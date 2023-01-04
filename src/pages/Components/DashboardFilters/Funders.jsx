@@ -1,15 +1,19 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-
 import Typography from '@mui/material/Typography';
 import Iconify from '../../../components/Iconify';
-import { Padding, PaddingOutlined } from '@mui/icons-material';
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 const bull = (
   <Box
     component="span"
@@ -19,60 +23,73 @@ const bull = (
   </Box>
 );
 
-export default function Funders({selectDATA,getData}) {
-  const [fund,setFund] = useState();
-  useEffect(()=>{
-    console.log(selectDATA,"<--dffgdfgdf")
-    if(selectDATA)
-    {
-    funder()
+export default function Funders({ selectDATA, getData }) {
+  const [fund, setFund] = useState();
+
+  
+
+  useEffect(() => {
+    console.log(selectDATA, "<--dffgdfgdf")
+    if (selectDATA) {
+      funder()
     }
-    },[selectDATA]
-    )
+  }, [selectDATA]
+  )
   const funder = async () => {
-  const data = JSON.stringify({
-    "role_id": 1,
-    "filter_type": selectDATA,
-    "pageNum": 1,
-    "emp_id": 206
-  });
-  
-  const config = {
-    method: 'post',
-    url: 'http://3.7.7.138/appTest/getPeopleFilters.php',
-    headers: { 
-      'Content-Type': 'application/json'
-    },
-     data
-  };
-  
-  axios(config)
-  .then( (response) =>{
-    setFund(response?.data?.data)
-    console.log(JSON.stringify(response.data));
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
+    const data = JSON.stringify({
+      "role_id": 1,
+      "filter_type": selectDATA,
+      "pageNum": 1,
+      "emp_id": 206
+    });
+
+    const config = {
+      method: 'post',
+      url: 'http://3.7.7.138/appTest/getPeopleFilters.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data
+    };
+
+    axios(config)
+      .then((response) => {
+        setFund(response?.data?.data)
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <div>
 
-    
-      <Card style={{marginTop:20}}>
-        {fund?.length!==0?fund?.map(itm=>{
- return(
-       
+
+      <Card style={{ marginTop: 20 }}>
+        {fund?.length !== 0 ? fund?.map(itm => {
+          return (
+
             <CardContent>
-                <Typography>
-                <card><Iconify onClick={()=>getData(itm,selectDATA)} icon="mdi:user-circle" style={{ flexDirection: 'row', justifyContent: 'space-between' }}/>
-                    {itm?.name}</card>
-                </Typography>
-               
+              <TableContainer >
+                <Table aria-label="customized table">
+                  <TableBody>
+                    <TableRow >
+                      <TableCell > <Iconify onClick={() => getData(itm, selectDATA)} icon="mdi:user-circle" width={20} height={20} /> </TableCell>
+                      <TableCell style={{alignItems:"left",justifyContent:"left",textAlign:"left"}}>  {itm?.name}</TableCell>
+                    </TableRow>
+                
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              {/* <Typography>
+                <Iconify onClick={() => getData(itm, selectDATA)} icon="mdi:user-circle" width={20} height={20} />
+                {itm?.name}
+              </Typography> */}
             </CardContent>
- )
-             }):null}
-          </Card>
-      
-          </div>
-  )}
+          )
+        }) : null}
+      </Card>
+
+    </div>
+  )
+}
