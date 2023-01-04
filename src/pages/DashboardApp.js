@@ -130,14 +130,16 @@ export default function DashboardApp() {
        <Grid item spacing={10}>
        <Typography variant="h4" sx={{ mb: 5 }}>
           Hi, Welcome back
+          
+        <Button style={{float:"right"}}
+        onClick={()=>{
+          handleOpenFilter()}}>
+          Filter
+        </Button>
         </Typography>
         <h1>{slected?.id===2?"founder":null}{slected?.name?slected?.name:''}</h1>
         {/* <Chip label= {slected?.id===2?"founder":null}{slected?.name?slected?.name:''}/> */}
 
-        <Button onClick={()=>{
-          handleOpenFilter()}}>
-          Filter
-        </Button>
        </Grid>
        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <DashboardFilter
@@ -231,6 +233,7 @@ export default function DashboardApp() {
                   borderRadius: 12,
                   border: '2px solid',
                   borderColor: '#ffcc80',
+                  marginBottom:'40px',
                 }}
                 onClick={()=>{navigate('/dashboard/chart')}}
               >

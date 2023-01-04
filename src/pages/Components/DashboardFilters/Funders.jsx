@@ -5,8 +5,10 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
+
 import Typography from '@mui/material/Typography';
 import Iconify from '../../../components/Iconify';
+import { Padding, PaddingOutlined } from '@mui/icons-material';
 
 const bull = (
   <Box
@@ -63,9 +65,10 @@ export default function Funders({selectDATA,getData}) {
        
             <CardContent>
                 <Typography>
-                <Iconify onClick={()=>getData(itm,selectDATA)} icon="eva:people-fill" width={20} height={20} />
-               {itm?.name}
+                <card><Iconify onClick={()=>getData(itm,selectDATA)} icon="mdi:user-circle" style={{ flexDirection: 'row', justifyContent: 'space-between' }}/>
+                    {itm?.name}</card>
                 </Typography>
+               
             </CardContent>
  )
              }):null}

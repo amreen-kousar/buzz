@@ -30,7 +30,7 @@ import SrOperationManager from './SrOperationManager'
 import Participant from './Participant';
 import Trainers from './Trainers';
 import GelathisLead from './GelathisLead';
-import  DateRangeF  from './DateRangeFilter';
+import DateRangeFilter from './DateRangeFilter';
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -88,6 +88,9 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25}}>
             Filters {selectDATA&&selectDATA===2&&":  Funders"}
+            {selectDATA&&selectDATA===1&&": Partners"}
+            {selectDATA&&selectDATA===7&&": Location"}
+            {selectDATA&&selectDATA===9&&": Data Range"}
           </Typography>
           <IconButton onClick={()=>{
         setSelectData()
@@ -137,9 +140,9 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
               <Grid style={{ marginTop: 30 }}>
                 <Partners getData={getData} selectDATA={selectDATA}/>
               </Grid>
-              <Grid style={{ marginTop: 30 }}>
-                <DateRangeF onDateSubmit={onDateSubmit} />
-              </Grid>
+              {/* <Grid style={{ marginTop: 30 }}>
+                <DateRangeFilter onDateSubmit={onDateSubmit} />
+              </Grid> */}
               {/* <Grid style={{ marginTop: 30 }}>
                 <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
               </Grid> */}
