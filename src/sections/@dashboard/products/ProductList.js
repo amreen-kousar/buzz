@@ -1,0 +1,76 @@
+import PropTypes from 'prop-types';
+// material
+import { styled } from '@mui/material/styles'
+import { red } from '@mui/material/colors';
+
+import {Card, CardContent, Grid, Typography,Avatar,Badge,Button} from '@mui/material';
+import ShopProductCard from './ProductCard';
+
+// ----------------------------------------------------------------------
+
+ProductList.propTypes = {
+  products: PropTypes.array.isRequired
+};
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    backgroundColor: '#44b700',
+    color: '#44b700',
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    '&::after': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      borderRadius: '50%',
+      animation: 'ripple 1.2s infinite ease-in-out',
+      border: '1px solid currentColor',
+      content: '""',
+    },
+  },
+  '@keyframes ripple': {
+    '0%': {
+      transform: 'scale(.8)',
+      opacity: 1,
+    },
+    '100%': {
+      transform: 'scale(2.4)',
+      opacity: 0,
+    },
+  },
+}));
+
+export default function ProductList({isOpenFilter, onOpenFilter, onCloseFilter, products,users, ...other   }) {
+  return (
+    <Grid container spacing={3} {...other}>
+            {/* {users.map((product) => ( */}
+      {users.map((itm,index) => (
+   
+
+        <Grid key={index} item xs={12} sm={6} md={3}>
+          {/* <Button> */}
+          {console.log(itm,",-gvvyub")}
+          
+          <Card onClick={onOpenFilter}>
+            <CardContent>
+         <Grid  direction={'column'} spacing={2} alignItems="center" justifyContent="space-between">
+       
+            <Avatar sx={{ bgcolor: red[500], width: 100, height: 100,marginLeft: '30%' }}   aria-label="recipe">
+            R
+          </Avatar>
+              <Typography sx={{fontSize: 20, fontWeight: 'medium' }} mt={3} textAlign={'center'} >
+               {/* {users?.first_name} */}
+              {`${itm?.first_name} ${itm?.last_name}`}
+              </Typography>
+        </Grid>
+            
+             
+            </CardContent>
+          </Card>
+          {/* </Button> */}
+          {/* <ShopProductCard product={product} /> */}
+        </Grid>
+      ))}
+    </Grid>
+  );
+}
