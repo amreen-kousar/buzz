@@ -43,7 +43,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter, products, users, ...other }) {
 
   const viewUser = (itm) => {
-  
+
     localStorage.setItem('people', JSON.stringify(itm))
     onOpenFilter()
   }
@@ -61,15 +61,13 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
               <Grid direction={'column'} spacing={2} alignItems="center" justifyContent="space-between">
 
                 <Avatar sx={{ bgcolor: red[500], width: 100, height: 100, marginLeft: '30%' }} aria-label="recipe">
-                  R
+                  {itm?.first_name.substring(0, 1)}
                 </Avatar>
                 <Typography sx={{ fontSize: 20, fontWeight: 'medium' }} mt={3} textAlign={'center'} >
                   {/* {users?.first_name} */}
                   {`${itm?.first_name} ${itm?.last_name}`}
                 </Typography>
               </Grid>
-
-
             </CardContent>
           </Card>
           {/* </Button> */}
