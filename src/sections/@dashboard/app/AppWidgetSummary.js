@@ -23,14 +23,16 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 AppWidgetSummary.propTypes = {
+  title: PropTypes.string.isRequired,
   color: PropTypes.string,
   icon: PropTypes.string,
-  title: PropTypes.string.isRequired,
   total: PropTypes.number.isRequired,
   sx: PropTypes.object,
+  style:PropTypes.object,
+  
 };
 
-export default function AppWidgetSummary({ title, total, icon, color = 'primary', sx, ...other }) {
+export default function AppWidgetSummary({ title, total, icon, color = 'primary', sx,style, ...other }) {
   return (
     <Card
       sx={{
@@ -46,22 +48,24 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
       <IconWrapperStyle
         sx={{
           color: (theme) => theme.palette[color].dark,
-          backgroundImage: (theme) =>
-            `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
-              theme.palette[color].dark,
-              0.24
-            )} 100%)`,
+          // backgroundImage: (theme) =>
+          //   `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
+          //     theme.palette[color].dark,
+          //     0.24
+          //   )} 100%)`,
         }}
       >
         <Iconify icon={icon} width={24} height={24} />
       </IconWrapperStyle>
-
-      <Typography variant="h3">{fShortenNumber(total)}</Typography>
-      {/* <Typography variant="h3">{(total)}</Typography> */}
-
-      <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
+      <Typography variant="h4" sx={{ opacity: 0.72 }}>
         {title}
       </Typography>
+      <Typography variant="h5">{fShortenNumber(total)}</Typography>
+      {/* <Typography variant="h3">{(total)}</Typography> */}
+
+      {/* <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
+        {title}
+      </Typography> */}
     </Card>
   );
 }

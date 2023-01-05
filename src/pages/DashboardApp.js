@@ -3,12 +3,11 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography, Stack, Divider, Card, CardContent,Button,Box } from '@mui/material';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
-
-// components
+import Iconify from '../components/Iconify';
 import Page from '../components/Page';
-// sections
+
 import { AppWidgetSummary } from '../sections/@dashboard/app';
-// ----------------------------------------------------------------------
+
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
 import DashboardFilter from './Components/DashboardFilters/DashboardFilter';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +26,7 @@ export default function DashboardApp() {
   const [filter,setFilterData] = useState(intialValues)
   const [slected,setSelected] = useState({
     id:'',
-  nmae:''  })
+  name:''  })
   const [summaryData, setSummaryData] = useState([]);
 
   useEffect(() => {
@@ -101,6 +100,31 @@ export default function DashboardApp() {
   console.log(e,"<----scasds")
   }
 
+  // const IconStyle = styled('div')(({ theme }) => ({
+  //   margin: 'auto',
+  //   display: 'flex',
+  //   borderRadius: '50%',
+  //   alignItems: 'center',
+  //   width: theme.spacing(8),
+  //   height: theme.spacing(8),
+  //   justifyContent: 'center',
+  //   marginBottom: theme.spacing(3),
+  // }));
+
+//   <IconStyle
+//   sx={{
+//     color: (theme) => theme.palette[color].dark,
+//     // backgroundImage: (theme) =>
+//     //   `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
+//     //     theme.palette[color].dark,
+//     //     0.24
+//     //   )} 100%)`,
+//   }}
+// >
+//   <Iconify icon={icon} width={24} height={24} />
+// </IconStyle>
+
+
  if(summaryData?.length===0){
   return(
   <Box sx={{ display: 'flex',justifyContent:'center',alignItems:"center" ,height:'70vh'}}>
@@ -108,6 +132,7 @@ export default function DashboardApp() {
 </Box>
   )
  }
+
 
   const getData = (itm,i) =>{
     setSelected({
@@ -128,15 +153,16 @@ export default function DashboardApp() {
     <Page title="Dashboard">
       <Container maxWidth="xl">
        <Grid item spacing={10}>
-       <Typography variant="h4" sx={{ mb: 5 }}>
+       {/* <Typography variant="h4" sx={{ mb: 5 }}>
           Hi, Welcome back
           
+       
+        </Typography> */} 
         <Button style={{float:"right"}}
         onClick={()=>{
           handleOpenFilter()}}>
           Filter
         </Button>
-        </Typography>
         <h1>{slected?.id===2?"founder":null}{slected?.name?slected?.name:''}</h1>
         {/* <Chip label= {slected?.id===2?"founder":null}{slected?.name?slected?.name:''}/> */}
 
@@ -156,29 +182,33 @@ export default function DashboardApp() {
         {/*  */}
         <Grid container spacing={3} marginTop={4}>
           <Grid item xs={4} sm={8} md={4}>
-            <AppWidgetSummary
-              title="Target"
-              total={summaryData?.summary_target}
-              color="actual"
-              icon={'mdi:target-arrow'}
-            />
+          
+            <AppWidgetSummary 
+            title="Target" 
+            total={summaryData?.summary_target} 
+               color="actual"
+             
+              // icon={'mdi:target-arrow'}
+            />  
           </Grid>
 
           <Grid item xs={4} sm={8} md={4}>
             <AppWidgetSummary
-              title="Actual"
+              
               total={summaryData?.summary_actual}
+              title="Actual"
               color="primary"
-              icon={'material-symbols:data-exploration'}
+              // icon={'material-symbols:data-exploration'}
             />
           </Grid>
 
           <Grid item xs={4} sm={8} md={4}>
             <AppWidgetSummary
-              title="2nd Day TurnOut(%)"
+              
               total={summaryData?.summary_day2}
-              color="warning"
-              icon={'mdi:percent-circle-outline'}
+              title="2nd Day TurnOut(%)"
+               color="warning"
+              // icon={'mdi:percent-circle-outline'}
             />
           </Grid>
 
@@ -188,6 +218,11 @@ export default function DashboardApp() {
               total={summaryData?.summary_villages}
               color="villages"
               icon={'fontisto:holiday-village'}
+              style={{backgroundImage: (theme) =>
+                `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
+                  theme.palette[color].dark,
+                  0.24
+                )} 100%)`,}}
             />
           </Grid>
 
@@ -248,8 +283,9 @@ export default function DashboardApp() {
                   <Grid container spacing={3} marginTop={1}>
                     <Grid item xs={4} sm={8} md={4}>
                       <AppWidgetSummary
-                        title="Villages"
+                       
                         total={itm?.villages}
+                        title="Villages"
                         color="villages"
                         icon={'fontisto:holiday-village'}
                       />
