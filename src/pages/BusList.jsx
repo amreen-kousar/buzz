@@ -189,6 +189,22 @@ export default function User() {
           <Typography variant="h5" gutterBottom>
             All Bus List
           </Typography>
+          <Button style={{float:"right"}}
+        onClick={()=>{
+          handleOpenFilter()}}>
+          Filter
+        </Button>
+        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+            <DashboardFilter
+            onDateSubmit={onDateSubmit}
+            onSumbit={onSumbit}
+            getData={getData}
+            // clcikData={clcikData}
+              isOpenFilter={openFilter}
+              onOpenFilter={handleOpenFilter}
+              onCloseFilter={handleCloseFilter}
+            />
+          </Stack>
           {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}

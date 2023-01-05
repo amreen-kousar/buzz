@@ -45,7 +45,7 @@ export default function AccountPopover() {
 
   return (
     <>
-      <IconButton
+      {/* <IconButton
         ref={anchorRef}
         onClick={handleOpen}
         sx={{
@@ -64,7 +64,7 @@ export default function AccountPopover() {
         }}
       >
         <Avatar src={account.photoURL} alt="photoURL" />
-      </IconButton>
+      </IconButton> */}
 
       <MenuPopover
         open={Boolean(open)}

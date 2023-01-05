@@ -26,7 +26,7 @@ const bull = (
 export default function Funders({ selectDATA, getData }) {
   const [fund, setFund] = useState();
 
-  
+
 
   useEffect(() => {
     console.log(selectDATA, "<--dffgdfgdf")
@@ -71,13 +71,12 @@ export default function Funders({ selectDATA, getData }) {
 
             <CardContent>
               <TableContainer >
-                <Table aria-label="customized table">
-                  <TableBody>
-                    <TableRow >
-                      <TableCell > <Iconify onClick={() => getData(itm, selectDATA)} icon="mdi:user-circle" width={20} height={20} /> </TableCell>
-                      <TableCell style={{alignItems:"left",justifyContent:"left",textAlign:"left"}}>  {itm?.name}</TableCell>
+                <Table aria-label="customized table"  >
+                  <TableBody  >
+                    <TableRow style={{ height: "10px !important" }} onClick={() => getData(itm, selectDATA)} >
+                      <TableCell style={{ width: "10px" }}> <Iconify  icon="mdi:user-circle" width={20} height={20} /> </TableCell>
+                      <TableCell >  {itm?.name}</TableCell>
                     </TableRow>
-                
                   </TableBody>
                 </Table>
               </TableContainer>

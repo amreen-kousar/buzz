@@ -22,11 +22,11 @@ export default function Partners({selectDATA,getData}) {
     console.log(selectDATA,"<--dffgdfgdf")
     if(selectDATA)
     {
-    funder()
+    Partner()
     }
     },[selectDATA]
     )
-  const funder = async () => {
+  const Partner = async () => {
   const data = JSON.stringify({
     "role_id": 1,
     "filter_type": selectDATA,
