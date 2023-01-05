@@ -1,9 +1,9 @@
 // ----------------------------------------------------------------------
-
+let userDetails = localStorage?.getItem('userDetails')
+userDetails = JSON.parse(userDetails)
 const account = {
-  displayName: 'Jaydon Frankie',
+  displayName: `${userDetails.first_name} ${userDetails.last_name}`,
   email: 'demo@minimals.cc',
-  photoURL: '/static/mock-images/avatars/avatar_default.jpg',
+  photoURL: userDetails.profile_pic,
 };
-
 export default account;

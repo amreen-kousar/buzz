@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles'
 import { red } from '@mui/material/colors';
 
-import {Card, CardContent, Grid, Typography,Avatar,Badge,Button} from '@mui/material';
+import { Card, CardContent, Grid, Typography, Avatar, Badge, Button } from '@mui/material';
 import ShopProductCard from './ProductCard';
 
 // ----------------------------------------------------------------------
@@ -40,31 +40,36 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function ProductList({isOpenFilter, onOpenFilter, onCloseFilter, products,users, ...other   }) {
+export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter, products, users, ...other }) {
+
+  const viewUser = (itm) => {
+  
+    localStorage.setItem('people', JSON.stringify(itm))
+    onOpenFilter()
+  }
+
   return (
     <Grid container spacing={3} {...other}>
-            {/* {users.map((product) => ( */}
-      {users.map((itm,index) => (
-   
-
+      {/* {users.map((product) => ( */}
+      {users.map((itm, index) => (
         <Grid key={index} item xs={12} sm={6} md={3}>
           {/* <Button> */}
-          {console.log(itm,",-gvvyub")}
-          
-          <Card onClick={onOpenFilter}>
+          {console.log(itm, ",-gvvyub")}
+
+          <Card onClick={() => { viewUser(itm) }}>
             <CardContent>
-         <Grid  direction={'column'} spacing={2} alignItems="center" justifyContent="space-between">
-       
-            <Avatar sx={{ bgcolor: red[500], width: 100, height: 100,marginLeft: '30%' }}   aria-label="recipe">
-            R
-          </Avatar>
-              <Typography sx={{fontSize: 20, fontWeight: 'medium' }} mt={3} textAlign={'center'} >
-               {/* {users?.first_name} */}
-              {`${itm?.first_name} ${itm?.last_name}`}
-              </Typography>
-        </Grid>
-            
-             
+              <Grid direction={'column'} spacing={2} alignItems="center" justifyContent="space-between">
+
+                <Avatar sx={{ bgcolor: red[500], width: 100, height: 100, marginLeft: '30%' }} aria-label="recipe">
+                  R
+                </Avatar>
+                <Typography sx={{ fontSize: 20, fontWeight: 'medium' }} mt={3} textAlign={'center'} >
+                  {/* {users?.first_name} */}
+                  {`${itm?.first_name} ${itm?.last_name}`}
+                </Typography>
+              </Grid>
+
+
             </CardContent>
           </Card>
           {/* </Button> */}

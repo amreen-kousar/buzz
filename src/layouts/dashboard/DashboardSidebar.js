@@ -43,11 +43,13 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const data = localStorage?.getItem('userId')
+
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive('up', 'lg');
 
   useEffect(() => {
+
     if (isOpenSidebar) {
       onCloseSidebar();
     }
@@ -63,7 +65,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
         <Logo />
       </Box>
-{console.log(account.displayName,"<--yghuj")}
+      {console.log(account.displayName, "<--yghuj")}
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
@@ -79,8 +81,8 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           </AccountStyle>
         </Link>
       </Box>
-  
-      <NavSection navConfig={navConfig?.filter(itm=>itm?.id.find(it=>it==data))} />
+
+      <NavSection navConfig={navConfig?.filter(itm => itm?.id.find(it => it == data))} />
 
       <Box sx={{ flexGrow: 1 }} />
 
