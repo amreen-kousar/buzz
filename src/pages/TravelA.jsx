@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Stack, Typography,Box } from '@mui/material';
+import { Container, Stack, Typography,Box,Button } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
@@ -51,6 +51,7 @@ export default function TravelA() {
     <Container>
       <Typography variant="h4" sx={{ mb: 5 }}>
      Travel Allowances
+     <Button style={{float:"right"}}>Filters</Button>
       </Typography>
 
       {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>

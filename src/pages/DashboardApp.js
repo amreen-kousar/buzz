@@ -174,12 +174,12 @@ export default function DashboardApp() {
             onDateSubmit={onDateSubmit}
             onSumbit={onSumbit}
             getData={getData}
-            // clcikData={clcikData}
-            isOpenFilter={openFilter}
-            onOpenFilter={handleOpenFilter}
-            onCloseFilter={handleCloseFilter}
-          />
-        </Stack>
+            //clcikData={clcikData}
+              isOpenFilter={openFilter}
+              onOpenFilter={handleOpenFilter}
+              onCloseFilter={handleCloseFilter}
+            />
+          </Stack>
 
         {/*  */}
         <Grid container spacing={3} marginTop={4}>

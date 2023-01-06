@@ -1,11 +1,13 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Stack, Typography,Box } from '@mui/material';
+import { Container, Stack, Typography,Box,Button } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
-
+import POA from './Components/PlanofactionFilters/POA';
+import { useState } from 'react';
 // components
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -41,21 +43,54 @@ function a11yProps(index) {
 
 export default function PlanofAction() {
   const [value, setValue] = React.useState(0);
-
+  const [openFilter, setOpenFilter] = useState(false); 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const handleOpenFilter = () => {
+    setOpenFilter(true);
+  };
+  
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
+  const getData = (itm,i) =>{
+    setSelected({
+      id:i,
+      name:itm?.name
+    })
+    apiHit(itm,i)
+    handleCloseFilter()
+  console.log("sdfgsdfdfssd",itm,i)
+  }
   return (
     <Page title="Dashboard: Products">
     <Container>
       <Typography variant="h4" sx={{ mb: 5 }}>
       Plan Of Actions
-      </Typography>
+     
+      <Button style={{float:"right"}}
+          onClick={()=>{
+          handleOpenFilter()}}>
+          Filter
+        </Button>
+        </Typography>
 
       {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
         </Stack> */}
+
+<Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+            <POA
+            // onDateSubmit={onDateSubmit}
+            // onSumbit={onSumbit}
+            // getData={getData}
+            //  clcikData={clcikData}
+              isOpenFilter={openFilter}
+              onOpenFilter={handleOpenFilter}
+              onCloseFilter={handleCloseFilter}
+            />
+          </Stack>
         
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <Box sx={{ width: '100%' }}>

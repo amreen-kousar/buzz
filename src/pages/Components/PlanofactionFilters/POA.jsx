@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
-import Funders from './Busfunders';
+import Poafunders from './Poafunders';
 import { useState } from 'react';
-import Location from './Buslocation';
+
 // material
 import {
   Grid,
@@ -55,13 +55,13 @@ export const FILTER_COLOR_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-BusListFilter.propTypes = {
+PoaFilter.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
 
-export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
+export default function PoaFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
  const [selectDATA,setSelectData] = useState()
   return (
     <>
@@ -105,24 +105,21 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                       <Button onClick={()=>{setSelectData(2)}}>Funders</Button>
              {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
   {/* <Button>Funders</Button> */}
-  <Button>Project</Button>
+  {/* <Button>Project</Button>
                         <Button onClick={()=>{setSelectData(7)}}>Location</Button>
-                        <Button>All Bus</Button>
+                        <Button>All Bus</Button> */}
 
                 </CardContent>
               </Card>
-             <Grid style={{ marginTop: 30 }}>
-                <Funders getData={getData} selectDATA={selectDATA}/>
-              </Grid>        
             
-            {selectDATA===7&&<Grid style={{ marginTop: 30 }}>
+            <Grid>
+              <Poafunders selectDATA={selectDATA}/>
+            </Grid>
+            {/* {selectDATA===7&&<Grid style={{ marginTop: 30 }}>
                 <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
-              </Grid> }
+              </Grid> } */}
               
-              {/* <Grid style={{ marginTop: 30 }}>
-                <Projects />
-              </Grid> */}
-            
+          
             </div>
           {/* </Stack> */}
         </Scrollbar>
