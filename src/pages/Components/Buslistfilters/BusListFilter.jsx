@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
+import Funders from './Busfunders';
+import { useState } from 'react';
+import Location from './Buslocation';
 // material
 import {
+  Grid,
   Box,
   Radio,
   Stack,
@@ -57,7 +61,8 @@ BusListFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData }) {
+export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
+ const [selectDATA,setSelectData] = useState()
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -67,16 +72,22 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
       <Drawer
         anchor="right"
         open={isOpenFilter}
-        onClose={onCloseFilter}
+        onClose={()=>{
+          setSelectData()
+            onCloseFilter()}}
         PaperProps={{
           sx: { width: 280, },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }}>
-         Bus List Filters
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25}}>
+          Filters
+         {selectDATA&&selectDATA===2&&":  Funders"}
+         {selectDATA&&selectDATA===7&&": Location"}
           </Typography>
-          <IconButton onClick={onCloseFilter}>
+          <IconButton onClick={()=>{
+        setSelectData()
+          onCloseFilter()}}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
@@ -91,65 +102,25 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                  <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
                     {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
                       {/* <Grid spacing={1} > */}
-                        {/* <Button onClick={()=>{setSelectData(2)}}>Funders</Button>
-8                        <Button onClick={()=>{setSelectData(1)}}>Partner</Button> */}
-                        <Button>Project</Button>
-                        <Button>Operation Manager</Button>
+                      <Button onClick={()=>{setSelectData(2)}}>Funders</Button>
+             {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
+  {/* <Button>Funders</Button> */}
+  <Button>Project</Button>
+                        <Button onClick={()=>{setSelectData(7)}}>Location</Button>
+                        <Button>All Bus</Button>
 
-                      {/* </Grid> */}
-                    {/* </ButtonGroup> */}
-                    {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons">
-                      <Grid> */}
-                        <Button>Trainer</Button>
-                      {/* </Grid>
-                    </ButtonGroup> */}
-
-                    {/* <Grid spacing={2}> */}
-                      {/* <Button onClick={()=>{setSelectData(9)}}>Date Range</Button>
-                      <Button onClick={()=>{setSelectData(7)}}>Location</Button> */}
-                      <Button>Participant</Button>
-                    {/* </Grid> */}
-                    <Button>Sr.Operation Manager</Button>
-                    {/* <Button onClick={()=>{setSelectData(9)}}>Gelathis Facilator Leads</Button> */}
-                    {/* </ButtonGroup> */}
-                  {/* </Typography> */}
                 </CardContent>
               </Card>
-              {/* <Grid style={{ marginTop: 30 }}>
+             <Grid style={{ marginTop: 30 }}>
                 <Funders getData={getData} selectDATA={selectDATA}/>
-              </Grid>
-              <Grid style={{ marginTop: 30 }}>
-                <Partners getData={getData} selectDATA={selectDATA}/>
-              </Grid> */}
-              {/* <Grid style={{ marginTop: 30 }}>
-                <DateRangeFilter onDateSubmit={onDateSubmit} />
-              </Grid> */}
-              {/* <Grid style={{ marginTop: 30 }}>
+              </Grid>        
+            
+            {selectDATA===7&&<Grid style={{ marginTop: 30 }}>
                 <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
-              </Grid> */}
-              {/* <Grid style={{ marginTop: 10 }}>
-                <GelathisLead  onDateSubmit={onDateSubmit}/>
-              </Grid> */}
+              </Grid> }
+              
               {/* <Grid style={{ marginTop: 30 }}>
-                <Partners />
-              </Grid>
-              <Grid style={{ marginTop: 30 }}>
                 <Projects />
-              </Grid>
-              <Grid style={{ marginTop: 30 }}>
-                <Location />
-              </Grid>
-              <Grid style={{ marginTop: 30 }}>
-                <SrOperationManager />
-              </Grid>
-              <Grid style={{ marginTop: 30 }}>
-                <Participant />
-              </Grid>
-              <Grid style={{ marginTop: 30 }}>
-                <Trainers />
-              </Grid>
-              <Grid style={{ marginTop: 30 }}>
-                <GelathisLead />
               </Grid> */}
             
             </div>

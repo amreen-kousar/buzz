@@ -1,4 +1,5 @@
 import { useState,useEffect } from 'react';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -16,60 +17,48 @@ const bull = (
   </Box>
 );
 
-export default function Partners({selectDATA,getData}) {
-  const [partner,setPartner] = useState();
+export default function Projects() {
+  const [projects,setProjects] = useState();
   useEffect(()=>{
-    console.log(selectDATA,"<--dffgdfgdf")
-    if(selectDATA)
-    {
-    Partner()
-    }
-    },[selectDATA]
+    project()
+    },[]
     )
-  const Partner = async () => {
+  const project = async () => {
   const data = JSON.stringify({
-    "role_id": 1,
-    "filter_type": selectDATA,
-    "pageNum": 1,
-    "emp_id": 206
+    "manager_id": 2
   });
   
   const config = {
-    method: 'post',
-    url: 'http://3.7.7.138/appTest/getPeopleFilters.php',
+    method: 'get',
+    // url: 'http://3.7.7.138/appTest/getProjectList.php',
+    url: 'http://3.7.7.138/appTest/getProjectList.php?manager_id=2',
     headers: { 
       'Content-Type': 'application/json'
     },
-     data
   };
   
   axios(config)
-  .then( (response) =>{
-    setPartner(response?.data?.data)
-    console.log(JSON.stringify(response.data));
+  .then( (response) => {
+    setProjects(response.data)
+    console.log(response.data,"<-fddbdfgbdb");
   })
-  .catch((error) => {
+  .catch( (error) => {
     console.log(error);
   });
-}
+} 
   return (
     <div>
 
     
-<Card style={{marginTop:20}}>
-        {partner?.length!==0?partner?.map(itm=>{
- return(
-       
+      <Card style={{marginTop:20}}>
             <CardContent>
                 <Typography>
-                <Iconify onClick={()=>getData(itm,selectDATA)} icon="eva:people-fill" width={20} height={20} />
-               {itm?.name}
+                <Iconify icon="eva:people-fill" width={20} height={20} />
+                Projects
                 </Typography>
             </CardContent>
- )
-             }):null}
           </Card>
-         
+          
           </div>
   );
 }
