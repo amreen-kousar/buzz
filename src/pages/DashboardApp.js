@@ -172,7 +172,7 @@ export default function DashboardApp() {
             onDateSubmit={onDateSubmit}
             onSumbit={onSumbit}
             getData={getData}
-            // clcikData={clcikData}
+            //clcikData={clcikData}
               isOpenFilter={openFilter}
               onOpenFilter={handleOpenFilter}
               onCloseFilter={handleCloseFilter}

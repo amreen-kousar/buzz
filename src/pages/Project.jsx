@@ -1,12 +1,14 @@
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import {Grid, Container, Stack, Typography,Box, CardContent,Card,Chip,Icon,IconButton } from '@mui/material';
+import {Grid, Container, Stack, Typography,Box, CardContent,Card,Chip,Icon,IconButton,Button} from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
+import ProjectFilter from './Components/Projectfilters/ProjectFilters'
 import Iconify from '../components/Iconify';
 import ProjectDialog from './Components/ProjectDialog';
+
 
 // components
 function TabPanel(props) {
@@ -45,9 +47,26 @@ function a11yProps(index) {
 export default function Project({handleClickOpen,handleClose,open}) {
   const [value, setValue] = useState(0);
   const [project,setProject] = useState();
+  const [openFilter,setOpenFilter] = useState(0);
+  const handleOpenFilter = () => {
+    setOpenFilter(true);
+  };
+  
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const getData = (itm,i) =>{
+    setSelected({
+      id:i,
+      name:itm?.name
+    })
+    apiHit(itm,i)
+    handleCloseFilter()
+  console.log("sdfgsdfdfssd",itm,i)
+  }
   useEffect(()=>{
     projectr()
     },[]
@@ -86,7 +105,12 @@ export default function Project({handleClickOpen,handleClose,open}) {
     <Container>
       <Typography variant="h4" sx={{ mb: 5 }}>
       Projects
-      </Typography>
+     
+      <Button style={{float:"right"}}
+       onClick={()=>{
+        handleOpenFilter()
+       }}> Filters
+      </Button> </Typography>
 
       {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
@@ -98,6 +122,17 @@ export default function Project({handleClickOpen,handleClose,open}) {
               onClose={handleClose}
             />
           </Stack> */}
+          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+            <ProjectFilter
+            // onDateSubmit={onDateSubmit}
+            // onSumbit={onSumbit}
+            // getData={getData}
+            //  clcikData={clcikData}
+              isOpenFilter={openFilter}
+              onOpenFilter={handleOpenFilter}
+              onCloseFilter={handleCloseFilter}
+            />
+          </Stack>
         
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <Box sx={{ width: '100%' }}>
