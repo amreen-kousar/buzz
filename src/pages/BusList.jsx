@@ -31,7 +31,7 @@ import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashbo
 // mock
 import USERLIST from '../_mock/user';
 import BuslistDrawer from './Components/BuslistDrawer';
-
+import BusListFilter from './Components/Buslistfilters/BusListFilter';
 
 // ----------------------------------------------------------------------
 
@@ -173,13 +173,21 @@ export default function User() {
   const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
   const [openFilter, setOpenFilter] = useState(false);
-
+  const [openbusfilter,setopenbusfilter] = useState(false);
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
 
   const handleCloseFilter = () => {
     setOpenFilter(false);
+  };
+
+  const handleopenbusfilter = () => {
+    setopenbusfilter(true);
+  };
+
+  const handleclosebusfilter = () => {
+    setopenbusfilter(false);
   };
   
   return (
@@ -188,23 +196,13 @@ export default function User() {
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
             All Bus List
+         
           </Typography>
           <Button style={{float:"right"}}
-        onClick={()=>{
-          handleOpenFilter()}}>
+          onClick={()=>{
+          handleopenbusfilter()}}>
           Filter
         </Button>
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <DashboardFilter
-            onDateSubmit={onDateSubmit}
-            onSumbit={onSumbit}
-            getData={getData}
-            // clcikData={clcikData}
-              isOpenFilter={openFilter}
-              onOpenFilter={handleOpenFilter}
-              onCloseFilter={handleCloseFilter}
-            />
-          </Stack>
           {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
@@ -218,6 +216,15 @@ export default function User() {
               onCloseFilter={handleCloseFilter}
             />
           </Stack>
+          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+            <BusListFilter
+           clcikData={clcikData}
+              isOpenFilter={openbusfilter}
+              onOpenFilter={handleopenbusfilter}
+              onCloseFilter={handleclosebusfilter}
+            />
+          </Stack>
+
         {/* </Stack> */}
         {buses?.list?.map((itm)=>{
 return(
@@ -243,7 +250,8 @@ return(
               Checked/Total : 0/16
               </Typography>
           </Grid>
-        </Card>)
+        </Card>
+       )
         })}
 
       </Container>
