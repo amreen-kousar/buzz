@@ -42,30 +42,38 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
       sx={{
         py: 5,
         boxShadow: 0,
-        textAlign: 'center',
+        textAlign: "center",
         color: (theme) => theme.palette[color].darker,
         bgcolor: (theme) => theme.palette[color].lighter,
         ...sx,
+        height: "210px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
       }}
       {...other}
     >
-      {(icon) ? <IconWrapperStyle
-        sx={{
-          color: (theme) => theme.palette[color].dark,
-          backgroundImage: (theme) =>
-            `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
-              theme.palette[color].dark,
-              0.24
-            )} 100%)`,
-        }}
-      >
-        <Iconify icon={icon} width={24} height={24} />
-      </IconWrapperStyle> : null}
-      <Typography variant="h4" sx={{ opacity: 0.72 }}>
-        {title}
-      </Typography>
-      <Typography variant="h5">{fShortenNumber(total)}</Typography>
-      {/* <Typography variant="h3">{(total)}</Typography> */}
+      <div>
+        {(icon) ? <IconWrapperStyle
+          sx={{
+            color: (theme) => theme.palette[color].dark,
+            backgroundImage: (theme) =>
+              `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
+                theme.palette[color].dark,
+                0.24
+              )} 100%)`,
+          }}
+        >
+          <Iconify icon={icon} width={24} height={24} />
+        </IconWrapperStyle> : null}
+
+        <Typography variant="h4" sx={{ opacity: 0.72 }}>
+          {title}
+        </Typography>
+        {/* <Typography variant="h5">{fShortenNumber(total)}</Typography> */}
+        <Typography variant="h3">{(total)}</Typography>
+      </div>
+      
 
       {/* <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
         {title}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography, Stack, Divider, Card, CardContent,Button,Box } from '@mui/material';
+import { Grid, Container, Typography, Stack, Divider, Card, CardContent, Button, Box } from '@mui/material';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import Iconify from '../components/Iconify';
@@ -16,36 +16,37 @@ export default function DashboardApp() {
   const navigate = useNavigate();
 
   const theme = useTheme();
-  const intialValues  = {
-    funder:"",
-    patner:"",
-    fromDate:'',
-    toDate:""
+  const intialValues = {
+    funder: "",
+    patner: "",
+    fromDate: '',
+    toDate: ""
   }
   const [openFilter, setOpenFilter] = useState(false);
-  const [filter,setFilterData] = useState(intialValues)
-  const [slected,setSelected] = useState({
-    id:'',
-  name:''  })
+  const [filter, setFilterData] = useState(intialValues)
+  const [slected, setSelected] = useState({
+    id: '',
+    name: ''
+  })
   const [summaryData, setSummaryData] = useState([]);
 
   useEffect(() => {
     apiHit();
   }, []);
 
-  const apiHit = async (id,i,g) => {
+  const apiHit = async (id, i, g) => {
     const data = {
-      end_date:g==="date"?i: '',
+      end_date: g === "date" ? i : '',
       role_id: 1,
-      taluk_id: g==="country"?i:"",
-      district_id:g==="country"?id:"",
+      taluk_id: g === "country" ? i : "",
+      district_id: g === "country" ? id : "",
       trainerId: '',
       emp_id: 1,
-      start_date:g==="date"?id: '',
+      start_date: g === "date" ? id : '',
       somId: '',
       gflId: '',
-      funder_id:g?"": i===2?id?.id:'',
-      partner_id:g?"": i===1?id?.id:'',
+      funder_id: g ? "" : i === 2 ? id?.id : '',
+      partner_id: g ? "" : i === 1 ? id?.id : '',
       project_id: '',
       opsManager: '',
     };
@@ -53,14 +54,14 @@ export default function DashboardApp() {
       end_date: i,
       role_id: 1,
       taluk_id: "",
-      district_id:"",
+      district_id: "",
       trainerId: '',
       emp_id: 1,
       start_date: id,
       somId: '',
       gflId: '',
-      funder_id:"",
-      partner_id:"",
+      funder_id: "",
+      partner_id: "",
       project_id: '',
       opsManager: '',
     };
@@ -73,7 +74,7 @@ export default function DashboardApp() {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
-    data,
+      data,
     };
 
     axios(config)
@@ -93,11 +94,11 @@ export default function DashboardApp() {
     setOpenFilter(false);
   };
 
-  const onDateSubmit = (e)=>{
-    apiHit(e?.startDate,e?.endDate,"date")
-    setFilterData({...intialValues,fromDate:e?.startDate,toDate:e?.endDate})
+  const onDateSubmit = (e) => {
+    apiHit(e?.startDate, e?.endDate, "date")
+    setFilterData({ ...intialValues, fromDate: e?.startDate, toDate: e?.endDate })
     handleCloseFilter()
-  console.log(e,"<----scasds")
+    console.log(e, "<----scasds")
   }
 
   // const IconStyle = styled('div')(({ theme }) => ({
@@ -111,122 +112,125 @@ export default function DashboardApp() {
   //   marginBottom: theme.spacing(3),
   // }));
 
-//   <IconStyle
-//   sx={{
-//     color: (theme) => theme.palette[color].dark,
-//     // backgroundImage: (theme) =>
-//     //   `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
-//     //     theme.palette[color].dark,
-//     //     0.24
-//     //   )} 100%)`,
-//   }}
-// >
-//   <Iconify icon={icon} width={24} height={24} />
-// </IconStyle>
+  //   <IconStyle
+  //   sx={{
+  //     color: (theme) => theme.palette[color].dark,
+  //     // backgroundImage: (theme) =>
+  //     //   `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
+  //     //     theme.palette[color].dark,
+  //     //     0.24
+  //     //   )} 100%)`,
+  //   }}
+  // >
+  //   <Iconify icon={icon} width={24} height={24} />
+  // </IconStyle>
 
 
- if(summaryData?.length===0){
-  return(
-  <Box sx={{ display: 'flex',justifyContent:'center',alignItems:"center" ,height:'70vh'}}>
-  <CircularProgress />
-</Box>
-  )
- }
-
-
-  const getData = (itm,i) =>{
-    setSelected({
-      id:i,
-      name:itm?.name
-    })
-    apiHit(itm,i)
-    handleCloseFilter()
-  console.log("sdfgsdfdfssd",itm,i)
+  if (summaryData?.length === 0) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    )
   }
-  const onSumbit = (e,i) =>{
+
+
+  const getData = (itm, i) => {
+    setSelected({
+      id: i,
+      name: itm?.name
+    })
+    apiHit(itm, i)
     handleCloseFilter()
-    apiHit(e?.district_id,e?.talaq_id,"country")
-   console.log(e,i,"<----datssdasdsa")
+    console.log("sdfgsdfdfssd", itm, i)
+  }
+  const onSumbit = (e, i) => {
+    handleCloseFilter()
+    apiHit(e?.district_id, e?.talaq_id, "country")
+    console.log(e, i, "<----datssdasdsa")
   }
 
   return (
     <Page title="Dashboard">
       <Container maxWidth="xl">
-       <Grid item spacing={10}>
-       {/* <Typography variant="h4" sx={{ mb: 5 }}>
+        <Grid item spacing={10}>
+          {/* <Typography variant="h4" sx={{ mb: 5 }}>
           Hi, Welcome back
           
        
-        </Typography> */} 
-        <Button style={{float:"right"}}
-        onClick={()=>{
-          handleOpenFilter()}}>
-          Filter
-        </Button>
-        <h1>{slected?.id===2?"founder":null}{slected?.name?slected?.name:''}</h1>
-        {/* <Chip label= {slected?.id===2?"founder":null}{slected?.name?slected?.name:''}/> */}
+        </Typography> */}
+          <Button style={{ float: "right" }}
+            onClick={() => {
+              handleOpenFilter()
+            }}>
+            Filter
+          </Button>
+          <h1>{slected?.id === 2 ? "founder" : null}{slected?.name ? slected?.name : ''}</h1>
+          {/* <Chip label= {slected?.id===2?"founder":null}{slected?.name?slected?.name:''}/> */}
 
-       </Grid>
-       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <DashboardFilter
+        </Grid>
+        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <DashboardFilter
             onDateSubmit={onDateSubmit}
             onSumbit={onSumbit}
             getData={getData}
             // clcikData={clcikData}
-              isOpenFilter={openFilter}
-              onOpenFilter={handleOpenFilter}
-              onCloseFilter={handleCloseFilter}
-            />
-          </Stack>
+            isOpenFilter={openFilter}
+            onOpenFilter={handleOpenFilter}
+            onCloseFilter={handleCloseFilter}
+          />
+        </Stack>
 
         {/*  */}
         <Grid container spacing={3} marginTop={4}>
-          <Grid item xs={4} sm={8} md={4}>
-          
-            <AppWidgetSummary 
-            title="Target" 
-            total={summaryData?.summary_target} 
-               color="actual"
-             
-              // icon={'mdi:target-arrow'}
-            />  
+          <Grid item xs={12} sm={6} md={4}>
+
+            <AppWidgetSummary
+              title="Target"
+              total={summaryData?.summary_target}
+              color="actual"
+
+            // icon={'mdi:target-arrow'}
+            />
           </Grid>
 
-          <Grid item xs={4} sm={8} md={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary
-              
+
               total={summaryData?.summary_actual}
               title="Actual"
               color="primary"
-              // icon={'material-symbols:data-exploration'}
+            // icon={'material-symbols:data-exploration'}
             />
           </Grid>
 
-          <Grid item xs={4} sm={8} md={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary
-              
+
               total={summaryData?.summary_day2}
               title="2nd Day TurnOut(%)"
-               color="warning"
-              // icon={'mdi:percent-circle-outline'}
+              color="warning"
+            // icon={'mdi:percent-circle-outline'}
             />
           </Grid>
 
-          <Grid item xs={4} sm={8} md={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary
               title="Villages"
               total={summaryData?.summary_villages}
               color="villages"
               icon={'fontisto:holiday-village'}
-              style={{backgroundImage: (theme) =>
-                `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
-                  theme.palette[color].dark,
-                  0.24
-                )} 100%)`,}}
+              style={{
+                backgroundImage: (theme) =>
+                  `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
+                    theme.palette[color].dark,
+                    0.24
+                  )} 100%)`,
+              }}
             />
           </Grid>
 
-          <Grid item xs={4} sm={8} md={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary
               title="Women"
               total={summaryData?.summary_women}
@@ -235,7 +239,7 @@ export default function DashboardApp() {
             />
           </Grid>
 
-          <Grid item xs={4} sm={8} md={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary title="Gelathis" total={15022} color="gelathis" icon={'fluent:people-team-16-regular'} />
           </Grid>
 
@@ -244,7 +248,7 @@ export default function DashboardApp() {
               title="Green Motivator"
               total={summaryData?.summary_green}
               color="motivator"
-              icon={'openmoji:leafy-green'}
+            // icon={'openmoji:leafy-green'}
             />
           </Grid>
           <Grid item xs={6} sm={8} md={6}>
@@ -252,7 +256,7 @@ export default function DashboardApp() {
               title="Enrolled Vyapar"
               total={summaryData?.summary_enrolled}
               color="vyapar"
-              icon={'eos-icons:product-subscriptions-outlined'}
+            // icon={'eos-icons:product-subscriptions-outlined'}
             />
           </Grid>
         </Grid>
@@ -268,22 +272,22 @@ export default function DashboardApp() {
                   borderRadius: 12,
                   border: '2px solid',
                   borderColor: '#ffcc80',
-                  marginBottom:'40px',
+                  marginBottom: '40px',
                 }}
-                onClick={()=>{navigate('/dashboard/chart')}}
+                onClick={() => { navigate('/dashboard/chart') }}
               >
                 <CardContent>
                   <Typography variant="h4" component="h2" marginLeft={2}>
                     {itm?.name}
                   </Typography>
                   <Typography variant="h4" component="h2" marginLeft={2}>
-                    {`Actual Target : ${itm?.target}`}
+                    {`Actual / Target : ${itm?.actual} / ${itm?.target}`}
                   </Typography>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={1}>
-                    <Grid item xs={4} sm={8} md={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <AppWidgetSummary
-                       
+
                         total={itm?.villages}
                         title="Villages"
                         color="villages"
@@ -291,7 +295,7 @@ export default function DashboardApp() {
                       />
                     </Grid>
 
-                    <Grid item xs={4} sm={8} md={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <AppWidgetSummary
                         title="Women"
                         total={itm?.women}
@@ -300,7 +304,7 @@ export default function DashboardApp() {
                       />
                     </Grid>
 
-                    <Grid item xs={4} sm={8} md={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <AppWidgetSummary
                         title="2nd Day TurnOut(%)"
                         total={`${itm?.day2}%`}
@@ -308,7 +312,7 @@ export default function DashboardApp() {
                         icon={'mdi:percent-circle-outline'}
                       />
                     </Grid>
-                    <Grid item xs={4} sm={8} md={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <AppWidgetSummary
                         title="Gelathis"
                         total={itm?.enrolled}
@@ -317,7 +321,7 @@ export default function DashboardApp() {
                       />
                     </Grid>
 
-                    <Grid item xs={4} sm={8} md={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <AppWidgetSummary
                         title="Green Motivator"
                         total={itm?.greenMotivators}
@@ -325,7 +329,7 @@ export default function DashboardApp() {
                         icon={'openmoji:leafy-green'}
                       />
                     </Grid>
-                    <Grid item xs={4} sm={8} md={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <AppWidgetSummary
                         title="Vyapar"
                         total={itm?.vyapar}
