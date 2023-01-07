@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+
 // material
 import {
   Grid,
@@ -30,7 +32,7 @@ import SrOperationManager from './SrOperationManager'
 import Participant from './Participant';
 import Trainers from './Trainers';
 import GelathisLead from './GelathisLead';
-import DateRangeFilter from './DateRangeFilter';
+import  DateRangeF  from './DateRangeFilter';
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -88,9 +90,6 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25}}>
             Filters {selectDATA&&selectDATA===2&&":  Funders"}
-            {selectDATA&&selectDATA===1&&": Partners"}
-            {selectDATA&&selectDATA===7&&": Location"}
-            {selectDATA&&selectDATA===9&&": Data Range"}
           </Typography>
           <IconButton onClick={()=>{
         setSelectData()
@@ -112,14 +111,14 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                       {/* <Grid spacing={1} > */}
                         <Button onClick={()=>{setSelectData(2)}}>Funders</Button>
                         <Button onClick={()=>{setSelectData(1)}}>Partner</Button>
-                        <Button>Project</Button>
-                        <Button>Operation Manager</Button>
+                        <Button onClick={()=>{setSelectData(3)}}>Project</Button>
+                        <Button onClick={()=>{setSelectData(4)}}>Operation Manager</Button>
 
                       {/* </Grid> */}
                     {/* </ButtonGroup> */}
                     {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons">
                       <Grid> */}
-                        <Button>Trainer</Button>
+                        <Button onClick={()=>{setSelectData(5)}}>Trainer</Button>
                       {/* </Grid>
                     </ButtonGroup> */}
 
@@ -128,8 +127,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                       <Button onClick={()=>{setSelectData(7)}}>Location</Button>
                       <Button>Participant</Button>
                     {/* </Grid> */}
-                    <Button>Sr.Operation Manager</Button>
-                    <Button onClick={()=>{setSelectData(9)}}>Gelathis Facilator Leads</Button>
+                    <Button onClick={()=>{setSelectData(12)}}>Sr.Operation Manager</Button>
+                    <Button onClick={()=>{setSelectData(13)}}>Gelathis Facilator Leads</Button>
                     {/* </ButtonGroup> */}
                   {/* </Typography> */}
                 </CardContent>
@@ -140,12 +139,25 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
               <Grid style={{ marginTop: 30 }}>
                 <Partners getData={getData} selectDATA={selectDATA}/>
               </Grid>
+              <Grid style={{ marginTop: 30 }}>
+                <Projects getData={getData} selectDATA={selectDATA} />
+              </Grid>
               {/* <Grid style={{ marginTop: 30 }}>
-                <DateRangeFilter onDateSubmit={onDateSubmit} />
+                <DateRangeF onDateSubmit={onDateSubmit} />
               </Grid> */}
-              {/* <Grid style={{ marginTop: 30 }}>
+              <Grid style={{ marginTop: 30 }}>
                 <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
-              </Grid> */}
+              </Grid>
+              <Grid style={{ marginTop: 30 }}>
+                <Trainers getData={getData} selectDATA={selectDATA} />
+              </Grid>
+              <Grid style={{ marginTop: 30 }}>
+                <GelathisLead getData={getData} selectDATA={selectDATA} />
+              </Grid> 
+              <Grid style={{ marginTop: 30 }}>
+                <SrOperationManager getData={getData} selectDATA={selectDATA} />
+              </Grid>
+             
               {/* <Grid style={{ marginTop: 10 }}>
                 <GelathisLead  onDateSubmit={onDateSubmit}/>
               </Grid> */}

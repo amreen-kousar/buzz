@@ -4,6 +4,7 @@ import { Container, Stack, Typography,Box,Button } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
+import TravelDialog from './Components/DashboardFilters/TravelDialog'
 
 // components
 function TabPanel(props) {
@@ -78,6 +79,9 @@ export default function TravelA() {
       </TabPanel>
     </Box>
         </Stack>
+        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+            <TravelDialog />
+          </Stack>
       {/* </Stack> */}
     
     </Container></Page>

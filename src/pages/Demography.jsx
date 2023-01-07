@@ -80,7 +80,7 @@ const config = {
   axios(config)
   .then((response)=> {
     setDemo(response.data)
-    console.log(JSON.stringify(response.data,'<----223swswsws'));
+    console.log(response.data,'<----223swswsws');
   })
   .catch( (error)=> {
     console.log(error);

@@ -32,6 +32,7 @@ import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashbo
 import USERLIST from '../_mock/user';
 import BuslistDrawer from './Components/BuslistDrawer';
 import BusListFilter from './Components/Buslistfilters/BusListFilter';
+import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
 
 // ----------------------------------------------------------------------
 
@@ -85,6 +86,7 @@ export default function User() {
   const [clcikData,setClickData] = useState()
 
   const [orderBy, setOrderBy] = useState('name');
+  const [search,setSearch] = useState('')
 
   const [filterName, setFilterName] = useState('');
 
@@ -92,7 +94,7 @@ export default function User() {
   const [buses,setBuses] = useState();
   useEffect(()=>{
     busesd()
-    },[]
+    },[search]
     )
   const busesd = async () => {
   const data = JSON.stringify({
@@ -102,9 +104,10 @@ export default function User() {
     "taluk_id": "",
     "district_id": "",
     "funder_id": "",
-    "emp_id": 206
+    "emp_id": 206,
+    "search":search
   });
-  
+  console.log(data,"<----qwertyuiosdfgh")
   const config = {
     method: 'post',
     url: 'http://3.7.7.138/appTest/getBuses.php',
@@ -193,6 +196,8 @@ export default function User() {
   return (
     <Page title="User">
       <Container>
+      <DashboardNavbar getSearch={(e)=>setSearch(e)} onOpenSidebar={() => setOpen(true)} />
+
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
             All Bus List
@@ -225,6 +230,13 @@ export default function User() {
             />
           </Stack>
 
+{buses?.list?.length==0&&(
+  
+  <div>
+  <h1>no data found</h1>
+  </div>
+  
+)}
         {/* </Stack> */}
         {buses?.list?.map((itm)=>{
 return(
@@ -235,6 +247,7 @@ return(
           <Grid pt={1} pb={1} container xs={12} md={4}  direction="row" alignItems="center" justifyContent="space-between" style={{marginLeft:15}}>
           <Typography variant="subtitle1" gutterBottom >
            { `Bus Number : ${itm?.register_number}`}
+           
             </Typography>
             
             <Typography variant="subtitle1" gutterBottom>

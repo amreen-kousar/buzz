@@ -16,52 +16,53 @@ export default function DashboardApp() {
   const navigate = useNavigate();
 
   const theme = useTheme();
-  const intialValues = {
-    funder: "",
-    patner: "",
-    fromDate: '',
-    toDate: ""
+  const intialValues  = {
+    funder:"",
+    patner:"",
+    project:"",
+    fromDate:'',
+    toDate:""
   }
   const [openFilter, setOpenFilter] = useState(false);
-  const [filter, setFilterData] = useState(intialValues)
-  const [slected, setSelected] = useState({
-    id: '',
-    name: ''
-  })
+ 
+  const [filterData,setFilterData] = useState({})
+  const [slected,setSelected] = useState({
+    id:'',
+  nmae:''  })
   const [summaryData, setSummaryData] = useState([]);
 
   useEffect(() => {
     apiHit();
   }, []);
 
-  const apiHit = async (id, i, g) => {
+  const apiHit = async (id,i,g) => {
     const data = {
-      end_date: g === "date" ? i : '',
+      end_date:g==="date"?i: '',
       role_id: 1,
-      taluk_id: g === "country" ? i : "",
-      district_id: g === "country" ? id : "",
-      trainerId: '',
+      taluk_id: g==="country"?i:"",
+      district_id:g==="country"?id:"",
+      trainerId: g?"": i===5?id?.id:'',
       emp_id: 1,
-      start_date: g === "date" ? id : '',
-      somId: '',
-      gflId: '',
-      funder_id: g ? "" : i === 2 ? id?.id : '',
-      partner_id: g ? "" : i === 1 ? id?.id : '',
-      project_id: '',
-      opsManager: '',
+      start_date:g==="date"?id: '',
+      somId:g?"": i===12?id?.id:'',
+      gflId:g?"": i===13?id?.id:'',
+      funder_id:g?"": i===2?id?.id:'',
+      partner_id:g?"": i===1?id?.id:'',
+      project_id:g?"": i===3?id?.id:'',
+      opsManager:g?"": i===4?id?.id:'',
     };
     const datas = {
       end_date: i,
       role_id: 1,
       taluk_id: "",
-      district_id: "",
+      district_id:"",
       trainerId: '',
       emp_id: 1,
       start_date: id,
       somId: '',
       gflId: '',
-      funder_id: "",
-      partner_id: "",
+      funder_id:"",
+      partner_id:"",
       project_id: '',
       opsManager: '',
     };
@@ -69,12 +70,12 @@ export default function DashboardApp() {
     const config = {
       method: 'post',
       // url: "https://cors-anywhere.herokuapp.com/{http://3.7.7.138/appTest/Scripts/getDashboardData.php}",
-      url: 'http://3.7.7.138/hari-buzz/Scripts/getDashboardData.php',
+      url: 'https://bdms.buzzwomen.org/appTest/Scripts/getDashboardData.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
-      data,
+    data,
     };
 
     axios(config)
@@ -94,37 +95,12 @@ export default function DashboardApp() {
     setOpenFilter(false);
   };
 
-  const onDateSubmit = (e) => {
-    apiHit(e?.startDate, e?.endDate, "date")
-    setFilterData({ ...intialValues, fromDate: e?.startDate, toDate: e?.endDate })
+  const onDateSubmit = (e)=>{
+    apiHit(e?.startDate,e?.endDate,"date")
+    setFilterData({from_date:e?.startDate,to_date:e?.endDate})
     handleCloseFilter()
-    console.log(e, "<----scasds")
+  console.log(e,"<----scasds")
   }
-
-  // const IconStyle = styled('div')(({ theme }) => ({
-  //   margin: 'auto',
-  //   display: 'flex',
-  //   borderRadius: '50%',
-  //   alignItems: 'center',
-  //   width: theme.spacing(8),
-  //   height: theme.spacing(8),
-  //   justifyContent: 'center',
-  //   marginBottom: theme.spacing(3),
-  // }));
-
-  //   <IconStyle
-  //   sx={{
-  //     color: (theme) => theme.palette[color].dark,
-  //     // backgroundImage: (theme) =>
-  //     //   `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
-  //     //     theme.palette[color].dark,
-  //     //     0.24
-  //     //   )} 100%)`,
-  //   }}
-  // >
-  //   <Iconify icon={icon} width={24} height={24} />
-  // </IconStyle>
-
 
   if (summaryData?.length === 0) {
     return (
@@ -140,12 +116,16 @@ export default function DashboardApp() {
       id: i,
       name: itm?.name
     })
+    const data = i===2?{"funder_id":itm?.id}:i===1?{"partner_id":itm?.id}:{"project_id":itm?.id}
     apiHit(itm, i)
+    console.log(data,i,itm,"<----sdfssreerfer")
+    setFilterData(data)
     handleCloseFilter()
     console.log("sdfgsdfdfssd", itm, i)
   }
   const onSumbit = (e, i) => {
     handleCloseFilter()
+
     apiHit(e?.district_id, e?.talaq_id, "country")
     console.log(e, i, "<----datssdasdsa")
   }
@@ -274,8 +254,8 @@ export default function DashboardApp() {
                   borderColor: '#ffcc80',
                   marginBottom: '40px',
                 }}
-                onClick={() => { navigate('/dashboard/chart') }}
-              >
+                onClick={()=>{navigate('/dashboard/chart',{state:{
+                  filterData:  filterData  }})}}              >
                 <CardContent>
                   <Typography variant="h4" component="h2" marginLeft={2}>
                     {itm?.name}

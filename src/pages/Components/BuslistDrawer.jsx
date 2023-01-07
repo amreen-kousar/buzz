@@ -1,3 +1,5 @@
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 // material
 import {
@@ -56,7 +58,39 @@ BuslistDrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData }) {
+export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData,bus_id }) {
+  const [detailsData,setDetailsData] = useState();
+ 
+  useEffect(()=>{
+    details()
+    },[clcikData]
+    )
+  const details = async => {
+    console.log(clcikData,"<-----clcikDataclcikData")
+    
+    var data = JSON.stringify({
+      "bus_id":clcikData?.bus_id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'http://3.7.7.138/appTest/getBusData.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+     data
+    };
+    
+    axios(config)
+    .then(function (response) { 
+      setDetailsData(response.data)
+      console.log(JSON.stringify(response.data,'<njnjnjn'));
+    })
+    .catch(function (error) {
+      console.log(error,"<---error");
+    });
+    
+  }
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -71,6 +105,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           sx: { width: 280, },
         }}
       >
+        {console?.log(detailsData,"<---detailsDatadetailsData")}
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }}>
           {`Bus Number : ${clcikData?.register_number}`}
@@ -85,19 +120,20 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>
+            
             <Card>
                 <CardContent>
                 <Typography style={{flexDirection:'row'}} variant="subtitle1" gutterBottom>
                Registration Date
-               <Typography variant="body1" >25/12/2022</Typography>       
+               <Typography variant="body1" >{detailsData?.register_date}</Typography>       
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
                Engine Number:
-               <Typography variant="body1" gutterBottom>122132323dsd</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.engine_number}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
               Chasis Number:
-               <Typography variant="body1" gutterBottom>jhbhb2233</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.chassis_number}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
               Insurance Number:

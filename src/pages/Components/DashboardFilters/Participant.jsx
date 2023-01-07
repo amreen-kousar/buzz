@@ -14,24 +14,59 @@ const bull = (
 );
 
 export default function Participant() {
+  const [party,setParty] = useState();
+  useEffect(()=>{
+    console.log(selectDATA,"<--dffgdfgdf")
+    if(selectDATA)
+    {
+      participant()
+    }
+    },[selectDATA]
+    )
+  const participant = async () => {
+  const data = JSON.stringify({
+    "role_id": 1,
+    "filter_type": selectDATA,
+    "pageNum": 1,
+    "emp_id": 206
+  });
+  
+  const config = {
+    method: 'post',
+    url: 'http://3.7.7.138/appTest/getPeopleFilters.php',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+     data
+  };
+  
+  axios(config)
+  .then( (response) =>{
+    setParty(response?.data?.data)
+    console.log(JSON.stringify(response.data));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
   return (
     <div>
-      <Card style={{ marginTop: 20 }}>
-        <CardContent>
-          <Typography>
-            <Iconify icon="eva:people-fill" width={20} height={20} />
-            Participant
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card style={{ marginTop: 20 }}>
-        <CardContent>
-          <Typography>
-            <Iconify icon="eva:people-fill" width={20} height={20} />
-            Birla
-          </Typography>
-        </CardContent>
-      </Card>
-    </div>
+
+    
+<Card style={{marginTop:20}}>
+        {party?.length!==0?party?.map(itm=>{
+ return(
+       
+            <CardContent>
+                <Typography>
+                <Iconify onClick={()=>getData(itm,selectDATA)} icon="eva:people-fill" width={20} height={20} />
+               {itm?.name}
+                </Typography>
+            </CardContent>
+ )
+             }):null}
+          </Card>
+         
+          </div>
   );
 }

@@ -66,7 +66,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
         const config = {
             method: 'post',
-            url: 'http://3.7.7.138/hari-buzz/getProjects.php',
+            url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
             headers: {
                 'Content-Type': 'application/json'
             },

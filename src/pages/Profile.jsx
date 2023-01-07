@@ -1,4 +1,7 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
+import React from "react";
+import axios from 'axios';
+
 import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -18,6 +21,38 @@ export default function Profile(index) {
     bottom: false,
     right: false,
   });
+  const [profileData,setProfileData]= useState()
+  const [userUpdate,setUserUpdate]=useState(false)
+  useEffect(()=>{
+    profile()
+    },[userUpdate]
+    )
+  const profile = async => {
+    const userData = localStorage?.getItem('userDetails')
+    
+    var data = JSON.stringify({
+      "id": JSON?.parse(userData)?.id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setProfileData(response.data)
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -85,7 +120,7 @@ export default function Profile(index) {
         maxWidth: 500,
         flexGrow: 1,
       }}>
-       <ProfileCard />
+       <ProfileCard changeUser={()=>{setUserUpdate(!userUpdate)}}  profileData={profileData}/>
        </Grid>
        
 
