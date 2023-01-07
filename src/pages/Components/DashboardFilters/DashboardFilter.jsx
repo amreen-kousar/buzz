@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // material
 import {
@@ -16,7 +16,7 @@ import {
   Chip,
   Card,
   CardContent,
-  ButtonGroup,
+  Box,
 } from '@mui/material';
 // components
 import Iconify from '../../../components/Iconify';
@@ -66,8 +66,21 @@ DashboardFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,getData,onSumbit,onDateSubmit }) {
-  const [selectDATA,setSelectData]= useState()
+export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit }) {
+  var [selectDATA, setSelectData] = useState(2)
+  const setData = (value) => {
+    localStorage.setItem('selectedData', value)
+    setSelectData(value)
+
+  }
+  useEffect(() => {
+    localStorage.setItem('selectedData', 2)
+  }, [])
+
+  useEffect(() => {
+    setSelectData(localStorage?.getItem('selectedData'))
+    console.log(selectDATA)
+  }, [selectDATA])
 
   return (
     <>
@@ -78,23 +91,26 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
       <Drawer
         anchor="right"
         open={isOpenFilter}
-        onClose={()=>{
-        setSelectData()
-          onCloseFilter()}}
+        onClose={() => {
+          // setSelectData(2)
+          onCloseFilter()
+          setData()
+        }}
         PaperProps={{
           sx: { width: 400 },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25}}>
-            Filters {selectDATA&&selectDATA===2&&":  Funders"}
-            {selectDATA&&selectDATA===1&&": Partners"}
-            {selectDATA&&selectDATA===7&&": Location"}
-            {selectDATA&&selectDATA===9&&": Data Range"}
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25 }}>
+            Filters {selectDATA && selectDATA == 2 && ":  Funders"}
+            {selectDATA && selectDATA == 1 && ": Partners"}
+            {selectDATA && selectDATA == 7 && ": Location"}
+            {selectDATA && selectDATA == 9 && ": Data Range"}
           </Typography>
-          <IconButton onClick={()=>{
-        setSelectData()
-          onCloseFilter()}}>
+          <IconButton onClick={() => {
+            setSelectData()
+            onCloseFilter()
+          }}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
@@ -103,53 +119,55 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
 
         <Scrollbar>
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
-            <div>
-              <Card style={{backgroundColor:'#F6F8FB',}}>
-                <CardContent>
-                  {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
-                 <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
-                    {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
-                      {/* <Grid spacing={1} > */}
-                        <Button onClick={()=>{setSelectData(2)}}>Funders</Button>
-                        <Button onClick={()=>{setSelectData(1)}}>Partner</Button>
-                        <Button>Project</Button>
-                        <Button>Operation Manager</Button>
+          <div>
+            <Card style={{ backgroundColor: '#F6F8FB', }}>
+              <CardContent>
+                {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
+                <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Categories</Typography>
+                {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
+                {/* <Grid spacing={1} > */}
 
-                      {/* </Grid> */}
-                    {/* </ButtonGroup> */}
-                    {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons">
+                <Button onClick={() => { setData(2) }} variant={selectDATA == 2 ? 'contained' : 'text'}>Funders</Button>
+                <Button onClick={() => { setData(1) }} variant={selectDATA == 1 ? 'contained' : 'text'}>Partner</Button>
+                <Button>Project</Button>
+                <Button>Operation Manager</Button>
+
+                {/* </Grid> */}
+                {/* </ButtonGroup> */}
+                {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons">
                       <Grid> */}
-                        <Button>Trainer</Button>
-                      {/* </Grid>
+                <Button>Trainer</Button>
+                {/* </Grid>
                     </ButtonGroup> */}
 
-                    {/* <Grid spacing={2}> */}
-                      <Button onClick={()=>{setSelectData(9)}}>Date Range</Button>
-                      <Button onClick={()=>{setSelectData(7)}}>Location</Button>
-                      <Button>Participant</Button>
-                    {/* </Grid> */}
-                    <Button>Sr.Operation Manager</Button>
-                    <Button onClick={()=>{setSelectData(9)}}>Gelathis Facilator Leads</Button>
-                    {/* </ButtonGroup> */}
-                  {/* </Typography> */}
-                </CardContent>
-              </Card>
-              <Grid style={{ marginTop: 30 }}>
-                <Funders getData={getData} selectDATA={selectDATA}/>
-              </Grid>
-              <Grid style={{ marginTop: 30 }}>
-                <Partners getData={getData} selectDATA={selectDATA}/>
-              </Grid>
-              {/* <Grid style={{ marginTop: 30 }}>
+                {/* <Grid spacing={2}> */}
+                <Button onClick={() => { setData(9) }} variant={selectDATA == 9 ? 'contained' : 'text'}>Date Range</Button>
+                <Button onClick={() => { setData(7) }} variant={selectDATA == 7 ? 'contained' : 'text'}>Location</Button>
+                <Button>Participant</Button>
+                {/* </Grid> */}
+                <Button>Sr.Operation Manager</Button>
+                <Button onClick={() => { setData(9) }} variant={selectDATA == 9 ? 'contained' : 'text'}>Gelathis Facilator Leads</Button>
+                {/* </ButtonGroup> */}
+                {/* </Typography> */}
+
+              </CardContent>
+            </Card>
+            <Grid style={{ marginTop: 30 }}>
+              <Funders getData={getData} selectDATA={selectDATA} />
+            </Grid>
+            <Grid style={{ marginTop: 30 }}>
+              <Partners getData={getData} selectDATA={selectDATA} />
+            </Grid>
+            {/* <Grid style={{ marginTop: 30 }}>
                 <DateRangeFilter onDateSubmit={onDateSubmit} />
               </Grid> */}
-              {/* <Grid style={{ marginTop: 30 }}>
+            {/* <Grid style={{ marginTop: 30 }}>
                 <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
               </Grid> */}
-              {/* <Grid style={{ marginTop: 10 }}>
+            {/* <Grid style={{ marginTop: 10 }}>
                 <GelathisLead  onDateSubmit={onDateSubmit}/>
               </Grid> */}
-              {/* <Grid style={{ marginTop: 30 }}>
+            {/* <Grid style={{ marginTop: 30 }}>
                 <Partners />
               </Grid>
               <Grid style={{ marginTop: 30 }}>
@@ -170,8 +188,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
               <Grid style={{ marginTop: 30 }}>
                 <GelathisLead />
               </Grid> */}
-            
-            </div>
+
+          </div>
           {/* </Stack> */}
         </Scrollbar>
       </Drawer>

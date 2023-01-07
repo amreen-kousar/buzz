@@ -1,30 +1,70 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Container, Stack, Typography, Box } from '@mui/material';
+import { Container, Stack, Typography, Box, Button, TextField, Select, MenuItem } from '@mui/material';
 // components
 import Page from '../components/Page';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
 // mock
 import PRODUCTS from '../_mock/products';
 import UserDrawer from './Components/UserDrawer';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 // ----------------------------------------------------------------------
 
 export default function EcommerceShop() {
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
+
+  const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = useState('paper');
+
+  const handleClickOpen = (scrollType) => () => {
+    setOpen(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+    console.log(AddUser)
+    setOpen(false);
+  };
+  const descriptionElementRef = useRef(null);
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
+
+  const submitBus = () => {
+
+  }
 
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
   useEffect(() => {
     user()
-    
+
   }, []
   )
+
+
+  useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
+  const roles = ['Admin', 'Program Manager', 'Operations Manager', 'Cor', 'Trainer', 'Gelathi Facilitator', 'Driver', 'Funder', 'Partner', 'FIN/HR/VIEWER', 'Senior Operations Manager', 'Gelathi Facilitator Lead']
+
+  const [AddUser, setAddUser] = useState({
+    role: 'Admin', name: '', mobilenumber: '', work: '', email: '', address: '',
+    pincode: ""
+  })
+
   const user = async () => {
     const data = JSON.stringify({
       "search": "",
@@ -56,6 +96,66 @@ export default function EcommerceShop() {
 
   return (
     <Page title="All Users">
+
+      <div>
+        <Button style={{ float: "right", marginLeft: "1rem" }} variant="contained" onClick={handleClickOpen('paper')}>Add User</Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          scroll={scroll}
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
+        >
+          <DialogTitle id="scroll-dialog-title">Add User</DialogTitle>
+          <DialogContent dividers={scroll === 'paper'}>
+            <DialogContentText
+              id="scroll-dialog-description"
+              ref={descriptionElementRef}
+              tabIndex={-1}
+            >
+
+              <Box
+                component="form"
+                sx={{
+                  '& .MuiTextField-root': { m: 1, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <Select
+                style={{width:"245px",margin:'0.5rem'}}
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={AddUser.role}
+                  label="Role"
+                  onChange={(e) => setAddUser({ ...AddUser, role: e.target.value })}
+                >
+                  {roles.map(role => {
+                    return <MenuItem value={role}>{role}</MenuItem>
+                  })}
+
+                </Select>
+
+
+                <TextField id="outlined-basic" label="Bus Number" required variant="outlined" value={AddUser.busNumber} onChange={(e) => { setAddUser({ ...AddUser, busNumber: e.target.value }) }} />
+                <TextField id="outlined-basic" label="Name" value={AddUser.name} onChange={(e) => { setAddUser({ ...AddUser, name: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Mobile number" value={AddUser.mobilenumber} type="number" onChange={(e) => { setAddUser({ ...AddUser, mobilenumber: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" />
+                <TextField id="outlined-basic" label="Email" value={AddUser.email} onChange={(e) => { setAddUser({ ...AddUser, email: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Address" value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Pincode" value={AddUser.pincode} onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" />
+
+
+              </Box>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button variant="contained" onClick={submitBus}>Add</Button>
+            <Button variant="contained" color="error" onClick={handleClose}>Cancel</Button>
+
+          </DialogActions>
+        </Dialog>
+      </div>
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
           People
@@ -76,6 +176,6 @@ export default function EcommerceShop() {
           onCloseFilter={handleCloseFilter} />
         <ProductCartWidget />
       </Container>
-    </Page>
+    </Page >
   );
 }
