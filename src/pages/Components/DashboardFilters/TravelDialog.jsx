@@ -23,12 +23,8 @@ import Select from '@mui/material/Select';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-// import StaticDatePicker from '../StaticDatePicker';
 import { useGeolocated } from "react-geolocated";
 import Webcam from "react-webcam";
-// const Transition = React.forwardRef(function Transition(props, ref) {
-//   return <Slide direction="up" ref={ref} {...props} />;
-// });
 function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
@@ -57,13 +53,8 @@ endLocation:"",
 totalkm:""
   });
 
-  const webcamRef = React.useRef(null);
+  // const webcamRef = React.useRef(null);
   const [imgSrc, setImgSrc] = React.useState(null);
-
-//   const capture = React.useCallback(() => {
-//     const imageSrc = webcamRef.current.getScreenshot();
-//     setImgSrc(imageSrc);
-//   }, [webcamRef, setImgSrc]);
   const [datadrop,setDataDrop] = useState();
   const handleClickOpen = () => {
     setOpen(true);
@@ -90,22 +81,6 @@ totalkm:""
     location()
     },[coords]
     )
-//   const imageUpload = async => {
-//     formdata.append("emp_id", "15");
-// formdata.append("file[]", fileInput.files[0], "[PROXY]");
-
-// var requestOptions = {
-//   method: 'POST',
-//   body: formdata,
-//   redirect: 'follow'
-// };
-
-// fetch("http://3.7.7.138/appTest/new/taAttachments.php", requestOptions)
-//   .then(response => response.text())
-//   .then(result => console.log(result))
-//   .catch(error => console.log('error', error));
-//   }
-
     const location = ()=>{
         Geocode.fromLatLng(coords?.latitude, coords?.longitude).then(
             (response) => {
@@ -143,15 +118,15 @@ totalkm:""
       });
   }
  // const [imgSrc, setImgSrc] = React.useState(null);
-  const WebcamCapture = () => {
-  const webcamRef = React.useRef(null);
+  // const WebcamCapture = () => {
+  // const webcamRef = React.useRef(null);
  
-  }
-  const capture =() => {
-    console.log(webcamRef.current,"<----webcamRef.current")
-    const imageSrc = webcamRef.current.getScreenshot();
-    setImgSrc(imageSrc);
-  };
+  // }
+  // const capture =() => {
+  //   // console.log(webcamRef.current,"<----webcamRef.current")
+  //   const imageSrc = webcamRef.current.getScreenshot();
+  //   setImgSrc(imageSrc);
+  // };
   console.log(imgSrc,"<-----gfvimageSrc")
    const SendData = async => {
     var data = JSON.stringify({
