@@ -200,7 +200,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     </ButtonGroup> */}
 
                     {/* <Grid spacing={2}> */}
-                      <Button onClick={()=>{setSelectData(9)}}sx={{
+                      <Button onClick={()=>{setSelectData(9)}}
+                      sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
                             color: '#ed6c02',
@@ -316,4 +317,16 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
       </Drawer>
     </>
   );
+}
+const styles = {
+  button: {
+    '&:active':{
+      backgroundColor: '#ffd796',
+      color:'#ed6c02'
+   },
+    '&:hover': {
+      backgroundColor: '#ffd796',
+      color:'#ed6c02'
+    },
+  },
 }

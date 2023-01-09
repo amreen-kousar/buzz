@@ -148,7 +148,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
           flexGrow: 1,
         }}
         avatar={
-          <Avatar sx={{ bgcolor: red[500], width: 100, height: 100, marginLeft: 13 }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: "#ed6c02", width: 100, height: 100, marginLeft: 13 }} aria-label="recipe">
             P
           </Avatar>
         }
@@ -188,7 +188,19 @@ export default function RecipeReviewCard({profileData,changeUser}) {
       </CardContent>
       <CardActions disableSpacing>
         <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-          <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
+          <Button variant="warning"
+            sx={{
+              ':hover': {
+                bgcolor: '#ffd796', // theme.palette.primary.main
+                color: '#ed6c02',
+              },
+              ':active':{
+                bgcolor:'#ffd796',
+                color:"#ed6c02"
+              },
+              bgcolor:'#ffd796',
+              color:"#ed6c02"
+            }} component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             Edit User
           </Button>
           {/* <Edit /> */}
@@ -196,7 +208,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Stack mb={3} style={{ backgroundColor: '#f5f5f5', borderRadius: 9 }}>
+          <Stack mb={3} style={{ backgroundColor: '#ffd796', borderRadius: 9 }}>
             <Typography
               variant="h6"
               sx={{
@@ -204,6 +216,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
                 margin: 'auto',
                 maxWidth: 500,
                 flexGrow: 1,
+                color:'#ed6c02'
               }}
             >
               Edit User Information
@@ -276,7 +289,19 @@ export default function RecipeReviewCard({profileData,changeUser}) {
             </Grid>
           </Grid>
           <Box display="flex" justifyContent="flex-end">
-          <Button onClick={editProfile} variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:save-fill" />}>
+          <Button onClick={editProfile} variant="warning"
+            sx={{
+              ':hover': {
+                bgcolor: '#ffd796', // theme.palette.primary.main
+                color: '#ed6c02',
+              },
+              ':active':{
+                bgcolor:'#ffd796',
+                color:"#ed6c02"
+              },
+              bgcolor:'#ffd796',
+              color:"#ed6c02"
+            }}  component={RouterLink} to="#" startIcon={<Iconify icon="eva:save-fill" />}>
             Save
           </Button>
           </Box>

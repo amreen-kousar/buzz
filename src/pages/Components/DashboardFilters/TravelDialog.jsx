@@ -246,16 +246,29 @@ export default function FullScreenDialog() {
   //   }
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} sx={{
+                      ':hover': {
+                                bgcolor: '#ffd796', // theme.palette.primary.main
+                                color: '#ed6c02',
+                                border:'#ffd796'
+                                },
+                      ':active':{
+                                 bgcolor:'#ffd796',
+                                color:"#ed6c02"
+                                 },
+                                 bgcolor:'#ffd796',
+                                 color:"#ed6c02",
+                                 border:'none'
+                                   }} >
         Open full-screen dialog
       </Button>
       <Dialog fullScreen open={open} onClose={handleClose}>
-        <AppBar sx={{ position: 'relative' }}>
+        <AppBar sx={{ position: 'relative',bgcolor:'#ed6c02' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1,color:"inherit" }} variant="h6" component="div" >
               Create Allowances
             </Typography>
 
@@ -354,7 +367,7 @@ export default function FullScreenDialog() {
           </FormControl>
         </Stack>
         <Stack style={{ marginTop: 20 }}>
-          <h1>Other Benifits</h1>
+          <h1>Other Benefits</h1>
         </Stack>
         <Stack style={{ marginTop: 20 }}>
           <FormControl fullWidth>
@@ -414,7 +427,7 @@ export default function FullScreenDialog() {
           <label for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
             <Iconify
               icon={'mdi:camera'}
-              sx={{ width: 25, height: 25, ml: 2, color: "blue" }}
+              sx={{ width: 25, height: 25, ml: 2, color: "#ed6c02" }}
             />&nbsp;
             Click to upoad images
             <input style={{ display: "none" }} id="inputTag" type="file" onClick={(e) => { e.target.value = null; }} onChange={(e) => { convertImage(e.target.files[0]) }} />

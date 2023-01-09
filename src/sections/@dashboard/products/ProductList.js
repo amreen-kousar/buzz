@@ -60,7 +60,7 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
             <CardContent>
               <Grid direction={'column'} spacing={2} alignItems="center" justifyContent="space-between">
 
-                <Avatar sx={{ bgcolor: red[500], width: 100, height: 100, marginLeft: '30%' }} aria-label="recipe">
+                <Avatar sx={{ bgcolor: red[500], width: 100, height: 100, marginLeft: '30%',bgcolor:'#ed6c02' }} aria-label="recipe">
                   {itm?.first_name.substring(0, 1)}
                 </Avatar>
                 <Typography sx={{ fontSize: 20, fontWeight: 'medium' }} mt={3} textAlign={'center'} >
