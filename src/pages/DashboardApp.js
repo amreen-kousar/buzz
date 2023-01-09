@@ -139,7 +139,7 @@ export default function DashboardApp() {
           
        
         </Typography> */}
-          <Button style={{ float: "right" }}
+          <Button style={{ float: "right" }} color='warning' 
             onClick={() => {
               handleOpenFilter()
             }}>
@@ -163,7 +163,7 @@ export default function DashboardApp() {
 
         {/*  */}
         <Grid container spacing={3} marginTop={4}>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item  xs={4} sm={8} md={4}>
 
             <AppWidgetSummary
               title="Target"
@@ -174,7 +174,7 @@ export default function DashboardApp() {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item  xs={4} sm={8} md={4}>
             <AppWidgetSummary
 
               total={summaryData?.summary_actual}
@@ -184,7 +184,7 @@ export default function DashboardApp() {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item  xs={4} sm={8} md={4}>
             <AppWidgetSummary
 
               total={summaryData?.summary_day2}
@@ -194,7 +194,7 @@ export default function DashboardApp() {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item  xs={4} sm={8} md={4}>
             <AppWidgetSummary
               title="Villages"
               total={summaryData?.summary_villages}
@@ -210,7 +210,7 @@ export default function DashboardApp() {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item  xs={4} sm={8} md={4}>
             <AppWidgetSummary
               title="Women"
               total={summaryData?.summary_women}
@@ -219,7 +219,7 @@ export default function DashboardApp() {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item  xs={4} sm={8} md={4}>
             <AppWidgetSummary title="Gelathis" total={15022} color="gelathis" icon={'fluent:people-team-16-regular'} />
           </Grid>
 
@@ -265,7 +265,7 @@ export default function DashboardApp() {
                   </Typography>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={1}>
-                    <Grid item xs={12} sm={6} md={4}>
+                    <Grid item  xs={4} sm={8} md={4}>
                       <AppWidgetSummary
 
                         total={itm?.villages}
@@ -275,7 +275,7 @@ export default function DashboardApp() {
                       />
                     </Grid>
 
-                    <Grid item xs={12} sm={6} md={4}>
+                    <Grid item  xs={4} sm={8} md={4}>
                       <AppWidgetSummary
                         title="Women"
                         total={itm?.women}
@@ -284,7 +284,7 @@ export default function DashboardApp() {
                       />
                     </Grid>
 
-                    <Grid item xs={12} sm={6} md={4}>
+                    <Grid item  xs={4} sm={8} md={4}>
                       <AppWidgetSummary
                         title="2nd Day TurnOut(%)"
                         total={`${itm?.day2}%`}
@@ -292,7 +292,7 @@ export default function DashboardApp() {
                         icon={'mdi:percent-circle-outline'}
                       />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
+                    <Grid item  xs={4} sm={8} md={4}>
                       <AppWidgetSummary
                         title="Gelathis"
                         total={itm?.enrolled}
@@ -301,7 +301,7 @@ export default function DashboardApp() {
                       />
                     </Grid>
 
-                    <Grid item xs={12} sm={6} md={4}>
+                    <Grid item  xs={4} sm={8} md={4}>
                       <AppWidgetSummary
                         title="Green Motivator"
                         total={itm?.greenMotivators}
@@ -309,7 +309,7 @@ export default function DashboardApp() {
                         icon={'openmoji:leafy-green'}
                       />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
+                    <Grid item  xs={4} sm={8} md={4}>
                       <AppWidgetSummary
                         title="Vyapar"
                         total={itm?.vyapar}

@@ -144,7 +144,7 @@ export default function User() {
             All Bus List
          
           </Typography>
-          <Button style={{float:"right"}}
+          <Button style={{float:"right"}} color="warning"
           onClick={()=>{
           handleopenbusfilter()}}>
           Filter
@@ -185,12 +185,13 @@ export default function User() {
         {/* </Stack> */}
         {buses?.list?.map((itm)=>{
 return(
-        <Card style={styles.card1} onClick={()=>{
+        <Card style={styles.card1} 
+         onClick={()=>{
           setClickData(itm)
           handleOpenFilter()}}>
            
           <Grid pt={1} pb={1} container xs={12} md={4}  direction="row" alignItems="center" justifyContent="space-between" style={{marginLeft:15}}>
-          <Typography variant="subtitle1" gutterBottom >
+          <Typography variant="subtitle1" gutterBottom  >
            { `Bus Number : ${itm?.register_number}`}
            
             </Typography>
@@ -218,7 +219,7 @@ return(
 }
 const styles = {
   card1: {
-   backgroundColor:'#f5f5f5',
+   backgroundColor:'inherit',
    opacity:0.9,
    marginTop:"10px"
   },
