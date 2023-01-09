@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -49,42 +49,43 @@ const rows = [
 ];
 
 export default function BuzzStock() {
-  const [demo,setDemo] = useState([]);
-  useEffect(()=>{
+  const [demo, setDemo] = useState([]);
+  useEffect(() => {
     demoi()
-    },[]
-    )
-    const demoi = async () => {
+  }, []
+  )
+  const demoi = async () => {
 
-      const data = JSON.stringify({
-        "from_date": "2022-1-20",
-        "to_date": "2022-1-29",
-        "user_id": 206,
-        "role_id": 1,
-        "project_id": "1",
-        "taluk_id": "",
-        "district_id": "",
-        "funder_id": ""
-  });
+    const data = JSON.stringify({
+      "from_date": "2022-1-20",
+      "to_date": "2022-1-29",
+      "user_id": 206,
+      "role_id": 1,
+      "project_id": "1",
+      "taluk_id": "",
+      "district_id": "",
+      "funder_id": ""
+    });
 
-const config = {
-    method: 'post',
-    url: 'http://3.7.7.138/appTest/getTotalStocks.php',
-    headers: { 
-      'Content-Type': 'application/json'
-    },
-    data
-  };
-  
-  axios(config)
-  .then((response)=> {
-    setDemo(response.data?.data)
-    console.log(JSON.stringify(response.data,'<----333ssss'));
-  })
-  .catch( (error)=> {
-    console.log(error);
-  });
-    }
+    const config = {
+      method: 'post',
+      url: 'http://3.7.7.138/appTest/getTotalStocks.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(response)
+        setDemo(response.data?.data)
+        console.log(JSON.stringify(response.data, '<----333ssss'));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <Grid
       sx={{
@@ -103,8 +104,8 @@ const config = {
             </TableRow>
           </TableHead>
           <TableBody>
-            {console.log(demo,"<--demodedede")}
-            {demo&&demo.map((row) => (
+            {console.log(demo, "<--demodedede")}
+            {demo && demo.map((row) => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell component="th" scope="row">
                   {row.name}
