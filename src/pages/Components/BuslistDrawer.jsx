@@ -58,7 +58,7 @@ BuslistDrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData,bus_id }) {
+export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData,bus_id,deletebuses }) {
   const [detailsData,setDetailsData] = useState();
   const [deletebus, setDeleteBus] = useState();
  
@@ -84,6 +84,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
     
     axios(config)
     .then(function (response) { 
+     
       setDetailsData(response.data)
       console.log(JSON.stringify(response.data,'<njnjnjn'));
     })
@@ -108,6 +109,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
     
     axios(config)
     .then(function (response) {
+      deletebuses()
       setDeleteBus(response.data)
       console.log(response.data,'<------deleteee');
     })

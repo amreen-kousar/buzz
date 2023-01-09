@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState,useEffect } from 'react';
+import { useState,useEffect, forwardRef } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -30,6 +30,8 @@ import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
 // mock
 import USERLIST from '../_mock/user';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import BuslistDrawer from './Components/BuslistDrawer';
 import BusListFilter from './Components/Buslistfilters/BusListFilter';
 import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
@@ -54,18 +56,21 @@ export default function User() {
 
   const [selected, setSelected] = useState([]);
 
+  const [open, setOpens] = useState(false);
+
   const [clcikData,setClickData] = useState()
 
   const [orderBy, setOrderBy] = useState('name');
   const [search,setSearch] = useState('')
 
   const [filterName, setFilterName] = useState('');
-
+   const [dw,setDw] = useState(false)
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [buses,setBuses] = useState();
   useEffect(()=>{
+    setDw(false)
     busesd()
-    },[search]
+    },[search,dw]
     )
   const busesd = async () => {
   const data = JSON.stringify({
@@ -119,10 +124,19 @@ export default function User() {
   const handleclosebusfilter = () => {
     setopenbusfilter(false);
   };
+
+  const Alert = forwardRef ( function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
   
   return (
     <Page title="User">
       <Container>
+      <Snackbar open={open} autoHideDuration={6000} onClose={()=>setOpens(false)}>
+        <Alert onClose={()=>{setOpens(false)}} severity="success" sx={{ width: '100%' }}>
+          This is a success message!
+        </Alert>
+      </Snackbar>
       <DashboardNavbar getSearch={(e)=>setSearch(e)} onOpenSidebar={() => setOpen(true)} />
 
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
@@ -144,6 +158,10 @@ export default function User() {
             <BuslistDrawer
             clcikData={clcikData}
               isOpenFilter={openFilter}
+              deletebuses={()=>{setDw(!dw)
+                handleCloseFilter()
+                setOpens(true)
+              }}
               onOpenFilter={handleOpenFilter}
               onCloseFilter={handleCloseFilter}
             />
