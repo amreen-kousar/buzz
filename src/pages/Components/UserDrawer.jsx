@@ -59,7 +59,7 @@ UserDrawer.propTypes = {
 export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter }) {
 
 
-  let user = JSON.parse(localStorage.getItem('people'))
+  let user = JSON.parse(localStorage?.getItem('people'))
 
   return (
     <>
@@ -77,7 +77,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter }
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }}>
-            Member Details:  {user.first_name}  {user.last_name}
+            Member Details:  {user?.first_name}  {user?.last_name}
           </Typography>
           <IconButton onClick={onCloseFilter}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
@@ -93,15 +93,15 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter }
                 <CardContent>
                   <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
                     Role:
-                    <Typography variant="body1" >{user.role_name}</Typography>
+                    <Typography variant="body1" >{user?.role_name}</Typography>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
                     Reporting Manager:
-                    <Typography variant="body1" gutterBottom>{user.supervisorName}</Typography>
+                    <Typography variant="body1" gutterBottom>{user?.supervisorName}</Typography>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
                     Date Of Joining:
-                    <Typography variant="body1" gutterBottom> {user.doj}</Typography>
+                    <Typography variant="body1" gutterBottom> {user?.doj}</Typography>
                   </Typography>
                 </CardContent>
               </Card>
@@ -121,20 +121,20 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter }
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
                     Mobile Number:
-                    <Typography variant="body1" gutterBottom>   {user.contactNum}</Typography>
+                    <Typography variant="body1" gutterBottom>   {user?.contactNum}</Typography>
 
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
-                    Work: <Typography variant="body1" gutterBottom>   {user.workNum}</Typography>
+                    Work: <Typography variant="body1" gutterBottom>   {user?.workNum}</Typography>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
-                    Email: <Typography variant="body1" gutterBottom>   {user.officeMailId}</Typography>
+                    Email: <Typography variant="body1" gutterBottom>   {user?.officeMailId}</Typography>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
-                    Address: <Typography variant="body1" gutterBottom>   {user.address}</Typography>
+                    Address: <Typography variant="body1" gutterBottom>   {user?.address}</Typography>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
-                    PinCode: <Typography variant="body1" gutterBottom>   {user.pincode}</Typography>
+                    PinCode: <Typography variant="body1" gutterBottom>   {user?.pincode}</Typography>
                   </Typography>
                 </CardContent>
               </Card>
@@ -148,7 +148,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter }
                     Projects
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
-                    {user.project_list.map(project => {
+                    {user?.project_list.map(project => {
                       return (
                         <Typography variant="body1" gutterBottom>   {project.projectName}</Typography>
                       )
