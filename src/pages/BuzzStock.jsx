@@ -60,8 +60,8 @@ export default function BuzzStock() {
         "from_date": "2022-1-20",
         "to_date": "2022-1-29",
         "user_id": 206,
-        "role_id": 1,
-        "project_id": "1",
+        "role_id": 2,
+        "project_id": "",
         "taluk_id": "",
         "district_id": "",
         "funder_id": ""

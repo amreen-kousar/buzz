@@ -1,4 +1,6 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
+import React from "react";
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Container, Stack, Typography, Box, Button, TextField } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
@@ -45,7 +47,38 @@ export default function TravelA() {
  const image = ["tykml","exrdcftvbgyhnuj"]
   //const [image, setImage] = React.useState(['data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==']);
   const [viewImage, setViewImage] = React.useState(false);
-
+  const [listdata,setListData]  = React.useState()
+  useEffect(()=>{
+    list()
+    },[]
+    )
+const list = async =>{
+  const userDetails = localStorage?.getItem("userDetails")
+  var data = JSON.stringify({
+    "emp_id": JSON?.parse(userDetails)?.id,
+    "date": new Date()
+  });
+  
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/new/listTa.php',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(function (response) {
+    setListData(response.data)
+    console.log(response.data, '<--------hbjhbjbjhbj');
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  
+  
+}
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -113,7 +146,15 @@ export default function TravelA() {
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              Item One
+            {listdata?.data?.map((itm) => {
+              console.log(itm,"<---asdasdasdsadas")
+              return (
+                <>
+               <h1>{itm?.Ta_Name}</h1> 
+               </>
+              )   
+            })}
+            Item Two
             </TabPanel>
             <TabPanel value={value} index={1}>
               Item Two
