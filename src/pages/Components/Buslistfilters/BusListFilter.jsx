@@ -96,7 +96,7 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
         <Scrollbar>
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
             <div>
-              <Card  style={{backgroundColor:"#ffd796"}}>
+              <Card  style={{backgroundColor:"#F6F8FB"}}>
                 <CardContent>
                   {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                  <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>

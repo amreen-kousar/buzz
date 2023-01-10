@@ -129,7 +129,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
           {/* <Stack spacing={3} sx={{ p: 3 }}> */} 
             <div>
               <Card >
-                <CardContent style={{backgroundColor:"#ffd796"}}>
+                <CardContent style={{backgroundColor:"#F6F8FB"}}>
                   {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                  <Typography style={{ marginLeft:10}} variant="subtitle1"  gutterBottom>Categories</Typography>
                     {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
@@ -140,10 +140,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                             bgcolor: '#ffd796', // theme.palette.primary.main
                             color: '#ed6c02',
                           },
-                          ':active':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
+                
                           color:'black',
                         }}>Funders</Button>
                         <Button onClick={()=>{setSelectData(1)}} 
