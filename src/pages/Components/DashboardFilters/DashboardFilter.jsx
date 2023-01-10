@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+
 // material
 import {
   Grid,
@@ -18,6 +20,8 @@ import {
   CardContent,
   Box,
 } from '@mui/material';
+
+
 // components
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
@@ -30,7 +34,7 @@ import SrOperationManager from './SrOperationManager'
 import Participant from './Participant';
 import Trainers from './Trainers';
 import GelathisLead from './GelathisLead';
-import DateRangeFilter from './DateRangeFilter';
+import  DateRangeF  from './DateRangeFilter';
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -57,6 +61,20 @@ export const FILTER_COLOR_OPTIONS = [
   '#94D82D',
   '#FFC107',
 ];
+
+// export const BUTTON_STYLES =makeStyles({
+ 
+//   button: {
+//     '&:active':{
+//       backgroundColor: '#ffd796',
+//       color:'#ed6c02'
+//    },
+//     '&:hover': {
+//       backgroundColor: '#ffd796',
+//       color:'#ed6c02'
+//     },
+   
+// }})
 
 // ----------------------------------------------------------------------
 
@@ -101,11 +119,17 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25 }}>
-            Filters {selectDATA && selectDATA == 2 && ":  Funders"}
-            {selectDATA && selectDATA == 1 && ": Partners"}
-            {selectDATA && selectDATA == 7 && ": Location"}
-            {selectDATA && selectDATA == 9 && ": Data Range"}
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25,color:'black'}}>
+            Filters {selectDATA&&selectDATA===2&&":  Funders"}
+       
+            {selectDATA&&selectDATA===1&&": Partner"}
+            {selectDATA&&selectDATA===3&&": Project"}
+            {selectDATA&&selectDATA===4&&": Operation Manager"}
+            {selectDATA&&selectDATA===5&&": Trainers"}
+            {selectDATA&&selectDATA===9&&": Date Range"}
+            {selectDATA&&selectDATA===7&&": Location"}
+            {selectDATA&&selectDATA===12&&":SR.Operation Manager"}
+            {selectDATA&&selectDATA===13&&":Gelathis Facilator Leads"}
           </Typography>
           <IconButton onClick={() => {
             setSelectData()
@@ -118,14 +142,60 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
         <Divider />
 
         <Scrollbar>
-          {/* <Stack spacing={3} sx={{ p: 3 }}> */}
-          <div>
-            <Card style={{ backgroundColor: '#F6F8FB', }}>
-              <CardContent>
-                {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
-                <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Categories</Typography>
-                {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
-                {/* <Grid spacing={1} > */}
+          {/* <Stack spacing={3} sx={{ p: 3 }}> */} 
+            <div>
+              <Card >
+                <CardContent style={{backgroundColor:"#ffd796"}}>
+                  {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
+                 <Typography style={{ marginLeft:10}} variant="subtitle1"  gutterBottom>Categories</Typography>
+                    {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
+                      {/* <Grid spacing={1} > */}
+                        <Button onClick={()=>{setSelectData(2)}} 
+                        sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':active':{
+                            bgcolor:'#ffd796',
+                            color:"#ed6c02"
+                          },
+                          color:'black',
+                        }}>Funders</Button>
+                        <Button onClick={()=>{setSelectData(1)}} 
+                        sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':active':{
+                            bgcolor:'#ffd796',
+                            color:"#ed6c02"
+                          },
+                          color:'black',
+                        }}>Partner</Button>
+                        <Button onClick={()=>{setSelectData(3)}}sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':active':{
+                            bgcolor:'#ffd796',
+                            color:"#ed6c02"
+                          },
+                          color:'black',
+                        }}>Project</Button>
+                        <Button onClick={()=>{setSelectData(4)}} sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':active':{
+                            bgcolor:'#ffd796',
+                            color:"#ed6c02"
+                          },
+                          color:'black',
+                        }}>Operation Manager</Button>
 
                 <Button onClick={() => { setData(2) }} variant={selectDATA == 2 ? 'contained' : 'text'}>Funders</Button>
                 <Button onClick={() => { setData(1) }} variant={selectDATA == 1 ? 'contained' : 'text'}>Partner</Button>
@@ -136,35 +206,108 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 {/* </ButtonGroup> */}
                 {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons">
                       <Grid> */}
-                <Button>Trainer</Button>
-                {/* </Grid>
+                        <Button onClick={()=>{setSelectData(5)}} sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':active':{
+                            bgcolor:'#ffd796',
+                            color:"#ed6c02"
+                          },
+                          color:'black',
+                        }}>Trainer</Button>
+                      {/* </Grid>
                     </ButtonGroup> */}
 
-                {/* <Grid spacing={2}> */}
-                <Button onClick={() => { setData(9) }} variant={selectDATA == 9 ? 'contained' : 'text'}>Date Range</Button>
-                <Button onClick={() => { setData(7) }} variant={selectDATA == 7 ? 'contained' : 'text'}>Location</Button>
-                <Button>Participant</Button>
-                {/* </Grid> */}
-                <Button>Sr.Operation Manager</Button>
-                <Button onClick={() => { setData(9) }} variant={selectDATA == 9 ? 'contained' : 'text'}>Gelathis Facilator Leads</Button>
-                {/* </ButtonGroup> */}
-                {/* </Typography> */}
-
-              </CardContent>
-            </Card>
-            <Grid style={{ marginTop: 30 }}>
-              <Funders getData={getData} selectDATA={selectDATA} />
-            </Grid>
-            <Grid style={{ marginTop: 30 }}>
-              <Partners getData={getData} selectDATA={selectDATA} />
-            </Grid>
-            {/* <Grid style={{ marginTop: 30 }}>
-                <DateRangeFilter onDateSubmit={onDateSubmit} />
+                    {/* <Grid spacing={2}> */}
+                      <Button onClick={()=>{setSelectData(9)}}
+                      sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':active':{
+                            bgcolor:'#ffd796',
+                            color:"#ed6c02"
+                          },
+                          color:'black',
+                        }}>Date Range</Button>
+                      <Button onClick={()=>{setSelectData(7)}} sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':active':{
+                            bgcolor:'#ffd796',
+                            color:"#ed6c02"
+                          },
+                          color:'black',
+                        }}>Location</Button>
+                      <Button sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':active':{
+                            bgcolor:'#ffd796',
+                            color:"#ed6c02"
+                          },
+                          color:'black',
+                        }}>Participant</Button>
+                    {/* </Grid> */}
+                    <Button onClick={()=>{setSelectData(12)}} sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':active':{
+                            bgcolor:'#ffd796',
+                            color:"#ed6c02"
+                          },
+                          color:'black',
+                        }}>Sr.Operation Manager</Button>
+                    <Button onClick={()=>{setSelectData(13)}} sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':active':{
+                            bgcolor:'#ffd796',
+                            color:"#ed6c02"
+                          },
+                          color:'black',
+                        }}>Gelathis Facilator Leads</Button>
+                    {/* </ButtonGroup> */}
+                  {/* </Typography> */}
+                </CardContent>
+              </Card>
+              <Grid style={{ marginTop: 30 }}>
+                <Funders getData={getData} selectDATA={selectDATA}/>
+              </Grid>
+              <Grid style={{ marginTop: 30 }}>
+                <Partners getData={getData} selectDATA={selectDATA}/>
+              </Grid>
+              <Grid style={{ marginTop: 30 }}>
+                <Projects getData={getData} selectDATA={selectDATA} />
+              </Grid>
+              {/* <Grid style={{ marginTop: 30 }}>
+                <DateRangeF onDateSubmit={onDateSubmit} />
               </Grid> */}
-            {/* <Grid style={{ marginTop: 30 }}>
+              <Grid style={{ marginTop: 30 }}>
                 <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
-              </Grid> */}
-            {/* <Grid style={{ marginTop: 10 }}>
+              </Grid>
+              <Grid style={{ marginTop: 30 }}>
+                <Trainers getData={getData} selectDATA={selectDATA} />
+              </Grid>
+              <Grid style={{ marginTop: 30 }}>
+                <GelathisLead getData={getData} selectDATA={selectDATA} />
+              </Grid> 
+              <Grid style={{ marginTop: 30 }}>
+                <SrOperationManager getData={getData} selectDATA={selectDATA} />
+              </Grid>
+             
+              {/* <Grid style={{ marginTop: 10 }}>
                 <GelathisLead  onDateSubmit={onDateSubmit}/>
               </Grid> */}
             {/* <Grid style={{ marginTop: 30 }}>
@@ -195,4 +338,16 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
       </Drawer>
     </>
   );
+}
+const styles = {
+  button: {
+    '&:active':{
+      backgroundColor: '#ffd796',
+      color:'#ed6c02'
+   },
+    '&:hover': {
+      backgroundColor: '#ffd796',
+      color:'#ed6c02'
+    },
+  },
 }

@@ -1,3 +1,5 @@
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 // material
 import {
@@ -56,13 +58,69 @@ BuslistDrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData }) {
+export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData,bus_id,deletebuses }) {
+  const [detailsData,setDetailsData] = useState();
+  const [deletebus, setDeleteBus] = useState();
+ 
+  useEffect(()=>{
+    details()
+    },[clcikData]
+    )
+  const details = async => {
+    console.log(clcikData,"<-----clcikDataclcikData")
+    
+    var data = JSON.stringify({
+      "bus_id":clcikData?.bus_id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'http://3.7.7.138/appTest/getBusData.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+     data
+    };
+    
+    axios(config)
+    .then(function (response) { 
+     
+      setDetailsData(response.data)
+      console.log(JSON.stringify(response.data,'<njnjnjn'));
+    })
+    .catch(function (error) {
+      console.log(error,"<---error");
+    });
+    
+  }
+  const DeleteBus = async =>{
+    var data = JSON.stringify({
+      "bus_id": clcikData?.bus_id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/deleteBus.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      deletebuses()
+      setDeleteBus(response.data)
+      console.log(response.data,'<------deleteee');
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
   return (
     <>
-      {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
-
+     
       <Drawer
         anchor="right"
         open={isOpenFilter}
@@ -71,6 +129,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           sx: { width: 280, },
         }}
       >
+        {console?.log(detailsData,"<---detailsDatadetailsData")}
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }}>
           {`Bus Number : ${clcikData?.register_number}`}
@@ -85,51 +144,53 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>
+            
+            <Button onClick={DeleteBus}>Delete Bus</Button>
             <Card>
                 <CardContent>
                 <Typography style={{flexDirection:'row'}} variant="subtitle1" gutterBottom>
                Registration Date
-               <Typography variant="body1" >25/12/2022</Typography>       
+               <Typography variant="body1" >{detailsData?.register_date}</Typography>       
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
                Engine Number:
-               <Typography variant="body1" gutterBottom>122132323dsd</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.engine_number}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
               Chasis Number:
-               <Typography variant="body1" gutterBottom>jhbhb2233</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.chassis_number}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
               Insurance Number:
-               <Typography variant="body1" gutterBottom>please</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.insurance_number}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
               Insurance Company:
-               <Typography variant="body1" gutterBottom>IcICI Bank</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.insurance_company}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
               Insurance Start Date:
-               <Typography variant="body1" gutterBottom>25/12/2022</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.insurance_start_date}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
               Insurance End Date:
-               <Typography variant="body1" gutterBottom>25/12/2023</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.insurance_end_date}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
               Last Service Date:
-               <Typography variant="body1" gutterBottom>25/12/2023</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.last_service_date}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
               Next Service Date:
-               <Typography variant="body1" gutterBottom>25/12/2023</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.next_service_due_date}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
               Permit Details:
-               <Typography variant="body1" gutterBottom>31/12/2023</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.permit}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
              Fitness Certificate:
-               <Typography variant="body1" gutterBottom>31/12/2023</Typography> 
+               <Typography variant="body1" gutterBottom>{detailsData?.fitness_certificate}</Typography> 
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
               Emission Date:
@@ -137,12 +198,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
               </Typography>
                 </CardContent>
             </Card>
-             
-              {/* <FormGroup>
-                {FILTER_GENDER_OPTIONS.map((item) => (
-                  <FormControlLabel key={item} control={<Checkbox />} label={item} />
-                ))}
-              </FormGroup> */}
+            
             </div>
 
            

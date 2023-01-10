@@ -24,6 +24,7 @@ const RootStyle = styled(AppBar)(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     width: `calc(100% - ${DRAWER_WIDTH + 1}px)`,
   },
+ 
 }));
 
 const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
@@ -40,7 +41,7 @@ DashboardNavbar.propTypes = {
   onOpenSidebar: PropTypes.func,
 };
 
-export default function DashboardNavbar({ onOpenSidebar }) {
+export default function DashboardNavbar({ onOpenSidebar,getSearch }) {
   return (
     <RootStyle>
       <ToolbarStyle>
@@ -48,7 +49,7 @@ export default function DashboardNavbar({ onOpenSidebar }) {
           <Iconify icon="eva:menu-2-fill" />
         </IconButton>
 
-        <Searchbar />
+        <Searchbar getSearch={getSearch} />
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>

@@ -3,23 +3,28 @@ import axios from 'axios';
 import BarChart from 'react-bar-chart';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 
-export default function Charts() {
+export default function Charts(props) {
+  console.log(props,"<----propss")
+  const location = useLocation();
+  const [searchparams] = useSearchParams()
+  console.log(searchparams.get("state"),"<---location",location?.state?.filterData)
     const [chartData, setChartData] = useState([]);
+    const [dayper, setDayper] = useState([]);
 
     useEffect(() => {
         chart();
-      }, []);
-    const chart = async => {
+      }, [location?.state?.filterData]);
+      const chart = async => {
         var data = JSON.stringify({
-            "partner_id": "",
-            "from_date": "",
-            "to_date": "",
+           
             "role_id": 1,
-            "funder_id": 3,
-            "location_id": "",
-            "emp_id": 144
+            
+            "emp_id": 144,
+            ...location?.state?.filterData
+            
           });
           
           var config = {
@@ -40,13 +45,27 @@ export default function Charts() {
                     text:itm?.month_name
                 }
             })
+            const dayper_data = response.data?. dayper_xaxis?.map((itm,index)=>{
+              return{
+                  value:response.data?.dayper_data[index]?.perc,
+                  text:itm?.month_name
+              }
+          })
             setChartData(targetData)
-            console.log(response.data,'<----jhbhjbhjbjh',targetData);
+            setDayper(dayper_data)
+            console.log(response.data,'<----jhbhjbhjbjh',dayper_data,targetData);
           })
           .catch(function (error) {
             console.log(error);
           });
           
+    }
+
+    console.log(chartData,"<----wertyujhgfd")
+    if(chartData?.length ===0&&dayper?.length===0){
+      return(
+      <h1>no data found</h1>
+      )
     }
   return (
     // <Box
@@ -60,6 +79,7 @@ export default function Charts() {
     //     },
     //   }}>
       <div style={{width: '70%'}}> 
+      {chartData.length!==0?
       <BarChart 
       //ylabel='Quantity'
         width={1200}
@@ -68,6 +88,16 @@ export default function Charts() {
         data={chartData}
        // onBarClick={this.handleBarClick}/>
        />
+       :
+       <h1>no data foundd</h1>
+      }{dayper.length!==0&&
+         <BarChart 
+        width={1200}
+        height={600}
+        margin={{top: 40, right: 40, bottom: 30, left: 80}}
+        data={dayper}
+       />
+      }
   </div>
 
     

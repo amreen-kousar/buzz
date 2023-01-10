@@ -14,8 +14,17 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
   height: 48,
   position: 'relative',
   textTransform: 'capitalize',
-  color: theme.palette.text.secondary,
   borderRadius: theme.shape.borderRadius,
+  '&:active':{
+    backgroundColor: '#ffd796',
+    color:'#ed6c02'
+ },
+  '&:hover': {
+    backgroundColor: '#ffd796',
+    color:'#ed6c02'
+  },
+ 
+ 
 }));
 
 const ListItemIconStyle = styled(ListItemIcon)({
@@ -25,6 +34,7 @@ const ListItemIconStyle = styled(ListItemIcon)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  color:'#ed6c02'
 });
 
 // ----------------------------------------------------------------------
@@ -48,14 +58,15 @@ function NavItem({ item, active }) {
   };
 
   const activeRootStyle = {
-    color: 'primary.main',
+    color: theme.palette.text.warning,
     fontWeight: 'fontWeightMedium',
-    bgcolor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+    bgcolor: alpha('#ffd796', theme.palette.action.selectedOpacity),
   };
 
   const activeSubStyle = {
-    color: 'text.primary',
+    color: theme.palette.text.warning,
     fontWeight: 'fontWeightMedium',
+    bgcolor:'#ffd796'
   };
 
   if (children) {

@@ -18,14 +18,14 @@ export default function LoginForm() {
 		<>
 			<Card sx={{ minWidth: 275 }}>
 				<CardContent>
-					<div style={{
+					{/* <div style={{
 						marginBottom: '15px'
 					}}>
 						<TextField id="phoneNumber" fullWidth='true' label="Phone Number" variant="outlined" type="number" autoFocus='true' inputProps={{maxLength: 10}} />
 					</div>
 					<div>
 						<TextField id="password" fullWidth='true' label="Password" variant="outlined" type="password" />
-					</div>
+					</div> */}
 					<Grid container spacing={2}>
 						<Grid item md={6}>
 							<FormControlLabel control={<Checkbox defaultChecked />} label="Remember Me" />

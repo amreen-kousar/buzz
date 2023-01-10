@@ -32,9 +32,9 @@ const SearchbarStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function Searchbar() {
+export default function Searchbar({getSearch}) {
   const [isOpen, setOpen] = useState(false);
-
+  const[search,setSearch]=useState('')
   const handleOpen = () => {
     setOpen((prev) => !prev);
   };
@@ -57,6 +57,8 @@ export default function Searchbar() {
             <Input
               autoFocus
               fullWidth
+              onChange={(e)=>
+              {setSearch(e?.target?.value)}}
               disableUnderline
               placeholder="Search…"
               startAdornment={
@@ -66,7 +68,9 @@ export default function Searchbar() {
               }
               sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
             />
-            <Button variant="contained" onClick={handleClose}>
+            <Button variant="contained" onClick={()=>{
+              getSearch(search)
+              handleClose()}}>
               Search
             </Button>
           </SearchbarStyle>

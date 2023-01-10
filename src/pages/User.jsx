@@ -162,7 +162,7 @@ export default function EcommerceShop() {
         </Typography>
 
         <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
-          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <Stack direction="row" spacing={1} flexShrink={0} sx={{ mb: 1 }}>
             <UserDrawer
               isOpenFilter={openFilter}
               onOpenFilter={handleOpenFilter}
@@ -171,7 +171,7 @@ export default function EcommerceShop() {
           </Stack>
         </Stack>
 
-        <ProductList users={users} products={PRODUCTS} isOpenFilter={openFilter}
+        <ProductList users={users} products={PRODUCTS} isOpenFilter={openFilter} 
           onOpenFilter={handleOpenFilter}
           onCloseFilter={handleCloseFilter} />
         <ProductCartWidget />

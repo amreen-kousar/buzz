@@ -44,7 +44,7 @@ function a11yProps(index) {
 }
 
 export default function AllProjects({ handleClickOpen, handleClose, open }) {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState('one');
     const [project, setProject] = useState();
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -66,7 +66,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
         const config = {
             method: 'post',
-            url: 'http://3.7.7.138/hari-buzz/getProjects.php',
+            url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -100,13 +100,59 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             />
           </Stack> */}
 
+
                 <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                     <Box sx={{ width: '100%' }}>
-                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <Tabs variant="fullWidth" value={value} onChange={handleChange} aria-label="basic tabs example">
-                                <Tab label="All" {...a11yProps(0)} />
-                                <Tab label="Published" {...a11yProps(1)} />
-                                <Tab label="Completed" {...a11yProps(2)} />
+                        <Box sx={{  borderColor: 'divider' }} >
+
+
+
+                            <Tabs variant="fullWidth" value={value} onChange={handleChange}  indicatorColor="warning"
+                           
+                             aria-label="basic tabs example">
+                                <Tab 
+                                 
+                                sx={{
+                                    ':hover': {
+                                      bgcolor: '#ffd796', // theme.palette.primary.main
+                                      color: '#ed6c02',
+                                    },
+                                    ':active':{
+                                      bgcolor:'#ffd796',
+                                      color:"#ed6c02",
+                                    },
+                                    color:'black',
+                                
+                                    
+                                  }} label="All" {...a11yProps(0)} />
+                                <Tab  
+                                sx={{
+                                    ':hover': {
+                                      bgcolor: '#ffd796', // theme.palette.primary.main
+                                      color: '#ed6c02',
+                                    },
+                                    ':active':{
+                                      bgcolor:'#ffd796',
+                                      color:"#ed6c02"
+                                    },
+                                    color:'black',
+                                    
+                                  }} label="Published" {...a11yProps(1)} />
+                                <Tab 
+                                  sx={{
+                                    ':hover': {
+                                      bgcolor: '#ffd796', // theme.palette.primary.main
+                                      color: '#ed6c02',
+                                    },
+                                    ':active':{
+                                      bgcolor:'#ffd796',
+                                      color:"#ed6c02",
+
+                                    },
+                                   
+                                    color:'black',
+                                    
+                                  }} label="Completed" {...a11yProps(2)} />
                             </Tabs>
                         </Box>
                         <Link to="/dashboard/projects/project" state={{ name: "project name" }}

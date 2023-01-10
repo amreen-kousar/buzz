@@ -80,7 +80,7 @@ export default function PoaFilter({ isOpenFilter, onOpenFilter, onCloseFilter,cl
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25}}>
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25,color:'black'}}>
           Filters
          {selectDATA&&selectDATA===2&&":  Funders"}
          {selectDATA&&selectDATA===7&&": Location"}
@@ -96,13 +96,24 @@ export default function PoaFilter({ isOpenFilter, onOpenFilter, onCloseFilter,cl
         <Scrollbar>
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
             <div>
-              <Card style={{backgroundColor:'#F6F8FB',}}>
+              <Card style={{backgroundColor:'#ffd796',}}>
                 <CardContent>
                   {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                  <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
                     {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
                       {/* <Grid spacing={1} > */}
-                      <Button onClick={()=>{setSelectData(2)}}>Funders</Button>
+                      <Button onClick={()=>{setSelectData(2)}} sx={{
+            ':hover': {
+              bgcolor: '#ffd796', // theme.palette.primary.main
+              color: '#ed6c02',
+            },
+            ':active':{
+              bgcolor:'#ffd796',
+              color:"#ed6c02"
+            },
+            color:'black',
+            
+          }} >Funders</Button>
              {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
   {/* <Button>Funders</Button> */}
   {/* <Button>Project</Button>

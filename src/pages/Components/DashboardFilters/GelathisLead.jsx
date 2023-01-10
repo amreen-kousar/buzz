@@ -10,21 +10,65 @@ import Iconify from '../../../components/Iconify';
 
 
 
-export default function GelathisLead() {
- 
+export default function GelathisLead({selectDATA,getData}) {
+  const [glead,setGlead] = useState();
+  useEffect(()=>{
+    console.log(selectDATA,"<--dffgdfgdf")
+    if(selectDATA)
+    {
+      lead()
+    }
+    },[selectDATA]
+    )
+  const lead = async () => {
+  const data = JSON.stringify({
+    "role_id": 1,
+    "filter_type": selectDATA,
+    "pageNum": 1,
+    "emp_id": 206
+  });
+  
+  const config = {
+    method: 'post',
+    url: 'http://3.7.7.138/appTest/getPeopleFilters.php',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+     
+  };
+  
+  axios(config)
+  .then( (response) =>{
+    setGlead(response?.data?.data)
+    console.log(JSON.stringify(response.data));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
+if(glead?.length ===0){
+  return(
+  <h1>no data found</h1>
+  )
+}
   return (
     <div>
 
     
-      <Card style={{marginTop:20}}>
+<Card style={{marginTop:20}}>
+        {glead?.length!==0?glead?.map(itm=>{
+ return(
+       
             <CardContent>
                 <Typography>
-                <Iconify icon="eva:people-fill" width={20} height={20} />
-                Projects
+                <Iconify onClick={()=>getData(itm,selectDATA)} icon="eva:people-fill" width={20} height={20} />
+               {itm?.name}
                 </Typography>
             </CardContent>
+ )
+             }):null}
           </Card>
-          
+         
           </div>
   );
 }
