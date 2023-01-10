@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState, useEffect, forwardRef } from 'react';
+import { useState, useEffect, forwardRef, useRef } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -17,10 +17,14 @@ import {
   Typography,
   TableContainer,
   TablePagination,
-  Grid
+  Grid, Box, TextField
 } from '@mui/material';
 import axios from 'axios';
-
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 // components
 import Page from '../components/Page';
 import Label from '../components/Label';
@@ -57,7 +61,7 @@ export default function User() {
   const [selected, setSelected] = useState([]);
 
   const [open, setOpens] = useState(false);
-
+  const [openAddBus,setOpenAddBus]=useState(false)
   const [clcikData, setClickData] = useState()
 
   const [orderBy, setOrderBy] = useState('name');
@@ -66,12 +70,45 @@ export default function User() {
   const [filterName, setFilterName] = useState('');
   const [dw, setDw] = useState(false)
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const submitBus = () => {
+    console.log(addBus)
+  }
+  const [openDate, setopenDate] = useState(true)
+  const [addBus, setAddBus] = useState({
+    busNumber: '', registerNumber: '', registerDate: '', engineNumber: '', chassisNumber: '', insuranceNumber: '',
+    insuranceCompany: "", insuranceStartDate: "", insuranceEndDate: "", lastServiceDate: "", nextServiceDate: "", fitnessCertificate: "", permitDetails: "", emissionDate: ''
+  })
+
+  const [scroll, setScroll] = useState('paper');
+
+  const handleClickOpen = (scrollType) => () => {
+    setOpenAddBus(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+    console.log(addBus)
+    setOpenAddBus(false);
+  };
+
+  const descriptionElementRef = useRef(null);
+
   const [buses, setBuses] = useState();
   useEffect(() => {
     setDw(false)
     busesd()
   }, [search, dw]
   )
+
+  useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
+
   const busesd = async () => {
     const data = JSON.stringify({
       "date": "",
@@ -125,12 +162,73 @@ export default function User() {
     setopenbusfilter(false);
   };
 
+
+
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
   return (
     <Page title="User">
+      <div>
+        <Button style={{ float: "right", marginLeft: "1rem" }} variant="contained" onClick={handleClickOpen('paper')}>Add Bus</Button>
+        <Dialog
+          open={openAddBus}
+          onClose={handleClose}
+          scroll={scroll}
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
+        >
+          <DialogTitle id="scroll-dialog-title">Add Bus</DialogTitle>
+          <DialogContent dividers={scroll === 'paper'}>
+            <DialogContentText
+              id="scroll-dialog-description"
+              ref={descriptionElementRef}
+              tabIndex={-1}
+            >
+
+              <Box
+                component="form"
+                sx={{
+                  '& .MuiTextField-root': { m: 1, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField id="outlined-basic" label="Bus Number" required variant="outlined" value={addBus.busNumber} onChange={(e) => { setAddBus({ ...addBus, busNumber: e.target.value }) }} />
+                <TextField id="outlined-basic" label="Register Number" value={addBus.registerNumber} onChange={(e) => { setAddBus({ ...addBus, registerNumber: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Register Date" value={addBus.registerDate} onChange={(e) => { setAddBus({ ...addBus, registerDate: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Engine Number" value={addBus.engineNumber} onChange={(e) => { setAddBus({ ...addBus, engineNumber: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Chassis Number" value={addBus.chassisNumber} onChange={(e) => { setAddBus({ ...addBus, chassisNumber: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Insurance Number" value={addBus.insuranceNumber} onChange={(e) => { setAddBus({ ...addBus, insuranceNumber: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Insurance Company" value={addBus.insuranceCompany} onChange={(e) => { setAddBus({ ...addBus, insuranceCompany: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Insurance Start Date" type="date" InputLabelProps={{
+                  shrink: true,
+                }} value={addBus.insuranceStartDate} onChange={(e) => { setAddBus({ ...addBus, insuranceStartDate: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Insurance End Date" type="date" InputLabelProps={{
+                  shrink: true,
+                }} value={addBus.insuranceEndDate} onChange={(e) => { setAddBus({ ...addBus, insuranceEndDate: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Last Service Date" type="date" InputLabelProps={{
+                  shrink: true,
+                }} value={addBus.lastServiceDate} onChange={(e) => { setAddBus({ ...addBus, lastServiceDate: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Next Service Date" type="date" InputLabelProps={{
+                  shrink: true,
+                }} value={addBus.nextServiceDate} onChange={(e) => { setAddBus({ ...addBus, nextServiceDate: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Fitness Certificate" value={addBus.fitnessCertificate} onChange={(e) => { setAddBus({ ...addBus, fitnessCertificate: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Permit Details" value={addBus.permitDetails} onChange={(e) => { setAddBus({ ...addBus, permitDetails: e.target.value }) }} variant="outlined" />
+                <TextField id="outlined-basic" label="Emission Date" type="date" InputLabelProps={{
+                  shrink: true,
+                }} value={addBus.emissionDate} onChange={(e) => { setAddBus({ ...addBus, emissionDate: e.target.value }) }} variant="outlined" />
+              </Box>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button variant="contained" onClick={submitBus}>Add</Button>
+            <Button variant="contained" color="error" onClick={handleClose}>Cancel</Button>
+
+          </DialogActions>
+        </Dialog>
+      </div>
       <Container>
         <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpens(false)}>
           <Alert onClose={() => { setOpens(false) }} severity="success" sx={{ width: '100%' }}>
