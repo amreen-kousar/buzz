@@ -36,6 +36,8 @@ export default function FullScreenDialog() {
   const [startTime, setStartTime] = useState('');
   const [images, setImages] = useState();
   const [upload, setUpload] = useState();
+
+
   const [sendData, setSendData] = useState({
     odimeter: "",
     location: "",
@@ -108,10 +110,14 @@ export default function FullScreenDialog() {
   }
 
   const convertImage = (fileObjectFromInput) => {
+
     setImagePath([...imagePath, fileObjectFromInput])
+
+
+
     console.log(imagePath, "imagePath")
     getBase64(fileObjectFromInput, function (base64Data) {
-      console.log(base64Data, '<-----hbhjbjbhjbjh22222', fileObjectFromInput)
+
       setImage([...image, base64Data])
       setViewImage(true)
     });
@@ -213,9 +219,18 @@ export default function FullScreenDialog() {
 
 
   const postImages = () => {
+    var bodyFormData = new FormData();
+
+
+
     var data = JSON.stringify(
       { "emp_id": 15, "file": imagePath }
     );
+    for (var key of imagePath) {
+      bodyFormData.append('file', key);
+      console.log(key, "formdata add", bodyFormData)
+    }
+    console.log(bodyFormData)
     const dataImage = [{
       lastModified: 1672737762860,
       lastModifiedDate: "Tue Jan 03 2023 14:52:42 GMT+0530 (India Standard Time)",
@@ -231,7 +246,7 @@ export default function FullScreenDialog() {
       headers: {
         'Content-Type': 'application/json'
       },
-      data: dataImage
+      data: JSON.stringify({ emp_id: 15, file: bodyFormData })
     };
     console.log(config)
     axios(config)

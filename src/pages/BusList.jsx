@@ -74,12 +74,44 @@ export default function User() {
   const [dw, setDw] = useState(false)
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const submitBus = () => {
+    var data = JSON.stringify({
+      "lastUpdatedBy": "144",
+      "createdBy": "144",
+      ...addBus
+    });
+    console.log(data)
+
+
+
+
+
+
+
+
+
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/createBus.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     console.log(addBus)
   }
   const [openDate, setopenDate] = useState(true)
   const [addBus, setAddBus] = useState({
-    busNumber: '', registerNumber: '', registerDate: '', engineNumber: '', chassisNumber: '', insuranceNumber: '',
-    insuranceCompany: "", insuranceStartDate: "", insuranceEndDate: "", lastServiceDate: "", nextServiceDate: "", fitnessCertificate: "", permitDetails: "", emissionDate: ''
+    busNumber: '', register_number: '', register_date: '', engine_number: '', chassis_number: '', insurance_number: '',
+    insurance_company: "", insurance_start_date: "", insurance_end_date: "", last_service_date: "", next_service_due_date: "", fitness_certificate: "", permit: "", emission_date: ''
   })
 
   const [scroll, setScroll] = useState('paper');
@@ -174,7 +206,7 @@ export default function User() {
   return (
     <Page title="User">
       <div>
-        <Button style={{ float: "right", marginLeft: "1rem" }} variant="contained" onClick={handleClickOpen('paper')}>Add Bus</Button>
+        <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem" }} variant="contained" onClick={handleClickOpen('paper')}><span style={{ fontSize: "2rem" }}>+</span></Button>
         <Dialog
           open={openAddBus}
           fullScreen
@@ -208,29 +240,31 @@ export default function User() {
 
               >
                 <TextField fullWidth id="outlined-basic" label="Bus Number" required variant="outlined" value={addBus.busNumber} onChange={(e) => { setAddBus({ ...addBus, busNumber: e.target.value }) }} /><br />
-                <TextField fullWidth id="outlined-basic" label="Register Number" value={addBus.registerNumber} onChange={(e) => { setAddBus({ ...addBus, registerNumber: e.target.value }) }} variant="outlined" /><br />
-                <TextField fullWidth id="outlined-basic" label="Register Date" value={addBus.registerDate} onChange={(e) => { setAddBus({ ...addBus, registerDate: e.target.value }) }} variant="outlined" /><br />
-                <TextField fullWidth id="outlined-basic" label="Engine Number" value={addBus.engineNumber} onChange={(e) => { setAddBus({ ...addBus, engineNumber: e.target.value }) }} variant="outlined" /><br />
-                <TextField fullWidth id="outlined-basic" label="Chassis Number" value={addBus.chassisNumber} onChange={(e) => { setAddBus({ ...addBus, chassisNumber: e.target.value }) }} variant="outlined" /><br />
-                <TextField fullWidth id="outlined-basic" label="Insurance Number" value={addBus.insuranceNumber} onChange={(e) => { setAddBus({ ...addBus, insuranceNumber: e.target.value }) }} variant="outlined" /><br />
-                <TextField fullWidth id="outlined-basic" label="Insurance Company" value={addBus.insuranceCompany} onChange={(e) => { setAddBus({ ...addBus, insuranceCompany: e.target.value }) }} variant="outlined" /><br />
+                <TextField fullWidth id="outlined-basic" label="Register Number" value={addBus.register_number} onChange={(e) => { setAddBus({ ...addBus, register_number: e.target.value }) }} variant="outlined" /><br />
+                <TextField fullWidth id="outlined-basic" label="Register Date" type="date" InputLabelProps={{
+                  shrink: true,
+                }} value={addBus.register_date} onChange={(e) => { setAddBus({ ...addBus, register_date: e.target.value }) }} variant="outlined" /><br />
+                <TextField fullWidth id="outlined-basic" label="Engine Number" value={addBus.engine_number} onChange={(e) => { setAddBus({ ...addBus, engine_number: e.target.value }) }} variant="outlined" /><br />
+                <TextField fullWidth id="outlined-basic" label="Chassis Number" value={addBus.chassis_number} onChange={(e) => { setAddBus({ ...addBus, chassis_number: e.target.value }) }} variant="outlined" /><br />
+                <TextField fullWidth id="outlined-basic" label="Insurance Number" value={addBus.insurance_number} onChange={(e) => { setAddBus({ ...addBus, insurance_number: e.target.value }) }} variant="outlined" /><br />
+                <TextField fullWidth id="outlined-basic" label="Insurance Company" value={addBus.insurance_company} onChange={(e) => { setAddBus({ ...addBus, insurance_company: e.target.value }) }} variant="outlined" /><br />
                 <TextField fullWidth id="outlined-basic" label="Insurance Start Date" type="date" InputLabelProps={{
                   shrink: true,
-                }} value={addBus.insuranceStartDate} onChange={(e) => { setAddBus({ ...addBus, insuranceStartDate: e.target.value }) }} variant="outlined" /><br />
+                }} value={addBus.insurance_start_date} onChange={(e) => { setAddBus({ ...addBus, insurance_start_date: e.target.value }) }} variant="outlined" /><br />
                 <TextField fullWidth id="outlined-basic" label="Insurance End Date" type="date" InputLabelProps={{
                   shrink: true,
-                }} value={addBus.insuranceEndDate} onChange={(e) => { setAddBus({ ...addBus, insuranceEndDate: e.target.value }) }} variant="outlined" /><br />
+                }} value={addBus.insurance_end_date} onChange={(e) => { setAddBus({ ...addBus, insurance_end_date: e.target.value }) }} variant="outlined" /><br />
                 <TextField fullWidth id="outlined-basic" label="Last Service Date" type="date" InputLabelProps={{
                   shrink: true,
-                }} value={addBus.lastServiceDate} onChange={(e) => { setAddBus({ ...addBus, lastServiceDate: e.target.value }) }} variant="outlined" /><br />
+                }} value={addBus.last_service_date} onChange={(e) => { setAddBus({ ...addBus, last_service_date: e.target.value }) }} variant="outlined" /><br />
                 <TextField fullWidth id="outlined-basic" label="Next Service Date" type="date" InputLabelProps={{
                   shrink: true,
-                }} value={addBus.nextServiceDate} onChange={(e) => { setAddBus({ ...addBus, nextServiceDate: e.target.value }) }} variant="outlined" /><br />
-                <TextField fullWidth id="outlined-basic" label="Fitness Certificate" value={addBus.fitnessCertificate} onChange={(e) => { setAddBus({ ...addBus, fitnessCertificate: e.target.value }) }} variant="outlined" /><br />
-                <TextField fullWidth id="outlined-basic" label="Permit Details" value={addBus.permitDetails} onChange={(e) => { setAddBus({ ...addBus, permitDetails: e.target.value }) }} variant="outlined" /><br />
+                }} value={addBus.next_service_due_date} onChange={(e) => { setAddBus({ ...addBus, next_service_due_date: e.target.value }) }} variant="outlined" /><br />
+                <TextField fullWidth id="outlined-basic" label="Fitness Certificate" value={addBus.fitness_certificate} onChange={(e) => { setAddBus({ ...addBus, fitness_certificate: e.target.value }) }} variant="outlined" /><br />
+                <TextField fullWidth id="outlined-basic" label="Permit Details" value={addBus.permit} onChange={(e) => { setAddBus({ ...addBus, permit: e.target.value }) }} variant="outlined" /><br />
                 <TextField fullWidth id="outlined-basic" label="Emission Date" type="date" InputLabelProps={{
                   shrink: true,
-                }} value={addBus.emissionDate} onChange={(e) => { setAddBus({ ...addBus, emissionDate: e.target.value }) }} variant="outlined" /><br />
+                }} value={addBus.emission_date} onChange={(e) => { setAddBus({ ...addBus, emission_date: e.target.value }) }} variant="outlined" /><br />
               </Box>
             </DialogContentText>
           </DialogContent>
@@ -254,16 +288,17 @@ export default function User() {
             All Bus List
 
           </Typography>
-          <Button style={{float:"right",color:'#ed6c02'}} 
-          sx={{
-            '&:hover': {
-              backgroundColor: '#ffd796',
-            },
-          }} 
-          onClick={()=>{
-          handleopenbusfilter()}}>
-          Filter
-        </Button>
+          <Button style={{ float: "right", color: '#ed6c02' }}
+            sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+              },
+            }}
+            onClick={() => {
+              handleopenbusfilter()
+            }}>
+            Filter
+          </Button>
           {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
