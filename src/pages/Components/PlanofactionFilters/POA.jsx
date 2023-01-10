@@ -96,7 +96,7 @@ export default function PoaFilter({ isOpenFilter, onOpenFilter, onCloseFilter,cl
         <Scrollbar>
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
             <div>
-              <Card style={{backgroundColor:'#ffd796',}}>
+              <Card style={{backgroundColor:'#f6f8fb',}}>
                 <CardContent>
                   {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                  <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
@@ -107,7 +107,7 @@ export default function PoaFilter({ isOpenFilter, onOpenFilter, onCloseFilter,cl
               bgcolor: '#ffd796', // theme.palette.primary.main
               color: '#ed6c02',
             },
-            ':active':{
+            ':focus':{
               bgcolor:'#ffd796',
               color:"#ed6c02"
             },

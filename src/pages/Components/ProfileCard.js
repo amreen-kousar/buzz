@@ -153,7 +153,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
           </Avatar>
         }
         // action={
-        //     <Chip label="ACTIVE" size="small" color="success" variant="filled" />
+        //     <Chip label="focus" size="small" color="success" variant="filled" />
         // }
       />
       <Typography variant="h6" marginLeft={13}>
@@ -194,7 +194,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
                 bgcolor: '#ffd796', // theme.palette.primary.main
                 color: '#ed6c02',
               },
-              ':active':{
+              ':focus':{
                 bgcolor:'#ffd796',
                 color:"#ed6c02"
               },
@@ -295,7 +295,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
                 bgcolor: '#ffd796', // theme.palette.primary.main
                 color: '#ed6c02',
               },
-              ':active':{
+              ':focus':{
                 bgcolor:'#ffd796',
                 color:"#ed6c02"
               },

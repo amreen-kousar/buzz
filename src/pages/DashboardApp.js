@@ -139,14 +139,21 @@ export default function DashboardApp() {
           
        
         </Typography> */}
-          <Button style={{ float: "right" }} color='warning' 
+          <Button style={{ float: "right",color:'#ed6c02'}} 
+          sx={{
+            '&:hover': {
+              backgroundColor: '#ffd796',
+            },
+          }}  
             onClick={() => {
               handleOpenFilter()
             }}>
             Filter
           </Button>
-          <h1>{slected?.id === 2 ? "founder" : null} {slected?.name ? slected?.name : ''}</h1>
-          {/* <Chip label= {slected?.id===2?"founder":null}{slected?.name?slected?.name:''}/> */}
+         
+          <h2>{slected?.id===2? "Funder": null}&nbsp;{slected?.name ? slected?.name : ''}
+          </h2>
+          {/* <Chip label= {slected?.id===2?"founder":null}/> */}
 
         </Grid>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>

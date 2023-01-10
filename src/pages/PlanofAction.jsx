@@ -69,7 +69,12 @@ export default function PlanofAction() {
       <Typography variant="h4" sx={{ mb: 5 }}>
       Plan Of Actions
      
-      <Button style={{float:"right"}} color="warning"
+      <Button style={{float:"right",color:"#ed6c02"}}
+      sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          } }}
           onClick={()=>{
           handleOpenFilter()}}>
           Filter
@@ -103,7 +108,7 @@ export default function PlanofAction() {
             bgcolor: '#ffd796', // theme.palette.primary.main
             color: '#ed6c02',
           },
-          ':active':{
+          ':focus':{
             bgcolor:'#ffd796',
             color:"#ed6c02"
           },
@@ -116,7 +121,7 @@ export default function PlanofAction() {
               bgcolor: '#ffd796', // theme.palette.primary.main
               color: '#ed6c02',
             },
-            ':active':{
+            ':focus':{
               bgcolor:'#ffd796',
               color:"#ed6c02"
             },
@@ -129,7 +134,7 @@ export default function PlanofAction() {
               bgcolor: '#ffd796', // theme.palette.primary.main
               color: '#ed6c02',
             },
-            ':active':{
+            ':focus':{
               bgcolor:'#ffd796',
               color:"#ed6c02"
             },

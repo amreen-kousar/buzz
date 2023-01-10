@@ -101,7 +101,16 @@ export default function EcommerceShop() {
     <Page title="All Users">
 
       <div>
-        <Button style={{ float: "right", marginLeft: "1rem" }} variant="contained" onClick={handleClickOpen('paper')}>Add User</Button>
+        <Button style={{ float: "right", marginLeft: "1rem" }} variant="contained" onClick={handleClickOpen('paper')}   sx={{':focus':{
+    backgroundColor: '#ffd796',
+    color:'#ed6c02'
+ },
+  '&:hover': {
+    backgroundColor: '#ffd796',
+    color:'#ed6c02'
+  }, backgroundColor: '#ffd796',
+  color:'#ed6c02'
+}}>Add User</Button>
         <Dialog
           open={open}
           fullScreen
@@ -169,7 +178,16 @@ export default function EcommerceShop() {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button variant="contained" onClick={submitBus}>Add</Button>
+            <Button variant="contained" onClick={submitBus} color="warning"  sx={{':focus':{
+                                                     backgroundColor: '#ffd796',
+                                                      color:'#ed6c02'
+                                                     },
+                                              ':hover': {
+                                                      backgroundColor: '#ffd796',
+                                                      color:'#ed6c02'
+                                                    },
+                                                  
+                                                  }}>Add</Button>
             <Button variant="contained" color="error" onClick={handleClose}>Cancel</Button>
 
           </DialogActions>
