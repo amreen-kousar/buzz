@@ -34,7 +34,7 @@ import SrOperationManager from './SrOperationManager'
 import Participant from './Participant';
 import Trainers from './Trainers';
 import GelathisLead from './GelathisLead';
-import  DateRangeF  from './DateRangeFilter';
+import  DateRangeFilter  from './DateRangeFilter';
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -70,27 +70,17 @@ DashboardFilter.propTypes = {
 };
 
 export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit }) {
-  var [selectDATA, setSelectData] = useState(2)
+  var [selectDATA, setSelectData] = useState()
   const setData = (value) => {
     localStorage.setItem('selectedData', value)
     setSelectData(value)
 
   }
-  useEffect(() => {
-    localStorage.setItem('selectedData', 2)
-  }, [])
-
-  useEffect(() => {
-    setSelectData(localStorage?.getItem('selectedData'))
-    console.log(selectDATA)
-  }, [selectDATA])
-
+  
+  
   return (
     <>
-      {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
-
+     
       <Drawer
         anchor="right"
         open={isOpenFilter}
@@ -135,7 +125,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                  <Typography style={{ marginLeft:10}} variant="subtitle1"  gutterBottom>Categories</Typography>
               
 
-                <Button onClick={() => { setData(2) } } 
+                <Button onClick={() => { setSelectData(2) } } 
                      sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
@@ -149,7 +139,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                           color:'black',
                         }}>Funders</Button>
                        
-                <Button onClick={() => { setData(1) }}
+                <Button onClick={() => { setSelectData(1) }}
                  sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
@@ -270,12 +260,12 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
               <Grid style={{ marginTop: 30 }}>
                 <Projects getData={getData} selectDATA={selectDATA} />
               </Grid>
-              {/* <Grid style={{ marginTop: 30 }}>
-                <DateRangeF onDateSubmit={onDateSubmit} />
-              </Grid> */}
-              <Grid style={{ marginTop: 30 }}>
+              {/* {selectDATA&&selectDATA===9&&<Grid style={{ marginTop: 30 }}>
+                <DateRangeFilter selectDATA={selectDATA} />
+              </Grid>} */}
+             { selectDATA&&selectDATA===7&&<Grid style={{ marginTop: 30 }}>
                 <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
-              </Grid>
+              </Grid>}
               <Grid style={{ marginTop: 30 }}>
                 <Trainers getData={getData} selectDATA={selectDATA} />
               </Grid>
