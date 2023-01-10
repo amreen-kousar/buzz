@@ -117,7 +117,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                       bgcolor: '#ffd796', // theme.palette.primary.main
                                       color: '#ed6c02',
                                     },
-                                    ':active':{
+                                    ':focus':{
                                       bgcolor:'#ffd796',
                                       color:"#ed6c02",
                                     },
@@ -131,7 +131,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                       bgcolor: '#ffd796', // theme.palette.primary.main
                                       color: '#ed6c02',
                                     },
-                                    ':active':{
+                                    ':focus':{
                                       bgcolor:'#ffd796',
                                       color:"#ed6c02"
                                     },
@@ -144,7 +144,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                       bgcolor: '#ffd796', // theme.palette.primary.main
                                       color: '#ed6c02',
                                     },
-                                    ':active':{
+                                    ':focus':{
                                       bgcolor:'#ffd796',
                                       color:"#ed6c02",
 

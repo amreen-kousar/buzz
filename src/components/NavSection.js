@@ -15,7 +15,7 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
   position: 'relative',
   textTransform: 'capitalize',
   borderRadius: theme.shape.borderRadius,
-  '&:active':{
+  '&:focus':{
     backgroundColor: '#ffd796',
     color:'#ed6c02'
  },
@@ -76,6 +76,15 @@ function NavItem({ item, active }) {
           onClick={handleOpen}
           sx={{
             ...(isActiveRoot && activeRootStyle),
+            '&:focus':{
+              backgroundColor: '#ffd796',
+              color:'#ed6c02'
+           },
+            '&:hover': {
+              backgroundColor: '#ffd796',
+              color:'#ed6c02'
+            },
+           
           }}
         >
           <ListItemIconStyle>{icon && icon}</ListItemIconStyle>

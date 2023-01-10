@@ -113,7 +113,7 @@ const list = async =>{
                                 bgcolor: '#ffd796', // theme.palette.primary.main
                                 color: '#ed6c02',
                                 },
-                      ':active':{
+                      ':focus':{
                                  bgcolor:'#ffd796',
                                 color:"#ed6c02"
                                  },
@@ -124,7 +124,7 @@ const list = async =>{
                                 bgcolor: '#ffd796', // theme.palette.primary.main
                                 color: '#ed6c02',
                                 },
-                      ':active':{
+                      ':focus':{
                                  bgcolor:'#ffd796',
                                 color:"#ed6c02"
                                  },
@@ -136,7 +136,7 @@ const list = async =>{
                                 bgcolor: '#ffd796', // theme.palette.primary.main
                                 color: '#ed6c02',
                                 },
-                      ':active':{
+                      ':focus':{
                                  bgcolor:'#ffd796',
                                 color:"#ed6c02"
                                  },

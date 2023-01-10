@@ -62,21 +62,6 @@ export const FILTER_COLOR_OPTIONS = [
   '#FFC107',
 ];
 
-// export const BUTTON_STYLES =makeStyles({
- 
-//   button: {
-//     '&:active':{
-//       backgroundColor: '#ffd796',
-//       color:'#ed6c02'
-//    },
-//     '&:hover': {
-//       backgroundColor: '#ffd796',
-//       color:'#ed6c02'
-//     },
-   
-// }})
-
-// ----------------------------------------------------------------------
 
 DashboardFilter.propTypes = {
   isOpenFilter: PropTypes.bool,
@@ -84,9 +69,23 @@ DashboardFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,getData,onSumbit,onDateSubmit }) {
-  const [selectDATA,setSelectData]= useState()
-  
+export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit }) {
+  var [selectDATA, setSelectData] = useState(2)
+  const setData = (value) => {
+    localStorage.setItem('selectedData', value)
+    setSelectData(value)
+
+  }
+  useEffect(() => {
+    localStorage.setItem('selectedData', 2)
+  }, [])
+
+  useEffect(() => {
+    setSelectData(localStorage?.getItem('selectedData'))
+    console.log(selectDATA)
+  }, [selectDATA])
+ 
+
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -132,65 +131,61 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 <CardContent style={{backgroundColor:"#F6F8FB"}}>
                   {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                  <Typography style={{ marginLeft:10}} variant="subtitle1"  gutterBottom>Categories</Typography>
-                    {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
-                      {/* <Grid spacing={1} > */}
-                        <Button onClick={()=>{setSelectData(2)}} 
-                        sx={{
+              
+
+                <Button onClick={() => { setData(2) } } 
+                     sx={{
                           ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':focus':{
                             bgcolor: '#ffd796', // theme.palette.primary.main
                             color: '#ed6c02',
                           },
                 
                           color:'black',
                         }}>Funders</Button>
-                        <Button onClick={()=>{setSelectData(1)}} 
-                        sx={{
+                       
+                <Button onClick={() => { setData(1) }}
+                 sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ed6c02',
+                  },
+                  ':focus':{
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ed6c02',
+                  }, color:'black',
+                
+                  }}>Partner</Button>
+                <Button  sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
                             color: '#ed6c02',
                           },
-                          ':active':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
-                          color:'black',
-                        }}>Partner</Button>
-                        <Button onClick={()=>{setSelectData(3)}}sx={{
+                          ':focus':{
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          }
+                        , color:'black',
+                          }}>Project</Button>
+                <Button sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
                             color: '#ed6c02',
                           },
-                          ':active':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
-                          color:'black',
-                        }}>Project</Button>
-                        <Button onClick={()=>{setSelectData(4)}} sx={{
-                          ':hover': {
-                            bgcolor: '#ffd796', // theme.palette.primary.main
-                            color: '#ed6c02',
-                          },
-                          ':active':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
+                         
                           color:'black',
                         }}>Operation Manager</Button>
 
-                      {/* </Grid> */}
-                    {/* </ButtonGroup> */}
-                    {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons">
-                      <Grid> */}
+                     
                         <Button onClick={()=>{setSelectData(5)}} sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
                             color: '#ed6c02',
                           },
-                          ':active':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
+                         
                           color:'black',
                         }}>Trainer</Button>
                       {/* </Grid>
@@ -199,61 +194,58 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     {/* <Grid spacing={2}> */}
                       <Button onClick={()=>{setSelectData(9)}}
                       sx={{
-                          ':hover': {
-                            bgcolor: '#ffd796', // theme.palette.primary.main
-                            color: '#ed6c02',
-                          },
-                          ':active':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
-                          color:'black',
+                        ':hover': {
+                          bgcolor: '#ffd796', // theme.palette.primary.main
+                          color: '#ed6c02',
+                        },
+                        ':focus':{
+                          bgcolor: '#ffd796', // theme.palette.primary.main
+                          color: '#ed6c02',
+                        }, color:'black'
+                      
                         }}>Date Range</Button>
-                      <Button onClick={()=>{setSelectData(7)}} sx={{
+                      <Button onClick={()=>{setSelectData(7)}}  sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
                             color: '#ed6c02',
                           },
-                          ':active':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
-                          color:'black',
-                        }}>Location</Button>
-                      <Button sx={{
+                          ':focus':{
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          }, color:'black',
+                        
+                          }}>Location</Button>
+                      <Button  sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
                             color: '#ed6c02',
                           },
-                          ':active':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
+                          ':focus':{
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
                           },
                           color:'black',
-                        }}>Participant</Button>
+                          }}>Participant</Button>
                     {/* </Grid> */}
                     <Button onClick={()=>{setSelectData(12)}} sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
                             color: '#ed6c02',
                           },
-                          ':active':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
+                         
                           color:'black',
                         }}>Sr.Operation Manager</Button>
-                    <Button onClick={()=>{setSelectData(13)}} sx={{
+                    <Button onClick={()=>{setSelectData(13)}} s sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
                             color: '#ed6c02',
                           },
-                          ':active':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
+                          ':focus':{
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
                           },
                           color:'black',
-                        }}>Gelathis Facilator Leads</Button>
+                          }}>Gelathis Facilator Leads</Button>
                     {/* </ButtonGroup> */}
                   {/* </Typography> */}
                 </CardContent>
