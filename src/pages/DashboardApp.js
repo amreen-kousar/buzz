@@ -145,7 +145,7 @@ export default function DashboardApp() {
             }}>
             Filter
           </Button>
-          <h1>{slected?.id === 2 ? "founder" : null}{slected?.name ? slected?.name : ''}</h1>
+          <h1>{slected?.id === 2 ? "founder" : null} {slected?.name ? slected?.name : ''}</h1>
           {/* <Chip label= {slected?.id===2?"founder":null}{slected?.name?slected?.name:''}/> */}
 
         </Grid>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Container, Stack, Typography, Box, Button, TextField, Select, MenuItem } from '@mui/material';
+import { Container, Stack, Typography, Box, Toolbar, Button, TextField, Select, MenuItem } from '@mui/material';
 // components
 import Page from '../components/Page';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
@@ -12,7 +12,10 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 // ----------------------------------------------------------------------
 
 export default function EcommerceShop() {
@@ -101,12 +104,21 @@ export default function EcommerceShop() {
         <Button style={{ float: "right", marginLeft: "1rem" }} variant="contained" onClick={handleClickOpen('paper')}>Add User</Button>
         <Dialog
           open={open}
+          fullScreen
           onClose={handleClose}
           scroll={scroll}
           aria-labelledby="scroll-dialog-title"
           aria-describedby="scroll-dialog-description"
         >
-          <DialogTitle id="scroll-dialog-title">Add User</DialogTitle>
+          <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+              Add User
+            </Typography>
+          </Toolbar>
+          {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
           <DialogContent dividers={scroll === 'paper'}>
             <DialogContentText
               id="scroll-dialog-description"
@@ -117,33 +129,40 @@ export default function EcommerceShop() {
               <Box
                 component="form"
                 sx={{
-                  '& .MuiTextField-root': { m: 1, width: '25ch' },
+                  '& .MuiTextField-root': { m: 1 },
+
                 }}
+
                 noValidate
                 autoComplete="off"
               >
-                <Select
-                style={{width:"245px",margin:'0.5rem'}}
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={AddUser.role}
-                  label="Role"
-                  onChange={(e) => setAddUser({ ...AddUser, role: e.target.value })}
-                >
-                  {roles.map(role => {
-                    return <MenuItem value={role}>{role}</MenuItem>
-                  })}
-
-                </Select>
+                <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem" }}>
+                  <InputLabel id="demo-simple-select-label">Select role</InputLabel>
+                  <Select
 
 
-                <TextField id="outlined-basic" label="Bus Number" required variant="outlined" value={AddUser.busNumber} onChange={(e) => { setAddUser({ ...AddUser, busNumber: e.target.value }) }} />
-                <TextField id="outlined-basic" label="Name" value={AddUser.name} onChange={(e) => { setAddUser({ ...AddUser, name: e.target.value }) }} variant="outlined" />
-                <TextField id="outlined-basic" label="Mobile number" value={AddUser.mobilenumber} type="number" onChange={(e) => { setAddUser({ ...AddUser, mobilenumber: e.target.value }) }} variant="outlined" />
-                <TextField id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" />
-                <TextField id="outlined-basic" label="Email" value={AddUser.email} onChange={(e) => { setAddUser({ ...AddUser, email: e.target.value }) }} variant="outlined" />
-                <TextField id="outlined-basic" label="Address" value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" />
-                <TextField id="outlined-basic" label="Pincode" value={AddUser.pincode} onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" />
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={AddUser.role}
+                    label="Role"
+                    onChange={(e) => setAddUser({ ...AddUser, role: e.target.value })}
+                  >
+                    {roles.map(role => {
+                      return <MenuItem value={role}>{role}</MenuItem>
+                    })}
+
+                  </Select>
+                </FormControl>
+
+
+
+                <TextField fullWidth id="outlined-basic" label="Bus Number" required variant="outlined" value={AddUser.busNumber} onChange={(e) => { setAddUser({ ...AddUser, busNumber: e.target.value }) }} />
+                <TextField fullWidth id="outlined-basic" label="Name" value={AddUser.name} onChange={(e) => { setAddUser({ ...AddUser, name: e.target.value }) }} variant="outlined" />
+                <TextField fullWidth id="outlined-basic" label="Mobile number" value={AddUser.mobilenumber} type="number" onChange={(e) => { setAddUser({ ...AddUser, mobilenumber: e.target.value }) }} variant="outlined" />
+                <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" />
+                <TextField fullWidth id="outlined-basic" label="Email" value={AddUser.email} onChange={(e) => { setAddUser({ ...AddUser, email: e.target.value }) }} variant="outlined" />
+                <TextField fullWidth id="outlined-basic" label="Address" value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" />
+                <TextField fullWidth id="outlined-basic" label="Pincode" value={AddUser.pincode} onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" />
 
 
               </Box>
@@ -171,7 +190,7 @@ export default function EcommerceShop() {
           </Stack>
         </Stack>
 
-        <ProductList users={users} products={PRODUCTS} isOpenFilter={openFilter} 
+        <ProductList users={users} products={PRODUCTS} isOpenFilter={openFilter}
           onOpenFilter={handleOpenFilter}
           onCloseFilter={handleCloseFilter} />
         <ProductCartWidget />

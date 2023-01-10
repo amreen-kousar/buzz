@@ -111,7 +111,7 @@ export default function FullScreenDialog() {
     setImagePath([...imagePath, fileObjectFromInput])
     console.log(imagePath, "imagePath")
     getBase64(fileObjectFromInput, function (base64Data) {
-      console.log(base64Data,'<-----hbhjbjbhjbjh22222',fileObjectFromInput)
+      console.log(base64Data, '<-----hbhjbjbhjbjh22222', fileObjectFromInput)
       setImage([...image, base64Data])
       setViewImage(true)
     });
@@ -170,8 +170,6 @@ export default function FullScreenDialog() {
   console.log(imgSrc, "<-----gfvimageSrc")
   const SendData = async => {
 
-
-    console.log(image)
     var data = JSON.stringify({
       "date": sendData?.date,
       "insideBangalore": false,
@@ -204,15 +202,38 @@ export default function FullScreenDialog() {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-
+        console.log(imagePath, "post Images befor caall")
+        postImages()
       })
       .catch(function (error) {
         console.log(error);
       });
 
-    config.url = 'https://bdms.buzzwomen.org/appTest/new/taAttachments.php'
-    config.data = { emp_id: 15, file: imagePath }
-    console.log(config.data)
+  }
+
+
+  const postImages = () => {
+    var data = JSON.stringify(
+      { "emp_id": 15, "file": imagePath }
+    );
+    const dataImage = [{
+      lastModified: 1672737762860,
+      lastModifiedDate: "Tue Jan 03 2023 14:52:42 GMT+0530 (India Standard Time)",
+      name: "Screenshot (1).png",
+      size: 346607,
+      type: "image/png",
+      webkitRelativePath: ""
+    }]
+    console.log(dataImage)
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/new/taAttachments.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: dataImage
+    };
+    console.log(config)
     axios(config)
       .then(function (imageResponse) {
         console.log(JSON.stringify(imageResponse.data, "images Upload"));
@@ -247,29 +268,30 @@ export default function FullScreenDialog() {
   //   }
   return (
     <div>
+
       <Button variant="outlined" onClick={handleClickOpen} sx={{
-                      ':hover': {
-                                bgcolor: '#ffd796', // theme.palette.primary.main
-                                color: '#ed6c02',
-                                border:'#ffd796'
-                                },
-                      ':active':{
-                                 bgcolor:'#ffd796',
-                                color:"#ed6c02"
-                                 },
-                                 bgcolor:'#ffd796',
-                                 color:"#ed6c02",
-                                 border:'none'
-                                   }} >
+        ':hover': {
+          bgcolor: '#ffd796', // theme.palette.primary.main
+          color: '#ed6c02',
+          border: '#ffd796'
+        },
+        ':active': {
+          bgcolor: '#ffd796',
+          color: "#ed6c02"
+        },
+        bgcolor: '#ffd796',
+        color: "#ed6c02",
+        border: 'none'
+      }} >
         Open full-screen dialog
       </Button>
       <Dialog fullScreen open={open} onClose={handleClose}>
-        <AppBar sx={{ position: 'relative',bgcolor:'#ed6c02' }}>
+        <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1,color:"inherit" }} variant="h6" component="div" >
+            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
               Create Allowances
             </Typography>
 
