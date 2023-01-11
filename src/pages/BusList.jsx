@@ -206,7 +206,15 @@ export default function User() {
   return (
     <Page title="User">
       <div>
-        <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem" }} variant="contained" onClick={handleClickOpen('paper')}><span style={{ fontSize: "2rem" }}>+</span></Button>
+        <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem" }}
+         sx={{
+          '&:hover': {
+            backgroundColor: '#ffd796',
+         
+          },
+        backgroundColor:"#ffd796"
+       }} variant="contained" onClick={handleClickOpen('paper')}>
+          <span style={{ fontSize: "2rem",color:"#ed6c02" }}>+</span></Button>
         <Dialog
           open={openAddBus}
           fullScreen
@@ -216,11 +224,11 @@ export default function User() {
           aria-describedby="scroll-dialog-description"
         >
           {/* <DialogTitle id="scroll-dialog-title">Add Bus</DialogTitle> */}
-          <Toolbar>
+          <Toolbar sx={{color:"#ffffff",backgroundColor:"#ed6c02"}}>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+            <Typography sx={{ ml: 2, flex: 1,color:"#ffffff" }} variant="h6" component="div" >
               Add Bus
             </Typography>
           </Toolbar>
@@ -269,7 +277,13 @@ export default function User() {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button variant="contained" onClick={submitBus}>Add</Button>
+            <Button variant="contained" onClick={submitBus} sx={{
+            '&:hover': {
+              backgroundColor: '#ed6c02',
+			        color:"#ffffff"
+            },
+			     color:'#ed6c02',backgroundColor:"#ffd796"
+          }} >Add</Button>
             <Button variant="contained" color="error" onClick={handleClose}>Cancel</Button>
 
           </DialogActions>
