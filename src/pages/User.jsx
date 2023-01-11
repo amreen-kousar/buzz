@@ -101,7 +101,7 @@ export default function EcommerceShop() {
     <Page title="All Users">
 
       <div>
-        <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem" }} variant="contained" onClick={handleClickOpen('paper')} sx={{
+        <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} variant="contained" onClick={handleClickOpen('paper')} sx={{
           ':focus': {
             backgroundColor: '#ffd796',
             color: '#ed6c02'

@@ -263,7 +263,8 @@ export default function FullScreenDialog() {
   return (
     <div>
 
-      <Button variant="outlined" onClick={handleClickOpen} sx={{
+
+      <Button variant="contained" style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} onClick={handleClickOpen} sx={{
         ':hover': {
           bgcolor: '#ffd796', // theme.palette.primary.main
           color: '#ed6c02',
@@ -277,7 +278,7 @@ export default function FullScreenDialog() {
         color: "#ed6c02",
         border: 'none'
       }} >
-        Open full-screen dialog
+        <span style={{ fontSize: "2rem" }}>+</span>
       </Button>
       <Dialog fullScreen open={open} onClose={handleClose}>
         <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>

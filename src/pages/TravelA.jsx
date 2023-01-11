@@ -85,24 +85,24 @@ export default function TravelA() {
   };
 
 
-  const { register, handleSubmit } = useForm();
+  // const { register, handleSubmit } = useForm();
 
-  const onSubmit = async (data) => {
-    const formData = new FormData();
-    formData.file = [{ lastModified: 1672744000446, lastModifiedDate: "Tue Jan 03 2023 16:36:40 GMT+0530 (India Standard Time)", name: "Screenshot (3).png", size: 346182, type: "image/png", webkitRelativePath: "" }];
-    formData.emp_id = 15;
-    console.log(formData)
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/taAttachments.php',
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      data: JSON.stringify(formData)
-    };
-    const res = await axios(config).then((res) => console.log(res.data));
-    // alert(JSON.stringify(`${res.message}, status: ${res.status}`));
-  };
+  // const onSubmit = async (data) => {
+  //   const formData = new FormData();
+  //   formData.file = [{ lastModified: 1672744000446, lastModifiedDate: "Tue Jan 03 2023 16:36:40 GMT+0530 (India Standard Time)", name: "Screenshot (3).png", size: 346182, type: "image/png", webkitRelativePath: "" }];
+  //   formData.emp_id = 15;
+  //   console.log(formData)
+  //   var config = {
+  //     method: 'post',
+  //     url: 'https://bdms.buzzwomen.org/appTest/new/taAttachments.php',
+  //     headers: {
+  //       "Content-Type": "multipart/form-data",
+  //     },
+  //     data: JSON.stringify(formData)
+  //   };
+  //   const res = await axios(config).then((res) => console.log(res.data));
+  //   // alert(JSON.stringify(`${res.message}, status: ${res.status}`));
+  // };
 
 
 
@@ -118,13 +118,13 @@ export default function TravelA() {
 
 
         {/* testing to post images */}
-        <div className="App">
+        {/* <div className="App">
           <form onSubmit={handleSubmit(onSubmit)}>
             <input type="file" {...register("file")} />
 
             <input type="submit" />
           </form>
-        </div>
+        </div> */}
 
 
 
