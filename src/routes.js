@@ -62,18 +62,18 @@ export default function Router() {
         // ]
 
         [
-            { path: 'app', element: <DashboardApp />, id: [1, 3, 4, 5] },
+            { path: 'app', element: <DashboardApp />, id: [1, 3, 4, 5, 6] },
             { path: 'buslist', element: <BusList />, id: [1, 2, 3, 4, 5] },
-            { path: 'planofaction', element: <PlanofAction />, id: [1, 2, 3, 5] },
+            { path: 'planofaction', element: <PlanofAction />, id: [1, 2, 3, 5, 6] },
             //  { path: 'projects', element: <Blog />,id=[1,2,3] },
             {
-                path: 'projects', element: <ProjectHome />, id: [1, 2, 3, 5],
+                path: 'projects', element: <ProjectHome />, id: [1, 2, 3, 5, 6],
                 children: getProjectRoutes
             },
             { path: 'people', element: <User />, id: [1, 2, 3, 5] },
             { path: 'BuzzStock', element: <BuzzStock />, id: [1, 2, 3, 5] },
-            { path: 'profile', element: <Profile />, id: [1, 2, 3, 5] },
-            { path: 'travel', element: <TravelA />, id: [1, 2, 3, 5] },
+            { path: 'profile', element: <Profile />, id: [1, 2, 3, 5, 6] },
+            { path: 'travel', element: <TravelA />, id: [1, 2, 3, 5, 6] },
             { path: 'demogrphy', element: <Demography />, id: [1, 2, 3, 5] },
             { path: 'chart', element: <Chart />, id: [1, 2, 3, 4, 5] }
         ]
