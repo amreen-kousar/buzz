@@ -34,7 +34,7 @@ import SrOperationManager from './SrOperationManager'
 import Participant from './Participant';
 import Trainers from './Trainers';
 import GelathisLead from './GelathisLead';
-import  DateRangeFilter  from './DateRangeFilter';
+import DateRangeFilter from './DateRangeFilter';
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -74,21 +74,20 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
   const setData = (value) => {
     localStorage.setItem('selectedData', value)
     setSelectData(value)
-
   }
   useEffect(() => {
-    console.log(isOpenFilter)
-    // localStorage.setItem('selectedData', 2)
+    localStorage.setItem('selectedData', 2)
+    setSelectData(2)
   }, [])
 
   useEffect(() => {
-    setSelectData(2)
+    setSelectData(localStorage.getItem('selectedData'))
     console.log(selectDATA)
   }, [isOpenFilter])
 
   return (
     <>
-     
+
       <Drawer
         anchor="right"
         open={isOpenFilter}
@@ -133,7 +132,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Categories</Typography>
 
 
-                <Button onClick={() => { setSelectData(2) }}
+                <Button onClick={() => { setData(2) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -145,7 +144,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     color: '#ed6c02',
                   } : null}>Funders</Button>
 
-                <Button onClick={() => { setSelectData(1) }}
+                <Button onClick={() => { setData(1) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -173,8 +172,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   color: 'black',
                 }}>Operation Manager</Button>
 
-                {/* <Button onClick={() => { setSelectData(2) }} variant={selectDATA == 2 ? 'contained' : 'text'}>Funders</Button>
-                <Button onClick={() => { setSelectData(1) }} variant={selectDATA == 1 ? 'contained' : 'text'}>Partner</Button>
+                {/* <Button onClick={() => { setData(2) }} variant={selectDATA == 2 ? 'contained' : 'text'}>Funders</Button>
+                <Button onClick={() => { setData(1) }} variant={selectDATA == 1 ? 'contained' : 'text'}>Partner</Button>
                 <Button>Project</Button>
                 <Button>Operation Manager</Button> */}
 
@@ -183,7 +182,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons">
                       <Grid> */}
 
-                <Button onClick={() => { setSelectData(5) }} sx={{
+                <Button onClick={() => { setData(5) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -198,7 +197,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     </ButtonGroup> */}
 
                 {/* <Grid spacing={2}> */}
-                <Button onClick={() => { setSelectData(9) }}
+                <Button onClick={() => { setData(9) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -210,7 +209,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     background: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   } : null}>Date Range</Button>
-                <Button onClick={() => { setSelectData(7) }} sx={{
+                <Button onClick={() => { setData(7) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -229,7 +228,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   color: 'black',
                 }}>Participant</Button>
                 {/* </Grid> */}
-                <Button onClick={() => { setSelectData(12) }} sx={{
+                <Button onClick={() => { setData(12) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -240,7 +239,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
                 } : null}>Sr.Operation Manager</Button>
-                <Button onClick={() => { setSelectData(13) }} s sx={{
+                <Button onClick={() => { setData(13) }} s sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
