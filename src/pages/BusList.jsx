@@ -94,6 +94,7 @@ export default function User() {
         console.log(response.data)
         if (response.data.code == 200) {
           setOpenAddBus(false)
+          busesd()
         }
       })
       .catch(function (error) {
