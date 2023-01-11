@@ -53,14 +53,16 @@ export default function Login() {
         }
         else {
           localStorage.setItem('userDetails', JSON.stringify(response.data))
-          if (
-            response.data.role == 2
-          ) {
-            navigate('/dashboard/buslist',)
-          } else {
-            navigate('/dashboard/app')
-          }
+          if (localStorage?.userDetails) {
+            if (
+              response.data.role == 2
+            ) {
+              navigate('/dashboard/buslist',)
+            } else {
+              navigate('/dashboard/app')
+            }
 
+          }
         }
         console.log(JSON.stringify(response.data));
       })
