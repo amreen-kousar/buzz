@@ -206,7 +206,7 @@ export default function User() {
   return (
     <Page title="User">
       <div>
-        <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem" }}
+        <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1',top:"85vh",left:"92vw"}}
          sx={{
           '&:hover': {
             backgroundColor: '#ffd796',
@@ -223,6 +223,7 @@ export default function User() {
           aria-labelledby="scroll-dialog-title"
           aria-describedby="scroll-dialog-description"
         >
+          
           {/* <DialogTitle id="scroll-dialog-title">Add Bus</DialogTitle> */}
           <Toolbar sx={{color:"#ffffff",backgroundColor:"#ed6c02"}}>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
@@ -288,7 +289,9 @@ export default function User() {
 
           </DialogActions>
         </Dialog>
+        
       </div>
+      
       <Container>
         <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpens(false)}>
           <Alert onClose={() => { setOpens(false) }} severity="success" sx={{ width: '100%' }}>
@@ -339,6 +342,7 @@ export default function User() {
             onCloseFilter={handleclosebusfilter}
           />
         </Stack>
+        
 
         {buses?.list?.length == 0 && (
 
@@ -378,7 +382,15 @@ export default function User() {
             </Card>
           )
         })}
-
+         {/* <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'relative', zIndex: '1',top:"40",left:"50" }}
+         sx={{
+          '&:hover': {
+            backgroundColor: '#ffd796',
+         
+          },
+        backgroundColor:"#ffd796"
+       }} variant="contained" onClick={handleClickOpen('paper')}>
+          <span style={{ fontSize: "2rem",color:"#ed6c02" }}>+</span></Button> */}
       </Container>
     </Page>
   );
