@@ -34,7 +34,7 @@ import SrOperationManager from './SrOperationManager'
 import Participant from './Participant';
 import Trainers from './Trainers';
 import GelathisLead from './GelathisLead';
-import DateRangeF from './DateRangeFilter';
+import  DateRangeFilter  from './DateRangeFilter';
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -70,7 +70,7 @@ DashboardFilter.propTypes = {
 };
 
 export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit }) {
-  var [selectDATA, setSelectData] = useState(2)
+  var [selectDATA, setSelectData] = useState()
   const setData = (value) => {
     localStorage.setItem('selectedData', value)
     setSelectData(value)
@@ -88,10 +88,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
 
   return (
     <>
-      {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
-
+     
       <Drawer
         anchor="right"
         open={isOpenFilter}

@@ -151,8 +151,14 @@ export default function DashboardApp() {
             Filter
           </Button>
          
-          <h2>{slected?.id===2? "Funder": null}&nbsp;{slected?.name ? slected?.name : ''}
-          </h2>
+          <h2>{slected?.id===2? "Funder": null}
+        {slected?.id===1? "Partner": null}
+        {slected?.id===3? "Project": null}
+        {slected?.id===4? "Operation Manager": null}
+        {slected?.id===12? "Sr.Operation Manager": null}
+        {slected?.id===13? "Gelathis Facilator Leads": null}&nbsp;{slected?.name ? slected?.name : ''}</h2>
+          {/* <h2>{slected?.id===2? "Funder": null}&nbsp;{slected?.name ? slected?.name : ''}
+          </h2> */}
           {/* <Chip label= {slected?.id===2?"founder":null}/> */}
 
         </Grid>
@@ -248,8 +254,8 @@ export default function DashboardApp() {
           </Grid>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={12} marginTop={3}>
-          {/* <AppWidgetSummary title="Funder" total={234} style={{backgroundColor:'#bdbdbd'}} icon={'ant-design:fund-view-outlined'} /> */}
+        {/* <Grid item xs={12} sm={12} md={12} marginTop={3}>
+          <AppWidgetSummary title="Funder" total={234} style={{backgroundColor:'#bdbdbd'}} icon={'ant-design:fund-view-outlined'} />
           {summaryData?.data?.map((itm) => {
             return (
               <Card
@@ -329,7 +335,7 @@ export default function DashboardApp() {
               </Card>
             );
           })}
-        </Grid>
+        </Grid>  */}
       </Container>
     </Page>
   );

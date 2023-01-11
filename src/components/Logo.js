@@ -24,7 +24,7 @@ export default function Logo({ disabledLink = false, sx }) {
   // const logo = <Box component="img" src="/static/logo.svg" sx={{ width: 40, height: 40, ...sx }} />
 
   const logo = (
-    <Box component="img" src="/static/ic_launcher-web.png"  sx={{height:100,width:100}}/>
+    <Box component="img" src="/static/ic_launcher-web.png"  sx={{height:70,width:70}} style={{width:"30%",height:"auto"}}/>
 
     
   );

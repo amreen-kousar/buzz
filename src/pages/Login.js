@@ -127,7 +127,7 @@ export default function Login() {
           {smUp && (
             <Typography variant="body2" sx={{ mt: { md: -2 } }}>
               Don’t have an account? {''}
-              <Link variant="subtitle2" component={RouterLink} to="/register">
+              <Link variant="subtitle2" component={RouterLink} to="/register" color="#ed6c02" underline='hover'>
                 Get started
               </Link>
             </Typography>
@@ -137,7 +137,7 @@ export default function Login() {
         {mdUp && (
           <SectionStyle>
             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              Hi, Welcome Back
+              {/* Hi, Welcome Back */}
             </Typography>
             <img src="/static/illustrations/illustration_login.png" alt="login" />
           </SectionStyle>
@@ -145,14 +145,23 @@ export default function Login() {
 
         <Container maxWidth="sm">
           <ContentStyle>
-            <Typography variant="h4" gutterBottom>
-              Sign in to Buzz Staff For Women
-            </Typography>
-
-            <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography>
-            <Button onClick={googleLogin}>
-              Login google
+            <Typography variant="h4" gutterBottom align='center'>
+              Sign in to Buzz Staff <br></br>
+             
+            </Typography> 
+            <Button onClick={googleLogin} style={{textAlign:"center",alignContent:"center",}} 
+          sx={{
+            '&:hover': {
+              backgroundColor: '#ed6c02',
+              color:'#ffffff',
+            },
+            color:'#ed6c02',backgroundColor:'#ffd796'
+          }}  >
+              Login with google
             </Button>
+
+            {/* <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography> */}
+           
 
             {/* <AuthSocial /> */}
 
@@ -161,7 +170,7 @@ export default function Login() {
             {!smUp && (
               <Typography variant="body2" align="center" sx={{ mt: 3 }}>
                 Don’t have an account?{' '}
-                <Link variant="subtitle2" component={RouterLink} to="/register">
+                <Link variant="subtitle2"  component={RouterLink} to="/register" underline="hover" color="#ed6c02">
                   Get started
                 </Link>
               </Typography>
