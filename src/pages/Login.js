@@ -46,6 +46,7 @@ export default function Login() {
 
     axios(config)
       .then(function (response) {
+        console.log(response.data, "response")
         localStorage?.setItem('user', JSON?.stringify(itm?.user))
         localStorage?.setItem('userId', response?.data?.role)
         if (response?.data?.code == 404) {
@@ -53,14 +54,16 @@ export default function Login() {
         }
         else {
           localStorage.setItem('userDetails', JSON.stringify(response.data))
-          if (
-            response.data.role == 2
-          ) {
-            navigate('/dashboard/buslist',)
-          } else {
-            navigate('/dashboard/app')
-          }
+          if (localStorage?.userDetails) {
+            if (
+              response.data.role == 2
+            ) {
+              navigate('/dashboard/buslist',)
+            } else {
+              navigate('/dashboard/app')
+            }
 
+          }
         }
         console.log(JSON.stringify(response.data));
       })

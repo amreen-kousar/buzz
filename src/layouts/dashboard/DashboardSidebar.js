@@ -49,7 +49,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const isDesktop = useResponsive('up', 'lg');
 
   useEffect(() => {
-
     if (isOpenSidebar) {
       onCloseSidebar();
     }
@@ -66,7 +65,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         <Logo />
       </Box>
       {console.log(account.displayName, "<--yghuj")}
-      <Box sx={{ mb: 5, mx: 2.5 }}  backgroundColor="#ed6c02">
+      <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ed6c02">
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
             <Avatar src={account.photoURL} alt="photoURL" />

@@ -103,24 +103,80 @@ export default function FullScreenDialog() {
     reader.readAsDataURL(file);
   }
 
-  const postImage = () => {
-    setViewImage(true)
-    console.log(image, "imageeeeeee")
-    //  hit the api in this and files[] refers to image[] 
-  }
-
-  const convertImage = (fileObjectFromInput) => {
-
-    setImagePath([...imagePath, fileObjectFromInput])
-
-
-
+  const convertImage = (e) => {
+    setImagePath([...imagePath, e.target.files[0]])
     console.log(imagePath, "imagePath")
-    getBase64(fileObjectFromInput, function (base64Data) {
-
+    getBase64(e.target.files[0], function (base64Data) {
       setImage([...image, base64Data])
       setViewImage(true)
     });
+  }
+
+  const SendData = async => {
+
+    var data = JSON.stringify({
+      "date": sendData?.date,
+      "insideBangalore": false,
+      "end_odometer": sendData?.endOdimeter,
+      "telephone": sendData?.telephonecharges,
+      "end_location_name": sendData?.endLocation,
+      "printing": sendData?.printing,
+      "start_location_name": "RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India",
+      "poa_id": sendData?.poa,
+      "start_odometer": sendData?.odimeter,
+      "rate_per_KM": sendData?.rateperkm,
+      "stationery": sendData?.stationary,
+      "klmtr": sendData?.rateperkm,
+      "da": sendData?.foodexpenses,
+      "others": sendData?.otherExpenses,
+      "emp_id": 15,
+      "mode_of_travel": sendData?.modeoftravel,
+      "other_text": sendData?.OtherAmount
+    });
+
+    var config = {
+      method: 'post',
+      url: 'http://3.7.7.138/appTest/new/addNewTA.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        postImages()
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  const postImages = () => {
+    var dataImage = []
+    Array.from(imagePath).forEach(image => {
+      dataImage.push({
+        name: image.name, lastModified: image.lastModified, lastModifiedDate: image.lastModifiedDate,
+        size: image.size, type: image.type, webkitRelativePath: image.webkitRelativePath
+      });
+    });
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/new/taAttachments.php',
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: JSON.stringify({ emp_id: 15, file: dataImage })
+    };
+    axios(config)
+      .then(function (imageResponse) {
+        console.log(JSON.stringify(imageResponse.data, "images Upload"));
+      })
+      .catch(function (imageError) {
+        console.log(imageError);
+      });
 
   }
 
@@ -135,6 +191,7 @@ export default function FullScreenDialog() {
       }
     );
   }
+
   const drop = async => {
     var data = JSON.stringify({
       "emp_id": "329",
@@ -173,89 +230,11 @@ export default function FullScreenDialog() {
   // };
 
 
-  console.log(imgSrc, "<-----gfvimageSrc")
-  const SendData = async => {
-
-    var data = JSON.stringify({
-      "date": sendData?.date,
-      "insideBangalore": false,
-      "end_odometer": sendData?.endOdimeter,
-      "telephone": sendData?.telephonecharges,
-      "end_location_name": sendData?.endLocation,
-      "printing": sendData?.printing,
-      "start_location_name": "RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India",
-      "poa_id": sendData?.poa,
-      "start_odometer": sendData?.odimeter,
-      "rate_per_KM": sendData?.rateperkm,
-      "stationery": sendData?.stationary,
-      "klmtr": sendData?.rateperkm,
-      "da": sendData?.foodexpenses,
-      "others": sendData?.otherExpenses,
-      "emp_id": 15,
-      "mode_of_travel": sendData?.modeoftravel,
-      "other_text": sendData?.OtherAmount
-    });
-
-    var config = {
-      method: 'post',
-      url: 'http://3.7.7.138/appTest/new/addNewTA.php',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: data
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        console.log(imagePath, "post Images befor caall")
-        postImages()
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-  }
-
-
-  const postImages = () => {
-    var bodyFormData = new FormData();
+  // console.log(imgSrc, "<-----gfvimageSrc")
 
 
 
-    var data = JSON.stringify(
-      { "emp_id": 15, "file": imagePath }
-    );
-    for (var key of imagePath) {
-      bodyFormData.append('file', key);
-      console.log(key, "formdata add", bodyFormData)
-    }
-    console.log(bodyFormData)
-    const dataImage = [{
-      lastModified: 1672737762860,
-      lastModifiedDate: "Tue Jan 03 2023 14:52:42 GMT+0530 (India Standard Time)",
-      name: "Screenshot (1).png",
-      size: 346607,
-      type: "image/png",
-      webkitRelativePath: ""
-    }]
-    console.log(dataImage)
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/taAttachments.php',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify({ emp_id: 15, file: bodyFormData })
-    };
-    console.log(config)
-    axios(config)
-      .then(function (imageResponse) {
-        console.log(JSON.stringify(imageResponse.data, "images Upload"));
-      })
-      .catch(function (imageError) {
-        console.log(imageError);
-      });
+  const imageApiCall = (config) => {
 
   }
 
@@ -468,7 +447,7 @@ export default function FullScreenDialog() {
               sx={{ width: 25, height: 25, ml: 2, color: "#ed6c02" }}
             />&nbsp;
             Click to upoad images
-            <input style={{ display: "none" }} id="inputTag" type="file" onClick={(e) => { e.target.value = null; }} onChange={(e) => { convertImage(e.target.files[0]) }} />
+            <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
           </label>
         </div>
         <br /><br />

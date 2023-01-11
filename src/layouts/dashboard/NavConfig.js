@@ -10,7 +10,7 @@ const navConfig = [
     title: 'dashboard',
     path: '/dashboard/app',
     icon: getIcon('eva:pie-chart-2-fill'),
-    id: [1, 3, 4, 5]
+    id: [1, 3, 4, 5, 6]
   },
   {
     title: 'BusList',
@@ -22,13 +22,13 @@ const navConfig = [
     title: 'Plan Of Action',
     path: '/dashboard/planofaction',
     icon: getIcon('mdi:call-to-action'),
-    id: [1, 3, 5]
+    id: [1, 3, 5, 6]
   },
   {
     title: 'Projects',
     path: '/dashboard/projects',
     icon: getIcon('grommet-icons:projects'),
-    id: [1, 2, 3, 5]
+    id: [1, 2, 3, 5, 6]
   },
   {
     title: 'People',
@@ -46,7 +46,7 @@ const navConfig = [
     title: 'My Profile',
     path: '/dashboard/profile',
     icon: getIcon('healthicons:ui-user-profile-negative'),
-    id: [1, 2, 3, 5]
+    id: [1, 2, 3, 5, 6]
   },
   {
     title: 'Demography',
@@ -58,7 +58,7 @@ const navConfig = [
     title: 'Travel Allowance',
     path: '/dashboard/travel',
     icon: getIcon('map:travel-agency'),
-    id: [1, 2, 3, 5]
+    id: [1, 2, 3, 5, 6]
   },
 
 ];
