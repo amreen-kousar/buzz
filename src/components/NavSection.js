@@ -15,16 +15,16 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
   position: 'relative',
   textTransform: 'capitalize',
   borderRadius: theme.shape.borderRadius,
-  '&:focus':{
+  '&:focus': {
     backgroundColor: '#ffd796',
-    color:'#ed6c02'
- },
+    color: '#ed6c02'
+  },
   '&:hover': {
     backgroundColor: '#ffd796',
-    color:'#ed6c02'
+    color: '#ed6c02'
   },
- 
- 
+
+
 }));
 
 const ListItemIconStyle = styled(ListItemIcon)({
@@ -34,7 +34,7 @@ const ListItemIconStyle = styled(ListItemIcon)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color:'#ed6c02'
+  color: '#ed6c02'
 });
 
 // ----------------------------------------------------------------------
@@ -58,16 +58,17 @@ function NavItem({ item, active }) {
   };
 
   const activeRootStyle = {
-    color: theme.palette.text.warning,
+    color: '#ed6c02',
     fontWeight: 'fontWeightMedium',
-    bgcolor: alpha('#ffd796', theme.palette.action.selectedOpacity),
+    bgcolor: "#ffd796",
   };
 
   const activeSubStyle = {
-    color: theme.palette.text.warning,
+    color: '#ed6c02',
     fontWeight: 'fontWeightMedium',
-    bgcolor:'#ffd796'
+    bgcolor: '#ffd796'
   };
+
 
   if (children) {
     return (
@@ -76,15 +77,15 @@ function NavItem({ item, active }) {
           onClick={handleOpen}
           sx={{
             ...(isActiveRoot && activeRootStyle),
-            '&:focus':{
+            '&:focus': {
               backgroundColor: '#ffd796',
-              color:'#ed6c02'
-           },
+              color: '#ed6c02'
+            },
             '&:hover': {
               backgroundColor: '#ffd796',
-              color:'#ed6c02'
+              color: '#ed6c02'
             },
-           
+
           }}
         >
           <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
