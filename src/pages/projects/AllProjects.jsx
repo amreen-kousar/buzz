@@ -45,6 +45,10 @@ function a11yProps(index) {
 }
 
 export default function AllProjects({ handleClickOpen, handleClose, open }) {
+    var userAccess = ['2']
+
+    var userIdCheck = localStorage?.getItem('userId')
+
     const [value, setValue] = useState(0);
     const [project, setProject] = useState();
     const handleChange = (event, newValue) => {
@@ -212,10 +216,11 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                         </Link>
                     </Box>
                 </Stack>
-
-                <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-                    <AddProject />
-                </Stack>
+                {userAccess.includes(userIdCheck) &&
+                    <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                        <AddProject />
+                    </Stack>
+                }
             </Container>
         </Page >
     );

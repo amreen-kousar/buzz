@@ -1,31 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Container, Stack, Typography, Box, Toolbar, Button, TextField, Select, MenuItem } from '@mui/material';
+import { Container, Stack, Typography, } from '@mui/material';
 // components
 import Page from '../../components/Page';
-import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../../sections/@dashboard/products';
+import { ProductList, ProductCartWidget, } from '../../sections/@dashboard/products';
 // mock
 import PRODUCTS from '../../_mock/products';
 import UserDrawer from '../Components/UserDrawer';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import InputLabel from '@mui/material/InputLabel';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import Switch from '@mui/material/Switch';
-import Autocomplete from '@mui/material/Autocomplete';
+
 import AddUser from './AddUser';
 // ----------------------------------------------------------------------
 
-export default function EcommerceShop() {
+export default function UserHome() {
+
+  var userAccess = ['2']
+
+  var userIdCheck = localStorage?.getItem('userId')
+
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
   const [ceoUser, setCeoUser] = useState([])
@@ -43,6 +34,8 @@ export default function EcommerceShop() {
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
+
+
   useEffect(() => {
     user()
 
@@ -116,12 +109,13 @@ export default function EcommerceShop() {
         <ProductList users={users} products={PRODUCTS} isOpenFilter={openFilter}
           onOpenFilter={handleOpenFilter}
           onCloseFilter={handleCloseFilter} />
-        <ProductCartWidget />
+       
       </Container>
-
-      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-        <AddUser data={ceoUser} />
-      </Stack>
+      {userAccess.includes(userIdCheck) &&
+        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <AddUser data={ceoUser} />
+        </Stack>
+      }
     </Page >
   );
 }

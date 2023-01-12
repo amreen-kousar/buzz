@@ -13,7 +13,9 @@ import Addbus from './Addbus';
 
 export default function User() {
 
+  var userAccess = ['2']
 
+  var userIdCheck = localStorage?.getItem('userId')
 
   const [openMessage, setOpenMessage] = useState(false);
 
@@ -221,8 +223,10 @@ export default function User() {
        }} variant="contained" onClick={handleClickOpen('paper')}>
           <span style={{ fontSize: "2rem",color:"#ed6c02" }}>+</span></Button> */}
       </Container>
+      {userAccess.includes(userIdCheck) && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        <Addbus />
+      </Stack>}
 
-    
     </Page>
   );
 }
