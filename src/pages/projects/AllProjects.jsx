@@ -103,7 +103,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
                 <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                     <Box sx={{ width: '100%' }}>
-                        <Box sx={{ borderColor: 'divider' }} >
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }} >
 
 
 
@@ -124,7 +124,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                     }} label="All" {...a11yProps(0)} style={value == 0 ? {
                                         borderBottom: '3px solid #ed6c02',
                                         color: "#ed6c02",
-                                    } : { borderBottom: '1px solid grey', }} />
+                                    } : null} />
                                 <Tab
                                     sx={{
                                         ':hover': {
@@ -137,7 +137,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                     }} style={value == 1 ? {
                                         borderBottom: '3px solid #ed6c02',
                                         color: "#ed6c02",
-                                    } : { borderBottom: '1px solid grey', }} label="Published" {...a11yProps(1)} />
+                                    } : null} label="Published" {...a11yProps(1)} />
                                 <Tab
                                     sx={{
                                         ':hover': {
@@ -151,7 +151,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                     }} label="Completed" {...a11yProps(2)} style={value == 2 ? {
                                         borderBottom: '3px solid #ed6c02',
                                         color: "#ed6c02",
-                                    } : { borderBottom: '1px solid grey', }} />
+                                    } : null} />
                             </Tabs>
                         </Box>
                         <Link to="/dashboard/projects/project" state={{ name: "project name" }}

@@ -145,36 +145,36 @@ export default function TravelA() {
                       bgcolor: '#ffd796', // theme.palette.primary.main
                       color: '#ed6c02',
                     },
-                    ':focus': {
-                      bgcolor: '#ffd796',
-                      color: "#ed6c02"
-                    },
+
                     color: 'black',
-                  }} label="Today" {...a11yProps(0)} />
+                  }} label="Today" {...a11yProps(0)} style={value == 0 ? {
+                    borderBottom: '3px solid #ed6c02',
+                    color: "#ed6c02",
+                  } : null} />
                 <Tab sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   },
-                  ':focus': {
-                    bgcolor: '#ffd796',
-                    color: "#ed6c02"
-                  },
+
                   color: 'black',
                 }}
-                  label="Week" {...a11yProps(1)} />
+                  label="Week" {...a11yProps(1)} style={value == 1 ? {
+                    borderBottom: '3px solid #ed6c02',
+                    color: "#ed6c02",
+                  } : null} />
                 <Tab sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   },
-                  ':focus': {
-                    bgcolor: '#ffd796',
-                    color: "#ed6c02"
-                  },
+
                   color: 'black',
                 }}
-                  label="Month" {...a11yProps(2)} />
+                  label="Month" style={value == 2 ? {
+                    borderBottom: '3px solid #ed6c02',
+                    color: "#ed6c02",
+                  } : null} {...a11yProps(2)} />
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
