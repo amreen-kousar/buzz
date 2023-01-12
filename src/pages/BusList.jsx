@@ -138,14 +138,14 @@ export default function User() {
     }
   }, [open]);
 
-  const busesd = async () => {
+  const busesd = async (i,id) => {
     const data = JSON.stringify({
       "date": "",
       "role_id": 1,
-      "project_id": "",
+      "project_id":id===1?i?.id: "",
       "taluk_id": "",
       "district_id": "",
-      "funder_id": "",
+      "funder_id":id===2?i?.id: "",
       "emp_id": 206,
       "search": search
     });
@@ -190,7 +190,20 @@ export default function User() {
   const handleclosebusfilter = () => {
     setopenbusfilter(false);
   };
-
+  const getData = (itm, i) => {
+    setopenbusfilter(false);
+    console.log(itm,i,"<-----qwertyu")
+    // setSelected({
+    //   id: i,
+    //   name: itm?.name
+    // })
+    // const data = i===2?{"funder_id":itm?.id}:i===1?{"partner_id":itm?.id}:{"project_id":itm?.id}
+    busesd(itm, i)
+    // console.log(data,i,itm,"<----sdfssreerfer")
+    // setFilterData(data)
+    // handleCloseFilter()
+    // console.log("sdfgsdfdfssd", itm, i)
+  }
 
 
   const Alert = forwardRef(function Alert(props, ref) {
@@ -324,6 +337,7 @@ export default function User() {
         </Stack>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <BusListFilter
+          getData={getData}
             clcikData={clcikData}
             isOpenFilter={openbusfilter}
             onOpenFilter={handleopenbusfilter}

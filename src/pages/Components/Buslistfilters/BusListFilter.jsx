@@ -24,8 +24,6 @@ import {
 } from '@mui/material';
 // components
 
-
-
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -61,8 +59,8 @@ BusListFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
- const [selectDATA,setSelectData] = useState()
+export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData }) {
+  const [selectDATA, setSelectData] = useState();
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -72,22 +70,26 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
       <Drawer
         anchor="right"
         open={isOpenFilter}
-        onClose={()=>{
-          setSelectData()
-            onCloseFilter()}}
+        onClose={() => {
+          setSelectData();
+          onCloseFilter();
+        }}
         PaperProps={{
-          sx: { width: 280, },
+          sx: { width: 280 },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25,color:'black'}}>
-          Filters
-         {selectDATA&&selectDATA===2&&":  Funders"}
-         {selectDATA&&selectDATA===7&&": Location"}
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25, color: 'black' }}>
+            Filters
+            {selectDATA && selectDATA === 2 && ':  Funders'}
+            {selectDATA && selectDATA === 7 && ': Location'}
           </Typography>
-          <IconButton onClick={()=>{
-        setSelectData()
-          onCloseFilter()}}>
+          <IconButton
+            onClick={() => {
+              setSelectData();
+              onCloseFilter();
+            }}
+          >
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
@@ -95,80 +97,103 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
         <Divider />
         <Scrollbar>
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
-            <div>
-              <Card  style={{backgroundColor:"#f6f8fb"}}>
-                <CardContent>
-                  {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
-                 <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
-                    {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
-                      {/* <Grid spacing={1} > */}
-                      <Button onClick={()=>{setSelectData(2)}} sx={{
-                          ':hover': {
-                            bgcolor: '#ffd796', // theme.palette.primary.main
-                            color: '#ed6c02',
-                          },
-                          ':focus':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
-                          color:'black',
-                        }}>Funders</Button>
-             {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
-  {/* <Button>Funders</Button> */}
-  <Button 
-  sx={{
-    ':hover': {
-      bgcolor: '#ffd796', // theme.palette.primary.main
-      color: '#ed6c02',
-    },
-    ':focus':{
-      bgcolor:'#ffd796',
-      color:"#ed6c02"
-    },
-    color:'black',
-  }}>Project</Button>
-                        <Button onClick={()=>{setSelectData(7)}}
-                        sx={{
-                          ':hover': {
-                            bgcolor: '#ffd796', // theme.palette.primary.main
-                            color: '#ed6c02',
-                          },
-                          ':focus':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
-                          color:'black',
-                        }}>Location</Button>
-                        <Button sx={{
-                          ':hover': {
-                            bgcolor: '#ffd796', // theme.palette.primary.main
-                            color: '#ed6c02',
-                          },
-                          ':focus':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
-                          color:'black',
-                        }}>All Bus</Button>
+          <div>
+            <Card style={{ backgroundColor: '#f6f8fb' }}>
+              <CardContent>
+                {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
+                <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>
+                  Categories
+                </Typography>
+                {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
+                {/* <Grid spacing={1} > */}
+                <Button
+                  onClick={() => {
+                    setSelectData(2);
+                  }}
+                  sx={{
+                    ':hover': {
+                      bgcolor: '#ffd796', // theme.palette.primary.main
+                      color: '#ed6c02',
+                    },
+                    ':focus': {
+                      bgcolor: '#ffd796',
+                      color: '#ed6c02',
+                    },
+                    color: 'black',
+                  }}
+                >
+                  Funders
+                </Button>
+                {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
+                {/* <Button>Funders</Button> */}
+                <Button
+                  sx={{
+                    ':hover': {
+                      bgcolor: '#ffd796', // theme.palette.primary.main
+                      color: '#ed6c02',
+                    },
+                    ':focus': {
+                      bgcolor: '#ffd796',
+                      color: '#ed6c02',
+                    },
+                    color: 'black',
+                  }}
+                >
+                  Project
+                </Button>
+                <Button
+                  onClick={() => {
+                    setSelectData(7);
+                  }}
+                  sx={{
+                    ':hover': {
+                      bgcolor: '#ffd796', // theme.palette.primary.main
+                      color: '#ed6c02',
+                    },
+                    ':focus': {
+                      bgcolor: '#ffd796',
+                      color: '#ed6c02',
+                    },
+                    color: 'black',
+                  }}
+                >
+                  Location
+                </Button>
+                <Button
+                  sx={{
+                    ':hover': {
+                      bgcolor: '#ffd796', // theme.palette.primary.main
+                      color: '#ed6c02',
+                    },
+                    ':focus': {
+                      bgcolor: '#ffd796',
+                      color: '#ed6c02',
+                    },
+                    color: 'black',
+                  }}
+                >
+                  All Bus
+                </Button>
+              </CardContent>
+            </Card>
+            <Grid style={{ marginTop: 30 }}>
+              <Funders getData={getData} selectDATA={selectDATA} />
+            </Grid>
 
-                </CardContent>
-              </Card>
-             <Grid style={{ marginTop: 30 }}>
-                <Funders getData={getData} selectDATA={selectDATA}/>
-              </Grid>        
-            
-            {selectDATA===7&&<Grid style={{ marginTop: 30 }}>
-                <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
-              </Grid> }
-              
-              {/* <Grid style={{ marginTop: 30 }}>
-                <Projects />
-              </Grid> */}
-            
-            </div>
-          {/* </Stack> */}
+            {selectDATA === 7 && (
+              <Grid style={{ marginTop: 30 }}>
+                <Location
+                  selectDATA={selectDATA}
+                  onSumbit={(e, i) => {
+                    onSumbit(e, i);
+                  }}
+                />
+              </Grid>
+            )}
+
+           
+          </div>
         </Scrollbar>
-
       </Drawer>
     </>
   );
