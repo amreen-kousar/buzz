@@ -196,6 +196,7 @@ export default function TravelA() {
             </TabPanel>
           </Box>
         </Stack>
+        
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <TravelDialog />
         </Stack>

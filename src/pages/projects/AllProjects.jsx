@@ -8,6 +8,7 @@ import Page from '../../components/Page';
 import Iconify from '../../components/Iconify';
 import ProjectDialog from '../Components/ProjectDialog';
 import { Link } from 'react-router-dom';
+import AddProject from './Addproject';
 
 // components
 function TabPanel(props) {
@@ -210,6 +211,10 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                             </TabPanel>
                         </Link>
                     </Box>
+                </Stack>
+
+                <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                    <AddProject />
                 </Stack>
             </Container>
         </Page >

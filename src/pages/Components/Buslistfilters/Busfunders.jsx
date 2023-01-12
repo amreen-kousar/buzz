@@ -33,6 +33,7 @@ export default function Funders({ selectDATA, getData }) {
     if (selectDATA) {
       funder()
     }
+    console.log(selectDATA, "selectdata")
   }, [selectDATA]
   )
   const funder = async () => {
@@ -74,7 +75,7 @@ export default function Funders({ selectDATA, getData }) {
                 <Table aria-label="customized table"  >
                   <TableBody  >
                     <TableRow style={{ height: "10px !important" }} onClick={() => getData(itm, selectDATA)} >
-                      <TableCell style={{ width: "10px" }}> <Iconify  icon="mdi:user-circle" width={20} height={20} /> </TableCell>
+                      <TableCell style={{ width: "10px" }}> <Iconify icon="mdi:user-circle" width={20} height={20} /> </TableCell>
                       <TableCell >  {itm?.name}</TableCell>
                     </TableRow>
                   </TableBody>

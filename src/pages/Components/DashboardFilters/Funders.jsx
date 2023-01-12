@@ -22,70 +22,70 @@ const bull = (
   </Box>
 );
 
-export default function Funders({selectDATA,getData}) {
-  const [fund,setFund] = useState();
-  useEffect(()=>{
-    console.log(selectDATA,"<--dffgdfgdf")
-    if(selectDATA)
-    {
-    funder()
+export default function Funders({ selectDATA, getData }) {
+  const [fund, setFund] = useState();
+  useEffect(() => {
+    console.log(selectDATA, "<--dffgdfgdfn ---- funder")
+    if (selectDATA) {
+      funder()
     }
-    },[selectDATA]
-    )
+  }, [selectDATA]
+  )
   const funder = async () => {
-  const data = JSON.stringify({
-    "role_id": 1,
-    "filter_type": selectDATA,
-    "pageNum": 1,
-    "emp_id": 206
-  });
-  
-  const config = {
-    method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
-    headers: { 
-      'Content-Type': 'application/json'
-    },
-     data
-  };
-  
-  axios(config)
-  .then( (response) =>{
-    setFund(response?.data?.data)
-    console.log(JSON.stringify(response.data));
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
+    const data = JSON.stringify({
+      "role_id": 1,
+      "filter_type": selectDATA,
+      "pageNum": 1,
+      "emp_id": 206
+    });
+
+    const config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data
+    };
+
+    axios(config)
+      .then((response) => {
+        setFund(response?.data?.data)
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <div>
 
-    
-      <Card style={{marginTop:20}}>
-        {fund?.length!==0?fund?.map(itm=>{
- return(
-  <CardContent>
-  <TableContainer >
-    <Table aria-label="customized table"  >
-      <TableBody  >
-        <TableRow style={{ height: "10px !important" }} onClick={() => getData(itm, selectDATA)} >
-          <TableCell style={{ width: "10px" }}> <Iconify  icon="mdi:user-circle" width={20} height={20} /> </TableCell>
-          <TableCell >  {itm?.name}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-  </TableContainer>
-</CardContent>
+
+      <Card style={{ marginTop: 20 }}>
+        {fund?.length !== 0 ? fund?.map(itm => {
+          return (
+            <CardContent>
+              <TableContainer >
+                <Table aria-label="customized table"  >
+                  <TableBody  >
+                    <TableRow style={{ height: "10px !important" }} onClick={() => getData(itm, selectDATA)} >
+                      <TableCell style={{ width: "10px" }}> <Iconify icon="mdi:user-circle" width={20} height={20} /> </TableCell>
+                      <TableCell >  {itm?.name}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </CardContent>
             // <CardContent>
             //     <Typography>
             //     <Iconify onClick={()=>getData(itm,selectDATA)} icon="eva:people-fill" width={20} height={20} />
             //    {itm?.name}
             //     </Typography>
             // </CardContent>
- )
-             }):null}
-          </Card>
-      
-          </div>
-  )}
+          )
+        }) : null}
+      </Card>
+
+    </div>
+  )
+}
