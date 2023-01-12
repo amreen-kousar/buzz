@@ -263,12 +263,12 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
             <Grid style={{ marginTop: 30 }}>
               <Projects getData={getData} selectDATA={selectDATA} />
             </Grid>
-            {/* <Grid style={{ marginTop: 30 }}>
-                <DateRangeF onDateSubmit={onDateSubmit} />
-              </Grid> */}
-            <Grid style={{ marginTop: 30 }}>
+            {selectDATA&&selectDATA===9&&<Grid style={{ marginTop: 30 }}>
+                <DateRangeFilter onDateSubmit={onDateSubmit} />
+              </Grid>}
+           {selectDATA&&selectDATA===7&&<Grid style={{ marginTop: 30 }}>
               <Location selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
-            </Grid>
+            </Grid>}
             <Grid style={{ marginTop: 30 }}>
               <Trainers getData={getData} selectDATA={selectDATA} />
             </Grid>

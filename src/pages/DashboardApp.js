@@ -5,7 +5,7 @@ import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import Iconify from '../components/Iconify';
 import Page from '../components/Page';
-
+import Chip from '@mui/material/Chip';
 import { AppWidgetSummary } from '../sections/@dashboard/app';
 
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
@@ -130,8 +130,14 @@ export default function DashboardApp() {
     console.log(e, i, "<----datssdasdsa")
   }
 
+  const closefilter =()=>{
+    console.log("deleted")
+  }
+
   return (
+    
     <Page title="Dashboard">
+      
       <Container maxWidth="xl">
         <Grid item spacing={10}>
           {/* <Typography variant="h4" sx={{ mb: 5 }}>
@@ -150,16 +156,21 @@ export default function DashboardApp() {
             }}>
             Filter
           </Button>
-         
-          <h2>{slected?.id===2? "Funder": null}
+          {/* <h2> <Chip label={(slected?.id===2)? "Funder":(slected?.id===1)?"partner":(slected?.id===5)?"Trainer":(slected?.id===1)?"partner": null} onDelete={closefilter}/>
+        
         {slected?.id===1? "Partner": null}
         {slected?.id===3? "Project": null}
+        {slected?.id===5? "Trainer":null}
         {slected?.id===4? "Operation Manager": null}
         {slected?.id===12? "Sr.Operation Manager": null}
-        {slected?.id===13? "Gelathis Facilator Leads": null}&nbsp;{slected?.name ? slected?.name : ''}</h2>
+        {slected?.id===13? "Gelathis Facilator Leads": null}&nbsp;{slected?.name ? slected?.name : ''}</h2> */}
           {/* <h2>{slected?.id===2? "Funder": null}&nbsp;{slected?.name ? slected?.name : ''}
           </h2> */}
           {/* <Chip label= {slected?.id===2?"founder":null}/> */}
+          <Chip label={(slected?.id===2)? ("Funder"):
+           (slected?.id===1)?"partner":(slected?.id===5)?"Trainer":
+           (slected?.id===4)?"Operation Manager":(slected?.id===12)?"Sr.Operation Manager":
+           (slected?.id===13)?"Gelathi Facilator Leads": ""} onDelete={closefilter}/>
 
         </Grid>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>

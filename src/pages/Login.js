@@ -119,10 +119,10 @@ export default function Login() {
       .catch((error) => alert(error.message));
   }
   return (
-    <Page title="Login">
+    <Page title="Login" style={{backgroundColor:"#ed6c02"}}>
       <RootStyle>
-        <HeaderStyle>
-          <Logo />
+        {/* <HeaderStyle>
+         
 
           {smUp && (
             <Typography variant="body2" sx={{ mt: { md: -2 } }}>
@@ -132,32 +132,37 @@ export default function Login() {
               </Link>
             </Typography>
           )}
-        </HeaderStyle>
+        </HeaderStyle> */}
 
-        {mdUp && (
+        {/* {mdUp && (
           <SectionStyle>
             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              {/* Hi, Welcome Back */}
+              Hi, Welcome Back
             </Typography>
             <img src="/static/illustrations/illustration_login.png" alt="login" />
           </SectionStyle>
-        )}
-
+        )} */}
+                 
         <Container maxWidth="sm">
-          <ContentStyle>
-            <Typography variant="h4" gutterBottom align='center'>
+          
+          <ContentStyle >
+          <Logo />
+            <Typography variant="h4" gutterBottom align='center' >
+           
+               
+                 
               Sign in to Buzz Staff <br></br>
              
             </Typography> 
             <Button onClick={googleLogin} style={{textAlign:"center",alignContent:"center",}} 
           sx={{
             '&:hover': {
-              backgroundColor: '#ed6c02',
-              color:'#ffffff',
+              backgroundColor: '#eaecde',
+             
             },
-            color:'#ed6c02',backgroundColor:'#ffd796'
+            color:'black',backgroundColor:'#ffffff'
           }}  >
-              Login with google
+              Sign in with google
             </Button>
 
             {/* <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography> */}
@@ -167,14 +172,14 @@ export default function Login() {
 
             <LoginForm />
 
-            {!smUp && (
+            {/* {!smUp && (
               <Typography variant="body2" align="center" sx={{ mt: 3 }}>
                 Don’t have an account?{' '}
                 <Link variant="subtitle2"  component={RouterLink} to="/register" underline="hover" color="#ed6c02">
                   Get started
                 </Link>
               </Typography>
-            )}
+            )} */}
           </ContentStyle>
         </Container>
       </RootStyle>
