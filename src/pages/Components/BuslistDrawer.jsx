@@ -75,7 +75,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
     
     var config = {
       method: 'post',
-      url: 'http://3.7.7.138/appTest/getBusData.php',
+      url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
       headers: { 
         'Content-Type': 'application/json'
       },

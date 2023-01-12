@@ -139,7 +139,7 @@ export default function FullScreenDialog() {
 
     var config = {
       method: 'post',
-      url: 'http://3.7.7.138/appTest/new/addNewTA.php',
+      url: 'https://bdms.buzzwomen.org/appTest/new/addNewTA.php',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -207,7 +207,7 @@ export default function FullScreenDialog() {
 
     var config = {
       method: 'post',
-      url: 'http://3.7.7.138/appTest/new/getPoaTa.php',
+      url: 'https://bdms.buzzwomen.org/appTest/new/getPoaTa.php',
       headers: {
         'Content-Type': 'application/json'
       },

@@ -31,7 +31,7 @@ export default function Projects() {
   const config = {
     method: 'get',
     // url: 'http://3.7.7.138/appTest/getProjectList.php',
-    url: 'http://3.7.7.138/appTest/getProjectList.php?manager_id=2',
+    url: 'https://bdms.buzzwomen.org/appTest/getProjectList.php?manager_id=2',
     headers: { 
       'Content-Type': 'application/json'
     },

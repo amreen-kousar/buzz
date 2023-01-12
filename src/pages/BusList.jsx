@@ -142,9 +142,12 @@ export default function User() {
     const data = JSON.stringify({
       "date": "",
       "role_id": 1,
+    
       "project_id":id===3?i?.id: "",
       "taluk_id": "",
       "district_id": "",
+      // "taluk_id": g==="country"?i:"",
+      // "district_id":g==="country"?id:"",
       "funder_id":id===2?i?.id: "",
       "emp_id": 206,
       "search": search
@@ -152,7 +155,7 @@ export default function User() {
     console.log(data, "<----qwertyuiosdfgh")
     const config = {
       method: 'post',
-      url: 'http://3.7.7.138/appTest/getBuses.php',
+      url: 'https://bdms.buzzwomen.org/appTest/getBuses.php',
       headers: {
         'Content-Type': 'application/json'
       },

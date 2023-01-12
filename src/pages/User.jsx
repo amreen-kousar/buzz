@@ -122,7 +122,7 @@ export default function EcommerceShop() {
 
     const config = {
       method: 'post',
-      url: 'http://3.7.7.138/appTest/getAllPeople.php',
+      url: 'https://bdms.buzzwomen.org/appTest/getAllPeople.php',
       headers: {
         'Content-Type': 'application/json'
       },

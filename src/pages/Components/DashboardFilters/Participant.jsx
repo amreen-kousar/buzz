@@ -33,7 +33,7 @@ export default function Participant() {
   
   const config = {
     method: 'post',
-    url: 'http://3.7.7.138/appTest/getPeopleFilters.php',
+    url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
     headers: { 
       'Content-Type': 'application/json'
     },

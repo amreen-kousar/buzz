@@ -29,7 +29,7 @@ export default function Charts(props) {
           
           var config = {
             method: 'post',
-            url: 'http://3.7.7.138/appTest/getDashBoardChart.php',
+            url: 'https://bdms.buzzwomen.org/appTest/getDashBoardChart.php',
             headers: { 
               'Content-Type': 'application/json'
             },

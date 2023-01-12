@@ -69,7 +69,7 @@ export default function BuzzStock() {
 
     const config = {
       method: 'post',
-      url: 'http://3.7.7.138/appTest/getTotalStocks.php',
+      url: 'https://bdms.buzzwomen.org/appTest/getTotalStocks.php',
       headers: {
         'Content-Type': 'application/json'
       },
