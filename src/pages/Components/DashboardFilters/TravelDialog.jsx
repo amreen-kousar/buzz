@@ -102,8 +102,11 @@ export default function FullScreenDialog() {
 
     reader.readAsDataURL(file);
   }
+  const data = new FormData();
 
   const convertImage = (e) => {
+    data.append('emp_id', 15);
+    data.append('file', e.target.files[0]);
     setImagePath([...imagePath, e.target.files[0]])
     console.log(e.target.files[0], "files")
     getBase64(e.target.files[0], function (base64Data) {
@@ -154,7 +157,7 @@ export default function FullScreenDialog() {
 
   }
 
-  const postImages = () => {
+  const postImages = async () => {
     var dataImage = []
     Array.from(imagePath).forEach(image => {
       dataImage.push({
@@ -164,19 +167,22 @@ export default function FullScreenDialog() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/taAttachments.php',
+      url: "https://bdms.buzzwomen.org/appTest/new/taAttachments.php",
       headers: {
         "Content-Type": "multipart/form-data",
       },
-      data: JSON.stringify({ emp_id: 15, file: dataImage })
+      body: data
     };
-    axios(config)
-      .then(function (imageResponse) {
-        console.log(JSON.stringify(imageResponse.data, "images Upload"));
-      })
-      .catch(function (imageError) {
-        console.log(imageError);
-      });
+    console.log(config)
+    let res = await fetch(config)
+    console.log(res)
+    // axios(config)
+    //   .then(function (imageResponse) {
+    //     console.log(JSON.stringify(imageResponse.data, "images Upload"));
+    //   })
+    //   .catch(function (imageError) {
+    //     console.log(imageError);
+    //   });
 
   }
 
