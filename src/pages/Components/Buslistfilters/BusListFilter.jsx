@@ -127,6 +127,9 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                 {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
                 {/* <Button>Funders</Button> */}
                 <Button
+                 onClick={() => {
+                  setSelectData(3);
+                }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main

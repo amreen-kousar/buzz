@@ -142,7 +142,7 @@ export default function User() {
     const data = JSON.stringify({
       "date": "",
       "role_id": 1,
-      "project_id":id===1?i?.id: "",
+      "project_id":id===3?i?.id: "",
       "taluk_id": "",
       "district_id": "",
       "funder_id":id===2?i?.id: "",
