@@ -105,7 +105,7 @@ export default function FullScreenDialog() {
 
   const convertImage = (e) => {
     setImagePath([...imagePath, e.target.files[0]])
-    console.log(imagePath, "imagePath")
+    console.log(e.target.files[0], "files")
     getBase64(e.target.files[0], function (base64Data) {
       setImage([...image, base64Data])
       setViewImage(true)
