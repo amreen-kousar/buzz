@@ -67,7 +67,7 @@ export default function Location(props) {
     
     var config = {
       method: 'post',
-      url: 'http://3.7.7.138/appTest/getLocation.php',
+      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
       headers: { 
         'Content-Type': 'application/json'
       },

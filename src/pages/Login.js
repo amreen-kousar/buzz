@@ -37,7 +37,7 @@ export default function Login() {
 
     var config = {
       method: 'post',
-      url: 'http://3.7.7.138/appTest/signIn.php',
+      url: 'https://bdms.buzzwomen.org/appTest/signIn.php',
       headers: {
         'Content-Type': 'application/json'
       },
