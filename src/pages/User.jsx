@@ -14,20 +14,27 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import Switch from '@mui/material/Switch';
+import Autocomplete from '@mui/material/Autocomplete';
 // ----------------------------------------------------------------------
 
 export default function EcommerceShop() {
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
-
+  const [ceoUser, setCeoUser] = useState([])
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState('paper');
-
+  const [projects, setProjects] = useState([])
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);
     setScroll(scrollType);
+    // getProjects()
   };
 
   const handleClose = () => {
@@ -40,7 +47,7 @@ export default function EcommerceShop() {
   };
 
   const submitBus = () => {
-
+    console.log(AddUser)
   }
 
   const handleCloseFilter = () => {
@@ -52,6 +59,38 @@ export default function EcommerceShop() {
   }, []
   )
 
+  const getProjects = async () => {
+
+
+    const data = JSON.stringify({
+      "search": "",
+      "id": 1,
+      "role_id": 1,
+      "filter_id": 0,
+      "type": "",
+      "pageNum": 1
+    });
+
+    const config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data
+    };
+
+    axios(config)
+      .then((response) => {
+        setProjects(response.data)
+        console.log(projects)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+  }
 
   useEffect(() => {
     if (open) {
@@ -61,11 +100,14 @@ export default function EcommerceShop() {
       }
     }
   }, [open]);
+
+
+
   const roles = ['Admin', 'Program Manager', 'Operations Manager', 'Cor', 'Trainer', 'Gelathi Facilitator', 'Driver', 'Funder', 'Partner', 'FIN/HR/VIEWER', 'Senior Operations Manager', 'Gelathi Facilitator Lead']
 
   const [AddUser, setAddUser] = useState({
-    role: 'Admin', name: '', mobilenumber: '', work: '', email: '', address: '',
-    pincode: ""
+    role: '', name: '', lastName: "", mobilenumber: '', work: '', email: '', address: '', address1: "", address2: "",
+    pincode: "", gender: "male", present_status: true, dateOfJoining: '', reportingManager: "", license_number: "", project: ""
   })
 
   const user = async () => {
@@ -90,7 +132,9 @@ export default function EcommerceShop() {
     axios(config)
       .then((response) => {
         setUsers(response.data.list)
-        console.log(response.data);
+        let ceo = []
+        response.data.list.map(r => (r.role_name === "CEO") ? ceo = [...ceo, { label: r.first_name, ...r }] : null)
+        setCeoUser([...ceo])
       })
       .catch((error) => {
         console.log(error);
@@ -119,8 +163,9 @@ export default function EcommerceShop() {
           scroll={scroll}
           aria-labelledby="scroll-dialog-title"
           aria-describedby="scroll-dialog-description"
+
         >
-          <Toolbar>
+          <Toolbar >
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
@@ -129,7 +174,7 @@ export default function EcommerceShop() {
             </Typography>
           </Toolbar>
           {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
-          <DialogContent dividers={scroll === 'paper'}>
+          <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
             <DialogContentText
               id="scroll-dialog-description"
               ref={descriptionElementRef}
@@ -146,35 +191,114 @@ export default function EcommerceShop() {
                 noValidate
                 autoComplete="off"
               >
-                <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem" }}>
-                  <InputLabel id="demo-simple-select-label">Select role</InputLabel>
-                  <Select
+
+
+                <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
+
+                  <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem" }}>
+                    <InputLabel id="demo-simple-select-label">Choose Role</InputLabel>
+                    <Select
+
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={AddUser.role}
+                      label="Role"
+                      onChange={(e) => setAddUser({ ...AddUser, role: e.target.value })}
+                    >
+                      <MenuItem value="" default disabled>Choose Role </MenuItem>
+                      {roles.map(role => {
+                        return <MenuItem value={role}>{role}</MenuItem>
+                      })}
+
+                    </Select>
+                  </FormControl>
+
+                  <TextField fullWidth id="outlined-basic" label="Name" value={AddUser.name} required onChange={(e) => { setAddUser({ ...AddUser, name: e.target.value }) }} variant="outlined" />
+                  {
+
+                    ["Admin", "Program Manager", "Operations Manager", "Gelathi Facilitator Lead", 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role) && <TextField fullWidth id="outlined-basic" label="Last Name" variant="outlined" value={AddUser.lastName} onChange={(e) => { setAddUser({ ...AddUser, lastName: e.target.value }) }} />
+                  }
+                  {!["Funder", "Partner"].includes(AddUser.role) && <FormControl style={{ marginLeft: "1rem" }}>
+                    <RadioGroup
+                      row
+                      onChange={(e, value) => { setAddUser({ ...AddUser, gender: value }) }}
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      defaultValue="male"
+                      name="radio-buttons-group"
+                    >
+                      <FormControlLabel value="female" control={<Radio />} label="Female" />
+                      <FormControlLabel value="male" control={<Radio />} label="Male" />
+
+                    </RadioGroup>
+                  </FormControl>}
+                  <FormGroup style={{ float: "right" }}>
+                    <FormControlLabel label="Status" labelPlacement="start"
+                      control={<Switch defaultValue={AddUser.present_status} onClick={(e, value) => { setAddUser({ ...AddUser, present_status: !AddUser.present_status }); console.log(!AddUser.present_status) }} defaultChecked />} />
+                  </FormGroup>
+                  <br />
+                  {!["Funder", "Partner"].includes(AddUser.role) && <FormControl fullWidth>
+
+                    <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      options={ceoUser}
+                      defaultValue={AddUser.reportingManager}
+                      label="reportingManager"
+                      onChange={(event, value) => setAddUser({ ...AddUser, reportingManager: value })}
+
+                      renderInput={(params) => <TextField {...params} label="ReportingManger" />}
+                    />
+                    {/* <Select
 
 
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={AddUser.role}
-                    label="Role"
-                    onChange={(e) => setAddUser({ ...AddUser, role: e.target.value })}
+                    value={AddUser.reportingManager}
+                    label="reportingManager"
+                    onChange={(e) => setAddUser({ ...AddUser, reportingManager: e.target.value })}
                   >
-                    {roles.map(role => {
-                      return <MenuItem value={role}>{role}</MenuItem>
+                    {ceoUser.map(user => {
+                      return <MenuItem value={user}>{user?.label}</MenuItem>
                     })}
 
-                  </Select>
-                </FormControl>
+                  </Select> */}
+                  </FormControl>
+                  }
+                  {!["Funder", "Partner"].includes(AddUser.role) && <TextField fullWidth id="outlined-basic" label="Date of joining " type="date" InputLabelProps={{
+                    shrink: true,
+                  }} value={AddUser.dateOfJoining} onChange={(e) => { setAddUser({ ...AddUser, dateOfJoining: e.target.value }) }} variant="outlined" />
+                  }
+                </div>
+                <br />
+                <h3>Contact Information</h3>
+                <br />
+                <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
+                  <TextField fullWidth required id="outlined-basic" label="Mobile number" value={AddUser.mobilenumber} type="number" onChange={(e) => { setAddUser({ ...AddUser, mobilenumber: e.target.value }) }} variant="outlined" />
+                  <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" />
+                  <TextField fullWidth required id="outlined-basic" label="Email" value={AddUser.email} onChange={(e) => { setAddUser({ ...AddUser, email: e.target.value }) }} variant="outlined" />
+                  <TextField fullWidth required id="outlined-basic" label="Address" value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" />
 
+                  {!["Funder", "Partner"].includes(AddUser.role) && <TextField fullWidth id="outlined-basic" label="Address 1" value={AddUser.address1} onChange={(e) => { setAddUser({ ...AddUser, address1: e.target.value }) }} variant="outlined" />}
+                  {!["Funder", "Partner"].includes(AddUser.role) && < TextField fullWidth id="outlined-basic" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" />}
 
+                  <TextField fullWidth id="outlined-basic" label="Pincode" value={AddUser.pincode} onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" />
+                  {["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role) && <FormControl fullWidth>
 
-                <TextField fullWidth id="outlined-basic" label="Bus Number" required variant="outlined" value={AddUser.busNumber} onChange={(e) => { setAddUser({ ...AddUser, busNumber: e.target.value }) }} />
-                <TextField fullWidth id="outlined-basic" label="Name" value={AddUser.name} onChange={(e) => { setAddUser({ ...AddUser, name: e.target.value }) }} variant="outlined" />
-                <TextField fullWidth id="outlined-basic" label="Mobile number" value={AddUser.mobilenumber} type="number" onChange={(e) => { setAddUser({ ...AddUser, mobilenumber: e.target.value }) }} variant="outlined" />
-                <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" />
-                <TextField fullWidth id="outlined-basic" label="Email" value={AddUser.email} onChange={(e) => { setAddUser({ ...AddUser, email: e.target.value }) }} variant="outlined" />
-                <TextField fullWidth id="outlined-basic" label="Address" value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" />
-                <TextField fullWidth id="outlined-basic" label="Pincode" value={AddUser.pincode} onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" />
+                    <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      options={ceoUser}
+                      defaultValue={AddUser.project}
+                      label="project"
+                      onChange={(e, value) => setAddUser({ ...AddUser, project: value })}
+                      renderInput={(params) => <TextField {...params} label="Choose project" />}
+                    />
 
-
+                  </FormControl>
+                  }
+                  {["Driver"].includes(AddUser.role) && <TextField fullWidth id="outlined-basic" label="License Number" value={AddUser.license_number} onChange={(e) => { setAddUser({ ...AddUser, license_number: e.target.value }) }} variant="outlined" />
+                  }
+                </div>
               </Box>
             </DialogContentText>
           </DialogContent>

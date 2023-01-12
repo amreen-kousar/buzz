@@ -44,7 +44,7 @@ function a11yProps(index) {
 }
 
 export default function AllProjects({ handleClickOpen, handleClose, open }) {
-    const [value, setValue] = useState('one');
+    const [value, setValue] = useState(0);
     const [project, setProject] = useState();
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -103,56 +103,55 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
                 <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                     <Box sx={{ width: '100%' }}>
-                        <Box sx={{  borderColor: 'divider' }} >
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }} >
 
 
 
-                            <Tabs variant="fullWidth" value={value} onChange={handleChange}  indicatorColor="warning"
-                           
-                             aria-label="basic tabs example">
-                                <Tab 
-                                 
-                                sx={{
-                                    ':hover': {
-                                      bgcolor: '#ffd796', // theme.palette.primary.main
-                                      color: '#ed6c02',
-                                    },
-                                    ':focus':{
-                                      bgcolor:'#ffd796',
-                                      color:"#ed6c02",
-                                    },
-                                    color:'black',
-                                
-                                    
-                                  }} label="All" {...a11yProps(0)} />
-                                <Tab  
-                                sx={{
-                                    ':hover': {
-                                      bgcolor: '#ffd796', // theme.palette.primary.main
-                                      color: '#ed6c02',
-                                    },
-                                    ':focus':{
-                                      bgcolor:'#ffd796',
-                                      color:"#ed6c02"
-                                    },
-                                    color:'black',
-                                    
-                                  }} label="Published" {...a11yProps(1)} />
-                                <Tab 
-                                  sx={{
-                                    ':hover': {
-                                      bgcolor: '#ffd796', // theme.palette.primary.main
-                                      color: '#ed6c02',
-                                    },
-                                    ':focus':{
-                                      bgcolor:'#ffd796',
-                                      color:"#ed6c02",
+                            <Tabs variant="fullWidth" value={value} onChange={handleChange} indicatorColor="warning"
 
-                                    },
-                                   
-                                    color:'black',
-                                    
-                                  }} label="Completed" {...a11yProps(2)} />
+                                aria-label="basic tabs example">
+                                <Tab
+
+                                    sx={{
+                                        ':hover': {
+                                            bgcolor: '#ffd796', // theme.palette.primary.main
+                                            color: '#ed6c02',
+                                        },
+
+                                        color: 'black',
+
+
+                                    }} label="All" {...a11yProps(0)} style={value == 0 ? {
+                                        borderBottom: '3px solid #ed6c02',
+                                        color: "#ed6c02",
+                                    } : null} />
+                                <Tab
+                                    sx={{
+                                        ':hover': {
+                                            bgcolor: '#ffd796', // theme.palette.primary.main
+                                            color: '#ed6c02',
+                                        },
+
+                                        color: 'black',
+
+                                    }} style={value == 1 ? {
+                                        borderBottom: '3px solid #ed6c02',
+                                        color: "#ed6c02",
+                                    } : null} label="Published" {...a11yProps(1)} />
+                                <Tab
+                                    sx={{
+                                        ':hover': {
+                                            bgcolor: '#ffd796', // theme.palette.primary.main
+                                            color: '#ed6c02',
+                                        },
+
+
+                                        color: 'black',
+
+                                    }} label="Completed" {...a11yProps(2)} style={value == 2 ? {
+                                        borderBottom: '3px solid #ed6c02',
+                                        color: "#ed6c02",
+                                    } : null} />
                             </Tabs>
                         </Box>
                         <Link to="/dashboard/projects/project" state={{ name: "project name" }}
