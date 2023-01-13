@@ -9,6 +9,8 @@ import Iconify from '../../components/Iconify';
 import ProjectDialog from '../Components/ProjectDialog';
 import { Link } from 'react-router-dom';
 import ProjectFilter from '../Components/Projectfilters/ProjectFilters';
+import AddProject from './Addproject';
+
 // components
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -44,6 +46,10 @@ function a11yProps(index) {
 }
 
 export default function AllProjects({ handleClickOpen, handleClose, open }) {
+    var userAccess = ['2']
+
+    var userIdCheck = localStorage?.getItem('userId')
+
     const [value, setValue] = useState(0);
     const [project, setProject] = useState();
     const [openFilter, setOpenFilter] = useState(false);
@@ -84,7 +90,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
         axios(config)
             .then((response) => {
-                console.log(JSON.stringify(response.data, '<-----yuyuyuyuyuy'));
+                console.log(JSON.stringify(response.data, 'get All projectrs'));
             })
             .catch((error) => {
                 console.log(error);
@@ -240,6 +246,11 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                         </Link>
                     </Box>
                 </Stack>
+                {userAccess.includes(userIdCheck) &&
+                    <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                        <AddProject />
+                    </Stack>
+                }
             </Container>
         </Page >
     );

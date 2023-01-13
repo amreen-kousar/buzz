@@ -3,14 +3,14 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 //
 import Blog from './pages/Blog';
-import User from './pages/User';
+import User from './pages/user/User';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
-import BusList from './pages/BusList';
+import BusList from './pages/buses/BusList';
 import BuzzStock from './pages/BuzzStock';
 import Demography from './pages/Demography';
 import PlanofAction from './pages/PlanofAction';

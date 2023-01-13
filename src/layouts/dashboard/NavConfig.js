@@ -13,12 +13,6 @@ const navConfig = [
     id: [1, 3, 4, 5, 6]
   },
   {
-    title: 'BusList',
-    path: '/dashboard/buslist',
-    icon: getIcon('mdi:bus-stop'),
-    id: [1, 2, 3, 4, 5]
-  },
-  {
     title: 'Plan Of Action',
     path: '/dashboard/planofaction',
     icon: getIcon('mdi:call-to-action'),
@@ -29,6 +23,12 @@ const navConfig = [
     path: '/dashboard/projects',
     icon: getIcon('grommet-icons:projects'),
     id: [1, 2, 3, 5, 6]
+  },
+  {
+    title: 'BusList',
+    path: '/dashboard/buslist',
+    icon: getIcon('mdi:bus-stop'),
+    id: [1, 2, 3, 4, 5]
   },
   {
     title: 'People',
