@@ -302,7 +302,7 @@ export default function User() {
             This is a success message!
           </Alert>
         </Snackbar>
-        {/* <DashboardNavbar getSearch={(e) => setSearch(e)} onOpenSidebar={() => setOpen(true)} /> */}
+        <DashboardNavbar getSearch={(e) => setSearch(e)} onOpenSidebar={() => setOpen(true)} />
 
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>

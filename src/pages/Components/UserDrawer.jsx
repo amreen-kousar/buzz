@@ -20,7 +20,7 @@ import {
 import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import { ColorManyPicker } from '../../components/color-utils';
-
+import UserEditProfile from './UserComponent/UserEditProfile'
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -75,6 +75,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter }
           sx: { width: 280, },
         }}
       >
+      
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }}>
             Member Details:  {user?.first_name}  {user?.last_name}
@@ -85,7 +86,12 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter }
         </Stack>
 
         <Divider />
+        <Stack style={{alignSelf:'center',}} direction={'row'}>
+          <UserEditProfile />
+         
+          <Button>Delete Profile</Button>
 
+        </Stack>
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>

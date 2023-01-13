@@ -22,15 +22,17 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Switch from '@mui/material/Switch';
 import Autocomplete from '@mui/material/Autocomplete';
+import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
 // ----------------------------------------------------------------------
 
-export default function EcommerceShop() {
+export default function User() {
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
   const [ceoUser, setCeoUser] = useState([])
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState('paper');
   const [projects, setProjects] = useState([])
+  const [searchUser,setSearchUser] = useState("");
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);
     setScroll(scrollType);
@@ -56,7 +58,7 @@ export default function EcommerceShop() {
   useEffect(() => {
     user()
 
-  }, []
+  }, [searchUser]
   )
 
   const getProjects = async () => {
@@ -111,11 +113,12 @@ export default function EcommerceShop() {
   })
 
   const user = async () => {
+    const dataid = localStorage?.getItem('userDetails')
     const data = JSON.stringify({
-      "search": "",
-      "user_id": 310,
-      "role_id": 1,
-      "filter_id": 0,
+      "search": searchUser,
+      "user_id": JSON?.parse(dataid)?.id,
+      "role_id": JSON?.parse(dataid)?.role,
+      "filter_id": "",
       "type": "",
       "pageNum": 1
     });
@@ -143,6 +146,7 @@ export default function EcommerceShop() {
 
   return (
     <Page title="All Users">
+        <DashboardNavbar getSearch={(e) => setSearchUser(e)} onOpenSidebar={() => setOpen(true)} />
 
       <div>
         <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} variant="contained" onClick={handleClickOpen('paper')} sx={{
@@ -163,7 +167,6 @@ export default function EcommerceShop() {
           scroll={scroll}
           aria-labelledby="scroll-dialog-title"
           aria-describedby="scroll-dialog-description"
-
         >
           <Toolbar >
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">

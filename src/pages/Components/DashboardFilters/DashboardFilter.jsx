@@ -156,7 +156,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     background: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   } : null}>Partner</Button>
-                <Button sx={{
+                <Button onClick={() => { setData(3) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -266,9 +266,11 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
             {/* <Grid style={{ marginTop: 30 }}>
                 <DateRangeF onDateSubmit={onDateSubmit} />
               </Grid> */}
+              
             <Grid style={{ marginTop: 30 }}>
               <Location selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
             </Grid>
+
             <Grid style={{ marginTop: 30 }}>
               <Trainers getData={getData} selectDATA={selectDATA} />
             </Grid>

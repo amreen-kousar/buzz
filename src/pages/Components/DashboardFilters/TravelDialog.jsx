@@ -105,10 +105,12 @@ export default function FullScreenDialog() {
   const data = new FormData();
 
   const convertImage = (e) => {
+    console.log("this is calleddddfdsfs")
     data.append('emp_id', 15);
     data.append('file', e.target.files[0]);
     setImagePath([...imagePath, e.target.files[0]])
-    console.log(e.target.files[0], "files")
+    const imageData =  URL.createObjectURL(e.target.files[0]);
+    console.log(imageData, "files")
     getBase64(e.target.files[0], function (base64Data) {
       setImage([...image, base64Data])
       setViewImage(true)
@@ -458,6 +460,7 @@ export default function FullScreenDialog() {
               <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
             </label>
           </div>
+          <Button>Send Images</Button>
           <br /><br />
 
           {/* <Button onClick={() => capture()}>Click here to to upload snaps</Button> */}
