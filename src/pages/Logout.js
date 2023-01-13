@@ -36,7 +36,7 @@ function SimpleDialog(props) {
         ':hover':{
             color:"#ffffff",bgcolor:"#ed6c02"
         },
-        color:"#ffffff",bgcolor:"#ed6c02",borderRadius:"5px"}} onClick={()=>{navigate('/dashboard/buslist')}}>No</Button>&nbsp;&nbsp;&nbsp;
+        color:"#ffffff",bgcolor:"#ed6c02",borderRadius:"5px"}} onClick={()=>{navigate('/dashboard')}}>No</Button>&nbsp;&nbsp;&nbsp;
           <Button sx={{
             ':hover':{
                 color:"#ffffff",bgcolor:"#ed6c02"
