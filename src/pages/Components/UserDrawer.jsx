@@ -87,7 +87,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter }
         <Divider />
 
         <Scrollbar>
-          <Stack spacing={3} sx={{ p: 3 }}>
+          <Stack spacing={1} sx={{ px: 3}}>
             <div>
               <Card>
                 <CardContent>
@@ -114,7 +114,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter }
             </div>
 
             <div>
-              <Card>
+              <Card style={{width:"auto"}}>
                 <CardContent>
                   <Typography variant="subtitle1" gutterBottom>
                     Contact Information
@@ -128,10 +128,10 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter }
                     Work: <Typography variant="body1" gutterBottom>   {user?.workNum}</Typography>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
-                    Email: <Typography variant="body1" gutterBottom>   {user?.officeMailId}</Typography>
+                    Email: <Typography variant="body1" gutterBottom style={{overflowWrap:'break-word'}}>{user?.officeMailId}</Typography>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
-                    Address: <Typography variant="body1" gutterBottom>   {user?.address}</Typography>
+                    Address: <Typography variant="body1" gutterBottom> {user?.address}</Typography>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
                     PinCode: <Typography variant="body1" gutterBottom>   {user?.pincode}</Typography>

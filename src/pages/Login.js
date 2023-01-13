@@ -147,13 +147,11 @@ export default function Login() {
         <Container maxWidth="sm" >
           
           <ContentStyle >
-          <Logo />
-            <Typography variant="h4" gutterBottom align='center' >
-           
-               
-                 
-             Sign in to Buzz Staff <br></br>
-             
+            <div style={{textAlign:"center"}}>
+            <Logo />
+            </div>
+            <Typography variant="h4" gutterBottom align='center'  >
+             Sign in to Buzz Staff
             </Typography> 
             <Button onClick={googleLogin} style={{textAlign:"center",alignContent:"center",}} 
           sx={{

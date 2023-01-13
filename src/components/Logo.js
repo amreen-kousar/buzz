@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import  { Grid } from '@mui/material';
+import  { Box, Grid, Icon } from '@mui/material';
 
 
 // ----------------------------------------------------------------------
@@ -25,7 +25,7 @@ export default function Logo({ disabledLink = false, sx }) {
   // const logo =Grid component="img" src="/static/logo.svg" sx={{ width: 40, height: 40, ...sx }} />
 
   const logo = (
-    <Grid container component="img" src="/static/ic_launcher-web.png" display="flex" sx={{height:70,width:70}} style={{width:"30%",height:"auto",alignItems:"center",justifyContent:"center"}} />
+    <Icon container component="img" src="/static/ic_launcher-web.png" sx={{height:70,width:70}} style={{width:"30%",height:"auto"}} />
 
     
   );
