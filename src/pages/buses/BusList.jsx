@@ -10,6 +10,8 @@ import Page from '../../components/Page';
 import BuslistDrawer from '../Components/BuslistDrawer';
 import BusListFilter from '../Components/Buslistfilters/BusListFilter';
 import Addbus from './Addbus';
+import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
+
 
 export default function User() {
 
@@ -42,6 +44,8 @@ export default function User() {
         descriptionElement.focus();
       }
     }
+
+    console.log("I am clicked")
   }, [open]);
 
   const busesd = async (i, id) => {
@@ -128,7 +132,7 @@ export default function User() {
             This is a success message!
           </Alert>
         </Snackbar>
-        {/* <DashboardNavbar getSearch={(e) => setSearch(e)} onOpenSidebar={() => setOpen(true)} /> */}
+        <DashboardNavbar getSearch={(e) => setSearch(e)} onOpenSidebar={() => setOpen(true)} />
 
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
@@ -191,7 +195,7 @@ export default function User() {
                 handleOpenFilter()
               }}>
 
-              <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
+              <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
                 <Typography variant="subtitle1" gutterBottom  >
                   {`Bus Number : ${itm?.register_number}`}
 

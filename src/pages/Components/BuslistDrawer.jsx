@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 // material
@@ -58,69 +58,79 @@ BuslistDrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData,bus_id,deletebuses }) {
-  const [detailsData,setDetailsData] = useState();
+export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, bus_id, deletebuses }) {
+  const [detailsData, setDetailsData] = useState();
   const [deletebus, setDeleteBus] = useState();
- 
-  useEffect(()=>{
+
+  var userAccess = ['2']
+
+  var userIdCheck = localStorage?.getItem('userId')
+
+  useEffect(() => {
     details()
-    },[clcikData]
-    )
+  }, [clcikData]
+  )
   const details = async => {
-    console.log(clcikData,"<-----clcikDataclcikData")
-    
-    var data = JSON.stringify({
-      "bus_id":clcikData?.bus_id
-    });
-    
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-     data
-    };
-    
-    axios(config)
-    .then(function (response) { 
-     
-      setDetailsData(response.data)
-      console.log(JSON.stringify(response.data,'<njnjnjn'));
-    })
-    .catch(function (error) {
-      console.log(error,"<---error");
-    });
-    
-  }
-  const DeleteBus = async =>{
+    console.log(clcikData, "<-----clcikDataclcikData")
+
     var data = JSON.stringify({
       "bus_id": clcikData?.bus_id
     });
-    
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data
+    };
+
+    axios(config)
+      .then(function (response) {
+
+        setDetailsData(response.data)
+        console.log(JSON.stringify(response.data, '<njnjnjn'));
+      })
+      .catch(function (error) {
+        console.log(error, "<---error");
+      });
+
+  }
+
+
+  const editBus = async => {
+
+  }
+
+  const DeleteBus = async => {
+    var data = JSON.stringify({
+      "bus_id": clcikData?.bus_id
+    });
+
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/deleteBus.php',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
-    
+
     axios(config)
-    .then(function (response) {
-      deletebuses()
-      setDeleteBus(response.data)
-      console.log(response.data,'<------deleteee');
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    
+      .then(function (response) {
+        deletebuses()
+        setDeleteBus(response.data)
+        console.log(response.data, '<------deleteee');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   }
   return (
     <>
-     
+
       <Drawer
         anchor="right"
         open={isOpenFilter}
@@ -129,10 +139,10 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           sx: { width: 280, },
         }}
       >
-        {console?.log(detailsData,"<---detailsDatadetailsData")}
+        {console?.log(detailsData, "<---detailsDatadetailsData")}
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }}>
-          {`Bus Number : ${clcikData?.register_number}`}
+            {`Bus Number : ${clcikData?.register_number}`}
           </Typography>
           <IconButton onClick={onCloseFilter}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
@@ -144,64 +154,74 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>
-            
-            <Button onClick={DeleteBus}>Delete Bus</Button>
-            <Card>
+              {userAccess.includes(userIdCheck) &&
+                <div>
+
+                  <Button onClick={editBus} style={{ float: "right" }} >   <Iconify icon="ic:baseline-edit" width={30} height={30} /></Button>
+                  <Button onClick={DeleteBus} >  <Iconify icon="ic:baseline-delete" style={{ color: "red" }} width={30} height={30} /></Button>
+
+
+                  <br /><br />
+                </div>
+
+
+              }
+              <Card>
                 <CardContent>
-                <Typography style={{flexDirection:'row'}} variant="subtitle1" gutterBottom>
-               Registration Date
-               <Typography variant="body1" >{detailsData?.register_date}</Typography>       
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-               Engine Number:
-               <Typography variant="body1" gutterBottom>{detailsData?.engine_number}</Typography> 
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-              Chasis Number:
-               <Typography variant="body1" gutterBottom>{detailsData?.chassis_number}</Typography> 
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-              Insurance Number:
-               <Typography variant="body1" gutterBottom>{detailsData?.insurance_number}</Typography> 
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-              Insurance Company:
-               <Typography variant="body1" gutterBottom>{detailsData?.insurance_company}</Typography> 
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-              Insurance Start Date:
-               <Typography variant="body1" gutterBottom>{detailsData?.insurance_start_date}</Typography> 
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-              Insurance End Date:
-               <Typography variant="body1" gutterBottom>{detailsData?.insurance_end_date}</Typography> 
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-              Last Service Date:
-               <Typography variant="body1" gutterBottom>{detailsData?.last_service_date}</Typography> 
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-              Next Service Date:
-               <Typography variant="body1" gutterBottom>{detailsData?.next_service_due_date}</Typography> 
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-              Permit Details:
-               <Typography variant="body1" gutterBottom>{detailsData?.permit}</Typography> 
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-             Fitness Certificate:
-               <Typography variant="body1" gutterBottom>{detailsData?.fitness_certificate}</Typography> 
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-              Emission Date:
-               <Typography variant="body1" gutterBottom>31/12/2023</Typography> 
-              </Typography>
+                  <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
+                    Registration Date
+                    <Typography variant="body1" >{detailsData?.register_date}</Typography>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Engine Number:
+                    <Typography variant="body1" gutterBottom>{detailsData?.engine_number}</Typography>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Chasis Number:
+                    <Typography variant="body1" gutterBottom>{detailsData?.chassis_number}</Typography>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Insurance Number:
+                    <Typography variant="body1" gutterBottom>{detailsData?.insurance_number}</Typography>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Insurance Company:
+                    <Typography variant="body1" gutterBottom>{detailsData?.insurance_company}</Typography>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Insurance Start Date:
+                    <Typography variant="body1" gutterBottom>{detailsData?.insurance_start_date}</Typography>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Insurance End Date:
+                    <Typography variant="body1" gutterBottom>{detailsData?.insurance_end_date}</Typography>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Last Service Date:
+                    <Typography variant="body1" gutterBottom>{detailsData?.last_service_date}</Typography>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Next Service Date:
+                    <Typography variant="body1" gutterBottom>{detailsData?.next_service_due_date}</Typography>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Permit Details:
+                    <Typography variant="body1" gutterBottom>{detailsData?.permit}</Typography>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Fitness Certificate:
+                    <Typography variant="body1" gutterBottom>{detailsData?.fitness_certificate}</Typography>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Emission Date:
+                    <Typography variant="body1" gutterBottom>31/12/2023</Typography>
+                  </Typography>
                 </CardContent>
-            </Card>
-            
+              </Card>
+
             </div>
 
-           
+
           </Stack>
         </Scrollbar>
       </Drawer>

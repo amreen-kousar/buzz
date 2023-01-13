@@ -45,19 +45,21 @@ function a11yProps(index) {
 
 export default function TravelA() {
   const [value, setValue] = React.useState(0);
+  const [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
   const image = ["tykml", "exrdcftvbgyhnuj"]
   //const [image, setImage] = React.useState(['data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==']);
   const [viewImage, setViewImage] = React.useState(false);
   const [listdata, setListData] = React.useState()
   useEffect(() => {
     list()
-  }, []
+  }, [dateValue]
   )
   const list = async => {
+    console.log(dateValue)
     const userDetails = localStorage?.getItem("userDetails")
     var data = JSON.stringify({
       "emp_id": JSON?.parse(userDetails)?.id,
-      "date": new Date()
+      "date": new Date(dateValue)
     });
 
     var config = {
@@ -72,7 +74,7 @@ export default function TravelA() {
     axios(config)
       .then(function (response) {
         setListData(response.data)
-        console.log(response.data, '<--------hbjhbjbjhbj');
+        console.log(response.data, '<--------travel alliance ');
       })
       .catch(function (error) {
         console.log(error);
@@ -83,6 +85,8 @@ export default function TravelA() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+
 
 
   // const { register, handleSubmit } = useForm();
@@ -132,10 +136,13 @@ export default function TravelA() {
         <h1>jnjn</h1>
         </Stack> */}
 
+        <TextField id="outlined-basic" type="date" defaultValue={dateValue}
+          fullWidth
+          onChange={(e) => { setDatevalue(e?.target?.value); list() }} label="Select Range" variant="outlined" InputLabelProps={{
+            shrink: true,
+          }} />
 
-
-
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        {list?.data?.length > 0 ? <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <Tabs variant="fullWidth" value={value} onChange={handleChange} aria-label="basic tabs example" indicatorColor='warning'>
@@ -195,8 +202,13 @@ export default function TravelA() {
               Item Three
             </TabPanel>
           </Box>
-        </Stack>
-        
+        </Stack> : <div style={{ margin: "5rem", textAlign: "center" }}> no data found</div>}
+
+
+
+
+
+
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <TravelDialog />
         </Stack>

@@ -297,7 +297,7 @@ function AddProject() {
                     <br /><br />
 
 
-                    <Button onClick={() => createProject()} fullWidth variant="filled">Create Project</Button>
+                    <Button onClick={() => createProject()} fullWidth variant="filled" style={{background:"#f5f5f5"}}>Create New Project</Button>
 
 
                 </div>

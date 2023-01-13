@@ -80,7 +80,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
         axios(config)
             .then((response) => {
-                console.log(JSON.stringify(response.data, '<-----yuyuyuyuyuy'));
+                console.log(JSON.stringify(response.data, 'get All projectrs'));
             })
             .catch((error) => {
                 console.log(error);
