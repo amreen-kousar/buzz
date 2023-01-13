@@ -16,12 +16,13 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import UserFilter from './Components/Peoplefilters/Userfilters';
 // ----------------------------------------------------------------------
-
+import Scrollbar from '../components/Scrollbar';
 export default function EcommerceShop() {
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
-
+  const [peopleFilter,setpeopleFilter]=useState(false)
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState('paper');
 
@@ -38,13 +39,21 @@ export default function EcommerceShop() {
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
-
+  
+  const handlepeopleOpenFilter = () => {
+    setpeopleFilter(true);
+  
+  };
   const submitBus = () => {
 
   }
 
   const handleCloseFilter = () => {
     setOpenFilter(false);
+  };
+  
+  const handlepeopleCloseFilter = () => {
+    setpeopleFilter(false);
   };
   useEffect(() => {
     user()
@@ -101,6 +110,13 @@ export default function EcommerceShop() {
     <Page title="All Users">
 
       <div>
+      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <UserFilter
+              isOpenFilter={openFilter}
+              onOpenFilter={handlepeopleOpenFilter}
+              onCloseFilter={handlepeopleCloseFilter}
+            />
+          </Stack>
         <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} variant="contained" onClick={handleClickOpen('paper')} sx={{
           ':focus': {
             backgroundColor: '#ffd796',
@@ -197,7 +213,16 @@ export default function EcommerceShop() {
       </div>
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
-          People
+          People 
+          <Button style={{float:"right",color:'#ed6c02'}}
+         sx={{
+          '&:hover': {
+            backgroundColor: '#ffd796',
+          },
+        }}  
+          onClick={() => {
+            handlepeopleOpenFilter()
+          }}>Filters</Button>
         </Typography>
 
         <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>

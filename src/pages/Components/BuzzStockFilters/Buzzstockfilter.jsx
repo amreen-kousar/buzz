@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
-
+import BuzzFunders from './Buzzfunders';
 import { useState } from 'react';
-
+import BuzzProjects from './Buzzprojects';
 // material
 import {
   Grid,
@@ -55,15 +55,19 @@ export const FILTER_COLOR_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-ProjectFilter.propTypes = {
+BuzzFilter.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
 
-export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
+export default function BuzzFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
  const [selectDATA,setSelectData] = useState()
  const data = localStorage?.getItem('userId')
+  const setData = (value) => {
+    localStorage.setItem('selectedData', value)
+    setSelectData(value)
+  }
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -81,10 +85,10 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25}}>
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25,color:'black'}}>
           Filters
-         {selectDATA&&selectDATA===2&&":  Funders"}
-         {selectDATA&&selectDATA===7&&": Location"}
+         {selectDATA&&selectDATA==2&&":  Funders"}
+         {selectDATA&&selectDATA==7&&": Location"}
           </Typography>
           <IconButton onClick={()=>{
         setSelectData()
@@ -97,72 +101,81 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
         <Scrollbar>
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
             <div>
-              <Card style={{backgroundColor:'#F6F8FB',}}>
+              <Card style={{backgroundColor:'#f6f8fb',}}>
                 <CardContent>
                   {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                  <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
-                      {data==1|data==2&&<Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}>All Bus</Button>}
-                     {data==1|data==2&&<Button  sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }} >
-                    Location</Button>}
-                    {data==1|data==2&& <Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}>Date Range</Button>}
-                     {data==1|data==2&& <Button  sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }} 
-                  >Funders</Button>}
-                        {data==1|data==2&&<Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }} 
-                  >Operation Manager</Button>}
-                       {data==1|data==2&& <Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}
-                  >Trainer</Button>}
-                       {data==1|data==2&& <Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}>Gelathi Facilitator</Button>}
-  
-                      
-                      
+                    {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
+                      {/* <Grid spacing={1} > */}
+                      {data==1|data==2&&<Button onClick={() => {setData(3)}} 
+            sx={{
+            ':hover': {
+              bgcolor: '#ffd796', // theme.palette.primary.main
+              color: '#ed6c02',
+            },
+            ':focus':{
+              bgcolor:'#ffd796',
+              color:"#ed6c02"
+            },
+            color:'black',
+            
+          }}>Project</Button>}
+        {data==1|data==2&&<Button  onClick={() => { setData(2) }} sx={{
+            ':hover': {
+              bgcolor: '#ffd796', // theme.palette.primary.main
+              color: '#ed6c02',
+            },
+            ':focus':{
+              bgcolor:'#ffd796',
+              color:"#ed6c02"
+            },
+            color:'black',
+            
+          }}
+          style={selectDATA == 2 ? {
+                    background: '#ffd796', // theme.palette.primary.main
+                    color: '#ed6c02',
+                  } : null}>Funders</Button>}
+           {data==1|data==2&&<Button sx={{
+            ':hover': {
+              bgcolor: '#ffd796', // theme.palette.primary.main
+              color: '#ed6c02',
+            },
+            ':focus':{
+              bgcolor:'#ffd796',
+              color:"#ed6c02"
+            },
+            color:'black',
+            
+          }} >Location</Button>}
+            {data==1|data==2&&<Button sx={{
+            ':hover': {
+              bgcolor: '#ffd796', // theme.palette.primary.main
+              color: '#ed6c02',
+            },
+            ':focus':{
+              bgcolor:'#ffd796',
+              color:"#ed6c02"
+            },
+            color:'black',
+            
+          }} >Date Range</Button>}
+             {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
+  {/* <Button>Funders</Button> */}
+  {/* <Button>Project</Button>
+                        <Button onClick={()=>{setSelectData(7)}}>Location</Button>
+                        <Button>All Bus</Button> */}
+
                 </CardContent>
               </Card>
             
-            {/* <Grid>
-              <Poafunders selectDATA={selectDATA}/>
-            </Grid> */}
+            <Grid>
+              <BuzzFunders onClick={()=>{setSelectData(2)}}  selectDATA={selectDATA}/>
+            </Grid>
+
+            <Grid>
+              <BuzzProjects onClick={()=>{setSelectData(3)}}  selectDATA={selectDATA}/>
+            </Grid>
             {/* {selectDATA===7&&<Grid style={{ marginTop: 30 }}>
                 <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
               </Grid> } */}

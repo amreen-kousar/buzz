@@ -63,6 +63,8 @@ BusListFilter.propTypes = {
 
 export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
  const [selectDATA,setSelectData] = useState()
+ const data = localStorage?.getItem('userId')
+
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -102,7 +104,7 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                  <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
                     {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
                       {/* <Grid spacing={1} > */}
-                      <Button onClick={()=>{setSelectData(2)}} sx={{
+                      {data==2&&<Button sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
                             color: '#ed6c02',
@@ -112,10 +114,9 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                             color:"#ed6c02"
                           },
                           color:'black',
-                        }}>Funders</Button>
-             {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
-  {/* <Button>Funders</Button> */}
-  <Button 
+                        }}>All Bus</Button>}
+
+{data==2&&<Button 
   sx={{
     ':hover': {
       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -126,8 +127,22 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
       color:"#ed6c02"
     },
     color:'black',
-  }}>Project</Button>
-                        <Button onClick={()=>{setSelectData(7)}}
+  }}>Project</Button>}
+                      {data==2&&<Button onClick={()=>{setSelectData(2)}} sx={{
+                          ':hover': {
+                            bgcolor: '#ffd796', // theme.palette.primary.main
+                            color: '#ed6c02',
+                          },
+                          ':focus':{
+                            bgcolor:'#ffd796',
+                            color:"#ed6c02"
+                          },
+                          color:'black',
+                        }}>Funders</Button>}
+             {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
+  {/* <Button>Funders</Button> */}
+ 
+                        {data==2&&<Button onClick={()=>{setSelectData(7)}}
                         sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
@@ -138,18 +153,8 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                             color:"#ed6c02"
                           },
                           color:'black',
-                        }}>Location</Button>
-                        <Button sx={{
-                          ':hover': {
-                            bgcolor: '#ffd796', // theme.palette.primary.main
-                            color: '#ed6c02',
-                          },
-                          ':focus':{
-                            bgcolor:'#ffd796',
-                            color:"#ed6c02"
-                          },
-                          color:'black',
-                        }}>All Bus</Button>
+                        }}>Location</Button>}
+                      
 
                 </CardContent>
               </Card>
