@@ -15,6 +15,7 @@ import { LoginForm } from '../sections/auth/login';
 import { auth, provider } from "../Firebase"
 //import Firebase from '../Firebase'
 import AuthSocial from '../sections/auth/AuthSocial';
+import Iconify from 'src/components/Iconify';
 
 
 
@@ -143,7 +144,7 @@ export default function Login() {
           </SectionStyle>
         )} */}
                  
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" >
           
           <ContentStyle >
           <Logo />
@@ -151,7 +152,7 @@ export default function Login() {
            
                
                  
-              Sign in to Buzz Staff <br></br>
+             Sign in to Buzz Staff <br></br>
              
             </Typography> 
             <Button onClick={googleLogin} style={{textAlign:"center",alignContent:"center",}} 
@@ -162,7 +163,7 @@ export default function Login() {
             },
             color:'black',backgroundColor:'#ffffff'
           }}  >
-              Sign in with google
+             <Iconify  icon="cib:google"></Iconify>&nbsp;&nbsp;&nbsp;&nbsp;Sign in with google
             </Button>
 
             {/* <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography> */}

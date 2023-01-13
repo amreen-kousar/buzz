@@ -1,11 +1,17 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Stack, Typography,Box,Button } from '@mui/material';
+import { Container, Stack, Typography,Box,Button,TextField } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
 import POA from './Components/PlanofactionFilters/POA';
 import { useState } from 'react';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+import Input from 'src/theme/overrides/Input';
+import Label from 'src/components/Label';
 // components
 
 function TabPanel(props) {
@@ -42,7 +48,7 @@ function a11yProps(index) {
 }
 
 export default function PlanofAction() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState([null,null]);
   const [openFilter, setOpenFilter] = useState(false); 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -65,11 +71,8 @@ export default function PlanofAction() {
   }
   return (
     <Page title="Dashboard: Products">
-    <Container>
-      <Typography variant="h4" sx={{ mb: 5 }}>
-      Plan Of Actions
-     
-      <Button style={{float:"right",color:"#ed6c02"}}
+    <Container sx={{color:"#ed6c02"}}>
+    {/* <Button style={{float:"right",color:"#ed6c02"}}
       sx={{
                           ':hover': {
                             bgcolor: '#ffd796', // theme.palette.primary.main
@@ -78,8 +81,25 @@ export default function PlanofAction() {
           onClick={()=>{
           handleOpenFilter()}}>
           Filter
-        </Button>
-        </Typography>
+        </Button> */}
+        <Stack style={{ marginTop: 20,float:"right"}}>
+          <LocalizationProvider dateAdapter={AdapterDayjs} sx={{color:"#ed6c02"}}>
+          <DatePicker
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue)
+              }}
+              renderInput={(params) => <TextField disabled {...params} style={{width:"11vw",color:"#ed6c02"}} 
+              />}
+            
+            />
+          </LocalizationProvider>
+        </Stack>
+     
+      <Typography variant="h4" sx={{ mb: 5 }}>
+      Plan Of Actions
+      
+        </Typography> 
 
       {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
@@ -87,10 +107,7 @@ export default function PlanofAction() {
 
 <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <POA
-            // onDateSubmit={onDateSubmit}
-            // onSumbit={onSumbit}
-            // getData={getData}
-            //  clcikData={clcikData}
+        
               isOpenFilter={openFilter}
               onOpenFilter={handleOpenFilter}
               onCloseFilter={handleCloseFilter}
