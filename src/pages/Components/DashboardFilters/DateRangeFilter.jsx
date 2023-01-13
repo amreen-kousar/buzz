@@ -1,39 +1,61 @@
+
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import dayjs from 'dayjs';
+import { useState } from 'react';
+import TextField from '@mui/material/TextField';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Iconify from '../../../components/Iconify';
-import { DateRangePicker, DateRange } from 'mui-daterange-picker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 
-const bull = (
-  <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-    •
-  </Box>
-);
-
-export default function DateRangeFilter(props) {
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { CardContent,Stack } from '@mui/material';
+import Box from '@mui/material/Box';
+export default function StaticDatePickerDemo(props) {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
+ 
   const [open, setOpen] = React.useState(false);
-  const [dateRange, setDateRange] = React.useState({});
-
-  const toggle = () => setOpen(!open);
+     const [dateRange, setDateRange] = React.useState({});
 
   return (
-    <div>
-      <Card style={{ marginTop: 20 }}>
-        <CardContent>
-          <DateRangePicker
-            open={true}
-            toggle={toggle}
-            onChange={(range) => {
-              console.log(range, ',---randefe'), setDateRange(range);
-            }}
-          />{' '}
-          <Button onClick={() => props?.onDateSubmit(dateRange)}>Submit</Button>
-        </CardContent>
-      </Card>
-    </div>
+    <Card style={{marginTop:20}} sx={{color:"#ed6c02"}} >
+      <CardContent sx={{color:"#ed6c02"}}>
+  
+    <Stack>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <StaticDatePicker
+              value={startDate}
+              onChange={(newstartvalue) => {
+                setStartDate(newstartvalue)
+              }}
+              renderInput={(params) => <TextField {...params} sx={{color:"white"}} />}
+            
+            />
+    </LocalizationProvider></Stack>
+    <Stack>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <StaticDatePicker
+              value={endDate}
+              onChange={(newendvalue) => {
+                setEndDate(newendvalue)
+              }}
+              renderInput={(params) => <TextField {...params} sx={{color:"white"}}  variant="outlined" color=""/>}
+            />
+    </LocalizationProvider></Stack>
+    
+    {/* <Button onClick={() => props?.onDateSubmit(dateRange)}
+     sx=
+     {{
+      ":hover":{
+            color:"#ed6c02",
+            bgcolor:"#ffd796"
+      },
+      
+      color:"#ffffff",bgcolor:"#ed6c02"}}>Submit</Button> */}
+    </CardContent>
+    </Card>
   );
 }
+

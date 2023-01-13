@@ -22,6 +22,12 @@ import { Link as RouterLink } from 'react-router-dom';
 import Iconify from '../../components/Iconify';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -159,7 +165,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
       <Typography variant="h6" marginLeft={13}>
        {profileData?.first_name} {profileData?.last_name}
       </Typography>
-
+     
       {/* <CardMedia
         component="img"
         height="194"
@@ -167,25 +173,79 @@ export default function RecipeReviewCard({profileData,changeUser}) {
         alt="Paella dish"
       /> */}
       <CardContent>
+        <Card>
+          <CardContent>
         <Typography variant="body1" gutterBottom>
           Role: {profileData?.role_name}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+        Status:{profileData?.status}
         </Typography>
         <Typography variant="body1" gutterBottom>
           Reporting Manager: {profileData?.supervisorName===""  ? "-":profileData?.supervisorName}
         </Typography>
         <Typography variant="body1" gutterBottom>
+          Date of Joining: {profileData?.doj}
+        </Typography>
+        </CardContent>
+        </Card>
+
+
+       {/* <Card>
+        <CardContent>
+          <Typography variant="h6" sx={{color:"white",bgcolor:"#9c9e7f",height:"30px"}} >Contact Information</Typography>
+        <Typography variant="body1" gutterBottom>
+          Mobile: {profileData?.contactNum}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
           Work : {profileData?.officeMailId}
         </Typography>
         <Typography variant="body1" gutterBottom>
-          Contact Number: {profileData?.contactNum}
+          Email : {profileData?.personalMailId}
         </Typography>
         <Typography variant="body1" gutterBottom>
-          Address: Kempapura Bangalore
+          Address: {profileData?.address}
         </Typography>
         <Typography variant="body1" gutterBottom>
           Pincode:{profileData?.pincode}
         </Typography>
+        </CardContent>
+        </Card> */}
       </CardContent>
+      <CardContent>
+  <TableContainer >
+    <Table aria-label="customized table"  >
+      {/* <TableHead style={{width:"50px"}}>Contact Information</TableHead> */}
+      <TableBody >
+        <TableRow style={{ height: "8px !important" }} >
+          <TableCell > Mobile </TableCell>
+          
+          <TableCell>{profileData?.contactNum}</TableCell>
+        </TableRow>
+        <TableRow style={{ height: "8px !important" }} >
+          <TableCell style={{ width: "8px" }}> Work</TableCell>
+          <TableCell>{profileData?.officeMailId}</TableCell>
+        </TableRow>
+        <TableRow style={{ height: "8px !important" }} >
+          <TableCell style={{ width: "8px" }}>Email</TableCell>
+          <TableCell>{profileData?.personalMailId}</TableCell>
+        </TableRow>
+        <TableRow style={{ height: "8px !important" }} >
+          <TableCell style={{ width: "8px" }}>Address</TableCell>
+          <TableCell>{profileData?.address}</TableCell>
+        </TableRow>
+        <TableRow style={{ height: "8px !important" }} >
+          <TableCell style={{ width: "8px" }}>Pincode:</TableCell>
+          <TableCell>{profileData?.pincode}</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  </TableContainer>
+</CardContent>
+{/* <Typography variant="body1" gutterBottom>
+          Projects: {profileData?.project_list}
+        </Typography> */}
+
       <CardActions disableSpacing>
         <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
           <Button variant="warning"

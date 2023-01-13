@@ -55,13 +55,13 @@ export const FILTER_COLOR_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-ProjectFilter.propTypes = {
+UserFilter.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
 
-export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
+export default function UserFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
  const [selectDATA,setSelectData] = useState()
  const data = localStorage?.getItem('userId')
   return (
@@ -101,13 +101,20 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                 <CardContent>
                   {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                  <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
+                    {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
+                      {/* <Grid spacing={1} > */}
                       {data==1|data==2&&<Button sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
                       color: '#ed6c02',
                     },
                     color: 'black',
-                  }}>All Bus</Button>}
+                  }}
+                  //  style={selectDATA == 2 ? {
+                  //   background: '#ffd796', // theme.palette.primary.main
+                  //   color: '#ed6c02',
+                  // } : null}
+                  >All Bus</Button>}
                      {data==1|data==2&&<Button  sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -130,6 +137,10 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                     },
                     color: 'black',
                   }} 
+                  // style={selectDATA == 2 ? {
+                  //   background: '#ffd796', // theme.palette.primary.main
+                  //   color: '#ed6c02',
+                  // } : null}
                   >Funders</Button>}
                         {data==1|data==2&&<Button sx={{
                     ':hover': {
@@ -138,6 +149,10 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                     },
                     color: 'black',
                   }} 
+                  // style={selectDATA == 2 ? {
+                  //   background: '#ffd796', // theme.palette.primary.main
+                  //   color: '#ed6c02',
+                  // } : null}
                   >Operation Manager</Button>}
                        {data==1|data==2&& <Button sx={{
                     ':hover': {
@@ -146,6 +161,10 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                     },
                     color: 'black',
                   }}
+                  //  style={selectDATA == 2 ? {
+                  //   background: '#ffd796', // theme.palette.primary.main
+                  //   color: '#ed6c02',
+                  // } : null}
                   >Trainer</Button>}
                        {data==1|data==2&& <Button sx={{
                     ':hover': {
@@ -154,6 +173,8 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                     },
                     color: 'black',
                   }}>Gelathi Facilitator</Button>}
+                      {/* <Button>Custom Filters</Button> */}
+             {/* <Button >Partner</Button>   */}
   
                       
                       

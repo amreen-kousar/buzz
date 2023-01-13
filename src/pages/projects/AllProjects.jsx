@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Grid, Container, Stack, Typography, Box, CardContent, Card, Chip, Icon, IconButton } from '@mui/material';
+import { Grid, Container, Stack, Typography, Box, CardContent, Card, Chip, Icon, IconButton,Button } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../../components/Page';
 import Iconify from '../../components/Iconify';
 import ProjectDialog from '../Components/ProjectDialog';
 import { Link } from 'react-router-dom';
-
+import ProjectFilter from '../Components/Projectfilters/ProjectFilters';
 // components
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -46,6 +46,15 @@ function a11yProps(index) {
 export default function AllProjects({ handleClickOpen, handleClose, open }) {
     const [value, setValue] = useState(0);
     const [project, setProject] = useState();
+    const [openFilter, setOpenFilter] = useState(false);
+   
+    const handleOpenFilter = () => {
+      setOpenFilter(true);
+    };
+  
+    const handleCloseFilter = () => {
+      setOpenFilter(false);
+    };
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -86,7 +95,18 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
         <Page title="Dashboard: Projects">
             <Container>
                 <Typography variant="h4" sx={{ mb: 5 }}>
-                    Projects
+                    Projects    <Button style={{ float: "right",color:'#ed6c02'}} 
+          sx={{
+            '&:hover': {
+              backgroundColor: '#ffd796',
+            },
+          }}  
+            onClick={() => {
+              handleOpenFilter()
+            }}
+            >
+            Filter
+          </Button>
                 </Typography>
 
                 {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
@@ -99,6 +119,15 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
               onClose={handleClose}
             />
           </Stack> */}
+                  <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <ProjectFilter
+            // clcikData={clcikData}
+            isOpenFilter={openFilter}
+        
+            onOpenFilter={handleOpenFilter}
+            onCloseFilter={handleCloseFilter}
+          />
+        </Stack>
 
 
                 <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>

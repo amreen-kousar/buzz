@@ -5,7 +5,7 @@ import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import Iconify from '../components/Iconify';
 import Page from '../components/Page';
-
+import Chip from '@mui/material/Chip';
 import { AppWidgetSummary } from '../sections/@dashboard/app';
 
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function DashboardApp() {
   const navigate = useNavigate();
-
+  const data = localStorage?.getItem('userId')
   const theme = useTheme();
   const intialValues  = {
     funder:"",
@@ -130,15 +130,17 @@ export default function DashboardApp() {
     console.log(e, i, "<----datssdasdsa")
   }
 
+  const closefilter =()=>{
+    console.log("deleted")
+  }
+
   return (
+    
     <Page title="Dashboard">
+      
       <Container maxWidth="xl">
         <Grid item spacing={10}>
-          {/* <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome back
-          
-       
-        </Typography> */}
+        
           <Button style={{ float: "right",color:'#ed6c02'}} 
           sx={{
             '&:hover': {
@@ -150,16 +152,23 @@ export default function DashboardApp() {
             }}>
             Filter
           </Button>
-         
-          <h2>{slected?.id===2? "Funder": null}
+         <h2> 
+          
+          {/* <Chip label={(slected?.id===2)? "Funder":(slected?.id===1)?"partner":(slected?.id===5)?"Trainer":(slected?.id===1)?"partner": null} onDelete={closefilter}/> */}
+        
         {slected?.id===1? "Partner": null}
         {slected?.id===3? "Project": null}
+        {slected?.id===5? "Trainer":null}
         {slected?.id===4? "Operation Manager": null}
         {slected?.id===12? "Sr.Operation Manager": null}
-        {slected?.id===13? "Gelathis Facilator Leads": null}&nbsp;{slected?.name ? slected?.name : ''}</h2>
+        {slected?.id===13? "Gelathis Facilator Leads": null}&nbsp;{slected?.name ? slected?.name : ''}</h2> 
           {/* <h2>{slected?.id===2? "Funder": null}&nbsp;{slected?.name ? slected?.name : ''}
           </h2> */}
           {/* <Chip label= {slected?.id===2?"founder":null}/> */}
+          {/* <Chip label={(slected?.id===2)? ("Funder"):
+           (slected?.id===1)?"partner":(slected?.id===5)?"Trainer":
+           (slected?.id===4)?"Operation Manager":(slected?.id===12)?"Sr.Operation Manager":
+           (slected?.id===13)?"Gelathi Facilator Leads": ""} onDelete={closefilter}/> */}
 
         </Grid>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -175,7 +184,7 @@ export default function DashboardApp() {
           </Stack>
 
         {/*  */}
-        <Grid container spacing={3} marginTop={4}>
+        {(data==1|data==2)?(<Grid container spacing={3} marginTop={4}>
           <Grid item  xs={4} sm={8} md={4}>
 
             <AppWidgetSummary
@@ -203,6 +212,7 @@ export default function DashboardApp() {
               total={summaryData?.summary_day2}
               title="2nd Day TurnOut(%)"
               color="warning"
+        
             // icon={'mdi:percent-circle-outline'}
             />
           </Grid>
@@ -252,10 +262,77 @@ export default function DashboardApp() {
             // icon={'eos-icons:product-subscriptions-outlined'}
             />
           </Grid>
-        </Grid>
+        </Grid>):
+        (<Grid container spacing={3} marginTop={4}>
+        <Grid item  xs={4} sm={8} md={4}>
 
-        {/* <Grid item xs={12} sm={12} md={12} marginTop={3}>
-          <AppWidgetSummary title="Funder" total={234} style={{backgroundColor:'#bdbdbd'}} icon={'ant-design:fund-view-outlined'} />
+          <AppWidgetSummary
+            title="Total Circles"
+            // total={summaryData?.summary_actual}
+            color="motivator"
+
+          />
+          </Grid>
+          <Grid item  xs={4} sm={8} md={4}>
+
+          <AppWidgetSummary
+            title="Circle Meetings"
+            // total={summaryData?.summary_target}
+            color="motivator"
+
+          />
+          </Grid>
+          <Grid item  xs={4} sm={8} md={4}>
+
+          <AppWidgetSummary
+            title="Village Visits"
+            // total={summaryData?.summary_target}
+            color="motivator"
+
+          />
+          </Grid>
+          <Grid item  xs={6} sm={6} md={6}>
+
+          <AppWidgetSummary
+            title="Beehive Visits"
+            // total={summaryData?.summary_target}
+            color="motivator"
+
+          />
+          </Grid>
+          <Grid item  xs={6} sm={6} md={6}>
+
+          <AppWidgetSummary
+            title="Enrolled Gelathis"
+            // total={summaryData?.summary_target}
+            color="motivator"
+
+          />
+          </Grid>
+          <Grid item  xs={6} sm={6} md={6}>
+
+          <AppWidgetSummary
+            title="Green Motivators"
+            // total={summaryData?.summary_target}
+            color="motivator"
+
+          />
+          </Grid>
+          <Grid item  xs={6} sm={6} md={6}>
+
+          <AppWidgetSummary
+            title="Enrolled Vyapor"
+            // total={summaryData?.summary_target}
+            color="motivator"
+
+          />
+          </Grid>
+        </Grid>)}
+
+
+        {(data==1|data==2)?
+        <Grid item xs={12} sm={12} md={12} marginTop={3}>
+          {/* <AppWidgetSummary title="Funder" total={234} style={{backgroundColor:'#bdbdbd'}} icon={'ant-design:fund-view-outlined'} /> */}
           {summaryData?.data?.map((itm) => {
             return (
               <Card
@@ -335,7 +412,9 @@ export default function DashboardApp() {
               </Card>
             );
           })}
-        </Grid>  */}
+        </Grid>:null}
+       
+
       </Container>
     </Page>
   );

@@ -15,6 +15,7 @@ import { LoginForm } from '../sections/auth/login';
 import { auth, provider } from "../Firebase"
 //import Firebase from '../Firebase'
 import AuthSocial from '../sections/auth/AuthSocial';
+import Iconify from 'src/components/Iconify';
 
 
 
@@ -119,11 +120,10 @@ export default function Login() {
       .catch((error) => alert(error.message));
   }
   return (
-    <Page title="Login">
+    <Page title="Login" style={{backgroundColor:"#ed6c02"}}>
       <RootStyle>
-        <HeaderStyle>
-          <div style={{alignSelf:'center',alignContent:'center'}}>
-          <Logo />
+        {/* <HeaderStyle>
+         
 
           </div>
 
@@ -134,26 +134,36 @@ export default function Login() {
                 Get started
               </Link>
             </Typography>
-          )} */}
-        </HeaderStyle>
+          )}
+        </HeaderStyle> */}
 
-       
-
-        <Container maxWidth="sm">
-          <ContentStyle>
-            <Typography variant="h4" gutterBottom align='center'>
-              Sign in to Buzz Staff <br></br>
-             
+        {/* {mdUp && (
+          <SectionStyle>
+            <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
+              Hi, Welcome Back
+            </Typography>
+            <img src="/static/illustrations/illustration_login.png" alt="login" />
+          </SectionStyle>
+        )} */}
+                 
+        <Container maxWidth="sm" >
+          
+          <ContentStyle >
+            <div style={{textAlign:"center"}}>
+            <Logo />
+            </div>
+            <Typography variant="h4" gutterBottom align='center'  >
+             Sign in to Buzz Staff
             </Typography> 
             <Button onClick={googleLogin} style={{textAlign:"center",alignContent:"center",}} 
           sx={{
             '&:hover': {
-              backgroundColor: '#ed6c02',
-              color:'#ffffff',
+              backgroundColor: '#eaecde',
+             
             },
-            color:'#ed6c02',backgroundColor:'#ffd796'
+            color:'black',backgroundColor:'#ffffff'
           }}  >
-              Login with google
+             <Iconify  icon="cib:google"></Iconify>&nbsp;&nbsp;&nbsp;&nbsp;Sign in with google
             </Button>
 
             {/* <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography> */}
@@ -163,14 +173,14 @@ export default function Login() {
 
             <LoginForm />
 
-            {!smUp && (
+            {/* {!smUp && (
               <Typography variant="body2" align="center" sx={{ mt: 3 }}>
                 Don’t have an account?{' '}
                 <Link variant="subtitle2"  component={RouterLink} to="/register" underline="hover" color="#ed6c02">
                   Get started
                 </Link>
               </Typography>
-            )}
+            )} */}
           </ContentStyle>
         </Container>
       </RootStyle>

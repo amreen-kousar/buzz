@@ -60,6 +60,12 @@ const navConfig = [
     icon: getIcon('map:travel-agency'),
     id: [1, 2, 3, 5, 6]
   },
+  {
+    title: 'Logout',
+    path: '/dashboard/logout',
+    icon: getIcon('material-symbols:exit-to-app'),
+    id: [1, 2, 3, 5, 6]
+  },
 
 ];
 

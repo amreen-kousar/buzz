@@ -61,9 +61,9 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         '& .simplebar-content': { height: 1, display: 'flex', flexDirection: 'column' },
       }}
     >
-      <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
+      <div style={{textAlign:"center"}}>
         <Logo />
-      </Box>
+      </div>
       {console.log(account.displayName, "<--yghuj")}
       <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ed6c02">
         <Link underline="none" component={RouterLink} to="#">

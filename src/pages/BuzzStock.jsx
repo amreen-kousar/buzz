@@ -7,9 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Grid } from '@mui/material';
+import { Grid,Button,Stack } from '@mui/material';
 import axios from 'axios';
-
+import BuzzFilter from './Components/BuzzStockFilters/Buzzstockfilter';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -50,6 +50,15 @@ const rows = [
 
 export default function BuzzStock() {
   const [demo, setDemo] = useState([]);
+  const [openFilter, setOpenFilter] = useState(false);
+  const handleOpenFilter = () => {
+    setOpenFilter(true);
+  };
+
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
+
   useEffect(() => {
     demoi()
   }, []
@@ -87,6 +96,30 @@ export default function BuzzStock() {
       });
   }
   return (
+    <div>
+           <Button style={{ float: "right",color:'#ed6c02'}} 
+    sx={{
+      '&:hover': {
+        backgroundColor: '#ffd796',
+      },
+    }}  
+      onClick={() => {
+        handleOpenFilter()
+      }}
+      >
+      Filter
+    </Button>
+    <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <BuzzFilter
+            // onDateSubmit={onDateSubmit}
+            // onSumbit={onSumbit}
+            // getData={getData}
+            //clcikData={clcikData}
+              isOpenFilter={openFilter}
+              onOpenFilter={handleOpenFilter}
+              onCloseFilter={handleCloseFilter}
+            />
+          </Stack>
     <Grid
       sx={{
         p: 2,
@@ -94,8 +127,10 @@ export default function BuzzStock() {
         maxWidth: 500,
         flexGrow: 1,
       }}
-    >
-      <TableContainer component={Paper}>
+    > 
+
+      <TableContainer component={Paper}> 
+ 
         <Table aria-label="customized table">
           <TableHead>
             <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
@@ -117,5 +152,6 @@ export default function BuzzStock() {
         </Table>
       </TableContainer>
     </Grid>
+    </div>
   );
 }

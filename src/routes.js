@@ -6,6 +6,7 @@ import Blog from './pages/Blog';
 import User from './pages/User';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+import Logout from './pages/Logout';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
@@ -75,7 +76,8 @@ export default function Router() {
             { path: 'profile', element: <Profile />, id: [1, 2, 3, 5, 6] },
             { path: 'travel', element: <TravelA />, id: [1, 2, 3, 5, 6] },
             { path: 'demogrphy', element: <Demography />, id: [1, 2, 3, 5] },
-            { path: 'chart', element: <Chart />, id: [1, 2, 3, 4, 5] }
+            { path: 'chart', element: <Chart />, id: [1, 2, 3, 4, 5] },
+            {path:'logout',element:<Logout/>,id:[1,2,3,4,5,6]}
         ]
 
 
@@ -97,6 +99,10 @@ export default function Router() {
         {
             path: '*',
             element: <Navigate to="/404" replace />,
+        },
+        {
+            path: '/dashboard/logout',
+            element: <Logout />,
         },
     ]);
 }

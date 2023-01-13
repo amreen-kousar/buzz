@@ -52,11 +52,11 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
     <Grid container spacing={3} {...other}>
       {/* {users.map((product) => ( */}
       {users.map((itm, index) => (
-        <Grid key={index} item xs={12} sm={6} md={3}>
+        <Grid key={index} item xs={4} sm={4} md={4}>
           {/* <Button> */}
           {/* {console.log(itm, ",-gvvyub")} */}
 
-          <Card onClick={() => { viewUser(itm) }}>
+          <Card onClick={() => { viewUser(itm) }} height="70vw">
             <CardContent>
               <Grid direction={'column'} spacing={2} alignItems="center" justifyContent="space-between">
 

@@ -59,8 +59,10 @@ BusListFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData }) {
-  const [selectDATA, setSelectData] = useState();
+export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
+ const [selectDATA,setSelectData] = useState()
+ const data = localStorage?.getItem('userId')
+
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -106,7 +108,7 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                 </Typography>
                 {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
                 {/* <Grid spacing={1} > */}
-                <Button
+                {data==2|data==1&&<Button
                   onClick={() => {
                     setSelectData(2);
                   }}
@@ -123,10 +125,10 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   }}
                 >
                   Funders
-                </Button>
+                </Button>}
                 {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
                 {/* <Button>Funders</Button> */}
-                <Button
+                {data==2|data==1&&<Button
                  onClick={() => {
                   setSelectData(3);
                 }}
@@ -143,8 +145,8 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   }}
                 >
                   Project
-                </Button>
-                <Button
+                </Button>}
+                {data==2|data==1&&<Button
                   onClick={() => {
                     setSelectData(7);
                   }}
@@ -161,8 +163,8 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   }}
                 >
                   Location
-                </Button>
-                <Button
+                </Button>}
+                {data==2|data==1&&<Button
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -176,7 +178,7 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   }}
                 >
                   All Bus
-                </Button>
+                </Button>}
               </CardContent>
             </Card>
             <Grid style={{ marginTop: 30 }}>
