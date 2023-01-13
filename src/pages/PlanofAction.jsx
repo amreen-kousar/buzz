@@ -124,7 +124,7 @@ export default function PlanofAction() {
             />
           </Stack>
         
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs variant="fullWidth" value={value}  indicatorColor="warning"
@@ -180,7 +180,7 @@ export default function PlanofAction() {
         Item Three
       </TabPanel>
     </Box>
-        </Stack>
+        </Stack> */}
 
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <Box sx={{ width: '100%' }}>
