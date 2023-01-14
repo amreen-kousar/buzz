@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Container, Stack, Typography, Box, Toolbar, Button, TextField, Select, MenuItem } from '@mui/material';
 // components
+import Pagination from '@mui/material/Pagination';
+
 import Page from '../components/Page';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
 // mock
@@ -33,6 +35,8 @@ export default function User() {
   const [scroll, setScroll] = useState('paper');
   const [projects, setProjects] = useState([])
   const [searchUser,setSearchUser] = useState("");
+  const [page,setPage] = useState(1)
+  const [count, setCount] = useState('')
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);
     setScroll(scrollType);
@@ -61,7 +65,7 @@ export default function User() {
   }, [searchUser]
   )
 
-  const getProjects = async () => {
+  const getProjects = async (d) => {
 
 
     const data = JSON.stringify({
@@ -70,7 +74,7 @@ export default function User() {
       "role_id": 1,
       "filter_id": 0,
       "type": "",
-      "pageNum": 1
+      "pageNum": d?d:1
     });
 
     const config = {
@@ -112,7 +116,7 @@ export default function User() {
     pincode: "", gender: "male", present_status: true, dateOfJoining: '', reportingManager: "", license_number: "", project: ""
   })
 
-  const user = async () => {
+  const user = async (d) => {
     const dataid = localStorage?.getItem('userDetails')
     const data = JSON.stringify({
       "search": searchUser,
@@ -120,7 +124,7 @@ export default function User() {
       "role_id": JSON?.parse(dataid)?.role,
       "filter_id": "",
       "type": "",
-      "pageNum": 1
+      "pageNum":d?d: 1
     });
 
     const config = {
@@ -135,6 +139,7 @@ export default function User() {
     axios(config)
       .then((response) => {
         setUsers(response.data.list)
+        setCount(response?.data?.total_count%25==0?parseInt( response?.data?.total_count/25):parseInt( response?.data?.total_count/25)+1)
         let ceo = []
         response.data.list.map(r => (r.role_name === "CEO") ? ceo = [...ceo, { label: r.first_name, ...r }] : null)
         setCeoUser([...ceo])
@@ -142,6 +147,12 @@ export default function User() {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  const pageChange = (event, newPage) =>{
+    setPage(newPage)
+    user(newPage)
+  console.log(newPage,"<----efesfdsefsd")
   }
 
   return (
@@ -326,6 +337,7 @@ export default function User() {
         <Typography variant="h4" sx={{ mb: 5 }}>
           People
         </Typography>
+        <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="primary" />
 
         <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ mb: 1 }}>
@@ -341,6 +353,7 @@ export default function User() {
           onOpenFilter={handleOpenFilter}
           onCloseFilter={handleCloseFilter} />
         <ProductCartWidget />
+
       </Container>
     </Page >
   );

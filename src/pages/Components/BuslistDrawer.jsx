@@ -22,7 +22,7 @@ import {
 import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import { ColorManyPicker } from '../../components/color-utils';
-
+import BusEdit from './Buslistfilters/BusEdit'
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -146,6 +146,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
             <div>
             
             <Button onClick={DeleteBus}>Delete Bus</Button>
+           <BusEdit />
             <Card>
                 <CardContent>
                 <Typography style={{flexDirection:'row'}} variant="subtitle1" gutterBottom>
