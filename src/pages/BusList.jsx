@@ -42,6 +42,7 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import BuslistDrawer from './Components/BuslistDrawer';
 import BusListFilter from './Components/Buslistfilters/BusListFilter';
 import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
+import BusEdit from './Components/Buslistfilters/BusEdit';
 
 // ----------------------------------------------------------------------
 
@@ -144,7 +145,7 @@ export default function User() {
       "role_id": 1,
     
       "project_id":id===3?i?.id: "",
-      "taluk_id": "",
+      "taluk_id": id==="location"?i:"",
       "district_id": "",
       // "taluk_id": g==="country"?i:"",
       // "district_id":g==="country"?id:"",
@@ -212,7 +213,12 @@ export default function User() {
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
+const onSumbit = (e,i)=>{
+ console.log(e,i,"<---1234567")
+ handleclosebusfilter()
+ busesd( e?.talaq_id,"location")
 
+}
   return (
     <Page title="User">
       <div>
@@ -341,7 +347,9 @@ export default function User() {
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <BusListFilter
           getData={getData}
+          onSumbit={onSumbit}
             clcikData={clcikData}
+            same={()=>{busesd(),handleclosebusfilter()}}
             isOpenFilter={openbusfilter}
             onOpenFilter={handleopenbusfilter}
             onCloseFilter={handleclosebusfilter}

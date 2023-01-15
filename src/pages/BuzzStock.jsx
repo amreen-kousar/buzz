@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
+import {Stack} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -8,7 +9,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Grid } from '@mui/material';
+import Button from '@mui/material/Button';
+import BusListFilter from './Components/Buslistfilters/BusListFilter';
+  
 import axios from 'axios';
+import TotalFilter from './Components/BuzzStockFilter/TotalFilter';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -50,6 +55,43 @@ const rows = [
 
 export default function BuzzStock() {
   const [demo, setDemo] = useState([]);
+  const [openFilter, setOpenFilter] = useState(false);
+  const [openbusfilter, setopenbusfilter] = useState(false);
+  const handleOpenFilter = () => {
+    setOpenFilter(true);
+  };
+
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
+
+  const handleopenbusfilter = () => {
+    setopenbusfilter(true);
+  };
+
+  const handleclosebusfilter = () => {
+    setopenbusfilter(false);
+  };
+  const getData = (itm, i) => {
+    setopenbusfilter(false);
+    console.log(itm,i,"<-----qwertyu")
+    // setSelected({
+    //   id: i,
+    //   name: itm?.name
+    // })
+    // const data = i===2?{"funder_id":itm?.id}:i===1?{"partner_id":itm?.id}:{"project_id":itm?.id}
+    busesd(itm, i)
+    // console.log(data,i,itm,"<----sdfssreerfer")
+    // setFilterData(data)
+    // handleCloseFilter()
+    // console.log("sdfgsdfdfssd", itm, i)
+  }
+  const onSumbit = (e,i)=>{
+    console.log(e,i,"<---1234567")
+    handleclosebusfilter()
+    busesd( e?.talaq_id,"location")
+   
+   }
   useEffect(() => {
     demoi()
   }, []
@@ -95,6 +137,36 @@ export default function BuzzStock() {
         flexGrow: 1,
       }}
     >
+      <Button style={{ float: "right", color: '#ed6c02' }}
+            sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+              },
+            }}
+            onClick={() => {
+              handleopenbusfilter()
+            }}>
+            Filter
+          </Button>
+          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          {/* <BusListFilter
+          getData={getData}
+          onSumbit={onSumbit}
+           
+            same={()=>{busesd(),handleclosebusfilter()}}
+            isOpenFilter={openbusfilter}
+            onOpenFilter={handleopenbusfilter}
+            onCloseFilter={handleclosebusfilter}
+          /> */}
+          <TotalFilter
+            getData={getData}
+            onSumbit={onSumbit}
+             
+              same={()=>{busesd(),handleclosebusfilter()}}
+              isOpenFilter={openbusfilter}
+              onOpenFilter={handleopenbusfilter}
+              onCloseFilter={handleclosebusfilter} />
+        </Stack>
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
           <TableHead>
@@ -116,6 +188,7 @@ export default function BuzzStock() {
           </TableBody>
         </Table>
       </TableContainer>
+      
     </Grid>
   );
 }

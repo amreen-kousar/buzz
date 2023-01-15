@@ -37,20 +37,43 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function UserEditProfile() {
+  let user = JSON.parse(localStorage?.getItem('people'))
+
+  console.log(user,'<-----uyuyuuuhuhuuhu')
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [age, setAge] = React.useState('');
   const [ceoUser, setCeoUser] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [usersDataEdit, setUsersDataEdit] = useState('')
+  const [rolesData, setRolesData] = useState([])
 
+  const [editData,setEditData] = useState({
+      id: "",
+      countryID: "",
+      first_name: "",
+      last_name: "",
+      gender: "",
+      doj: "",
+      pincode: "",
+      officeMailId: "",
+      personalMailId: "",
+      contactNum: "",
+      workNum: "",
+      address: "",
+      address1: "",
+      address2: "",
+      empRole: "",
+      supervisorId: "",
+      profile_pic: "",
+      status: "",
+      createdBy: "",
+      lastUpdatedBy: "",
+      project_list: "",
+      license_number: ""
+  })
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-  //   const handleClickOpen = (scrollType) => () => {
-  //     setOpen(true);
-  //     setScroll(scrollType);
-  //     // getProjects()
-  //   };
   const handleClickOpen = () => {
     setOpen(true);
     setScroll(scrollType);
@@ -60,25 +83,80 @@ export default function UserEditProfile() {
     setOpen(false);
   };
 
-  const [AddUser, setAddUser] = useState({
-    role: '',
-    name: '',
-    lastName: '',
-    mobilenumber: '',
-    work: '',
-    email: '',
-    address: '',
-    address1: '',
-    address2: '',
-    pincode: '',
-    gender: 'male',
-    present_status: true,
-    dateOfJoining: '',
-    reportingManager: '',
-    license_number: '',
-    project: '',
-  });
 
+  useEffect(()=>{
+  //   editUser()
+  getRoles()
+    },[]
+     )
+ 
+  const getRoles = () => {
+    const data = JSON.stringify({
+    });
+
+    const config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/roles_list.php',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data
+    };
+
+    axios(config)
+        .then((response) => {
+            setRolesData(response.data.list)
+
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+   const editUser = async =>{
+   
+    var data = JSON.stringify({
+      "id": user?.id,
+      "countryID": user?.countryID,
+      "first_name": user?.first_name,
+      "last_name":user?.last_name ,
+      "gender":user?.gender ,
+      "doj": user?.doj,
+      "pincode": user?.pincode,
+      "officeMailId": user?.officeMailId,
+      "personalMailId": user?.personalMailId,
+      "contactNum": user?.contactNum,
+      "workNum": user?.workNum,
+      "address": user?.address,
+      "address1": user?.address1,
+      "address2": user?.address2,
+      "empRole": user?.empRole,
+      "supervisorId": user?.supervisorId,
+      "profile_pic": user?.profile_pic,
+      "status": user?.status,
+      "createdBy": user?.createdBy,
+      "lastUpdatedBy": "",
+      "project_list": user?.project_list,
+      "license_number": user?.license_number
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/editUser.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setUsersDataEdit(response.data)
+      console.log(response.data,'<------------------setUsers') ;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+   }
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -132,21 +210,21 @@ export default function UserEditProfile() {
 
                   <Select
                     labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={age}
-                    label="Age"
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    id="role"
+                   // defaultValue={AddUser.role}
+                    label="Role"
+                    onChange={(e) => { getEmpId(e.target.value) }}
+                >
+                    {rolesData.map(role => {
+                        return <MenuItem value={role ?? ''}>{role?.roleName}</MenuItem>
+                    })}
                   </Select>
                 </FormControl>
                 <Autocomplete
                   disablePortal
                   id="combo-box-demo"
-                  options={ceoUser}
-                  defaultValue={AddUser.reportingManager}
+                  // options={ceoUser}
+                  // defaultValue={AddUser.reportingManager}
                   label="reportingManager"
                   onChange={(event, value) => setAddUser({ ...AddUser, reportingManager: value })}
                   renderInput={(params) => <TextField {...params} label="ReportingManger" />}

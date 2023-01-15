@@ -146,7 +146,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
             <div>
             
             <Button onClick={DeleteBus}>Delete Bus</Button>
-           <BusEdit />
+           <BusEdit clcikData={detailsData} />
             <Card>
                 <CardContent>
                 <Typography style={{flexDirection:'row'}} variant="subtitle1" gutterBottom>

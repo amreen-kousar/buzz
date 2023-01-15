@@ -139,6 +139,7 @@ export default function User() {
     axios(config)
       .then((response) => {
         setUsers(response.data.list)
+       
         setCount(response?.data?.total_count%25==0?parseInt( response?.data?.total_count/25):parseInt( response?.data?.total_count/25)+1)
         let ceo = []
         response.data.list.map(r => (r.role_name === "CEO") ? ceo = [...ceo, { label: r.first_name, ...r }] : null)
@@ -148,7 +149,7 @@ export default function User() {
         console.log(error);
       });
   }
-
+  console.log(users,'<------------------response.data.list')
   const pageChange = (event, newPage) =>{
     setPage(newPage)
     user(newPage)
