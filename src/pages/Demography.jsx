@@ -37,11 +37,9 @@ function createData1(R1, R2) {
   return { R1, R2 };
 }
 
-
-
-const rows1 = [
-  createData('Buses', 18),
-]
+function createData2(r1,r2){
+  return {r1,r2};
+}
 export default function Demography() {
   const [demo, setDemo] = useState();
   useEffect(() => {
@@ -89,6 +87,17 @@ export default function Demography() {
     createData('Gelathi Facilator', demo?.gelathiCount),
     createData('Drivers', demo?.driverCount),
   ];
+  const assetrows = [
+    createData1('Buses', demo?.busCount),
+   
+  ];
+  const executionrows = [
+    createData2('Number of Projects', demo?.project_count),
+    createData2('Completed Training Batches', demo?.tb_count),
+    createData2('Completed Village Visits', demo?.vv_count),
+    createData2('Completed Circle Meetings', demo?.cm_count),
+    createData2('Completed Beehive Visits', demo?.bh_count),
+  ];
   return (
     <>
       <Grid
@@ -104,8 +113,7 @@ export default function Demography() {
             <TableHead>
               <TableRow style={{ width: "max-content", justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
 
-                {/* <TableCell size={'medium'} align="center" style={{     padding: "0px 12px 0px 0px"
-justifyContent: 'center', textAlign: 'center', }}>Resources</TableCell> */}
+           
                 <StyledTableCell colSpan={2} style={{ width: 'max-content', justifyContent: 'center', textAlign: 'center', }}>Resources</StyledTableCell>
 
               </TableRow>
@@ -131,17 +139,17 @@ justifyContent: 'center', textAlign: 'center', }}>Resources</TableCell> */}
           flexGrow: 1,
         }}
       >
-        <TableContainer component={Paper}>
+         <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead>
               <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
 
-                <StyledTableCell xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }} colSpan={2}>Assets</StyledTableCell>
+                <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Excecution</StyledTableCell>
                 {/* <StyledTableCell>Available Quantity</StyledTableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows1.map((row) => (
+              {assetrows.map((row) => (
                 <StyledTableRow key={row.R1}>
                   <StyledTableCell component="th" scope="row">
                     {row.R1}
@@ -171,12 +179,12 @@ justifyContent: 'center', textAlign: 'center', }}>Resources</TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
+              {executionrows.map((row) => (
+                <StyledTableRow key={row.r1}>
                   <StyledTableCell component="th" scope="row">
-                    {row.name}
+                    {row.r1}
                   </StyledTableCell>
-                  <StyledTableCell>{row.calories}</StyledTableCell>
+                  <StyledTableCell>{row.r2}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>

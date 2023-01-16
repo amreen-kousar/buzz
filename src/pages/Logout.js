@@ -11,14 +11,15 @@ function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
   const navigate = useNavigate();
   const logoutuser=(path)=>{
-    localStorage.removeItem('userId')
- 
-    console.log("sdhgfjwhlogout")
-  }
-  const loginuser=(path)=>{
-    console.log("login")
+    //  localStorage.removeItem('userId')
+    // localStorage.removeItem('userDetails')
+    localStorage.clear()
+    navigate('/')
 
   }
+  const loginuser=(path)=>{
+  navigate('/dashboard/app') 
+ }
   const handleClose = () => {
     onClose(selectedValue);
   };
@@ -36,12 +37,12 @@ function SimpleDialog(props) {
         ':hover':{
             color:"#ffffff",bgcolor:"#ed6c02"
         },
-        color:"#ffffff",bgcolor:"#ed6c02",borderRadius:"5px"}} onClick={()=>{navigate('/dashboard')}}>No</Button>&nbsp;&nbsp;&nbsp;
+        color:"#ffffff",bgcolor:"#ed6c02",borderRadius:"5px"}} onClick={loginuser}>No</Button>&nbsp;&nbsp;&nbsp;
           <Button sx={{
             ':hover':{
                 color:"#ffffff",bgcolor:"#ed6c02"
             },
-            color:"#ffffff",bgcolor:"#ed6c02"}} onClick={()=>{navigate('/')}}>Yes</Button>
+            color:"#ffffff",bgcolor:"#ed6c02"}} onClick={logoutuser}>Yes</Button>
     </div>
     </Dialog>
   );
