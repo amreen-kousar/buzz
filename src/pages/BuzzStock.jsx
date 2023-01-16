@@ -129,25 +129,19 @@ export default function BuzzStock() {
       });
   }
   return (
-    <Grid
-      sx={{
-        p: 2,
-        margin: 'auto',
-        maxWidth: 500,
-        flexGrow: 1,
-      }}
-    >
-      <Button style={{ float: "right", color: '#ed6c02' }}
-            sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-              },
-            }}
-            onClick={() => {
-              handleopenbusfilter()
-            }}>
-            Filter
-          </Button>
+    <div>
+    <Button style={{ float: "right",color:'#ed6c02'}} 
+sx={{
+'&:hover': {
+ backgroundColor: '#ffd796',
+},
+}}  
+onClick={() => {
+  handleopenbusfilter()
+}}
+>
+Filter
+</Button>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           {/* <BusListFilter
           getData={getData}
@@ -167,6 +161,14 @@ export default function BuzzStock() {
               onOpenFilter={handleopenbusfilter}
               onCloseFilter={handleclosebusfilter} />
         </Stack>
+        <Grid
+      sx={{
+        p: 2,
+        margin: 'auto',
+        maxWidth: 500,
+        flexGrow: 1,
+      }}
+    > 
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
           <TableHead>
@@ -190,5 +192,6 @@ export default function BuzzStock() {
       </TableContainer>
       
     </Grid>
+</div>
   );
 }

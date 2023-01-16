@@ -4,7 +4,7 @@ import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import Funders from './TotalFunder';
 import Location from './TotalLocation';
-import Project from './TotalProject';
+import TotalProject from './TotalProject';
 import DateRange from './TotalDateRange'
 
 // material
@@ -38,10 +38,6 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
   const [selectDATA, setSelectData] = useState();
   return (
     <>
-      {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
-
       <Drawer
         anchor="right"
         open={isOpenFilter}
@@ -57,6 +53,7 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25, color: 'black' }}>
             Filters
             {selectDATA && selectDATA === 2 && ':  Funders'}
+            {selectDATA && selectDATA === 3 && ':  Projects'}
             {selectDATA && selectDATA === 7 && ': Location'}
           </Typography>
           <IconButton
@@ -75,12 +72,9 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
           <div>
             <Card style={{ backgroundColor: '#f6f8fb' }}>
               <CardContent>
-                {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                 <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>
                   Categories
                 </Typography>
-                {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
-                {/* <Grid spacing={1} > */}
                 <Button
                   onClick={() => {
                     setSelectData(2);
@@ -99,8 +93,6 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
                 >
                   Funders
                 </Button>
-                {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
-                {/* <Button>Funders</Button> */}
                 <Button
                  onClick={() => {
                   setSelectData(3);
@@ -157,6 +149,9 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
             </Card>
             <Grid style={{ marginTop: 30 }}>
               <Funders getData={getData} selectDATA={selectDATA} />
+            </Grid>
+            <Grid style={{ marginTop: 30 }}>
+              <TotalProject getData={getData} selectDATA={selectDATA} />
             </Grid>
 
             {selectDATA === 7 && (

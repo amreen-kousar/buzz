@@ -1,16 +1,3 @@
-// import * as React from 'react';
-// import Chip from '@mui/material/Chip';
-// import Stack from '@mui/material/Stack';
-
-// export default function TotalFunder() {
-//   return (
-//     <Stack direction="row" spacing={1}>
-//       <Chip label="Chip Filled" />
-//       <Chip label="Chip Outlined" variant="outlined" />
-//     </Stack>
-//   );
-// }
-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -28,7 +15,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-export default function Funders({ selectDATA, getData }) {
+export default function TotalFunder({ selectDATA, getData }) {
   const [fund, setFund] = useState();
 
 
