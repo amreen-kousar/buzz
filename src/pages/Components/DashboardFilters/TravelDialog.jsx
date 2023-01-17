@@ -106,7 +106,7 @@ export default function FullScreenDialog() {
 
   const convertImage = (e) => {
     console.log("this is calleddddfdsfs")
-    data.append('emp_id', 15);
+    data.append('emp_id', 651);
     data.append('file', e.target.files[0]);
     setImagePath([...imagePath, e.target.files[0]])
     const imageData =  URL.createObjectURL(e.target.files[0]);
@@ -134,7 +134,7 @@ export default function FullScreenDialog() {
       "klmtr": sendData?.rateperkm,
       "da": sendData?.foodexpenses,
       "others": sendData?.otherExpenses,
-      "emp_id": 15,
+      "emp_id": 651,
       "mode_of_travel": sendData?.modeoftravel,
       "other_text": sendData?.OtherAmount
     });
@@ -162,7 +162,7 @@ export default function FullScreenDialog() {
   const postImages = async () => {
     var dataImage = []
     const form = new FormData()
-    form?.append("emp_id",15)
+    form?.append("emp_id",651)
     //form?.append("file[]",imagePath[0])
 
     const data = imagePath?.map(itm=>{
