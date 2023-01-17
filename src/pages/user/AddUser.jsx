@@ -11,6 +11,10 @@ function AddUser(props) {
 
     let isValidForm = true;
 
+    let [inputProject, setInputProject] = useState([''])
+
+    let [filteredProjects, setFilteredProjects] = useState([])
+
 
     let [errors, setErrors] = useState({ office_email_id: false })
 
@@ -154,14 +158,26 @@ function AddUser(props) {
 
         axios(config)
             .then((response) => {
-                console.log(response, 'project')
+                console.log(response.data.list, 'project')
                 let temprepoManagerProject = response.data.list.map(repo => { return { label: repo?.projectName, id: repo.id } })
-                setReportingManagerProject([...temprepoManagerProject])
+                setReportingManagerProject([...temprepoManagerProject,
+                    // { id: '210', label: 'testme' }
+                ])
             })
             .catch((error) => {
                 console.log(error);
             });
 
+    }
+
+
+
+    const changeProject = (value) => {
+        console.log(value)
+        // console.log(value, "changeProject")
+        // inputProject[inputProject.length - 1] = value.id
+        setInputProject([...value])
+        console.log(inputProject)
     }
 
 
@@ -200,12 +216,13 @@ function AddUser(props) {
 
 
     const submitUser = () => {
+        AddUser.project = inputProject.map(i => parseInt(i.id))
         AddUser.officeMailId = AddUser.office_email_id
         AddUser.empRole = AddUser.role.id
         AddUser.supervisorId = AddUser.reportingManager.id
         AddUser.profile_pic = ''
-        AddUser.status = '1',
-            AddUser.createdBy = '650',
+        AddUser.status = AddUser.present_status ? '1' : '0';
+        AddUser.createdBy = '650',
             AddUser.lastUpdatedBy = '650'
         // console.log(AddUser)
         const data = JSON.stringify(AddUser);
@@ -229,6 +246,8 @@ function AddUser(props) {
             .catch((error) => {
                 console.log(error);
             });
+
+        console.log("Add User", AddUser)
         // https://bdms.buzzwomen.org/appTest/createUser.php
     }
 
@@ -366,19 +385,32 @@ function AddUser(props) {
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="outlined-basic" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" />}
 
                                 <TextField fullWidth id="outlined-basic" label="Pincode" value={AddUser.pincode} onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" />
-                                {["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <FormControl fullWidth>
+                                {
 
-                                    <Autocomplete
-                                        disablePortal
-                                        id="combo-box-demo"
-                                        options={reportingManagerProject}
-                                        defaultValue={AddUser.project}
-                                        label="project"
-                                        onChange={(e, value) => setAddUser({ ...AddUser, project: value.id })}
-                                        renderInput={(params) => <TextField {...params} label="Choose project" />}
-                                    />
+                                    ["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <FormControl fullWidth>
 
-                                </FormControl>
+                                        <Autocomplete
+                                            // disablePortal
+                                            // id="combo-box-demo"
+                                            // options={reportingManagerProject}
+                                            // defaultValue={inputProject[-1]}
+                                            // label="project"
+                                            // onChange={(e, value) => changeProject(value)}
+                                            // renderInput={(params) => <TextField {...params} label="Choose project" />}
+
+                                            multiple
+                                            limitTags={2}
+                                            id="multiple-limit-tags"
+                                            options={reportingManagerProject}
+                                            onChange={(e, value) => changeProject(value)}
+                                            getOptionLabel={(option) => option.label}
+                                            renderInput={(params) => (
+                                                <TextField {...params} label="Choose project" placeholder="Choose project" />
+                                            )}
+                                        />
+
+                                    </FormControl>
+
                                 }
                                 {["Driver"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="License Number" value={AddUser.license_number} onChange={(e) => { setAddUser({ ...AddUser, license_number: e.target.value }) }} variant="outlined" />
                                 }
