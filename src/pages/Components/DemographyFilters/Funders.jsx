@@ -76,7 +76,7 @@ export default function Funders({ selectDATA, getData }) {
                 </Table>
               </TableContainer>
             </CardContent>
-        
+          
           )
         }) : null}
       </Card>
