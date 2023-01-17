@@ -19,14 +19,16 @@ import { blue } from '@mui/material/colors';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function SimpleDialog(props) {
-  const { onClose, selectedValue, open,teamData } = props;
+  const { onClose, selectedValue, open,teamData,setUserId } = props;
 
   const handleClose = () => {
-    onClose(selectedValue);
+   // onClose(selectedValue);
   };
 
   const handleListItemClick = (value) => {
-    onClose(value);
+    props?.setUserId(value?.id)
+    console.log(value,"<--valuevalue")
+ onClose(value);
   };
  console.log(teamData,"<----teamDatateamDatateamData")
   
@@ -36,7 +38,7 @@ function SimpleDialog(props) {
       <List sx={{ pt: 0 }}>
         {teamData?.map((email) => (
           <ListItem disableGutters>
-            <ListItemButton onClick={() => handleListItemClick(email)} key={email}>
+            <ListItemButton onClick={() => handleListItemClick(email)} >
               <ListItemAvatar>
                 <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                   <PersonIcon />
@@ -50,7 +52,7 @@ function SimpleDialog(props) {
         <ListItem disableGutters>
           <ListItemButton
             autoFocus
-            onClick={() => handleListItemClick('addAccount')}
+          //  onClick={() => handleListItemClick('addAccount')}
           >
             <ListItemAvatar>
               <Avatar>
@@ -68,12 +70,12 @@ function SimpleDialog(props) {
 SimpleDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  selectedValue: PropTypes.string.isRequired,
+//   selectedValue: PropTypes.string.isRequired,
 };
 
-export default function PoaTeam() {
+export default function PoaTeam({setUserId}) {
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+//   const [selectedValue, setSelectedValue] = React.useState();
   const [teamData,setTeamData] = useState([])
   useEffect(()=>{
     team()
@@ -110,13 +112,13 @@ export default function PoaTeam() {
 
   const handleClose = (value) => {
     setOpen(false);
-    setSelectedValue(value);
+   // setSelectedValue(value);
   };
 
   return (
     <div>
       <Typography variant="subtitle1" component="div">
-        Selected: {selectedValue}
+        {/* Selected: {selectedValue} */}
       </Typography>
       <br />
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -124,6 +126,7 @@ export default function PoaTeam() {
       </Button>
       <SimpleDialog
         teamData={teamData}
+        setUserId={setUserId}
         open={open}
         onClose={handleClose}
       />

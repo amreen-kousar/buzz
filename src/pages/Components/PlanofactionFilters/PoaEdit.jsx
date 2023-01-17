@@ -33,7 +33,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PoaEdit({setSucess}) {
+export default function PoaEdit({setSucess,itm}) {
+    console.log(itm,"<---ergegreg")
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa,setAddPoa] = useState("");
@@ -76,15 +77,26 @@ export default function PoaEdit({setSucess}) {
 
   useEffect(()=>{
     //AddPoa()
+    setAddData({ date:itm?.date1,
+        user_id:651,
+        name: itm?.name,
+        all_day: 0,
+        description: itm?.description,
+        date2:itm?.date2,
+        poa_id:itm?.id})
     },[]
      )
+
+     const detailsAdded = ()=>{
+
+     }
  
   const AddPoa = async =>{
     console.log(addData,"<0hgdfvfdbgdf")
     var data = JSON.stringify({
         "poa_id":addData?.poa_id,
         "date": addData?.date,
-        "user_id": "651",
+        "user_id": 651,
         "name":addData?.name,
         "all_day":addData?.all_day,
         "description": addData?.description,
@@ -104,6 +116,7 @@ export default function PoaEdit({setSucess}) {
       .then(function (response) {
         if(response?.data?.code === 200)
         {
+            handleClose()
         
         setSucess("this is success create")
        
@@ -140,7 +153,7 @@ export default function PoaEdit({setSucess}) {
         <Alert onClose={()=>{setAddPoa(''),
          setValue(false)
     }} severity="error" sx={{ width: '100%' }}>
-        {addPoa}
+        {/* {addPoa} */}
         </Alert>
       </Snackbar>
 

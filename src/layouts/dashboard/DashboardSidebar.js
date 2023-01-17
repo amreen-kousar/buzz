@@ -64,7 +64,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
         <Logo />
       </Box>
-      {console.log(account.displayName, "<--yghuj")}
+      {console.log(account.displayName,account.role, "<--yghuj")}
       <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ed6c02">
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
@@ -73,8 +73,8 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
               <Typography variant="subtitle2" color='#ffffff' >
                 {account.displayName}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
+              <Typography variant="body2" sx={{ color: '#ffffff' }}>
+                {account.role_name}
               </Typography>
             </Box>
           </AccountStyle>

@@ -21,6 +21,8 @@ import PoaEvent from '././Components/PlanofactionFilters/PoaEvent'
 // components
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { SecurityUpdate } from '@mui/icons-material';
+import moment from 'moment';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
  
@@ -62,6 +64,8 @@ export default function PlanofAction() {
   const [openMessage, setOpenMessage] = useState(false);
   const [select,setSelect] = useState();
   const [season,setSeason] = useState(0)
+  const [date,setDate] = useState("")
+  const [ userId,setUserId]= useState()
   const [poaData,setPoaData] =[{
     emp_id: "",
     team: "",
@@ -89,18 +93,19 @@ export default function PlanofAction() {
   };
   useEffect(() => {
     todaypoa();
-  }, [season]);
+  }, [season,date,userId]);
   const todaypoa = (async) => {
+    console.log(date,"<----ergregerger")
     var data = JSON.stringify({
-      "emp_id": 558,
+      "emp_id": userId?userId:651,
       "team": "",
-      "date": "",
+      "date":moment(date?.$d)?.format('YYYY-MM-DD'),
       "for": season
     });
 
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getTodayPoa.php',
+      url: 'https://bdms.buzzwomen.org/appTest/getPoa.php',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -109,8 +114,12 @@ export default function PlanofAction() {
 
     axios(config)
       .then(function (response) {
-        SetPoa(response.data?.data);
-        console.log(response.data, '<-----------poaDatalist');
+        let arr = []
+        response?.data?.data?.map((itm,index)=>{
+         arr.push(...itm)
+        })
+        SetPoa( response?.data?.data);
+        console.log(arr, '<-----------poaDatalist');
       })
       .catch(function (error) {
         console.log(error);
@@ -128,6 +137,9 @@ export default function PlanofAction() {
     borderRadius: Number(theme.shape.borderRadius) * 1.5,
     backgroundColor: theme.palette.grey[500_12],
   }));
+  const  setDefaut = ()=>{
+    setUserId(651)
+  }
   return (
     <Page title="Dashboard: Products">
       <Container>
@@ -138,9 +150,12 @@ export default function PlanofAction() {
         </Snackbar>
         <Typography variant="h4" sx={{ mb: 5 }}>
           Plan Of Actions
-          <PoaTeam />
-          {console.log(account.displayName, "<--yghuj")}
-      <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ed6c02">
+          <PoaTeam setUserId={(e)=>
+          setUserId(e)
+          
+          } />
+          {/* {console.log(account.displayName,account.role, "<--yghuj")} */}
+      <Box onClick={setDefaut} sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ed6c02">
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
             <Avatar src={account.photoURL} alt="photoURL" />
@@ -200,8 +215,11 @@ export default function PlanofAction() {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Date"
-              // value={sendData?.date}
-              // onChange={(newValue) => {
+               value={date}
+               onChange={(newValue) => {
+                console.log(newValue,"<----newValuenewValue")
+                setDate(newValue)
+               }}
               //   setSendData({ ...sendData, date: newValue })
               // }}
               renderInput={(params) => <TextField {...params} fullWidth />}
@@ -285,8 +303,12 @@ export default function PlanofAction() {
             <TabPanel value={value} index={0}>
              
               {
-                poa?.map((itm) =>{
-                   {console.log(itm,'<-------------itmitmitmitmitmitm')}
+             poa?.length !==0? 
+               poa?.map((item) =>{
+                return(
+                  // <h1>{item[0]?.actual_Date}</h1>
+             item?.length !==0&&item?.map(itm=>{
+                  
                   return (
               <Card style={{marginTop:35}}  onClick={() => {
                 setSelect(itm)
@@ -304,14 +326,20 @@ export default function PlanofAction() {
                    
 </Stack>
                  <Stack direction={'row'} spacing={5} mt={2}>
-                  <PoaEdit />
+                  <PoaEdit itm={itm}  />
                   <Button>Delete</Button>
                  </Stack>
                 </CardContent>
               </Card>
               
               ) 
+          
                 })
+                )
+              })
+                :<h1>
+                  no data found
+                </h1>
               } 
             </TabPanel>
 
@@ -320,14 +348,14 @@ export default function PlanofAction() {
                 poa?.map((itm) =>{
                    {console.log(itm,'<-------------itmitmitmitmitmitm')}
                   return (
-              <Card onClick={() => {
+              <Card  style={{marginTop:35}}  onClick={() => {
                 setSelect(itm)
               handleOpenEvent();
             }}>
                 <CardContent>
                   Title: {itm?.name}
                   "roleName": {itm?.roleName}, "emp_name": {itm?.emp_name},
-                  <PoaEdit />
+                  <PoaEdit itm={itm} />
                   <Button>Delete</Button>
                 </CardContent>
               </Card>
@@ -338,24 +366,39 @@ export default function PlanofAction() {
             </TabPanel>
             <TabPanel value={value} index={2}>
             {
-                poa?.map((itm) =>{
-                   {console.log(itm,'<-------------itmitmitmitmitmitm')}
+             poa?.length !==0? 
+               poa?.map((item) =>{
+                return(
+                  <>
+                   <h1>{item[0]?.date}</h1>
+           {  item?.length !==0&&item?.map(itm=>{
+                  
                   return (
-              <Card onClick={() => {
+              <Card style={{marginTop:35}}  onClick={() => {
                 setSelect(itm)
               handleOpenEvent();
             }}>
+             { console.log(itm,'<------jbhjjbjbjb')}
+              {/* <Typography>{itm?.date}</Typography> */}
                 <CardContent>
                   Title: {itm?.name}
                   "roleName": {itm?.roleName}, "emp_name": {itm?.emp_name},
-                  <PoaEdit />
+                  <PoaEdit itm={itm} />
                   <Button>Delete</Button>
                 </CardContent>
               </Card>
               
               ) 
-                })
-              } 
+          
+            })
+          }
+          </>
+            )
+          })
+            :<h1>
+              no data found
+            </h1>
+          } 
             </TabPanel>
           </Box>
         </Stack>
