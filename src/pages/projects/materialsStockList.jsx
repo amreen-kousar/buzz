@@ -7,10 +7,10 @@ import Iconify from 'src/components/Iconify';
 export default function MaterialStockList() {
 
     const [clcikData, setClickData] = useState()
-    const [materialStock, setmaterialStock] = useState();
+    const [materialStock, setmaterialStock] = useState([{ stockname: "fist" }, { stockname: "second" }]);
 
     useEffect(() => {
-        setmaterialStock([{ stockname: "fist" }, { stockname: "second" }])
+        // setmaterialStock([{ stockname: "fist" }, { stockname: "second" }])
     }, []
     )
 

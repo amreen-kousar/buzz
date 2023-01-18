@@ -7,10 +7,10 @@ import Iconify from 'src/components/Iconify';
 export default function busTestList() {
 
     const [clcikData, setClickData] = useState()
-    const [busTest, setbusTest] = useState();
+    const [busTest, setbusTest] = useState([{ stockname: "fist" }, { stockname: "second" }]);
 
     useEffect(() => {
-        setbusTest([{ stockname: "fist" }, { stockname: "second" }])
+        // setbusTest([{ stockname: "fist" }, { stockname: "second" }])
     }, []
     )
 

@@ -7,10 +7,10 @@ import Iconify from 'src/components/Iconify';
 export default function selfShakthi() {
 
     const [clcikData, setClickData] = useState()
-    const [selfShakthi, setselfShakthi] = useState();
+    const [selfShakthi, setselfShakthi] = useState([{ stockname: "fist" }, { stockname: "second" }]);
 
     useEffect(() => {
-        setselfShakthi([{ stockname: "fist" }, { stockname: "second" }])
+        // setselfShakthi([{ stockname: "fist" }, { stockname: "second" }])
     }, []
     )
 

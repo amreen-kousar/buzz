@@ -7,10 +7,10 @@ import Iconify from 'src/components/Iconify';
 export default function enrolledVyaaparList() {
 
     const [clcikData, setClickData] = useState()
-    const [enrolledVyaapar, setenrolledVyaapar] = useState();
+    const [enrolledVyaapar, setenrolledVyaapar] = useState([{ stockname: "fist" }, { stockname: "second" }]);
 
     useEffect(() => {
-        setenrolledVyaapar([{ stockname: "fist" }, { stockname: "second" }])
+        // setenrolledVyaapar([{ stockname: "fist" }, { stockname: "second" }])
     }, []
     )
 

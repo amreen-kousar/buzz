@@ -7,10 +7,10 @@ import Iconify from 'src/components/Iconify';
 export default function enrolledGelathiList() {
 
     const [clcikData, setClickData] = useState()
-    const [enrolledGelathi, setenrolledGelathi] = useState();
+    const [enrolledGelathi, setenrolledGelathi] = useState([{ stockname: "fist" }, { stockname: "second" }]);
 
     useEffect(() => {
-        setenrolledGelathi([{ stockname: "fist" }, { stockname: "second" }])
+        // setenrolledGelathi([{ stockname: "fist" }, { stockname: "second" }])
     }, []
     )
 

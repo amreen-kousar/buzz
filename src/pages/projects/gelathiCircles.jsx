@@ -7,10 +7,10 @@ import Iconify from 'src/components/Iconify';
 export default function gelathiCirclesList() {
 
     const [clcikData, setClickData] = useState()
-    const [gelathiCircles, setgelathiCircles] = useState();
+    const [gelathiCircles, setgelathiCircles] = useState([{ stockname: "fist" }, { stockname: "second" }]);
 
     useEffect(() => {
-        setgelathiCircles([{ stockname: "fist" }, { stockname: "second" }])
+        // setgelathiCircles([{ stockname: "fist" }, { stockname: "second" }])
     }, []
     )
 

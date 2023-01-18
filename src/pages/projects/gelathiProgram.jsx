@@ -7,10 +7,10 @@ import Iconify from 'src/components/Iconify';
 export default function gelathiProgram() {
 
     const [clcikData, setClickData] = useState()
-    const [gelathiProgram, setgelathiProgram] = useState();
+    const [gelathiProgram, setgelathiProgram] = useState([{ stockname: "fist" }, { stockname: "second" }]);
 
     useEffect(() => {
-        setgelathiProgram([{ stockname: "fist" }, { stockname: "second" }])
+        // setgelathiProgram([{ stockname: "fist" }, { stockname: "second" }])
     }, []
     )
 

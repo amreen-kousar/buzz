@@ -7,10 +7,10 @@ import Iconify from 'src/components/Iconify';
 export default function enrolledGreenMotivatorsList() {
 
     const [clcikData, setClickData] = useState()
-    const [enrolledGreenMotivators, setenrolledGreenMotivators] = useState();
+    const [enrolledGreenMotivators, setenrolledGreenMotivators] = useState([{ stockname: "fist" }, { stockname: "second" }]);
 
     useEffect(() => {
-        setenrolledGreenMotivators([{ stockname: "fist" }, { stockname: "second" }])
+        // setenrolledGreenMotivators([{ stockname: "fist" }, { stockname: "second" }])
     }, []
     )
 

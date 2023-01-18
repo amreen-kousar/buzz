@@ -59,14 +59,12 @@ export default function Login() {
             if (
               response.data.role == 2
             ) {
-              navigate('/dashboard/buslist',)
-            } 
-            if(response.data.role==5)
-            {
+              navigate('/dashboard/buslist')
+            }
+            else if (response.data.role == 5) {
               navigate('/dashboard/trainer')
             }
-            if(response.data.role==6)
-            {
+            else if (response.data.role == 6) {
               navigate('/dashboard/gelathi')
             }
             else {
@@ -75,7 +73,7 @@ export default function Login() {
 
           }
         }
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
@@ -129,31 +127,31 @@ export default function Login() {
       .catch((error) => alert(error.message));
   }
   return (
-    <Page title="Login" style={{backgroundColor:"#ed6c02"}}>
+    <Page title="Login" style={{ backgroundColor: "#ed6c02" }}>
       <RootStyle>
-       
+
         <Container maxWidth="sm" >
-          
+
           <ContentStyle >
-            <div style={{textAlign:"center"}}>
-            <Logo />
+            <div style={{ textAlign: "center" }}>
+              <Logo />
             </div>
             <Typography variant="h4" gutterBottom align='center'  >
-             Sign in to Buzz Staff
-            </Typography> 
-            <Button onClick={googleLogin} style={{textAlign:"center",alignContent:"center",}} 
-          sx={{
-            '&:hover': {
-              backgroundColor: '#eaecde',
-             
-            },
-            color:'black',backgroundColor:'#ffffff'
-          }}  >
-             <Iconify  icon="cib:google"></Iconify>&nbsp;&nbsp;&nbsp;&nbsp;Sign in with google
+              Sign in to Buzz Staff
+            </Typography>
+            <Button onClick={googleLogin} style={{ textAlign: "center", alignContent: "center", }}
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#eaecde',
+
+                },
+                color: 'black', backgroundColor: '#ffffff'
+              }}  >
+              <Iconify icon="cib:google"></Iconify>&nbsp;&nbsp;&nbsp;&nbsp;Sign in with google
             </Button>
 
             {/* <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography> */}
-           
+
 
             {/* <AuthSocial /> */}
 

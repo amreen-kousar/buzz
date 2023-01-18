@@ -10,16 +10,16 @@ const emails = ['username@gmail.com', 'user02@gmail.com'];
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
   const navigate = useNavigate();
-  const logoutuser=(path)=>{
+  const logoutuser = (path) => {
     //  localStorage.removeItem('userId')
     // localStorage.removeItem('userDetails')
     localStorage.clear()
     navigate('/')
 
   }
-  const loginuser=(path)=>{
-  navigate('/dashboard/app') 
- }
+  const loginuser = (path) => {
+    navigate('/dashboard/app')
+  }
   const handleClose = () => {
     onClose(selectedValue);
   };
@@ -29,21 +29,23 @@ function SimpleDialog(props) {
   };
 
   return (
-    <Dialog open={open} style={{width:"100vw"}}>
-      <DialogTitle style={{textAlign:"center"}}>Are You Sure?</DialogTitle>
+    <Dialog open={open} style={{ width: "100vw" }}>
+      <DialogTitle style={{ textAlign: "center" }}>Are You Sure?</DialogTitle>
       <DialogContent>Do You Want to logout?</DialogContent>
-    <div style={{margin:"5px",textAlign:"center"}}> <Button 
-    sx={{
-        ':hover':{
-            color:"#ffffff",bgcolor:"#ed6c02"
-        },
-        color:"#ffffff",bgcolor:"#ed6c02",borderRadius:"5px"}} onClick={loginuser}>No</Button>&nbsp;&nbsp;&nbsp;
-          <Button sx={{
-            ':hover':{
-                color:"#ffffff",bgcolor:"#ed6c02"
-            },
-            color:"#ffffff",bgcolor:"#ed6c02"}} onClick={logoutuser}>Yes</Button>
-    </div>
+      <div style={{ margin: "5px", textAlign: "center" }}> <Button
+        sx={{
+          ':hover': {
+            color: "#ffffff", bgcolor: "#ed6c02"
+          },
+          color: "#ffffff", bgcolor: "#ed6c02", borderRadius: "5px"
+        }} onClick={loginuser}>No</Button>&nbsp;&nbsp;&nbsp;
+        <Button sx={{
+          ':hover': {
+            color: "#ffffff", bgcolor: "#ed6c02"
+          },
+          color: "#ffffff", bgcolor: "#ed6c02"
+        }} onClick={logoutuser}>Yes</Button>
+      </div>
     </Dialog>
   );
 }
@@ -51,12 +53,12 @@ function SimpleDialog(props) {
 SimpleDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-//   selectedValue: PropTypes.string.isRequired,
+  //   selectedValue: PropTypes.string.isRequired,
 };
 
 export default function Logout() {
   const [open, setOpen] = React.useState(true);
- 
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -64,12 +66,12 @@ export default function Logout() {
 
   const handleClose = (value) => {
     setOpen(false);
- 
+
   };
 
   return (
     <div>
-     
+
       <SimpleDialog
         // selectedValue={selectedValue}
         open={open}
