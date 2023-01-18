@@ -57,7 +57,7 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
 
           <Card onClick={() => { viewUser(itm) }} height="70vw">
             <CardContent>
-              <Grid direction={'column'} spacing={2} alignItems="center" justifyContent="space-between">
+              <Grid direction={'column'} spacing={2} alignItems="center" justifyContent="space-between" height="20vh">
 
                 <Avatar sx={{ bgcolor: red[500], width: 100, height: 100, marginLeft: '30%', bgcolor: '#ed6c02' }} aria-label="recipe">
                   {itm?.first_name.substring(0, 1)}
