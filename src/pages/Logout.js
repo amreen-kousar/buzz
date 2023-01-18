@@ -18,7 +18,8 @@ function SimpleDialog(props) {
 
   }
   const loginuser = (path) => {
-    navigate('/dashboard/app')
+    // navigate('/dashboard/app')
+    navigate(-1)
   }
   const handleClose = () => {
     onClose(selectedValue);
