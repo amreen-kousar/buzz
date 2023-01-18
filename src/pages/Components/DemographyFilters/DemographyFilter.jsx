@@ -27,6 +27,9 @@ import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
 import Funders from './Funders';
+import Demographylocation from './Demographylocation';
+import Demographyprojects from './Demographyprojects';
+
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -68,10 +71,10 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
     localStorage.setItem('selectedData', value)
     setSelectData(value)
   }
-  useEffect(() => {
-    localStorage.setItem('selectedData', 2)
-    setSelectData(2)
-  }, [])
+  // useEffect(() => {
+  //   localStorage.setItem('selectedData', 2)
+  //   setSelectData(2)
+  // }, [])
 
   useEffect(() => {
     setSelectData(localStorage.getItem('selectedData'))
@@ -124,8 +127,16 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
                 {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                 <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Categories</Typography>
 
-               <Button>Project</Button>
-               
+                <Button onClick={() => { setData(3) }} sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ed6c02',
+                  },
+                  color: 'black',
+                }} style={selectDATA == 2 ? {
+                  background: '#ffd796', // theme.palette.primary.main
+                  color: '#ed6c02',
+                } : null}>Project</Button>
                <Button onClick={()=> setData(2) } sx={{
                 ':hover':{
                   bgcolor:'#ffd796',
@@ -136,7 +147,16 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
                 background: '#ffd796', // theme.palette.primary.main
                 color: '#ed6c02',
               } : null} >Funders</Button>
-               <Button>Location</Button>
+               <Button onClick={()=> setData(7) } sx={{
+                ':hover':{
+                  bgcolor:'#ffd796',
+                  color:'#ed6c02,'
+                },
+                color:"black"
+               }} style={selectDATA == 7? {
+                background: '#ffd796', // theme.palette.primary.main
+                color: '#ed6c02',
+              } : null} >Location</Button>
              
                 
               </CardContent>
@@ -144,7 +164,14 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
             {selectDATA&&selectDATA===2&&<Grid style={{ marginTop: 30 }}>
               <Funders getData={getData} selectDATA={selectDATA} />
             </Grid>}
+         
+              {selectDATA&&selectDATA===7&&<Grid style={{ marginTop: 30 }}>
+              <Demographylocation selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
+            </Grid>}
           
+            <Grid style={{ marginTop: 30 }}>
+              <Demographyprojects getData={getData} selectDATA={selectDATA} />
+            </Grid>
 
 
 

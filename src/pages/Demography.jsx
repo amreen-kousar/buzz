@@ -72,6 +72,8 @@ nmae:''  })
   const demoi = async (id,i,g) => {
     console.log("'hscjh",id)
     const data = {
+      taluk_id: g==="country"?i:"",
+      district_id:g==="country"?id:"",
       trainerId: g?"": i===5?id?.id:'',
       somId:g?"": i===12?id?.id:'',
       gflId:g?"": i===13?id?.id:'',
@@ -121,12 +123,12 @@ nmae:''  })
 
   
 
-  // const onSumbit = (e, i) => {
-  //   handleCloseFilter()
+  const onSumbit = (e, i) => {
+    handleCloseFilter()
 
-  //   demoi(e?.district_id, e?.talaq_id, "country")
-  //   console.log(e, i, "<----datssdasdsa")
-  // }
+    demoi(e?.district_id, e?.talaq_id, "country")
+    console.log(e, i, "<----datssdasdsa")
+  }
  
 
   const rows = [
@@ -160,7 +162,7 @@ nmae:''  })
       name: itm?.name
     })
   
-    const data = i===2?{"funder_id":itm?.id}:i===1?{"partner_id":itm?.id}:{"project_id":itm?.id}
+    const data = i===2?{"funder_id":itm?.id}:{"project_id":itm?.id}
     demoi(itm, i);
     console.log("helloooo--->",data)
     console.log(data,i,itm,"<----sdfssreerfer");
@@ -184,10 +186,20 @@ nmae:''  })
             }}>
             Filter
           </Button>
+          {/* <h2> 
+          
+          
+        
+        
+        {slected?.id===3? "Project": null}
+        {slected?.id===2?"Funder":null}
+        {slected?.id===7?"Location":null}
+      &nbsp;{slected?.name ? slected?.name : ''}</h2>  */}
          
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <DemographyFilter
               getData={getData}
+              onSumbit={onSumbit}
               isOpenFilter={openFilter}
               onOpenFilter={handleOpenFilter}
               onCloseFilter={handleCloseFilter}
@@ -300,7 +312,7 @@ nmae:''  })
           }}>
             <CardContent>
             <Typography variant="h4" component="h2" marginLeft={2}>
-                   {itm} jsgsfuewhgtf
+                   {itm?.nmae} 
                   </Typography>
           <Grid
         sx={{
