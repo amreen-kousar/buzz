@@ -1,4 +1,6 @@
-import react, { useEffect } from 'react'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import React from "react"
 import PropTypes from 'prop-types';
 // material
 import {
@@ -21,34 +23,7 @@ import {
 import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import { ColorManyPicker } from '../../components/color-utils';
-
-// ----------------------------------------------------------------------
-
-export const SORT_BY_OPTIONS = [
-    { value: 'featured', label: 'Featured' },
-    { value: 'newest', label: 'Newest' },
-    { value: 'priceDesc', label: 'Price: High-Low' },
-    { value: 'priceAsc', label: 'Price: Low-High' },
-];
-export const FILTER_GENDER_OPTIONS = ['Men', 'Women', 'Kids'];
-export const FILTER_CATEGORY_OPTIONS = ['All', 'Shose', 'Apparel', 'Accessories'];
-export const FILTER_RATING_OPTIONS = ['up4Star', 'up3Star', 'up2Star', 'up1Star'];
-export const FILTER_PRICE_OPTIONS = [
-    { value: 'below', label: 'Below $25' },
-    { value: 'between', label: 'Between $25 - $75' },
-    { value: 'above', label: 'Above $75' },
-];
-export const FILTER_COLOR_OPTIONS = [
-    '#00AB55',
-    '#000000',
-    '#FFFFFF',
-    '#FFC0CB',
-    '#FF4842',
-    '#1890FF',
-    '#94D82D',
-    '#FFC107',
-];
-
+import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 
 projectMultiDrawer.propTypes = {
@@ -59,10 +34,37 @@ projectMultiDrawer.propTypes = {
 
 export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
 
-
+     const [batch,setBatch] = useState('')
     useEffect(() => {
-        console.log(clcikData)
+        getTrainingBatch();
+        // console.log(clcikData)
     }, [])
+
+    const getTrainingBatch = async =>{
+        var data = JSON.stringify({
+            "batch_id": 59696,
+            "role_id": 1
+          });
+          
+          var config = {
+            method: 'post',
+            url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : data
+          };
+          
+          axios(config)
+          .then(function (response) {
+            setBatch(response.data)
+            console.log(response.data,'<-----------setBatchsetBatchsetBatch');
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          
+    }
 
     return (
         <>
@@ -95,61 +97,47 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                             <Card>
                                 <CardContent>
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
-                                        Registration Date
-                                        <Typography variant="body1" >25/12/2022</Typography>
+                                        Project :
+                                        <Typography variant="body1" >{batch?.data?.projectName}</Typography>
+                                        {console.log(batch?.data?.projectName,'<--------njknnjnjn')}
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Engine Number:
-                                        <Typography variant="body1" gutterBottom>122132323dsd</Typography>
+                                        Partner :
+                                        <Typography variant="body1" gutterBottom>{batch?.data?.partnerName}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Chasis Number:
-                                        <Typography variant="body1" gutterBottom>jhbhb2233</Typography>
+                                        Training Batch:
+                                        <Typography variant="body1" gutterBottom>{batch?.data?.name}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Insurance Number:
-                                        <Typography variant="body1" gutterBottom>please</Typography>
+                                        Day1:
+                                        <Typography variant="body1" gutterBottom>{batch?.data?.day1_actual}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Insurance Company:
-                                        <Typography variant="body1" gutterBottom>IcICI Bank</Typography>
+                                        Day2:
+                                        <Typography variant="body1" gutterBottom>{batch?.data?.day2_actual}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Insurance Start Date:
-                                        <Typography variant="body1" gutterBottom>25/12/2022</Typography>
+                                        Contact Person:
+                                        <Typography variant="body1" gutterBottom>{batch?.data?.contact_person}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Insurance End Date:
-                                        <Typography variant="body1" gutterBottom>25/12/2023</Typography>
+                                    Contact Number:
+                                        <Typography variant="body1" gutterBottom>{batch?.data?.contact_number}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Last Service Date:
-                                        <Typography variant="body1" gutterBottom>25/12/2023</Typography>
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Next Service Date:
-                                        <Typography variant="body1" gutterBottom>25/12/2023</Typography>
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Permit Details:
-                                        <Typography variant="body1" gutterBottom>31/12/2023</Typography>
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Fitness Certificate:
-                                        <Typography variant="body1" gutterBottom>31/12/2023</Typography>
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Emission Date:
-                                        <Typography variant="body1" gutterBottom>31/12/2023</Typography>
+                                       Trainer Name:
+                                        <Typography variant="body1" gutterBottom>{batch?.data?.trainer_name}</Typography>
                                     </Typography>
                                 </CardContent>
                             </Card>
-
-                            {/* <FormGroup>
-                {FILTER_GENDER_OPTIONS.map((item) => (
-                  <FormControlLabel key={item} control={<Checkbox />} label={item} />
-                ))}
-              </FormGroup> */}
+                            <ShaktiDialog />
+                            <Card style={{marginTop:20}}>
+                                <CardContent>
+                                    <Typography>Actual Participants   {batch?.total_participants}     </Typography>
+                                    <Typography>Target Participants    {batch?.data?.participants}    </Typography>
+                                </CardContent>
+                            </Card>
                         </div>
 
 
