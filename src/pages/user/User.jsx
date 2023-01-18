@@ -200,7 +200,7 @@ export default function User() {
               handlepeopleOpenFilter()
             }}>Filters</Button>
         </Typography>
-        <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="primary" />
+      
 
         <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ mb: 1 }}>
@@ -215,8 +215,8 @@ export default function User() {
         <ProductList users={users} products={PRODUCTS} isOpenFilter={openFilter}
           onOpenFilter={handleOpenFilter}
           onCloseFilter={handleCloseFilter} />
-        <ProductCartWidget />
-
+        <ProductCartWidget /><br></br>
+        <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{color:"#ffd796"}} style={{float:"right"}} />
       </Container>
     </Page >
   );
