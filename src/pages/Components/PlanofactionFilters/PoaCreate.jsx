@@ -120,9 +120,28 @@ export default function PoaCreate({setSucess}) {
   }
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      {/* <Button variant="outlined" onClick={handleClickOpen} style={{float:"right",color:"#ed6c02"}} sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+                borderColor:"#ed6c02"
+              },  
+              borderColor:"#ed6c02",
+              color:"#ed6c02"
+            }}>
        Create New Poa
-      </Button>
+      </Button> */}
+      <Button variant="contained" onClick={handleClickOpen} style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 30, right: 120 }}  sx={{
+                ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ed6c02',
+                    border: '#ffd796'
+                },
+                bgcolor: '#ffd796',
+                color: "#ed6c02",
+                border: 'none'
+            }} >
+                <span style={{ fontSize: "2rem" }}>+</span>
+            </Button>
       <Dialog
         open={open}
         fullScreen

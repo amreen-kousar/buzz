@@ -135,8 +135,15 @@ export default function PoaEdit({setSucess,itm}) {
   }
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-      Edit  Poa
+      <Button variant="outlined" onClick={handleClickOpen} sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+                borderColor:"#ed6c02"
+              },  
+              borderColor:"#ed6c02",
+              color:"#ed6c02"
+            }}>
+      Edit Poa
       </Button>
       <Dialog
         open={open}
@@ -162,7 +169,7 @@ export default function PoaEdit({setSucess,itm}) {
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div"  >
               Edit Your POA
             </Typography>
 

@@ -6,7 +6,7 @@ import account from '.././_mock/account';
 import { styled } from '@mui/material/styles';
 
 import PropTypes from 'prop-types';
-import {Link, Container, Stack, Typography, Box, Button, TextField, CardContent, Card,Avatar} from '@mui/material';
+import {Link, Container, Stack, Typography, Box, Button, TextField, CardContent, Card,Avatar, Grid} from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
@@ -152,12 +152,7 @@ export default function PlanofAction() {
         </Snackbar>
         <Typography variant="h4" sx={{ mb: 5 }}>
           Plan Of Actions
-          <PoaTeam setUserId={(e)=>
-          setUserId(e)
-          
-          } />
-          {/* {console.log(account.displayName,account.role, "<--yghuj")} */}
-      <Box onClick={setDefaut} sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ed6c02">
+          {/* <Box onClick={setDefaut} sx={{ mb: 5, mx: 2,bgcolor:"#ed6c02"}} style={{float:"right",width:"8vw",height:"8vh"}}>
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
             <Avatar src={account.photoURL} alt="photoURL" />
@@ -171,21 +166,28 @@ export default function PlanofAction() {
             </Box>
           </AccountStyle>
         </Link>
-      </Box>
-          {/* <Button
-            style={{ float: 'right', color: '#ed6c02' }}
-            sx={{
-              ':hover': {
-                bgcolor: '#ffd796', // theme.palette.primary.main
-                color: '#ed6c02',
-              },
-            }}
-            onClick={() => {
-              handleOpenFilter();
-            }}
-          >
-            Filter
-          </Button> */}
+      </Box> */}
+          <PoaTeam setUserId={(e)=>
+          setUserId(e)
+          
+          } />
+          {/* {console.log(account.displayName,account.role, "<--yghuj")} */}
+      {/* <Box onClick={setDefaut} sx={{ mb: 5, mx: 2}} backgroundColor="#ed6c02" style={{float:"right"}}>
+        <Link underline="none" component={RouterLink} to="#">
+          <AccountStyle>
+            <Avatar src={account.photoURL} alt="photoURL" />
+            <Box sx={{ ml: 2 }}>
+              <Typography variant="subtitle2" color='#ffffff' >
+                {account.displayName}
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                {account.role}
+              </Typography>
+            </Box>
+          </AccountStyle>
+        </Link>
+      </Box> */}
+          
         </Typography>
 
         {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
@@ -326,10 +328,17 @@ export default function PlanofAction() {
                    <Stack>
                    {itm?.emp_name}
                    
-</Stack>
+                 </Stack>
                  <Stack direction={'row'} spacing={5} mt={2}>
-                  <PoaEdit itm={itm}  />
-                  <Button>Delete</Button>
+                  <PoaEdit itm={itm}   />
+                  <Button style={{float:"right",color:"#ed6c02"}} variant="outlined" sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+                borderColor:"#ed6c02"
+              },  
+              borderColor:"#ed6c02",
+              color:"#ed6c02"
+            }}>Delete</Button>
                  </Stack>
                 </CardContent>
               </Card>
@@ -339,9 +348,9 @@ export default function PlanofAction() {
                 })
                 )
               })
-                :<h1>
+                :<Grid>
                   no data found
-                </h1>
+                </Grid>
               } 
             </TabPanel>
 
@@ -355,10 +364,20 @@ export default function PlanofAction() {
               handleOpenEvent();
             }}>
                 <CardContent>
-                  Title: {itm?.name}
-                  "roleName": {itm?.roleName}, "emp_name": {itm?.emp_name},
-                  <PoaEdit itm={itm} />
-                  <Button>Delete</Button>
+                <Stack>{itm?.name}</Stack>
+                <Stack>{itm?.roleName}</Stack>
+                <Stack>{itm?.emp_name}</Stack>
+                <Stack direction={'row'} spacing={5} mt={2}>
+                  <PoaEdit itm={itm}   />
+                  <Button style={{float:"right",color:"#ed6c02"}} variant="outlined" sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+                borderColor:"#ed6c02"
+              },  
+              borderColor:"#ed6c02",
+              color:"#ed6c02"
+            }}>Delete</Button>
+                 </Stack>
                 </CardContent>
               </Card>
               
@@ -372,7 +391,7 @@ export default function PlanofAction() {
                poa?.map((item) =>{
                 return(
                   <>
-                   <h1>{item[0]?.date}</h1>
+                   <h3>{item[0]?.date}</h3>
            {  item?.length !==0&&item?.map(itm=>{
                   
                   return (
@@ -383,10 +402,21 @@ export default function PlanofAction() {
              { console.log(itm,'<------jbhjjbjbjb')}
               {/* <Typography>{itm?.date}</Typography> */}
                 <CardContent>
-                  Title: {itm?.name}
-                  "roleName": {itm?.roleName}, "emp_name": {itm?.emp_name},
-                  <PoaEdit itm={itm} />
-                  <Button>Delete</Button>
+                <Stack>
+                   {itm?.name}
+                    </Stack>
+                  <Stack>{itm?.roleName}</Stack><Stack>{itm?.emp_name}</Stack> 
+                  <Stack direction={'row'} spacing={5} mt={2}>
+                  <PoaEdit itm={itm}   />
+                  <Button style={{float:"right",color:"#ed6c02"}} variant="outlined" sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+                borderColor:"#ed6c02"
+              },  
+              borderColor:"#ed6c02",
+              color:"#ed6c02"
+            }}>Delete</Button>
+                 </Stack>
                 </CardContent>
               </Card>
               
@@ -397,9 +427,9 @@ export default function PlanofAction() {
           </>
             )
           })
-            :<h1>
+            :<Grid>
               no data found
-            </h1>
+            </Grid>
           } 
             </TabPanel>
           </Box>

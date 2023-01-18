@@ -28,7 +28,7 @@ import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
 import Funders from './Funders';
 import Demographylocation from './Demographylocation';
-
+import Demographyprojects from './Demographyprojects';
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -70,10 +70,10 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
     localStorage.setItem('selectedData', value)
     setSelectData(value)
   }
-  // useEffect(() => {
-  //   localStorage.setItem('selectedData', 2)
-  //   setSelectData(2)
-  // }, [])
+  useEffect(() => {
+    localStorage.setItem('selectedData', 3)
+    setSelectData(2)
+  }, [])
 
   useEffect(() => {
     setSelectData(localStorage.getItem('selectedData'))
@@ -132,7 +132,7 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
                     color: '#ed6c02',
                   },
                   color: 'black',
-                }} style={selectDATA == 2 ? {
+                }} style={selectDATA == 3 ? {
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
                 } : null}>Project</Button>
