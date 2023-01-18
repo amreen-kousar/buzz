@@ -7,9 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Grid } from '@mui/material';
+import { Grid,Button,Stack, CardContent } from '@mui/material';
 import axios from 'axios';
-
+import DemographyFilter from './Components/DemographyFilters/DemographyFilter';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -20,6 +20,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
+ 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
@@ -41,30 +42,71 @@ function createData2(r1,r2){
   return {r1,r2};
 }
 export default function Demography() {
+  const intialValues  = {
+    funder:"",
+    project:"",
+  }
+
+ 
+
+  const [openFilter, setOpenFilter] = useState(false);
+const [filterData,setFilterData] = useState({})
+const [slected,setSelected] = useState({
+  id:'',
+nmae:''  })
+
+
+
+  const handleOpenFilter = () => {
+    setOpenFilter(true);
+  };
+
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
   const [demo, setDemo] = useState();
   useEffect(() => {
     demoi()
   }, []
   )
-  const demoi = async () => {
-
-    const data = JSON.stringify({
-      "project_id": "",
-      "taluk_id": "",
-      "district_id": "",
-      "funder_id": ""
-    });
-
+  const demoi = async (id,i,g) => {
+    console.log("'hscjh",id)
+    const data = {
+      trainerId: g?"": i===5?id?.id:'',
+      somId:g?"": i===12?id?.id:'',
+      gflId:g?"": i===13?id?.id:'',
+      funder_id:g?"": i===2?id?.id:'',
+      partner_id:g?"": i===1?id?.id:'',
+      project_id:g?"": i===3?id?.id:'',
+      opsManager:g?"": i===4?id?.id:'',
+    };
+     const datas = {
+      end_date: i,
+      taluk_id: "",
+      district_id:"",
+      trainerId: '',
+      emp_id: 1,
+      start_date: id,
+      somId: '',
+      gflId: '',
+      funder_id:"",
+      partner_id:"",
+      project_id: '',
+      opsManager: '',
+    };
+     
+    console.log(data,"datttttttaaaaaaaaaa")
     const config = {
       // http://3.7.7.138/appTest/getDemoGraphy.php
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getDemoGraphy.php',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       data
     };
-
+   console.log(data,"_______>data")
     axios(config)
       .then((response) => {
         setDemo(response.data.list)
@@ -73,7 +115,19 @@ export default function Demography() {
       .catch((error) => {
         console.log(error);
       });
+      
   }
+
+
+  
+
+  // const onSumbit = (e, i) => {
+  //   handleCloseFilter()
+
+  //   demoi(e?.district_id, e?.talaq_id, "country")
+  //   console.log(e, i, "<----datssdasdsa")
+  // }
+ 
 
   const rows = [
     createData('Admins', demo?.adminCount),
@@ -87,10 +141,11 @@ export default function Demography() {
     createData('Gelathi Facilator', demo?.gelathiCount),
     createData('Drivers', demo?.driverCount),
   ];
+
   const assetrows = [
     createData1('Buses', demo?.busCount),
-   
   ];
+
   const executionrows = [
     createData2('Number of Projects', demo?.project_count),
     createData2('Completed Training Batches', demo?.tb_count),
@@ -98,8 +153,46 @@ export default function Demography() {
     createData2('Completed Circle Meetings', demo?.cm_count),
     createData2('Completed Beehive Visits', demo?.bh_count),
   ];
+
+  const getData = (itm, i) => {
+    setSelected({
+      id: i,
+      name: itm?.name
+    })
+  
+    const data = i===2?{"funder_id":itm?.id}:i===1?{"partner_id":itm?.id}:{"project_id":itm?.id}
+    demoi(itm, i);
+    console.log("helloooo--->",data)
+    console.log(data,i,itm,"<----sdfssreerfer");
+    setFilterData(data);
+    handleCloseFilter();
+    console.log("itemmmm",itm);
+    console.log("iiii",i);
+  }
+
+ 
   return (
     <>
+    <Button style={{ float: "right",color:'#ed6c02'}} 
+          sx={{
+            '&:hover': {
+              backgroundColor: '#ffd796',
+            },
+          }}  
+            onClick={() => {
+              handleOpenFilter()
+            }}>
+            Filter
+          </Button>
+         
+          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <DemographyFilter
+              getData={getData}
+              isOpenFilter={openFilter}
+              onOpenFilter={handleOpenFilter}
+              onCloseFilter={handleCloseFilter}
+            />
+          </Stack>
       <Grid
         sx={{
           p: 2,
@@ -108,6 +201,7 @@ export default function Demography() {
           flexGrow: 1,
         }}
       >
+         
         <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead>
@@ -144,7 +238,7 @@ export default function Demography() {
             <TableHead>
               <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
 
-                <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Excecution</StyledTableCell>
+                <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Assets</StyledTableCell>
                 {/* <StyledTableCell>Available Quantity</StyledTableCell> */}
               </TableRow>
             </TableHead>
@@ -175,7 +269,7 @@ export default function Demography() {
               <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
 
                 <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Excecution</StyledTableCell>
-                {/* <StyledTableCell>Available Quantity</StyledTableCell> */}
+                
               </TableRow>
             </TableHead>
             <TableBody>
@@ -191,6 +285,191 @@ export default function Demography() {
           </Table>
         </TableContainer>
       </Grid>
+
+      <Grid item xs={12} sm={12} md={12} marginTop={3}>
+      {demo?.data?.map((itm) => {
+        return(
+          <Card
+          style={{
+            backgroundColor: '#f5f5f5',
+            flexDirection: 'column',
+            borderRadius: 12,
+            border: '2px solid',
+            borderColor: '#ffcc80',
+            marginBottom: '40px',
+          }}>
+            <CardContent>
+            <Typography variant="h4" component="h2" marginLeft={2}>
+                   {itm} jsgsfuewhgtf
+                  </Typography>
+          <Grid
+        sx={{
+          p: 2,
+          margin: 'auto',
+          maxWidth: 500,
+          flexGrow: 1,
+        }}
+      >
+         
+        <TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow style={{ width: "max-content", justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+           
+                <StyledTableCell colSpan={2} style={{ width: 'max-content', justifyContent: 'center', textAlign: 'center', }}>Resources</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+         <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                    Admins
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.adminCount}</StyledTableCell>
+        </StyledTableRow>  
+        <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                 Funders
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.funderCount}</StyledTableCell>
+        </StyledTableRow>  
+        <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                   Partners
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.partnerCount}</StyledTableCell>
+        </StyledTableRow>  
+        <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                   Program Manager
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.pmCount}</StyledTableCell>
+        </StyledTableRow>  
+        <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                    Sr.Operation Manager
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.somCount}</StyledTableCell>
+        </StyledTableRow>  
+        <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                    Operation Manager
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.opmCount}</StyledTableCell>
+        </StyledTableRow>  
+        <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                    Gelathi Faciliator Leads
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.gflCount}</StyledTableCell>
+        </StyledTableRow> 
+        <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                     Trainer
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.trainerCount}</StyledTableCell>
+        </StyledTableRow>  
+        <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                    Gelathi Faciliator 
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.gelathiCount}</StyledTableCell>
+        </StyledTableRow> 
+        <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                    Drivers
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.driverCount}</StyledTableCell>
+        </StyledTableRow> 
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+
+      <Grid
+        sx={{
+          p: 2,
+          margin: 'auto',
+          maxWidth: 500,
+          flexGrow: 1,
+        }}
+      >
+         <TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+
+                <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Assets</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+                <StyledTableRow>
+                  <StyledTableCell component="th" scope="row">
+                    Buses
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.busCount}</StyledTableCell>
+                </StyledTableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+
+      <Grid
+        sx={{
+          p: 2,
+          margin: 'auto',
+          maxWidth: 500,
+          flexGrow: 1,
+        }}
+      >
+        <TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+
+                <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Excecution</StyledTableCell>
+                
+              </TableRow>
+            </TableHead>
+            <TableBody>
+            
+                <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                    Number of Projects
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.project_count}</StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                   Completed Training Batches
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.tb_count}</StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                   Completed Village Visits
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.vv_count}</StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                  Completed Circle Meetings
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.cm_count}</StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                  Completed Beehive Visits
+                  </StyledTableCell>
+                  <StyledTableCell>{demo?.bh_count}</StyledTableCell>
+                </StyledTableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+      </CardContent>
+      </Card>
+  
+        )})}  </Grid>
     </>
   );
 }

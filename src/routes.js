@@ -1,11 +1,13 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 // layouts
 import DashboardLayout from './layouts/dashboard';
-//
+
 import Blog from './pages/Blog';
 import User from './pages/user/User';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+import Trainerdashboard from './pages/Trainerdashboardapp';
+import Gelathidashboard from './pages/Gelathidashboard';
 import Logout from './pages/Logout';
 import Register from './pages/Register';
 import Products from './pages/Products';
@@ -28,6 +30,7 @@ import EnrolledGelathi from './pages/projects/enrolledGelathi';
 import EnrolledGreenMotivators from './pages/projects/enrolledGreenMotivators';
 import EnrolledVyaapar from './pages/projects/enrolledVyaapar';
 import GelathiCirces from './pages/projects/gelathiCircles';
+import Trainers from './pages/Components/DashboardFilters/Trainers';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -63,7 +66,9 @@ export default function Router() {
         // ]
 
         [
-            { path: 'app', element: <DashboardApp />, id: [1, 3, 4, 5, 6] },
+            { path: 'app', element: <DashboardApp />, id: [1, 3, 4] },
+            {path:'trainer',element:<Trainerdashboard/>,id:[5]},
+            {path:'gelathi',element:<Gelathidashboard/>,id:[6]},
             { path: 'buslist', element: <BusList />, id: [1, 2, 3, 4, 5] },
             { path: 'planofaction', element: <PlanofAction />, id: [1, 2, 3, 5, 6] },
             //  { path: 'projects', element: <Blog />,id=[1,2,3] },
@@ -88,6 +93,7 @@ export default function Router() {
             element: <DashboardLayout />,
             children: getRoutes?.filter(itm => itm?.id.find(it => it == data))
         },
+        
         {
             path: '/',
             element: <Login />,
@@ -104,5 +110,14 @@ export default function Router() {
             path: '/dashboard/logout',
             element: <Logout />,
         },
+        {
+            path: '/dashboard/trainer',
+            element: <Trainerdashboard />,
+        },
+        {
+            path: '/dashboard/gelathi',
+            element: <Gelathidashboard/>,
+        },
+     
     ]);
 }

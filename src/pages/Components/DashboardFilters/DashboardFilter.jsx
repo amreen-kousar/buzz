@@ -166,7 +166,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 {/* } : null}>Partner</Button>
                 <Button onClick={() => { setData(3) }} sx={{ */}
 
-                {data == 6 | data == 1 && <Button onClick={() => { setData(3) }} sx={{
+                {/* {data == 6 | data == 1 && <Button onClick={() => { setData(3) }} sx={{ */}
+                {data==6|data==1|data==5&&<Button onClick={() => { setData(3) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -194,8 +195,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
                 } : null}>Trainer</Button>}
-
-                {data == 6 | data == 1 && <Button onClick={() => { setData(9) }}
+            
+               {data==6|data==1|data==5&&<Button onClick={() => { setData(9) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -207,7 +208,20 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     background: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   } : null}>Date Range</Button>}
-                {data == 1 && <Button onClick={() => { setData(7) }} sx={{
+
+            {data==5&&<Button
+                  sx={{
+                    ':hover': {
+                      bgcolor: '#ffd796', // theme.palette.primary.main
+                      color: '#ed6c02',
+                    },
+                    color: 'black'
+
+                  }}>Participant</Button>}
+
+
+
+                {data==1&&<Button onClick={() => { setData(7) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',

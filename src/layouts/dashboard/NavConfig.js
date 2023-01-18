@@ -10,7 +10,19 @@ const navConfig = [
     title: 'dashboard',
     path: '/dashboard/app',
     icon: getIcon('eva:pie-chart-2-fill'),
-    id: [1, 3, 4, 5, 6]
+    id: [1, 3, 4]
+  },
+  {
+    title: 'dashboard',
+    path: '/dashboard/trainer',
+    icon: getIcon('eva:pie-chart-2-fill'),
+    id: [5]
+  },
+  {
+    title: 'dashboard',
+    path: '/dashboard/gelathi',
+    icon: getIcon('eva:pie-chart-2-fill'),
+    id: [6]
   },
   {
     title: 'Plan Of Action',
@@ -34,13 +46,13 @@ const navConfig = [
     title: 'People',
     path: '/dashboard/people',
     icon: getIcon('eva:people-fill'),
-    id: [1, 2, 3, 5]
+    id: [1, 2, 3]
   },
   {
     title: 'Buzz Stock',
     path: '/dashboard/BuzzStock',
     icon: getIcon('ant-design:stock-outlined'),
-    id: [1, 2, 3, 5]
+    id: [1, 2, 3]
   },
   {
     title: 'My Profile',
@@ -52,7 +64,7 @@ const navConfig = [
     title: 'Demography',
     path: '/dashboard/demogrphy',
     icon: getIcon('material-symbols:demography'),
-    id: [1, 3, 5]
+    id: [1, 3]
   },
   {
     title: 'Travel Allowance',

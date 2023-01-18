@@ -60,7 +60,16 @@ export default function Login() {
               response.data.role == 2
             ) {
               navigate('/dashboard/buslist',)
-            } else {
+            } 
+            if(response.data.role==5)
+            {
+              navigate('/dashboard/trainer')
+            }
+            if(response.data.role==6)
+            {
+              navigate('/dashboard/gelathi')
+            }
+            else {
               navigate('/dashboard/app')
             }
 
