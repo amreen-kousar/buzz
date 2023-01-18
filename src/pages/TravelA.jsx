@@ -58,7 +58,7 @@ export default function TravelA() {
     console.log(dateValue)
     const userDetails = localStorage?.getItem("userDetails")
     var data = JSON.stringify({
-      "emp_id": JSON?.parse(userDetails)?.id,
+      "emp_id": 651,
       "date": new Date(dateValue)
     });
 
@@ -114,24 +114,24 @@ export default function TravelA() {
   return (
     <Page title="Dashboard: Products">
       <Container>
-    
+
         <Typography variant="h4" sx={{ mb: 5 }}>
           Travel Allowances
           {/* <Button style={{ float: "right" }}>Filters</Button> */}
         </Typography>
         <Tabs variant="fullWidth" aria-label="basic tabs example" indicatorColor='warning'>
-                <Tab
-                  sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
+          <Tab
+            sx={{
+              ':hover': {
+                bgcolor: '#ffd796', // theme.palette.primary.main
+                color: '#ed6c02',
+              },
 
-                    color: 'black',
-                  }} label="TEAM"  style={value == 0 ? {
-                    borderBottom: '3px solid #ed6c02',
-                    color: "#ed6c02",
-                  } : null} /></Tabs>
+              color: 'black',
+            }} label="TEAM" style={value == 0 ? {
+              borderBottom: '3px solid #ed6c02',
+              color: "#ed6c02",
+            } : null} /></Tabs>
 
 
 
@@ -149,14 +149,14 @@ export default function TravelA() {
         {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
         </Stack> */}
-       <br></br>
+        <br></br>
         <TextField id="outlined-basic" type="date" defaultValue={dateValue}
           fullWidth
           onChange={(e) => { setDatevalue(e?.target?.value); list() }} label="Select Range" variant="outlined" InputLabelProps={{
             shrink: true,
           }} />
-        
-        {list?.data?.length > 0 ? <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+
+        {listdata?.data?.length > 0 ? <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <Tabs variant="fullWidth" value={value} onChange={handleChange} aria-label="basic tabs example" indicatorColor='warning'>
