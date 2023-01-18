@@ -247,7 +247,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
         </Typography> */}
 
       <CardActions disableSpacing>
-        <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
+        <ExpandMore expand={expanded}  aria-expanded={expanded} aria-label="show more">
           <Button variant="warning"
             sx={{
               ':hover': {
@@ -260,7 +260,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
               },
               bgcolor:'#ffd796',
               color:"#ed6c02"
-            }} component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
+            }} component={RouterLink} to="#"  startIcon={<Iconify icon="eva:plus-fill" />}>
             Edit User
           </Button>
           {/* <Edit /> */}

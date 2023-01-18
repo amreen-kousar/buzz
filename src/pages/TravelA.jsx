@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import React from "react";
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Container, Stack, Typography, Box, Button, TextField } from '@mui/material';
+import { Container, Stack, Typography, Box, Button, TextField,Grid } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
@@ -119,7 +119,7 @@ export default function TravelA() {
           Travel Allowances
           {/* <Button style={{ float: "right" }}>Filters</Button> */}
         </Typography>
-        <Tabs variant="fullWidth" aria-label="basic tabs example" indicatorColor='warning'>
+        <Tabs variant="fullWidth" indicatorColor='warning'>
           <Tab
             sx={{
               ':hover': {
@@ -128,10 +128,10 @@ export default function TravelA() {
               },
 
               color: 'black',
-            }} label="TEAM" style={value == 0 ? {
+            }} label="TEAM" style={{
               borderBottom: '3px solid #ed6c02',
               color: "#ed6c02",
-            } : null} /></Tabs>
+            }} /></Tabs>
 
 
 
@@ -199,21 +199,28 @@ export default function TravelA() {
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              {listdata?.data?.map((itm) => {
+              {/* {listdata?.data?.map((itm) => {
                 console.log(itm, "<---asdasdasdsadas")
                 return (
                   <>
-                    <h1>{itm?.Ta_Name}</h1>
+                    <Grid>{itm?.Ta_Name}</Grid>
                   </>
                 )
-              })}
-              Item Two
+              })} */}  Item One
+         
             </TabPanel>
             <TabPanel value={value} index={1}>
               Item Two
             </TabPanel>
             <TabPanel value={value} index={2}>
-              Item Three
+            {listdata?.data?.map((itm) => {
+                console.log(itm, "<---asdasdasdsadas")
+                return (
+                  <>
+                    <Grid>{itm?.Ta_Name}</Grid>
+                  </>
+                )
+              })}
             </TabPanel>
           </Box>
         </Stack> : <div style={{ margin: "5rem", textAlign: "center" }}> no data found</div>}

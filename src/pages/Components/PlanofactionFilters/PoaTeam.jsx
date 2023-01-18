@@ -120,9 +120,16 @@ export default function PoaTeam({setUserId}) {
       <Typography variant="subtitle1" component="div">
         {/* Selected: {selectedValue} */}
       </Typography>
-      <br />
-      <Button variant="outlined" onClick={handleClickOpen}>
-       Select Buzz Memeber
+      <br /><br></br>
+      <Button variant="outlined"  onClick={handleClickOpen} style={{float:"right",color:"#ed6c02"}} sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+                borderColor:"#ed6c02"
+              },  
+              borderColor:"#ed6c02",
+              color:"#ed6c02"
+            }} >
+       Select Buzz Member
       </Button>
       <SimpleDialog
         teamData={teamData}
