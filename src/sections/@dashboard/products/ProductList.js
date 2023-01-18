@@ -53,13 +53,13 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
       {users.map((itm, index) => (
         <Grid key={index} item xs={4} sm={4} md={4}>
           {/* <Button> */}
-          {/* {console.log(itm, ",-gvvyub")} */}
+          
 
           <Card onClick={() => { viewUser(itm) }} height="70vw">
             <CardContent>
               <Grid direction={'column'} spacing={2} alignItems="center" justifyContent="space-between" height="20vh">
-
-                <Avatar sx={{ bgcolor: red[500], width: 100, height: 100, marginLeft: '30%', bgcolor: '#ed6c02' }} aria-label="recipe">
+           
+                <Avatar sx={{ bgcolor: red[500], width: 100, height: 100, marginLeft: '30%', bgcolor: '#ed6c02' }} src={itm?.profile_pic} aria-label="recipe">
                   {itm?.first_name.substring(0, 1)}
                 </Avatar>
                 <Typography sx={{ fontSize: 20, fontWeight: 'medium' }} mt={3} textAlign={'center'} >
