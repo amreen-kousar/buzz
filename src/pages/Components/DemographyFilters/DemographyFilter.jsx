@@ -28,7 +28,6 @@ import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
 import Funders from './Funders';
 import Demographylocation from './Demographylocation';
-import Demographyprojects from './Demographyprojects';
 
 // ----------------------------------------------------------------------
 
