@@ -1,9 +1,12 @@
+import { useState,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
-import Funders from './Busfunders';
-import { useState } from 'react';
-import Location from './Buslocation';
+import Funders from './TotalFunder';
+import Location from './TotalLocation';
+import TotalProject from './TotalProject';
+import DateRange from './TotalDateRange'
+
 // material
 import {
   Grid,
@@ -25,51 +28,16 @@ import {
 // components
 
 // ----------------------------------------------------------------------
-
-export const SORT_BY_OPTIONS = [
-  { value: 'featured', label: 'Featured' },
-  { value: 'newest', label: 'Newest' },
-  { value: 'priceDesc', label: 'Price: High-Low' },
-  { value: 'priceAsc', label: 'Price: Low-High' },
-];
-export const FILTER_GENDER_OPTIONS = ['Men', 'Women', 'Kids'];
-export const FILTER_CATEGORY_OPTIONS = ['All', 'Shose', 'Apparel', 'Accessories'];
-export const FILTER_RATING_OPTIONS = ['up4Star', 'up3Star', 'up2Star', 'up1Star'];
-export const FILTER_PRICE_OPTIONS = [
-  { value: 'below', label: 'Below $25' },
-  { value: 'between', label: 'Between $25 - $75' },
-  { value: 'above', label: 'Above $75' },
-];
-export const FILTER_COLOR_OPTIONS = [
-  '#00AB55',
-  '#000000',
-  '#FFFFFF',
-  '#FFC0CB',
-  '#FF4842',
-  '#1890FF',
-  '#94D82D',
-  '#FFC107',
-];
-
-// ----------------------------------------------------------------------
-
-BusListFilter.propTypes = {
+TotalFilter.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
 
-export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, same }) {
-
-  const [selectDATA, setSelectData] = useState()
-  const data = localStorage?.getItem('userId')
-
+export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter, getData,onSumbit,same }) {
+  const [selectDATA, setSelectData] = useState();
   return (
     <>
-      {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
-
       <Drawer
         anchor="right"
         open={isOpenFilter}
@@ -85,6 +53,7 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25, color: 'black' }}>
             Filters
             {selectDATA && selectDATA === 2 && ':  Funders'}
+            {selectDATA && selectDATA === 3 && ':  Projects'}
             {selectDATA && selectDATA === 7 && ': Location'}
           </Typography>
           <IconButton
@@ -103,13 +72,10 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
           <div>
             <Card style={{ backgroundColor: '#f6f8fb' }}>
               <CardContent>
-                {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                 <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>
                   Categories
                 </Typography>
-                {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
-                {/* <Grid spacing={1} > */}
-                {data == 2 | data == 1 && <Button
+                <Button
                   onClick={() => {
                     setSelectData(2);
                   }}
@@ -126,13 +92,11 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   }}
                 >
                   Funders
-                </Button>}
-                {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
-                {/* <Button>Funders</Button> */}
-                {data == 2 | data == 1 && <Button
-                  onClick={() => {
-                    setSelectData(3);
-                  }}
+                </Button>
+                <Button
+                 onClick={() => {
+                  setSelectData(3);
+                }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -146,8 +110,8 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   }}
                 >
                   Project
-                </Button>}
-                {data == 2 | data == 1 && <Button
+                </Button>
+                <Button
                   onClick={() => {
                     setSelectData(7);
                   }}
@@ -164,9 +128,9 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   }}
                 >
                   Location
-                </Button>}
-                {data == 2 | data == 1 && <Button
-                  onClick={same}
+                </Button>
+                <Button
+                onClick={same}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -179,12 +143,15 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                     color: 'black',
                   }}
                 >
-                  All Bus
-                </Button>}
+                 Date Range
+                </Button>
               </CardContent>
             </Card>
             <Grid style={{ marginTop: 30 }}>
               <Funders getData={getData} selectDATA={selectDATA} />
+            </Grid>
+            <Grid style={{ marginTop: 30 }}>
+              <TotalProject getData={getData} selectDATA={selectDATA} />
             </Grid>
 
             {selectDATA === 7 && (
@@ -198,7 +165,7 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
               </Grid>
             )}
 
-
+           
           </div>
         </Scrollbar>
       </Drawer>

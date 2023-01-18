@@ -105,10 +105,12 @@ export default function FullScreenDialog() {
   const data = new FormData();
 
   const convertImage = (e) => {
-    data.append('emp_id', 15);
+    console.log("this is calleddddfdsfs")
+    data.append('emp_id', 651);
     data.append('file', e.target.files[0]);
     setImagePath([...imagePath, e.target.files[0]])
-    console.log(e.target.files[0], "files")
+    const imageData =  URL.createObjectURL(e.target.files[0]);
+    console.log(imageData, "files")
     getBase64(e.target.files[0], function (base64Data) {
       setImage([...image, base64Data])
       setViewImage(true)
@@ -132,7 +134,7 @@ export default function FullScreenDialog() {
       "klmtr": sendData?.rateperkm,
       "da": sendData?.foodexpenses,
       "others": sendData?.otherExpenses,
-      "emp_id": 15,
+      "emp_id": 651,
       "mode_of_travel": sendData?.modeoftravel,
       "other_text": sendData?.OtherAmount
     });
@@ -148,7 +150,9 @@ export default function FullScreenDialog() {
 
     axios(config)
       .then(function (response) {
+
         console.log(JSON.stringify(response.data));
+        handleClose()
         postImages()
       })
       .catch(function (error) {
@@ -159,30 +163,35 @@ export default function FullScreenDialog() {
 
   const postImages = async () => {
     var dataImage = []
-    Array.from(imagePath).forEach(image => {
-      dataImage.push({
-        name: image.name, lastModified: image.lastModified, lastModifiedDate: image.lastModifiedDate,
-        size: image.size, type: image.type, webkitRelativePath: image.webkitRelativePath
-      });
-    });
-    var config = {
-      method: 'post',
-      url: "https://bdms.buzzwomen.org/appTest/new/taAttachments.php",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      body: data
+    const form = new FormData()
+    form?.append("emp_id",651)
+    //form?.append("file[]",imagePath[0])
+
+    const data = imagePath?.map(itm=>{
+      form?.append("file[]",itm)
+    })
+    var requestOptions = {
+      method: 'POST',
+      body: form,
+      redirect: 'follow'
     };
-    console.log(config)
-    let res = await fetch(config)
-    console.log(res)
-    // axios(config)
-    //   .then(function (imageResponse) {
-    //     console.log(JSON.stringify(imageResponse.data, "images Upload"));
-    //   })
-    //   .catch(function (imageError) {
-    //     console.log(imageError);
-    //   });
+    // var config = {
+    //   method: 'post',
+    //   url: "https://bdms.buzzwomen.org/appTest/new/taAttachments.php",
+    //   headers: {
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    //   body: form
+    // };
+    //console.log(config)
+    let res =  fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn=>{
+      console.log(itn,"<--itemgh")
+    })
+    .catch(err=>{
+      console.log(err,"<---wertyu")
+    })
+    //console.log(res,"<----2werdcfvghbj")
+    
 
   }
 
@@ -458,6 +467,7 @@ export default function FullScreenDialog() {
               <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
             </label>
           </div>
+          <Button onClick={postImages}>Send Images</Button>
           <br /><br />
 
           {/* <Button onClick={() => capture()}>Click here to to upload snaps</Button> */}

@@ -22,7 +22,7 @@ import {
 import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import { ColorManyPicker } from '../../components/color-utils';
-
+import BusEdit from './Buslistfilters/BusEdit'
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -154,19 +154,10 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>
-              {userAccess.includes(userIdCheck) &&
-                <div>
-
-                  <Button onClick={editBus} style={{ float: "right" }} >   <Iconify icon="ic:baseline-edit" width={30} height={30} /></Button>
-                  <Button onClick={DeleteBus} >  <Iconify icon="ic:baseline-delete" style={{ color: "red" }} width={30} height={30} /></Button>
-
-
-                  <br /><br />
-                </div>
-
-
-              }
-              <Card>
+            {/* {userAccess.includes(userIdCheck) && */}
+            <Button onClick={DeleteBus}>Delete Bus</Button>
+           <BusEdit clcikData={detailsData} />
+            <Card>
                 <CardContent>
                   <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
                     Registration Date

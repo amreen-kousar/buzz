@@ -5,7 +5,7 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
 // mock
-import account from '../../_mock/account';
+// import account from '../../_mock/account';
 // hooks
 import useResponsive from '../../hooks/useResponsive';
 // components
@@ -44,6 +44,9 @@ DashboardSidebar.propTypes = {
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const data = localStorage?.getItem('userId')
 
+  var account = localStorage?.getItem('userDetails')
+  account = JSON.parse(account)
+
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive('up', 'lg');
@@ -61,10 +64,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         '& .simplebar-content': { height: 1, display: 'flex', flexDirection: 'column' },
       }}
     >
-      <div style={{textAlign:"center"}}>
+      <div style={{ textAlign: "center" }}>
         <Logo />
       </div>
-      {console.log(account.displayName, "<--yghuj")}
+      {console.log(account.displayName, account.role, "<--yghuj")}
       <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ed6c02">
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
@@ -73,8 +76,8 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
               <Typography variant="subtitle2" color='#ffffff' >
                 {account.displayName}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
+              <Typography variant="body2" sx={{ color: '#ffffff' }}>
+                {account.role_name}
               </Typography>
             </Box>
           </AccountStyle>

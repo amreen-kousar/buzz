@@ -19,14 +19,23 @@ export default function Projects({selectDATA,getData}) {
       },[selectDATA]
       )
   const project = async () => {
+  // const data = JSON.stringify({
+  //   "manager_id": 2
+  // });
   const data = JSON.stringify({
-    "manager_id": 2
+    "role_id": 1,
+    "filter_type": selectDATA,
+    "pageNum": 1,
+    "emp_id": 206
   });
   
   const config = {
-    method: 'get',
+    // method: 'get',
+    method: 'post',
     // url: 'http://3.7.7.138/appTest/getProjectList.php',
-    url: 'https://bdms.buzzwomen.org/appTest/getProjectList.php?manager_id=2',
+    // url: 'https://bdms.buzzwomen.org/appTest/getProjectList.php?manager_id=2',
+    url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
+
     headers: { 
       'Content-Type': 'application/json'
     },

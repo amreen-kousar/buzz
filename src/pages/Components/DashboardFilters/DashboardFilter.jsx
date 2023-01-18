@@ -85,10 +85,10 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
     setSelectData(localStorage.getItem('selectedData'))
     console.log(selectDATA)
   }, [isOpenFilter])
- 
 
-  console.log("xncvjhdat",data)
-  
+
+  console.log("xncvjhdat", data)
+
   // <TextField fullWidth id="outlined-basic" label="Bus Number" required variant="outlined" value={AddUser.busNumber} onChange={(e) => { setAddUser({ ...AddUser, busNumber: e.target.value }) }} />
   return (
     <>
@@ -105,7 +105,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
           sx: { width: 400 },
         }}
       >
-      
+
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25, color: 'black' }}>
             Filters
@@ -137,8 +137,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                 <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Categories</Typography>
 
-               
-              {data==1&&<Button onClick={() => { setData(2) }}
+
+                {data == 1 && <Button onClick={() => { setData(2) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -150,7 +150,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     color: '#ed6c02',
                   } : null}>Funders</Button>}
 
-                {data==1&&<Button onClick={() => { setData(1) }}
+                {data == 1 && <Button onClick={() => { setData(1) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -162,14 +162,18 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     background: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   } : null}>Partner</Button>}
-                {data==6|data==1&&<Button sx={{
+
+                {/* } : null}>Partner</Button>
+                <Button onClick={() => { setData(3) }} sx={{ */}
+
+                {data == 6 | data == 1 && <Button onClick={() => { setData(3) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   },
                   color: 'black',
                 }}>Project</Button>}
-                {data==1&&<Button sx={{
+                {data == 1 && <Button sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -178,8 +182,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   color: 'black',
                 }}>Operation Manager</Button>}
 
-             
-                {data==1&&<Button onClick={() => { setData(5) }} sx={{
+
+                {data == 1 && <Button onClick={() => { setData(5) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -190,8 +194,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
                 } : null}>Trainer</Button>}
-            
-               {data==6|data==1&&<Button onClick={() => { setData(9) }}
+
+                {data == 6 | data == 1 && <Button onClick={() => { setData(9) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -203,7 +207,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     background: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   } : null}>Date Range</Button>}
-                {data==1&&<Button onClick={() => { setData(7) }} sx={{
+                {data == 1 && <Button onClick={() => { setData(7) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -214,7 +218,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
                 } : null}>Location</Button>}
-                {data==1&&<Button sx={{
+                {data == 1 && <Button sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -222,7 +226,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   color: 'black',
                 }}>Participant</Button>}
                 {/* </Grid> */}
-                {data==1&&<Button onClick={() => { setData(12) }} sx={{
+                {data == 1 && <Button onClick={() => { setData(12) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -233,7 +237,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
                 } : null}>Sr.Operation Manager</Button>}
-                {data==1&&<Button onClick={() => { setData(13) }} s sx={{
+                {data == 1 && <Button onClick={() => { setData(13) }} s sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -244,7 +248,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
                 } : null}>Gelathis Facilator Leads</Button>}
-              
+
               </CardContent>
             </Card>
             <Grid style={{ marginTop: 30 }}>
@@ -256,12 +260,14 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
             <Grid style={{ marginTop: 30 }}>
               <Projects getData={getData} selectDATA={selectDATA} />
             </Grid>
-            {selectDATA&&selectDATA===9&&<Grid style={{ marginTop: 30 }}>
-                <DateRangeFilter onDateSubmit={onDateSubmit} />
-              </Grid>}
-           {selectDATA&&selectDATA===7&&<Grid style={{ marginTop: 30 }}>
+            {/* <Grid style={{ marginTop: 30 }}>
+                <DateRangeF onDateSubmit={onDateSubmit} />
+              </Grid> */}
+              
+            <Grid style={{ marginTop: 30 }}>
               <Location selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
-            </Grid>}
+            </Grid>
+
             <Grid style={{ marginTop: 30 }}>
               <Trainers getData={getData} selectDATA={selectDATA} />
             </Grid>
@@ -272,10 +278,10 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
               <SrOperationManager getData={getData} selectDATA={selectDATA} />
             </Grid>
 
-            {/* <Grid style={{ marginTop: 10 }}>
+  {/* <Grid style={{ marginTop: 10 }}>
                 <GelathisLead  onDateSubmit={onDateSubmit}/>
               </Grid> */}
-            {/* <Grid style={{ marginTop: 30 }}>
+  {/* <Grid style={{ marginTop: 30 }}>
                 <Partners />
               </Grid>
               <Grid style={{ marginTop: 30 }}>
@@ -300,10 +306,10 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
 
 
 
-          </div>
-          {/* </Stack> */}
-        </Scrollbar>
-      </Drawer>
+          </div >
+    {/* </Stack> */ }
+        </Scrollbar >
+      </Drawer >
     </>
   );
 }
