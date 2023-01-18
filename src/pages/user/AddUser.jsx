@@ -61,7 +61,7 @@ function AddUser(props) {
             setErrors({ ...errors, office_email_id: true })
         }
 
-        console.log(errors.office_email_id)
+        // console.log(errors.office_email_id)
 
     }
 
@@ -112,6 +112,8 @@ function AddUser(props) {
 
         axios(config)
             .then((response) => {
+
+                console.log(response, "roles")
                 setRoles(response.data.list)
 
             })
