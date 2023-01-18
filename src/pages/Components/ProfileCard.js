@@ -48,6 +48,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
   const [editData,setEditData]= useState({
     firstName:profileData?.first_name,
     lastName:profileData?.last_name,
+    profilepic:profileData?.profile_pic,
     gender:profileData?.gender,
     doj:profileData?.doj,
     pincode:profileData?.pincode,
@@ -70,6 +71,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
     setEditData({
       firstName:profileData?.first_name,
       lastName:profileData?.last_name,
+      profilepic:profileData?.profile_pic,
       gender:profileData?.gender,
       doj:profileData?.doj,
       pincode:profileData?.pincode,
@@ -104,6 +106,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
       "countryID": 1,
       "first_name": editData?.firstName,
       "last_name": editData?.lastName,
+      "profile_pic": editData?.profile_pic,
       "gender": editData?.gender,
       "doj": editData?.doj,
       "pincode": editData?.pincode,
@@ -154,8 +157,8 @@ export default function RecipeReviewCard({profileData,changeUser}) {
           flexGrow: 1,
         }}
         avatar={
-          <Avatar sx={{ bgcolor: "#ed6c02", width: 100, height: 100, marginLeft: 13 }} aria-label="recipe">
-            P
+          <Avatar sx={{ bgcolor: "#ed6c02", width: 100, height: 100, marginLeft: 13 }} aria-label="recipe" src={profileData?.profile_pic}>
+            {profileData?.first_name.substring(0, 1)}
           </Avatar>
         }
         // action={
@@ -247,7 +250,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
         </Typography> */}
 
       <CardActions disableSpacing>
-        <ExpandMore expand={expanded}  aria-expanded={expanded} aria-label="show more">
+        <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
           <Button variant="warning"
             sx={{
               ':hover': {
