@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, forwardRef } from 'react';
 import { useForm } from "react-hook-form";
 import React from "react";
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Container, Stack, Typography, Box, Button, TextField,Grid } from '@mui/material';
+import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar } from '@mui/material';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
 import TravelDialog from './Components/DashboardFilters/TravelDialog'
+import moment from 'moment';
 
 // components
 function TabPanel(props) {
@@ -50,16 +52,24 @@ export default function TravelA() {
   //const [image, setImage] = React.useState(['data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==']);
   const [viewImage, setViewImage] = React.useState(false);
   const [listdata, setListData] = React.useState()
+  const [openMessage, setOpenMessage] = React.useState(false);
+  const [message, setMessage] = useState(false)
+
   useEffect(() => {
     list()
   }, [dateValue]
   )
+
+  const Alert = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
   const list = async => {
     console.log(dateValue)
     const userDetails = localStorage?.getItem("userDetails")
     var data = JSON.stringify({
       "emp_id": 651,
-      "date": new Date(dateValue)
+      "date": moment(dateValue?.$d)?.format('YYYY-MM-DD')
     });
 
     var config = {
@@ -119,6 +129,11 @@ export default function TravelA() {
           Travel Allowances
           {/* <Button style={{ float: "right" }}>Filters</Button> */}
         </Typography>
+        <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+          <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
+            {message}
+          </Alert>
+        </Snackbar>
         <Tabs variant="fullWidth" indicatorColor='warning'>
           <Tab
             sx={{
@@ -207,13 +222,13 @@ export default function TravelA() {
                   </>
                 )
               })} */}  Item One
-         
+
             </TabPanel>
             <TabPanel value={value} index={1}>
               Item Two
             </TabPanel>
             <TabPanel value={value} index={2}>
-            {listdata?.data?.map((itm) => {
+              {listdata?.data?.map((itm) => {
                 console.log(itm, "<---asdasdasdsadas")
                 return (
                   <>
@@ -231,7 +246,10 @@ export default function TravelA() {
 
 
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <TravelDialog />
+          <TravelDialog viewMessage={(text) => {
+            setMessage(text)
+            setOpenMessage(true)
+          }} />
         </Stack>
         {/* </Stack> */}
 

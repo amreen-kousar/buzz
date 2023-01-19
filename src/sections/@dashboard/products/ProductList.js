@@ -53,12 +53,12 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
       {users.map((itm, index) => (
         <Grid key={index} item xs={4} sm={4} md={4}>
           {/* <Button> */}
-          
 
-          <Card onClick={() => { viewUser(itm) }} height="70vw">
+
+          <Card onClick={() => { viewUser(itm) }}>
             <CardContent>
-              <Grid direction={'column'} spacing={2} alignItems="center" justifyContent="space-between" height="20vh">
-           
+              <Grid direction={'column'} spacing={2} alignItems="center" justifyContent="space-between" height="180px">
+
                 <Avatar sx={{ bgcolor: red[500], width: 100, height: 100, marginLeft: '30%', bgcolor: '#ed6c02' }} src={itm?.profile_pic} aria-label="recipe">
                   {itm?.first_name.substring(0, 1)}
                 </Avatar>
@@ -66,6 +66,9 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
                   {/* {users?.first_name} */}
                   {`${itm?.first_name} ${itm?.last_name}`}
                 </Typography>
+                <div style={{ textAlign: "center", fontSize: "0.8rem" }}>
+                  {itm?.role_name}
+                </div>
               </Grid>
             </CardContent>
           </Card>

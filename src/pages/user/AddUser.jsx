@@ -243,6 +243,7 @@ function AddUser(props) {
                 console.log(response)
                 if (response?.data?.success) {
                     setOpen(false)
+                    props.viewMessage('User Added successfully');   
                 }
             })
             .catch((error) => {

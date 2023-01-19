@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 import axios from 'axios';
-import { Container, Stack, Typography, Box, Toolbar, Button, TextField, Select, MenuItem } from '@mui/material';
+import { Container, Stack, Typography, Box, Toolbar, Button, TextField, Select, MenuItem, Snackbar } from '@mui/material';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
 // components
 import Pagination from '@mui/material/Pagination';
 
@@ -42,6 +44,14 @@ export default function User() {
   const [searchUser, setSearchUser] = useState("");
   const [page, setPage] = useState(1)
   const [count, setCount] = useState('')
+  const [openMessage, setOpenMessage] = useState(false)
+  const [message, setMessage] = useState(false)
+
+  const Alert = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);
     setScroll(scrollType);
@@ -167,12 +177,16 @@ export default function User() {
     console.log(newPage, "<----efesfdsefsd")
   }
 
-  
+
 
   return (
     <Page title="All Users">
       <DashboardNavbar getSearch={(e) => setSearchUser(e)} onOpenSidebar={() => setOpen(true)} />
-
+      <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+        <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
+          {message}
+        </Alert>
+      </Snackbar>
       <div>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <UserFilter
@@ -183,7 +197,10 @@ export default function User() {
         </Stack>
         {userAccess.includes(userIdCheck) &&
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <AddUser data={ceoUser} />
+            <AddUser viewMessage={(text) => {
+              setMessage(text)
+              setOpenMessage(true)
+            }} data={ceoUser} />
           </Stack>
         }
       </div>
@@ -200,7 +217,7 @@ export default function User() {
               handlepeopleOpenFilter()
             }}>Filters</Button>
         </Typography>
-      
+
 
         <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ mb: 1 }}>
@@ -216,7 +233,7 @@ export default function User() {
           onOpenFilter={handleOpenFilter}
           onCloseFilter={handleCloseFilter} />
         <ProductCartWidget /><br></br>
-        <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{color:"#ffd796"}} style={{float:"right"}} />
+        <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
       </Container>
     </Page >
   );

@@ -93,7 +93,7 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
               onCloseFilter();
             }}
           >
-            <Iconify icon="eva:close-fill" width={20} height={20} />
+          <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
 
