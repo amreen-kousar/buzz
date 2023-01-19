@@ -109,7 +109,7 @@ export default function FullScreenDialog() {
     data.append('emp_id', 651);
     data.append('file', e.target.files[0]);
     setImagePath([...imagePath, e.target.files[0]])
-    const imageData =  URL.createObjectURL(e.target.files[0]);
+    const imageData = URL.createObjectURL(e.target.files[0]);
     console.log(imageData, "files")
     getBase64(e.target.files[0], function (base64Data) {
       setImage([...image, base64Data])
@@ -164,11 +164,11 @@ export default function FullScreenDialog() {
   const postImages = async () => {
     var dataImage = []
     const form = new FormData()
-    form?.append("emp_id",651)
+    form?.append("emp_id", 651)
     //form?.append("file[]",imagePath[0])
 
-    const data = imagePath?.map(itm=>{
-      form?.append("file[]",itm)
+    const data = imagePath?.map(itm => {
+      form?.append("file[]", itm)
     })
     var requestOptions = {
       method: 'POST',
@@ -184,14 +184,14 @@ export default function FullScreenDialog() {
     //   body: form
     // };
     //console.log(config)
-    let res =  fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn=>{
-      console.log(itn,"<--itemgh")
+    let res = fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn => {
+      console.log(itn, "<--itemgh")
     })
-    .catch(err=>{
-      console.log(err,"<---wertyu")
-    })
+      .catch(err => {
+        console.log(err, "<---wertyu")
+      })
     //console.log(res,"<----2werdcfvghbj")
-    
+
 
   }
 
@@ -306,7 +306,7 @@ export default function FullScreenDialog() {
             </Typography>
 
 
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            <Button autoFocus color="inherit" onClick={() => SendData()}>
               save
             </Button>
           </Toolbar>
@@ -473,7 +473,7 @@ export default function FullScreenDialog() {
           {/* <Button onClick={() => capture()}>Click here to to upload snaps</Button> */}
 
         </div>
-        <Button onClick={() => SendData()} variant="filled">Upload</Button>
+        {/* <Button onClick={() => SendData()} variant="filled">Upload</Button> */}
       </Dialog>
     </div>
   );
