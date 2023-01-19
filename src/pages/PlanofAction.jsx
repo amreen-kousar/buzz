@@ -1,4 +1,4 @@
-import { useEffect, useState,forwardRef, useRef  } from 'react';
+import { useEffect, useState, forwardRef, useRef } from 'react';
 import axios from 'axios';
 import React from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
@@ -6,7 +6,7 @@ import account from '.././_mock/account';
 import { styled } from '@mui/material/styles';
 
 import PropTypes from 'prop-types';
-import {Link, Container, Stack, Typography, Box, Button, TextField, CardContent, Card,Avatar, Grid} from '@mui/material';
+import { Link, Container, Stack, Typography, Box, Button, TextField, CardContent, Card, Avatar, Grid } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
@@ -27,7 +27,7 @@ import { SecurityUpdate } from '@mui/icons-material';
 import moment from 'moment';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
- 
+
   return (
     <div
       role="tabpanel"
@@ -61,21 +61,21 @@ function a11yProps(index) {
 export default function PlanofAction() {
   const [value, setValue] = React.useState(0);
   const [openFilter, setOpenFilter] = useState(false);
-  const [drawerEvent,SetDrawerEvent] = useState(false);
+  const [drawerEvent, SetDrawerEvent] = useState(false);
   const [poa, SetPoa] = useState([]);
   const [openMessage, setOpenMessage] = useState(false);
-  const [select,setSelect] = useState();
-  const [season,setSeason] = useState(0)
-  const [date,setDate] = useState("")
-  const [ userId,setUserId]= useState()
-  const [poaData,setPoaData] =[{
+  const [select, setSelect] = useState();
+  const [season, setSeason] = useState(0)
+  const [date, setDate] = useState("")
+  const [userId, setUserId] = useState()
+  const [poaData, setPoaData] = [{
     emp_id: "",
     team: "",
     date: "",
     for: ""
   }]
   const handleChange = (event, newValue) => {
-    console.log("gsfdhfgdhgfhgf",newValue)
+    console.log("gsfdhfgdhgfhgf", newValue)
     setSeason(newValue)
     setValue(newValue);
   };
@@ -95,13 +95,13 @@ export default function PlanofAction() {
   };
   useEffect(() => {
     todaypoa();
-  }, [season,date,userId]);
+  }, [season, date, userId]);
   const todaypoa = (async) => {
-    console.log(date,"<----ergregerger")
+    console.log(date, "<----ergregerger")
     var data = JSON.stringify({
-      "emp_id": userId?userId:651,
+      "emp_id": userId ? userId : 651,
       "team": "",
-      "date":moment(date?.$d)?.format('YYYY-MM-DD'),
+      "date": moment(date?.$d)?.format('YYYY-MM-DD'),
       "for": season
     });
 
@@ -117,10 +117,10 @@ export default function PlanofAction() {
     axios(config)
       .then(function (response) {
         let arr = []
-        response?.data?.data?.map((itm,index)=>{
-         arr.push(...itm)
+        response?.data?.data?.map((itm, index) => {
+          arr.push(...itm)
         })
-        SetPoa( response?.data?.data);
+        SetPoa(response?.data?.data);
         console.log(arr, '<-----------poaDatalist');
       })
       .catch(function (error) {
@@ -139,15 +139,15 @@ export default function PlanofAction() {
     borderRadius: Number(theme.shape.borderRadius) * 1.5,
     backgroundColor: theme.palette.grey[500_12],
   }));
-  const  setDefaut = ()=>{
+  const setDefaut = () => {
     setUserId(651)
   }
   return (
     <Page title="Dashboard: Products">
       <Container>
-      <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+        <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
           <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
-           created
+            created
           </Alert>
         </Snackbar>
         <Typography variant="h4" sx={{ mb: 5 }}>
@@ -167,12 +167,12 @@ export default function PlanofAction() {
           </AccountStyle>
         </Link>
       </Box> */}
-          <PoaTeam setUserId={(e)=>
-          setUserId(e)
-          
+          <PoaTeam setUserId={(e) =>
+            setUserId(e)
+
           } />
           {/* {console.log(account.displayName,account.role, "<--yghuj")} */}
-      {/* <Box onClick={setDefaut} sx={{ mb: 5, mx: 2}} backgroundColor="#ed6c02" style={{float:"right"}}>
+          {/* <Box onClick={setDefaut} sx={{ mb: 5, mx: 2}} backgroundColor="#ed6c02" style={{float:"right"}}>
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
             <Avatar src={account.photoURL} alt="photoURL" />
@@ -187,14 +187,14 @@ export default function PlanofAction() {
           </AccountStyle>
         </Link>
       </Box> */}
-          
+
         </Typography>
 
         {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
         </Stack> */}
         <Stack>
-          <PoaCreate setSucess={()=>{setOpenMessage(true)}} />
+          <PoaCreate setSucess={() => { setOpenMessage(true) }} />
         </Stack>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <POA
@@ -209,7 +209,7 @@ export default function PlanofAction() {
         </Stack>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <PoaEvent
-          select={select}
+            select={select}
             isOpenEvent={drawerEvent}
             onOpenEvent={handleOpenEvent}
             onCloseEvent={handleCloseEvent}
@@ -219,11 +219,11 @@ export default function PlanofAction() {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Date"
-               value={date}
-               onChange={(newValue) => {
-                console.log(newValue,"<----newValuenewValue")
+              value={date}
+              onChange={(newValue) => {
+                console.log(newValue, "<----newValuenewValue")
                 setDate(newValue)
-               }}
+              }}
               //   setSendData({ ...sendData, date: newValue })
               // }}
               renderInput={(params) => <TextField {...params} fullWidth />}
@@ -253,9 +253,9 @@ export default function PlanofAction() {
                   style={
                     value == 0
                       ? {
-                          borderBottom: '3px solid #ed6c02',
-                          color: '#ed6c02',
-                        }
+                        borderBottom: '3px solid #ed6c02',
+                        color: '#ed6c02',
+                      }
                       : null
                   }
                   label="Today"
@@ -273,9 +273,9 @@ export default function PlanofAction() {
                   style={
                     value == 1
                       ? {
-                          borderBottom: '3px solid #ed6c02',
-                          color: '#ed6c02',
-                        }
+                        borderBottom: '3px solid #ed6c02',
+                        color: '#ed6c02',
+                      }
                       : null
                   }
                   label="Week"
@@ -293,9 +293,9 @@ export default function PlanofAction() {
                   style={
                     value == 2
                       ? {
-                          borderBottom: '3px solid #ed6c02',
-                          color: '#ed6c02',
-                        }
+                        borderBottom: '3px solid #ed6c02',
+                        color: '#ed6c02',
+                      }
                       : null
                   }
                   label="Month"
@@ -305,132 +305,134 @@ export default function PlanofAction() {
             </Box>
 
             <TabPanel value={value} index={0}>
-             
+
               {
-             poa?.length !==0? 
-               poa?.map((item) =>{
-                return(
-                  // <h1>{item[0]?.actual_Date}</h1>
-             item?.length !==0&&item?.map(itm=>{
-                  
-                  return (
-              <Card style={{marginTop:35}}  onClick={() => {
-                setSelect(itm)
-              handleOpenEvent();
-            }}>
-                <CardContent>
-                   <Stack>
-                   {itm?.name}
-                    </Stack>
-                   <Stack>
-                   {itm?.roleName}
-                   </Stack>
-                   <Stack>
-                   {itm?.emp_name}
-                   
-                 </Stack>
-                 <Stack direction={'row'} spacing={5} mt={2}>
-                  <PoaEdit itm={itm}   />
-                  <Button style={{float:"right",color:"#ed6c02"}} variant="outlined" sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-                borderColor:"#ed6c02"
-              },  
-              borderColor:"#ed6c02",
-              color:"#ed6c02"
-            }}>Delete</Button>
-                 </Stack>
-                </CardContent>
-              </Card>
-              
-              ) 
-          
-                })
-                )
-              })
-                :<Grid>
-                  no data found
-                </Grid>
-              } 
+                poa?.length !== 0 ?
+                  poa?.map((item) => {
+                    return (
+                      // <h1>{item[0]?.actual_Date}</h1>
+                      item?.length !== 0 && item?.map(itm => {
+
+                        return (
+                          <Card style={{ marginTop: 35 }}>
+                            <CardContent>
+                              <Stack style={{ cursor: 'pointer' }} onClick={() => {
+                                setSelect(itm)
+                                handleOpenEvent();
+                              }}>
+                                <Stack>
+                                  {itm?.name}
+                                </Stack>
+                                <Stack>
+                                  {itm?.roleName}
+                                </Stack>
+                                <Stack>
+                                  {itm?.emp_name}
+
+                                </Stack>
+                              </Stack>
+                              <Stack direction={'row'} spacing={5} mt={2}>
+                                <PoaEdit itm={itm} />
+                                <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
+                                  '&:hover': {
+                                    backgroundColor: '#ffd796',
+                                    borderColor: "#ed6c02"
+                                  },
+                                  borderColor: "#ed6c02",
+                                  color: "#ed6c02"
+                                }}>Delete</Button>
+                              </Stack>
+                            </CardContent>
+                          </Card>
+
+                        )
+
+                      })
+                    )
+                  })
+                  : <Grid>
+                    no data found
+                  </Grid>
+              }
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-            {
-                poa?.map((itm) =>{
-                   {console.log(itm,'<-------------itmitmitmitmitmitm')}
+              {
+                poa?.map((itm) => {
+                  { console.log(itm, '<-------------itmitmitmitmitmitm') }
                   return (
-              <Card  style={{marginTop:35}}  onClick={() => {
-                setSelect(itm)
-              handleOpenEvent();
-            }}>
-                <CardContent>
-                <Stack>{itm?.name}</Stack>
-                <Stack>{itm?.roleName}</Stack>
-                <Stack>{itm?.emp_name}</Stack>
-                <Stack direction={'row'} spacing={5} mt={2}>
-                  <PoaEdit itm={itm}   />
-                  <Button style={{float:"right",color:"#ed6c02"}} variant="outlined" sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-                borderColor:"#ed6c02"
-              },  
-              borderColor:"#ed6c02",
-              color:"#ed6c02"
-            }}>Delete</Button>
-                 </Stack>
-                </CardContent>
-              </Card>
-              
-              ) 
+                    <Card style={{ marginTop: 35 }} onClick={() => {
+                      setSelect(itm)
+                      handleOpenEvent();
+                    }}>
+                      <CardContent>
+                        <Stack>{itm?.name}</Stack>
+                        <Stack>{itm?.roleName}</Stack>
+                        <Stack>{itm?.emp_name}</Stack>
+                        <Stack direction={'row'} spacing={5} mt={2}>
+                          <PoaEdit itm={itm} />
+                          <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
+                            '&:hover': {
+                              backgroundColor: '#ffd796',
+                              borderColor: "#ed6c02"
+                            },
+                            borderColor: "#ed6c02",
+                            color: "#ed6c02"
+                          }}>Delete</Button>
+                        </Stack>
+                      </CardContent>
+                    </Card>
+
+                  )
                 })
-              } 
+              }
             </TabPanel>
             <TabPanel value={value} index={2}>
-            {
-             poa?.length !==0? 
-               poa?.map((item) =>{
-                return(
-                  <>
-                   <h3>{item[0]?.date}</h3>
-           {  item?.length !==0&&item?.map(itm=>{
-                  
-                  return (
-              <Card style={{marginTop:35}}  onClick={() => {
-                setSelect(itm)
-              handleOpenEvent();
-            }}>
-             { console.log(itm,'<------jbhjjbjbjb')}
-              {/* <Typography>{itm?.date}</Typography> */}
-                <CardContent>
-                <Stack>
-                   {itm?.name}
-                    </Stack>
-                  <Stack>{itm?.roleName}</Stack><Stack>{itm?.emp_name}</Stack> 
-                  <Stack direction={'row'} spacing={5} mt={2}>
-                  <PoaEdit itm={itm}   />
-                  <Button style={{float:"right",color:"#ed6c02"}} variant="outlined" sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-                borderColor:"#ed6c02"
-              },  
-              borderColor:"#ed6c02",
-              color:"#ed6c02"
-            }}>Delete</Button>
-                 </Stack>
-                </CardContent>
-              </Card>
-              
-              ) 
-          
-            })
-          }
-          </>
-            )
-          })
-            :<Grid>
-              no data found
-            </Grid>
-          } 
+              {
+                poa?.length !== 0 ?
+                  poa?.map((item) => {
+                    return (
+                      <>
+                        <h3>{item[0]?.date}</h3>
+                        {item?.length !== 0 && item?.map(itm => {
+
+                          return (
+                            <Card style={{ marginTop: 35 }} onClick={() => {
+                              setSelect(itm)
+                              handleOpenEvent();
+                            }}>
+                              {console.log(itm, '<------jbhjjbjbjb')}
+                              {/* <Typography>{itm?.date}</Typography> */}
+                              <CardContent>
+                                <Stack>
+                                  {itm?.name}
+                                </Stack>
+                                <Stack>{itm?.roleName}</Stack><Stack>{itm?.emp_name}</Stack>
+                                <Stack direction={'row'} spacing={5} mt={2}>
+                                  <PoaEdit itm={itm} />
+                                  <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
+                                    '&:hover': {
+                                      backgroundColor: '#ffd796',
+                                      borderColor: "#ed6c02"
+                                    },
+                                    borderColor: "#ed6c02",
+                                    color: "#ed6c02"
+                                  }}>Delete</Button>
+                                </Stack>
+                              </CardContent>
+                            </Card>
+
+                          )
+
+                        })
+                        }
+                      </>
+                    )
+                  })
+                  : <Grid>
+                    no data found
+                  </Grid>
+              }
             </TabPanel>
           </Box>
         </Stack>

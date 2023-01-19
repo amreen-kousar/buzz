@@ -33,36 +33,36 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PoaEdit({setSucess,itm}) {
-    console.log(itm,"<---ergegreg")
+export default function PoaEdit({ setSucess, itm }) {
+  console.log(itm, "<---ergegreg")
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
-  const [addPoa,setAddPoa] = useState("");
- 
+  const [addPoa, setAddPoa] = useState("");
+
   const [value, setValue] = React.useState(false);
 
   const handleChangeTime = (newValue) => {
-    console.log(newValue,"<----1234567u8")
-   // setValue(newValue);
+    console.log(newValue, "<----1234567u8")
+    // setValue(newValue);
   };
-  const [addData,setAddData] = useState({
-        date:dayjs( new Date()),
-        user_id: "",
-        name: "",
-        all_day: 0,
-        description: "",
-        date2:dayjs( new Date()),
-        poa_id:""
+  const [addData, setAddData] = useState({
+    date: dayjs(new Date()),
+    user_id: "",
+    name: "",
+    all_day: 0,
+    description: "",
+    date2: dayjs(new Date()),
+    poa_id: ""
   })
   const handleChange2 = (event) => {
- 
-  
-     console.log(event,"<--jyhfgd")
-  
-    setAddData({...addData,date2:event})
+
+
+    console.log(event, "<--jyhfgd")
+
+    setAddData({ ...addData, date2: event })
   }
-  const handleChange = (event) =>{
-    setAddData({...addData,date:event})
+  const handleChange = (event) => {
+    setAddData({ ...addData, date: event })
   }
 
   const handleClickOpen = () => {
@@ -75,59 +75,60 @@ export default function PoaEdit({setSucess,itm}) {
   };
 
 
-  useEffect(()=>{
+  useEffect(() => {
     //AddPoa()
-    setAddData({ date:itm?.date1,
-        user_id:651,
-        name: itm?.name,
-        all_day: 0,
-        description: itm?.description,
-        date2:itm?.date2,
-        poa_id:itm?.id})
-    },[]
-     )
+    setAddData({
+      date: itm?.date1,
+      user_id: 651,
+      name: itm?.name,
+      all_day: 0,
+      description: itm?.description,
+      date2: itm?.date2,
+      poa_id: itm?.id
+    })
+  }, []
+  )
 
-     const detailsAdded = ()=>{
+  const detailsAdded = () => {
 
-     }
- 
-  const AddPoa = async =>{
-    console.log(addData,"<0hgdfvfdbgdf")
+  }
+
+  const AddPoa = async => {
+    console.log(addData, "<0hgdfvfdbgdf")
     var data = JSON.stringify({
-        "poa_id":addData?.poa_id,
-        "date": addData?.date,
-        "user_id": 651,
-        "name":addData?.name,
-        "all_day":addData?.all_day,
-        "description": addData?.description,
-        "date2":addData?.date2
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/updateRescheduleEvent.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      axios(config)
+      "poa_id": addData?.poa_id,
+      "date": addData?.date,
+      "user_id": 651,
+      "name": addData?.name,
+      "all_day": addData?.all_day,
+      "description": addData?.description,
+      "date2": addData?.date2
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/updateRescheduleEvent.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
       .then(function (response) {
-        if(response?.data?.code === 200)
-        {
-            handleClose()
-        
-        setSucess("this is success create")
-       
-        handleClose()
+        if (response?.data?.code === 200) {
+          handleClose()
+
+          setSucess("this is success create")
+
+          handleClose()
         }
-        else{
-            setValue(true)
-            console?.log(response?.data?.message,"<---response?.data?.message")
-            setAddPoa(response?.data?.message)
+        else {
+          setValue(true)
+          console?.log(response?.data?.message, "<---response?.data?.message")
+          setAddPoa(response?.data?.message)
         }
-       // console.log(response.data);
+        // console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -136,14 +137,14 @@ export default function PoaEdit({setSucess,itm}) {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen} sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-                borderColor:"#ed6c02"
-              },  
-              borderColor:"#ed6c02",
-              color:"#ed6c02"
-            }}>
-      Edit Poa
+        '&:hover': {
+          backgroundColor: '#ffd796',
+          borderColor: "#ed6c02"
+        },
+        borderColor: "#ed6c02",
+        color: "#ed6c02"
+      }}>
+        Edit Poa
       </Button>
       <Dialog
         open={open}
@@ -153,18 +154,20 @@ export default function PoaEdit({setSucess,itm}) {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        {console.log(addPoa,"<----qwedrftgyhujikkmijnuhbygtv")}
-              <Snackbar open={value} autoHideDuration={6000} onClose={()=>{setAddPoa(''),
+        {console.log(addPoa, "<----qwedrftgyhujikkmijnuhbygtv")}
+        <Snackbar open={value} autoHideDuration={6000} onClose={() => {
+          setAddPoa(''),
+          setValue(false)
+        }}>
+          <Alert onClose={() => {
+            setAddPoa(''),
             setValue(false)
-            }}>
-        <Alert onClose={()=>{setAddPoa(''),
-         setValue(false)
-    }} severity="error" sx={{ width: '100%' }}>
-        {/* {addPoa} */}
-        </Alert>
-      </Snackbar>
+          }} severity="error" sx={{ width: '100%' }}>
+            {/* {addPoa} */}
+          </Alert>
+        </Snackbar>
 
-          <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
+        <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
@@ -178,9 +181,9 @@ export default function PoaEdit({setSucess,itm}) {
               save
             </Button>
           </Toolbar>
-       
+
         </AppBar>
-       
+
         {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
         <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
           <DialogContentText
@@ -197,50 +200,51 @@ export default function PoaEdit({setSucess,itm}) {
               autoComplete="off"
             >
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
-                <TextField fullWidth value={addData?.name} onChange={(e)=>{setAddData({...addData,name:e?.target?.value}),
-            console.log(e,"<---EWWEREWREW")
-            }} id="outlined-basic" label="Add Title" variant="outlined" />
-                 <Stack direction={'row'}>
-                 <Typography>All Day</Typography>
-                 <Switch value={addData?.all_day} onChange={(e)=>{setAddData({...addData,all_day:addData?.all_day===1?0:1})}} {...label} />
-                 </Stack>
-
-                 <Stack direction={'row'}>
-               
-                <DateTimePicker
-          label="Date&Time picker"
-          value={addData?.date}
-          onChange={(e)=>{handleChange(e)}}
-          renderInput={(params) => <TextField {...params} />}
-        />
-              
+                <TextField fullWidth value={addData?.name} onChange={(e) => {
+                  setAddData({ ...addData, name: e?.target?.value }),
+                  console.log(e, "<---EWWEREWREW")
+                }} id="outlined-basic" label="Add Title" variant="outlined" />
+                <Stack direction={'row'}>
+                  <Typography>All Day</Typography>
+                  <Switch value={addData?.all_day} onChange={(e) => { setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) }} {...label} />
                 </Stack>
-                {addData?.all_day===0&&
-             <Stack direction={'row'}>
-             {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-             <DateTimePicker
-       label="Date&Time picker"
-       value={addData?.date2}
-       onChange={(e)=>{handleChange2(e)}}
-       renderInput={(params) => <TextField {...params} />}
-     />
-             {/* </LocalizationProvider> */}
-             </Stack>
-                
-                }
-               
-                <br />
-               
-                <Stack>
-                <Typography variant="body1">Description</Typography>
-              </Stack>
 
-              <Stack>
-              <TextField id="outlined-basic"  value={addData?.description} onChange={(e)=>{setAddData({...addData,description:e?.target?.value})}} label="Add Description For Creating Poa"  variant="outlined" />
-              </Stack>
-              <Stack>
-             
-              </Stack>
+                <Stack direction={'row'}>
+
+                  <DateTimePicker
+                    label="Date&Time picker"
+                    value={addData?.date}
+                    onChange={(e) => { handleChange(e) }}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+
+                </Stack>
+                {addData?.all_day === 0 &&
+                  <Stack direction={'row'}>
+                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
+                    <DateTimePicker
+                      label="Date&Time picker"
+                      value={addData?.date2}
+                      onChange={(e) => { handleChange2(e) }}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                    {/* </LocalizationProvider> */}
+                  </Stack>
+
+                }
+
+                <br />
+
+                <Stack>
+                  <Typography variant="body1">Description</Typography>
+                </Stack>
+
+                <Stack>
+                  <TextField id="outlined-basic" value={addData?.description} onChange={(e) => { setAddData({ ...addData, description: e?.target?.value }) }} label="Add Description For Creating Poa" variant="outlined" />
+                </Stack>
+                <Stack>
+
+                </Stack>
               </div>
             </Box>
           </DialogContentText>
