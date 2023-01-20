@@ -12,17 +12,17 @@ const navConfig = [
     icon: getIcon('eva:pie-chart-2-fill'),
     id: [0, 1, 3, 4]
   },
-  {
-    title: 'dashboard',
-    path: '/dashboard/trainer',
-    icon: getIcon('eva:pie-chart-2-fill'),
-    id: [5]
-  },
+  // {
+  //   title: 'dashboard',
+  //   path: '/dashboard/trainer',
+  //   icon: getIcon('eva:pie-chart-2-fill'),
+  //   id: [5]
+  // },
   {
     title: 'dashboard',
     path: '/dashboard/gelathi',
     icon: getIcon('eva:pie-chart-2-fill'),
-    id: [6]
+    id: [5,6]
   },
   {
     title: 'Plan Of Action',

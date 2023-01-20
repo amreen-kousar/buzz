@@ -15,6 +15,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
+import Iconify from 'src/components/Iconify';
+import Tooltip from 'src/theme/overrides/Tooltip';
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
@@ -121,15 +123,17 @@ export default function PoaTeam({setUserId}) {
         {/* Selected: {selectedValue} */}
       </Typography>
       <br /><br></br>
-      <Button variant="outlined"  onClick={handleClickOpen} style={{float:"right",color:"#ed6c02"}} sx={{
+      <Button  onClick={handleClickOpen} style={{float:"right",color:"#ed6c02"}} sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
-                borderColor:"#ed6c02"
+                borderColor:"#ed6c02",
+               
               },  
               borderColor:"#ed6c02",
-              color:"#ed6c02"
+              color:"#ed6c02",
+              backgroundColor: '#ffd796',
             }} >
-       Select Buzz Member
+      <Iconify icon="mdi:people" style={{width:'30px',height:'30px'}}></Iconify>
       </Button>
       <SimpleDialog
         teamData={teamData}

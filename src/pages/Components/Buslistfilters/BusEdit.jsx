@@ -30,7 +30,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
-
+import Iconify from 'src/components/Iconify';
 import Autocomplete from '@mui/material/Autocomplete';
 import moment from 'moment';
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -145,8 +145,8 @@ const getCaaled = () =>{
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-       Edit Bus Details
+      <Button onClick={handleClickOpen} >
+       <Iconify icon="material-symbols:edit"style={{width:'30px',height:'30px',color:'#e69138',marginLeft:"120px"}}></Iconify>
       </Button>
       <Dialog
         open={open}

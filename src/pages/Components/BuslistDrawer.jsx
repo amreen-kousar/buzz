@@ -141,7 +141,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
       >
         {console?.log(detailsData, "<---detailsDatadetailsData")}
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }}>
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{color:"#494646"}}>
             {`Bus Number : ${clcikData?.register_number}`}
           </Typography>
           <IconButton onClick={onCloseFilter}>
@@ -155,57 +155,57 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>
             {/* {userAccess.includes(userIdCheck) && */}
-            <Button onClick={DeleteBus}>Delete Bus</Button>
+            <Button onClick={DeleteBus} style={{float:'right',textAlign:'left'}}><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138'}}></Iconify></Button>
            <BusEdit clcikData={detailsData} />
             <Card>
                 <CardContent>
-                  <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
+                  <Typography style={{ flexDirection: 'row',color:'#494646' }} variant="subtitle1" gutterBottom>
                     Registration Date
-                    <Typography variant="body1" >{detailsData?.register_date}</Typography>
+                    <Typography variant="body1"  >{detailsData?.register_date}</Typography>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Engine Number:
                     <Typography variant="body1" gutterBottom>{detailsData?.engine_number}</Typography>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Chasis Number:
                     <Typography variant="body1" gutterBottom>{detailsData?.chassis_number}</Typography>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Insurance Number:
-                    <Typography variant="body1" gutterBottom>{detailsData?.insurance_number}</Typography>
+                    <Typography variant="body1"  gutterBottom>{detailsData?.insurance_number}</Typography>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Insurance Company:
                     <Typography variant="body1" gutterBottom>{detailsData?.insurance_company}</Typography>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Insurance Start Date:
                     <Typography variant="body1" gutterBottom>{detailsData?.insurance_start_date}</Typography>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Insurance End Date:
                     <Typography variant="body1" gutterBottom>{detailsData?.insurance_end_date}</Typography>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Last Service Date:
                     <Typography variant="body1" gutterBottom>{detailsData?.last_service_date}</Typography>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Next Service Date:
                     <Typography variant="body1" gutterBottom>{detailsData?.next_service_due_date}</Typography>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Permit Details:
                     <Typography variant="body1" gutterBottom>{detailsData?.permit}</Typography>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Fitness Certificate:
                     <Typography variant="body1" gutterBottom>{detailsData?.fitness_certificate}</Typography>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Emission Date:
-                    <Typography variant="body1" gutterBottom>31/12/2023</Typography>
+                    <Typography variant="body1" gutterBottom>{detailsData?.emission_date}</Typography>
                   </Typography>
                 </CardContent>
               </Card>

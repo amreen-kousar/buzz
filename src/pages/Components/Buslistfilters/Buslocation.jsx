@@ -133,7 +133,8 @@ export default function Location(props) {
           })
         }
         </Select> */}
-         <Select
+          <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>State
+         <Select fullWidth variant='standard'
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={data.state}
@@ -149,9 +150,9 @@ export default function Location(props) {
             )
           })
         }
-        </Select>
-
-        <Select
+        </Select></Typography>
+        <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>District
+        <Select fullWidth variant='standard'
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={data.district_id}
@@ -167,8 +168,9 @@ export default function Location(props) {
             )
           })
         }
-        </Select>
-        <Select
+        </Select></Typography>
+        <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>Taluk
+        <Select fullWidth variant='standard'
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={data.talaq_id}
@@ -184,10 +186,11 @@ export default function Location(props) {
             )
           })
         }
-        </Select>
+        </Select></Typography>
          
         </CardContent>
-        <Button onClick={()=>props?.onSumbit(data)}>Submit</Button>
+        <Button style={{ marginLeft:'100px', color: 'white',marginBottom:'10px' ,backgroundColor:'#ed6c02'}}
+            onClick={()=>props?.onSumbit(data)}>Submit</Button>
       </Card>
     </div>
   );

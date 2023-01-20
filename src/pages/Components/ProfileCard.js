@@ -99,7 +99,8 @@ export default function RecipeReviewCard({profileData,changeUser}) {
   };
    console.log(editData,profileData,"<---345678i")
   const editProfile = async => {
-    console.log(editData,"<----editProfileeditProfile")
+    // console.log(editData,"<----editProfileeditProfile")
+    handleExpandClick();
     const userDetails = localStorage?.getItem("userDetails")
     var data = JSON.stringify({
       "id": JSON?.parse(userDetails)?.id,
