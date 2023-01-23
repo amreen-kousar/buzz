@@ -19,7 +19,7 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
-import Graphchart from './gelathigraph';
+// import Graphchart from './gelathigraph';
 export default function Gelathidashboard(){
     const navigate = useNavigate();
     const data = localStorage?.getItem('userId')
@@ -124,13 +124,13 @@ export default function Gelathidashboard(){
         id: i,
         name: itm?.name
       })
-      const data = i===2?{"funder_id":itm?.id}:i===1?{"partner_id":itm?.id}:{"project_id":itm?.id}
+      const data = i === 3 ? { "project_id": itm?.id } :  { "gfl_id": itm?.id } 
       apiHit(itm, i)
-      console.log(data,i,itm,"<----sdfssreerfer")
+      console.log(data, i, itm, "<----sdfssreerfer")
       setFilterData(data)
       handleCloseFilter()
       console.log("sdfgsdfdfssd", itm, i)
-    }
+    } 
     const onSumbit = (e, i) => {
       handleCloseFilter()
   
@@ -243,7 +243,7 @@ export default function Gelathidashboard(){
           <Typography variant="h4" gutterBottom style={{marginLeft:"20px"}}>
       Project {summaryData?.data[0]?.name}
     </Typography> 
-           <Graphchart/>
+           {/* <Graphchart/> */}
           <CardContent style={{display:"flex"}}>    
           <TableContainer component={Paper}>
           <Table aria-label="customized table" style={{width:'200px',float:'Left'}}>
