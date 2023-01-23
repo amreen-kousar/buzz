@@ -19,7 +19,6 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
-// import Graphchart from './gelathigraph';
 export default function Gelathidashboard(){
     const navigate = useNavigate();
     const data = localStorage?.getItem('userId')
