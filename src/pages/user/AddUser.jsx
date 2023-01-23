@@ -226,7 +226,7 @@ function AddUser(props) {
         AddUser.status = AddUser.present_status ? '1' : '0';
         AddUser.createdBy = '650',
             AddUser.lastUpdatedBy = '650'
-        // console.log(AddUser)
+        console.log(AddUser)
         const data = JSON.stringify(AddUser);
 
         const config = {
@@ -238,12 +238,66 @@ function AddUser(props) {
             data
         };
 
+        let apiCallName = (AddUser.role.roleName == "Funder") ? 'createFunder' : (AddUser.role.roleName == "Partner") ? 'createPartner' : false;
+
+
+
         axios(config)
             .then((response) => {
                 console.log(response)
                 if (response?.data?.success) {
-                    setOpen(false)
-                    props.viewMessage('User Added successfully');   
+                    let funderPartnerData = {}
+                    if (apiCallName) {
+                        (apiCallName == "Funder") ?
+                            funderPartnerData = {
+                                "countryID": 1,
+                                "partnername": AddUser.first_name,
+                                "workPhone": AddUser.workNum,
+                                "mobilePhone": AddUser.contactNum,
+                                "emailID": AddUser.office_email_id,
+                                "address": AddUser.address,
+                                "status": AddUser.present_status ? '1' : '0',
+                                "city": "banglore",
+                                "state": "Karnataka",
+                                "pincode": AddUser.pincode,
+                                "designation": "Funder",
+                                "createdBy": "650",
+                                "lastUpdatedBy": "650"
+
+                            } : funderPartnerData = {
+                                "countryID": 1,
+                                "partnername": AddUser.first_name,
+                                "workPhone": AddUser.workNum,
+                                "mobilePhone": AddUser.contactNum,
+                                "emailID": AddUser.office_email_id,
+                                "address": AddUser.address,
+                                "status": AddUser.present_status ? '1' : '0',
+                                "city": "banglore",
+                                "state": "Karnataka",
+                                "pincode": AddUser.pincode,
+                                "designation": "Partner",
+                                "createdBy": "650",
+                                "lastUpdatedBy": "650"
+                            }
+                        const partnerFunderConfig = {
+                            method: 'post',
+                            url: `https://bdms.buzzwomen.org/appTest/${apiCallName}.php`,
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            funderPartnerData
+                        }
+                        axios(partnerFunderConfig)
+                            .then((responseIn) => {
+                                console.log(responseIn)
+                                setOpen(false)
+                                props.viewMessage('User Added successfully');
+                            })
+                            .catch((error2) => {
+                                console.log("error")
+                            })
+
+                    }
                 }
             })
             .catch((error) => {

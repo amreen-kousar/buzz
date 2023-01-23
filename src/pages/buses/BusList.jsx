@@ -12,7 +12,6 @@ import BusListFilter from '../Components/Buslistfilters/BusListFilter';
 import Addbus from './Addbus';
 import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
 
-
 export default function User() {
 
   var userAccess = ['2']
@@ -20,6 +19,8 @@ export default function User() {
   var userIdCheck = localStorage?.getItem('userId')
 
   const [openMessage, setOpenMessage] = useState(false);
+
+  const [selected, setSelected] = useState([])
 
   const [clcikData, setClickData] = useState()
 
@@ -30,6 +31,8 @@ export default function User() {
   const descriptionElementRef = useRef(null);
 
   const [buses, setBuses] = useState();
+
+  const [respBuses, setRespbuses] = useState()
 
   useEffect(() => {
     setDw(false)
@@ -48,7 +51,10 @@ export default function User() {
     console.log("I am clicked")
   }, [open]);
 
-  const busesd = async (i, id) => {
+  const busesd = async (i, id, filterBusItem = null) => {
+
+
+    console.log(i, id)
     const data = JSON.stringify({
       "date": "",
       "role_id": 1,
@@ -62,6 +68,9 @@ export default function User() {
       "emp_id": 206,
       "search": search
     });
+
+
+    console.log(data)
     console.log(data, "<----qwertyuiosdfgh")
     const config = {
       method: 'post',
@@ -73,10 +82,40 @@ export default function User() {
     };
 
     axios(config)
-
       .then((response) => {
-        setBuses(response?.data)
-        console.log(JSON.stringify(response.data));
+        console.log(i, id, "i am i and id", filterBusItem)
+        if (filterBusItem) {
+          if (selected.length == 0) {
+            setBuses(respBuses?.list)
+          }
+          else if (response?.data?.list?.length > 0) {
+            console.log(buses, "i am bus")
+            let filteredBuses = buses?.filter(({ id }) => response?.data?.list.some(x => x.id !== id))
+            setBuses([...filteredBuses])
+
+          }
+        }
+        else {
+          console.log(selected)
+          if (selected.length == 1) {
+            setBuses(response?.data?.list)
+          }
+          else if (selected.length > 0) {
+            console.log(buses, response?.data?.list)
+            buses.push(...response?.data?.list)
+            setBuses([...buses])
+            console.log(buses)
+          }
+          else if (i == undefined && id == undefined) {
+            setRespbuses(response?.data)
+            setBuses(response?.data?.list)
+            console.log(response?.data, "i am resp data")
+          }
+          else {
+            setBuses(respBuses?.list)
+          }
+        }
+        console.log(response?.data, "i am normal data")
       })
       .catch((error) => {
         console.log(error);
@@ -111,12 +150,36 @@ export default function User() {
     //   name: itm?.name
     // })
     // const data = i===2?{"funder_id":itm?.id}:i===1?{"partner_id":itm?.id}:{"project_id":itm?.id}
-    busesd(itm, i)
+    let filterSelect = selected.filter(s => s?.id == itm?.id)
+
+    if (filterSelect.length == 0) {
+      console.log(selected)
+      selected.push(itm)
+      setSelected(selected);
+      console.log(selected)
+      busesd(itm, i)
+    }
+
     // console.log(data,i,itm,"<----sdfssreerfer")
     // setFilterData(data)
     // handleCloseFilter()
     // console.log("sdfgsdfdfssd", itm, i)
   }
+
+  const handleDelete = (itmTodelete) => {
+    let empty = false
+    if (selected.length == 1) {
+      empty = true
+      setBuses([...respBuses?.list])
+    }
+    let deleteSelected = selected.filter(s => s?.id != itmTodelete?.id)
+    setSelected(deleteSelected)
+    // delete funder of bus
+    if (!empty) {
+      busesd(itmTodelete, 2, "filter")
+    }
+    console.info('You clicked the delete icon.');
+  };
 
 
   const Alert = forwardRef(function Alert(props, ref) {
@@ -125,6 +188,7 @@ export default function User() {
 
   return (
     <Page title="User">
+
 
       <Container>
         <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
@@ -168,6 +232,14 @@ export default function User() {
             onCloseFilter={handleCloseFilter}
           />
         </Stack>
+
+
+        {selected.length > 0 && selected.map(s => {
+          return <Stack direction="row" spacing={1}>
+            <Chip label={s?.name} onDelete={() => { handleDelete(s) }} />
+          </Stack>
+        })}
+
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <BusListFilter
             getData={getData}
@@ -179,7 +251,7 @@ export default function User() {
         </Stack>
 
 
-        {buses?.list?.length == 0 && (
+        {buses?.length == 0 && (
 
           <div>
             <h1>no data found</h1>
@@ -187,7 +259,7 @@ export default function User() {
 
         )}
         {/* </Stack> */}
-        {buses?.list?.map((itm) => {
+        {buses?.map((itm) => {
           return (
             <Card style={styles.card1}
               onClick={() => {

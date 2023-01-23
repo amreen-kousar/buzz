@@ -190,7 +190,7 @@ export default function User() {
       <div>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <UserFilter
-            isOpenFilter={openFilter}
+            isOpenFilter={peopleFilter}
             onOpenFilter={handlepeopleOpenFilter}
             onCloseFilter={handlepeopleCloseFilter}
           />

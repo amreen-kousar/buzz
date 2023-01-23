@@ -167,7 +167,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 <Button onClick={() => { setData(3) }} sx={{ */}
 
                 {/* {data == 6 | data == 1 && <Button onClick={() => { setData(3) }} sx={{ */}
-                {data==6|data==1|data==5&&<Button onClick={() => { setData(3) }} sx={{
+                {data == 6 | data == 1 | data == 5 && <Button onClick={() => { setData(3) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -195,8 +195,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
                 } : null}>Trainer</Button>}
-            
-               {data==6|data==1|data==5&&<Button onClick={() => { setData(9) }}
+
+                {data == 6 | data == 1 | data == 5 && <Button onClick={() => { setData(9) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -209,7 +209,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     color: '#ed6c02',
                   } : null}>Date Range</Button>}
 
-            {data==5&&<Button
+                {data == 5 && <Button
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -221,7 +221,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
 
 
 
-                {data==1&&<Button onClick={() => { setData(7) }} sx={{
+                {data == 1 && <Button onClick={() => { setData(7) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -265,37 +265,49 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
 
               </CardContent>
             </Card>
-            <Grid style={{ marginTop: 30 }}>
+            {selectDATA == 2 && <Grid style={{ marginTop: 30 }}>
               <Funders getData={getData} selectDATA={selectDATA} />
-            </Grid>
-            <Grid style={{ marginTop: 30 }}>
-              <Partners getData={getData} selectDATA={selectDATA} />
-            </Grid>
-            <Grid style={{ marginTop: 30 }}>
-              <Projects getData={getData} selectDATA={selectDATA} />
-            </Grid>
+            </Grid>}
+            {
+              selectDATA == 1 && <Grid style={{ marginTop: 30 }}>
+                <Partners getData={getData} selectDATA={selectDATA} />
+              </Grid>
+            }
+            {
+              selectDATA == 3 && <Grid style={{ marginTop: 30 }}>
+                <Projects getData={getData} selectDATA={selectDATA} />
+              </Grid>
+            }
             {/* <Grid style={{ marginTop: 30 }}>
                 <DateRangeF onDateSubmit={onDateSubmit} />
               </Grid> */}
-              
-            <Grid style={{ marginTop: 30 }}>
-              <Location selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
-            </Grid>
 
-            <Grid style={{ marginTop: 30 }}>
-              <Trainers getData={getData} selectDATA={selectDATA} />
-            </Grid>
-            <Grid style={{ marginTop: 30 }}>
-              <GelathisLead getData={getData} selectDATA={selectDATA} />
-            </Grid>
-            <Grid style={{ marginTop: 30 }}>
-              <SrOperationManager getData={getData} selectDATA={selectDATA} />
-            </Grid>
+            {
+              selectDATA == 7 && <Grid style={{ marginTop: 30 }}>
+                <Location selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
+              </Grid>
+            }
 
-  {/* <Grid style={{ marginTop: 10 }}>
+            {
+              selectDATA == 5 && <Grid style={{ marginTop: 30 }}>
+                <Trainers getData={getData} selectDATA={selectDATA} />
+              </Grid>
+            }
+            {
+              selectDATA == 13 && <Grid style={{ marginTop: 30 }}>
+                <GelathisLead getData={getData} selectDATA={selectDATA} />
+              </Grid>
+            }
+            {
+              selectDATA == 12 && <Grid style={{ marginTop: 30 }}>
+                <SrOperationManager getData={getData} selectDATA={selectDATA} />
+              </Grid>
+
+            }
+            {/* <Grid style={{ marginTop: 10 }}>
                 <GelathisLead  onDateSubmit={onDateSubmit}/>
               </Grid> */}
-  {/* <Grid style={{ marginTop: 30 }}>
+            {/* <Grid style={{ marginTop: 30 }}>
                 <Partners />
               </Grid>
               <Grid style={{ marginTop: 30 }}>
@@ -321,7 +333,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
 
 
           </div >
-    {/* </Stack> */ }
+          {/* </Stack> */}
         </Scrollbar >
       </Drawer >
     </>

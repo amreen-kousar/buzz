@@ -38,7 +38,7 @@ export default function Funders({ selectDATA, getData }) {
       "pageNum": 1,
       "emp_id": 206
     });
-
+    console.log("in dashboard filter")
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
@@ -76,7 +76,7 @@ export default function Funders({ selectDATA, getData }) {
                 </Table>
               </TableContainer>
             </CardContent>
-        
+
           )
         }) : null}
       </Card>

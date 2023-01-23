@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // material
 import {
@@ -22,6 +22,11 @@ import {
   Card,
   CardContent,
 } from '@mui/material';
+import Funders from '../DashboardFilters/Funders';
+import Partners from '../DashboardFilters/Partners';
+import BuzzTeams from './BuzzTeam';
+import Trainers from '../DashboardFilters/Trainers';
+import Driver from './Driver';
 // components
 
 
@@ -61,136 +66,110 @@ UserFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function UserFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
- const [selectDATA,setSelectData] = useState()
- const data = localStorage?.getItem('userId')
+export default function UserFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData }) {
+
+
+  var [selectDATA, setSelectData] = useState()
+  const userPermissions = ['1', '2']
+  const data = localStorage?.getItem('userId')
+  const filtersHeaders = [{ id: 1, name: 'Partners' }, { id: 2, name: 'Funders' }, { id: 5, name: 'Trainers' }, { id: 0, name: 'All Buzz team Members' }, { id: 10, name: 'Management Team' }, { id: 16, name: 'Gelathi Facilitators' }, { id: 7, name: 'Drivers' }]
+
+  const setData = (value) => {
+    localStorage.setItem('selectedData', value)
+    setSelectData(value)
+  }
+  useEffect(() => {
+    localStorage.setItem('selectedData', 1)
+    setSelectData(1)
+  }, [])
+
+  useEffect(() => {
+    setSelectData(localStorage.getItem('selectedData'))
+  }, [isOpenFilter])
+
+  const styles = {
+    buttonStyle: {
+      ':hover': {
+        bgcolor: '#ffd796',
+        color: '#ed6c02',
+      },
+      color: 'black',
+    },
+    highlightStyle: {
+      background: '#ffd796',
+      color: '#ed6c02',
+    }
+  }
+
   return (
     <>
-      {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
-
       <Drawer
         anchor="right"
         open={isOpenFilter}
-        onClose={()=>{
+        onClose={() => {
           setSelectData()
-            onCloseFilter()}}
+          onCloseFilter()
+        }}
         PaperProps={{
           sx: { width: 280, },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25}}>
-          Filters
-         {selectDATA&&selectDATA===2&&":  Funders"}
-         {selectDATA&&selectDATA===7&&": Location"}
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25 }}>
+            Filters
+            {filtersHeaders.map(f => {
+              return selectDATA == f.id && `:${f.name}`
+            })}
           </Typography>
-          <IconButton onClick={()=>{
-        setSelectData()
-          onCloseFilter()}}>
+          <IconButton onClick={() => {
+            setSelectData()
+            onCloseFilter()
+          }}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
 
         <Divider />
         <Scrollbar>
-          {/* <Stack spacing={3} sx={{ p: 3 }}> */}
-            <div>
-              <Card style={{backgroundColor:'#F6F8FB',}}>
-                <CardContent>
-                  {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
-                 <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
-                    {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
-                      {/* <Grid spacing={1} > */}
-                      {data==1|data==2&&<Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}
-                  //  style={selectDATA == 2 ? {
-                  //   background: '#ffd796', // theme.palette.primary.main
-                  //   color: '#ed6c02',
-                  // } : null}
-                  >All Bus</Button>}
-                     {data==1|data==2&&<Button  sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }} >
-                    Location</Button>}
-                    {data==1|data==2&& <Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}>Date Range</Button>}
-                     {data==1|data==2&& <Button  sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }} 
-                  // style={selectDATA == 2 ? {
-                  //   background: '#ffd796', // theme.palette.primary.main
-                  //   color: '#ed6c02',
-                  // } : null}
-                  >Funders</Button>}
-                        {data==1|data==2&&<Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }} 
-                  // style={selectDATA == 2 ? {
-                  //   background: '#ffd796', // theme.palette.primary.main
-                  //   color: '#ed6c02',
-                  // } : null}
-                  >Operation Manager</Button>}
-                       {data==1|data==2&& <Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}
-                  //  style={selectDATA == 2 ? {
-                  //   background: '#ffd796', // theme.palette.primary.main
-                  //   color: '#ed6c02',
-                  // } : null}
-                  >Trainer</Button>}
-                       {data==1|data==2&& <Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}>Gelathi Facilitator</Button>}
-                      {/* <Button>Custom Filters</Button> */}
-             {/* <Button >Partner</Button>   */}
-  
-                      
-                      
-                </CardContent>
-              </Card>
-            
-            {/* <Grid>
-              <Poafunders selectDATA={selectDATA}/>
-            </Grid> */}
-            {/* {selectDATA===7&&<Grid style={{ marginTop: 30 }}>
-                <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
-              </Grid> } */}
-              
-          
-            </div>
-          {/* </Stack> */}
+          <div>
+            <Card style={{ backgroundColor: '#F6F8FB', }}>
+              <CardContent>
+                {
+                  filtersHeaders.map(f => {
+                    return userPermissions.includes(data) && <Button onClick={() => { setData(f.id) }}
+                      sx={styles.buttonStyle} style={selectDATA == f.id ? styles.highlightStyle : null}>{f.name}</Button>
+                  })
+                }
+              </CardContent>
+            </Card>
+
+            {
+              selectDATA == 2 && <Grid>
+                <Funders getData={getData} selectDATA={selectDATA} />
+              </Grid>
+            }
+            {
+              selectDATA == 1 && <Grid>
+                <Partners getData={getData} selectDATA={selectDATA} />
+              </Grid>
+            }
+            {
+              selectDATA == 0 && <Grid>
+                <BuzzTeams getData={getData} selectDATA={selectDATA} />
+              </Grid>
+
+            }
+            {
+              selectDATA == 5 && <Grid>
+                <Trainers getData={getData} selectDATA={selectDATA} />
+              </Grid>
+            }
+            {
+              selectDATA == 7 && <Grid>
+                <Driver getData={getData} selectDATA={selectDATA} />
+              </Grid>
+            }
+          </div>
         </Scrollbar>
 
       </Drawer>
