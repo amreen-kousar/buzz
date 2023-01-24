@@ -121,7 +121,7 @@ export default function Location(props) {
         
         <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>
                   State
-         <Select fullWidth variant='standard'
+         <Select fullWidth variant='standard' color="common"
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={data.state}
@@ -139,7 +139,7 @@ export default function Location(props) {
         }
         </Select> </Typography><br></br>
         <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>District
-        <Select fullWidth variant='standard'
+        <Select fullWidth variant='standard' color="common"
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={data.district_id}
@@ -157,7 +157,7 @@ export default function Location(props) {
         }
         </Select></Typography><br></br>
         <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>Taluk
-        <Select fullWidth variant='standard'
+        <Select fullWidth variant='standard' color="common"
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={data.talaq_id}

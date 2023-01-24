@@ -101,60 +101,71 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                 <CardContent>
                   {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
                  <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
-                      {data==1|data==2&&<Button sx={{
+                      {(data==1|data==2)?<Button sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
                       color: '#ed6c02',
                     },
                     color: 'black',
-                  }}>All Bus</Button>}
-                     {data==1|data==2&&<Button  sx={{
+                  }}>All Bus</Button>:null}
+                   {(data==6)?<Button sx={{
+                    ':hover': {
+                      bgcolor: '#ffd796', // theme.palette.primary.main
+                      color: '#ed6c02',
+                    },
+                    color: 'black',
+                  }}>All Projects</Button>:null}
+                     {(data==1|data==2|data==6)?<Button  sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
                       color: '#ed6c02',
                     },
                     color: 'black',
                   }} >
-                    Location</Button>}
-                    {data==1|data==2&& <Button sx={{
+                    Location</Button>:null}
+                   
+                    {(data==1|data==2|data==6)? <Button sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
                       color: '#ed6c02',
                     },
                     color: 'black',
-                  }}>Date Range</Button>}
-                     {data==1|data==2&& <Button  sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }} 
-                  >Funders</Button>}
-                        {data==1|data==2&&<Button sx={{
+                  }}>Date Range</Button>:null}
+                     {(data==1|data==2)?<Button  sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
                       color: '#ed6c02',
                     },
                     color: 'black',
                   }} 
-                  >Operation Manager</Button>}
-                       {data==1|data==2&& <Button sx={{
+                  >Funders</Button>:null}
+                        {(data==1|data==2)?<Button sx={{
+                    ':hover': {
+                      bgcolor: '#ffd796', // theme.palette.primary.main
+                      color: '#ed6c02',
+                    },
+                    color: 'black',
+                  }} 
+                  >Operation Manager</Button>:null}
+                       {(data==1|data==2)?<Button sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
                       color: '#ed6c02',
                     },
                     color: 'black',
                   }}
-                  >Trainer</Button>}
-                       {data==1|data==2&& <Button sx={{
+                  >Trainer</Button>:null}
+                       {(data==1|data==2)? <Button sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
                       color: '#ed6c02',
                     },
                     color: 'black',
-                  }}>Gelathi Facilitator</Button>}
-  
+                  }}>Gelathi Facilitator</Button>:null}
+                   
+
+                    
+               
                       
                       
                 </CardContent>

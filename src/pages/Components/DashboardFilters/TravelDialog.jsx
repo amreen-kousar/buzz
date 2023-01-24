@@ -27,12 +27,15 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useGeolocated } from "react-geolocated";
 import Iconify from 'src/components/Iconify';
+import { orange } from '@mui/material/colors';
 import Webcam from "react-webcam";
 function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
+const orangecolor = orange[800];
 
 export default function FullScreenDialog() {
+
   Geocode.setApiKey("AIzaSyAQZSphbIdAeypWHytAIHtJ5K-wuUHBfx4");
   const [open, setOpen] = useState(false);
   const [startTime, setStartTime] = useState('');
@@ -321,15 +324,15 @@ export default function FullScreenDialog() {
 
         <div style={{ margin: "1rem" }}>
           <Stack style={{ marginTop: 20 }}>
-            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" />
+            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
           </Stack>
           <Stack style={{ marginTop: 20 }}>
-            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Location" variant="outlined" />
-          </Stack>
+            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
+          </Stack><br></br>
           <Stack style={{ marginTop: 20 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Select Poa</InputLabel>
-              <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })}>
+            <FormControl fullWidth >
+              <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row',color:'#ed6c02',fontWeight:700}}>Poa</InputLabel>
+              <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                 {datadrop?.data?.map(itm => {
                   return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                 })}
@@ -339,12 +342,12 @@ export default function FullScreenDialog() {
               </Select>
             </FormControl>
            
-          </Stack>
+          </Stack><br></br>
 
           <Stack style={{ marginTop: 20 }}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                label="Date"
+                // label="Date"
                 value={sendData?.date}
                 onChange={(newValue) => {
                   setSendData({ ...sendData, date: newValue })
@@ -352,16 +355,17 @@ export default function FullScreenDialog() {
                 renderInput={(params) => <TextField {...params} fullWidth />}
               />
             </LocalizationProvider>
-          </Stack>
+          </Stack><br></br>
           <Stack style={{ marginTop: 20 }}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Select Mode Of Travel</InputLabel>
-              <Select
+              <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row',color:'#ed6c02',fontWeight:700}}>Mode Of Travel</InputLabel>
+              <Select variant="standard" color="common" sx={{fontSize:'13px'}}
                 labelId="Select Mode Of Travel"
                 id="demo-simple-select"
                 value={sendData?.modeoftravel}
                 onChange={(e) => setSendData({ ...sendData, modeoftravel: e?.target?.value })}
-                label="Select Mode Of Travel"
+                label="select Mode Of Travel"
+                
               //onChange={handleChange}
               >
                 {datadrop?.Mode_of_Travel?.map(itm => {
@@ -369,11 +373,11 @@ export default function FullScreenDialog() {
                 })}
               </Select>
             </FormControl>
-          </Stack>
+          </Stack><br></br>
           <Stack style={{ marginTop: 20 }}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Select Rate Per Km</InputLabel>
-              <Select
+              <InputLabel id="demo-simple-select-label"  style={{ flexDirection: 'row',color:'#ed6c02',fontWeight:700}}>Rate Per Km</InputLabel>
+              <Select variant="standard" color="common" sx={{fontSize:'13px'}}
                 labelId="Select Rate Per Km"
                 id="demo-simple-select"
                 value={sendData?.rateperkm}
@@ -385,15 +389,15 @@ export default function FullScreenDialog() {
                 })}
               </Select>
             </FormControl>
-          </Stack>
+          </Stack><br></br>
           <Stack style={{ marginTop: 20 }}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Select Food Expenses </InputLabel>
-              <Select
-                labelId="Select Food Expenses"
+              <InputLabel id="demo-simple-select-label"  style={{ flexDirection: 'row',color:'#ed6c02',fontWeight:700}}>Food Expenses </InputLabel>
+              <Select variant="standard" color="common" sx={{fontSize:'13px'}}
+                labelId="Select Food Expenses" 
                 id="demo-simple-select"
                 value={sendData?.foodexpenses}
-                label="Select Food Expenses"
+                label="Select Food Expenses" 
                 onChange={(e) => setSendData({ ...sendData, foodexpenses: e?.target?.value })}
               >
                 {datadrop?.DA?.map(itm => {
@@ -401,14 +405,14 @@ export default function FullScreenDialog() {
                 })}
               </Select>
             </FormControl>
-          </Stack>
+          </Stack><br></br>
           <Stack style={{ marginTop: 20 }}>
-            <h1>Other Benefits</h1>
+            <h4>Other Benefits</h4>
           </Stack>
           <Stack style={{ marginTop: 20 }}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Select Phone Charges</InputLabel>
-              <Select
+              <InputLabel id="demo-simple-select-label"  style={{ flexDirection: 'row',color:'#ed6c02',fontWeight:700 }} >Phone Charges</InputLabel>
+              <Select variant="standard" color="common" sx={{fontSize:'13px'}}
                 labelId="Select Phone Charges"
                 id="demo-simple-select"
                 value={sendData?.telephonecharges}
@@ -423,25 +427,25 @@ export default function FullScreenDialog() {
           </Stack>
 
           <Stack style={{ marginTop: 20 }}>
-            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="Printing" variant="outlined" />
+            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="Printing" variant="outlined" color="common" />
           </Stack>
           <Stack style={{ marginTop: 20 }}>
-            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="Stationary" variant="outlined" />
+            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="Stationary" variant="outlined" color="common"/>
           </Stack>
           <Stack style={{ marginTop: 20 }}>
-            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="other expenses" variant="outlined" />
+            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="other expenses" variant="outlined" color="common" />
           </Stack>
           <Stack style={{ marginTop: 20 }}>
-            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="other expenses amounnt" variant="outlined" />
+            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="other expenses amounnt" variant="outlined" color="common" />
           </Stack>
           <Stack style={{ marginTop: 20 }}>
-            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="end odometer reading" variant="outlined" />
+            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="end odometer reading" variant="outlined" color="common" />
           </Stack>
           <Stack style={{ marginTop: 20 }}>
-            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="end location" variant="outlined" />
+            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="end location" variant="outlined" color="common" />
           </Stack>
           <Stack style={{ marginTop: 20 }}>
-            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" />
+            <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common" />
           </Stack>
           <br /><br />
           <div>

@@ -136,7 +136,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Categories</Typography>
 
 
-                {(data == 1|data==8|data==12)? <Button onClick={() => { setData(2) }}
+                {(data == 1|data==8|data==12|data==3|data==7)? <Button onClick={() => { setData(2) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -146,9 +146,9 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   }} style={selectDATA == 2 ? {
                     background: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
-                  } : null}>Funders</Button>:null}
+                  } : null}>Funder</Button>:null}
 
-                {(data == 1 | data==8 |data==12)?<Button onClick={() => { setData(1) }}
+                {(data == 1 | data==8 |data==12|data==3|data==7)?<Button onClick={() => { setData(1) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -165,14 +165,14 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 <Button onClick={() => { setData(3) }} sx={{ */}
 
                 {/* {data == 6 | data == 1 && <Button onClick={() => { setData(3) }} sx={{ */}
-                {(data==6|data==1|data==5|data==4|data==8|data==12|data==13)?<Button onClick={() => { setData(3) }} sx={{
+                {(data==6|data==1|data==5|data==4|data==8|data==12|data==13|data==3|data==7)?<Button onClick={() => { setData(3) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   },
                   color: 'black',
                 }}>Project</Button>:null}
-                {(data == 1|data==8|data==12)? <Button sx={{
+                {(data == 1|data==8|data==12|data==3|data==7)? <Button sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -181,8 +181,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   color: 'black',
                 }}>Operation Manager</Button>:null}
 
-
-                {(data == 1 |data==4|data==8|data==12) ? <Button onClick={() => { setData(5) }} sx={{
+                {(data == 1 |data==4|data==8|data==12|data==3|data==7) ? <Button onClick={() => { setData(5) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -194,7 +193,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   color: '#ed6c02',
                 } : null}>Trainer</Button>:null}
             
-               {(data==6|data==1|data==5|data==4|data==8|data==12|data==13)?<Button onClick={() => { setData(9) }}
+               {(data==6|data==1|data==5|data==4|data==8|data==12|data==13|data==3|data==7)?<Button onClick={() => { setData(9) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -207,7 +206,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     color: '#ed6c02',
                   } : null}>Date Range</Button>:null}
 
-            {(data==5|data==4|data==12)?<Button
+            {(data==5|data==4|data==12|data==3|data==7)?<Button
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -217,7 +216,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
 
                   }}>Participant</Button>:null}
 
-                {(data==1|data==4|data==8|data==12)?<Button onClick={() => { setData(7) }} sx={{
+                {(data==1|data==4|data==8|data==12|data==3|data==7)?<Button onClick={() => { setData(7) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -228,7 +227,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
                 } : null}>Location</Button>:null}
-                {(data == 1|data==8)?<Button sx={{
+                {(data == 1|data==8|data==3)?<Button sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -236,7 +235,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   color: 'black',
                 }}>Participant</Button>:null}
                 {/* </Grid> */}
-                {(data == 1)?<Button onClick={() => { setData(12) }} sx={{
+                {(data == 1|data==3)?<Button onClick={() => { setData(12) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -247,7 +246,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
                 } : null}>Sr.Operation Manager</Button>:null}
-                {(data == 1)?<Button onClick={() => { setData(13) }} s sx={{
+                {(data == 1|data==3|data==13)?<Button onClick={() => { setData(13) }} s sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -257,8 +256,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 }} style={selectDATA == 13 ? {
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
-                } : null}>Gelathis Facilator Leads</Button>:null}
-                 {(data == 13)?<Button onClick={() => { setData(13) }} s sx={{
+                } : null}>Gelathis Facilitator Leads</Button>:null}
+                 {/* {(data == 13)?<Button onClick={() => { setData(13) }} s sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -268,7 +267,7 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 }} style={selectDATA == 13 ? {
                   background: '#ffd796', // theme.palette.primary.main
                   color: '#ed6c02',
-                } : null}>Gelathis Facilator</Button>:null}
+                } : null}>Gelathis Facilitator</Button>:null} */}
 
               </CardContent>
             </Card>
