@@ -59,7 +59,7 @@ BusListFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, same }) {
+export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, resetBus }) {
 
   const [selectDATA, setSelectData] = useState()
   const data = localStorage?.getItem('userId')
@@ -93,7 +93,7 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
               onCloseFilter();
             }}
           >
-          <Iconify icon="eva:close-fill" width={20} height={20} />
+            <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
 
@@ -166,7 +166,10 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   Location
                 </Button>}
                 {data == 2 | data == 1 && <Button
-                  onClick={same}
+                  onClick={() => {
+                    resetBus();
+                    onCloseFilter()
+                  }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main

@@ -80,7 +80,7 @@ export default function TravelA() {
       },
       data: data
     };
-
+    console.log(data, "travel request ")
     axios(config)
       .then(function (response) {
         setListData(response.data)
@@ -229,10 +229,10 @@ export default function TravelA() {
             </TabPanel>
             <TabPanel value={value} index={2}>
               {listdata?.data?.map((itm) => {
-                console.log(itm, "<---asdasdasdsadas")
                 return (
                   <>
-                    <Grid>{itm?.Ta_Name}</Grid>
+                    <Grid>{itm?.start_odometer} &nbsp; - &nbsp;
+                      {itm?.Ta_Name}</Grid>
                   </>
                 )
               })}
@@ -242,13 +242,11 @@ export default function TravelA() {
 
 
 
-
-
-
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <TravelDialog viewMessage={(text) => {
             setMessage(text)
             setOpenMessage(true)
+            list()
           }} />
         </Stack>
         {/* </Stack> */}

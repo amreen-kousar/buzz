@@ -27,6 +27,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useGeolocated } from "react-geolocated";
 import Iconify from 'src/components/Iconify';
+import moment from 'moment'
 import Webcam from "react-webcam";
 function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
@@ -71,7 +72,6 @@ export default function TravelDialog({ viewMessage }) {
       },
       userDecisionTimeout: 5000,
     });
-  console.log(coords, "<----coordscoordscoordscoords")
   const handleClose = () => {
     setOpen(false);
   };
@@ -152,10 +152,9 @@ export default function TravelDialog({ viewMessage }) {
 
     axios(config)
       .then(function (response) {
-
         console.log(JSON.stringify(response.data));
+        viewMessage('Travel allowance added sucessfully')
         handleClose()
-        postImages()
       })
       .catch(function (error) {
         console.log(error);
@@ -188,7 +187,6 @@ export default function TravelDialog({ viewMessage }) {
     //console.log(config)
     let res = fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn => {
       console.log(itn, "<--itemgh")
-      viewMessage('Travel allowance added sucessfully')
     })
       .catch(err => {
         console.log(err, "<---wertyu")

@@ -1,4 +1,3 @@
-
 import { useState, useEffect, forwardRef, useRef } from 'react';
 // material
 import { Card, Stack, Chip, Button, Container, Typography, Grid, Snackbar } from '@mui/material';
@@ -20,7 +19,7 @@ export default function User() {
 
   const [openMessage, setOpenMessage] = useState(false);
 
-  const [selected, setSelected] = useState([])
+  var [selected, setSelected] = useState([])
 
   const [clcikData, setClickData] = useState()
 
@@ -37,10 +36,11 @@ export default function User() {
   useEffect(() => {
     setDw(false)
     busesd()
-  }, [search, dw]
+  }, [dw]
   )
 
   useEffect(() => {
+
     if (open) {
       const { current: descriptionElement } = descriptionElementRef;
       if (descriptionElement !== null) {
@@ -48,13 +48,12 @@ export default function User() {
       }
     }
 
-    console.log("I am clicked")
   }, [open]);
 
   const busesd = async (i, id, filterBusItem = null) => {
 
 
-    console.log(i, id)
+    console.log("bus api called ............................")
     const data = JSON.stringify({
       "date": "",
       "role_id": 1,
@@ -69,9 +68,8 @@ export default function User() {
       "search": search
     });
 
+    console.log(data, "checking for search")
 
-    console.log(data)
-    console.log(data, "<----qwertyuiosdfgh")
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getBuses.php',
@@ -83,45 +81,36 @@ export default function User() {
 
     axios(config)
       .then((response) => {
-        console.log(i, id, "i am i and id", filterBusItem)
         if (filterBusItem) {
           if (selected.length == 0) {
             setBuses(respBuses?.list)
           }
           else if (response?.data?.list?.length > 0) {
-            console.log(buses, "i am bus")
             let filteredBuses = buses?.filter(({ id }) => response?.data?.list.some(x => x.id !== id))
             setBuses([...filteredBuses])
-
           }
         }
         else {
-          console.log(selected)
           if (selected.length == 1) {
             setBuses(response?.data?.list)
           }
           else if (selected.length > 0) {
-            console.log(buses, response?.data?.list)
             buses.push(...response?.data?.list)
             setBuses([...buses])
-            console.log(buses)
           }
-          else if (i == undefined && id == undefined) {
+          else if (selected.length == 0) {
             setRespbuses(response?.data)
             setBuses(response?.data?.list)
-            console.log(response?.data, "i am resp data")
           }
           else {
             setBuses(respBuses?.list)
           }
         }
-        console.log(response?.data, "i am normal data")
       })
       .catch((error) => {
         console.log(error);
       });
   }
-
 
 
 
@@ -144,32 +133,47 @@ export default function User() {
   };
   const getData = (itm, i) => {
     setopenbusfilter(false);
-    console.log(itm, i, "<-----qwertyu")
+    if (search != "") {
+      selected = []
+      setSelected(selected)
+      setSearch([])
+      console.log("empty select")
+    }
     // setSelected({
     //   id: i,
     //   name: itm?.name
     // })
     // const data = i===2?{"funder_id":itm?.id}:i===1?{"partner_id":itm?.id}:{"project_id":itm?.id}
-    let filterSelect = selected.filter(s => s?.id == itm?.id)
-
+    let filterSelect = selected.length == 0 ? [] : selected.filter(s => s?.id == itm?.id)
     if (filterSelect.length == 0) {
-      console.log(selected)
       selected.push(itm)
       setSelected(selected);
-      console.log(selected)
       busesd(itm, i)
     }
 
-    // console.log(data,i,itm,"<----sdfssreerfer")
-    // setFilterData(data)
-    // handleCloseFilter()
-    // console.log("sdfgsdfdfssd", itm, i)
+  }
+
+
+  const searchFunction = (e) => {
+    setSearch(e)
+    setSelected([{ name: e, type: "Search" }])
+    busesd()
+  }
+
+
+  const resetBus = () => {
+    setSelected([])
+    setSearch([])
+    busesd()
   }
 
   const handleDelete = (itmTodelete) => {
     let empty = false
     if (selected.length == 1) {
       empty = true
+      if (selected.type == "Search") {
+        setSearch("")
+      }
       setBuses([...respBuses?.list])
     }
     let deleteSelected = selected.filter(s => s?.id != itmTodelete?.id)
@@ -196,12 +200,11 @@ export default function User() {
             This is a success message!
           </Alert>
         </Snackbar>
-        <DashboardNavbar getSearch={(e) => setSearch(e)} onOpenSidebar={() => setOpen(true)} />
+        <DashboardNavbar getSearch={(e) => searchFunction(e)} onOpenSidebar={() => setOpen(true)} />
 
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
-            All Bus List
-
+            {selected.length == 0 ? "All Bus List" : "Bus List"}
           </Typography>
           <Button style={{ float: "right", color: '#ed6c02' }}
             sx={{
@@ -236,7 +239,7 @@ export default function User() {
 
         {selected.length > 0 && selected.map(s => {
           return <Stack direction="row" spacing={1}>
-            <Chip label={s?.name} onDelete={() => { handleDelete(s) }} />
+            <Chip label={`${s?.type} : ${s?.name} `} onDelete={() => { handleDelete(s) }} />
           </Stack>
         })}
 
@@ -247,6 +250,7 @@ export default function User() {
             isOpenFilter={openbusfilter}
             onOpenFilter={handleopenbusfilter}
             onCloseFilter={handleclosebusfilter}
+            resetBus={resetBus}
           />
         </Stack>
 

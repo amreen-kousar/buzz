@@ -69,12 +69,11 @@ export default function Funders({ selectDATA, getData }) {
       <Card style={{ marginTop: 20 }}>
         {fund?.length !== 0 ? fund?.map(itm => {
           return (
-
             <CardContent>
               <TableContainer >
                 <Table aria-label="customized table"  >
                   <TableBody  >
-                    <TableRow style={{ height: "10px !important" }} onClick={() => getData(itm, selectDATA)} >
+                    <TableRow style={{ height: "10px !important" }} onClick={() => getData({ ...itm, type: "Funder" }, selectDATA)} >
                       <TableCell style={{ width: "10px" }}> <Iconify icon="mdi:user-circle" width={20} height={20} /> </TableCell>
                       <TableCell >  {itm?.name}</TableCell>
                     </TableRow>

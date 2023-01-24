@@ -139,7 +139,6 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           sx: { width: 280, },
         }}
       >
-        {console?.log(detailsData, "<---detailsDatadetailsData")}
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }}>
             {`Bus Number : ${clcikData?.register_number}`}
