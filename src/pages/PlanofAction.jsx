@@ -276,7 +276,7 @@ export default function PlanofAction() {
 
             <TabPanel value={value} index={0}>
 
-              {
+              {/* {
                 poa?.length !== 0 ?
                   poa?.map((item) => {
                     return (
@@ -301,7 +301,7 @@ export default function PlanofAction() {
 
                                 </Stack>
                               </Stack>
-                              <Stack direction={'row'} spacing={5} mt={2}>
+                              {item?.name&&<Stack direction={'row'} spacing={5} mt={2}>
                                 <PoaEdit itm={itm} />
                                 <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
                                   '&:hover': {
@@ -311,7 +311,7 @@ export default function PlanofAction() {
                                   borderColor: "#ed6c02",
                                   color: "#ed6c02"
                                 }}>Delete</Button>
-                              </Stack>
+                              </Stack>}
                             </CardContent>
                           </Card>
 
@@ -323,19 +323,21 @@ export default function PlanofAction() {
                   : <Grid>
                     no data found
                   </Grid>
-              }
-            </TabPanel>
+              } */}
+                 {
+                 poa?.length !== 0 ?
+                poa?.map((item) => {
+              
+                  return (
+                    // <h1>{item[0]?.actual_Date}</h1>
+                    item?.length !== 0 && item?.map(itm => {
 
-            <TabPanel value={value} index={1}>
-              {
-                poa?.map((itm) => {
-                  { console.log(itm, '<-------------itmitmitmitmitmitm') }
                   return (
                     <Card style={{ marginTop: 35 }} onClick={() => {
                       setSelect(itm)
                       handleOpenEvent();
                     }}>
-                      <CardContent>
+                      {itm?.id&&<CardContent>
                         <Stack>{itm?.name}</Stack>
                         <Stack>{itm?.roleName}</Stack>
                         <Stack>{itm?.emp_name}</Stack>
@@ -350,11 +352,54 @@ export default function PlanofAction() {
                             color: "#ed6c02"
                           }}>Delete</Button>
                         </Stack>
-                      </CardContent>
+                      </CardContent>}
                     </Card>
 
                   )
                 })
+              )
+              })
+              :<Grid>no data found</Grid>
+              }
+            </TabPanel>
+
+            <TabPanel value={value} index={1}>
+              {
+                 poa?.length !== 0 ?
+                poa?.map((item) => {
+              
+                  return (
+                    // <h1>{item[0]?.actual_Date}</h1>
+                    item?.length !== 0 && item?.map(itm => {
+
+                  return (
+                    <Card style={{ marginTop: 35 }} onClick={() => {
+                      setSelect(itm)
+                      handleOpenEvent();
+                    }}>
+                      {itm?.id&&<CardContent>
+                        <Stack>{itm?.name}</Stack>
+                        <Stack>{itm?.roleName}</Stack>
+                        <Stack>{itm?.emp_name}</Stack>
+                        <Stack direction={'row'} spacing={5} mt={2}>
+                          <PoaEdit itm={itm} />
+                          <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
+                            '&:hover': {
+                              backgroundColor: '#ffd796',
+                              borderColor: "#ed6c02"
+                            },
+                            borderColor: "#ed6c02",
+                            color: "#ed6c02"
+                          }}>Delete</Button>
+                        </Stack>
+                      </CardContent>}
+                    </Card>
+
+                  )
+                })
+              )
+              })
+              :<Grid>no data found</Grid>
               }
             </TabPanel>
             <TabPanel value={value} index={2}>
@@ -373,12 +418,12 @@ export default function PlanofAction() {
                             }}>
                               {console.log(itm, '<------jbhjjbjbjb')}
                               {/* <Typography>{itm?.date}</Typography> */}
-                              <CardContent>
+                              {itm?.id&&<CardContent>
                                 <Stack>
                                   {itm?.name}
                                 </Stack>
                                 <Stack>{itm?.roleName}</Stack><Stack>{itm?.emp_name}</Stack>
-                                <Stack direction={'row'} spacing={5} mt={2}>
+                               <Stack direction={'row'} spacing={5} mt={2}>
                                   <PoaEdit itm={itm} />
                                   <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
                                     '&:hover': {
@@ -389,7 +434,7 @@ export default function PlanofAction() {
                                     color: "#ed6c02"
                                   }}>Delete</Button>
                                 </Stack>
-                              </CardContent>
+                              </CardContent>}
                             </Card>
 
                           )

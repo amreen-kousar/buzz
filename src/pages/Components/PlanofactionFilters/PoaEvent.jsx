@@ -84,7 +84,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent,select}) {
           setEventData("")
             onCloseEvent()}}
         PaperProps={{
-          sx: { width: 280, },
+          sx: { width: 400, },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
@@ -102,19 +102,20 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent,select}) {
         <Scrollbar>
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
             <div>
+            
               <Card style={{backgroundColor:'#f6f8fb',marginTop:20}}>
                <CardContent>
                 <Typography style={{marginTop:30}} variant="subtitle1">EVENT TITLE :
-                <Typography variant="subtitle2">{eventData?.name}</Typography>
+                <span style={{fontWeight:100,color:'#444444'}}>{eventData?.name}</span>
                  </Typography>
                 <Typography style={{marginTop:30}} variant="subtitle1">EVENT DATE & TIME : 
-                <Typography variant="subtitle2">{eventData?.date1}</Typography>
+                <span style={{fontWeight:100,color:'#444444'}}>{eventData?.date1}</span>
                 </Typography>
                 <Typography style={{marginTop:30}} variant="subtitle1">EVENT DATE & TIME : 
-                <Typography variant="subtitle2">{eventData?.date2}</Typography>
+                <span style={{fontWeight:100,color:'#444444'}}>{eventData?.date2}</span>
                 </Typography>
                 <Typography style={{marginTop:30}} variant="subtitle1">EVENT DESCRIPTION : 
-                <Typography variant="subtitle2">{eventData?.description}</Typography>
+                <span style={{fontWeight:100,color:'#444444'}}>{eventData?.description}</span>
                 </Typography>
                </CardContent>
               </Card>
@@ -122,7 +123,12 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent,select}) {
               <Card style={{backgroundColor:'#f6f8fb',marginTop:20}}>
 <CardContent>
 <Typography>CHECK IN CHECKOUT STATUS</Typography>
-<Button>CHECKOUT</Button>
+<Button  sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+              },
+              color:'#ed6c02'
+            }}>CHECKOUT</Button>
 <Typography>CHECKINN TIME</Typography>
 <Typography>CHECKINN LOCATION :  </Typography>
 <Typography>CHECKOUT TIME : </Typography>
@@ -133,7 +139,12 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent,select}) {
 
               <Card>
                 <CardContent>
-                    <Button>ADD PHOTOS</Button>
+                    <Button sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+              },
+              color:'#ed6c02'
+            }}>ADD PHOTOS</Button>
                 </CardContent>
               </Card>
             

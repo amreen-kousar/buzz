@@ -203,8 +203,8 @@ export default function PoaEdit({ setSucess, itm }) {
                 <TextField fullWidth value={addData?.name} onChange={(e) => {
                   setAddData({ ...addData, name: e?.target?.value }),
                   console.log(e, "<---EWWEREWREW")
-                }} id="outlined-basic" label="Add Title" variant="outlined" />
-                <Stack direction={'row'}>
+                }} id="outlined-basic" label="Add Title" variant="outlined" color="common"/>
+                <Stack direction={'row'} color="common">
                   <Typography>All Day</Typography>
                   <Switch value={addData?.all_day} onChange={(e) => { setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) }} {...label} />
                 </Stack>
@@ -215,7 +215,7 @@ export default function PoaEdit({ setSucess, itm }) {
                     label="Date&Time picker"
                     value={addData?.date}
                     onChange={(e) => { handleChange(e) }}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => <TextField {...params} color="common" />}
                   />
 
                 </Stack>
@@ -226,7 +226,7 @@ export default function PoaEdit({ setSucess, itm }) {
                       label="Date&Time picker"
                       value={addData?.date2}
                       onChange={(e) => { handleChange2(e) }}
-                      renderInput={(params) => <TextField {...params} />}
+                      renderInput={(params) => <TextField {...params} color="common" />}
                     />
                     {/* </LocalizationProvider> */}
                   </Stack>
@@ -240,7 +240,7 @@ export default function PoaEdit({ setSucess, itm }) {
                 </Stack>
 
                 <Stack>
-                  <TextField id="outlined-basic" value={addData?.description} onChange={(e) => { setAddData({ ...addData, description: e?.target?.value }) }} label="Add Description For Creating Poa" variant="outlined" />
+                  <TextField id="outlined-basic" value={addData?.description} onChange={(e) => { setAddData({ ...addData, description: e?.target?.value }) }} label="Add Description For Creating Poa" variant="outlined" color="common" />
                 </Stack>
                 <Stack>
 
