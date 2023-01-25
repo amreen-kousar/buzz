@@ -20,46 +20,34 @@ import {
     CardContent,
 } from '@mui/material';
 // components
-import Iconify from '../../components/Iconify';
-import Scrollbar from '../../components/Scrollbar';
-import { ColorManyPicker } from '../../components/color-utils';
-import ShaktiDialog from '../projects/Components/ShaktiDialog'
-import Photos from '../projects/Components/Photos'
-
+import Iconify from '../../../components/Iconify';
+import Scrollbar from '../../../components/Scrollbar';
+import { ColorManyPicker } from '../../../components/color-utils';
+// import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 
-projectMultiDrawer.propTypes = {
+GelathiProgrameDrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
 };
 
-export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,batchState}) {
+export default function GelathiProgrameDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
 
-     const [batch,setBatch] = useState('')
-     const [photos,setPhotos] = React.useState(false)
-     const [shown,setShown] = React.useState(false)
-
-
+     const [session,setSession] = useState('')
     useEffect(() => {
-        getTrainingBatch();
-       // console.log(batchState)
-        
-    }, [batchState])
-    console.log(clcikData,"<---sads",batchState)
-    const getTrainingBatch = async =>{
-        
-        
-        console.log(batchState,"<---batchStatebatchState")
+        getGFSessionData();
+        // console.log(clcikData)
+    }, [])
 
+    const getGFSessionData = async =>{
         var data = JSON.stringify({
-            "batch_id": batchState?.training_batch_id,
-            "role_id": 1
+            "gf_session_id": 77878
           });
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
+            url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData.php',
             headers: { 
               'Content-Type': 'application/json'
             },
@@ -68,8 +56,8 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
           
           axios(config)
           .then(function (response) {
-            setBatch(response.data)
-            console.log(response.data,'<-----------setBatchsetBatchsetBatch');
+            setSession(response.data)
+            console.log(response.data,'<---------setSessionsetSession');
           })
           .catch(function (error) {
             console.log(error);
@@ -79,6 +67,10 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
 
     return (
         <>
+            {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
+        Filters&nbsp;
+      </Button> */}
+
             <Drawer
                 anchor="right"
                 open={isOpenFilter}
@@ -89,8 +81,9 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
             >
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                        {`${clcikData?.title}: ${clcikData?.name}`}
+                        {`${clcikData?.title}:`}
                     </Typography>
+                    {console.log(clcikData,'<------clcikDataclcikData')}
                     <IconButton onClick={onCloseFilter}>
                         <Iconify icon="eva:close-fill" width={20} height={20} />
                     </IconButton>
@@ -105,51 +98,49 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                                 <CardContent>
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
                                         Project :
-                                        <Typography variant="body1" >{batch?.data?.projectName}</Typography>
-                                        {console.log(batch?.data?.projectName,'<--------njknnjnjn')}
+                                        <Typography variant="body1" >{session?.gf_session_name}</Typography>
+                                        {console.log(session?.gf_session_name,'<--------gf_session_namegf_session_name')}
                                     </Typography>
+                                   
                                     <Typography variant="subtitle1" gutterBottom>
                                         Partner :
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.partnerName}</Typography>
+                                        <Typography variant="body1" gutterBottom>{session?.partnerName}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
                                         Training Batch:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.name}</Typography>
+                                        <Typography variant="body1" gutterBottom>{session?.data?.name}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Day1:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.day1_actual}</Typography>
+                                        Plan Date :
+                                        <Typography variant="body1" gutterBottom>{session?.plan_date}</Typography>
                                     </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Day2:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.day2_actual}</Typography>
-                                    </Typography>
+                                    
                                     <Typography variant="subtitle1" gutterBottom>
                                         Contact Person:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.contact_person}</Typography>
+                                        <Typography variant="body1" gutterBottom>{session?.contact_person}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
                                     Contact Number:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.contact_number}</Typography>
+                                        <Typography variant="body1" gutterBottom>{session?.contact_number}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
                                        Trainer Name:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.trainer_name}</Typography>
+                                        <Typography variant="body1" gutterBottom>{session?.trainer_name}</Typography>
+                                    </Typography>
+                                    <Typography variant="subtitle1" gutterBottom>
+                                       GF Name:
+                                        <Typography variant="body1" gutterBottom>{session?.gf_name}</Typography>
                                     </Typography>
                                 </CardContent>
                             </Card>
-                            <ShaktiDialog batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />
-                            <Card onClick={()=>{setShown(true),console.log("ferfgreg")}} style={{marginTop:20}}>
+                            {/* <ShaktiDialog /> */}
+                            <Card style={{marginTop:20}}>
                                 <CardContent>
-                                    <Typography>Actual Participants   {batch?.total_participants}     </Typography>
-                                    <Typography>Target Participants    {batch?.data?.participants}    </Typography>
-                                </CardContent>
-                            </Card>
-                            <Photos batch={batch} photos={photos} setPhotos={(e)=>{setPhotos(e)}}/>
-                            <Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
-                                <CardContent>
-                                    <Typography>Photos</Typography>
-                                    
+                                   
+                                   <Typography  variant="subtitle1" gutterBottom>Visit Participants :   
+                                    <Typography variant="body1" gutterBottom>{session?.total_participants} </Typography>
+                                    </Typography>
+                                   
                                 </CardContent>
                             </Card>
                         </div>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button,Card,CardActions,CardContent} from '@mui/material';
+import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
@@ -16,23 +16,23 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog({shown,setShown,batch}) {
+export default function FullScreenDialog({photos,setPhotos,batch}) {
   console.log(batch,'<--------shownshownshown')
 
 
   const [open, setOpen] = React.useState(false);
   React.useEffect(()=>{
   //setShown(shown)
-  setOpen(shown)
-  },[shown])
+  setOpen(photos)
+  },[photos])
 
   const handleClickOpen = () => {
-    setShown(true)
+    setPhotos(true)
     setOpen(true);
   };
 
   const handleClose = () => {
-    setShown(false)
+    setPhotos(false)
     setOpen(false);
   };
 
@@ -55,7 +55,7 @@ export default function FullScreenDialog({shown,setShown,batch}) {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-             Self Shakti
+             Self Shakti 
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
@@ -63,32 +63,19 @@ export default function FullScreenDialog({shown,setShown,batch}) {
            
           </Toolbar>
         </AppBar>
-        <Card>
-          <CardContent>
-            <Typography  variant="subtitle2"> Project : {batch?.data?.projectName} </Typography>
-            {console.log(batch?.data?.projectName,'<----------batch?.data?.projectName')}
-            <Typography  variant="subtitle2"> Training Batch : {batch?.data?.name} </Typography>
-            <Typography  variant="subtitle2"> Day 1 : {batch?.data?.day1}</Typography>
-            <Typography  variant="subtitle2"> Day 2 : {batch?.data?.day2}</Typography>
-            <Typography  variant="subtitle2"> Contact Person : {batch?.data?.contact_number}</Typography>
-            <Typography  variant="subtitle2"> Contact Number : {batch?.data?.contact_person}</Typography>
-          </CardContent>
-        </Card>
-        {/* <Typography variant="subtitle1"> ALl Participants</Typography> */}
-        {batch?.all_participants?.map(itm=>{
+        <List>
+        <>
+
+{batch?.photos?.map(itm=>{
   return(
-        <Card style={{top:40}}>
-          <CardContent>
-            <CardActions>
-              
-            </CardActions>
-           <Typography variant="subtitle2">{itm?.participant_name}</Typography>
-           {console.log(itm?.participant_name,'<----------itm?.participant_name')}
-          </CardContent>
-        </Card>
-         )
-        })}
-       
+    <>
+<img src={itm?.photo1?itm?.photo1:""}/>
+<img src={itm?.photo2?itm?.photo2:""}/>
+    </>
+  )
+})}
+</>
+        </List>
       </Dialog>
     </div>
   );

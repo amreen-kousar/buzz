@@ -47,7 +47,7 @@ export default function Funders({ selectDATA, getData }) {
       },
       data
     };
-
+if(data){
     axios(config)
       .then((response) => {
         setFund(response?.data?.data)
@@ -56,6 +56,7 @@ export default function Funders({ selectDATA, getData }) {
       .catch((error) => {
         console.log(error);
       });
+    }
   }
   return (
     <div>

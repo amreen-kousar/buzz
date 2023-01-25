@@ -19,6 +19,7 @@ export default function selfShaktiProj() {
 
     const [openFilter, setOpenFilter] = useState(false);
     const [selfShakti,setSelfShakthi] = useState('');
+    const [batchState,setBatchState] = useState()
 
     const handleOpenFilter = () => {
         setOpenFilter(true);
@@ -75,6 +76,7 @@ export default function selfShaktiProj() {
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ProjectMultiDrawer
+                batchState={batchState}
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
@@ -91,6 +93,7 @@ export default function selfShaktiProj() {
                      
                     <Card style={styles.card1} 
                     onClick={() => {
+                        setBatchState(itm)
                         setClickData({ name: itm.batch_name, title: "self Shakthi name" })
                         handleOpenFilter()
                     }}

@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
-import ProjectMultiDrawer from '../Components/ProjectMultiDrawer';
+import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
 export default function enrolledVyaaparList() {
 
     const [clcikData, setClickData] = useState()
-    const [enrolledVyaapar, setenrolledVyaapar] = useState([{ stockname: "fist" }, { stockname: "second" }]);
+    const [vyaapar, setVyaapar] = useState('');
 
     useEffect(() => {
+        enrolledVyaapar();
         // setenrolledVyaapar([{ stockname: "fist" }, { stockname: "second" }])
     }, []
     )
@@ -23,6 +25,31 @@ export default function enrolledVyaaparList() {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
+    const enrolledVyaapar= async =>{
+        var data = JSON.stringify({
+            "search": "",
+            "project_id": 281,
+            "emp_id": 144
+          });
+          
+          var config = {
+            method: 'post',
+            url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollVyaparEnrollment.php',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : data
+          };
+          
+          axios(config)
+          .then(function (response) {
+            setVyaapar(response?.data)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          
+    }
 
     return (
 
@@ -41,7 +68,7 @@ export default function enrolledVyaaparList() {
             </Stack>
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-                <ProjectMultiDrawer
+            <ParticipantDrawer
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
@@ -49,25 +76,24 @@ export default function enrolledVyaaparList() {
                 />
             </Stack>
             {/* </Stack> */}
-            {enrolledVyaapar?.map((itm) => {
+            {vyaapar?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.stockname, title: "Enrolled Vyaapar Name" })
+                        setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" })
                         handleOpenFilter()
                     }}>
 
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Vyaapar Name : ${itm?.stockname}`}
+                                {` Enrolled Vyaapar Name : ${itm?.gelathiname}`}
                             </Typography>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
-                            <Typography variant="subtitle2" gutterBottom >
-                                Today Checklist Status : <Chip label="Published" size="small" color="success" variant="outlined" />
-
+                        <Typography variant="subtitle1" gutterBottom>
+                                {` Enrolled Village Name : ${itm?.villagename}`}
                             </Typography>
-                            <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                                Checked/Total : 0/16
+                            <Typography variant="subtitle1" gutterBottom>
+                                {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>
                         </Grid>
                     </Card>)

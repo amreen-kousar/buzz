@@ -156,13 +156,14 @@ export default function DashboardApp() {
           <h2>
 
             {/* <Chip label={(slected?.id===2)? "Funder":(slected?.id===1)?"partner":(slected?.id===5)?"Trainer":(slected?.id===1)?"partner": null} onDelete={closefilter}/> */}
-
+            
             {slected?.id === 1 ? "Partner" : null}
             {slected?.id === 3 ? "Project" : null}
             {slected?.id === 5 ? "Trainer" : null}
             {slected?.id === 4 ? "Operation Manager" : null}
             {slected?.id === 12 ? "Sr.Operation Manager" : null}
             {slected?.id === 13 ? "Gelathis Facilator Leads" : null}&nbsp;{slected?.name ? slected?.name : ''}</h2>
+            {/* <h1 onClick={apiHit}>Close</h1> */}
           {/* <h2>{slected?.id===2? "Funder": null}&nbsp;{slected?.name ? slected?.name : ''}
           </h2> */}
           {/* <Chip label= {slected?.id===2?"founder":null}/> */}

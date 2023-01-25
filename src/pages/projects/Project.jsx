@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, {useState, useEffect } from 'react'
+import axios from 'axios';
 import { Button, ButtonGroup, Card, CardHeader, Container, Icon, IconButton, TableCell, Typography } from '@mui/material';
 import Iconify from 'src/components/Iconify';
 import Page from 'src/components/Page';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { Box } from '@mui/system';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,13 +12,40 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow';
 import { Grid } from '@mui/material';
 import { useLocation } from 'react-router-dom'
-
+import CreateTrainerBatch from './Components/CreateTrainerBatch'
 function Project(props) {
   const location = useLocation()
-
+  const [data1,setData1] = useState('')
   useEffect(() => {
-    console.log(location.state, "props")
+    projData();
+    // console.log(location.state, "props")
   }, [])
+  const projData= async =>{
+    var data = JSON.stringify({
+      "project_id": 234,
+      "role_id": 1,
+      "emp_id": 144
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setData1(response.data.list)
+      console.log(response.data,'<--------------setData1setData1');
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
 
   const [projectDetails, setProjectDetails] = useState({ projectName: "BANGARAPETCI19102", districtName: "Kolar", partnerName: "CDPO", trainingTarget: "2879", projectDuration: " From: 01 - 04 - 2019 To: 31 - 03 - 2020", projectStatus: "Completed" })
 
@@ -50,27 +77,28 @@ function Project(props) {
                     <TableBody>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Project Name </TableCell>
-                        <TableCell>{projectDetails.projectName} </TableCell>
+                        <TableCell>{data1.project_name} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>District Name</TableCell>
-                        <TableCell>{projectDetails.districtName} </TableCell>
+                        <TableCell>{data1.location_name} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Partner Name </TableCell>
-                        <TableCell>{projectDetails.partnerName} </TableCell>
+                        <TableCell>{data1.partnerName} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Training Target</TableCell>
-                        <TableCell>{projectDetails.trainingTarget} </TableCell>
+                        <TableCell>{data1.training_target} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Project Duration</TableCell>
-                        <TableCell>{projectDetails.projectDuration} </TableCell>
+                        <TableCell> From : {data1.startDate} </TableCell>
+                        <TableCell> To : {data1.endDate}</TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Project Status</TableCell>
-                        <TableCell>{projectDetails.projectStatus} </TableCell>
+                        <TableCell>{data1.project_status} </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
@@ -171,13 +199,11 @@ function Project(props) {
 
               </Box>
 
-              <Box
-
-              >
+              <Box style={{marginTop:50}}>
 
 
-                <div>
-
+                <div style={{marginTop:50}}>
+                        <CreateTrainerBatch />
                 </div>
               </Box>
             </Grid>
