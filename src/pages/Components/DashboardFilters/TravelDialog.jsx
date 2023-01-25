@@ -473,13 +473,25 @@ export default function FullScreenDialog() {
               <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
             </label>
           </div>
-          <Button onClick={postImages}>Send Images</Button>
+          <Button onClick={postImages}   
+          sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+              },
+              color:"#ed6c02"
+            }}>Send Images</Button>
           <br /><br />
 
           {/* <Button onClick={() => capture()}>Click here to to upload snaps</Button> */}
 
         </div>
-        <Button onClick={() => SendData()} variant="filled">Upload</Button>
+        <Button onClick={() => SendData()} variant="filled"   sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+              },
+              color:"#ed6c02",
+          
+            }}>Upload</Button><br></br>
       </Dialog>
     </div>
   );
