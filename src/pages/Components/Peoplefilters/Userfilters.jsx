@@ -72,7 +72,9 @@ export default function UserFilter({ isOpenFilter, onOpenFilter, onCloseFilter, 
   var [selectDATA, setSelectData] = useState()
   const userPermissions = ['1', '2']
   const data = localStorage?.getItem('userId')
-  const filtersHeaders = [{ id: 1, name: 'Partners' }, { id: 2, name: 'Funders' }, { id: 5, name: 'Trainers' }, { id: 0, name: 'All Buzz team Members' }, { id: 10, name: 'Management Team' }, { id: 16, name: 'Gelathi Facilitators' }, { id: 7, name: 'Drivers' }]
+
+
+  const filtersHeaders = [{ id: 9, name: 'Partners' }, { id: 8, name: 'Funders' }, { id: 5, name: 'Trainers' }, { id: 0, name: 'All Buzz team Members' }, { id: 10, name: 'Management Team' }, { id: 6, name: 'Gelathi Facilitators' }, { id: 7, name: 'Drivers' }]
 
   const setData = (value) => {
     localStorage.setItem('selectedData', value)
