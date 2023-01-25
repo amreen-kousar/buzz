@@ -92,40 +92,47 @@ function Addbus(props) {
                             }}
 
                         >
-                            <TextField fullWidth id="outlined-basic" label="Register Number" defaultValue={addBus.register_number} onChange={(e) => { setAddBus({ ...addBus, register_number: e.target.value }) }} variant="outlined" /><br />
+                            <TextField fullWidth id="outlined-basic" label="Register Number" helperText="Register Number required*" defaultValue={addBus.register_number} onChange={(e) => { setAddBus({ ...addBus, register_number: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" label="Register Date" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.register_date} onChange={(e) => { setAddBus({ ...addBus, register_date: e.target.value }) }} variant="outlined" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Engine Number" defaultValue={addBus.engine_number} onChange={(e) => { setAddBus({ ...addBus, engine_number: e.target.value }) }} variant="outlined" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Chassis Number" defaultValue={addBus.chassis_number} onChange={(e) => { setAddBus({ ...addBus, chassis_number: e.target.value }) }} variant="outlined" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Insurance Number" defaultValue={addBus.insurance_number} onChange={(e) => { setAddBus({ ...addBus, insurance_number: e.target.value }) }} variant="outlined" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Insurance Company" defaultValue={addBus.insurance_company} onChange={(e) => { setAddBus({ ...addBus, insurance_company: e.target.value }) }} variant="outlined" /><br />
+                            }} defaultValue={addBus.register_date} onChange={(e) => { setAddBus({ ...addBus, register_date: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="outlined-basic" label="Engine Number" defaultValue={addBus.engine_number} onChange={(e) => { setAddBus({ ...addBus, engine_number: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="outlined-basic" label="Chassis Number" defaultValue={addBus.chassis_number} onChange={(e) => { setAddBus({ ...addBus, chassis_number: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="outlined-basic" label="Insurance Number" defaultValue={addBus.insurance_number} onChange={(e) => { setAddBus({ ...addBus, insurance_number: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="outlined-basic" label="Insurance Company" defaultValue={addBus.insurance_company} onChange={(e) => { setAddBus({ ...addBus, insurance_company: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" label="Insurance Start Date" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.insurance_start_date} onChange={(e) => { setAddBus({ ...addBus, insurance_start_date: e.target.value }) }} variant="outlined" /><br />
+                            }} defaultValue={addBus.insurance_start_date} onChange={(e) => { setAddBus({ ...addBus, insurance_start_date: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" label="Insurance End Date" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.insurance_end_date} onChange={(e) => { setAddBus({ ...addBus, insurance_end_date: e.target.value }) }} variant="outlined" /><br />
+                            }} defaultValue={addBus.insurance_end_date} onChange={(e) => { setAddBus({ ...addBus, insurance_end_date: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" label="Last Service Date" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.last_service_date} onChange={(e) => { setAddBus({ ...addBus, last_service_date: e.target.value }) }} variant="outlined" /><br />
+                            }} defaultValue={addBus.last_service_date} onChange={(e) => { setAddBus({ ...addBus, last_service_date: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" label="Next Service Date" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.next_service_due_date} onChange={(e) => { setAddBus({ ...addBus, next_service_due_date: e.target.value }) }} variant="outlined" /><br />
+                            }} defaultValue={addBus.next_service_due_date} onChange={(e) => { setAddBus({ ...addBus, next_service_due_date: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" label="Fitness Certificate" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.fitness_certificate} onChange={(e) => { setAddBus({ ...addBus, fitness_certificate: e.target.value }) }} variant="outlined" /><br />
+                            }} defaultValue={addBus.fitness_certificate} onChange={(e) => { setAddBus({ ...addBus, fitness_certificate: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} label="Permit Details" defaultValue={addBus.permit} onChange={(e) => { setAddBus({ ...addBus, permit: e.target.value }) }} variant="outlined" /><br />
+                            }} label="Permit Details" defaultValue={addBus.permit} onChange={(e) => { setAddBus({ ...addBus, permit: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" label="Emission Date" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.emission_date} onChange={(e) => { setAddBus({ ...addBus, emission_date: e.target.value }) }} variant="outlined" /><br />
+                            }} defaultValue={addBus.emission_date} onChange={(e) => { setAddBus({ ...addBus, emission_date: e.target.value }) }} variant="outlined" color="common" /><br />
                         </Box>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="contained" onClick={submitBus}>Add</Button>
+                    <Button variant="contained" onClick={submitBus} sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+                color:'#ed6c02'
+              },
+              color:"#ffffff",
+              backgroundColor:'#ed6c02'
+            }}>Add</Button>
                     <Button variant="contained" color="error" onClick={handleClose}>Cancel</Button>
 
                 </DialogActions>

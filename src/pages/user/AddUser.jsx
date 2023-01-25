@@ -3,7 +3,7 @@ import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, Dialog, Toolbar, IconButton, Typography, TextField, DialogContent, DialogContentText, Box, DialogActions, FormControl, InputLabel, Select, MenuItem, RadioGroup, Radio, Autocomplete, FormControlLabel, FormGroup, Switch } from '@mui/material'
 import Iconify from '../../components/Iconify';
-
+import AppBar from '@mui/material/AppBar';
 function AddUser(props) {
 
     const [open, setOpen] = useState(false);
@@ -228,7 +228,7 @@ function AddUser(props) {
             AddUser.lastUpdatedBy = '650'
         console.log(AddUser)
         const data = JSON.stringify(AddUser);
-
+        
         const config = {
             method: 'post',
             url: 'https://bdms.buzzwomen.org/appTest/createUser.php',
@@ -237,7 +237,7 @@ function AddUser(props) {
             },
             data
         };
-
+        
         let apiCallName = (AddUser.role.roleName == "Funder") ? 'createFunder' : (AddUser.role.roleName == "Partner") ? 'createPartner' : false;
 
 
@@ -305,6 +305,7 @@ function AddUser(props) {
             });
 
         console.log("Add User", AddUser)
+        handleClose()
         // https://bdms.buzzwomen.org/appTest/createUser.php
     }
 
@@ -330,17 +331,32 @@ function AddUser(props) {
                 aria-describedby="scroll-dialog-description"
 
             >
-                <Toolbar >
+
+ <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
+          <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+            Add Users
+            </Typography>
+            <Button autoFocus color="inherit" onClick={submitUser}>
+              save
+            </Button>
+          </Toolbar>
+       
+        </AppBar> 
+                {/* <Toolbar sx={{ position: 'relative', bgcolor: '#ed6c02' }} >
                     <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                         <CloseIcon />
                     </IconButton>
-                    <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+                    <Typography sx={{ ml: 2, flex: 1 }} variant="h6" color="inherit" component="div" >
                         Add User
                     </Typography>
                     <Button autoFocus color="inherit" onClick={submitUser}>
                         save
                     </Button>
-                </Toolbar>
+                </Toolbar> */}
                 <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
                     <DialogContentText
                         id="scroll-dialog-description"
@@ -359,15 +375,15 @@ function AddUser(props) {
                         >
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
-                                <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem" }}>
-                                    <InputLabel id="demo-simple-select-label">Choose Role</InputLabel>
-                                    <Select
+                                <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem",color:'#ed6c02'}}>
+                                <InputLabel id="demo-simple-select-label" fullWidth color="common" style={{color:'#ed6c02'}}>Role</InputLabel>
 
+                                <Select fullWidth color="common" variant='standard'
                                         labelId="demo-simple-select-label"
-                                        id="role"
-                                        defaultValue={AddUser.role}
-                                        label="Role"
-                                        onChange={(e) => { getEmpId(e.target.value) }}
+                                                     id="role"
+                                    // defaultValue={AddUser.role}
+                                    label="Role"
+                                    onChange={(e) => { getEmpId(e.target.value) }}
                                     >
                                         {roles.map(role => {
                                             return <MenuItem value={role ?? ''}>{role?.roleName}</MenuItem>
@@ -376,11 +392,11 @@ function AddUser(props) {
                                     </Select>
                                 </FormControl>
 
-                                <TextField fullWidth id="outlined-basic" label="Name" value={AddUser.first_name} required onChange={(e) => { setAddUser({ ...AddUser, first_name: e.target.value }) }} variant="outlined" />
+                                <TextField fullWidth id="outlined-basic" helperText='Name required*' label="Name" value={AddUser.first_name} required onChange={(e) => { setAddUser({ ...AddUser, first_name: e.target.value }) }} variant="outlined" color="common" />
                                 {
                                     ["Admin", "Program Manager", "Operations Manager", "Gelathi Facilitator Lead", 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Last Name" variant="outlined" value={AddUser.last_name} onChange={(e) => { setAddUser({ ...AddUser, last_name: e.target.value }) }} />
                                 }
-                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl style={{ marginLeft: "1rem" }}>
+                                {/* {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl style={{ marginLeft: "1rem" }}>
                                     <RadioGroup
                                         row
                                         onChange={(e, value) => { setAddUser({ ...AddUser, gender: value }) }}
@@ -388,17 +404,17 @@ function AddUser(props) {
                                         defaultValue="male"
                                         first_name="radio-buttons-group"
                                     >
-                                        <FormControlLabel value="female" control={<Radio />} label="Female" />
+                                        <FormControlLabel value="female" control={<Radio />} label="Female" color='#ed6c02'/>
                                         <FormControlLabel value="male" control={<Radio />} label="Male" />
 
                                     </RadioGroup>
-                                </FormControl>}
-                                <FormGroup style={{ float: "right" }}>
+                                </FormControl>} */}
+                                {/* <FormGroup style={{ float: "right" }}>
                                     <FormControlLabel label="Status" labelPlacement="start"
                                         control={<Switch defaultValue={AddUser.present_status} onClick={(e, value) => { setAddUser({ ...AddUser, present_status: !AddUser.present_status }); console.log(!AddUser.present_status) }} defaultChecked />} />
-                                </FormGroup>
+                                </FormGroup> */}
                                 <br />
-                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl fullWidth>
+                                {/* {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl fullWidth>
 
                                     <Autocomplete
                                         disablePortal
@@ -411,25 +427,23 @@ function AddUser(props) {
                                         renderInput={(params) => <TextField {...params} label="ReportingManger" />}
                                     />
                                 </FormControl>
-                                }
-                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Date of joining " type="date" InputLabelProps={{
+                                } */}
+                                {/* {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Date of joining " type="date" InputLabelProps={{
                                     shrink: true,
                                 }} value={AddUser.doj} onChange={(e) => { setAddUser({ ...AddUser, doj: e.target.value }) }} variant="outlined" />
-                                }
+                                } */}
                             </div>
 
-                            <br />
                             <h3>Contact Information</h3>
-                            <br />
-
+                           
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
-                                <TextField fullWidth required id="outlined-basic" label="Mobile number" value={AddUser.contactNum} type="number" onChange={(e) => { setAddUser({ ...AddUser, contactNum: e.target.value }) }} variant="outlined" />
-                                <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" />
+                                <TextField fullWidth required id="outlined-basic" label="Mobile number" helperText='Mobile Number Required*'  value={AddUser.contactNum} type="number" onChange={(e) => { setAddUser({ ...AddUser, contactNum: e.target.value }) }} variant="outlined" color="common" />
+                                <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" color='common'/>
 
 
 
-                                <TextField fullWidth required id="outlined-basic" label="office_email_id" value={AddUser.office_email_id} onChange={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} onPaste={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} variant="outlined" />
+                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} onChange={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} onPaste={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} variant="outlined" color="common"/>
 
                                 <div style={{ marginLeft: "1rem", fontSize: "0.8rem", fontWeight: "700" }}>
                                     {emailExists ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp; Email Id already exists !</span> : (errors.office_email_id) ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp;Invalid Email Id</span> : (AddUser.office_email_id != "") ? <span style={{ color: "green", display: "flex" }}><Iconify icon="mdi:tick-circle" width={20} height={20} /> &nbsp;Valid Email Id</span> : null}

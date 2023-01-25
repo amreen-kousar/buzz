@@ -170,7 +170,7 @@ export default function Gelathidashboard() {
               onCloseFilter={handleCloseFilter}
             />
           </Stack>
-          {/* <Grid container spacing={3} marginTop={4}>
+          <Grid container spacing={3} marginTop={4}>
             <Grid item xs={4} sm={8} md={4}>
 
               <AppWidgetSummary
@@ -233,8 +233,8 @@ export default function Gelathidashboard() {
 
               />
             </Grid>
-          </Grid> */}
-          <Grid>
+          </Grid>
+          {/* <Grid>
           <Grid item xs={4} sm={8} md={4}>
 
             <AppWidgetSummary
@@ -291,7 +291,7 @@ export default function Gelathidashboard() {
 
 
 
-        </Grid>
+        </Grid> */}
 
         {summaryData?.data[0]?.name ? <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
 

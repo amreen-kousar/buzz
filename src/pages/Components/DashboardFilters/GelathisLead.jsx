@@ -8,6 +8,13 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Iconify from '../../../components/Iconify';
 
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 
 export default function GelathisLead({selectDATA,getData}) {
@@ -60,11 +67,16 @@ if(glead?.length ===0){
  return(
        
             <CardContent>
-                <Typography>
-                <Iconify onClick={()=>getData(itm,selectDATA)} icon="eva:people-fill" width={20} height={20} />
-               {itm?.name}
-                </Typography>
-            </CardContent>
+             <TableContainer >
+              <Table aria-label="customized table"  >
+                <TableBody  >
+                  <TableRow style={{ height: "10px !important" }} onClick={() => getData(itm, selectDATA)} >
+                    <TableCell style={{ width: "10px" }}> <Iconify icon="mdi:user-circle" width={20} height={20} /> </TableCell>
+                    <TableCell >  {itm?.name}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer></CardContent>
  )
              }):null}
           </Card>
