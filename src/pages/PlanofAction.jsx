@@ -150,10 +150,8 @@ export default function PlanofAction() {
             created
           </Alert>
         </Snackbar>
-        <Typography variant="h4" sx={{ mb: 5 }} >
+        <Typography variant="h4" sx={{ mb: 5 }} style={{margin:5}} >
           Plan Of Actions
-         
-        
 
         </Typography> <PoaTeam setUserId={(e) =>
             setUserId(e)
@@ -196,7 +194,7 @@ export default function PlanofAction() {
               }}
               //   setSendData({ ...sendData, date: newValue })
               // }}
-              renderInput={(params) => <TextField {...params} style={{width:'10vw'}} />}
+              renderInput={(params) => <TextField {...params} color="common" />}
             />
           </LocalizationProvider>  
         </Stack>
@@ -337,11 +335,7 @@ export default function PlanofAction() {
                       setSelect(itm)
                       handleOpenEvent();
                     }}>
-                      {itm?.id&&<CardContent>
-                        <Stack>{itm?.name}</Stack>
-                        <Stack>{itm?.roleName}</Stack>
-                        <Stack>{itm?.emp_name}</Stack>
-                        <Stack direction={'row'} spacing={5} mt={2}>
+                       <Stack direction={'row'} spacing={5} mt={2} sx={{float:"right",marginRight:10,position:'relative'}}>
                           <PoaEdit itm={itm} />
                           <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
                             '&:hover': {
@@ -352,6 +346,21 @@ export default function PlanofAction() {
                             color: "#ed6c02"
                           }}>Delete</Button>
                         </Stack>
+                      {itm?.id&&<CardContent>
+                        <Stack margin="5px">{itm?.name}</Stack>
+                        <Stack>{itm?.roleName}</Stack>
+                        <Stack>{itm?.emp_name}</Stack>
+                        {/* <Stack direction={'row'} spacing={5} mt={2}>
+                          <PoaEdit itm={itm} />
+                          <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
+                            '&:hover': {
+                              backgroundColor: '#ffd796',
+                              borderColor: "#ed6c02"
+                            },
+                            borderColor: "#ed6c02",
+                            color: "#ed6c02"
+                          }}>Delete</Button>
+                        </Stack> */}
                       </CardContent>}
                     </Card>
 
@@ -373,25 +382,25 @@ export default function PlanofAction() {
                     item?.length !== 0 && item?.map(itm => {
 
                   return (
-                    <Card style={{ marginTop: 35 }} onClick={() => {
+                    <Card style={{ marginBottom: 30 ,marginTop:10}} onClick={() => {
                       setSelect(itm)
                       handleOpenEvent();
                     }}>
+                        <Stack direction={'row'} spacing={5} mt={2} sx={{float:"right",marginRight:10}}>
+                                  <PoaEdit itm={itm} />
+                                  <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
+                                    '&:hover': {
+                                      backgroundColor: '#ffd796',
+                                      borderColor: "#ed6c02"
+                                    },
+                                    borderColor: "#ed6c02",
+                                    color: "#ed6c02"
+                                  }}>Delete</Button>
+                                </Stack>
                       {itm?.id&&<CardContent>
-                        <Stack>{itm?.name}</Stack>
+                        <Stack margin="5px">{itm?.name}</Stack>
                         <Stack>{itm?.roleName}</Stack>
                         <Stack>{itm?.emp_name}</Stack>
-                        <Stack direction={'row'} spacing={5} mt={2}>
-                          <PoaEdit itm={itm} />
-                          <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
-                            '&:hover': {
-                              backgroundColor: '#ffd796',
-                              borderColor: "#ed6c02"
-                            },
-                            borderColor: "#ed6c02",
-                            color: "#ed6c02"
-                          }}>Delete</Button>
-                        </Stack>
                       </CardContent>}
                     </Card>
 
@@ -412,18 +421,11 @@ export default function PlanofAction() {
                         {item?.length !== 0 && item?.map(itm => {
 
                           return (
-                            <Card style={{ marginTop: 35 }} onClick={() => {
+                            <Card style={{ marginBottom: 30 ,marginTop:10}} onClick={() => {
                               setSelect(itm)
                               handleOpenEvent();
                             }}>
-                              {console.log(itm, '<------jbhjjbjbjb')}
-                              {/* <Typography>{itm?.date}</Typography> */}
-                              {itm?.id&&<CardContent>
-                                <Stack>
-                                  {itm?.name}
-                                </Stack>
-                                <Stack>{itm?.roleName}</Stack><Stack>{itm?.emp_name}</Stack>
-                               <Stack direction={'row'} spacing={5} mt={2}>
+                               <Stack direction={'row'} spacing={5} mt={2} sx={{float:"right",marginRight:10}}>
                                   <PoaEdit itm={itm} />
                                   <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
                                     '&:hover': {
@@ -434,6 +436,14 @@ export default function PlanofAction() {
                                     color: "#ed6c02"
                                   }}>Delete</Button>
                                 </Stack>
+                              {console.log(itm, '<------jbhjjbjbjb')}
+                
+                              {itm?.id&&<CardContent>
+                                <Stack margin="5px">
+                                  {itm?.name}
+                                </Stack>
+                                <Stack>{itm?.roleName}</Stack><Stack>{itm?.emp_name}</Stack>
+                              
                               </CardContent>}
                             </Card>
 

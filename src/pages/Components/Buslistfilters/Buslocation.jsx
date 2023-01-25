@@ -114,26 +114,13 @@ export default function Location(props) {
   }
   return (
     <div>
-      <Card style={{ marginTop: 20 }}>
+      <Card>
+
+
         <CardContent>
-        {/* <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={data.country}
-          label="Age"
-          onChange={(e=>{
-            setData({...data,country:e?.target?.value})
-            // getState(e?.target?.value)
-          })}
-        >
-        {country?.map(itm=>{
-            return(
-            <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
-            )
-          })
-        }
-        </Select> */}
-          <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>State
+        
+        <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>
+                  State
          <Select fullWidth variant='standard' color="common"
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -150,7 +137,7 @@ export default function Location(props) {
             )
           })
         }
-        </Select></Typography>
+        </Select> </Typography><br></br>
         <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>District
         <Select fullWidth variant='standard' color="common"
           labelId="demo-simple-select-label"
@@ -168,7 +155,7 @@ export default function Location(props) {
             )
           })
         }
-        </Select></Typography>
+        </Select></Typography><br></br>
         <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>Taluk
         <Select fullWidth variant='standard' color="common"
           labelId="demo-simple-select-label"
@@ -189,8 +176,8 @@ export default function Location(props) {
         </Select></Typography>
          
         </CardContent>
-        <Button style={{ marginLeft:'100px', color: 'white',marginBottom:'10px' ,backgroundColor:'#ed6c02'}}
-            onClick={()=>props?.onSumbit(data)}>Submit</Button>
+        <Button style={{ float: "right", color: 'white',marginRight:'160px',marginBottom:'10px',  backgroundColor: '#ed6c02', }}
+          onClick={()=>props?.onSumbit(data)}>Submit</Button>
       </Card>
     </div>
   );

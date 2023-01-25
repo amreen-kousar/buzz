@@ -198,16 +198,9 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
               <Funders getData={getData} selectDATA={selectDATA} />
             </Grid>
             }
-            {selectDATA === 7 && (
-              <Grid style={{ marginTop: 30 }}>
-                <Location
-                  selectDATA={selectDATA}
-                  onSumbit={(e, i) => {
-                    onSumbit(e, i);
-                  }}
-                />
-              </Grid>
-            )}
+             {selectDATA&&selectDATA==7&&<Grid style={{ marginTop: 30 }}>
+              <Location selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
+            </Grid>}
 
 
           </div>

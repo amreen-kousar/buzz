@@ -17,16 +17,17 @@ import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import Iconify from 'src/components/Iconify';
 import Tooltip from 'src/theme/overrides/Tooltip';
-
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open,teamData,setUserId } = props;
 
   const handleClose = () => {
-   // onClose(selectedValue);
+    onClose(selectedValue);
   };
-
+  
   const handleListItemClick = (value) => {
     props?.setUserId(value?.id)
     console.log(value,"<--valuevalue")
@@ -36,7 +37,9 @@ function SimpleDialog(props) {
   
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Select Buzz Team Members</DialogTitle>
+      <DialogTitle> <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+              <CloseIcon />
+            </IconButton>Select Buzz Team Members</DialogTitle>
       <List sx={{ pt: 0 }}>
         {teamData?.map((email) => (
           <ListItem disableGutters>
@@ -56,12 +59,12 @@ function SimpleDialog(props) {
             autoFocus
           //  onClick={() => handleListItemClick('addAccount')}
           >
-            <ListItemAvatar>
+            {/* <ListItemAvatar>
               <Avatar>
                 <AddIcon />
               </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Add account" />
+            </ListItemAvatar> */}
+            {/* <ListItemText primary="Add account" /> */}
           </ListItemButton>
         </ListItem>
       </List>
@@ -123,7 +126,7 @@ export default function PoaTeam({setUserId}) {
         {/* Selected: {selectedValue} */}
       </Typography>
       <br /><br></br>
-      <Button  onClick={handleClickOpen} style={{float:"right",color:"#ed6c02"}} sx={{
+      <Button  onClick={handleClickOpen} style={{float:"right",color:"#ed6c02",margin:10,marginTop:22}} sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
                 borderColor:"#ed6c02",

@@ -72,7 +72,6 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
   )
   const details = async => {
     console.log(clcikData, "<-----clcikDataclcikData")
-
     var data = JSON.stringify({
       "bus_id": clcikData?.bus_id
     });

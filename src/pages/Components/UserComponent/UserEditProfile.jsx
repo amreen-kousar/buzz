@@ -207,7 +207,7 @@ export default function UserEditProfile() {
               autoComplete="off"
             >
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px'}}>
-                <TextField label="First Name" variant="outlined" color="common" 
+                <TextField label="First Name" variant="outlined" color="common" fullWidth
   //                sx={{
   //   "& .MuiOutlinedInput-root": {
   //     "& > fieldset": {
@@ -215,8 +215,8 @@ export default function UserEditProfile() {
   //     }
   //   }
   // }}
-  />
-                <TextField id="outlined-basic" label="Last Name" variant="outlined" color="common"/><br></br><br></br>
+  />            <br></br>
+                <TextField id="outlined-basic" label="Last Name" variant="outlined" color="common" fullWidth/><br></br><br></br>
                 <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: '0.5rem' }}>
                   <InputLabel id="demo-simple-select-label" fullWidth color="common">Role</InputLabel>
 

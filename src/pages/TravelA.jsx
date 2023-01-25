@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import React from "react";
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar,Card} from '@mui/material';
+import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar,Card, CardActionArea } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -222,23 +222,26 @@ export default function TravelA() {
                     <Grid>{itm?.Ta_Name}</Grid>
                   </>
                 )
-              })} */}  Item One
+              })} */}  No data found
 
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Item Two
+              No data found
             </TabPanel>
             <TabPanel value={value} index={2}>
               {listdata?.data?.map((itm) => {
                 return (
                   <>
-                    <Card style={{margin:"20px",borderRadius:"5px",backgroundColor:"#f7f7f7"}}>
-                    <Grid sx={{margin:'8px'}} style={{color:"blue"}}><b>{itm?.Ta_Name}</b>
                     
+                    <Card style={{margin:"20px",borderRadius:"5px",backgroundColor:"#f7f7f7",cursor:'pointer'}} >
+                      <CardActionArea LinkComponent={TravelDialog}>
+                    <Grid sx={{margin:'8px'}} style={{color:"blue"}}><b>{itm?.Ta_Name}</b>
                     <Iconify style={{float:"right",marginTop:5,marginRight:10,fontSize:30,color:"gray"}} icon="system-uicons:cross"></Iconify>
                     <Iconify style={{float:"right",marginTop:5,marginRight:30,fontSize:30,color:"#303030"}} icon="ic:outline-access-time"></Iconify></Grid>
-                    <Typography variant="body" gutterBottom sx={{margin:'10px'}}> <b>TA Amount:{itm?.telephone}</b></Typography></Card>
-                  </>
+                    <Typography variant="body" gutterBottom sx={{margin:'10px'}}> <b>TA Amount:{itm?.telephone}</b></Typography>
+                    </CardActionArea>
+                    </Card>
+                   </>
                 )
 })}
             </TabPanel >

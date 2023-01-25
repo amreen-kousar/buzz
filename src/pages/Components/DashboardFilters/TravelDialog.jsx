@@ -333,12 +333,7 @@ export default function TravelDialog({ viewMessage }) {
             tabIndex={-1}
           >
             <div style={{ margin: "1rem" }}>
-              <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" />
-              </Stack>
-              <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Location" variant="outlined" />
-              </Stack>
+           
 
               <Stack style={{ marginTop: 20 }}>
                 <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />

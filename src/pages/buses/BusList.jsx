@@ -26,6 +26,7 @@ export default function User() {
   const [search, setSearch] = useState('')
 
   const [dw, setDw] = useState(false)
+  const [open, setOpen] = useState(false)
 
   const descriptionElementRef = useRef(null);
 

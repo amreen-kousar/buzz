@@ -149,7 +149,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
     });
   }
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width:400 }}>
       <CardHeader
         sx={{
           p: 2,

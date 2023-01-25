@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Grid } from '@mui/material';
 import Button from '@mui/material/Button';
-import BusListFilter from './Components/Buslistfilters/BusListFilter';
+
   
 import axios from 'axios';
 import TotalFilter from './Components/BuzzStockFilter/TotalFilter';
@@ -80,7 +80,7 @@ export default function BuzzStock() {
     //   name: itm?.name
     // })
     // const data = i===2?{"funder_id":itm?.id}:i===1?{"partner_id":itm?.id}:{"project_id":itm?.id}
-    busesd(itm, i)
+    demoi(itm, i)
     // console.log(data,i,itm,"<----sdfssreerfer")
     // setFilterData(data)
     // handleCloseFilter()
@@ -117,11 +117,13 @@ export default function BuzzStock() {
       },
       data
     };
+    console.log("dataaaaaaaaaaaaa",data);
 
     axios(config)
       .then((response) => {
-        console.log(response)
+        console.log("responseeeeeeeeeeee",response)
         setDemo(response.data?.data)
+        console.log("harshaaaa",response?.data.data[0]?.current_stock)
         console.log(JSON.stringify(response.data, '<----333ssss'));
       })
       .catch((error) => {
@@ -180,7 +182,7 @@ Filter
           <TableBody>
             {console.log(demo, "<--demodedede")}
             {demo && demo.map((row) => (
-              <StyledTableRow key={row.name}>
+              <StyledTableRow >
                 <StyledTableCell component="th" scope="row">
                   {row.name}
                 </StyledTableCell>
