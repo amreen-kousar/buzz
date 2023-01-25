@@ -5,7 +5,7 @@ import Scrollbar from '../../../components/Scrollbar';
 import Funders from './TotalFunder';
 import Location from './TotalLocation';
 import TotalProject from './TotalProject';
-import DateRange from './TotalDateRange'
+// import DateRange from './TotalDateRange'
 
 // material
 import {

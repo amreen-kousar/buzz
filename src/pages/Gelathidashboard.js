@@ -5,13 +5,20 @@ import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import Iconify from '../components/Iconify';
 import Page from '../components/Page';
+import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
 import { AppWidgetSummary } from '../sections/@dashboard/app';
 import DashboardFilter from './Components/DashboardFilters/DashboardFilter';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
-
+import CardHeader from '@mui/material/CardHeader';
+import { max } from 'lodash';
 export default function Gelathidashboard() {
   const navigate = useNavigate();
   const data = localStorage?.getItem('userId')
@@ -58,7 +65,7 @@ export default function Gelathidashboard() {
       taluk_id: "",
       district_id: "",
       trainerId: '',
-      emp_id: 6,
+      emp_id: 558,
       start_date: id,
       somId: '',
       gflId: '',
@@ -163,7 +170,7 @@ export default function Gelathidashboard() {
               onCloseFilter={handleCloseFilter}
             />
           </Stack>
-          <Grid container spacing={3} marginTop={4}>
+          {/* <Grid container spacing={3} marginTop={4}>
             <Grid item xs={4} sm={8} md={4}>
 
               <AppWidgetSummary
@@ -226,9 +233,111 @@ export default function Gelathidashboard() {
 
               />
             </Grid>
+          </Grid> */}
+          <Grid>
+          <Grid item xs={4} sm={8} md={4}>
+
+            <AppWidgetSummary
+              title="Circle Meetings"
+              total={summaryData?.summary_circle_meet}
+              color="motivator"
+
+            />
           </Grid>
-        </Container>
-      </Page>
-    </>
+          <Grid item xs={4} sm={8} md={4}>
+
+            <AppWidgetSummary
+              title="Village Visits"
+              total={summaryData?.summary_villagevisit}
+              color="motivator"
+
+            />
+          </Grid>
+          <Grid item xs={6} sm={6} md={6}>
+
+            <AppWidgetSummary
+              title="Beehive Visits"
+              total={summaryData?.summary_beehive}
+              color="motivator"
+
+            />
+          </Grid>
+          <Grid item xs={6} sm={6} md={6}>
+
+            <AppWidgetSummary
+              title="Enrolled Gelathis"
+              total={summaryData?.summary_enroll}
+              color="motivator"
+
+            />
+          </Grid>
+          <Grid item xs={6} sm={6} md={6}>
+
+            <AppWidgetSummary
+              title="Green Motivators"
+              total={summaryData?.summary_green}
+              color="motivator"
+
+            />
+          </Grid>
+          <Grid item xs={6} sm={6} md={6}>
+            <AppWidgetSummary
+              title="Enrolled Vyapor"
+              total={summaryData?.summary_vyapar}
+              color="motivator"
+
+            />
+          </Grid>
+
+
+
+        </Grid>
+
+        {summaryData?.data[0]?.name ? <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
+
+          <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+            Project {summaryData?.data[0]?.name}
+          </Typography>
+          {/* <Graphchart/> */}
+          <CardContent style={{ display: "flex" }}>
+            <TableContainer component={Paper}>
+              <Table aria-label="customized table" style={{ width: '200px', float: 'Left' }}>
+                <TableHead>
+                  <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                    <TableCell>Total Circles</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.circles}</TableCell>
+                  </TableRow>
+                  <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                    <TableCell>Circle Meetings</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.circle_meet}</TableCell>
+                  </TableRow>
+
+                  <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                    <TableCell>Village Visits</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.villagevisit}</TableCell>
+                  </TableRow>
+
+                  <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                    <TableCell>Beehive Visits</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.beehive}</TableCell>
+                  </TableRow>
+
+                  <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                    <TableCell>Enrolled Gelathis</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.enroll}</TableCell>
+                  </TableRow>
+
+                </TableHead>
+                <TableBody>
+
+                </TableBody>
+              </Table>
+            </TableContainer>
+
+
+          </CardContent>
+        </Card> : <span style={{ textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}>No Projects</span>}
+
+
+
+
+      </Container>
+    </Page>
+</>
   )
 }

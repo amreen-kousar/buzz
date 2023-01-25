@@ -184,8 +184,6 @@ export default function DashboardApp() {
           />
         </Stack>
 
-        {/*  */}
-
         <Grid container spacing={3} marginTop={4}>
           <Grid item xs={4} sm={8} md={4}>
 
@@ -265,9 +263,6 @@ export default function DashboardApp() {
             />
           </Grid>
         </Grid>
-
-
-
 
         <Grid item xs={12} sm={12} md={12} marginTop={3}>
           {/* <AppWidgetSummary title="Funder" total={234} style={{backgroundColor:'#bdbdbd'}} icon={'ant-design:fund-view-outlined'} /> */}

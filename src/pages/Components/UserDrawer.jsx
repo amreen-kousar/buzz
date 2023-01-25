@@ -44,12 +44,12 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,u
         open={isOpenFilter}
         onClose={onCloseFilter}
         PaperProps={{
-          sx: { width: 280, },
+          sx: { width: 400 },
         }}
       >
       
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }}>
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{color:'#444444'}}>
             Member Details:  {user?.first_name}  {user?.last_name}
           </Typography>
           <IconButton onClick={onCloseFilter}>
@@ -58,10 +58,14 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,u
         </Stack>
 
         <Divider />
-        <Stack style={{alignSelf:'center',}} direction={'row'}>
+        <Stack  direction={'row'}>
           <UserEditProfile />
          
-          <Button >Delete Profile</Button>
+          <Button style={{float:'right'}}  sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+              },
+            }}><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138',marginRight:0}}></Iconify></Button>
 
         </Stack>
         <Scrollbar>
@@ -69,18 +73,16 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,u
             <div>
               <Card>
                 <CardContent>
-                  <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
-                    Role:
-                    <Typography variant="body1" >{user?.role_name}</Typography>
+                  <Typography style={{ flexDirection: 'row',color:'#444444' }} variant="subtitle1" gutterBottom>
+                    Role:<span style={{fontWeight:100,color:'#444444'}}>{user?.role_name}</span>
+                 
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Reporting Manager:
-                    <Typography variant="body1" gutterBottom>{user?.supervisorName}</Typography>
+                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
+                    Reporting Manager:<span style={{fontWeight:100,color:'#444444'}}>{user?.supervisorName}</span>
+                 
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Date Of Joining:
-                    <Typography variant="body1" gutterBottom> {user?.doj}</Typography>
-                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
+                    Date Of Joining:<span style={{fontWeight:100,color:'#444444'}}>{user?.doj}</span> </Typography>
                 </CardContent>
               </Card>
 
@@ -94,25 +96,24 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,u
             <div>
               <Card style={{width:"auto"}}>
                 <CardContent>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
                     Contact Information
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Mobile Number:
-                    <Typography variant="body1" gutterBottom>   {user?.contactNum}</Typography>
-
+                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
+                    Mobile Number:<span style={{fontWeight:100,color:'#444444'}}>{user?.contactNum}</span> 
+                  
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Work: <Typography variant="body1" gutterBottom>   {user?.workNum}</Typography>
+                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
+                    Work: <span style={{fontWeight:100,color:'#444444'}}>{user?.workNum} </span>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Email: <Typography variant="body1" gutterBottom style={{overflowWrap:'break-word'}}>{user?.officeMailId}</Typography>
+                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
+                    Email:<span style={{fontWeight:100,color:'#444444'}}> {user?.officeMailId}</span>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Address: <Typography variant="body1" gutterBottom> {user?.address}</Typography>
+                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
+                    Address:<span style={{fontWeight:100,color:'#444444'}}>{user?.address}</span>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
-                    PinCode: <Typography variant="body1" gutterBottom>   {user?.pincode}</Typography>
+                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
+                    PinCode:<span style={{fontWeight:100,color:'#444444'}}>{user?.pincode}</span>
                   </Typography>
                 </CardContent>
               </Card>
@@ -122,10 +123,10 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,u
             <div>
               <Card>
                 <CardContent>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
                     Projects
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
                     {user?.project_list.map(project => {
                       return (
                         <Typography variant="body1" gutterBottom>   {project.projectName}</Typography>

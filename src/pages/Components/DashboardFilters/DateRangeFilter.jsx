@@ -45,7 +45,7 @@ export default function StaticDatePickerDemo(props) {
             />
     </LocalizationProvider></Stack>
     
-    {/* <Button onClick={() => props?.onDateSubmit(dateRange)}
+    <Button onClick={() => props?.onDateSubmit(dateRange)}
      sx=
      {{
       ":hover":{
@@ -53,7 +53,7 @@ export default function StaticDatePickerDemo(props) {
             bgcolor:"#ffd796"
       },
       
-      color:"#ffffff",bgcolor:"#ed6c02"}}>Submit</Button> */}
+      color:"#ffffff",bgcolor:"#ed6c02"}}>Submit</Button>
     </CardContent>
     </Card>
   );

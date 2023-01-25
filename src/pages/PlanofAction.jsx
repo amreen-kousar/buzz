@@ -150,45 +150,15 @@ export default function PlanofAction() {
             created
           </Alert>
         </Snackbar>
-        <Typography variant="h4" sx={{ mb: 5 }}>
+        <Typography variant="h4" sx={{ mb: 5 }} >
           Plan Of Actions
-          {/* <Box onClick={setDefaut} sx={{ mb: 5, mx: 2,bgcolor:"#ed6c02"}} style={{float:"right",width:"8vw",height:"8vh"}}>
-        <Link underline="none" component={RouterLink} to="#">
-          <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL" />
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" color='#ffffff' >
-                {account.displayName}
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
-              </Typography>
-            </Box>
-          </AccountStyle>
-        </Link>
-      </Box> */}
-          <PoaTeam setUserId={(e) =>
+         
+        
+
+        </Typography> <PoaTeam setUserId={(e) =>
             setUserId(e)
 
           } />
-          {/* {console.log(account.displayName,account.role, "<--yghuj")} */}
-          {/* <Box onClick={setDefaut} sx={{ mb: 5, mx: 2}} backgroundColor="#ed6c02" style={{float:"right"}}>
-        <Link underline="none" component={RouterLink} to="#">
-          <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL" />
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" color='#ffffff' >
-                {account.displayName}
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
-              </Typography>
-            </Box>
-          </AccountStyle>
-        </Link>
-      </Box> */}
-
-        </Typography>
 
         {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
@@ -216,8 +186,8 @@ export default function PlanofAction() {
           />
         </Stack>
         <Stack>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker 
               label="Date"
               value={date}
               onChange={(newValue) => {
@@ -226,9 +196,9 @@ export default function PlanofAction() {
               }}
               //   setSendData({ ...sendData, date: newValue })
               // }}
-              renderInput={(params) => <TextField {...params} fullWidth />}
+              renderInput={(params) => <TextField {...params} style={{width:'10vw'}} />}
             />
-          </LocalizationProvider>
+          </LocalizationProvider>  
         </Stack>
 
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>

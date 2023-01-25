@@ -11,6 +11,7 @@ import Page from '../components/Page';
 import TravelDialog from './Components/DashboardFilters/TravelDialog'
 import moment from 'moment';
 
+import Iconify from 'src/components/Iconify';
 // components
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -231,26 +232,30 @@ export default function TravelA() {
               {listdata?.data?.map((itm) => {
                 return (
                   <>
-                    <Grid>{itm?.start_odometer} &nbsp; - &nbsp;
-                      {itm?.Ta_Name}</Grid>
+                    <Card style={{margin:"20px",borderRadius:"5px",backgroundColor:"#f7f7f7"}}>
+                    <Grid sx={{margin:'8px'}} style={{color:"blue"}}><b>{itm?.Ta_Name}</b>
+                    
+                    <Iconify style={{float:"right",marginTop:5,marginRight:10,fontSize:30,color:"gray"}} icon="system-uicons:cross"></Iconify>
+                    <Iconify style={{float:"right",marginTop:5,marginRight:30,fontSize:30,color:"#303030"}} icon="ic:outline-access-time"></Iconify></Grid>
+                    <Typography variant="body" gutterBottom sx={{margin:'10px'}}> <b>TA Amount:{itm?.telephone}</b></Typography></Card>
                   </>
                 )
-              })}
-            </TabPanel>
-          </Box>
-        </Stack> : <div style={{ margin: "5rem", textAlign: "center" }}> no data found</div>}
+})}
+            </TabPanel >
+          </Box >
+        </Stack > : <div style={{ margin: "5rem", textAlign: "center" }}> no data found</div>}
 
 
 
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <TravelDialog viewMessage={(text) => {
-            setMessage(text)
-            setOpenMessage(true)
-            list()
-          }} />
-        </Stack>
-        {/* </Stack> */}
+<Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+  <TravelDialog viewMessage={(text) => {
+    setMessage(text)
+    setOpenMessage(true)
+    list()
+  }} />
+</Stack>
+{/* </Stack> */ }
 
-      </Container></Page>
+      </Container ></Page >
   );
 }

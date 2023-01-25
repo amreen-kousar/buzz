@@ -168,9 +168,9 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
               <Demographylocation selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
             </Grid>}
           
-            <Grid style={{ marginTop: 30 }}>
+            {selectDATA&&selectDATA===3&&<Grid style={{ marginTop: 30 }}>
               <Demographyprojects getData={getData} selectDATA={selectDATA} />
-            </Grid>
+            </Grid>}
 
 
 

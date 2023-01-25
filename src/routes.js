@@ -31,6 +31,7 @@ import EnrolledGreenMotivators from './pages/projects/enrolledGreenMotivators';
 import EnrolledVyaapar from './pages/projects/enrolledVyaapar';
 import GelathiCirces from './pages/projects/gelathiCircles';
 import Trainers from './pages/Components/DashboardFilters/Trainers';
+import Operationmanagerdashboard from './pages/Operationmanagerdashboard';
 import Test from './pages/Test';
 // ----------------------------------------------------------------------
 
@@ -67,23 +68,24 @@ export default function Router() {
         // ]
 
         [
-            { path: 'app', element: <DashboardApp />, id: [0, 1, 3, 4] },
+            { path: 'app', element: <DashboardApp />, id: [0, 1, 3, 7, 8, 12] },
             { path: 'trainer', element: <Trainerdashboard />, id: [5] },
-            { path: 'gelathi', element: <Gelathidashboard />, id: [6] },
-            { path: 'buslist', element: <BusList />, id: [0, 1, 2, 3, 4, 5] },
-            { path: 'planofaction', element: <PlanofAction />, id: [0, 1, 2, 3, 5, 6] },
+            { path: 'gelathi', element: <Gelathidashboard />, id: [6,13] },
+            {path:'operationmanager',element:<Operationmanagerdashboard/>,id:[4]},
+            { path: 'buslist', element: <BusList />, id: [0, 1, 2, 3, 4, 5, 7, 8, 12] },
+            { path: 'planofaction', element: <PlanofAction />, id: [0, 1, 3, 4, 5, 6, 7, 8, 12, 13] },
             //  { path: 'projects', element: <Blog />,id=[1,2,3] },
             {
-                path: 'projects', element: <ProjectHome />, id: [0, 1, 2, 3, 5, 6],
+                path: 'projects', element: <ProjectHome />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13],
                 children: getProjectRoutes
             },
-            { path: 'people', element: <User />, id: [0, 1, 2, 3, 5] },
-            { path: 'BuzzStock', element: <BuzzStock />, id: [0, 1, 2, 3, 5] },
-            { path: 'profile', element: <Profile />, id: [0, 1, 2, 3, 5, 6] },
-            { path: 'travel', element: <TravelA />, id: [0, 1, 2, 3, 5, 6] },
-            { path: 'demogrphy', element: <Demography />, id: [0, 1, 2, 3, 5] },
+            { path: 'people', element: <User />, id: [0, 1, 2, 3, 4, 12] },
+            { path: 'BuzzStock', element: <BuzzStock />, id: [0, 1, 2, 3, 4, 12] },
+            { path: 'profile', element: <Profile />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13] },
+            { path: 'travel', element: <TravelA />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13] },
+            { path: 'demogrphy', element: <Demography />, id: [0, 1, 2, 3, 12] },
             { path: 'chart', element: <Chart />, id: [0, 1, 2, 3, 4, 5] },
-            { path: 'logout', element: <Logout />, id: [0, 1, 2, 3, 4, 5, 6] }
+            { path: 'logout', element: <Logout />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13] }
         ]
 
 
@@ -121,6 +123,10 @@ export default function Router() {
         {
             path: '/dashboard/gelathi',
             element: <Gelathidashboard />,
+        },
+        {
+            path:'/dahsboard/operationmanager',
+            element:<Operationmanagerdashboard/>
         },
         {
             path: '*',

@@ -30,7 +30,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
-
+import Iconify from 'src/components/Iconify';
 import Autocomplete from '@mui/material/Autocomplete';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -159,8 +159,12 @@ export default function UserEditProfile() {
    }
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Edit Profile
+      <Button onClick={handleClickOpen}  sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+              },
+            }} >
+      <Iconify icon="material-symbols:edit"style={{width:'30px',height:'30px',color:'#e69138',marginLeft:"10px"}}></Iconify>
       </Button>
       <Dialog
         open={open}
@@ -202,13 +206,21 @@ export default function UserEditProfile() {
               noValidate
               autoComplete="off"
             >
-              <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
-                <TextField id="outlined-basic" label="First Name" variant="outlined" />
-                <TextField id="outlined-basic" label="Last Name" variant="outlined" />
+              <div style={{ background: 'white', padding: '2rem', borderRadius: '10px'}}>
+                <TextField label="First Name" variant="outlined" color="common" 
+  //                sx={{
+  //   "& .MuiOutlinedInput-root": {
+  //     "& > fieldset": {
+  //       border: "none"
+  //     }
+  //   }
+  // }}
+  />
+                <TextField id="outlined-basic" label="Last Name" variant="outlined" color="common"/><br></br><br></br>
                 <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: '0.5rem' }}>
-                  <InputLabel id="demo-simple-select-label">Choose Role</InputLabel>
+                  <InputLabel id="demo-simple-select-label" fullWidth color="common">Role</InputLabel>
 
-                  <Select
+                  <Select fullWidth color="common" variant='standard'
                     labelId="demo-simple-select-label"
                     id="role"
                    // defaultValue={AddUser.role}
@@ -243,20 +255,20 @@ export default function UserEditProfile() {
                 <br />
                
                 <Stack>
-                <Typography variant="body1">Contact Information</Typography>
+                <Typography variant="body1"  color="common">Contact Information</Typography>
               </Stack>
 
               <Stack>
-              <TextField id="outlined-basic" label="Mobile Number" type="number" variant="outlined" />
+              <TextField id="outlined-basic" label="Mobile Number" type="number" variant="outlined"  color="common"/>
               </Stack>
               <Stack>
-              <TextField id="outlined-basic" label="Work Mobile Number" type="number" variant="outlined" />
+              <TextField id="outlined-basic" label="Work Mobile Number" type="number" variant="outlined"  color="common"/>
               </Stack>
               <Stack>
-              <TextField id="outlined-basic" label="Email" type="email" variant="outlined" />
+              <TextField id="outlined-basic" label="Email" type="email" variant="outlined" color="common" />
               </Stack>
               <Stack>
-              <TextField id="outlined-basic" label="Address1"  variant="outlined" />
+              <TextField id="outlined-basic" label="Address1"  variant="outlined" color="common"/>
               </Stack>
               <Stack>
               <TextField id="outlined-basic" label="Address2"  variant="outlined" />

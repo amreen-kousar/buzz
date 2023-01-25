@@ -51,9 +51,8 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
     <Grid container spacing={3} {...other}>
       {/* {users.map((product) => ( */}
       {users.map((itm, index) => (
-        <Grid key={index} item xs={4} sm={4} md={4}>
+        <Grid key={index} item xs={4} sm={4} md={4} >
           {/* <Button> */}
-
 
           <Card onClick={() => { viewUser(itm) }}>
             <CardContent>
