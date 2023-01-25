@@ -24,7 +24,7 @@ import Project from './pages/projects/Project';
 import ProjectProfile from './pages/projects/ProjectProfile';
 import BusTest from './pages/projects/busTest';
 import MaterialStockList from './pages/projects/materialsStockList';
-import SelfShakthi from './pages/projects/selfShakti';
+import SelfShakthi from './pages/projects/selfShaktiProj';
 import GelathiProgram from './pages/projects/gelathiProgram';
 import EnrolledGelathi from './pages/projects/enrolledGelathi';
 import EnrolledGreenMotivators from './pages/projects/enrolledGreenMotivators';

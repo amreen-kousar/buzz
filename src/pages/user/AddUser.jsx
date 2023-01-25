@@ -136,8 +136,9 @@ function AddUser(props) {
             })
             .then((res) => res.json())
         let temprepoManager = res.list.map(repo => { return { label: repo?.name, id: repo.id, role: repo.role } })
-        console.log(temprepoManager)
         setReportingManager([...temprepoManager])
+        console.log(temprepoManager,'<---------------temprepoManagertemprepoManager')
+
     }
 
     const getProjectOfManager = async (value) => {
