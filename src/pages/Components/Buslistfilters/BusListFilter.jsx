@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import Funders from './Busfunders';
+import Project from './Busprojects'
 import { useState } from 'react';
 import Location from './Buslocation';
 // material
@@ -86,6 +87,7 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
             Filters
             {selectDATA && selectDATA === 2 && ':  Funders'}
             {selectDATA && selectDATA === 7 && ': Location'}
+            {selectDATA && selectDATA === 3 && ': Projects'}
           </Typography>
           <IconButton
             onClick={() => {
@@ -132,6 +134,7 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                 {data == 2 | data == 1 && <Button
                   onClick={() => {
                     setSelectData(3);
+                    console.log("project selected")
                   }}
                   sx={{
                     ':hover': {
@@ -186,10 +189,15 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                 </Button>}
               </CardContent>
             </Card>
-            <Grid style={{ marginTop: 30 }}>
+            {
+              selectDATA == 3 && <Grid style={{ marginTop: 30 }}>
+                <Project getData={getData} selectDATA={selectDATA} />
+              </Grid>
+            }
+            {selectDATA == 2 && <Grid style={{ marginTop: 30 }}>
               <Funders getData={getData} selectDATA={selectDATA} />
             </Grid>
-
+            }
             {selectDATA === 7 && (
               <Grid style={{ marginTop: 30 }}>
                 <Location
