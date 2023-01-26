@@ -23,7 +23,7 @@ export default function User() {
 
   const [clcikData, setClickData] = useState()
 
-  const [search, setSearch] = useState('')
+  var [search, setSearch] = useState('')
 
   const [dw, setDw] = useState(false)
   const [open, setOpen] = useState(false)
@@ -82,6 +82,7 @@ export default function User() {
 
     axios(config)
       .then((response) => {
+        console.log(data, response?.data)
         if (filterBusItem) {
           if (selected.length == 0) {
             setBuses(respBuses?.list)
@@ -156,7 +157,8 @@ export default function User() {
 
 
   const searchFunction = (e) => {
-    setSearch(e)
+    search = e
+    setSearch(search)
     setSelected([{ name: e, type: "Search" }])
     busesd()
   }
@@ -201,7 +203,7 @@ export default function User() {
             This is a success message!
           </Alert>
         </Snackbar>
-        <DashboardNavbar getSearch={(e) => searchFunction(e)} onOpenSidebar={() => setOpen(true)} />
+        <DashboardNavbar getSearch={(e) => searchFunction(e)} isOpenSidebar={() => setOpen(true)} />
 
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>

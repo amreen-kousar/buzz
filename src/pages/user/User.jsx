@@ -177,11 +177,9 @@ export default function User() {
     console.log(newPage, "<----efesfdsefsd")
   }
 
-
-
   return (
     <Page title="All Users">
-      <DashboardNavbar getSearch={(e) => setSearchUser(e)} onOpenSidebar={() => setOpen(true)} />
+      <DashboardNavbar getSearch={(e) => setSearchUser(e)}  onOpenSidebar={() => setOpen(true)} />
       <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
         <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
           {message}

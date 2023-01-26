@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 // material
 import { styled } from '@mui/material/styles'
 import { red } from '@mui/material/colors';
-
+import defaultImage from '../../../assets/images/default.png'
 import { Card, CardContent, Grid, Typography, Avatar, Badge, Button } from '@mui/material';
 import ShopProductCard from './ProductCard';
 
@@ -56,11 +56,13 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
 
           <Card onClick={() => { viewUser(itm) }}>
             <CardContent>
-              <Grid direction={'column'} spacing={2} alignItems="center" justifyContent="space-between" height="180px">
-
-                <Avatar sx={{ bgcolor: red[500], width: 100, height: 100, marginLeft: '30%', bgcolor: '#ed6c02' }} src={itm?.profile_pic} aria-label="recipe">
+              <Grid direction={'column'} spacing={2} height="180px">
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <img style={{ borderRadius: 50 }} src={itm?.profile_pic ? itm?.profile_pic : defaultImage} />
+                </div>
+                {/* <Avatar sx={{ bgcolor: red[500], width: 50, height: '16vh', bgcolor: '#ed6c02' }} src={itm?.profile_pic} aria-label="recipe">
                   {itm?.first_name.substring(0, 1)}
-                </Avatar>
+                </Avatar> */}
                 <Typography sx={{ fontSize: 20, fontWeight: 'medium' }} mt={3} textAlign={'center'} >
                   {/* {users?.first_name} */}
                   {`${itm?.first_name} ${itm?.last_name}`}
@@ -74,7 +76,8 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
           {/* </Button> */}
           {/* <ShopProductCard product={product} /> */}
         </Grid>
-      ))}
-    </Grid>
+      ))
+      }
+    </Grid >
   );
 }

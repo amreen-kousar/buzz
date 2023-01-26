@@ -37,6 +37,7 @@ export default function Searchbar({ getSearch }) {
   const [search, setSearch] = useState('')
   const handleOpen = () => {
     setOpen((prev) => !prev);
+    console.log(isOpen)
   };
 
   const handleClose = () => {
