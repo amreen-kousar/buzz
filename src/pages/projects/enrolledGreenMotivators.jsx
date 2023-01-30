@@ -4,6 +4,7 @@ import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mu
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
+import GreenSurvey from './Components/GreenSurvey'
 
 export default function enrolledGreenMotivatorsList() {
 
@@ -76,9 +77,10 @@ export default function enrolledGreenMotivatorsList() {
             </Stack>
             {/* </Stack> */}
             {green?.list?.map((itm) => {
+                console.log(itm,'<----------greengreengreen')
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.gelathiname, title: "Enrolled Green Motivator Name" })
+                        setClickData({ name: itm, title: "Enrolled Green Motivator Name" })
                         handleOpenFilter()
                     }}>
 
@@ -95,6 +97,7 @@ export default function enrolledGreenMotivatorsList() {
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>
                         </Grid>
+                        <GreenSurvey />
                     </Card>)
             })}
 
