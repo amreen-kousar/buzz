@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import { Grid } from '@mui/material';
 import { useLocation } from 'react-router-dom'
 import CreateTrainerBatch from './Components/CreateTrainerBatch'
+import AddTrainerDrawer from './Components/AddTrainerDrawer';
 function Project(props) {
   const location = useLocation()
   const [data1,setData1] = useState('')
@@ -211,8 +212,19 @@ function Project(props) {
 
 
 
+          {/* <Card onClick={() => {
+                    console.log("its copensdfdsfds")
+                handleOpenFilter()
+              }}>
+<Typography>hbjbhbjhbjh</Typography>
+</Card> */}
 
-
+          {/* <AddTrainerDrawer
+            isOpenFilter={true}
+            
+            // onOpenFilter={handleOpenFilter}
+            // onCloseFilter={handleCloseFilter}
+          /> */}
 
 
 

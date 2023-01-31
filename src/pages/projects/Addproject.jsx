@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, Dialog, AppBar, Toolbar, IconButton, Typography, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
+import { useLocation,Link } from 'react-router-dom'
+import CreateProj from './Components/CreateProj';
 
 function AddProject() {
 
@@ -181,7 +183,7 @@ function AddProject() {
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-                            Create Project
+                            Create New Project
                         </Typography>
 
                         <Button autoFocus color="inherit" onClick={handleClose}>
@@ -296,10 +298,13 @@ function AddProject() {
                     </FormControl>
                     <br /><br />
 
+                    {/* <Link to="/dashboard/projects/CreateProj"><Button fullWidth variant="filled">
+                    <span style={{ width: "235px" }}>Create New Project</span>
+                  </Button>
+                  </Link><br /> */}
+                    {/* <Button onClick={() => createProject()} fullWidth variant="filled" style={{background:"#f5f5f5"}}>Create New Project</Button> */}
 
-                    <Button onClick={() => createProject()} fullWidth variant="filled" style={{background:"#f5f5f5"}}>Create New Project</Button>
-
-
+                    <CreateProj />
                 </div>
 
             </Dialog>

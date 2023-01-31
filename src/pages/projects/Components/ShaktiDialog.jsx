@@ -1,5 +1,6 @@
-import * as React from 'react';
-import {Button,Card,CardActions,CardContent} from '@mui/material';
+import { useState, useEffect } from 'react';
+import React from 'react'
+import {Button,Card,CardActions,CardContent,Stack} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
@@ -11,6 +12,9 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
+import ParticipantDrawer from './ParticipantDrawer';
+import ShaktiForm from './ShaktiForm';
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -18,6 +22,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function FullScreenDialog({shown,setShown,batch}) {
   console.log(batch,'<--------shownshownshown')
+  const [openFilter, setOpenFilter] = useState(false);
+  const [clcikData, setClickData] = useState()
+
+    const handleOpenFilter = () => {
+        setOpenFilter(true);
+    };
+
+    const handleCloseFilter = () => {
+        setOpenFilter(false);
+    };
 
 
   const [open, setOpen] = React.useState(false);
@@ -63,7 +77,8 @@ export default function FullScreenDialog({shown,setShown,batch}) {
            
           </Toolbar>
         </AppBar>
-        <Card>
+        <Stack style={{top:40}}>
+        <Card >
           <CardContent>
             <Typography  variant="subtitle2"> Project : {batch?.data?.projectName} </Typography>
             {console.log(batch?.data?.projectName,'<----------batch?.data?.projectName')}
@@ -74,18 +89,36 @@ export default function FullScreenDialog({shown,setShown,batch}) {
             <Typography  variant="subtitle2"> Contact Number : {batch?.data?.contact_person}</Typography>
           </CardContent>
         </Card>
+        </Stack>
         {/* <Typography variant="subtitle1"> ALl Participants</Typography> */}
+        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <ParticipantDrawer
+                    clcikData={clcikData}
+                    isOpenFilter={openFilter}
+                    onOpenFilter={handleOpenFilter}
+                    onCloseFilter={handleCloseFilter}
+                />
+                </Stack>
         {batch?.all_participants?.map(itm=>{
   return(
-        <Card style={{top:40}}>
+    <Stack style={{top:100}}>
+ <Card onClick={() => {
+                        setClickData({ name: itm.gelathiname, title: "Enrolled  Name" })
+                        handleOpenFilter()
+                    }}>
           <CardContent>
             <CardActions>
-              
+            <Stack direction={'row'} spacing={10}>
+          <Typography variant="subtitle2">{itm?.participant_name}</Typography>
+           <ShaktiForm />
+          </Stack>
             </CardActions>
-           <Typography variant="subtitle2">{itm?.participant_name}</Typography>
+         
            {console.log(itm?.participant_name,'<----------itm?.participant_name')}
           </CardContent>
         </Card>
+    </Stack>
+       
          )
         })}
        
