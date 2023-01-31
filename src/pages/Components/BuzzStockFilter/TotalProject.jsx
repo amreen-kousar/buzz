@@ -4,9 +4,10 @@ import Stack from '@mui/material/Stack';
 
 export default function TotalProject() {
   return (
-    <Stack direction="row" spacing={1}>
-      <Chip label="Chip Filled" />
-      <Chip label="Chip Outlined" variant="outlined" />
-    </Stack>
+    // <Stack direction="row" spacing={1}>
+    //   <Chip label="Chip Filled" />
+    //   <Chip label="Chip Outlined" variant="outlined" />
+    // </Stack>
+    <></>
   );
 }
