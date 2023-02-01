@@ -10,8 +10,9 @@ import BuslistDrawer from '../Components/BuslistDrawer';
 import BusListFilter from '../Components/Buslistfilters/BusListFilter';
 import Addbus from './Addbus';
 import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
+import Searchbar from 'src/layouts/dashboard/Searchbar';
 
-export default function User() {
+export default function User({ isDesktop }) {
 
   var userAccess = ['2']
 
@@ -195,7 +196,7 @@ export default function User() {
 
   return (
     <Page title="User">
-
+      <Searchbar getSearch={(e) => searchFunction(e)} />
 
       <Container>
         <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
@@ -203,7 +204,7 @@ export default function User() {
             This is a success message!
           </Alert>
         </Snackbar>
-        <DashboardNavbar getSearch={(e) => searchFunction(e)} isOpenSidebar={() => setOpen(true)} />
+        {/* <DashboardNavbar getSearch={(e) => searchFunction(e)} isOpenSidebar={() => setOpen(true)} /> */}
 
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>

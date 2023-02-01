@@ -33,7 +33,8 @@ export default function Login() {
   const apiHit = async (itm) => {
     console.log(itm, "<--sadsa")
     var data = JSON.stringify({
-      "email": itm?.user?.email
+      // "email": itm?.user?.email
+      "email": "buzzgelathi@gmail.com"
     });
 
     var config = {
@@ -67,8 +68,7 @@ export default function Login() {
             else if (response.data.role == 6 | response.data.role == 13) {
               navigate('/dashboard/gelathi')
             }
-            else if(response.data.role==4)
-            {
+            else if (response.data.role == 4) {
               navigate('/dashboard/operationmanager')
             }
             else {

@@ -32,6 +32,7 @@ import Scrollbar from '../../components/Scrollbar';
 import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
 // ----------------------------------------------------------------------
 import AddUser from './AddUser';
+import Searchbar from 'src/layouts/dashboard/Searchbar';
 
 export default function User() {
   const [openFilter, setOpenFilter] = useState(false);
@@ -179,7 +180,9 @@ export default function User() {
 
   return (
     <Page title="All Users">
-      <DashboardNavbar getSearch={(e) => setSearchUser(e)}  onOpenSidebar={() => setOpen(true)} />
+      {/* <DashboardNavbar getSearch={(e) => setSearchUser(e)}  onOpenSidebar={() => setOpen(true)} /> */}
+      <Searchbar getSearch={(e) => setSearchUser(e)} />
+
       <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
         <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
           {message}

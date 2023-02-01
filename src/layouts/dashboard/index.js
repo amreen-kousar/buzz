@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 //
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
+import Searchbar from './Searchbar';
 
 // ----------------------------------------------------------------------
 
@@ -27,19 +28,21 @@ const MainStyle = styled('div')(({ theme }) => ({
     paddingTop: APP_BAR_DESKTOP + 24,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2)
-  }
+  },
 }));
 
 // ----------------------------------------------------------------------
 
 export default function DashboardLayout() {
+
+
   const [open, setOpen] = useState(false);
   useEffect(() => {
   }, [open])
 
   return (
     <RootStyle>
-      {/* <DashboardNavbar onOpenSidebar={() => setOpen(true)} /> */}
+      <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
       <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
       <MainStyle>
         <Outlet />
