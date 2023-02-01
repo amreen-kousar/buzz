@@ -10,7 +10,7 @@ import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
 import TravelDialog from './Components/DashboardFilters/TravelDialog'
 import moment from 'moment';
-
+import Edittraveldialog from './Editta';
 import Iconify from 'src/components/Iconify';
 // components
 function TabPanel(props) {
@@ -50,12 +50,15 @@ export default function TravelA() {
   const [value, setValue] = React.useState(0);
   const [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
   const image = ["tykml", "exrdcftvbgyhnuj"]
+  const [drawerEvent, SetDrawerEvent] = useState(false);
   //const [image, setImage] = React.useState(['data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==']);
   const [viewImage, setViewImage] = React.useState(false);
   const [listdata, setListData] = React.useState()
   const [openMessage, setOpenMessage] = React.useState(false);
   const [message, setMessage] = useState(false)
 
+  const [openFilter, setOpenFilter] = useState(false);
+  const [clcikData, setClickData] = useState()
   useEffect(() => {
     list()
   }, [dateValue]
@@ -64,6 +67,16 @@ export default function TravelA() {
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
+
+
+  const handleOpenFilter = () => {
+    setOpenFilter(true);
+  };
+
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
+
 
   const list = async => {
     console.log(dateValue)
@@ -97,6 +110,9 @@ export default function TravelA() {
     setValue(newValue);
   };
 
+  // const Traveledit=()=>{
+  //    <Edittraveldialog/>
+  // }
 
 
 
@@ -125,7 +141,8 @@ export default function TravelA() {
   return (
     <Page title="Dashboard: Products">
       <Container>
-
+    
+  
         <Typography variant="h4" sx={{ mb: 5 }}>
           Travel Allowances
           {/* <Button style={{ float: "right" }}>Filters</Button> */}
@@ -233,13 +250,11 @@ export default function TravelA() {
                 return (
                   <>
                     
-                    <Card style={{margin:"20px",borderRadius:"5px",backgroundColor:"#f7f7f7",cursor:'pointer'}} >
-                      <CardActionArea LinkComponent={TravelDialog}>
+                    <Card  onClick={() => {handleOpenFilter()}} style={{margin:"20px",borderRadius:"5px",backgroundColor:"#f7f7f7",cursor:'pointer'}} >
                     <Grid sx={{margin:'8px'}} style={{color:"blue"}}><b>{itm?.Ta_Name}</b>
                     <Iconify style={{float:"right",marginTop:5,marginRight:10,fontSize:30,color:"gray"}} icon="system-uicons:cross"></Iconify>
                     <Iconify style={{float:"right",marginTop:5,marginRight:30,fontSize:30,color:"#303030"}} icon="ic:outline-access-time"></Iconify></Grid>
                     <Typography variant="body" gutterBottom sx={{margin:'10px'}}> <b>TA Amount:{itm?.telephone}</b></Typography>
-                    </CardActionArea>
                     </Card>
                    </>
                 )
@@ -257,6 +272,16 @@ export default function TravelA() {
     list()
   }} />
 </Stack>
+
+<Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <Edittraveldialog
+            isOpenFilter={openFilter}
+            onOpenFilter={handleOpenFilter}
+            onCloseFilter={handleCloseFilter} viewMessage={(text)=>
+              {setMessage(text)
+              setOpenMessage(true)}}
+          />
+        </Stack>
 {/* </Stack> */ }
 
       </Container ></Page >

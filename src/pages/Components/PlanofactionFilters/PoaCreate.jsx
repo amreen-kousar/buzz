@@ -130,7 +130,7 @@ export default function PoaCreate({setSucess}) {
             }}>
        Create New Poa
       </Button> */}
-      <Button variant="contained" onClick={handleClickOpen} style={{ float: "right", marginLeft:100, borderRadius: "50%", padding: "0.2rem", position:'relative', zIndex: '-1',marginRight:10,marginTop:15}}  sx={{
+      <Button variant="contained" onClick={handleClickOpen}  style={{ float: "right", marginLeft:100, borderRadius: "50%", padding: "0.2rem", position:'relative', zIndex: '1',marginRight:10,marginTop:15}} sx={{
                 ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
@@ -140,6 +140,7 @@ export default function PoaCreate({setSucess}) {
                 color: "#ed6c02",
                 border: 'none'
             }} >
+              {/* style={{ float: "right", marginLeft:100, borderRadius: "50%", padding: "0.2rem", position:'relative', zIndex: '-1',marginRight:10,marginTop:15}} */}
                 <span style={{ fontSize: "2rem" }}>+</span>
             </Button>
       <Dialog
