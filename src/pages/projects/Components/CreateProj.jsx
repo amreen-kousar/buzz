@@ -16,6 +16,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Addbus from '../../buses/Addbus';
 import AddTrainerDrawer from './AddTrainerDrawer';
 import Add from '@mui/icons-material/Add';
+import CancelIcon from '@mui/icons-material/Cancel';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -31,6 +32,7 @@ export default function CreateProj() {
     const [name,setName] = useState([])
     const [driverData,setDriverData] = useState([])
     const [date, setDate] = useState("")
+    const [deleteData, setDeleteData] = useState([])
     const [data, setData] = useState({
         country: 1,
         state: '',
@@ -154,6 +156,7 @@ export default function CreateProj() {
       });
       
   }
+ 
   return (
     <div>
       <Button fullWidth variant="filled" onClick={handleClickOpen}>
@@ -357,14 +360,30 @@ export default function CreateProj() {
                 handleOpenFilter()
               }}>
                     <CardContent>
-                        {name?.map(i=>{
-                            return(
-                                <h1>{i}</h1>
-                            )
-                        })}
-                        <Typography variant='h6'>Want To Add Trainers (0)</Typography>
+                        
+                        <Typography variant='h6'>Want To Add Trainers  ({name.length})</Typography>
+                       
                     </CardContent>
                 </Card>
+{name?.length!==0&&
+               <Card style={{marginTop:20}}>
+                <CardContent>
+                <Stack spacing={4}>
+                        {name?.map(i=>{
+                            return(
+                                <Stack  direction={'row'} >
+                                    <Typography mt={2} variant='subtitle2'>{i}</Typography>
+                                    <Stack style={{marginLeft:20}}  mt={2} >
+                                    <CancelIcon  />
+                                    </Stack>
+                                    </Stack>
+                               
+                            )
+                        })}
+                        </Stack>
+                </CardContent>
+               </Card>
+}
             </CardContent>
 
            

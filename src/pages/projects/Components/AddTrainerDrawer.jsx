@@ -115,7 +115,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
+import {Button,Stack} from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -128,7 +128,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function SimpleDialog(props) {
@@ -140,6 +140,35 @@ function SimpleDialog(props) {
   };
   const [arr,setArr] = useState([])
   const handleListItemClick = (value) => {
+    if(arr?.includes(value?.first_name)){
+        var data = JSON.stringify({
+            "project_id": 292,
+            "role_id":value?.role_id ,
+            "emp_id": value?.id
+          });
+              
+              var config = {
+                method: 'post',
+                url: 'https://bdms.buzzwomen.org/appTest/deleteEmpFromProject.php',
+                headers: { 
+                  'Content-Type': 'application/json'
+                },
+                data : data
+              };
+              
+              axios(config)
+              .then(function (response) {
+                const getList = arr?.filter(ite=> {return (ite!==value?.first_name)})
+        console.log(getList,"<--fgetList",value?.first_name,arr)
+        setArr(getList)
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          
+       
+    }
+    else{
     var data = JSON.stringify({
   "project_id": 292,
   "role_id":value?.role_id ,
@@ -163,7 +192,7 @@ axios(config)
 .catch(function (error) {
   console.log(error);
 });
-
+    }
     // onClose(value);
   };
 
@@ -172,12 +201,16 @@ axios(config)
   
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Add Trainer From List</DialogTitle>
-      <Typography onClick={()=>{
+        <Stack direction={'row'}>
+        <Typography variant="subtitle2" style={{color:'#ed6c02'}} mt={2} onClick={handleClose}>Close</Typography>
+        <DialogTitle>Add Trainer From List</DialogTitle>
+      <Typography mt={2} variant="subtitle2" style={{color:'#ed6c02'}} onClick={()=>{
     getData(arr),
     handleClose()
     }}>Save</Typography>
-      <Typography onClick={handleClose}>close</Typography>
+      
+        </Stack>
+     
 
       <List sx={{ pt: 0 }}>
         {data?.list?.map((email) => (
@@ -189,6 +222,7 @@ axios(config)
                
                  <Avatar>
                     {!arr?.includes(email?.first_name)?
+                // <AddIcon />:<CheckCircleRoundedIcon sx={{ color: 'red' }}/>}
                 <AddIcon />:null}
               </Avatar>
                 

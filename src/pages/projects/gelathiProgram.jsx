@@ -82,7 +82,7 @@ export default function gelathiProgram() {
                         console.log(itm, "<---programeprogrameprograme")
                         return (
                             <Card style={styles.card1} onClick={() => {
-                                setClickData({ name: itm.stockname, title: "Gelathi program Name" })
+                                setClickData({ name: itm.gf_session_id, title: "Gelathi program Name" })
                                 handleOpenFilter()
                             }}>  
                      

@@ -38,11 +38,11 @@ export default function GelathiProgrameDrawer({ isOpenFilter, onOpenFilter, onCl
     useEffect(() => {
         getGFSessionData();
         // console.log(clcikData)
-    }, [])
-
+    }, [clcikData])
+console.log(clcikData,'<---------clcikDataclcikDataclcikData')
     const getGFSessionData = async =>{
         var data = JSON.stringify({
-            "gf_session_id": 77878
+            "gf_session_id": clcikData?.name
           });
           
           var config = {
