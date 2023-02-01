@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react'; 
 import axios from 'axios';
+import { Grid, Container, Typography, Stack, Divider, Card, CardContent, Button, } from '@mui/material';
 import BarChart from 'react-bar-chart';
-import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import { useLocation, useSearchParams } from 'react-router-dom';
 // import "chartjs-plugin-datalabels";
@@ -23,6 +23,18 @@ export default function Charts(props) {
       value:[]
     });
     const [dayper, setDayper] = useState({
+      month:[],
+      value:[]
+    });
+    const [gelathi,setGelathi] = useState({
+      month:[],
+      value:[]
+    });
+    const [green,setGreen] = useState({
+      month:[],
+      value:[]
+    });
+    const [vyapar,setVyapar] = useState({
       month:[],
       value:[]
     });
@@ -65,9 +77,19 @@ export default function Charts(props) {
           const dayper_month = response.data?. dayper_xaxis?.map((itm,index)=>{
             return response.data?.dayper_data[index]?.perc
         })
+      //   const enroll_data = response.data?. enroll_xaxis?.map((itm,index)=>{
+      //     return response.data?.enroll_data[index]?.perc
+      // })
+      const enroll_data =response.data?. enroll_xaxis?.map((itm,index)=>{
+        return response.data?.enroll_data[index]?.count
+    })
+      const enroll_month = response.data?. enroll_xaxis?.map((itm,index)=>{
+        return itm?.month_name
+    })
             setChartData({month:targetvalue,value:targetData})
             setDayper({month:dayper_month,value:dayper_data})
-            console.log(response.data,'<----jhbhjbhjbjh',dayper_data,targetData);
+            setGelathi({month:enroll_month,value:enroll_data})
+            console.log(response.data,'<----jhbhjbhjbjh',enroll_data);
           })
           .catch(function (error) {
             console.log(error);
@@ -78,16 +100,14 @@ export default function Charts(props) {
     console.log(chartData,"<----wertyujhgfd")
     if(chartData?.length ===0&&dayper?.length===0){
       return(
-      <h1>no data found</h1>
+      <h1>No data found</h1>
       )
     }
     const dataBar = {
        labels: chartData?.month,
-      //labels: ["January", "February", "March", "April", "May", "June", "July"],
-
       datasets: [
         {
-          label: "My First dataset",
+          label: "Actual ",
           backgroundColor: "#EC932F",
           borderColor: "rgba(255,99,132,1)",
           borderWidth: 1,
@@ -99,20 +119,34 @@ export default function Charts(props) {
     };
     const dayperbar = {
       labels: dayper?.month,
-     //labels: ["January", "February", "March", "April", "May", "June", "July"],
-
      datasets: [
        {
-         label: "My First dataset",
+         label: "2nd Day Turnout (%)",
          backgroundColor: "#EC932F",
          borderColor: "rgba(255,99,132,1)",
          borderWidth: 1,
+        
          hoverBackgroundColor: "rgba(255,99,132,0.4)",
          hoverBorderColor: "rgba(255,99,132,1)",
          data: dayper?.value
        }
      ]
    };
+   const gelathiBar = {
+    labels: gelathi?.month,
+   datasets: [
+     {
+       label: "Enrolled Gelathis",
+       backgroundColor: "#EC932F",
+       borderColor: "rgba(255,99,132,1)",
+       borderWidth: 1,
+      
+       hoverBackgroundColor: "rgba(255,99,132,0.4)",
+       hoverBorderColor: "rgba(255,99,132,1)",
+       data: gelathi?.value
+     }
+   ]
+ };
    
     const options = {
       plugins: {
@@ -162,7 +196,12 @@ export default function Charts(props) {
        />
       } */}
   <Bar data={dataBar} plugins={[ChartDataLabels]} options={options} width={100} height={50} />
+  <Stack mt={5}>
   <Bar data={dayperbar} plugins={[ChartDataLabels]} options={options} width={100} height={50} />
+  </Stack>
+  <Stack mt={5}>
+  <Bar data={gelathiBar} plugins={[ChartDataLabels]} options={options} width={100} height={50} />
+  </Stack>
   </div>
 
     
