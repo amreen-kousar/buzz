@@ -77,18 +77,23 @@ export default function Charts(props) {
           const dayper_month = response.data?. dayper_xaxis?.map((itm,index)=>{
             return response.data?.dayper_data[index]?.perc
         })
-      //   const enroll_data = response.data?. enroll_xaxis?.map((itm,index)=>{
-      //     return response.data?.enroll_data[index]?.perc
-      // })
       const enroll_data =response.data?. enroll_xaxis?.map((itm,index)=>{
         return response.data?.enroll_data[index]?.count
     })
       const enroll_month = response.data?. enroll_xaxis?.map((itm,index)=>{
         return itm?.month_name
     })
+    const green_data =response.data?. green_xaxis?.map((itm,index)=>{
+      return response.data?.green_data[index]?.count
+  })
+    const green_month = response.data?. green_xaxis?.map((itm,index)=>{
+      return itm?.month_name
+  })
+
             setChartData({month:targetvalue,value:targetData})
             setDayper({month:dayper_month,value:dayper_data})
             setGelathi({month:enroll_month,value:enroll_data})
+            setGreen({month:green_month,value:green_data})
             console.log(response.data,'<----jhbhjbhjbjh',enroll_data);
           })
           .catch(function (error) {
