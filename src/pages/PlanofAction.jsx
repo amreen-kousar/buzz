@@ -274,54 +274,7 @@ export default function PlanofAction() {
 
             <TabPanel value={value} index={0}>
 
-              {/* {
-                poa?.length !== 0 ?
-                  poa?.map((item) => {
-                    return (
-                      // <h1>{item[0]?.actual_Date}</h1>
-                      item?.length !== 0 && item?.map(itm => {
-
-                        return (
-                          <Card style={{ marginTop: 35 }}>
-                            <CardContent>
-                              <Stack style={{ cursor: 'pointer' }} onClick={() => {
-                                setSelect(itm)
-                                handleOpenEvent();
-                              }}>
-                                <Stack>
-                                  {itm?.name}
-                                </Stack>
-                                <Stack>
-                                  {itm?.roleName}
-                                </Stack>
-                                <Stack>
-                                  {itm?.emp_name}
-
-                                </Stack>
-                              </Stack>
-                              {item?.name&&<Stack direction={'row'} spacing={5} mt={2}>
-                                <PoaEdit itm={itm} />
-                                <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
-                                  '&:hover': {
-                                    backgroundColor: '#ffd796',
-                                    borderColor: "#ed6c02"
-                                  },
-                                  borderColor: "#ed6c02",
-                                  color: "#ed6c02"
-                                }}>Delete</Button>
-                              </Stack>}
-                            </CardContent>
-                          </Card>
-
-                        )
-
-                      })
-                    )
-                  })
-                  : <Grid>
-                    no data found
-                  </Grid>
-              } */}
+        
                  {
                  poa?.length !== 0 ?
                 poa?.map((item) => {
@@ -335,7 +288,7 @@ export default function PlanofAction() {
                       setSelect(itm)
                       handleOpenEvent();
                     }}>
-                       <Stack direction={'row'} spacing={5} mt={2}  sx={{float:"right",padding:'auto',margin:'5px'}}>
+                       <Stack direction={'row'} spacing={2} sx={{float:"right",padding:'auto',margin:'5px'}}>
                           <PoaEdit itm={itm} />
                           <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
                             '&:hover': {
@@ -386,7 +339,7 @@ export default function PlanofAction() {
                       setSelect(itm)
                       handleOpenEvent();
                     }}>
-                        <Stack direction={'row'} spacing={5} mt={2}  sx={{float:"right",padding:'auto',margin:'5px'}}>
+                        <Stack direction={'row'} spacing={2}   sx={{float:"right",padding:'auto',margin:'8px'}}>
                                   <PoaEdit itm={itm} />
                                   <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
                                     '&:hover': {
@@ -425,7 +378,7 @@ export default function PlanofAction() {
                               setSelect(itm)
                               handleOpenEvent();
                             }}>
-                               <Stack direction={'row'} spacing={5} mt={2} sx={{float:"right",padding:'auto',margin:'5px'}}>
+                               <Stack direction={'row'} spacing={2} sx={{float:"right",padding:'auto',margin:'5px'}}>
                                   <PoaEdit itm={itm} />
                                   <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
                                     '&:hover': {
