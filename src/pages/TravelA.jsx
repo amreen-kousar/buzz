@@ -56,7 +56,7 @@ export default function TravelA() {
   const [listdata, setListData] = React.useState()
   const [openMessage, setOpenMessage] = React.useState(false);
   const [message, setMessage] = useState(false)
-
+  const [editData, setEditData] = useState(null)
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
   useEffect(() => {
@@ -69,7 +69,10 @@ export default function TravelA() {
   });
 
 
-  const handleOpenFilter = () => {
+  const handleOpenFilter = (itm) => {
+    // itm.klmtr = +klmtr;
+    setEditData(itm)
+    console.log(editData)
     setOpenFilter(true);
   };
 
@@ -252,8 +255,8 @@ export default function TravelA() {
                 return (
                   <>
 
-                    <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7" }} >
-                      <Grid sx={{ margin: '8px' }} style={{ color: "blue" }}><b cursor="pointer" onClick={() => { handleOpenFilter() }} >{itm?.Ta_Name}</b>
+                    <Card onClick={() => { handleOpenFilter(itm) }} style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer" }} >
+                      <Grid sx={{ margin: '8px' }} style={{ color: "blue" }}><b cursor="pointer"  >{itm?.Ta_Name}</b>
                         <Iconify style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
                         <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify></Grid>
                       <Typography variant="body" gutterBottom sx={{ margin: '10px' }}> <b>TA Amount:{itm?.telephone}</b></Typography>
@@ -279,6 +282,7 @@ export default function TravelA() {
           <Edittraveldialog
             isOpenFilter={openFilter}
             onOpenFilter={handleOpenFilter}
+            editData={editData}
             onCloseFilter={handleCloseFilter} viewMessage={(text) => {
               setMessage(text)
               setOpenMessage(true)
