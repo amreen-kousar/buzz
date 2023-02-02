@@ -10,7 +10,7 @@ import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
-import { Dialog, Toolbar, DialogContent, DialogContentText,Card } from '@mui/material'
+import { Dialog, Toolbar, DialogContent, DialogContentText, Card } from '@mui/material'
 import PropTypes from 'prop-types';
 // import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -40,19 +40,19 @@ const orangecolor = orange[800];
 
 
 Edittraveldialog.propTypes = {
-isOpenFilter: PropTypes.bool,
-onOpenFilter: PropTypes.func,
-onCloseFilter: PropTypes.func,
+  isOpenFilter: PropTypes.bool,
+  onOpenFilter: PropTypes.func,
+  onCloseFilter: PropTypes.func,
 };
 
 
-export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFilter, viewMessage }) {
+export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFilter, viewMessage }) {
   Geocode.setApiKey("AIzaSyAQZSphbIdAeypWHytAIHtJ5K-wuUHBfx4");
   const [open, setOpen] = useState(true);
   const [startTime, setStartTime] = useState('');
   const [images, setImages] = useState();
   const [upload, setUpload] = useState();
-  
+
   const [sendData, setSendData] = useState({
     odimeter: "",
     location: "",
@@ -283,11 +283,11 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
   return (
     <div>
 
-      <Dialog fullScreen open={isOpenFilter} onClose={onCloseFilter} 
+      <Dialog fullScreen open={isOpenFilter} onClose={onCloseFilter}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">
-        {/* <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}> */}
-        <Toolbar sx={{ bgcolor: '#ed6c02', color: 'white' }} >
+        {/* <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}> */}
+        <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
           <IconButton edge="start" sx={{ color: "inherit" }} onClick={onCloseFilter} aria-label="close">
             <CloseIcon />
           </IconButton>
@@ -312,7 +312,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
             tabIndex={-1}
           >
             <div style={{ margin: "1rem" }}>
-           
+
 
               <Stack style={{ marginTop: 20 }}>
                 <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
@@ -322,7 +322,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth >
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Poa</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
                   <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                     {datadrop?.data?.map(itm => {
                       return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
@@ -349,7 +349,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Mode Of Travel</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Mode Of Travel</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Mode Of Travel"
                     id="demo-simple-select"
@@ -367,7 +367,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Rate Per Km</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Rate Per Km</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Rate Per Km"
                     id="demo-simple-select"
@@ -383,7 +383,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Food Expenses </InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Food Expenses </InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Food Expenses"
                     id="demo-simple-select"
@@ -402,7 +402,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               </Stack>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }} >Phone Charges</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }} >Phone Charges</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Phone Charges"
                     id="demo-simple-select"
@@ -458,7 +458,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
                 <label for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
                   <Iconify
                     icon={'mdi:camera'}
-                    sx={{ width: 25, height: 25, ml: 2, color: "#ed6c02" }}
+                    sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
                   />&nbsp;
                   Click to upoad images
                   <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
@@ -469,7 +469,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
                   '&:hover': {
                     backgroundColor: '#ffd796',
                   },
-                  color: "#ed6c02"
+                  color: "#ff7424"
                 }}>Send Images</Button>
               <br /><br />
 
@@ -480,7 +480,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               '&:hover': {
                 backgroundColor: '#ffd796',
               },
-              color: "#ed6c02",
+              color: "#ff7424",
 
             }}>Upload</Button><br></br>
           </DialogContentText></DialogContent>  </Dialog>

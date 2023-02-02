@@ -139,10 +139,10 @@ export default function PoaEdit({ setSucess, itm }) {
       <Button variant="outlined" onClick={handleClickOpen} sx={{
         '&:hover': {
           backgroundColor: '#ffd796',
-          borderColor: "#ed6c02"
+          borderColor: "#ff7424"
         },
-        borderColor: "#ed6c02",
-        color: "#ed6c02"
+        borderColor: "#ff7424",
+        color: "#ff7424"
       }}>
         Edit Poa
       </Button>
@@ -157,17 +157,17 @@ export default function PoaEdit({ setSucess, itm }) {
         {console.log(addPoa, "<----qwedrftgyhujikkmijnuhbygtv")}
         <Snackbar open={value} autoHideDuration={6000} onClose={() => {
           setAddPoa(''),
-          setValue(false)
+            setValue(false)
         }}>
           <Alert onClose={() => {
             setAddPoa(''),
-            setValue(false)
+              setValue(false)
           }} severity="error" sx={{ width: '100%' }}>
             {/* {addPoa} */}
           </Alert>
         </Snackbar>
 
-        <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
+        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
@@ -202,8 +202,8 @@ export default function PoaEdit({ setSucess, itm }) {
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
                 <TextField fullWidth value={addData?.name} onChange={(e) => {
                   setAddData({ ...addData, name: e?.target?.value }),
-                  console.log(e, "<---EWWEREWREW")
-                }} id="outlined-basic" label="Add Title" variant="outlined" color="common"/>
+                    console.log(e, "<---EWWEREWREW")
+                }} id="outlined-basic" label="Add Title" variant="outlined" color="common" />
                 <Stack direction={'row'} color="common">
                   <Typography>All Day</Typography>
                   <Switch value={addData?.all_day} onChange={(e) => { setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) }} {...label} />

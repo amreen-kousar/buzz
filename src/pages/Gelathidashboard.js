@@ -148,7 +148,7 @@ export default function Gelathidashboard() {
       <Page title="Dashboard">
 
         <Container maxWidth="xl">
-          <Button style={{ float: "right", color: '#ed6c02' }}
+          <Button style={{ float: "right", color: '#ff7424' }}
             sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
@@ -293,51 +293,51 @@ export default function Gelathidashboard() {
 
         </Grid> */}
 
-        {summaryData?.data[0]?.name ? <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
+          {summaryData?.data[0]?.name ? <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
 
-          <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-            Project {summaryData?.data[0]?.name}
-          </Typography>
-          {/* <Graphchart/> */}
-          <CardContent style={{ display: "flex" }}>
-            <TableContainer component={Paper}>
-              <Table aria-label="customized table" style={{ width: '200px', float: 'Left' }}>
-                <TableHead>
-                  <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                    <TableCell>Total Circles</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.circles}</TableCell>
-                  </TableRow>
-                  <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                    <TableCell>Circle Meetings</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.circle_meet}</TableCell>
-                  </TableRow>
+            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+              Project {summaryData?.data[0]?.name}
+            </Typography>
+            {/* <Graphchart/> */}
+            <CardContent style={{ display: "flex" }}>
+              <TableContainer component={Paper}>
+                <Table aria-label="customized table" style={{ width: '200px', float: 'Left' }}>
+                  <TableHead>
+                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                      <TableCell>Total Circles</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.circles}</TableCell>
+                    </TableRow>
+                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                      <TableCell>Circle Meetings</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.circle_meet}</TableCell>
+                    </TableRow>
 
-                  <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                    <TableCell>Village Visits</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.villagevisit}</TableCell>
-                  </TableRow>
+                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                      <TableCell>Village Visits</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.villagevisit}</TableCell>
+                    </TableRow>
 
-                  <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                    <TableCell>Beehive Visits</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.beehive}</TableCell>
-                  </TableRow>
+                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                      <TableCell>Beehive Visits</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.beehive}</TableCell>
+                    </TableRow>
 
-                  <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                    <TableCell>Enrolled Gelathis</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.enroll}</TableCell>
-                  </TableRow>
+                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                      <TableCell>Enrolled Gelathis</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.enroll}</TableCell>
+                    </TableRow>
 
-                </TableHead>
-                <TableBody>
+                  </TableHead>
+                  <TableBody>
 
-                </TableBody>
-              </Table>
-            </TableContainer>
-
-
-          </CardContent>
-        </Card> : <span style={{ textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}>No Projects</span>}
+                  </TableBody>
+                </Table>
+              </TableContainer>
 
 
+            </CardContent>
+          </Card> : <span style={{ textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}>No Projects</span>}
 
 
-      </Container>
-    </Page>
-</>
+
+
+        </Container>
+      </Page>
+    </>
   )
 }

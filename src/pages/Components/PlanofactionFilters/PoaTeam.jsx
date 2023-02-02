@@ -22,24 +22,24 @@ import CloseIcon from '@mui/icons-material/Close';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function SimpleDialog(props) {
-  const { onClose, selectedValue, open,teamData,setUserId } = props;
+  const { onClose, selectedValue, open, teamData, setUserId } = props;
 
   const handleClose = () => {
     onClose(selectedValue);
   };
-  
+
   const handleListItemClick = (value) => {
     props?.setUserId(value?.id)
-    console.log(value,"<--valuevalue")
- onClose(value);
+    console.log(value, "<--valuevalue")
+    onClose(value);
   };
- console.log(teamData,"<----teamDatateamDatateamData")
-  
+  console.log(teamData, "<----teamDatateamDatateamData")
+
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle> <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon />
-            </IconButton>Select Buzz Team Members</DialogTitle>
+        <CloseIcon />
+      </IconButton>Select Buzz Team Members</DialogTitle>
       <List sx={{ pt: 0 }}>
         {teamData?.map((email) => (
           <ListItem disableGutters>
@@ -75,35 +75,35 @@ function SimpleDialog(props) {
 SimpleDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-//   selectedValue: PropTypes.string.isRequired,
+  //   selectedValue: PropTypes.string.isRequired,
 };
 
-export default function PoaTeam({setUserId}) {
+export default function PoaTeam({ setUserId }) {
   const [open, setOpen] = React.useState(false);
-//   const [selectedValue, setSelectedValue] = React.useState();
-  const [teamData,setTeamData] = useState([])
-  useEffect(()=>{
+  //   const [selectedValue, setSelectedValue] = React.useState();
+  const [teamData, setTeamData] = useState([])
+  useEffect(() => {
     team()
-   },[]
-    )
-  const team = async =>{
+  }, []
+  )
+  const team = async => {
     var data = JSON.stringify({
-        "emp_id": 144,
-        "team": ""
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getMyTeam.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      axios(config)
+      "emp_id": 144,
+      "team": ""
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getMyTeam.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
       .then(function (response) {
-        console.log(response.data?.data,"<--response.dataresponse.data")
+        console.log(response.data?.data, "<--response.dataresponse.data")
         setTeamData(response.data?.data)
         console.log(response.data);
       })
@@ -117,7 +117,7 @@ export default function PoaTeam({setUserId}) {
 
   const handleClose = (value) => {
     setOpen(false);
-   // setSelectedValue(value);
+    // setSelectedValue(value);
   };
 
   return (
@@ -126,17 +126,17 @@ export default function PoaTeam({setUserId}) {
         {/* Selected: {selectedValue} */}
       </Typography>
       <br /><br></br>
-      <Button  onClick={handleClickOpen} style={{float:"right",color:"#ed6c02",margin:10,marginTop:22}} sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-                borderColor:"#ed6c02",
-               
-              },  
-              borderColor:"#ed6c02",
-              color:"#ed6c02",
-              backgroundColor: '#ffd796',
-            }} >
-      <Iconify icon="mdi:people" style={{width:'30px',height:'30px'}}></Iconify>
+      <Button onClick={handleClickOpen} style={{ float: "right", color: "#ff7424", margin: 10, marginTop: 22 }} sx={{
+        '&:hover': {
+          backgroundColor: '#ffd796',
+          borderColor: "#ff7424",
+
+        },
+        borderColor: "#ff7424",
+        color: "#ff7424",
+        backgroundColor: '#ffd796',
+      }} >
+        <Iconify icon="mdi:people" style={{ width: '30px', height: '30px' }}></Iconify>
       </Button>
       <SimpleDialog
         teamData={teamData}

@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'; 
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -19,98 +19,98 @@ const bull = (
 );
 
 export default function Location(props) {
-  console.log(props,"<---dadsad")
-  const [country,setCountry]=useState([])
-  const [states,setStates]=useState([])
-  const [district,setDistrict]=useState([])
-  const [taluk,setTaluk]=useState([])
-  const [data,setData] = useState({
-    country:1,
-    state:'',
-    district_id:'',
-    talaq_id:''
+  console.log(props, "<---dadsad")
+  const [country, setCountry] = useState([])
+  const [states, setStates] = useState([])
+  const [district, setDistrict] = useState([])
+  const [taluk, setTaluk] = useState([])
+  const [data, setData] = useState({
+    country: 1,
+    state: '',
+    district_id: '',
+    talaq_id: ''
   })
-  useEffect(()=>{
-  location()
-    },[]
-    )
+  useEffect(() => {
+    location()
+  }, []
+  )
   const location = async => {
     var data = JSON.stringify({
       "country_id": "1",
-   
+
     });
-    
+
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
-    
+
     axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      setStates(response?.data?.list)
-    })
-    .catch(function (error) {
-      console.log(error);
-    }); 
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setStates(response?.data?.list)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-  const getState = async(id) => {
+  const getState = async (id) => {
     var data = JSON.stringify({
       "country_id": "1",
-      "state_id":id
-   
+      "state_id": id
+
     });
-    
+
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
-    
+
     axios(config)
-    .then(function (response) {
-      setDistrict(response.data.list)
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-    }); 
+      .then(function (response) {
+        setDistrict(response.data.list)
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-  const getDistrict = async(id) => {
+  const getDistrict = async (id) => {
     var data = JSON.stringify({
       "country_id": "1",
-      "state_id":data?.state,
-      "district_id":id
-   
+      "state_id": data?.state,
+      "district_id": id
+
     });
-    
+
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
-    
+
     axios(config)
-    .then(function (response) {
-      setTaluk(response.data.list)
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-    }); 
+      .then(function (response) {
+        setTaluk(response.data.list)
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-  const getTalaq = async(id) => {
-   console.log(id,data,"<---somethimnfff")
+  const getTalaq = async (id) => {
+    console.log(id, data, "<---somethimnfff")
   }
   return (
     <div>
@@ -118,66 +118,66 @@ export default function Location(props) {
 
 
         <CardContent>
-        
-        <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>
-                  State
-         <Select fullWidth variant='standard' color="common"
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={data.state}
-          label="Age"
-          onChange={(e=>{
-            setData({...data,state:e?.target?.value}),
-            getState(e?.target?.value)
-          })}
-        >
-        {states?.map(itm=>{
-            return(
-            <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
-            )
-          })
-        }
-        </Select> </Typography><br></br>
-        <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>District
-        <Select fullWidth variant='standard' color="common"
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={data.district_id}
-          label="Age"
-          onChange={(e=>{
-            setData({...data,district_id:e?.target?.value}),
-            getDistrict(e?.target?.value)
-          })}
-        >
-        {district?.map(itm=>{
-            return(
-            <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
-            )
-          })
-        }
-        </Select></Typography><br></br>
-        <Typography style={{ flexDirection: 'row',color:'#ed6c02' }} variant="subtitle1" gutterBottom>Taluk
-        <Select fullWidth variant='standard' color="common"
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={data.talaq_id}
-          label="Age"
-          onChange={(e=>{
-            setData({...data,talaq_id:e?.target?.value})
-            // getTaluk(e?.target?.value)
-          })}
-        >
-        {taluk?.map(itm=>{
-            return(
-            <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
-            )
-          })
-        }
-        </Select></Typography>
-         
+
+          <Typography style={{ flexDirection: 'row', color: '#ff7424' }} variant="subtitle1" gutterBottom>
+            State
+            <Select fullWidth variant='standard' color="common"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={data.state}
+              label="Age"
+              onChange={(e => {
+                setData({ ...data, state: e?.target?.value }),
+                  getState(e?.target?.value)
+              })}
+            >
+              {states?.map(itm => {
+                return (
+                  <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                )
+              })
+              }
+            </Select> </Typography><br></br>
+          <Typography style={{ flexDirection: 'row', color: '#ff7424' }} variant="subtitle1" gutterBottom>District
+            <Select fullWidth variant='standard' color="common"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={data.district_id}
+              label="Age"
+              onChange={(e => {
+                setData({ ...data, district_id: e?.target?.value }),
+                  getDistrict(e?.target?.value)
+              })}
+            >
+              {district?.map(itm => {
+                return (
+                  <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                )
+              })
+              }
+            </Select></Typography><br></br>
+          <Typography style={{ flexDirection: 'row', color: '#ff7424' }} variant="subtitle1" gutterBottom>Taluk
+            <Select fullWidth variant='standard' color="common"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={data.talaq_id}
+              label="Age"
+              onChange={(e => {
+                setData({ ...data, talaq_id: e?.target?.value })
+                // getTaluk(e?.target?.value)
+              })}
+            >
+              {taluk?.map(itm => {
+                return (
+                  <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                )
+              })
+              }
+            </Select></Typography>
+
         </CardContent>
-        <Button style={{ float: "right", color: 'white',marginRight:'160px',marginBottom:'10px',  backgroundColor: '#ed6c02', }}
-          onClick={()=>props?.onSumbit(data)}>Submit</Button>
+        <Button style={{ float: "right", color: 'white', marginRight: '160px', marginBottom: '10px', backgroundColor: '#ff7424', }}
+          onClick={() => props?.onSumbit(data)}>Submit</Button>
       </Card>
     </div>
   );

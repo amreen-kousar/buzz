@@ -58,7 +58,7 @@ export default function GreenSurvey() {
         Survey Form
       </Button>
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
+        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
@@ -221,7 +221,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Typography variant="subtitle2">
-                   What Kind Of Changes Happened To The Climate ?
+                    What Kind Of Changes Happened To The Climate ?
                   </Typography>
                   <Stack mt={2}>
                     <FormGroup>

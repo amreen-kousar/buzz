@@ -63,7 +63,7 @@ function Addbus(props) {
                     },
                     backgroundColor: "#ffd796"
                 }} variant="contained" onClick={handleClickOpen}>
-                <span style={{ fontSize: "2rem", color: "#ed6c02" }}>+</span></Button>
+                <span style={{ fontSize: "2rem", color: "#ff7424" }}>+</span></Button>
             <Dialog
                 open={openAddBus}
                 fullScreen
@@ -71,7 +71,7 @@ function Addbus(props) {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <Toolbar sx={{ color: "#ffffff", backgroundColor: "#ed6c02" }}>
+                <Toolbar sx={{ color: "#ffffff", backgroundColor: "#ff7424" }}>
                     <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                         <CloseIcon />
                     </IconButton>
@@ -126,13 +126,13 @@ function Addbus(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button variant="contained" onClick={submitBus} sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-                color:'#ed6c02'
-              },
-              color:"#ffffff",
-              backgroundColor:'#ed6c02'
-            }}>Add</Button>
+                        '&:hover': {
+                            backgroundColor: '#ffd796',
+                            color: '#ff7424'
+                        },
+                        color: "#ffffff",
+                        backgroundColor: '#ff7424'
+                    }}>Add</Button>
                     <Button variant="contained" color="error" onClick={handleClose}>Cancel</Button>
 
                 </DialogActions>

@@ -156,13 +156,13 @@ export default function PlanofAction() {
             created
           </Alert>
         </Snackbar>
-        <Typography variant="h4" sx={{ mb: 5 }} style={{margin:5}} >
+        <Typography variant="h4" sx={{ mb: 5 }} style={{ margin: 5 }} >
           Plan Of Actions
 
         </Typography> <PoaTeam setUserId={(e) =>
-            setUserId(e)
+          setUserId(e)
 
-          } />
+        } />
 
         {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
@@ -190,8 +190,8 @@ export default function PlanofAction() {
           />
         </Stack>
         <Stack>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker 
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
               label="Date"
               value={date}
               onChange={(newValue) => {
@@ -202,7 +202,7 @@ export default function PlanofAction() {
               // }}
               renderInput={(params) => <TextField {...params} color="common" />}
             />
-          </LocalizationProvider>  
+          </LocalizationProvider>
         </Stack>
 
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -219,7 +219,7 @@ export default function PlanofAction() {
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
 
                     color: 'black',
@@ -227,8 +227,8 @@ export default function PlanofAction() {
                   style={
                     value == 0
                       ? {
-                        borderBottom: '3px solid #ed6c02',
-                        color: '#ed6c02',
+                        borderBottom: '3px solid #ff7424',
+                        color: '#ff7424',
                       }
                       : null
                   }
@@ -239,7 +239,7 @@ export default function PlanofAction() {
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
 
                     color: 'black',
@@ -247,8 +247,8 @@ export default function PlanofAction() {
                   style={
                     value == 1
                       ? {
-                        borderBottom: '3px solid #ed6c02',
-                        color: '#ed6c02',
+                        borderBottom: '3px solid #ff7424',
+                        color: '#ff7424',
                       }
                       : null
                   }
@@ -259,7 +259,7 @@ export default function PlanofAction() {
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
 
                     color: 'black',
@@ -267,8 +267,8 @@ export default function PlanofAction() {
                   style={
                     value == 2
                       ? {
-                        borderBottom: '3px solid #ed6c02',
-                        color: '#ed6c02',
+                        borderBottom: '3px solid #ff7424',
+                        color: '#ff7424',
                       }
                       : null
                   }
@@ -280,29 +280,29 @@ export default function PlanofAction() {
 
             <TabPanel value={value} index={0}>
 
-        
-                 {
-                 poa?.length !== 0 ?
-                poa?.map((item) => {
-              
-                  return (
-                    // <h1>{item[0]?.actual_Date}</h1>
-                    item?.length !== 0 && item?.map(itm => {
 
-                  return (
-                    <Card style={{ marginTop: 35 }} onClick={() => {
-                      setSelect(itm)
-                      handleOpenEvent();
-                    }}>
-                       {/* <Stack direction={'row'} spacing={2} sx={{float:"right",padding:'auto',margin:'5px'}}>
+              {
+                poa?.length !== 0 ?
+                  poa?.map((item) => {
+
+                    return (
+                      // <h1>{item[0]?.actual_Date}</h1>
+                      item?.length !== 0 && item?.map(itm => {
+
+                        return (
+                          <Card style={{ marginTop: 35 }} onClick={() => {
+                            setSelect(itm)
+                            handleOpenEvent();
+                          }}>
+                            {/* <Stack direction={'row'} spacing={2} sx={{float:"right",padding:'auto',margin:'5px'}}>
                           <PoaEdit itm={itm} />
-                          <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
+                          <Button style={{ float: "right", color: "#ff7424" }} variant="outlined" sx={{
                             '&:hover': {
                               backgroundColor: '#ffd796',
-                              borderColor: "#ed6c02"
+                              borderColor: "#ff7424"
                             },
-                            borderColor: "#ed6c02",
-                            color: "#ed6c02"
+                            borderColor: "#ff7424",
+                            color: "#ff7424"
                           }}>Delete</Button>
                        </Stack>
                       {itm?.id&&<CardContent sx={{margin:'10px'}}>
@@ -311,64 +311,64 @@ export default function PlanofAction() {
                         <Stack>{itm?.emp_name}</Stack> 
                   
                       </CardContent>} */}
-                          <TableContainer component={Paper}>
-               <Table aria-label="customized table">
-              <TableBody>
-              <TableRow >
-                <TableCell component="th" scope="row">
-                {itm?.name}<br></br>{itm?.roleName}<br></br>{itm?.emp_name}
-                </TableCell>
-                <TableCell> 
-                  <Stack direction={'row'} spacing={2} >
-                                  <PoaEdit itm={itm} />
-                                  <Button style={{color: "#ed6c02" }} variant="outlined" sx={{
-                                    '&:hover': {
-                                      backgroundColor: '#ffd796',
-                                      borderColor: "#ed6c02"
-                                    },
-                                    borderColor: "#ed6c02",
-                                    color: "#ed6c02"
-                                  }}>Delete</Button>
-                    </Stack>
-                </TableCell>
-              </TableRow>
-              </TableBody>
-               </Table>
-             </TableContainer>
+                            <TableContainer component={Paper}>
+                              <Table aria-label="customized table">
+                                <TableBody>
+                                  <TableRow >
+                                    <TableCell component="th" scope="row">
+                                      {itm?.name}<br></br>{itm?.roleName}<br></br>{itm?.emp_name}
+                                    </TableCell>
+                                    <TableCell>
+                                      <Stack direction={'row'} spacing={2} >
+                                        <PoaEdit itm={itm} />
+                                        <Button style={{ color: "#ff7424" }} variant="outlined" sx={{
+                                          '&:hover': {
+                                            backgroundColor: '#ffd796',
+                                            borderColor: "#ff7424"
+                                          },
+                                          borderColor: "#ff7424",
+                                          color: "#ff7424"
+                                        }}>Delete</Button>
+                                      </Stack>
+                                    </TableCell>
+                                  </TableRow>
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
 
-                    </Card>
+                          </Card>
 
-                  )
-                })
-              )
-              })
-              :<Grid>no data found</Grid>
+                        )
+                      })
+                    )
+                  })
+                  : <Grid>no data found</Grid>
               }
             </TabPanel>
 
             <TabPanel value={value} index={1}>
               {
-                 poa?.length !== 0 ?
-                poa?.map((item) => {
-              
-                  return (
-                    // <h1>{item[0]?.actual_Date}</h1>
-                    item?.length !== 0 && item?.map(itm => {
+                poa?.length !== 0 ?
+                  poa?.map((item) => {
 
-                  return (
-                    <Card style={{ marginBottom: 30 ,marginTop:10}} onClick={() => {
-                      setSelect(itm)
-                      handleOpenEvent();
-                    }}>
-                        {/* <Stack direction={'row'} spacing={2}   sx={{float:"right",padding:'auto',margin:'8px'}}>
+                    return (
+                      // <h1>{item[0]?.actual_Date}</h1>
+                      item?.length !== 0 && item?.map(itm => {
+
+                        return (
+                          <Card style={{ marginBottom: 30, marginTop: 10 }} onClick={() => {
+                            setSelect(itm)
+                            handleOpenEvent();
+                          }}>
+                            {/* <Stack direction={'row'} spacing={2}   sx={{float:"right",padding:'auto',margin:'8px'}}>
                                   <PoaEdit itm={itm} />
-                                  <Button style={{ float: "right", color: "#ed6c02" }} variant="outlined" sx={{
+                                  <Button style={{ float: "right", color: "#ff7424" }} variant="outlined" sx={{
                                     '&:hover': {
                                       backgroundColor: '#ffd796',
-                                      borderColor: "#ed6c02"
+                                      borderColor: "#ff7424"
                                     },
-                                    borderColor: "#ed6c02",
-                                    color: "#ed6c02"
+                                    borderColor: "#ff7424",
+                                    color: "#ff7424"
                                   }}>Delete</Button>
                               </Stack>
                       {itm?.id&&<CardContent sx={{margin:'10px'}}>
@@ -376,37 +376,37 @@ export default function PlanofAction() {
                         <Stack margin="2px">{itm?.roleName}</Stack>
                         <Stack>{itm?.emp_name}</Stack>
                       </CardContent>}     */}
-             <TableContainer component={Paper}>
-               <Table aria-label="customized table">
-              <TableBody>
-              <TableRow >
-                <TableCell component="th" scope="row">
-                {itm?.name}<br></br>{itm?.roleName}<br></br>{itm?.emp_name}
-                </TableCell>
-                <TableCell> 
-                  <Stack direction={'row'} spacing={2} >
-                                  <PoaEdit itm={itm} />
-                                  <Button style={{color: "#ed6c02" }} variant="outlined" sx={{
-                                    '&:hover': {
-                                      backgroundColor: '#ffd796',
-                                      borderColor: "#ed6c02"
-                                    },
-                                    borderColor: "#ed6c02",
-                                    color: "#ed6c02"
-                                  }}>Delete</Button>
-                    </Stack>
-                </TableCell>
-              </TableRow>
-              </TableBody>
-               </Table>
-             </TableContainer>
-                    </Card>
+                            <TableContainer component={Paper}>
+                              <Table aria-label="customized table">
+                                <TableBody>
+                                  <TableRow >
+                                    <TableCell component="th" scope="row">
+                                      {itm?.name}<br></br>{itm?.roleName}<br></br>{itm?.emp_name}
+                                    </TableCell>
+                                    <TableCell>
+                                      <Stack direction={'row'} spacing={2} >
+                                        <PoaEdit itm={itm} />
+                                        <Button style={{ color: "#ff7424" }} variant="outlined" sx={{
+                                          '&:hover': {
+                                            backgroundColor: '#ffd796',
+                                            borderColor: "#ff7424"
+                                          },
+                                          borderColor: "#ff7424",
+                                          color: "#ff7424"
+                                        }}>Delete</Button>
+                                      </Stack>
+                                    </TableCell>
+                                  </TableRow>
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
+                          </Card>
 
-                  )
-                })
-              )
-              })
-              :<Grid>no data found</Grid>
+                        )
+                      })
+                    )
+                  })
+                  : <Grid>no data found</Grid>
               }
             </TabPanel>
             <TabPanel value={value} index={2}>
@@ -419,39 +419,39 @@ export default function PlanofAction() {
                         {item?.length !== 0 && item?.map(itm => {
 
                           return (
-                            <Card style={{ marginBottom: 30 ,marginTop:10}} onClick={() => {
+                            <Card style={{ marginBottom: 30, marginTop: 10 }} onClick={() => {
                               setSelect(itm)
                               handleOpenEvent();
                             }}>
-                             
+
                               <TableContainer component={Paper}>
-               <Table aria-label="customized table">
-              <TableBody>
-              <TableRow >
-                <TableCell component="th" scope="row">
-                {itm?.name}<br></br>{itm?.roleName}<br></br>{itm?.emp_name}
-                </TableCell>
-                <TableCell> 
-                  <Stack direction={'row'} spacing={2} >
-                                  <PoaEdit itm={itm} />
-                                  <Button style={{  color: "#ed6c02" }} variant="outlined" sx={{
-                                    '&:hover': {
-                                      backgroundColor: '#ffd796',
-                                      borderColor: "#ed6c02"
-                                    },
-                                    borderColor: "#ed6c02",
-                                    color: "#ed6c02"
-                                  }}>Delete</Button>
-                    </Stack>
-                </TableCell>
-              </TableRow>
-              </TableBody>
-               </Table>
-             </TableContainer>
+                                <Table aria-label="customized table">
+                                  <TableBody>
+                                    <TableRow >
+                                      <TableCell component="th" scope="row">
+                                        {itm?.name}<br></br>{itm?.roleName}<br></br>{itm?.emp_name}
+                                      </TableCell>
+                                      <TableCell>
+                                        <Stack direction={'row'} spacing={2} >
+                                          <PoaEdit itm={itm} />
+                                          <Button style={{ color: "#ff7424" }} variant="outlined" sx={{
+                                            '&:hover': {
+                                              backgroundColor: '#ffd796',
+                                              borderColor: "#ff7424"
+                                            },
+                                            borderColor: "#ff7424",
+                                            color: "#ff7424"
+                                          }}>Delete</Button>
+                                        </Stack>
+                                      </TableCell>
+                                    </TableRow>
+                                  </TableBody>
+                                </Table>
+                              </TableContainer>
                             </Card>
 
                           )
- 
+
                         })
                         }
                       </>

@@ -39,7 +39,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function UserEditProfile() {
   let user = JSON.parse(localStorage?.getItem('people'))
 
-  console.log(user,'<-----uyuyuuuhuhuuhu')
+  console.log(user, '<-----uyuyuuuhuhuuhu')
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [age, setAge] = React.useState('');
@@ -47,29 +47,29 @@ export default function UserEditProfile() {
   const [usersDataEdit, setUsersDataEdit] = useState('')
   const [rolesData, setRolesData] = useState([])
 
-  const [editData,setEditData] = useState({
-      id: "",
-      countryID: "",
-      first_name: "",
-      last_name: "",
-      gender: "",
-      doj: "",
-      pincode: "",
-      officeMailId: "",
-      personalMailId: "",
-      contactNum: "",
-      workNum: "",
-      address: "",
-      address1: "",
-      address2: "",
-      empRole: "",
-      supervisorId: "",
-      profile_pic: "",
-      status: "",
-      createdBy: "",
-      lastUpdatedBy: "",
-      project_list: "",
-      license_number: ""
+  const [editData, setEditData] = useState({
+    id: "",
+    countryID: "",
+    first_name: "",
+    last_name: "",
+    gender: "",
+    doj: "",
+    pincode: "",
+    officeMailId: "",
+    personalMailId: "",
+    contactNum: "",
+    workNum: "",
+    address: "",
+    address1: "",
+    address2: "",
+    empRole: "",
+    supervisorId: "",
+    profile_pic: "",
+    status: "",
+    createdBy: "",
+    lastUpdatedBy: "",
+    project_list: "",
+    license_number: ""
   })
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -84,42 +84,42 @@ export default function UserEditProfile() {
   };
 
 
-  useEffect(()=>{
-  //   editUser()
-  getRoles()
-    },[]
-     )
- 
+  useEffect(() => {
+    //   editUser()
+    getRoles()
+  }, []
+  )
+
   const getRoles = () => {
     const data = JSON.stringify({
     });
 
     const config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/roles_list.php',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/roles_list.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data
     };
 
     axios(config)
-        .then((response) => {
-            setRolesData(response.data.list)
+      .then((response) => {
+        setRolesData(response.data.list)
 
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-}
-   const editUser = async =>{
-   
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  const editUser = async => {
+
     var data = JSON.stringify({
       "id": user?.id,
       "countryID": user?.countryID,
       "first_name": user?.first_name,
-      "last_name":user?.last_name ,
-      "gender":user?.gender ,
+      "last_name": user?.last_name,
+      "gender": user?.gender,
       "doj": user?.doj,
       "pincode": user?.pincode,
       "officeMailId": user?.officeMailId,
@@ -138,33 +138,33 @@ export default function UserEditProfile() {
       "project_list": user?.project_list,
       "license_number": user?.license_number
     });
-    
+
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/editUser.php',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
-    
+
     axios(config)
-    .then(function (response) {
-      setUsersDataEdit(response.data)
-      console.log(response.data,'<------------------setUsers') ;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-   }
+      .then(function (response) {
+        setUsersDataEdit(response.data)
+        console.log(response.data, '<------------------setUsers');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   return (
     <div>
-      <Button onClick={handleClickOpen}  sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-              },
-            }} >
-      <Iconify icon="material-symbols:edit"style={{width:'30px',height:'30px',color:'#e69138',marginLeft:"10px"}}></Iconify>
+      <Button onClick={handleClickOpen} sx={{
+        '&:hover': {
+          backgroundColor: '#ffd796',
+        },
+      }} >
+        <Iconify icon="material-symbols:edit" style={{ width: '30px', height: '30px', color: '#e69138', marginLeft: "10px" }}></Iconify>
       </Button>
       <Dialog
         open={open}
@@ -174,13 +174,13 @@ export default function UserEditProfile() {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-          <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
+        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Edit Users
+              Edit Users
             </Typography>
 
 
@@ -188,9 +188,9 @@ export default function UserEditProfile() {
               save
             </Button>
           </Toolbar>
-       
+
         </AppBar>
-       
+
         {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
         <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
           <DialogContentText
@@ -206,29 +206,29 @@ export default function UserEditProfile() {
               noValidate
               autoComplete="off"
             >
-              <div style={{ background: 'white', padding: '2rem', borderRadius: '10px'}}>
+              <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
                 <TextField label="First Name" variant="outlined" color="common" fullWidth
-  //                sx={{
-  //   "& .MuiOutlinedInput-root": {
-  //     "& > fieldset": {
-  //       border: "none"
-  //     }
-  //   }
-  // }}
-  />            <br></br>
-                <TextField id="outlined-basic" label="Last Name" variant="outlined" color="common" fullWidth/><br></br><br></br>
+                //                sx={{
+                //   "& .MuiOutlinedInput-root": {
+                //     "& > fieldset": {
+                //       border: "none"
+                //     }
+                //   }
+                // }}
+                />            <br></br>
+                <TextField id="outlined-basic" label="Last Name" variant="outlined" color="common" fullWidth /><br></br><br></br>
                 <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: '0.5rem' }}>
                   <InputLabel id="demo-simple-select-label" fullWidth color="common">Role</InputLabel>
 
                   <Select fullWidth color="common" variant='standard'
                     labelId="demo-simple-select-label"
                     id="role"
-                   // defaultValue={AddUser.role}
+                    // defaultValue={AddUser.role}
                     label="Role"
                     onChange={(e) => { getEmpId(e.target.value) }}
-                >
+                  >
                     {rolesData.map(role => {
-                        return <MenuItem value={role ?? ''}>{role?.roleName}</MenuItem>
+                      return <MenuItem value={role ?? ''}>{role?.roleName}</MenuItem>
                     })}
                   </Select>
                 </FormControl>
@@ -253,35 +253,35 @@ export default function UserEditProfile() {
                 </LocalizationProvider>
                 <br />
                 <br />
-               
-                <Stack>
-                <Typography variant="body1"  color="common">Contact Information</Typography>
-              </Stack>
 
-              <Stack>
-              <TextField id="outlined-basic" label="Mobile Number" type="number" variant="outlined"  color="common"/>
-              </Stack>
-              <Stack>
-              <TextField id="outlined-basic" label="Work Mobile Number" type="number" variant="outlined"  color="common"/>
-              </Stack>
-              <Stack>
-              <TextField id="outlined-basic" label="Email" type="email" variant="outlined" color="common" />
-              </Stack>
-              <Stack>
-              <TextField id="outlined-basic" label="Address1"  variant="outlined" color="common"/>
-              </Stack>
-              <Stack>
-              <TextField id="outlined-basic" label="Address2"  variant="outlined" />
-              </Stack>
-              <Stack>
-              <TextField id="outlined-basic" label="Pincode"  variant="outlined" />
-              </Stack>
-              <Stack>
-              <TextField id="outlined-basic" label="Project"  variant="outlined" />
-              </Stack>
+                <Stack>
+                  <Typography variant="body1" color="common">Contact Information</Typography>
+                </Stack>
+
+                <Stack>
+                  <TextField id="outlined-basic" label="Mobile Number" type="number" variant="outlined" color="common" />
+                </Stack>
+                <Stack>
+                  <TextField id="outlined-basic" label="Work Mobile Number" type="number" variant="outlined" color="common" />
+                </Stack>
+                <Stack>
+                  <TextField id="outlined-basic" label="Email" type="email" variant="outlined" color="common" />
+                </Stack>
+                <Stack>
+                  <TextField id="outlined-basic" label="Address1" variant="outlined" color="common" />
+                </Stack>
+                <Stack>
+                  <TextField id="outlined-basic" label="Address2" variant="outlined" />
+                </Stack>
+                <Stack>
+                  <TextField id="outlined-basic" label="Pincode" variant="outlined" />
+                </Stack>
+                <Stack>
+                  <TextField id="outlined-basic" label="Project" variant="outlined" />
+                </Stack>
               </div>
 
-            
+
               {/* <br />
                 <h3>Contact Information</h3>
                 <br /> */}

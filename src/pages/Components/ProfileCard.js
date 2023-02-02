@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import React from "react";
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
-import { Button, Stack, TextField, Grid, Divider,Box } from '@mui/material';
+import { Button, Stack, TextField, Grid, Divider, Box } from '@mui/material';
 import Chip from '@mui/material/Chip';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -42,62 +42,62 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function RecipeReviewCard({profileData,changeUser}) {
+export default function RecipeReviewCard({ profileData, changeUser }) {
   const [expanded, setExpanded] = React.useState(false);
- 
-  const [editData,setEditData]= useState({
-    firstName:profileData?.first_name,
-    lastName:profileData?.last_name,
-    profilepic:profileData?.profile_pic,
-    gender:profileData?.gender,
-    doj:profileData?.doj,
-    pincode:profileData?.pincode,
-    officeMailId:profileData?.officeMailId,
-    personalMailId:profileData?.personalMailId,
-    contactNum:profileData?.contactNum,
-    workNum:profileData?.workNum,
-    address:profileData?.address,
-    address1:profileData?.address1,
-    address2:profileData?.address2,
-    empRole:profileData?.role_name,
-    supervisorId:profileData?.supervisorId,
-    status:profileData?.status,
-    project_list:profileData?.project_list,
-    license_number:profileData?.license_number,
-    createdBy:profileData?.id,
-    lastUpdatedBy:profileData?.id
+
+  const [editData, setEditData] = useState({
+    firstName: profileData?.first_name,
+    lastName: profileData?.last_name,
+    profilepic: profileData?.profile_pic,
+    gender: profileData?.gender,
+    doj: profileData?.doj,
+    pincode: profileData?.pincode,
+    officeMailId: profileData?.officeMailId,
+    personalMailId: profileData?.personalMailId,
+    contactNum: profileData?.contactNum,
+    workNum: profileData?.workNum,
+    address: profileData?.address,
+    address1: profileData?.address1,
+    address2: profileData?.address2,
+    empRole: profileData?.role_name,
+    supervisorId: profileData?.supervisorId,
+    status: profileData?.status,
+    project_list: profileData?.project_list,
+    license_number: profileData?.license_number,
+    createdBy: profileData?.id,
+    lastUpdatedBy: profileData?.id
   })
-  useEffect(()=>{
+  useEffect(() => {
     setEditData({
-      firstName:profileData?.first_name,
-      lastName:profileData?.last_name,
-      profilepic:profileData?.profile_pic,
-      gender:profileData?.gender,
-      doj:profileData?.doj,
-      pincode:profileData?.pincode,
-      officeMailId:profileData?.officeMailId,
-      personalMailId:profileData?.personalMailId,
-      contactNum:profileData?.contactNum,
-      workNum:profileData?.workNum,
-      address:profileData?.address,
-      address1:profileData?.address1,
-      address2:profileData?.address2,
-      empRole:profileData?.role_name,
-      supervisorId:profileData?.supervisorId,
-      status:profileData?.status,
-      project_list:profileData?.project_list,
-      license_number:profileData?.license_number,
-      createdBy:profileData?.id,
-      lastUpdatedBy:profileData?.id
+      firstName: profileData?.first_name,
+      lastName: profileData?.last_name,
+      profilepic: profileData?.profile_pic,
+      gender: profileData?.gender,
+      doj: profileData?.doj,
+      pincode: profileData?.pincode,
+      officeMailId: profileData?.officeMailId,
+      personalMailId: profileData?.personalMailId,
+      contactNum: profileData?.contactNum,
+      workNum: profileData?.workNum,
+      address: profileData?.address,
+      address1: profileData?.address1,
+      address2: profileData?.address2,
+      empRole: profileData?.role_name,
+      supervisorId: profileData?.supervisorId,
+      status: profileData?.status,
+      project_list: profileData?.project_list,
+      license_number: profileData?.license_number,
+      createdBy: profileData?.id,
+      lastUpdatedBy: profileData?.id
     })
-  },[profileData])
+  }, [profileData])
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };
-   console.log(editData,profileData,"<---345678i")
+  console.log(editData, profileData, "<---345678i")
   const editProfile = async => {
     // console.log(editData,"<----editProfileeditProfile")
     handleExpandClick();
@@ -126,30 +126,30 @@ export default function RecipeReviewCard({profileData,changeUser}) {
       "project_list": editData?.project_list,
       "license_number": editData?.license_number
     });
-     console.log("ediuyjyhtgrfde",data)
+    console.log("ediuyjyhtgrfde", data)
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/editUser.php',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
-    
-    axios(config)
-    .then(function (response) {
-      setEditData(response.data)
-      changeUser()
-      console.log(JSON.stringify(response.data,'<------ghjhgjghjhg'));
-      <Alert severity="success">Updated Data!</Alert>
 
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    axios(config)
+      .then(function (response) {
+        setEditData(response.data)
+        changeUser()
+        console.log(JSON.stringify(response.data, '<------ghjhgjghjhg'));
+        <Alert severity="success">Updated Data!</Alert>
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
   return (
-    <Card sx={{ width:400 }}>
+    <Card sx={{ width: 400 }}>
       <CardHeader
         sx={{
           p: 2,
@@ -158,18 +158,18 @@ export default function RecipeReviewCard({profileData,changeUser}) {
           flexGrow: 1,
         }}
         avatar={
-          <Avatar sx={{ bgcolor: "#ed6c02", width: 100, height: 100, marginLeft: 13 }} aria-label="recipe" src={profileData?.profile_pic}>
+          <Avatar sx={{ bgcolor: "#ff7424", width: 100, height: 100, marginLeft: 13 }} aria-label="recipe" src={profileData?.profile_pic}>
             {profileData?.first_name.substring(0, 1)}
           </Avatar>
         }
-        // action={
-        //     <Chip label="focus" size="small" color="success" variant="filled" />
-        // }
+      // action={
+      //     <Chip label="focus" size="small" color="success" variant="filled" />
+      // }
       />
       <Typography variant="h6" textAlign="center">
-       {profileData?.first_name} {profileData?.last_name}
+        {profileData?.first_name} {profileData?.last_name}
       </Typography>
-     
+
       {/* <CardMedia
         component="img"
         height="194"
@@ -178,59 +178,59 @@ export default function RecipeReviewCard({profileData,changeUser}) {
       /> */}
       <CardContent>
         <TableContainer >
-    <Table aria-label="customized table"  >
-   
-      <TableBody >
-        <TableRow style={{ height: "8px !important" }} >
-          <TableCell > Role</TableCell>
-          
-          <TableCell>{profileData?.role_name}</TableCell>
-        </TableRow>
-        <TableRow style={{ height: "8px !important" }} >
-          <TableCell style={{ width: "8px" }}> Reporting Manager</TableCell>
-          <TableCell>{profileData?.supervisorName===""  ? "-":profileData?.supervisorName}</TableCell>
-        </TableRow>
-        <TableRow style={{ height: "8px !important" }} >
-          <TableCell style={{ width: "8px" }}>Date of Joining</TableCell>
-          <TableCell>{profileData?.doj}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-  </TableContainer>
-  </CardContent>
+          <Table aria-label="customized table"  >
+
+            <TableBody >
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell > Role</TableCell>
+
+                <TableCell>{profileData?.role_name}</TableCell>
+              </TableRow>
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell style={{ width: "8px" }}> Reporting Manager</TableCell>
+                <TableCell>{profileData?.supervisorName === "" ? "-" : profileData?.supervisorName}</TableCell>
+              </TableRow>
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell style={{ width: "8px" }}>Date of Joining</TableCell>
+                <TableCell>{profileData?.doj}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </CardContent>
 
       <CardContent>
-        <b textAlign="center" style={{color:'black'}}>Contact Information</b>
-  <TableContainer >
-    <Table aria-label="customized table"  >
-      {/* <TableHead maxWidth>Contact Information</TableHead> */}
-      <TableBody >
-        <TableRow style={{ height: "8px !important" }} >
-          <TableCell > Mobile </TableCell>
-          
-          <TableCell>{profileData?.contactNum}</TableCell>
-        </TableRow>
-        <TableRow style={{ height: "8px !important" }} >
-          <TableCell style={{ width: "8px" }}> Work</TableCell>
-          <TableCell>{profileData?.officeMailId}</TableCell>
-        </TableRow>
-        <TableRow style={{ height: "8px !important" }} >
-          <TableCell style={{ width: "8px" }}>Email</TableCell>
-          <TableCell>{profileData?.personalMailId}</TableCell>
-        </TableRow>
-        <TableRow style={{ height: "8px !important" }} >
-          <TableCell style={{ width: "8px" }}>Address</TableCell>
-          <TableCell>{profileData?.address}</TableCell>
-        </TableRow>
-        <TableRow style={{ height: "8px !important" }} >
-          <TableCell style={{ width: "8px" }}>Pincode:</TableCell>
-          <TableCell>{profileData?.pincode}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-  </TableContainer>
-</CardContent>
-{/* <Typography variant="body1" gutterBottom>
+        <b textAlign="center" style={{ color: 'black' }}>Contact Information</b>
+        <TableContainer >
+          <Table aria-label="customized table"  >
+            {/* <TableHead maxWidth>Contact Information</TableHead> */}
+            <TableBody >
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell > Mobile </TableCell>
+
+                <TableCell>{profileData?.contactNum}</TableCell>
+              </TableRow>
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell style={{ width: "8px" }}> Work</TableCell>
+                <TableCell>{profileData?.officeMailId}</TableCell>
+              </TableRow>
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell style={{ width: "8px" }}>Email</TableCell>
+                <TableCell>{profileData?.personalMailId}</TableCell>
+              </TableRow>
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell style={{ width: "8px" }}>Address</TableCell>
+                <TableCell>{profileData?.address}</TableCell>
+              </TableRow>
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell style={{ width: "8px" }}>Pincode:</TableCell>
+                <TableCell>{profileData?.pincode}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </CardContent>
+      {/* <Typography variant="body1" gutterBottom>
           Projects: {profileData?.project_list}
         </Typography> */}
 
@@ -240,15 +240,15 @@ export default function RecipeReviewCard({profileData,changeUser}) {
             sx={{
               ':hover': {
                 bgcolor: '#ffd796', // theme.palette.primary.main
-                color: '#ed6c02',
+                color: '#ff7424',
               },
-              ':focus':{
-                bgcolor:'#ffd796',
-                color:"#ed6c02"
+              ':focus': {
+                bgcolor: '#ffd796',
+                color: "#ff7424"
               },
-              bgcolor:'#ffd796',
-              color:"#ed6c02"
-            }} component={RouterLink} to="#"  startIcon={<Iconify icon="eva:plus-fill" />}>
+              bgcolor: '#ffd796',
+              color: "#ff7424"
+            }} component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             Edit User
           </Button>
           {/* <Edit /> */}
@@ -264,47 +264,47 @@ export default function RecipeReviewCard({profileData,changeUser}) {
                 margin: 'auto',
                 maxWidth: 500,
                 flexGrow: 1,
-                color:'#ed6c02'
+                color: '#ff7424'
               }}
             >
               Edit User Information
             </Typography>
           </Stack>
           <Card>
-      
-        <TableContainer >
-    <Table aria-label="customized table"  >
-   
-      <TableBody >
-      <TableRow style={{ height: "8px !important" }} >
-          <TableCell>UserName</TableCell>
-          <TableCell>{profileData?.firstName} {profileData?.last_name}</TableCell>
-        </TableRow>
-        <TableRow style={{ height: "8px !important" }} >
-          <TableCell> Role</TableCell>
-          <TableCell>{profileData?.role_name}</TableCell>
-        </TableRow>
-        <TableRow style={{ height: "8px !important" }} >
-          <TableCell style={{ width: "8px" }}>Email</TableCell>
-          <TableCell>{profileData?.officeMailId}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-  </TableContainer>
- 
+
+            <TableContainer >
+              <Table aria-label="customized table"  >
+
+                <TableBody >
+                  <TableRow style={{ height: "8px !important" }} >
+                    <TableCell>UserName</TableCell>
+                    <TableCell>{profileData?.firstName} {profileData?.last_name}</TableCell>
+                  </TableRow>
+                  <TableRow style={{ height: "8px !important" }} >
+                    <TableCell> Role</TableCell>
+                    <TableCell>{profileData?.role_name}</TableCell>
+                  </TableRow>
+                  <TableRow style={{ height: "8px !important" }} >
+                    <TableCell style={{ width: "8px" }}>Email</TableCell>
+                    <TableCell>{profileData?.officeMailId}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+
           </Card>
           <Stack mb={1.5}>
             <Divider variant="middle" />
           </Stack>
-          <Grid  direction={'column'} spacing={1.8} alignItems="center" justifyContent="space-between">
-            <Grid item  mb={1}>
+          <Grid direction={'column'} spacing={1.8} alignItems="center" justifyContent="space-between">
+            <Grid item mb={1}>
               <TextField
                 fullWidth
                 helperText="Mobile Number Required *"
                 size="small"
                 margin="dense"
                 value={editData?.contactNum}
-                onChange={(e)=>{setEditData({...editData,contactNum:e?.target?.value})}}
+                onChange={(e) => { setEditData({ ...editData, contactNum: e?.target?.value }) }}
                 type="number"
                 inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                 id="Mobile-Number"
@@ -317,51 +317,51 @@ export default function RecipeReviewCard({profileData,changeUser}) {
             </Grid>
             <Grid item mb={2}>
               <TextField
-              fullWidth
+                fullWidth
                 helperText="Address Required *"
                 size="small"
                 id="Address"
                 value={editData?.address}
-                onChange={(e)=>{setEditData({...editData,address:e?.target?.value})}}
+                onChange={(e) => { setEditData({ ...editData, address: e?.target?.value }) }}
                 label="Address"
-                variant="outlined"  color="common"
+                variant="outlined" color="common"
               />
             </Grid>
             <Grid item mb={2}>
               <TextField fullWidth size="small" id="Address1"
-                 value={editData?.address1}
-                 onChange={(e)=>{setEditData({...editData,address1:e?.target?.value})}}
-              label="Address1" variant="outlined"  color="common" />
+                value={editData?.address1}
+                onChange={(e) => { setEditData({ ...editData, address1: e?.target?.value }) }}
+                label="Address1" variant="outlined" color="common" />
             </Grid>
             <Grid item mb={2}>
               <TextField fullWidth size="small"
-                 value={editData?.address2}
-                 onChange={(e)=>{setEditData({...editData,address2:e?.target?.value})}}
-              id="Address2" label="Address2" variant="outlined"  color="common" />
+                value={editData?.address2}
+                onChange={(e) => { setEditData({ ...editData, address2: e?.target?.value }) }}
+                id="Address2" label="Address2" variant="outlined" color="common" />
             </Grid>
             <Grid item mb={2}>
               <TextField fullWidth size="small" id="PinCode"
-                 value={editData?.pincode}
-                 onChange={(e)=>{setEditData({...editData,pincode:e?.target?.value})}}
-              label="PinCode" variant="outlined"  color="common" />
+                value={editData?.pincode}
+                onChange={(e) => { setEditData({ ...editData, pincode: e?.target?.value }) }}
+                label="PinCode" variant="outlined" color="common" />
             </Grid>
           </Grid>
           <Box display="flex" justifyContent="flex-end">
-          <Button onClick={editProfile} variant="warning"
-            sx={{
-              ':hover': {
-                bgcolor: '#ffd796', // theme.palette.primary.main
-                color: '#ed6c02',
-              },
-              ':focus':{
-                bgcolor:'#ffd796',
-                color:"#ed6c02"
-              },
-              bgcolor:'#ffd796',
-              color:"#ed6c02"
-            }}  component={RouterLink} to="#" startIcon={<Iconify icon="eva:save-fill" />}>
-            Save
-          </Button>
+            <Button onClick={editProfile} variant="warning"
+              sx={{
+                ':hover': {
+                  bgcolor: '#ffd796', // theme.palette.primary.main
+                  color: '#ff7424',
+                },
+                ':focus': {
+                  bgcolor: '#ffd796',
+                  color: "#ff7424"
+                },
+                bgcolor: '#ffd796',
+                color: "#ff7424"
+              }} component={RouterLink} to="#" startIcon={<Iconify icon="eva:save-fill" />}>
+              Save
+            </Button>
           </Box>
         </CardContent>
       </Collapse>

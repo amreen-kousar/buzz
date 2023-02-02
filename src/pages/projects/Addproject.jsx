@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, Dialog, AppBar, Toolbar, IconButton, Typography, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
-import { useLocation,Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import CreateProj from './Components/CreateProj';
 
 function AddProject() {
@@ -163,21 +163,21 @@ function AddProject() {
             <Button variant="contained" style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} onClick={handleClickOpen} sx={{
                 ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                     border: '#ffd796'
                 },
                 ':active': {
                     bgcolor: '#ffd796',
-                    color: "#ed6c02"
+                    color: "#ff7424"
                 },
                 bgcolor: '#ffd796',
-                color: "#ed6c02",
+                color: "#ff7424",
                 border: 'none'
             }} >
                 <span style={{ fontSize: "2rem" }}>+</span>
             </Button>
             <Dialog fullScreen open={open} onClose={handleClose} >
-                <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
+                <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
                     <Toolbar>
                         <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                             <CloseIcon />

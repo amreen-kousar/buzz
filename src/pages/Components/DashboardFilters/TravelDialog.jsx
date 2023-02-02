@@ -10,7 +10,7 @@ import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
-import { Dialog, Toolbar, DialogContent, DialogContentText,Card } from '@mui/material'
+import { Dialog, Toolbar, DialogContent, DialogContentText, Card } from '@mui/material'
 
 // import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -291,15 +291,15 @@ export default function TravelDialog({ viewMessage }) {
       }} onClick={handleClickOpen} sx={{
         ':hover': {
           bgcolor: '#ffd796', // theme.palette.primary.main
-          color: '#ed6c02',
+          color: '#ff7424',
           border: '#ffd796'
         },
         ':active': {
           bgcolor: '#ffd796',
-          color: "#ed6c02"
+          color: "#ff7424"
         },
         bgcolor: '#ffd796',
-        color: "#ed6c02",
+        color: "#ff7424",
         border: 'none'
       }} >
         <span style={{ fontSize: "2rem" }}>+</span>
@@ -307,8 +307,8 @@ export default function TravelDialog({ viewMessage }) {
       <Dialog fullScreen open={open} onClose={handleClose}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">
-        {/* <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}> */}
-        <Toolbar sx={{ bgcolor: '#ed6c02', color: 'white' }} >
+        {/* <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}> */}
+        <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
           <IconButton edge="start" sx={{ color: "inherit" }} onClick={handleClose} aria-label="close">
             <CloseIcon />
           </IconButton>
@@ -333,7 +333,7 @@ export default function TravelDialog({ viewMessage }) {
             tabIndex={-1}
           >
             <div style={{ margin: "1rem" }}>
-           
+
 
               <Stack style={{ marginTop: 20 }}>
                 <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
@@ -343,7 +343,7 @@ export default function TravelDialog({ viewMessage }) {
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth >
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Poa</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
                   <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                     {datadrop?.data?.map(itm => {
                       return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
@@ -370,7 +370,7 @@ export default function TravelDialog({ viewMessage }) {
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Mode Of Travel</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Mode Of Travel</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Mode Of Travel"
                     id="demo-simple-select"
@@ -388,7 +388,7 @@ export default function TravelDialog({ viewMessage }) {
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Rate Per Km</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Rate Per Km</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Rate Per Km"
                     id="demo-simple-select"
@@ -404,7 +404,7 @@ export default function TravelDialog({ viewMessage }) {
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Food Expenses </InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Food Expenses </InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Food Expenses"
                     id="demo-simple-select"
@@ -423,7 +423,7 @@ export default function TravelDialog({ viewMessage }) {
               </Stack>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }} >Phone Charges</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }} >Phone Charges</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Phone Charges"
                     id="demo-simple-select"
@@ -479,7 +479,7 @@ export default function TravelDialog({ viewMessage }) {
                 <label for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
                   <Iconify
                     icon={'mdi:camera'}
-                    sx={{ width: 25, height: 25, ml: 2, color: "#ed6c02" }}
+                    sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
                   />&nbsp;
                   Click to upoad images
                   <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
@@ -490,7 +490,7 @@ export default function TravelDialog({ viewMessage }) {
                   '&:hover': {
                     backgroundColor: '#ffd796',
                   },
-                  color: "#ed6c02"
+                  color: "#ff7424"
                 }}>Send Images</Button>
               <br /><br />
 
@@ -501,7 +501,7 @@ export default function TravelDialog({ viewMessage }) {
               '&:hover': {
                 backgroundColor: '#ffd796',
               },
-              color: "#ed6c02",
+              color: "#ff7424",
 
             }}>Upload</Button><br></br>
           </DialogContentText></DialogContent>  </Dialog>

@@ -113,10 +113,10 @@ export default function Searchbar({ getSearch }) {
                 }} sx={{
                   '&:hover': {
                     backgroundColor: '#ffd796',
-                    color:'#ed6c02'
-  
+                    color: '#ff7424'
+
                   },
-                  color: 'white', backgroundColor: '#ed6c02'
+                  color: 'white', backgroundColor: '#ff7424'
                 }}>
                   Search
                 </Button>

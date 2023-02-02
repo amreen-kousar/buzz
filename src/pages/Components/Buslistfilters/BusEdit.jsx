@@ -37,17 +37,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function BusEdit({clcikData}) {
+export default function BusEdit({ clcikData }) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [age, setAge] = React.useState('');
-  const [editData,setEditData] = useState('')
+  const [editData, setEditData] = useState('')
   const [sendData, setSendData] = useState({
     lastUpdatedBy: "",
     chassis_number: "",
     insurance_number: "",
     register_date: new Date(),
-    insurance_company:"",
+    insurance_company: "",
     insurance_start_date: "",
     last_service_date: "",
     emission_date: "",
@@ -63,7 +63,7 @@ export default function BusEdit({clcikData}) {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-  
+
   const handleClickOpen = () => {
     setOpen(true);
     setScroll(scrollType);
@@ -73,80 +73,80 @@ export default function BusEdit({clcikData}) {
     setOpen(false);
   };
 
-  const enterData = () =>{
-    console.log(clcikData,sendData,"<---sendDataefewfs")
+  const enterData = () => {
+    console.log(clcikData, sendData, "<---sendDataefewfs")
     setSendData({
-        chassis_number:clcikData?.chassis_number,
-        "lastUpdatedBy": "",
-        "insurance_number": clcikData?.insurance_number,
-        "register_date":moment(clcikData?.register_date).format('MM-DD-YYYY'),
-        "insurance_company":clcikData?.insurance_company,
-        "insurance_start_date":clcikData?.insurance_start_date,
-        "last_service_date": clcikData?.last_service_date,
-        "emission_date": clcikData?.emission_date,
-        "insurance_end_date": clcikData?.insurance_end_date,
-        "createdBy": clcikData?.createdBy,
-        "engine_number": clcikData?.engine_number,
-        "permit": clcikData?.permit,
-        "fitness_certificate": clcikData?.fitness_certificate,
-        "register_number": clcikData?.register_number,
-        "bus_id": clcikData?.bus_id,
-        "next_service_due_date": clcikData?.next_service_due_date
+      chassis_number: clcikData?.chassis_number,
+      "lastUpdatedBy": "",
+      "insurance_number": clcikData?.insurance_number,
+      "register_date": moment(clcikData?.register_date).format('MM-DD-YYYY'),
+      "insurance_company": clcikData?.insurance_company,
+      "insurance_start_date": clcikData?.insurance_start_date,
+      "last_service_date": clcikData?.last_service_date,
+      "emission_date": clcikData?.emission_date,
+      "insurance_end_date": clcikData?.insurance_end_date,
+      "createdBy": clcikData?.createdBy,
+      "engine_number": clcikData?.engine_number,
+      "permit": clcikData?.permit,
+      "fitness_certificate": clcikData?.fitness_certificate,
+      "register_number": clcikData?.register_number,
+      "bus_id": clcikData?.bus_id,
+      "next_service_due_date": clcikData?.next_service_due_date
 
     })
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     //edit()
     enterData()
-    },[clcikData]
-    )
-  const edit = async =>{
+  }, [clcikData]
+  )
+  const edit = async => {
     var data = JSON.stringify({
-        "lastUpdatedBy": "144",
-        "chassis_number": sendData?.chassis_number,
-        "insurance_number": sendData?.insurance_number,
-        "register_date": sendData?.register_date,
-        "insurance_company":sendData?.insurance_company,
-        "insurance_start_date": sendData?.insurance_start_date,
-        "last_service_date": sendData?.last_service_date,
-        "emission_date":sendData?.emission_date,
-        "insurance_end_date":sendData?.insurance_end_date,
-        "createdBy": sendData?.createdBy,
-        "engine_number": sendData?.engine_number,
-        "permit": sendData?.permit,
-        "fitness_certificate": sendData?.fitness_certificate,
-        "register_number": sendData?.register_number,
-        "bus_id": sendData?.bus_id,
-        "next_service_due_date": sendData?.next_service_due_date
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/editBus.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      axios(config)
+      "lastUpdatedBy": "144",
+      "chassis_number": sendData?.chassis_number,
+      "insurance_number": sendData?.insurance_number,
+      "register_date": sendData?.register_date,
+      "insurance_company": sendData?.insurance_company,
+      "insurance_start_date": sendData?.insurance_start_date,
+      "last_service_date": sendData?.last_service_date,
+      "emission_date": sendData?.emission_date,
+      "insurance_end_date": sendData?.insurance_end_date,
+      "createdBy": sendData?.createdBy,
+      "engine_number": sendData?.engine_number,
+      "permit": sendData?.permit,
+      "fitness_certificate": sendData?.fitness_certificate,
+      "register_number": sendData?.register_number,
+      "bus_id": sendData?.bus_id,
+      "next_service_due_date": sendData?.next_service_due_date
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/editBus.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
       .then(function (response) {
         setEditData(response.data)
-        console.log(response.data,'<----------njknjjkkjn');
+        console.log(response.data, '<----------njknjjkkjn');
       })
       .catch(function (error) {
         console.log(error);
       });
   }
-const getCaaled = () =>{
-  edit()
-}
+  const getCaaled = () => {
+    edit()
+  }
 
   return (
     <div>
       <Button onClick={handleClickOpen} >
-       <Iconify icon="material-symbols:edit"style={{width:'30px',height:'30px',color:'#e69138',marginLeft:"120px"}}></Iconify>
+        <Iconify icon="material-symbols:edit" style={{ width: '30px', height: '30px', color: '#e69138', marginLeft: "120px" }}></Iconify>
       </Button>
       <Dialog
         open={open}
@@ -156,13 +156,13 @@ const getCaaled = () =>{
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-          <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
+        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Edit Bus Details {clcikData?.register_number}
+              Edit Bus Details {clcikData?.register_number}
             </Typography>
 
 
@@ -170,9 +170,9 @@ const getCaaled = () =>{
               save
             </Button>
           </Toolbar>
-       
+
         </AppBar>
-       
+
         {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
         <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
           <DialogContentText
@@ -180,7 +180,7 @@ const getCaaled = () =>{
             //   ref={descriptionElementRef}
             tabIndex={-1}
           >
-            {console.log(clcikData,"<-----qwertyuio")}
+            {console.log(clcikData, "<-----qwertyuio")}
             <Box
               component="form"
               sx={{
@@ -190,131 +190,139 @@ const getCaaled = () =>{
               autoComplete="off"
             >
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
-                <TextField fullWidth id="outlined-basic" value={sendData?.register_number} onChange={(e)=>{setSendData({...sendData,register_number:e?.target?.value})}} label="Bus Number" variant="outlined" />
+                <TextField fullWidth id="outlined-basic" value={sendData?.register_number} onChange={(e) => { setSendData({ ...sendData, register_number: e?.target?.value }) }} label="Bus Number" variant="outlined" />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
-                   onChange={(e)=>{setSendData({...sendData,register_date:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
-                console.log(e,"<----werewrewrewrewr")
-                }}
+                    onChange={(e) => {
+                      setSendData({ ...sendData, register_date: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                      console.log(e, "<----werewrewrewrewr")
+                    }}
                     label="Registration Date"
-                 value={sendData?.register_date}
-                     
+                    value={sendData?.register_date}
+
                     renderInput={(params) => <TextField value={sendData?.register_date} {...params} fullWidth />}
                   />
-                  {console.log(moment(new Date(sendData?.register_date)).format("MM-DD-YYYY"),"<----(sendData?.register_date(sendData?.register_date")}
+                  {console.log(moment(new Date(sendData?.register_date)).format("MM-DD-YYYY"), "<----(sendData?.register_date(sendData?.register_date")}
                 </LocalizationProvider>
-                <Stack style={{marginTop:10}}>
-                <TextField id="outlined-basic" value={sendData?.engine_number} onChange={(e)=>{setSendData({...sendData,engine_number:e?.target?.value})}} label="Engine Number" variant="outlined" />
+                <Stack style={{ marginTop: 10 }}>
+                  <TextField id="outlined-basic" value={sendData?.engine_number} onChange={(e) => { setSendData({ ...sendData, engine_number: e?.target?.value }) }} label="Engine Number" variant="outlined" />
                 </Stack>
-                <Stack style={{marginTop:10}}>
-                <TextField fullWidth id="outlined-basic" value={sendData?.chassis_number} onChange={(e)=>{setSendData({...sendData,chassis_number:e?.target?.value})}} label="Chasis Number" variant="outlined" />
+                <Stack style={{ marginTop: 10 }}>
+                  <TextField fullWidth id="outlined-basic" value={sendData?.chassis_number} onChange={(e) => { setSendData({ ...sendData, chassis_number: e?.target?.value }) }} label="Chasis Number" variant="outlined" />
                 </Stack>
-                <Stack style={{marginTop:10}}>
-                <TextField fullWidth id="outlined-basic" value={sendData?.insurance_number} onChange={(e)=>{setSendData({...sendData,insurance_number:e?.target?.value})}} label="Insurance Number" variant="outlined" />
+                <Stack style={{ marginTop: 10 }}>
+                  <TextField fullWidth id="outlined-basic" value={sendData?.insurance_number} onChange={(e) => { setSendData({ ...sendData, insurance_number: e?.target?.value }) }} label="Insurance Number" variant="outlined" />
                 </Stack>
-                <Stack style={{marginTop:10}}>
-                <TextField fullWidth id="outlined-basic" value={sendData?.insurance_company} onChange={(e)=>{setSendData({...sendData,insurance_company:e?.target?.value})}} label="Insurance Company" variant="outlined" />
+                <Stack style={{ marginTop: 10 }}>
+                  <TextField fullWidth id="outlined-basic" value={sendData?.insurance_company} onChange={(e) => { setSendData({ ...sendData, insurance_company: e?.target?.value }) }} label="Insurance Company" variant="outlined" />
                 </Stack>
-                <Stack style={{marginTop:10}}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                   onChange={(e)=>{setSendData({...sendData,insurance_start_date:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
-                console.log(e,"<----werewrewrewrewr")
-                }}
-                    label="Insurance Start Date"
-                 value={sendData?.insurance_start_date}
-                     
-                    renderInput={(params) => <TextField value={sendData?.insurance_start_date} {...params} fullWidth />}
-                  />
-                  
-                </LocalizationProvider>
+                <Stack style={{ marginTop: 10 }}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      onChange={(e) => {
+                        setSendData({ ...sendData, insurance_start_date: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                        console.log(e, "<----werewrewrewrewr")
+                      }}
+                      label="Insurance Start Date"
+                      value={sendData?.insurance_start_date}
+
+                      renderInput={(params) => <TextField value={sendData?.insurance_start_date} {...params} fullWidth />}
+                    />
+
+                  </LocalizationProvider>
                 </Stack>
-                <Stack style={{marginTop:10}}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                   onChange={(e)=>{setSendData({...sendData,insurance_end_date:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
-                console.log(e,"<----insurance_end_date")
-                }}
-                    label="Insurance End Date"
-                 value={sendData?.insurance_end_date}
-                     
-                    renderInput={(params) => <TextField value={sendData?.insurance_end_date} {...params} fullWidth />}
-                  />
-                </LocalizationProvider>
+                <Stack style={{ marginTop: 10 }}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      onChange={(e) => {
+                        setSendData({ ...sendData, insurance_end_date: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                        console.log(e, "<----insurance_end_date")
+                      }}
+                      label="Insurance End Date"
+                      value={sendData?.insurance_end_date}
+
+                      renderInput={(params) => <TextField value={sendData?.insurance_end_date} {...params} fullWidth />}
+                    />
+                  </LocalizationProvider>
                 </Stack>
-                <Stack style={{marginTop:10}}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                   onChange={(e)=>{setSendData({...sendData,last_service_date:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
-                console.log(e,"<----last_service_date")
-                }}
-                    label="Last Service Date"
-                 value={sendData?.last_service_date}
-                     
-                    renderInput={(params) => <TextField value={sendData?.last_service_date} {...params} fullWidth />}
-                  />
-                </LocalizationProvider>
+                <Stack style={{ marginTop: 10 }}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      onChange={(e) => {
+                        setSendData({ ...sendData, last_service_date: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                        console.log(e, "<----last_service_date")
+                      }}
+                      label="Last Service Date"
+                      value={sendData?.last_service_date}
+
+                      renderInput={(params) => <TextField value={sendData?.last_service_date} {...params} fullWidth />}
+                    />
+                  </LocalizationProvider>
                 </Stack>
-                <Stack style={{marginTop:10}}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                   onChange={(e)=>{setSendData({...sendData,next_service_due_date:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
-                console.log(e,"<----next_service_due_date")
-                }}
-                    label="Next Service Date"
-                 value={sendData?.next_service_due_date}
-                     
-                    renderInput={(params) => <TextField value={sendData?.next_service_due_date} {...params} fullWidth />}
-                  />
-                </LocalizationProvider>
+                <Stack style={{ marginTop: 10 }}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      onChange={(e) => {
+                        setSendData({ ...sendData, next_service_due_date: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                        console.log(e, "<----next_service_due_date")
+                      }}
+                      label="Next Service Date"
+                      value={sendData?.next_service_due_date}
+
+                      renderInput={(params) => <TextField value={sendData?.next_service_due_date} {...params} fullWidth />}
+                    />
+                  </LocalizationProvider>
                 </Stack>
-                <Stack style={{marginTop:10}}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                   onChange={(e)=>{setSendData({...sendData,fitness_certificate:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
-                console.log(e,"<----fitness_certificate")
-                }}
-                    label="Fitness Certificate"
-                 value={sendData?.fitness_certificate}
-                     
-                    renderInput={(params) => <TextField value={sendData?.fitness_certificate} {...params} fullWidth />}
-                  />
-                </LocalizationProvider>
+                <Stack style={{ marginTop: 10 }}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      onChange={(e) => {
+                        setSendData({ ...sendData, fitness_certificate: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                        console.log(e, "<----fitness_certificate")
+                      }}
+                      label="Fitness Certificate"
+                      value={sendData?.fitness_certificate}
+
+                      renderInput={(params) => <TextField value={sendData?.fitness_certificate} {...params} fullWidth />}
+                    />
+                  </LocalizationProvider>
                 </Stack>
-                <Stack style={{marginTop:10}}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                   onChange={(e)=>{setSendData({...sendData,permit:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
-                console.log(e,"<----permit")
-                }}
-                    label="Permit Details"
-                 value={sendData?.permit}
-                     
-                    renderInput={(params) => <TextField value={sendData?.permit} {...params} fullWidth />}
-                  />
-                </LocalizationProvider>
+                <Stack style={{ marginTop: 10 }}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      onChange={(e) => {
+                        setSendData({ ...sendData, permit: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                        console.log(e, "<----permit")
+                      }}
+                      label="Permit Details"
+                      value={sendData?.permit}
+
+                      renderInput={(params) => <TextField value={sendData?.permit} {...params} fullWidth />}
+                    />
+                  </LocalizationProvider>
                 </Stack>
-                <Stack style={{marginTop:10}}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                   onChange={(e)=>{setSendData({...sendData,emission_date:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
-                console.log(e,"<----emission_date")
-                }}
-                    label="Emission Date"
-                 value={sendData?.emission_date}
-                     
-                    renderInput={(params) => <TextField value={sendData?.emission_date} {...params} fullWidth />}
-                  />
-                </LocalizationProvider>
+                <Stack style={{ marginTop: 10 }}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      onChange={(e) => {
+                        setSendData({ ...sendData, emission_date: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                        console.log(e, "<----emission_date")
+                      }}
+                      label="Emission Date"
+                      value={sendData?.emission_date}
+
+                      renderInput={(params) => <TextField value={sendData?.emission_date} {...params} fullWidth />}
+                    />
+                  </LocalizationProvider>
                 </Stack>
 
 
 
-              
-               
+
+
               </div>
 
-            
+
             </Box>
           </DialogContentText>
         </DialogContent>

@@ -36,15 +36,15 @@ function SimpleDialog(props) {
       <div style={{ margin: "5px", textAlign: "center" }}> <Button
         sx={{
           ':hover': {
-            color: "#ffffff", bgcolor: "#ed6c02"
+            color: "#ffffff", bgcolor: "#ff7424"
           },
-          color: "#ffffff", bgcolor: "#ed6c02", borderRadius: "5px"
+          color: "#ffffff", bgcolor: "#ff7424", borderRadius: "5px"
         }} onClick={loginuser}>No</Button>&nbsp;&nbsp;&nbsp;
         <Button sx={{
           ':hover': {
-            color: "#ffffff", bgcolor: "#ed6c02"
+            color: "#ffffff", bgcolor: "#ff7424"
           },
-          color: "#ffffff", bgcolor: "#ed6c02"
+          color: "#ffffff", bgcolor: "#ff7424"
         }} onClick={logoutuser}>Yes</Button>
       </div>
     </Dialog>

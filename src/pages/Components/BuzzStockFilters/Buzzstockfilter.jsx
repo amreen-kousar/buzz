@@ -61,9 +61,9 @@ BuzzFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BuzzFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
- const [selectDATA,setSelectData] = useState()
- const data = localStorage?.getItem('userId')
+export default function BuzzFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData }) {
+  const [selectDATA, setSelectData] = useState()
+  const data = localStorage?.getItem('userId')
   const setData = (value) => {
     localStorage.setItem('selectedData', value)
     setSelectData(value)
@@ -77,22 +77,24 @@ export default function BuzzFilter({ isOpenFilter, onOpenFilter, onCloseFilter,c
       <Drawer
         anchor="right"
         open={isOpenFilter}
-        onClose={()=>{
+        onClose={() => {
           setSelectData()
-            onCloseFilter()}}
+          onCloseFilter()
+        }}
         PaperProps={{
           sx: { width: 280, },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25,color:'black'}}>
-          Filters
-         {selectDATA&&selectDATA==2&&":  Funders"}
-         {selectDATA&&selectDATA==7&&": Location"}
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25, color: 'black' }}>
+            Filters
+            {selectDATA && selectDATA == 2 && ":  Funders"}
+            {selectDATA && selectDATA == 7 && ": Location"}
           </Typography>
-          <IconButton onClick={()=>{
-        setSelectData()
-          onCloseFilter()}}>
+          <IconButton onClick={() => {
+            setSelectData()
+            onCloseFilter()
+          }}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
@@ -100,88 +102,88 @@ export default function BuzzFilter({ isOpenFilter, onOpenFilter, onCloseFilter,c
         <Divider />
         <Scrollbar>
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
-            <div>
-              <Card style={{backgroundColor:'#f6f8fb',}}>
-                <CardContent>
-                  {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
-                 <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
-                    {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
-                      {/* <Grid spacing={1} > */}
-                      {data==1|data==2&&<Button onClick={() => {setData(3)}} 
-            sx={{
-            ':hover': {
-              bgcolor: '#ffd796', // theme.palette.primary.main
-              color: '#ed6c02',
-            },
-            ':focus':{
-              bgcolor:'#ffd796',
-              color:"#ed6c02"
-            },
-            color:'black',
-            
-          }}>Project</Button>}
-        {data==1|data==2&&<Button  onClick={() => { setData(2) }} sx={{
-            ':hover': {
-              bgcolor: '#ffd796', // theme.palette.primary.main
-              color: '#ed6c02',
-            },
-            ':focus':{
-              bgcolor:'#ffd796',
-              color:"#ed6c02"
-            },
-            color:'black',
-            
-          }}
-          style={selectDATA == 2 ? {
+          <div>
+            <Card style={{ backgroundColor: '#f6f8fb', }}>
+              <CardContent>
+                {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
+                <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Categories</Typography>
+                {/* <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons"> */}
+                {/* <Grid spacing={1} > */}
+                {data == 1 | data == 2 && <Button onClick={() => { setData(3) }}
+                  sx={{
+                    ':hover': {
+                      bgcolor: '#ffd796', // theme.palette.primary.main
+                      color: '#ff7424',
+                    },
+                    ':focus': {
+                      bgcolor: '#ffd796',
+                      color: "#ff7424"
+                    },
+                    color: 'black',
+
+                  }}>Project</Button>}
+                {data == 1 | data == 2 && <Button onClick={() => { setData(2) }} sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  ':focus': {
+                    bgcolor: '#ffd796',
+                    color: "#ff7424"
+                  },
+                  color: 'black',
+
+                }}
+                  style={selectDATA == 2 ? {
                     background: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   } : null}>Funders</Button>}
-           {data==1|data==2&&<Button sx={{
-            ':hover': {
-              bgcolor: '#ffd796', // theme.palette.primary.main
-              color: '#ed6c02',
-            },
-            ':focus':{
-              bgcolor:'#ffd796',
-              color:"#ed6c02"
-            },
-            color:'black',
-            
-          }} >Location</Button>}
-            {data==1|data==2&&<Button sx={{
-            ':hover': {
-              bgcolor: '#ffd796', // theme.palette.primary.main
-              color: '#ed6c02',
-            },
-            ':focus':{
-              bgcolor:'#ffd796',
-              color:"#ed6c02"
-            },
-            color:'black',
-            
-          }} >Date Range</Button>}
-             {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
-  {/* <Button>Funders</Button> */}
-  {/* <Button>Project</Button>
+                {data == 1 | data == 2 && <Button sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  ':focus': {
+                    bgcolor: '#ffd796',
+                    color: "#ff7424"
+                  },
+                  color: 'black',
+
+                }} >Location</Button>}
+                {data == 1 | data == 2 && <Button sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  ':focus': {
+                    bgcolor: '#ffd796',
+                    color: "#ff7424"
+                  },
+                  color: 'black',
+
+                }} >Date Range</Button>}
+                {/* <Button onClick={()=>{setSelectData(1)}}>Partner</Button>   */}
+                {/* <Button>Funders</Button> */}
+                {/* <Button>Project</Button>
                         <Button onClick={()=>{setSelectData(7)}}>Location</Button>
                         <Button>All Bus</Button> */}
 
-                </CardContent>
-              </Card>
-            
+              </CardContent>
+            </Card>
+
             <Grid>
-              <BuzzFunders onClick={()=>{setSelectData(2)}}  selectDATA={selectDATA}/>
+              <BuzzFunders onClick={() => { setSelectData(2) }} selectDATA={selectDATA} />
             </Grid>
 
             <Grid>
-              <BuzzProjects onClick={()=>{setSelectData(3)}}  selectDATA={selectDATA}/>
+              <BuzzProjects onClick={() => { setSelectData(3) }} selectDATA={selectDATA} />
             </Grid>
             {/* {selectDATA===7&&<Grid style={{ marginTop: 30 }}>
                 <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
               </Grid> } */}
-              
-          
-            </div>
+
+
+          </div>
           {/* </Stack> */}
         </Scrollbar>
 

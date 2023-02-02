@@ -148,7 +148,7 @@ export default function BuzzStock() {
   }
   return (
     <div>
-      <Button style={{ float: "right", color: '#ed6c02' }}
+      <Button style={{ float: "right", color: '#ff7424' }}
         sx={{
           '&:hover': {
             backgroundColor: '#ffd796',

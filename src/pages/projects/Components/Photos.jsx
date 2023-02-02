@@ -16,15 +16,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog({photos,setPhotos,batch}) {
-  console.log(batch,'<--------shownshownshown')
+export default function FullScreenDialog({ photos, setPhotos, batch }) {
+  console.log(batch, '<--------shownshownshown')
 
 
   const [open, setOpen] = React.useState(false);
-  React.useEffect(()=>{
-  //setShown(shown)
-  setOpen(photos)
-  },[photos])
+  React.useEffect(() => {
+    //setShown(shown)
+    setOpen(photos)
+  }, [photos])
 
   const handleClickOpen = () => {
     setPhotos(true)
@@ -44,7 +44,7 @@ export default function FullScreenDialog({photos,setPhotos,batch}) {
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
+        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton
               edge="start"
@@ -55,26 +55,26 @@ export default function FullScreenDialog({photos,setPhotos,batch}) {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-             Self Shakti 
+              Self Shakti
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button> */}
-           
+
           </Toolbar>
         </AppBar>
         <List>
-        <>
+          <>
 
-{batch?.photos?.map(itm=>{
-  return(
-    <>
-<img src={itm?.photo1?itm?.photo1:""}/>
-<img src={itm?.photo2?itm?.photo2:""}/>
-    </>
-  )
-})}
-</>
+            {batch?.photos?.map(itm => {
+              return (
+                <>
+                  <img src={itm?.photo1 ? itm?.photo1 : ""} />
+                  <img src={itm?.photo2 ? itm?.photo2 : ""} />
+                </>
+              )
+            })}
+          </>
         </List>
       </Dialog>
     </div>

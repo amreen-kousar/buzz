@@ -34,7 +34,7 @@ TotalFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter, getData, onSumbit, same ,onDateSubmit}) {
+export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter, getData, onSumbit, same, onDateSubmit }) {
   const [selectDATA, setSelectData] = useState();
   return (
     <>
@@ -82,11 +82,11 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
@@ -100,11 +100,11 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
@@ -118,11 +118,11 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
@@ -136,11 +136,11 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
