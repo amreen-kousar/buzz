@@ -210,7 +210,7 @@ export default function User({ isDesktop }) {
           <Typography variant="h5" gutterBottom>
             {selected.length == 0 ? "All Bus List" : "Bus List"}
           </Typography>
-          <Button style={{ float: "right", color: '#ed6c02' }}
+          <Button style={{ float: "right", color: '#ff7424' }}
             sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
@@ -305,7 +305,7 @@ export default function User({ isDesktop }) {
           },
         backgroundColor:"#ffd796"
        }} variant="contained" onClick={handleClickOpen('paper')}>
-          <span style={{ fontSize: "2rem",color:"#ed6c02" }}>+</span></Button> */}
+          <span style={{ fontSize: "2rem",color:"#ff7424" }}>+</span></Button> */}
       </Container>
       {userAccess.includes(userIdCheck) && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <Addbus />

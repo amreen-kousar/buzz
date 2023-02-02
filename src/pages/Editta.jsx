@@ -10,7 +10,7 @@ import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
-import { Dialog, Toolbar, DialogContent, DialogContentText,Card } from '@mui/material'
+import { Dialog, Toolbar, DialogContent, DialogContentText, Card } from '@mui/material'
 import PropTypes from 'prop-types';
 // import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -40,36 +40,20 @@ const orangecolor = orange[800];
 
 
 Edittraveldialog.propTypes = {
-isOpenFilter: PropTypes.bool,
-onOpenFilter: PropTypes.func,
-onCloseFilter: PropTypes.func,
+  isOpenFilter: PropTypes.bool,
+  onOpenFilter: PropTypes.func,
+  onCloseFilter: PropTypes.func,
 };
 
 
-export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFilter, viewMessage }) {
+export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFilter, viewMessage, editData }) {
   Geocode.setApiKey("AIzaSyAQZSphbIdAeypWHytAIHtJ5K-wuUHBfx4");
   const [open, setOpen] = useState(true);
   const [startTime, setStartTime] = useState('');
   const [images, setImages] = useState();
   const [upload, setUpload] = useState();
-  
-  const [sendData, setSendData] = useState({
-    odimeter: "",
-    location: "",
-    poa: "",
-    date: new Date(),
-    modeoftravel: "",
-    rateperkm: "",
-    foodexpenses: "",
-    telephonecharges: "",
-    printing: "",
-    stationary: "",
-    otherExpenses: "",
-    OtherAmount: "",
-    endOdimeter: "",
-    endLocation: "",
-    totalkm: ""
-  });
+
+  const [sendData, setSendData] = useState(editData);
 
   // const webcamRef = React.useRef(null);
   const [imgSrc, setImgSrc] = React.useState(null);
@@ -95,11 +79,35 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
     setAge(event.target.value);
   };
   useEffect(() => {
+
     drop()
     //imageUpload()
     location()
   }, [coords]
   )
+
+  useEffect(() => {
+    // {
+    //   odimeter: "",
+    //   location: "",
+    //   poa: "",
+    //   date: new Date(),
+    //   mode_of_travel: "",
+    //   rate_per_KM: "",
+    //   da: "",
+    //   telephone: "",
+    //   printing: "",
+    //   stationary: "",
+    //   others: "",
+    //   other_text: "",
+    //   end_odometer: "",
+    //   end_location_name: "",
+    //   totalkm: ""
+    // }
+
+    console.log(sendData, "sendDataaaaaaaaaaaaaa")
+  }, [])
+
   const [image, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
   const [viewImage, setViewImage] = React.useState(false);
@@ -137,26 +145,26 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
     var data = JSON.stringify({
       "date": sendData?.date,
       "insideBangalore": false,
-      "end_odometer": sendData?.endOdimeter,
-      "telephone": sendData?.telephonecharges,
-      "end_location_name": sendData?.endLocation,
+      "end_odometer": sendData?.end_odometer,
+      "telephone": sendData?.telephone,
+      "end_location_name": sendData?.end_location_name,
       "printing": sendData?.printing,
-      "start_location_name": "RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India",
-      "poa_id": sendData?.poa,
-      "start_odometer": sendData?.odimeter,
-      "rate_per_KM": sendData?.rateperkm,
-      "stationery": sendData?.stationary,
-      "klmtr": sendData?.rateperkm,
-      "da": sendData?.foodexpenses,
-      "others": sendData?.otherExpenses,
+      "start_location_name": sendData?.start_location_name,
+      "poa_id": sendData?.poa_id,
+      "start_odometer": sendData?.start_odometer,
+      "rate_per_KM": sendData?.rate_per_KM,
+      "stationery": sendData?.stationery,
+      "klmtr": sendData?.rate_per_KM,
+      "da": sendData?.da,
+      "others": sendData?.others,
       "emp_id": 651,
-      "mode_of_travel": sendData?.modeoftravel,
-      "other_text": sendData?.OtherAmount
+      "mode_of_travel": sendData?.mode_of_travel,
+      "other_text": sendData?.other_text
     });
 
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/addNewTA.php',
+      url: 'https://bdms.buzzwomen.org/appTest/new/editTa.php',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -283,11 +291,11 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
   return (
     <div>
 
-      <Dialog fullScreen open={isOpenFilter} onClose={onCloseFilter} 
+      <Dialog fullScreen open={isOpenFilter} onClose={onCloseFilter}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">
-        {/* <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}> */}
-        <Toolbar sx={{ bgcolor: '#ed6c02', color: 'white' }} >
+        {/* <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}> */}
+        <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
           <IconButton edge="start" sx={{ color: "inherit" }} onClick={onCloseFilter} aria-label="close">
             <CloseIcon />
           </IconButton>
@@ -312,18 +320,18 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
             tabIndex={-1}
           >
             <div style={{ margin: "1rem" }}>
-           
+
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
+                <TextField id="outlined-basic" defaultValue={editData?.start_odometer} onChange={(e) => { setSendData({ ...sendData, start_odometer: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
+                <TextField defaultValue={editData?.start_location_name} id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, start_location_name: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth >
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Poa</InputLabel>
-                  <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
+                  <Select labelId="Select Poa" id="demo-simple-select" defaultValue={editData?.poa_id} label="Poa" onChange={(e) => setSendData({ ...sendData, poa_id: e?.target?.value })} variant="standard" color="common">
                     {datadrop?.data?.map(itm => {
                       return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                     })}
@@ -339,7 +347,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     // label="Date"
-                    value={sendData?.date}
+                    defaultValue={editData?.date}
                     onChange={(newValue) => {
                       setSendData({ ...sendData, date: newValue })
                     }}
@@ -349,12 +357,12 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Mode Of Travel</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Mode Of Travel</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Mode Of Travel"
                     id="demo-simple-select"
-                    value={sendData?.modeoftravel}
-                    onChange={(e) => setSendData({ ...sendData, modeoftravel: e?.target?.value })}
+                    defaultValue={editData?.mode_of_travel}
+                    onChange={(e) => setSendData({ ...sendData, mode_of_travel: e?.target?.value })}
                     label="select Mode Of Travel"
 
                   //onChange={handleChange}
@@ -367,15 +375,16 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Rate Per Km</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Rate Per Km</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Rate Per Km"
                     id="demo-simple-select"
-                    value={sendData?.rateperkm}
+                    defaultValue={editData?.rate_per_KM}
                     label="Select Rate Per Km"
-                    onChange={(e) => setSendData({ ...sendData, rateperkm: e?.target?.value })}
+                    onChange={(e) => setSendData({ ...sendData, rate_per_KM: e?.target?.value })}
                   >
                     {datadrop?.Rate_per_KM?.map(itm => {
+                      console.log(itm)
                       return (<MenuItem value={itm?.amount}>{itm?.amount}</MenuItem>)
                     })}
                   </Select>
@@ -383,13 +392,13 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Food Expenses </InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Food Expenses </InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Food Expenses"
                     id="demo-simple-select"
-                    value={sendData?.foodexpenses}
+                    defaultValue={editData?.da}
                     label="Select Food Expenses"
-                    onChange={(e) => setSendData({ ...sendData, foodexpenses: e?.target?.value })}
+                    onChange={(e) => setSendData({ ...sendData, da: e?.target?.value })}
                   >
                     {datadrop?.DA?.map(itm => {
                       return (<MenuItem value={itm?.amount}>{itm?.name}</MenuItem>)
@@ -402,13 +411,13 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               </Stack>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }} >Phone Charges</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }} >Phone Charges</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Phone Charges"
                     id="demo-simple-select"
-                    value={sendData?.telephonecharges}
+                    defaultValue={editData?.telephone}
                     label="Select Phone Charges"
-                    onChange={(e) => setSendData({ ...sendData, telephonecharges: e?.target?.value })}
+                    onChange={(e) => setSendData({ ...sendData, telephone: e?.target?.value })}
                   >
                     {datadrop?.telephone?.map(itm => {
                       return (<MenuItem value={itm}>{itm}</MenuItem>)
@@ -418,25 +427,25 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               </Stack>
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="Printing" variant="outlined" color="common" />
+                <TextField id="outlined-basic" defaultValue={editData?.printing} onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="Printing" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="Stationary" variant="outlined" color="common" />
+                <TextField id="outlined-basic" defaultValue={editData?.stationery} onChange={(e) => { setSendData({ ...sendData, stationery: e?.target?.value }) }} label="Stationary" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="other expenses" variant="outlined" color="common" />
+                <TextField defaultValue={editData?.others} id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, others: e?.target?.value }) }} label="other expenses" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="other expenses amounnt" variant="outlined" color="common" />
+                <TextField id="outlined-basic" defaultValue={editData?.other_text} onChange={(e) => { setSendData({ ...sendData, other_text: e?.target?.value }) }} label="other expenses amounnt" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="end odometer reading" variant="outlined" color="common" />
+                <TextField id="outlined-basic" defaultValue={editData?.end_odometer} onChange={(e) => { setSendData({ ...sendData, end_odometer: e?.target?.value }) }} label="end odometer reading" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="end location" variant="outlined" color="common" />
+                <TextField id="outlined-basic" defaultValue={editData?.end_location_name} onChange={(e) => { setSendData({ ...sendData, end_location_name: e?.target?.value }) }} label="end location" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common" />
+                <TextField id="outlined-basic" defaultValue={editData?.location} onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common" />
               </Stack>
               <br /><br />
               <div>
@@ -458,7 +467,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
                 <label for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
                   <Iconify
                     icon={'mdi:camera'}
-                    sx={{ width: 25, height: 25, ml: 2, color: "#ed6c02" }}
+                    sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
                   />&nbsp;
                   Click to upoad images
                   <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
@@ -469,7 +478,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
                   '&:hover': {
                     backgroundColor: '#ffd796',
                   },
-                  color: "#ed6c02"
+                  color: "#ff7424"
                 }}>Send Images</Button>
               <br /><br />
 
@@ -480,7 +489,7 @@ export default function Edittraveldialog({isOpenFilter, onOpenFilter, onCloseFil
               '&:hover': {
                 backgroundColor: '#ffd796',
               },
-              color: "#ed6c02",
+              color: "#ff7424",
 
             }}>Upload</Button><br></br>
           </DialogContentText></DialogContent>  </Dialog>

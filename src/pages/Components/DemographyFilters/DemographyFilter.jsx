@@ -79,10 +79,10 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
     setSelectData(localStorage.getItem('selectedData'))
     console.log(selectDATA)
   }, [isOpenFilter])
- 
 
-  console.log("xncvjhdat",data)
-  
+
+  console.log("xncvjhdat", data)
+
   // <TextField fullWidth id="outlined-basic" label="Bus Number" required variant="outlined" value={AddUser.busNumber} onChange={(e) => { setAddUser({ ...AddUser, busNumber: e.target.value }) }} />
   return (
     <>
@@ -91,22 +91,22 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
         anchor="right"
         open={isOpenFilter}
         onClose={() => {
-         
+
           onCloseFilter()
         }}
         PaperProps={{
           sx: { width: 400 },
         }}
       >
-      
+
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25, color: 'black' }}>
             Filters
             {selectDATA && selectDATA == 2 && ":  Funders"}
             {selectDATA && selectDATA == 3 && ": Project"}
-            
+
             {selectDATA && selectDATA == 7 && ": Location"}
-           
+
           </Typography>
           <IconButton onClick={() => {
             setSelectData()
@@ -129,46 +129,46 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
                 <Button onClick={() => { setData(3) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   },
                   color: 'black',
                 }} style={selectDATA == 3 ? {
                   background: '#ffd796', // theme.palette.primary.main
-                  color: '#ed6c02',
+                  color: '#ff7424',
                 } : null}>Project</Button>
-               <Button onClick={()=> setData(2) } sx={{
-                ':hover':{
-                  bgcolor:'#ffd796',
-                  color:'#ed6c02,'
-                },
-                color:"black"
-               }} style={selectDATA == 2 ? {
-                background: '#ffd796', // theme.palette.primary.main
-                color: '#ed6c02',
-              } : null} >Funders</Button>
-               <Button onClick={()=> setData(7) } sx={{
-                ':hover':{
-                  bgcolor:'#ffd796',
-                  color:'#ed6c02,'
-                },
-                color:"black"
-               }} style={selectDATA == 7? {
-                background: '#ffd796', // theme.palette.primary.main
-                color: '#ed6c02',
-              } : null} >Location</Button>
-             
-                
+                <Button onClick={() => setData(2)} sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796',
+                    color: '#ff7424,'
+                  },
+                  color: "black"
+                }} style={selectDATA == 2 ? {
+                  background: '#ffd796', // theme.palette.primary.main
+                  color: '#ff7424',
+                } : null} >Funders</Button>
+                <Button onClick={() => setData(7)} sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796',
+                    color: '#ff7424,'
+                  },
+                  color: "black"
+                }} style={selectDATA == 7 ? {
+                  background: '#ffd796', // theme.palette.primary.main
+                  color: '#ff7424',
+                } : null} >Location</Button>
+
+
               </CardContent>
             </Card>
-            {selectDATA&&selectDATA===2&&<Grid style={{ marginTop: 30 }}>
+            {selectDATA && selectDATA === 2 && <Grid style={{ marginTop: 30 }}>
               <Funders getData={getData} selectDATA={selectDATA} />
             </Grid>}
-         
-              {selectDATA&&selectDATA===7&&<Grid style={{ marginTop: 30 }}>
+
+            {selectDATA && selectDATA === 7 && <Grid style={{ marginTop: 30 }}>
               <Demographylocation selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
             </Grid>}
-          
-            {selectDATA&&selectDATA===3&&<Grid style={{ marginTop: 30 }}>
+
+            {selectDATA && selectDATA === 3 && <Grid style={{ marginTop: 30 }}>
               <Demographyprojects getData={getData} selectDATA={selectDATA} />
             </Grid>}
 
@@ -185,11 +185,11 @@ const styles = {
   button: {
     '&:active': {
       backgroundColor: '#ffd796',
-      color: '#ed6c02'
+      color: '#ff7424'
     },
     '&:hover': {
       backgroundColor: '#ffd796',
-      color: '#ed6c02'
+      color: '#ff7424'
     },
   },
 }

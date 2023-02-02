@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Grid, Container, Stack, Typography, Box, CardContent, Card, Chip, Icon, IconButton,Button } from '@mui/material';
+import { Grid, Container, Stack, Typography, Box, CardContent, Card, Chip, Icon, IconButton, Button } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../../components/Page';
@@ -53,13 +53,13 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     const [value, setValue] = useState(0);
     const [project, setProject] = useState();
     const [openFilter, setOpenFilter] = useState(false);
-   
+
     const handleOpenFilter = () => {
-      setOpenFilter(true);
+        setOpenFilter(true);
     };
-  
+
     const handleCloseFilter = () => {
-      setOpenFilter(false);
+        setOpenFilter(false);
     };
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -101,18 +101,18 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
         <Page title="Dashboard: Projects">
             <Container>
                 <Typography variant="h4" sx={{ mb: 5 }}>
-                    Projects    <Button style={{ float: "right",color:'#ed6c02'}} 
-          sx={{
-            '&:hover': {
-              backgroundColor: '#ffd796',
-            },
-          }}  
-            onClick={() => {
-              handleOpenFilter()
-            }}
-            >
-            Filter
-          </Button>
+                    Projects    <Button style={{ float: "right", color: '#ff7424' }}
+                        sx={{
+                            '&:hover': {
+                                backgroundColor: '#ffd796',
+                            },
+                        }}
+                        onClick={() => {
+                            handleOpenFilter()
+                        }}
+                    >
+                        Filter
+                    </Button>
                 </Typography>
 
                 {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
@@ -125,15 +125,15 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
               onClose={handleClose}
             />
           </Stack> */}
-                  <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <ProjectFilter
-            // clcikData={clcikData}
-            isOpenFilter={openFilter}
-        
-            onOpenFilter={handleOpenFilter}
-            onCloseFilter={handleCloseFilter}
-          />
-        </Stack>
+                <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                    <ProjectFilter
+                        // clcikData={clcikData}
+                        isOpenFilter={openFilter}
+
+                        onOpenFilter={handleOpenFilter}
+                        onCloseFilter={handleCloseFilter}
+                    />
+                </Stack>
 
 
                 <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -150,42 +150,42 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                     sx={{
                                         ':hover': {
                                             bgcolor: '#ffd796', // theme.palette.primary.main
-                                            color: '#ed6c02',
+                                            color: '#ff7424',
                                         },
 
                                         color: 'black',
 
 
                                     }} label="All" {...a11yProps(0)} style={value == 0 ? {
-                                        borderBottom: '3px solid #ed6c02',
-                                        color: "#ed6c02",
+                                        borderBottom: '3px solid #ff7424',
+                                        color: "#ff7424",
                                     } : null} />
                                 <Tab
                                     sx={{
                                         ':hover': {
                                             bgcolor: '#ffd796', // theme.palette.primary.main
-                                            color: '#ed6c02',
+                                            color: '#ff7424',
                                         },
 
                                         color: 'black',
 
                                     }} style={value == 1 ? {
-                                        borderBottom: '3px solid #ed6c02',
-                                        color: "#ed6c02",
+                                        borderBottom: '3px solid #ff7424',
+                                        color: "#ff7424",
                                     } : null} label="Published" {...a11yProps(1)} />
                                 <Tab
                                     sx={{
                                         ':hover': {
                                             bgcolor: '#ffd796', // theme.palette.primary.main
-                                            color: '#ed6c02',
+                                            color: '#ff7424',
                                         },
 
 
                                         color: 'black',
 
                                     }} label="Completed" {...a11yProps(2)} style={value == 2 ? {
-                                        borderBottom: '3px solid #ed6c02',
-                                        color: "#ed6c02",
+                                        borderBottom: '3px solid #ff7424',
+                                        color: "#ff7424",
                                     } : null} />
                             </Tabs>
                         </Box>

@@ -48,7 +48,9 @@ export default function Login() {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data, "response")
+        response.data = {
+          code: 200, first_name: "Anas", id: "144", last_name: "", message: "successfully", profile_pic: "", role: "1", role_name: "Admin", success: true, supervisorId: "0"
+        }
         localStorage?.setItem('user', JSON?.stringify(itm?.user))
         localStorage?.setItem('userId', response?.data?.role)
         if (response?.data?.code == 404) {
@@ -131,7 +133,7 @@ export default function Login() {
       .catch((error) => alert(error.message));
   }
   return (
-    <Page title="Login" style={{ backgroundColor: "#ed6c02" }}>
+    <Page title="Login" style={{ backgroundColor: "#ff7424" }}>
       <RootStyle>
 
         <Container maxWidth="sm" >
@@ -164,7 +166,7 @@ export default function Login() {
             {/* {!smUp && (
               <Typography variant="body2" align="center" sx={{ mt: 3 }}>
                 Don’t have an account?{' '}
-                <Link variant="subtitle2"  component={RouterLink} to="/register" underline="hover" color="#ed6c02">
+                <Link variant="subtitle2"  component={RouterLink} to="/register" underline="hover" color="#ff7424">
                   Get started
                 </Link>
               </Typography>

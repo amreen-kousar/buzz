@@ -3,13 +3,13 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography, Stack, Divider, Card, CardContent, Button, Box } from '@mui/material';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
-import Iconify from '../components/Iconify';
-import Page from '../components/Page';
+import Iconify from '../../components/Iconify';
+import Page from '../../components/Page';
 import Chip from '@mui/material/Chip';
-import { AppWidgetSummary } from '../sections/@dashboard/app';
+import { AppWidgetSummary } from '../../sections/@dashboard/app';
 
-import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
-import DashboardFilter from './Components/DashboardFilters/DashboardFilter';
+import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../../sections/@dashboard/products';
+import DashboardFilter from '../Components/DashboardFilters/DashboardFilter';
 import { useNavigate } from 'react-router-dom';
 
 export default function DashboardApp() {
@@ -142,7 +142,7 @@ export default function DashboardApp() {
       <Container maxWidth="xl">
         <Grid item spacing={10}>
 
-          <Button style={{ float: "right", color: '#ed6c02' }}
+          <Button style={{ float: "right", color: '#ff7424' }}
             sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
@@ -156,14 +156,14 @@ export default function DashboardApp() {
           <h2>
 
             {/* <Chip label={(slected?.id===2)? "Funder":(slected?.id===1)?"partner":(slected?.id===5)?"Trainer":(slected?.id===1)?"partner": null} onDelete={closefilter}/> */}
-            
+
             {slected?.id === 1 ? "Partner" : null}
             {slected?.id === 3 ? "Project" : null}
             {slected?.id === 5 ? "Trainer" : null}
             {slected?.id === 4 ? "Operation Manager" : null}
             {slected?.id === 12 ? "Sr.Operation Manager" : null}
             {slected?.id === 13 ? "Gelathis Facilator Leads" : null}&nbsp;{slected?.name ? slected?.name : ''}</h2>
-            {/* <h1 onClick={apiHit}>Close</h1> */}
+          {/* <h1 onClick={apiHit}>Close</h1> */}
           {/* <h2>{slected?.id===2? "Funder": null}&nbsp;{slected?.name ? slected?.name : ''}
           </h2> */}
           {/* <Chip label= {slected?.id===2?"founder":null}/> */}
@@ -279,7 +279,7 @@ export default function DashboardApp() {
                   marginBottom: '40px',
                 }}
                 onClick={() => {
-                  navigate('/dashboard/chart', {
+                  navigate('/dashboard/app/chart', {
                     state: {
                       filterData: filterData
                     }

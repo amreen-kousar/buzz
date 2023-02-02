@@ -208,7 +208,7 @@ export default function User() {
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
           People
-          <Button style={{ float: "right", color: '#ed6c02' }}
+          <Button style={{ float: "right", color: '#ff7424' }}
             sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',

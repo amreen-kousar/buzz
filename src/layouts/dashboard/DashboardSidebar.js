@@ -70,7 +70,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         <Logo />
       </div>
       {console.log(account.displayName, account.role, "<--yghuj")}
-      <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ed6c02">
+      <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ff7424">
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
             <Avatar src={account.profile_pic} alt="photoURL" />

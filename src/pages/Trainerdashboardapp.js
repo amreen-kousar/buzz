@@ -44,7 +44,7 @@ export default function Trainerdashboard()
         taluk_id: g==="country"?i:"",
         district_id:g==="country"?id:"",
         trainerId: g?"": i===5?id?.id:'',
-        emp_id: 653,
+        emp_id: 144,
         start_date:g==="date"?id: '',
         somId:g?"": i===12?id?.id:'',
         gflId:g?"": i===13?id?.id:'',

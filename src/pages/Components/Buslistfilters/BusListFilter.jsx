@@ -118,11 +118,11 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
@@ -139,11 +139,11 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
@@ -157,11 +157,11 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
@@ -176,11 +176,11 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
@@ -198,7 +198,7 @@ export default function BusListFilter({ isOpenFilter, onOpenFilter, onCloseFilte
               <Funders getData={getData} selectDATA={selectDATA} />
             </Grid>
             }
-             {selectDATA&&selectDATA==7&&<Grid style={{ marginTop: 30 }}>
+            {selectDATA && selectDATA == 7 && <Grid style={{ marginTop: 30 }}>
               <Location selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
             </Grid>}
 

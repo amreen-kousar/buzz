@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import {Stack} from '@mui/material';
+import { Stack, Chip } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -11,9 +11,10 @@ import Paper from '@mui/material/Paper';
 import { Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 
-  
+
 import axios from 'axios';
 import TotalFilter from './Components/BuzzStockFilter/TotalFilter';
+// import FiltersHome from './Filters/FiltersHome';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -57,6 +58,7 @@ export default function BuzzStock() {
   const [demo, setDemo] = useState([]);
   const [openFilter, setOpenFilter] = useState(false);
   const [openbusfilter, setopenbusfilter] = useState(false);
+  const [selected, setSelected] = useState(null)
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -73,8 +75,9 @@ export default function BuzzStock() {
     setopenbusfilter(false);
   };
   const getData = (itm, i) => {
+    setSelected(itm)
     setopenbusfilter(false);
-    console.log(itm,i,"<-----qwertyu")
+    console.log(itm, i, "<-----qwertyu")
     // setSelected({
     //   id: i,
     //   name: itm?.name
@@ -86,28 +89,41 @@ export default function BuzzStock() {
     // handleCloseFilter()
     // console.log("sdfgsdfdfssd", itm, i)
   }
-  const onSumbit = (e,i)=>{
-    console.log(e,i,"<---1234567")
+  const onSumbit = (e, i) => {
+    console.log(e, i, "<---onSUbmittttt")
+    // handleclosebusfilter()
+    demoi(e, '', "location")
+
+  }
+
+  const onDateSubmit = (e) => {
+    demoi(e?.startDate, e?.endDate, "date")
     handleclosebusfilter()
-    busesd( e?.talaq_id,"location")
-   
-   }
+  }
+
+
   useEffect(() => {
     demoi()
   }, []
   )
-  const demoi = async () => {
 
-      const data = JSON.stringify({
-        "from_date": "2022-1-20",
-        "to_date": "2022-1-29",
-        "user_id": 206,
-        "role_id": 2,
-        "project_id": "",
-        "taluk_id": "",
-        "district_id": "",
-        "funder_id": ""
-  });
+  const handleDelete = () => {
+    setSelected(null)
+    demoi()
+  }
+  const demoi = async (itm, i, type) => {
+    console.log(itm, i, type)
+    var data = JSON.stringify({
+      "from_date": "2022-1-20",
+      "to_date": "2022-1-29",
+      "user_id": 206,
+      "role_id": 2,
+      // "project_id": "",
+      // "taluk_id": "",
+      // "district_id": "",
+      "funder_id": "",
+
+    });
 
     const config = {
       method: 'post',
@@ -117,13 +133,13 @@ export default function BuzzStock() {
       },
       data
     };
-    console.log("dataaaaaaaaaaaaa",data);
+    console.log("dataaaaaaaaaaaaa", data);
 
     axios(config)
       .then((response) => {
-        console.log("responseeeeeeeeeeee",response)
+        console.log("responseeeeeeeeeeee", response)
         setDemo(response.data?.data)
-        console.log("harshaaaa",response?.data.data[0]?.current_stock)
+        console.log("harshaaaa", response?.data.data[0]?.current_stock)
         console.log(JSON.stringify(response.data, '<----333ssss'));
       })
       .catch((error) => {
@@ -132,68 +148,74 @@ export default function BuzzStock() {
   }
   return (
     <div>
-    <Button style={{ float: "right",color:'#ed6c02'}} 
-sx={{
-'&:hover': {
- backgroundColor: '#ffd796',
-},
-}}  
-onClick={() => {
-  handleopenbusfilter()
-}}
->
-Filter
-</Button>
-          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          {/* <BusListFilter
+      <Button style={{ float: "right", color: '#ff7424' }}
+        sx={{
+          '&:hover': {
+            backgroundColor: '#ffd796',
+          },
+        }}
+        onClick={() => {
+          handleopenbusfilter()
+        }}
+      >
+        Filter
+      </Button>
+      {selected?.type &&
+        <Stack direction="row" spacing={1}>
+          <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
+        </Stack>
+      }
+      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        <TotalFilter
           getData={getData}
           onSumbit={onSumbit}
-           
-            same={()=>{busesd(),handleclosebusfilter()}}
-            isOpenFilter={openbusfilter}
-            onOpenFilter={handleopenbusfilter}
-            onCloseFilter={handleclosebusfilter}
-          /> */}
-          <TotalFilter
-            getData={getData}
-            onSumbit={onSumbit}
-             
-              same={()=>{busesd(),handleclosebusfilter()}}
-              isOpenFilter={openbusfilter}
-              onOpenFilter={handleopenbusfilter}
-              onCloseFilter={handleclosebusfilter} />
-        </Stack>
-        <Grid
-      sx={{
-        p: 2,
-        margin: 'auto',
-        maxWidth: 500,
-        flexGrow: 1,
-      }}
-    > 
-      <TableContainer component={Paper}>
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-              <StyledTableCell>ITEM</StyledTableCell>
-              <StyledTableCell>Available Quantity</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {console.log(demo, "<--demodedede")}
-            {demo && demo.map((row) => (
-              <StyledTableRow >
-                <StyledTableCell component="th" scope="row">
-                  {row.name}
-                </StyledTableCell>
-                <StyledTableCell>{row.current_stock}</StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      
-    </Grid>
-</div>
+
+          same={() => { demoi(), handleclosebusfilter() }}
+          isOpenFilter={openbusfilter}
+          onOpenFilter={handleopenbusfilter}
+          onCloseFilter={handleclosebusfilter}
+        />
+        {/* <FiltersHome
+        type="BuzzStock"
+        getData={getData}
+        onSumbit={onSumbit}
+        same={() => { demoi(), handleclosebusfilter() }}
+        onDateSubmit={onDateSubmit}
+        isOpenFilter={openbusfilter}
+        onOpenFilter={handleopenbusfilter}
+        onCloseFilter={handleclosebusfilter} /> */}
+      </Stack>
+      <Grid
+        sx={{
+          p: 2,
+          margin: 'auto',
+          maxWidth: 500,
+          flexGrow: 1,
+        }}
+      >
+        <TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                <StyledTableCell>ITEM</StyledTableCell>
+                <StyledTableCell>Available Quantity</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {console.log(demo, "<--demodedede")}
+              {demo && demo.map((row) => (
+                <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                    {row.name}
+                  </StyledTableCell>
+                  <StyledTableCell>{row.current_stock}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+      </Grid>
+    </div>
   );
 }

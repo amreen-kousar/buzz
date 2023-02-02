@@ -93,13 +93,13 @@ export default function UserFilter({ isOpenFilter, onOpenFilter, onCloseFilter, 
     buttonStyle: {
       ':hover': {
         bgcolor: '#ffd796',
-        color: '#ed6c02',
+        color: '#ff7424',
       },
       color: 'black',
     },
     highlightStyle: {
       background: '#ffd796',
-      color: '#ed6c02',
+      color: '#ff7424',
     }
   }
 

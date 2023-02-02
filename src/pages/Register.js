@@ -69,7 +69,7 @@ export default function Register() {
           {smUp && (
             <Typography variant="body2" sx={{ mt: { md: -2 } }}>
               Already have an account? {''}
-              <Link variant="subtitle2" component={RouterLink} to="/"  color="#ed6c02" underline='hover' >
+              <Link variant="subtitle2" component={RouterLink} to="/" color="#ff7424" underline='hover' >
                 Login
               </Link>
             </Typography>

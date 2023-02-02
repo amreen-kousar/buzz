@@ -1,11 +1,11 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import Funders from './TotalFunder';
 import Location from './TotalLocation';
 import TotalProject from './TotalProject';
-// import DateRange from './TotalDateRange'
+import DateRangeFilter from '../DashboardFilters/DateRangeFilter'
 
 // material
 import {
@@ -34,7 +34,7 @@ TotalFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter, getData,onSumbit,same }) {
+export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter, getData, onSumbit, same, onDateSubmit }) {
   const [selectDATA, setSelectData] = useState();
   return (
     <>
@@ -82,11 +82,11 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
@@ -94,17 +94,17 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
                   Funders
                 </Button>
                 <Button
-                 onClick={() => {
-                  setSelectData(3);
-                }}
+                  onClick={() => {
+                    setSelectData(3);
+                  }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
@@ -118,11 +118,11 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
@@ -130,20 +130,22 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
                   Location
                 </Button>
                 <Button
-                onClick={same}
+                  onClick={() => {
+                    setSelectData(7);
+                  }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     ':focus': {
                       bgcolor: '#ffd796',
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }}
                 >
-                 Date Range
+                  Date Range
                 </Button>
               </CardContent>
             </Card>
@@ -153,6 +155,10 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
             <Grid style={{ marginTop: 30 }}>
               <TotalProject getData={getData} selectDATA={selectDATA} />
             </Grid>
+            {selectDATA && selectDATA === 9 && <Grid style={{ marginTop: 30 }}>
+              <DateRangeFilter onDateSubmit={onDateSubmit} />
+            </Grid>}
+
 
             {selectDATA === 7 && (
               <Grid style={{ marginTop: 30 }}>
@@ -165,7 +171,7 @@ export default function TotalFilter({ isOpenFilter, onOpenFilter, onCloseFilter,
               </Grid>
             )}
 
-           
+
           </div>
         </Scrollbar>
       </Drawer>

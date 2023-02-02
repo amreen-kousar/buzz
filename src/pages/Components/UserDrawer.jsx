@@ -28,7 +28,7 @@ UserDrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,users }) {
+export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users }) {
 
 
   let user = JSON.parse(localStorage?.getItem('people'))
@@ -47,9 +47,9 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,u
           sx: { width: 400 },
         }}
       >
-      
+
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{color:'#444444'}}>
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ color: '#444444' }}>
             Member Details:  {user?.first_name}  {user?.last_name}
           </Typography>
           <IconButton onClick={onCloseFilter}>
@@ -57,32 +57,30 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,u
           </IconButton>
         </Stack>
 
-        <Divider />
-        <Stack  direction={'row'}>
+        <Divider /><br />
+        <Stack direction={'row'} justifyContent="flex-end">
           <UserEditProfile />
-         
-          <Button style={{float:'right'}}  sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-              },
-            }}><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138',marginRight:0}}></Iconify></Button>
+          <Button style={{ float: 'right' }} sx={{
+            '&:hover': {
+              backgroundColor: '#ffd796',
+            },
+          }}><Iconify icon="ic:baseline-delete" style={{ width: '30px', height: '30px', color: '#e69138', marginRight: 0 }}></Iconify></Button>
 
         </Stack>
         <Scrollbar>
-          <Stack spacing={1} sx={{ px: 3}}>
+          <Stack spacing={1} sx={{ px: 3 }}>
             <div>
               <Card>
                 <CardContent>
-                  <Typography style={{ flexDirection: 'row',color:'#444444' }} variant="subtitle1" gutterBottom>
-                    Role:<span style={{fontWeight:100,color:'#444444'}}>{user?.role_name}</span>
-                 
+                  <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="subtitle1" gutterBottom>
+                    Role:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.role_name}</span>
+
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
-                    Reporting Manager:<span style={{fontWeight:100,color:'#444444'}}>{user?.supervisorName}</span>
-                 
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    Reporting Manager:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.supervisorName}</span>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
-                    Date Of Joining:<span style={{fontWeight:100,color:'#444444'}}>{user?.doj}</span> </Typography>
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    Date Of Joining:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.doj}</span> </Typography>
                 </CardContent>
               </Card>
 
@@ -94,49 +92,53 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter,u
             </div>
 
             <div>
-              <Card style={{width:"auto"}}>
+              <Card style={{ width: "auto" }}>
                 <CardContent>
-                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
                     Contact Information
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
-                    Mobile Number:<span style={{fontWeight:100,color:'#444444'}}>{user?.contactNum}</span> 
-                  
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    Mobile Number:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.contactNum}</span>
+
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
-                    Work: <span style={{fontWeight:100,color:'#444444'}}>{user?.workNum} </span>
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    Work: <span style={{ fontWeight: 100, color: '#444444' }}>{user?.workNum} </span>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
-                    Email:<span style={{fontWeight:100,color:'#444444'}}> {user?.officeMailId}</span>
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    Email:<span style={{ fontWeight: 100, color: '#444444' }}> {user?.officeMailId}</span>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
-                    Address:<span style={{fontWeight:100,color:'#444444'}}>{user?.address}</span>
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    Address:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.address}</span>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
-                    PinCode:<span style={{fontWeight:100,color:'#444444'}}>{user?.pincode}</span>
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    PinCode:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.pincode}</span>
                   </Typography>
                 </CardContent>
               </Card>
 
             </div>
 
-            <div>
-              <Card>
-                <CardContent>
-                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
-                    Projects
-                  </Typography>
-                  <Typography variant="subtitle1" gutterBottom style={{color:'#444444'}}>
-                    {user?.project_list.map(project => {
-                      return (
-                        <Typography variant="body1" gutterBottom>   {project.projectName}</Typography>
-                      )
-                    })}
-                  </Typography>
-                </CardContent>
-              </Card>
+            {user?.project_list.length > 0 &&
 
-            </div>
+              <div>
+                <Card>
+                  <CardContent>
+                    <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                      Projects
+                    </Typography>
+                    <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                      {user?.project_list.map(project => {
+                        return (
+                          <Typography variant="body1" gutterBottom>   {project.projectName}</Typography>
+                        )
+                      })}
+                    </Typography>
+                  </CardContent>
+                </Card>
+
+              </div>
+
+            }
           </Stack>
         </Scrollbar>
 

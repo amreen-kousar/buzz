@@ -63,10 +63,9 @@ console.log(clcikData,'<------clcikDataclcikData')
           .catch(function (error) {
             console.log(error);
           });
-          
-          
+         
     }
-
+console.log(partiData,"------------------------------>dataaaaa")
     return (
         <>
             <Drawer
@@ -74,7 +73,7 @@ console.log(clcikData,'<------clcikDataclcikData')
                 open={isOpenFilter}
                 onClose={onCloseFilter}
                 PaperProps={{
-                    sx: { width: 280, },
+                    sx: { width: 350, },
                 }}
             >
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
@@ -97,7 +96,7 @@ console.log(clcikData,'<------clcikDataclcikData')
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
                                         Name :
                                         <Typography variant="body1" >{partiData?.firstName}</Typography>
-=                                    </Typography>
+                                     </Typography>
                                    
                                     <Typography variant="subtitle1" gutterBottom>
                                     Age :
@@ -118,7 +117,7 @@ console.log(clcikData,'<------clcikDataclcikData')
                                         <Typography variant="body1" gutterBottom>{partiData?.education}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
-                                       Savinng Amount:
+                                       Saving Amount:
                                         <Typography variant="body1" gutterBottom>{partiData?.saving_amt}</Typography>
                                     </Typography>
                                     <Typography variant="subtitle1" gutterBottom>

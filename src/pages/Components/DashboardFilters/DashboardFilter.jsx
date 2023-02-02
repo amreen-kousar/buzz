@@ -109,13 +109,13 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25, color: 'black' }}>
             Filters
-          
+
             {selectDATA && selectDATA == 3 && ": Project"}
-   
+
             {selectDATA && selectDATA == 5 && ": Trainers"}
             {selectDATA && selectDATA == 9 && ": Date Range"}
             {selectDATA && selectDATA == 7 && ": Location"}
-          
+
           </Typography>
           <IconButton onClick={() => {
             setSelectData()
@@ -136,137 +136,137 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                 <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Categories</Typography>
 
 
-                {(data == 1|data==8|data==12|data==3|data==7)? <Button onClick={() => { setData(2) }}
+                {(data == 1 | data == 8 | data == 12 | data == 3 | data == 7) ? <Button onClick={() => { setData(2) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
                   }} style={selectDATA == 2 ? {
                     background: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
-                  } : null}>Funder</Button>:null}
+                    color: '#ff7424',
+                  } : null}>Funder</Button> : null}
 
-                {(data == 1 | data==8 |data==12|data==3|data==7)?<Button onClick={() => { setData(1) }}
+                {(data == 1 | data == 8 | data == 12 | data == 3 | data == 7) ? <Button onClick={() => { setData(1) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black',
 
                   }} style={selectDATA == 1 ? {
                     background: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
-                  } : null}>Partner</Button>:null}
+                    color: '#ff7424',
+                  } : null}>Partner</Button> : null}
 
                 {/* } : null}>Partner</Button>
                 <Button onClick={() => { setData(3) }} sx={{ */}
 
                 {/* {data == 6 | data == 1 && <Button onClick={() => { setData(3) }} sx={{ */}
-                {(data==6|data==1|data==5|data==4|data==8|data==12|data==13|data==3|data==7)?<Button onClick={() => { setData(3) }} sx={{
+                {(data == 6 | data == 1 | data == 5 | data == 4 | data == 8 | data == 12 | data == 13 | data == 3 | data == 7) ? <Button onClick={() => { setData(3) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   },
                   color: 'black',
-                }}>Project</Button>:null}
-                {(data == 1|data==8|data==12|data==3|data==7)? <Button sx={{
+                }}>Project</Button> : null}
+                {(data == 1 | data == 8 | data == 12 | data == 3 | data == 7) ? <Button sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   },
 
                   color: 'black',
-                }}>Operation Manager</Button>:null}
+                }}>Operation Manager</Button> : null}
 
-                {(data == 1 |data==4|data==8|data==12|data==3|data==7) ? <Button onClick={() => { setData(5) }} sx={{
+                {(data == 1 | data == 4 | data == 8 | data == 12 | data == 3 | data == 7) ? <Button onClick={() => { setData(5) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   },
 
                   color: 'black',
                 }} style={selectDATA == 5 ? {
                   background: '#ffd796', // theme.palette.primary.main
-                  color: '#ed6c02',
-                } : null}>Trainer</Button>:null}
-            
-               {(data==6|data==1|data==5|data==4|data==8|data==12|data==13|data==3|data==7)?<Button onClick={() => { setData(9) }}
+                  color: '#ff7424',
+                } : null}>Trainer</Button> : null}
+
+                {(data == 6 | data == 1 | data == 5 | data == 4 | data == 8 | data == 12 | data == 13 | data == 3 | data == 7) ? <Button onClick={() => { setData(9) }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black'
 
                   }} style={selectDATA == 9 ? {
                     background: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
-                  } : null}>Date Range</Button>:null}
+                    color: '#ff7424',
+                  } : null}>Date Range</Button> : null}
 
-            {(data==5|data==4|data==12|data==3|data==7)?<Button
+                {(data == 5 | data == 4 | data == 12 | data == 3 | data == 7) ? <Button
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
                     color: 'black'
 
-                  }}>Participant</Button>:null}
+                  }}>Participant</Button> : null}
 
-                {(data==1|data==4|data==8|data==12|data==3|data==7)?<Button onClick={() => { setData(7) }} sx={{
+                {(data == 1 | data == 4 | data == 8 | data == 12 | data == 3 | data == 7) ? <Button onClick={() => { setData(7) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   },
                   color: 'black',
 
                 }} style={selectDATA == 7 ? {
                   background: '#ffd796', // theme.palette.primary.main
-                  color: '#ed6c02',
-                } : null}>Location</Button>:null}
-                {(data == 1|data==8|data==3)?<Button sx={{
+                  color: '#ff7424',
+                } : null}>Location</Button> : null}
+                {(data == 1 | data == 8 | data == 3) ? <Button sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   },
                   color: 'black',
-                }}>Participant</Button>:null}
+                }}>Participant</Button> : null}
                 {/* </Grid> */}
-                {(data == 1|data==3)?<Button onClick={() => { setData(12) }} sx={{
+                {(data == 1 | data == 3) ? <Button onClick={() => { setData(12) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   },
 
                   color: 'black',
                 }} style={selectDATA == 12 ? {
                   background: '#ffd796', // theme.palette.primary.main
-                  color: '#ed6c02',
-                } : null}>Sr.Operation Manager</Button>:null}
-                {(data == 1|data==3|data==13)?<Button onClick={() => { setData(13) }} s sx={{
+                  color: '#ff7424',
+                } : null}>Sr.Operation Manager</Button> : null}
+                {(data == 1 | data == 3 | data == 13) ? <Button onClick={() => { setData(13) }} s sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   },
 
                   color: 'black',
                 }} style={selectDATA == 13 ? {
                   background: '#ffd796', // theme.palette.primary.main
-                  color: '#ed6c02',
-                } : null}>Gelathis Facilitator Leads</Button>:null}
-                 {/* {(data == 13)?<Button onClick={() => { setData(13) }} s sx={{
+                  color: '#ff7424',
+                } : null}>Gelathis Facilitator Leads</Button> : null}
+                {/* {(data == 13)?<Button onClick={() => { setData(13) }} s sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   },
 
                   color: 'black',
                 }} style={selectDATA == 13 ? {
                   background: '#ffd796', // theme.palette.primary.main
-                  color: '#ed6c02',
+                  color: '#ff7424',
                 } : null}>Gelathis Facilitator</Button>:null} */}
 
               </CardContent>
@@ -274,25 +274,25 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
             {selectDATA == 2 && <Grid style={{ marginTop: 30 }}>
               <Funders getData={getData} selectDATA={selectDATA} />
             </Grid>}
-            
+
             <Grid style={{ marginTop: 30 }}>
               <Partners getData={getData} selectDATA={selectDATA} />
             </Grid>
             <Grid style={{ marginTop: 30 }}>
               <Projects getData={getData} selectDATA={selectDATA} />
             </Grid>
-            
-              
-            {selectDATA&&selectDATA==7&&<Grid style={{ marginTop: 30 }}>
+
+
+            {selectDATA && selectDATA == 7 && <Grid style={{ marginTop: 30 }}>
               <Location selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
             </Grid>}
 
-            {selectDATA&&selectDATA===9&&<Grid style={{ marginTop: 30 }}>
-                <DateRangeFilter onDateSubmit={onDateSubmit} />
-              </Grid>}
+            {selectDATA && selectDATA === 9 && <Grid style={{ marginTop: 30 }}>
+              <DateRangeFilter onDateSubmit={onDateSubmit} />
+            </Grid>}
 
-          
- 
+
+
 
 
 
@@ -308,11 +308,11 @@ const styles = {
   button: {
     '&:active': {
       backgroundColor: '#ffd796',
-      color: '#ed6c02'
+      color: '#ff7424'
     },
     '&:hover': {
       backgroundColor: '#ffd796',
-      color: '#ed6c02'
+      color: '#ff7424'
     },
   },
 }

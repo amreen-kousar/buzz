@@ -7,9 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Grid,Button,Stack, CardContent } from '@mui/material';
+import { Grid, Button, Stack, CardContent } from '@mui/material';
 import axios from 'axios';
 import DemographyFilter from './Components/DemographyFilters/DemographyFilter';
+import { assertTSAnyKeyword } from '@babel/types';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -20,7 +21,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
- 
+
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
@@ -38,22 +39,23 @@ function createData1(R1, R2) {
   return { R1, R2 };
 }
 
-function createData2(r1,r2){
-  return {r1,r2};
+function createData2(r1, r2) {
+  return { r1, r2 };
 }
 export default function Demography() {
-  const intialValues  = {
-    funder:"",
-    project:"",
+  const intialValues = {
+    funder: "",
+    project: "",
   }
 
- 
+
 
   const [openFilter, setOpenFilter] = useState(false);
-const [filterData,setFilterData] = useState({})
-const [slected,setSelected] = useState({
-  id:'',
-nmae:''  })
+  const [filterData, setFilterData] = useState({})
+  const [slected, setSelected] = useState({
+    id: '',
+    nmae: ''
+  })
 
 
 
@@ -69,35 +71,35 @@ nmae:''  })
     demoi()
   }, []
   )
-  const demoi = async (id,i,g) => {
-    console.log("'hscjh",id)
+  const demoi = async (id, i, g) => {
+    console.log("'hscjh", id)
     const data = {
-      taluk_id: g==="country"?i:"",
-      district_id:g==="country"?id:"",
-      trainerId: g?"": i===5?id?.id:'',
-      somId:g?"": i===12?id?.id:'',
-      gflId:g?"": i===13?id?.id:'',
-      funder_id:g?"": i===2?id?.id:'',
-      partner_id:g?"": i===1?id?.id:'',
-      project_id:g?"": i===3?id?.id:'',
-      opsManager:g?"": i===4?id?.id:'',
+      taluk_id: g === "country" ? i : "",
+      district_id: g === "country" ? id : "",
+      trainerId: g ? "" : i === 5 ? id?.id : '',
+      somId: g ? "" : i === 12 ? id?.id : '',
+      gflId: g ? "" : i === 13 ? id?.id : '',
+      funder_id: g ? "" : i === 2 ? id?.id : '',
+      partner_id: g ? "" : i === 1 ? id?.id : '',
+      project_id: g ? "" : i === 3 ? id?.id : '',
+      opsManager: g ? "" : i === 4 ? id?.id : '',
     };
-     const datas = {
+    const datas = {
       end_date: i,
       taluk_id: "",
-      district_id:"",
+      district_id: "",
       trainerId: '',
       emp_id: 1,
       start_date: id,
       somId: '',
       gflId: '',
-      funder_id:"",
-      partner_id:"",
+      funder_id: "",
+      partner_id: "",
       project_id: '',
       opsManager: '',
     };
-     
-    console.log(data,"datttttttaaaaaaaaaa")
+
+    console.log(data, "datttttttaaaaaaaaaa")
     const config = {
       // http://3.7.7.138/appTest/getDemoGraphy.php
       method: 'post',
@@ -108,7 +110,7 @@ nmae:''  })
       },
       data
     };
-   console.log(data,"_______>data")
+    console.log(data, "_______>data")
     axios(config)
       .then((response) => {
         setDemo(response.data.list)
@@ -117,11 +119,11 @@ nmae:''  })
       .catch((error) => {
         console.log(error);
       });
-      
+
   }
 
 
-  
+
 
   const onSumbit = (e, i) => {
     handleCloseFilter()
@@ -129,7 +131,7 @@ nmae:''  })
     demoi(e?.district_id, e?.talaq_id, "country")
     console.log(e, i, "<----datssdasdsa")
   }
- 
+
 
   const rows = [
     createData('Admins', demo?.adminCount),
@@ -161,32 +163,32 @@ nmae:''  })
       id: i,
       name: itm?.name
     })
-  
-    const data = i===2?{"funder_id":itm?.id}:{"project_id":itm?.id}
+
+    const data = i === 2 ? { "funder_id": itm?.id } : { "project_id": itm?.id }
     demoi(itm, i);
-    console.log("helloooo--->",data)
-    console.log(data,i,itm,"<----sdfssreerfer");
+    console.log("helloooo--->", data)
+    console.log(data, i, itm, "<----sdfssreerfer");
     setFilterData(data);
     handleCloseFilter();
-    console.log("itemmmm",itm);
-    console.log("iiii",i);
+    console.log("itemmmm", itm);
+    console.log("iiii", i);
   }
 
- 
+
   return (
     <>
-    <Button style={{ float: "right",color:'#ed6c02'}} 
-          sx={{
-            '&:hover': {
-              backgroundColor: '#ffd796',
-            },
-          }}  
-            onClick={() => {
-              handleOpenFilter()
-            }}>
-            Filter
-          </Button>
-          {/* <h2> 
+      <Button style={{ float: "right", color: '#ff7424' }}
+        sx={{
+          '&:hover': {
+            backgroundColor: '#ffd796',
+          },
+        }}
+        onClick={() => {
+          handleOpenFilter()
+        }}>
+        Filter
+      </Button>
+      {/* <h2> 
           
           
         
@@ -195,16 +197,16 @@ nmae:''  })
         {slected?.id===2?"Funder":null}
         {slected?.id===7?"Location":null}
       &nbsp;{slected?.name ? slected?.name : ''}</h2>  */}
-         
-          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <DemographyFilter
-              getData={getData}
-              onSumbit={onSumbit}
-              isOpenFilter={openFilter}
-              onOpenFilter={handleOpenFilter}
-              onCloseFilter={handleCloseFilter}
-            />
-          </Stack>
+
+      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        <DemographyFilter
+          getData={getData}
+          onSumbit={onSumbit}
+          isOpenFilter={openFilter}
+          onOpenFilter={handleOpenFilter}
+          onCloseFilter={handleCloseFilter}
+        />
+      </Stack>
       <Grid
         sx={{
           p: 2,
@@ -213,13 +215,13 @@ nmae:''  })
           flexGrow: 1,
         }}
       >
-         
+
         <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead>
               <TableRow style={{ width: "max-content", justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
 
-           
+
                 <StyledTableCell colSpan={2} style={{ width: 'max-content', justifyContent: 'center', textAlign: 'center', }}>Resources</StyledTableCell>
 
               </TableRow>
@@ -245,24 +247,26 @@ nmae:''  })
           flexGrow: 1,
         }}
       >
-         <TableContainer component={Paper}>
+        <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead>
               <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
 
                 <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Assets</StyledTableCell>
-                {/* <StyledTableCell>Available Quantity</StyledTableCell> */}
+              
               </TableRow>
             </TableHead>
             <TableBody>
-              {assetrows.map((row) => (
+             
+            {assetrows.map((row) => (
                 <StyledTableRow key={row.R1}>
                   <StyledTableCell component="th" scope="row">
                     {row.R1}
                   </StyledTableCell>
-                  <StyledTableCell>{row.R2}</StyledTableCell>
+                  <StyledTableCell style={{textAlign:'center',paddingLeft:8}}>{row.R2}</StyledTableCell>
                 </StyledTableRow>
               ))}
+             
             </TableBody>
           </Table>
         </TableContainer>
@@ -281,7 +285,7 @@ nmae:''  })
               <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
 
                 <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Excecution</StyledTableCell>
-                
+
               </TableRow>
             </TableHead>
             <TableBody>
@@ -297,191 +301,193 @@ nmae:''  })
           </Table>
         </TableContainer>
       </Grid>
+      
 
       <Grid item xs={12} sm={12} md={12} marginTop={3}>
-      {demo?.data?.map((itm) => {
-        return(
-          <Card
-          style={{
-            backgroundColor: '#f5f5f5',
-            flexDirection: 'column',
-            borderRadius: 12,
-            border: '2px solid',
-            borderColor: '#ffcc80',
-            marginBottom: '40px',
-          }}>
-            <CardContent>
-            <Typography variant="h4" component="h2" marginLeft={2}>
-                   {itm?.nmae} 
-                  </Typography>
-          <Grid
-        sx={{
-          p: 2,
-          margin: 'auto',
-          maxWidth: 500,
-          flexGrow: 1,
-        }}
-      >
-         
-        <TableContainer component={Paper}>
-          <Table aria-label="customized table">
-            <TableHead>
-              <TableRow style={{ width: "max-content", justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-           
-                <StyledTableCell colSpan={2} style={{ width: 'max-content', justifyContent: 'center', textAlign: 'center', }}>Resources</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-         <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                    Admins
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.adminCount}</StyledTableCell>
-        </StyledTableRow>  
-        <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                 Funders
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.funderCount}</StyledTableCell>
-        </StyledTableRow>  
-        <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                   Partners
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.partnerCount}</StyledTableCell>
-        </StyledTableRow>  
-        <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                   Program Manager
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.pmCount}</StyledTableCell>
-        </StyledTableRow>  
-        <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                    Sr.Operation Manager
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.somCount}</StyledTableCell>
-        </StyledTableRow>  
-        <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                    Operation Manager
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.opmCount}</StyledTableCell>
-        </StyledTableRow>  
-        <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                    Gelathi Faciliator Leads
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.gflCount}</StyledTableCell>
-        </StyledTableRow> 
-        <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                     Trainer
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.trainerCount}</StyledTableCell>
-        </StyledTableRow>  
-        <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                    Gelathi Faciliator 
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.gelathiCount}</StyledTableCell>
-        </StyledTableRow> 
-        <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                    Drivers
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.driverCount}</StyledTableCell>
-        </StyledTableRow> 
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
+        {demo?.data?.map((itm) => {
+          return (
+            <Card
+              style={{
+                backgroundColor: '#f5f5f5',
+                flexDirection: 'column',
+                borderRadius: 12,
+                border: '2px solid',
+                borderColor: '#ffcc80',
+                marginBottom: '40px',
+              }}>
+              <CardContent>
+                <Typography variant="h4" component="h2" marginLeft={2}>
+                  {itm?.nmae}
+                </Typography>
+                <Grid
+                  sx={{
+                    p: 2,
+                    margin: 'auto',
+                    maxWidth: 500,
+                    flexGrow: 1,
+                  }}
+                >
 
-      <Grid
-        sx={{
-          p: 2,
-          margin: 'auto',
-          maxWidth: 500,
-          flexGrow: 1,
-        }}
-      >
-         <TableContainer component={Paper}>
-          <Table aria-label="customized table">
-            <TableHead>
-              <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                  <TableContainer component={Paper}>
+                    <Table aria-label="customized table">
+                      <TableHead>
+                        <TableRow style={{ width: "max-content", justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
 
-                <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Assets</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-                <StyledTableRow>
-                  <StyledTableCell component="th" scope="row">
-                    Buses
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.busCount}</StyledTableCell>
-                </StyledTableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
+                          <StyledTableCell colSpan={2} style={{ width: 'max-content', justifyContent: 'center', textAlign: 'center', }}>Resources</StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Admins
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.adminCount}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Funders
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.funderCount}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Partners
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.partnerCount}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Program Manager
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.pmCount}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Sr.Operation Manager
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.somCount}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Operation Manager
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.opmCount}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Gelathi Faciliator Leads
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.gflCount}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Trainer
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.trainerCount}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Gelathi Faciliator
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.gelathiCount}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Drivers
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.driverCount}</StyledTableCell>
+                        </StyledTableRow>
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Grid>
 
-      <Grid
-        sx={{
-          p: 2,
-          margin: 'auto',
-          maxWidth: 500,
-          flexGrow: 1,
-        }}
-      >
-        <TableContainer component={Paper}>
-          <Table aria-label="customized table">
-            <TableHead>
-              <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                <Grid
+                  sx={{
+                    p: 2,
+                    margin: 'auto',
+                    maxWidth: 500,
+                    flexGrow: 1,
+                  }}
+                >
+                  <TableContainer component={Paper}>
+                    <Table aria-label="customized table">
+                      <TableHead>
+                        <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
 
-                <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Excecution</StyledTableCell>
-                
-              </TableRow>
-            </TableHead>
-            <TableBody>
-            
-                <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                    Number of Projects
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.project_count}</StyledTableCell>
-                </StyledTableRow>
-                <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                   Completed Training Batches
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.tb_count}</StyledTableCell>
-                </StyledTableRow>
-                <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                   Completed Village Visits
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.vv_count}</StyledTableCell>
-                </StyledTableRow>
-                <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                  Completed Circle Meetings
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.cm_count}</StyledTableCell>
-                </StyledTableRow>
-                <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                  Completed Beehive Visits
-                  </StyledTableCell>
-                  <StyledTableCell>{demo?.bh_count}</StyledTableCell>
-                </StyledTableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
-      </CardContent>
-      </Card>
-  
-        )})}  </Grid>
+                          <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Assets</StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        <StyledTableRow>
+                          <StyledTableCell component="th" scope="row">
+                            Buses
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.busCount}</StyledTableCell>
+                        </StyledTableRow>
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Grid>
+
+                <Grid
+                  sx={{
+                    p: 2,
+                    margin: 'auto',
+                    maxWidth: 500,
+                    flexGrow: 1,
+                  }}
+                >
+                  <TableContainer component={Paper}>
+                    <Table aria-label="customized table">
+                      <TableHead>
+                        <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+
+                          <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Excecution</StyledTableCell>
+
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Number of Projects
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.project_count}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Completed Training Batches
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.tb_count}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Completed Village Visits
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.vv_count}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Completed Circle Meetings
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.cm_count}</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow >
+                          <StyledTableCell component="th" scope="row">
+                            Completed Beehive Visits
+                          </StyledTableCell>
+                          <StyledTableCell>{demo?.bh_count}</StyledTableCell>
+                        </StyledTableRow>
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Grid>
+              </CardContent>
+            </Card>
+
+          )
+        })}  </Grid>
     </>
   );
 }

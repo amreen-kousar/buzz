@@ -137,7 +137,7 @@ function AddUser(props) {
             .then((res) => res.json())
         let temprepoManager = res.list.map(repo => { return { label: repo?.name, id: repo.id, role: repo.role } })
         setReportingManager([...temprepoManager])
-        console.log(temprepoManager,'<---------------temprepoManagertemprepoManager')
+        console.log(temprepoManager, '<---------------temprepoManagertemprepoManager')
 
     }
 
@@ -229,7 +229,7 @@ function AddUser(props) {
             AddUser.lastUpdatedBy = '650'
         console.log(AddUser)
         const data = JSON.stringify(AddUser);
-        
+
         const config = {
             method: 'post',
             url: 'https://bdms.buzzwomen.org/appTest/createUser.php',
@@ -238,7 +238,7 @@ function AddUser(props) {
             },
             data
         };
-        
+
         let apiCallName = (AddUser.role.roleName == "Funder") ? 'createFunder' : (AddUser.role.roleName == "Partner") ? 'createPartner' : false;
 
 
@@ -316,13 +316,13 @@ function AddUser(props) {
             <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} variant="contained" onClick={handleClickOpen} sx={{
                 ':focus': {
                     backgroundColor: '#ffd796',
-                    color: '#ed6c02'
+                    color: '#ff7424'
                 },
                 '&:hover': {
                     backgroundColor: '#ffd796',
-                    color: '#ed6c02'
+                    color: '#ff7424'
                 }, backgroundColor: '#ffd796',
-                color: '#ed6c02'
+                color: '#ff7424'
             }}><span style={{ fontSize: "2rem" }}>+</span></Button>
             <Dialog
                 open={open}
@@ -333,21 +333,21 @@ function AddUser(props) {
 
             >
 
- <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Add Users
-            </Typography>
-            <Button autoFocus color="inherit" onClick={submitUser}>
-              save
-            </Button>
-          </Toolbar>
-       
-        </AppBar> 
-                {/* <Toolbar sx={{ position: 'relative', bgcolor: '#ed6c02' }} >
+                <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                            <CloseIcon />
+                        </IconButton>
+                        <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+                            Add Users
+                        </Typography>
+                        <Button autoFocus color="inherit" onClick={submitUser}>
+                            save
+                        </Button>
+                    </Toolbar>
+
+                </AppBar>
+                {/* <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }} >
                     <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                         <CloseIcon />
                     </IconButton>
@@ -376,15 +376,15 @@ function AddUser(props) {
                         >
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
-                                <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem",color:'#ed6c02'}}>
-                                <InputLabel id="demo-simple-select-label" fullWidth color="common" style={{color:'#ed6c02'}}>Role</InputLabel>
+                                <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem", color: '#ff7424' }}>
+                                    <InputLabel id="demo-simple-select-label" fullWidth color="common" style={{ color: '#ff7424' }}>Role</InputLabel>
 
-                                <Select fullWidth color="common" variant='standard'
+                                    <Select fullWidth color="common" variant='standard'
                                         labelId="demo-simple-select-label"
-                                                     id="role"
-                                    // defaultValue={AddUser.role}
-                                    label="Role"
-                                    onChange={(e) => { getEmpId(e.target.value) }}
+                                        id="role"
+                                        // defaultValue={AddUser.role}
+                                        label="Role"
+                                        onChange={(e) => { getEmpId(e.target.value) }}
                                     >
                                         {roles.map(role => {
                                             return <MenuItem value={role ?? ''}>{role?.roleName}</MenuItem>
@@ -405,7 +405,7 @@ function AddUser(props) {
                                         defaultValue="male"
                                         first_name="radio-buttons-group"
                                     >
-                                        <FormControlLabel value="female" control={<Radio />} label="Female" color='#ed6c02'/>
+                                        <FormControlLabel value="female" control={<Radio />} label="Female" color='#ff7424'/>
                                         <FormControlLabel value="male" control={<Radio />} label="Male" />
 
                                     </RadioGroup>
@@ -436,15 +436,15 @@ function AddUser(props) {
                             </div>
 
                             <h3>Contact Information</h3>
-                           
+
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
-                                <TextField fullWidth required id="outlined-basic" label="Mobile number" helperText='Mobile Number Required*'  value={AddUser.contactNum} type="number" onChange={(e) => { setAddUser({ ...AddUser, contactNum: e.target.value }) }} variant="outlined" color="common" />
-                                <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" color='common'/>
+                                <TextField fullWidth required id="outlined-basic" label="Mobile number" helperText='Mobile Number Required*' value={AddUser.contactNum} type="number" onChange={(e) => { setAddUser({ ...AddUser, contactNum: e.target.value }) }} variant="outlined" color="common" />
+                                <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" color='common' />
 
 
 
-                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} onChange={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} onPaste={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} variant="outlined" color="common"/>
+                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} onChange={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} onPaste={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} variant="outlined" color="common" />
 
                                 <div style={{ marginLeft: "1rem", fontSize: "0.8rem", fontWeight: "700" }}>
                                     {emailExists ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp; Email Id already exists !</span> : (errors.office_email_id) ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp;Invalid Email Id</span> : (AddUser.office_email_id != "") ? <span style={{ color: "green", display: "flex" }}><Iconify icon="mdi:tick-circle" width={20} height={20} /> &nbsp;Valid Email Id</span> : null}
@@ -494,11 +494,11 @@ function AddUser(props) {
                     <Button variant="contained" onClick={submitUser} color="warning" sx={{
                         ':focus': {
                             backgroundColor: '#ffd796',
-                            color: '#ed6c02'
+                            color: '#ff7424'
                         },
                         ':hover': {
                             backgroundColor: '#ffd796',
-                            color: '#ed6c02'
+                            color: '#ff7424'
                         },
 
                     }}>Add</Button>

@@ -61,9 +61,9 @@ ProjectFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilter,clcikData ,getData}) {
- const [selectDATA,setSelectData] = useState()
- const data = localStorage?.getItem('userId')
+export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData }) {
+  const [selectDATA, setSelectData] = useState()
+  const data = localStorage?.getItem('userId')
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -73,22 +73,24 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
       <Drawer
         anchor="right"
         open={isOpenFilter}
-        onClose={()=>{
+        onClose={() => {
           setSelectData()
-            onCloseFilter()}}
+          onCloseFilter()
+        }}
         PaperProps={{
           sx: { width: 280, },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft:25}}>
-          Filters
-         {selectDATA&&selectDATA===2&&":  Funders"}
-         {selectDATA&&selectDATA===7&&": Location"}
+          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25 }}>
+            Filters
+            {selectDATA && selectDATA === 2 && ":  Funders"}
+            {selectDATA && selectDATA === 7 && ": Location"}
           </Typography>
-          <IconButton onClick={()=>{
-        setSelectData()
-          onCloseFilter()}}>
+          <IconButton onClick={() => {
+            setSelectData()
+            onCloseFilter()
+          }}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
@@ -96,90 +98,90 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
         <Divider />
         <Scrollbar>
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
-            <div>
-              <Card style={{backgroundColor:'#F6F8FB',}}>
-                <CardContent>
-                  {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
-                 <Typography style={{ marginLeft:10}} variant="subtitle1" gutterBottom>Categories</Typography>
-                      {(data==1|data==2)?<Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}>All Bus</Button>:null}
-                   {(data==6)?<Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}>All Projects</Button>:null}
-                     {(data==1|data==2|data==6)?<Button  sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }} >
-                    Location</Button>:null}
-                   
-                    {(data==1|data==2|data==6)? <Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}>Date Range</Button>:null}
-                     {(data==1|data==2)?<Button  sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }} 
-                  >Funders</Button>:null}
-                        {(data==1|data==2)?<Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }} 
-                  >Operation Manager</Button>:null}
-                       {(data==1|data==2)?<Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}
-                  >Trainer</Button>:null}
-                       {(data==1|data==2)? <Button sx={{
-                    ':hover': {
-                      bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
-                    },
-                    color: 'black',
-                  }}>Gelathi Facilitator</Button>:null}
-                   
+          <div>
+            <Card style={{ backgroundColor: '#F6F8FB', }}>
+              <CardContent>
+                {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
+                <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Categories</Typography>
+                {(data == 1 | data == 2) ? <Button sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  color: 'black',
+                }}>All Bus</Button> : null}
+                {(data == 6) ? <Button sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  color: 'black',
+                }}>All Projects</Button> : null}
+                {(data == 1 | data == 2 | data == 6) ? <Button sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  color: 'black',
+                }} >
+                  Location</Button> : null}
 
-                    
-               
-                      
-                      
-                </CardContent>
-              </Card>
-            
+                {(data == 1 | data == 2 | data == 6) ? <Button sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  color: 'black',
+                }}>Date Range</Button> : null}
+                {(data == 1 | data == 2) ? <Button sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  color: 'black',
+                }}
+                >Funders</Button> : null}
+                {(data == 1 | data == 2) ? <Button sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  color: 'black',
+                }}
+                >Operation Manager</Button> : null}
+                {(data == 1 | data == 2) ? <Button sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  color: 'black',
+                }}
+                >Trainer</Button> : null}
+                {(data == 1 | data == 2) ? <Button sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  color: 'black',
+                }}>Gelathi Facilitator</Button> : null}
+
+
+
+
+
+
+              </CardContent>
+            </Card>
+
             {/* <Grid>
               <Poafunders selectDATA={selectDATA}/>
             </Grid> */}
             {/* {selectDATA===7&&<Grid style={{ marginTop: 30 }}>
                 <Location selectDATA={selectDATA}  onSumbit = {(e,i)=>{onSumbit(e,i)}} />
               </Grid> } */}
-              
-          
-            </div>
+
+
+          </div>
           {/* </Stack> */}
         </Scrollbar>
 

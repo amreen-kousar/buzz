@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import React from "react";
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar,Card, CardActionArea } from '@mui/material';
+import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, Card, CardActionArea } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -56,7 +56,7 @@ export default function TravelA() {
   const [listdata, setListData] = React.useState()
   const [openMessage, setOpenMessage] = React.useState(false);
   const [message, setMessage] = useState(false)
-
+  const [editData, setEditData] = useState(null)
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
   useEffect(() => {
@@ -69,7 +69,10 @@ export default function TravelA() {
   });
 
 
-  const handleOpenFilter = () => {
+  const handleOpenFilter = (itm) => {
+    // itm.klmtr = +klmtr;
+    setEditData(itm)
+    console.log(editData)
     setOpenFilter(true);
   };
 
@@ -141,8 +144,8 @@ export default function TravelA() {
   return (
     <Page title="Dashboard: Products">
       <Container>
-    
-  
+
+
         <Typography variant="h4" sx={{ mb: 5 }}>
           Travel Allowances
           {/* <Button style={{ float: "right" }}>Filters</Button> */}
@@ -157,13 +160,13 @@ export default function TravelA() {
             sx={{
               ':hover': {
                 bgcolor: '#ffd796', // theme.palette.primary.main
-                color: '#ed6c02',
+                color: '#ff7424',
               },
 
               color: 'black',
             }} label="TEAM" style={{
-              borderBottom: '3px solid #ed6c02',
-              color: "#ed6c02",
+              borderBottom: '3px solid #ff7424',
+              color: "#ff7424",
             }} /></Tabs>
 
 
@@ -197,37 +200,37 @@ export default function TravelA() {
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
-                      color: '#ed6c02',
+                      color: '#ff7424',
                     },
 
                     color: 'black',
                   }} label="Today" {...a11yProps(0)} style={value == 0 ? {
-                    borderBottom: '3px solid #ed6c02',
-                    color: "#ed6c02",
+                    borderBottom: '3px solid #ff7424',
+                    color: "#ff7424",
                   } : null} />
                 <Tab sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   },
 
                   color: 'black',
                 }}
                   label="Week" {...a11yProps(1)} style={value == 1 ? {
-                    borderBottom: '3px solid #ed6c02',
-                    color: "#ed6c02",
+                    borderBottom: '3px solid #ff7424',
+                    color: "#ff7424",
                   } : null} />
                 <Tab sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ed6c02',
+                    color: '#ff7424',
                   },
 
                   color: 'black',
                 }}
                   label="Month" style={value == 2 ? {
-                    borderBottom: '3px solid #ed6c02',
-                    color: "#ed6c02",
+                    borderBottom: '3px solid #ff7424',
+                    color: "#ff7424",
                   } : null} {...a11yProps(2)} />
               </Tabs>
             </Box>
@@ -239,50 +242,54 @@ export default function TravelA() {
                     <Grid>{itm?.Ta_Name}</Grid>
                   </>
                 )
-              })} */}  No data found
+              })} */}
+
+              <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
 
             </TabPanel>
             <TabPanel value={value} index={1}>
-              No data found
+              <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
             </TabPanel>
             <TabPanel value={value} index={2}>
               {listdata?.data?.map((itm) => {
                 return (
                   <>
-                    
-                    <Card  onClick={() => {handleOpenFilter()}} style={{margin:"20px",borderRadius:"5px",backgroundColor:"#f7f7f7",cursor:'pointer'}} >
-                    <Grid sx={{margin:'8px'}} style={{color:"blue"}}><b>{itm?.Ta_Name}</b>
-                    <Iconify style={{float:"right",marginTop:5,marginRight:10,fontSize:30,color:"gray"}} icon="system-uicons:cross"></Iconify>
-                    <Iconify style={{float:"right",marginTop:5,marginRight:30,fontSize:30,color:"#303030"}} icon="ic:outline-access-time"></Iconify></Grid>
-                    <Typography variant="body" gutterBottom sx={{margin:'10px'}}> <b>TA Amount:{itm?.telephone}</b></Typography>
+
+                    <Card onClick={() => { handleOpenFilter(itm) }} style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer" }} >
+                      <Grid sx={{ margin: '8px' }} style={{ color: "blue" }}><b cursor="pointer"  >{itm?.Ta_Name}</b>
+                        <Iconify style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+                        <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify></Grid>
+                      <Typography variant="body" gutterBottom sx={{ margin: '10px' }}> <b>TA Amount:{itm?.telephone}</b></Typography>
                     </Card>
-                   </>
+                  </>
                 )
-})}
+              })}
             </TabPanel >
           </Box >
-        </Stack > : <div style={{ margin: "5rem", textAlign: "center" }}> no data found</div>}
+        </Stack > : <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>}
 
 
 
-<Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-  <TravelDialog viewMessage={(text) => {
-    setMessage(text)
-    setOpenMessage(true)
-    list()
-  }} />
-</Stack>
+        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <TravelDialog viewMessage={(text) => {
+            setMessage(text)
+            setOpenMessage(true)
+            list()
+          }} />
+        </Stack>
 
-<Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <Edittraveldialog
             isOpenFilter={openFilter}
             onOpenFilter={handleOpenFilter}
-            onCloseFilter={handleCloseFilter} viewMessage={(text)=>
-              {setMessage(text)
-              setOpenMessage(true)}}
+            editData={editData}
+            onCloseFilter={handleCloseFilter} viewMessage={(text) => {
+              setMessage(text)
+              setOpenMessage(true)
+            }}
           />
         </Stack>
-{/* </Stack> */ }
+        {/* </Stack> */}
 
       </Container ></Page >
   );
