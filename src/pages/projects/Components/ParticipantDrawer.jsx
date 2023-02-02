@@ -39,11 +39,11 @@ console.log(clcikData,'<------clcikDataclcikData')
     useEffect(() => {
         Participant();
         // console.log(clcikData)
-    }, [])
+    }, [clcikData])
 
     const Participant = async =>{
         var data = JSON.stringify({
-            "participant_id": 463015
+            "participant id": clickData?.id 
           });
           
           var config = {

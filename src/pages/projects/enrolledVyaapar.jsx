@@ -79,7 +79,7 @@ export default function enrolledVyaaparList() {
             {vyaapar?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" })
+                        setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name",id:itm?.id })
                         handleOpenFilter()
                     }}>
 
