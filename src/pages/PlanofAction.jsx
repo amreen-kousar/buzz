@@ -342,7 +342,7 @@ export default function PlanofAction() {
                       })
                     )
                   })
-                  : <Grid>no data found</Grid>
+                  : <Grid>   <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1></Grid>
               }
             </TabPanel>
 
@@ -406,7 +406,7 @@ export default function PlanofAction() {
                       })
                     )
                   })
-                  : <Grid>no data found</Grid>
+                  : <Grid>   <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1></Grid>
               }
             </TabPanel>
             <TabPanel value={value} index={2}>
@@ -458,7 +458,7 @@ export default function PlanofAction() {
                     )
                   })
                   : <Grid>
-                    no data found
+                    <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
                   </Grid>
               }
             </TabPanel>

@@ -239,11 +239,13 @@ export default function TravelA() {
                     <Grid>{itm?.Ta_Name}</Grid>
                   </>
                 )
-              })} */}  No data found
+              })} */}
+
+              <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
 
             </TabPanel>
             <TabPanel value={value} index={1}>
-              No data found
+              <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
             </TabPanel>
             <TabPanel value={value} index={2}>
               {listdata?.data?.map((itm) => {
@@ -261,7 +263,7 @@ export default function TravelA() {
               })}
             </TabPanel >
           </Box >
-        </Stack > : <div style={{ margin: "5rem", textAlign: "center" }}> no data found</div>}
+        </Stack > : <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>}
 
 
 
