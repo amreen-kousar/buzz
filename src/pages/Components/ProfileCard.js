@@ -44,7 +44,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function RecipeReviewCard({ profileData, changeUser }) {
   const [expanded, setExpanded] = React.useState(false);
-
+  const userDetails = JSON.parse(localStorage.getItem('userDetails'))
   const [editData, setEditData] = useState({
     firstName: profileData?.first_name,
     lastName: profileData?.last_name,
@@ -149,23 +149,13 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       });
   }
   return (
-    <Card sx={{ width: 400 }}>
-      <CardHeader
-        sx={{
-          p: 2,
-          margin: 'auto',
-          maxWidth: 500,
-          flexGrow: 1,
-        }}
-        avatar={
-          <Avatar sx={{ bgcolor: "#ff7424", width: 100, height: 100, marginLeft: 13 }} aria-label="recipe" src={profileData?.profile_pic}>
-            {profileData?.first_name.substring(0, 1)}
-          </Avatar>
-        }
-      // action={
-      //     <Chip label="focus" size="small" color="success" variant="filled" />
-      // }
-      />
+    <Card sx={{ width: 400 }}><br />
+      <div style={{ display: 'flex', justifyContent: "center" }}>
+        <Avatar sx={{ bgcolor: "#ff7424", width: 100, height: 100, }} aria-label="recipe" src={profileData?.profile_pic}>
+          {profileData?.first_name.substring(0, 1)}
+        </Avatar>
+      </div>
+      <br />
       <Typography variant="h6" textAlign="center">
         {profileData?.first_name} {profileData?.last_name}
       </Typography>
@@ -184,14 +174,14 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
               <TableRow style={{ height: "8px !important" }} >
                 <TableCell > Role</TableCell>
 
-                <TableCell>{profileData?.role_name}</TableCell>
+                <TableCell>{userDetails?.role_name}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
-                <TableCell style={{ width: "8px" }}> Reporting Manager</TableCell>
+                <TableCell > Reporting Manager</TableCell>
                 <TableCell>{profileData?.supervisorName === "" ? "-" : profileData?.supervisorName}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
-                <TableCell style={{ width: "8px" }}>Date of Joining</TableCell>
+                <TableCell >Date of Joining</TableCell>
                 <TableCell>{profileData?.doj}</TableCell>
               </TableRow>
             </TableBody>
@@ -211,19 +201,19 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                 <TableCell>{profileData?.contactNum}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
-                <TableCell style={{ width: "8px" }}> Work</TableCell>
+                <TableCell> Work</TableCell>
                 <TableCell>{profileData?.officeMailId}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
-                <TableCell style={{ width: "8px" }}>Email</TableCell>
+                <TableCell>Email</TableCell>
                 <TableCell>{profileData?.personalMailId}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
-                <TableCell style={{ width: "8px" }}>Address</TableCell>
+                <TableCell>Address</TableCell>
                 <TableCell>{profileData?.address}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
-                <TableCell style={{ width: "8px" }}>Pincode:</TableCell>
+                <TableCell>Pincode:</TableCell>
                 <TableCell>{profileData?.pincode}</TableCell>
               </TableRow>
             </TableBody>
