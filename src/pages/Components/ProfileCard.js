@@ -166,7 +166,7 @@ export default function RecipeReviewCard({profileData,changeUser}) {
         //     <Chip label="focus" size="small" color="success" variant="filled" />
         // }
       />
-      <Typography variant="h6" marginLeft={13}>
+      <Typography variant="h6" textAlign="center">
        {profileData?.first_name} {profileData?.last_name}
       </Typography>
      
@@ -177,49 +177,33 @@ export default function RecipeReviewCard({profileData,changeUser}) {
         alt="Paella dish"
       /> */}
       <CardContent>
-        <Card>
-          <CardContent>
-        <Typography variant="body1" gutterBottom>
-          Role: {profileData?.role_name}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-        Status:{profileData?.status}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Reporting Manager: {profileData?.supervisorName===""  ? "-":profileData?.supervisorName}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Date of Joining: {profileData?.doj}
-        </Typography>
-        </CardContent>
-        </Card>
+        <TableContainer >
+    <Table aria-label="customized table"  >
+   
+      <TableBody >
+        <TableRow style={{ height: "8px !important" }} >
+          <TableCell > Role</TableCell>
+          
+          <TableCell>{profileData?.role_name}</TableCell>
+        </TableRow>
+        <TableRow style={{ height: "8px !important" }} >
+          <TableCell style={{ width: "8px" }}> Reporting Manager</TableCell>
+          <TableCell>{profileData?.supervisorName===""  ? "-":profileData?.supervisorName}</TableCell>
+        </TableRow>
+        <TableRow style={{ height: "8px !important" }} >
+          <TableCell style={{ width: "8px" }}>Date of Joining</TableCell>
+          <TableCell>{profileData?.doj}</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  </TableContainer>
+  </CardContent>
 
-
-       {/* <Card>
-        <CardContent>
-          <Typography variant="h6" sx={{color:"white",bgcolor:"#9c9e7f",height:"30px"}} >Contact Information</Typography>
-        <Typography variant="body1" gutterBottom>
-          Mobile: {profileData?.contactNum}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Work : {profileData?.officeMailId}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Email : {profileData?.personalMailId}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Address: {profileData?.address}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Pincode:{profileData?.pincode}
-        </Typography>
-        </CardContent>
-        </Card> */}
-      </CardContent>
       <CardContent>
+        <b textAlign="center" style={{color:'black'}}>Contact Information</b>
   <TableContainer >
     <Table aria-label="customized table"  >
-      {/* <TableHead style={{width:"50px"}}>Contact Information</TableHead> */}
+      {/* <TableHead maxWidth>Contact Information</TableHead> */}
       <TableBody >
         <TableRow style={{ height: "8px !important" }} >
           <TableCell > Mobile </TableCell>
@@ -287,17 +271,27 @@ export default function RecipeReviewCard({profileData,changeUser}) {
             </Typography>
           </Stack>
           <Card>
-            <CardContent>
-              <Typography variant="body1" gutterBottom>
-                UserName: {profileData?.firstName} {profileData?.last_name}
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                Role: {profileData?.role_name}
-              </Typography>
-              <Typography variant="body1" mb={1.5} gutterBottom>
-                Email: {profileData?.officeMailId}
-              </Typography>
-            </CardContent>
+      
+        <TableContainer >
+    <Table aria-label="customized table"  >
+   
+      <TableBody >
+      <TableRow style={{ height: "8px !important" }} >
+          <TableCell>UserName</TableCell>
+          <TableCell>{profileData?.firstName} {profileData?.last_name}</TableCell>
+        </TableRow>
+        <TableRow style={{ height: "8px !important" }} >
+          <TableCell> Role</TableCell>
+          <TableCell>{profileData?.role_name}</TableCell>
+        </TableRow>
+        <TableRow style={{ height: "8px !important" }} >
+          <TableCell style={{ width: "8px" }}>Email</TableCell>
+          <TableCell>{profileData?.officeMailId}</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  </TableContainer>
+ 
           </Card>
           <Stack mb={1.5}>
             <Divider variant="middle" />
@@ -315,11 +309,11 @@ export default function RecipeReviewCard({profileData,changeUser}) {
                 inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                 id="Mobile-Number"
                 label="Mobile Number"
-                variant="outlined"
+                variant="outlined" color="common"
               />
             </Grid>
             <Grid item mb={2}>
-              <TextField fullWidth size="small" id="Work" label="Work" variant="outlined"  />
+              <TextField fullWidth size="small" id="Work" label="Work" variant="outlined" color="common" />
             </Grid>
             <Grid item mb={2}>
               <TextField
@@ -330,26 +324,26 @@ export default function RecipeReviewCard({profileData,changeUser}) {
                 value={editData?.address}
                 onChange={(e)=>{setEditData({...editData,address:e?.target?.value})}}
                 label="Address"
-                variant="outlined"
+                variant="outlined"  color="common"
               />
             </Grid>
             <Grid item mb={2}>
               <TextField fullWidth size="small" id="Address1"
                  value={editData?.address1}
                  onChange={(e)=>{setEditData({...editData,address1:e?.target?.value})}}
-              label="Address1" variant="outlined" />
+              label="Address1" variant="outlined"  color="common" />
             </Grid>
             <Grid item mb={2}>
               <TextField fullWidth size="small"
                  value={editData?.address2}
                  onChange={(e)=>{setEditData({...editData,address2:e?.target?.value})}}
-              id="Address2" label="Address2" variant="outlined" />
+              id="Address2" label="Address2" variant="outlined"  color="common" />
             </Grid>
             <Grid item mb={2}>
               <TextField fullWidth size="small" id="PinCode"
                  value={editData?.pincode}
                  onChange={(e)=>{setEditData({...editData,pincode:e?.target?.value})}}
-              label="PinCode" variant="outlined" />
+              label="PinCode" variant="outlined"  color="common" />
             </Grid>
           </Grid>
           <Box display="flex" justifyContent="flex-end">

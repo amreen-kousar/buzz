@@ -107,9 +107,16 @@ export default function Searchbar({ getSearch }) {
                   }
                   sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
                 />
-                <Button variant="contained" onClick={() => {
+                <Button onClick={() => {
                   getSearch(searchData)
                   handleClose()
+                }} sx={{
+                  '&:hover': {
+                    backgroundColor: '#ffd796',
+                    color:'#ed6c02'
+  
+                  },
+                  color: 'white', backgroundColor: '#ed6c02'
                 }}>
                   Search
                 </Button>
