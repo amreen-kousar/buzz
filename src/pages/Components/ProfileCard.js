@@ -107,7 +107,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "countryID": 1,
       "first_name": editData?.firstName,
       "last_name": editData?.lastName,
-      "profile_pic": editData?.profile_pic,
+      "profile_pic": editData?.profilepic,
       "gender": editData?.gender,
       "doj": editData?.doj,
       "pincode": editData?.pincode,

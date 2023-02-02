@@ -136,15 +136,15 @@ export default function PoaEdit({ setSucess, itm }) {
   }
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen} sx={{
+      <Button onClick={handleClickOpen} sx={{
         '&:hover': {
           backgroundColor: '#ffd796',
           borderColor: "#ff7424"
         },
-        borderColor: "#ff7424",
-        color: "#ff7424"
-      }}>
-        Edit Poa
+        borderColor: "#ed6c02",
+        color: "#ed6c02"
+      }} variant="outlined" >
+        Edit&nbsp;Poa
       </Button>
       <Dialog
         open={open}

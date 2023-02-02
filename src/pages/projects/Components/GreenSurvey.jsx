@@ -27,7 +27,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
-
+import { Color } from '@mui/material';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -54,7 +54,14 @@ export default function GreenSurvey() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} sx={{
+        '&:hover': {
+          backgroundColor: '#ffd796',
+          borderColor: "#ed6c02"
+        },
+        borderColor: "#ed6c02",
+        color: "#ed6c02"
+      }} >
         Survey Form
       </Button>
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
@@ -63,7 +70,7 @@ export default function GreenSurvey() {
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" style={{color:"white"}}>
               Green Baseline Survey Form
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
@@ -74,47 +81,30 @@ export default function GreenSurvey() {
         <Grid>
           <Card>
             <CardContent>
-              <Card mt={2}>
+              <Card mt={1} style={{backgroundColor: '#F6F8FB'}}>
                 <CardContent>
                   <Typography variant="subtitle2">Enter Your Email</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Email" label="Email" variant="outlined" />
+                    <TextField id="Email" label="Email" variant="outlined" color="common" />
                   </Stack>
-                </CardContent>
-              </Card>
-
-              <Card mt={2}>
-                <CardContent>
                   <Typography variant="subtitle2">No Of Surveyors</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Answer" label="Your Answer" variant="outlined" />
+                    <TextField id="Answer" label="Your Answer" variant="outlined" color="common"/>
                   </Stack>
-                </CardContent>
-              </Card>
-
-              <Card mt={2}>
-                <CardContent>
+               
                   <Typography variant="subtitle2">No Of Respondent</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Answer" label="Your Answer" variant="outlined" />
+                    <TextField id="Answer" label="Your Answer" variant="outlined" color="common" />
                   </Stack>
-                </CardContent>
-              </Card>
-
-              <Card mt={2}>
-                <CardContent>
+              
                   <Typography variant="subtitle2">Village Name</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Village" label="Village Name" variant="outlined" />
+                    <TextField id="Village" label="Village Name" variant="outlined" color="common"/>
                   </Stack>
-                </CardContent>
-              </Card>
-
-              <Card mt={2}>
-                <CardContent>
+               
                   <Typography variant="subtitle2">Phone Number</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Phone Number" label="Phone Number" variant="outlined" />
+                    <TextField id="Phone Number" label="Phone Number" variant="outlined" color="common" />
                   </Stack>
                 </CardContent>
               </Card>
@@ -124,12 +114,12 @@ export default function GreenSurvey() {
                   <Typography variant="subtitle2">Which Of The Following Are Natural Resources</Typography>
                   <Stack mt={2}>
                     <FormGroup>
-                      <FormControlLabel control={<Checkbox defaultChecked />} label="Soil" />
-                      <FormControlLabel control={<Checkbox />} label="Water" />
-                      <FormControlLabel control={<Checkbox />} label="MotorCycle" />
-                      <FormControlLabel control={<Checkbox />} label="Money" />
-                      <FormControlLabel control={<Checkbox />} label="Trees Borwell" />
-                      <FormControlLabel control={<Checkbox />} label="House" />
+                      <FormControlLabel control={<Checkbox defaultChecked style={{color:"#595959"}} />} label="Soil" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Water" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="MotorCycle" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Money" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Trees Borwell" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="House" />
                     </FormGroup>
                   </Stack>
                 </CardContent>
@@ -141,13 +131,13 @@ export default function GreenSurvey() {
                   </Typography>
                   <Stack mt={2}>
                     <FormGroup>
-                      <FormControlLabel control={<Checkbox defaultChecked />} label="Quality Of Food Degrading" />
-                      <FormControlLabel control={<Checkbox />} label="Negatively Affecting Agriculture Income" />
-                      <FormControlLabel control={<Checkbox />} label="Drinking Water Scaricity" />
-                      <FormControlLabel control={<Checkbox />} label="Frequent Illness In Children" />
-                      <FormControlLabel control={<Checkbox />} label="Bodily Discomfort" />
-                      <FormControlLabel control={<Checkbox />} label="Loss Of Jobs / Lack Of Work" />
-                      <FormControlLabel control={<Checkbox />} label="There Is No Impact On My Life" />
+                      <FormControlLabel control={<Checkbox defaultChecked style={{color:"#595959"}} />} label="Quality Of Food Degrading" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Negatively Affecting Agriculture Income" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Drinking Water Scaricity" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Frequent Illness In Children" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}}  />} label="Bodily Discomfort" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Loss Of Jobs / Lack Of Work" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="There Is No Impact On My Life" />
                     </FormGroup>
                   </Stack>
                 </CardContent>
@@ -164,11 +154,11 @@ export default function GreenSurvey() {
                     >
                       <FormControlLabel
                         value="Natural Resource"
-                        control={<Radio />}
+                        control={<Radio style={{color:"#595959"}} />}
                         label="To Enjoy Natural Resource As A Human Being Without Any Limits"
                       />
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
+                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}} />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
                     </RadioGroup>
                   </Stack>
                 </CardContent>
@@ -183,9 +173,9 @@ export default function GreenSurvey() {
                       defaultValue="Natural Resource"
                       name="radio-buttons-group"
                     >
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Maybe" control={<Radio />} label="Maybe" />
+                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}}  />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
+                      <FormControlLabel value="Maybe" control={<Radio style={{color:"#595959"}} />} label="Maybe" />
                     </RadioGroup>
                   </Stack>
                 </CardContent>
@@ -210,9 +200,9 @@ export default function GreenSurvey() {
                       defaultValue="Natural Resource"
                       name="radio-buttons-group"
                     >
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Maybe" control={<Radio />} label="Maybe" />
+                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}} />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
+                      <FormControlLabel value="Maybe" control={<Radio style={{color:"#595959"}} />} label="Maybe" />
                     </RadioGroup>
                   </Stack>
                 </CardContent>
@@ -225,13 +215,13 @@ export default function GreenSurvey() {
                   </Typography>
                   <Stack mt={2}>
                     <FormGroup>
-                      <FormControlLabel control={<Checkbox defaultChecked />} label="Excessive Temperature" />
-                      <FormControlLabel control={<Checkbox />} label="Excessive Cold" />
-                      <FormControlLabel control={<Checkbox />} label="Frequent Flood" />
-                      <FormControlLabel control={<Checkbox />} label="Unseasonal Rainfall" />
-                      <FormControlLabel control={<Checkbox />} label="Bodily Discomfort" />
-                      <FormControlLabel control={<Checkbox />} label="Loss Of Jobs / Lack Of Work" />
-                      <FormControlLabel control={<Checkbox />} label="There Is No Impact On My Life" />
+                      <FormControlLabel control={<Checkbox defaultChecked style={{color:"#595959"}} />} label="Excessive Temperature" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Excessive Cold" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}}  />} label="Frequent Flood" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Unseasonal Rainfall" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Bodily Discomfort" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Loss Of Jobs / Lack Of Work" />
+                      <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="There Is No Impact On My Life" />
                     </FormGroup>
                   </Stack>
                 </CardContent>

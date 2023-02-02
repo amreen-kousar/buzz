@@ -42,30 +42,31 @@ function SimpleDialog(props) {
       </IconButton>Select Buzz Team Members</DialogTitle>
       <List sx={{ pt: 0 }}>
         {teamData?.map((email) => (
+           
           <ListItem disableGutters>
             <ListItemButton onClick={() => handleListItemClick(email)} >
               <ListItemAvatar>
-                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-                  <PersonIcon />
-                </Avatar>
+                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }} src={email?.profile_pic}/>
+                
               </ListItemAvatar>
               <ListItemText primary={email?.name} />
             </ListItemButton>
           </ListItem>
+          
         ))}
 
         <ListItem disableGutters>
-          <ListItemButton
+          {/* <ListItemButton
             autoFocus
           //  onClick={() => handleListItemClick('addAccount')}
           >
-            {/* <ListItemAvatar>
+          <ListItemAvatar>
               <Avatar>
                 <AddIcon />
               </Avatar>
-            </ListItemAvatar> */}
-            {/* <ListItemText primary="Add account" /> */}
-          </ListItemButton>
+            </ListItemAvatar> 
+            <ListItemText primary="Add account" />
+          </ListItemButton>  */}
         </ListItem>
       </List>
     </Dialog>
@@ -88,24 +89,25 @@ export default function PoaTeam({ setUserId }) {
   )
   const team = async => {
     var data = JSON.stringify({
-      "emp_id": 144,
-      "team": ""
-    });
-
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getMyTeam.php',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: data
-    };
-
-    axios(config)
+        "emp_id": 192,
+        "team": ""
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/getMyTeam.php',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
       .then(function (response) {
         console.log(response.data?.data, "<--response.dataresponse.data")
         setTeamData(response.data?.data)
         console.log(response.data);
+        console.log(response.data?.data[0]?.profile_pic,"---------------->")
       })
       .catch(function (error) {
         console.log(error);

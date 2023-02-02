@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import { Grid, Button, Stack, CardContent } from '@mui/material';
 import axios from 'axios';
 import DemographyFilter from './Components/DemographyFilters/DemographyFilter';
+import { assertTSAnyKeyword } from '@babel/types';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -252,18 +253,20 @@ export default function Demography() {
               <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
 
                 <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Assets</StyledTableCell>
-                {/* <StyledTableCell>Available Quantity</StyledTableCell> */}
+              
               </TableRow>
             </TableHead>
             <TableBody>
-              {assetrows.map((row) => (
+             
+            {assetrows.map((row) => (
                 <StyledTableRow key={row.R1}>
                   <StyledTableCell component="th" scope="row">
                     {row.R1}
                   </StyledTableCell>
-                  <StyledTableCell>{row.R2}</StyledTableCell>
+                  <StyledTableCell style={{textAlign:'center',paddingLeft:8}}>{row.R2}</StyledTableCell>
                 </StyledTableRow>
               ))}
+             
             </TableBody>
           </Table>
         </TableContainer>
@@ -298,6 +301,7 @@ export default function Demography() {
           </Table>
         </TableContainer>
       </Grid>
+      
 
       <Grid item xs={12} sm={12} md={12} marginTop={3}>
         {demo?.data?.map((itm) => {
