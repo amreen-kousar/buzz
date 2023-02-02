@@ -80,7 +80,7 @@ export default function enrolledGelathiList() {
             {enrolled?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.gelathiname, title: "Participant Details" })
+                        setClickData({ name: itm.gelathiname, title: "Participant Details",id:itm?.id })
                         handleOpenFilter()
                     }}>
 

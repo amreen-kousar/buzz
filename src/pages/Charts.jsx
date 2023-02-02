@@ -97,8 +97,8 @@ export default function Charts(props) {
           
     }
 
-    console.log(chartData,"<----wertyujhgfd")
-    if(chartData?.length ===0&&dayper?.length===0){
+    console.log(gelathi,"<----wertyujhgfd")
+    if(chartData?.length===0&&dayper?.length===0&&gelathi?.length===0){
       return(
       <h1>No data found</h1>
       )

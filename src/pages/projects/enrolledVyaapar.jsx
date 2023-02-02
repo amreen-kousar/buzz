@@ -77,9 +77,10 @@ export default function enrolledVyaaparList() {
             </Stack>
             {/* </Stack> */}
             {vyaapar?.list?.map((itm) => {
+               // console.log(itm,'<---------------vyaaparvyaaparvyaaparvyaapar')
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" })
+                        setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
                         handleOpenFilter()
                     }}>
 

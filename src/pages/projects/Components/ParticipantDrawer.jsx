@@ -39,11 +39,11 @@ console.log(clcikData,'<------clcikDataclcikData')
     useEffect(() => {
         Participant();
         // console.log(clcikData)
-    }, [])
+    }, [clcikData])
 
     const Participant = async =>{
         var data = JSON.stringify({
-            "participant_id": 463015
+            "participant_id": clcikData?.id
           });
           
           var config = {
@@ -58,7 +58,7 @@ console.log(clcikData,'<------clcikDataclcikData')
           axios(config)
           .then(function (response) {
             setpartiData(response.data)
-            console.log(response.data);
+            console.log(response.data,">-gbdfgh");
           })
           .catch(function (error) {
             console.log(error);
@@ -69,10 +69,6 @@ console.log(clcikData,'<------clcikDataclcikData')
 
     return (
         <>
-            {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
-
             <Drawer
                 anchor="right"
                 open={isOpenFilter}
