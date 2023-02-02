@@ -199,7 +199,7 @@ export default function Charts(props) {
        />
       } */}
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Card style={{ background: '#ff7424', color: "white", padding: "1rem", width: "30vw", display: 'flex' }}>
+        <Card style={{ background: '#ff7424', color: "white", padding: "1rem 3rem", display: 'flex' }} xs={12} sm={12} md={12}>
           <div style={{ marginRight: "2rem" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
               <img style={{ borderRadius: 50, width: "60px" }} src={userDetails?.profile_pic ? userDetails?.profile_pic : defaultImage} />
