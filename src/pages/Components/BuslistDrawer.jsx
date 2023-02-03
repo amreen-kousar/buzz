@@ -59,7 +59,7 @@ BuslistDrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, bus_id, deletebuses,busesd }) {
+export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, bus_id, deletebuses,busesd,updatedata }) {
   const [detailsData, setDetailsData] = useState();
   const [deletebus, setDeleteBus] = useState();
   const [userUpdate,setUserUpdate]=useState(false)
@@ -95,6 +95,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
       .then(function (response) {
 
         setDetailsData(response.data)
+        updatedata()
         console.log(JSON.stringify(response.data, '<njnjnjn'));
       })
       .catch(function (error) {
@@ -145,7 +146,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{color:"#494646"}}>
-            {`Bus Number : ${clcikData?.register_number}`}
+            {`Bus Number : ${detailsData?.register_number}`}
           </Typography>
           <IconButton onClick={onCloseFilter}>
             <Iconify icon="eva:close-fill" width={20} height={20} />

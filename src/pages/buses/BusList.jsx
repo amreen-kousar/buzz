@@ -34,6 +34,8 @@ export default function User({ isDesktop }) {
   const [buses, setBuses] = useState();
 
   const [respBuses, setRespbuses] = useState()
+ 
+
 
   useEffect(() => {
     setDw(false)
@@ -227,7 +229,7 @@ export default function User({ isDesktop }) {
         </Stack>
         {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <BuslistDrawer
+          <BuslistDrawer updatedata={()=>{setDw(!dw)}}
             clcikData={clcikData}
             busesd={busesd}
             isOpenFilter={openFilter}

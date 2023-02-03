@@ -42,6 +42,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
   const [scroll, setScroll] = useState('paper');
   const [age, setAge] = React.useState('');
   const [editData, setEditData] = useState('')
+  const [date, setDate] = useState(new Date())
   const [sendData, setSendData] = useState({
     lastUpdatedBy: "",
     chassis_number: "",
@@ -80,7 +81,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
       chassis_number: clcikData?.chassis_number,
       "lastUpdatedBy": "",
       "insurance_number": clcikData?.insurance_number,
-      "register_date": clcikData?.register_date,
+      "register_date": moment(clcikData?.register_date).format('MM-DD-YYYY'),
       "insurance_company": clcikData?.insurance_company,
       "insurance_start_date": clcikData?.insurance_start_date,
       "last_service_date": clcikData?.last_service_date,
@@ -109,7 +110,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
       "lastUpdatedBy": "144",
       "chassis_number": sendData?.chassis_number,
       "insurance_number": sendData?.insurance_number,
-      "register_date": sendData?.register_date,
+      "register_date":sendData?.register_date,
       "insurance_company": sendData?.insurance_company,
       "insurance_start_date": sendData?.insurance_start_date,
       "last_service_date": sendData?.last_service_date,
@@ -204,11 +205,13 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
               autoComplete="off"
             >
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
-                {/* <TextField fullWidth id="outlined-basic" value={sendData?.register_number} onChange={(e) => { setSendData({ ...sendData, register_number: e?.target?.value }) }} label="Bus Number" variant="outlined" /> */}
-                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <TextField fullWidth id="outlined-basic" value={sendData?.register_number} onChange={(e) => { setSendData({ ...sendData, register_number: e?.target?.value }) }} label="Bus Number" variant="outlined" />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
+                  
                     onChange={(e) => {
-                      setSendData({ ...sendData, register_date: moment(new Date(e?.$d))}),
+                      // setSendData({ ...sendData, register_date: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                      setSendData({...sendData, register_date:e })
                       console.log(e, "<----werewrewrewrewr")
                       console.log(moment(new Date(e?.$d)))
                     }}
@@ -216,8 +219,8 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                     value={sendData?.register_date}
 
                     renderInput={(params) => <TextField value={sendData?.register_date} {...params} fullWidth />}
-                  /> */}
-                 <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  /></LocalizationProvider>
+                 {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker 
                     // label="Date"
                     defaultValue={sendData?.register_date}
@@ -228,7 +231,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                     value={sendData?.register_date}
                     renderInput={(params) => <TextField value={sendData?.register_date} {...params} fullWidth />}
                   />
-                </LocalizationProvider>
+                </LocalizationProvider> */}
                   {console.log(moment(new Date(sendData?.register_date)).format("MM-DD-YYYY"), "<----(sendData?.register_date(sendData?.register_date")}
                
                 <Stack style={{ marginTop: 10 }}>
