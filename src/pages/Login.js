@@ -33,8 +33,8 @@ export default function Login() {
   const apiHit = async (itm) => {
     console.log(itm, "<--sadsa")
     var data = JSON.stringify({
-      // "email": itm?.user?.email
-      "email": "buzzgelathi@gmail.com"
+      "email": itm?.user?.email
+      // "email": "buzzgelathi@gmail.com"
     });
 
     var config = {
@@ -48,9 +48,9 @@ export default function Login() {
 
     axios(config)
       .then(function (response) {
-        response.data = {
-          code: 200, first_name: "Anas", id: "144", last_name: "", message: "successfully", profile_pic: "", role: "1", role_name: "Admin", success: true, supervisorId: "0"
-        }
+        // response.data = {
+        //   code: 200, first_name: "Anas", id: "144", last_name: "", message: "successfully", profile_pic: "", role: "1", role_name: "Admin", success: true, supervisorId: "0"
+        // }
         localStorage?.setItem('user', JSON?.stringify(itm?.user))
         localStorage?.setItem('userId', response?.data?.role)
         if (response?.data?.code == 404) {
