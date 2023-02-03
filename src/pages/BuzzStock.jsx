@@ -87,6 +87,7 @@ export default function BuzzStock() {
    
 
   const onDateSubmit = (e) => {
+    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
     demoi(e?.startDate, e?.endDate, "date")
     handleclosebusfilter()
   }
@@ -194,24 +195,24 @@ export default function BuzzStock() {
         </Stack>
       }
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-        <TotalFilter
+        {/* <BusListFilter
           getData={getData}
           onSumbit={onSumbit}
-
+           
+            same={()=>{demoi(),handleclosebusfilter()}}
+            isOpenFilter={openbusfilter}
+            onOpenFilter={handleopenbusfilter}
+            onCloseFilter={handleclosebusfilter}
+          /> */}
+        <FiltersHome
+          type="BuzzStock"
+          getData={getData}
+          onSumbit={onSumbit}
           same={() => { demoi(), handleclosebusfilter() }}
+          onDateSubmit={onDateSubmit}
           isOpenFilter={openbusfilter}
           onOpenFilter={handleopenbusfilter}
-          onCloseFilter={handleclosebusfilter}
-        />
-        {/* <FiltersHome
-        type="BuzzStock"
-        getData={getData}
-        onSumbit={onSumbit}
-        same={() => { demoi(), handleclosebusfilter() }}
-        onDateSubmit={onDateSubmit}
-        isOpenFilter={openbusfilter}
-        onOpenFilter={handleopenbusfilter}
-        onCloseFilter={handleclosebusfilter} /> */}
+          onCloseFilter={handleclosebusfilter} />
       </Stack>
       <Grid
         sx={{

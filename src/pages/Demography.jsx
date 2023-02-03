@@ -11,6 +11,7 @@ import { Grid, Button, Stack, CardContent } from '@mui/material';
 import axios from 'axios';
 import DemographyFilter from './Components/DemographyFilters/DemographyFilter';
 import { assertTSAnyKeyword } from '@babel/types';
+import FiltersHome from './Filters/FiltersHome';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -199,7 +200,8 @@ export default function Demography() {
       &nbsp;{slected?.name ? slected?.name : ''}</h2>  */}
 
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-        <DemographyFilter
+        <FiltersHome
+          type="Demography"
           getData={getData}
           onSumbit={onSumbit}
           isOpenFilter={openFilter}

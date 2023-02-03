@@ -14,6 +14,7 @@ import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } fro
 import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
+import FiltersHome from './Filters/FiltersHome';
 
 export default function Operationmanagerdashboard() {
   const navigate = useNavigate();
@@ -156,11 +157,11 @@ export default function Operationmanagerdashboard() {
             Filter
           </Button>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <DashboardFilter
-              onDateSubmit={onDateSubmit}
-              onSumbit={onSumbit}
-              getData={getData}
-              //clcikData={clcikData}
+          <FiltersHome
+            onDateSubmit={onDateSubmit}
+            onSumbit={onSumbit}
+            getData={getData}
+            //clcikData={clcikData}
               isOpenFilter={openFilter}
               onOpenFilter={handleOpenFilter}
               onCloseFilter={handleCloseFilter}

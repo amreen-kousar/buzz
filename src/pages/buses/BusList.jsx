@@ -11,6 +11,7 @@ import BusListFilter from '../Components/Buslistfilters/BusListFilter';
 import Addbus from './Addbus';
 import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import FiltersHome from '../Filters/FiltersHome';
 
 export default function User({ isDesktop }) {
 
@@ -20,7 +21,7 @@ export default function User({ isDesktop }) {
 
   const [openMessage, setOpenMessage] = useState(false);
 
-  var [selected, setSelected] = useState([])
+  var [selected, setSelected] = useState(null)
 
   const [clcikData, setClickData] = useState()
 
@@ -52,17 +53,17 @@ export default function User({ isDesktop }) {
 
   }, [open]);
 
-  const busesd = async (i, id, filterBusItem = null) => {
+  const busesd = async (i, id, g) => {
+
+
     console.log("bus api called ............................")
     const data = JSON.stringify({
       "date": "",
       "role_id": 1,
 
       "project_id": id === 3 ? i?.id : "",
-      "taluk_id": "",
-      "district_id": "",
-      // "taluk_id": g==="country"?i:"",
-      // "district_id":g==="country"?id:"",
+      taluk_id: g === "country" ? id : "",
+      district_id: g === "country" ? i : "",
       "funder_id": id === 2 ? i?.id : "",
       "emp_id": 206,
       "search": search
@@ -81,38 +82,48 @@ export default function User({ isDesktop }) {
 
     axios(config)
       .then((response) => {
-        console.log(data, response?.data)
-        if (filterBusItem) {
-          if (selected.length == 0) {
-            setBuses(respBuses?.list)
-          }
-          else if (response?.data?.list?.length > 0) {
-            let filteredBuses = buses?.filter(({ id }) => response?.data?.list.some(x => x.id !== id))
-            setBuses([...filteredBuses])
-          }
-        }
-        else {
-          if (selected.length == 1) {
-            setBuses(response?.data?.list)
-          }
-          else if (selected.length > 0) {
-            buses.push(...response?.data?.list)
-            setBuses([...buses])
-          }
-          else if (selected.length == 0) {
-            setRespbuses(response?.data)
-            setBuses(response?.data?.list)
-          }
-          else {
-            setBuses(respBuses?.list)
-          }
-        }
+        console.log("respoonse in Bus List", response.data, id, i)
+        // if (filterBusItem) {
+        //   if (selected.length == 0) {
+        //     setBuses(respBuses?.list)
+        //   }
+        //   else if (response?.data?.list?.length > 0) {
+        //     console.log(buses)
+        //     let filteredBuses = buses?.filter(({ id }) => response?.data?.list.some(x => x.id !== id))
+        //     setBuses([...filteredBuses])
+        //   }
+        // }
+        // else {
+        //   if (selected.length == 1) {
+        //     setBuses(response?.data?.list)
+        //   }
+        //   else if (selected.length > 0) {
+        //     buses.push(...response?.data?.list)
+        //     setBuses([...buses])
+        //   }
+        //   else if (selected.length == 0) {
+        //     setRespbuses(response?.data)
+        //     setBuses(response?.data?.list)
+        //   }
+        //   else {
+        //     setBuses(respBuses?.list)
+        //   }
+        // }
+
+
+        setBuses(response?.data?.list)
+
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
+  const onSumbit = (e, i) => {
+    setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
+    handleclosebusfilter()
+    busesd(e?.district_id, e?.talaq_id, "country")
+  }
 
 
   const [openFilter, setOpenFilter] = useState(false);
@@ -133,24 +144,24 @@ export default function User({ isDesktop }) {
     setopenbusfilter(false);
   };
   const getData = (itm, i) => {
+    console.log(itm, "get Data in Bus List")
     setopenbusfilter(false);
-    if (search != "") {
-      selected = []
-      setSelected(selected)
-      setSearch([])
-      console.log("empty select")
-    }
-    // setSelected({
-    //   id: i,
-    //   name: itm?.name
-    // })
-    // const data = i===2?{"funder_id":itm?.id}:i===1?{"partner_id":itm?.id}:{"project_id":itm?.id}
-    let filterSelect = selected.length == 0 ? [] : selected.filter(s => s?.id == itm?.id)
-    if (filterSelect.length == 0) {
-      selected.push(itm)
-      setSelected(selected);
-      busesd(itm, i)
-    }
+    console.log(selected, "Selected ")
+    setSelected(itm)
+    busesd(itm, i)
+    // if (search != "") {
+    //   selected = []
+    //   setSelected(selected)
+    //   setSearch([])
+    //   console.log("empty select")
+    // }
+    // let filterSelect = selected.length == 0 ? [] : selected.filter(s => s?.id == itm?.id)
+    // console.log(filterSelect)
+    // if (filterSelect.length == 0) {
+    //   selected.push(itm)
+    //   setSelected(selected);
+    //   busesd(itm, i)
+    // }
 
   }
 
@@ -172,21 +183,23 @@ export default function User({ isDesktop }) {
   console.log(busesd,"busessssssssssssssss")
 
   const handleDelete = (itmTodelete) => {
-    let empty = false
-    if (selected.length == 1) {
-      empty = true
-      if (selected.type == "Search") {
-        setSearch("")
-      }
-      setBuses([...respBuses?.list])
-    }
-    let deleteSelected = selected.filter(s => s?.id != itmTodelete?.id)
-    setSelected(deleteSelected)
-    // delete funder of bus
-    if (!empty) {
-      busesd(itmTodelete, 2, "filter")
-    }
-    console.info('You clicked the delete icon.');
+    setSelected(null)
+    busesd()
+    // let empty = false
+    // if (selected.length == 1) {
+    //   empty = true
+    //   if (selected.type == "Search") {
+    //     setSearch("")
+    //   }
+    //   setBuses([...respBuses?.list])
+    // }
+    // let deleteSelected = selected.filter(s => s?.id != itmTodelete?.id)
+    // setSelected(deleteSelected)
+    // // delete funder of bus
+    // if (!empty) {
+    //   busesd(itmTodelete, 2, "filter")
+    // }
+    // console.info('You clicked the delete icon.');
   };
 
 
@@ -208,7 +221,7 @@ export default function User({ isDesktop }) {
 
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
-            {selected.length == 0 ? "All Bus List" : "Bus List"}
+            {selected?.type ? " Bus List" : "All Bus List"}
           </Typography>
           <Button style={{ float: "right", color: '#ff7424' }}
             sx={{
@@ -242,20 +255,22 @@ export default function User({ isDesktop }) {
         </Stack>
 
 
-        {selected.length > 0 && selected.map(s => {
-          return <Stack direction="row" spacing={1}>
-            <Chip label={`${s?.type} : ${s?.name} `} onDelete={() => { handleDelete(s) }} />
+        {selected?.type &&
+          <Stack direction="row" spacing={1}>
+            <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
           </Stack>
-        })}
+        }
 
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <BusListFilter
+          <FiltersHome
+            onSumbit={onSumbit}
+            type="BusList"
+            resetBus={resetBus}
             getData={getData}
             clcikData={clcikData}
             isOpenFilter={openbusfilter}
             onOpenFilter={handleopenbusfilter}
             onCloseFilter={handleclosebusfilter}
-            resetBus={resetBus}
           />
         </Stack>
 

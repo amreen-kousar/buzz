@@ -10,6 +10,7 @@ import ProjectDialog from '../Components/ProjectDialog';
 import { Link } from 'react-router-dom';
 import ProjectFilter from '../Components/Projectfilters/ProjectFilters';
 import AddProject from './Addproject';
+import FiltersHome from '../Filters/FiltersHome';
 
 // components
 function TabPanel(props) {
@@ -90,6 +91,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
         axios(config)
             .then((response) => {
+                console.log(responsex)
                 console.log(JSON.stringify(response.data, 'get All projectrs'));
             })
             .catch((error) => {
@@ -126,7 +128,8 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             />
           </Stack> */}
                 <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-                    <ProjectFilter
+                    <FiltersHome
+                        type="Projects"
                         // clcikData={clcikData}
                         isOpenFilter={openFilter}
 

@@ -33,8 +33,8 @@ export default function Login() {
   const apiHit = async (itm) => {
     console.log(itm, "<--sadsa")
     var data = JSON.stringify({
-      "email": itm?.user?.email
-      // "email": "buzzgelathi@gmail.com"
+      "email": "buzzgelathi@gmail.com"
+      // "email": itm?.user?.email
     });
 
     var config = {

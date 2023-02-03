@@ -19,6 +19,7 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
+import FiltersHome from './Filters/FiltersHome';
 export default function Gelathidashboard() {
   const navigate = useNavigate();
   const data = localStorage?.getItem('userId')
@@ -160,7 +161,7 @@ export default function Gelathidashboard() {
             Filter
           </Button>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <DashboardFilter
+            <FiltersHome
               onDateSubmit={onDateSubmit}
               onSumbit={onSumbit}
               getData={getData}

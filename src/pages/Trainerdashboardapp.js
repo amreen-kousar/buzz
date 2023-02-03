@@ -11,6 +11,7 @@ import DashboardFilter from './Components/DashboardFilters/DashboardFilter';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
 
 import { useNavigate } from 'react-router-dom';
+import FiltersHome from './Filters/FiltersHome';
 
 
 export default function Trainerdashboard() {
@@ -154,11 +155,11 @@ export default function Trainerdashboard() {
             Filter
           </Button>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <DashboardFilter
-              onDateSubmit={onDateSubmit}
-              onSumbit={onSumbit}
-              getData={getData}
-              //clcikData={clcikData}
+          <FiltersHome
+            onDateSubmit={onDateSubmit}
+            onSumbit={onSumbit}
+            getData={getData}
+            //clcikData={clcikData}
               isOpenFilter={openFilter}
               onOpenFilter={handleOpenFilter}
               onCloseFilter={handleCloseFilter}

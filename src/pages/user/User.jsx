@@ -33,6 +33,7 @@ import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
 // ----------------------------------------------------------------------
 import AddUser from './AddUser';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import FiltersHome from '../Filters/FiltersHome';
 
 export default function User() {
   const [openFilter, setOpenFilter] = useState(false);
@@ -190,7 +191,8 @@ export default function User() {
       </Snackbar>
       <div>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <UserFilter
+          <FiltersHome
+            type="People"
             isOpenFilter={peopleFilter}
             onOpenFilter={handlepeopleOpenFilter}
             onCloseFilter={handlepeopleCloseFilter}
