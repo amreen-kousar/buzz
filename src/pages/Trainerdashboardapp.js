@@ -44,7 +44,7 @@ export default function Trainerdashboard() {
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       trainerId: g ? "" : i === 5 ? id?.id : '',
-      emp_id: 144,
+      emp_id: 653,
       start_date: g === "date" ? id : '',
       somId: g ? "" : i === 12 ? id?.id : '',
       gflId: g ? "" : i === 13 ? id?.id : '',
@@ -59,7 +59,7 @@ export default function Trainerdashboard() {
       taluk_id: "",
       district_id: "",
       trainerId: '',
-      emp_id: 144,
+      emp_id: 653,
       start_date: id,
       somId: '',
       gflId: '',
@@ -135,6 +135,8 @@ export default function Trainerdashboard() {
   const closefilter = () => {
     console.log("deleted")
   }
+
+  console.log("sumarryyyyyyyyyyy",summaryData?.data[0]?.name)
   return (
     <>
       <Page title="Dashboard">
@@ -220,6 +222,69 @@ export default function Trainerdashboard() {
               />
             </Grid>
           </Grid>
+
+       <br></br>
+          {summaryData?.data?.map((item) => {
+            return(
+              <>
+              <Card>
+          <CardContent style={{fontWeight:700}}>
+           <Stack direction="row" spacing={8}>
+            <Grid>Project</Grid>
+            <Grid>{item?.name}</Grid>
+
+           </Stack>
+           <Stack direction="row" spacing={2}>
+            <Grid>Actual Target</Grid>
+            <Grid>{item?.actual}/{item?.target}</Grid>
+
+           </Stack>
+            <Stack direction="row" spacing={7}>
+            <Grid>Duration</Grid>
+            <Grid>{item?.startDate}&nbsp;&nbsp;to&nbsp;&nbsp;{item?.endDate}</Grid>
+           
+           </Stack> 
+           <Grid container spacing={3} marginTop={4}>
+            <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Villages"
+                total={item?.villages}
+                color="motivator"
+
+              // icon={'mdi:target-arrow'}
+              />
+            </Grid>
+
+            <Grid item xs={4} sm={8} md={4}>
+              <AppWidgetSummary
+
+                total={item?.women}
+                title="Women"
+                color="motivator"
+              // icon={'material-symbols:data-exploration'}
+              />
+            </Grid>
+
+            <Grid item xs={4} sm={8} md={4}>
+              <AppWidgetSummary
+
+                total={item?.day2}
+                title="2nd Day TurnOut(%)"
+                color="motivator"
+
+             
+              />
+            </Grid>
+</Grid>
+           </CardContent>
+        </Card>
+        
+        
+        <br></br></>
+
+        )})}
+           
         </Container>
       </Page>
     </>
