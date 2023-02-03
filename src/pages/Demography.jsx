@@ -96,7 +96,7 @@ export default function Demography() {
       funder_id: "",
       partner_id: "",
       project_id: '',
-      opsManager: '',
+      opsManager: '', 
     };
 
     console.log(data, "datttttttaaaaaaaaaa")
@@ -128,7 +128,7 @@ export default function Demography() {
   const onSumbit = (e, i) => {
     handleCloseFilter()
 
-    demoi(e?.district_id, e?.talaq_id, "country")
+    demoi(e?.district_id, e?.taluk_id, "country")
     console.log(e, i, "<----datssdasdsa")
   }
 
@@ -423,7 +423,7 @@ export default function Demography() {
                           <StyledTableCell component="th" scope="row">
                             Buses
                           </StyledTableCell>
-                          <StyledTableCell>{demo?.busCount}</StyledTableCell>
+                          <StyledTableCell style={{textAlign:'center',paddingLeft:2}}>{demo?.busCount}</StyledTableCell>
                         </StyledTableRow>
                       </TableBody>
                     </Table>

@@ -40,25 +40,26 @@ function createData(name, calories) {
   return { name, calories };
 }
 
-const rows = [
-  createData('Biscuits', 567159),
-  createData('Buzz Financial Booklet', 237),
-  createData('Certificates', 26200),
-  createData('Duster', 30512),
-  createData('NewsLetter', 3526),
-  createData('Pencils', 35226),
-  createData('Training Charts', 945356),
-  createData('Training RolePlay Card', 34356),
-  createData('Whiteboard', 356),
-  createData('Whiteboard Maker', 23156),
-  createData('Whiteboard Stand', 11356),
-];
+// const rows = [
+//   createData('Biscuits', 567159),
+//   createData('Buzz Financial Booklet', 237),
+//   createData('Certificates', 26200),
+//   createData('Duster', 30512),
+//   createData('NewsLetter', 3526),
+//   createData('Pencils', 35226),
+//   createData('Training Charts', 945356),
+//   createData('Training RolePlay Card', 34356),
+//   createData('Whiteboard', 356),
+//   createData('Whiteboard Maker', 23156),
+//   createData('Whiteboard Stand', 11356),
+// ];
 
 export default function BuzzStock() {
   const [demo, setDemo] = useState([]);
   const [openFilter, setOpenFilter] = useState(false);
   const [openbusfilter, setopenbusfilter] = useState(false);
   const [selected, setSelected] = useState(null)
+  const [filterData, setFilterData] = useState({})
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -74,27 +75,16 @@ export default function BuzzStock() {
   const handleclosebusfilter = () => {
     setopenbusfilter(false);
   };
-  const getData = (itm, i) => {
-    setSelected(itm)
-    setopenbusfilter(false);
-    console.log(itm, i, "<-----qwertyu")
-    // setSelected({
-    //   id: i,
-    //   name: itm?.name
-    // })
-    // const data = i===2?{"funder_id":itm?.id}:i===1?{"partner_id":itm?.id}:{"project_id":itm?.id}
-    demoi(itm, i)
-    // console.log(data,i,itm,"<----sdfssreerfer")
-    // setFilterData(data)
-    // handleCloseFilter()
-    // console.log("sdfgsdfdfssd", itm, i)
-  }
-  const onSumbit = (e, i) => {
-    console.log(e, i, "<---onSUbmittttt")
-    // handleclosebusfilter()
-    demoi(e, '', "location")
+  // const getData = (itm, i) => {
+  //   setSelected(itm)
+  //   setopenbusfilter(false);
+  //   console.log(itm, i, "<-----qwertyu")
+  //   setSelected({
+  //     id: i,
+  //     name: itm?.name
+  //   })
 
-  }
+   
 
   const onDateSubmit = (e) => {
     demoi(e?.startDate, e?.endDate, "date")
@@ -111,25 +101,38 @@ export default function BuzzStock() {
     setSelected(null)
     demoi()
   }
-  const demoi = async (itm, i, type) => {
-    console.log(itm, i, type)
+  const demoi = async (id, i, g) => {
+    // console.log(itm, i, g,"wedasghkiwe")
     var data = JSON.stringify({
       "from_date": "2022-1-20",
       "to_date": "2022-1-29",
       "user_id": 206,
       "role_id": 2,
-      // "project_id": "",
-      // "taluk_id": "",
-      // "district_id": "",
-      "funder_id": "",
+      project_id: g ? "" : i === 3 ? id?.id : '',
+      taluk_id: g === "country" ? i : "",
+      district_id: g === "country" ? id : "",
+      funder_id: g ? "" : i === 2 ? id?.id : '',
 
     });
+    const datas = {
+      end_date: i,
+      taluk_id: "",
+      district_id: "",
+      emp_id: 1,
+      start_date: id,
+      funder_id: "",
+      partner_id: "",
+      project_id: '',
+      opsManager: '',
+    };
+
 
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getTotalStocks.php',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Accept:'application/json'
       },
       data
     };
@@ -139,13 +142,38 @@ export default function BuzzStock() {
       .then((response) => {
         console.log("responseeeeeeeeeeee", response)
         setDemo(response.data?.data)
-        console.log("harshaaaa", response?.data.data[0]?.current_stock)
+       console.log("harshaaaaaaa",response.data.list)
         console.log(JSON.stringify(response.data, '<----333ssss'));
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
+  const onSumbit = (e, i) => {
+    console.log(e, i, "<---onSUbmittttt")
+     handleclosebusfilter()
+    demoi(e?.district_id,e?.taluk_id,"country")
+
+  }
+
+
+  const getData = (itm, i) => {
+    setSelected(itm)
+    setopenbusfilter(false);
+    console.log(itm, i, "<-----qwertyu")
+    setSelected({
+      id: i,
+      name: itm?.name
+    })
+
+  const data = i===2?{"funder_id":itm?.id}:{"project_id":itm?.id}
+  demoi(itm, i)
+  console.log(data,i,itm,"<----sdfssreerfer")
+  setFilterData(data)
+  handleCloseFilter()
+  console.log("sdfgsdfdfssd", itm, i)
+}
   return (
     <div>
       <Button style={{ float: "right", color: '#ff7424' }}
