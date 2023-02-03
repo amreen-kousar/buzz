@@ -103,13 +103,13 @@ export default function DashboardApp() {
     console.log(e, "<----scasds")
   }
 
-  // if (summaryData?.length === 0) {
-  //   return (
-  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-  //       <CircularProgress />
-  //     </Box>
-  //   )
-  // }
+  if (summaryData?.length === 0) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
 
 
   const getData = (itm, i) => {
