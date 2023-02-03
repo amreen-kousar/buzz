@@ -70,15 +70,15 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
     localStorage.setItem('selectedData', value)
     setSelectData(value)
   }
-  useEffect(() => {
-    localStorage.setItem('selectedData', 3)
-    setSelectData(2)
-  }, [])
+  // useEffect(() => {
+  //   localStorage.setItem('selectedData', 3)
+  //   setSelectData(3)
+  // }, [])
 
-  useEffect(() => {
-    setSelectData(localStorage.getItem('selectedData'))
-    console.log(selectDATA)
-  }, [isOpenFilter])
+  // useEffect(() => {
+  //   setSelectData(localStorage.getItem('selectedData'))
+  //   console.log(selectDATA)
+  // }, [isOpenFilter])
 
 
   console.log("xncvjhdat", data)

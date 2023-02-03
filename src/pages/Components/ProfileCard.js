@@ -268,14 +268,14 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                 <TableBody >
                   <TableRow style={{ height: "8px !important" }} >
                     <TableCell>UserName</TableCell>
-                    <TableCell>{profileData?.firstName} {profileData?.last_name}</TableCell>
+                    <TableCell> {profileData?.first_name} {profileData?.last_name}</TableCell>
                   </TableRow>
                   <TableRow style={{ height: "8px !important" }} >
                     <TableCell> Role</TableCell>
-                    <TableCell>{profileData?.role_name}</TableCell>
+                    <TableCell>{userDetails?.role_name}</TableCell>
                   </TableRow>
                   <TableRow style={{ height: "8px !important" }} >
-                    <TableCell style={{ width: "8px" }}>Email</TableCell>
+                    <TableCell >Email</TableCell>
                     <TableCell>{profileData?.officeMailId}</TableCell>
                   </TableRow>
                 </TableBody>
@@ -303,7 +303,9 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
               />
             </Grid>
             <Grid item mb={2}>
-              <TextField fullWidth size="small" id="Work" label="Work" variant="outlined" color="common" />
+              <TextField fullWidth size="small" id="Work" 
+              value={editData?.officeMailId}
+              label="Work" variant="outlined" color="common" />
             </Grid>
             <Grid item mb={2}>
               <TextField

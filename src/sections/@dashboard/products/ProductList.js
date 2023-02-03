@@ -48,6 +48,7 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
   }
 
   return (
+    <>
     <Grid container spacing={3} {...other}>
       {/* {users.map((product) => ( */}
       {users.map((itm, index) => (
@@ -78,6 +79,13 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
         </Grid>
       ))
       }
-    </Grid >
+         
+    </Grid>{users?.length == 0 && (
+
+<div>
+  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
+</div>
+
+)}</>
   );
 }
