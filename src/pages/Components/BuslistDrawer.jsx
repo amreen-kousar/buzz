@@ -23,6 +23,7 @@ import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import { ColorManyPicker } from '../../components/color-utils';
 import BusEdit from './Buslistfilters/BusEdit'
+import { DetailsRounded } from '@mui/icons-material';
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -61,7 +62,12 @@ BuslistDrawer.propTypes = {
 export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, bus_id, deletebuses,busesd }) {
   const [detailsData, setDetailsData] = useState();
   const [deletebus, setDeleteBus] = useState();
+  const [userUpdate,setUserUpdate]=useState(false)
 
+  useEffect(()=>{
+    details()
+    },[userUpdate]
+    )
   var userAccess = ['2']
 
   var userIdCheck = localStorage?.getItem('userId')
@@ -157,7 +163,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
             backgroundColor: 'white',
           },
         }} ><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138'}}></Iconify></Button>
-           <BusEdit clcikData={detailsData} busesd={busesd} />
+           <BusEdit clcikData={detailsData} busesd={busesd} updatedata={()=>{setUserUpdate(!userUpdate)}} />
             <Card>
                 <CardContent>
                   <Typography style={{ flexDirection: 'row',color:'#494646' }} variant="subtitle1" gutterBottom>
