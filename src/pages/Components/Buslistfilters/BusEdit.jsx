@@ -83,17 +83,17 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
       "insurance_number": clcikData?.insurance_number,
       "register_date": moment(clcikData?.register_date).format('MM-DD-YYYY'),
       "insurance_company": clcikData?.insurance_company,
-      "insurance_start_date": clcikData?.insurance_start_date,
-      "last_service_date": clcikData?.last_service_date,
-      "emission_date": clcikData?.emission_date,
-      "insurance_end_date": clcikData?.insurance_end_date,
+      "insurance_start_date": moment(clcikData?.insurance_start_date).format('MM-DD-YYYY'),
+      "last_service_date":moment( clcikData?.last_service_date).format('MM-DD-YYYY'),
+      "emission_date": moment(clcikData?.emission_date).format('MM-DD-YYYY'),
+      "insurance_end_date":moment( clcikData?.insurance_end_date).format('MM-DD-YYYY'),
       "createdBy": clcikData?.createdBy,
       "engine_number": clcikData?.engine_number,
-      "permit": clcikData?.permit,
-      "fitness_certificate": clcikData?.fitness_certificate,
+      "permit": moment(clcikData?.permit).format('MM-DD-YYYY'),
+      "fitness_certificate": moment(clcikData?.fitness_certificate).format('MM-DD-YYYY'),
       "register_number": clcikData?.register_number,
       "bus_id": clcikData?.bus_id,
-      "next_service_due_date": clcikData?.next_service_due_date
+      "next_service_due_date":moment( clcikData?.next_service_due_date).format('MM-DD-YYYY')
 
     })
   }
@@ -210,8 +210,8 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <DatePicker
                   
                     onChange={(e) => {
-                      // setSendData({ ...sendData, register_date: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
-                      setSendData({...sendData, register_date:e })
+                      setSendData({ ...sendData, register_date: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                      // setSendData({...sendData, register_date:e })
                       console.log(e, "<----werewrewrewrewr")
                       console.log(moment(new Date(e?.$d)))
                     }}
@@ -250,7 +250,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, insurance_start_date: e }),
+                        setSendData({ ...sendData, insurance_start_date:moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
                         console.log(e, "<----werewrewrewrewr")
                       }}
                       label="Insurance Start Date"
@@ -266,7 +266,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, insurance_end_date: e }),
+                        setSendData({ ...sendData, insurance_end_date:moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
                         console.log(e, "<----insurance_end_date")
                       }}
                       label="Insurance End Date"
@@ -280,7 +280,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, last_service_date: e }),
+                        setSendData({ ...sendData, last_service_date:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
                         console.log(e, "<----last_service_date")
                       }}
                       label="Last Service Date"
@@ -294,7 +294,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, next_service_due_date:e}),
+                        setSendData({ ...sendData, next_service_due_date:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
                         console.log(e, "<----next_service_due_date")
                       }}
                       label="Next Service Date"
@@ -308,7 +308,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, fitness_certificate: e}),
+                        setSendData({ ...sendData, fitness_certificate: moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
                         console.log(e, "<----fitness_certificate")
                       }}
                       label="Fitness Certificate"
@@ -323,7 +323,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                     <DatePicker
                     // moment(new Date(e?.$d)).format("MM-DD-YYYY")
                       onChange={(e) => {
-                        setSendData({ ...sendData, permit: e}),
+                        setSendData({ ...sendData, permit: moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
                         console.log(e, "<----permit")
                       }}
                       label="Permit Details"
@@ -337,7 +337,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, emission_date: e }),
+                        setSendData({ ...sendData, emission_date: moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
                         console.log(e, "<----emission_date")
                       }}
                       label="Emission Date"
