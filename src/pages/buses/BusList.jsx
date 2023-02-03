@@ -53,8 +53,6 @@ export default function User({ isDesktop }) {
   }, [open]);
 
   const busesd = async (i, id, filterBusItem = null) => {
-
-
     console.log("bus api called ............................")
     const data = JSON.stringify({
       "date": "",
@@ -171,6 +169,8 @@ export default function User({ isDesktop }) {
     busesd()
   }
 
+  console.log(busesd,"busessssssssssssssss")
+
   const handleDelete = (itmTodelete) => {
     let empty = false
     if (selected.length == 1) {
@@ -229,6 +229,7 @@ export default function User({ isDesktop }) {
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <BuslistDrawer
             clcikData={clcikData}
+            busesd={busesd}
             isOpenFilter={openFilter}
             deletebuses={() => {
               setDw(!dw)

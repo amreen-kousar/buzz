@@ -58,7 +58,7 @@ BuslistDrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, bus_id, deletebuses }) {
+export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, bus_id, deletebuses,busesd }) {
   const [detailsData, setDetailsData] = useState();
   const [deletebus, setDeleteBus] = useState();
 
@@ -98,9 +98,8 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
   }
 
 
-  const editBus = async => {
-
-  }
+  console.log(busesd,"buslistdrawerrr")
+  
 
   const DeleteBus = async => {
     var data = JSON.stringify({
@@ -153,8 +152,12 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>
             {/* {userAccess.includes(userIdCheck) && */}
-            <Button onClick={DeleteBus} style={{float:'right',textAlign:'left'}}><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138'}}></Iconify></Button>
-           <BusEdit clcikData={detailsData} />
+            <Button onClick={DeleteBus} style={{float:'right',textAlign:'left'}} sx={{
+          '&:hover': {
+            backgroundColor: 'white',
+          },
+        }} ><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138'}}></Iconify></Button>
+           <BusEdit clcikData={detailsData} busesd={busesd} />
             <Card>
                 <CardContent>
                   <Typography style={{ flexDirection: 'row',color:'#494646' }} variant="subtitle1" gutterBottom>

@@ -37,7 +37,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function BusEdit({ clcikData }) {
+export default function BusEdit({ clcikData,busesd }) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [age, setAge] = React.useState('');
@@ -71,10 +71,11 @@ export default function BusEdit({ clcikData }) {
 
   const handleClose = () => {
     setOpen(false);
+   
   };
 
   const enterData = () => {
-    console.log(clcikData, sendData, "<---sendDataefewfs")
+    console.log(clcikData,"-----------------" ,sendData, "<---sendDataefewfs")
     setSendData({
       chassis_number: clcikData?.chassis_number,
       "lastUpdatedBy": "",
@@ -97,11 +98,13 @@ export default function BusEdit({ clcikData }) {
   }
 
   useEffect(() => {
-    //edit()
     enterData()
   }, [clcikData]
   )
   const edit = async => {
+  
+    handleClose()
+    
     var data = JSON.stringify({
       "lastUpdatedBy": "144",
       "chassis_number": sendData?.chassis_number,
@@ -120,7 +123,7 @@ export default function BusEdit({ clcikData }) {
       "bus_id": sendData?.bus_id,
       "next_service_due_date": sendData?.next_service_due_date
     });
-
+   
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/editBus.php',
@@ -139,14 +142,23 @@ export default function BusEdit({ clcikData }) {
         console.log(error);
       });
   }
+
+
+ 
   const getCaaled = () => {
-    edit()
+    edit();
   }
 
   return (
     <div>
-      <Button onClick={handleClickOpen} >
-        <Iconify icon="material-symbols:edit" style={{ width: '30px', height: '30px', color: '#e69138', marginLeft: "120px" }}></Iconify>
+      <Button onClick={handleClickOpen} sx={{
+          '&:hover': {
+            backgroundColor: 'white',
+          },
+        }} >
+        <Iconify icon="material-symbols:edit" style={{ width: '30px', height: '30px', color: '#e69138', marginLeft: "120px"  }} 
+        
+        ></Iconify>
       </Button>
       <Dialog
         open={open}
