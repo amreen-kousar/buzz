@@ -33,7 +33,7 @@ function SimpleDialog(props) {
     console.log(value, "<--valuevalue")
     onClose(value);
   };
-  console.log(teamData, "<----teamDatateamDatateamData")
+  // console.log(teamData, "<----teamDatateamDatateamData")
 
   return (
     <Dialog onClose={handleClose} open={open}>

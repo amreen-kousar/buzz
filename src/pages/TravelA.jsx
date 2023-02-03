@@ -48,7 +48,7 @@ function a11yProps(index) {
 
 export default function TravelA() {
   const [value, setValue] = React.useState(0);
-  const [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
+  var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
   const image = ["tykml", "exrdcftvbgyhnuj"]
   const [drawerEvent, SetDrawerEvent] = useState(false);
   //const [image, setImage] = React.useState(['data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==']);
@@ -59,9 +59,10 @@ export default function TravelA() {
   const [editData, setEditData] = useState(null)
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
+
   useEffect(() => {
-    list()
-  }, [dateValue]
+    list(dateValue)
+  }, []
   )
 
   const Alert = forwardRef(function Alert(props, ref) {
@@ -81,14 +82,15 @@ export default function TravelA() {
   };
 
 
-  const list = async => {
+  const list = async (target) => {
     console.log(dateValue)
+    if (target) { dateValue = target }
     const userDetails = localStorage?.getItem("userDetails")
     var data = JSON.stringify({
       "emp_id": 651,
-      "date": moment(dateValue?.$d)?.format('YYYY-MM-DD')
+      "date": dateValue
     });
-
+    console.log(data)
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/new/listTa.php',
@@ -188,7 +190,7 @@ export default function TravelA() {
         <br></br>
         <TextField id="outlined-basic" type="date" defaultValue={dateValue}
           fullWidth
-          onChange={(e) => { setDatevalue(e?.target?.value); list() }} label="Select Range" variant="outlined" InputLabelProps={{
+          onChange={(e) => { setDatevalue(e?.target?.value); list(e?.target?.value) }} label="Select Range" variant="outlined" InputLabelProps={{
             shrink: true,
           }} />
 
@@ -274,11 +276,11 @@ export default function TravelA() {
           <TravelDialog viewMessage={(text) => {
             setMessage(text)
             setOpenMessage(true)
-            list()
+            // list()
           }} />
         </Stack>
 
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        {editData && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <Edittraveldialog
             isOpenFilter={openFilter}
             onOpenFilter={handleOpenFilter}
@@ -287,8 +289,10 @@ export default function TravelA() {
               setMessage(text)
               setOpenMessage(true)
             }}
+            list={list}
           />
-        </Stack>
+
+        </Stack>}
         {/* </Stack> */}
 
       </Container ></Page >
