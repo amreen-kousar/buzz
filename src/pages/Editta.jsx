@@ -46,7 +46,7 @@ Edittraveldialog.propTypes = {
 };
 
 
-export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFilter, viewMessage, editData }) {
+export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFilter, viewMessage, editData, list }) {
   Geocode.setApiKey("AIzaSyAQZSphbIdAeypWHytAIHtJ5K-wuUHBfx4");
   const [open, setOpen] = useState(true);
   const [startTime, setStartTime] = useState('');
@@ -87,6 +87,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
   )
 
   useEffect(() => {
+    setSendData(editData)
     // {
     //   odimeter: "",
     //   location: "",
@@ -141,8 +142,9 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
     });
   }
   const SendData = async => {
-
+    console.log(sendData)
     var data = JSON.stringify({
+      "ta_id": sendData?.id,
       "date": sendData?.date,
       "insideBangalore": false,
       "end_odometer": sendData?.end_odometer,
@@ -162,19 +164,23 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
       "other_text": sendData?.other_text
     });
 
+
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/editTa.php',
+      url: 'https://bdms.buzzwomen.org/appTest/new/updateTa.php',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: data
+      data
     };
 
+
+    console.log(config)
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        viewMessage('Travel allowance added sucessfully')
+        viewMessage('Travel allowance edited sucessfully')
+        list()
         onCloseFilter()
       })
       .catch(function (error) {
@@ -290,7 +296,6 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
   //   }
   return (
     <div>
-
       <Dialog fullScreen open={isOpenFilter} onClose={onCloseFilter}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">

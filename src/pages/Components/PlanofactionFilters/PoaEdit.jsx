@@ -34,7 +34,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function PoaEdit({ setSucess, itm }) {
-  console.log(itm, "<---ergegreg")
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState("");
@@ -42,7 +41,6 @@ export default function PoaEdit({ setSucess, itm }) {
   const [value, setValue] = React.useState(false);
 
   const handleChangeTime = (newValue) => {
-    console.log(newValue, "<----1234567u8")
     // setValue(newValue);
   };
   const [addData, setAddData] = useState({
@@ -57,7 +55,7 @@ export default function PoaEdit({ setSucess, itm }) {
   const handleChange2 = (event) => {
 
 
-    console.log(event, "<--jyhfgd")
+
 
     setAddData({ ...addData, date2: event })
   }
@@ -94,7 +92,7 @@ export default function PoaEdit({ setSucess, itm }) {
   }
 
   const AddPoa = async => {
-    console.log(addData, "<0hgdfvfdbgdf")
+
     var data = JSON.stringify({
       "poa_id": addData?.poa_id,
       "date": addData?.date,
@@ -154,7 +152,7 @@ export default function PoaEdit({ setSucess, itm }) {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        {console.log(addPoa, "<----qwedrftgyhujikkmijnuhbygtv")}
+
         <Snackbar open={value} autoHideDuration={6000} onClose={() => {
           setAddPoa(''),
             setValue(false)
@@ -201,8 +199,8 @@ export default function PoaEdit({ setSucess, itm }) {
             >
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
                 <TextField fullWidth value={addData?.name} onChange={(e) => {
-                  setAddData({ ...addData, name: e?.target?.value }),
-                    console.log(e, "<---EWWEREWREW")
+                  setAddData({ ...addData, name: e?.target?.value })
+                 
                 }} id="outlined-basic" label="Add Title" variant="outlined" color="common" />
                 <Stack direction={'row'} color="common">
                   <Typography>All Day</Typography>

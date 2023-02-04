@@ -34,6 +34,8 @@ export default function User({ isDesktop }) {
   const [buses, setBuses] = useState();
 
   const [respBuses, setRespbuses] = useState()
+ 
+
 
   useEffect(() => {
     setDw(false)
@@ -53,8 +55,6 @@ export default function User({ isDesktop }) {
   }, [open]);
 
   const busesd = async (i, id, filterBusItem = null) => {
-
-
     console.log("bus api called ............................")
     const data = JSON.stringify({
       "date": "",
@@ -171,6 +171,8 @@ export default function User({ isDesktop }) {
     busesd()
   }
 
+  console.log(busesd,"busessssssssssssssss")
+
   const handleDelete = (itmTodelete) => {
     let empty = false
     if (selected.length == 1) {
@@ -227,8 +229,9 @@ export default function User({ isDesktop }) {
         </Stack>
         {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <BuslistDrawer
+          <BuslistDrawer updatedata={()=>{setDw(!dw)}}
             clcikData={clcikData}
+            busesd={busesd}
             isOpenFilter={openFilter}
             deletebuses={() => {
               setDw(!dw)
@@ -262,7 +265,7 @@ export default function User({ isDesktop }) {
         {buses?.length == 0 && (
 
           <div>
-            <h1>no data found</h1>
+             <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
           </div>
 
         )}

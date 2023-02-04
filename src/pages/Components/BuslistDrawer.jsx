@@ -23,6 +23,7 @@ import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import { ColorManyPicker } from '../../components/color-utils';
 import BusEdit from './Buslistfilters/BusEdit'
+import { DetailsRounded } from '@mui/icons-material';
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -58,10 +59,15 @@ BuslistDrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, bus_id, deletebuses }) {
+export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, bus_id, deletebuses,busesd,updatedata }) {
   const [detailsData, setDetailsData] = useState();
   const [deletebus, setDeleteBus] = useState();
+  const [userUpdate,setUserUpdate]=useState(false)
 
+  useEffect(()=>{
+    details()
+    },[userUpdate]
+    )
   var userAccess = ['2']
 
   var userIdCheck = localStorage?.getItem('userId')
@@ -89,6 +95,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
       .then(function (response) {
 
         setDetailsData(response.data)
+        updatedata()
         console.log(JSON.stringify(response.data, '<njnjnjn'));
       })
       .catch(function (error) {
@@ -98,9 +105,8 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
   }
 
 
-  const editBus = async => {
-
-  }
+  console.log(busesd,"buslistdrawerrr")
+  
 
   const DeleteBus = async => {
     var data = JSON.stringify({
@@ -140,7 +146,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{color:"#494646"}}>
-            {`Bus Number : ${clcikData?.register_number}`}
+            {`Bus Number : ${detailsData?.register_number}`}
           </Typography>
           <IconButton onClick={onCloseFilter}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
@@ -153,8 +159,12 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>
             {/* {userAccess.includes(userIdCheck) && */}
-            <Button onClick={DeleteBus} style={{float:'right',textAlign:'left'}}><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138'}}></Iconify></Button>
-           <BusEdit clcikData={detailsData} />
+            <Button onClick={DeleteBus} style={{float:'right',textAlign:'left'}} sx={{
+          '&:hover': {
+            backgroundColor: 'white',
+          },
+        }} ><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138'}}></Iconify></Button>
+           <BusEdit clcikData={detailsData} busesd={busesd} updatedata={()=>{setUserUpdate(!userUpdate)}} />
             <Card>
                 <CardContent>
                   <Typography style={{ flexDirection: 'row',color:'#494646' }} variant="subtitle1" gutterBottom>
