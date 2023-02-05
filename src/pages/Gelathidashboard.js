@@ -19,6 +19,7 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
+import FiltersHome from './Filters/FiltersHome';
 export default function Gelathidashboard() {
   const navigate = useNavigate();
   const data = localStorage?.getItem('userId')
@@ -33,17 +34,26 @@ export default function Gelathidashboard() {
   const [openFilter, setOpenFilter] = useState(false);
 
   const [filterData, setFilterData] = useState({})
-  const [slected, setSelected] = useState({
-    id: '',
-    nmae: ''
-  })
+  const [loader, setLoader] = useState(false)
+
+  const [slected, setSelected] = useState(null)
+
   const [summaryData, setSummaryData] = useState([]);
 
   useEffect(() => {
     apiHit();
   }, []);
 
+
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
   const apiHit = async (id, i, g) => {
+    setLoader(true)
     const data = {
       end_date: g === "date" ? i : '',
       role_id: 6,
@@ -88,6 +98,8 @@ export default function Gelathidashboard() {
 
     axios(config)
       .then((response) => {
+        setLoader(false)
+
         setSummaryData(response.data);
         console.log(response.data, '<-------njnnjhnjhjh');
       })
@@ -104,11 +116,19 @@ export default function Gelathidashboard() {
   };
 
   const onDateSubmit = (e) => {
+    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+
     apiHit(e?.startDate, e?.endDate, "date")
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
     handleCloseFilter()
     console.log(e, "<----scasds")
   }
+
+  const handleDelete = () => {
+    setSelected(null)
+    apiHit();
+  }
+
 
   if (summaryData?.length === 0) {
     return (
@@ -120,10 +140,7 @@ export default function Gelathidashboard() {
 
 
   const getData = (itm, i) => {
-    setSelected({
-      id: i,
-      name: itm?.name
-    })
+    setSelected(itm)
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     apiHit(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
@@ -133,6 +150,7 @@ export default function Gelathidashboard() {
   }
   const onSumbit = (e, i) => {
     handleCloseFilter()
+    setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
 
     apiHit(e?.district_id, e?.talaq_id, "country")
     console.log(e, i, "<----datssdasdsa")
@@ -159,8 +177,15 @@ export default function Gelathidashboard() {
             }}>
             Filter
           </Button>
+
+          {
+            slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+          }
+
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <DashboardFilter
+            <FiltersHome
+              type="Dashboard"
+
               onDateSubmit={onDateSubmit}
               onSumbit={onSumbit}
               getData={getData}

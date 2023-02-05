@@ -7,7 +7,7 @@ import AppBar from '@mui/material/AppBar';
 function AddUser(props) {
 
     const [open, setOpen] = useState(false);
-    const [ceoUser, setCeoUser] = useState(props.data)
+    // const [ceoUser, setCeoUser] = useState(props.data)
 
     let isValidForm = true;
 

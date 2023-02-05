@@ -77,7 +77,6 @@ export default function Searchbar({ getSearch }) {
 
   const changeText = (e) => {
     searchData = e?.target?.value
-    console.log(searchData)
   }
 
   // ----------------------------------------------------------------------

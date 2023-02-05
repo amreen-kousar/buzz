@@ -7,10 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Grid, Button, Stack, CardContent } from '@mui/material';
+import { Grid, Button, Stack, CardContent, Chip } from '@mui/material';
 import axios from 'axios';
 import DemographyFilter from './Components/DemographyFilters/DemographyFilter';
 import { assertTSAnyKeyword } from '@babel/types';
+import FiltersHome from './Filters/FiltersHome';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -52,10 +53,7 @@ export default function Demography() {
 
   const [openFilter, setOpenFilter] = useState(false);
   const [filterData, setFilterData] = useState({})
-  const [slected, setSelected] = useState({
-    id: '',
-    nmae: ''
-  })
+  const [selected, setSelected] = useState()
 
 
 
@@ -96,7 +94,7 @@ export default function Demography() {
       funder_id: "",
       partner_id: "",
       project_id: '',
-      opsManager: '', 
+      opsManager: '',
     };
 
     console.log(data, "datttttttaaaaaaaaaa")
@@ -126,8 +124,8 @@ export default function Demography() {
 
 
   const onSumbit = (e, i) => {
+    setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
     handleCloseFilter()
-
     demoi(e?.district_id, e?.taluk_id, "country")
     console.log(e, i, "<----datssdasdsa")
   }
@@ -159,11 +157,7 @@ export default function Demography() {
   ];
 
   const getData = (itm, i) => {
-    setSelected({
-      id: i,
-      name: itm?.name
-    })
-
+    setSelected(itm)
     const data = i === 2 ? { "funder_id": itm?.id } : { "project_id": itm?.id }
     demoi(itm, i);
     console.log("helloooo--->", data)
@@ -172,6 +166,11 @@ export default function Demography() {
     handleCloseFilter();
     console.log("itemmmm", itm);
     console.log("iiii", i);
+  }
+
+  const handleDelete = () => {
+    setSelected(null)
+    demoi()
   }
 
 
@@ -188,18 +187,22 @@ export default function Demography() {
         }}>
         Filter
       </Button>
+      {
+        selected?.type && <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
+      }
+
       {/* <h2> 
           
-          
+           
         
-        
-        {slected?.id===3? "Project": null}
-        {slected?.id===2?"Funder":null}
-        {slected?.id===7?"Location":null}
-      &nbsp;{slected?.name ? slected?.name : ''}</h2>  */}
+        {selected?.id===3? "Project": null}
+        {selected?.id===2?"Funder":null}
+        {selected?.id===7?"Location":null}
+      &nbsp;{selected?.name ? selected?.name : ''}</h2>  */}
 
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-        <DemographyFilter
+        <FiltersHome
+          type="Demography"
           getData={getData}
           onSumbit={onSumbit}
           isOpenFilter={openFilter}
@@ -253,20 +256,20 @@ export default function Demography() {
               <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
 
                 <StyledTableCell colSpan={2} xs={12} sm={12} md={12} style={{ justifyContent: 'center', textAlign: 'center', }}>Assets</StyledTableCell>
-              
+
               </TableRow>
             </TableHead>
             <TableBody>
-             
-            {assetrows.map((row) => (
+
+              {assetrows.map((row) => (
                 <StyledTableRow key={row.R1}>
                   <StyledTableCell component="th" scope="row">
                     {row.R1}
                   </StyledTableCell>
-                  <StyledTableCell style={{textAlign:'center',paddingLeft:8}}>{row.R2}</StyledTableCell>
+                  <StyledTableCell style={{ textAlign: 'center', paddingLeft: 8 }}>{row.R2}</StyledTableCell>
                 </StyledTableRow>
               ))}
-             
+
             </TableBody>
           </Table>
         </TableContainer>
@@ -301,7 +304,7 @@ export default function Demography() {
           </Table>
         </TableContainer>
       </Grid>
-      
+
 
       <Grid item xs={12} sm={12} md={12} marginTop={3}>
         {demo?.data?.map((itm) => {
@@ -423,7 +426,7 @@ export default function Demography() {
                           <StyledTableCell component="th" scope="row">
                             Buses
                           </StyledTableCell>
-                          <StyledTableCell style={{textAlign:'center',paddingLeft:2}}>{demo?.busCount}</StyledTableCell>
+                          <StyledTableCell style={{ textAlign: 'center', paddingLeft: 2 }}>{demo?.busCount}</StyledTableCell>
                         </StyledTableRow>
                       </TableBody>
                     </Table>

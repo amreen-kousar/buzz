@@ -108,7 +108,7 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ff7424',
                   },
-                  color: 'black',
+                  color: 'black'
                 }}>All Bus</Button> : null}
                 {(data == 6) ? <Button sx={{
                   ':hover': {

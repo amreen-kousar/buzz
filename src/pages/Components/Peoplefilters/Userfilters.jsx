@@ -24,9 +24,9 @@ import {
 } from '@mui/material';
 import Funders from '../DashboardFilters/Funders';
 import Partners from '../DashboardFilters/Partners';
-import BuzzTeams from './BuzzTeam';
+import BuzzTeams from '../../Filters/BuzzTeam';
 import Trainers from '../DashboardFilters/Trainers';
-import Driver from './Driver';
+import Driver from '../../Filters/Driver';
 // components
 
 

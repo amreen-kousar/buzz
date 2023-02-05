@@ -173,7 +173,6 @@ export default function DemographyFilter({ isOpenFilter, onOpenFilter, onCloseFi
             </Grid>}
 
 
-
           </div>
           {/* </Stack> */}
         </Scrollbar>
