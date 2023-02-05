@@ -21,7 +21,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateProj() {
+export default function CreateProj({createPro,setCreatePro,sendData}) {
+    console.log(sendData,"<------sendDatasendDatasendDatasendData")
   const [open, setOpen] = React.useState(false);
   const [openFilter, setOpenFilter] = useState(false);
 
@@ -164,7 +165,7 @@ export default function CreateProj() {
       </Button>
       <Dialog
         fullScreen
-        open={open}
+        open={createPro}
         onClose={handleClose}
         TransitionComponent={Transition}
       >
