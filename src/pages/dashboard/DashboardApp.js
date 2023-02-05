@@ -11,10 +11,12 @@ import { AppWidgetSummary } from '../../sections/@dashboard/app';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../../sections/@dashboard/products';
 import DashboardFilter from '../Components/DashboardFilters/DashboardFilter';
 import { useNavigate } from 'react-router-dom';
+import FiltersHome from '../Filters/FiltersHome';
 
 export default function DashboardApp() {
   const navigate = useNavigate();
   const data = localStorage?.getItem('userId')
+  const [loader, setLoader] = useState(false)
   const theme = useTheme();
   const intialValues = {
     funder: "",
@@ -26,17 +28,21 @@ export default function DashboardApp() {
   const [openFilter, setOpenFilter] = useState(false);
 
   const [filterData, setFilterData] = useState({})
-  const [slected, setSelected] = useState({
-    id: '',
-    nmae: ''
-  })
+  const [slected, setSelected] = useState(null)
   const [summaryData, setSummaryData] = useState([]);
+
+  const handleDelete = () => {
+    setSelected(null)
+    apiHit();
+  }
 
   useEffect(() => {
     apiHit();
   }, []);
 
   const apiHit = async (id, i, g) => {
+    setLoader(true)
+    console.log(id, i, g, "api hit in dashboard app")
     const data = {
       end_date: g === "date" ? i : '',
       role_id: 1,
@@ -78,9 +84,9 @@ export default function DashboardApp() {
       },
       data,
     };
-
     axios(config)
       .then((response) => {
+        setLoader(false)
         setSummaryData(response.data);
         console.log(response.data, '<-------njnnjhnjhjh');
       })
@@ -97,26 +103,24 @@ export default function DashboardApp() {
   };
 
   const onDateSubmit = (e) => {
+    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
     apiHit(e?.startDate, e?.endDate, "date")
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
     handleCloseFilter()
     console.log(e, "<----scasds")
   }
 
-  // if (summaryData?.length === 0) {
-  //   return (
-  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-  //       <CircularProgress />
-  //     </Box>
-  //   )
-  // }
-
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
 
   const getData = (itm, i) => {
-    setSelected({
-      id: i,
-      name: itm?.name
-    })
+    
+    setSelected(itm)
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     apiHit(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
@@ -125,8 +129,8 @@ export default function DashboardApp() {
     console.log("sdfgsdfdfssd", itm, i)
   }
   const onSumbit = (e, i) => {
+    setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
     handleCloseFilter()
-
     apiHit(e?.district_id, e?.talaq_id, "country")
     console.log(e, i, "<----datssdasdsa")
   }
@@ -153,16 +157,23 @@ export default function DashboardApp() {
             }}>
             Filter
           </Button>
-          <h2>
+          {/* <h2>
 
-            {/* <Chip label={(slected?.id===2)? "Funder":(slected?.id===1)?"partner":(slected?.id===5)?"Trainer":(slected?.id===1)?"partner": null} onDelete={closefilter}/> */}
+         
 
             {slected?.id === 1 ? "Partner" : null}
             {slected?.id === 3 ? "Project" : null}
             {slected?.id === 5 ? "Trainer" : null}
             {slected?.id === 4 ? "Operation Manager" : null}
             {slected?.id === 12 ? "Sr.Operation Manager" : null}
-            {slected?.id === 13 ? "Gelathis Facilator Leads" : null}&nbsp;{slected?.name ? slected?.name : ''}</h2>
+            {slected?.id === 13 ? "Gelathis Facilator Leads" : null}&nbsp;{slected?.name ? slected?.name : ''}
+            
+            </h2> */}
+
+          {
+            slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+          }
+
           {/* <h1 onClick={apiHit}>Close</h1> */}
           {/* <h2>{slected?.id===2? "Funder": null}&nbsp;{slected?.name ? slected?.name : ''}
           </h2> */}
@@ -174,7 +185,8 @@ export default function DashboardApp() {
 
         </Grid>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <DashboardFilter
+          <FiltersHome
+            type="Dashboard"
             onDateSubmit={onDateSubmit}
             onSumbit={onSumbit}
             getData={getData}

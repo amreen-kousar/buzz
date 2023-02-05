@@ -161,18 +161,15 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                     color: '#ff7424',
                   } : null}>Partner</Button> : null}
 
-                {/* } : null}>Partner</Button>
-                <Button onClick={() => { setData(3) }} sx={{ */}
-
-                {/* {data == 6 | data == 1 && <Button onClick={() => { setData(3) }} sx={{ */}
-                {(data == 6 | data == 1 | data == 5 | data == 4 | data == 8 | data == 12 | data == 13 | data == 3 | data == 7) ? <Button onClick={() => { setData(3) }} sx={{
+                {(data==6|data==1|data==5|data==4|data==8|data==12|data==13|data==3|data==7)?<Button onClick={() => { setData(3) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ff7424',
                   },
                   color: 'black',
-                }}>Project</Button> : null}
-                {(data == 1 | data == 8 | data == 12 | data == 3 | data == 7) ? <Button sx={{
+                }}>Project</Button>:null}
+
+                {(data == 1|data==8|data==12|data==3|data==7)? <Button sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ff7424',
@@ -225,9 +222,10 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
 
                 }} style={selectDATA == 7 ? {
                   background: '#ffd796', // theme.palette.primary.main
-                  color: '#ff7424',
-                } : null}>Location</Button> : null}
-                {(data == 1 | data == 8 | data == 3) ? <Button sx={{
+                  color: '#ed6c02',
+                } : null}>Location</Button>:null}
+
+                {(data == 1|data==8|data==3)?<Button sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ff7424',
@@ -235,7 +233,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   color: 'black',
                 }}>Participant</Button> : null}
                 {/* </Grid> */}
-                {(data == 1 | data == 3) ? <Button onClick={() => { setData(12) }} sx={{
+
+                {(data == 1|data==3)?<Button onClick={() => { setData(12) }} sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ff7424',
@@ -244,9 +243,10 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   color: 'black',
                 }} style={selectDATA == 12 ? {
                   background: '#ffd796', // theme.palette.primary.main
-                  color: '#ff7424',
-                } : null}>Sr.Operation Manager</Button> : null}
-                {(data == 1 | data == 3 | data == 13) ? <Button onClick={() => { setData(13) }} s sx={{
+                  color: '#ed6c02',
+                } : null}>Sr.Operation Manager</Button>:null}
+
+                {(data == 1|data==3|data==13)?<Button onClick={() => { setData(13) }} s sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ff7424',
@@ -255,19 +255,8 @@ export default function DashboardFilter({ isOpenFilter, onOpenFilter, onCloseFil
                   color: 'black',
                 }} style={selectDATA == 13 ? {
                   background: '#ffd796', // theme.palette.primary.main
-                  color: '#ff7424',
-                } : null}>Gelathis Facilitator Leads</Button> : null}
-                {/* {(data == 13)?<Button onClick={() => { setData(13) }} s sx={{
-                  ':hover': {
-                    bgcolor: '#ffd796', // theme.palette.primary.main
-                    color: '#ff7424',
-                  },
-
-                  color: 'black',
-                }} style={selectDATA == 13 ? {
-                  background: '#ffd796', // theme.palette.primary.main
-                  color: '#ff7424',
-                } : null}>Gelathis Facilitator</Button>:null} */}
+                  color: '#ed6c02',
+                } : null}>Gelathis Facilitator Leads</Button>:null}
 
               </CardContent>
             </Card>

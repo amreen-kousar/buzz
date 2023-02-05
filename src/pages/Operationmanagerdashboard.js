@@ -14,11 +14,16 @@ import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } fro
 import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
+import FiltersHome from './Filters/FiltersHome';
 
 export default function Operationmanagerdashboard() {
+
   const navigate = useNavigate();
+
   const data = localStorage?.getItem('userId')
+
   const theme = useTheme();
+
   const intialValues = {
     funder: "",
     patner: "",
@@ -26,20 +31,24 @@ export default function Operationmanagerdashboard() {
     fromDate: '',
     toDate: ""
   }
+
   const [openFilter, setOpenFilter] = useState(false);
 
   const [filterData, setFilterData] = useState({})
-  const [slected, setSelected] = useState({
-    id: '',
-    nmae: ''
-  })
+
+  const [slected, setSelected] = useState(null)
+
   const [summaryData, setSummaryData] = useState([]);
+
+  const [loader, setLoader] = useState(false)
+
 
   useEffect(() => {
     apiHit();
   }, []);
 
   const apiHit = async (id, i, g) => {
+    setLoader(true)
     const data = {
       end_date: g === "date" ? i : '',
       role_id: 1,
@@ -84,6 +93,7 @@ export default function Operationmanagerdashboard() {
 
     axios(config)
       .then((response) => {
+        setLoader(false)
         setSummaryData(response.data);
         console.log(response.data, '<-------njnnjhnjhjh');
       })
@@ -91,6 +101,15 @@ export default function Operationmanagerdashboard() {
         console.log(error);
       });
   };
+
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
+
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -100,6 +119,7 @@ export default function Operationmanagerdashboard() {
   };
 
   const onDateSubmit = (e) => {
+    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
     apiHit(e?.startDate, e?.endDate, "date")
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
     handleCloseFilter()
@@ -114,12 +134,13 @@ export default function Operationmanagerdashboard() {
     )
   }
 
+  const handleDelete = () => {
+    setSelected(null)
+    apiHit();
+  }
 
   const getData = (itm, i) => {
-    setSelected({
-      id: i,
-      name: itm?.name
-    })
+    setSelected(itm)
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     apiHit(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
@@ -127,12 +148,15 @@ export default function Operationmanagerdashboard() {
     handleCloseFilter()
     console.log("sdfgsdfdfssd", itm, i)
   }
-  const onSumbit = (e, i) => {
-    handleCloseFilter()
 
+  const onSumbit = (e, i) => {
+    setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
+
+    handleCloseFilter()
     apiHit(e?.district_id, e?.talaq_id, "country")
     console.log(e, i, "<----datssdasdsa")
   }
+
 
   const closefilter = () => {
     console.log("deleted")
@@ -155,8 +179,14 @@ export default function Operationmanagerdashboard() {
             }}>
             Filter
           </Button>
+
+          {
+            slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+          }
+
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <DashboardFilter
+            <FiltersHome
+              type="Dashboard"
               onDateSubmit={onDateSubmit}
               onSumbit={onSumbit}
               getData={getData}
@@ -248,4 +278,5 @@ export default function Operationmanagerdashboard() {
       </Page>
     </>
   )
+
 }

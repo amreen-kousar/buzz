@@ -11,6 +11,7 @@ import DashboardFilter from './Components/DashboardFilters/DashboardFilter';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
 
 import { useNavigate } from 'react-router-dom';
+import FiltersHome from './Filters/FiltersHome';
 
 
 export default function Trainerdashboard() {
@@ -27,11 +28,10 @@ export default function Trainerdashboard() {
   const [openFilter, setOpenFilter] = useState(false);
 
   const [filterData, setFilterData] = useState({})
-  const [slected, setSelected] = useState({
-    id: '',
-    nmae: ''
-  })
+  const [slected, setSelected] = useState(null)
   const [summaryData, setSummaryData] = useState([]);
+
+  const [loader, setLoader] = useState(false)
 
   useEffect(() => {
     apiHit();
@@ -97,7 +97,23 @@ export default function Trainerdashboard() {
     setOpenFilter(false);
   };
 
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
+
+  const handleDelete = () => {
+    setSelected(null)
+    apiHit();
+  }
+
+
   const onDateSubmit = (e) => {
+    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+
     apiHit(e?.startDate, e?.endDate, "date")
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
     handleCloseFilter()
@@ -114,10 +130,8 @@ export default function Trainerdashboard() {
 
 
   const getData = (itm, i) => {
-    setSelected({
-      id: i,
-      name: itm?.name
-    })
+    setSelected(itm)
+
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     apiHit(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
@@ -127,6 +141,7 @@ export default function Trainerdashboard() {
   }
   const onSumbit = (e, i) => {
     handleCloseFilter()
+    setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
 
     apiHit(e?.district_id, e?.talaq_id, "country")
     console.log(e, i, "<----datssdasdsa")
@@ -136,7 +151,7 @@ export default function Trainerdashboard() {
     console.log("deleted")
   }
 
-  console.log("sumarryyyyyyyyyyy",summaryData?.data[0]?.name)
+  console.log("sumarryyyyyyyyyyy", summaryData?.data[0]?.name)
   return (
     <>
       <Page title="Dashboard">
@@ -153,8 +168,12 @@ export default function Trainerdashboard() {
             }}>
             Filter
           </Button>
+          {
+            slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+          }
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <DashboardFilter
+            <FiltersHome
+              type="Dashboard"
               onDateSubmit={onDateSubmit}
               onSumbit={onSumbit}
               getData={getData}
@@ -223,68 +242,69 @@ export default function Trainerdashboard() {
             </Grid>
           </Grid>
 
-       <br></br>
+          <br></br>
           {summaryData?.data?.map((item) => {
-            return(
+            return (
               <>
-              <Card>
-          <CardContent style={{fontWeight:700}}>
-           <Stack direction="row" spacing={8}>
-            <Grid>Project</Grid>
-            <Grid>{item?.name}</Grid>
+                <Card>
+                  <CardContent style={{ fontWeight: 700 }}>
+                    <Stack direction="row" spacing={8}>
+                      <Grid>Project</Grid>
+                      <Grid>{item?.name}</Grid>
 
-           </Stack>
-           <Stack direction="row" spacing={2}>
-            <Grid>Actual Target</Grid>
-            <Grid>{item?.actual}/{item?.target}</Grid>
+                    </Stack>
+                    <Stack direction="row" spacing={2}>
+                      <Grid>Actual Target</Grid>
+                      <Grid>{item?.actual}/{item?.target}</Grid>
 
-           </Stack>
-            <Stack direction="row" spacing={7}>
-            <Grid>Duration</Grid>
-            <Grid>{item?.startDate}&nbsp;&nbsp;to&nbsp;&nbsp;{item?.endDate}</Grid>
-           
-           </Stack> 
-           <Grid container spacing={3} marginTop={4}>
-            <Grid item xs={4} sm={8} md={4}>
+                    </Stack>
+                    <Stack direction="row" spacing={7}>
+                      <Grid>Duration</Grid>
+                      <Grid>{item?.startDate}&nbsp;&nbsp;to&nbsp;&nbsp;{item?.endDate}</Grid>
 
-              <AppWidgetSummary
-                title="Villages"
-                total={item?.villages}
-                color="motivator"
+                    </Stack>
+                    <Grid container spacing={3} marginTop={4}>
+                      <Grid item xs={4} sm={8} md={4}>
 
-              // icon={'mdi:target-arrow'}
-              />
-            </Grid>
+                        <AppWidgetSummary
+                          title="Villages"
+                          total={item?.villages}
+                          color="motivator"
 
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
+                        // icon={'mdi:target-arrow'}
+                        />
+                      </Grid>
 
-                total={item?.women}
-                title="Women"
-                color="motivator"
-              // icon={'material-symbols:data-exploration'}
-              />
-            </Grid>
+                      <Grid item xs={4} sm={8} md={4}>
+                        <AppWidgetSummary
 
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
+                          total={item?.women}
+                          title="Women"
+                          color="motivator"
+                        // icon={'material-symbols:data-exploration'}
+                        />
+                      </Grid>
 
-                total={item?.day2}
-                title="2nd Day TurnOut(%)"
-                color="motivator"
+                      <Grid item xs={4} sm={8} md={4}>
+                        <AppWidgetSummary
 
-             
-              />
-            </Grid>
-</Grid>
-           </CardContent>
-        </Card>
-        
-        
-        <br></br></>
+                          total={item?.day2}
+                          title="2nd Day TurnOut(%)"
+                          color="motivator"
 
-        )})}
-           
+
+                        />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                </Card>
+
+
+                <br></br></>
+
+            )
+          })}
+
         </Container>
       </Page>
     </>
