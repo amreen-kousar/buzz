@@ -10,7 +10,7 @@ const navConfig = [
     title: 'dashboard',
     path: '/dashboard/app',
     icon: getIcon('eva:pie-chart-2-fill'),
-    id: [0, 1, 3, 7, 8, 12]
+    id: [0, 1, 3, 7, 8, 9, 12]
   },
   {
     title: 'dashboard',
@@ -22,7 +22,7 @@ const navConfig = [
     title: 'dashboard',
     path: '/dashboard/gelathi',
     icon: getIcon('eva:pie-chart-2-fill'),
-    id: [6,13]
+    id: [6, 13]
   },
   {
     title: 'dashboard',
@@ -34,19 +34,19 @@ const navConfig = [
     title: 'Plan Of Action',
     path: '/dashboard/planofaction',
     icon: getIcon('mdi:call-to-action'),
-    id: [0, 1, 3, 4, 5, 6, 7, 8, 12, 13]
+    id: [0, 1, 3, 4, 5, 6, 7, 9, 8, 12, 13]
   },
   {
     title: 'Projects',
     path: '/dashboard/projects',
     icon: getIcon('grommet-icons:projects'),
-    id: [0, 1, 2, 3,4, 5, 6, 7, 8, 12, 13]
+    id: [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 12, 13]
   },
   {
     title: 'BusList',
     path: '/dashboard/buslist',
     icon: getIcon('mdi:bus-stop'),
-    id: [0, 1, 2, 3, 4, 5, 7, 8, 12]
+    id: [0, 1, 2, 3, 4, 5, 6,9, 7, 8, 12]
   },
   {
     title: 'People',
@@ -64,7 +64,7 @@ const navConfig = [
     title: 'My Profile',
     path: '/dashboard/profile',
     icon: getIcon('healthicons:ui-user-profile-negative'),
-    id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13]
+    id: [0, 1, 2, 3, 4, 5, 6, 9, 7, 8, 12, 13]
   },
   {
     title: 'Demography',
@@ -76,7 +76,7 @@ const navConfig = [
     title: 'Travel Allowance',
     path: '/dashboard/travel',
     icon: getIcon('map:travel-agency'),
-    id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13]
+    id: [0, 1, 2, 3, 4, 5, 6, 9, 7, 8, 12, 13]
   },
   {
     title: 'Logout',

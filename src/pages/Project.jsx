@@ -128,6 +128,7 @@ export default function Project({ handleClickOpen, handleClose, open }) {
           <FiltersHome
             // onDateSubmit={onDateSubmit}
             // onSumbit={onSumbit}
+            projectr={projectr}
             getData={getData}
             // clcikData={clcikData}
             isOpenFilter={openFilter}

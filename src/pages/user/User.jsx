@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, forwardRef } from 'react';
 import axios from 'axios';
-import { Container, Stack, Typography, Box, Toolbar, Button, TextField, Select, MenuItem, Snackbar } from '@mui/material';
+import { Container, Stack, Typography, Box, Toolbar, Button, TextField, Select, MenuItem, Snackbar, Chip } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 // components
@@ -48,6 +48,7 @@ export default function User() {
   const [count, setCount] = useState('')
   const [openMessage, setOpenMessage] = useState(false)
   const [message, setMessage] = useState(false)
+  const [selected, setSelected] = useState(null)
 
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -120,8 +121,9 @@ export default function User() {
         console.log(error);
       });
 
-
   }
+
+
 
   useEffect(() => {
     if (open) {
@@ -139,17 +141,24 @@ export default function User() {
   var userIdCheck = localStorage?.getItem('userId')
 
 
-  const user = async (d) => {
+  const user = async (d, filter_type) => {
+
+    console.log(filter_type)
+    if (filter_type) {
+      setSelected(filter_type)
+      let ids = { "Trainer": 5, "Driver": 7, "Funder": 8, "Partner": 9, 'Gelathi Facilitators': 6, 'Management Team': 33 }
+      filter_type.id = ids[filter_type.type]
+    }
     const dataid = localStorage?.getItem('userDetails')
     const data = JSON.stringify({
       "search": searchUser,
       "user_id": JSON?.parse(dataid)?.id,
       "role_id": JSON?.parse(dataid)?.role,
-      "filter_id": "",
+      "filter_id": filter_type?.id ? filter_type?.id : '',
       "type": "",
       "pageNum": d ? d : 1
     });
-
+    console.log(data)
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getAllPeople.php',
@@ -161,12 +170,12 @@ export default function User() {
 
     axios(config)
       .then((response) => {
+        console.log(response, "response in user.jsx")
         setUsers(response.data.list)
-
         setCount(response?.data?.total_count % 25 == 0 ? parseInt(response?.data?.total_count / 25) : parseInt(response?.data?.total_count / 25) + 1)
-        let ceo = []
-        response.data.list.map(r => (r.role_name === "CEO") ? ceo = [...ceo, { label: r.first_name, ...r }] : null)
-        setCeoUser([...ceo])
+        // let ceo = []
+        // response.data.list.map(r => (r.role_name === "CEO") ? ceo = [...ceo, { label: r.first_name, ...r }] : null)
+        // setCeoUser([...ceo])
       })
       .catch((error) => {
         console.log(error);
@@ -174,15 +183,29 @@ export default function User() {
   }
   console.log(users, '<------------------response.data.list')
   const pageChange = (event, newPage) => {
-    setPage(newPage)
-    user(newPage)
+    setPage(newPage);
+    (selected?.type) ? user(newPage, selected) : user(newPage)
     console.log(newPage, "<----efesfdsefsd")
+  }
+
+  const handleDelete = () => {
+    setSearchUser([])
+    setSelected([])
+    user()
+    console.log('deleteeeeeeeeeee')
+  }
+
+  const searchBarCall = (e) => {
+    setSearchUser(e)
+    setSelected({ type: `Search :  ${e}` })
+    console.log(e)
   }
 
   return (
     <Page title="All Users">
       {/* <DashboardNavbar getSearch={(e) => setSearchUser(e)}  onOpenSidebar={() => setOpen(true)} /> */}
-      <Searchbar getSearch={(e) => setSearchUser(e)} />
+      <Searchbar getSearch={(e) => { searchBarCall(e) }} />
+
 
       <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
         <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
@@ -193,6 +216,7 @@ export default function User() {
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <FiltersHome
             type="People"
+            user={user}
             isOpenFilter={peopleFilter}
             onOpenFilter={handlepeopleOpenFilter}
             onCloseFilter={handlepeopleCloseFilter}
@@ -221,6 +245,11 @@ export default function User() {
             }}>Filters</Button>
         </Typography>
 
+        {selected?.type &&
+          <Stack direction="row" spacing={1}>
+            <Chip label={`${selected?.type}`} onDelete={() => { handleDelete() }} />
+          </Stack>
+        }
 
         <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ mb: 1 }}>

@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 
 import axios from 'axios';
 import TotalFilter from './Components/BuzzStockFilter/TotalFilter';
-// import FiltersHome from './Filters/FiltersHome';
+import FiltersHome from './Filters/FiltersHome';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -75,6 +75,7 @@ export default function BuzzStock() {
   const handleclosebusfilter = () => {
     setopenbusfilter(false);
   };
+
   // const getData = (itm, i) => {
   //   setSelected(itm)
   //   setopenbusfilter(false);
@@ -84,7 +85,7 @@ export default function BuzzStock() {
   //     name: itm?.name
   //   })
 
-   
+
 
   const onDateSubmit = (e) => {
     setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
@@ -103,10 +104,10 @@ export default function BuzzStock() {
     demoi()
   }
   const demoi = async (id, i, g) => {
-    // console.log(itm, i, g,"wedasghkiwe")
+    console.log(id, i, g, "buzz stock")
     var data = JSON.stringify({
-      "from_date": "2022-1-20",
-      "to_date": "2022-1-29",
+      "start_date": g === "date" ? id : '',
+      "end_date": g === "date" ? i : '',
       "user_id": 206,
       "role_id": 2,
       project_id: g ? "" : i === 3 ? id?.id : '',
@@ -133,7 +134,7 @@ export default function BuzzStock() {
       url: 'https://bdms.buzzwomen.org/appTest/getTotalStocks.php',
       headers: {
         'Content-Type': 'application/json',
-        Accept:'application/json'
+        Accept: 'application/json'
       },
       data
     };
@@ -143,7 +144,7 @@ export default function BuzzStock() {
       .then((response) => {
         console.log("responseeeeeeeeeeee", response)
         setDemo(response.data?.data)
-       console.log("harshaaaaaaa",response.data.list)
+        console.log("harshaaaaaaa", response.data.list)
         console.log(JSON.stringify(response.data, '<----333ssss'));
       })
       .catch((error) => {
@@ -152,9 +153,10 @@ export default function BuzzStock() {
   }
 
   const onSumbit = (e, i) => {
+    setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
     console.log(e, i, "<---onSUbmittttt")
-     handleclosebusfilter()
-    demoi(e?.district_id,e?.taluk_id,"country")
+    handleclosebusfilter()
+    demoi(e?.district_id, e?.taluk_id, "country")
 
   }
 
@@ -163,18 +165,15 @@ export default function BuzzStock() {
     setSelected(itm)
     setopenbusfilter(false);
     console.log(itm, i, "<-----qwertyu")
-    setSelected({
-      id: i,
-      name: itm?.name
-    })
 
-  const data = i===2?{"funder_id":itm?.id}:{"project_id":itm?.id}
-  demoi(itm, i)
-  console.log(data,i,itm,"<----sdfssreerfer")
-  setFilterData(data)
-  handleCloseFilter()
-  console.log("sdfgsdfdfssd", itm, i)
-}
+
+    const data = i === 2 ? { "funder_id": itm?.id } : { "project_id": itm?.id }
+    demoi(itm, i)
+    console.log(data, i, itm, "<----sdfssreerfer")
+    setFilterData(data)
+    handleCloseFilter()
+    console.log("sdfgsdfdfssd", itm, i)
+  }
   return (
     <div>
       <Button style={{ float: "right", color: '#ff7424' }}

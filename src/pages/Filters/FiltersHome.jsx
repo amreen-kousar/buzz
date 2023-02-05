@@ -56,19 +56,19 @@ FiltersHome.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit, type, resetBus }) {
+export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit, type, resetBus, user, projectr }) {
 
   var [selectDATA, setSelectData] = useState()
 
   const filterPermissions = {
 
-    Dashboard: { 1: ['1', '8', '12', '3', '7'], 2: ['1', '8', '12', '3', '7'], 3: ['6', '1', '5', '4', '8', '12', '13', '3', '7'], 4: ['1', '8', '12', '3', '7'], 5: ['1', '4', '8', '12', '3', '7'], 7: ['1', '4', '8', '12', '3', '7'], 9: ['6', '1', '5', '4', '8', '12', '13', '3', '7'], 10: ['5', '4', '3', '12', '3', '7'], 12: ['1', '3'], 13: ['1', '3', '13'] },
+    Dashboard: { 2: ['1', '8', '12', '3', '5', '6','9', '7'], 1: ['1', '8', '5', '12', '9', '6','3', '7'], 3: ['6', '1', '5', '4', '8', '12', '13', '3', '7'], 4: ['1', '8', '5', '12', '3','6', '7'], 5: ['1', '4', '5', '8','6', '12', '3', '7'], 7: ['1', '4', '6','8', '5', '12', '3', '7'], 9: ['6', '1', '5', '4', '8', '12', '13', '3', '7'], 10: ['5', '1', '3', '4', '12','6', '7'], 12: ['1', '3'], 13: ['1', '3', '13'] },
 
-    Projects: { 30: ['1', '2'], 31: ['6'], 7: ['1', '2', '6'], 9: ['1', '2', '6'], 2: ['1', '2'], 4: ['1', '2'], 5: ['1', '2'], 6: ['1', '2'] },
+    Projects: { 31: ['1', '2', '3', '4', '6'], 7: ['1', '2', '3', '4', '6'], 9: ['1', '2', '3', '4', '6'], 2: ['1', '3', '2'], 4: ['1', '3', '2'], 5: ['1', '3', '2'], 6: ['1', '3', '2'] },
 
-    BusList: { 2: ['1', '2'], 3: ['1', '2'], 7: ['1', '2'], 30: ['1', '2'] },
+    BusList: { 2: true, 3: true, 7: true, 30: true },
 
-    People: { 1: ['1', '2'], 2: ['1', '2'], 5: ['1', '2'], 32: ['1', '2'], 33: ['1', '2'], 34: ['1', '2'] },
+    People: { 1: ['1', '3', '2'], 2: ['1', '3', '2'], 5: ['1', '3', '4', '2'], 32: ['1', '3', '2'], 33: ['1', '3', '2'], 34: ['1', '4', '3', '2'], 6: ['1', '3', '4', '2'] },
 
     Demography: { 2: true, 3: true, 7: true },
 
@@ -79,20 +79,43 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
   const data = localStorage?.getItem('userId')
 
   // partner = 1, funder = 2, project = 3, opm = 4, trainer = 5, gelathi = 6 SOM=12 GFl=13
-  const filtersHeaders = { 1: 'Partners', 2: 'Funders', 3: 'Projects', 4: 'Operation Manager', 5: 'Trainer', 6: 'Gelathi Facilitators', 12: 'Sr. Operations Manager', 13: 'Gelathi Falicitator Lead', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Drivers' }
+  const filtersHeaders = { 1: 'Partner', 2: 'Funder', 3: 'Project', 4: 'Operation Manager', 5: 'Trainer', 6: 'Gelathi Facilitators', 12: 'Sr. Operations Manager', 13: 'Gelathi Falicitator Leads', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Driver' }
 
 
   const setData = (value) => {
     setSelectData(value)
+    if (type == 'People') {
+      user(1, { id: value, type: filtersHeaders[value] });
+      onCloseFilter()
+    }
     if (value == 30) {
       resetBus();
+      onCloseFilter()
+    }
+    if (value == 31) {
+      // call all projects
+      projectr()
       onCloseFilter()
     }
   }
 
   useEffect(() => {
-    console.log(onDateSubmit)
-    setSelectData(Object.keys(filterPermissions[type])[0])
+    console.log(Object.keys(filterPermissions[type]))
+
+    if (type != 'People') {
+      if (type == 'Demography' || type == 'BuzzStock' || type == 'BusList') {
+        setSelectData(Object.keys(filterPermissions[type])[0])
+      }
+      else {
+        Object.keys(filterPermissions[type]).forEach
+          ((e, i, arr) => {
+            if (filterPermissions[type][e].includes(data)) {
+              setSelectData(e);
+              arr.length = i + 1; // Behaves like `break`
+            }
+          })
+      }
+    }
   }, [])
 
 
@@ -116,7 +139,7 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
         anchor="right"
         open={isOpenFilter}
         onClose={() => {
-          setSelectData()
+          setSelectData(null)
           onCloseFilter()
         }}
         PaperProps={{
@@ -128,7 +151,7 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
             Filters :  {filtersHeaders[selectDATA]}
           </Typography>
           <IconButton onClick={() => {
-            setSelectData()
+            setSelectData(null)
             onCloseFilter()
           }}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
@@ -147,62 +170,64 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
                 }
               </CardContent>
             </Card>
-            {
-
-            }
-            {
-              selectDATA == 1 && <Grid>
-                <Partners getData={getData} selectDATA={selectDATA} />
-              </Grid>
-            }
-            {
-              selectDATA == 2 && <Grid>
-                <Funders getData={getData} selectDATA={selectDATA} />
-              </Grid>
-            }
-            {
-              selectDATA == 3 && <Grid>
-                <Projects getData={getData} selectDATA={selectDATA} />
-              </Grid>
-
-            }
-            {
-              selectDATA == 4 && <Grid>
-                <OperationManager getData={getData} selectDATA={selectDATA} />
-              </Grid>
-
-            }
-            {
-              selectDATA == 5 && <Grid>
-                <Trainers getData={getData} selectDATA={selectDATA} />
-              </Grid>
-            }
-            {
-              selectDATA == 7 && <Grid>
-                <Location getData={getData} selectDATA={selectDATA} onSumbit={onSumbit} />
-              </Grid>
-            }
-            {
-              selectDATA == 9 && <Grid>
-                <DateRangeFilter getData={getData} selectDATA={selectDATA} onDateSubmit={onDateSubmit} />
-              </Grid>
-            }
-            {
-              selectDATA == 10 && <Grid>
-                <Participant getData={getData} selectDATA={selectDATA} />
-              </Grid>
-            }
-            {
-              selectDATA == 12 && <Grid>
-                <SrOperationManager getData={getData} selectDATA={selectDATA} />
-              </Grid>
-            }
-            {
-              selectDATA == 13 && <Grid>
-                <GelathisLead getData={getData} selectDATA={selectDATA} />
-              </Grid>
-            }
           </div>
+
+          {
+            type != 'People' && <div>
+              {
+                selectDATA == 1 && <Grid>
+                  <Partners getData={getData} selectDATA={selectDATA} />
+                </Grid>
+              }
+              {
+                selectDATA == 2 && <Grid>
+                  <Funders getData={getData} selectDATA={selectDATA} />
+                </Grid>
+              }
+              {
+                selectDATA == 3 && <Grid>
+                  <Projects getData={getData} selectDATA={selectDATA} />
+                </Grid>
+
+              }
+              {
+                selectDATA == 4 && <Grid>
+                  <OperationManager getData={getData} selectDATA={selectDATA} />
+                </Grid>
+
+              }
+              {
+                selectDATA == 5 && <Grid>
+                  <Trainers getData={getData} selectDATA={selectDATA} />
+                </Grid>
+              }
+              {
+                selectDATA == 7 && <Grid>
+                  <Location getData={getData} selectDATA={selectDATA} onSumbit={onSumbit} />
+                </Grid>
+              }
+              {
+                selectDATA == 9 && <Grid>
+                  <DateRangeFilter getData={getData} selectDATA={selectDATA} onDateSubmit={onDateSubmit} />
+                </Grid>
+              }
+              {
+                selectDATA == 10 && <Grid>
+                  <Participant getData={getData} selectDATA={selectDATA} />
+                </Grid>
+              }
+              {
+                selectDATA == 12 && <Grid>
+                  <SrOperationManager getData={getData} selectDATA={selectDATA} />
+                </Grid>
+              }
+              {
+                selectDATA == 13 && <Grid>
+                  <GelathisLead getData={getData} selectDATA={selectDATA} />
+                </Grid>
+              }
+            </div>
+          }
         </Scrollbar>
 
       </Drawer>

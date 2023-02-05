@@ -11,7 +11,7 @@ import { AppWidgetSummary } from '../../sections/@dashboard/app';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../../sections/@dashboard/products';
 import DashboardFilter from '../Components/DashboardFilters/DashboardFilter';
 import { useNavigate } from 'react-router-dom';
-import FiltersHome from './Filters/FiltersHome';
+import FiltersHome from '../Filters/FiltersHome';
 
 export default function DashboardApp() {
   const navigate = useNavigate();
@@ -119,6 +119,7 @@ export default function DashboardApp() {
   }
 
   const getData = (itm, i) => {
+    
     setSelected(itm)
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     apiHit(itm, i)

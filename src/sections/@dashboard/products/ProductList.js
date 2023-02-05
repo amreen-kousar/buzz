@@ -49,43 +49,43 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
 
   return (
     <>
-    <Grid container spacing={3} {...other}>
-      {/* {users.map((product) => ( */}
-      {users.map((itm, index) => (
-        <Grid key={index} item xs={4} sm={4} md={4} >
-          {/* <Button> */}
+      <Grid container spacing={3} {...other}>
+        {/* {users.map((product) => ( */}
+        {users.map((itm, index) => (
+          <Grid key={index} item xs={4} sm={4} md={4} >
+            {/* <Button> */}
 
-          <Card onClick={() => { viewUser(itm) }}>
-            <CardContent>
-              <Grid direction={'column'} spacing={2} height="180px">
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <img style={{ borderRadius: 50 }} src={itm?.profile_pic ? itm?.profile_pic : defaultImage} />
-                </div>
-                {/* <Avatar sx={{ bgcolor: red[500], width: 50, height: '16vh', bgcolor: '#ff7424' }} src={itm?.profile_pic} aria-label="recipe">
+            <Card onClick={() => { viewUser(itm) }}>
+              <CardContent>
+                <Grid direction={'column'} spacing={2} height="180px">
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <img style={{ borderRadius: 50 }} src={itm?.profile_pic && itm.profile_pic != '1' ? itm?.profile_pic : defaultImage} />
+                  </div>
+                  {/* <Avatar sx={{ bgcolor: red[500], width: 50, height: '16vh', bgcolor: '#ff7424' }} src={itm?.profile_pic} aria-label="recipe">
                   {itm?.first_name.substring(0, 1)}
                 </Avatar> */}
-                <Typography sx={{ fontSize: 20, fontWeight: 'medium' }} mt={3} textAlign={'center'} >
-                  {/* {users?.first_name} */}
-                  {`${itm?.first_name} ${itm?.last_name}`}
-                </Typography>
-                <div style={{ textAlign: "center", fontSize: "0.8rem" }}>
-                  {itm?.role_name}
-                </div>
-              </Grid>
-            </CardContent>
-          </Card>
-          {/* </Button> */}
-          {/* <ShopProductCard product={product} /> */}
-        </Grid>
-      ))
-      }
-         
-    </Grid>{users?.length == 0 && (
+                  <Typography sx={{ fontSize: 20, fontWeight: 'medium' }} mt={3} textAlign={'center'} >
+                    {/* {users?.first_name} */}
+                    {`${itm?.first_name} ${itm?.last_name}`}
+                  </Typography>
+                  <div style={{ textAlign: "center", fontSize: "0.8rem" }}>
+                    {itm?.role_name}
+                  </div>
+                </Grid>
+              </CardContent>
+            </Card>
+            {/* </Button> */}
+            {/* <ShopProductCard product={product} /> */}
+          </Grid>
+        ))
+        }
 
-<div>
-  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
-</div>
+      </Grid>{users?.length == 0 && (
 
-)}</>
+        <div>
+          <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
+        </div>
+
+      )}</>
   );
 }

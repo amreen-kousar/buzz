@@ -60,7 +60,6 @@ export default function User({ isDesktop }) {
     const data = JSON.stringify({
       "date": "",
       "role_id": 1,
-
       "project_id": id === 3 ? i?.id : "",
       taluk_id: g === "country" ? id : "",
       district_id: g === "country" ? i : "",
