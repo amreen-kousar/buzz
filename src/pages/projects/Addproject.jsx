@@ -186,33 +186,30 @@ var config = {
 axios(config)
 .then(function (response) {
      setSendData({
-        projectId:response?.project_id,
-        projectname:response?.projectName,
-        locationid:response?.locationID,
-        locationName:response?.location_name
+        projectId:response?.data?.project_id,
+        projectname:response?.data?.projectName,
+        locationid:response?.data?.locationID,
+        locationName:response?.data?.location_name
      })
-    // "project_id": "297",
-    // "projectName": "Bilgi23297",
-    // "locationID": "36",
-    // "location_name": "Bilgi",
     setCreatePro(true)
     setAddProject(response.data)
-  console.log(response.data,'<----------setAddProjectsetAddProjectsetAddProject');
+  console.log(response,'<----------setAddProjectsetAddProjectsetAddProject',sendData);
 })
 .catch(function (error) {
   console.log(error);
 });
         }
-       else{
-            setSendData({
-                projectId:"",
-                projectname:"",
-                locationName:"",
-                locationid:""
-            })
-            setCreatePro(true)
-            console.log("form is cancelsdsd")
-      }
+        console.log(sendData,"<---qwertyui")
+    //    else{
+    //         setSendData({
+    //             projectId:"",
+    //             projectname:"",
+    //             locationName:"",
+    //             locationid:""
+    //         })
+    //         setCreatePro(true)
+    //         console.log("form is cancelsdsd")
+    //   }
 
       
     }
