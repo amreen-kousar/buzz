@@ -163,7 +163,7 @@ function AddProject() {
 
 
     const createProject = () => {
-        if(!confirm("Press a button!")){
+        if(confirm("Are You Sure You Want To Create Project?")){
        const fundList = fund?.filter(itm=>itm?.id===mainState?.funderId)
        const talukList = taluk?.filter(itm=>itm?.id===mainState?.locationID)
        console.log(fundList,talukList,"<----talukListtalukList")
@@ -185,7 +185,12 @@ var config = {
 
 axios(config)
 .then(function (response) {
-    setSendData({})
+     setSendData({
+        projectId:response?.project_id,
+        projectname:response?.projectName,
+        locationid:response?.locationID,
+        locationName:response?.location_name
+     })
     // "project_id": "297",
     // "projectName": "Bilgi23297",
     // "locationID": "36",
@@ -198,18 +203,18 @@ axios(config)
   console.log(error);
 });
         }
-        else{
+       else{
             setSendData({
-                projectId:"56",
-                projectname:"nothing",
-                locationName:"bilgi",
-                locationid:"578"
+                projectId:"",
+                projectname:"",
+                locationName:"",
+                locationid:""
             })
             setCreatePro(true)
             console.log("form is cancelsdsd")
-        }
+      }
 
-        // MAKE API caal to create project
+      
     }
 
 
@@ -364,8 +369,11 @@ axios(config)
                   </Button>
                   </Link><br /> */}
                     {/* <Button onClick={() => createProject()} fullWidth variant="filled" style={{background:"#f5f5f5"}}>Create New Project</Button> */}
-
-                    <CreateProj sendData={sendData} setCreatePro={(e)=>{setCreatePro(e)}}  createPro={createPro&&sendData?.projectname!==""} />
+ {}
+                    <CreateProj sendData={sendData} setCreatePro={(e)=>{setCreatePro(e),
+                    handleClose()
+                    
+                    }}  createPro={sendData?.projectname!==""&&createPro} />
                 </div>
 
             </Dialog>

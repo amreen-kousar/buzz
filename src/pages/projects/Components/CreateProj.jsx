@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import {Button,CardContent,Card,Grid,FormControl,InputLabel,MenuItem,Select,TextField,Stack} from '@mui/material';
+import {Button,CardContent,Card,Grid,FormControl,InputLabel,MenuItem,Select,TextField,Stack, Snackbar, Alert} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
@@ -27,6 +27,7 @@ export default function CreateProj({createPro,setCreatePro,sendData}) {
   const [openFilter, setOpenFilter] = useState(false);
 
     const [partner, setPartner] = useState([])
+    const[notify,setNotify]=useState(false)
     const [busData,setBusData]  = useState([])
     const [teamData, setTeamData] = useState([])
     const [trainerData,setTrainerData] = useState([])
@@ -64,6 +65,7 @@ export default function CreateProj({createPro,setCreatePro,sendData}) {
     busList();
     teamList();
     driverList();
+    setNotify(true)
 }, [])
   const partnerList = async =>{
     var config = {
@@ -160,9 +162,7 @@ export default function CreateProj({createPro,setCreatePro,sendData}) {
  
   return (
     <div>
-      <Button fullWidth variant="filled" onClick={handleClickOpen}>
-       Create New Project
-      </Button>
+    
       <Dialog
         fullScreen
         open={createPro}
@@ -172,23 +172,28 @@ export default function CreateProj({createPro,setCreatePro,sendData}) {
                 <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
           <Toolbar>
             {/* <Stack direction={'column'}> */}
-          
+           
             {/* </Stack> */}
         
-            <Button  autoFocus color="inherit" onClick={handleClose}>
+            <Button  autoFocus color="inherit" onClick={()=>{setCreatePro(false)}}>
               save
             </Button>
           </Toolbar>
         </AppBar>
        <Grid>
        <CardContent>
+       <Snackbar open={notify} autoHideDuration={3000} onClose={()=>{setNotify(false)}}>
+        <Alert onClose={()=>{setNotify(false)}} severity="success" sx={{ width: '100%' }}>
+          Project created succesfully
+        </Alert>
+      </Snackbar>
        <Card style={{top:15}}>
             <CardContent>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Project : BangaloreAd23291
+              Project : {sendData?.projectname}
             </Typography>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-             District : Bangalore
+             District : {sendData?.locationName}
             </Typography>
             </CardContent>
          </Card>
