@@ -45,7 +45,7 @@ export default function StaticDatePickerDemo(props) {
             />
           </LocalizationProvider></Stack>
 
-        <Button onClick={() => props?.onDateSubmit({ startDate: moment(startDate?.$d)?.format('YYYY-MM-DD'), endDate: moment(endDate  ?.$d)?.format('YYYY-MM-DD') })}
+        <Button onClick={() => props?.onDateSubmit({ startDate: moment(startDate?.$d)?.format('YYYY-MM-DD'), endDate: moment(endDate?.$d)?.format('YYYY-MM-DD') })}
           sx=
           {{
             ":hover": {

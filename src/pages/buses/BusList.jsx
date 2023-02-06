@@ -13,36 +13,26 @@ import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
 
-export default function User({ isDesktop }) {
+export default function User() {
 
   var userAccess = ['2']
-
   var userIdCheck = localStorage?.getItem('userId')
-
   const [openMessage, setOpenMessage] = useState(false);
-
   var [selected, setSelected] = useState(null)
-
   const [clcikData, setClickData] = useState()
-
   var [search, setSearch] = useState('')
-
   const [dw, setDw] = useState(false)
   const [open, setOpen] = useState(false)
-
   const descriptionElementRef = useRef(null);
-
   const [buses, setBuses] = useState();
-
   const [respBuses, setRespbuses] = useState()
- 
+
 
 
   useEffect(() => {
     setDw(false)
     busesd()
-  }, [dw]
-  )
+  }, [dw])
 
   useEffect(() => {
 
@@ -56,9 +46,6 @@ export default function User({ isDesktop }) {
   }, [open]);
 
   const busesd = async (i, id, g) => {
-
-
-    console.log("bus api called ............................")
     const data = JSON.stringify({
       "date": "",
       "role_id": 1,
@@ -181,7 +168,7 @@ export default function User({ isDesktop }) {
     busesd()
   }
 
-  console.log(busesd,"busessssssssssssssss")
+  console.log(busesd, "busessssssssssssssss")
 
   const handleDelete = (itmTodelete) => {
     setSelected(null)
@@ -211,15 +198,12 @@ export default function User({ isDesktop }) {
   return (
     <Page title="User">
       <Searchbar getSearch={(e) => searchFunction(e)} />
-
       <Container>
         <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
           <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
             This is a success message!
           </Alert>
         </Snackbar>
-        {/* <DashboardNavbar getSearch={(e) => searchFunction(e)} isOpenSidebar={() => setOpen(true)} /> */}
-
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
             {selected?.type ? " Bus List" : "All Bus List"}
@@ -235,13 +219,9 @@ export default function User({ isDesktop }) {
             }}>
             Filter
           </Button>
-          {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
         </Stack>
-        {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <BuslistDrawer updatedata={()=>{setDw(!dw)}}
+          <BuslistDrawer updatedata={() => { setDw(!dw) }}
             clcikData={clcikData}
             busesd={busesd}
             isOpenFilter={openFilter}
@@ -277,13 +257,11 @@ export default function User({ isDesktop }) {
 
 
         {buses?.length == 0 && (
-
           <div>
-             <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
+            <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
           </div>
-
         )}
-        {/* </Stack> */}
+
         {buses?.map((itm) => {
           return (
             <Card style={styles.card1}
@@ -291,16 +269,10 @@ export default function User({ isDesktop }) {
                 setClickData(itm)
                 handleOpenFilter()
               }}>
-
               <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
                 <Typography variant="subtitle1" gutterBottom  >
                   {`Bus Number : ${itm?.register_number}`}
-
                 </Typography>
-                {/* 
-                <Typography variant="subtitle1" gutterBottom>
-                  {` Project Name : ${itm?.project_name}`}
-                </Typography> */}
               </Grid>
               <Grid style={{ marginLeft: 15 }}>
                 <Typography variant="subtitle2" gutterBottom >
@@ -314,16 +286,8 @@ export default function User({ isDesktop }) {
             </Card>
           )
         })}
-        {/* <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'relative', zIndex: '1',top:"40",left:"50" }}
-         sx={{
-          '&:hover': {
-            backgroundColor: '#ffd796',
-         
-          },
-        backgroundColor:"#ffd796"
-       }} variant="contained" onClick={handleClickOpen('paper')}>
-          <span style={{ fontSize: "2rem",color:"#ff7424" }}>+</span></Button> */}
       </Container>
+
       {userAccess.includes(userIdCheck) && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <Addbus />
       </Stack>}
