@@ -84,26 +84,26 @@ export default function GreenSurvey() {
             <CardContent>
               <Card mt={1} style={{backgroundColor: '#F6F8FB'}}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>Email *</Typography>
+                  <Typography style={{color:"#ff7424"}}>Email *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField  id="Email" label="Enter Email" variant="outlined" required color="common" />
                   </Stack>
-                  <Typography style={{color:"#ff4913"}}>Name of surveyor *</Typography>
+                  <Typography style={{color:"#ff7424"}}>Name of surveyor *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Answer" required label="Your Answer" variant="outlined" color="common"/>
                   </Stack>
                
-                  <Typography style={{color:"#ff4913"}}>Name of respondent *</Typography>
+                  <Typography style={{color:"#ff7424"}}>Name of respondent *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Answer" required  label="Your Answer" variant="outlined" color="common" />
                   </Stack>
               
-                  <Typography style={{color:"#ff4913"}}>Village Name *</Typography>
+                  <Typography style={{color:"#ff7424"}}>Village Name *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Village" required label="Village Name" variant="outlined" color="common"/>
                   </Stack>
                
-                  <Typography style={{color:"#ff4913"}}>Phone Number *</Typography>
+                  <Typography style={{color:"#ff7424"}}>Phone Number *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Phone Number" required label="Phone Number" variant="outlined" color="common" />
                   </Stack>
@@ -112,7 +112,7 @@ export default function GreenSurvey() {
 
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>Which of the following are natural resources? *</Typography>
+                  <Typography style={{color:"#ff7424"}}>Which of the following are natural resources? *</Typography>
                   <Stack mt={2}>
                     <FormGroup >
                       <FormControlLabel control={<Checkbox style={{color:"#595959"}} />} label="Soil" />
@@ -128,7 +128,7 @@ export default function GreenSurvey() {
               </Card>
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>
+                  <Typography style={{color:"#ff7424"}}>
                     How is change in state of natural resources impacting your life? *</Typography>
                   <Stack mt={2}>
                     <FormGroup>
@@ -147,7 +147,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Natural wealth for me is *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Natural wealth for me is *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -172,7 +172,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Have you heard of "Climate Change" ? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Have you heard of "Climate Change" ? *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
@@ -188,7 +188,7 @@ export default function GreenSurvey() {
 
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>What do you know about it? *</Typography>
+                  <Typography style={{color:"#ff7424"}}>What do you know about it? *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Answe" label="Your Answer" variant="outlined" color="common" required/>
                   </Stack>
@@ -199,7 +199,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Do you notice any change in the weather/climate in last 30 years? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Do you notice any change in the weather/climate in last 30 years? *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -215,7 +215,7 @@ export default function GreenSurvey() {
 
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>
+                  <Typography style={{color:"#ff7424"}}>
                     What kind of changes happened to the climate? *</Typography>
                   <Stack mt={2}>
                     <FormGroup>
@@ -233,7 +233,7 @@ export default function GreenSurvey() {
 
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>
+                  <Typography style={{color:"#ff7424"}}>
                     On a scale of 1 to 10 please rate,how much do you think climate change threatens your personal and family health and safety? *</Typography>
                   <Stack mt={2}>
                   <RadioGroup
@@ -259,7 +259,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Do you think anything can be tackle climate change? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Do you think anything can be tackle climate change? *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -276,7 +276,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Do you think you would do something to tackle climate change? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Do you think you would do something to tackle climate change? *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -292,7 +292,7 @@ export default function GreenSurvey() {
 
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>
+                  <Typography style={{color:"#ff7424"}}>
                     What is the main source of water used by your house-hold for other purposes,such as cooking and hand washing? *</Typography>
                   <Stack mt={2}>
                     <FormGroup>
@@ -315,7 +315,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Which Statement shown below do you agree with? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Which Statement shown below do you agree with? *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -335,7 +335,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>How concerned are you about local water quality that you are consuming now in your village? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>How concerned are you about local water quality that you are consuming now in your village? *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -356,7 +356,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>My personal actions can affect water quality in my village? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>My personal actions can affect water quality in my village? *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -377,7 +377,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Do you think you take water conservation measures in your everyday life? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Do you think you take water conservation measures in your everyday life? *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -393,7 +393,7 @@ export default function GreenSurvey() {
             
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>If yes,what kind of measures have you taken in the past? *</Typography>
+                  <Typography style={{color:"#ff7424"}}>If yes,what kind of measures have you taken in the past? *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Ans" label="Your Answer" variant="outlined" color="common"/>
                   </Stack>
@@ -402,7 +402,7 @@ export default function GreenSurvey() {
             
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>Can you list down impact of climate change on your land? *</Typography>
+                  <Typography style={{color:"#ff7424"}}>Can you list down impact of climate change on your land? *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Anse" label="Your Answer" variant="outlined" color="common"/>
                   </Stack>
@@ -413,7 +413,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Bhasker is gifting his 6 acres land to children Meena and Keshav.Out of 6 acres, 3 acres is in P.Halli and another 3 acres is in K.Halli which are closeby. The 2 plots are situated in the borders of K.Halli and P.Halli. 
+                    <Typography style={{color:"#ff7424"}}>Bhasker is gifting his 6 acres land to children Meena and Keshav.Out of 6 acres, 3 acres is in P.Halli and another 3 acres is in K.Halli which are closeby. The 2 plots are situated in the borders of K.Halli and P.Halli. 
                     K.Halli and P.Halli is separated by a forest in between. Meena and Keshav plans to expand their land by clearing parts of the forest. 
                     Meena wants to build a school and keshav wants to build a shopping complex in the forest land. what do you think should be done here? *</Typography>
                     <RadioGroup
@@ -435,7 +435,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Which one according to you is right? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Which one according to you is right? *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -454,7 +454,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Do you believe there is a connection between the food we eat,our health and climate change? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Do you believe there is a connection between the food we eat,our health and climate change? *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -472,7 +472,7 @@ export default function GreenSurvey() {
 
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>Are there any native food you believe is environmentally friendly to plant and is good for health?Name any two *</Typography>
+                  <Typography style={{color:"#ff7424"}}>Are there any native food you believe is environmentally friendly to plant and is good for health?Name any two *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Answ" label="Your Answer" variant="outlined" color="common"/>
                   </Stack>
@@ -482,7 +482,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Which of the following household activity pollutes natural resources? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Which of the following household activity pollutes natural resources? *</Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -502,7 +502,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Do you think there are alternatives in the household for materials that cause pollution? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Do you think there are alternatives in the household for materials that cause pollution? *</Typography>
                     <RadioGroup 
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -521,7 +521,7 @@ export default function GreenSurvey() {
 
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>If yes, what are they? *</Typography>
+                  <Typography style={{color:"#ff7424"}}>If yes, what are they? *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Answ" label="Your Answer" variant="outlined" color="common"/>
                   </Stack>
@@ -531,7 +531,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Would you be willing to switch to these eco-friendly products and activities? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Would you be willing to switch to these eco-friendly products and activities? *</Typography>
                     <RadioGroup 
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -550,7 +550,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Would you be willing to make this switch to eco-friendly even if you have a pay a little more than what you pay for the chemicals? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Would you be willing to make this switch to eco-friendly even if you have a pay a little more than what you pay for the chemicals? *</Typography>
                     <RadioGroup 
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -567,7 +567,7 @@ export default function GreenSurvey() {
 
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>What do you think we should make this switch to eco-friendlly products? *</Typography>
+                  <Typography style={{color:"#ff7424"}}>What do you think we should make this switch to eco-friendlly products? *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Answ" label="Your Answer" variant="outlined" color="common"/>
                   </Stack>
@@ -577,7 +577,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Do you think developing simple-at-home solutiions to climate change is a lot of effort? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Do you think developing simple-at-home solutiions to climate change is a lot of effort? *</Typography>
                     <RadioGroup 
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -596,7 +596,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Have you ever taken, or do you regularly take,any action out of concern for climate change? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Have you ever taken, or do you regularly take,any action out of concern for climate change? *</Typography>
                     <RadioGroup 
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -613,7 +613,7 @@ export default function GreenSurvey() {
             
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>If yes,what did you do/are you doing? *</Typography>
+                  <Typography style={{color:"#ff7424"}}>If yes,what did you do/are you doing? *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Answ" label="Your Answer" variant="outlined" color="common"/>
                   </Stack>
@@ -624,7 +624,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Do you know what natural resource of your community needs immediate attention and measures of conservation (forest,lake,pond,park etc)? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Do you know what natural resource of your community needs immediate attention and measures of conservation (forest,lake,pond,park etc)? *</Typography>
                     <RadioGroup 
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -641,7 +641,7 @@ export default function GreenSurvey() {
             
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>If yes,what is that resource? *</Typography>
+                  <Typography style={{color:"#ff7424"}}>If yes,what is that resource? *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Answ" label="Your Answer" variant="outlined" color="common"/>
                   </Stack>
@@ -651,7 +651,7 @@ export default function GreenSurvey() {
                       
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff4913"}}>What is your goal you want to achieve with regard to natural resource conservation in your village? *</Typography>
+                  <Typography style={{color:"#ff7424"}}>What is your goal you want to achieve with regard to natural resource conservation in your village? *</Typography>
                   <Stack mt={2} mb={2}>
                     <TextField id="Answ" color="common" label="Your Answer" variant="outlined"/>
                   </Stack>
@@ -662,7 +662,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Have you seen anyone in the village take a initiative to conserve the environment of your village? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Have you seen anyone in the village take a initiative to conserve the environment of your village? *</Typography>
                     <RadioGroup 
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"
@@ -679,7 +679,7 @@ export default function GreenSurvey() {
               <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography style={{color:"#ff4913"}}>Have you seen anyone in the village take a initiative to conserve the environment of your village? *</Typography>
+                    <Typography style={{color:"#ff7424"}}>Have you seen anyone in the village take a initiative to conserve the environment of your village? *</Typography>
                     <RadioGroup 
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Natural Resource"

@@ -33,6 +33,7 @@ import Iconify from 'src/components/Iconify';
 import moment from 'moment'
 import { orange } from '@mui/material/colors';
 import Webcam from "react-webcam";
+import Label from 'src/components/Label';
 function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
@@ -283,6 +284,8 @@ export default function TravelDialog({ viewMessage }) {
   //     </>
   //     )
   //   }
+  const userDetails = localStorage?.getItem('userId')
+  console.log(userDetails,"userrrrrrrrrrrrrrr")
   return (
     <div>
 
@@ -343,20 +346,60 @@ export default function TravelDialog({ viewMessage }) {
               <Stack style={{ marginTop: 20 }}>
                 <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
               </Stack><br></br>
-              <Stack style={{ marginTop: 20 }}>
-                <FormControl fullWidth >
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
+              {/* <Stack style={{ marginTop: 20 }}>
+
+                     <ListItemButton
+            autoFocus
+          //  onClick={() => handleListItemClick('addAccount')}
+          >
+          <ListItemAvatar>
+              <Avatar>
+                <AddIcon />
+              </Avatar>
+            </ListItemAvatar> 
+            <ListItemText primary="Add account" />
+          </ListItemButton>  
+
+
+          
+                {(userDetails===12)?<FormControl fullWidth >
+                <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel> 
+                {(userDetails===12)?
+                  
+                  <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />
                   <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                     {datadrop?.data?.map(itm => {
                       return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                     })}
-
-                    {/* <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem> */}
                   </Select>
+               
+             
+                </FormControl>
+                :
+                <FormControl fullWidth >
+                <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
+                <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
+                  {datadrop?.data?.map(itm => {
+                    return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
+                  })}
+                </Select>
                 </FormControl>
 
-              </Stack><br></br>
+              </Stack><br></br> */}
+              <Stack style={{ marginTop: 20 }}>       
+             <FormControl fullWidth >
+            {console.log(userDetails,"userdetailsssssssssssss")}
+              {/* {(userDetails===12)?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />:null} */}
+              <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />
+               
+                <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
+                
+                  {datadrop?.data?.map(itm => {
+                    return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
+                  })}
+                </Select>
+                </FormControl>
+              </Stack>
 
               <Stack style={{ marginTop: 20 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>

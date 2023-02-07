@@ -4,7 +4,7 @@ import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mu
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
-
+import Vyaparprogram from './Components/Vyaparprogram';
 export default function enrolledVyaaparList() {
 
     const [clcikData, setClickData] = useState()
@@ -96,6 +96,7 @@ export default function enrolledVyaaparList() {
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>
                         </Grid>
+                       <Vyaparprogram/>
                     </Card>)
             })}
 
