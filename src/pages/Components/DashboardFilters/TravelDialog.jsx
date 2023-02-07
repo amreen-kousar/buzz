@@ -61,7 +61,8 @@ export default function TravelDialog({ viewMessage }) {
     OtherAmount: "",
     endOdimeter: "",
     endLocation: "",
-    totalkm: ""
+    totalkm: "",
+    fairamount:""
   });
 
   // const webcamRef = React.useRef(null);
@@ -132,6 +133,7 @@ export default function TravelDialog({ viewMessage }) {
       "end_odometer": sendData?.endOdimeter,
       "telephone": sendData?.telephonecharges,
       "end_location_name": sendData?.endLocation,
+      "fairamount":sendData?.fairamount,
       "printing": sendData?.printing,
       "start_location_name": "RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India",
       "poa_id": sendData?.poa,
@@ -386,6 +388,10 @@ export default function TravelDialog({ viewMessage }) {
                   </Select>
                 </FormControl>
               </Stack><br></br>
+              {console.log(datadrop?.Mode_of_Travel,"modeeeeeeeeeeee",sendData?.modeoftravel)}
+              {(sendData?.modeoftravel&&sendData?.modeoftravel===1 | sendData?.modeoftravel===4 | sendData?.modeoftravel===5 | sendData?.modeoftravel===6)?<Stack style={{ marginTop: 20 }}>
+                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, fairamount: e?.target?.value }) }} label="Fair amount" variant="outlined" color="common" />
+              </Stack>:null}
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Rate Per Km</InputLabel>
@@ -402,6 +408,7 @@ export default function TravelDialog({ viewMessage }) {
                   </Select>
                 </FormControl>
               </Stack><br></br>
+             
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Food Expenses </InputLabel>
