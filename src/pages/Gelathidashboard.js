@@ -318,7 +318,11 @@ export default function Gelathidashboard() {
 
         </Grid> */}
 
-          {summaryData?.data[0]?.name ? <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
+          {summaryData?.data?.map((item)=>{
+            return(
+              <>
+              {summaryData?.data?
+               <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
 
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
               Project {summaryData?.data[0]?.name}
@@ -356,8 +360,13 @@ export default function Gelathidashboard() {
 
 
             </CardContent>
-          </Card> : <span style={{ textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}>No Projects</span>}
-
+          </Card> 
+          :  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>}
+              </>
+            )
+          })
+        } 
+          
 
 
 
