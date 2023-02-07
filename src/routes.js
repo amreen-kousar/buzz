@@ -16,7 +16,7 @@ import BusList from './pages/buses/BusList';
 import BuzzStock from './pages/BuzzStock';
 import Demography from './pages/Demography';
 import PlanofAction from './pages/PlanofAction';
-import TravelA from './pages/TravelA';
+import TravelA from './pages/travelAllowance/TravelA';
 import Chart from './pages/dashboard/Charts'
 import ProjectHome from './pages/projects/ProjectHome';
 import AllProjects from './pages/projects/AllProjects';
@@ -79,7 +79,7 @@ export default function Router() {
             { path: 'trainer', element: <Trainerdashboard />, id: [5] },
             { path: 'gelathi', element: <Gelathidashboard />, id: [6, 13] },
             { path: 'operationmanager', element: <Operationmanagerdashboard />, id: [4] },
-            { path: 'buslist', element: <BusList />, id: [0, 1, 2, 3, 4, 5,6, 7, 9, 8, 12] },
+            { path: 'buslist', element: <BusList />, id: [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 12] },
             { path: 'planofaction', element: <PlanofAction />, id: [0, 1, 3, 4, 5, 9, 6, 7, 8, 12, 13] },
             //  { path: 'projects', element: <Blog />,id=[1,2,3] },
             {
