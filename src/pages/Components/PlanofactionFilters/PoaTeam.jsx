@@ -55,8 +55,8 @@ function SimpleDialog(props) {
           
         ))}
 
-        <ListItem disableGutters>
-          {/* <ListItemButton
+        {/* <ListItem disableGutters>
+          <ListItemButton
             autoFocus
           //  onClick={() => handleListItemClick('addAccount')}
           >
@@ -66,8 +66,8 @@ function SimpleDialog(props) {
               </Avatar>
             </ListItemAvatar> 
             <ListItemText primary="Add account" />
-          </ListItemButton>  */}
-        </ListItem>
+          </ListItemButton> 
+        </ListItem> */}
       </List>
     </Dialog>
   );
