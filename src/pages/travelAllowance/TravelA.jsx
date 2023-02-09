@@ -173,10 +173,6 @@ export default function TravelA() {
 
         <br></br>
 
-
-
-
-
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <TravelDialog viewMessage={(text) => {
             setMessage(text)

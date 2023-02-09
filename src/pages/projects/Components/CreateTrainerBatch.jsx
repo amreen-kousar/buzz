@@ -115,7 +115,15 @@ export default function CreateTrainerBatch() {
   }
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined"  onClick={handleClickOpen} style={{  color: '#ff7424' }} 
+      sx=
+      {{ 
+        '&:hover': 
+        { 
+          backgroundColor: '#ffd796', 
+          borderColor: "#ff7424", 
+          
+        }, borderColor: "#ff7424",}}>
         New Training Batch
       </Button>
       <Dialog
@@ -134,7 +142,7 @@ export default function CreateTrainerBatch() {
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" style={{color:"white"}}>
               Create  New Training Batch
             </Typography>
             <Button autoFocus color="inherit" onClick={createTrainerBatch}>
@@ -155,12 +163,13 @@ export default function CreateTrainerBatch() {
         <Stack mt={3}>
           {console.log(trainerData, "><0khjhgbfd")}
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Select Village</InputLabel>
-            <Select
+            <InputLabel id="demo-simple-select-label" color="common">Select Village</InputLabel>
+            <Select color="common"
               // labelId="demo-simple-select-label"
               //id="demo-simple-select"
               value={trainerData?.talaq_id}
               label="Select Village"
+              
               onChange={(e => {
                 console.log(e?.target)
                 setTrainerData({ ...trainerData, talaq_id: e?.target?.value })
@@ -180,7 +189,7 @@ export default function CreateTrainerBatch() {
         <Stack style={{ marginTop: 20 }}>
           <TextField
             fullWidth
-            error
+            color="common"
             id="outlined-error"
             onChange={(e) => { setTrainerData({ ...trainerData, sub_village: e?.target?.value }) }}
             label="Sub Village" />
@@ -188,7 +197,7 @@ export default function CreateTrainerBatch() {
         <Stack style={{ marginTop: 20 }}>
           <TextField
             fullWidth
-            error
+            color="common"
             id="outlined-error"
             label="Number Of Participants"
             onChange={(e) => { setTrainerData({ ...trainerData, number_of_participants: e?.target?.value }) }}
@@ -197,27 +206,30 @@ export default function CreateTrainerBatch() {
         <Stack style={{ marginTop: 20 }}>
           <TextField
             fullWidth
+            color="common"
             onChange={(e) => { setTrainerData({ ...trainerData, contact_person: e?.target?.value }) }}
-            error
+           
             id="outlined-error"
             label="Contact Person" />
         </Stack>
         <Stack style={{ marginTop: 20 }}>
           <TextField
             fullWidth
+            color="common"
             onChange={(e) => { setTrainerData({ ...trainerData, contact_number: e?.target?.value }) }}
-            error
+            
             id="outlined-error"
             label="Contact Number" />
         </Stack>
         <Stack style={{ marginTop: 40 }}>
           <Typography>Day 1</Typography>
         </Stack>
-        <Stack style={{ marginTop: 20 }}>
+        <Stack style={{ marginTop: 20 }} color="common" >
 
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
             label="DateTimePicker"
+            color="common"
             value={trainerData?.day1}
             onChange={(newValue) => {
               setTrainerData({ ...trainerData, day1: newValue })

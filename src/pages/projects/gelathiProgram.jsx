@@ -95,12 +95,12 @@ export default function gelathiProgram() {
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle2" gutterBottom >
-                               Day 1 : <Typography>{itm?.plan_date}</Typography>
+                               Day 1 : {itm?.plan_date}</Typography>
 
-                            </Typography>
+                          
                             <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                            Day 2 : <Typography>{itm?.status}</Typography>
-                            </Typography>
+                            Day 2 : {itm?.status}</Typography>
+                            
                         </Grid>
                     </Card>)
             })}

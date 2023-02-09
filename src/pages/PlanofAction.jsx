@@ -210,7 +210,8 @@ export default function PlanofAction() {
           />
         </Stack>
 
-        {drawerEvent && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}><PoaEvent
+        {drawerEvent && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <PoaEvent
           select={select}
           isOpenEvent={drawerEvent}
           onOpenEvent={handleOpenEvent}
@@ -222,10 +223,14 @@ export default function PlanofAction() {
             <DatePicker
               label="Date"
               defaultValue={date}
+              
               onChange={(newValue) => {
                 console.log(newValue, "<----newValuenewValue")
                 setDate(newValue)
+                // value=newValue
               }}
+            
+              
               //   setSendData({ ...sendData, date: newValue })
               // }}
               renderInput={(params) => <TextField {...params} color="common" />}
@@ -376,7 +381,7 @@ export default function PlanofAction() {
                       })
                     )
                   })
-                  : <Grid> <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1></Grid>
+                  : <Grid> <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Poa</h1></Grid>
               }
             </TabPanel>
 
@@ -394,22 +399,7 @@ export default function PlanofAction() {
                             setSelect(itm)
 
                           }}>
-                            {/* <Stack direction={'row'} spacing={2}   sx={{float:"right",padding:'auto',margin:'8px'}}>
-                                  <PoaEdit itm={itm} />
-                                  <Button style={{ float: "right", color: "#ed6c02" }}  sx={{
-                                    '&:hover': {
-                                      backgroundColor: '#ffd796',
-                                      borderColor: "#ed6c02"
-                                    },
-                                    borderColor: "#ed6c02",
-                                    color: "#ed6c02"
-                                  }}>Delete</Button>
-                              </Stack>
-                      {itm?.id&&<CardContent sx={{margin:'10px'}}>
-                        <Stack margin="5px">{itm?.name}</Stack>
-                        <Stack margin="2px">{itm?.roleName}</Stack>
-                        <Stack>{itm?.emp_name}</Stack>
-                      </CardContent>}     */}
+                      
                             <TableContainer component={Paper}>
                               <Table aria-label="customized table">
                                 <TableBody>
@@ -446,7 +436,7 @@ export default function PlanofAction() {
                       })
                     )
                   })
-                  : <Grid> <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1></Grid>
+                  : <Grid> <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Poa</h1></Grid>
               }
             </TabPanel>
             <TabPanel value={value} index={2}>
@@ -503,7 +493,7 @@ export default function PlanofAction() {
                     )
                   })
                   : <Grid>
-                    <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
+                    <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Poa</h1>
                   </Grid>
               }
             </TabPanel>

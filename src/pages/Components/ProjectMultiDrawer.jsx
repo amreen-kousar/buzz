@@ -84,7 +84,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                 open={isOpenFilter}
                 onClose={onCloseFilter}
                 PaperProps={{
-                    sx: { width: 280, },
+                    sx: { width: 350, },
                 }}
             >
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
@@ -99,50 +99,44 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                 <Divider />
 
                 <Scrollbar>
-                    <Stack spacing={3} sx={{ p: 3 }}>
+                    <Stack spacing={3} sx={{ p: 2 }}>
                         <div>
                             <Card>
                                 <CardContent>
-                                    <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
+                                    <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
                                         Project :
-                                        <Typography variant="body1" >{batch?.data?.projectName}</Typography>
+                                      &nbsp;{batch?.data?.projectName}
                                         {console.log(batch?.data?.projectName,'<--------njknnjnjn')}
                                     </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
+                                    <Typography variant="body1" gutterBottom>
                                         Partner :
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.partnerName}</Typography>
+                                        &nbsp;{batch?.data?.partnerName}
                                     </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Training Batch:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.name}</Typography>
+                                    <Typography variant="body1" gutterBottom>
+                                        Training&nbsp;Batch:{batch?.data?.name}
                                     </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Day1:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.day1_actual}</Typography>
+                                    <Typography variant="body1" gutterBottom>
+                                        Day1:&nbsp;{batch?.data?.day1_actual}
                                     </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Day2:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.day2_actual}</Typography>
+                                    <Typography variant="body1" gutterBottom>
+                                        Day2:&nbsp;{batch?.data?.day2_actual}
                                     </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Contact Person:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.contact_person}</Typography>
+                                    <Typography variant="body1" gutterBottom>
+                                        Contact Person:&nbsp;{batch?.data?.contact_person}
                                     </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                    Contact Number:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.contact_number}</Typography>
+                                    <Typography variant="body1" gutterBottom>
+                                    Contact Number:&nbsp;{batch?.data?.contact_number}
                                     </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                       Trainer Name:
-                                        <Typography variant="body1" gutterBottom>{batch?.data?.trainer_name}</Typography>
+                                    <Typography variant="body1" gutterBottom>
+                                       Trainer Name:&nbsp;{batch?.data?.trainer_name}
                                     </Typography>
                                 </CardContent>
                             </Card>
                             <ShaktiDialog batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />
                             <Card onClick={()=>{setShown(true),console.log("ferfgreg")}} style={{marginTop:20}}>
                                 <CardContent>
-                                    <Typography>Actual Participants   {batch?.total_participants}     </Typography>
-                                    <Typography>Target Participants    {batch?.data?.participants}    </Typography>
+                                    <Typography>Actual Participants:   {batch?.total_participants}     </Typography>
+                                    <Typography>Target Participants:   {batch?.data?.participants}    </Typography>
                                 </CardContent>
                             </Card>
                             <Photos batch={batch} photos={photos} setPhotos={(e)=>{setPhotos(e)}}/>

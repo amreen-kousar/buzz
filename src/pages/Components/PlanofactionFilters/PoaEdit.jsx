@@ -139,7 +139,7 @@ export default function PoaEdit({ setSucess, itm }) {
           backgroundColor: '#ffd796',
           borderColor: "#ff7424"
         },
-        borderColor: "#ed6c02",
+        borderColor: "#ff7424",
         color: "#ed6c02"
       }} variant="outlined" >
         Edit&nbsp;Poa
