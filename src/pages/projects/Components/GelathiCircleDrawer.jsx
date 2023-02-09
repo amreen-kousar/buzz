@@ -26,6 +26,7 @@ import { ColorManyPicker } from '../../../components/color-utils';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 import { Icon } from '@iconify/react';
+import GelathiCircleForm from './GelathiCircleForm';
 
 GelathiCircleDrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
@@ -101,10 +102,10 @@ console.log(circleData,"------------------------------>dataaaaa")
 
                             <Card style={{marginTop:20,}}>
                                 <CardContent >
-                                    <Stack style={{ flexDirection: 'row' , }}  mb={2}>
+                                    {/* <Stack style={{ flexDirection: 'row' , }}  mb={2}>
                                         
                                        
-                                       <Typography  variant="subtitle1" >{itm?.firstName}</Typography>
+                                      
 
                                        <IconButton style={{marginLeft:70,}}>
                                         <Icon  icon="material-symbols:check-box-rounded" width={20} height={20} marginTop={20}  color="#ff7424"  />
@@ -117,8 +118,10 @@ console.log(circleData,"------------------------------>dataaaaa")
                                         </IconButton>
                                        
                                        
-                                     </Stack>
+                                     </Stack> */}
                                    {console.log(circleData?.firstName,'<-------circleData?.firstName')}
+                                   <GelathiCircleForm/>
+                                   <Typography  variant="subtitle1" >{itm?.firstName}</Typography>
                                     <Typography variant="subtitle1" gutterBottom>
                                    
                                         <Typography variant="body1" gutterBottom>{itm?.villagename}</Typography>
