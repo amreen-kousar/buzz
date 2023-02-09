@@ -5,13 +5,13 @@ import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
-export default function enrolledGelathiList() {
+export default function assignedVillages() {
 
     const [clcikData, setClickData] = useState()
-    const [enrolled, setenrolled] = useState('');
+    const [villageData, setVillageData] = useState('');
 
     useEffect(() => {
-        enrolledGelathi();
+        assignedVillages();
     }, []
     )
 
@@ -25,17 +25,16 @@ export default function enrolledGelathiList() {
         setOpenFilter(false);
     };
 
-    const enrolledGelathi = async =>{
+    const assignedVillages = async =>{
         var data = JSON.stringify({
             "search": "",
             "project_id": 225,
-            "emp_id": 343,
-            "role_id": 6
+            "emp_id": 343
           });
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
+            url: 'https://bdms.buzzwomen.org/appTest/getGFAssignedBatch.php',
             headers: { 
               'Content-Type': 'application/json'
             },
@@ -44,12 +43,13 @@ export default function enrolledGelathiList() {
           
           axios(config)
           .then(function (response) {
-            setenrolled(response.data)
-            console.log(response.data,'<---------------setenrolledsetenrolled');
+            setVillageData(response.data)
+            console.log(JSON.stringify(response.data));
           })
           .catch(function (error) {
             console.log(error);
           });
+          
     }
 
     return (
@@ -61,7 +61,7 @@ export default function enrolledGelathiList() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    All enrolledGelathi
+                   Assigned Villages
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
@@ -77,27 +77,20 @@ export default function enrolledGelathiList() {
                 />
             </Stack>
             {/* </Stack> */}
-            {enrolled?.list?.map((itm) => {
+            {villageData?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
                         setClickData({ name: itm.gelathiname, title: "Participant Details",id:itm?.id })
                         handleOpenFilter()
                     }}>
 
-                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
+                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" >
                             <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Gelathi Name : ${itm?.gelathiname}`}
+                                {`  Training Batch Name  : ${itm?.training_batch_name}`}
                             </Typography>
                             {/* {console.log(itm?.list?.gelathiname,'<-------gelathinamegelathiname')} */}
                         </Grid>
-                        <Grid style={{ marginLeft: 15 }}>
-                        <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Village Name : ${itm?.villagename}`}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Date : ${itm?.enroll_date}`}
-                            </Typography>
-                        </Grid>
+                       
                     </Card>)
             })}
 

@@ -5,7 +5,7 @@ import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
-export default function enrolledGelathiList() {
+export default function scheduleVillage() {
 
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');

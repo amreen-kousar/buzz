@@ -153,6 +153,30 @@ export default function DashboardApp() {
     )
   }
 
+
+  //  const getData = (itm, i) => {
+  //   setSelected({
+  //     id: i,
+  //     name: itm?.name
+  //   })
+  //   const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+  //   apiHit(itm, i)
+  //   console.log(data, i, itm, "<----sdfssreerfer")
+  //   setFilterData(data)
+  //   handleCloseFilter()
+  //   console.log("sdfgsdfdfssd", itm, i)
+  // }
+  // const onSumbit = (e, i) => {
+  //   handleCloseFilter()
+
+  //   apiHit(e?.district_id, e?.talaq_id, "country")
+  //   console.log(e, i, "<----datssdasdsa")
+  // }
+
+  const closefilter = () => {
+    console.log("deleted")
+  }
+
   return (
 
     <Page title="Dashboard">

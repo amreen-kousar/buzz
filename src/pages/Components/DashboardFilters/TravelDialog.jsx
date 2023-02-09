@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, * as others from 'axios';
 import React from "react"
 import Button from '@mui/material/Button';
 // import Dialog from '@mui/material/Dialog';
@@ -97,6 +97,7 @@ export default function TravelDialog({ viewMessage }) {
   const [image, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
   const [viewImage, setViewImage] = React.useState(false);
+  const [locationS,setLocation] = useState()
   const hiddenFileInput = React.useRef(null);
 
   const handleClick = event => {
@@ -205,6 +206,36 @@ export default function TravelDialog({ viewMessage }) {
 
 
   }
+  useEffect(()=>{
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+var data = JSON.stringify({
+  "latitude": position.coords.latitude,
+  "longitude": position.coords.longitude
+});
+
+var config = {
+  method: 'post',
+  url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(response,",----ewrwerwer")
+  setLocation(response?.data)
+//  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error,",----ewrwerwer");
+});
+      
+    });
+  },[])
 
   const location = () => {
     Geocode.fromLatLng(coords?.latitude, coords?.longitude).then(
@@ -346,7 +377,7 @@ export default function TravelDialog({ viewMessage }) {
                 <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
+                <TextField id="outlined-basic" value={locationS} disabled={true} onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
               </Stack><br></br>
               {/* <Stack style={{ marginTop: 20 }}>
 

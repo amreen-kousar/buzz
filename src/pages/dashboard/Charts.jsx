@@ -198,7 +198,7 @@ export default function Charts(props) {
         data={dayper}
        />
       } */}
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      {/* <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Card style={{ background: '#ff7424', color: "white", padding: "1rem 3rem", display: 'flex' }} xs={12} sm={12} md={12}>
           <div style={{ marginRight: "2rem" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -217,14 +217,14 @@ export default function Charts(props) {
           </div>
         </Card>
       </div>
-      <br />
+      <br /> */}
       {/* 
       <div style={{ background: '#ff7424', color: "white", padding: '1rem' }}>
         Welcome {userDetails?.first_name} {userDetails?.last_name} <br />
         ( {userDetails?.role_name} )
       </div> */}
 
-      <br />
+     
 
       <Bar data={dataBar} plugins={[ChartDataLabels]} options={options} width={100} height={50} />
       <Stack mt={5}>

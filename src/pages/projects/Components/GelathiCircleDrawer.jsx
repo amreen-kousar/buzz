@@ -33,7 +33,6 @@ GelathiCircleDrawer.propTypes = {
     onCloseFilter: PropTypes.func,
 };
 
-
 export default function GelathiCircleDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
 console.log(clcikData,'<------clcikDataclcikData')
      const [session,setSession] = useState('')
@@ -102,12 +101,10 @@ console.log(circleData,"------------------------------>dataaaaa")
 
                             <Card style={{marginTop:20,}}>
                                 <CardContent >
-                                <GelathiCircleForm/>
-                                <Typography  variant="subtitle1" >{itm?.firstName} </Typography>
                                     {/* <Stack style={{ flexDirection: 'row' , }}  mb={2}>
                                         
                                        
-                                       <Typography  variant="subtitle1" >{itm?.firstName}</Typography>
+                                      
 
                                        <IconButton style={{marginLeft:70,}}>
                                         <Icon  icon="material-symbols:check-box-rounded" width={20} height={20} marginTop={20}  color="#ff7424"  />
@@ -119,9 +116,11 @@ console.log(circleData,"------------------------------>dataaaaa")
 
                                         </IconButton>
                                        
+                                       
                                      </Stack> */}
-                                     
                                    {console.log(circleData?.firstName,'<-------circleData?.firstName')}
+                                   <GelathiCircleForm/>
+                                   <Typography  variant="subtitle1" >{itm?.firstName}</Typography>
                                     <Typography variant="subtitle1" gutterBottom>
                                    
                                         <Typography variant="body1" gutterBottom>{itm?.villagename}</Typography>
