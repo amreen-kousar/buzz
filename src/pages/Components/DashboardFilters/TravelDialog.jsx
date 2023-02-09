@@ -51,6 +51,7 @@ export default function TravelDialog({ viewMessage }) {
     odimeter: "",
     location: "",
     poa: "",
+    srpoa:"",
     date: new Date(),
     modeoftravel: "",
     rateperkm: "",
@@ -138,6 +139,7 @@ export default function TravelDialog({ viewMessage }) {
       "printing": sendData?.printing,
       "start_location_name": "RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India",
       "poa_id": sendData?.poa,
+      "srpoa":sendData?.srpoa,
       "start_odometer": sendData?.odimeter,
       "rate_per_KM": sendData?.rateperkm,
       "stationery": sendData?.stationary,
@@ -390,14 +392,29 @@ export default function TravelDialog({ viewMessage }) {
              <FormControl fullWidth >
             {console.log(userDetails,"userdetailsssssssssssss")}
               {/* {(userDetails===12)?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />:null} */}
-              <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />
-               
+             
+              <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
                 <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                 
                   {datadrop?.data?.map(itm => {
                     return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                   })}
                 </Select>
+                </FormControl>
+              </Stack>
+
+              <Stack style={{ marginTop: 20 }}>       
+             <FormControl fullWidth >
+            {console.log(userDetails,"userdetailsssssssssssss")}
+              {userDetails==12?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, srpoa: e?.target?.value }) }} label="poa" color="common" />:null}
+             
+              {/* <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
+                <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
+                
+                  {datadrop?.data?.map(itm => {
+                    return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
+                  })}
+                </Select> */}
                 </FormControl>
               </Stack>
 
