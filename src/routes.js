@@ -30,6 +30,10 @@ import EnrolledGelathi from './pages/projects/enrolledGelathi';
 import EnrolledGreenMotivators from './pages/projects/enrolledGreenMotivators';
 import EnrolledVyaapar from './pages/projects/enrolledVyaapar';
 import GelathiCirces from './pages/projects/gelathiCircles';
+import AssignedVillages from './pages/projects/assignedVillages';
+import ScheduleBeehiveVisit from './pages/projects/scheduleBeehiveVisit';
+import ScheduleCircleMeet from './pages/projects/scheduleCircleMeet';
+import ScheduleVillage from './pages/projects/scheduleVillage';
 import Trainers from './pages/Components/DashboardFilters/Trainers';
 import Operationmanagerdashboard from './pages/Operationmanagerdashboard';
 import Test from './pages/Test';
@@ -49,6 +53,10 @@ export default function Router() {
         { path: "enrolledGreenMotivators", element: <EnrolledGreenMotivators /> },
         { path: "enrolledVyaapar", element: <EnrolledVyaapar /> },
         { path: "gelathiCirlces", element: <GelathiCirces /> },
+        { path: "assignedVillages", element: <AssignedVillages /> },
+        { path: "scheduleCircleMeet", element: <ScheduleCircleMeet /> },
+        { path: "scheduleVillage", element: <ScheduleVillage /> },
+        { path: "scheduleBeehiveVisit", element: <ScheduleBeehiveVisit /> },
         { path: "projectProfile", element: <ProjectProfile /> },
 
     ]

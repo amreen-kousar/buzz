@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
-import GelathiCircleDrawer from '../projects/Components/GelathiCircleDrawer';
+import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
-export default function gelathiCirclesList() {
+export default function assignedVillages() {
 
     const [clcikData, setClickData] = useState()
-    const [gelathiCircles, setgelathiCircles] = useState('');
+    const [villageData, setVillageData] = useState('');
 
     useEffect(() => {
-
-        circle();
-        // setgelathiCircles([{ stockname: "fist" }, { stockname: "second" }])
+        assignedVillages();
     }, []
     )
 
@@ -27,16 +25,16 @@ export default function gelathiCirclesList() {
         setOpenFilter(false);
     };
 
-    const circle = async =>{
+    const assignedVillages = async =>{
         var data = JSON.stringify({
             "search": "",
             "project_id": 225,
-            "gelathi_id": 343
+            "emp_id": 343
           });
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircle.php',
+            url: 'https://bdms.buzzwomen.org/appTest/getGFAssignedBatch.php',
             headers: { 
               'Content-Type': 'application/json'
             },
@@ -45,7 +43,7 @@ export default function gelathiCirclesList() {
           
           axios(config)
           .then(function (response) {
-            setgelathiCircles(response.data)
+            setVillageData(response.data)
             console.log(JSON.stringify(response.data));
           })
           .catch(function (error) {
@@ -63,7 +61,7 @@ export default function gelathiCirclesList() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Gelathi Circles
+                   Assigned Villages
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
@@ -71,7 +69,7 @@ export default function gelathiCirclesList() {
             </Stack>
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-                <GelathiCircleDrawer
+                <ParticipantDrawer
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
@@ -79,25 +77,20 @@ export default function gelathiCirclesList() {
                 />
             </Stack>
             {/* </Stack> */}
-            {gelathiCircles?.list?.map((itm) => {
+            {villageData?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.circle_name, title: " Gelathi Cirlce Name",id:itm?.circle_id })
+                        setClickData({ name: itm.gelathiname, title: "Participant Details",id:itm?.id })
                         handleOpenFilter()
                     }}>
 
-                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
+                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" >
                             <Typography variant="subtitle1" gutterBottom>
-                                {`  Gelathi Cirlces Name : ${itm?.circle_name}`}
+                                {`  Training Batch Name  : ${itm?.training_batch_name}`}
                             </Typography>
+                            {/* {console.log(itm?.list?.gelathiname,'<-------gelathinamegelathiname')} */}
                         </Grid>
-                        <Grid style={{ marginLeft: 15 }}>
-                           
-                            <Typography variant="subtitle2" gutterBottom>
-                                {`   Cirlces Date : ${itm?.circle_date}`}
-                            </Typography>
-                           
-                        </Grid>
+                       
                     </Card>)
             })}
 

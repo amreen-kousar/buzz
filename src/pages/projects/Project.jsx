@@ -195,6 +195,39 @@ function Project(props) {
                     <span style={{ width: "200px" }}> Gelathi Circles</span>
                   </Button>
                   </Link>
+                  <br />
+
+                  <Link to="/dashboard/projects/gelathiCirlces" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
+                    <span style={{ width: "200px" }}> Schedule A Village Visit</span>
+                  </Button>
+                  </Link>
+                  <br />
+
+                  <Link to="/dashboard/projects/assignedVillages" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
+                    <span style={{ width: "200px" }}> Assigned Villages</span>
+                  </Button>
+                  </Link>
+                  <br />
+
+                  <Link to="/dashboard/projects/scheduleCircleMeet" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
+                    <span style={{ width: "200px" }}>Schedule A Circle Meeting</span>
+                  </Button>
+                  </Link>
+                  <br />
+
+                  <Link to="/dashboard/projects/scheduleBeehiveVisit" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
+                    <span style={{ width: "200px" }}>Schedule A Beehive Visit</span>
+                  </Button>
+                  </Link>
+                  <br />
 
                 </ButtonGroup>
 
