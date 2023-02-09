@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios'
 import {
   Button,
   Grid,
@@ -36,14 +38,10 @@ export default function Vyaparprogram() {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState('a');
   const [age, setAge] = React.useState('');
+  const [vyaapar, setVyaapar] = useState('');
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-  const handleChangeSelect = (event) => {
-    setAge(event.target.value);
-  };
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
+ 
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -51,6 +49,38 @@ export default function Vyaparprogram() {
   const handleClose = () => {
     setOpen(false);
   };
+
+
+  useEffect(() => {
+    gelathinamelist();
+      // setenrolledVyaapar([{ stockname: "fist" }, { stockname: "second" }])
+  }, []
+  )
+
+
+  const gelathinamelist= async =>{
+      var data = JSON.stringify({
+          "partcipantId":457065
+        });
+        
+        var config = {
+          method: 'post',
+          url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
+        
+        axios(config)
+        .then(function (response) {
+          setVyaapar(response?.data)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        
+  }
 
   return (
     <div>
@@ -87,7 +117,14 @@ export default function Vyaparprogram() {
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Name of the GF *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Answe" label="Your Answer" variant="outlined" color="common"/>
+               
+              <Select color="common" label="Choose Gelathi Facilitator" variant="standard">
+                  {vyaapar?.list?.map((itm)=>{
+                    return(
+                            <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
+                    )
+                  })}
+                </Select>
                   </Stack>
                 </CardContent>
               </Card>
