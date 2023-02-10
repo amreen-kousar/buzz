@@ -32,6 +32,7 @@ import Slide from '@mui/material/Slide';
 import { Color } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Iconify from '../../../components/Iconify';
+import { Icon } from '@iconify/react';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -86,7 +87,7 @@ export default function Vyaparprogram() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen} sx={{
+      {/* <Button variant="outlined" onClick={handleClickOpen} sx={{
         '&:hover': {
           backgroundColor: '#ffd796',
           borderColor: "#ed6c02"
@@ -95,7 +96,15 @@ export default function Vyaparprogram() {
         color: "#ed6c02"
       }} >
         Survey Form
-      </Button>
+      </Button> */}
+        <Stack style={{ flexDirection: 'row' ,float:'right' }}  mb={2}>
+        {/* <IconButton >
+        <Icon  icon="material-symbols:check-box-rounded" width={20} height={20} marginTop={20}  color="#ff7424"  />
+        </IconButton> */}
+        <IconButton onClick={handleClickOpen}>
+         <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
+        </IconButton>
+        </Stack> 
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
       <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>

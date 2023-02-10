@@ -83,7 +83,7 @@ export default function enrolledGreenMotivatorsList() {
                         setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
                         handleOpenFilter()
                     }}>
-
+                       <GreenSurvey />
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Gelathi Name : ${itm?.gelathiname}`}
@@ -97,7 +97,7 @@ export default function enrolledGreenMotivatorsList() {
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>
                         </Grid>
-                        <GreenSurvey />
+                     
                     </Card>)
             })}
 

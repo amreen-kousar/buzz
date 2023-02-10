@@ -67,7 +67,7 @@ export default function selfShaktiProj() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    All self Shakthi
+                    All self shakthi
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User

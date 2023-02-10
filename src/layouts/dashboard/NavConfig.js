@@ -9,38 +9,26 @@ const navConfig = [
   {
     title: 'dashboard',
     path: '/dashboard/app',
-    icon: getIcon('eva:pie-chart-2-fill'),
+    icon: getIcon("ic:baseline-home"),
     id: [0, 1, 3, 7, 8, 9, 12]
   },
   {
     title: 'dashboard',
     path: '/dashboard/trainer',
-    icon: getIcon('eva:pie-chart-2-fill'),
+    icon: getIcon('ic:baseline-home'),
     id: [5]
   },
   {
     title: 'dashboard',
     path: '/dashboard/gelathi',
-    icon: getIcon('eva:pie-chart-2-fill'),
+    icon: getIcon('ic:baseline-home'),
     id: [6, 13]
   },
   {
     title: 'dashboard',
     path: '/dashboard/operationmanager',
-    icon: getIcon('eva:pie-chart-2-fill'),
+    icon: getIcon('ic:baseline-home'),
     id: [4]
-  },
-  {
-    title: 'Plan Of Action',
-    path: '/dashboard/planofaction',
-    icon: getIcon('mdi:call-to-action'),
-    id: [0, 1, 3, 4, 5, 6, 7, 9, 8, 12, 13]
-  },
-  {
-    title: 'Projects',
-    path: '/dashboard/projects',
-    icon: getIcon('grommet-icons:projects'),
-    id: [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 12, 13]
   },
   {
     title: 'BusList',
@@ -48,6 +36,19 @@ const navConfig = [
     icon: getIcon('mdi:bus-stop'),
     id: [0, 1, 2, 3, 4, 5, 6,9, 7, 8, 12]
   },
+  {
+    title: 'Plan Of Action',
+    path: '/dashboard/planofaction',
+    icon: getIcon('mdi:clipboard-text'),
+    id: [0, 1, 3, 4, 5, 6, 7, 9, 8, 12, 13]
+  },
+  {
+    title: 'Projects',
+    path: '/dashboard/projects',
+    icon: getIcon('ic:baseline-library-books'),
+    id: [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 12, 13]
+  },
+
   {
     title: 'People',
     path: '/dashboard/people',
@@ -63,7 +64,7 @@ const navConfig = [
   {
     title: 'My Profile',
     path: '/dashboard/profile',
-    icon: getIcon('healthicons:ui-user-profile-negative'),
+    icon: getIcon('mdi:user'),
     id: [0, 1, 2, 3, 4, 5, 6, 9, 7, 8, 12, 13]
   },
   {
@@ -75,7 +76,7 @@ const navConfig = [
   {
     title: 'Travel Allowance',
     path: '/dashboard/travel',
-    icon: getIcon('map:travel-agency'),
+    icon: getIcon('mdi:wallet-travel'),
     id: [0, 1, 2, 3, 4, 5, 6, 9, 7, 8, 12, 13]
   },
   {

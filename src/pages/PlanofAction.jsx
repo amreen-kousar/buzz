@@ -221,8 +221,8 @@ export default function PlanofAction() {
         <Stack>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              label="Date"
-              defaultValue={date}
+              // label="Date"
+              // defaultValue={date}
               
               onChange={(newValue) => {
                 console.log(newValue, "<----newValuenewValue")

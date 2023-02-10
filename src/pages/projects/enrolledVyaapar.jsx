@@ -83,7 +83,7 @@ export default function enrolledVyaaparList() {
                         setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
                         handleOpenFilter()
                     }}>
-
+                           <Vyaparprogram/>
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Vyaapar Name : ${itm?.gelathiname}`}
@@ -97,7 +97,7 @@ export default function enrolledVyaaparList() {
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>
                         </Grid>
-                       <Vyaparprogram/>
+                      
                     </Card>)
             })}
 
