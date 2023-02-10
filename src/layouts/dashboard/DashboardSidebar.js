@@ -27,11 +27,12 @@ const RootStyle = styled('div')(({ theme }) => ({
 }));
 
 const AccountStyle = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(2, 2.5),
+  // display: 'flex',
+  // alignItems: 'center',
+  // textAlign:'center',
+  // padding: theme.spacing(2, 12),
   borderRadius: Number(theme.shape.borderRadius) * 1.5,
-  backgroundColor: theme.palette.grey[500_12],
+  // backgroundColor: theme.palette.grey[500_12],
 }));
 
 // ----------------------------------------------------------------------
@@ -72,17 +73,19 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       {console.log(account.displayName, account.role, "<--yghuj")}
       <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ff7424">
         <Link underline="none" component={RouterLink} to="#">
-          <AccountStyle>
-            <Avatar src={account.profile_pic} alt="photoURL" />
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" color='#ffffff' >
-                {account.displayName}
+          {/* <AccountStyle > */}
+          <div style={{ paddingTop:20,paddingLeft:100}}>
+            <Avatar src={account.profile_pic}  alt="photoURL" />
+            
+          {/* </AccountStyle> */}</div>
+          <Box sx={{ ml: 2 }}>
+              <Typography variant="subtitle2" color='#ffffff' style={{textAlign:"center"}}>
+               Welcome, {account.first_name}
               </Typography>
-              <Typography variant="body2" sx={{ color: '#ffffff' }}>
-                {account.role_name}
+              <Typography variant="body2" sx={{ color: '#ffffff' }} style={{textAlign:'center'}}>
+                ({account.role_name})
               </Typography>
             </Box>
-          </AccountStyle>
         </Link>
       </Box>
 

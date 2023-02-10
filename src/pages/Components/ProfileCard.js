@@ -149,8 +149,12 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       });
   }
   return (
+    <>
+    <Typography variant="h4" sx={{ mb: 2,color:'black' }} >
+        Profile
+     </Typography>
     <Card sx={{ width: 400 }}><br />
-      <div style={{ display: 'flex', justifyContent: "center" }}>
+      {/* <div style={{ display: 'flex', justifyContent: "center" }}>
         <Avatar sx={{ bgcolor: "#ff7424", width: 100, height: 100, }} aria-label="recipe" src={profileData?.profile_pic}>
           {profileData?.first_name.substring(0, 1)}
         </Avatar>
@@ -158,7 +162,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       <br />
       <Typography variant="h6" textAlign="center">
         {profileData?.first_name} {profileData?.last_name}
-      </Typography>
+      </Typography> */}
 
       {/* <CardMedia
         component="img"
@@ -166,7 +170,75 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
         image="/static/images/cards/paella.jpg"
         alt="Paella dish"
       /> */}
-      <CardContent>
+      <Stack spacing={1} sx={{ px: 1 }}>
+            <div>
+              <Card >
+                <CardContent>
+                <div  style={{float:'left',paddingTop:30,paddingRight:5}}>
+            <Avatar src={profileData?.profile_pic} alt="photoURL" style={{height:50,width:50}}/>
+            </div>
+                 <Card sx={{px:1}}>
+                 <Typography style={{ flexDirection: 'row', color: '#444444'}} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name}</Typography>
+                  <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
+                    Role : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.role_name}</span>
+                  </Typography>
+                  <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                    Status : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.status==='1'?'Active':null}</span>
+                  </Typography>
+                  <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                    Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.supervisorName===""?"-":profileData?.superVisorName}</span>
+                  </Typography>
+                  <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                    Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.doj}</span> </Typography>
+               </Card>
+                </CardContent>
+              </Card>
+
+            </div>
+
+            <div>
+              <Card style={{ width: "auto" }}>
+                <CardContent>
+                  <Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}>
+                    Contact Information
+                  </Card>
+                  <TableContainer >
+          <Table aria-label="customized table"  >
+            {/* <TableHead maxWidth>Contact Information</TableHead> */}
+            <TableBody >
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell > Mobile </TableCell>
+
+                <TableCell>: &nbsp;{profileData?.contactNum}</TableCell>
+              </TableRow>
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell> Work</TableCell>
+                <TableCell>: &nbsp;{profileData?.officeMailId}</TableCell>
+              </TableRow>
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell>Email</TableCell>
+                <TableCell>: &nbsp;{profileData?.personalMailId}</TableCell>
+              </TableRow>
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell>Address</TableCell>
+                <TableCell>: &nbsp;{profileData?.address}</TableCell>
+              </TableRow>
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell>Pincode:</TableCell>
+                <TableCell>: &nbsp;{profileData?.pincode}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+                
+                </CardContent>
+              </Card>
+
+            </div>
+
+          
+          </Stack>
+      {/* <CardContent>
         <TableContainer >
           <Table aria-label="customized table"  >
 
@@ -175,6 +247,10 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                 <TableCell > Role</TableCell>
 
                 <TableCell>{userDetails?.role_name}</TableCell>
+              </TableRow>
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell > Status</TableCell>
+                <TableCell>{profileData?.status === "1" ? "Active" : null}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
                 <TableCell > Reporting Manager</TableCell>
@@ -187,39 +263,12 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
             </TableBody>
           </Table>
         </TableContainer>
-      </CardContent>
+      </CardContent> */}
 
-      <CardContent>
+      {/* <CardContent>
         <b textAlign="center" style={{ color: 'black' }}>Contact Information</b>
-        <TableContainer >
-          <Table aria-label="customized table"  >
-            {/* <TableHead maxWidth>Contact Information</TableHead> */}
-            <TableBody >
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell > Mobile </TableCell>
-
-                <TableCell>{profileData?.contactNum}</TableCell>
-              </TableRow>
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell> Work</TableCell>
-                <TableCell>{profileData?.officeMailId}</TableCell>
-              </TableRow>
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell>Email</TableCell>
-                <TableCell>{profileData?.personalMailId}</TableCell>
-              </TableRow>
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell>Address</TableCell>
-                <TableCell>{profileData?.address}</TableCell>
-              </TableRow>
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell>Pincode:</TableCell>
-                <TableCell>{profileData?.pincode}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </CardContent>
+       
+      </CardContent> */}
       {/* <Typography variant="body1" gutterBottom>
           Projects: {profileData?.project_list}
         </Typography> */}
@@ -247,17 +296,17 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Stack mb={3} style={{ backgroundColor: '#ffd796', borderRadius: 9 }}>
-            <Typography
+            <Typography style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}
               variant="h6"
-              sx={{
-                p: 2,
-                margin: 'auto',
-                maxWidth: 500,
-                flexGrow: 1,
-                color: '#ff7424'
-              }}
+              // sx={{
+              //   p: 2,
+              //   margin: 'auto',
+              //   maxWidth: 500,
+              //   flexGrow: 1,
+              //   color: '#ff7424'
+              // }}
             >
-              Edit User Information
+             User Information
             </Typography>
           </Stack>
           <Card>
@@ -267,17 +316,14 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
 
                 <TableBody >
                   <TableRow style={{ height: "8px !important" }} >
-                    <TableCell>UserName</TableCell>
+                    <TableCell>UserName:</TableCell>
                     <TableCell> {profileData?.first_name} {profileData?.last_name}</TableCell>
                   </TableRow>
                   <TableRow style={{ height: "8px !important" }} >
-                    <TableCell> Role</TableCell>
+                    <TableCell> Role:</TableCell>
                     <TableCell>{userDetails?.role_name}</TableCell>
                   </TableRow>
-                  <TableRow style={{ height: "8px !important" }} >
-                    <TableCell >Email</TableCell>
-                    <TableCell>{profileData?.officeMailId}</TableCell>
-                  </TableRow>
+                  
                 </TableBody>
               </Table>
             </TableContainer>
@@ -286,7 +332,11 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
           <Stack mb={1.5}>
             <Divider variant="middle" />
           </Stack>
+          <Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}>
+                    Contact Information
+                  </Card><br/>
           <Grid direction={'column'} spacing={1.8} alignItems="center" justifyContent="space-between">
+            <Typography>Email: {profileData?.officeMailId}</Typography><br/>
             <Grid item mb={1}>
               <TextField
                 fullWidth
@@ -358,5 +408,6 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
         </CardContent>
       </Collapse>
     </Card>
+    </>
   );
 }

@@ -104,7 +104,7 @@ export default function TravelA() {
 
 
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Travel Allowances
+          Travel Allowance
           {/* <Button style={{ float: "right" }}>Filters</Button> */}
         </Typography>
         <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>

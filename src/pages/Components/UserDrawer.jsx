@@ -13,14 +13,21 @@ import {
   IconButton,
   Typography,
   RadioGroup,
-  Card,
+  Card,Avatar,
   CardContent,
 } from '@mui/material';
 // components
 import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import { ColorManyPicker } from '../../components/color-utils';
-import UserEditProfile from './UserComponent/UserEditProfile'
+import UserEditProfile from './UserComponent/UserEditProfile';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import CloseIcon from '@mui/icons-material/Close';
+import Slide from '@mui/material/Slide';
+import { Color } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Icon } from '@iconify/react';
 // ----------------------------------------------------------------------
 UserDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
@@ -30,7 +37,8 @@ UserDrawer.propTypes = {
 
 export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users }) {
 
-
+  const userDetails = localStorage?.getItem('userId')
+  {console.log(userDetails,"userrrrrrrrrrrrrrrrrrr")}
   let user = JSON.parse(localStorage?.getItem('people'))
 
   return (
@@ -44,21 +52,27 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
         open={isOpenFilter}
         onClose={onCloseFilter}
         PaperProps={{
-          sx: { width: 400 },
+          sx: { width: 350 },
         }}
       >
-
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ color: '#444444' }}>
-            Member Details:  {user?.first_name}  {user?.last_name}
+               <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+          <Toolbar>
+          
+          
+                        <IconButton style={{color:"white",float:'left'}} onClick={onCloseFilter}>
+                            <Iconify icon="material-symbols:arrow-back-rounded" />
+                        </IconButton>
+                        <Typography variant="subtitle2" style={{color:'white'}}>
+                   Member Detail
           </Typography>
-          <IconButton onClick={onCloseFilter}>
-            <Iconify icon="eva:close-fill" width={20} height={20} />
-          </IconButton>
-        </Stack>
+         
+          </Toolbar>
+        </AppBar>
 
+       
         <Divider /><br />
-        <Stack direction={'row'} justifyContent="flex-end">
+
+        {userDetails&&userDetails==2&&<Stack direction={'row'} justifyContent="flex-end">
           <UserEditProfile />
           <Button style={{ float: 'right' }} sx={{
             '&:hover': {
@@ -66,21 +80,30 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
             },
           }}><Iconify icon="ic:baseline-delete" style={{ width: '30px', height: '30px', color: '#e69138', marginRight: 0 }}></Iconify></Button>
 
-        </Stack>
+        </Stack>}
         <Scrollbar>
-          <Stack spacing={1} sx={{ px: 3 }}>
+          <Stack spacing={1} sx={{ px: 1 }}>
             <div>
-              <Card>
+              <Card >
                 <CardContent>
+                <div  style={{float:'left',paddingTop:30,paddingRight:5}}>
+            <Avatar src={user?.profile_pic} alt="photoURL" />
+            </div>
+                 <Card sx={{px:1}}>
+                 <Typography style={{ flexDirection: 'row', color: '#444444',textAlign:'center'}} variant="subtitle1" gutterBottom>{user?.first_name}&nbsp;{user?.last_name}</Typography>
                   <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="subtitle1" gutterBottom>
                     Role:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.role_name}</span>
 
                   </Typography>
+                  {userDetails&&userDetails==2&&<Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                   Status : <span style={{ fontWeight: 100, color: '#444444' }}>{user?.status==='1'?"Active":null}</span>
+                  </Typography>}
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
                     Reporting Manager:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.supervisorName}</span>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
                     Date Of Joining:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.doj}</span> </Typography>
+               </Card>
                 </CardContent>
               </Card>
 
@@ -94,9 +117,9 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
             <div>
               <Card style={{ width: "auto" }}>
                 <CardContent>
-                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                  <Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}>
                     Contact Information
-                  </Typography>
+                  </Card>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
                     Mobile Number:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.contactNum}</span>
 
@@ -123,9 +146,9 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
               <div>
                 <Card>
                   <CardContent>
-                    <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                      Projects
-                    </Typography>
+                  <Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}>
+                    Projects
+                  </Card>
                     <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
                       {user?.project_list.map(project => {
                         return (

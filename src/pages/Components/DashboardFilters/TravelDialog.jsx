@@ -34,6 +34,13 @@ import moment from 'moment'
 import { orange } from '@mui/material/colors';
 import Webcam from "react-webcam";
 import Label from 'src/components/Label';
+import InputAdornment from '@mui/material/InputAdornment';
+
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import LocalPrintshop from '@mui/icons-material/LocalPrintshop';
+import CurrencyRupee  from '@mui/icons-material/CurrencyRupee';
+import DiamondRounded  from '@mui/icons-material/DiamondRounded';
+import  Room  from '@mui/icons-material/Room';
 function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
@@ -300,7 +307,7 @@ axios(config)
     image.splice(index, 1);
     setImage([...image])
   }
-
+ 
   //   const clickImages = () =>{
   //     console.log("fefefergregre");
   //    // handleClose()
@@ -351,7 +358,7 @@ axios(config)
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Create Allowances
+            Create Allowance
           </Typography>
 
 
@@ -374,10 +381,18 @@ axios(config)
 
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" 
+                />
               </Stack>
-              <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" value={locationS} disabled={true} onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
+              <Stack style={{ marginTop: 20 ,color:'black'}}>
+                <TextField id="outlined-basic" value={locationS} disabled={true} onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Start Location" variant="outlined" color="common" 
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">
+                    <Room sx={{color:"green"}} />
+                    </InputAdornment>
+                   ),
+               }}  />
               </Stack><br></br>
               {/* <Stack style={{ marginTop: 20 }}>
 
@@ -424,8 +439,8 @@ axios(config)
             {console.log(userDetails,"userdetailsssssssssssss")}
               {/* {(userDetails===12)?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />:null} */}
              
-              <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
-                <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
+              <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa *</InputLabel>
+                <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                 
                   {datadrop?.data?.map(itm => {
                     return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
@@ -452,6 +467,9 @@ axios(config)
               <Stack style={{ marginTop: 20 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
+                    
+                    inputFormat="YYYY-MM-DD"
+                    views={["year", "month", "day"]}
                     // label="Date"
                     value={sendData?.date}
                     onChange={(newValue) => {
@@ -460,7 +478,8 @@ axios(config)
                     renderInput={(params) => <TextField {...params} fullWidth />}
                   />
                 </LocalizationProvider>
-              </Stack><br></br>
+              </Stack>
+              <br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Mode Of Travel</InputLabel>
@@ -537,25 +556,63 @@ axios(config)
               </Stack>
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="Printing" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="Printing" variant="outlined" color="common" 
+                InputProps={{
+                     endAdornment: (
+                       <InputAdornment position="start">
+                       <LocalPrintshop color="secondary" />
+                       </InputAdornment>
+                      ),
+                  }} />
+              
+              </Stack>
+              <Stack style={{ marginTop: 20 }}>  
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="Stationery" variant="outlined" color="common" 
+                InputProps={{
+                     endAdornment: (
+                       <InputAdornment position="start">
+                       <AttachMoneyIcon />
+                       </InputAdornment>
+                      ),
+                  }} />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="Stationary" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="other expenses" variant="outlined" color="common"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">
+                  
+                  {/* <Iconify icon="material-symbols:diamond-rounded " /> */}
+                  <DiamondRounded sx={{color:"red"}}/>
+                    </InputAdornment>
+                   ),
+               }}  />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="other expenses" variant="outlined" color="common" />
-              </Stack>
-              <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="other expenses amounnt" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="other expenses amount" variant="outlined" color="common" 
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">
+                    <CurrencyRupee sx={{color:"green"}}/>
+                    </InputAdornment>
+                   ),
+               }} />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
                 <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="end odometer reading" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="end location" variant="outlined" color="common" />
+                <TextField id="outlined-basic" disabled={true} onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="end location" variant="outlined" 
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">
+                    <Room sx={{color:"green"}} />
+                    </InputAdornment>
+                   ),
+               }}   />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common"   />
               </Stack>
               <br /><br />
               <div>
@@ -579,7 +636,7 @@ axios(config)
                     icon={'mdi:camera'}
                     sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
                   />&nbsp;
-                  Click to upoad images
+                  Click here to Add images
                   <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
                 </label>
               </div>

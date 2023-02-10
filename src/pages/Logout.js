@@ -32,7 +32,7 @@ function SimpleDialog(props) {
   return (
     <Dialog open={open} style={{ width: "100vw" }}>
       <DialogTitle style={{ textAlign: "center" }}>Are You Sure?</DialogTitle>
-      <DialogContent>Do You Want to logout?</DialogContent>
+      <DialogContent>Do you want to logout?</DialogContent>
       <div style={{ margin: "5px", textAlign: "center" }}> <Button
         sx={{
           ':hover': {

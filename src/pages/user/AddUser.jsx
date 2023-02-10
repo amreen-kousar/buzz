@@ -451,7 +451,7 @@ function AddUser(props) {
                                 </div>
 
 
-                                <TextField fullWidth required id="outlined-basic" label="Address" value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" />
+                                <TextField fullWidth required id="outlined-basic" label="Address" helperText='Address Required*' value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" />
 
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Address 1" value={AddUser.address3} onChange={(e) => { setAddUser({ ...AddUser, address3: e.target.value }) }} variant="outlined" />}
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="outlined-basic" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" />}

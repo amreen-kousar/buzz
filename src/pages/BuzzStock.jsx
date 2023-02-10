@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import { Stack, Chip } from '@mui/material';
+import { Stack, Chip, Typography} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -176,6 +176,9 @@ export default function BuzzStock() {
   }
   return (
     <div>
+       <Typography variant="h4" sx={{ mb: 2 }} >
+       Consolidated Org Stock
+   
       <Button style={{ float: "right", color: '#ff7424' }}
         sx={{
           '&:hover': {
@@ -186,8 +189,8 @@ export default function BuzzStock() {
           handleopenbusfilter()
         }}
       >
-        Filter
-      </Button>
+        Filter  
+      </Button></Typography>
       {selected?.type &&
         <Stack direction="row" spacing={1}>
           <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />

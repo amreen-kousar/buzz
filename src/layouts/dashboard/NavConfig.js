@@ -7,7 +7,7 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
 const navConfig = [
   {
-    title: 'dashboard',
+    title: 'Main',
     path: '/dashboard/app',
     icon: getIcon("ic:baseline-home"),
     id: [0, 1, 3, 7, 8, 9, 12]

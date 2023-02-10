@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react'
 import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
-import { Button, Dialog, Toolbar, IconButton, Typography, TextField, DialogContent, DialogContentText, Box, DialogActions } from '@mui/material'
-
+import { Button, Dialog, Toolbar, IconButton, Typography,Stack, TextField, DialogContent, DialogContentText, Box, DialogActions } from '@mui/material'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 function Addbus(props) {
 
-
+    const [date, setDate] = useState(new Date())
     const [addBus, setAddBus] = useState({
         register_number: '', register_date: '', engine_number: '', chassis_number: '', insurance_number: '',
         insurance_company: "", insurance_start_date: "", insurance_end_date: "", last_service_date: "", next_service_due_date: "", fitness_certificate: "", permit: "", emission_date: ''
@@ -76,7 +78,7 @@ function Addbus(props) {
                         <CloseIcon />
                     </IconButton>
                     <Typography sx={{ ml: 2, flex: 1, color: "#ffffff" }} variant="h6" component="div" >
-                        Add Bus
+                        Add New Bus
                     </Typography>
                 </Toolbar>
                 <DialogContent dividers={scroll === 'paper'}>
@@ -92,10 +94,30 @@ function Addbus(props) {
                             }}
 
                         >
-                            <TextField fullWidth id="outlined-basic" label="Register Number" helperText="Register Number required*" defaultValue={addBus.register_number} onChange={(e) => { setAddBus({ ...addBus, register_number: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Register Date" type="date" InputLabelProps={{
+                            <TextField fullWidth id="outlined-basic" label="Bus Number" helperText="Bus Number required*" defaultValue={addBus.register_number} onChange={(e) => { setAddBus({ ...addBus, register_number: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="outlined-basic" label="Register Date" type="date"  InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.register_date} onChange={(e) => { setAddBus({ ...addBus, register_date: e.target.value }) }} variant="outlined" color="common" /><br />
+                            }} defaultValue={addBus.register_date} format={'YYYY/MM/DD'} onChange={(e) => { setAddBus({ ...addBus, register_date: e.target.value }) }} variant="outlined" color="common" /><br />
+                             
+                                  <Stack style={{ marginTop: 20 }}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    
+                    inputFormat="YYYY-MM-DD"
+                    views={["year", "month", "day"]}
+                    // label="Date"
+                    defaultValue={date}
+                    value={date}
+                   
+                    onChange={(e) => {
+                      setAddBus({ ...addBus, register_datedate: e})
+                    }}
+                    renderInput={(params) => <TextField {...params} fullWidth />}
+                  />
+                </LocalizationProvider>
+              </Stack> 
+                           
+                           
                             <TextField fullWidth id="outlined-basic" label="Engine Number" defaultValue={addBus.engine_number} onChange={(e) => { setAddBus({ ...addBus, engine_number: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" label="Chassis Number" defaultValue={addBus.chassis_number} onChange={(e) => { setAddBus({ ...addBus, chassis_number: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" label="Insurance Number" defaultValue={addBus.insurance_number} onChange={(e) => { setAddBus({ ...addBus, insurance_number: e.target.value }) }} variant="outlined" color="common" /><br />

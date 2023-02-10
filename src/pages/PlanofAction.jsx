@@ -339,35 +339,23 @@ export default function PlanofAction() {
                   poa?.map((item) => {
 
                     return (
-                      // <h1>{item[0]?.actual_Date}</h1>
-                      item?.length !== 0 && item?.map(itm => {
+                      <>
+                      <h3>{item[0]?.date}</h3>
+                      {item?.length !== 0 && item?.map(itm => {
 
                         return (
                           <Card style={{ marginTop: 35 }} onClick={() => {
                             setSelect(itm)
 
                           }}>
-                            {/* <Stack direction={'row'} spacing={2} sx={{float:"right",padding:'auto',margin:'5px'}}>
-                          <PoaEdit itm={itm} />
-                          <Button style={{ float: "right", color: "#ed6c02" }}  sx={{
-                            '&:hover': {
-                              backgroundColor: '#ffd796',
-                              borderColor: "#ed6c02"
-                            },
-                            borderColor: "#ed6c02",
-                            color: "#ed6c02"
-                          }}>Delete</Button>
-                       </Stack>
-                      {itm?.id&&<CardContent sx={{margin:'10px'}}>
-                        <Stack margin="5px" padding="2px">{itm?.name}</Stack>
-                        <Stack margin="2px">{itm?.roleName}</Stack>
-                        <Stack>{itm?.emp_name}</Stack> 
-                  
-                      </CardContent>} */}
+                           
                             <TableContainer component={Paper}>
                               <Table aria-label="customized table">
                                 <TableBody>
                                   <TableRow >
+                                  <TableCell component="th" scope="row" onClick={handleOpenEvent}>
+                                      {itm?.time}<br></br>
+                                    </TableCell>
                                     <TableCell component="th" scope="row" onClick={handleOpenEvent}>
                                       {itm?.name}<br></br>{itm?.roleName}<br></br>{itm?.emp_name}
 
@@ -375,6 +363,7 @@ export default function PlanofAction() {
                                         (Canceled)
                                       </span>}
                                     </TableCell>
+                                  
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
                                         <Stack direction={'row'} spacing={2} >
@@ -399,6 +388,8 @@ export default function PlanofAction() {
 
                         )
                       })
+                    }
+                    </>
                     )
                   })
                   : <Grid> <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Poa</h1></Grid>
@@ -411,8 +402,9 @@ export default function PlanofAction() {
                   poa?.map((item) => {
 
                     return (
-                      // <h1>{item[0]?.actual_Date}</h1>
-                      item?.length !== 0 && item?.map(itm => {
+                      <>
+                      <h3>{item[0]?.date}</h3>
+                      {item?.length !== 0 && item?.map(itm => {
 
                         return (
                           <Card style={{ marginBottom: 30, marginTop: 10 }} onClick={() => {
@@ -424,6 +416,9 @@ export default function PlanofAction() {
                               <Table aria-label="customized table">
                                 <TableBody>
                                   <TableRow >
+                                  <TableCell component="th" scope="row" onClick={handleOpenEvent}>
+                                      {itm?.time}<br></br>
+                                    </TableCell>
                                     <TableCell component="th" scope="row" onClick={handleOpenEvent}>
                                       {itm?.name}<br></br>{itm?.roleName}<br></br>{itm?.emp_name}
 
@@ -454,6 +449,8 @@ export default function PlanofAction() {
 
                         )
                       })
+                       }
+                   </>
                     )
                   })
                   : <Grid> <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Poa</h1></Grid>
@@ -477,8 +474,11 @@ export default function PlanofAction() {
                                 <Table aria-label="customized table">
                                   <TableBody>
                                     <TableRow >
+                                    <TableCell component="th" scope="row" onClick={handleOpenEvent}>
+                                      {itm?.time}<br></br>
+                                    </TableCell>
                                       <TableCell component="th" scope="row" onClick={handleOpenEvent}>
-                                        {itm?.name}<br></br>{itm?.roleName}<br></br>{itm?.emp_name}
+                                        Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.location_name}
 
                                         {itm?.status == '2' && <span style={{ color: 'red' }}><br />
                                           (Canceled)

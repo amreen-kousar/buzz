@@ -26,8 +26,8 @@ export default function User() {
   const descriptionElementRef = useRef(null);
   const [buses, setBuses] = useState();
   const [respBuses, setRespbuses] = useState()
-
-
+  const [count,setCount]=useState()
+  const [cc,setCc]=useState()
 
   useEffect(() => {
     setDw(false)
@@ -71,6 +71,7 @@ export default function User() {
     axios(config)
       .then((response) => {
         console.log("respoonse in Bus List", response.data, id, i)
+        console.log(response.data.list.length,"responseeeeeeeeeeeeeeeeeeeeee")
         // if (filterBusItem) {
         //   if (selected.length == 0) {
         //     setBuses(respBuses?.list)
@@ -100,7 +101,8 @@ export default function User() {
 
 
         setBuses(response?.data?.list)
-
+        setCount(response?.data?.list.length)
+        setCc(response?.data?.checked_count)
       })
       .catch((error) => {
         console.log(error);
@@ -168,7 +170,7 @@ export default function User() {
     busesd()
   }
 
-  console.log(busesd, "busessssssssssssssss")
+  
 
   const handleDelete = (itmTodelete) => {
     setSelected(null)
@@ -206,7 +208,8 @@ export default function User() {
         </Snackbar>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
-            {selected?.type ? " Bus List" : "All Bus List"}
+            {selected?.type ? " Bus List" : "All Bus List"}&nbsp;({cc}/{count})
+            
           </Typography>
           <Button style={{ float: "right", color: '#ff7424' }}
             sx={{
@@ -270,17 +273,22 @@ export default function User() {
                 handleOpenFilter()
               }}>
               <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
-                <Typography variant="subtitle1" gutterBottom  >
+                <Typography variant="subtitle1" gutterBottom  style={{ color: 'blue' }} >
                   {`Bus Number : ${itm?.register_number}`}
+                </Typography>
+                <Typography  gutterBottom  >
+                  {`Project Name : ${itm?.project_name}`}
                 </Typography>
               </Grid>
               <Grid style={{ marginLeft: 15 }}>
-                <Typography variant="subtitle2" gutterBottom >
-                  Today Checklist Status : <Chip label="Published" size="small" color="success" variant="outlined" />
+                <Typography variant="body2" gutterBottom style={{ color: '#FF337A' }}>
+                  Today Checklist Status : 
+                  {/* <Chip label="Published" size="small" color="success" variant="outlined" /> */}
 
                 </Typography>
                 <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                  Checked/Total : 0/16
+                  Checked/Total : {itm?.checked_count}/ 16
+                  {console.log(itm?.total_count,"total counttttttttttt")}
                 </Typography>
               </Grid>
             </Card>

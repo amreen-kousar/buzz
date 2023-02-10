@@ -72,7 +72,7 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
 
     Demography: { 2: true, 3: true, 7: true },
 
-    BuzzStock: { 2: true, 3: true, 7: true, 9: true }
+    BuzzStock: { 3: true, 2: true, 7: true, 9: true }
   }
 
 
