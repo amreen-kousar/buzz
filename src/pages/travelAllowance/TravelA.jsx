@@ -10,7 +10,7 @@ import Tab from '@mui/material/Tab';
 import Page from '../../components/Page';
 import TravelDialog from '../Components/DashboardFilters/TravelDialog'
 import moment from 'moment';
-import Edittraveldialog from '../Editta';
+import Edittraveldialog from './Editta';
 import Iconify from 'src/components/Iconify';
 import Team from './Team';
 import Own from './Own'
@@ -181,19 +181,7 @@ export default function TravelA() {
           }} />
         </Stack>
 
-        {editData && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <Edittraveldialog
-            isOpenFilter={openFilter}
-            onOpenFilter={handleOpenFilter}
-            editData={editData}
-            onCloseFilter={handleCloseFilter} viewMessage={(text) => {
-              setMessage(text)
-              setOpenMessage(true)
-            }}
-            list={list}
-          />
-
-        </Stack>}
+        
         {/* </Stack> */}
 
       </Container ></Page >

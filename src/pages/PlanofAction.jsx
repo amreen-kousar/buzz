@@ -6,7 +6,7 @@ import account from '.././_mock/account';
 import { styled } from '@mui/material/styles';
 
 import PropTypes from 'prop-types';
-import { Link, Container, Stack, Typography, Box, Button, TextField, CardContent, Card, Avatar, Grid } from '@mui/material';
+import { Link, Container, Stack, Typography, Box, Button, TextField, CardContent, Card, Avatar, Grid, Chip } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
@@ -75,6 +75,7 @@ export default function PlanofAction() {
   const [date, setDate] = useState(new Date())
   const [userId, setUserId] = useState()
   const [message, setMessage] = useState('')
+  const [name, setName] = useState('')
   const [poaData, setPoaData] = [{
     emp_id: "",
     team: "",
@@ -176,6 +177,15 @@ export default function PlanofAction() {
         console.log(error);
       });
   }
+
+
+  const handleDeleteSelected = () => {
+    setName('')
+    setUserId()
+    todaypoa()
+  }
+
+
   return (
     <Page title="Dashboard: Products">
       <Container>
@@ -187,10 +197,20 @@ export default function PlanofAction() {
         <Typography variant="h4" sx={{ mb: 5 }} style={{ margin: 5 }} >
           Plan Of Actions
 
-        </Typography> <PoaTeam setUserId={(e) =>
+        </Typography>
+
+        <br />
+
+        {name !== '' &&
+          <Stack direction="row" spacing={1}>
+            <Chip label={name} onDelete={() => { handleDeleteSelected() }} />
+          </Stack>
+        }
+
+        <PoaTeam setUserId={(e) =>
           setUserId(e)
 
-        } />
+        } setName={(e) => setName(e)} />
 
         {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
@@ -221,9 +241,9 @@ export default function PlanofAction() {
         <Stack>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              // label="Date"
-              // defaultValue={date}
-              
+              label="Date"
+              defaultValue={date}
+              value={date}
               onChange={(newValue) => {
                 console.log(newValue, "<----newValuenewValue")
                 setDate(newValue)

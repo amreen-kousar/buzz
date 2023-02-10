@@ -10,7 +10,7 @@ import Tab from '@mui/material/Tab';
 import Page from '../../components/Page';
 import TravelDialog from '../Components/DashboardFilters/TravelDialog'
 import moment from 'moment';
-import Edittraveldialog from '../Editta';
+import Edittraveldialog from './Editta';
 import Iconify from 'src/components/Iconify';
 // components
 
