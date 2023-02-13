@@ -15,10 +15,10 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
   position: 'relative',
   textTransform: 'capitalize',
   borderRadius: theme.shape.borderRadius,
-  '&:focus': {
-    backgroundColor: '#ffd796',
-    color: '#ff7424'
-  },
+  // '&:focus': {
+  //   backgroundColor: '#ffd796',
+  //   color: '#ff7424'
+  // },
   '&:hover': {
     backgroundColor: '#ffd796',
     color: '#ff7424'
@@ -64,9 +64,9 @@ function NavItem({ item, active }) {
   };
 
   const activeSubStyle = {
-    color: '#ff7424',
-    fontWeight: 'fontWeightMedium',
-    bgcolor: '#ffd796'
+    // color: '#ff7424',
+    // fontWeight: 'fontWeightMedium',
+    // bgcolor: '#ffd796'
   };
 
 
@@ -88,6 +88,7 @@ function NavItem({ item, active }) {
 
           }}
         >
+
           <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
           <ListItemText disableTypography primary={title} />
           {info && info}
@@ -102,7 +103,7 @@ function NavItem({ item, active }) {
             {children.map((item) => {
               const { title, path } = item;
               const isActiveSub = active(path);
-
+              console.log(path, "in  sub child")
               return (
                 <ListItemStyle
                   key={title}
@@ -145,11 +146,14 @@ function NavItem({ item, active }) {
     <ListItemStyle
       component={RouterLink}
       to={path}
+
       sx={{
-        ...(isActiveRoot && activeRootStyle),
+        ...((isActiveRoot) && activeRootStyle),
       }}
       style={{ marginTop: "0.3rem" }}
     >
+
+      {isActiveRoot}
       <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
       <ListItemText disableTypography primary={title} />
       {info && info}
