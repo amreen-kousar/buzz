@@ -130,7 +130,18 @@ export default function Location(props) {
         <CardContent>
 
           <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
-            State
+            Country
+            <Select fullWidth variant='standard' color="common"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              defaultValue="0"
+              label="Age"
+            >
+              <MenuItem value="0">India</MenuItem>
+            </Select> </Typography><br></br>
+
+          <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
+            {data.state == "" && "Select "}State
             <Select fullWidth variant='standard' color="common"
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -148,7 +159,9 @@ export default function Location(props) {
               })
               }
             </Select> </Typography><br></br>
-          <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>District
+          <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
+            {data.district_id == "" && "Select "}
+            District
             <Select fullWidth variant='standard' color="common"
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -166,7 +179,8 @@ export default function Location(props) {
               })
               }
             </Select></Typography><br></br>
-          <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>Taluk
+          <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
+            {data.talaq_id == "" && "Select "}Taluk
             <Select fullWidth variant='standard' color="common"
               labelId="demo-simple-select-label"
               id="demo-simple-select"
