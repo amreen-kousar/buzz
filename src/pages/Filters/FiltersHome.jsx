@@ -79,7 +79,7 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
   const data = localStorage?.getItem('userId')
 
   // partner = 1, funder = 2, project = 3, opm = 4, trainer = 5, gelathi = 6 SOM=12 GFl=13
-  const filtersHeaders = { 1: 'Partner', 2: 'Funder', 3: 'Project', 4: 'Operation Manager', 5: 'Trainer', 6: 'Gelathi Facilitators', 12: 'Sr. Operations Manager', 13: 'Gelathi Falicitator Leads', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Driver' }
+  const filtersHeaders = { 1: 'Partner', 2: 'Funders', 3: 'Project', 4: 'Operation Managers', 5: 'Trainers', 6: 'Gelathi Facilitators', 12: 'Sr. Operations Manager', 13: 'Gelathi Falicitator Leads', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Driver' }
 
 
   const setData = (value) => {

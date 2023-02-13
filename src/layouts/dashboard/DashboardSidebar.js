@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
@@ -52,7 +52,32 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
 
   const isDesktop = useResponsive('up', 'lg');
 
+  const [filteredNavConfig, setNavConfig] = useState([])
+
+  const roleDashboard = { 2: ['7', '5', '8', '9', '10', '12', '13'] }
+
   useEffect(() => {
+    let temp = []
+    for (let r = 0; r < roleDashboard[data].length; r++) {
+      let s = roleDashboard[data][r]
+      // console.log(navConfig[s].id.includes(data), data, "ssssssssssssssssssssssssssssssss")
+      if (navConfig[s].id.includes(data)) {
+        temp.push(navConfig[s])
+      }
+    }
+    setNavConfig(temp)
+  }, [])
+
+
+  let tempnavConfig = []
+
+  console.log(filteredNavConfig, "temp navv config")
+
+  useEffect(() => {
+
+    // roleDashboard[data].map(r => navConfig[r].id.filter(itm => itm?.find(it => it == data)))
+
+
     if (isOpenSidebar) {
       onCloseSidebar();
     }
@@ -89,7 +114,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         </Link>
       </Box>
 
-      <NavSection navConfig={navConfig?.filter(itm => itm?.id.find(it => it == data))} />
+      <NavSection navConfig={filteredNavConfig} />
 
       <Box sx={{ flexGrow: 1 }} />
 

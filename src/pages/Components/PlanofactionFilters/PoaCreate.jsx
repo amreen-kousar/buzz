@@ -129,7 +129,10 @@ export default function PoaCreate({ setSucess }) {
             }}>
        Create New Poa
       </Button> */}
-      <Button variant="contained" onClick={handleClickOpen} style={{ float: "right", marginLeft: 100, borderRadius: "50%", padding: "0.2rem", position: 'relative', zIndex: '1', marginRight: 10, marginTop: 15 }} sx={{
+      <Button variant="contained" onClick={handleClickOpen} style={{
+        float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
+        position: 'fixed', zIndex: '1', bottom: 40, right: 40
+      }} sx={{
         ':hover': {
           bgcolor: '#ffd796', // theme.palette.primary.main
           color: '#ff7424',
@@ -153,11 +156,11 @@ export default function PoaCreate({ setSucess }) {
         {console.log(addPoa, "<----qwedrftgyhujikkmijnuhbygtv")}
         <Snackbar open={value} autoHideDuration={6000} onClose={() => {
           setAddPoa(''),
-          setValue(false)
+            setValue(false)
         }}>
           <Alert onClose={() => {
             setAddPoa(''),
-            setValue(false)
+              setValue(false)
           }} severity="error" sx={{ width: '100%' }}>
             {addPoa}
           </Alert>
@@ -169,7 +172,7 @@ export default function PoaCreate({ setSucess }) {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-              ADD New POA
+              Schedule an event
             </Typography>
 
 
@@ -198,7 +201,7 @@ export default function PoaCreate({ setSucess }) {
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
                 <TextField fullWidth value={addData?.name} onChange={(e) => {
                   setAddData({ ...addData, name: e?.target?.value }),
-                  console.log(e, "<---EWWEREWREW")
+                    console.log(e, "<---EWWEREWREW")
                 }} id="outlined-basic" label="Add Title" variant="outlined" color="common" />
                 <Stack direction={'row'}>
                   <Typography>All Day</Typography>

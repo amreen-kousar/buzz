@@ -49,7 +49,7 @@ export default function Login() {
     axios(config)
       .then(function (response) {
         response.data = {
-          code: 200, first_name: "Anas", id: "144", last_name: "", message: "successfully", profile_pic: "", role: "1", role_name: "CEO", success: true, supervisorId: "0"
+          code: 200, first_name: "Anas", id: "144", last_name: "", message: "successfully", profile_pic: "", role: "2", role_name: "Admin", success: true, supervisorId: "0"
         }
         localStorage?.setItem('user', JSON?.stringify(itm?.user))
         localStorage?.setItem('userId', response?.data?.role)
@@ -70,8 +70,7 @@ export default function Login() {
             else if (response.data.role == 6 | response.data.role == 13) {
               navigate('/dashboard/gelathi')
             }
-            else if(response.data.role==4)
-            {
+            else if (response.data.role == 4) {
               navigate('/dashboard/operationmanager')
             }
             else {

@@ -80,7 +80,7 @@ SimpleDialog.propTypes = {
   //   selectedValue: PropTypes.string.isRequired,
 };
 
-export default function PoaTeam({ setUserId ,setName}) {
+export default function PoaTeam({ setUserId, setName }) {
   const [open, setOpen] = React.useState(false);
   //   const [selectedValue, setSelectedValue] = React.useState();
   const [teamData, setTeamData] = useState([])
@@ -125,11 +125,8 @@ export default function PoaTeam({ setUserId ,setName}) {
 
   return (
     <div>
-      <Typography variant="subtitle1" component="div">
-        {/* Selected: {selectedValue} */}
-      </Typography>
-      <br /><br></br>
-      <Button onClick={handleClickOpen} style={{ float: "right", color: "#ff7424", margin: 10, marginTop: 22 }} sx={{
+
+      <Button onClick={handleClickOpen} style={{ float: "right", color: "#ff7424", margin: 10, marginTop: 0 }} sx={{
         '&:hover': {
           backgroundColor: '#ffd796',
           borderColor: "#ff7424",

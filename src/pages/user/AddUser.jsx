@@ -7,7 +7,7 @@ import AppBar from '@mui/material/AppBar';
 function AddUser(props) {
 
     const [open, setOpen] = useState(false);
-    const [count,setCount]=useState('');
+    const [count, setCount] = useState('');
     // const [ceoUser, setCeoUser] = useState(props.data)
 
     let isValidForm = true;
@@ -440,7 +440,7 @@ function AddUser(props) {
 
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
-                                <TextField fullWidth required id="outlined-basic" label="Mobile number"  helperText={`${AddUser.length}/10`}  inputProps={{ maxLength: 10}} multiline value={AddUser.contactNum} type="number" onChange={(e) => { setAddUser({ ...AddUser, contactNum: e.target.value }) }} variant="outlined" color="common" />
+                                <TextField fullWidth required id="outlined-basic" label="Mobile number" helperText={`${AddUser?.contactNum?.length}/10`} inputProps={{ maxLength: 10 }} multiline value={AddUser.contactNum} type="number" onChange={(e) => { setAddUser({ ...AddUser, contactNum: e.target.value }) }} variant="outlined" color="common" />
                                 <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" color='common' />
 
 
