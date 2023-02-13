@@ -74,18 +74,18 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ff7424">
         <Link underline="none" component={RouterLink} to="#">
           {/* <AccountStyle > */}
-          <div style={{ paddingTop:20,paddingLeft:100}}>
-            <Avatar src={account.profile_pic}  alt="photoURL" />
-            
-          {/* </AccountStyle> */}</div>
+          <div style={{ paddingTop: 20, paddingLeft: 100 }}>
+            <Avatar src={account.profile_pic} alt="photoURL" />
+
+            {/* </AccountStyle> */}</div>
           <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" color='#ffffff' style={{textAlign:"center"}}>
-               Welcome, {account.first_name}
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#ffffff' }} style={{textAlign:'center'}}>
-                ({account.role_name})
-              </Typography>
-            </Box>
+            <Typography variant="subtitle2" color='#ffffff' style={{ textAlign: "center" }}>
+              Welcome, {account.first_name}
+            </Typography>
+            <Typography variant="body2" sx={{ color: '#ffffff' }} style={{ textAlign: 'center' }}>
+              ({account.role_name})
+            </Typography>
+          </Box>
         </Link>
       </Box>
 

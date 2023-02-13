@@ -155,249 +155,103 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
   }
   return (
     <>
-    <Typography variant="h4" sx={{ color:'black',marginLeft:'150px' }} >
+      <Typography variant="h4" sx={{ color: 'black' }} >
         Profile
-     </Typography>
-    <Card sx={{ width: 400 }}><br />
-      {/* <div style={{ display: 'flex', justifyContent: "center" }}>
-        <Avatar sx={{ bgcolor: "#ff7424", width: 100, height: 100, }} aria-label="recipe" src={profileData?.profile_pic}>
-          {profileData?.first_name.substring(0, 1)}
-        </Avatar>
-      </div>
-      <br />
-      <Typography variant="h6" textAlign="center">
-        {profileData?.first_name} {profileData?.last_name}
-      </Typography> */}
+      </Typography>
+      <Card sx={{ width: 400 }}><br />
+        {/* <div style={{ display: 'flex', justifyContent: "center" }}>
+        <Avatar sx={{ bgcolor: "#ff7424", width: 100, height: 100, }} aria-label="recipe" src={profileData?.profile_pic}>
+          {profileData?.first_name.substring(0, 1)}
+        </Avatar>
+      </div>
+      <br />
+      <Typography variant="h6" textAlign="center">
+        {profileData?.first_name} {profileData?.last_name}
+      </Typography> */}
 
-      {/* <CardMedia
-        component="img"
-        height="194"
-        image="/static/images/cards/paella.jpg"
-        alt="Paella dish"
-      /> */}
-      <Stack spacing={1} sx={{ px: 1 }}>
-            <div>
-              <Card >
-                <CardContent>
-                <div  style={{float:'left',paddingTop:40,paddingRight:5,paddingBottom:40}}>
-            <Avatar src={profileData?.profile_pic} alt="photoURL" style={{height:50,width:50}}/>
-            </div>
-               
-                 <Typography style={{ flexDirection: 'row', color: '#444444'}} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name}</Typography>
-                  <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
-                    Role : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.role_name}</span>
-                  </Typography>
-                  <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
-                    Status : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.status==='1'?'Active':null}</span>
-                  </Typography>
-                  <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
-                    Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.supervisorName===""?"":profileData?.superVisorName}</span>
-                  </Typography>
-                  <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
-                    Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.doj}</span> </Typography>
-               </CardContent>
-              </Card>
+        {/* <CardMedia
+        component="img"
+        height="194"
+        image="/static/images/cards/paella.jpg"
+        alt="Paella dish"
+      /> */}
+        <Stack spacing={1} sx={{ px: 1 }}>
+          <div>
+            <Card >
+              <CardContent>
+                <div style={{ float: 'left', paddingTop: 40, paddingRight: 5, paddingBottom: 40 }}>
+                  <Avatar src={profileData?.profile_pic} alt="photoURL" style={{ height: 50, width: 50 }} />
+                </div>
 
-            </div>
+                <Card sx={{ boxShadow: 0 }}>
+                  <CardContent >
+                    <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name}</Typography>
+                    <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
+                      Role : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.role_name}</span>
+                    </Typography>
+                    <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                      Status : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.status === '1' ? 'Active' : null}</span>
+                    </Typography>
+                    <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                      Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.supervisorName === "" ? "" : profileData?.superVisorName}</span>
+                    </Typography>
+                    <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                      Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.doj}</span> </Typography>
+                  </CardContent>
+                </Card>
+              </CardContent>
+            </Card>
 
-            <div>
-              <Card style={{ width: "auto" }}>
-                <CardContent>
-                  <Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}>
-                    Contact Information
-                  </Card>
-                  <TableContainer >
-          <Table aria-label="customized table"  >
-            {/* <TableHead maxWidth>Contact Information</TableHead> */}
-            <TableBody >
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell > Mobile </TableCell>
+          </div>
 
-                <TableCell>: &nbsp;{profileData?.contactNum}</TableCell>
-              </TableRow>
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell> Work</TableCell>
-                <TableCell>: &nbsp;{profileData?.officeMailId}</TableCell>
-              </TableRow>
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell>Email</TableCell>
-                <TableCell>: &nbsp;{profileData?.personalMailId}</TableCell>
-              </TableRow>
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell>Address</TableCell>
-                <TableCell>: &nbsp;{profileData?.address}</TableCell>
-              </TableRow>
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell>Pincode:</TableCell>
-                <TableCell>: &nbsp;{profileData?.pincode}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-                
-                </CardContent>
-              </Card>
+          <div>
+            <Card style={{ width: "auto" }}>
+              <CardContent>
+                <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#999999' }}>
+                  Contact Information
+                </Card>
+                <TableContainer >
+                  <Table aria-label="customized table"  >
+                    {/* <TableHead maxWidth>Contact Information</TableHead> */}
+                    <TableBody >
+                      <TableRow style={{ height: "8px !important" }} >
+                        <TableCell > Mobile </TableCell>
 
-            </div>
+                        <TableCell>: &nbsp;{profileData?.contactNum}</TableCell>
+                      </TableRow>
+                      <TableRow style={{ height: "8px !important" }} >
+                        <TableCell> Work</TableCell>
+                        <TableCell>: &nbsp;{profileData?.officeMailId}</TableCell>
+                      </TableRow>
+                      <TableRow style={{ height: "8px !important" }} >
+                        <TableCell>Email</TableCell>
+                        <TableCell>: &nbsp;{profileData?.personalMailId}</TableCell>
+                      </TableRow>
+                      <TableRow style={{ height: "8px !important" }} >
+                        <TableCell>Address</TableCell>
+                        <TableCell>: &nbsp;{profileData?.address}</TableCell>
+                      </TableRow>
+                      <TableRow style={{ height: "8px !important" }} >
+                        <TableCell>Pincode:</TableCell>
+                        <TableCell>: &nbsp;{profileData?.pincode}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
 
-          
-          </Stack>
-      {/* <CardContent>
-        <TableContainer >
-          <Table aria-label="customized table"  >
+              </CardContent>
+            </Card>
 
-            <TableBody >
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell > Role</TableCell>
+          </div>
 
-                <TableCell>{userDetails?.role_name}</TableCell>
-              </TableRow>
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell > Status</TableCell>
-                <TableCell>{profileData?.status === "1" ? "Active" : null}</TableCell>
-              </TableRow>
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell > Reporting Manager</TableCell>
-                <TableCell>{profileData?.supervisorName === "" ? "-" : profileData?.supervisorName}</TableCell>
-              </TableRow>
-              <TableRow style={{ height: "8px !important" }} >
-                <TableCell >Date of Joining</TableCell>
-                <TableCell>{profileData?.doj}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </CardContent> */}
 
-      {/* <CardContent>
-        <b textAlign="center" style={{ color: 'black' }}>Contact Information</b>
-       
-      </CardContent> */}
-      {/* <Typography variant="body1" gutterBottom>
-          Projects: {profileData?.project_list}
-        </Typography> */}
-
-      <CardActions disableSpacing>
-      <IconButton edge="start" onClick={handleCloseClick} color="inherit" aria-label="close" sx={{paddingLeft:5,color:'#ed6c02'}}>
-                        <CloseIcon />
+        </Stack>
+        <CardActions disableSpacing>
+          <IconButton edge="start" onClick={handleCloseClick} color="inherit" aria-label="close" sx={{ marginLeft: 5, color: '#ed6c02' }} style={{ backgroundColor: 'transparent' }}>
+            <CloseIcon />
           </IconButton>
-        <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-      
-          <Button variant="warning"
-            sx={{
-              ':hover': {
-                bgcolor: '#ffd796', // theme.palette.primary.main
-                color: '#ff7424',
-              },
-              ':focus': {
-                bgcolor: '#ffd796',
-                color: "#ff7424"
-              },
-              bgcolor: '#ffd796',
-              color: "#ff7424"
-            }} component={RouterLink} to="#" startIcon={<Iconify icon="material-symbols:edit" />}>
-            Edit User
-          </Button>
-          {/* <Edit /> */}
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Stack mb={3} style={{ backgroundColor: '#ffd796', borderRadius: 9 }}>
-            <Typography style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}
-              variant="h6"
-              // sx={{
-              //   p: 2,
-              //   margin: 'auto',
-              //   maxWidth: 500,
-              //   flexGrow: 1,
-              //   color: '#ff7424'
-              // }}
-            >
-             User Information
-            </Typography>
-          </Stack>
-          <Card>
-
-            <TableContainer >
-              <Table aria-label="customized table"  >
-
-                <TableBody >
-                  <TableRow style={{ height: "8px !important" }} >
-                    <TableCell>UserName :</TableCell>
-                    <TableCell> {profileData?.first_name} {profileData?.last_name}</TableCell>
-                  </TableRow>
-                  <TableRow style={{ height: "8px !important" }} >
-                    <TableCell> Role :</TableCell>
-                    <TableCell>{userDetails?.role_name}</TableCell>
-                  </TableRow>
-                  
-                </TableBody>
-              </Table>
-            </TableContainer>
-
-          </Card>
-          <Stack mb={1.5}>
-            <Divider variant="middle" />
-          </Stack>
-          <Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}>
-                    Contact Information
-                  </Card><br/>
-          <Grid direction={'column'} spacing={1.8} alignItems="center" justifyContent="space-between">
-            <Typography>Email: {profileData?.officeMailId}</Typography><br/>
-            <Grid item mb={1}>
-              <TextField
-                fullWidth
-                helperText="Mobile Number Required *"
-                size="small"
-                margin="dense"
-                value={editData?.contactNum}
-                onChange={(e) => { setEditData({ ...editData, contactNum: e?.target?.value }) }}
-                type="number"
-                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-                id="Mobile-Number"
-                label="Mobile Number"
-                variant="outlined" color="common"
-              />
-            </Grid>
-            <Grid item mb={2}>
-              <TextField fullWidth size="small" id="Work" 
-              value={editData?.officeMailId}
-              label="Work" variant="outlined" color="common" />
-            </Grid>
-            <Grid item mb={2}>
-              <TextField
-                fullWidth
-                helperText="Address Required *"
-                size="small"
-                id="Address"
-                value={editData?.address}
-                onChange={(e) => { setEditData({ ...editData, address: e?.target?.value }) }}
-                label="Address"
-                variant="outlined" color="common"
-              />
-            </Grid>
-            <Grid item mb={2}>
-              <TextField fullWidth size="small" id="Address1"
-                value={editData?.address1}
-                onChange={(e) => { setEditData({ ...editData, address1: e?.target?.value }) }}
-                label="Address1" variant="outlined" color="common" />
-            </Grid>
-            <Grid item mb={2}>
-              <TextField fullWidth size="small"
-                value={editData?.address2}
-                onChange={(e) => { setEditData({ ...editData, address2: e?.target?.value }) }}
-                id="Address2" label="Address2" variant="outlined" color="common" />
-            </Grid>
-            <Grid item mb={2}>
-              <TextField fullWidth size="small" id="PinCode"
-                value={editData?.pincode}
-                onChange={(e) => { setEditData({ ...editData, pincode: e?.target?.value }) }}
-                label="PinCode" variant="outlined" color="common" />
-            </Grid>
-          </Grid>
-          <Box display="flex" justifyContent="flex-end">
-            <Button onClick={editProfile} variant="warning"
+          <ExpandMore disableRipple style={{ backgroundColor: 'transparent' }} expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
+            <Button variant="warning"
               sx={{
                 ':hover': {
                   bgcolor: '#ffd796', // theme.palette.primary.main
@@ -409,13 +263,127 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                 },
                 bgcolor: '#ffd796',
                 color: "#ff7424"
-              }} component={RouterLink} to="#" startIcon={<Iconify icon="eva:save-fill" />}>
-              Save
+              }} component={RouterLink} to="#" startIcon={<Iconify icon="material-symbols:edit" />}>
+              Edit User
             </Button>
-          </Box>
-        </CardContent>
-      </Collapse>
-    </Card>
+            {/* <Edit /> */}
+          </ExpandMore>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Stack mb={3} style={{ backgroundColor: '#ffd796', borderRadius: 9 }}>
+              <Typography style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#999999' }}
+                variant="h6"
+              // sx={{
+              //   p: 2,
+              //   margin: 'auto',
+              //   maxWidth: 500,
+              //   flexGrow: 1,
+              //   color: '#ff7424'
+              // }}
+              >
+                User Information
+              </Typography>
+            </Stack>
+            <Card>
+
+              <TableContainer >
+                <Table aria-label="customized table"  >
+
+                  <TableBody >
+                    <TableRow style={{ height: "8px !important" }} >
+                      <TableCell>UserName :</TableCell>
+                      <TableCell> {profileData?.first_name} {profileData?.last_name}</TableCell>
+                    </TableRow>
+                    <TableRow style={{ height: "8px !important" }} >
+                      <TableCell> Role :</TableCell>
+                      <TableCell>{userDetails?.role_name}</TableCell>
+                    </TableRow>
+
+                  </TableBody>
+                </Table>
+              </TableContainer>
+
+            </Card>
+            <Stack mb={1.5}>
+              <Divider variant="middle" />
+            </Stack>
+            <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#999999' }}>
+              Contact Information
+            </Card><br />
+            <Grid direction={'column'} spacing={1.8} alignItems="center" justifyContent="space-between">
+              <Typography>Email: {profileData?.officeMailId}</Typography><br />
+              <Grid item mb={1}>
+                <TextField
+                  fullWidth
+                  helperText="Mobile Number Required *"
+                  size="small"
+                  margin="dense"
+                  value={editData?.contactNum}
+                  onChange={(e) => { setEditData({ ...editData, contactNum: e?.target?.value }) }}
+                  type="number"
+                  inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                  id="Mobile-Number"
+                  label="Mobile Number"
+                  variant="outlined" color="common"
+                />
+              </Grid>
+              <Grid item mb={2}>
+                <TextField fullWidth size="small" id="Work"
+                  value={editData?.officeMailId}
+                  label="Work" variant="outlined" color="common" />
+              </Grid>
+              <Grid item mb={2}>
+                <TextField
+                  fullWidth
+                  helperText="Address Required *"
+                  size="small"
+                  id="Address"
+                  value={editData?.address}
+                  onChange={(e) => { setEditData({ ...editData, address: e?.target?.value }) }}
+                  label="Address"
+                  variant="outlined" color="common"
+                />
+              </Grid>
+              <Grid item mb={2}>
+                <TextField fullWidth size="small" id="Address1"
+                  value={editData?.address1}
+                  onChange={(e) => { setEditData({ ...editData, address1: e?.target?.value }) }}
+                  label="Address1" variant="outlined" color="common" />
+              </Grid>
+              <Grid item mb={2}>
+                <TextField fullWidth size="small"
+                  value={editData?.address2}
+                  onChange={(e) => { setEditData({ ...editData, address2: e?.target?.value }) }}
+                  id="Address2" label="Address2" variant="outlined" color="common" />
+              </Grid>
+              <Grid item mb={2}>
+                <TextField fullWidth size="small" id="PinCode"
+                  value={editData?.pincode}
+                  onChange={(e) => { setEditData({ ...editData, pincode: e?.target?.value }) }}
+                  label="PinCode" variant="outlined" color="common" />
+              </Grid>
+            </Grid>
+            <Box display="flex" justifyContent="flex-end">
+              <Button onClick={editProfile} variant="warning"
+                sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ff7424',
+                  },
+                  ':focus': {
+                    bgcolor: '#ffd796',
+                    color: "#ff7424"
+                  },
+                  bgcolor: '#ffd796',
+                  color: "#ff7424"
+                }} component={RouterLink} to="#" startIcon={<Iconify icon="eva:save-fill" />}>
+                Save
+              </Button>
+            </Box>
+          </CardContent>
+        </Collapse>
+      </Card>
     </>
   );
 }

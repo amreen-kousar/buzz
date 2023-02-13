@@ -10,7 +10,7 @@ import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
-import { Dialog, Toolbar, DialogContent, DialogContentText,Card } from '@mui/material'
+import { Dialog, Toolbar, DialogContent, DialogContentText, Card } from '@mui/material'
 
 // import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -348,7 +348,8 @@ export default function TravelDialog({ viewMessage }) {
               </Stack><br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth >
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>Poa</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 }}>
+                    {sendData?.poa == "" ? 'Select Poa' : "Poa"}</InputLabel>
                   <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                     {datadrop?.data?.map(itm => {
                       return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
@@ -502,7 +503,7 @@ export default function TravelDialog({ viewMessage }) {
               {/* <Button onClick={() => capture()}>Click here to to upload snaps</Button> */}
 
             </div>
-            <Button onClick={() => SendData()}  sx={{
+            <Button onClick={() => SendData()} sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
               },

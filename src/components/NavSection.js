@@ -148,6 +148,7 @@ function NavItem({ item, active }) {
       sx={{
         ...(isActiveRoot && activeRootStyle),
       }}
+      style={{ marginTop: "0.3rem" }}
     >
       <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
       <ListItemText disableTypography primary={title} />
