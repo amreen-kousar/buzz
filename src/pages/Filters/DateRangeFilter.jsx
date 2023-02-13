@@ -24,9 +24,11 @@ export default function StaticDatePickerDemo(props) {
       <CardContent sx={{ color: "#ed6c02" }}>
 
         <Stack>
+         <label>From</label>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <StaticDatePicker
               defaultValue={startDate}
+              // label='From'
               onChange={(newstartvalue) => {
                 setStartDate(newstartvalue)
               }}
@@ -35,6 +37,7 @@ export default function StaticDatePickerDemo(props) {
             />
           </LocalizationProvider></Stack>
         <Stack>
+        <label>To</label>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <StaticDatePicker
               defaultValue={endDate}

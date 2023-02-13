@@ -218,7 +218,7 @@ export default function BuzzStock() {
       </Stack>
       <Grid
         sx={{
-          p: 2,
+          p: 1,
           margin: 'auto',
           maxWidth: 500,
           flexGrow: 1,

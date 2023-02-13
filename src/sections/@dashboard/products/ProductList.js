@@ -83,7 +83,7 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
       </Grid>{users?.length == 0 && (
 
         <div>
-          <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
+          <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />Data not found</h1>
         </div>
 
       )}</>

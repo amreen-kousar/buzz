@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import Poafunders from './Poafunders';
+import Avatar from '@mui/material/Avatar';
 // material
 import {
   Grid,
@@ -144,7 +145,10 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select }) {
 
           <Card style={{ marginTop: 20 }}>
               <CardContent>
-                <Typography>{eventData?.photo1}</Typography>
+              <div >
+              <img src={eventData?.photo1 ? eventData?.photo1 : ""} />
+                 
+            </div>
               </CardContent>
           </Card>
           </div>

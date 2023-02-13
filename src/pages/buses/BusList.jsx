@@ -12,7 +12,7 @@ import Addbus from './Addbus';
 import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
-
+import Iconify from '../../components/Iconify';
 export default function User() {
 
   var userAccess = ['2']
@@ -272,6 +272,12 @@ export default function User() {
                 setClickData(itm)
                 handleOpenFilter()
               }}>
+               
+               <div  style={{float:'left',paddingLeft:'20px',paddingTop:'50px',paddingBottom:'50px',paddingRight:'20px'}}>
+               <Iconify icon="material-symbols:directions-bus" width={30} height={30} />
+            </div>
+
+              
               <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
                 <Typography variant="subtitle1" gutterBottom  style={{ color: 'blue' }} >
                   {`Bus Number : ${itm?.register_number}`}
@@ -290,7 +296,8 @@ export default function User() {
                   Checked/Total : {itm?.checked_count}/ 16
                   {console.log(itm?.total_count,"total counttttttttttt")}
                 </Typography>
-              </Grid>
+           
+              </Grid>  
             </Card>
           )
         })}

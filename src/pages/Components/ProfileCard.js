@@ -28,6 +28,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import CloseIcon from '@mui/icons-material/Close';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -92,7 +93,11 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
     })
   }, [profileData])
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+    setExpanded(true);
+  };
+
+  const handleCloseClick = () => {
+    setExpanded(false);
   };
   const handleClick = () => {
     console.info('You clicked the Chip.');
@@ -100,7 +105,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
   console.log(editData, profileData, "<---345678i")
   const editProfile = async => {
     // console.log(editData,"<----editProfileeditProfile")
-    handleExpandClick();
+    handleCloseClick();
     const userDetails = localStorage?.getItem("userDetails")
     var data = JSON.stringify({
       "id": JSON?.parse(userDetails)?.id,
@@ -150,7 +155,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
   }
   return (
     <>
-    <Typography variant="h4" sx={{ mb: 2,color:'black' }} >
+    <Typography variant="h4" sx={{ color:'black',marginLeft:'150px' }} >
         Profile
      </Typography>
     <Card sx={{ width: 400 }}><br />
@@ -174,10 +179,10 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
             <div>
               <Card >
                 <CardContent>
-                <div  style={{float:'left',paddingTop:30,paddingRight:5}}>
+                <div  style={{float:'left',paddingTop:40,paddingRight:5,paddingBottom:40}}>
             <Avatar src={profileData?.profile_pic} alt="photoURL" style={{height:50,width:50}}/>
             </div>
-                 <Card sx={{px:1}}>
+               
                  <Typography style={{ flexDirection: 'row', color: '#444444'}} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name}</Typography>
                   <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
                     Role : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.role_name}</span>
@@ -186,12 +191,11 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                     Status : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.status==='1'?'Active':null}</span>
                   </Typography>
                   <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
-                    Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.supervisorName===""?"-":profileData?.superVisorName}</span>
+                    Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.supervisorName===""?"":profileData?.superVisorName}</span>
                   </Typography>
                   <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
                     Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.doj}</span> </Typography>
-               </Card>
-                </CardContent>
+               </CardContent>
               </Card>
 
             </div>
@@ -274,7 +278,11 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
         </Typography> */}
 
       <CardActions disableSpacing>
+      <IconButton edge="start" onClick={handleCloseClick} color="inherit" aria-label="close" sx={{paddingLeft:5,color:'#ed6c02'}}>
+                        <CloseIcon />
+          </IconButton>
         <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
+      
           <Button variant="warning"
             sx={{
               ':hover': {
@@ -287,7 +295,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
               },
               bgcolor: '#ffd796',
               color: "#ff7424"
-            }} component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
+            }} component={RouterLink} to="#" startIcon={<Iconify icon="material-symbols:edit" />}>
             Edit User
           </Button>
           {/* <Edit /> */}
@@ -316,11 +324,11 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
 
                 <TableBody >
                   <TableRow style={{ height: "8px !important" }} >
-                    <TableCell>UserName:</TableCell>
+                    <TableCell>UserName :</TableCell>
                     <TableCell> {profileData?.first_name} {profileData?.last_name}</TableCell>
                   </TableRow>
                   <TableRow style={{ height: "8px !important" }} >
-                    <TableCell> Role:</TableCell>
+                    <TableCell> Role :</TableCell>
                     <TableCell>{userDetails?.role_name}</TableCell>
                   </TableRow>
                   

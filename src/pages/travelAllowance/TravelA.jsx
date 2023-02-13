@@ -156,6 +156,21 @@ export default function TravelA() {
           onChange={(e) => { getDateValue(e?.target?.value) }} label="Select Range" variant="outlined" InputLabelProps={{
             shrink: true,
           }} />
+           {/* <Stack style={{ marginTop: 20 }}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    
+                    inputFormat="YYYY-MM-DD"
+                    views={["year", "month", "day"]}
+                    // label="Date"
+                    value={getDateValue?.date}
+                    onChange={(newValue) => {
+                      setSendData({ ...sendData, date: newValue })
+                    }}
+                    renderInput={(params) => <TextField {...params} fullWidth />}
+                  />
+                </LocalizationProvider>
+              </Stack> */}
 
 
         <TabPanel value={mainValue} index={1}>

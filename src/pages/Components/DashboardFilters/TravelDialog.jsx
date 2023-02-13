@@ -36,6 +36,7 @@ import Webcam from "react-webcam";
 import Label from 'src/components/Label';
 import InputAdornment from '@mui/material/InputAdornment';
 
+
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LocalPrintshop from '@mui/icons-material/LocalPrintshop';
 import CurrencyRupee  from '@mui/icons-material/CurrencyRupee';
@@ -363,7 +364,7 @@ axios(config)
 
 
           <Button autoFocus color="inherit" onClick={() => SendData()}>
-            save
+          <Iconify icon="material-symbols:save" width={30} height={30} />
           </Button>
         </Toolbar>
         {/* <Webcam
@@ -439,7 +440,7 @@ axios(config)
             {console.log(userDetails,"userdetailsssssssssssss")}
               {/* {(userDetails===12)?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />:null} */}
              
-              <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa *</InputLabel>
+              <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>POA *</InputLabel>
                 <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                 
                   {datadrop?.data?.map(itm => {
@@ -504,7 +505,7 @@ axios(config)
               </Stack>:
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Rate Per Km</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Rate Per KM</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Rate Per Km"
                     id="demo-simple-select"
@@ -556,7 +557,7 @@ axios(config)
               </Stack>
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="Printing" variant="outlined" color="common" 
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="printing" variant="outlined" color="common" 
                 InputProps={{
                      endAdornment: (
                        <InputAdornment position="start">
@@ -567,7 +568,7 @@ axios(config)
               
               </Stack>
               <Stack style={{ marginTop: 20 }}>  
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="Stationery" variant="outlined" color="common" 
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="stationery" variant="outlined" color="common" 
                 InputProps={{
                      endAdornment: (
                        <InputAdornment position="start">
@@ -577,7 +578,7 @@ axios(config)
                   }} />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="other expenses" variant="outlined" color="common"
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="Other Expenses" variant="outlined" color="common"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="start">
@@ -589,7 +590,7 @@ axios(config)
                }}  />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="other expenses amount" variant="outlined" color="common" 
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="Other Expenses Amount" variant="outlined" color="common" 
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="start">
@@ -599,10 +600,10 @@ axios(config)
                }} />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="end odometer reading" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="End Odometer Reading" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" disabled={true} onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="end location" variant="outlined" 
+                <TextField id="outlined-basic" disabled={true} onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="End Location" variant="outlined" 
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="start">
@@ -612,7 +613,7 @@ axios(config)
                }}   />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common"   />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="Total Kilometer" variant="outlined" color="common"   />
               </Stack>
               <br /><br />
               <div>
@@ -640,25 +641,26 @@ axios(config)
                   <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
                 </label>
               </div>
-              <Button onClick={postImages}
-                sx={{
-                  '&:hover': {
-                    backgroundColor: '#ffd796',
-                  },
-                  color: "#ff7424"
-                }}>Send Images</Button>
-              <br /><br />
+              
+             
 
               {/* <Button onClick={() => capture()}>Click here to to upload snaps</Button> */}
 
             </div>
-            <Button onClick={() => SendData()} variant="filled" sx={{
+            {/* <Button onClick={() => SendData()}  sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
               },
               color: "#ff7424",
 
-            }}>Upload</Button><br></br>
+            }}>Upload</Button><br></br> */}
+            <Button onClick={postImages} variant="filled"
+                sx={{
+                  '&:hover': {
+                    backgroundColor: '#ffd796',
+                  },
+                  color: "#ff7424"
+                }}>Upload</Button>
           </DialogContentText></DialogContent>  </Dialog>
     </div>
   );

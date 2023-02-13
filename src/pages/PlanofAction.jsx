@@ -185,7 +185,7 @@ export default function PlanofAction() {
     todaypoa()
   }
 
-
+  const userDetails = localStorage?.getItem('userId')
   return (
     <Page title="Dashboard: Products">
       <Container>
@@ -353,11 +353,9 @@ export default function PlanofAction() {
                               <Table aria-label="customized table">
                                 <TableBody>
                                   <TableRow >
-                                  <TableCell component="th" scope="row" onClick={handleOpenEvent}>
-                                      {itm?.time}<br></br>
-                                    </TableCell>
+                                
                                     <TableCell component="th" scope="row" onClick={handleOpenEvent}>
-                                      {itm?.name}<br></br>{itm?.roleName}<br></br>{itm?.emp_name}
+                                    Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.location_name}
 
                                       {itm?.status == '2' && <span style={{ color: 'red' }}><br />
                                         (Canceled)
@@ -366,7 +364,7 @@ export default function PlanofAction() {
                                   
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                        <Stack direction={'row'} spacing={2} >
+                                        {(userDetails==2)?<Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
                                           <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
@@ -376,7 +374,7 @@ export default function PlanofAction() {
                                             borderColor: "#ed6c02",
                                             color: "#ed6c02"
                                           }} variant="outlined">Delete</Button>
-                                        </Stack>
+                                        </Stack>:null}
                                       </TableCell>
                                     }
                                   </TableRow>
@@ -416,11 +414,9 @@ export default function PlanofAction() {
                               <Table aria-label="customized table">
                                 <TableBody>
                                   <TableRow >
-                                  <TableCell component="th" scope="row" onClick={handleOpenEvent}>
-                                      {itm?.time}<br></br>
-                                    </TableCell>
+                                 
                                     <TableCell component="th" scope="row" onClick={handleOpenEvent}>
-                                      {itm?.name}<br></br>{itm?.roleName}<br></br>{itm?.emp_name}
+                                 Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.location_name}
 
                                       {itm?.status == '2' && <span style={{ color: 'red' }}><br />
                                         (Canceled)
@@ -428,7 +424,7 @@ export default function PlanofAction() {
                                     </TableCell>
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                        <Stack direction={'row'} spacing={2} >
+                                        {(userDetails==2)?<Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
                                           <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
@@ -438,7 +434,7 @@ export default function PlanofAction() {
                                             borderColor: "#ed6c02",
                                             color: "#ed6c02"
                                           }} variant="outlined">Delete</Button>
-                                        </Stack>
+                                        </Stack>:null}
                                       </TableCell>
                                     }
                                   </TableRow>
@@ -474,11 +470,9 @@ export default function PlanofAction() {
                                 <Table aria-label="customized table">
                                   <TableBody>
                                     <TableRow >
-                                    <TableCell component="th" scope="row" onClick={handleOpenEvent}>
-                                      {itm?.time}<br></br>
-                                    </TableCell>
+                                   
                                       <TableCell component="th" scope="row" onClick={handleOpenEvent}>
-                                        Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.location_name}
+                                      {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.location_name}
 
                                         {itm?.status == '2' && <span style={{ color: 'red' }}><br />
                                           (Canceled)
@@ -486,7 +480,7 @@ export default function PlanofAction() {
                                       </TableCell>
                                       {
                                         itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                          <Stack direction={'row'} spacing={2} >
+                                          {(userDetails==2)?<Stack direction={'row'} spacing={2} >
                                             <PoaEdit itm={itm} />
                                             <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                               '&:hover': {
@@ -496,7 +490,7 @@ export default function PlanofAction() {
                                               borderColor: "#ed6c02",
                                               color: "#ed6c02"
                                             }} variant="outlined">Delete</Button>
-                                          </Stack>
+                                          </Stack>:null}
                                         </TableCell>
                                       }
                                     </TableRow>

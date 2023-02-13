@@ -113,7 +113,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
 
 
 
-  
+  const userDetails = localStorage?.getItem('userId')
 
   const DeleteBus = async => {
     var data = JSON.stringify({
@@ -173,12 +173,12 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>
             {/* {userAccess.includes(userIdCheck) && */}
-            <Button onClick={DeleteBus} style={{float:'right',textAlign:'left'}} sx={{
+            {(userDetails==2)?<Button onClick={DeleteBus} style={{float:'right',textAlign:'left'}} sx={{
           '&:hover': {
             backgroundColor: 'white',
           },
-        }} ><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138'}}></Iconify></Button>
-           <BusEdit clcikData={detailsData} busesd={busesd} updatedata={()=>{setUserUpdate(!userUpdate)}} />
+        }} ><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138'}}></Iconify></Button>:null}
+           {(userDetails==2)?<BusEdit clcikData={detailsData} busesd={busesd} updatedata={()=>{setUserUpdate(!userUpdate)}} />:null}
             <Card>
                 <CardContent>
                 <Typography variant="subtitle1" style={{color:"#494646"}}>

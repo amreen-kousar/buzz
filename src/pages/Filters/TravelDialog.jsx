@@ -502,7 +502,7 @@ export default function TravelDialog({ viewMessage }) {
               {/* <Button onClick={() => capture()}>Click here to to upload snaps</Button> */}
 
             </div>
-            <Button onClick={() => SendData()} variant="filled" sx={{
+            <Button onClick={() => SendData()}  sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
               },
