@@ -20,7 +20,7 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
   //   color: '#ff7424'
   // },
   '&:hover': {
-    backgroundColor: '#ffd796',
+    backgroundColor: '#eeeeee',
     color: '#ff7424'
   },
 
@@ -64,9 +64,9 @@ function NavItem({ item, active }) {
   };
 
   const activeSubStyle = {
-    // color: '#ff7424',
-    // fontWeight: 'fontWeightMedium',
-    // bgcolor: '#ffd796'
+    color: '#ff7424',
+    fontWeight: 'fontWeightMedium',
+    bgcolor: '#ffd796'
   };
 
 
