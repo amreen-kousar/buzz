@@ -46,6 +46,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function RecipeReviewCard({ profileData, changeUser }) {
   const [expanded, setExpanded] = React.useState(false);
   const userDetails = JSON.parse(localStorage.getItem('userDetails'))
+  const [count, setCount] = React.useState('');
   const [editData, setEditData] = useState({
     firstName: profileData?.first_name,
     lastName: profileData?.last_name,
@@ -159,24 +160,10 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
         Profile
       </Typography>
       <Card sx={{ width: 400 }}><br />
-        {/* <div style={{ display: 'flex', justifyContent: "center" }}>
-        <Avatar sx={{ bgcolor: "#ff7424", width: 100, height: 100, }} aria-label="recipe" src={profileData?.profile_pic}>
-          {profileData?.first_name.substring(0, 1)}
-        </Avatar>
-      </div>
-      <br />
-      <Typography variant="h6" textAlign="center">
-        {profileData?.first_name} {profileData?.last_name}
-      </Typography> */}
 
-        {/* <CardMedia
-        component="img"
-        height="194"
-        image="/static/images/cards/paella.jpg"
-        alt="Paella dish"
-      /> */}
+       
         <Stack spacing={1} sx={{ px: 1 }}>
-          <div>
+       
             <Card >
               <CardContent>
                 <div style={{ float: 'left', paddingTop: 40, paddingRight: 5, paddingBottom: 40 }}>
@@ -202,14 +189,38 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
               </CardContent>
             </Card>
 
-          </div>
-
+            {/* <div>
+              <Card style={{ width: "auto" }}>
+                <CardContent> */}
+                  {/* <Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white',textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}>
+                    Contact Information
+                    {(!expanded)?<ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">  
+      <IconButton  style={{color:"white"}}
+       component={RouterLink} to="#"> <Iconify icon="material-symbols:edit" />
+      </IconButton>
+    </ExpandMore>:null}
+                  </Card> */}
+                   {/* {(!expanded)?<Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}>
+                    Contact Information<IconButton edge="start" onClick={handleExpandClick} color="inherit" aria-label="show more" aria-expanded={expanded} style={{float:'right'}}>
+                    <Iconify icon="material-symbols:edit" />
+                  </IconButton>
+                  </Card>:null} */}
+                 
+                  {/* <TableContainer >
+          <Table aria-label="customized table"  >
+             <TableHead maxWidth>Contact Information</TableHead> */}
+            {/* <TableBody >
+              <TableRow style={{ height: "8px !important" }} >
+                <TableCell > Mobile </TableCell> */} 
+{/* </CardContent></Card></div> */}
           <div>
             <Card style={{ width: "auto" }}>
               <CardContent>
-                <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#999999' }}>
-                  Contact Information
-                </Card>
+              {(!expanded)?<Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}>
+                    Contact Information<IconButton edge="start" onClick={handleExpandClick} color="inherit" aria-label="show more" aria-expanded={expanded} style={{float:'right'}}>
+                    <Iconify icon="material-symbols:edit" />
+                  </IconButton>
+                  </Card>:null}
                 <TableContainer >
                   <Table aria-label="customized table"  >
                     {/* <TableHead maxWidth>Contact Information</TableHead> */}
@@ -244,14 +255,12 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
 
           </div>
 
-
+      
         </Stack>
         <CardActions disableSpacing>
-          <IconButton edge="start" onClick={handleCloseClick} color="inherit" aria-label="close" sx={{ marginLeft: 5, color: '#ed6c02' }} style={{ backgroundColor: 'transparent' }}>
-            <CloseIcon />
-          </IconButton>
+          
           <ExpandMore disableRipple style={{ backgroundColor: 'transparent' }} expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-            <Button variant="warning"
+            {/* <Button variant="warning"
               sx={{
                 ':hover': {
                   bgcolor: '#ffd796', // theme.palette.primary.main
@@ -265,7 +274,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                 color: "#ff7424"
               }} component={RouterLink} to="#" startIcon={<Iconify icon="material-symbols:edit" />}>
               Edit User
-            </Button>
+            </Button> */}
             {/* <Edit /> */}
           </ExpandMore>
         </CardActions>
@@ -310,6 +319,14 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
             </Stack>
             <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#999999' }}>
               Contact Information
+              <IconButton edge="start" onClick={handleCloseClick} color="inherit" aria-label="close"  style={{float:'right'}}>
+              <CloseIcon />
+                  </IconButton>
+              {/* <IconButton edge="start" onClick={handleCloseClick} color="inherit" aria-label="close" >
+            <CloseIcon />
+          </IconButton> */}
+
+
             </Card><br />
             <Grid direction={'column'} spacing={1.8} alignItems="center" justifyContent="space-between">
               <Typography>Email: {profileData?.officeMailId}</Typography><br />

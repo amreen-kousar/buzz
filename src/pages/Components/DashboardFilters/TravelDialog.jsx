@@ -382,7 +382,7 @@ axios(config)
 
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" 
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading *" variant="outlined" color="common" 
                 />
               </Stack>
               <Stack style={{ marginTop: 20 ,color:'black'}}>
@@ -412,7 +412,7 @@ axios(config)
 
           
                 {(userDetails===12)?<FormControl fullWidth >
-                <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel> 
+                <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>Poa</InputLabel> 
                 {(userDetails===12)?
                   
                   <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />
@@ -440,7 +440,7 @@ axios(config)
             {console.log(userDetails,"userdetailsssssssssssss")}
               {/* {(userDetails===12)?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />:null} */}
              
-              <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>POA *</InputLabel>
+              <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.poa==""?"Select POA *":"POA *"}</InputLabel>
                 <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                 
                   {datadrop?.data?.map(itm => {
@@ -455,7 +455,7 @@ axios(config)
             {console.log(userDetails,"userdetailsssssssssssss")}
               {userDetails==12?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, srpoa: e?.target?.value }) }} label="Create poa" color="common" />:null}
              
-              {/* <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
+              {/* <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>Poa</InputLabel>
                 <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                 
                   {datadrop?.data?.map(itm => {
@@ -483,7 +483,7 @@ axios(config)
               <br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Mode Of Travel</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.modeoftravel==""?"Select Mode of Travel":"Mode of Travel"}</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Mode Of Travel"
                     id="demo-simple-select"
@@ -505,7 +505,7 @@ axios(config)
               </Stack>:
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Rate Per KM</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.rateperkm==""?"Select Rate per KM":"Rate per KM"}</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Rate Per Km"
                     id="demo-simple-select"
@@ -522,7 +522,7 @@ axios(config)
              
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Food Expenses </InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.foodexpenses==""?"Select Food Expenses":"Food Expenses"}</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Food Expenses"
                     id="demo-simple-select"
@@ -541,7 +541,7 @@ axios(config)
               </Stack>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }} >Phone Charges</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.telephonecharges==""?"Select Phone Charges":"Phone Charges"}</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Phone Charges"
                     id="demo-simple-select"
@@ -632,6 +632,7 @@ axios(config)
                       }) : null
                   }
                 </div>
+                <div style={{display:'flex'}}>
                 <label for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
                   <Iconify
                     icon={'mdi:camera'}
@@ -640,6 +641,15 @@ axios(config)
                   Click here to Add images
                   <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
                 </label>
+                <Button onClick={postImages} 
+                sx={{
+                  '&:hover': {
+                    backgroundColor: '#ffd796',
+                  },
+                  color: "#ff7424",
+                  backgroundColor:'#ffd796',
+                  marginLeft:'10px'
+                }}>Upload</Button></div>
               </div>
               
              
@@ -654,13 +664,7 @@ axios(config)
               color: "#ff7424",
 
             }}>Upload</Button><br></br> */}
-            <Button onClick={postImages} variant="filled"
-                sx={{
-                  '&:hover': {
-                    backgroundColor: '#ffd796',
-                  },
-                  color: "#ff7424"
-                }}>Upload</Button>
+            
           </DialogContentText></DialogContent>  </Dialog>
     </div>
   );

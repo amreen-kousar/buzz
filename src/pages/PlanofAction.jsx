@@ -242,6 +242,8 @@ export default function PlanofAction() {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Date"
+              inputFormat="DD/MM/YYYY"
+              views={["day","month","year"]}
               defaultValue={date}
               value={date}
               onChange={(newValue) => {

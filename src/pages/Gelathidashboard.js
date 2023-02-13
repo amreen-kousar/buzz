@@ -325,7 +325,7 @@ export default function Gelathidashboard() {
                <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
 
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Project {summaryData?.data[0]?.name}
+              Project : {summaryData?.data[0]?.name}
             </Typography>
             {/* <Graphchart/> */}
             <CardContent style={{ display: "flex" }}>
@@ -361,7 +361,7 @@ export default function Gelathidashboard() {
 
             </CardContent>
           </Card> 
-          :  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>}
+          :  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Projects</h1>}
               </>
             )
           })

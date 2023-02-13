@@ -95,22 +95,19 @@ function Addbus(props) {
 
                         >
                             <TextField fullWidth id="outlined-basic" label="Bus Number" helperText="Bus Number required*" defaultValue={addBus.register_number} onChange={(e) => { setAddBus({ ...addBus, register_number: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Register Date" type="date"  InputLabelProps={{
+                            {/* <TextField fullWidth id="outlined-basic" label="Register Date" type="date"  InputLabelProps={{
                                 shrink: true,
                             }} defaultValue={addBus.register_date} format={'YYYY/MM/DD'} onChange={(e) => { setAddBus({ ...addBus, register_date: e.target.value }) }} variant="outlined" color="common" /><br />
-                             
-                                  <Stack style={{ marginTop: 20 }}>
+                              */}
+                <Stack style={{ marginTop: 20 }} color="common">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                    
-                    inputFormat="YYYY-MM-DD"
+                  <DatePicker     
+                    inputFormat="YYYY/MM/DD"
                     views={["year", "month", "day"]}
-                    // label="Date"
-                    defaultValue={date}
-                    value={date}
-                   
+                     label="Register Date"
+                    // defaultValue={date}
                     onChange={(e) => {
-                      setAddBus({ ...addBus, register_datedate: e})
+                      setAddBus({ ...addBus, register_date: e})
                     }}
                     renderInput={(params) => <TextField {...params} fullWidth />}
                   />
@@ -122,27 +119,145 @@ function Addbus(props) {
                             <TextField fullWidth id="outlined-basic" label="Chassis Number" defaultValue={addBus.chassis_number} onChange={(e) => { setAddBus({ ...addBus, chassis_number: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" label="Insurance Number" defaultValue={addBus.insurance_number} onChange={(e) => { setAddBus({ ...addBus, insurance_number: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="outlined-basic" label="Insurance Company" defaultValue={addBus.insurance_company} onChange={(e) => { setAddBus({ ...addBus, insurance_company: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Insurance Start Date" type="date" InputLabelProps={{
+                           
+                           
+                            {/* <TextField fullWidth id="outlined-basic" label="Insurance Start Date" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.insurance_start_date} onChange={(e) => { setAddBus({ ...addBus, insurance_start_date: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Insurance End Date" type="date" InputLabelProps={{
+                            }} defaultValue={addBus.insurance_start_date} onChange={(e) => { setAddBus({ ...addBus, insurance_start_date: e.target.value }) }} variant="outlined" color="common" /><br /> */}
+                            
+                            <Stack style={{ marginTop: 20 }} color="common">
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                               <DatePicker     
+                                 inputFormat="YYYY/MM/DD"
+                                 views={["year", "month", "day"]}
+                                  label="Insurance Start Date"
+                                  // defaultValue={date}
+                             onChange={(e) => {
+                                setAddBus({ ...addBus, insurance_start_date: e})
+                              }}
+                             renderInput={(params) => <TextField {...params} fullWidth />}
+                            />
+                           </LocalizationProvider>
+                                 </Stack> 
+                            
+                            {/* <TextField fullWidth id="outlined-basic" label="Insurance End Date" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.insurance_end_date} onChange={(e) => { setAddBus({ ...addBus, insurance_end_date: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Last Service Date" type="date" InputLabelProps={{
+                            }} defaultValue={addBus.insurance_end_date} onChange={(e) => { setAddBus({ ...addBus, insurance_end_date: e.target.value }) }} variant="outlined" color="common" /><br /> */}
+                            
+                            <Stack style={{ marginTop: 20 }} color="common">
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                               <DatePicker     
+                                 inputFormat="YYYY/MM/DD"
+                                 views={["year", "month", "day"]}
+                                  label="Insurance End Date"
+                                  // defaultValue={date}
+                             onChange={(e) => {
+                                setAddBus({ ...addBus, insurance_end_date: e})
+                              }}
+                             renderInput={(params) => <TextField {...params} fullWidth />}
+                            />
+                           </LocalizationProvider>
+                                 </Stack>
+                            
+                            
+                            {/* <TextField fullWidth id="outlined-basic" label="Last Service Date" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.last_service_date} onChange={(e) => { setAddBus({ ...addBus, last_service_date: e.target.value }) }} variant="outlined" color="common" /><br />
+                            }} defaultValue={addBus.last_service_date} onChange={(e) => { setAddBus({ ...addBus, last_service_date: e.target.value }) }} variant="outlined" color="common" /><br /> */}
+                            
+                            <Stack style={{ marginTop: 20 }} color="common">
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                               <DatePicker     
+                                 inputFormat="YYYY/MM/DD"
+                                 views={["year", "month", "day"]}
+                                  label="Last Service Date"
+                                  // defaultValue={date}
+                             onChange={(e) => {
+                                setAddBus({ ...addBus, last_service_date: e})
+                              }}
+                             renderInput={(params) => <TextField {...params} fullWidth />}
+                            />
+                           </LocalizationProvider>
+                                 </Stack>
+{/*                             
                             <TextField fullWidth id="outlined-basic" label="Next Service Date" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.next_service_due_date} onChange={(e) => { setAddBus({ ...addBus, next_service_due_date: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Fitness Certificate" type="date" InputLabelProps={{
+                            }} defaultValue={addBus.next_service_due_date} onChange={(e) => { setAddBus({ ...addBus, next_service_due_date: e.target.value }) }} variant="outlined" color="common" /><br /> */}
+                            
+                            <Stack style={{ marginTop: 20 }} color="common">
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                               <DatePicker     
+                                 inputFormat="YYYY/MM/DD"
+                                 views={["year", "month", "day"]}
+                                  label="Next Service Date"
+                                  // defaultValue={date}
+                             onChange={(e) => {
+                                setAddBus({ ...addBus, next_service_due_date: e})
+                              }}
+                             renderInput={(params) => <TextField {...params} fullWidth />}
+                            />
+                           </LocalizationProvider>
+                                 </Stack>
+
+
+                            {/* <TextField fullWidth id="outlined-basic" label="Fitness Certificate" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.fitness_certificate} onChange={(e) => { setAddBus({ ...addBus, fitness_certificate: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" type="date" InputLabelProps={{
+                            }} defaultValue={addBus.fitness_certificate} onChange={(e) => { setAddBus({ ...addBus, fitness_certificate: e.target.value }) }} variant="outlined" color="common" /><br /> */}
+                            
+                               <Stack style={{ marginTop: 20 }} color="common">
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                               <DatePicker     
+                                 inputFormat="YYYY/MM/DD"
+                                 views={["year", "month", "day"]}
+                                  label="Fitness Certificate"
+                                  // defaultValue={date}
+                             onChange={(e) => {
+                                setAddBus({ ...addBus, fitness_certificate: e})
+                              }}
+                             renderInput={(params) => <TextField {...params} fullWidth />}
+                            />
+                           </LocalizationProvider>
+                                 </Stack>
+
+
+                            {/* <TextField fullWidth id="outlined-basic" type="date" InputLabelProps={{
                                 shrink: true,
-                            }} label="Permit Details" defaultValue={addBus.permit} onChange={(e) => { setAddBus({ ...addBus, permit: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Emission Date" type="date" InputLabelProps={{
+                            }} label="Permit Details" defaultValue={addBus.permit} onChange={(e) => { setAddBus({ ...addBus, permit: e.target.value }) }} variant="outlined" color="common" /><br /> */}
+                            
+                            <Stack style={{ marginTop: 20 }} color="common">
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                               <DatePicker     
+                                 inputFormat="YYYY/MM/DD"
+                                 views={["year", "month", "day"]}
+                                  label="Permit Details"
+                                  // defaultValue={date}
+                             onChange={(e) => {
+                                setAddBus({ ...addBus, permit: e})
+                              }}
+                             renderInput={(params) => <TextField {...params} fullWidth />}
+                            />
+                           </LocalizationProvider>
+                                 </Stack>
+
+
+                            {/* <TextField fullWidth id="outlined-basic" label="Emission Date" type="date" InputLabelProps={{
                                 shrink: true,
                             }} defaultValue={addBus.emission_date} onChange={(e) => { setAddBus({ ...addBus, emission_date: e.target.value }) }} variant="outlined" color="common" /><br />
+                      */}
+                             <Stack style={{ marginTop: 20 }} color="common">
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                               <DatePicker     
+                                 inputFormat="YYYY/MM/DD"
+                                 views={["year", "month", "day"]}
+                                  label="Emission Date"
+                                  // defaultValue={date}
+                             onChange={(e) => {
+                                setAddBus({ ...addBus, emission_date: e})
+                              }}
+                             renderInput={(params) => <TextField {...params} fullWidth />}
+                            />
+                           </LocalizationProvider>
+                             </Stack>
+                     
                         </Box>
                     </DialogContentText>
                 </DialogContent>
