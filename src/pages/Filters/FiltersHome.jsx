@@ -22,6 +22,8 @@ import Trainers from './Trainers';
 import GelathisLead from './GelathisLead';
 import DateRangeFilter from './DateRangeFilter';
 import OperationManager from './OperationManager';
+import GelathiFacilitator from './GelathiFacilitator';
+
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -62,15 +64,15 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
 
   const filterPermissions = {
 
-    Dashboard: [{ id: 2, roles: ['1', '8', '12', '3', '5', '6', '9', '7'] }, { id: 1, roles: ['1', '8', '5', '12', '9', '6', '3', '7'] }, { id: 3, roles: ['6', '1', '5', '4', '8', '12', '13', '3', '7'] }, { id: 4, roles: ['1', '8', '5', '12', '3', '6', '7'] }, { id: 5, roles: ['1', '4', '5', '8', '6', '12', '3', '7'] }, { id: 7, roles: ['1', '4', '6', '8', '5', '12', '3', '7'] }, { id: 9, roles: ['6', '1', '5', '4', '8', '12', '13', '3', '7'] }, { id: 10, roles: ['5', '1', '3', '4', '12', '6', '7'] }, { id: 12, roles: ['1', '3'] }, { id: 13, roles: ['1', '3', '13'] }],
+    Dashboard: [{ id: 2, roles: ['1', '8', '12', '3','11' , '9', '7'] }, { id: 1, roles: ['1', '8', '11' ,'12', '9',  '3', '7'] }, { id: 3, roles: [ '1', '4', '8', '5','6','12', '13','11' , '3', '9',  '7'] }, { id: 4, roles: ['1', '8', '12', '9','11' ,  '3',  '7'] }, { id: 5, roles: ['1',  '9', '11' ,'4', '8',  '12', '3', '7'] },{id:6,roles:['13']}, { id: 9, roles: [ '1', '9', '11' , '4', '6','8',  '5','12', '13', '3', '7'] },{ id: 7, roles: ['1', '4',  '9', '11' , '8', '12', '3', '7'] }, { id: 10, roles: ['1',  '9', '11' ,'3', '4', '5', '12',  '7'] }, { id: 12, roles: ['1', '3','11' ] }, { id: 13, roles: ['1','11' , '3'] }],
 
     Projects: [{ id: 31, roles: ['1', '2', '3', '4', '6'] }, { id: 7, roles: ['1', '2', '3', '4', '6'] }, { id: 9, roles: ['1', '2', '3', '4', '6'] }, { id: 2, roles: ['1', '3', '2'] }, { id: 4, roles: ['1', '3', '2'] }, { id: 5, roles: ['1', '3', '2'] }, { id: 6, roles: ['1', '3', '2'] }],
 
     BusList: [{ id: 30, roles: true }, { id: 3, roles: true }, { id: 2, roles: true }, { id: 7, roles: true },],
 
-    People: [{ id: 1, roles: ['1', '3', '2'] }, { id: 2, roles: ['1', '3', '2'] }, { id: 32, roles: ['1', '3', '2'] }, { id: 33, roles: ['1', '3', '2'] }, { id: 34, roles: ['1', '4', '3', '2'] }, { id: 5, roles: ['1', '3', '4', '2'] }, { id: 6, roles: ['1', '3', '4', '2'] }],
+    People: [{ id: 1, roles: ['1', '3', '12', '11' ,'2'] }, { id: 2, roles: ['1', '12','11' , '3', '2'] }, { id: 32, roles: ['1', '3', '12','11' , '2'] }, { id: 33, roles: ['1', '3', '12','11' , '2'] },{ id: 5, roles: ['1', '3', '12', '11' ,'4', '2'] }, { id: 6, roles: ['1', '3', '12', '11' ,'4', '2'] }, { id: 34, roles: ['1', '4', '3','11' , '12', '2'] }, ],
 
-    Demography: [{ id: 2, roles: true }, { id: 3, roles: true }, { id: 7, roles: true }],
+    Demography: [ { id: 3, roles: true },{ id: 2, roles: true }, { id: 7, roles: true }],
 
     BuzzStock: [{ id: 3, roles: true }, { id: 2, roles: true }, { id: 7, roles: true }, { id: 9, roles: true }]
   }
@@ -79,7 +81,7 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
   const data = localStorage?.getItem('userId')
 
   // partner = 1, funder = 2, project = 3, opm = 4, trainer = 5, gelathi = 6 SOM=12 GFl=13
-  const filtersHeaders = { 1: 'Partner', 2: 'Funders', 3: 'Project', 4: 'Operation Managers', 5: 'Trainers', 6: 'Gelathi Facilitators', 12: 'Sr. Operations Manager', 13: 'Gelathi Falicitator Leads', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Driver' }
+  const filtersHeaders = { 1: 'Partner', 2: 'Funders', 3: 'Project', 4: 'Operation Managers', 5: 'Trainers', 6: 'Gelathi Facilitators', 12: 'Sr. Operations Manager', 13: 'Gelathi Facilitator Leads', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Drivers' }
 
 
   const setData = (value) => {
@@ -202,6 +204,11 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
               {
                 selectDATA == 5 && <Grid>
                   <Trainers getData={getData} selectDATA={selectDATA} />
+                </Grid>
+              }
+               {
+                selectDATA == 6 && <Grid>
+                  <GelathiFacilitator getData={getData} selectDATA={selectDATA} />
                 </Grid>
               }
               {

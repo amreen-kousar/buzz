@@ -40,18 +40,6 @@ export default function Gelathidashboard() {
 
   const [summaryData, setSummaryData] = useState([]);
 
-  useEffect(() => {
-    apiHit();
-  }, []);
-
-
-  if (loader) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-        <CircularProgress />
-      </Box>
-    )
-  }
   const apiHit = async (id, i, g) => {
     setLoader(true)
     const data = {
@@ -107,6 +95,22 @@ export default function Gelathidashboard() {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    apiHit();
+  }, []);
+
+
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
+
+
+ 
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };

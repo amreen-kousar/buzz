@@ -217,7 +217,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
             <Card style={{ width: "auto" }}>
               <CardContent>
               {(!expanded)?<Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}>
-                    Contact Information<IconButton edge="start" onClick={handleExpandClick} color="inherit" aria-label="show more" aria-expanded={expanded} style={{float:'right'}}>
+                    Contact Information<IconButton edge="start" title="Edit User Information" onClick={handleExpandClick} color="inherit" aria-label="show more" aria-expanded={expanded} style={{float:'right'}}>
                     <Iconify icon="material-symbols:edit" />
                   </IconButton>
                   </Card>:null}
@@ -319,7 +319,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
             </Stack>
             <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#999999' }}>
               Contact Information
-              <IconButton edge="start" onClick={handleCloseClick} color="inherit" aria-label="close"  style={{float:'right'}}>
+              <IconButton edge="start" title="close" onClick={handleCloseClick} color="inherit" aria-label="close"  style={{float:'right'}}>
               <CloseIcon />
                   </IconButton>
               {/* <IconButton edge="start" onClick={handleCloseClick} color="inherit" aria-label="close" >

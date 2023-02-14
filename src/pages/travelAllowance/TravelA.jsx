@@ -65,13 +65,22 @@ export default function TravelA() {
   const [teamMembersData, setTeamMembersData] = useState([])
   const [mainValue, setMainValue] = useState(0)
 
-
+  const userOwnPermissions=['9','5','12','4','13','6','3']
+  const userTeamPermissions=['2','1','12','4','13','3','11']
 
 
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
+
+  
+  useEffect(()=>{
+    if(!userOwnPermissions.includes(data)){
+    setMainValue(1)
+    }
+      },[])
+    
 
   const handleOpenFilter = (itm) => {
     // itm.klmtr = +klmtr;
@@ -115,38 +124,43 @@ export default function TravelA() {
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs variant="fullWidth" indicatorColor='warning'>
 
-            <Tab
+           {
+            userOwnPermissions.includes(data) &&  <Tab
 
-              onClick={() => { setMainValue(0) }}
-              sx={{
-                ':hover': {
-                  bgcolor: '#ffd796', // theme.palette.primary.main
-                  color: '#ff7424',
-                },
+            onClick={() => { setMainValue(0) }}
+            sx={{
+              ':hover': {
+                bgcolor: '#ffd796', // theme.palette.primary.main
+                color: '#ff7424',
+              },
 
-                color: 'black',
-              }} label="OWN" style={mainValue == 0 ? {
-                borderBottom: '3px solid #ff7424',
-                color: "#ff7424",
-              } : null} />
-
-
-
-            <Tab
-              onClick={() => { setMainValue(1) }}
-              sx={{
-                ':hover': {
-                  bgcolor: '#ffd796', // theme.palette.primary.main
-                  color: '#ff7424',
-                },
-
-                color: 'black',
-              }} label="TEAM" style={mainValue == 1 ? {
-                borderBottom: '3px solid #ff7424',
-                color: "#ff7424",
-              } : null} />
+              color: 'black',
+            }} label="OWN" style={mainValue == 0 ? {
+              borderBottom: '3px solid #ff7424',
+              color: "#ff7424",
+            } : null} />
+           }
 
 
+{
+userTeamPermissions.includes(data) &&
+<Tab
+onClick={() => { setMainValue(1) }}
+sx={{
+  ':hover': {
+    bgcolor: '#ffd796', // theme.palette.primary.main
+    color: '#ff7424',
+  },
+
+  color: 'black',
+}} label="TEAM" style={mainValue == 1 ? {
+  borderBottom: '3px solid #ff7424',
+  color: "#ff7424",
+} : null} />
+
+
+}
+           
 
           </Tabs>
         </Box>
@@ -173,17 +187,21 @@ export default function TravelA() {
               </Stack> */}
 
 
-        <TabPanel value={mainValue} index={1}>
-          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <Box sx={{ width: '100%' }}>
-              <Team returnDateValue={returnDateValue} />
-            </Box>
-          </Stack>
-        </TabPanel>
+      {
+        userTeamPermissions.includes(data) &&   <TabPanel value={mainValue} index={1}>
+        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <Box sx={{ width: '100%' }}>
+            <Team returnDateValue={returnDateValue} />
+          </Box>
+        </Stack>
+      </TabPanel>
 
-        <TabPanel value={mainValue} index={0}>
-          <Own returnDateValue={returnDateValue} />
-        </TabPanel>
+      }
+       {
+        userOwnPermissions.includes(data) &&  <TabPanel value={mainValue} index={0}>
+        <Own returnDateValue={returnDateValue} />
+      </TabPanel>
+       }
 
 
         <br></br>

@@ -10,8 +10,8 @@ function Addbus(props) {
 
     const [date, setDate] = useState(moment(new Date())?.format('YYYY-MM-DD'))
     const [addBus, setAddBus] = useState({
-        register_number: '', register_date: '', engine_number: '', chassis_number: '', insurance_number: '',
-        insurance_company: "", insurance_start_date: "", insurance_end_date: "", last_service_date: "", next_service_due_date: "", fitness_certificate: "", permit: "", emission_date: ''
+        register_number: '', register_date: new Date(), engine_number: '', chassis_number: '', insurance_number: '',
+        insurance_company: "", insurance_start_date: new Date(), insurance_end_date: new Date(), last_service_date: new Date(), next_service_due_date: new Date(), fitness_certificate: new Date(), permit: new Date(), emission_date: new Date()
     })
     const [openAddBus, setOpenAddBus] = useState(false)
 
@@ -235,10 +235,10 @@ function Addbus(props) {
                                 shrink: true,
                             }} label="Permit Details" defaultValue={addBus.permit} onChange={(e) => { setAddBus({ ...addBus, permit: e.target.value }) }} variant="outlined" color="common" /><br /> */}
 
-                            <Stack style={{ marginTop: 20 }} color="common">
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <Stack style={{ marginTop: 20,borderColor:'none' }} color="common">
+                               
                                     <DatePicker
-                                        inputFormat="YYYY/MM/DD"
+                                        inputFormat="YYYY-MM-DD"
                                         views={["year", "month", "day"]}
                                         label="Permit Details"
                                         // defaultValue={date}
@@ -249,7 +249,7 @@ function Addbus(props) {
 
                                         renderInput={(params) => <TextField {...params} fullWidth />}
                                     />
-                                </LocalizationProvider>
+                       
                             </Stack>
 
 
@@ -263,7 +263,7 @@ function Addbus(props) {
                                         inputFormat="YYYY/MM/DD"
                                         views={["year", "month", "day"]}
                                         label="Emission Date"
-                                        // defaultValue={date}
+                                        defaultValue="YYYY/MM/DD"
                                         onChange={(e) => {
                                             setAddBus({ ...addBus, emission_date: e })
                                         }}

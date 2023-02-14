@@ -180,7 +180,7 @@ export default function DashboardApp() {
   return (
 
     <Page title="Dashboard">
-
+<h1 style={{textAlign:"center",color:"#0000ff"}}><u>Summary</u></h1>
       <Container maxWidth="xl">
         <Grid item spacing={10}>
 

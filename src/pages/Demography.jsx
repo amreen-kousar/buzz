@@ -176,6 +176,8 @@ export default function Demography() {
 
   return (
     <>
+
+    <h1>Demography</h1>
       <Button style={{ float: "right", color: '#ff7424' }}
         sx={{
           '&:hover': {

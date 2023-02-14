@@ -278,15 +278,17 @@ export default function User() {
               <div style={{ float: 'left', paddingLeft: '20px', paddingTop: '50px', paddingBottom: '50px', paddingRight: '20px' }}>
                 <Iconify icon="material-symbols:directions-bus" width={30} height={30} />
               </div>
+              <Card sx={{ boxShadow: 0 }} >
               <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
                 <Typography variant="subtitle1" gutterBottom style={{ color: 'blue' }} >
                   {`Bus Number : ${itm?.register_number}`}
                 </Typography>
-                <Typography gutterBottom  >
-                  {`Project Name : ${itm?.project_name}`}
-                </Typography>
+                
               </Grid>
               <Grid style={{ marginLeft: 15 }}>
+              <Typography gutterBottom  >
+                  {`Project Name : ${itm?.project_name}`}
+                </Typography>
                 <Typography variant="body2" gutterBottom style={{ color: '#FF337A' }}>
                   Today Checklist Status :
                   {/* <Chip label="Published" size="small" color="success" variant="outlined" /> */}
@@ -297,7 +299,7 @@ export default function User() {
                   {console.log(buses?.total_count, "total counttttttttttt")}
                 </Typography>
 
-              </Grid>
+              </Grid></Card>
             </Card>
           )
         })}

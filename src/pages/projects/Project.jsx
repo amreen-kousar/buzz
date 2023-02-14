@@ -77,29 +77,29 @@ function Project(props) {
                   <Table aria-label="customized table">
                     <TableBody>
                       <TableRow style={styles.tableRowStyle}>
-                        <TableCell>Project Name </TableCell>
-                        <TableCell>{data1.project_name} </TableCell>
+                        <TableCell>Project Name : </TableCell>
+                        <TableCell>: {data1.project_name} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>District Name</TableCell>
-                        <TableCell>{data1.location_name} </TableCell>
+                        <TableCell>: {data1.location_name} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Partner Name </TableCell>
-                        <TableCell>{data1.partnerName} </TableCell>
+                        <TableCell>: {data1.partnerName} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Training Target</TableCell>
-                        <TableCell>{data1.training_target} </TableCell>
+                        <TableCell>: {data1.training_target} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Project Duration</TableCell>
-                        <TableCell> From : {data1.startDate} </TableCell>
+                        <TableCell> : From : {data1.startDate} </TableCell>
                         <TableCell> To : {data1.endDate}</TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Project Status</TableCell>
-                        <TableCell>{data1.project_status} </TableCell>
+                        <TableCell>: {data1.project_status} </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>

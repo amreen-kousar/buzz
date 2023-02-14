@@ -135,8 +135,8 @@ export default function PoaTeam({ setUserId, setName }) {
         borderColor: "#ff7424",
         color: "#ff7424",
         backgroundColor: '#ffd796',
-      }} >
-        <Iconify icon="mdi:people" style={{ width: '30px', height: '30px' }}></Iconify>
+      }} title="Select Buzz member">
+        <Iconify icon="mdi:people" style={{ width: '30px', height: '30px' }} ></Iconify>
       </Button>
       <SimpleDialog
         teamData={teamData}

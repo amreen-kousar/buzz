@@ -59,7 +59,8 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
               <CardContent>
                 <Grid direction={'column'} spacing={2} height="180px">
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <img style={{ borderRadius: 50 }} src={itm?.profile_pic && itm.profile_pic != '1' ? itm?.profile_pic : defaultImage} />
+                  
+                    <img style={{ borderRadius: 50 }} src={(itm?.profile_pic) ? itm.profile_pic : defaultImage} />
                   </div>
                   {/* <Avatar sx={{ bgcolor: red[500], width: 50, height: '16vh', bgcolor: '#ff7424' }} src={itm?.profile_pic} aria-label="recipe">
                   {itm?.first_name.substring(0, 1)}

@@ -27,7 +27,7 @@ import Switch from '@mui/material/Switch';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
-
+import Iconify from 'src/components/Iconify';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -141,7 +141,7 @@ export default function PoaCreate({ setSucess }) {
         bgcolor: '#ffd796',
         color: "#ff7424",
         border: 'none'
-      }} >
+      }} title="Create POA">
         {/* style={{ float: "right", marginLeft:100, borderRadius: "50%", padding: "0.2rem", position:'relative', zIndex: '-1',marginRight:10,marginTop:15}} */}
         <span style={{ fontSize: "2rem" }}>+</span>
       </Button>
@@ -177,7 +177,7 @@ export default function PoaCreate({ setSucess }) {
 
 
             <Button autoFocus color="inherit" onClick={AddPoa}>
-              save
+            <Iconify icon="material-symbols:save" width={30} height={30} />
             </Button>
           </Toolbar>
 

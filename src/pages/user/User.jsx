@@ -104,6 +104,8 @@ export default function User() {
       "pageNum": d ? d : 1
     });
 
+
+
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
@@ -146,9 +148,11 @@ export default function User() {
     setLoader(true)
     if (filter_type) {
       setSelected(filter_type)
-      let ids = { "Trainer": 5, "Driver": 7, "Funder": 8, "Partner": 9, 'Gelathi Facilitators': 6 }
+      let ids = { "Trainers": 5, "Drivers": 7, "Funders": 8, "Partner": 9, 'Gelathi Facilitators': 6 }
       filter_type.id = ids[filter_type.type]
     }
+
+    console.log(filter_type,"filter typr")
     const dataid = localStorage?.getItem('userDetails')
     const data = JSON.stringify({
       "search": searchUser,
@@ -170,8 +174,15 @@ export default function User() {
 
     axios(config)
       .then((response) => {
-        // console.log(response, "response in user.jsx")
+       console.log(response, "response in user.jsxsssssssssssss")
+       if(response.data.list){
+
         setUsers(response.data.list)
+       }
+       else{
+        setUsers([])
+
+       }
         setCount(response?.data?.total_count % 25 == 0 ? parseInt(response?.data?.total_count / 25) : parseInt(response?.data?.total_count / 25) + 1)
         setLoader(false)
         // let ceo = []

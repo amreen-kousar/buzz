@@ -49,7 +49,7 @@ export default function Login() {
     axios(config)
       .then(function (response) {
         response.data = {
-          code: 200, first_name: "Anas", id: "144", last_name: "", message: "successfully", profile_pic: "", role: "2", role_name: "Admin", success: true, supervisorId: "0"
+          code: 200, first_name: "Anas", id: "144", last_name: "", message: "successfully", profile_pic: "", role: "5", role_name: "Trainer", success: true, supervisorId: "0"
         }
         localStorage?.setItem('user', JSON?.stringify(itm?.user))
         localStorage?.setItem('userId', response?.data?.role)
