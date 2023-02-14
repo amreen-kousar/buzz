@@ -31,6 +31,12 @@ import { Color } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { DetailsRounded } from '@mui/icons-material';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
@@ -148,7 +154,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
         open={isOpenFilter}
         onClose={onCloseFilter}
         PaperProps={{
-          sx: { width: 350, },
+          sx: { width: 380, },
         }}
         
       >
@@ -181,10 +187,10 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
            {(userDetails==2)?<BusEdit clcikData={detailsData} busesd={busesd} updatedata={()=>{setUserUpdate(!userUpdate)}} />:null}
             <Card>
                 <CardContent>
-                <Typography variant="subtitle1" style={{color:"#494646"}}>
+                {/* <Typography variant="subtitle1" style={{color:"#494646"}}>
                    {`Bus Number : ${detailsData?.register_number}`}
-                    </Typography>
-                <Typography style={{ flexDirection: 'row',color:'#494646' }} variant="subtitle1" gutterBottom>
+                    </Typography> */}
+                {/* <Typography style={{ flexDirection: 'row',color:'#494646' }} variant="subtitle1" gutterBottom>
                     Register Date:&nbsp;
                     {detailsData?.register_date}</Typography>
                   
@@ -230,7 +236,67 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
                  
                   <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
                     Emission Date:&nbsp;
-                    {detailsData?.emission_date}</Typography>
+                    {detailsData?.emission_date}</Typography> */}
+
+                    <TableContainer >
+                  <Table aria-label="customized table"  >
+                    {/* <TableHead maxWidth>Contact Information</TableHead> */}
+                    <TableBody >
+                      <TableRow  >
+                        <TableCell>Bus Number</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.register_number}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Register Date</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.register_date}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Engine Number</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.engine_number}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Chassis Number</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.chassis_number} </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Insurance Number</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.insurance_number}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Insurance&nbsp;Company</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.insurance_company}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Insurance&nbsp;Start&nbsp;date</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.insurance_start_date}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Insurance&nbsp;End&nbsp;Date</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.insurance_end_date}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Last Service Date</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.last_service_date}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Next Service Date</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.next_service_due_date}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Permit Details</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.permit}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Fitness Certificate</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.fitness_certificate}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Emission Date</TableCell>
+                        <TableCell>:&nbsp;{detailsData?.emission_date}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
                 
                 </CardContent>
               </Card>

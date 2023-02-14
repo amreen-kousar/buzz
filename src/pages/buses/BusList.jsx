@@ -280,7 +280,7 @@ export default function User() {
               </div>
               <Card sx={{ boxShadow: 0 }} >
               <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
-                <Typography variant="subtitle1" gutterBottom style={{ color: 'blue' }} >
+                <Typography variant="subtitle1" gutterBottom style={{color:'#6495ED'}} >
                   {`Bus Number : ${itm?.register_number}`}
                 </Typography>
                 
