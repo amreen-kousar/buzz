@@ -217,9 +217,8 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
             <Card style={{ width: "auto" }}>
               <CardContent>
               {(!expanded)?<Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#999999'}}>
-                    Contact Information<IconButton edge="start" title="Edit User Information" onClick={handleExpandClick} color="inherit" aria-label="show more" aria-expanded={expanded} style={{float:'right'}}>
-                    <Iconify icon="material-symbols:edit" />
-                  </IconButton>
+                    Contact Information
+                   
                   </Card>:null}
                 <TableContainer >
                   <Table aria-label="customized table"  >
@@ -259,8 +258,8 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
         </Stack>
         <CardActions disableSpacing>
           
-          <ExpandMore disableRipple style={{ backgroundColor: 'transparent' }} expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-            {/* <Button variant="warning"
+          {(!expanded)?<ExpandMore disableRipple style={{ backgroundColor: 'transparent' }} expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
+            <Button variant="warning"
               sx={{
                 ':hover': {
                   bgcolor: '#ffd796', // theme.palette.primary.main
@@ -274,10 +273,15 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                 color: "#ff7424"
               }} component={RouterLink} to="#" startIcon={<Iconify icon="material-symbols:edit" />}>
               Edit User
-            </Button> */}
-            {/* <Edit /> */}
-          </ExpandMore>
+            </Button> 
+        
+          </ExpandMore>: 
+          <IconButton  title="close" onClick={handleCloseClick} color="inherit" aria-label="close"  style={{float:'right'}}>
+              <CloseIcon />
+                  </IconButton>}
         </CardActions>
+        {/* <Button onClick={handleExpandClick}  aria-label="show more" aria-expanded={expanded} style={{float:'right',color:'#ed6c07'}}>Edit</Button> */}
+        {/* <IconButton edge="start" title="Edit User Information" > </IconButton> */}
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Stack mb={3} style={{ backgroundColor: '#ffd796', borderRadius: 9 }}>
@@ -319,9 +323,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
             </Stack>
             <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#999999' }}>
               Contact Information
-              <IconButton edge="start" title="close" onClick={handleCloseClick} color="inherit" aria-label="close"  style={{float:'right'}}>
-              <CloseIcon />
-                  </IconButton>
+            
               {/* <IconButton edge="start" onClick={handleCloseClick} color="inherit" aria-label="close" >
             <CloseIcon />
           </IconButton> */}
