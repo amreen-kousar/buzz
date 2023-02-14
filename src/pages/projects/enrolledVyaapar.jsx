@@ -4,7 +4,7 @@ import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mu
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
-
+import Vyaparprogram from './Components/Vyaparprogram';
 export default function enrolledVyaaparList() {
 
     const [clcikData, setClickData] = useState()
@@ -68,12 +68,12 @@ export default function enrolledVyaaparList() {
             </Stack>
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <ParticipantDrawer
+            {/* <ParticipantDrawer
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
                     onCloseFilter={handleCloseFilter}
-                />
+                /> */}
             </Stack>
             {/* </Stack> */}
             {vyaapar?.list?.map((itm) => {
@@ -83,7 +83,7 @@ export default function enrolledVyaaparList() {
                         setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
                         handleOpenFilter()
                     }}>
-
+                           <Vyaparprogram/>
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Vyaapar Name : ${itm?.gelathiname}`}
@@ -97,6 +97,7 @@ export default function enrolledVyaaparList() {
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>
                         </Grid>
+                      
                     </Card>)
             })}
 

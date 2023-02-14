@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
@@ -27,11 +27,12 @@ const RootStyle = styled('div')(({ theme }) => ({
 }));
 
 const AccountStyle = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(2, 2.5),
+  // display: 'flex',
+  // alignItems: 'center',
+  // textAlign:'center',
+  // padding: theme.spacing(2, 12),
   borderRadius: Number(theme.shape.borderRadius) * 1.5,
-  backgroundColor: theme.palette.grey[500_12],
+  // backgroundColor: theme.palette.grey[500_12],
 }));
 
 // ----------------------------------------------------------------------
@@ -51,7 +52,32 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
 
   const isDesktop = useResponsive('up', 'lg');
 
+  const [filteredNavConfig, setNavConfig] = useState([])
+
+  const roleDashboard = { 1:['1','5','6','7','8','9','10','11','12','13'],2: ['7', '5', '8', '9', '10', '12', '13'],9:['1','5','6','7','8','10','12','13'],5:['2','5','6','7','10','12','13'],12:['1','5','6','7','8','9','10','11','12','13'],4:['4','5','6','7','8','9','10','12','13'],13:['3','6','7','10','12','13'],6:['3','6','7','10','12','13'],3:['1','5','6','7','8','9','10','11','12','13'],11:['1','5','6','7','8','9','10','11','12','13']}
+
   useEffect(() => {
+    let temp = []
+    for (let r = 0; r < roleDashboard[data].length; r++) {
+      let s = roleDashboard[data][r]
+      // console.log(navConfig[s].id.includes(data), data, "ssssssssssssssssssssssssssssssss")
+      if (navConfig[s].id.includes(data)) {
+        temp.push(navConfig[s])
+      }
+    }
+    setNavConfig(temp)
+  }, [])
+
+
+  let tempnavConfig = []
+
+  console.log(filteredNavConfig, "temp navv config")
+
+  useEffect(() => {
+
+    // roleDashboard[data].map(r => navConfig[r].id.filter(itm => itm?.find(it => it == data)))
+
+
     if (isOpenSidebar) {
       onCloseSidebar();
     }
@@ -72,21 +98,23 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       {console.log(account.displayName, account.role, "<--yghuj")}
       <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ff7424">
         <Link underline="none" component={RouterLink} to="#">
-          <AccountStyle>
+          {/* <AccountStyle > */}
+          <div style={{ paddingTop: 20, paddingLeft: 100 }}>
             <Avatar src={account.profile_pic} alt="photoURL" />
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" color='#ffffff' >
-                {account.displayName}
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#ffffff' }}>
-                {account.role_name}
-              </Typography>
-            </Box>
-          </AccountStyle>
+
+            {/* </AccountStyle> */}</div>
+          <Box sx={{ ml: 2 }}>
+            <Typography variant="subtitle2" color='#ffffff' style={{ textAlign: "center" }}>
+              Welcome, {account.first_name}
+            </Typography>
+            <Typography variant="body2" sx={{ color: '#ffffff' }} style={{ textAlign: 'center' }}>
+              ({account.role_name})
+            </Typography>
+          </Box>
         </Link>
       </Box>
 
-      <NavSection navConfig={navConfig?.filter(itm => itm?.id.find(it => it == data))} />
+      <NavSection navConfig={filteredNavConfig} />
 
       <Box sx={{ flexGrow: 1 }} />
 

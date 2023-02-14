@@ -1,47 +1,19 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
-import GelathiProgrameDrawer from '../projects/Components/GelathiProgrameDrawer';
+import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
-export default function gelathiProgram() {
+export default function scheduleCircleMeet() {
 
     const [clcikData, setClickData] = useState()
-    const [programe,setPrograme] = useState('')
+    const [enrolled, setenrolled] = useState('');
+
     useEffect(() => {
-        gelathiPrograme();
-        }, []
+        enrolledGelathi();
+    }, []
     )
-    const gelathiPrograme = async =>{
-        var data = JSON.stringify({
-            "filter": "",
-            "end_date": "",
-            "search": "",
-            "project_id": "263",
-            "gelathi_id": "",
-            "start_date": "",
-            "emp_id": 144
-          });
-          
-          var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getGFSessions.php',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
-          
-          axios(config)
-          .then(function (response) {
-            setPrograme(response.data)
-            console.log(response.data,'<--------------setProgramesetProgramesetPrograme');
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-    }
 
     const [openFilter, setOpenFilter] = useState(false);
 
@@ -53,6 +25,33 @@ export default function gelathiProgram() {
         setOpenFilter(false);
     };
 
+    const enrolledGelathi = async =>{
+        var data = JSON.stringify({
+            "search": "",
+            "project_id": 225,
+            "emp_id": 343,
+            "role_id": 6
+          });
+          
+          var config = {
+            method: 'post',
+            url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : data
+          };
+          
+          axios(config)
+          .then(function (response) {
+            setenrolled(response.data)
+            console.log(response.data,'<---------------setenrolledsetenrolled');
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+
     return (
 
         <Container>
@@ -62,7 +61,7 @@ export default function gelathiProgram() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    All gelathi Program
+                        scheduleCircleMeet
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
@@ -70,7 +69,7 @@ export default function gelathiProgram() {
             </Stack>
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-                <GelathiProgrameDrawer
+                <ParticipantDrawer
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
@@ -78,34 +77,30 @@ export default function gelathiProgram() {
                 />
             </Stack>
             {/* </Stack> */}
-            {programe?.list?.map((itm) => {
-                        console.log(itm, "<---programeprogrameprograme")
-                        return (
-                            <Card style={styles.card1} onClick={() => {
-                                setClickData({ name: itm.gf_session_id, title: "Gelathi program Name" })
-                                handleOpenFilter()
-                            }}>  
-                     
-                   
+            {enrolled?.list?.map((itm) => {
+                return (
+                    <Card style={styles.card1} onClick={() => {
+                        setClickData({ name: itm.gelathiname, title: "Participant Details",id:itm?.id })
+                        handleOpenFilter()
+                    }}>
 
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
-                                {` GF Name : ${itm?.gf_session_name}`}
+                                {` Enrolled Gelathi Name : ${itm?.gelathiname}`}
                             </Typography>
+                            {/* {console.log(itm?.list?.gelathiname,'<-------gelathinamegelathiname')} */}
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
-                            <Typography variant="subtitle2" gutterBottom >
-                               Day 1 : {itm?.plan_date}</Typography>
-
-                          
-                            <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                            Day 2 : {itm?.status}</Typography>
-                            
+                        <Typography variant="subtitle1" gutterBottom>
+                                {` Enrolled Village Name : ${itm?.villagename}`}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
+                                {` Enrolled Date : ${itm?.enroll_date}`}
+                            </Typography>
                         </Grid>
                     </Card>)
             })}
 
-          
         </Container>
 
     );

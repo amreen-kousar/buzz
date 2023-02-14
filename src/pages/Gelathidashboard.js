@@ -40,18 +40,6 @@ export default function Gelathidashboard() {
 
   const [summaryData, setSummaryData] = useState([]);
 
-  useEffect(() => {
-    apiHit();
-  }, []);
-
-
-  if (loader) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-        <CircularProgress />
-      </Box>
-    )
-  }
   const apiHit = async (id, i, g) => {
     setLoader(true)
     const data = {
@@ -107,6 +95,22 @@ export default function Gelathidashboard() {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    apiHit();
+  }, []);
+
+
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
+
+
+ 
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -318,10 +322,14 @@ export default function Gelathidashboard() {
 
         </Grid> */}
 
-          {summaryData?.data[0]?.name ? <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
+          {summaryData?.data?.map((item)=>{
+            return(
+              <>
+              {summaryData?.data?
+               <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
 
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Project {summaryData?.data[0]?.name}
+              Project : {summaryData?.data[0]?.name}
             </Typography>
             {/* <Graphchart/> */}
             <CardContent style={{ display: "flex" }}>
@@ -356,8 +364,13 @@ export default function Gelathidashboard() {
 
 
             </CardContent>
-          </Card> : <span style={{ textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}>No Projects</span>}
-
+          </Card> 
+          :  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Projects</h1>}
+              </>
+            )
+          })
+        } 
+          
 
 
 

@@ -7,6 +7,7 @@ import AppBar from '@mui/material/AppBar';
 function AddUser(props) {
 
     const [open, setOpen] = useState(false);
+    const [count, setCount] = useState('');
     // const [ceoUser, setCeoUser] = useState(props.data)
 
     let isValidForm = true;
@@ -21,7 +22,7 @@ function AddUser(props) {
     let [emailExists, setEmailExists] = useState(false)
 
     var [AddUser, setAddUser] = useState({
-        role: { id: '2', roleName: 'Admin' }, first_name: '', last_name: "", contactNum: '', workNum: '', office_email_id: '', address: '', address3: "", address2: "",
+        role: { id: '0', roleName: 'Admin' }, first_name: '', last_name: "", contactNum: '', workNum: '', office_email_id: '', address: '', address3: "", address2: "",
         pincode: "", gender: "male", present_status: true, doj: '', reportingManager: "", license_number: "", project: "",
         emp_id: ""
     })
@@ -377,13 +378,13 @@ function AddUser(props) {
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
                                 <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem", color: '#ff7424' }}>
-                                    <InputLabel id="demo-simple-select-label" fullWidth color="common" style={{ color: '#ff7424' }}>Role</InputLabel>
+                                    <InputLabel id="demo-simple-select-label" fullWidth color="common" style={{ color: '#ff7424' }}>{AddUser.role.id>1?"Role":"Choose Role"} </InputLabel>
 
                                     <Select fullWidth color="common" variant='standard'
                                         labelId="demo-simple-select-label"
                                         id="role"
                                         // defaultValue={AddUser.role}
-                                        label="Role"
+                                        // label="Role"
                                         onChange={(e) => { getEmpId(e.target.value) }}
                                     >
                                         {roles.map(role => {
@@ -439,7 +440,7 @@ function AddUser(props) {
 
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
-                                <TextField fullWidth required id="outlined-basic" label="Mobile number" helperText='Mobile Number Required*' value={AddUser.contactNum} type="number" onChange={(e) => { setAddUser({ ...AddUser, contactNum: e.target.value }) }} variant="outlined" color="common" />
+                                <TextField fullWidth required id="outlined-basic" label="Mobile number" helperText={`${AddUser?.contactNum?.length}/10`} inputProps={{ maxLength: 10 }} multiline value={AddUser.contactNum} type="number" onChange={(e) => { setAddUser({ ...AddUser, contactNum: e.target.value }) }} variant="outlined" color="common" />
                                 <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" color='common' />
 
 
@@ -451,7 +452,7 @@ function AddUser(props) {
                                 </div>
 
 
-                                <TextField fullWidth required id="outlined-basic" label="Address" value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" />
+                                <TextField fullWidth required id="outlined-basic" label="Address" helperText='Address Required*' value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" />
 
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Address 1" value={AddUser.address3} onChange={(e) => { setAddUser({ ...AddUser, address3: e.target.value }) }} variant="outlined" />}
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="outlined-basic" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" />}

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, forwardRef } from 'react';
 import axios from 'axios';
 import { Container, Stack, Typography, Box, Toolbar, Button, TextField, Select, MenuItem, Snackbar, Chip } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // components
 import Pagination from '@mui/material/Pagination';
@@ -49,11 +50,11 @@ export default function User() {
   const [openMessage, setOpenMessage] = useState(false)
   const [message, setMessage] = useState(false)
   const [selected, setSelected] = useState(null)
+  const [loader, setLoader] = useState(true)
 
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-
 
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);
@@ -72,8 +73,8 @@ export default function User() {
 
   const handlepeopleOpenFilter = () => {
     setpeopleFilter(true);
-
   };
+
   const submitBus = () => {
     console.log(AddUser)
   }
@@ -87,7 +88,7 @@ export default function User() {
   };
   useEffect(() => {
     user()
-
+    setLoader(true)
   }, [searchUser]
   )
 
@@ -103,6 +104,8 @@ export default function User() {
       "pageNum": d ? d : 1
     });
 
+
+
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
@@ -115,7 +118,7 @@ export default function User() {
     axios(config)
       .then((response) => {
         setProjects(response.data)
-        console.log(projects)
+
       })
       .catch((error) => {
         console.log(error);
@@ -142,13 +145,14 @@ export default function User() {
 
 
   const user = async (d, filter_type) => {
-
-    console.log(filter_type)
+    setLoader(true)
     if (filter_type) {
       setSelected(filter_type)
-      let ids = { "Trainer": 5, "Driver": 7, "Funder": 8, "Partner": 9, 'Gelathi Facilitators': 6, 'Management Team': 33 }
+      let ids = { "Trainers": 5, "Drivers": 7, "Funders": 8, "Partner": 9, 'Gelathi Facilitators': 6 }
       filter_type.id = ids[filter_type.type]
     }
+
+    console.log(filter_type,"filter typr")
     const dataid = localStorage?.getItem('userDetails')
     const data = JSON.stringify({
       "search": searchUser,
@@ -170,9 +174,17 @@ export default function User() {
 
     axios(config)
       .then((response) => {
-        console.log(response, "response in user.jsx")
+       console.log(response, "response in user.jsxsssssssssssss")
+       if(response.data.list){
+
         setUsers(response.data.list)
+       }
+       else{
+        setUsers([])
+
+       }
         setCount(response?.data?.total_count % 25 == 0 ? parseInt(response?.data?.total_count / 25) : parseInt(response?.data?.total_count / 25) + 1)
+        setLoader(false)
         // let ceo = []
         // response.data.list.map(r => (r.role_name === "CEO") ? ceo = [...ceo, { label: r.first_name, ...r }] : null)
         // setCeoUser([...ceo])
@@ -201,72 +213,83 @@ export default function User() {
     console.log(e)
   }
 
-  return (
-    <Page title="All Users">
-      {/* <DashboardNavbar getSearch={(e) => setSearchUser(e)}  onOpenSidebar={() => setOpen(true)} /> */}
-      <Searchbar getSearch={(e) => { searchBarCall(e) }} />
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
+  else {
+    return (
+      <Page title="All Users">
+        {/* <DashboardNavbar getSearch={(e) => setSearchUser(e)}  onOpenSidebar={() => setOpen(true)} /> */}
+        <Searchbar getSearch={(e) => { searchBarCall(e) }} />
 
 
-      <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
-        <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
-          {message}
-        </Alert>
-      </Snackbar>
-      <div>
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <FiltersHome
-            type="People"
-            user={user}
-            isOpenFilter={peopleFilter}
-            onOpenFilter={handlepeopleOpenFilter}
-            onCloseFilter={handlepeopleCloseFilter}
-          />
-        </Stack>
-        {userAccess.includes(userIdCheck) &&
+        <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+          <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
+            {message}
+          </Alert>
+        </Snackbar>
+        <div>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <AddUser viewMessage={(text) => {
-              setMessage(text)
-              setOpenMessage(true)
-            }} data={ceoUser} />
-          </Stack>
-        }
-      </div>
-      <Container>
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          People
-          <Button style={{ float: "right", color: '#ff7424' }}
-            sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-              },
-            }}
-            onClick={() => {
-              handlepeopleOpenFilter()
-            }}>Filters</Button>
-        </Typography>
-
-        {selected?.type &&
-          <Stack direction="row" spacing={1}>
-            <Chip label={`${selected?.type}`} onDelete={() => { handleDelete() }} />
-          </Stack>
-        }
-
-        <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
-          <Stack direction="row" spacing={1} flexShrink={0} sx={{ mb: 1 }}>
-            <UserDrawer
-              isOpenFilter={openFilter}
-              onOpenFilter={handleOpenFilter}
-              onCloseFilter={handleCloseFilter}
+            <FiltersHome
+              type="People"
+              user={user}
+              isOpenFilter={peopleFilter}
+              onOpenFilter={handlepeopleOpenFilter}
+              onCloseFilter={handlepeopleCloseFilter}
             />
           </Stack>
-        </Stack>
+          {userAccess.includes(userIdCheck) &&
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+              <AddUser viewMessage={(text) => {
+                setMessage(text)
+                setOpenMessage(true)
+              }} data={ceoUser} />
+            </Stack>
+          }
+        </div>
+        <Container>
+          <Typography variant="h4" sx={{ mb: 5 }}>
+            People
+            <Button style={{ float: "right", color: '#ff7424' }}
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#ffd796',
+                },
+              }}
+              onClick={() => {
+                handlepeopleOpenFilter()
+              }}>Filters</Button>
+          </Typography>
 
-        <ProductList users={users} products={PRODUCTS} isOpenFilter={openFilter}
-          onOpenFilter={handleOpenFilter}
-          onCloseFilter={handleCloseFilter} />
-        <ProductCartWidget /><br></br>
-        <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
-      </Container>
-    </Page >
-  );
+          {selected?.type &&
+            <Stack direction="row" spacing={1}>
+              <Chip label={`${selected?.type}`} onDelete={() => { handleDelete() }} />
+            </Stack>
+          }
+
+          <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ mb: 1 }}>
+              <UserDrawer
+                isOpenFilter={openFilter}
+                onOpenFilter={handleOpenFilter}
+                onCloseFilter={handleCloseFilter}
+              />
+            </Stack>
+          </Stack>
+
+          <ProductList users={users} products={PRODUCTS} isOpenFilter={openFilter}
+            onOpenFilter={handleOpenFilter}
+            onCloseFilter={handleCloseFilter} />
+          <ProductCartWidget /><br></br>
+          <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
+        </Container>
+      </Page >
+    );
+  }
+
+
 }

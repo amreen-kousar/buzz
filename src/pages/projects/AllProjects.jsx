@@ -11,11 +11,18 @@ import { Link } from 'react-router-dom';
 import ProjectFilter from '../Components/Projectfilters/ProjectFilters';
 import AddProject from './Addproject';
 import FiltersHome from '../Filters/FiltersHome';
-
+import Searchbar from 'src/layouts/dashboard/Searchbar';
 // components
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
+    
+  
+    
+    //   const resetBus = () => {
+    //     setSelected([])
+    //     setSearch([])
+    //     projectr()
+    //   }
     return (
         <div
             role="tabpanel"
@@ -54,6 +61,9 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     const [value, setValue] = useState(0);
     const [project, setProject] = useState();
     const [openFilter, setOpenFilter] = useState(false);
+    // var [search, setSearch] = useState('')
+    // var [selected, setSelected] = useState(null)
+   
 
     const handleOpenFilter = () => {
         setOpenFilter(true);
@@ -99,11 +109,20 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             });
     }
 
+    // const searchFunction = (e) => {
+    //     search = e
+    //     setSearch(search)
+    //     setSelected([{ name: e, type: "Search" }])
+    //     projectr()
+    //   }
+    
+
     return (
         <Page title="Dashboard: Projects">
+            <Searchbar getSearch={(e) => searchFunction(e)} />
             <Container>
                 <Typography variant="h4" sx={{ mb: 5 }}>
-                    Projects    <Button style={{ float: "right", color: '#ff7424' }}
+                   All Projects    <Button style={{ float: "right", color: '#ff7424' }}
                         sx={{
                             '&:hover': {
                                 backgroundColor: '#ffd796',

@@ -21,37 +21,37 @@ export default function Profile(index) {
     bottom: false,
     right: false,
   });
-  const [profileData,setProfileData]= useState()
-  const [userUpdate,setUserUpdate]=useState(false)
-  useEffect(()=>{
+  const [profileData, setProfileData] = useState()
+  const [userUpdate, setUserUpdate] = useState(false)
+  useEffect(() => {
     profile()
-    },[userUpdate]
-    )
+  }, [userUpdate]
+  )
   const profile = async => {
     const userData = localStorage?.getItem('userDetails')
-    
+
     var data = JSON.stringify({
       "id": JSON?.parse(userData)?.id
     });
-    
+
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
-    
+
     axios(config)
-    .then(function (response) {
-      setProfileData(response.data)
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    
+      .then(function (response) {
+        setProfileData(response.data)
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   }
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -100,7 +100,7 @@ export default function Profile(index) {
   const latestPost = index === 1 || index === 2;
   return (
     <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
-    {/* <Grid>
+      {/* <Grid>
       {['left', 'right', 'top', 'bottom'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
@@ -114,15 +114,15 @@ export default function Profile(index) {
         </React.Fragment>
       ))}
        </Grid> */}
-       <Grid sx={{
+      <Grid sx={{
         p: 2,
         margin: 'auto',
         maxWidth: 500,
         flexGrow: 1,
       }}>
-       <ProfileCard changeUser={()=>{setUserUpdate(!userUpdate)}}  profileData={profileData}/>
-       </Grid>
-       
+        <ProfileCard changeUser={() => { setUserUpdate(!userUpdate) }} profileData={profileData} />
+      </Grid>
+
 
     </Grid>
   );

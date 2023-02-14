@@ -7,27 +7,31 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
+import { useState } from 'react';
 function ListTabledata(props) {
+
+    const [filterData, setFilterData] = useState(null)
     useEffect(() => {
-        console.log(props, "in List Table dataaaa")
-    }, [])
+        setFilterData(props.returnSearchFilter)
+    }, [props.returnSearchFilter])
 
     return (
-        <Card >
-            {props.data?.length !== 0 ? props.data?.map(itm => {
-                return (
-                    <TableContainer sx={{ paddingLeft: "1rem" }} ><br />
-                        <Table aria-label="customized table"  >
-                            <TableBody style={{ marginTop: "10px" }} >
-                                <TableRow onClick={() => { props.getData({ ...itm, type: props.type }, props.selectDATA) }} >
-                                    <TableCell sx={{ width: "10px" }}> <Iconify icon="mdi:user-circle" width={25} height={25} /> </TableCell>
-                                    <TableCell >  {itm?.name} </TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                )
-            }) : null}
+        <Card>
+            {props.data?.length !== 0 && props.data?.map(itm => {
+                if (itm?.name?.toLowerCase()?.includes(filterData?.toLowerCase()) || filterData == null)
+                    return (
+                        <TableContainer sx={{ paddingLeft: "1rem" }} ><br />
+                            <Table aria-label="customized table"  >
+                                <TableBody style={{ marginTop: "10px" }} >
+                                    <TableRow onClick={() => { props.getData({ ...itm, type: props.type }, props.selectDATA) }} >
+                                        <TableCell sx={{ width: "10px" }}> <Iconify icon="mdi:user-circle" width={25} height={25} /> </TableCell>
+                                        <TableCell >  {itm?.name} </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    )
+            })}
         </Card>
     )
 }

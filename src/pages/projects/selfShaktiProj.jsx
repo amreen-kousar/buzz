@@ -67,7 +67,7 @@ export default function selfShaktiProj() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    All self Shakthi
+                    All self shakthi
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
@@ -98,20 +98,19 @@ export default function selfShaktiProj() {
                         handleOpenFilter()
                     }}
                     >
-
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {` self Shakthi Name : ${itm?.batch_name}`}
                             </Typography>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
-                            <Typography variant="subtitle2" gutterBottom >
-                               Day 1 : <Typography>{itm?.day1}</Typography>
+                            <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }} >
+                               Day 1 : {itm?.day1}</Typography>
 
-                            </Typography>
+                           
                             <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                            Day 2 : <Typography>{itm?.day2}</Typography>
-                            </Typography>
+                            Day 2 : {itm?.day2}</Typography>
+                            
                         </Grid>
                     </Card>)
             })}

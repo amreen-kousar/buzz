@@ -77,29 +77,29 @@ function Project(props) {
                   <Table aria-label="customized table">
                     <TableBody>
                       <TableRow style={styles.tableRowStyle}>
-                        <TableCell>Project Name </TableCell>
-                        <TableCell>{data1.project_name} </TableCell>
+                        <TableCell>Project Name : </TableCell>
+                        <TableCell>: {data1.project_name} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>District Name</TableCell>
-                        <TableCell>{data1.location_name} </TableCell>
+                        <TableCell>: {data1.location_name} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Partner Name </TableCell>
-                        <TableCell>{data1.partnerName} </TableCell>
+                        <TableCell>: {data1.partnerName} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Training Target</TableCell>
-                        <TableCell>{data1.training_target} </TableCell>
+                        <TableCell>: {data1.training_target} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Project Duration</TableCell>
-                        <TableCell> From : {data1.startDate} </TableCell>
+                        <TableCell> : From : {data1.startDate} </TableCell>
                         <TableCell> To : {data1.endDate}</TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Project Status</TableCell>
-                        <TableCell>{data1.project_status} </TableCell>
+                        <TableCell>: {data1.project_status} </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
@@ -195,6 +195,39 @@ function Project(props) {
                     <span style={{ width: "200px" }}> Gelathi Circles</span>
                   </Button>
                   </Link>
+                  <br />
+
+                  <Link to="/dashboard/projects/gelathiCirlces" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
+                    <span style={{ width: "200px" }}> Schedule A Village Visit</span>
+                  </Button>
+                  </Link>
+                  <br />
+
+                  <Link to="/dashboard/projects/assignedVillages" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
+                    <span style={{ width: "200px" }}> Assigned Villages</span>
+                  </Button>
+                  </Link>
+                  <br />
+
+                  <Link to="/dashboard/projects/scheduleCircleMeet" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
+                    <span style={{ width: "200px" }}>Schedule A Circle Meeting</span>
+                  </Button>
+                  </Link>
+                  <br />
+
+                  <Link to="/dashboard/projects/scheduleBeehiveVisit" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
+                    <span style={{ width: "200px" }}>Schedule A Beehive Visit</span>
+                  </Button>
+                  </Link>
+                  <br />
 
                 </ButtonGroup>
 

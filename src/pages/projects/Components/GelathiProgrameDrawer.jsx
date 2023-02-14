@@ -76,12 +76,12 @@ console.log(clcikData,'<---------clcikDataclcikDataclcikData')
                 open={isOpenFilter}
                 onClose={onCloseFilter}
                 PaperProps={{
-                    sx: { width: 280, },
+                    sx: { width: 350, },
                 }}
             >
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-                    <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                        {`${clcikData?.title}:`}
+                    <Typography variant="body1" sx={{ ml: 1 }}>
+                        {`${clcikData?.title}`}
                     </Typography>
                     {console.log(clcikData,'<------clcikDataclcikData')}
                     <IconButton onClick={onCloseFilter}>
@@ -96,48 +96,44 @@ console.log(clcikData,'<---------clcikDataclcikDataclcikData')
                         <div>
                             <Card>
                                 <CardContent>
-                                    <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
-                                        Project :
-                                        <Typography variant="body1" >{session?.gf_session_name}</Typography>
+                                    <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
+                                        Project:&nbsp;{session?.projectName}
                                         {console.log(session?.gf_session_name,'<--------gf_session_namegf_session_name')}
                                     </Typography>
+                                    <Typography variant="body1" gutterBottom>
+                                        Partner :&nbsp;{session?.partnerName}</Typography>
                                    
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Partner :
-                                        <Typography variant="body1" gutterBottom>{session?.partnerName}</Typography>
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Training Batch:
-                                        <Typography variant="body1" gutterBottom>{session?.data?.name}</Typography>
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
+                                    <Typography variant="body1" gutterBottom>
+                                        Training&nbsp;Batch:&nbsp;{session?.training_batch_name}</Typography>
+                                  
+                                    <Typography variant="body1" gutterBottom>
                                         Plan Date :
-                                        <Typography variant="body1" gutterBottom>{session?.plan_date}</Typography>
-                                    </Typography>
+                                        {session?.plan_date}</Typography>
+                                 
                                     
-                                    <Typography variant="subtitle1" gutterBottom>
+                                    <Typography variant="body1" gutterBottom>
                                         Contact Person:
-                                        <Typography variant="body1" gutterBottom>{session?.contact_person}</Typography>
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
+                                        {session?.contact_person}</Typography>
+                                   
+                                    <Typography variant="body1" gutterBottom>
                                     Contact Number:
-                                        <Typography variant="body1" gutterBottom>{session?.contact_number}</Typography>
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
+                                        {session?.contact_number}</Typography>
+                                   
+                                    <Typography variant="body1" gutterBottom>
                                        Trainer Name:
-                                        <Typography variant="body1" gutterBottom>{session?.trainer_name}</Typography>
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
+                                       {session?.trainer_name}</Typography>
+                                  
+                                    <Typography variant="body1" gutterBottom>
                                        GF Name:
-                                        <Typography variant="body1" gutterBottom>{session?.gf_name}</Typography>
-                                    </Typography>
+                                        {session?.gf_name}</Typography>
+                              
                                 </CardContent>
                             </Card>
                             {/* <ShaktiDialog /> */}
                             <Card style={{marginTop:20}}>
                                 <CardContent>
                                    
-                                   <Typography  variant="subtitle1" gutterBottom>Visit Participants :   
+                                   <Typography  variant="body1" gutterBottom>Visit Participants :   
                                     <Typography variant="body1" gutterBottom>{session?.total_participants} </Typography>
                                     </Typography>
                                    

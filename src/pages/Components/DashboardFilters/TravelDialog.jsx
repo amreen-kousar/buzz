@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, * as others from 'axios';
 import React from "react"
 import Button from '@mui/material/Button';
 // import Dialog from '@mui/material/Dialog';
@@ -33,6 +33,15 @@ import Iconify from 'src/components/Iconify';
 import moment from 'moment'
 import { orange } from '@mui/material/colors';
 import Webcam from "react-webcam";
+import Label from 'src/components/Label';
+import InputAdornment from '@mui/material/InputAdornment';
+
+
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import LocalPrintshop from '@mui/icons-material/LocalPrintshop';
+import CurrencyRupee  from '@mui/icons-material/CurrencyRupee';
+import DiamondRounded  from '@mui/icons-material/DiamondRounded';
+import  Room  from '@mui/icons-material/Room';
 function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
@@ -50,6 +59,7 @@ export default function TravelDialog({ viewMessage }) {
     odimeter: "",
     location: "",
     poa: "",
+    srpoa:"",
     date: new Date(),
     modeoftravel: "",
     rateperkm: "",
@@ -61,7 +71,8 @@ export default function TravelDialog({ viewMessage }) {
     OtherAmount: "",
     endOdimeter: "",
     endLocation: "",
-    totalkm: ""
+    totalkm: "",
+    fairamount:""
   });
 
   // const webcamRef = React.useRef(null);
@@ -94,6 +105,7 @@ export default function TravelDialog({ viewMessage }) {
   const [image, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
   const [viewImage, setViewImage] = React.useState(false);
+  const [locationS,setLocation] = useState()
   const hiddenFileInput = React.useRef(null);
 
   const handleClick = event => {
@@ -132,9 +144,11 @@ export default function TravelDialog({ viewMessage }) {
       "end_odometer": sendData?.endOdimeter,
       "telephone": sendData?.telephonecharges,
       "end_location_name": sendData?.endLocation,
+      "fairamount":sendData?.fairamount,
       "printing": sendData?.printing,
       "start_location_name": "RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India",
       "poa_id": sendData?.poa,
+      "srpoa":sendData?.srpoa,
       "start_odometer": sendData?.odimeter,
       "rate_per_KM": sendData?.rateperkm,
       "stationery": sendData?.stationary,
@@ -200,6 +214,36 @@ export default function TravelDialog({ viewMessage }) {
 
 
   }
+  useEffect(()=>{
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+var data = JSON.stringify({
+  "latitude": position.coords.latitude,
+  "longitude": position.coords.longitude
+});
+
+var config = {
+  method: 'post',
+  url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(response,",----ewrwerwer")
+  setLocation(response?.data)
+//  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error,",----ewrwerwer");
+});
+      
+    });
+  },[])
 
   const location = () => {
     Geocode.fromLatLng(coords?.latitude, coords?.longitude).then(
@@ -264,7 +308,7 @@ export default function TravelDialog({ viewMessage }) {
     image.splice(index, 1);
     setImage([...image])
   }
-
+ 
   //   const clickImages = () =>{
   //     console.log("fefefergregre");
   //    // handleClose()
@@ -281,6 +325,8 @@ export default function TravelDialog({ viewMessage }) {
   //     </>
   //     )
   //   }
+  const userDetails = localStorage?.getItem('userId')
+  console.log(userDetails,"userrrrrrrrrrrrrrr")
   return (
     <div>
 
@@ -313,12 +359,12 @@ export default function TravelDialog({ viewMessage }) {
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Create Allowances
+            Create Allowance
           </Typography>
 
 
           <Button autoFocus color="inherit" onClick={() => SendData()}>
-            save
+          <Iconify icon="material-symbols:save" width={30} height={30} />
           </Button>
         </Toolbar>
         {/* <Webcam
@@ -336,29 +382,95 @@ export default function TravelDialog({ viewMessage }) {
 
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading *" variant="outlined" color="common" 
+                />
               </Stack>
-              <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
+              <Stack style={{ marginTop: 20 ,color:'black'}}>
+                <TextField id="outlined-basic" value={locationS} disabled={true} onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Start Location" variant="outlined" color="common" 
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">
+                    <Room sx={{color:"green"}} />
+                    </InputAdornment>
+                   ),
+               }}  />
               </Stack><br></br>
-              <Stack style={{ marginTop: 20 }}>
-                <FormControl fullWidth >
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
+              {/* <Stack style={{ marginTop: 20 }}>
+
+                     <ListItemButton
+            autoFocus
+          //  onClick={() => handleListItemClick('addAccount')}
+          >
+          <ListItemAvatar>
+              <Avatar>
+                <AddIcon />
+              </Avatar>
+            </ListItemAvatar> 
+            <ListItemText primary="Add account" />
+          </ListItemButton>  
+
+
+          
+                {(userDetails===12)?<FormControl fullWidth >
+                <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>Poa</InputLabel> 
+                {(userDetails===12)?
+                  
+                  <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />
                   <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                     {datadrop?.data?.map(itm => {
                       return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                     })}
-
-                    {/* <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem> */}
                   </Select>
+               
+             
+                </FormControl>
+                :
+                <FormControl fullWidth >
+                <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
+                <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
+                  {datadrop?.data?.map(itm => {
+                    return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
+                  })}
+                </Select>
                 </FormControl>
 
-              </Stack><br></br>
+              </Stack><br></br> */}
+              <Stack style={{ marginTop: 20 }}>       
+             <FormControl fullWidth >
+            {console.log(userDetails,"userdetailsssssssssssss")}
+              {/* {(userDetails===12)?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />:null} */}
+             
+              <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.poa==""?"Select POA *":"POA *"}</InputLabel>
+                <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
+                
+                  {datadrop?.data?.map(itm => {
+                    return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
+                  })}
+                </Select>
+                </FormControl>
+              </Stack>
+
+              <Stack style={{ marginTop: 20 }}>       
+             <FormControl fullWidth >
+            {console.log(userDetails,"userdetailsssssssssssss")}
+              {userDetails==12?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, srpoa: e?.target?.value }) }} label="Create poa" color="common" />:null}
+             
+              {/* <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>Poa</InputLabel>
+                <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
+                
+                  {datadrop?.data?.map(itm => {
+                    return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
+                  })}
+                </Select> */}
+                </FormControl>
+              </Stack>
 
               <Stack style={{ marginTop: 20 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
+                    
+                    inputFormat="YYYY-MM-DD"
+                    views={["year", "month", "day"]}
                     // label="Date"
                     value={sendData?.date}
                     onChange={(newValue) => {
@@ -367,10 +479,11 @@ export default function TravelDialog({ viewMessage }) {
                     renderInput={(params) => <TextField {...params} fullWidth />}
                   />
                 </LocalizationProvider>
-              </Stack><br></br>
+              </Stack>
+              <br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Mode Of Travel</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.modeoftravel==""?"Select Mode of Travel":"Mode of Travel"}</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Mode Of Travel"
                     id="demo-simple-select"
@@ -386,9 +499,13 @@ export default function TravelDialog({ viewMessage }) {
                   </Select>
                 </FormControl>
               </Stack><br></br>
+              {console.log(datadrop?.Mode_of_Travel,"modeeeeeeeeeeee",sendData?.modeoftravel)}
+              {(sendData?.modeoftravel&&sendData?.modeoftravel===1 | sendData?.modeoftravel===4 | sendData?.modeoftravel===5 | sendData?.modeoftravel===6)?<Stack style={{ marginTop: 20 }}>
+                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, fairamount: e?.target?.value }) }} label="Fair amount" variant="outlined" color="common" />
+              </Stack>:
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Rate Per Km</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.rateperkm==""?"Select Rate per KM":"Rate per KM"}</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Rate Per Km"
                     id="demo-simple-select"
@@ -401,10 +518,11 @@ export default function TravelDialog({ viewMessage }) {
                     })}
                   </Select>
                 </FormControl>
-              </Stack><br></br>
+              </Stack>}<br></br>
+             
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Food Expenses </InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.foodexpenses==""?"Select Food Expenses":"Food Expenses"}</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Food Expenses"
                     id="demo-simple-select"
@@ -423,7 +541,7 @@ export default function TravelDialog({ viewMessage }) {
               </Stack>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }} >Phone Charges</InputLabel>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.telephonecharges==""?"Select Phone Charges":"Phone Charges"}</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Phone Charges"
                     id="demo-simple-select"
@@ -439,25 +557,63 @@ export default function TravelDialog({ viewMessage }) {
               </Stack>
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="Printing" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="printing" variant="outlined" color="common" 
+                InputProps={{
+                     endAdornment: (
+                       <InputAdornment position="start">
+                       <LocalPrintshop color="secondary" />
+                       </InputAdornment>
+                      ),
+                  }} />
+              
+              </Stack>
+              <Stack style={{ marginTop: 20 }}>  
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="stationery" variant="outlined" color="common" 
+                InputProps={{
+                     endAdornment: (
+                       <InputAdornment position="start">
+                       <AttachMoneyIcon />
+                       </InputAdornment>
+                      ),
+                  }} />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="Stationary" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="Other Expenses" variant="outlined" color="common"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">
+                  
+                  {/* <Iconify icon="material-symbols:diamond-rounded " /> */}
+                  <DiamondRounded sx={{color:"red"}}/>
+                    </InputAdornment>
+                   ),
+               }}  />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="other expenses" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="Other Expenses Amount" variant="outlined" color="common" 
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">
+                    <CurrencyRupee sx={{color:"green"}}/>
+                    </InputAdornment>
+                   ),
+               }} />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="other expenses amounnt" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="End Odometer Reading" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="end odometer reading" variant="outlined" color="common" />
+                <TextField id="outlined-basic" disabled={true} onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="End Location" variant="outlined" 
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">
+                    <Room sx={{color:"green"}} />
+                    </InputAdornment>
+                   ),
+               }}   />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="end location" variant="outlined" color="common" />
-              </Stack>
-              <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common" />
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="Total Kilometer" variant="outlined" color="common"   />
               </Stack>
               <br /><br />
               <div>
@@ -476,34 +632,39 @@ export default function TravelDialog({ viewMessage }) {
                       }) : null
                   }
                 </div>
+                <div style={{display:'flex'}}>
                 <label for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
                   <Iconify
                     icon={'mdi:camera'}
                     sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
                   />&nbsp;
-                  Click to upoad images
+                  Click here to Add images
                   <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
                 </label>
-              </div>
-              <Button onClick={postImages}
+                <Button onClick={postImages} 
                 sx={{
                   '&:hover': {
                     backgroundColor: '#ffd796',
                   },
-                  color: "#ff7424"
-                }}>Send Images</Button>
-              <br /><br />
+                  color: "#ff7424",
+                  backgroundColor:'#ffd796',
+                  marginLeft:'10px'
+                }}>Upload</Button></div>
+              </div>
+              
+             
 
               {/* <Button onClick={() => capture()}>Click here to to upload snaps</Button> */}
 
             </div>
-            <Button onClick={() => SendData()} variant="filled" sx={{
+            {/* <Button onClick={() => SendData()}  sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
               },
               color: "#ff7424",
 
-            }}>Upload</Button><br></br>
+            }}>Upload</Button><br></br> */}
+            
           </DialogContentText></DialogContent>  </Dialog>
     </div>
   );

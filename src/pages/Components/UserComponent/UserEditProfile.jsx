@@ -246,7 +246,7 @@ export default function UserEditProfile() {
                     label="Date"
                     // value={sendData?.date}
                     onChange={(newValue) => {
-                      setSendData({ ...sendData, date: newValue });
+                      setEditData({ ...editData, date: newValue });
                     }}
                     renderInput={(params) => <TextField {...params} fullWidth />}
                   />

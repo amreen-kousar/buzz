@@ -16,7 +16,7 @@ import BusList from './pages/buses/BusList';
 import BuzzStock from './pages/BuzzStock';
 import Demography from './pages/Demography';
 import PlanofAction from './pages/PlanofAction';
-import TravelA from './pages/TravelA';
+import TravelA from './pages/travelAllowance/TravelA';
 import Chart from './pages/dashboard/Charts'
 import ProjectHome from './pages/projects/ProjectHome';
 import AllProjects from './pages/projects/AllProjects';
@@ -30,6 +30,10 @@ import EnrolledGelathi from './pages/projects/enrolledGelathi';
 import EnrolledGreenMotivators from './pages/projects/enrolledGreenMotivators';
 import EnrolledVyaapar from './pages/projects/enrolledVyaapar';
 import GelathiCirces from './pages/projects/gelathiCircles';
+import AssignedVillages from './pages/projects/assignedVillages';
+import ScheduleBeehiveVisit from './pages/projects/scheduleBeehiveVisit';
+import ScheduleCircleMeet from './pages/projects/scheduleCircleMeet';
+import ScheduleVillage from './pages/projects/scheduleVillage';
 import Trainers from './pages/Components/DashboardFilters/Trainers';
 import Operationmanagerdashboard from './pages/Operationmanagerdashboard';
 import Test from './pages/Test';
@@ -49,6 +53,10 @@ export default function Router() {
         { path: "enrolledGreenMotivators", element: <EnrolledGreenMotivators /> },
         { path: "enrolledVyaapar", element: <EnrolledVyaapar /> },
         { path: "gelathiCirlces", element: <GelathiCirces /> },
+        { path: "assignedVillages", element: <AssignedVillages /> },
+        { path: "scheduleCircleMeet", element: <ScheduleCircleMeet /> },
+        { path: "scheduleVillage", element: <ScheduleVillage /> },
+        { path: "scheduleBeehiveVisit", element: <ScheduleBeehiveVisit /> },
         { path: "projectProfile", element: <ProjectProfile /> },
 
     ]
@@ -70,7 +78,7 @@ export default function Router() {
 
         [
             {
-                path: 'app', element: <DashboardHome />, id: [0, 1, 3, 7, 8, 9, 12],
+                path: 'app', element: <DashboardHome />, id: [0, 1, 3, 7, 8, 9, 12,11],
                 children: [
                     { path: '', element: <DashboardApp />, exact: true },
                     { path: 'chart', element: <Chart /> },
@@ -79,18 +87,18 @@ export default function Router() {
             { path: 'trainer', element: <Trainerdashboard />, id: [5] },
             { path: 'gelathi', element: <Gelathidashboard />, id: [6, 13] },
             { path: 'operationmanager', element: <Operationmanagerdashboard />, id: [4] },
-            { path: 'buslist', element: <BusList />, id: [0, 1, 2, 3, 4, 5,6, 7, 9, 8, 12] },
-            { path: 'planofaction', element: <PlanofAction />, id: [0, 1, 3, 4, 5, 9, 6, 7, 8, 12, 13] },
+            { path: 'buslist', element: <BusList />, id: [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 12,11] },
+            { path: 'planofaction', element: <PlanofAction />, id: [0, 1, 3, 4, 5, 9, 6, 7, 8, 12, 13,11] },
             //  { path: 'projects', element: <Blog />,id=[1,2,3] },
             {
-                path: 'projects', element: <ProjectHome />, id: [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 12, 13],
+                path: 'projects', element: <ProjectHome />, id: [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 12, 13,11],
                 children: getProjectRoutes
             },
-            { path: 'people', element: <User />, id: [0, 1, 2, 3, 4, 12] },
-            { path: 'BuzzStock', element: <BuzzStock />, id: [0, 1, 2, 3, 4, 12] },
-            { path: 'profile', element: <Profile />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13] },
-            { path: 'travel', element: <TravelA />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13] },
-            { path: 'demogrphy', element: <Demography />, id: [0, 1, 2, 3, 12] },
+            { path: 'people', element: <User />, id: [0, 1, 2, 3, 4, 12,11] },
+            { path: 'BuzzStock', element: <BuzzStock />, id: [0, 1, 2, 3, 4, 12,11] },
+            { path: 'profile', element: <Profile />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13,11] },
+            { path: 'travel', element: <TravelA />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,11] },
+            { path: 'demogrphy', element: <Demography />, id: [0, 1, 2, 3, 12,11] },
             { path: 'logout', element: <Logout />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13] }
         ]
 
