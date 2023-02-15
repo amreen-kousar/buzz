@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import { Stack, Chip, Typography} from '@mui/material';
+import { Stack, Chip, Typography, Container} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Grid } from '@mui/material';
 import Button from '@mui/material/Button';
-
+import Page from 'src/components/Page';
 
 import axios from 'axios';
 import TotalFilter from './Components/BuzzStockFilter/TotalFilter';
@@ -175,28 +175,31 @@ export default function BuzzStock() {
     console.log("sdfgsdfdfssd", itm, i)
   }
   return (
-    <div>
-       <Typography variant="h4" sx={{ mb: 2 }} >
-       Consolidated Org Stock
-   
-      <Button style={{ float: "right", color: '#ff7424' }}
-        sx={{
-          '&:hover': {
-            backgroundColor: '#ffd796',
-          },
-        }}
-        onClick={() => {
-          handleopenbusfilter()
-        }}
-      >
-        Filter  
-      </Button></Typography>
+    
+          <Page title="Buzz Stock">
+            <Container>
+         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+          <Typography variant="h5" gutterBottom >
+           Consolidated Org Stock
+          </Typography>
+          <Button style={{ float: "right", color: '#ff7424' }}
+            sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+              },
+            }}
+            onClick={() => {
+              handleopenbusfilter()
+            }}>
+            Filter
+          </Button>
+        </Stack>
       {selected?.type &&
         <Stack direction="row" spacing={1}>
           <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
         </Stack>
       }
-      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+      <Stack direction="row" spacing={1} flexShrink={0} >
         {/* <BusListFilter
           getData={getData}
           onSumbit={onSumbit}
@@ -247,6 +250,7 @@ export default function BuzzStock() {
         </TableContainer>
 
       </Grid>
-    </div>
+      </Container>
+    </Page>
   );
 }

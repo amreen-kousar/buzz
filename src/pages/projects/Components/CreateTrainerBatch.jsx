@@ -15,6 +15,7 @@ import Slide from '@mui/material/Slide';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import moment from 'moment/moment';
+import Iconify from 'src/components/Iconify';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -113,19 +114,19 @@ export default function CreateTrainerBatch() {
         console.log(error);
       });
   }
+  const styles = {
+    buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
+    tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
+    linkStyle: { textDecoration: 'none', color: "black" }
+  }
   return (
     <div>
-      <Button variant="outlined"  onClick={handleClickOpen} style={{  color: '#ff7424' }} 
-      sx=
-      {{ 
-        '&:hover': 
-        { 
-          backgroundColor: '#ffd796', 
-          borderColor: "#ff7424", 
-          
-        }, borderColor: "#ff7424",}}>
-        New Training Batch
-      </Button>
+
+      <Button variant="secondary" style={styles.buttonStyle} onClick={handleClickOpen}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
+                    <span style={{ width: "200px" }}>New Training Batch</span>
+                  </Button>
       <Dialog
         fullScreen
         open={open}

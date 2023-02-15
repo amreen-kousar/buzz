@@ -116,7 +116,7 @@ export default function Profile(index) {
        </Grid> */}
       <Grid sx={{
         p: 2,
-        margin: 'auto',
+    
         maxWidth: 500,
         flexGrow: 1,
       }}>

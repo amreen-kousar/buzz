@@ -275,12 +275,12 @@ export default function User() {
                 handleOpenFilter()
               }}>
 
-              <div style={{ float: 'left', paddingLeft: '20px', paddingTop: '50px', paddingBottom: '50px', paddingRight: '20px' }}>
+              <div style={{ float: 'left', paddingLeft: '20px', paddingTop: '50px', paddingBottom: '50px', paddingRight: '20px',backgroundColor:'white' }}>
                 <Iconify icon="material-symbols:directions-bus" width={30} height={30} />
               </div>
               <Card sx={{ boxShadow: 0 }} >
               <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
-                <Typography variant="subtitle1" gutterBottom style={{color:'#6495ED'}} >
+                <Typography variant="subtitle1" gutterBottom  >
                   {`Bus Number : ${itm?.register_number}`}
                 </Typography>
                 

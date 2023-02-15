@@ -182,13 +182,19 @@ export default function DashboardApp() {
   return (
 
     <Page title="Dashboard">
-      <h1 style={{ textAlign: "center", color: "#0000ff" }}><u>Summary</u></h1>
-      <Container maxWidth="xl">
-        <Grid item spacing={10}>
+         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+          <Typography variant="h5" gutterBottom>
+            Summary
 
+          </Typography>
           <Button style={{ float: "right", color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleOpenFilter() }}>
             Filter
           </Button>
+        </Stack>
+{/* <h1 style={{textAlign:"center",color:"#0000ff"}}><u>Summary</u></h1> */}
+      <Container maxWidth="xl">
+        <Grid item spacing={10}>
+
 
           {
             slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
