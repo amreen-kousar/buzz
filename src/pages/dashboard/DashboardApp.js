@@ -22,7 +22,7 @@ export default function DashboardApp() {
 
     { ...itemStyles[0], title: "Actual", total: 'summary_actual', color: "primary" },
 
-    { ...itemStyles[0], title: "2nd Day TurnOut(%)", total: 'summary_day2', color: "warning" },
+    { ...itemStyles[0], title: "2nd Day TurnOut(%)", total: 'summary_day2', color: "warning", ext: ' % ', },
 
     {
       ...itemStyles[0], title: "Villages", total: 'summary_villages', color: "villages", styles: {
@@ -36,7 +36,7 @@ export default function DashboardApp() {
 
     { ...itemStyles[0], title: "Women", total: 'summary_women', color: "info", icon: 'twemoji:women-holding-hands' },
 
-    { ...itemStyles[0], title: "Gelathis", total: 15022, color: "gelathis", icon: 'fluent:people-team-16-regular' },
+    { ...itemStyles[0], title: "Gelathis", total: 'gelathi', color: "gelathis", icon: 'fluent:people-team-16-regular' },
 
     { ...itemStyles[1], title: "Green Motivator", total: 'summary_green', color: "motivator" },
 
@@ -103,7 +103,9 @@ export default function DashboardApp() {
     };
     axios(config)
       .then((response) => {
+        console.log(response.data)
         setLoader(false)
+        response.data.gelathi = 15022
         setSummaryData(response.data);
       })
       .catch((error) => {
@@ -180,7 +182,7 @@ export default function DashboardApp() {
   return (
 
     <Page title="Dashboard">
-<h1 style={{textAlign:"center",color:"#0000ff"}}><u>Summary</u></h1>
+      <h1 style={{ textAlign: "center", color: "#0000ff" }}><u>Summary</u></h1>
       <Container maxWidth="xl">
         <Grid item spacing={10}>
 
@@ -212,7 +214,7 @@ export default function DashboardApp() {
 
                 <AppWidgetSummary
                   title={s.title}
-                  total={summaryData[s.total]}
+                  total={`${summaryData[s.total]} ${s.ext ? s.ext : ''}`}
                   color={s.color}
                   icon={s.icon}
                   styles={s.styles} />

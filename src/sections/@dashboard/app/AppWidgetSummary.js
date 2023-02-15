@@ -66,14 +66,16 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         >
           <Iconify icon={icon} width={24} height={24} />
         </IconWrapperStyle> : null}
+        <span style={{ opacity: 0.72, fontSize: '2vw', color: '#103996' }}><strong>{title}</strong></span><br />
+        <span style={{ fontSize: '3vw', color: "#103996" }}><strong>{(total)}</strong></span>
 
-        <Typography variant="h4" sx={{ opacity: 0.72 }}>
+        {/* <Typography variant="h4" sx={{ opacity: 0.72 }}>
           {title}
-        </Typography>
+        </Typography> */}
         {/* <Typography variant="h5">{fShortenNumber(total)}</Typography> */}
-        <Typography variant="h2">{(total)}</Typography>
+        {/* <Typography variant="h2">{(total)}</Typography> */}
       </div>
-      
+
 
       {/* <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
         {title}

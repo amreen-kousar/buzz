@@ -152,7 +152,7 @@ export default function User() {
       filter_type.id = ids[filter_type.type]
     }
 
-    console.log(filter_type,"filter typr")
+    console.log(filter_type, "filter typr")
     const dataid = localStorage?.getItem('userDetails')
     const data = JSON.stringify({
       "search": searchUser,
@@ -174,15 +174,15 @@ export default function User() {
 
     axios(config)
       .then((response) => {
-       console.log(response, "response in user.jsxsssssssssssss")
-       if(response.data.list){
+        console.log(response, "response in user.jsxsssssssssssss")
+        if (response.data.list) {
 
-        setUsers(response.data.list)
-       }
-       else{
-        setUsers([])
+          setUsers(response.data.list)
+        }
+        else {
+          setUsers([])
 
-       }
+        }
         setCount(response?.data?.total_count % 25 == 0 ? parseInt(response?.data?.total_count / 25) : parseInt(response?.data?.total_count / 25) + 1)
         setLoader(false)
         // let ceo = []
@@ -285,7 +285,9 @@ export default function User() {
             onOpenFilter={handleOpenFilter}
             onCloseFilter={handleCloseFilter} />
           <ProductCartWidget /><br></br>
-          <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
+          {
+            users.length > 0 && <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
+          }
         </Container>
       </Page >
     );
