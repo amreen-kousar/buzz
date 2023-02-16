@@ -105,10 +105,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             {/* </AccountStyle> */}</div>
           <Box sx={{ ml: 2 }}>
             <Typography variant="subtitle2" color='#ffffff' style={{ textAlign: "center" }}>
-              Welcome, {account.first_name}
+              Welcome, {account.first_name}  ({account.role_name})
             </Typography>
             <Typography variant="body2" sx={{ color: '#ffffff' }} style={{ textAlign: 'center' }}>
-              ({account.role_name})
+            
             </Typography>
           </Box>
         </Link>

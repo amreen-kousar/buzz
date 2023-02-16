@@ -269,7 +269,7 @@ export default function Trainerdashboard() {
                         <AppWidgetSummary
                           title="Villages"
                           total={item?.villages}
-                          color="motivator"
+                          color="villages"
 
                         // icon={'mdi:target-arrow'}
                         />
@@ -280,7 +280,7 @@ export default function Trainerdashboard() {
 
                           total={item?.women}
                           title="Women"
-                          color="motivator"
+                          color="info"
                         // icon={'material-symbols:data-exploration'}
                         />
                       </Grid>
@@ -290,7 +290,7 @@ export default function Trainerdashboard() {
 
                           total={item?.day2}
                           title="2nd Day TurnOut(%)"
-                          color="motivator"
+                          color="warning"
 
 
                         />

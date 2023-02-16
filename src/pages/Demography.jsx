@@ -7,11 +7,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Grid, Button, Stack, CardContent, Chip } from '@mui/material';
+import { Grid, Button, Stack, CardContent, Chip , Typography,Container} from '@mui/material';
 import axios from 'axios';
 import DemographyFilter from './Components/DemographyFilters/DemographyFilter';
 import { assertTSAnyKeyword } from '@babel/types';
 import FiltersHome from './Filters/FiltersHome';
+import Page from 'src/components/Page';
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -175,10 +177,13 @@ export default function Demography() {
 
 
   return (
-    <>
-
-    <h1>Demography</h1>
-      <Button style={{ float: "right", color: '#ff7424' }}
+    <Page title="Demography">
+      <Container>
+         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+          <Typography variant="h5" gutterBottom >
+         Demography
+          </Typography>
+          <Button style={{ float: "right", color: '#ff7424' }}
         sx={{
           '&:hover': {
             backgroundColor: '#ffd796',
@@ -189,20 +194,15 @@ export default function Demography() {
         }}>
         Filter
       </Button>
+        </Stack>
+
+     
       {
         selected?.type && <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
       }
 
-      {/* <h2> 
-          
-           
-        
-        {selected?.id===3? "Project": null}
-        {selected?.id===2?"Funder":null}
-        {selected?.id===7?"Location":null}
-      &nbsp;{selected?.name ? selected?.name : ''}</h2>  */}
-
-      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+   
+      <Stack direction="row" spacing={1} flexShrink={0} >
         <FiltersHome
           type="Demography"
           getData={getData}
@@ -493,6 +493,7 @@ export default function Demography() {
 
           )
         })}  </Grid>
-    </>
+        </Container>
+    </Page>
   );
 }

@@ -152,7 +152,7 @@ export default function User() {
       filter_type.id = ids[filter_type.type]
     }
 
-    console.log(filter_type,"filter typr")
+    console.log(filter_type, "filter typr")
     const dataid = localStorage?.getItem('userDetails')
     const data = JSON.stringify({
       "search": searchUser,
@@ -174,15 +174,15 @@ export default function User() {
 
     axios(config)
       .then((response) => {
-       console.log(response, "response in user.jsxsssssssssssss")
-       if(response.data.list){
+        console.log(response, "response in user.jsxsssssssssssss")
+        if (response.data.list) {
 
-        setUsers(response.data.list)
-       }
-       else{
-        setUsers([])
+          setUsers(response.data.list)
+        }
+        else {
+          setUsers([])
 
-       }
+        }
         setCount(response?.data?.total_count % 25 == 0 ? parseInt(response?.data?.total_count / 25) : parseInt(response?.data?.total_count / 25) + 1)
         setLoader(false)
         // let ceo = []
@@ -225,14 +225,11 @@ export default function User() {
       <Page title="All Users">
         {/* <DashboardNavbar getSearch={(e) => setSearchUser(e)}  onOpenSidebar={() => setOpen(true)} /> */}
         <Searchbar getSearch={(e) => { searchBarCall(e) }} />
-
-
         <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
           <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
             {message}
           </Alert>
-        </Snackbar>
-        <div>
+        </Snackbar>  
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <FiltersHome
               type="People"
@@ -250,7 +247,7 @@ export default function User() {
               }} data={ceoUser} />
             </Stack>
           }
-        </div>
+      
         <Container>
           <Typography variant="h4" sx={{ mb: 5 }}>
             People
@@ -270,7 +267,9 @@ export default function User() {
               <Chip label={`${selected?.type}`} onDelete={() => { handleDelete() }} />
             </Stack>
           }
-
+            <ProductList users={users} products={PRODUCTS} isOpenFilter={openFilter}
+            onOpenFilter={handleOpenFilter}
+            onCloseFilter={handleCloseFilter} />
           <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ mb: 1 }}>
               <UserDrawer
@@ -281,11 +280,11 @@ export default function User() {
             </Stack>
           </Stack>
 
-          <ProductList users={users} products={PRODUCTS} isOpenFilter={openFilter}
-            onOpenFilter={handleOpenFilter}
-            onCloseFilter={handleCloseFilter} />
+        
           <ProductCartWidget /><br></br>
-          <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
+          {
+            users.length > 0 && <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
+          }
         </Container>
       </Page >
     );

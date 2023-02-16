@@ -226,20 +226,15 @@ function Project(props) {
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}>Schedule A Beehive Visit</span>
                   </Button>
-                  </Link>
+                  </Link><br/>
+                  <CreateTrainerBatch />
                   <br />
 
                 </ButtonGroup>
 
               </Box>
 
-              <Box style={{marginTop:50}}>
-
-
-                <div style={{marginTop:50}}>
-                        <CreateTrainerBatch />
-                </div>
-              </Box>
+        
             </Grid>
           </Grid>
 
