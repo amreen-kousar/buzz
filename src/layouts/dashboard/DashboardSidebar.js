@@ -14,6 +14,7 @@ import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
 //
 import navConfig from './NavConfig';
+import defaultImage from '../../assets/images/default.png';
 
 // ----------------------------------------------------------------------
 
@@ -75,7 +76,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
 
   useEffect(() => {
 
-    // roleDashboard[data].map(r => navConfig[r].id.filter(itm => itm?.find(it => it == data)))
+    // roleDashboard[data].map(r => navConfig[r].id.filter(account => itm?.find(it => it == data)))
 
 
     if (isOpenSidebar) {
@@ -95,12 +96,13 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <div style={{ textAlign: "center" }}>
         <Logo />
       </div>
+      
       {console.log(account.displayName, account.role, "<--yghuj")}
       <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ff7424">
         <Link underline="none" component={RouterLink} to="#">
           {/* <AccountStyle > */}
           <div style={{ paddingTop: 20, paddingLeft: 100 }}>
-            <Avatar src={account.profile_pic} alt="photoURL" />
+            <Avatar src={account?.profile_pic} alt="photoURL" />
 
             {/* </AccountStyle> */}</div>
           <Box sx={{ ml: 2 }}>

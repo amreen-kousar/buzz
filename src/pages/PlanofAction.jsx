@@ -141,6 +141,9 @@ export default function PlanofAction() {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
   const data = localStorage?.getItem('userId')
+  console.log(data,"dataaaaaaaaaaaaaaaaaaaa")
+  const user = localStorage?.getItem("userDetails")
+  console.log(user,"userrrrrrrrrrrrrrrr")
   const { pathname } = useLocation();
   const AccountStyle = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -365,7 +368,7 @@ export default function PlanofAction() {
 
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                        {(userDetails == 2) ? <Stack direction={'row'} spacing={2} >
+                                        {(userDetails == 2 || userDetails == 13) ? <Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
                                           <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
@@ -425,7 +428,7 @@ export default function PlanofAction() {
                                     </TableCell>
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                        {(userDetails == 2) ? <Stack direction={'row'} spacing={2} >
+                                        {(userDetails == 2 || userDetails == 13) ? <Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
                                           <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
@@ -481,7 +484,7 @@ export default function PlanofAction() {
                                     </TableCell>
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                        {(userDetails == 2) ? <Stack direction={'row'} spacing={2} >
+                                        {(userDetails == 2 || userDetails == 13) ? <Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
                                           <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {

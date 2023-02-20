@@ -30,6 +30,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import CloseIcon from '@mui/icons-material/Close';
 import Page from 'src/components/Page';
+import defaultImage from '../../assets/images/default.png';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -167,7 +168,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
      
       <div style={{display:"flex",justifyContent:"center",width:"75vw"}}>
       <div>
-      <Card sx={{ width: 400 }}><br />
+      <Card sx={{ width: 420 }}><br />
 
        
 <Stack spacing={1} sx={{ px: 1 }}>
@@ -175,14 +176,14 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
     <Card >
       <CardContent>
         <div style={{ float: 'left', paddingTop: 40, paddingRight: 5, paddingBottom: 40 }}>
-          <Avatar src={profileData?.profile_pic} alt="photoURL" style={{ height: 50, width: 50 }} />
+          <Avatar src={(profileData?.profile_pic) ? profileData.profile_pic : defaultImage} alt="photoURL" style={{ height: 50, width: 50 }} />
         </div>
 
         <Card sx={{ boxShadow: 0 }}>
           <CardContent >
             <Typography style={{ flexDirection: 'row',color: '#444444'}} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name}</Typography>
             <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
-              Role : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.role_name}</span>
+              Role : <span style={{ fontWeight: 100, color: '#444444' }}>{userDetails?.role_name}</span>
             </Typography>
             <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
               Status : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.status === '1' ? 'Active' : null}</span>
@@ -239,11 +240,11 @@ component={RouterLink} to="#"> <Iconify icon="material-symbols:edit" />
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
                 <TableCell> Work</TableCell>
-                <TableCell>: &nbsp;{profileData?.officeMailId}</TableCell>
+                <TableCell>: &nbsp;{profileData?.workNum}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
                 <TableCell>Email</TableCell>
-                <TableCell>: &nbsp;{profileData?.personalMailId}</TableCell>
+                <TableCell>:&nbsp;{profileData?.officeMailId}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
                 <TableCell>Address</TableCell>
@@ -339,11 +340,10 @@ component={RouterLink} to="#"> <Iconify icon="material-symbols:edit" />
 
     </Card><br />
     <Grid direction={'column'} spacing={1.8} alignItems="center" justifyContent="space-between">
-      <Typography>Email: {profileData?.officeMailId}</Typography><br />
+      <Typography fullWidth>Email :&nbsp;{profileData?.officeMailId}</Typography><br />
       <Grid item mb={1}>
         <TextField
           fullWidth
-          helperText="Mobile Number Required *"
           size="small"
           margin="dense"
           value={editData?.contactNum}
@@ -356,9 +356,11 @@ component={RouterLink} to="#"> <Iconify icon="material-symbols:edit" />
         />
       </Grid>
       <Grid item mb={2}>
-        <TextField fullWidth size="small" id="Work"
-          value={editData?.officeMailId}
+        <TextField fullWidth size="small" id="Work"  margin="dense"
+          value={editData?.workNum}
+          onChange={(e) => { setEditData({ ...editData, workNum: e?.target?.value }) }}
           label="Work" variant="outlined" color="common" />
+          
       </Grid>
       <Grid item mb={2}>
         <TextField

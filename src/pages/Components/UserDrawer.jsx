@@ -28,6 +28,7 @@ import Slide from '@mui/material/Slide';
 import { Color } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
+import defaultImage from '../../assets/images/default.png';
 // ----------------------------------------------------------------------
 UserDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
@@ -87,7 +88,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
               <Card >
                 <CardContent>
                   <div style={{ float: 'left', paddingTop: 30, paddingRight: 5 }}>
-                    <Avatar src={user?.profile_pic} alt="photoURL" />
+                    <Avatar src={(user?.profile_pic) ? user.profile_pic : defaultImage} alt="photoURL" />
                   </div>
                   <Card sx={{ px: 1, boxShadow: 0 }} >
                     <Typography style={{ flexDirection: 'row', color: '#444444', }} variant="subtitle1" gutterBottom>{user?.first_name}&nbsp;{user?.last_name}</Typography>

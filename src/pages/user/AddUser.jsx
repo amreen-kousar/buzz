@@ -440,10 +440,8 @@ function AddUser(props) {
 
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
-                                <TextField fullWidth required id="outlined-basic" label="Mobile number" helperText={`${AddUser?.contactNum?.length}/10`} inputProps={{ maxLength: 10 }} multiline value={AddUser.contactNum} type="number" onChange={(e) => { setAddUser({ ...AddUser, contactNum: e.target.value }) }} variant="outlined" color="common" />
-                                <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.work} onChange={(e) => { setAddUser({ ...AddUser, work: e.target.value }) }} type="number" variant="outlined" color='common' />
-
-
+                                <TextField fullWidth required id="outlined-basic" label="Mobile number" helperText={`Mobile Number Required (${AddUser?.contactNum?.length}/10)`} inputProps={{ maxLength: 10 }} multiline value={AddUser.contactNum} type="number" onChange={(e) => { setAddUser({ ...AddUser, contactNum: e.target.value }) }} variant="outlined" color="common" />
+                                <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.workNum} onChange={(e) => { setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' />
 
                                 <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} onChange={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} onPaste={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} variant="outlined" color="common" />
 
@@ -452,12 +450,12 @@ function AddUser(props) {
                                 </div>
 
 
-                                <TextField fullWidth required id="outlined-basic" label="Address" helperText='Address Required*' value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" />
+                                <TextField fullWidth required id="outlined-basic" label="Address" helperText='Address Required*' value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" color="common"/>
 
-                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Address 1" value={AddUser.address3} onChange={(e) => { setAddUser({ ...AddUser, address3: e.target.value }) }} variant="outlined" />}
-                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="outlined-basic" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" />}
+                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Address 1" value={AddUser.address3} onChange={(e) => { setAddUser({ ...AddUser, address3: e.target.value }) }} variant="outlined" color="common"/>}
+                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="outlined-basic" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" color="common"/>}
 
-                                <TextField fullWidth id="outlined-basic" label="Pincode" value={AddUser.pincode} onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" />
+                                <TextField fullWidth id="outlined-basic" label="Pincode" value={AddUser.pincode} onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" color="common"/>
                                 {
 
                                     ["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <FormControl fullWidth>
@@ -478,7 +476,7 @@ function AddUser(props) {
                                             onChange={(e, value) => changeProject(value)}
                                             getOptionLabel={(option) => option.label}
                                             renderInput={(params) => (
-                                                <TextField {...params} label="Choose project" placeholder="Choose project" />
+                                                <TextField {...params} label="Choose project" placeholder="Choose project" color="common"/>
                                             )}
                                         />
 
