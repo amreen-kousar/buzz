@@ -69,7 +69,7 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
                     {/* {users?.first_name} */}
                     {`${itm?.first_name} ${itm?.last_name}`}
                   </Typography>
-                  <div style={{ textAlign: "center", fontSize: "0.8rem" }}>
+                  <div style={{ textAlign: "center", fontSize: "0.8rem",color:"#ff7424",fontWeight:300}}>
                     {itm?.role_name}
                   </div>
                 </Grid>

@@ -167,7 +167,7 @@ sx={{
         <br />
         <TextField id="outlined-basic" type="date" defaultValue={dateValue}
           fullWidth
-          onChange={(e) => { getDateValue(e?.target?.value) }} label="Select Range" variant="outlined" InputLabelProps={{
+          onChange={(e) => { getDateValue(e?.target?.value) }} label="Select Date" variant="outlined" InputLabelProps={{
             shrink: true,
           }} />
            {/* <Stack style={{ marginTop: 20 }}>

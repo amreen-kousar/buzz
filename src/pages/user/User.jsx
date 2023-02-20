@@ -263,9 +263,9 @@ export default function User() {
           </Typography>
 
           {selected?.type &&
-            <Stack direction="row" spacing={1}>
+            <div><Stack direction="row" spacing={1}>
               <Chip label={`${selected?.type}`} onDelete={() => { handleDelete() }} />
-            </Stack>
+            </Stack><br/></div>
           }
             <ProductList users={users} products={PRODUCTS} isOpenFilter={openFilter}
             onOpenFilter={handleOpenFilter}
