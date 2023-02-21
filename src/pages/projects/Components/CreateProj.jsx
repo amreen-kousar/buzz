@@ -357,7 +357,7 @@ export default function CreateProj() {
                 </Select>
               </FormControl></Stack>
 
-              <Stack mt={3}>
+              {/* <Stack mt={3}>
               <FormControl fullWidth>
              
                   <InputLabel id="demo-simple-select-label" color="common">Select Gelathi facilitator</InputLabel>
@@ -380,7 +380,7 @@ export default function CreateProj() {
                   })
                   }
                 </Select>
-              </FormControl></Stack>
+              </FormControl></Stack> */}
 
             <Stack mt={3}>
               <FormControl fullWidth>
@@ -452,12 +452,12 @@ export default function CreateProj() {
             }
           </CardContent>
 
-          {/* <CardContent>
+          <CardContent>
             <Card  >
               <CardContent>
                 <Typography variant='h6'>Want To Add Gelathi Facilators (0)</Typography>
               </CardContent>
-              <Stack mt={3}>
+              {/* <Stack mt={3}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label" color="common">Select Gelathi Facilitator</InputLabel>
                 <Select
@@ -479,9 +479,9 @@ export default function CreateProj() {
                   })
                   }
                 </Select>
-              </FormControl></Stack><br/>
+              </FormControl></Stack><br/> */}
             </Card>
-          </CardContent> */}
+          </CardContent>
 
         </Grid>
       </Dialog>
