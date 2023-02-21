@@ -173,7 +173,7 @@ function Project(props) {
                   </Link>
                   <br />
 
-                  {(userDetails && userDetails == 13 || userDetails == 4) ?
+                  {/* {(userDetails && userDetails == 13 || userDetails == 4) ? */}
                     <div><Link to="/dashboard/projects/assignbatches" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>} startIcon={<IconButton>
@@ -182,7 +182,8 @@ function Project(props) {
                       <span style={{ width: "200px" }}> Assign Villages to Gelathi Facilitator</span>
                     </Button>
 
-                    </Link></div> : null} {(userDetails && userDetails == 13 || userDetails == 4) ? <br /> : null}
+                    </Link></div> <br/>
+                    {/* : null} {(userDetails && userDetails == 13 || userDetails == 4) ? <br /> : null} */}
 
                   <Link to="/dashboard/projects/enrolledGelathi" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} startIcon={
                     <IconButton>
