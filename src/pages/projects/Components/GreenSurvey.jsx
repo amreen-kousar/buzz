@@ -80,7 +80,7 @@ export default function GreenSurvey() {
            <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
           
-            <Link to="/dashboard/projects">
+            <Link to="/dashboard/projects/project">
                         <IconButton style={{color:"white"}}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>

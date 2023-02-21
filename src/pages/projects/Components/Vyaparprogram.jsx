@@ -73,8 +73,9 @@ export default function Vyaparprogram() {
             'Content-Type': 'application/json'
           },
           data : data
-        };
         
+        };
+        // Console.log(data,"dataaaaaaaaaaaaaaaaaaaaaaaaaaa")
         axios(config)
         .then(function (response) {
           setVyaapar(response?.data)
@@ -109,7 +110,7 @@ export default function Vyaparprogram() {
       <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
           
-            <Link to="/dashboard/projects">
+            <Link to="/dashboard/projects/project">
                         <IconButton style={{color:"white"}}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>

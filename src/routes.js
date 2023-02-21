@@ -35,9 +35,11 @@ import ScheduleBeehiveVisit from './pages/projects/scheduleBeehiveVisit';
 import ScheduleCircleMeet from './pages/projects/scheduleCircleMeet';
 import ScheduleVillage from './pages/projects/scheduleVillage';
 import Trainers from './pages/Components/DashboardFilters/Trainers';
+import AssignBatches from './pages/projects/AssignBatches';
 import Operationmanagerdashboard from './pages/Operationmanagerdashboard';
 import Test from './pages/Test';
 import DashboardHome from './pages/dashboard/DashboardHome';
+import AssignTargets from './pages/projects/AssignTargets';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -49,6 +51,8 @@ export default function Router() {
         { path: "materialStock", element: <MaterialStockList /> },
         { path: "selfShakthi", element: <SelfShakthi /> },
         { path: "gelathiProgram", element: <GelathiProgram /> },
+        { path:  "assignbatches",element:<AssignBatches/>},
+        { path: "assigntargets",element:<AssignTargets/>},
         { path: "enrolledGelathi", element: <EnrolledGelathi /> },
         { path: "enrolledGreenMotivators", element: <EnrolledGreenMotivators /> },
         { path: "enrolledVyaapar", element: <EnrolledVyaapar /> },

@@ -331,7 +331,7 @@ axios(config)
     <div>
 
 
-      <Button variant="contained" style={{
+{(userDetails && userDetails!=1)?<Button variant="contained" style={{
         float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
         position: 'fixed', zIndex: '1', bottom: 40, right: 40
       }} onClick={handleClickOpen} sx={{
@@ -349,7 +349,7 @@ axios(config)
         border: 'none'
       }} >
         <span style={{ fontSize: "2rem" }}>+</span>
-      </Button>
+      </Button>:null}
       <Dialog fullScreen open={open} onClose={handleClose}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">

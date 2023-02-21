@@ -37,7 +37,8 @@ export default function PoaCreate({ setSucess }) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState("");
-
+  const userDetails = localStorage?.getItem('userId')
+  console.log(userDetails,"userrrrrrrrrrrrr")
   const [value, setValue] = React.useState(false);
 
   const handleChangeTime = (newValue) => {
@@ -129,7 +130,7 @@ export default function PoaCreate({ setSucess }) {
             }}>
        Create New Poa
       </Button> */}
-      <Button variant="contained" onClick={handleClickOpen} style={{
+        {(userDetails && userDetails!=1)?<Button variant="contained" onClick={handleClickOpen} style={{
         float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
         position: 'fixed', zIndex: '1', bottom: 40, right: 40
       }} sx={{
@@ -143,8 +144,8 @@ export default function PoaCreate({ setSucess }) {
         border: 'none'
       }} title="Create POA">
         {/* style={{ float: "right", marginLeft:100, borderRadius: "50%", padding: "0.2rem", position:'relative', zIndex: '-1',marginRight:10,marginTop:15}} */}
-        <span style={{ fontSize: "2rem" }}>+</span>
-      </Button>
+      <span style={{ fontSize: "2rem" }}>+</span>
+      </Button>:null}
       <Dialog
         open={open}
         fullScreen
