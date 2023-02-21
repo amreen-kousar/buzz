@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Grid, Container, Stack, Typography, Box, CardContent, Card, Chip, Icon, IconButton, Button } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
+import Pagination from '@mui/material/Pagination';
 import Tab from '@mui/material/Tab';
 import Page from '../../components/Page';
 import Iconify from '../../components/Iconify';
@@ -59,7 +60,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     }
 
     var userIdCheck = localStorage?.getItem('userId')
-
+    var [page, setPage] = useState(1)
     const [value, setValue] = useState(0);
     const [projects, setProjects] = useState([])
     const [publishedProject, setPublishedProject] = useState([])
@@ -67,6 +68,17 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     const [openFilter, setOpenFilter] = useState(false);
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
+    const [count, setCount] = useState('')
+
+    const [countCompleted, setCountCompleted] = useState('')
+
+    const [countPublished, setCountPublished] = useState('')
+
+    const pageChange = (event, newPage) => {
+        page = newPage
+        setPage(page);
+        projectr()
+    }
 
 
     const handleOpenFilter = () => {
@@ -92,11 +104,12 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             end_date: g === "date" ? i : null,
             start_date: g === "date" ? id : null,
             "search": search,
-            "id": 3,
+            "id": userIdCheck,
             "role_id": 5,
             "filter_id": 0,
             "type": "",
-            "pageNum": 1,
+            "pageNum": page,
+            count: count,
             taluk_id: g === "country" ? id : null,
             district_id: g === "country" ? i : null,
             "funder_id": id === 2 ? i?.id : null,
@@ -116,10 +129,16 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
         axios(config)
             .then((response) => {
+                setCount(response.data.count % 25 == 0 ? parseInt(response.data.count / 25) : parseInt(response.data.count / 25) + 1)
                 setProjects(response.data.list)
                 let published = response.data.list.filter(r => r.project_status_name == 'Published')
+                setCountPublished(published?.length % 25 == 0 ? parseInt(published?.length / 25) : parseInt(published?.length / 25) + 1)
+
                 setPublishedProject(published)
                 let completed = response.data.list.filter(r => r.project_status_name == 'Completed')
+
+                setCountCompleted(completed?.length % 25 == 0 ? parseInt(completed?.length / 25) : parseInt(completed?.length / 25) + 1)
+
                 setCompletedProject(completed)
                 // console.log(response, "projects responseeeeeeeeeeeeee", projects)
                 // console.log(JSON.stringify(response.data, 'get All projectrs'));
@@ -291,7 +310,10 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                                 </Grid>
                                             </CardContent>
                                         </Card><br />
-                                    </Link>)}</> :
+                                    </Link>)}
+                                    {
+                                        <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
+                                    }</> :
                                     <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
                             }
                         </TabPanel>
@@ -313,7 +335,10 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                                 </Grid>
                                             </CardContent>
                                         </Card><br />
-                                    </Link>)}</> :
+                                    </Link>)}
+                                    {
+                                        <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countPublished} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
+                                    }</> :
                                     <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
                             }
                         </TabPanel>
@@ -336,13 +361,19 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                                 </Grid>
                                             </CardContent>
                                         </Card><br />
-                                    </Link>)}</> :
+                                    </Link>)}
+                                    {
+                                        <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countCompleted} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
+                                    }
+                                </> :
                                     <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
 
                             }
                         </TabPanel>
                     </Box>
                 </Stack>
+
+
                 {userAccess.includes(userIdCheck) &&
                     <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                         <AddProject />
