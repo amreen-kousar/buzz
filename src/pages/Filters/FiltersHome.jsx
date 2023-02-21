@@ -129,7 +129,8 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
         color: '#ed6c02',
       },
       color: 'black',
-      marginRight: "0.5rem"
+      marginRight: "0.5rem",
+      marginBottom: "0.5rem"
     },
     highlightStyle: {
       background: '#ffd796',

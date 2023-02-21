@@ -223,7 +223,7 @@ export default function Gelathidashboard() {
               <AppWidgetSummary
                 title="Village Visits"
                 total={summaryData?.summary_villagevisit}
-                color="motivator"
+                color="villages"
 
               />
             </Grid>
@@ -241,7 +241,7 @@ export default function Gelathidashboard() {
               <AppWidgetSummary
                 title="Enrolled Gelathis"
                 total={summaryData?.summary_enroll}
-                color="motivator"
+                color="gelathis"
 
               />
             </Grid>
@@ -258,7 +258,7 @@ export default function Gelathidashboard() {
               <AppWidgetSummary
                 title="Enrolled Vyapor"
                 total={summaryData?.summary_vyapar}
-                color="motivator"
+                color="vyapar"
 
               />
             </Grid>

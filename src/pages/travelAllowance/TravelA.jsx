@@ -185,8 +185,6 @@ sx={{
                   />
                 </LocalizationProvider>
               </Stack> */}
-
-
       {
         userTeamPermissions.includes(data) &&   <TabPanel value={mainValue} index={1}>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>

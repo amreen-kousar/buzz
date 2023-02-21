@@ -28,10 +28,13 @@ export default function CreateProj() {
   const [partner, setPartner] = useState([])
   const [busData, setBusData] = useState([])
   const [teamData, setTeamData] = useState([])
-  const [trainerData, setTrainerData] = useState([])
+  const [gelathiData, setGelathiData] = useState([])
   const [name, setName] = useState([])
   const [driverData, setDriverData] = useState([])
-  const [date, setDate] = useState("")
+  // const [gelathiData, setGelathiData] = useState([])
+  // const [date, setDate] = useState("")
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [deleteData, setDeleteData] = useState([])
   const [data, setData] = useState({
     country: 1,
@@ -42,7 +45,8 @@ export default function CreateProj() {
     partner_id: "",
     bus_id: "",
     manager_id: "",
-    driver_id: ""
+    driver_id: "",
+    gelathi_id:""
   })
   const handleClickOpen = () => {
     setOpen(true);
@@ -63,6 +67,7 @@ export default function CreateProj() {
     busList();
     teamList();
     driverList();
+    gelathinamelist();
   }, [])
   const partnerList = async => {
     var config = {
@@ -129,33 +134,58 @@ export default function CreateProj() {
         console.log(error);
       });
   }
-  const showTrainerList = async => {
+  // const showTrainerList = async => {
+  //   var gelathidata = JSON.stringify({
+  //     "role_id": 13,
+  //     "project_id": 234,
+  //     "operation_manager_id": 35,
+  //     // "pageNum": 1
+  //   });
+
+  //   var config = {
+  //     method: 'get',
+  //     url: 'http://3.7.7.138/appTest/getPeopleList.php',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     gelathidata: gelathidata
+  //   };
+
+  //   axios(config)
+  //     .then(function (response) {
+  //       setGelathiData(response?.data)
+  //       console.log(response?.data,"sddjjjjjjjjjjj");
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+
+  // }
+
+  const gelathinamelist= async =>{
     var data = JSON.stringify({
-      "role_id": 5,
-      "project_id": 292,
-      "operation_manager_id": 122,
-      "pageNum": 1
-    });
-
-    var config = {
-      method: 'get',
-      url: 'http://3.7.7.138/appTest/getPeopleList.php',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: data
-    };
-
-    axios(config)
+        "project_id":234,
+        "role_id":13, 
+        "operation_manager_id":35
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      axios(config)
       .then(function (response) {
-        setTrainerData(response.data)
-        console.log(JSON.stringify(response.data));
+        setGelathiData(response?.data)
       })
       .catch(function (error) {
         console.log(error);
       });
-
-  }
+      
+}
 
   return (
     <div>
@@ -206,7 +236,7 @@ export default function CreateProj() {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={data.partner_id}
-                  label="Partner"
+                  label="Select Partner"
                   onChange={(e => {
                     console.log(e, "<--hhhbhbh")
                     setData({ ...data, partner_id: e?.target?.value })
@@ -236,31 +266,36 @@ export default function CreateProj() {
             <CardContent>
               <Typography style={{ marginLeft: 10 }} variant="h6">Project From / To Dates :</Typography>
             </CardContent>
-            <Stack>
-              <CardContent>
+            <Stack >
+              <CardContent >
                 <DatePicker
-
-                  label="Date"
-                  value={date}
-                  onChange={(newValue) => {
-                    console.log(newValue, "<----newValuenewValue")
-                    setDate(newValue)
+                  // defaultValue={startDate}
+                  label="From"
+                  fullWidth
+                  onChange={(e) => {
+                    console.log(e, "<----e")
+                    setStartDate(e)
                   }}
                   //   setSendData({ ...sendData, date: newValue })
                   // }}
-                  renderInput={(params) => <TextField  {...params} style={{ width: '10vw' }} />}
-                />
-                <DatePicker
+                
+                  renderInput={(params) => <TextField  {...params} fullWidth />}
+                  value={startDate}
+                />   <br/><br/>
 
-                  label="Date"
-                  value={date}
-                  onChange={(newValue) => {
-                    console.log(newValue, "<----newValuenewValue")
-                    setDate(newValue)
+                <DatePicker
+                  
+                  label="to"
+                  fullWidth
+                  // defaultValue={endDate}
+                  onChange={(newendValue) => {
+                    console.log(newendValue, "<----newValuenewValue")
+                    setEndDate(newendValue)
                   }}
                   //   setSendData({ ...sendData, date: newValue })
                   // }}
-                  renderInput={(params) => <TextField  {...params} style={{ width: '10vw' }} />}
+                  renderInput={(params) => <TextField  {...params} fullWidth  color="common"/>}
+                  value={endDate}
                 />
               </CardContent>
             </Stack>
@@ -270,12 +305,13 @@ export default function CreateProj() {
             <Typography variant="h6">Resources</Typography>
             <Stack mt={2}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Select Bus</InputLabel>
+                <InputLabel id="demo-simple-select-label" color="common">Select Bus</InputLabel>
                 <Select
                   // labelId="demo-simple-select-label"
-                  //id="demo-simple-select"
+                  //id="demo-simple-select" 
+                  color="common"
                   value={data.bus_id}
-                  label="Bus"
+                  label="Select Bus"
                   onChange={(e => {
                     setData({ ...data, bus_id: e?.target?.value })
 
@@ -299,11 +335,12 @@ export default function CreateProj() {
             <Typography variant="h6">Team Members</Typography>
             <Stack mt={3}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Select Operation Manager</InputLabel>
+                <InputLabel id="demo-simple-select-label" color="common">Select Operation Manager</InputLabel>
                 <Select
                   // labelId="demo-simple-select-label"
                   //id="demo-simple-select"
                   value={data.manager_id}
+                  color="common"
                   label="Select Operation Manager"
                   onChange={(e => {
                     setData({ ...data, manager_id: e?.target?.value })
@@ -320,14 +357,39 @@ export default function CreateProj() {
                 </Select>
               </FormControl></Stack>
 
+              <Stack mt={3}>
+              <FormControl fullWidth>
+             
+                  <InputLabel id="demo-simple-select-label" color="common">Select Gelathi facilitator</InputLabel>
+                <Select
+                  // labelId="demo-simple-select-label"
+                  //id="demo-simple-select"
+                  value={data.gelathi_id}
+                  color="common"
+                  label="Select Gelathi Facilitator"
+                  onChange={(e => {
+                    setData({ ...data, gelathi_id: e?.target?.value })
+
+                  })}
+                >
+                  <MenuItem value="" default disabled>Choose Gelathi</MenuItem>
+                  {gelathiData?.list?.map(itm => {
+                    return (
+                      <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
+                    )
+                  })
+                  }
+                </Select>
+              </FormControl></Stack>
 
             <Stack mt={3}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Select Driver</InputLabel>
+                <InputLabel id="demo-simple-select-label" color="common">Select Driver</InputLabel>
                 <Select
                   // labelId="demo-simple-select-label"
                   //id="demo-simple-select"
                   value={data.driver_id}
+                  color="common"
                   label="Select Driver"
                   onChange={(e => {
                     setData({ ...data, driver_id: e?.target?.value })
@@ -343,8 +405,14 @@ export default function CreateProj() {
                   }
                 </Select>
               </FormControl></Stack>
+
+
           </CardContent>
           <Divider />
+
+          
+
+
           {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}> */}
           <AddTrainerDrawer
             isOpenFilter={openFilter}
@@ -360,9 +428,7 @@ export default function CreateProj() {
               handleOpenFilter()
             }}>
               <CardContent>
-
                 <Typography variant='h6'>Want To Add Trainers  ({name.length})</Typography>
-
               </CardContent>
             </Card>
             {name?.length !== 0 &&
@@ -386,15 +452,36 @@ export default function CreateProj() {
             }
           </CardContent>
 
-
-
-          <CardContent>
+          {/* <CardContent>
             <Card  >
               <CardContent>
                 <Typography variant='h6'>Want To Add Gelathi Facilators (0)</Typography>
               </CardContent>
+              <Stack mt={3}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label" color="common">Select Gelathi Facilitator</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={data.gelathi_id}
+                  color="common"
+                  label="Select Gelathi"
+                  onChange={(e => {
+                    setData({ ...data, gelathi_id: e?.target?.value })
+                    driverList(e?.target?.value)
+                  })}
+                >
+                  <MenuItem value="" default disabled>Choose Gelathi</MenuItem>
+                  {gelathiData?.list?.map(itm => {
+                    return (
+                      <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
+                    )
+                  })
+                  }
+                </Select>
+              </FormControl></Stack><br/>
             </Card>
-          </CardContent>
+          </CardContent> */}
 
         </Grid>
       </Dialog>

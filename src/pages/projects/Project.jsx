@@ -16,7 +16,9 @@ import CreateTrainerBatch from './Components/CreateTrainerBatch'
 import AddTrainerDrawer from './Components/AddTrainerDrawer';
 function Project(props) {
   const location = useLocation()
-  const [data1, setData1] = useState('')
+  const userDetails = localStorage?.getItem('userId')
+    console.log(userDetails,"userrrrrrrrrrrrr")
+  const [data1,setData1] = useState('')
   useEffect(() => {
 
 
@@ -123,24 +125,28 @@ function Project(props) {
                   orientation="vertical"
                   style={{ boxShadow: "none", borderRadius: "0px" }} elevation={0} >
 
-                  <Link to="/dashboard/projects/busTest" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={addIcon}>
-                    <span style={{ width: "235px" }}>Bus: Test & check List</span>
+                  <Link to="/dashboard/projects/busTest" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
+                      <Iconify style={{ color: "black" }} icon="material-symbols:add" />
+                    </IconButton>}>
+                    <span style={{ width: "235px" }}>Bus: &nbsp;&nbsp;& check List</span>
                   </Button>
                   </Link><br />
 
                   <Link to="/dashboard/projects/materialStock" style={styles.linkStyle}>
                     <Button variant="secondary" style={styles.buttonStyle} startIcon={
                       <IconButton>
-                        <Iconify style={{ color: "#6d7c89" }} icon="fluent:textbox-16-filled" />
+                        <Iconify style={{ color: "black" }} icon="material-symbols:list-alt-outline-sharp" />
                       </IconButton>
-                    } endIcon={addIcon}>
+                    } endIcon={<IconButton>
+                      <Iconify style={{ color: "black" }} icon="material-symbols:add" />
+                    </IconButton>}>
                       <span style={{ width: "200px" }}> Materials Stocklist</span>
                     </Button>
                   </Link><br />
 
                   <Link to="/dashboard/projects/selfShakthi" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                     startIcon={<IconButton>
-                      <Iconify style={{ color: "#6d7c89" }} icon="mdi:bus-school" />
+                      <Iconify style={{ color: "black" }} icon="mdi:bus-school" />
                     </IconButton>} endIcon={<IconButton>
                       <Iconify style={{ color: "#6d7c89" }} icon="fluent:notebook-eye-20-filled" />
                     </IconButton>}>
@@ -149,23 +155,43 @@ function Project(props) {
                   </Link>
                   <br />
 
+                  {/* {(userDetails && userDetails ==4)?
+                 <div><Link to="/dashboard/projects/assigntargets" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
+                    <Iconify style={{ color: "black" }} icon="material-symbols:add" />
+                  </IconButton>} startIcon={<IconButton>
+                    <Iconify style={{ color: "black" }} icon="ic:sharp-my-location" />
+                  </IconButton>}>
+                    <span style={{ width: "200px" }}>Assign Targets to trainers</span>
+                  </Button></Link></div>:null}{(userDetails ==4)?<br/>:null} */}
 
                   <Link to="/dashboard/projects/gelathiProgram" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
                     <Iconify style={{ color: "#6d7c89" }} icon="fluent:notebook-eye-20-filled" />
                   </IconButton>} startIcon={<IconButton>
-                    <Iconify style={{ color: "#6d7c89" }} icon="twemoji:diya-lamp" />
+                    <Iconify style={{ color: "black" }} icon="ic:sharp-spa" />
                   </IconButton>}>
                     <span style={{ width: "200px" }}> Gelathi Program</span>
                   </Button>
                   </Link>
                   <br />
 
+                 {(userDetails && userDetails==13 || userDetails ==4)?
+                 <div><Link to="/dashboard/projects/assignbatches" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
+                    <Iconify style={{ color: "black" }} icon="material-symbols:add" />
+                  </IconButton>} startIcon={<IconButton>
+                    <Iconify style={{ color: "black" }} icon="ic:baseline-home" />
+                  </IconButton>}>
+                    <span style={{ width: "200px" }}> Assign Villages to Gelathi Facilitator</span>
+                  </Button>
+                 
+                  </Link></div>:null} {(userDetails && userDetails==13 || userDetails ==4)?<br/>:null}
 
                   <Link to="/dashboard/projects/enrolledGelathi" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} startIcon={
                     <IconButton>
-                      <Iconify style={{ color: "#6d7c89" }} icon="mdi:user-group" />
+                      <Iconify style={{ color: "black" }} icon="ic:round-people" />
                     </IconButton>
-                  } endIcon={addIcon}>
+                  } endIcon={<IconButton>
+                    <Iconify style={{ color: "black" }} icon="material-symbols:add" />
+                  </IconButton>}>
                     <span style={{ width: "200px" }}> Enrolled Gelathis</span>
                   </Button>
                   </Link>
@@ -173,7 +199,7 @@ function Project(props) {
 
                   <Link to="/dashboard/projects/enrolledGreenMotivators" style={styles.linkStyle}>
                     <Button variant="secondary" style={{ ...styles.buttonStyle, color: "green" }} startIcon={<IconButton>
-                      <Iconify style={{ color: "green" }} icon="mingcute:user-add-fill" />
+                      <Iconify style={{ color: "green" }} icon="mdi:user-add" />
                     </IconButton>} endIcon={<IconButton>
                       <Iconify style={{ color: "green" }} icon="material-symbols:add" />
                     </IconButton>}>
@@ -184,7 +210,7 @@ function Project(props) {
 
                   <Link to="/dashboard/projects/enrolledVyaapar" style={styles.linkStyle}>
                     <Button variant="secondary" style={{ ...styles.buttonStyle, color: "blue" }} startIcon={<IconButton>
-                      <Iconify style={{ color: "blue" }} icon="mingcute:user-add-fill" />
+                      <Iconify style={{ color: "blue" }} icon="mdi:user-add" />
                     </IconButton>} endIcon={<IconButton>
                       <Iconify style={{ color: "blue" }} icon="material-symbols:add" />
                     </IconButton>}>
@@ -194,8 +220,8 @@ function Project(props) {
                   <br />
 
                   <Link to="/dashboard/projects/gelathiCirlces" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
-                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
-                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
+                    endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}> Gelathi Circles</span>
                   </Button>
                   </Link>

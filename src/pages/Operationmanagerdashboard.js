@@ -202,7 +202,7 @@ export default function Operationmanagerdashboard() {
               <AppWidgetSummary
                 title="Target"
                 total={summaryData?.summary_target}
-                color="motivator"
+                color="actual"
 
               />
             </Grid>
@@ -211,7 +211,7 @@ export default function Operationmanagerdashboard() {
               <AppWidgetSummary
                 title="Actual"
                 total={summaryData?.summary_actual}
-                color="motivator"
+                color="primary"
 
               />
             </Grid>
@@ -220,7 +220,7 @@ export default function Operationmanagerdashboard() {
               <AppWidgetSummary
                 title="2nd day Turnout(%)"
                 total={summaryData?.summary_day2}
-                color="motivator"
+                color="warning"
 
               />
             </Grid>
@@ -229,7 +229,7 @@ export default function Operationmanagerdashboard() {
               <AppWidgetSummary
                 title="Villages"
                 total={summaryData?.summary_villages}
-                color="motivator"
+                color="villages"
 
               />
             </Grid>
@@ -238,7 +238,7 @@ export default function Operationmanagerdashboard() {
               <AppWidgetSummary
                 title="Women"
                 total={summaryData?.summary_women}
-                color="motivator"
+                color="info"
 
               />
             </Grid>
@@ -247,7 +247,7 @@ export default function Operationmanagerdashboard() {
               <AppWidgetSummary
                 title="Gelathis"
                 total={summaryData?.summary_enrolled}
-                color="motivator"
+                color="gelathis"
 
               />
 
@@ -266,7 +266,7 @@ export default function Operationmanagerdashboard() {
               <AppWidgetSummary
                 title="Enrolled Vyapor"
                 total={summaryData?.summary_vyapar}
-                color="motivator"
+                color="vyapar"
 
               />
             </Grid>
