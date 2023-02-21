@@ -15,9 +15,6 @@ import Searchbar from 'src/layouts/dashboard/Searchbar';
 // components
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-    
-  
-    
     //   const resetBus = () => {
     //     setSelected([])
     //     setSearch([])
@@ -59,11 +56,13 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     var userIdCheck = localStorage?.getItem('userId')
 
     const [value, setValue] = useState(0);
-    const [project, setProject] = useState();
+    const [projects, setProjects] = useState([])
+    const [publishedProject, setPublishedProject] = useState([])
+    const [completedProject, setCompletedProject] = useState([])
     const [openFilter, setOpenFilter] = useState(false);
-    // var [search, setSearch] = useState('')
-    // var [selected, setSelected] = useState(null)
-   
+    var [search, setSearch] = useState('')
+    var [selected, setSelected] = useState(null)
+
 
     const handleOpenFilter = () => {
         setOpenFilter(true);
@@ -79,15 +78,34 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
         projectr()
     }, []
     )
-    const projectr = async () => {
+    const projectr = async (i, id, g) => {
+        console.log(i, id, g)
+
 
         const data = JSON.stringify({
-            "search": "",
+            // "id":"230",
+            // "project_id":"230",
+            // "name":"MADHUGIRICI22230",
+            // "startDate":"2022-04-01",
+            // "endDate":"2023-03-31",
+            // "project_status_name":"Published",
+            // "project_status":"1",
+            // "location_name":"Tumkur"
+            end_date: g === "date" ? i : null,
+            start_date: g === "date" ? id : null,
+            "search": search,
             "id": 1,
             "role_id": 1,
             "filter_id": 0,
             "type": "",
-            "pageNum": 1
+            "pageNum": 1,
+            // "date": "",
+            taluk_id: g === "country" ? id : null,
+            district_id: g === "country" ? i : null,
+            "funder_id": id === 2 ? i?.id : null,
+            opsManager: g ? "" : id === 4 ? i?.id : null,
+            partner_id: g ? "" : id === 1 ? i?.id : null,
+            trainerId: g ? "" : id === 5 ? i?.id : null,
         });
 
         const config = {
@@ -101,28 +119,66 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
         axios(config)
             .then((response) => {
-                console.log(responsex)
-                console.log(JSON.stringify(response.data, 'get All projectrs'));
+                setProjects(response.data.list)
+                let published = response.data.list.filter(r => r.project_status_name == 'Published')
+                setPublishedProject(published)
+                let completed = response.data.list.filter(r => r.project_status_name == 'Completed')
+                setCompletedProject(completed)
+                // console.log(response, "projects responseeeeeeeeeeeeee", projects)
+                // console.log(JSON.stringify(response.data, 'get All projectrs'));
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 
-    // const searchFunction = (e) => {
-    //     search = e
-    //     setSearch(search)
-    //     setSelected([{ name: e, type: "Search" }])
-    //     projectr()
-    //   }
-    
+    const getData = (itm, i) => {
+        console.log(itm, i, "get Data in projects List")
+        setOpenFilter(false);
+        console.log(selected, "Selected ")
+        setSelected(itm)
+        projectr(itm, i)
+    }
+
+    const onSumbit = (e, i) => {
+        setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
+        handleCloseFilter()
+        projectr(e?.district_id, e?.talaq_id, "country")
+    }
+
+    const onDateSubmit = (e) => {
+        setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+        projectr(e?.startDate, e?.endDate, "date")
+        setOpenFilter(false);
+    }
+
+
+    const searchFunction = (e) => {
+        search = e
+        setSearch(search)
+        setSelected({ name: e, type: "Search" })
+        projectr()
+    }
+
+    const resetProjects = () => {
+        setSelected(null)
+        setSearch('')
+        projectr()
+    }
+
+    const handleDelete = () => {
+        setSelected(null)
+        setSearch('')
+        projectr();
+    }
+
 
     return (
         <Page title="Dashboard: Projects">
             <Searchbar getSearch={(e) => searchFunction(e)} />
             <Container>
                 <Typography variant="h4" sx={{ mb: 5 }}>
-                   All Projects    <Button style={{ float: "right", color: '#ff7424' }}
+                    All Projects    <Button style={{ float: "right", color: '#ff7424' }}
                         sx={{
                             '&:hover': {
                                 backgroundColor: '#ffd796',
@@ -135,6 +191,11 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                         Filter
                     </Button>
                 </Typography>
+
+
+                {
+                    selected && <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
+                }
 
                 {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
@@ -149,9 +210,12 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                 <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                     <FiltersHome
                         type="Projects"
-                        // clcikData={clcikData}
+                        onSumbit={onSumbit}
+                        onDateSubmit={onDateSubmit}
+                        resetProjects={resetProjects}
+                        getData={getData}
                         isOpenFilter={openFilter}
-
+                        projectr={projectr}
                         onOpenFilter={handleOpenFilter}
                         onCloseFilter={handleCloseFilter}
                     />
@@ -211,61 +275,75 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                     } : null} />
                             </Tabs>
                         </Box>
-                        <Link to="/dashboard/projects/project" state={{ name: "project name" }}
-                            style={{ textDecoration: 'none' }}>
-                            <TabPanel value={value} index={0}>
-                                {/* <Grid xs={4} spacing={5} justify="space-between" direction={'column'} > */}
-                                <Card onClick={handleClickOpen}>
-                                    <CardContent>
-                                        <Typography variant='h6'>SIRASA22281</Typography>
-                                        <Grid items direction={'row'} spacing={20}>
-                                            <Typography variant='body1'>TUMKUR</Typography>
-                                            <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                <Chip label="Published" size="small" color="success" variant="outlined" />
-                                            </Stack>
-                                        </Grid>
-                                    </CardContent>
-                                </Card>
 
-                                {/* </Grid> */}
-                            </TabPanel>
-                        </Link>
 
-                        <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }}>
-                            <TabPanel value={value} index={1}>
-                                <Card >
-                                    <CardContent>
-                                        {/* <Grid items direction="row" spacing={5}> */}
-                                        {/* <IconButton>
-            <Iconify icon="material-symbols:playlist-add-check-circle-rounded" />
-          </IconButton> */}
-                                        <Typography variant='h6'>SIRASA22281</Typography>
-                                        <Grid items direction={'row'} spacing={20}>
-                                            <Typography variant='body1'>TUMKUR</Typography>
-                                            <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                <Chip label="Published" size="small" color="success" variant="outlined" />
-                                            </Stack>
-                                        </Grid>
-                                        {/* </Grid>      */}
-                                    </CardContent>
-                                </Card>
-                            </TabPanel>
-                        </Link>
-                        <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }}>
-                            <TabPanel value={value} index={2}>
-                                <Card>
-                                    <CardContent>
-                                        <Typography variant='h6'>CHITRADURGACI1927</Typography>
-                                        <Grid items direction={'row'} spacing={20}>
-                                            <Typography variant='body1'>Chitraduruga</Typography>
-                                            <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                <Chip label="Completed" size="small" color="success" variant="outlined" />
-                                            </Stack>
-                                        </Grid>
-                                    </CardContent>
-                                </Card>
-                            </TabPanel>
-                        </Link>
+
+                        <TabPanel value={value} index={0}>
+                            {
+                                projects.length > 0 ? <>
+                                    {projects.map(p => <Link to="/dashboard/projects/project" state={{ id: p.id }}
+                                        style={{ textDecoration: 'none' }}>
+                                        <Card onClick={handleClickOpen}>
+                                            <CardContent>
+                                                <Typography variant='h6'>{p?.name}</Typography>
+                                                <Grid items direction={'row'} spacing={20}>
+                                                    <Typography variant='body1'>{p?.location_name}</Typography>
+                                                    <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
+                                                        <Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />
+                                                    </Stack>
+                                                </Grid>
+                                            </CardContent>
+                                        </Card><br />
+                                    </Link>)}</> :
+                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
+                            }
+                        </TabPanel>
+
+
+
+                        <TabPanel value={value} index={1}>
+                            {
+                                publishedProject.length > 0 ? <>
+                                    {publishedProject.map(p => <Link to="/dashboard/projects/project" state={{ id: p.id }} style={{ textDecoration: 'none' }}>
+                                        <Card onClick={handleClickOpen}>
+                                            <CardContent>
+                                                <Typography variant='h6'>{p?.name}</Typography>
+                                                <Grid items direction={'row'} spacing={20}>
+                                                    <Typography variant='body1'>{p?.location_name}</Typography>
+                                                    <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
+                                                        <Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />
+                                                    </Stack>
+                                                </Grid>
+                                            </CardContent>
+                                        </Card><br />
+                                    </Link>)}</> :
+                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
+                            }
+                        </TabPanel>
+
+
+
+
+                        <TabPanel value={value} index={2}>
+                            {
+                                completedProject.length > 0 ? <>
+                                    {completedProject.map(p => <Link to="/dashboard/projects/project" state={{ id: p.id }} style={{ textDecoration: 'none' }} >
+                                        <Card onClick={handleClickOpen}>
+                                            <CardContent>
+                                                <Typography variant='h6'>{p?.name}</Typography>
+                                                <Grid items direction={'row'} spacing={20}>
+                                                    <Typography variant='body1'>{p?.location_name}</Typography>
+                                                    <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
+                                                        <Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />
+                                                    </Stack>
+                                                </Grid>
+                                            </CardContent>
+                                        </Card><br />
+                                    </Link>)}</> :
+                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
+
+                            }
+                        </TabPanel>
                     </Box>
                 </Stack>
                 {userAccess.includes(userIdCheck) &&

@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Button, ButtonGroup, Card, CardHeader, Container, Icon, IconButton, TableCell, Typography } from '@mui/material';
 import Iconify from 'src/components/Iconify';
@@ -16,36 +16,40 @@ import CreateTrainerBatch from './Components/CreateTrainerBatch'
 import AddTrainerDrawer from './Components/AddTrainerDrawer';
 function Project(props) {
   const location = useLocation()
-  const [data1,setData1] = useState('')
+  const [data1, setData1] = useState('')
   useEffect(() => {
+
+
     projData();
-    // console.log(location.state, "props")
+
   }, [])
-  const projData= async =>{
+  const projData = async => {
+    console.log(location, "location props")
+
     var data = JSON.stringify({
-      "project_id": 234,
+      "project_id": location.state.id,
       "role_id": 1,
       "emp_id": 144
     });
-    
+
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
-    
+
     axios(config)
-    .then(function (response) {
-      setData1(response.data.list)
-      console.log(response.data,'<--------------setData1setData1');
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    
+      .then(function (response) {
+        setData1(response.data.list)
+        console.log(response.data, '<--------------setData1setData1');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   }
 
   const [projectDetails, setProjectDetails] = useState({ projectName: "BANGARAPETCI19102", districtName: "Kolar", partnerName: "CDPO", trainingTarget: "2879", projectDuration: " From: 01 - 04 - 2019 To: 31 - 03 - 2020", projectStatus: "Completed" })
@@ -226,7 +230,7 @@ function Project(props) {
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}>Schedule A Beehive Visit</span>
                   </Button>
-                  </Link><br/>
+                  </Link><br />
                   <CreateTrainerBatch />
                   <br />
 
@@ -234,7 +238,7 @@ function Project(props) {
 
               </Box>
 
-        
+
             </Grid>
           </Grid>
 

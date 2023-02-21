@@ -58,7 +58,7 @@ FiltersHome.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit, type, resetBus, user, projectr }) {
+export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit, type, resetBus, user, projectr,resetProjects }) {
 
   var [selectDATA, setSelectData] = useState()
 
@@ -96,7 +96,7 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
     }
     if (value == 31) {
       // call all projects
-      projectr()
+      resetProjects()
       onCloseFilter()
     }
   }
