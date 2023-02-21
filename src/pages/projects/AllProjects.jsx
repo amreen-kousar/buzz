@@ -53,6 +53,11 @@ function a11yProps(index) {
 export default function AllProjects({ handleClickOpen, handleClose, open }) {
     var userAccess = ['2']
 
+    const callOpenFunction = (id) => {
+        sessionStorage.setItem("proId", id)
+        handleClickOpen()
+    }
+
     var userIdCheck = localStorage?.getItem('userId')
 
     const [value, setValue] = useState(0);
@@ -83,14 +88,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
 
         const data = JSON.stringify({
-            // "id":"230",
-            // "project_id":"230",
-            // "name":"MADHUGIRICI22230",
-            // "startDate":"2022-04-01",
-            // "endDate":"2023-03-31",
-            // "project_status_name":"Published",
-            // "project_status":"1",
-            // "location_name":"Tumkur"
+
             end_date: g === "date" ? i : null,
             start_date: g === "date" ? id : null,
             "search": search,
@@ -99,7 +97,6 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             "filter_id": 0,
             "type": "",
             "pageNum": 1,
-            // "date": "",
             taluk_id: g === "country" ? id : null,
             district_id: g === "country" ? i : null,
             "funder_id": id === 2 ? i?.id : null,
@@ -281,9 +278,9 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                         <TabPanel value={value} index={0}>
                             {
                                 projects.length > 0 ? <>
-                                    {projects.map(p => <Link to="/dashboard/projects/project" state={{ id: p.id }}
+                                    {projects.map(p => <Link to="/dashboard/projects/project"
                                         style={{ textDecoration: 'none' }}>
-                                        <Card onClick={handleClickOpen}>
+                                        <Card onClick={() => { callOpenFunction(p.id) }}>
                                             <CardContent>
                                                 <Typography variant='h6'>{p?.name}</Typography>
                                                 <Grid items direction={'row'} spacing={20}>
@@ -304,8 +301,8 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                         <TabPanel value={value} index={1}>
                             {
                                 publishedProject.length > 0 ? <>
-                                    {publishedProject.map(p => <Link to="/dashboard/projects/project" state={{ id: p.id }} style={{ textDecoration: 'none' }}>
-                                        <Card onClick={handleClickOpen}>
+                                    {publishedProject.map(p => <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }}>
+                                        <Card onClick={() => { callOpenFunction(p.id) }}>
                                             <CardContent>
                                                 <Typography variant='h6'>{p?.name}</Typography>
                                                 <Grid items direction={'row'} spacing={20}>
@@ -327,8 +324,8 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                         <TabPanel value={value} index={2}>
                             {
                                 completedProject.length > 0 ? <>
-                                    {completedProject.map(p => <Link to="/dashboard/projects/project" state={{ id: p.id }} style={{ textDecoration: 'none' }} >
-                                        <Card onClick={handleClickOpen}>
+                                    {completedProject.map(p => <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }} >
+                                        <Card onClick={() => { callOpenFunction(p.id) }}>
                                             <CardContent>
                                                 <Typography variant='h6'>{p?.name}</Typography>
                                                 <Grid items direction={'row'} spacing={20}>

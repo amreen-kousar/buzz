@@ -16,12 +16,11 @@ import CreateTrainerBatch from './Components/CreateTrainerBatch'
 import AddTrainerDrawer from './Components/AddTrainerDrawer';
 function Project(props) {
   const location = useLocation()
-  const userDetails = localStorage?.getItem('userId')
-    console.log(userDetails,"userrrrrrrrrrrrr")
-  const [data1,setData1] = useState('')
+  const userDetails = localStorage?.getItem('userId');
+  console.log(userDetails, "userrrrrrrrrrrrr")
+  const [data1, setData1] = useState('')
+  const id = sessionStorage?.getItem("proId")
   useEffect(() => {
-
-
     projData();
 
   }, [])
@@ -29,7 +28,7 @@ function Project(props) {
     console.log(location, "location props")
 
     var data = JSON.stringify({
-      "project_id": location.state.id,
+      "project_id": id,
       "role_id": 1,
       "emp_id": 144
     });
@@ -126,8 +125,8 @@ function Project(props) {
                   style={{ boxShadow: "none", borderRadius: "0px" }} elevation={0} >
 
                   <Link to="/dashboard/projects/busTest" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
-                      <Iconify style={{ color: "black" }} icon="material-symbols:add" />
-                    </IconButton>}>
+                    <Iconify style={{ color: "black" }} icon="material-symbols:add" />
+                  </IconButton>}>
                     <span style={{ width: "235px" }}>Bus: &nbsp;&nbsp;& check List</span>
                   </Button>
                   </Link><br />
@@ -174,16 +173,16 @@ function Project(props) {
                   </Link>
                   <br />
 
-                 {(userDetails && userDetails==13 || userDetails ==4)?
-                 <div><Link to="/dashboard/projects/assignbatches" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
-                    <Iconify style={{ color: "black" }} icon="material-symbols:add" />
-                  </IconButton>} startIcon={<IconButton>
-                    <Iconify style={{ color: "black" }} icon="ic:baseline-home" />
-                  </IconButton>}>
-                    <span style={{ width: "200px" }}> Assign Villages to Gelathi Facilitator</span>
-                  </Button>
-                 
-                  </Link></div>:null} {(userDetails && userDetails==13 || userDetails ==4)?<br/>:null}
+                  {(userDetails && userDetails == 13 || userDetails == 4) ?
+                    <div><Link to="/dashboard/projects/assignbatches" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
+                      <Iconify style={{ color: "black" }} icon="material-symbols:add" />
+                    </IconButton>} startIcon={<IconButton>
+                      <Iconify style={{ color: "black" }} icon="ic:baseline-home" />
+                    </IconButton>}>
+                      <span style={{ width: "200px" }}> Assign Villages to Gelathi Facilitator</span>
+                    </Button>
+
+                    </Link></div> : null} {(userDetails && userDetails == 13 || userDetails == 4) ? <br /> : null}
 
                   <Link to="/dashboard/projects/enrolledGelathi" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} startIcon={
                     <IconButton>
