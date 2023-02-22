@@ -34,6 +34,11 @@ export default function User() {
   const [respBuses, setRespbuses] = useState()
 
   useEffect(() => {
+    console.log("entered in byss")
+  }, [])
+
+  useEffect(() => {
+
     setDw(false)
     busesd()
   }, [dw]

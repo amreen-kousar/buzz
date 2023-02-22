@@ -216,7 +216,7 @@ axios(config)
         {data?.list?.map((email) => (
            
           <ListItem disableGutters>
-             {console.log(email,'<------------nnnjnjnjnnii')}
+             {/* {console.log(email,'<------------nnnjnjnjnnii')} */}
             <ListItemButton onClick={() => handleListItemClick(email)} key={email}>
               <ListItemAvatar>
                

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, Dialog, AppBar, Toolbar, IconButton, Typography, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
-import { useLocation,Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import CreateProj from './Components/CreateProj';
 
 function AddProject() {
@@ -11,20 +11,15 @@ function AddProject() {
     const [country, setCountry] = useState([])
     const [fund, setFund] = useState()
     const [states, setStates] = useState([])
-    const [createPro,setCreatePro] = useState(false)
+    const [createPro, setCreatePro] = useState(false)
     const [district, setDistrict] = useState([])
     const [taluk, setTaluk] = useState([])
-    const [sendData,setSendData]=useState({
-        projectname:"",
-        locationName:"",
-        locationid:"",
-        projectId:""
-    })
-    const [mainState,setMainState] = useState({
-        locationID:"",
-        locationName:"",
-        funderId:"",
-        funderName:"",
+    const [sendData, setSendData] = useState(null)
+    const [mainState, setMainState] = useState({
+        locationID: "",
+        locationName: "",
+        funderId: "",
+        funderName: "",
 
     })
     const [data, setData] = useState({
@@ -163,55 +158,55 @@ function AddProject() {
 
 
     const createProject = () => {
-        if(confirm("Are You Sure You Want To Create Project?")){
-       const fundList = fund?.filter(itm=>itm?.id===mainState?.funderId)
-       const talukList = taluk?.filter(itm=>itm?.id===mainState?.locationID)
-       console.log(fundList,talukList,"<----talukListtalukList")
+        if (confirm("Are You Sure You Want To Create Project?")) {
+            const fundList = fund?.filter(itm => itm?.id === mainState?.funderId)
+            const talukList = taluk?.filter(itm => itm?.id === mainState?.locationID)
+            console.log(fundList, talukList, "<----talukListtalukList")
 
-        var data = new FormData();
-data.append('user_id', '650');
-data.append('locationID', talukList[0]?.id);
-data.append('funderID', fundList[0]?.id);
-data.append('createdBy', '650');
-data.append('lastUpdatedBy', '650');
-data.append('location_name', talukList[0]?.name);
-data.append('funderName', fundList[0]?.name);
+            var data = new FormData();
+            data.append('user_id', '650');
+            data.append('locationID', talukList[0]?.id);
+            data.append('funderID', fundList[0]?.id);
+            data.append('createdBy', '650');
+            data.append('lastUpdatedBy', '650');
+            data.append('location_name', talukList[0]?.name);
+            data.append('funderName', fundList[0]?.name);
 
-var config = {
-  method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
-  data : data
-};
+            var config = {
+                method: 'post',
+                url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
+                data: data
+            };
 
-axios(config)
-.then(function (response) {
-     setSendData({
-        projectId:response?.data?.project_id,
-        projectname:response?.data?.projectName,
-        locationid:response?.data?.locationID,
-        locationName:response?.data?.location_name
-     })
-    setCreatePro(true)
-    setAddProject(response.data)
-  console.log(response,'<----------setAddProjectsetAddProjectsetAddProject',sendData);
-})
-.catch(function (error) {
-  console.log(error);
-});
+            axios(config)
+                .then(function (response) {
+                    setSendData({
+                        projectId: response?.data?.project_id,
+                        projectname: response?.data?.projectName,
+                        locationid: response?.data?.locationID,
+                        locationName: response?.data?.location_name
+                    })
+                    setCreatePro(true)
+                    setAddProject(response.data)
+                    console.log(response, '<----------setAddProjectsetAddProjectsetAddProject', sendData);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
-        console.log(sendData,"<---qwertyui")
-    //    else{
-    //         setSendData({
-    //             projectId:"",
-    //             projectname:"",
-    //             locationName:"",
-    //             locationid:""
-    //         })
-    //         setCreatePro(true)
-    //         console.log("form is cancelsdsd")
-    //   }
+        console.log(sendData, "<---qwertyui")
+        //    else{
+        //         setSendData({
+        //             projectId:"",
+        //             projectname:"",
+        //             locationName:"",
+        //             locationid:""
+        //         })
+        //         setCreatePro(true)
+        //         console.log("form is cancelsdsd")
+        //   }
 
-      
+
     }
 
 
@@ -325,7 +320,7 @@ axios(config)
                             label="Age"
                             onChange={(e => {
                                 setData({ ...data, talaq_id: e?.target?.value })
-                                setMainState({...mainState,locationID:e?.target?.value})
+                                setMainState({ ...mainState, locationID: e?.target?.value })
                                 // getTaluk(e?.target?.value)
                             })}
                         >
@@ -347,7 +342,7 @@ axios(config)
                             label="Age"
                             onChange={(e => {
                                 setData({ ...data, funder_id: e?.target?.value })
-                                setMainState({...mainState,funderId:e?.target?.value})
+                                setMainState({ ...mainState, funderId: e?.target?.value })
                                 // getTaluk(e?.target?.value)
                             })}
                         >
@@ -366,11 +361,18 @@ axios(config)
                   </Button>
                   </Link><br /> */}
                     {/* <Button onClick={() => createProject()} fullWidth variant="filled" style={{background:"#f5f5f5"}}>Create New Project</Button> */}
- {}
-                    <CreateProj sendData={sendData} setCreatePro={(e)=>{setCreatePro(e),
-                    handleClose()
-                    
-                    }}  createPro={sendData?.projectname!==""&&createPro} />
+
+
+                    {
+                        sendData && <CreateProj sendData={sendData}
+                            setCreatePro={(e) => {
+                                setCreatePro(e),
+                                    handleClose()
+
+                            }} createPro={sendData && createPro} />
+                    }
+
+
                 </div>
 
             </Dialog>
