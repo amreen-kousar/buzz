@@ -256,7 +256,7 @@ export default function Gelathidashboard() {
             </Grid>
             <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
-                title="Enrolled Vyapor"
+                title="Enrolled Vyapar"
                 total={summaryData?.summary_vyapar}
                 color="vyapar"
 
