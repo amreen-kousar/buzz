@@ -321,7 +321,6 @@ export default function Gelathidashboard() {
 
 
         </Grid> */}
-
           {summaryData?.data?.map((item)=>{
             return(
               <>
@@ -329,7 +328,7 @@ export default function Gelathidashboard() {
                <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
 
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Project : {summaryData?.data[0]?.name}
+              Project : {item?.name}
             </Typography>
             {/* <Graphchart/> */}
             <CardContent style={{ display: "flex" }}>
@@ -337,22 +336,22 @@ export default function Gelathidashboard() {
                 <Table aria-label="customized table" style={{ width: '200px', float: 'Left' }}>
                   <TableHead>
                     <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                      <TableCell>Total Circles</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.circles}</TableCell>
+                      <TableCell>Total Circles</TableCell>  <TableCell>:&nbsp;{item?.circles}</TableCell>
                     </TableRow>
                     <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                      <TableCell>Circle Meetings</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.circle_meet}</TableCell>
-                    </TableRow>
-
-                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                      <TableCell>Village Visits</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.villagevisit}</TableCell>
+                      <TableCell>Circle Meetings</TableCell>  <TableCell>:&nbsp;{item?.circle_meet}</TableCell>
                     </TableRow>
 
                     <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                      <TableCell>Beehive Visits</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.beehive}</TableCell>
+                      <TableCell>Village Visits</TableCell>  <TableCell>:&nbsp;{item?.villagevisit}</TableCell>
                     </TableRow>
 
                     <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                      <TableCell>Enrolled Gelathis</TableCell>  <TableCell>:&nbsp;{summaryData?.data[0]?.enroll}</TableCell>
+                      <TableCell>Beehive Visits</TableCell>  <TableCell>:&nbsp;{item?.beehive}</TableCell>
+                    </TableRow>
+
+                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                      <TableCell>Enrolled Gelathis</TableCell>  <TableCell>:&nbsp;{item?.enroll}</TableCell>
                     </TableRow>
 
                   </TableHead>
