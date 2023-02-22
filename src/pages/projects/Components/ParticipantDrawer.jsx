@@ -43,7 +43,7 @@ console.log(clcikData,'<------clcikDataclcikData')
 
     const Participant = async =>{
         var data = JSON.stringify({
-            "participant_id": clcikData?.id
+            "participant id": clickData?.id 
           });
           
           var config = {
