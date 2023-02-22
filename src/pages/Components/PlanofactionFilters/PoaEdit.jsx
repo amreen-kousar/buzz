@@ -77,7 +77,7 @@ export default function PoaEdit({ setSucess, itm }) {
     //AddPoa()
     setAddData({
       date: itm?.date1,
-      user_id: 651,
+      user_id:localStorage?.getItem('userId'),
       name: itm?.name,
       all_day: 0,
       description: itm?.description,
@@ -96,7 +96,7 @@ export default function PoaEdit({ setSucess, itm }) {
     var data = JSON.stringify({
       "poa_id": addData?.poa_id,
       "date": addData?.date,
-      "user_id": 651,
+      "user_id": localStorage?.getItem('userId'),
       "name": addData?.name,
       "all_day": addData?.all_day,
       "description": addData?.description,

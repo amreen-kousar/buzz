@@ -37,6 +37,7 @@ export default function PoaCreate({ setSucess }) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState("");
+  const [userId, setUserId] = useState()
   const userDetails = localStorage?.getItem('userId')
   console.log(userDetails,"userrrrrrrrrrrrr")
   const [value, setValue] = React.useState(false);
@@ -83,7 +84,7 @@ export default function PoaCreate({ setSucess }) {
     console.log(addData, "<0hgdfvfdbgdf")
     var data = JSON.stringify({
       "date": addData?.date,
-      "user_id": "651",
+      "user_id": userId?userId:651,
       "name": addData?.name,
       "all_day": addData?.all_day,
       "description": addData?.description,
