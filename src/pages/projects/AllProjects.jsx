@@ -95,6 +95,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
         projectr()
     }, []
     )
+
     const projectr = async (i, id, g) => {
         console.log(i, id, g)
 
@@ -104,8 +105,8 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             end_date: g === "date" ? i : null,
             start_date: g === "date" ? id : null,
             "search": search,
-            "id": 35,
-            "role_id": 5,
+            "id": 650,
+            "role_id": userIdCheck,
             "filter_id": 0,
             "type": "",
             "pageNum": page,
@@ -170,6 +171,9 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
 
     const searchFunction = (e) => {
+        page = 1
+        setPage(page)
+        console.log(page, "page set toooo 11")
         search = e
         setSearch(search)
         setSelected({ name: e, type: "Search" })
@@ -184,7 +188,10 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
     const handleDelete = () => {
         setSelected(null)
-        setSearch('')
+        search = ''
+        setSearch(search)
+        page = 1
+        setPage(page)
         projectr();
     }
 

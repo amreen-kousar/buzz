@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button, CardContent, Card, Grid, FormControl, InputLabel, MenuItem, Select, TextField, Stack, Snackbar, Alert } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
+import moment from 'moment'
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -36,7 +37,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData }) {
   let [gelathiName, setGelathiName] = useState([])
   const [driverData, setDriverData] = useState([])
   const [deleteData, setDeleteData] = useState([])
-  const [data, setData] = useState({ sendData, start_date: new Date(), end_date: new Date() });
+  const [data, setData] = useState({ ...sendData, start_date: new Date(), end_date: new Date() });
 
 
 
