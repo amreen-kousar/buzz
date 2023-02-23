@@ -110,16 +110,24 @@ export default function Vyaparprogram() {
       <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
           
-            <Link to="/dashboard/projects/project">
-                        <IconButton style={{color:"white"}}>
+       
+                        <IconButton style={{color:"white"}} onClick={handleClose}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
-                        </IconButton></Link>
+                        </IconButton>
+                        <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+          Buzz Vyapar Program Baseline
+          </Typography>
+
+
+          <Button autoFocus edge="end" color="inherit">
+          <Iconify icon="material-symbols:save" width={30} height={30} />
+          </Button>
        
          
           </Toolbar>
         </AppBar>
         <Grid>
-        <Card mt={1} style={{ borderRadius: 20}} >
+        {/* <Card mt={1} style={{ borderRadius: 20}} >
                 <CardContent>
                
                     <Typography variant="subtitle2" style={{color:'white',backgroundColor:"#ff7424",padding:10,borderRadius:5}}>
@@ -129,7 +137,7 @@ export default function Vyaparprogram() {
                     * Required
                   </Typography>  
                   </CardContent>    
-          </Card>
+          </Card> */}
 
           <Card>
      

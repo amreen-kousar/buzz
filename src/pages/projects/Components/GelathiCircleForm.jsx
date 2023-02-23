@@ -16,7 +16,7 @@ import {
   FormControlLabel,
   Card,
   CardContent,
-  CardActionArea,
+  CardActionArea
   
 } from '@mui/material';
 import { Icon } from '@iconify/react';
@@ -104,6 +104,7 @@ export default function GelathiCircleForm() {
 
   const handleClose = () => {
     setOpen(false);
+  
   };
 
 
@@ -131,6 +132,7 @@ export default function GelathiCircleForm() {
         axios(config)
         .then(function (response) {
           setVyaapar(response?.data)
+
         })
         .catch(function (error) {
           console.log(error);
@@ -138,7 +140,7 @@ export default function GelathiCircleForm() {
   }
   {console.log(selectedValue,"selectedValueeeeee")}
 
-  const gelathicircleformdata= async =>{
+  const gelathicircleformdata= async() =>{
 
     var data = JSON.stringify({
       "partcipantId": 222954,
@@ -179,6 +181,7 @@ export default function GelathiCircleForm() {
       .catch(function (error) {
         console.log(error);
       });
+      handleClose();
 }
         
   return (
@@ -192,19 +195,27 @@ export default function GelathiCircleForm() {
         </IconButton>
         </Stack> 
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
-          <Toolbar>
-          
-            <Link to="/dashboard/projects">
-                        <IconButton style={{color:"white"}}>
+    
+              <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
+        
+
+                        <IconButton style={{float:"right", color:"white"}} onClick={handleClose}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
-                        </IconButton></Link>
-       
-         <Button onClick={() => gelathicircleformdata()} style={{float:'right'}}><Iconify icon="material-symbols:save" width={30} height={30} /></Button>
-          </Toolbar>
-        </AppBar>
+                        </IconButton>
+                    
+          <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+          Spoorthi Baseline Questionnaire
+          </Typography>
+
+
+          <Button autoFocus edge="end" color="inherit" onClick={() => gelathicircleformdata()}>
+          <Iconify icon="material-symbols:save" width={30} height={30} />
+          </Button>
+        </Toolbar>
+        {/* </AppBar> */}
+     
         <Grid style={{margin:10}}>
-        <Card mt={1} style={{ borderRadius: 20 }} >
+        {/* <Card mt={1} style={{ borderRadius: 20 }} >
                 <CardContent>
                
                     <Typography variant="subtitle2" style={{color:'white',backgroundColor:"#ff7424",padding:10,borderRadius:5}}>
@@ -214,7 +225,7 @@ export default function GelathiCircleForm() {
                     * Required
                   </Typography>  
                   </CardContent>    
-          </Card>
+          </Card> */}
 
 
           <Card mt={1} style={{marginTop:10, borderRadius: 20 }}>
@@ -222,7 +233,7 @@ export default function GelathiCircleForm() {
                 <CardContent>
                   <Typography variant="subtitle2" style={{color:"#ff7424"}}>Surveyor's email address *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Email" label="Enter Email" onChange={(e) => { setSendData({ ...sendData, email_address: e?.target?.value }) }} variant="outlined" color="common" />
+                    <TextField id="Email" required label="Enter Email" onChange={(e) => { setSendData({ ...sendData, email_address: e?.target?.value }) }} variant="outlined" color="common" />
                   </Stack>
               </CardContent>
           </Card>
@@ -231,7 +242,7 @@ export default function GelathiCircleForm() {
           <CardContent>
             <Typography variant="subtitle2" style={{color:"#ff7424"}}>Name of the Gelathi / ಗೆಲತಿಯ ಹೆಸರು *</Typography>
             <Stack mt={2} mb={2}>      
-              <Select color="common" label="Choose Gelathi Facilitator" variant="standard"  onChange={(e) => setSendData({ ...sendData, gelathiname: e?.target?.value })} value={sendData?.gelathiname} >
+              <Select color="common" label="Choose Gelathi Facilitator" variant="standard" required onChange={(e) => setSendData({ ...sendData, gelathiname: e?.target?.value })} value={sendData?.gelathiname} >
                   {vyaapar?.list?.map((itm)=>{
                     return(
                             <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
@@ -457,14 +468,16 @@ export default function GelathiCircleForm() {
                     <TextField id="instance" label="Your Answer" onChange={(e) => { setSendData({ ...sendData, There_puja_at_my_house: e?.target?.value }) }} variant="outlined" color="common" />
                   </Stack>
                 </CardContent>
-          </Card>
+          </Card><br/>
 
-
+          
 
               {/* -------------------------------- */}
           
         </Grid>
+     
       </Dialog>
+   
     </div>
   );
 }
