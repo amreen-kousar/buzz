@@ -117,7 +117,7 @@ export default function PlanofAction() {
       "for": season,
       
     });
-   
+
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getPoa.php',
@@ -365,7 +365,7 @@ export default function PlanofAction() {
 
                                     <TableCell component="th" scope="row" onClick={handleOpenEvent}>
                                       Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.location_name}
-
+                                        
                                       {itm?.status == '2' && <span style={{ color: 'red' }}><br />
                                         (Canceled)
                                       </span>}

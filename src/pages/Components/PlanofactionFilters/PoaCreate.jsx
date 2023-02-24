@@ -16,7 +16,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
-
+import moment from 'moment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -49,12 +49,12 @@ export default function PoaCreate() {
     // setValue(newValue);
   };
   const [addData, setAddData] = useState({
-    date: dayjs(new Date()),
+    date: "",
     user_id: "",
     name: "",
     all_day: 0,
     description: "",
-    date2: dayjs(new Date())
+    date2: ""
   })
   const handleChange2 = (event) => {
 
@@ -62,9 +62,11 @@ export default function PoaCreate() {
     console.log(event, "<--jyhfgd")
 
     setAddData({ ...addData, date2: event })
+    console.log(addData?.date2)
   }
   const handleChange = (event) => {
     setAddData({ ...addData, date: event })
+    console.log(addData?.date,"dataaaaa")
   }
 
   const handleClickOpen = () => {
@@ -77,7 +79,6 @@ export default function PoaCreate() {
     
   };
 
-
   useEffect(() => {
     //AddPoa()
   }, []
@@ -86,12 +87,12 @@ export default function PoaCreate() {
   const AddPoa = async => {
     console.log(addData, "<0hgdfvfdbgdf")
     var data = JSON.stringify({
-      "date": addData?.date,
+      "date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
       "user_id": userId?userId:651,
       "name": addData?.name,
       "all_day": addData?.all_day,
       "description": addData?.description,
-      "date2": addData?.date2,
+      "date2": moment(addData?.date2?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
       // "roleName":role_name
     });
 console.log(userId,"useriddddddddddd")
