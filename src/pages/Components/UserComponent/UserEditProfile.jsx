@@ -31,12 +31,13 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import Iconify from 'src/components/Iconify';
+import moment from 'moment';
 import Autocomplete from '@mui/material/Autocomplete';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function UserEditProfile() {
+export default function UserEditProfile({updateSetUser}) {
   let user = JSON.parse(localStorage?.getItem('people'))
 
   console.log(user, '<-----uyuyuuuhuhuuhu')
@@ -46,35 +47,37 @@ export default function UserEditProfile() {
   const [ceoUser, setCeoUser] = useState([]);
   const [usersDataEdit, setUsersDataEdit] = useState('')
   const [rolesData, setRolesData] = useState([])
-
   const [editData, setEditData] = useState({
-    id: "",
-    countryID: "",
-    first_name: "",
-    last_name: "",
-    gender: "",
-    doj: "",
-    pincode: "",
-    officeMailId: "",
-    personalMailId: "",
-    contactNum: "",
-    workNum: "",
-    address: "",
-    address1: "",
-    address2: "",
-    empRole: "",
-    supervisorId: "",
-    profile_pic: "",
-    status: "",
-    createdBy: "",
-    lastUpdatedBy: "",
-    project_list: "",
-    license_number: ""
+    id: user.id,
+    countryID: user.countryID,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    gender: user.gender,
+    doj: new Date(user.doj),
+    role:user.role   ,
+    pincode:user.pincode,
+        officeMailId: user.officeMailId,
+    personalMailId: user.personalMailId,
+    contactNum: user.contactNum,
+    workNum: user.workNum,
+    address: user.address,
+    address1: user.address1,
+    address2: user.address2,
+    empRole: user.empRole,
+    supervisorId: user.supervisorId,
+    profile_pic: user.profile_pic,
+    status: user.status,
+    createdBy: user.createdBy,
+    lastUpdatedBy: user.lastUpdatedBy,
+    project_list: user.project_list,
+    license_number: user.license_number
   })
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+  console.log(user?.role?.roleName,"roleeeeeeeeeeeee")
   const handleClickOpen = () => {
+    
     setOpen(true);
     setScroll(scrollType);
   };
@@ -82,7 +85,6 @@ export default function UserEditProfile() {
   const handleClose = () => {
     setOpen(false);
   };
-
 
   useEffect(() => {
     //   editUser()
@@ -115,29 +117,33 @@ export default function UserEditProfile() {
   const editUser = async => {
 
     var data = JSON.stringify({
-      "id": user?.id,
-      "countryID": user?.countryID,
-      "first_name": user?.first_name,
-      "last_name": user?.last_name,
-      "gender": user?.gender,
-      "doj": user?.doj,
-      "pincode": user?.pincode,
-      "officeMailId": user?.officeMailId,
-      "personalMailId": user?.personalMailId,
-      "contactNum": user?.contactNum,
-      "workNum": user?.workNum,
-      "address": user?.address,
-      "address1": user?.address1,
-      "address2": user?.address2,
-      "empRole": user?.empRole,
-      "supervisorId": user?.supervisorId,
-      "profile_pic": user?.profile_pic,
-      "status": user?.status,
-      "createdBy": user?.createdBy,
+      "id": editData?.id,
+      "countryID": editData?.countryID,
+      "first_name": editData?.first_name,
+      "last_name": editData?.last_name,
+      "gender": editData?.gender,
+      "doj": moment(editData?.doj?.$d)?.format('YYYY-MM-DD'),
+      "role":editData?.role?.roleName,
+      "pincode": editData?.pincode,
+      "officeMailId": editData?.officeMailId,
+      "personalMailId": editData?.personalMailId,
+      "contactNum": editData?.contactNum,
+      "workNum": editData?.workNum,
+      "address": editData?.address,
+      "address1": editData?.address1,
+      "address2": editData?.address2,
+      "empRole": editData?.empRole,
+      "supervisorId": editData?.supervisorId,
+      "profile_pic": editData?.profile_pic,
+      "status": editData?.status,
+      "createdBy": editData?.createdBy,
       "lastUpdatedBy": "",
-      "project_list": user?.project_list,
-      "license_number": user?.license_number
+      "project_list": editData?.project_list,
+      "license_number": editData?.license_number,
+      "role_name":editData?.role_name
     });
+
+
 
     var config = {
       method: 'post',
@@ -150,12 +156,15 @@ export default function UserEditProfile() {
 
     axios(config)
       .then(function (response) {
+        localStorage.setItem('people', data)
         setUsersDataEdit(response.data)
+        updateSetUser()
         console.log(response.data, '<------------------setUsers');
       })
       .catch(function (error) {
         console.log(error);
       });
+      handleClose()
   }
   return (
     <div>
@@ -184,7 +193,7 @@ export default function UserEditProfile() {
             </Typography>
 
 
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            <Button autoFocus color="inherit" onClick={()=>editUser()}>
               save
             </Button>
           </Toolbar>
@@ -207,16 +216,8 @@ export default function UserEditProfile() {
               autoComplete="off"
             >
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
-                <TextField label="First Name" variant="outlined" color="common" fullWidth
-                //                sx={{
-                //   "& .MuiOutlinedInput-root": {
-                //     "& > fieldset": {
-                //       border: "none"
-                //     }
-                //   }
-                // }}
-                />            <br></br>
-                <TextField id="outlined-basic" label="Last Name" variant="outlined" color="common" fullWidth /><br></br><br></br>
+                <TextField label="First Name" variant="outlined" color="common" fullWidth onChange={(e) => { setEditData({ ...editData, first_name: e?.target?.value }) }} value={editData?.first_name}/>            <br></br>
+                <TextField id="outlined-basic" label="Last Name" variant="outlined" color="common" fullWidth onChange={(e) => { setEditData({ ...editData, last_name: e?.target?.value }) }} value={editData?.last_name}/><br></br><br></br>
                 <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: '0.5rem' }}>
                   <InputLabel id="demo-simple-select-label" fullWidth color="common">Role</InputLabel>
 
@@ -225,11 +226,13 @@ export default function UserEditProfile() {
                     id="role"
                     // defaultValue={AddUser.role}
                     label="Role"
-                    onChange={(e) => { getEmpId(e.target.value) }}
+                    onChange={(e) => { setEditData({ ...editData, role: e?.target?.value }) }}
+                    value={editData?.role?.roleName}
+                  
                   >
                     {rolesData.map(role => {
                       return <MenuItem value={role ?? ''}>{role?.roleName}</MenuItem>
-                    })}
+                    })} 
                   </Select>
                 </FormControl>
                 <Autocomplete
@@ -244,10 +247,12 @@ export default function UserEditProfile() {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     label="Date"
-                    // value={sendData?.date}
+                    inputFormat="YYYY/MM/DD"
+                    
                     onChange={(newValue) => {
-                      setEditData({ ...editData, date: newValue });
+                      setEditData({ ...editData, doj: newValue });
                     }}
+                    value={editData?.doj}
                     renderInput={(params) => <TextField {...params} fullWidth />}
                   />
                 </LocalizationProvider>
@@ -259,25 +264,25 @@ export default function UserEditProfile() {
                 </Stack>
 
                 <Stack>
-                  <TextField id="outlined-basic" label="Mobile Number" type="number" variant="outlined" color="common" />
+                  <TextField id="outlined-basic" label="Mobile Number" type="number" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, contactNum: e?.target?.value }) }} value={editData?.contactNum}/>
                 </Stack>
                 <Stack>
-                  <TextField id="outlined-basic" label="Work Mobile Number" type="number" variant="outlined" color="common" />
+                  <TextField id="outlined-basic" label="Work Mobile Number" type="number" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, workNum: e?.target?.value }) }} value={editData?.workNum}/>
                 </Stack>
                 <Stack>
-                  <TextField id="outlined-basic" label="Email" type="email" variant="outlined" color="common" />
+                  <TextField id="outlined-basic" label="Email" type="email" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, officeMailId: e?.target?.value }) }} value={editData?.officeMailId}/>
                 </Stack>
                 <Stack>
-                  <TextField id="outlined-basic" label="Address1" variant="outlined" color="common" />
+                  <TextField id="outlined-basic" label="Address1" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, address1: e?.target?.value }) }} value={editData?.address1}/>
                 </Stack>
                 <Stack>
-                  <TextField id="outlined-basic" label="Address2" variant="outlined" />
+                  <TextField id="outlined-basic" label="Address2" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, address2: e?.target?.value }) }} value={editData?.address2}/>
                 </Stack>
                 <Stack>
-                  <TextField id="outlined-basic" label="Pincode" variant="outlined" />
+                  <TextField id="outlined-basic" label="Pincode" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, pincode: e?.target?.value }) }} value={editData?.pincode}/>
                 </Stack>
                 <Stack>
-                  <TextField id="outlined-basic" label="Project" variant="outlined" />
+                  <TextField id="outlined-basic" label="Project" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, project_list: e?.target?.value }) }} value={editData?.project_list}/>
                 </Stack>
               </div>
 
