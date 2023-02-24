@@ -33,15 +33,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PoaCreate({ setSucess }) {
+export default function PoaCreate() {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState("");
   const [userId, setUserId] = useState()
   const userDetails = localStorage?.getItem('userId')
   console.log(userDetails,"userrrrrrrrrrrrr")
+  const role_name =JSON.parse(localStorage?.getItem('userDetails'))?.role_name
   const [value, setValue] = React.useState(false);
-
+ const [successMessage,setsuccessMessage]=useState(false);
+ const [message, setMessage] = useState('')
   const handleChangeTime = (newValue) => {
     console.log(newValue, "<----1234567u8")
     // setValue(newValue);
@@ -72,6 +74,7 @@ export default function PoaCreate({ setSucess }) {
 
   const handleClose = () => {
     setOpen(false);
+    
   };
 
 
@@ -88,9 +91,10 @@ export default function PoaCreate({ setSucess }) {
       "name": addData?.name,
       "all_day": addData?.all_day,
       "description": addData?.description,
-      "date2": addData?.date2
+      "date2": addData?.date2,
+      // "roleName":role_name
     });
-
+console.log(userId,"useriddddddddddd")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createEvent.php',
@@ -104,8 +108,9 @@ export default function PoaCreate({ setSucess }) {
       .then(function (response) {
         if (response?.data?.code === 200) {
 
-          setSucess("this is success create")
-
+          // setSucess("this is success create")
+          setMessage('Poa Created successfully')
+          setsuccessMessage(true)
           handleClose()
         }
         else {
@@ -131,6 +136,13 @@ export default function PoaCreate({ setSucess }) {
             }}>
        Create New Poa
       </Button> */}
+        {successMessage &&
+        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)} >
+          <Alert onClose={() => { setsuccessMessage(false) }} severity="success" sx={{ width: '100%',backgroundColor:'green',color:'white' }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      }
         {(userDetails && userDetails!=1)?<Button variant="contained" onClick={handleClickOpen} style={{
         float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
         position: 'fixed', zIndex: '1', bottom: 40, right: 40

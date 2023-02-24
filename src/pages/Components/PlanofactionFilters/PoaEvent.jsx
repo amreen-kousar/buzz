@@ -121,8 +121,10 @@ const handlecheckout=()=>{
 }
   const event = async => {
     var data = JSON.stringify({
-      "event_id": select?.id,
-      "user_id": "651",
+      // "event_id": select?.id,
+      // "user_id": "651",
+      "event_id":80924,
+       "user_id":35,
       "check_in_location":"RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India"
     });
 

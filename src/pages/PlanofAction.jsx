@@ -70,6 +70,7 @@ export default function PlanofAction() {
   const [drawerEvent, SetDrawerEvent] = useState(false);
   const [poa, SetPoa] = useState([]);
   const [openMessage, setOpenMessage] = useState(false);
+ 
   const [select, setSelect] = useState();
   const [season, setSeason] = useState(0)
   const [date, setDate] = useState(new Date())
@@ -212,7 +213,7 @@ export default function PlanofAction() {
       </Typography>
 
 
-      <PoaCreate setSucess={() => { setOpenMessage(true) }} />
+      <PoaCreate  />
       <br />
       <br />
       {name !== '' &&
