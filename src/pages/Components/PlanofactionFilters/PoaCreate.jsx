@@ -49,12 +49,12 @@ export default function PoaCreate() {
     // setValue(newValue);
   };
   const [addData, setAddData] = useState({
-    date: "",
+    date: dayjs(new Date()),
     user_id: "",
     name: "",
     all_day: 0,
     description: "",
-    date2: ""
+    date2: dayjs(new Date())
   })
   const handleChange2 = (event) => {
 
