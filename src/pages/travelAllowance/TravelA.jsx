@@ -121,12 +121,12 @@ export default function TravelA() {
             {message}
           </Alert>
         </Snackbar>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs variant="fullWidth" indicatorColor='warning'>
 
            {
-            userOwnPermissions.includes(data) &&  <Tab
-
+            userOwnPermissions.includes(data) &&  
+            <Tab
             onClick={() => { setMainValue(0) }}
             sx={{
               ':hover': {
