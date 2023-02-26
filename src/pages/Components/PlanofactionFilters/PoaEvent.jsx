@@ -121,11 +121,13 @@ const handlecheckout=()=>{
 }
   const event = async => {
     var data = JSON.stringify({
-      "event_id": select?.id,
-      "user_id": "651",
+      // "event_id": select?.id,
+      // "user_id": "651",
+      "event_id":select?.id,
+       "user_id":35,
       "check_in_location":"RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India"
     });
-
+      console.log(select?.id,"selectedddddd")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',

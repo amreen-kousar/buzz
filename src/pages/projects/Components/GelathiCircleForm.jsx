@@ -16,7 +16,7 @@ import {
   FormControlLabel,
   Card,
   CardContent,
-  CardActionArea
+  CardActionArea,DialogContent,DialogContentText
   
 } from '@mui/material';
 import { Icon } from '@iconify/react';
@@ -41,6 +41,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function GelathiCircleForm() {
   const [open, setOpen] = React.useState(false);
   const [vyaapar, setVyaapar] = useState('');
+  const [circleform, setcircleform] = useState('');
   const [selectedValue, setSelectedValue] = React.useState('');
   const [skillValue, setSkillValue]= React.useState('');
   const [listenpara, setListenpara]= React.useState('');
@@ -50,9 +51,10 @@ export default function GelathiCircleForm() {
   const [bringtogether,setbringTogether]=React.useState('');
   const [conflicts,setConflicts]=React.useState('');
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  
   const [sendData, setSendData] = useState({
     email_address: "",
-    gelathiname:"",
+    GelathiId:"",
     Spoorthi_Session_Number:"",
     list_down_your_skills:"" ,
     skills_to_overcome_my_challenges:"",
@@ -145,8 +147,7 @@ export default function GelathiCircleForm() {
     var data = JSON.stringify({
       "partcipantId": 222954,
       "email_address": sendData?.email_address,
-      "GelathiId": 733,
-      "gelathiname":sendData?.gelathiname,
+      "GelathiId": sendData?.GelathiId,
       "Spoorthi_Session_Number":selectedValue,
       "list_down_your_skills": sendData?.list_down_your_skills,
       "skills_to_overcome_my_challenges": skillValue,
@@ -176,7 +177,7 @@ export default function GelathiCircleForm() {
       
       axios(config)
       .then(function (response) {
-        setVyaapar(response?.data)
+        setcircleform(response?.data)
       })
       .catch(function (error) {
         console.log(error);
@@ -214,6 +215,11 @@ export default function GelathiCircleForm() {
         </Toolbar>
         {/* </AppBar> */}
      
+        <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
+          <DialogContentText
+            id="scroll-dialog-description"
+            tabIndex={-1}
+          >
         <Grid style={{margin:10}}>
         {/* <Card mt={1} style={{ borderRadius: 20 }} >
                 <CardContent>
@@ -242,7 +248,7 @@ export default function GelathiCircleForm() {
           <CardContent>
             <Typography variant="subtitle2" style={{color:"#ff7424"}}>Name of the Gelathi / ಗೆಲತಿಯ ಹೆಸರು *</Typography>
             <Stack mt={2} mb={2}>      
-              <Select color="common" label="Choose Gelathi Facilitator" variant="standard" required onChange={(e) => setSendData({ ...sendData, gelathiname: e?.target?.value })} value={sendData?.gelathiname} >
+              <Select color="common" label="Choose Gelathi Facilitator" variant="standard" required onChange={(e) => setSendData({ ...sendData, GelathiId: e?.target?.value })} value={sendData?.GelathiId} >
                   {vyaapar?.list?.map((itm)=>{
                     return(
                             <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
@@ -475,7 +481,8 @@ export default function GelathiCircleForm() {
               {/* -------------------------------- */}
           
         </Grid>
-     
+     </DialogContentText>
+     </DialogContent>
       </Dialog>
    
     </div>
