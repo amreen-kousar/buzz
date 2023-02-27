@@ -62,6 +62,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     }
 
     var userIdCheck = localStorage?.getItem('userId')
+    var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
     var [page, setPage] = useState(1)
     const [value, setValue] = useState(0);
     const [projects, setProjects] = useState([])
@@ -108,7 +109,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             end_date: g === "date" ? i : null,
             start_date: g === "date" ? id : null,
             "search": search,
-            "id": 650,
+            "id": userDetails?.id,
             "role_id": userIdCheck,
             "filter_id": 0,
             "type": "",
