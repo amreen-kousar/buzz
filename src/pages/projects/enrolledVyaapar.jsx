@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Vyaparprogram from './Components/Vyaparprogram';
 export default function enrolledVyaaparList() {
-
+    const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const [vyaapar, setVyaapar] = useState('');
 
@@ -28,8 +28,8 @@ export default function enrolledVyaaparList() {
     const enrolledVyaapar= async =>{
         var data = JSON.stringify({
             "search": "",
-            "project_id": 281,
-            "emp_id": 144
+            "project_id": state?.id,
+            "emp_id": 492
           });
           
           var config = {

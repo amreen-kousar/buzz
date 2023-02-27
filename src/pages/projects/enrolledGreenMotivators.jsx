@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import GreenSurvey from './Components/GreenSurvey'
 
 export default function enrolledGreenMotivatorsList() {
-
+    const {state} = useLocation()
+    console.log("nwewepewrwe",state)
     const [clcikData, setClickData] = useState()
     const [green , setGreen] = useState('')
     useEffect(() => {
@@ -27,8 +28,8 @@ export default function enrolledGreenMotivatorsList() {
     const enrolledGreenMotivators = async =>{
         var data = JSON.stringify({
             "search": "",
-            "project_id": 281,
-            "emp_id": 144
+            "project_id": state?.id,
+            "emp_id": 492
           });
           
           var config = {

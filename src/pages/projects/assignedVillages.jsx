@@ -28,8 +28,8 @@ export default function assignedVillages() {
     const assignedVillages = async =>{
         var data = JSON.stringify({
             "search": "",
-            "project_id": 225,
-            "emp_id": 343
+            "project_id": 234,
+            "emp_id": 35
           });
           
           var config = {
@@ -80,11 +80,11 @@ export default function assignedVillages() {
             {villageData?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.gelathiname, title: "Participant Details",id:itm?.id })
+                        setClickData({ name: itm.training_batch_name, title: "Participant Details",id:itm?.training_batch_id})
                         handleOpenFilter()
                     }}>
 
-                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" >
+                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {`  Training Batch Name  : ${itm?.training_batch_name}`}
                             </Typography>

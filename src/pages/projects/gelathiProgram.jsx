@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
 import GelathiProgrameDrawer from '../projects/Components/GelathiProgrameDrawer';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
-export default function gelathiProgram() {
-
+export default function gelathiProgram(props) {
+    const {state} = useLocation();
+  console.log(props,"<----props",state)
     const [clcikData, setClickData] = useState()
     const [programe,setPrograme] = useState('')
     useEffect(() => {
@@ -18,10 +19,10 @@ export default function gelathiProgram() {
             "filter": "",
             "end_date": "",
             "search": "",
-            "project_id": "263",
+            "project_id": state?.id,
             "gelathi_id": "",
             "start_date": "",
-            "emp_id": 144
+            "emp_id": 492
           });
           
           var config = {
