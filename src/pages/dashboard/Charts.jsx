@@ -6,7 +6,7 @@ import Link from '@mui/material/Link';
 import { useLocation, useSearchParams } from 'react-router-dom';
 // import "chartjs-plugin-datalabels";
 import { Bar } from "react-chartjs-2";
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+// import ChartDataLabels from 'chartjs-plugin-datalabels';
 // import {CategoryScale} from 'chart.js'; 
 // import { Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale } from 'chart.js';
 import { Chart, registerables } from 'chart.js'

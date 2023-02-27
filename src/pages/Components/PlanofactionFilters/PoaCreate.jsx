@@ -37,8 +37,9 @@ export default function PoaCreate() {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState("");
-  const [userId, setUserId] = useState()
-  const userDetails = localStorage?.getItem('userId')
+  const [userId, setUserId] = useState();
+  var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
+  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
   console.log(userDetails,"userrrrrrrrrrrrr")
   const role_name =JSON.parse(localStorage?.getItem('userDetails'))?.role_name
   const [value, setValue] = React.useState(false);
@@ -88,7 +89,7 @@ export default function PoaCreate() {
     console.log(addData, "<0hgdfvfdbgdf")
     var data = JSON.stringify({
       "date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
-      "user_id": userId?userId:651,
+      "user_id": userDetails?.id,
       "name": addData?.name,
       "all_day": addData?.all_day,
       "description": addData?.description,
@@ -144,7 +145,8 @@ console.log(userId,"useriddddddddddd")
           </Alert>
         </Snackbar>
       }
-        {(userDetails && userDetails!=1)?<Button variant="contained" onClick={handleClickOpen} style={{
+      {console.log(role,"userrrrrrrrdetailssssss")}
+        {(role==3 ||role==4|| role==5 || role==6 || role==12 || role==13)?<Button variant="contained" onClick={handleClickOpen} style={{
         float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
         position: 'fixed', zIndex: '1', bottom: 40, right: 40
       }} sx={{
