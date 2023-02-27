@@ -58,21 +58,21 @@ FiltersHome.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit, type, resetBus, user, projectr,resetProjects }) {
+export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit, type, resetBus, user, projectr, resetProjects }) {
 
   var [selectDATA, setSelectData] = useState()
 
   const filterPermissions = {
 
-    Dashboard: [{ id: 2, roles: ['1', '8', '12', '3','11' , '9', '7'] }, { id: 1, roles: ['1', '8', '11' ,'12', '9',  '3', '7'] }, { id: 3, roles: [ '1', '4', '8', '5','6','12', '13','11' , '3', '9',  '7'] }, { id: 4, roles: ['1', '8', '12', '9','11' ,  '3',  '7'] }, { id: 5, roles: ['1',  '9', '11' ,'4', '8',  '12', '3', '7'] },{id:6,roles:['13']}, { id: 9, roles: [ '1', '9', '11' , '4', '6','8',  '5','12', '13', '3', '7'] },{ id: 7, roles: ['1', '4',  '9', '11' , '8', '12', '3', '7'] }, { id: 10, roles: ['1',  '9', '11' ,'3', '4', '5', '12',  '7'] }, { id: 12, roles: ['1', '3','11' ] }, { id: 13, roles: ['1','11' , '3'] }],
+    Dashboard: [{ id: 2, roles: ['1', '8', '12', '3', '11', '9', '7'] }, { id: 1, roles: ['1', '8', '11', '12', '9', '3', '7'] }, { id: 3, roles: ['1', '4', '8', '5', '6', '12', '13', '11', '3', '9', '7'] }, { id: 4, roles: ['1', '8', '12', '9', '11', '3', '7'] }, { id: 5, roles: ['1', '9', '11', '4', '8', '12', '3', '7'] }, { id: 6, roles: ['13'] }, { id: 9, roles: ['1', '9', '11', '4', '6', '8', '5', '12', '13', '3', '7'] }, { id: 7, roles: ['1', '4', '9', '11', '8', '12', '3', '7'] }, { id: 10, roles: ['1', '9', '11', '3', '4', '5', '12', '7'] }, { id: 12, roles: ['1', '3', '11'] }, { id: 13, roles: ['1', '11', '3'] }],
 
-    Projects: [{ id: 31, roles: ['1', '2', '3', '4', '6'] }, { id: 7, roles: ['1', '2', '3', '4', '6'] }, { id: 9, roles: ['1', '2', '3', '4', '6'] }, { id: 2, roles: ['1', '3', '2'] }, { id: 4, roles: ['1', '3', '2'] }, { id: 5, roles: ['1', '3', '2'] }, { id: 6, roles: ['1', '3', '2'] }],
+    Projects: [{ id: 31, roles: ['1', '2', '3', '4', '5', '9', '11', '12', '13', '6'] }, { id: 7, roles: ['1', '2', '3', '4', '13', '12', '5', '9', '11', '6'] }, { id: 9, roles: ['1', '2', '3', '13', '4', '12', '11', '5', '9', '6'] }, { id: 2, roles: ['1', '3', '12', '11', '2'] }, { id: 4, roles: ['1', '3', '12', '11', '2'] }, { id: 5, roles: ['1', '3', '12', '11', '2'] }, { id: 6, roles: ['1', '3', '12', '11', '2'] }],
 
     BusList: [{ id: 30, roles: true }, { id: 3, roles: true }, { id: 2, roles: true }, { id: 7, roles: true },],
 
-    People: [{ id: 1, roles: ['1', '3', '12', '11' ,'2'] }, { id: 2, roles: ['1', '12','11' , '3', '2'] }, { id: 32, roles: ['1', '3', '12','11' , '2'] }, { id: 33, roles: ['1', '3', '12','11' , '2'] },{ id: 5, roles: ['1', '3', '12', '11' ,'4', '2'] }, { id: 6, roles: ['1', '3', '12', '11' ,'4', '2'] }, { id: 34, roles: ['1', '4', '3','11' , '12', '2'] }, ],
+    People: [{ id: 1, roles: ['1', '3', '12', '11', '2'] }, { id: 2, roles: ['1', '12', '11', '3', '2'] }, { id: 32, roles: ['1', '3', '12', '11', '2'] }, { id: 33, roles: ['1', '3', '12', '11', '2'] }, { id: 5, roles: ['1', '3', '12', '11', '4', '2'] }, { id: 6, roles: ['1', '3', '12', '11', '4', '2'] }, { id: 34, roles: ['1', '4', '3', '11', '12', '2'] },],
 
-    Demography: [ { id: 3, roles: true },{ id: 2, roles: true }, { id: 7, roles: true }],
+    Demography: [{ id: 3, roles: true }, { id: 2, roles: true }, { id: 7, roles: true }],
 
     BuzzStock: [{ id: 3, roles: true }, { id: 2, roles: true }, { id: 7, roles: true }, { id: 9, roles: true }]
   }
@@ -207,7 +207,7 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
                   <Trainers getData={getData} selectDATA={selectDATA} />
                 </Grid>
               }
-               {
+              {
                 selectDATA == 6 && <Grid>
                   <GelathiFacilitator getData={getData} selectDATA={selectDATA} />
                 </Grid>
