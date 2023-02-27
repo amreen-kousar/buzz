@@ -5,7 +5,7 @@ import { Button, Dialog, AppBar, Toolbar, IconButton, Typography, InputLabel, Me
 import { useLocation, Link } from 'react-router-dom'
 import CreateProj from './Components/CreateProj';
 
-function AddProject() {
+function AddProject({viewMessage}) {
 
     const [open, setAddProject] = useState(false)
     const [country, setCountry] = useState([])
@@ -369,7 +369,7 @@ function AddProject() {
                                 setCreatePro(e),
                                     handleClose()
 
-                            }} createPro={sendData && createPro} />
+                            }} createPro={sendData && createPro} viewMessage={viewMessage} />
                     }
 
 

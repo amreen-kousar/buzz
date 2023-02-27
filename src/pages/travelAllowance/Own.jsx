@@ -72,9 +72,6 @@ export default function Own(props) {
     }, [props.returnDateValue]
     )
 
-    const Alert = forwardRef(function Alert(props, ref) {
-        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    });
 
 
     const handleOpenFilter = (itm) => {
@@ -87,6 +84,32 @@ export default function Own(props) {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
+
+    const handleDeleteTA = (itm) => {
+        var data = JSON.stringify({
+            ta_id: itm?.id
+        });
+        console.log(data)
+        var config = {
+            method: 'post',
+            url: 'https://bdms.buzzwomen.org/appTest/new/deleteTa.php',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        axios(config)
+            .then(function (response) {
+                setMessage("Poa Successfully deleted")
+                setOpenMessage(true)
+                list()
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 
 
     const list = async () => {
@@ -109,6 +132,7 @@ export default function Own(props) {
         console.log(data, "travel requestttttttttttttttttttttttttttttt")
         axios(config)
             .then(function (response) {
+
                 setListData(response.data)
                 console.log(response.data, '<--------travel alliance eeeeeeeeeeeeeeee');
             })
@@ -124,10 +148,19 @@ export default function Own(props) {
     };
 
 
+    const Alert = forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
 
 
     return (
         <div>
+            <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+                <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
+                    {message}
+                </Alert>
+            </Snackbar>
+
             {listdata?.data?.length > 0 ? <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <Box sx={{ width: '100%' }}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -182,11 +215,23 @@ export default function Own(props) {
                         {listdata?.data?.map((itm) => {
                             return (
                                 <>
-                                    <Card onClick={() => { handleOpenFilter(itm) }} style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer" }} >
-                                        <Grid sx={{ margin: '8px' }} style={{ color: "blue" }}><b cursor="pointer"  >{itm?.Ta_Name}</b>
-                                            <Iconify style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
-                                            <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify></Grid>
-                                        <Typography variant="body" gutterBottom sx={{ margin: '10px' }}> <b>TA Amount:{itm?.telephone}</b></Typography>
+                                    <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
+
+                                        <Grid container spacing={2} >
+                                            <Grid onClick={() => { handleOpenFilter(itm) }} item xs={8}>
+                                                <b cursor="pointer" style={{ color: "blue" }} >{itm?.Ta_Name}</b><br>
+                                                </br>
+                                                <Typography variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
+                                            </Grid>
+                                            <Grid item xs={4}>
+                                                <Iconify onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+                                                <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
+                                            </Grid>
+
+
+                                        </Grid>
+
+
                                     </Card>
                                 </>
                             )
