@@ -104,7 +104,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             end_date: g === "date" ? i : null,
             start_date: g === "date" ? id : null,
             "search": search,
-            "id": userIdCheck,
+            "id": 35,
             "role_id": 5,
             "filter_id": 0,
             "type": "",

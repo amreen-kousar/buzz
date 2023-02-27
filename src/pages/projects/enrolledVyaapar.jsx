@@ -80,7 +80,7 @@ export default function enrolledVyaaparList() {
                // console.log(itm,'<---------------vyaaparvyaaparvyaaparvyaapar')
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
+                        setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name",id:itm?.id })
                         handleOpenFilter()
                     }}>
                            <Vyaparprogram/>

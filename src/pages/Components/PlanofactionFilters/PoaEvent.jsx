@@ -5,6 +5,8 @@ import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import Poafunders from './Poafunders';
 import Avatar from '@mui/material/Avatar';
+import { useGeolocated } from "react-geolocated";
+import Geocode from "react-geocode";
 // material
 import {
   Grid,
@@ -35,10 +37,71 @@ PoaFilter.propTypes = {
 };
 
 export default function PoaFilter({ isOpenEvent, onCloseEvent, select }) {
-  console.log(select, "<--gfh");
+  
+  
+  const [locationS,setLocation] = useState();
+  const [checkin, setCheckIn] = useState();
+  const [checkout, setCheckout] = useState('')
+  const [checkvisible,setCheckvisible]= useState(false);
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+  useGeolocated({
+    positionOptions: {
+      enableHighAccuracy: false,
+    },
+    userDecisionTimeout: 5000,
+  });
+
+  useEffect(() => {
+   location()
+  }, [coords]
+  )
+
+  useEffect(()=>{
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+var data = JSON.stringify({
+  "latitude": position.coords.latitude,
+  "longitude": position.coords.longitude
+});
+
+var config = {
+  method: 'post',
+  url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(response,",----ewrwerwer")
+  setLocation(response?.data)
+//  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error,",----ewrwerwer");
+});
+      
+    });
+  },[])
+
+  
+  const location = () => {
+    Geocode.fromLatLng(coords?.latitude, coords?.longitude).then(
+      (response) => {
+        const address = response.results[0].formatted_address;
+        console.log(address, "<----addressss");
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+  }
   const [eventData, setEventData] = useState('')
   const [addImage, setAddImage] = useState('')
-  const [checkout, setCheckout] = useState('')
+ 
   const [idEvent, setIdEvent] = [{
     event_id: "",
     user_id: ""
@@ -47,12 +110,24 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select }) {
     event();
 
   }, [select]);
+
+const handlecheckin=()=>{
+     setCheckIn(locationS)
+     setCheckvisible(true)
+}
+
+const handlecheckout=()=>{
+  setCheckout(locationS)
+}
   const event = async => {
     var data = JSON.stringify({
-      "event_id": select?.id,
-      "user_id": "651"
+      // "event_id": select?.id,
+      // "user_id": "651",
+      "event_id":select?.id,
+       "user_id":35,
+      "check_in_location":"RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India"
     });
-
+      console.log(select?.id,"selectedddddd")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
@@ -124,10 +199,24 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select }) {
               <CardContent>
                 <Typography style={{textAlign:'center'}}><u>CheckIn/Out Status</u></Typography>
                 <br/>
+                {(!checkvisible)?<Button sx={{
+                  '&:hover': {
+                    backgroundColor: '#ffd796',
+                  },
+                  color: '#ff7424'
+                }} onClick={handlecheckin}>CHECK IN</Button>:
+          
+                 <Button sx={{
+                  '&:hover': {
+                    backgroundColor: '#ffd796',
+                  },
+                  color: '#ff7424'
+                }} onClick={handlecheckout} disabled={checkout}>CHECK OUT</Button>}
+                {console.log(location,"locationnnnnnnnn")}
                 <Typography variant="body1">Checkin Time: {eventData?.check_in}</Typography>
-                <Typography>Checkin Location: {eventData?.check_in_location}</Typography>
+                <Typography>Checkin Location: {checkin}</Typography>
                 <Typography>Checkout Time : {eventData?.check_out}</Typography>
-                <Typography>Checkout Location: {eventData?.check_out_location}</Typography>
+                <Typography>Checkout Location: {checkout}</Typography>
 
               </CardContent>
             </Card>

@@ -11,8 +11,17 @@ function AddProject() {
     const [country, setCountry] = useState([])
     const [fund, setFund] = useState()
     const [states, setStates] = useState([])
+    const [createPro, setCreatePro] = useState(false)
     const [district, setDistrict] = useState([])
     const [taluk, setTaluk] = useState([])
+    const [sendData, setSendData] = useState(null)
+    const [mainState, setMainState] = useState({
+        locationID: "",
+        locationName: "",
+        funderId: "",
+        funderName: "",
+
+    })
     const [data, setData] = useState({
         country: 1,
         state: '',
@@ -24,6 +33,7 @@ function AddProject() {
 
     useEffect(() => {
         location();
+        // createProject();
     }, []
     )
 
@@ -148,9 +158,55 @@ function AddProject() {
 
 
     const createProject = () => {
-        setAddProject(false)
+        if (confirm("Are You Sure You Want To Create Project?")) {
+            const fundList = fund?.filter(itm => itm?.id === mainState?.funderId)
+            const talukList = taluk?.filter(itm => itm?.id === mainState?.locationID)
+            console.log(fundList, talukList, "<----talukListtalukList")
 
-        // MAKE API caal to create project
+            var data = new FormData();
+            data.append('user_id', '650');
+            data.append('locationID', talukList[0]?.id);
+            data.append('funderID', fundList[0]?.id);
+            data.append('createdBy', '650');
+            data.append('lastUpdatedBy', '650');
+            data.append('location_name', talukList[0]?.name);
+            data.append('funderName', fundList[0]?.name);
+
+            var config = {
+                method: 'post',
+                url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
+                data: data
+            };
+
+            axios(config)
+                .then(function (response) {
+                    setSendData({
+                        projectId: response?.data?.project_id,
+                        projectname: response?.data?.projectName,
+                        locationid: response?.data?.locationID,
+                        locationName: response?.data?.location_name
+                    })
+                    setCreatePro(true)
+                    setAddProject(response.data)
+                    console.log(response, '<----------setAddProjectsetAddProjectsetAddProject', sendData);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+        console.log(sendData, "<---qwertyui")
+        //    else{
+        //         setSendData({
+        //             projectId:"",
+        //             projectname:"",
+        //             locationName:"",
+        //             locationid:""
+        //         })
+        //         setCreatePro(true)
+        //         console.log("form is cancelsdsd")
+        //   }
+
+
     }
 
 
@@ -186,7 +242,7 @@ function AddProject() {
                             Create New Project
                         </Typography>
 
-                        <Button autoFocus color="inherit" onClick={handleClose}>
+                        <Button autoFocus color="inherit" onClick={createProject}>
                             save
                         </Button>
                     </Toolbar>
@@ -264,6 +320,7 @@ function AddProject() {
                             label="Age"
                             onChange={(e => {
                                 setData({ ...data, talaq_id: e?.target?.value })
+                                setMainState({ ...mainState, locationID: e?.target?.value })
                                 // getTaluk(e?.target?.value)
                             })}
                         >
@@ -285,6 +342,7 @@ function AddProject() {
                             label="Age"
                             onChange={(e => {
                                 setData({ ...data, funder_id: e?.target?.value })
+                                setMainState({ ...mainState, funderId: e?.target?.value })
                                 // getTaluk(e?.target?.value)
                             })}
                         >
@@ -304,7 +362,17 @@ function AddProject() {
                   </Link><br /> */}
                     {/* <Button onClick={() => createProject()} fullWidth variant="filled" style={{background:"#f5f5f5"}}>Create New Project</Button> */}
 
-                    <CreateProj />
+
+                    {
+                        sendData && <CreateProj sendData={sendData}
+                            setCreatePro={(e) => {
+                                setCreatePro(e),
+                                    handleClose()
+
+                            }} createPro={sendData && createPro} />
+                    }
+
+
                 </div>
 
             </Dialog>

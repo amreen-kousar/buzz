@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
-import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
+// import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import GreenSurvey from './Components/GreenSurvey'
@@ -67,20 +67,20 @@ export default function enrolledGreenMotivatorsList() {
           </Button> */}
             </Stack>
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
-            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+            {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ParticipantDrawer
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
                     onCloseFilter={handleCloseFilter}
                 />
-            </Stack>
+            </Stack> */}
             {/* </Stack> */}
             {green?.list?.map((itm) => {
                 console.log(itm,'<----------greengreengreen')
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
+                        setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id })
                         handleOpenFilter()
                     }}>
                        <GreenSurvey />

@@ -31,6 +31,11 @@ export default function User() {
   var [totalCount, settotalCount] = useState(0)
 
   useEffect(() => {
+    console.log("entered in byss")
+  }, [])
+
+  useEffect(() => {
+
     setDw(false)
     busesd()
   }, [dw])

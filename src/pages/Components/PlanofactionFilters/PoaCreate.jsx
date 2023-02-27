@@ -16,7 +16,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
-
+import moment from 'moment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -33,14 +33,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PoaCreate({ setSucess }) {
+export default function PoaCreate() {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState("");
+  const [userId, setUserId] = useState()
   const userDetails = localStorage?.getItem('userId')
   console.log(userDetails,"userrrrrrrrrrrrr")
+  const role_name =JSON.parse(localStorage?.getItem('userDetails'))?.role_name
   const [value, setValue] = React.useState(false);
-
+ const [successMessage,setsuccessMessage]=useState(false);
+ const [message, setMessage] = useState('')
   const handleChangeTime = (newValue) => {
     console.log(newValue, "<----1234567u8")
     // setValue(newValue);
@@ -59,9 +62,11 @@ export default function PoaCreate({ setSucess }) {
     console.log(event, "<--jyhfgd")
 
     setAddData({ ...addData, date2: event })
+    console.log(addData?.date2)
   }
   const handleChange = (event) => {
     setAddData({ ...addData, date: event })
+    console.log(addData?.date,"dataaaaa")
   }
 
   const handleClickOpen = () => {
@@ -71,8 +76,8 @@ export default function PoaCreate({ setSucess }) {
 
   const handleClose = () => {
     setOpen(false);
+    
   };
-
 
   useEffect(() => {
     //AddPoa()
@@ -82,14 +87,15 @@ export default function PoaCreate({ setSucess }) {
   const AddPoa = async => {
     console.log(addData, "<0hgdfvfdbgdf")
     var data = JSON.stringify({
-      "date": addData?.date,
-      "user_id": "651",
+      "date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+      "user_id": userId?userId:651,
       "name": addData?.name,
       "all_day": addData?.all_day,
       "description": addData?.description,
-      "date2": addData?.date2
+      "date2": moment(addData?.date2?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+      // "roleName":role_name
     });
-
+console.log(userId,"useriddddddddddd")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createEvent.php',
@@ -103,8 +109,9 @@ export default function PoaCreate({ setSucess }) {
       .then(function (response) {
         if (response?.data?.code === 200) {
 
-          setSucess("this is success create")
-
+          // setSucess("this is success create")
+          setMessage('Poa Created successfully')
+          setsuccessMessage(true)
           handleClose()
         }
         else {
@@ -130,6 +137,13 @@ export default function PoaCreate({ setSucess }) {
             }}>
        Create New Poa
       </Button> */}
+        {successMessage &&
+        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)} >
+          <Alert onClose={() => { setsuccessMessage(false) }} severity="success" sx={{ width: '100%',backgroundColor:'green',color:'white' }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      }
         {(userDetails && userDetails!=1)?<Button variant="contained" onClick={handleClickOpen} style={{
         float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
         position: 'fixed', zIndex: '1', bottom: 40, right: 40

@@ -28,7 +28,9 @@ import Slide from '@mui/material/Slide';
 import { Color } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import defaultImage from '../../assets/images/default.png';
+import defaultImage from '../../assets/images/default.png'
+import {useState} from 'react'
+import { useEffect } from 'react';
 // ----------------------------------------------------------------------
 UserDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
@@ -40,7 +42,16 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
 
   const userDetails = localStorage?.getItem('userId')
   { console.log(userDetails, "userrrrrrrrrrrrrrrrrrr") }
-  let user = JSON.parse(localStorage?.getItem('people'))
+  const [user,setUser]=useState(JSON.parse(localStorage?.getItem('people')))
+ 
+  useEffect(() => {
+    //   editUser()
+    updateSetUser()
+  }, []
+  )
+  const updateSetUser=()=>{
+    setUser(JSON.parse(localStorage?.getItem('people')))
+  }
 
   return (
     <>
@@ -74,7 +85,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
         <Divider /><br />
 
         {userDetails && userDetails == 2 && <Stack direction={'row'} justifyContent="flex-end">
-          <UserEditProfile />
+          <UserEditProfile updateSetUser={updateSetUser} />
           <Button style={{ float: 'right' }} sx={{
             '&:hover': {
               backgroundColor: '#ffd796',
@@ -102,6 +113,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
                     <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
                       Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{user?.supervisorName}</span>
                     </Typography>
+            
                     <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
                       Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{user?.doj}</span> </Typography>
                   </Card>

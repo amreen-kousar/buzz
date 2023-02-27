@@ -18,9 +18,11 @@ import { vi } from "date-fns/locale";
 
 export default function AssignBatches(){
     const [gelathi, setGelathi] = useState('');
+    const [gl,setGl] = useState(false);
     const [villages, setVillages] = useState('');
     const [batch,setBatch] = useState('');
     const [tc, setTc] = useState('');
+    let [alloted,setAlloted]=useState(0)
 
    const [selected,setSelected]=useState([])
   useEffect(() => {
@@ -29,6 +31,7 @@ export default function AssignBatches(){
   }, []
   )
   const gelathinamelist= async() =>{
+   
     var data = JSON.stringify({
         "project_id":234,
         "role_id":13  , 
@@ -54,12 +57,17 @@ export default function AssignBatches(){
       
 }
 
-const villagelist= async(id) =>{
+const villagelist= async(itm) =>{
+  setGl(true)
   var data = JSON.stringify({
     "project_id":234, 
-    "emp_id":id
+    "emp_id":itm?.id,
+    
   
     });
+
+
+    setAlloted(itm?.villages_assigned)
     
     var config = {
       method: 'post',
@@ -81,7 +89,8 @@ const villagelist= async(id) =>{
 }
 
 const CreateBatch= async(id) =>{
-  setSelected([...selected,id])
+  selected.push(id)
+  setSelected(selected)
   // console.log(createbatch,"createbatchhhhhh")
   var data = JSON.stringify({
      
@@ -89,7 +98,10 @@ const CreateBatch= async(id) =>{
      "training_batch_id":id,
       "emp_id":50
     });
-    
+console.log(alloted,selected)
+      
+  setAlloted(alloted=>parseInt(alloted)+1)    
+  {console.log(alloted,"countttttttt")}
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createGFBatch.php',
@@ -134,19 +146,24 @@ const CreateBatch= async(id) =>{
               <Select color="common" label="Gelathi Facilitator" variant="standard">
              
                   {gelathi?.list?.map((itm)=>{
+                  
                     return(
-                            <MenuItem onClick={()=>{villagelist(itm?.id)}} value={itm?.id}>{itm?.first_name}</MenuItem>
+                            <MenuItem onClick={()=>{villagelist(itm)}} value={itm?.id}>{itm?.first_name}</MenuItem>
+                            
                     )
+                    
                   })}
                 </Select>
                   </Stack>
                 </CardContent>
           </Card><br/>
-          <Typography gutterBottom style={{textAlign:'center'}}>
-                     Total Villages: {selected.length}/{tc}
-                </Typography>
-
-          <Card style={{ marginTop: 20,  borderRadius: 20 }}>
+       
+                     {(gl)?<Typography gutterBottom style={{textAlign:'center'}}>
+                     Total Villages: {alloted}/{tc}
+                     {console.log(alloted,"alloteddddddddd")}
+                     </Typography>:null}
+                
+                 {(gl)?<Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                  
                   <Stack mt={2} mb={2}>
@@ -168,7 +185,7 @@ const CreateBatch= async(id) =>{
                         <Typography value={itm?.training_batch_id}>{itm?.name}
                         
                         
-                        {(selected.includes(itm?.training_batch_id))?<IconButton onClick={()=>CreateBatch(itm?.training_batch_id)} style={{float:'right'}}>
+                        {(selected.includes(itm?.training_batch_id))?<IconButton  style={{float:'right'}}>
                           <Iconify icon="typcn:tick" style={{fontSize:20,color:"green"}}/>
                         </IconButton>:
                         <IconButton onClick={()=>CreateBatch(itm?.training_batch_id)} style={{float:'right'}}>
@@ -188,7 +205,7 @@ const CreateBatch= async(id) =>{
                 
                   </Stack>
                 </CardContent>
-          </Card>
+                 </Card>:null}
             
 
 

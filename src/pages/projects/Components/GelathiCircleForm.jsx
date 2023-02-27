@@ -16,7 +16,7 @@ import {
   FormControlLabel,
   Card,
   CardContent,
-  CardActionArea,
+  CardActionArea,DialogContent,DialogContentText
   
 } from '@mui/material';
 import { Icon } from '@iconify/react';
@@ -41,22 +41,72 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function GelathiCircleForm() {
   const [open, setOpen] = React.useState(false);
   const [vyaapar, setVyaapar] = useState('');
-  const [selectedValue, setSelectedValue] = React.useState('a');
+  const [circleform, setcircleform] = useState('');
+  const [selectedValue, setSelectedValue] = React.useState('');
+  const [skillValue, setSkillValue]= React.useState('');
+  const [listenpara, setListenpara]= React.useState('');
+  const [community,setCommunity] = React.useState('');
   const [age, setAge] = React.useState('');
+  const [communitymem,setCommunitymem]= React.useState('');
+  const [bringtogether,setbringTogether]=React.useState('');
+  const [conflicts,setConflicts]=React.useState('');
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
+  
+  const [sendData, setSendData] = useState({
+    email_address: "",
+    GelathiId:"",
+    Spoorthi_Session_Number:"",
+    list_down_your_skills:"" ,
+    skills_to_overcome_my_challenges:"",
+    used_skills_resources_combat_challenge:"" ,
+    listen_paragraph:"" ,
+    summarize_main_points_paragraph:"" ,
+    ask_two_questions_help_you_understand:"" ,
+    three_infrastructure_of_your_village:"" ,
+    know_the_need_of_my_community:"" ,
+    together_community_members_community_infrastructure:"" ,
+    with_other_community_infrastructure:"" ,
+    bring_someone_together:"" ,
+    brought_people_together_incident:"" ,
+    conflict_with_anyone_ask_position:"" ,
+    conflict_matters_interest_mine:"" ,
+    There_puja_at_my_house:"" 
+  });
   const handleChangeSelect = (event) => {
     setAge(event.target.value);
   };
-  const handleChange = (event) => {
+  const sessionValue = (event) => {
     setSelectedValue(event.target.value);
   };
+  const skillsoption = (event) =>{
+     setSkillValue(event.target.value)
+  }
+
+  const paravalue=(event)=>{
+    setListenpara(event.target.value)
+  }
+
+  const communityvalue=(event)=>{
+    setCommunity(event.target.value)
+  }
+
+  const communitymemvalue=(event)=>{
+    setCommunitymem(event.target.value)
+  }
+  const bringtogethervalue=(event)=>{
+    setbringTogether(event.target.value)
+  }
+
+  const Conflictvalue=(event)=>{
+         setConflicts(event.target.value)
+  }
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+  
   };
 
 
@@ -84,11 +134,56 @@ export default function GelathiCircleForm() {
         axios(config)
         .then(function (response) {
           setVyaapar(response?.data)
+
         })
         .catch(function (error) {
           console.log(error);
         });
   }
+  {console.log(selectedValue,"selectedValueeeeee")}
+
+  const gelathicircleformdata= async() =>{
+
+    var data = JSON.stringify({
+      "partcipantId": 222954,
+      "email_address": sendData?.email_address,
+      "GelathiId": sendData?.GelathiId,
+      "Spoorthi_Session_Number":selectedValue,
+      "list_down_your_skills": sendData?.list_down_your_skills,
+      "skills_to_overcome_my_challenges": skillValue,
+      "used_skills_resources_combat_challenge": sendData?.used_skills_resources_combat_challenge,
+      "listen_paragraph": listenpara,
+      "summarize_main_points_paragraph": sendData?.summarize_main_points_paragraph,
+      "ask_two_questions_help_you_understand": sendData?.ask_two_questions_help_you_understand,
+      "three_infrastructure_of_your_village": sendData?.three_infrastructure_of_your_village,
+      "know_the_need_of_my_community": community,
+      "together_community_members_community_infrastructure": communitymem,
+      "with_other_community_infrastructure": sendData?.with_other_community_infrastructure,
+      "bring_someone_together": bringtogether,
+      "brought_people_together_incident": sendData?.brought_people_together_incident,
+      "conflict_with_anyone_ask_position": sendData?.conflict_with_anyone_ask_position,
+      "conflict_matters_interest_mine": conflicts,
+      "There_puja_at_my_house": sendData?.There_puja_at_my_house
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/new/addSpoorthiBaselineQuestionnaire.php',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        setcircleform(response?.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      handleClose();
+}
         
   return (
     <div>
@@ -101,19 +196,32 @@ export default function GelathiCircleForm() {
         </IconButton>
         </Stack> 
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
-          <Toolbar>
-          
-            <Link to="/dashboard/projects">
-                        <IconButton style={{color:"white"}}>
+    
+              <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
+        
+
+                        <IconButton style={{float:"right", color:"white"}} onClick={handleClose}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
-                        </IconButton></Link>
-       
-         
-          </Toolbar>
-        </AppBar>
+                        </IconButton>
+                    
+          <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+          Spoorthi Baseline Questionnaire
+          </Typography>
+
+
+          <Button autoFocus edge="end" color="inherit" onClick={() => gelathicircleformdata()}>
+          <Iconify icon="material-symbols:save" width={30} height={30} />
+          </Button>
+        </Toolbar>
+        {/* </AppBar> */}
+     
+        <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
+          <DialogContentText
+            id="scroll-dialog-description"
+            tabIndex={-1}
+          >
         <Grid style={{margin:10}}>
-        <Card mt={1} style={{ borderRadius: 20 }} >
+        {/* <Card mt={1} style={{ borderRadius: 20 }} >
                 <CardContent>
                
                     <Typography variant="subtitle2" style={{color:'white',backgroundColor:"#ff7424",padding:10,borderRadius:5}}>
@@ -123,7 +231,7 @@ export default function GelathiCircleForm() {
                     * Required
                   </Typography>  
                   </CardContent>    
-          </Card>
+          </Card> */}
 
 
           <Card mt={1} style={{marginTop:10, borderRadius: 20 }}>
@@ -131,7 +239,7 @@ export default function GelathiCircleForm() {
                 <CardContent>
                   <Typography variant="subtitle2" style={{color:"#ff7424"}}>Surveyor's email address *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Email" label="Enter Email" variant="outlined" color="common" />
+                    <TextField id="Email" required label="Enter Email" onChange={(e) => { setSendData({ ...sendData, email_address: e?.target?.value }) }} variant="outlined" color="common" />
                   </Stack>
               </CardContent>
           </Card>
@@ -140,7 +248,7 @@ export default function GelathiCircleForm() {
           <CardContent>
             <Typography variant="subtitle2" style={{color:"#ff7424"}}>Name of the Gelathi / ಗೆಲತಿಯ ಹೆಸರು *</Typography>
             <Stack mt={2} mb={2}>      
-              <Select color="common" label="Choose Gelathi Facilitator" variant="standard">
+              <Select color="common" label="Choose Gelathi Facilitator" variant="standard" required onChange={(e) => setSendData({ ...sendData, GelathiId: e?.target?.value })} value={sendData?.GelathiId} >
                   {vyaapar?.list?.map((itm)=>{
                     return(
                             <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
@@ -158,13 +266,16 @@ export default function GelathiCircleForm() {
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
+                      value={selectedValue}
+                      onChange={sessionValue}
+                      // value={sendData?.Spoorthi_Session_Number}  onChange={(e) => setSendData({ ...sendData, Spoorthi_Session_Number: e?.target?.value })}
                     >
-                      <FormControlLabel value="opt1" control={<Radio style={{color:"#595959"}} />} label="Session 1" />
-                      <FormControlLabel value="opt2" control={<Radio style={{color:"#595959"}} />} label="Session 2" />
-                      <FormControlLabel value="opt3" control={<Radio style={{color:"#595959"}} />} label="Session 3" />
-                      <FormControlLabel value="opt4" control={<Radio style={{color:"#595959"}} />} label="Session 4" />
-                      <FormControlLabel value="opt5" control={<Radio style={{color:"#595959"}} />} label="Session 5" />
-                      <FormControlLabel value="opt6" control={<Radio style={{color:"#595959"}} />} label="Session 6" />
+                      <FormControlLabel value="Session 1"  control={<Radio style={{color:"#595959"}} />} label="Session 1" />
+                      <FormControlLabel value="Session 2"  control={<Radio style={{color:"#595959"}} />} label="Session 2" />
+                      <FormControlLabel value="Session 3"  control={<Radio style={{color:"#595959"}} />} label="Session 3" />
+                      <FormControlLabel value="Session 4"  control={<Radio style={{color:"#595959"}} />} label="Session 4" />
+                      <FormControlLabel value="Session 5"  control={<Radio style={{color:"#595959"}} />} label="Session 5" />
+                      <FormControlLabel value="Session 6"  control={<Radio style={{color:"#595959"}} />} label="Session 6" />
                     </RadioGroup>
                   </Stack>
                 </CardContent>
@@ -175,7 +286,7 @@ export default function GelathiCircleForm() {
                   <Typography variant="subtitle2" style={{color:"#ff7424"}}>Can you list down three of your skills/
 ನಿಮ್ಮ ಮೂರು ಕೌಶಲ್ಯಗಳನ್ನು ನೀವು ಪಟ್ಟಿ ಮಾಡಬಹುದು?</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="skillslist" label="Your Answer" variant="outlined" color="common"/>
+                    <TextField id="skillslist" label="Your Answer" onChange={(e) => { setSendData({ ...sendData, list_down_your_skills: e?.target?.value }) }} variant="outlined" color="common"/>
                   </Stack>
                 </CardContent>
           </Card>
@@ -188,12 +299,14 @@ export default function GelathiCircleForm() {
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
+                      value={skillValue}
+                      onChange={skillsoption}
                     >
-                      <FormControlLabel value="opt1" control={<Radio style={{color:"#595959"}} />} label="Strongly Agree" />
-                      <FormControlLabel value="opt2" control={<Radio style={{color:"#595959"}} />} label="Agree" />
-                      <FormControlLabel value="opt3" control={<Radio style={{color:"#595959"}} />} label="Neutral" />
-                      <FormControlLabel value="opt4" control={<Radio style={{color:"#595959"}} />} label="Strongly Disagree" />
-                      <FormControlLabel value="opt5" control={<Radio style={{color:"#595959"}} />} label="Disagree" />
+                      <FormControlLabel value="Strongly Agree" control={<Radio style={{color:"#595959"}} />} label="Strongly Agree" />
+                      <FormControlLabel value="Agree" control={<Radio style={{color:"#595959"}} />} label="Agree" />
+                      <FormControlLabel value="Neutral" control={<Radio style={{color:"#595959"}} />} label="Neutral" />
+                      <FormControlLabel value="Strongly Disagree" control={<Radio style={{color:"#595959"}} />} label="Strongly Disagree" />
+                      <FormControlLabel value="Disagree" control={<Radio style={{color:"#595959"}} />} label="Disagree" />
                     </RadioGroup>
                   </Stack>
                 </CardContent>
@@ -203,7 +316,7 @@ export default function GelathiCircleForm() {
                 <CardContent>
                   <Typography variant="subtitle2" style={{color:"#ff7424"}}>State one instance of when you used your skills and resources to combat your challenge/ನಿಮ್ಮ ಸವಾಲನ್ನು ಎದುರಿಸಲು ನಿಮ್ಮ ಕೌಶಲ್ಯ ಮತ್ತು ಸಂಪನ್ಮೂಲಗಳನ್ನು ನೀವು ಬಳಸಿದಾಗ ಒಂದು ಉದಾಹರಣೆಯನ್ನು ತಿಳಿಸಿ</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="skillsresources" label="Your Answer" variant="outlined" color="common" />
+                    <TextField id="skillsresources" label="Your Answer" onChange={(e) => { setSendData({ ...sendData, used_skills_resources_combat_challenge: e?.target?.value }) }} variant="outlined" color="common" />
                   </Stack>
                 </CardContent>
           </Card>
@@ -220,9 +333,11 @@ export default function GelathiCircleForm() {
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
+                      value={listenpara}
+                      onChange={paravalue}
                     >
-                      <FormControlLabel value="opt1" control={<Radio style={{color:"#595959"}} />} label="Yes" />
-                      <FormControlLabel value="opt2" control={<Radio style={{color:"#595959"}} />} label="No" />
+                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}} />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
                      
                     </RadioGroup>
                   </Stack>
@@ -233,7 +348,7 @@ export default function GelathiCircleForm() {
                 <CardContent>
                   <Typography variant="subtitle2" style={{color:"#ff7424"}}>Please summarize the main points of the paragraph?/ಮೇಲಿನ ಪರಿಚ್ಚೇ ದದ ಮುಖ್ಯ ಅಂಶಗಳನ್ನು ನೀವುಸಂಕ್ಷಿಪ್ತವಾಗಿ ತಿಳಿಸಿ. (ಸತ್ಯ ತೆ ಮತ್ತು ಭಾವನೆಗಳೆರಡನ್ನೂ ವಿಶ್ಲೇ ಷಿಸುವುದು)</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="parapoints" label="Your Answer" variant="outlined" color="common" />
+                    <TextField id="parapoints" label="Your Answer" onChange={(e) => { setSendData({ ...sendData, summarize_main_points_paragraph: e?.target?.value }) }} variant="outlined" color="common" />
                   </Stack>
                 </CardContent>
           </Card>
@@ -242,7 +357,7 @@ export default function GelathiCircleForm() {
                 <CardContent>
                   <Typography variant="subtitle2" style={{color:"#ff7424"}}>Please ask two questions that can help you understand the previous paragraph better?/ಹಿಂದಿನ ಪರಿಚ್ಛೇ ದವನ್ನು ಚೆನ್ನಾಗಿ ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ನಿಮಗೆ ಸಹಾಯ ಮಾಡುವ ಎರಡು ಪ್ರಶ್ನೆ ನೀವು ಕೇಳಿ.</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="twoquestions" label="Your Answer" variant="outlined" color="common" />
+                    <TextField id="twoquestions" label="Your Answer" onChange={(e) => { setSendData({ ...sendData, ask_two_questions_help_you_understand: e?.target?.value }) }} variant="outlined" color="common" />
                   </Stack>
                 </CardContent>
           </Card>
@@ -251,7 +366,7 @@ export default function GelathiCircleForm() {
                 <CardContent>
                   <Typography variant="subtitle2" style={{color:"#ff7424"}}>Please name three infrastructure of your village?/ಗ್ರಾಮದಲ್ಲಿ ಇರುವ ಮೂರುಮೂಲಸೌಕರ್ಯಗಳನ್ನು ಹೆಸರಿಸಿ.</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="twoquestions" label="Your Answer" variant="outlined" color="common" />
+                    <TextField id="twoquestions" label="Your Answer" onChange={(e) => { setSendData({ ...sendData, three_infrastructure_of_your_village: e?.target?.value }) }} variant="outlined" color="common" />
                   </Stack>
                 </CardContent>
           </Card>
@@ -263,12 +378,14 @@ export default function GelathiCircleForm() {
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
+                      value={community}
+                      onChange={communityvalue}
                     >
-                      <FormControlLabel value="opt1" control={<Radio style={{color:"#595959"}} />} label="Strongly Agree" />
-                      <FormControlLabel value="opt2" control={<Radio style={{color:"#595959"}} />} label="Agree" />
-                      <FormControlLabel value="opt3" control={<Radio style={{color:"#595959"}} />} label="Neutral" />
-                      <FormControlLabel value="opt4" control={<Radio style={{color:"#595959"}} />} label="Strongly Disagree" />
-                      <FormControlLabel value="opt5" control={<Radio style={{color:"#595959"}} />} label="Disagree" />
+                      <FormControlLabel value="Strongly Agree" control={<Radio style={{color:"#595959"}} />} label="Strongly Agree" />
+                      <FormControlLabel value="Agree" control={<Radio style={{color:"#595959"}} />} label="Agree" />
+                      <FormControlLabel value="Neutral" control={<Radio style={{color:"#595959"}} />} label="Neutral" />
+                      <FormControlLabel value="Strongly Disagree" control={<Radio style={{color:"#595959"}} />} label="Strongly Disagree" />
+                      <FormControlLabel value="Disagree" control={<Radio style={{color:"#595959"}} />} label="Disagree" />
                     </RadioGroup>
                   </Stack>
                 </CardContent>
@@ -281,12 +398,14 @@ export default function GelathiCircleForm() {
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
+                      value={communitymem}
+                      onChange={communitymemvalue}
                     >
-                      <FormControlLabel value="opt1" control={<Radio style={{color:"#595959"}} />} label="Strongly Agree" />
-                      <FormControlLabel value="opt2" control={<Radio style={{color:"#595959"}} />} label="Agree" />
-                      <FormControlLabel value="opt3" control={<Radio style={{color:"#595959"}} />} label="Neutral" />
-                      <FormControlLabel value="opt4" control={<Radio style={{color:"#595959"}} />} label="Strongly Disagree" />
-                      <FormControlLabel value="opt5" control={<Radio style={{color:"#595959"}} />} label="Disagree" />
+                      <FormControlLabel value="Strongly Agree" control={<Radio style={{color:"#595959"}} />} label="Strongly Agree" />
+                      <FormControlLabel value="Agree" control={<Radio style={{color:"#595959"}} />} label="Agree" />
+                      <FormControlLabel value="Neutral" control={<Radio style={{color:"#595959"}} />} label="Neutral" />
+                      <FormControlLabel value="Strongly Disagree" control={<Radio style={{color:"#595959"}} />} label="Strongly Disagree" />
+                      <FormControlLabel value="Disagree" control={<Radio style={{color:"#595959"}} />} label="Disagree" />
                     </RadioGroup>
                   </Stack>
                 </CardContent>
@@ -297,7 +416,7 @@ export default function GelathiCircleForm() {
                 <CardContent>
                   <Typography variant="subtitle2" style={{color:"#ff7424"}}>Tell us about one instance when you came together with other community members to make a change in the community infrastructure/ಸಮುದಾಯದ ಮೂಲಸೌಕರ್ಯದಲ್ಲಿ ಬದಲಾವಣೆಯನ್ನು ಮಾಡಲು ನೀವು ಇತರ ಸಮುದಾಯದ ಸದಸ್ಯರೊಂದಿಗೆ ಸೇರಿಕೊಂಡಾಗ ಒಂದು ಉದಾಹರಣೆಯ ಕುರಿತು ನಮಗೆ ತಿಳಿಸಿ</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="instance" label="Your Answer" variant="outlined" color="common" />
+                    <TextField id="instance" label="Your Answer" onChange={(e) => { setSendData({ ...sendData, with_other_community_infrastructure: e?.target?.value }) }} variant="outlined" color="common" />
                   </Stack>
                 </CardContent>
           </Card>
@@ -309,11 +428,13 @@ export default function GelathiCircleForm() {
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
+                      value={bringtogether}
+                      onChange={bringtogethervalue}
                     >
-                      <FormControlLabel value="opt1" control={<Radio style={{color:"#595959"}} />} label="Most often I am successful" />
-                      <FormControlLabel value="opt2" control={<Radio style={{color:"#595959"}} />} label="I am successful at doing this" />
-                      <FormControlLabel value="opt3" control={<Radio style={{color:"#595959"}} />} label="I struggle to bring women together" />
-                      <FormControlLabel value="opt4" control={<Radio style={{color:"#595959"}} />} label="I am successful at getting women together but not getting an action done" />
+                      <FormControlLabel value="Most often I am successful" control={<Radio style={{color:"#595959"}} />} label="Most often I am successful" />
+                      <FormControlLabel value="I am successful at doing this" control={<Radio style={{color:"#595959"}} />} label="I am successful at doing this" />
+                      <FormControlLabel value="I struggle to bring women together" control={<Radio style={{color:"#595959"}} />} label="I struggle to bring women together" />
+                      <FormControlLabel value="I am successful at getting women together but not getting an action done" control={<Radio style={{color:"#595959"}} />} label="I am successful at getting women together but not getting an action done" />
                       
                     </RadioGroup>
                   </Stack>
@@ -328,12 +449,14 @@ export default function GelathiCircleForm() {
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
+                      value={conflicts}
+                      onChange={Conflictvalue}
                     >
-                      <FormControlLabel value="opt1" control={<Radio style={{color:"#595959"}} />} label="Strongly Agree" />
-                      <FormControlLabel value="opt2" control={<Radio style={{color:"#595959"}} />} label="Agree" />
-                      <FormControlLabel value="opt3" control={<Radio style={{color:"#595959"}} />} label="Neutral" />
-                      <FormControlLabel value="opt4" control={<Radio style={{color:"#595959"}} />} label="Strongly Disagree" />
-                      <FormControlLabel value="opt5" control={<Radio style={{color:"#595959"}} />} label="Disagree" />
+                      <FormControlLabel value="Strongly Agree" control={<Radio style={{color:"#595959"}} />} label="Strongly Agree" />
+                      <FormControlLabel value="Agree" control={<Radio style={{color:"#595959"}} />} label="Agree" />
+                      <FormControlLabel value="Neutral" control={<Radio style={{color:"#595959"}} />} label="Neutral" />
+                      <FormControlLabel value="Strongly Disagree" control={<Radio style={{color:"#595959"}} />} label="Strongly Disagree" />
+                      <FormControlLabel value="Disagree" control={<Radio style={{color:"#595959"}} />} label="Disagree" />
                     </RadioGroup>
                   </Stack>
                 </CardContent>
@@ -348,17 +471,20 @@ export default function GelathiCircleForm() {
                    ಇದ್ದಕ್ಕಿದ್ದಂತೆ, ನನ್ನ ನೆರೆಹೊರೆಯವರು ಜೋರಾಗಿ ಮತ್ತು ಅನುಚಿತವಾದ ಸಂಗೀತವನ್ನು ನುಡಿಸುತ್ತಾರೆ ಅದು ಪೂಜೆಗೆ ಅಡ್ಡಿಪಡಿಸುತ್ತದೆ. 
                    ನಿಮ್ಮ ನೆರೆಹೊರೆಯವರೊಂದಿಗೆ ನೀವು ಹೊಂದಿರುವ ಕುಂದುಕೊರತೆಯ ಬಗ್ಗೆ ನೀವು ಹೇಗೆ ಮಾತನಾಡುತ್ತೀರಿ?</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="instance" label="Your Answer" variant="outlined" color="common" />
+                    <TextField id="instance" label="Your Answer" onChange={(e) => { setSendData({ ...sendData, There_puja_at_my_house: e?.target?.value }) }} variant="outlined" color="common" />
                   </Stack>
                 </CardContent>
-          </Card>
+          </Card><br/>
 
-
+          
 
               {/* -------------------------------- */}
           
         </Grid>
+     </DialogContentText>
+     </DialogContent>
       </Dialog>
+   
     </div>
   );
 }

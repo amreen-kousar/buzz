@@ -70,6 +70,7 @@ export default function PlanofAction() {
   const [drawerEvent, SetDrawerEvent] = useState(false);
   const [poa, SetPoa] = useState([]);
   const [openMessage, setOpenMessage] = useState(false);
+ 
   const [select, setSelect] = useState();
   const [season, setSeason] = useState(0)
   const [date, setDate] = useState(new Date())
@@ -82,6 +83,8 @@ export default function PlanofAction() {
     date: "",
     for: ""
   }]
+  const role_name =JSON.parse(localStorage?.getItem('userDetails'))?.role_name
+  console.log(role_name,"roleeeee")
   const handleChange = (event, newValue) => {
     console.log("gsfdhfgdhgfhgf", newValue)
     setSeason(newValue)
@@ -111,7 +114,8 @@ export default function PlanofAction() {
       "emp_id": userId ? userId : 651,
       "team": "",
       "date": moment(date?.$d)?.format('YYYY-MM-DD'),
-      "for": season
+      "for": season,
+      
     });
 
     var config = {
@@ -122,6 +126,7 @@ export default function PlanofAction() {
       },
       data: data,
     };
+   
 
     axios(config)
       .then(function (response) {
@@ -208,7 +213,7 @@ export default function PlanofAction() {
       </Typography>
 
 
-      <PoaCreate setSucess={() => { setOpenMessage(true) }} />
+      <PoaCreate  />
       <br />
       <br />
       {name !== '' &&
@@ -360,7 +365,7 @@ export default function PlanofAction() {
 
                                     <TableCell component="th" scope="row" onClick={handleOpenEvent}>
                                       Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.location_name}
-
+                                        
                                       {itm?.status == '2' && <span style={{ color: 'red' }}><br />
                                         (Canceled)
                                       </span>}
@@ -368,7 +373,7 @@ export default function PlanofAction() {
 
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                        {(userDetails == 2 || userDetails == 13) ? <Stack direction={'row'} spacing={2} >
+                                        {(userDetails == 2 || userDetails == 13 || userDetails ==6) ? <Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
                                           <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
@@ -428,7 +433,7 @@ export default function PlanofAction() {
                                     </TableCell>
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                        {(userDetails == 2 || userDetails == 13) ? <Stack direction={'row'} spacing={2} >
+                                        {(userDetails == 2 || userDetails == 13 || userDetails==6) ? <Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
                                           <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
@@ -484,7 +489,7 @@ export default function PlanofAction() {
                                     </TableCell>
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                        {(userDetails == 2 || userDetails == 13) ? <Stack direction={'row'} spacing={2} >
+                                        {(userDetails == 2 || userDetails == 13 || userDetails == 6) ? <Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
                                           <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
