@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button, CardContent, Card, Grid, FormControl, InputLabel, MenuItem, Select, TextField, Stack, Snackbar, Alert } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
+import moment from 'moment'
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -22,7 +23,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateProj({ createPro, setCreatePro, sendData }) {
+export default function CreateProj({ createPro, setCreatePro, sendData ,viewMessage}) {
   console.log(sendData, "<------sendDatasendDatasendDatasendData")
   const [open, setOpen] = React.useState(false);
   const [openFilter, setOpenFilter] = useState(false);
@@ -36,7 +37,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData }) {
   let [gelathiName, setGelathiName] = useState([])
   const [driverData, setDriverData] = useState([])
   const [deleteData, setDeleteData] = useState([])
-  const [data, setData] = useState({ sendData, start_date: new Date(), end_date: new Date() });
+  const [data, setData] = useState({ ...sendData, start_date: new Date(), end_date: new Date() });
 
 
 
@@ -247,7 +248,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData }) {
     axios(config)
       .then(function (response) {
 
-
+        viewMessage('Project added sucessfully')
         console.log(response, '<----------createProj');
         setCreatePro(false)
       })

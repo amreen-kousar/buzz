@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Grid, Container, Stack, Typography, Box, CardContent, Card, Chip, Icon, IconButton, Button } from '@mui/material';
+import { Grid, Container, Stack, Typography, Box, CardContent, Card, Chip, Icon, IconButton, Button, Snackbar } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Pagination from '@mui/material/Pagination';
 import Tab from '@mui/material/Tab';
@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom';
 import ProjectFilter from '../Components/Projectfilters/ProjectFilters';
 import AddProject from './Addproject';
 import FiltersHome from '../Filters/FiltersHome';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 // components
 function TabPanel(props) {
@@ -69,7 +71,8 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
     const [count, setCount] = useState('')
-
+    const [openMessage, setOpenMessage] = useState(false);
+    const [message, setMessage] = useState(false)
     const [countCompleted, setCountCompleted] = useState('')
 
     const [countPublished, setCountPublished] = useState('')
@@ -95,6 +98,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
         projectr()
     }, []
     )
+
     const projectr = async (i, id, g) => {
         console.log(i, id, g)
 
@@ -104,8 +108,8 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             end_date: g === "date" ? i : null,
             start_date: g === "date" ? id : null,
             "search": search,
-            "id": 35,
-            "role_id": 5,
+            "id": 650,
+            "role_id": userIdCheck,
             "filter_id": 0,
             "type": "",
             "pageNum": page,
@@ -170,6 +174,8 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
 
     const searchFunction = (e) => {
+        page = 1
+        setPage(page)
         search = e
         setSearch(search)
         setSelected({ name: e, type: "Search" })
@@ -184,13 +190,27 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
     const handleDelete = () => {
         setSelected(null)
-        setSearch('')
+        search = ''
+        setSearch(search)
+        page = 1
+        setPage(page)
         projectr();
     }
+
+    const Alert = forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
 
 
     return (
         <Page title="Dashboard: Projects">
+
+            <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+                <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
+                    {message}
+                </Alert>
+            </Snackbar>
+
             <Searchbar getSearch={(e) => searchFunction(e)} />
             <Container>
                 <Typography variant="h4" sx={{ mb: 5 }}>
@@ -376,7 +396,10 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
 
                 {userAccess.includes(userIdCheck) &&
                     <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-                        <AddProject />
+                        <AddProject viewMessage={(text) => {
+                            setMessage(text)
+                            setOpenMessage(true)
+                        }} />
                     </Stack>
                 }
             </Container>
