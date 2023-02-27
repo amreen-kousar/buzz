@@ -14,11 +14,24 @@ import { Grid } from '@mui/material';
 import { useLocation } from 'react-router-dom'
 import CreateTrainerBatch from './Components/CreateTrainerBatch'
 import AddTrainerDrawer from './Components/AddTrainerDrawer';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Programevaluationday1 from './Components/Programevaluationday1';
 function Project(props) {
   const location = useLocation()
   const userDetails = localStorage?.getItem('userId');
   console.log(userDetails, "userrrrrrrrrrrrr")
   const [data1, setData1] = useState('')
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const id = sessionStorage?.getItem("proId")
   useEffect(() => {
     projData();
@@ -58,7 +71,7 @@ function Project(props) {
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
-    linkStyle: { textDecoration: 'none', color: "black" }
+    linkStyle: { textDecoration: 'none', color: "black"}
   }
   const addIcon = <IconButton>
     <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" />
@@ -227,7 +240,7 @@ function Project(props) {
                   </Link>
                   <br />
 
-                  <Link to="/dashboard/projects/gelathiCirlces" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                  {/* <Link to="/dashboard/projects/gelathiCirlces" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}> Schedule A Village Visit</span>
@@ -241,7 +254,49 @@ function Project(props) {
                     <span style={{ width: "200px" }}> Assigned Villages</span>
                   </Button>
                   </Link>
-                  <br />
+                  <br /> */}
+        <span style={styles.linkStyle}>
+        <Button variant="secondary" style={styles.buttonStyle}
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        endIcon={<KeyboardArrowDownIcon />}
+        startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="mdi:people-group-outline" /></IconButton>}
+      >
+        <span style={{ width: "215px" }}>Village visit</span>
+      </Button>
+      </span>
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+        
+        style={{justifyContent:'flex-end'}}
+      >
+        <MenuItem>
+        <Link to="/dashboard/projects/gelathiCirlces" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="mdi:bus-clock" /></IconButton>}>
+                    <span style={{ width: "200px" }}> Schedule A Village Visit</span>
+                  </Button>
+                  </Link>
+        </MenuItem>
+
+        <MenuItem>    
+        <Link to="/dashboard/projects/assignedVillages" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                    <span style={{ width: "200px" }}> Assigned Villages</span>
+                  </Button>
+        </Link></MenuItem>
+      
+      
+      </Menu><br/>
 
                   <Link to="/dashboard/projects/scheduleCircleMeet" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
@@ -257,10 +312,14 @@ function Project(props) {
                     <span style={{ width: "200px" }}>Schedule A Beehive Visit</span>
                   </Button>
                   </Link><br />
-                  <CreateTrainerBatch />
-                  <br />
+                  <CreateTrainerBatch /><br/>
+                  <Programevaluationday1 />
+                 
+                      <br />
+
 
                 </ButtonGroup>
+      
 
               </Box>
 

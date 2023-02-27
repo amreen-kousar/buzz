@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
-import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
+// import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
@@ -68,14 +68,14 @@ export default function assignedVillages() {
           </Button> */}
             </Stack>
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
-            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+            {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ParticipantDrawer
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
                     onCloseFilter={handleCloseFilter}
                 />
-            </Stack>
+            </Stack> */}
             {/* </Stack> */}
             {villageData?.list?.map((itm) => {
                 return (
