@@ -47,6 +47,8 @@ export default function UserEditProfile({updateSetUser}) {
   const [ceoUser, setCeoUser] = useState([]);
   const [usersDataEdit, setUsersDataEdit] = useState('')
   const [rolesData, setRolesData] = useState([])
+   const [reportingManager, setReportingManager] = useState([])
+   const [reportingManagerProject, setReportingManagerProject] = useState([])
   const [editData, setEditData] = useState({
     id: user.id,
     countryID: user.countryID,
@@ -56,7 +58,7 @@ export default function UserEditProfile({updateSetUser}) {
     doj: new Date(user.doj),
     role:user.role   ,
     pincode:user.pincode,
-        officeMailId: user.officeMailId,
+    officeMailId: user.officeMailId,
     personalMailId: user.personalMailId,
     contactNum: user.contactNum,
     workNum: user.workNum,
@@ -65,6 +67,7 @@ export default function UserEditProfile({updateSetUser}) {
     address2: user.address2,
     empRole: user.empRole,
     supervisorId: user.supervisorId,
+    supervisorName: user.supervisorName,
     profile_pic: user.profile_pic,
     status: user.status,
     createdBy: user.createdBy,
@@ -114,6 +117,58 @@ export default function UserEditProfile({updateSetUser}) {
         console.log(error);
       });
   }
+
+   const getEmpId = async (value) => {
+        setEditData({ ...editData, role: value })
+        let formData = new FormData();
+        formData.append('role_id', value);
+        formData.append('name', '');
+
+
+        let res = await fetch('https://bdms.buzzwomen.org/appTest/getAllBuzzTeam.php',
+            {
+                body: formData,
+                method: "post"
+            })
+            .then((res) => res.json())
+        let temprepoManager = res.list.map(repo => { return { label: repo?.name, id: repo.id, role: repo.role } })
+        setReportingManager([...temprepoManager])
+        console.log(temprepoManager, '<---------------temprepoManagertemprepoManager')
+
+    }
+    const getProjectOfManager = async (value) => {
+      setAddUser({ ...AddUser, reportingManager: value })
+      let formData = new FormData();
+      formData.append('manager_id', value.id);
+      formData.append('first_name', '');
+      const data = JSON.stringify({
+          'manager_id': value.id
+      });
+
+      const config = {
+          method: 'post',
+          url: 'https://bdms.buzzwomen.org/appTest/getProjectList.php',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          data
+      };
+
+      axios(config)
+          .then((response) => {
+              console.log(response.data.list, 'project')
+              let temprepoManagerProject = response.data.list.map(repo => { return { label: repo?.projectName, id: repo.id } })
+              setReportingManagerProject([...temprepoManagerProject,
+                  // { id: '210', label: 'testme' }
+              ])
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+
+  }
+
+
   const editUser = async => {
 
     var data = JSON.stringify({
@@ -227,6 +282,7 @@ export default function UserEditProfile({updateSetUser}) {
                     // defaultValue={AddUser.role}
                     label="Role"
                     onChange={(e) => { setEditData({ ...editData, role: e?.target?.value }) }}
+                    // onChange={(e) => { getEmpId(e.target.value) }}
                     value={editData?.role?.roleName}
                   
                   >
@@ -235,7 +291,21 @@ export default function UserEditProfile({updateSetUser}) {
                     })} 
                   </Select>
                 </FormControl>
-                <Autocomplete
+                {!["Funder", "Partner"].includes(editData.role?.roleName) &&      <FormControl fullWidth>
+
+                                    <Autocomplete
+                                        disablePortal
+                                        id="combo-box-demo"
+                                        options={reportingManager}
+                                        defaultValue={editData.supervisorName}
+                                        label="reportingManager"
+                                        onChange={(event, value) => getProjectOfManager(value)}
+
+                                        renderInput={(params) => <TextField {...params} label="ReportingManger" />}
+                                    />
+                                </FormControl> }
+                              
+                {/* <Autocomplete
                   disablePortal
                   id="combo-box-demo"
                   // options={ceoUser}
@@ -243,7 +313,7 @@ export default function UserEditProfile({updateSetUser}) {
                   label="reportingManager"
                   onChange={(event, value) => setAddUser({ ...AddUser, reportingManager: value })}
                   renderInput={(params) => <TextField {...params} label="ReportingManger" />}
-                />
+                /> */}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     label="Date"
@@ -267,7 +337,7 @@ export default function UserEditProfile({updateSetUser}) {
                   <TextField id="outlined-basic" label="Mobile Number" type="number" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, contactNum: e?.target?.value }) }} value={editData?.contactNum}/>
                 </Stack>
                 <Stack>
-                  <TextField id="outlined-basic" label="Work Mobile Number" type="number" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, workNum: e?.target?.value }) }} value={editData?.workNum}/>
+                  <TextField id="outlined-basic" label="Work " type="number" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, workNum: e?.target?.value }) }} value={editData?.workNum}/>
                 </Stack>
                 <Stack>
                   <TextField id="outlined-basic" label="Email" type="email" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, officeMailId: e?.target?.value }) }} value={editData?.officeMailId}/>
@@ -282,7 +352,17 @@ export default function UserEditProfile({updateSetUser}) {
                   <TextField id="outlined-basic" label="Pincode" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, pincode: e?.target?.value }) }} value={editData?.pincode}/>
                 </Stack>
                 <Stack>
-                  <TextField id="outlined-basic" label="Project" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, project_list: e?.target?.value }) }} value={editData?.project_list}/>
+                 
+                  {/* <TextField id="outlined-basic" label="Project" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, project_list: e?.target?.value }) }} value={editData?.project_list}/> */}
+                 <Typography>Choose Projects</Typography>
+                  <Select color="common" label="Choose Project" variant="standard" onChange={(e) => setEditData({ ...editData, project_list: e?.target?.value })} value={editData?.project_list}>             
+               {user?.project_list.map((itm)=>{
+                return(
+                        <MenuItem value={itm?.id}>{itm?.projectName}</MenuItem>
+                )
+              })}
+            </Select>
+               
                 </Stack>
               </div>
 

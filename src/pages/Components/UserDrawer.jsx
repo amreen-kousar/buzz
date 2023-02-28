@@ -42,16 +42,21 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
 
   const userDetails = localStorage?.getItem('userId')
   { console.log(userDetails, "userrrrrrrrrrrrrrrrrrr") }
-  const [user,setUser]=useState(JSON.parse(localStorage?.getItem('people')))
- 
+  var [user,setUser]=useState(JSON.parse(localStorage?.getItem('people')))
+  console.log(JSON.parse(localStorage.getItem('people')),"peopleeeeee");
+  let userprofile =JSON.parse(localStorage.getItem('people'))
+  console.log(userprofile,"userprofiledetails")
   useEffect(() => {
     //   editUser()
     updateSetUser()
   }, []
   )
+
   const updateSetUser=()=>{
     setUser(JSON.parse(localStorage?.getItem('people')))
   }
+
+  console.log(user,"userpeopleee")
 
   return (
     <>
@@ -99,23 +104,23 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
               <Card >
                 <CardContent>
                   <div style={{ float: 'left', paddingTop: 30, paddingRight: 5 }}>
-                    <Avatar src={(user?.profile_pic) ? user.profile_pic : defaultImage} alt="photoURL" />
+                    <Avatar src={(userprofile?.profile_pic) ? userprofile.profile_pic : defaultImage} alt="photoURL" />
                   </div>
                   <Card sx={{ px: 1, boxShadow: 0 }} >
-                    <Typography style={{ flexDirection: 'row', color: '#444444', }} variant="subtitle1" gutterBottom>{user?.first_name}&nbsp;{user?.last_name}</Typography>
+                    <Typography style={{ flexDirection: 'row', color: '#444444', }} variant="subtitle1" gutterBottom>{userprofile?.first_name}&nbsp;{userprofile?.last_name}</Typography>
                     <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
-                      Role : <span style={{ fontWeight: 100, color: '#444444' }}>{user?.role_name}</span>
+                      Role : <span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.role_name}</span>
 
                     </Typography>
                     {userDetails && userDetails == 2 && <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
-                      Status : <span style={{ fontWeight: 100, color: '#444444' }}>{user?.status === '1' ? "Active" : null}</span>
+                      Status : <span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.status === '1' ? "Active" : null}</span>
                     </Typography>}
                     <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
-                      Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{user?.supervisorName}</span>
+                      Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.supervisorName}</span>
                     </Typography>
             
                     <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
-                      Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{user?.doj}</span> </Typography>
+                      Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.doj}</span> </Typography>
                   </Card>
                 </CardContent>
               </Card>
@@ -135,20 +140,20 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
                   </Card>
                   <br />
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                    Mobile Number:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.contactNum}</span>
+                    Mobile Number:<span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.contactNum}</span>
 
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                    Work: <span style={{ fontWeight: 100, color: '#444444' }}>{user?.workNum} </span>
+                    Work: <span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.workNum} </span>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                    Email:<span style={{ fontWeight: 100, color: '#444444' }}> {user?.officeMailId}</span>
+                    Email:<span style={{ fontWeight: 100, color: '#444444' }}> {userprofile?.officeMailId}</span>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                    Address:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.address}</span>
+                    Address:<span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.address}</span>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                    PinCode:<span style={{ fontWeight: 100, color: '#444444' }}>{user?.pincode}</span>
+                    PinCode:<span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.pincode}</span>
                   </Typography>
                 </CardContent>
               </Card>
@@ -164,9 +169,9 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
                     Projects
                   </Card>
                   <br />
-                  {user?.project_list.length > 0 ?
+                  {userprofile?.project_list.length > 0 ?
                     <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                      {user?.project_list.map(project => {
+                      {userprofile?.project_list.map(project => {
                         return (
                           <Typography variant="body1" gutterBottom>   {project.projectName}</Typography>
                         )
