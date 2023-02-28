@@ -27,7 +27,7 @@ function SimpleDialog(props) {
   const handleClose = () => {
     onClose(selectedValue);
   };
-
+  
   const handleListItemClick = (value) => {
     props?.setUserId(value?.id)
     props?.setName(value?.name)
@@ -79,6 +79,7 @@ SimpleDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   //   selectedValue: PropTypes.string.isRequired,
 };
+var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
 
 export default function PoaTeam({ setUserId, setName }) {
   const [open, setOpen] = React.useState(false);
@@ -90,10 +91,10 @@ export default function PoaTeam({ setUserId, setName }) {
   )
   const team = async => {
     var data = JSON.stringify({
-      "emp_id": 192,
+      "emp_id": userDetails?.id,
       "team": ""
     });
-
+console.log(userDetails?.id,"iddddddddddd")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getMyTeam.php',

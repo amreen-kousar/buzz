@@ -20,7 +20,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateTrainerBatch() {
+export default function CreateTrainerBatch(props) {
+  console.log(props?.data1,"<------qwewqeqweqweqw")
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(dayjs('2022-04-07'));
   const [village, setVillage] = useState([]);
@@ -56,7 +57,7 @@ export default function CreateTrainerBatch() {
   }, [])
   const villageList = async => {
     var data = JSON.stringify({
-      "taluk_id": 45
+      "taluk_id": props?.data1?.location_id
     });
 
     var config = {
@@ -83,7 +84,7 @@ export default function CreateTrainerBatch() {
     var data = JSON.stringify({
       "batch_name": datass[0]?.name,
       "sub_village": trainerData?.sub_village,
-      "project_id": "292",
+      "project_id": props?.data1?.project_id,
       "contact_person": trainerData?.contact_person,
       "number_of_participants": trainerData?.number_of_participants,
       "day1": moment(trainerData?.day1)?.format('YYYY/MM/DD  h:mm:ss a'),
@@ -154,7 +155,7 @@ export default function CreateTrainerBatch() {
         <Card style={{ marginTop: 20 }}>
           <CardContent>
             <Stack style={{ marginTop: 20 }}>
-              <Typography>Project : njnjnnjnjn22</Typography>
+              <Typography>Project : {props?.data1?.project_name}</Typography>
             </Stack>
             <Stack style={{ marginTop: 20 }}>
               <Typography> Partner : test Partnner 11</Typography>

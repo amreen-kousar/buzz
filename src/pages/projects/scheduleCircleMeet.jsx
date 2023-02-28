@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
 export default function scheduleCircleMeet() {
-
+    const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
 
@@ -28,9 +28,9 @@ export default function scheduleCircleMeet() {
     const enrolledGelathi = async =>{
         var data = JSON.stringify({
             "search": "",
-            "project_id": 225,
-            "emp_id": 343,
-            "role_id": 6
+            "project_id": state?.id,
+            "emp_id": 492,
+            // "role_id": 6
           });
           
           var config = {
@@ -61,7 +61,7 @@ export default function scheduleCircleMeet() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                        scheduleCircleMeet
+                        Schedule Circle Meet
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User

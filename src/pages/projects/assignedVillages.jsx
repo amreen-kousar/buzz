@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
-import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
+// import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
@@ -28,8 +28,8 @@ export default function assignedVillages() {
     const assignedVillages = async =>{
         var data = JSON.stringify({
             "search": "",
-            "project_id": 225,
-            "emp_id": 343
+            "project_id": 234,
+            "emp_id": 35
           });
           
           var config = {
@@ -68,23 +68,23 @@ export default function assignedVillages() {
           </Button> */}
             </Stack>
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
-            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+            {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ParticipantDrawer
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
                     onCloseFilter={handleCloseFilter}
                 />
-            </Stack>
+            </Stack> */}
             {/* </Stack> */}
             {villageData?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.gelathiname, title: "Participant Details",id:itm?.id })
+                        setClickData({ name: itm.training_batch_name, title: "Participant Details",id:itm?.training_batch_id})
                         handleOpenFilter()
                     }}>
 
-                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" >
+                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {`  Training Batch Name  : ${itm?.training_batch_name}`}
                             </Typography>

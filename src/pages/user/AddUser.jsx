@@ -23,7 +23,7 @@ function AddUser(props) {
 
     var [AddUser, setAddUser] = useState({
         role: { id: '0', roleName: 'Admin' }, first_name: '', last_name: "", contactNum: '', workNum: '', office_email_id: '', address: '', address3: "", address2: "",
-        pincode: "", gender: "male", present_status: true, doj: '', reportingManager: "", license_number: "", project: "",
+        pincode: "", gender: "male", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project: "",
         emp_id: ""
     })
 
@@ -218,7 +218,8 @@ function AddUser(props) {
 
     }
 
-
+let userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+console.log(userid,"userrrrrridddddddd")
     const submitUser = () => {
         AddUser.project = inputProject.map(i => parseInt(i.id))
         AddUser.officeMailId = AddUser.office_email_id
@@ -226,8 +227,8 @@ function AddUser(props) {
         AddUser.supervisorId = AddUser.reportingManager.id
         AddUser.profile_pic = ''
         AddUser.status = AddUser.present_status ? '1' : '0';
-        AddUser.createdBy = '650',
-            AddUser.lastUpdatedBy = '650'
+        AddUser.createdBy = userid,
+            AddUser.lastUpdatedBy = userid
         console.log(AddUser)
         const data = JSON.stringify(AddUser);
 
@@ -263,8 +264,8 @@ function AddUser(props) {
                                 "state": "Karnataka",
                                 "pincode": AddUser.pincode,
                                 "designation": "Funder",
-                                "createdBy": "650",
-                                "lastUpdatedBy": "650"
+                                "createdBy": userid,
+                                "lastUpdatedBy": userid
 
                             } : funderPartnerData = {
                                 "countryID": 1,
@@ -278,8 +279,8 @@ function AddUser(props) {
                                 "state": "Karnataka",
                                 "pincode": AddUser.pincode,
                                 "designation": "Partner",
-                                "createdBy": "650",
-                                "lastUpdatedBy": "650"
+                                "createdBy": userid,
+                                "lastUpdatedBy": userid
                             }
                         const partnerFunderConfig = {
                             method: 'post',

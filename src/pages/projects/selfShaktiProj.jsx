@@ -3,11 +3,12 @@ import axios from 'axios';
 import React from "react"
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
 import ProjectMultiDrawer from '../Components/ProjectMultiDrawer';
-import { Link } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function selfShaktiProj() {
-
+    const {state} = useLocation()
+    console.log("shaktishakti",state)
     const [clcikData, setClickData] = useState()
     // const [selfShakthi, setselfShakthi] = useState([{ stockname: "fist" }, { stockname: "second" }]);
 
@@ -100,7 +101,7 @@ export default function selfShaktiProj() {
                     >
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
-                                {` self Shakthi Name : ${itm?.batch_name}`}
+                                {` Self Shakthi Name : ${itm?.batch_name}`}
                             </Typography>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
