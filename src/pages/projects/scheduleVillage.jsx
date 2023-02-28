@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
 export default function scheduleVillage() {
-
+    const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const [villageData, setVillageData] = useState('');
 
@@ -26,10 +26,12 @@ export default function scheduleVillage() {
     };
 
     const scheduleVillage = async =>{
+        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": "",
-            "project_id": 234,
-            "emp_id": 35
+            "project_id": state?.id,
+            "emp_id": idvalue
           });
           
           var config = {
@@ -76,7 +78,9 @@ export default function scheduleVillage() {
                 />
             </Stack>
             {/* </Stack> */}
-            {villageData?.list?.map((itm) => {
+
+            {villageData?.list?.length!==0?villageData?.list?.map((itm) => {
+
                 return (
                     <Card style={styles.card1} onClick={() => {
                         setClickData({ name: itm.training_batch_name, title: "Participant Details",id:itm?.training_batch_id })
@@ -91,7 +95,10 @@ export default function scheduleVillage() {
                         </Grid>
                       
                     </Card>)
-            })}
+              }):
+              <>
+              <h1>No Schedule Village Visit Found</h1>
+              </>}
 
         </Container>
 

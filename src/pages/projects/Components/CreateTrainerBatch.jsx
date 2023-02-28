@@ -72,13 +72,15 @@ export default function CreateTrainerBatch(props) {
     axios(config)
       .then(function (response) {
         setVillage(response.data)
-        console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response.data),"<-----reponsievdevsvs");
       })
       .catch(function (error) {
         console.log(error);
       });
   }
   const createTrainerBatch = async => {
+    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     const datass = village?.list?.filter(it => { return it?.id === trainerData?.talaq_id })
     console?.log(datass, village?.list, trainerData?.talaq_id, "<--kjughfd")
     var data = JSON.stringify({
@@ -89,9 +91,9 @@ export default function CreateTrainerBatch(props) {
       "number_of_participants": trainerData?.number_of_participants,
       "day1": moment(trainerData?.day1)?.format('YYYY/MM/DD  h:mm:ss a'),
       "day2": moment(trainerData?.day2)?.format('YYYY/MM/DD  h:mm:ss a'),
-      "location_id": 30233,
+      "location_id": props?.data1?.location_id,
       "contact_number": trainerData?.contact_number,
-      "trainer_id": "653"
+      "trainer_id": idvalue
     });
 
     var config = {
@@ -107,6 +109,10 @@ export default function CreateTrainerBatch(props) {
       .then(function (response) {
         if (response?.data?.code) {
           alert(response?.data?.message)
+        }
+        else{
+          alert("added succesfully")
+          handleClose()
         }
         /// setTrainerData(response.data)
         console.log(JSON.stringify(response.data));

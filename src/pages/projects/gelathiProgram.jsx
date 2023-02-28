@@ -15,6 +15,8 @@ export default function gelathiProgram(props) {
         }, []
     )
     const gelathiPrograme = async =>{
+        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "filter": "",
             "end_date": "",
@@ -22,7 +24,7 @@ export default function gelathiProgram(props) {
             "project_id": state?.id,
             "gelathi_id": "",
             "start_date": "",
-            "emp_id": 492
+            "emp_id": idvalue
           });
           
           var config = {
@@ -79,7 +81,8 @@ export default function gelathiProgram(props) {
                 />
             </Stack>
             {/* </Stack> */}
-            {programe?.list?.map((itm) => {
+
+            {programe?.list?.length!==0?programe?.list?.map((itm) => {
                         console.log(itm, "<---programeprogrameprograme")
                         return (
                             <Card style={styles.card1} onClick={() => {
@@ -104,7 +107,10 @@ export default function gelathiProgram(props) {
                             
                         </Grid>
                     </Card>)
-            })}
+             }):
+             <>
+             <h1>No  Gelathi  Program Found</h1>
+             </>}
 
           
         </Container>

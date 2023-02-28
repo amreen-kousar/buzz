@@ -51,10 +51,11 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
         
         
         console.log(batchState,"<---batchStatebatchState")
-
+        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "batch_id": batchState?.training_batch_id,
-            "role_id": 1
+            "role_id": role
           });
           
           var config = {

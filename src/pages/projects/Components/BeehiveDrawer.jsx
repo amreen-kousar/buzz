@@ -98,9 +98,11 @@ console.log(data,'<------clcikDataclcikData',data)
     }
 
     const beehiveVillageVisit = async =>{
+      var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+      var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
           var data = JSON.stringify({
             "batch_id": clcikData?.name,
-            "role_id": 6
+            "role_id": role
           });
           
           var config = {

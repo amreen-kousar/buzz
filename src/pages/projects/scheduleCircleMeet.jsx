@@ -26,10 +26,12 @@ export default function scheduleCircleMeet() {
     };
 
     const enrolledGelathi = async =>{
+        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": "",
             "project_id": state?.id,
-            "emp_id": 492,
+            "emp_id": idvalue,
             // "role_id": 6
           });
           
@@ -77,7 +79,8 @@ export default function scheduleCircleMeet() {
                 />
             </Stack>
             {/* </Stack> */}
-            {enrolled?.list?.map((itm) => {
+
+            {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
                         setClickData({ name: itm.gelathiname, title: "Participant Details",id:itm?.id })
@@ -99,7 +102,10 @@ export default function scheduleCircleMeet() {
                             </Typography>
                         </Grid>
                     </Card>)
-            })}
+            }):
+            <>
+            <h1>No Circle Meet  Found</h1>
+            </>}
 
         </Container>
 

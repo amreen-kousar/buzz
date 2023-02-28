@@ -46,13 +46,16 @@ function Project(props) {
     projData();
 
   }, [])
+  
   const projData = async => {
     console.log(location, "location props")
-
+    var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
+    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       "project_id": id,
-      "role_id": 1,
-      "emp_id": 144
+      "role_id": role,
+      "emp_id": idvalue
     });
 
     var config = {
@@ -273,7 +276,7 @@ function Project(props) {
         style={{justifyContent:'flex-end'}}
       >
         <MenuItem>
-        <Link to="/dashboard/projects/gelathiCirlces" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+        <Link to="/dashboard/projects/scheduleVillage" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="mdi:bus-clock" /></IconButton>}>
                     <span style={{ width: "200px" }}> Schedule A Village Visit</span>

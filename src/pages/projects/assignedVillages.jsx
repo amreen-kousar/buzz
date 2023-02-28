@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
 // import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
 export default function assignedVillages() {
+    const {state} = useLocation()
 
     const [clcikData, setClickData] = useState()
     const [villageData, setVillageData] = useState('');
@@ -26,10 +27,12 @@ export default function assignedVillages() {
     };
 
     const assignedVillages = async =>{
+        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": "",
-            "project_id": 234,
-            "emp_id": 35
+            "project_id": state?.id,
+            "emp_id": idvalue
           });
           
           var config = {

@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
 import GelathiCircleDrawer from '../projects/Components/GelathiCircleDrawer';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
 export default function gelathiCirclesList() {
-
+    const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const [gelathiCircles, setgelathiCircles] = useState('');
 
@@ -28,10 +28,12 @@ export default function gelathiCirclesList() {
     };
 
     const circle = async =>{
+        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": "",
-            "project_id": 225,
-            "gelathi_id": 343
+            "project_id": state?.id,
+            "gelathi_id": idvalue
           });
           
           var config = {
@@ -79,7 +81,8 @@ export default function gelathiCirclesList() {
                 />
             </Stack>
             {/* </Stack> */}
-            {gelathiCircles?.list?.map((itm) => {
+
+            {gelathiCircles?.list?.length!==0?gelathiCircles?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
                         setClickData({ name: itm.circle_name, title: " Gelathi Cirlce Name",id:itm?.circle_id })
@@ -99,7 +102,10 @@ export default function gelathiCirclesList() {
                            
                         </Grid>
                     </Card>)
-            })}
+            }):
+            <>
+            <h1>No  Gelathi Circle Found</h1>
+            </>}
 
         </Container>
 

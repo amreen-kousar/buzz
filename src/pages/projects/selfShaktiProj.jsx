@@ -30,14 +30,16 @@ export default function selfShaktiProj() {
         setOpenFilter(false);
     };
     const shakti = async =>{
+        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "end_date": "",
             "search": "",
-            "project_id": 215,
+            "project_id": state?.id,
             "filter_type": "",
             "start_date": "",
             "trainer_id": "",
-            "emp_id": 144
+            "emp_id": idvalue
           });
           
           var config = {
@@ -68,7 +70,7 @@ export default function selfShaktiProj() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    All self shakthi
+                    All Self Shakthi
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
@@ -87,7 +89,7 @@ export default function selfShaktiProj() {
             {/* </Stack> */}
             {/* {selfShakti?.map((itm) => {
                 return ( */}
-                    {selfShakti?.list?.map((itm) => {
+                    {selfShakti?.list?.length!==0?selfShakti?.list?.map((itm) => {
                         console.log(itm, "<---asdasdasdsadas")
                         return (
                           
@@ -114,7 +116,10 @@ export default function selfShaktiProj() {
                             
                         </Grid>
                     </Card>)
-            })}
+            }):
+            <>
+            <h1>No Self Shakthi Project  Found</h1>
+            </>}
 
         </Container>
 

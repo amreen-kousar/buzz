@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
 export default function enrolledGelathiList() {
+    const {state} = useLocation()
 
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
@@ -26,11 +27,14 @@ export default function enrolledGelathiList() {
     };
 
     const enrolledGelathi = async =>{
+        var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
+  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": "",
-            "project_id": 225,
-            "emp_id": 343,
-            "role_id": 6
+            "project_id": state?.id,
+            "emp_id": idvalue,
+            "role_id": role
           });
           
           var config = {
@@ -77,7 +81,8 @@ export default function enrolledGelathiList() {
                 />
             </Stack>
             {/* </Stack> */}
-            {enrolled?.list?.map((itm) => {
+
+            {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
                         setClickData({ name: itm.gelathiname, title: "Participant Details",id:itm?.id })
@@ -99,7 +104,9 @@ export default function enrolledGelathiList() {
                             </Typography>
                         </Grid>
                     </Card>)
-            })}
+            }):<>
+            <h1>No Enrolled Gelathi Found</h1>
+            </>}
 
         </Container>
 

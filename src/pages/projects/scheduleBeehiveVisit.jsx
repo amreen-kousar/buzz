@@ -28,10 +28,12 @@ export default function scheduleBeehiveVisit() {
     };
 
     const BeehiveGelathi = async =>{
+        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": "",
             "project_id": state?.id,
-            "emp_id": 492
+            "emp_id": idvalue
           });
           
           var config = {
