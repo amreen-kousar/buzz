@@ -61,6 +61,9 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     useGeolocated({
       positionOptions: {
@@ -131,7 +134,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
 
   const convertImage = (e) => {
     console.log("this is calleddddfdsfs")
-    data.append('emp_id', 651);
+    data.append('emp_id', userid);
     data.append('file', e.target.files[0]);
     setImagePath([...imagePath, e.target.files[0]])
     const imageData = URL.createObjectURL(e.target.files[0]);
@@ -159,7 +162,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
       "klmtr": sendData?.rate_per_KM,
       "da": sendData?.da,
       "others": sendData?.others,
-      "emp_id": 651,
+      "emp_id": userid,
       "mode_of_travel": sendData?.mode_of_travel,
       "other_text": sendData?.other_text
     });
@@ -192,7 +195,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
   const postImages = async () => {
     var dataImage = []
     const form = new FormData()
-    form?.append("emp_id", 651)
+    form?.append("emp_id", userid)
     //form?.append("file[]",imagePath[0])
 
     const data = imagePath?.map(itm => {

@@ -54,7 +54,7 @@ export default function TravelDialog({ viewMessage }) {
   const [images, setImages] = useState();
   const [upload, setUpload] = useState();
 
-
+  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   const [sendData, setSendData] = useState({
     odimeter: "",
     location: "",
@@ -125,7 +125,7 @@ export default function TravelDialog({ viewMessage }) {
 
   const convertImage = (e) => {
     console.log("this is calleddddfdsfs")
-    data.append('emp_id', 651);
+    data.append('emp_id', userid);
     data.append('file', e.target.files[0]);
     setImagePath([...imagePath, e.target.files[0]])
     const imageData = URL.createObjectURL(e.target.files[0]);
@@ -146,7 +146,7 @@ export default function TravelDialog({ viewMessage }) {
       "end_location_name": sendData?.endLocation,
       "fairamount":sendData?.fairamount,
       "printing": sendData?.printing,
-      "start_location_name": "RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India",
+      "start_location_name": locationS,
       "poa_id": sendData?.poa,
       "srpoa":sendData?.srpoa,
       "start_odometer": sendData?.odimeter,
@@ -155,7 +155,7 @@ export default function TravelDialog({ viewMessage }) {
       "klmtr": sendData?.rateperkm,
       "da": sendData?.foodexpenses,
       "others": sendData?.otherExpenses,
-      "emp_id": 651,
+      "emp_id":userid,
       "mode_of_travel": sendData?.modeoftravel,
       "other_text": sendData?.OtherAmount
     });
@@ -184,7 +184,7 @@ export default function TravelDialog({ viewMessage }) {
   const postImages = async () => {
     var dataImage = []
     const form = new FormData()
-    form?.append("emp_id", 651)
+    form?.append("emp_id", userid)
     //form?.append("file[]",imagePath[0])
 
     const data = imagePath?.map(itm => {
@@ -331,7 +331,7 @@ axios(config)
     <div>
 
 
-{(userDetails && userDetails!=1)?<Button variant="contained" style={{
+{(userDetails==2 || userDetails ==3 ||userDetails==4 || userDetails==5 || userDetails==6 || userDetails==12 || userDetails==13)?<Button variant="contained" style={{
         float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
         position: 'fixed', zIndex: '1', bottom: 40, right: 40
       }} onClick={handleClickOpen} sx={{
@@ -361,7 +361,6 @@ axios(config)
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
             Create Allowance
           </Typography>
-
 
           <Button autoFocus color="inherit" onClick={() => SendData()}>
           <Iconify icon="material-symbols:save" width={30} height={30} />

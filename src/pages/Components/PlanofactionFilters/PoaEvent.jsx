@@ -7,6 +7,7 @@ import Poafunders from './Poafunders';
 import Avatar from '@mui/material/Avatar';
 import { useGeolocated } from "react-geolocated";
 import Geocode from "react-geocode";
+import React from 'react';
 // material
 import {
   Grid,
@@ -43,6 +44,72 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select }) {
   const [checkin, setCheckIn] = useState();
   const [checkout, setCheckout] = useState('')
   const [checkvisible,setCheckvisible]= useState(false);
+  const [image, setImage] = React.useState([]);
+  const [imagePath, setImagePath] = React.useState([]);
+  const [viewImage, setViewImage] = React.useState(false);
+  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  const hiddenFileInput = React.useRef(null);
+
+  const handleClick = event => {
+    console.log("click", event.target)
+    hiddenFileInput.current.click();
+  };
+
+  function getBase64(file, callback) {
+
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => callback(reader.result));
+
+    reader.readAsDataURL(file);
+  }
+  const data = new FormData();
+
+  const convertImage = (e) => {
+    console.log("this is calleddddfdsfs")
+    data.append('emp_id', userid);
+    data.append('file', e.target.files[0]);
+    setImagePath([...imagePath, e.target.files[0]])
+    const imageData = URL.createObjectURL(e.target.files[0]);
+    console.log(imageData, "files")
+    getBase64(e.target.files[0], function (base64Data) {
+      setImage([...image, base64Data])
+      setViewImage(true)
+    });
+  }
+  const postImages = async () => {
+    var dataImage = []
+    const form = new FormData()
+  
+    form?.append("event_id",78385)
+    
+
+    const data = image?.map(itm => {
+      form?.append("file[]", itm)
+    })
+    var requestOptions = {
+      method: 'POST',
+      body: form,
+      redirect: 'follow'
+    };
+  
+    let res = fetch("https://bdms.buzzwomen.org/appTest/uploadEventPhotos.php", requestOptions).then(itn => {
+      console.log(itn, "<--itemgh")
+    })
+      .catch(err => {
+        console.log(err, "<---wertyu")
+      })
+    //console.log(res,"<----2werdcfvghbj")
+
+
+  }
+
+  const deleteImage = (index) => {
+
+    image.splice(index, 1);
+    setImage([...image])
+  }
+
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
   useGeolocated({
     positionOptions: {
@@ -221,16 +288,42 @@ const handlecheckout=()=>{
               </CardContent>
             </Card>
 
-            {/* <Card>
-              <CardContent>
-                <Button sx={{
+            <div>
+                <div style={{ display: "flex" }}>
+                  {
+                    viewImage ?
+                      image.map((i, index) => {
+                        return <div style={{ display: "flex", margin: "1rem" }}>
+                          <img src={i} style={{ height: "50px", width: "70px" }} alt="hello" />
+                          <Iconify
+                            onClick={() => { deleteImage(index) }}
+                            icon={'typcn:delete'}
+                            sx={{ width: 16, height: 16, ml: 1, color: "red" }}
+                          />
+                        </div>
+                      }) : null
+                  }
+                </div><br/>
+                {<div style={{display:'flex'}}>
+                <label for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
+                  <Iconify
+                    icon={'mdi:camera'}
+                    sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
+                  />&nbsp;
+                  
+                  <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
+                </label>Add Photos<br/>
+                <Button onClick={postImages} 
+                sx={{
                   '&:hover': {
                     backgroundColor: '#ffd796',
                   },
-                  color: '#ff7424'
-                }}>ADD PHOTOS</Button>
-              </CardContent>
-            </Card> */}
+                  color: "#ff7424",
+                  backgroundColor:'#ffd796',
+                  marginLeft:'10px'
+                }}>Upload</Button>
+                </div>}
+              </div>
 
           <Card style={{ marginTop: 20 }}>
               <CardContent>
