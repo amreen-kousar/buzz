@@ -158,7 +158,7 @@ export default function CreateTrainerBatch(props) {
               <Typography>Project : {props?.data1?.project_name}</Typography>
             </Stack>
             <Stack style={{ marginTop: 20 }}>
-              <Typography> Partner : test Partnner 11</Typography>
+              <Typography> Partner : {props?.data1?.partnerName}</Typography>
             </Stack>
           </CardContent>
         </Card>
