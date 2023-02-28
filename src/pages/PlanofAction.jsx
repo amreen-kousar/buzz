@@ -85,9 +85,9 @@ export default function PlanofAction() {
   }]
   var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
   var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-  console.log(role,"roleeeeeeeeee")
+  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  console.log(idvalue,"iddddddd")
   const role_name =JSON.parse(localStorage?.getItem('userDetails'))?.role_name
-  console.log(role_name,"roleeeee")
   const handleChange = (event, newValue) => {
     console.log("gsfdhfgdhgfhgf", newValue)
     setSeason(newValue)
@@ -114,7 +114,7 @@ export default function PlanofAction() {
   const todaypoa = (async) => {
     console.log(date, "<----ergregerger")
     var data = JSON.stringify({
-      "emp_id":  (userId)?userId:userDetails?.id,
+      "emp_id":  userId? userId :userDetails?.id,
       "team": "",
       "date": moment(date?.$d)?.format('YYYY-MM-DD'),
       "for": season,
@@ -380,7 +380,7 @@ export default function PlanofAction() {
 
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                        {(role==13) ? <Stack direction={'row'} spacing={2} >
+                                        {(role == 13 || idvalue==itm?.user_id) ? <Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
                                           <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
@@ -440,7 +440,7 @@ export default function PlanofAction() {
                                     </TableCell>
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                        {(role == 13) ? <Stack direction={'row'} spacing={2} >
+                                        {(role == 13 || idvalue==itm?.user_id) ?<Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
                                           <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
@@ -480,23 +480,31 @@ export default function PlanofAction() {
                         return (
                           <Card style={{ marginBottom: 30, marginTop: 10 }} onClick={() => {
                             setSelect(itm)
+                          
                           }}>
-
+                       
                             <TableContainer component={Paper}>
                               <Table aria-label="customized table">
                                 <TableBody>
                                   <TableRow >
-
+                               
                                     <TableCell component="th" scope="row" onClick={handleOpenEvent}>
+                                   
                                     {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
                                     {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}
+                                    
+                                    {console.log(idvalue,"hyyyyyyyyy")}
+                                    
                                       {itm?.status == '2' && <span style={{ color: 'red' }}><br />
                                         (Canceled)
                                       </span>}
+                                     
+                                    
                                     </TableCell>
                                     {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
-                                        {(role == 13) ? <Stack direction={'row'} spacing={2} >
+                                        {(role == 13 || idvalue==itm?.user_id) ? <Stack direction={'row'} spacing={2} >
+                                      
                                           <PoaEdit itm={itm} />
                                           <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
