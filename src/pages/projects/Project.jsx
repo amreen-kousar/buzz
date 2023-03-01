@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { Button, ButtonGroup, Card, CardHeader, Container, Icon, IconButton, TableCell, Typography } from '@mui/material';
+import { Button, ButtonGroup, Card, CardContent, CardHeader, Container, Icon, IconButton, TableCell, Typography } from '@mui/material';
 import Iconify from 'src/components/Iconify';
 import Page from 'src/components/Page';
 import { Link } from 'react-router-dom';
@@ -47,6 +47,7 @@ function Project(props) {
 
   }, [])
   
+  
   const projData = async => {
     console.log(location, "location props")
     var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
@@ -69,8 +70,8 @@ function Project(props) {
 
     axios(config)
       .then(function (response) {
-        setData1(response.data.list)
-        console.log(response.data, '<--------------setData1setData1');
+        setData1({...response.data.list})
+        console.log(response.data.list, '<--------------setData1setData1');
       })
       .catch(function (error) {
         console.log(error);
@@ -135,6 +136,17 @@ function Project(props) {
                   </Table>
                 </TableContainer>
 
+              </Card><br></br>
+              <Card>
+                <CardContent>
+                Project Team : 
+                {data1?.projectPeoplesList?.map((item)=>
+                  <Card value={item?.emp_id} style={{cursor:'pointer',margin:10,padding:10}}>
+                     <span style={{fontWeight:700}}>{item.emp_name}  
+                        <Iconify style={{ color: "black" ,float:'right',width:20,height:20}} icon="fluent:notebook-eye-20-filled" />
+                     </span><br></br>{item?.role}&nbsp;</Card>
+                )}
+                </CardContent>
               </Card>
             </Grid>
             <Grid item xs={12} sm={12} md={5} >
@@ -149,14 +161,16 @@ function Project(props) {
                   orientation="vertical"
                   style={{ boxShadow: "none", borderRadius: "0px" }} elevation={0} >
 
-                  <Link to="/dashboard/projects/busTest" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
+{(userDetails == 1 ) ? 
+ <Link to="/dashboard/projects/busTest" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
                     <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                   </IconButton>}>
                     <span style={{ width: "235px" }}>Bus: &nbsp;&nbsp;& check List</span>
                   </Button>
-                  </Link><br />
+                  </Link> : null}
+                      {(userDetails==1) ? <br /> : null} 
 
-                  <Link to="/dashboard/projects/materialStock" style={styles.linkStyle}>
+                      {(userDetails == 1 ) ?  <Link to="/dashboard/projects/materialStock" style={styles.linkStyle}>
                     <Button variant="secondary" style={styles.buttonStyle} startIcon={
                       <IconButton>
                         <Iconify style={{ color: "black" }} icon="material-symbols:list-alt-outline-sharp" />
@@ -166,9 +180,9 @@ function Project(props) {
                     </IconButton>}>
                       <span style={{ width: "200px" }}> Materials Stocklist</span>
                     </Button>
-                  </Link><br />
-
-                  <Link to="/dashboard/projects/selfShakthi" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                  </Link>: null}
+                      {(userDetails==1) ? <br /> : null} 
+                      {(userDetails == 1 ) ?  <Link to="/dashboard/projects/selfShakthi" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                     startIcon={<IconButton>
                       <Iconify style={{ color: "black" }} icon="mdi:bus-school" />
                     </IconButton>} endIcon={<IconButton>
@@ -177,8 +191,8 @@ function Project(props) {
                     <span style={{ width: "200px" }}>Self Shakthi program</span>
                   </Button>
                   </Link>
-                  <br />
-
+                  : null}
+                  {(userDetails==1) ? <br /> : null} 
                   {/* {(userDetails && userDetails ==4)?
                  <div><Link to="/dashboard/projects/assigntargets" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
                     <Iconify style={{ color: "black" }} icon="material-symbols:add" />
@@ -188,7 +202,7 @@ function Project(props) {
                     <span style={{ width: "200px" }}>Assign Targets to trainers</span>
                   </Button></Link></div>:null}{(userDetails ==4)?<br/>:null} */}
 
-                  <Link to="/dashboard/projects/gelathiProgram" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
+{(userDetails == 1 || userDetails == 6 ) ?    <Link to="/dashboard/projects/gelathiProgram" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
                     <Iconify style={{ color: "#6d7c89" }} icon="fluent:notebook-eye-20-filled" />
                   </IconButton>} startIcon={<IconButton>
                     <Iconify style={{ color: "black" }} icon="ic:sharp-spa" />
@@ -196,9 +210,9 @@ function Project(props) {
                     <span style={{ width: "200px" }}> Gelathi Program</span>
                   </Button>
                   </Link>
-                  <br />
-
-                  {/* {(userDetails && userDetails == 13 || userDetails == 4) ? */}
+                  : null}
+                  {(userDetails==1 || userDetails == 6) ? <br /> : null} 
+                  {(userDetails && userDetails == 13 || userDetails == 4 || userDetails==12) ? 
                     <div><Link to="/dashboard/projects/assignbatches" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>} startIcon={<IconButton>
@@ -207,10 +221,11 @@ function Project(props) {
                       <span style={{ width: "200px" }}> Assign Villages to Gelathi Facilitator</span>
                     </Button>
 
-                    </Link></div> <br/>
-                    {/* : null} {(userDetails && userDetails == 13 || userDetails == 4) ? <br /> : null} */}
+                    </Link></div> 
+                     : null}
+                      {(userDetails && userDetails == 13 || userDetails == 4) ? <br /> : null} 
 
-                  <Link to="/dashboard/projects/enrolledGelathi" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} startIcon={
+                      {(userDetails == 1 || userDetails == 6) ?       <Link to="/dashboard/projects/enrolledGelathi" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} startIcon={
                     <IconButton>
                       <Iconify style={{ color: "black" }} icon="ic:round-people" />
                     </IconButton>
@@ -220,9 +235,9 @@ function Project(props) {
                     <span style={{ width: "200px" }}> Enrolled Gelathis</span>
                   </Button>
                   </Link>
-                  <br />
-
-                  <Link to="/dashboard/projects/enrolledGreenMotivators" state={{id:data1?.project_id}} style={styles.linkStyle}>
+                  : null}
+                  {(userDetails==1 || userDetails == 6) ? <br /> : null} 
+                  {(userDetails == 1 || userDetails == 6) ?  <Link to="/dashboard/projects/enrolledGreenMotivators" state={{id:data1?.project_id}} style={styles.linkStyle}>
                     <Button variant="secondary" style={{ ...styles.buttonStyle, color: "green" }} startIcon={<IconButton>
                       <Iconify style={{ color: "green" }} icon="mdi:user-add" />
                     </IconButton>} endIcon={<IconButton>
@@ -231,9 +246,10 @@ function Project(props) {
                       <span style={{ width: "200px" }}> Enrolled Green Motivators</span>
                     </Button>
                   </Link>
-                  <br />
+                  : null}
+                  {(userDetails==1 || userDetails ==6) ? <br /> : null} 
 
-                  <Link to="/dashboard/projects/enrolledVyaapar" state={{id:data1?.project_id}} style={styles.linkStyle}>
+                  {(userDetails == 1|| userDetails ==6 ) ?    <Link to="/dashboard/projects/enrolledVyaapar" state={{id:data1?.project_id}} style={styles.linkStyle}>
                     <Button variant="secondary" style={{ ...styles.buttonStyle, color: "blue" }} startIcon={<IconButton>
                       <Iconify style={{ color: "blue" }} icon="mdi:user-add" />
                     </IconButton>} endIcon={<IconButton>
@@ -242,17 +258,19 @@ function Project(props) {
                       <span style={{ width: "200px" }}>Enrolled Vyapar</span>
                     </Button>
                   </Link>
-                  <br />
+                  : null}
+                  {(userDetails==1|| userDetails ==6) ? <br /> : null} 
 
-                  <Link to="/dashboard/projects/gelathiCirlces" state={{id:data1?.project_id}}  style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                  {(userDetails == 1 || userDetails ==6) ?   <Link to="/dashboard/projects/gelathiCirlces" state={{id:data1?.project_id}}  style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}> Gelathi Circles</span>
                   </Button>
                   </Link>
-                  <br />
+                  : null}
+                      {(userDetails==1 || userDetails ==6) ? <br /> : null} 
 
-        <span style={styles.linkStyle}>
+                      {(userDetails == 6 || userDetails == 13 ) ? <><span style={styles.linkStyle}>
         <Button variant="secondary" style={styles.buttonStyle}
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -293,9 +311,10 @@ function Project(props) {
         </Link></MenuItem>
       
       
-      </Menu><br/>
+      </Menu></> : null}
+                      {(userDetails==6 || userDetails==13) ? <br /> : null} 
 
-      <span style={styles.linkStyle}>
+                      {/* {(userDetails == 1 ) ?  <> <span style={styles.linkStyle}>
         <Button variant="secondary" style={styles.buttonStyle}
         id="basic-button"
         aria-controls={cm ? 'basic-menu' : undefined}
@@ -340,24 +359,27 @@ function Project(props) {
       
       
       
-      </Menu><br/>
+      </Menu></> : null}
+                      {(userDetails==1) ? <br /> : null}  */}
 
-                  <Link to="/dashboard/projects/scheduleCircleMeet" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+      {(userDetails == 6 ) ?  <Link to="/dashboard/projects/scheduleCircleMeet" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}>Schedule A Circle Meeting</span>
                   </Button>
                   </Link>
-                  <br />
+                  : null}
+                  {(userDetails==6) ? <br /> : null} 
 
-                  <Link to="/dashboard/projects/scheduleBeehiveVisit" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                  {(userDetails == 6 ) ?  <Link to="/dashboard/projects/scheduleBeehiveVisit" state={{id:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}>Schedule A Beehive Visit</span>
                   </Button>
-                  </Link><br />
-                  <CreateTrainerBatch data1={data1} /><br/>
-                  <Programevaluationday1 />
+                  </Link>: null}
+                      {(userDetails==6) ? <br /> : null} 
+                      {(userDetails == 5 ) ? <CreateTrainerBatch data1={data1} />: null} {(userDetails==5) ? <br /> : null} 
+                      {(userDetails == 1 ) ?  <Programevaluationday1 />: null} {(userDetails==1) ? <br /> : null} 
                  
                       <br />
 

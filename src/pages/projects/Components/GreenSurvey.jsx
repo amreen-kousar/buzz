@@ -316,7 +316,7 @@ const handleresources=(label,event)=>{
   return (
     <div>
     
-       <Stack style={{ flexDirection: 'row' ,float:'right' }}  mb={2}>
+       <Stack sx={{justifyContent:'flex-end'}}>
       
         <IconButton onClick={handleClickOpen}>
          <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />

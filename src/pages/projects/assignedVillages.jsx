@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton, } from '@mui/material';
 // import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
+import Searchbar from 'src/layouts/dashboard/Searchbar';
 
 export default function assignedVillages() {
     const {state} = useLocation()
-
+    const [data1, setData1] = useState('')
+    var [search, setSearch] = useState('')
+    var [selected, setSelected] = useState(null)
+    const [count,setCount]= useState('');
     const [clcikData, setClickData] = useState()
     const [villageData, setVillageData] = useState('');
 
@@ -30,7 +34,7 @@ export default function assignedVillages() {
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
-            "search": "",
+            "search": search,
             "project_id": state?.id,
             "emp_id": idvalue
           });
@@ -47,6 +51,7 @@ export default function assignedVillages() {
           axios(config)
           .then(function (response) {
             setVillageData(response.data)
+            setCount(response?.data?.list.length)
             console.log(JSON.stringify(response.data));
           })
           .catch(function (error) {
@@ -55,9 +60,53 @@ export default function assignedVillages() {
           
     }
 
+    const searchFunction = (e) => {
+        search = e
+        setSearch(search)
+        setSelected({ name: e, type: "Search" })
+        assignedVillages()
+    }
+    const id = sessionStorage?.getItem("proId")
+  useEffect(() => {
+    projData();
+
+  }, [])
+  
+  const projData = async => {
+    console.log(location, "location props")
+    var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
+    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var data = JSON.stringify({
+      "project_id": id,
+      "role_id": role,
+      "emp_id": idvalue
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        setData1(response.data.list)
+        console.log(response.data, '<--------------setData1setData1');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+
     return (
 
-        <Container>
+        <Container><Searchbar getSearch={(e) => searchFunction(e)} />
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
                     <Link to="/dashboard/projects/project">
@@ -69,7 +118,8 @@ export default function assignedVillages() {
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
-            </Stack>
+            </Stack> <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
+            <Typography style={{fontWeight:500,marginLeft:2}}>Villages ({count})</Typography> 
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ParticipantDrawer

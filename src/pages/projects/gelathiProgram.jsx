@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container, Typography, Grid, IconButton,CardContent } from '@mui/material';
 import GelathiProgrameDrawer from '../projects/Components/GelathiProgrameDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 
+import Searchbar from 'src/layouts/dashboard/Searchbar';
 export default function gelathiProgram(props) {
     const {state} = useLocation();
   console.log(props,"<----props",state)
     const [clcikData, setClickData] = useState()
     const [programe,setPrograme] = useState('')
+    const [data1, setData1] = useState('')
+    const [count,setCount]= useState('');
+    var [search, setSearch] = useState('')
+    var [selected, setSelected] = useState(null)
     useEffect(() => {
         gelathiPrograme();
         }, []
@@ -20,7 +25,7 @@ export default function gelathiProgram(props) {
         var data = JSON.stringify({
             "filter": "",
             "end_date": "",
-            "search": "",
+            "search": search,
             "project_id": state?.id,
             "gelathi_id": "",
             "start_date": "",
@@ -39,6 +44,7 @@ export default function gelathiProgram(props) {
           axios(config)
           .then(function (response) {
             setPrograme(response.data)
+            setCount(response.data?.list.length)
             console.log(response.data,'<--------------setProgramesetProgramesetPrograme');
           })
           .catch(function (error) {
@@ -46,6 +52,43 @@ export default function gelathiProgram(props) {
           });
     }
 
+    
+    const id = sessionStorage?.getItem("proId")
+    useEffect(() => {
+        projData();
+    
+      }, [])
+      
+    const projData = async => {
+        console.log(location, "location props")
+        var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
+        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+        var data = JSON.stringify({
+          "project_id": id,
+          "role_id": role,
+          "emp_id": idvalue
+        });
+    
+        var config = {
+          method: 'post',
+          url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: data
+        };
+    
+        axios(config)
+          .then(function (response) {
+            setData1(response.data.list)
+            console.log(response.data, '<--------------setData1setData1');
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    
+      }
     const [openFilter, setOpenFilter] = useState(false);
 
     const handleOpenFilter = () => {
@@ -56,9 +99,19 @@ export default function gelathiProgram(props) {
         setOpenFilter(false);
     };
 
+    const searchFunction = (e) => {
+       
+        search = e
+        setSearch(search)
+        setSelected({ name: e, type: "Search" })
+        gelathiPrograme()
+    }
+
     return (
 
         <Container>
+               <Searchbar getSearch={(e) => searchFunction(e)} />
+          
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
                     <Link to="/dashboard/projects/project">
@@ -71,7 +124,9 @@ export default function gelathiProgram(props) {
             New User
           </Button> */}
             </Stack>
-            {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
+               <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
+               <Typography style={{fontWeight:500,marginLeft:2}}> All Gelathi Sessions ({count})</Typography> 
+         {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <GelathiProgrameDrawer
                     clcikData={clcikData}
@@ -94,16 +149,16 @@ export default function gelathiProgram(props) {
 
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
-                                {` GF Name : ${itm?.gf_session_name}`}
+                                {` ${itm?.gf_session_name}`}
                             </Typography>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle2" gutterBottom >
-                               Day 1 : {itm?.plan_date}</Typography>
+                               Date : {itm?.plan_date}</Typography>
 
                           
-                            <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                            Day 2 : {itm?.status}</Typography>
+                            {/* <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
+                            Day 2 : {itm?.status}</Typography> */}
                             
                         </Grid>
                     </Card>)

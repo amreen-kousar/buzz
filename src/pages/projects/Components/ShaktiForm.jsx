@@ -12,7 +12,7 @@ import {
   FormGroup,
   FormControlLabel,
   Card,
-  CardContent
+  CardContent,Icon
 } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
@@ -53,8 +53,14 @@ export default function ShaktiForm() {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Survey Form
+     Survey form
       </Button>
+       {/* <Stack style={{ flexDirection: 'row' ,float:'right' }}  mb={2}>
+      
+      <IconButton onClick={handleClickOpen}>
+       <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
+      </IconButton>
+      </Stack>  */}
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
