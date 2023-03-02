@@ -14,14 +14,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import ParticipantDrawer from './ParticipantDrawer';
 import ShaktiForm from './ShaktiForm';
-
+import AddParticipants from './AddParticipants'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog({ shown, setShown, batch }) {
-  console.log(batch, '<--------shownshownshown')
+export default function ShaktiDialog({ shown, setShown, batch }) {
+  // console.log(batch, '<--------shownshownshown')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
 
@@ -72,8 +72,9 @@ export default function FullScreenDialog({ shown, setShown, batch }) {
               Self Shakti
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
-              save
+              Add Participants
             </Button> */}
+            <AddParticipants batch={batch} />
 
           </Toolbar>
         </AppBar>
@@ -93,6 +94,7 @@ export default function FullScreenDialog({ shown, setShown, batch }) {
         {/* <Typography variant="subtitle1"> ALl Participants</Typography> */}
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <ParticipantDrawer
+        
             clcikData={clcikData}
             isOpenFilter={openFilter}
             onOpenFilter={handleOpenFilter}
@@ -103,8 +105,9 @@ export default function FullScreenDialog({ shown, setShown, batch }) {
           return (
             <Stack style={{ top: 100 }}>
               <Card onClick={() => {
-                setClickData({ name: itm.gelathiname, title: "Enrolled  Name" })
                 handleOpenFilter()
+                setClickData({ name: itm.gelathiname, title: "Enrolled  Name" })
+                
               }}>
                 <CardContent>
                   <CardActions>

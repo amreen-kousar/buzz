@@ -33,7 +33,7 @@ ParticipantDrawer.propTypes = {
 };
 
 export default function ParticipantDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
-console.log(clcikData,'<------clcikDataclcikData')
+// console.log(batch,'<------clcikDataclcikData')
      const [session,setSession] = useState('')
      const [partiData,setpartiData] = useState('')
     useEffect(() => {
