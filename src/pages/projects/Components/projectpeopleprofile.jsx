@@ -23,6 +23,8 @@ import {
   Card, Avatar,
   CardContent,
 } from '@mui/material';
+import Projectdashboard from './projectdashboard';
+
 Peopleprofile.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
@@ -104,7 +106,8 @@ console.log(profileData,"infoooooooo")
                     <Avatar src={(profileData?.profile_pic) ? profileData.profile_pic : defaultImage} alt="photoURL" />
                   </div>
                   <Card sx={{ px: 1, boxShadow: 0 }} >
-                    <Typography style={{ flexDirection: 'row', color: '#444444', }} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name}</Typography>
+                    <Typography style={{ flexDirection: 'row', color: '#444444', }} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name}
+                   <Projectdashboard/> </Typography> 
                     <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
                       Role : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.role_name}</span>
 
