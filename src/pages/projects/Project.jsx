@@ -25,11 +25,13 @@ function Project(props) {
   const userDetails = localStorage?.getItem('userId');
   console.log(userDetails, "userrrrrrrrrrrrr")
   const [data1, setData1] = useState('')
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [circlemeeting,setCirclemeeting]=React.useState(null);
   const open = Boolean(anchorEl);
   const cm = Boolean(circlemeeting);
+
+
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -60,9 +62,10 @@ function Project(props) {
   const viewUser = (itm,i) => {
     localStorage.setItem('profiledetails', JSON.stringify(itm))
    console.log(itm,i,"itemeeeeeeeeeee")
+
    handleOpenFilter()
   }
-
+ 
   
 
   const projData = async => {
@@ -158,7 +161,7 @@ function Project(props) {
                 <CardContent>
                 Project Team : 
                 {data1?.projectPeoplesList?.map((item,index)=>
-                  <Card value={item?.emp_id} style={{cursor:'pointer',margin:10,padding:10}} onClick={()=>viewUser(item,index)}>
+                 <Card value={item?.emp_id} style={{cursor:'pointer',margin:10,padding:10}} onClick={()=>viewUser(item,index)}>
                      <span style={{fontWeight:700}}>{item.emp_name}  
                         <Iconify style={{ color: "black" ,float:'right',width:20,height:20}} icon="fluent:notebook-eye-20-filled" />
                      </span><br></br>{item?.role}&nbsp;</Card>

@@ -119,7 +119,7 @@ export default function User() {
   }
 
   const onSumbit = (e, i) => {
-    setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
+    setSelected({ type: 'Location', name: ` ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
     handleclosebusfilter()
     busesd(e?.district_id, e?.talaq_id, "country")
   }

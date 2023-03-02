@@ -126,7 +126,7 @@ export default function Demography() {
 
 
   const onSumbit = (e, i) => {
-    setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
+    setSelected({ type: 'Location', name: ` ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
     handleCloseFilter()
     demoi(e?.district_id, e?.taluk_id, "country")
     console.log(e, i, "<----datssdasdsa")

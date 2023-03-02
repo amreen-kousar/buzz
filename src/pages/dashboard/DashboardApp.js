@@ -122,7 +122,7 @@ export default function DashboardApp() {
   }
 
   const onSumbit = (e, i) => {
-    setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
+    setSelected({ type: 'Location', name: `State : ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
     handleCloseFilter()
     apiHit(e?.district_id, e?.talaq_id, "country")
   }

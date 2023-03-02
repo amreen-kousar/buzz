@@ -14,8 +14,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import ParticipantDrawer from './ParticipantDrawer';
 import ShaktiForm from './ShaktiForm';
-
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -68,7 +73,7 @@ export default function FullScreenDialog({ shown, setShown, batch }) {
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div">
               Self Shakti
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
@@ -78,16 +83,29 @@ export default function FullScreenDialog({ shown, setShown, batch }) {
           </Toolbar>
         </AppBar>
         <Stack style={{ top: 40 }}>
-          <Card >
-            <CardContent>
-              <Typography variant="subtitle2"> Project : {batch?.data?.projectName} </Typography>
+          <Card sx={{mt:2,ml:2}}>
+           
+            <TableContainer component={Paper} sx={{width:'40vw'}}>
+          <Table aria-label="customized table">
+           
+            <TableBody>
+              
+          <TableRow><TableCell component="th" scope="row">Project </TableCell><TableCell>: {batch?.data?.projectName}</TableCell></TableRow>
+          <TableRow><TableCell component="th" scope="row">Training&nbsp;Batch </TableCell><TableCell>:{batch?.data?.name}</TableCell></TableRow>
+          <TableRow><TableCell component="th" scope="row">Day 1</TableCell><TableCell>: {batch?.data?.day1}</TableCell></TableRow>
+          <TableRow><TableCell component="th" scope="row">Day 2</TableCell><TableCell>: {batch?.data?.day2}</TableCell></TableRow>
+          <TableRow><TableCell component="th" scope="row">Contact&nbsp;Person </TableCell><TableCell>: {batch?.data?.contact_person}</TableCell></TableRow>
+          <TableRow><TableCell component="th" scope="row">Contact&nbsp;Number</TableCell><TableCell>: {batch?.data?.contact_number}</TableCell></TableRow>  </TableBody>
+          </Table>
+        </TableContainer>
+              {/* <Typography variant="subtitle2" sx={{color:"black"}}> Project : {batch?.data?.projectName} </Typography>
               {console.log(batch?.data?.projectName, '<----------batch?.data?.projectName')}
-              <Typography variant="subtitle2"> Training Batch : {batch?.data?.name} </Typography>
-              <Typography variant="subtitle2"> Day 1 : {batch?.data?.day1}</Typography>
-              <Typography variant="subtitle2"> Day 2 : {batch?.data?.day2}</Typography>
-              <Typography variant="subtitle2"> Contact Person : {batch?.data?.contact_number}</Typography>
-              <Typography variant="subtitle2"> Contact Number : {batch?.data?.contact_person}</Typography>
-            </CardContent>
+              <Typography variant="subtitle2" sx={{color:"black"}}> Training Batch : {batch?.data?.name} </Typography>
+              <Typography variant="subtitle2" sx={{color:"black"}}> Day 1 : {batch?.data?.day1}</Typography>
+              <Typography variant="subtitle2" sx={{color:"black"}}> Day 2 : {batch?.data?.day2}</Typography>
+              <Typography variant="subtitle2" sx={{color:"black"}}> Contact Person : {batch?.data?.contact_number}</Typography>
+              <Typography variant="subtitle2" sx={{color:"black"}}> Contact Number : {batch?.data?.contact_person}</Typography> */}
+          
           </Card>
         </Stack>
         {/* <Typography variant="subtitle1"> ALl Participants</Typography> */}
@@ -106,12 +124,13 @@ export default function FullScreenDialog({ shown, setShown, batch }) {
                 setClickData({ name: itm.gelathiname, title: "Enrolled  Name" })
                 handleOpenFilter()
               }}>
-                <CardContent>
-                  <CardActions>
-                    <Stack direction={'row'} spacing={10}>
+                <CardContent >
+                  <CardActions sx={{borderRadius:0}}>
+                    <div  style={{width:'90vw',display:'flex',position:'relative',padding:'8px'}} >
+                     
                       <Typography variant="subtitle2">{itm?.participant_name}</Typography>
-                      <ShaktiForm />
-                    </Stack>
+                   <ShaktiForm/>
+                    </div>
                   </CardActions>
 
                   {console.log(itm?.participant_name, '<----------itm?.participant_name')}

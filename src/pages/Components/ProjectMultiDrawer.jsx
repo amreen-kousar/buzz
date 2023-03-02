@@ -136,7 +136,14 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                             <ShaktiDialog batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />
                             <Card onClick={()=>{setShown(true),console.log("ferfgreg")}} style={{marginTop:20}}>
                                 <CardContent>
-                                    <Typography>Actual Participants:   {batch?.total_participants}     </Typography>
+                                <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px',backgroundColor:'white' }}>
+                <Iconify icon="material-symbols:add" width={30} height={30} />
+              </div>
+                                 <Typography >Actual Participants:   {batch?.total_participants}     
+                     {/* <IconButton>
+                      <Iconify style={{ color: "black",float:'right'}} icon="material-symbols:add" />
+                    </IconButton> */}
+                    </Typography>
                                     <Typography>Target Participants:   {batch?.data?.participants}    </Typography>
                                 </CardContent>
                             </Card>

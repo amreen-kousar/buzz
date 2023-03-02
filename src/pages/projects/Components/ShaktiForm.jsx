@@ -25,7 +25,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
-
+import Iconify from 'src/components/Iconify';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -51,16 +51,17 @@ export default function ShaktiForm() {
   };
 
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+    <>
+      {/* <Button variant="outlined" onClick={handleClickOpen}>
      Survey form
-      </Button>
-       {/* <Stack style={{ flexDirection: 'row' ,float:'right' }}  mb={2}>
+      </Button> */}
+
+      <div style={{position:'absolute',right:0,float:'right'}}>
       
       <IconButton onClick={handleClickOpen}>
-       <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
+       <Iconify  icon="clarity:form-line" width={20} height={20}  color="#ff7424"  />
       </IconButton>
-      </Stack>  */}
+      </div> 
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
@@ -836,6 +837,6 @@ export default function ShaktiForm() {
           </Card>
         </Grid>
       </Dialog>
-    </div>
+  </>
   );
 } 
