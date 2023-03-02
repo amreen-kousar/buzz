@@ -48,11 +48,13 @@ export default function Operationmanagerdashboard() {
   }, []);
 
   const apiHit = async (id, i, g) => {
-    const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     setLoader(true)
     const data = {
       end_date: g === "date" ? i : '',
-      role_id: 1,
+      role_id: role,
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       trainerId: g ? "" : i === 5 ? id?.id : '',
@@ -67,11 +69,11 @@ export default function Operationmanagerdashboard() {
     };
     const datas = {
       end_date: i,
-      role_id: 1,
+      role_id: role,
       taluk_id: "",
       district_id: "",
       trainerId: '',
-      emp_id: 1,
+      emp_id: userid,
       start_date: id,
       somId: '',
       gflId: '',

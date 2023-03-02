@@ -67,9 +67,12 @@ export default function Team(props) {
 
     const teamMembersApiCall = () => {
         if (filterData) { dateValue = filterData }
+        var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
-            "date": dateValue, "role_id": 3,
-            "emp_id": 2
+            "date": dateValue,
+             "role_id": role,
+            "emp_id": userid
         });
         console.log(data)
         var config = {

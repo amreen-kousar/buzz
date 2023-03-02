@@ -38,11 +38,11 @@ export default function Trainerdashboard() {
   }, []);
 
   const apiHit = async (id, i, g) => {
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
- 
     const data = {
       end_date: g === "date" ? i : '',
-      role_id: 5,
+      role_id: role,
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       trainerId: g ? "" : i === 5 ? id?.id : '',
@@ -57,11 +57,11 @@ export default function Trainerdashboard() {
     };
     const datas = {
       end_date: i,
-      role_id: 5,
+      role_id: role,
       taluk_id: "",
       district_id: "",
       trainerId: '',
-      emp_id: 653,
+      emp_id:userid,
       start_date: id,
       somId: '',
       gflId: '',

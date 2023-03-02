@@ -46,11 +46,13 @@ export default function Charts(props) {
     chart();
   }, [location?.state?.filterData]);
   const chart = async => {
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
 
-      "role_id": 1,
+      "role_id": role,
 
-      "emp_id": 144,
+      "emp_id": userid,
       ...location?.state?.filterData
 
     });

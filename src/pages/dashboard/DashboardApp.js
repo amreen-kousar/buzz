@@ -77,13 +77,15 @@ export default function DashboardApp() {
 
   const apiHit = async (id, i, g) => {
     setLoader(true)
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     const data = {
       end_date: g === "date" ? i : '',
-      role_id: 1,
+      role_id: role,
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       trainerId: g ? "" : i === 5 ? id?.id : '',
-      emp_id: 1,
+      emp_id: userid,
       start_date: g === "date" ? id : '',
       somId: g ? "" : i === 12 ? id?.id : '',
       gflId: g ? "" : i === 13 ? id?.id : '',
@@ -182,8 +184,8 @@ export default function DashboardApp() {
   return (
 
     <Page title="Dashboard">
-         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h5" gutterBottom>
+         <Stack direction="row" alignItems="center" justifyContent="space-between" >
+          <Typography variant="h5" gutterBottom sx={{ml:4}}>
             Summary
 
           </Typography>
@@ -213,7 +215,7 @@ export default function DashboardApp() {
           />
         </Stack>
 
-        <Grid container spacing={3} marginTop={4}>
+        <Grid container spacing={3} marginTop={1}>
           {
             summaryDataView.map(s => {
               return <Grid item xs={s.itemXs} sm={s.itemSm} md={s.itemMd}>

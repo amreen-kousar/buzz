@@ -602,7 +602,7 @@ axios(config)
                 <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="End Odometer Reading" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" disabled={true} onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="End Location" variant="outlined" 
+                <TextField id="outlined-basic" disabled={true} value={locationS} onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="End Location" variant="outlined" 
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="start">

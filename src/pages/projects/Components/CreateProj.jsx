@@ -311,12 +311,12 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
             <Stack>
               <FormControl fullWidth>
                 {console.log(data, '<------------chcjcjcjcididid')}
-                <InputLabel id="demo-simple-select-label"> Select Partner</InputLabel>
+                <InputLabel color="common" id="demo-simple-select-label"> Select Partner</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={data.partner_id}
-                  label="Partner"
+                  label="Select Partner"
                   onChange={(e => {
                     console.log(e, "<--hhhbhbh")
                     setData({ ...data, partner_id: e?.target?.value })
@@ -337,7 +337,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
 
           <CardContent>
             <Stack mt={1} mb={2}>
-              <TextField id="Training Target" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
+              <TextField id="Training Target" color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
             </Stack>
           </CardContent>
           <Divider />
@@ -348,7 +348,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
             </CardContent>
             <Stack>
               <CardContent>
-                <DatePicker
+                <DatePicker color="common"
                   label="Date"
                   value={data.start_date}
                   onChange={(newValue) => {
@@ -358,10 +358,10 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
                   //   setSendData({ ...sendData, date: newValue })
                   // }}
                   renderInput={(params) => <TextField  {...params} style={{ width: '20vw' }} />}
-                />
+                /> &nbsp;
                 <DatePicker
 
-                  label="Date"
+                  label="Date" color="common"
                   value={data.end_date}
                   onChange={(newValue) => {
                     console.log(newValue, "<----newValuenewValue")
@@ -379,12 +379,12 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
             <Typography variant="h6">Resources</Typography>
             <Stack mt={2}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Select Bus</InputLabel>
+                <InputLabel id="demo-simple-select-label" color="common">Select Bus</InputLabel>
                 <Select
                   // labelId="demo-simple-select-label"
                   //id="demo-simple-select"
                   value={data.bus_id}
-                  label="Bus"
+                  label="Select Bus"
                   onChange={(e => {
                     setData({ ...data, bus_id: e?.target?.value })
 

@@ -23,7 +23,7 @@ function AddUser(props) {
 
     var [AddUser, setAddUser] = useState({
         role: { id: '0', roleName: 'Admin' }, first_name: '', last_name: "", contactNum: '', workNum: '', office_email_id: '', address: '', address3: "", address2: "",
-        pincode: "", gender: "male", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project: "",
+        pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project: "",
         emp_id: ""
     })
 
@@ -399,7 +399,7 @@ console.log(userid,"userrrrrridddddddd")
                                 {
                                     ["Admin", "Program Manager", "Operations Manager", "Gelathi Facilitator Lead", 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Last Name" variant="outlined" value={AddUser.last_name} onChange={(e) => { setAddUser({ ...AddUser, last_name: e.target.value }) }} />
                                 }
-                                {/* {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl style={{ marginLeft: "1rem" }}>
+                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl style={{ marginLeft: "1rem" }}>
                                     <RadioGroup
                                         row
                                         onChange={(e, value) => { setAddUser({ ...AddUser, gender: value }) }}
@@ -411,13 +411,13 @@ console.log(userid,"userrrrrridddddddd")
                                         <FormControlLabel value="male" control={<Radio />} label="Male" />
 
                                     </RadioGroup>
-                                </FormControl>} */}
+                                </FormControl>}
                                 {/* <FormGroup style={{ float: "right" }}>
                                     <FormControlLabel label="Status" labelPlacement="start"
                                         control={<Switch defaultValue={AddUser.present_status} onClick={(e, value) => { setAddUser({ ...AddUser, present_status: !AddUser.present_status }); console.log(!AddUser.present_status) }} defaultChecked />} />
                                 </FormGroup> */}
                                 <br />
-                                {/* {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl fullWidth>
+                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl fullWidth>
 
                                     <Autocomplete
                                         disablePortal
@@ -426,11 +426,10 @@ console.log(userid,"userrrrrridddddddd")
                                         defaultValue={AddUser.reportingManager}
                                         label="reportingManager"
                                         onChange={(event, value) => getProjectOfManager(value)}
-
                                         renderInput={(params) => <TextField {...params} label="ReportingManger" />}
                                     />
                                 </FormControl>
-                                } */}
+                                } 
                                 {/* {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Date of joining " type="date" InputLabelProps={{
                                     shrink: true,
                                 }} value={AddUser.doj} onChange={(e) => { setAddUser({ ...AddUser, doj: e.target.value }) }} variant="outlined" />

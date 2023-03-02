@@ -64,12 +64,14 @@ export default function Own(props) {
     const [teamMembersData, setTeamMembersData] = useState([])
     const [mainValue, setMainValue] = useState(0)
     const [filterData, setFilterData] = useState(null)
+    const [season, setSeason] = useState(0)
+
 
 
     useEffect(() => {
         setFilterData(props.returnDateValue)
         list()
-    }, [props.returnDateValue]
+    }, [props.returnDateValue,season]
     )
 
 
@@ -116,9 +118,12 @@ export default function Own(props) {
 
         if (filterData) { dateValue = filterData }
         const userDetails = localStorage?.getItem("userDetails")
+       
+        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
-            "emp_id": 651,
-            "date": dateValue
+            "emp_id": userid,
+            "date": dateValue,
+             "for":season,
         });
         console.log(data)
         var config = {
@@ -145,6 +150,7 @@ export default function Own(props) {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        setSeason(newValue);
     };
 
 
@@ -205,11 +211,57 @@ export default function Own(props) {
                     </Box>
                     <TabPanel value={value} index={0}>
 
-                        <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
+                    {listdata?.data?.map((itm) => {
+                            return (
+                                <>
+                                    <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
+
+                                        <Grid container spacing={2} >
+                                            <Grid onClick={() => { handleOpenFilter(itm) }} item xs={8}>
+                                                <b cursor="pointer" style={{ color: "blue" }} >{itm?.Ta_Name}</b><br>
+                                                </br>
+                                                <Typography variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
+                                            </Grid>
+                                            <Grid item xs={4}>
+                                                <Iconify onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+                                                <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
+                                            </Grid>
+
+
+                                        </Grid>
+
+
+                                    </Card>
+                                </>
+                            )
+                        })}
 
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
+                    {listdata?.data?.map((itm) => {
+                            return (
+                                <>
+                                    <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
+
+                                        <Grid container spacing={2} >
+                                            <Grid onClick={() => { handleOpenFilter(itm) }} item xs={8}>
+                                                <b cursor="pointer" style={{ color: "blue" }} >{itm?.Ta_Name}</b><br>
+                                                </br>
+                                                <Typography variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
+                                            </Grid>
+                                            <Grid item xs={4}>
+                                                <Iconify onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+                                                <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
+                                            </Grid>
+
+
+                                        </Grid>
+
+
+                                    </Card>
+                                </>
+                            )
+                        })}
                     </TabPanel>
                     <TabPanel value={value} index={2}>
                         {listdata?.data?.map((itm) => {

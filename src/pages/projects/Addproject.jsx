@@ -252,7 +252,7 @@ function AddProject({viewMessage}) {
                     <br />
                     <FormControl fullWidth>
 
-                        <InputLabel id="demo-simple-select-label"> Country</InputLabel>
+                        <InputLabel id="demo-simple-select-label" color="common" sx={{borderBlockColor:'black'}}> Country</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -296,7 +296,7 @@ function AddProject({viewMessage}) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={data.district_id}
-                            label="Age"
+                            label="District"
                             onChange={(e => {
                                 setData({ ...data, district_id: e?.target?.value }),
                                     getDistrict(e?.target?.value)
@@ -317,7 +317,7 @@ function AddProject({viewMessage}) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={data.talaq_id}
-                            label="Age"
+                            label="Taluk"
                             onChange={(e => {
                                 setData({ ...data, talaq_id: e?.target?.value })
                                 setMainState({ ...mainState, locationID: e?.target?.value })
@@ -339,7 +339,7 @@ function AddProject({viewMessage}) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={data.funder_id}
-                            label="Age"
+                            label="Funder"
                             onChange={(e => {
                                 setData({ ...data, funder_id: e?.target?.value })
                                 setMainState({ ...mainState, funderId: e?.target?.value })

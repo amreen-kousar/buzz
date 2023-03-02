@@ -214,9 +214,11 @@ export default function TravelDialog({ viewMessage }) {
   }
 
   const drop = async => {
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
-      "emp_id": "329",
-      "role_id": "5",
+      "emp_id": userid,
+      "role_id": role,
       "date": "2022/08/11"
     });
 

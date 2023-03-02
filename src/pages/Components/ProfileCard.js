@@ -105,7 +105,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };
-  console.log(editData, profileData, "<---345678i")
+  
   const editProfile = async => {
     // console.log(editData,"<----editProfileeditProfile")
     handleCloseClick();
@@ -156,6 +156,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
         console.log(error);
       });
   }
+  console.log(profileData ,"<---345678i")
   return (
     <Page title="profile">
       <Container>
@@ -189,7 +190,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
               Status : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.status === '1' ? 'Active' : null}</span>
             </Typography>
             <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
-              Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.supervisorName === "" ? "" : profileData?.superVisorName}</span>
+              Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.supervisorName === "" ? "" : profileData?.supervisorName}</span>
             </Typography>
             <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
               Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.doj}</span> </Typography>
@@ -198,34 +199,12 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       </CardContent>
     </Card>
 
-    {/* <div>
-      <Card style={{ width: "auto" }}>
-        <CardContent> */}
-          {/* <Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white',textAlign:'center',borderRadius:'0px',backgroundColor:'#ff7424'}}>
-            Contact Information
-            {(!expanded)?<ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">  
-<IconButton  style={{color:"white"}}
-component={RouterLink} to="#"> <Iconify icon="material-symbols:edit" />
-</IconButton>
-</ExpandMore>:null}
-          </Card> */}
-           {/* {(!expanded)?<Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#ff7424'}}>
-            Contact Information<IconButton edge="start" onClick={handleExpandClick} color="inherit" aria-label="show more" aria-expanded={expanded} style={{float:'right'}}>
-            <Iconify icon="material-symbols:edit" />
-          </IconButton>
-          </Card>:null} */}
-         
-          {/* <TableContainer >
-  <Table aria-label="customized table"  >
-     <TableHead maxWidth>Contact Information</TableHead> */}
-    {/* <TableBody >
-      <TableRow style={{ height: "8px !important" }} >
-        <TableCell > Mobile </TableCell> */} 
-{/* </CardContent></Card></div> */}
+
   <div>
     <Card style={{ width: "auto" }}>
       <CardContent>
-      {(!expanded)?<Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#ff7424'}}>
+      {(!expanded)?
+      <Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#ff7424'}}>
             Contact Information
            
           </Card>:null}
@@ -248,7 +227,7 @@ component={RouterLink} to="#"> <Iconify icon="material-symbols:edit" />
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
                 <TableCell>Address</TableCell>
-                <TableCell>: &nbsp;{profileData?.address}</TableCell>
+                <TableCell>: &nbsp;{profileData?.address}{profileData?.address2}{profileData?.address3}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
                 <TableCell>Pincode:</TableCell>
@@ -261,6 +240,23 @@ component={RouterLink} to="#"> <Iconify icon="material-symbols:edit" />
       </CardContent>
     </Card>
 
+  </div>
+<br></br>
+  <div>
+  <Card variant="subtitle1" gutterBottom style={{ padding:10,color: 'white' ,textAlign:'center',borderRadius:'0px',backgroundColor:'#ff7424'}}>
+          Projects
+         
+          </Card>
+          {(profileData?.project_list.length>0)?<Card>
+             <CardContent>
+          {
+            profileData?.project_list?.map((item)=>
+            <>
+            {item?.projectName}<br/></>
+            )
+          }
+          </CardContent>
+          </Card>:<>No data</>}
   </div>
 
 

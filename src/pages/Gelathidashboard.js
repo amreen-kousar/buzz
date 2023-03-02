@@ -42,13 +42,15 @@ export default function Gelathidashboard() {
 
   const apiHit = async (id, i, g) => {
     setLoader(true)
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     const data = {
       end_date: g === "date" ? i : '',
-      role_id: 6,
+      role_id:role ,
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       trainerId: g ? "" : i === 5 ? id?.id : '',
-      emp_id: 558,
+      emp_id: userid,
       start_date: g === "date" ? id : '',
       somId: g ? "" : i === 12 ? id?.id : '',
       gflId: g ? "" : i === 13 ? id?.id : '',
@@ -59,11 +61,11 @@ export default function Gelathidashboard() {
     };
     const datas = {
       end_date: i,
-      role_id: 6,
+      role_id: role,
       taluk_id: "",
       district_id: "",
       trainerId: '',
-      emp_id: 558,
+      emp_id: userid,
       start_date: id,
       somId: '',
       gflId: '',
