@@ -52,6 +52,8 @@ export default function User() {
   }, [open]);
 
   const busesd = async (i, id, g) => {
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+   
     const data = JSON.stringify({
       "date": "",
       "role_id": 1,
@@ -59,7 +61,7 @@ export default function User() {
       taluk_id: g === "country" ? id : "",
       district_id: g === "country" ? i : "",
       "funder_id": id === 2 ? i?.id : "",
-      "emp_id": 206,
+      "emp_id": userid,
       "search": search
     });
 

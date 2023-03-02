@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { Button, ButtonGroup, Card, CardContent, CardHeader, Container, Icon, IconButton, TableCell, Typography } from '@mui/material';
+import { Button, ButtonGroup, Card, Stack,CardContent, CardHeader, Container, Icon, IconButton, TableCell, Typography } from '@mui/material';
 import Iconify from 'src/components/Iconify';
 import Page from 'src/components/Page';
 import { Link } from 'react-router-dom';
@@ -18,8 +18,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Programevaluationday1 from './Components/Programevaluationday1';
+import Peopleprofile from './Components/projectpeopleprofile';
 function Project(props) {
   const location = useLocation()
+  const [openFilter, setOpenFilter] = useState(false);
   const userDetails = localStorage?.getItem('userId');
   console.log(userDetails, "userrrrrrrrrrrrr")
   const [data1, setData1] = useState('')
@@ -41,6 +43,13 @@ function Project(props) {
   const handleCircleClose = () => {
    setCirclemeeting(null);
   };
+  const handleOpenFilter = () => {
+    setOpenFilter(true);
+  };
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
+
   const id = sessionStorage?.getItem("proId")
   useEffect(() => {
     projData();
@@ -48,6 +57,14 @@ function Project(props) {
   }, [])
   
   
+  const viewUser = (itm,i) => {
+    localStorage.setItem('profiledetails', JSON.stringify(itm))
+   console.log(itm,i,"itemeeeeeeeeeee")
+   handleOpenFilter()
+  }
+
+  
+
   const projData = async => {
     console.log(location, "location props")
     var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
@@ -140,15 +157,23 @@ function Project(props) {
               <Card>
                 <CardContent>
                 Project Team : 
-                {data1?.projectPeoplesList?.map((item)=>
-                  <Card value={item?.emp_id} style={{cursor:'pointer',margin:10,padding:10}}>
+                {data1?.projectPeoplesList?.map((item,index)=>
+                  <Card value={item?.emp_id} style={{cursor:'pointer',margin:10,padding:10}} onClick={()=>viewUser(item,index)}>
                      <span style={{fontWeight:700}}>{item.emp_name}  
                         <Iconify style={{ color: "black" ,float:'right',width:20,height:20}} icon="fluent:notebook-eye-20-filled" />
                      </span><br></br>{item?.role}&nbsp;</Card>
                 )}
                 </CardContent>
+
               </Card>
             </Grid>
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ mb: 1 }}>
+              <Peopleprofile
+                isOpenFilter={openFilter}
+                onOpenFilter={handleOpenFilter}
+                onCloseFilter={handleCloseFilter}
+              />
+            </Stack>
             <Grid item xs={12} sm={12} md={5} >
 
               <Box

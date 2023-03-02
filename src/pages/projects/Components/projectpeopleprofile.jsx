@@ -1,5 +1,11 @@
 import PropTypes from 'prop-types';
-// material
+import Iconify from 'src/components/Iconify';
+import Scrollbar from 'src/components/Scrollbar';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import defaultImage from '../../../assets/images/default.png';
+import {useState} from 'react'
+import { useEffect } from 'react';
 import {
   Box,
   Radio,
@@ -16,37 +22,15 @@ import {
   Card, Avatar,
   CardContent,
 } from '@mui/material';
-// components
-import Iconify from '../../components/Iconify';
-import Scrollbar from '../../components/Scrollbar';
-import { ColorManyPicker } from '../../components/color-utils';
-import UserEditProfile from './UserComponent/UserEditProfile';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
-import { Color } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { Icon } from '@iconify/react';
-import defaultImage from '../../assets/images/default.png'
-import {useState} from 'react'
-import { useEffect } from 'react';
-// ----------------------------------------------------------------------
-UserDrawer.propTypes = {
+Peopleprofile.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
-
-export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users }) {
-
-  const userDetails = localStorage?.getItem('userId')
-  { console.log(userDetails, "userrrrrrrrrrrrrrrrrrr") }
-  var [user,setUser]=useState(JSON.parse(localStorage?.getItem('people')))
-  console.log(JSON.parse(localStorage.getItem('people')),"peopleeeeee");
-  let userprofile =JSON.parse(localStorage.getItem('people'))
-  console.log(userprofile,"userprofiledetails")
-  useEffect(() => {
+export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter}){
+    var [user,setUser]=useState(JSON.parse(localStorage?.getItem('profiledetails')))
+    let userprofile =JSON.parse(localStorage.getItem('profiledetails'))
+      useEffect(() => {
     //   editUser()
     updateSetUser()
   }, []
@@ -55,14 +39,11 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
   const updateSetUser=()=>{
     setUser(JSON.parse(localStorage?.getItem('people')))
   }
+    
 
-  console.log(user,"userpeopleee")
+    return(
+        <>
 
-  return (
-    <>
-      {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
 
       <Drawer
         anchor="right"
@@ -89,15 +70,6 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
 
         <Divider /><br />
 
-        {userDetails && userDetails == 2 && <Stack direction={'row'} justifyContent="flex-end">
-          <UserEditProfile updateSetUser={updateSetUser} />
-          <Button style={{ float: 'right' }} sx={{
-            '&:hover': {
-              backgroundColor: '#ffd796',
-            },
-          }}><Iconify icon="ic:baseline-delete" style={{ width: '30px', height: '30px', color: '#e69138', marginRight: 0 }}></Iconify></Button>
-
-        </Stack>}
         <Scrollbar>
           <Stack spacing={1} sx={{ px: 1 }}>
             <div>
@@ -107,14 +79,14 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
                     <Avatar src={(userprofile?.profile_pic) ? userprofile.profile_pic : defaultImage} alt="photoURL" />
                   </div>
                   <Card sx={{ px: 1, boxShadow: 0 }} >
-                    <Typography style={{ flexDirection: 'row', color: '#444444', }} variant="subtitle1" gutterBottom>{userprofile?.first_name}&nbsp;{userprofile?.last_name}</Typography>
+                    <Typography style={{ flexDirection: 'row', color: '#444444', }} variant="subtitle1" gutterBottom>{userprofile?.emp_name}&nbsp;{userprofile?.last_name}</Typography>
                     <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
-                      Role : <span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.role_name}</span>
+                      Role : <span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.role}</span>
 
                     </Typography>
-                    {userDetails && userDetails == 2 && <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                   <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
                       Status : <span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.status === '1' ? "Active" : null}</span>
-                    </Typography>}
+                    </Typography>
                     <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
                       Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{userprofile?.supervisorName}</span>
                     </Typography>
@@ -125,11 +97,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
                 </CardContent>
               </Card>
 
-              {/* <FormGroup>
-                {FILTER_GENDER_OPTIONS.map((item) => (
-                  <FormControlLabel key={item} control={<Checkbox />} label={item} />
-                ))}
-              </FormGroup> */}
+
             </div>
 
             <div>
@@ -189,19 +157,8 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
           </Stack>
         </Scrollbar>
 
-        {/* <Box sx={{ p: 3 }}>
-          <Button
-            fullWidth
-            size="large"
-            type="submit"
-            color="inherit"
-            variant="outlined"
-            startIcon={<Iconify icon="ic:round-clear-all" />}
-          >
-            RAJ KUMAR
-          </Button>
-        </Box> */}
+    
       </Drawer>
     </>
-  );
+    )
 }

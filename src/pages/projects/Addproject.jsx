@@ -162,13 +162,13 @@ function AddProject({viewMessage}) {
             const fundList = fund?.filter(itm => itm?.id === mainState?.funderId)
             const talukList = taluk?.filter(itm => itm?.id === mainState?.locationID)
             console.log(fundList, talukList, "<----talukListtalukList")
-
+        const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
             var data = new FormData();
-            data.append('user_id', '650');
+            data.append('user_id', userid);
             data.append('locationID', talukList[0]?.id);
             data.append('funderID', fundList[0]?.id);
-            data.append('createdBy', '650');
-            data.append('lastUpdatedBy', '650');
+            data.append('createdBy', userid);
+            data.append('lastUpdatedBy', userid);
             data.append('location_name', talukList[0]?.name);
             data.append('funderName', fundList[0]?.name);
 

@@ -38,13 +38,15 @@ export default function Trainerdashboard() {
   }, []);
 
   const apiHit = async (id, i, g) => {
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+ 
     const data = {
       end_date: g === "date" ? i : '',
       role_id: 5,
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       trainerId: g ? "" : i === 5 ? id?.id : '',
-      emp_id: 653,
+      emp_id: userid,
       start_date: g === "date" ? id : '',
       somId: g ? "" : i === 12 ? id?.id : '',
       gflId: g ? "" : i === 13 ? id?.id : '',

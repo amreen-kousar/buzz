@@ -226,9 +226,10 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
 
   const createProject = () => {
     console.log(data, "dateaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-
+  var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  console.log(userid,"projectuseridddddd");
     var formdata = new FormData();
-    formdata.append('user_id', '650');
+    formdata.append('user_id', userid);
     formdata.append('project_id', data.projectId)
     formdata.append('partnerID', data.partner_id)
     formdata.append('training_target', data.training_target)

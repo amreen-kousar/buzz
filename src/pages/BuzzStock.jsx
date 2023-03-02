@@ -105,11 +105,13 @@ export default function BuzzStock() {
   }
   const demoi = async (id, i, g) => {
     console.log(id, i, g, "buzz stock")
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var role =JSON.parse(localStorage.getItem('userDetails'))?.role
     var data = JSON.stringify({
       "start_date": g === "date" ? id : '',
       "end_date": g === "date" ? i : '',
-      "user_id": 206,
-      "role_id": 2,
+      "user_id": userid,
+      "role_id": role,
       project_id: g ? "" : i === 3 ? id?.id : '',
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",

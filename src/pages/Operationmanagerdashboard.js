@@ -48,6 +48,7 @@ export default function Operationmanagerdashboard() {
   }, []);
 
   const apiHit = async (id, i, g) => {
+    const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     setLoader(true)
     const data = {
       end_date: g === "date" ? i : '',
@@ -55,7 +56,7 @@ export default function Operationmanagerdashboard() {
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       trainerId: g ? "" : i === 5 ? id?.id : '',
-      emp_id: 1,
+      emp_id: userid,
       start_date: g === "date" ? id : '',
       somId: g ? "" : i === 12 ? id?.id : '',
       gflId: g ? "" : i === 13 ? id?.id : '',
