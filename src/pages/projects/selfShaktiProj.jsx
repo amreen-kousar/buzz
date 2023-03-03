@@ -5,13 +5,21 @@ import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mu
 import ProjectMultiDrawer from '../Components/ProjectMultiDrawer';
 import Iconify from 'src/components/Iconify';
 import { Link, useLocation } from 'react-router-dom';
+import Searchbar from 'src/layouts/dashboard/Searchbar';
 
 export default function selfShaktiProj() {
     const {state} = useLocation()
     console.log("shaktishakti",state)
     const [clcikData, setClickData] = useState()
+    var [search, setSearch] = useState('')
+    var [selected, setSelected] = useState(null)
     // const [selfShakthi, setselfShakthi] = useState([{ stockname: "fist" }, { stockname: "second" }]);
-
+    const searchFunction = (e) => {
+        search = e
+        setSearch(search)
+        setSelected({ name: e, type: "Search" })
+        shakti()
+    }
     useEffect(() => {
         shakti();
         // setselfShakthi([{ stockname: "fist" }, { stockname: "second" }])
@@ -34,7 +42,7 @@ export default function selfShaktiProj() {
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "end_date": "",
-            "search": "",
+            "search": search,
             "project_id": state?.id,
             "filter_type": "",
             "start_date": "",
@@ -64,6 +72,7 @@ export default function selfShaktiProj() {
     return (
 
         <Container>
+                           <Searchbar getSearch={(e) => searchFunction(e)} />
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
                     <Link to="/dashboard/projects/project">
