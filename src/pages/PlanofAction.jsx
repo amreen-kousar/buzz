@@ -31,6 +31,8 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { SecurityUpdate } from '@mui/icons-material';
 import moment from 'moment';
+import Day1SelfShakti from './Components/PlanofactionFilters/Day1SelfShakti'
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -70,7 +72,8 @@ export default function PlanofAction() {
   const [drawerEvent, SetDrawerEvent] = useState(false);
   const [poa, SetPoa] = useState([]);
   const [openMessage, setOpenMessage] = useState(false);
- 
+  const [day1,setDay1] = useState(false);
+
   const [select, setSelect] = useState();
   const [season, setSeason] = useState(0)
   const [date, setDate] = useState(new Date())
@@ -88,6 +91,13 @@ export default function PlanofAction() {
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   console.log(idvalue,"iddddddd")
   const role_name =JSON.parse(localStorage?.getItem('userDetails'))?.role_name
+  const handleOpenDay1 = () => {
+    setDay1(true);
+  };
+  const handleCloseDay1 = () => {
+    setSelect("")
+    setDay1(false);
+  };
   const handleChange = (event, newValue) => {
     console.log("gsfdhfgdhgfhgf", newValue)
     setSeason(newValue)
@@ -270,7 +280,14 @@ export default function PlanofAction() {
           />
         </LocalizationProvider>
       </Stack>
-
+      <Stack>
+                <Day1SelfShakti 
+                batchState={batchState}
+                 isOpenDay1={day1}
+                 onOpenDay1={handleOpenDay1}
+                 onCloseDay1={handleCloseDay1} 
+                 />
+              </Stack>
 
 
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -347,7 +364,18 @@ export default function PlanofAction() {
           </Box>
 
           <TabPanel value={value} index={0}>
-
+          <Card onClick={() => { handleOpenDay1() }}>
+              <CardContent>
+              Village:  DG_TB81268
+              <br />
+                Taluk Name: Ananthapura
+                <br />
+                Project Name: BANGALORE RURALQW23292
+                <br />
+                 Trainer:Arunkumar R
+              
+              </CardContent>
+            </Card>
 
             {
               poa?.length !== 0 ?
