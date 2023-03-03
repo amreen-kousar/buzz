@@ -99,6 +99,13 @@ export default function gelathiProgram(props) {
         setOpenFilter(false);
     };
 
+    const handleDelete = () => {
+      setSelected(null)
+      search = ''
+      setSearch(search)
+      gelathiPrograme()   
+  }
+
     const searchFunction = (e) => {
        
         search = e
@@ -124,6 +131,10 @@ export default function gelathiProgram(props) {
             New User
           </Button> */}
             </Stack>
+            
+            {
+                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            }
                <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
                <Typography style={{fontWeight:500,marginLeft:2}}> All Gelathi Sessions ({count})</Typography> 
          {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}

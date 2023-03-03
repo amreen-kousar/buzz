@@ -85,17 +85,17 @@ export default function FullScreenDialog({ shown, setShown, batch }) {
         <Stack style={{ top: 40 }}>
           <Card sx={{mt:2,ml:2}}>
            
-            <TableContainer component={Paper} sx={{width:'40vw'}}>
+            <TableContainer component={Paper} sx={{width:'50vw'}}>
           <Table aria-label="customized table">
            
             <TableBody>
               
-          <TableRow><TableCell component="th" scope="row">Project </TableCell><TableCell>: {batch?.data?.projectName}</TableCell></TableRow>
-          <TableRow><TableCell component="th" scope="row">Training&nbsp;Batch </TableCell><TableCell>:{batch?.data?.name}</TableCell></TableRow>
-          <TableRow><TableCell component="th" scope="row">Day 1</TableCell><TableCell>: {batch?.data?.day1}</TableCell></TableRow>
-          <TableRow><TableCell component="th" scope="row">Day 2</TableCell><TableCell>: {batch?.data?.day2}</TableCell></TableRow>
-          <TableRow><TableCell component="th" scope="row">Contact&nbsp;Person </TableCell><TableCell>: {batch?.data?.contact_person}</TableCell></TableRow>
-          <TableRow><TableCell component="th" scope="row">Contact&nbsp;Number</TableCell><TableCell>: {batch?.data?.contact_number}</TableCell></TableRow>  </TableBody>
+          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Project </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.projectName}</TableCell></TableRow>
+          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Training&nbsp;Batch </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.name}</TableCell></TableRow>
+          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Day 1</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.day1}</TableCell></TableRow>
+          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Day 2</TableCell><TableCell>:&nbsp;&nbsp; {batch?.data?.day2}</TableCell></TableRow>
+          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Contact&nbsp;Person </TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.contact_person}</TableCell></TableRow>
+          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Contact&nbsp;Number</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.contact_number}</TableCell></TableRow>  </TableBody>
           </Table>
         </TableContainer>
               {/* <Typography variant="subtitle2" sx={{color:"black"}}> Project : {batch?.data?.projectName} </Typography>

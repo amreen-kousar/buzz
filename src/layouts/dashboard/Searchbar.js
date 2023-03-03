@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 // material
 import { styled, alpha } from '@mui/material/styles';
-import { Input, Slide, Button, IconButton, InputAdornment, ClickAwayListener } from '@mui/material';
+import { Input, Slide, Button, IconButton, InputAdornment, ClickAwayListener,TextField } from '@mui/material';
 import { Box, Stack, AppBar, Toolbar, } from '@mui/material';
 // component
 import Iconify from '../../components/Iconify';
@@ -86,9 +86,19 @@ export default function Searchbar({ getSearch }) {
         <ClickAwayListener onClickAway={handleClose}>
           <div>
             {!isOpen && (
-              <IconButton onClick={handleOpen}>
-                <Iconify icon="eva:search-fill" width={20} height={20} />
-              </IconButton>
+              
+               <Input id="outlined-basic" color="common" disabled
+                 placeholder='Search...'
+                 onClick={handleOpen}
+                 sx={{ m: 2, fontWeight: 'fontWeightBold',width:'70vw'}}
+                 startAdornment= {
+                   <InputAdornment position="start">
+                    <IconButton >
+                   <Iconify icon="eva:search-fill"  sx={{  width: 20, height: 20 }}  />
+                    </IconButton>
+                   </InputAdornment>
+                 }
+             />
             )}
 
             <Slide direction="down" in={isOpen} mountOnEnter unmountOnExit>
@@ -104,7 +114,7 @@ export default function Searchbar({ getSearch }) {
                       <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled', width: 20, height: 20 }} />
                     </InputAdornment>
                   }
-                  sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
+                  sx={{ margin:5, fontWeight: 'fontWeightBold',width:'70vw'}}
                 />
                 <Button onClick={() => {
                   getSearch(searchData)

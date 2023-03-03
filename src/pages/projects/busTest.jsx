@@ -2,15 +2,25 @@ import { useState, useEffect } from 'react';
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
 import ProjectMultiDrawer from '../Components/ProjectMultiDrawer';
 import { Link } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
 import Iconify from 'src/components/Iconify';
+import axios from 'axios';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Page from 'src/components/Page';
 
 export default function busTestList() {
 
     const [clcikData, setClickData] = useState()
-    const [busTest, setbusTest] = useState([{ stockname: "fist" }, { stockname: "second" }]);
-
+  
+    const [buses, setBuses] = useState();
     useEffect(() => {
-        // setbusTest([{ stockname: "fist" }, { stockname: "second" }])
+        busesdata()
     }, []
     )
 
@@ -24,54 +34,116 @@ export default function busTestList() {
         setOpenFilter(false);
     };
 
+    const busesdata = async (i, id, g) => {
+        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+        var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+      
+        const data = JSON.stringify({
+        "fromDate":new Date(),
+         "toDate":"2023-03-3", 
+         "bus_id":56,
+        //   "search": search
+        });
+    
+        console.log(data, "checking for search")
+    
+        const config = {
+          method: 'post',
+          url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data
+        };
+    
+        axios(config)
+          .then((response) => {
+            console.log("respoonse in Bus List", response.data)
+           
+            setBuses(response?.data?.list)
+        
+           
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    
+console.log(buses,"responseeeeebus list")
+
     return (
 
         <Container>
-            <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
                     <Link to="/dashboard/projects/project">
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    All busTest and Check List
+                    Bus Details
                 </Typography>
-                {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
-            </Stack>
-            {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
-            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-                <ProjectMultiDrawer
-                    clcikData={clcikData}
-                    isOpenFilter={openFilter}
-                    onOpenFilter={handleOpenFilter}
-                    onCloseFilter={handleCloseFilter}
-                />
-            </Stack>
-            {/* </Stack> */}
-            {busTest?.map((itm) => {
-                return (
-                    <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.stockname, title: "Bus Name" })
-                        handleOpenFilter()
-                    }}>
-
-                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
-                            <Typography variant="subtitle1" gutterBottom>
-                                {` Bus Test Name : ${itm?.stockname}`}
-                            </Typography>
-                        </Grid>
-                        <Grid style={{ marginLeft: 15 }}>
-                            <Typography variant="subtitle2" gutterBottom >
-                                Today Checklist Status : <Chip label="Published" size="small" color="success" variant="outlined" />
-
-                            </Typography>
-                            <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                                Checked/Total : 0/16
-                            </Typography>
-                        </Grid>
-                    </Card>)
-            })}
+              
+            </Stack> 
+          <TableContainer component={Paper} sx={{width:'30vw',justifyContent:'center',alignItems:'center',ml:10}}>
+          <Table aria-label="customized table">
+           
+            <TableBody>
+             <TableRow>
+              <TableCell>Bus Number</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+               <TableRow>
+              <TableCell>Register Date</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+               <TableRow>
+              <TableCell>Engine Number</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+               <TableRow>
+              <TableCell>Chasis Number</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+               <TableRow>
+              <TableCell>Insurance Number</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+               <TableRow>
+              <TableCell>Insurance Company</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+              <TableRow>
+              <TableCell>Insurance Start Date</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+              <TableRow>
+              <TableCell>Insurance End Date</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+              <TableRow>
+              <TableCell>Last Service Date</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+              <TableRow>
+              <TableCell>Next Service Date</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+              <TableRow>
+              <TableCell>Permit Details</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+              <TableRow>
+              <TableCell>Fitness Certificate</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+              <TableRow>
+              <TableCell>Emission Date</TableCell>
+                <TableCell>: </TableCell>
+             </TableRow>
+             
+            </TableBody>
+          </Table>
+        </TableContainer>
 
         </Container>
 
