@@ -102,7 +102,12 @@ export default function enrolledGreenMotivatorsList() {
       });
 
   }
-
+  const handleDelete = () => {
+    setSelected(null)
+    search = ''
+    setSearch(search)
+    enrolledGreenMotivators();
+}
     return (
 
         <Container><Searchbar getSearch={(e) => searchFunction(e)} />
@@ -117,7 +122,11 @@ export default function enrolledGreenMotivatorsList() {
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
-            </Stack> <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
+            </Stack>
+            
+            {
+                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            } <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}>Green Motivators : ({count})</Typography> 
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -137,11 +146,11 @@ export default function enrolledGreenMotivatorsList() {
                         setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
                         handleOpenFilter()
                     }}>
-                         <Card sx={{ boxShadow: 0 }} >
+                        
               <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
-              <div style={{display:'flex'}}><Typography variant="subtitle1" gutterBottom>
+             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Gelathi Name : ${itm?.gelathiname}`}     
-                            </Typography><GreenSurvey /></div>
+                            </Typography><GreenSurvey />
               </Grid>
               <Grid style={{ marginLeft: 15 }}>
               <Typography variant="subtitle2" gutterBottom  >
@@ -153,7 +162,7 @@ export default function enrolledGreenMotivatorsList() {
                 </Typography>
               
 
-              </Grid></Card>
+              </Grid>
                       
                        
                     </Card>)

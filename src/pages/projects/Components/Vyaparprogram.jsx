@@ -341,7 +341,7 @@ const [sendData,setSendData] = useState({
   return (
     <div>
      
-        <Stack style={{ flexDirection: 'row' ,float:'right' }}  mb={2}>
+        <Stack style={{ position:'absolute',right:0 ,float:'right' }}  mb={2}>
       
         <IconButton onClick={handleClickOpen}>
          <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
@@ -351,7 +351,6 @@ const [sendData,setSendData] = useState({
       <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
           
-       
                         <IconButton style={{color:"white"}} onClick={handleClose}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from "react"
-import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip,CardContent, Container, Typography, Grid, IconButton, } from '@mui/material';
 import ProjectMultiDrawer from '../Components/ProjectMultiDrawer';
 import Iconify from 'src/components/Iconify';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,6 +11,7 @@ export default function selfShaktiProj() {
     const {state} = useLocation()
     console.log("shaktishakti",state)
     const [clcikData, setClickData] = useState()
+    const [count,setCount] = useState();
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
     // const [selfShakthi, setselfShakthi] = useState([{ stockname: "fist" }, { stockname: "second" }]);
@@ -19,17 +20,19 @@ export default function selfShaktiProj() {
         setSearch(search)
         setSelected({ name: e, type: "Search" })
         shakti()
+    } 
     }
     useEffect(() => {
         shakti();
         // setselfShakthi([{ stockname: "fist" }, { stockname: "second" }])
     }, []
     )
-
+    const [data1, setData1] = useState('')
     const [openFilter, setOpenFilter] = useState(false);
     const [selfShakti,setSelfShakthi] = useState('');
     const [batchState,setBatchState] = useState()
-
+    var  [selected, setSelected] = useState(null)
+    var [search, setSearch] = useState('')
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
@@ -62,12 +65,57 @@ export default function selfShaktiProj() {
           axios(config)
           .then(function (response) {
             setSelfShakthi(response.data)
+            setCount(response.data.list.length)
             console.log(response.data,'<-------------setSelfShakthisetSelfShakthisetSelfShakthi');
           })
           .catch(function (error) {
             console.log(error);
           });
     }
+  const handleDelete = () => {
+      setSelected(null)
+      search = ''
+      setSearch(search)
+      shakti();
+   }
+
+   const id = sessionStorage?.getItem("proId")
+   useEffect(() => {
+     projData();
+ 
+   }, [])
+   
+   const projData = async => {
+     console.log(location, "location props")
+     var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
+     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+     var data = JSON.stringify({
+       "project_id": id,
+       "role_id": role,
+       "emp_id": idvalue
+     });
+ 
+     var config = {
+       method: 'post',
+       url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+       headers: {
+         'Content-Type': 'application/json'
+       },
+       data: data
+     };
+ 
+     axios(config)
+       .then(function (response) {
+         setData1(response.data.list)
+       
+         console.log(response.data, '<--------------setData1setData1');
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+ 
+   }
 
     return (
 
@@ -85,7 +133,12 @@ export default function selfShaktiProj() {
             New User
           </Button> */}
             </Stack>
-            {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
+            {
+                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            }
+            <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
+           <Typography style={{fontWeight:500,marginLeft:2}}>All Training Batch : ({count})</Typography> 
+             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ProjectMultiDrawer
                 batchState={batchState}
@@ -112,7 +165,7 @@ export default function selfShaktiProj() {
                     >
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
-                                {` Self Shakthi Name : ${itm?.batch_name}`}
+                                {` ${itm?.batch_name}`}
                             </Typography>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
@@ -133,7 +186,7 @@ export default function selfShaktiProj() {
         </Container>
 
     );
-}
+
 const styles = {
     card1: {
         backgroundColor: '#f5f5f5',

@@ -102,6 +102,13 @@ export default function scheduleVillage() {
   
     }
 
+    const handleDelete = () => {
+      setSelected(null)
+      search = ''
+      setSearch(search)
+     scheduleVillage();
+  }
+
     return (
 
         <Container> <Searchbar getSearch={(e) => searchFunction(e)} />
@@ -116,7 +123,11 @@ export default function scheduleVillage() {
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
-            </Stack><Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
+            </Stack> 
+             {
+                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            }
+            <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <Villagevisitdrawer

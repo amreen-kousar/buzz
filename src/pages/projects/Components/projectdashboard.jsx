@@ -168,9 +168,9 @@ export default function Projectdashboard() {
 
   if (loader) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+      <Grid sx={{ display: 'flex',float:'right' }}>
         <CircularProgress />
-      </Box>
+      </Grid>
     )
   }
 
@@ -200,7 +200,7 @@ export default function Projectdashboard() {
 
   return (
 <>
-<IconButton onClick={handleClickOpen}><Iconify style={{ color: "black" ,float:'right',width:20,height:20}} icon="fluent:notebook-eye-20-filled" /></IconButton>
+<IconButton onClick={handleClickOpen}><Iconify style={{ color: "black" ,right:0,float:'right'}} icon="fluent:notebook-eye-20-filled" /></IconButton>
    
 <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
 <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>

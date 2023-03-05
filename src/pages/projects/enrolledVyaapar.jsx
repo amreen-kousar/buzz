@@ -13,7 +13,9 @@ export default function enrolledVyaaparList() {
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
     const [vyaapar, setVyaapar] = useState('');
+    var [selected, setSelected] = useState(null)
       const [count,setCount]= useState('');
+
  const searchFunction = (e) => {
        
         search = e
@@ -21,6 +23,15 @@ export default function enrolledVyaaparList() {
         setSelected({ name: e, type: "Search" })
         enrolledVyaapar()
     }
+
+
+      const handleDelete = () => {
+        setSelected(null)
+        search = ''
+        setSearch(search)
+        enrolledVyaapar();
+    }
+
     useEffect(() => {
         enrolledVyaapar();
         // setenrolledVyaapar([{ stockname: "fist" }, { stockname: "second" }])
@@ -116,7 +127,12 @@ const id = sessionStorage?.getItem("proId")
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
-            </Stack><Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
+            </Stack>
+            
+                {
+                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                }
+                <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
                 <Typography style={{fontWeight:500,marginLeft:2}}>Enrolled Vyapar : ({count})</Typography> 
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -136,11 +152,11 @@ const id = sessionStorage?.getItem("proId")
                         setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
                         handleOpenFilter()
                     }}>
-                           <Vyaparprogram/>
+                          
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Vyaapar Name : ${itm?.gelathiname}`}
-                            </Typography>
+                            </Typography> <Vyaparprogram/>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
                         <Typography variant="subtitle1" gutterBottom>
