@@ -5,6 +5,7 @@ import GelathiCircleDrawer from '../projects/Components/GelathiCircleDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import ChooseGelathi from './Components/ChooseGelathi'
 export default function gelathiCirclesList() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
@@ -119,6 +120,8 @@ export default function gelathiCirclesList() {
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
+                      <ChooseGelathi />
+
             </Stack> <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
              <Typography style={{fontWeight:500,marginLeft:2}}>Circles : ({count})</Typography> 
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}

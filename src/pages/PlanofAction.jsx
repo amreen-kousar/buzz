@@ -32,7 +32,7 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { SecurityUpdate } from '@mui/icons-material';
 import moment from 'moment';
 import Day1SelfShakti from './Components/PlanofactionFilters/Day1SelfShakti'
-
+import ProjectMultiDrawer from '../pages/Components/ProjectMultiDrawer'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -80,6 +80,9 @@ export default function PlanofAction() {
   const [userId, setUserId] = useState()
   const [message, setMessage] = useState('')
   const [name, setName] = useState('')
+  const [batchState,setBatchState] = useState()
+  const [clcikData, setClickData] = useState()
+ 
   const [poaData, setPoaData] = [{
     emp_id: "",
     team: "",
@@ -239,7 +242,7 @@ export default function PlanofAction() {
       }
 
 
-      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+      {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <POA
           // onDateSubmit={onDateSubmit}
           // onSumbit={onSumbit}
@@ -249,11 +252,12 @@ export default function PlanofAction() {
           onOpenFilter={handleOpenFilter}
           onCloseFilter={handleCloseFilter}
         />
-      </Stack>
+      </Stack> */}
 
       {drawerEvent && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <PoaEvent
           select={select}
+          clcikData={clcikData}
           isOpenEvent={drawerEvent}
           onOpenEvent={handleOpenEvent}
           onCloseEvent={handleCloseEvent}
@@ -280,14 +284,23 @@ export default function PlanofAction() {
           />
         </LocalizationProvider>
       </Stack>
-      <Stack>
+      {/* <Stack>
                 <Day1SelfShakti 
                 batchState={batchState}
                  isOpenDay1={day1}
                  onOpenDay1={handleOpenDay1}
                  onCloseDay1={handleCloseDay1} 
                  />
-              </Stack>
+              </Stack> */}
+              <Stack>
+              <ProjectMultiDrawer
+                batchState={batchState}
+                   clcikData={clcikData}
+                    isOpenFilter={openFilter}
+                    onOpenFilter={handleOpenFilter}
+                    onCloseFilter={handleCloseFilter}
+                />
+</Stack>
 
 
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -364,18 +377,6 @@ export default function PlanofAction() {
           </Box>
 
           <TabPanel value={value} index={0}>
-          <Card onClick={() => { handleOpenDay1() }}>
-              <CardContent>
-              Village:  DG_TB81268
-              <br />
-                Taluk Name: Ananthapura
-                <br />
-                Project Name: BANGALORE RURALQW23292
-                <br />
-                 Trainer:Arunkumar R
-              
-              </CardContent>
-            </Card>
 
             {
               poa?.length !== 0 ?
@@ -387,6 +388,7 @@ export default function PlanofAction() {
                       {item?.length !== 0 && item?.map(itm => {
 
                         return (
+                          
                           <Card style={{ marginTop: 35 }} onClick={() => {
                             setSelect(itm)
 
@@ -450,7 +452,8 @@ export default function PlanofAction() {
 
                         return (
                           <Card style={{ marginBottom: 30, marginTop: 10 }} onClick={() => {
-                            setSelect(itm)
+                            console.log(itm,"<-----wqeqwewqewqe")
+                           setSelect(itm)
 
                           }}>
 
@@ -459,7 +462,24 @@ export default function PlanofAction() {
                                 <TableBody>
                                   <TableRow >
 
-                                    <TableCell component="th" scope="row" onClick={handleOpenEvent}>
+                                    <TableCell component="th" scope="row"
+                                     onClick={()=>{
+                                      console.log(itm,"<---sadasdasdsa")
+                                       setClickData(itm)
+                                      if(itm?.type =="3"){
+
+                                      
+                                       handleOpenEvent()
+                                      }
+                                      else if(itm?.type =="1"){
+                                        setClickData(itm)
+                                        handleOpenFilter()
+                                      }
+                                      else{
+                                        console.log("its opened")
+                                      }
+                                    }}
+                                     >
                                     {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
                                     {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}
                                       {itm?.status == '2' && <span style={{ color: 'red' }}><br />

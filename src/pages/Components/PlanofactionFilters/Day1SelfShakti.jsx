@@ -36,7 +36,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-// import CheckinOut from './CheckinOut'
+ import CheckinOut from './CheckinOut'
 // import AddParticipants from './AddParticipants';
 // ----------------------------------------------------------------------
 
@@ -161,8 +161,8 @@ export default function Day1SelfShakti({ isOpenDay1, onOpenDay1, onCloseDay1, cl
                                    
                                </CardContent>
                            </Card>
-                           {/* <AddParticipants /> */}
-                           {/* <CheckinOut  checkinout={checkinout} /> */}
+                         
+                           <CheckinOut  checkinout={checkinout} />
                            
                            <Card onClick={()=>{setCheckInOut(true),console.log("knmknmk")}} style={{marginTop:20}}>
                                <CardContent>
