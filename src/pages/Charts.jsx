@@ -7,7 +7,7 @@ import Link from '@mui/material/Link';
 import { useLocation, useSearchParams } from 'react-router-dom';
 // import "chartjs-plugin-datalabels";
 import { Bar } from "react-chartjs-2";
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+// import ChartDataLabels from 'chartjs-plugin-datalabels';
 // import {CategoryScale} from 'chart.js'; 
 // import { Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale } from 'chart.js';
 import { Chart, registerables } from 'chart.js'
@@ -201,12 +201,12 @@ export default function Charts(props) {
         data={dayper}
        />
       } */}
-  <Bar data={dataBar} plugins={[ChartDataLabels]} options={options} width={100} height={50} />
+  <Bar data={dataBar} options={options} width={100} height={50} />
   <Stack mt={5}>
-  <Bar data={dayperbar} plugins={[ChartDataLabels]} options={options} width={100} height={50} />
+  <Bar data={dayperbar} options={options} width={100} height={50} />
   </Stack>
   <Stack mt={5}>
-  <Bar data={gelathiBar} plugins={[ChartDataLabels]} options={options} width={100} height={50} />
+  <Bar data={gelathiBar} options={options} width={100} height={50} />
   </Stack>
   </div>
 

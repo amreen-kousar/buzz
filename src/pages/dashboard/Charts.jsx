@@ -200,25 +200,7 @@ export default function Charts(props) {
         data={dayper}
        />
       } */}
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Card style={{ background: '#ff7424', color: "white", padding: "1rem 3rem", display: 'flex' }} xs={12} sm={12} md={12}>
-          <div style={{ marginRight: "2rem" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img style={{ borderRadius: 50, width: "60px" }} src={userDetails?.profile_pic ? userDetails?.profile_pic : defaultImage} />
-            </div>
-
-          </div>
-          <div >
-            <Typography sx={{ fontSize: 20, fontWeight: 'medium' }} mt={1} textAlign={'center'} >
-              Welcome ,&nbsp;
-              {userDetails?.first_name}
-            </Typography>
-            <div style={{ textAlign: "center", fontSize: "0.8rem" }}>
-              ({userDetails?.role_name})
-            </div>
-          </div>
-        </Card>
-      </div>
+     
       <br />
       {/* 
       <div style={{ background: '#ff7424', color: "white", padding: '1rem' }}>
@@ -228,14 +210,14 @@ export default function Charts(props) {
 
       <br />
 
-      <Bar data={dataBar} plugins={[ChartDataLabels]} options={options} width={100} height={50} />
+      <Bar data={dataBar}  options={options} width={100} height={50} />
       <br /><br />
       {/* <Stack mt={5}> */}
-      <Bar data={dayperbar} plugins={[ChartDataLabels]} options={options} width={100} height={50} />
+      <Bar data={dayperbar}  options={options} width={100} height={50} />
       <br /><br />
       {/* </Stack> */}
       {/* <Stack mt={5}> */}
-      <Bar data={gelathiBar} plugins={[ChartDataLabels]} options={options} width={100} height={50} />
+      <Bar data={gelathiBar}  options={options} width={100} height={50} />
       {/* </Stack> */}
     </div >
 
