@@ -20,7 +20,6 @@ export default function selfShaktiProj() {
         setSearch(search)
         setSelected({ name: e, type: "Search" })
         shakti()
-    } 
     }
     useEffect(() => {
         shakti();
@@ -186,7 +185,7 @@ export default function selfShaktiProj() {
         </Container>
 
     );
-
+}
 const styles = {
     card1: {
         backgroundColor: '#f5f5f5',
