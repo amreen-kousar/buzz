@@ -21,13 +21,10 @@ export default function selfShaktiProj() {
         setSelected({ name: e, type: "Search" })
         shakti()
     } 
-    }
-    useEffect(() => {
-        shakti();
-        // setselfShakthi([{ stockname: "fist" }, { stockname: "second" }])
-    }, []
-    )
-    const [data1, setData1] = useState('')
+    
+   
+    
+    const [data1, setData1] = useState('');
     const [openFilter, setOpenFilter] = useState(false);
     const [selfShakti,setSelfShakthi] = useState('');
     const [batchState,setBatchState] = useState()
@@ -40,7 +37,12 @@ export default function selfShaktiProj() {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
+    useEffect(() => {
+      shakti();
+  
+    }, [])
     const shakti = async =>{
+
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
@@ -72,56 +74,27 @@ export default function selfShaktiProj() {
             console.log(error);
           });
     }
-  const handleDelete = () => {
-      setSelected(null)
-      search = ''
-      setSearch(search)
-      shakti();
-   }
+  
 
-   const id = sessionStorage?.getItem("proId")
-   useEffect(() => {
-     projData();
- 
-   }, [])
    
-   const projData = async => {
-     console.log(location, "location props")
-     var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-     var data = JSON.stringify({
-       "project_id": id,
-       "role_id": role,
-       "emp_id": idvalue
-     });
- 
-     var config = {
-       method: 'post',
-       url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
-       headers: {
-         'Content-Type': 'application/json'
-       },
-       data: data
-     };
- 
-     axios(config)
-       .then(function (response) {
-         setData1(response.data.list)
-       
-         console.log(response.data, '<--------------setData1setData1');
-       })
-       .catch(function (error) {
-         console.log(error);
-       });
- 
-   }
+  
+  
+   
+   
+    const handleDelete = () => {
+      setSelected(null)
+        search = ''
+        setSearch(search)
+        shakti();
+    }
+  
+   
 
     return (
 
         <Container>
                            <Searchbar getSearch={(e) => searchFunction(e)} />
-            <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+                           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
                     <Link to="/dashboard/projects/project">
                         <IconButton>
@@ -133,12 +106,7 @@ export default function selfShaktiProj() {
             New User
           </Button> */}
             </Stack>
-            {
-                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
-            }
-            <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
-           <Typography style={{fontWeight:500,marginLeft:2}}>All Training Batch : ({count})</Typography> 
-             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
+            {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ProjectMultiDrawer
                 batchState={batchState}
@@ -165,7 +133,7 @@ export default function selfShaktiProj() {
                     >
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
-                                {` ${itm?.batch_name}`}
+                                {` Self Shakthi Name : ${itm?.batch_name}`}
                             </Typography>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
@@ -185,8 +153,8 @@ export default function selfShaktiProj() {
 
         </Container>
 
-    );
-
+);
+          }      
 const styles = {
     card1: {
         backgroundColor: '#f5f5f5',
