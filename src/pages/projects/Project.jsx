@@ -21,6 +21,7 @@ import Programevaluationday1 from './Components/Programevaluationday1';
 import Peopleprofile from './Components/projectpeopleprofile';
 import Gelathifacilitatorlist from './Components/Gelathifacilitatorslist';
 import Trainerslist from './Components/Trainerslist';
+import Evaluationday2 from './Components/Evaluationday2';
 function Project(props) {
   const location = useLocation()
   const [openFilter, setOpenFilter] = useState(false);
@@ -465,6 +466,7 @@ const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
                       {(userDetails==6|| userDetails==13) ? <br /> : null} 
                       {(userDetails == 5 ) ? <CreateTrainerBatch data1={data1} />: null} {(userDetails==5) ? <br /> : null} 
                       {(userDetails == 1 ) ?  <Programevaluationday1 />: null} {(userDetails==1) ? <br /> : null} 
+                      {(userDetails == 1 ) ?  <Evaluationday2/>: null} {(userDetails==1) ? <br /> : null} 
                  
                       <br />
 
