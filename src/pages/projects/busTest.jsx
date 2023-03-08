@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container, Typography, Grid, IconButton,TextField } from '@mui/material';
 import ProjectMultiDrawer from '../Components/ProjectMultiDrawer';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
@@ -13,11 +13,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Page from 'src/components/Page';
-
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import moment from 'moment';
 export default function busTestList() {
 
     const [clcikData, setClickData] = useState()
-  
+    const [date1, setDate1] = useState(new Date())
+    const [date2, setDate2] = useState(new Date())
     const [buses, setBuses] = useState();
     useEffect(() => {
         busesdata()
@@ -39,9 +43,9 @@ export default function busTestList() {
         var role = JSON.parse(localStorage.getItem('userDetails'))?.role
       
         const data = JSON.stringify({
-        "fromDate":new Date(),
-         "toDate":"2023-03-3", 
-         "bus_id":56,
+        "fromDate":moment(date1?.$d)?.format('YYYY-MM-DD'),
+         "toDate":moment(date2?.$d)?.format('YYYY-MM-DD'), 
+         "bus_id":158,
         //   "search": search
         });
     
@@ -60,7 +64,7 @@ export default function busTestList() {
           .then((response) => {
             console.log("respoonse in Bus List", response.data)
            
-            setBuses(response?.data?.list)
+            setBuses(response?.data)
         
            
           })
@@ -69,7 +73,7 @@ export default function busTestList() {
           });
       }
     
-console.log(buses,"responseeeeebus list")
+
 
     return (
 
@@ -84,61 +88,96 @@ console.log(buses,"responseeeeebus list")
                 </Typography>
               
             </Stack> 
-          <TableContainer component={Paper} sx={{width:'30vw',justifyContent:'center',alignItems:'center',ml:10}}>
+           <div style={{display:'flex'}}> 
+            <Stack>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            label="From"
+            inputFormat="DD/MM/YYYY"
+            views={["day", "month", "year"]}
+            defaultValue={date1}
+            value={date1}
+            onChange={(newValue) => {
+              console.log(newValue, "<----newValuenewValue")
+              setDate1(newValue)
+              
+            }}
+            renderInput={(params) => <TextField {...params} color="common" />}
+          />
+        </LocalizationProvider>
+      </Stack>&nbsp;&nbsp;
+      <Stack>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            label="to"
+            inputFormat="DD/MM/YYYY"
+            views={["day", "month", "year"]}
+            defaultValue={date2}
+            value={date2}
+            onChange={(newValue) => {
+              console.log(newValue, "<----newValuenewValue")
+              setDate2(newValue)
+            
+            }}
+            renderInput={(params) => <TextField {...params} color="common" />}
+          />
+        </LocalizationProvider>
+      </Stack></div> <br/>
+          <TableContainer component={Paper} sx={{width:'40vw',justifyContent:'center',alignItems:'center',ml:10}}>
           <Table aria-label="customized table">
            
             <TableBody>
              <TableRow>
               <TableCell>Bus Number</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.register_number} </TableCell>
              </TableRow>
                <TableRow>
               <TableCell>Register Date</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.register_date}</TableCell>
              </TableRow>
                <TableRow>
               <TableCell>Engine Number</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.engine_number}</TableCell>
              </TableRow>
                <TableRow>
               <TableCell>Chasis Number</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.chassis_number} </TableCell>
              </TableRow>
                <TableRow>
               <TableCell>Insurance Number</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.insurance_number}</TableCell>
              </TableRow>
                <TableRow>
               <TableCell>Insurance Company</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.insurance_company}</TableCell>
              </TableRow>
               <TableRow>
               <TableCell>Insurance Start Date</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.insurance_start_date}</TableCell>
              </TableRow>
               <TableRow>
               <TableCell>Insurance End Date</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.insurance_end_date}</TableCell>
              </TableRow>
               <TableRow>
               <TableCell>Last Service Date</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.last_service_date} </TableCell>
              </TableRow>
               <TableRow>
               <TableCell>Next Service Date</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.next_service_due_date} </TableCell>
              </TableRow>
               <TableRow>
               <TableCell>Permit Details</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.permit} </TableCell>
              </TableRow>
               <TableRow>
               <TableCell>Fitness Certificate</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.fitness_certificate} </TableCell>
              </TableRow>
               <TableRow>
               <TableCell>Emission Date</TableCell>
-                <TableCell>: </TableCell>
+                <TableCell>:&nbsp;{buses?.emission_date} </TableCell>
              </TableRow>
              
             </TableBody>
