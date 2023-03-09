@@ -21,7 +21,9 @@ export default function Programevaluationday1()
       businesswomen_m2:[],
       places_situation_m2:[],
       communicate_m3:[],
-      feel_role_m3:[]
+      feel_role_m3:[],
+      daytraining:[],
+      pretraining:[]
     });
     const handleClickOpen = () => {
         setOpen(true);
@@ -38,54 +40,56 @@ export default function Programevaluationday1()
 
    const [sendData,setSendData]= React.useState({
     
-       interactive_m1:"", 
-       women_m1:"", 
-       only_for:"", 
-        businesswomen_m2:"",
-        debriefing_m3:"",  
-        feel_role_m3:"", 
-        group_engage_m3:"", 
-          new_women_m2:"",
-          new_women_m3:"",
-         communicate_m3:"",
-      many_m2:"", many_m1:"",many_m3:"",  
-          role_play_card:"",
-           places_situation_m2:"",
-          women_leave_m1:"",
-    allotted_m2:"", 
-    allotted_m1:"", 
-       leave_first_module_m2:"",
-       leave_first_module_m3:"",
+  interactive_m1:"", 
+  women_m1:"", 
+  only_for:"", 
+  businesswomen_m2:"",
+  debriefing_m3:"",  
+  feel_role_m3:"", 
+  group_engage_m3:"", 
+  new_women_m2:"",
+  new_women_m3:"",
+  communicate_m3:"",
+  many_m2:"", many_m1:"",many_m3:"",  
+  role_play_card:"",
+  places_situation_m2:"",
+  women_leave_m1:"",
+  allotted_m2:"", 
+  allotted_m1:"", 
+  leave_first_module_m2:"",
+  leave_first_module_m3:"",
   leave_many_m2:"", 
   allotted_m3:"",
-         
+  trainingday1:"",  
+  training:"",     
 
   });
 
       const evaluationday1form= async() =>{
         console.log("surveyyyyform")
        var data = JSON.stringify({
-       "training_batch_id":81803,
-       "interactive_m1":sendData?.interactive_m1, 
-       "women_m1":sendData?.women_m1, 
-       "only_for":checked['only_for'], 
+        "training_batch_id":81803,
+        "interactive_m1":sendData?.interactive_m1, 
+        "women_m1":sendData?.women_m1, 
+        "only_for":checked['only_for'], 
         "businesswomen_m2":checked['businesswomen_m2'],
         "debriefing_m3":sendData?.debriefing_m3,
         "feel_role_m3":checked['feel_role_m3'], 
-       "group_engage_m3":sendData?.group_engage_m3, 
+        "group_engage_m3":sendData?.group_engage_m3, 
         "new_women_m2":sendData?.new_women_m2,
         "new_women_m3":sendData?.new_women_m3,
-      "communicate_m3":checked['communicate_m3'],     
+        "communicate_m3":checked['communicate_m3'],     
         "many_m2":sendData?.many_m2, 
-          "many_m1":sendData?.many_m1,"many_m3":sendData?.many_m3,  
+        "many_m1":sendData?.many_m1,"many_m3":sendData?.many_m3,  
         "role_play_card":sendData?.role_play_card,
        "places_situation_m2":checked['places_situation_m2'],
-             "women_leave_m1":sendData?.women_leave_m1,   
-         "allotted_m2":sendData?.allotted_m2, 
-         "allotted_m1":sendData?.allotted_m1, 
+       "women_leave_m1":sendData?.women_leave_m1,   
+       "allotted_m2":sendData?.allotted_m2, 
+       "allotted_m1":sendData?.allotted_m1, 
        "leave_first_module_m2":sendData?.leave_first_module_m2,
-        "leave_first_module_m3":sendData?.leave_first_module_m3,
-       
+       "leave_first_module_m3":sendData?.leave_first_module_m3,
+       "trainingday1":checked[daytraining],
+       "training":checked[pretraining]
          });
          
          var config = {
@@ -166,7 +170,7 @@ export default function Programevaluationday1()
                   <Typography style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack mt={2}>
                     <FormGroup >
-                      <FormControlLabel value="Explain the training schedule and intended outcomes of the training to them" control={<Checkbox style={{color:"#595959"}} />} label="Explain the training schedule and intended outcomes of the training to them"/>
+                      <FormControlLabel value="Explain the training schedule and intended outcomes of the training to them" control={<Checkbox style={{color:"#595959"}} />} label="Explain the training schedule and intended outcomes of the training to them" onChange={(event)=>handlecheckedata('pretraining',event)}/>
                       
                     </FormGroup>
                   </Stack>
@@ -176,13 +180,13 @@ export default function Programevaluationday1()
                   <Typography style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack mt={2}>
                     <FormGroup >
-                      <FormControlLabel value="Arrange the tent and the chairs in 'u' form" control={<Checkbox style={{color:"#595959"}} />} label="Arrange the tent and the chairs in 'u' form"/>
-                      <FormControlLabel value="Play the video while the participants were entering" control={<Checkbox style={{color:"#595959"}} />} label="Play the video while the participants were entering"/>
-                      <FormControlLabel value="Take the signature needed for the consent" control={<Checkbox style={{color:"#595959"}} />} label="Take the signature needed for the consent"/>
-                      <FormControlLabel value="Collect information for the primary Baseline Data Ledger" control={<Checkbox style={{color:"#595959"}} />} label="Collect information for the primary Baseline Data Ledger"/>
-                      <FormControlLabel value="Read the consent form loudly" control={<Checkbox style={{color:"#595959"}} />} label="Read the consent form loudly"/>
-                      <FormControlLabel value="Distribute the books and pencils to the partcipants with respect" control={<Checkbox style={{color:"#595959"}} />} label="Distribute the books and pencils to the partcipants with respect"/>
-                      <FormControlLabel value="Express gratitude towards the Anganwadi teacher for her efforts" control={<Checkbox style={{color:"#595959"}} />} label="Express gratitude towards the Anganwadi teacher for her efforts"/>
+                      <FormControlLabel value="Arrange the tent and the chairs in 'u' form" control={<Checkbox style={{color:"#595959"}} />} label="Arrange the tent and the chairs in 'u' form" onChange={(event)=>handlecheckedata('daytraining',event)}/>
+                      <FormControlLabel value="Play the video while the participants were entering" control={<Checkbox style={{color:"#595959"}} />} label="Play the video while the participants were entering" onChange={(event)=>handlecheckedata('daytraining',event)}/>
+                      <FormControlLabel value="Take the signature needed for the consent" control={<Checkbox style={{color:"#595959"}} />} label="Take the signature needed for the consent" onChange={(event)=>handlecheckedata('daytraining',event)}/>
+                      <FormControlLabel value="Collect information for the primary Baseline Data Ledger" control={<Checkbox style={{color:"#595959"}} />} label="Collect information for the primary Baseline Data Ledger" onChange={(event)=>handlecheckedata('daytraining',event)}/>
+                      <FormControlLabel value="Read the consent form loudly" control={<Checkbox style={{color:"#595959"}} />} label="Read the consent form loudly" onChange={(event)=>handlecheckedata('daytraining',event)}/>
+                      <FormControlLabel value="Distribute the books and pencils to the partcipants with respect" control={<Checkbox style={{color:"#595959"}} />} label="Distribute the books and pencils to the partcipants with respect" onChange={(event)=>handlecheckedata('daytraining',event)}/>
+                      <FormControlLabel value="Express gratitude towards the Anganwadi teacher for her efforts" control={<Checkbox style={{color:"#595959"}} />} label="Express gratitude towards the Anganwadi teacher for her efforts" onChange={(event)=>handlecheckedata('daytraining',event)}/>
                     </FormGroup>
                   </Stack><br/>
 
