@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton,TextField } from '@mui/material';
 import ProjectMultiDrawer from '../Components/ProjectMultiDrawer';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Iconify from 'src/components/Iconify';
 import axios from 'axios';
@@ -18,6 +18,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import moment from 'moment';
 export default function busTestList() {
+  const {state} = useLocation()
 
     const [clcikData, setClickData] = useState()
     const [date1, setDate1] = useState(new Date())
@@ -45,7 +46,7 @@ export default function busTestList() {
         const data = JSON.stringify({
         "fromDate":moment(date1?.$d)?.format('YYYY-MM-DD'),
          "toDate":moment(date2?.$d)?.format('YYYY-MM-DD'), 
-         "bus_id":158,
+         "bus_id":state?.id,
         //   "search": search
         });
     

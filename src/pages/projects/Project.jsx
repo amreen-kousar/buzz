@@ -229,7 +229,7 @@ const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
                   style={{ boxShadow: "none", borderRadius: "0px" }} elevation={0} >
 
 {(userDetails == 1 || userDetails ==4 || userDetails ==3 || userDetails ==2 || userDetails ==12) ? 
- <Link to="/dashboard/projects/busTest" style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
+ <Link to="/dashboard/projects/busTest" state={{id:data1?.bus_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
                     <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                   </IconButton>}>
                     <span style={{ width: "235px" }}>Bus: & check List</span>
