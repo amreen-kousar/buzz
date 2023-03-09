@@ -45,12 +45,11 @@ export default function busTestList() {
       
         const data = JSON.stringify({
         "fromDate":moment(date1?.$d)?.format('YYYY-MM-DD'),
-         "toDate":moment(date2?.$d)?.format('YYYY-MM-DD'), 
-         "bus_id":state?.id,
-        //   "search": search
+        "toDate":moment(date2?.$d)?.format('YYYY-MM-DD'), 
+        "bus_id":state?.id,
         });
     
-        console.log(data, "checking for search")
+        console.log(data, "checking for search",state?.id)
     
         const config = {
           method: 'post',
@@ -101,7 +100,7 @@ export default function busTestList() {
             onChange={(newValue) => {
               console.log(newValue, "<----newValuenewValue")
               setDate1(newValue)
-              
+              busesdata()
             }}
             renderInput={(params) => <TextField {...params} color="common" />}
           />
@@ -118,7 +117,7 @@ export default function busTestList() {
             onChange={(newValue) => {
               console.log(newValue, "<----newValuenewValue")
               setDate2(newValue)
-            
+              busesdata()
             }}
             renderInput={(params) => <TextField {...params} color="common" />}
           />

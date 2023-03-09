@@ -33,7 +33,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function ShaktiForm() {
   const [open, setOpen] = React.useState(false);
-
+  const [shaktidata,setshaktidata]=React.useState(false);
   const [worthperson,setworthperson] = React.useState(false);
   const [failureperson,setfailureperson] = React.useState(false);
   const [qualitiesgood,setqualitiesgood] = React.useState(false);
@@ -275,7 +275,7 @@ const [sendData,setSendData]= React.useState({
      
      axios(config)
      .then(function (response) {
-       setgreensurveyform(response?.data)
+       setshaktidata(response?.data)
      })
      .catch(function (error) {
        console.log(error);

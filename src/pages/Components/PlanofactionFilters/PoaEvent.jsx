@@ -46,8 +46,11 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select }) {
   const [checkvisible,setCheckvisible]= useState(false);
   const [image, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
+  const [type,setType] = React.useState('1');
   const [viewImage, setViewImage] = React.useState(false);
+  const [eventdetails,seteventdetails]=React.useState(false);
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  const [locationdata,setlocationdata] = React.useState('')
   const hiddenFileInput = React.useRef(null);
 
   const handleClick = event => {
@@ -145,7 +148,6 @@ axios(config)
 .then(function (response) {
   console.log(response,",----ewrwerwer")
   setLocation(response?.data)
-//  console.log(JSON.stringify(response.data));
 })
 .catch(function (error) {
   console.log(error,",----ewrwerwer");
@@ -154,7 +156,39 @@ axios(config)
     });
   },[])
 
-  
+  const postlocation = async => {
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+    var data = JSON.stringify({
+      
+      "location_name": locationS,
+      "user_id": 23,
+      "lon": position.coords.longitude,
+      "id": select?.id,
+      "type": type,
+      "lat": position.coords.latitude
+    });
+      console.log(select?.id,"selectedddddd")
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/checkInOut.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        setlocationdata(response.data)
+        console.log(response.data, '<------------locationdataaaaaaaaaaa');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    });
+  }
   const location = () => {
     Geocode.fromLatLng(coords?.latitude, coords?.longitude).then(
       (response) => {
@@ -175,21 +209,26 @@ axios(config)
   }]
   useEffect(() => {
     event();
+    
 
   }, [select]);
 
 const handlecheckin=()=>{
      setCheckIn(locationS)
      setCheckvisible(true)
+     postlocation()
+     setType('2')
 }
 
 const handlecheckout=()=>{
+  
   setCheckout(locationS)
+  postlocation()
+  
 }
+var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   const event = async => {
     var data = JSON.stringify({
-      // "event_id": select?.id,
-      // "user_id": "651",
       "event_id":select?.id,
        "user_id":35,
       "check_in_location":"RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India"
@@ -209,10 +248,49 @@ const handlecheckout=()=>{
         setEventData(response.data)
         console.log(response.data, '<------------setEventDatasetEventDatasetEventData');
       })
+      .catch(function (error) {                    
+        console.log(error);
+      });
+  }
+  useEffect(() => {
+    getlocationdata();
+
+  }, [select]);
+
+
+  const getlocationdata = async => {
+    var data = JSON.stringify({
+
+        "event_id": select?.id,
+        "user_id": 23
+    
+    });
+      console.log(select?.id,"selectedddddd")
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response,"responseeeeeeeeeeee")
+
+        seteventdetails(response.data)
+        
+      })
       .catch(function (error) {
         console.log(error);
       });
   }
+
+
+  console.log(eventdetails,"eventdetailssssssssssssss")
+ 
+
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -262,11 +340,25 @@ const handlecheckout=()=>{
               </CardContent>
             </Card>
 
-            <Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
+            {/* {(eventdetails?.data)?<Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
               <CardContent>
                 <Typography style={{textAlign:'center'}}><u>CheckIn/Out Status</u></Typography>
                 <br/>
-                {(!checkvisible)?<Button sx={{
+                
+                {console.log(location,"locationnnnnnnnn")}
+                <Typography variant="body1">Checkin Time: {eventdetails?.data?.check_in_time_day1}</Typography>
+                <Typography>Checkin Location: {eventdetails?.data?.check_in_location_day1}</Typography>
+                <Typography>Checkout Time : {eventdetails?.data?.check_out_time_day1}</Typography>
+                <Typography>Checkout Location: {eventdetails?.data?.check_out_location_day1}</Typography>
+
+              </CardContent>
+            </Card>:
+             */}
+           {(eventdetails?.check_in=="" || eventdetails?.check_out=="")?<Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
+            <CardContent>
+              <Typography style={{textAlign:'center'}}><u>CheckIn/Out Status</u></Typography>
+              <br/>
+               {(!checkvisible)?<Button sx={{
                   '&:hover': {
                     backgroundColor: '#ffd796',
                   },
@@ -279,14 +371,27 @@ const handlecheckout=()=>{
                   },
                   color: '#ff7424'
                 }} onClick={handlecheckout} disabled={checkout}>CHECK OUT</Button>}
-                {console.log(location,"locationnnnnnnnn")}
-                <Typography variant="body1">Checkin Time: {eventData?.check_in}</Typography>
-                <Typography>Checkin Location: {checkin}</Typography>
-                <Typography>Checkout Time : {eventData?.check_out}</Typography>
-                <Typography>Checkout Location: {checkout}</Typography>
+              {console.log(location,"locationnnnnnnnn")}
+              <Typography variant="body1">Checkin Time:{eventdetails?.check_in} </Typography>
+              <Typography>Checkin Location: {checkin} </Typography>
+              <Typography>Checkout Time : {eventdetails?.check_out}</Typography>
+              <Typography>Checkout Location: {checkout}</Typography>
 
-              </CardContent>
-            </Card>
+            </CardContent>
+          </Card>:
+          <Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
+          <CardContent>
+            <Typography style={{textAlign:'center'}}><u>CheckIn/Out Status</u></Typography>
+            <br/>
+       
+            <Typography variant="body1">Checkin Time:{eventdetails?.check_in} </Typography>
+            <Typography>Checkin Location: {eventdetails?.check_in_location} </Typography>
+            <Typography>Checkout Time : {eventdetails?.check_out}</Typography>
+            <Typography>Checkout Location: {eventdetails?.check_out_location}</Typography>
+
+          </CardContent>
+        </Card>}
+            
 
             <div>
                 <div style={{ display: "flex" }}>
