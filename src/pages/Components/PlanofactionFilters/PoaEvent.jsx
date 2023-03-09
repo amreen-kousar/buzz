@@ -46,7 +46,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select }) {
   const [checkvisible,setCheckvisible]= useState(false);
   const [image, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
-  const [type,setType] = React.useState('1');
+  
   const [viewImage, setViewImage] = React.useState(false);
   const [eventdetails,seteventdetails]=React.useState(false);
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
@@ -165,7 +165,7 @@ axios(config)
       "user_id": 23,
       "lon": position.coords.longitude,
       "id": select?.id,
-      "type": type,
+      "type": 1,
       "lat": position.coords.latitude
     });
       console.log(select?.id,"selectedddddd")
@@ -217,7 +217,7 @@ const handlecheckin=()=>{
      setCheckIn(locationS)
      setCheckvisible(true)
      postlocation()
-     setType('2')
+   
 }
 
 const handlecheckout=()=>{
@@ -230,7 +230,7 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   const event = async => {
     var data = JSON.stringify({
       "event_id":select?.id,
-       "user_id":35,
+       "user_id":idvalue,
       "check_in_location":"RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India"
     });
       console.log(select?.id,"selectedddddd")
@@ -259,10 +259,11 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
 
 
   const getlocationdata = async => {
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
 
         "event_id": select?.id,
-        "user_id": 23
+        "user_id": idvalue
     
     });
       console.log(select?.id,"selectedddddd")
@@ -340,20 +341,7 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
               </CardContent>
             </Card>
 
-            {/* {(eventdetails?.data)?<Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
-              <CardContent>
-                <Typography style={{textAlign:'center'}}><u>CheckIn/Out Status</u></Typography>
-                <br/>
-                
-                {console.log(location,"locationnnnnnnnn")}
-                <Typography variant="body1">Checkin Time: {eventdetails?.data?.check_in_time_day1}</Typography>
-                <Typography>Checkin Location: {eventdetails?.data?.check_in_location_day1}</Typography>
-                <Typography>Checkout Time : {eventdetails?.data?.check_out_time_day1}</Typography>
-                <Typography>Checkout Location: {eventdetails?.data?.check_out_location_day1}</Typography>
-
-              </CardContent>
-            </Card>:
-             */}
+           
            {(eventdetails?.check_in=="" || eventdetails?.check_out=="")?<Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
             <CardContent>
               <Typography style={{textAlign:'center'}}><u>CheckIn/Out Status</u></Typography>
