@@ -46,13 +46,13 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   const [checkvisible,setCheckvisible]= useState(false);
   const [image, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
-  
+  const [type,setType] = React.useState('1');
   const [viewImage, setViewImage] = React.useState(false);
   const [eventdetails,seteventdetails]=React.useState(false);
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   const [locationdata,setlocationdata] = React.useState('')
   const hiddenFileInput = React.useRef(null);
-
+  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   const handleClick = event => {
     console.log("click", event.target)
     hiddenFileInput.current.click();
@@ -155,9 +155,9 @@ axios(config)
       
     });
   },[])
-  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-  const postlocation = async => {
 
+  const postlocation = async => {
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     navigator.geolocation.getCurrentPosition(function(position) {
     var data = JSON.stringify({
       
@@ -165,7 +165,7 @@ axios(config)
       "user_id": idvalue,
       "lon": position.coords.longitude,
       "id": select?.id,
-      "type": 1,
+      "type": type,
       "lat": position.coords.latitude
     });
       console.log(select?.id,"selectedddddd")
@@ -215,19 +215,21 @@ axios(config)
 
 const handlecheckin=()=>{
      setCheckIn(locationS)
+     setType('2')
      setCheckvisible(true)
      postlocation()
    
 }
 
 const handlecheckout=()=>{
-  
+ 
   setCheckout(locationS)
   postlocation()
   
 }
 
   const event = async => {
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       "event_id":select?.id,
        "user_id":idvalue,

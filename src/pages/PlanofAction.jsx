@@ -420,7 +420,7 @@ export default function PlanofAction() {
                                             },
                                             borderColor: "#ed6c02",
                                             color: "#ed6c02"
-                                          }} variant="outlined">Delete</Button>:null}
+                                          }} variant="outlined">Delete</Button>:<span style={{color:'green',fontWeight:500}}>(Event&nbsp;Completed)</span>}
                                         </Stack> : null}
                                       </TableCell>
                                     }
@@ -498,7 +498,7 @@ export default function PlanofAction() {
                                             },
                                             borderColor: "#ed6c02",
                                             color: "#ed6c02"
-                                          }} variant="outlined">Delete</Button>:null}
+                                          }} variant="outlined">Delete</Button>:<span style={{color:'green',fontWeight:500}}>(Event&nbsp;Completed)</span>}
                                         </Stack> : null}
                                       </TableCell>
                                     }
