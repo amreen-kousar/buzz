@@ -39,22 +39,22 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
      const [batch,setBatch] = useState('')
      const [photos,setPhotos] = React.useState(false)
      const [shown,setShown] = React.useState(false)
-
+   const [images,setImages] = useState([])
 
     useEffect(() => {
         getTrainingBatch();
        // console.log(batchState)
         
-    }, [batchState])
+    }, [batchState,clcikData])
     console.log(clcikData,"<---sads",batchState)
     const getTrainingBatch = async =>{
         
         
-        console.log(batchState,"<---batchStatebatchState")
+        console.log(batchState,"<---batchStatebatchState",batchState?.training_batch_id?batchState?.training_batch_id:clcikData?.id)
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
-            "batch_id": batchState?.training_batch_id,
+            "batch_id": batchState?.training_batch_id?batchState?.training_batch_id:clcikData?.id,
             "role_id": role
           });
           
@@ -70,7 +70,8 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
           axios(config)
           .then(function (response) {
             setBatch(response.data)
-            console.log(response.data,'<-----------setBatchsetBatchsetBatch');
+          
+            
           })
           .catch(function (error) {
             console.log(error);
@@ -78,6 +79,47 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
           
     }
 
+    function getBase64(file, callback) {
+
+        const reader = new FileReader();
+    
+        reader.addEventListener('load', () => callback(reader.result));
+    
+        reader.readAsDataURL(file);
+      }
+    const convertImage = (e) => {
+        console.log("this is calleddddfdsfs")
+        // data.append('emp_id', userid);
+        // data.append('file', e.target.files[0]);
+        // setImagePath([...imagePath, e.target.files[0]])
+        const imageData = URL.createObjectURL(e.target.files[0]);
+        console.log(imageData, "files")
+        getBase64(e.target.files[0], function (base64Data) {
+          setImages([...images, base64Data])
+        //   setViewImage(true)
+        });
+      }
+
+    const UploadImages = (e) =>{
+        var raw = JSON.stringify({
+            "project_id": 292,
+            "tb_id": 81328,
+            "trainer_id": 23,
+            "day": 1,
+            "photos": images
+        })
+
+        var requestOptions = {
+            method: 'POST',
+            body: raw,
+            redirect: 'follow'
+          };
+
+          fetch("https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+    }
     return (
         <>
             <Drawer
@@ -150,12 +192,32 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                             <Photos batch={batch} photos={photos} setPhotos={(e)=>{setPhotos(e)}}/>
                             <Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
                                 <CardContent>
-                                    <Typography>Photos</Typography>
+                                    <Typography>View Photos</Typography>
+                                    
+                                </CardContent>
+                                </Card>
+                                <Card  style={{marginTop:20}}>
+                                <input
+        type="file"
+        name="myImage"
+        onChange={(event) => {
+          console.log(event.target,"<------imageesssssssss");
+          convertImage(event);
+        }}
+      />
+      {images?.map(itm=>{
+        return(
+            <img src={itm} style={{ height: "50px", width: "70px" }}/>
+        )
+      })}
+                                <CardContent>
+                                   
+                                    <Typography >Upload Photos</Typography>
                                     
                                 </CardContent>
                             </Card>
                         </div>
-
+                        <Button onClick={UploadImages}>upload image</Button>
 
                     </Stack>
                 </Scrollbar>
