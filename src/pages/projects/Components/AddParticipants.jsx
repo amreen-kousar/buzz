@@ -133,7 +133,7 @@ export default function AddParticipants({batch}) {
   }
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button  onClick={handleClickOpen} color="inherit">
       Add Participants
       </Button>
       <Dialog
@@ -152,7 +152,7 @@ export default function AddParticipants({batch}) {
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1, color:'white'}} variant="h6" component="div">
               Add Participants
             </Typography>
             <Button autoFocus color="inherit" onClick={hitApi}>
