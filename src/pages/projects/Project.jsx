@@ -158,7 +158,7 @@ function Project(props) {
                   backgroundColor: 'white',
                
                  }
-            }} style={{float:'right',color:'#ff7424',position:'absolute',right:0,paddingRight:'150px'}} onClick={() => { setEdit(true) }}>Edit</Button>
+            }} style={{float:'right',color:'#ff7424',position:'absolute',right:0,marginRight:'125px'}} onClick={() => { setEdit(true) }}>Edit</Button>
               </Typography>
            
               <Card >
