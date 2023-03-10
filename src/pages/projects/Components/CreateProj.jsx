@@ -23,7 +23,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateProj({ createPro, setCreatePro, sendData ,viewMessage}) {
+export default function CreateProj({ createPro, setCreatePro, sendData, viewMessage, edit }) {
   console.log(sendData, "<------sendDatasendDatasendDatasendData")
   const [open, setOpen] = React.useState(false);
   const [openFilter, setOpenFilter] = useState(false);
@@ -37,7 +37,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
   let [gelathiName, setGelathiName] = useState([])
   const [driverData, setDriverData] = useState([])
   const [deleteData, setDeleteData] = useState([])
-  const [data, setData] = useState({ ...sendData, start_date: new Date(), end_date: new Date() });
+  const [data, setData] = useState({ ...sendData, ...(edit && { start_date: new Date(), end_date: new Date() }) });
 
 
 
@@ -63,13 +63,31 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
     setOpen(false);
   };
   useEffect(() => {
+    console.log(edit, "eeeeeeeeeeeeeeee")
+    if (edit) {
+      setOpen(true);
+      assignValues()
+    }
     partnerList();
     busList();
     teamList();
     driverList();
-    gelathinamelist();
+
     setNotify(true)
   }, [])
+
+  const assignValues = () => {
+    let tempdata = {
+      ...sendData,
+      start_date: sendData.startDate,
+      end_date: sendData.endDate,
+      manager_id: sendData.operations_manager_id,
+      driver_id: sendData.driverId,
+
+    }
+    setData(tempdata)
+    console.log(tempdata, "tempdataaaaa")
+  }
   const partnerList = async => {
     var config = {
       method: 'post',
@@ -96,6 +114,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
 
     axios(config)
       .then(function (response) {
+        console.log(response.data, "bussssss")
         setBusData(response.data)
       })
       .catch(function (error) {
@@ -112,6 +131,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
 
     axios(config)
       .then(function (response) {
+        console.log(response.data, "teamlist opers")
         setTeamData(response.data)
       })
       .catch(function (error) {
@@ -165,8 +185,8 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
 
   const gelathinamelist = async => {
     var data = JSON.stringify({
-      "project_id": 234,
-      "role_id": 13,
+      "project_id": sendData.projectId,
+      "role_id": JSON.parse(localStorage.getItem('userDetails'))?.id,
       "operation_manager_id": 35
     });
 
@@ -190,7 +210,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
   const showTrainerList = async => {
     var data = JSON.stringify({
       "role_id": 5,
-      "project_id": 292,
+      "project_id": sendData.projectId,
       "operation_manager_id": 122,
       "pageNum": 1
     });
@@ -222,12 +242,12 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
 
   // }
 
-  { console.log(data, "i am visible while changing") }
+  { console.log(data, "i am visible while changing", edit) }
 
   const createProject = () => {
     console.log(data, "dateaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-  var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-  console.log(userid,"projectuseridddddd");
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    console.log(userid, "projectuseridddddd");
     var formdata = new FormData();
     formdata.append('user_id', userid);
     formdata.append('project_id', data.projectId)
@@ -239,7 +259,8 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
     formdata.append('driverID', data.driver_id)
     formdata.append("operations_manager_id", data.manager_id)
     formdata.append("locationID", data.locationid)
-    formdata.append("location_name", data.locationName)
+    formdata.append("location_name", data.locationName),
+      formdata.append("publish", "")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
@@ -259,13 +280,14 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
 
   }
 
-
-
   return (
     <div>
-      <Button fullWidth variant="filled" onClick={handleClickOpen}>
-        Create New Project
-      </Button>
+      {
+        !edit && <Button fullWidth variant="filled" onClick={handleClickOpen}>
+          Create New Project
+        </Button>
+      }
+
       <Dialog
         fullScreen
         open={createPro}
@@ -294,10 +316,10 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
             <Card style={{ top: 15 }}>
               <CardContent>
                 <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                  Project : {sendData?.projectname}
+                  Project : {edit ? sendData?.project_name : sendData?.projectname}
                 </Typography>
                 <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                  District : {sendData?.locationName}
+                  District : {edit ? sendData?.location_name : sendData?.locationName}
                 </Typography>
               </CardContent>
             </Card>
@@ -383,6 +405,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
                 <Select
                   // labelId="demo-simple-select-label"
                   //id="demo-simple-select"
+                  defaultValue={data.bus_id}
                   value={data.bus_id}
                   label="Select Bus"
                   onChange={(e => {
@@ -401,9 +424,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
               </FormControl ></Stack >
           </CardContent >
           <Divider />
-          <Stack direction="row" spacing={1} >
-            <Addbus />
-          </Stack>
+
           <CardContent>
             <Typography variant="h6">Team Members</Typography>
             <Stack mt={3}>
@@ -415,8 +436,8 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
                   value={data.manager_id}
                   label="Select Operation Manager"
                   onChange={(e => {
-                    setData({ ...data, manager_id: e?.target?.value })
-
+                    setData({ ...data, manager_id: e?.target?.value });
+                    localStorage.setItem("manager_id", e?.target?.value)
                   })}
                 >
                   <MenuItem value="" default disabled>Choose Operation Manager</MenuItem>
@@ -459,9 +480,11 @@ export default function CreateProj({ createPro, setCreatePro, sendData ,viewMess
             isOpenFilter={openFilter}
             getData={(e) => { setName(e) }}
             onOpenFilter={handleOpenFilter}
+            sendData={sendData}
             onCloseFilter={handleCloseFilter}
           />
           <AddGelathifacilitators
+            sendData={sendData}
             isOpenFilter={opengelathiFilter}
             getData={(e) => { setGelathiName(e) }}
             onOpenFilter={handlegelathiOpenFilter}

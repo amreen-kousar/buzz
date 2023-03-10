@@ -133,7 +133,7 @@ const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function SimpleDialog(props) {
 
-  const { onClose, selectedValue, open, data, getData } = props;
+  const { onClose, selectedValue, open, data, getData, sendData } = props;
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -216,7 +216,7 @@ function SimpleDialog(props) {
         {data?.list?.map((email) => (
 
           <ListItem disableGutters>
-             {/* {console.log(email,'<------------nnnjnjnjnnii')} */}
+            {/* {console.log(email,'<------------nnnjnjnjnnii')} */}
             <ListItemButton onClick={() => handleListItemClick(email)} key={email}>
               <ListItemAvatar>
 
@@ -256,7 +256,7 @@ SimpleDialog.propTypes = {
   selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData }) {
+export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData }) {
   const [open, setOpen] = React.useState(isOpenFilter);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
   const [listData, setListData] = useState();
@@ -306,6 +306,7 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData 
 
 
       <SimpleDialog
+        sendData={sendData}
         data={listData}
         getData={getData}
         selectedValue={selectedValue}

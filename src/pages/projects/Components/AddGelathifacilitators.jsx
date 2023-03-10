@@ -93,8 +93,7 @@ function SimpleDialog(props) {
                 <Typography variant="subtitle2" style={{ color: '#ed6c02' }} mt={2} onClick={handleClose}>Close</Typography>
                 <DialogTitle>Add Gelathi Facilitators From List</DialogTitle>
                 <Typography mt={2} variant="subtitle2" style={{ color: '#ed6c02' }} onClick={() => {
-                    getData(arr),
-                        handleClose()
+                    getData(arr), handleClose()
                 }}>Save</Typography>
 
             </Stack>
@@ -104,7 +103,7 @@ function SimpleDialog(props) {
                 {data?.list?.map((email) => (
 
                     <ListItem disableGutters>
-                       
+
                         <ListItemButton onClick={() => handleListItemClick(email)} key={email}>
                             <ListItemAvatar>
 
@@ -144,7 +143,7 @@ SimpleDialog.propTypes = {
     selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData }) {
+export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData }) {
     const [open, setOpen] = React.useState(isOpenFilter);
     const [selectedValue, setSelectedValue] = React.useState(emails[1]);
     const [listData, setListData] = useState();
@@ -160,13 +159,14 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData 
     };
     useEffect(() => {
         trainerList()
-    }, []
+    }, [localStorage.getItem("manager_id")]
     )
-    const trainerList = async => {
+    const trainerList = () => {
+        console.log(sendData, "sendDataaaa")
         var data = JSON.stringify({
-            "role_id": 6,
+            "role_id": JSON.parse(localStorage.getItem('userDetails'))?.id,
             "project_id": 292,
-            "operation_manager_id": 122,
+            "operation_manager_id": 112,
             "pageNum": 1
         });
 
@@ -199,6 +199,7 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData 
                 selectedValue={selectedValue}
                 open={isOpenFilter}
                 onClose={handleClose}
+                sendData={sendData}
             />
         </div>
     );
