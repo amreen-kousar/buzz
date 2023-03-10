@@ -224,6 +224,7 @@ const handlecheckin=()=>{
 const handlecheckout=()=>{
  
   setCheckout(locationS)
+  setCheckvisible(false)
   postlocation()
   
 }
@@ -281,7 +282,9 @@ const handlecheckout=()=>{
     axios(config)
       .then(function (response) {
         console.log(response,"responseeeeeeeeeeee")
-
+        if(response.data.check_in){
+          setType(2)
+        }
         seteventdetails(response.data)
         
       })
@@ -348,7 +351,7 @@ const handlecheckout=()=>{
             <CardContent>
               <Typography style={{textAlign:'center'}}><u>CheckIn/Out Status</u></Typography>
               <br/>
-               {(!checkvisible)?<Button sx={{
+               {(eventdetails?.check_in=="")?<Button sx={{
                   '&:hover': {
                     backgroundColor: '#ffd796',
                   },
