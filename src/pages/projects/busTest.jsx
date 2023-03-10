@@ -58,7 +58,7 @@ export default function busTestList() {
       }
       const onDateSubmit = (e) => {
         console.log(e,"hyyyyyyyyyyy")
-        setSelected({  name: `${e?.fromDate} - ${e?.toDate}` })  
+        setSelected({  name: `${e?.fromDate} to ${e?.toDate}` })  
         busesdata(e?.fromDate, e?.toDate, "date")
         handleClose()
    
