@@ -12,6 +12,7 @@ export default function selfShaktiProj() {
     console.log("shaktishakti",state)
     const [clcikData, setClickData] = useState()
     const [count,setCount] = useState();
+    var [selected, setSelected] = useState(null)
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
     // const [selfShakthi, setselfShakthi] = useState([{ stockname: "fist" }, { stockname: "second" }]);
@@ -22,7 +23,6 @@ export default function selfShaktiProj() {
         shakti()
     } 
     
-   
     
     const [data1, setData1] = useState('');
     const [openFilter, setOpenFilter] = useState(false);
@@ -75,6 +75,42 @@ export default function selfShaktiProj() {
           });
     }
   
+    const id = sessionStorage?.getItem("proId")
+    useEffect(() => {
+      projData();
+  
+    }, [])
+    
+    const projData = async => {
+      console.log(location, "location props")
+      var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
+      var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+      var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+      var data = JSON.stringify({
+        "project_id": id,
+        "role_id": role,
+        "emp_id": idvalue
+      });
+  
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: data
+      };
+  
+      axios(config)
+        .then(function (response) {
+          setData1(response.data.list)
+          console.log(response.data, '<--------------setData1setData1');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  
+    }
 
    
   
@@ -106,6 +142,10 @@ export default function selfShaktiProj() {
             New User
           </Button> */}
             </Stack>
+            {
+                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            }
+            <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ProjectMultiDrawer
