@@ -43,6 +43,7 @@ export default function PoaEdit({ setSucess, itm }) {
   const handleChangeTime = (newValue) => {
     // setValue(newValue);
   };
+
   const [addData, setAddData] = useState({
     date: dayjs(new Date()),
     user_id: "",
@@ -53,9 +54,6 @@ export default function PoaEdit({ setSucess, itm }) {
     poa_id: ""
   })
   const handleChange2 = (event) => {
-
-
-
 
     setAddData({ ...addData, date2: event })
   }
@@ -72,7 +70,7 @@ export default function PoaEdit({ setSucess, itm }) {
     setOpen(false);
   };
 
-
+{console.log(itm,"itemmmm")}
   useEffect(() => {
     //AddPoa()
     setAddData({
@@ -134,7 +132,7 @@ export default function PoaEdit({ setSucess, itm }) {
   }
   return (
     <div>
-      <Button onClick={handleClickOpen} sx={{
+      {(itm?.check_out==0 )?<Button onClick={handleClickOpen} sx={{
         '&:hover': {
           backgroundColor: '#ffd796',
           borderColor: "#ff7424"
@@ -143,7 +141,7 @@ export default function PoaEdit({ setSucess, itm }) {
         color: "#ed6c02"
       }} variant="outlined" >
         Edit&nbsp;Poa
-      </Button>
+      </Button>:null}
       <Dialog
         open={open}
         fullScreen

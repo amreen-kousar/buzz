@@ -198,8 +198,7 @@ export default function PlanofAction() {
     setUserId()
     todaypoa()
   }
-
-
+ 
   return (
     <div >
       {openMessage &&
@@ -244,11 +243,13 @@ export default function PlanofAction() {
       {drawerEvent && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <PoaEvent
           select={select}
+          useridvalue ={select?.user_id}
           isOpenEvent={drawerEvent}
           onOpenEvent={handleOpenEvent}
           onCloseEvent={handleCloseEvent}
         /> </Stack>
       }
+      {console.log(select?.user_id,"uservalueeeeeeeee")}
       <Stack>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
@@ -382,14 +383,14 @@ export default function PlanofAction() {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
                                         {(role == 13 || idvalue==itm?.user_id) ? <Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
-                                          <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
+                                          {(itm?.check_out==0)?<Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
                                               backgroundColor: '#ffd796',
                                               borderColor: "#ed6c02"
                                             },
                                             borderColor: "#ed6c02",
                                             color: "#ed6c02"
-                                          }} variant="outlined">Delete</Button>
+                                          }} variant="outlined">Delete</Button>:null}
                                         </Stack> : null}
                                       </TableCell>
                                     }
@@ -442,14 +443,14 @@ export default function PlanofAction() {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
                                         {(role == 13 || idvalue==itm?.user_id) ?<Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
-                                          <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
+                                          {(itm?.check_out==0)?<Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
                                               backgroundColor: '#ffd796',
                                               borderColor: "#ed6c02"
                                             },
                                             borderColor: "#ed6c02",
                                             color: "#ed6c02"
-                                          }} variant="outlined">Delete</Button>
+                                          }} variant="outlined">Delete</Button>:null}
                                         </Stack> : null}
                                       </TableCell>
                                     }
@@ -506,14 +507,14 @@ export default function PlanofAction() {
                                         {(role == 13 || idvalue==itm?.user_id) ? <Stack direction={'row'} spacing={2} >
                                       
                                           <PoaEdit itm={itm} />
-                                          <Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
+                                          {(itm?.check_out==0)?<Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
                                               backgroundColor: '#ffd796',
                                               borderColor: "#ed6c02"
                                             },
                                             borderColor: "#ed6c02",
                                             color: "#ed6c02"
-                                          }} variant="outlined">Delete</Button>
+                                          }} variant="outlined">Delete</Button>:<span style={{color:'green',fontWeight:500}}>(Event&nbsp;Completed)</span>}
                                         </Stack> : null}
                                       </TableCell>
                                     }

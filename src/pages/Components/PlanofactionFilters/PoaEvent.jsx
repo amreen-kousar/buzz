@@ -37,7 +37,7 @@ PoaFilter.propTypes = {
   onCloseEvent: PropTypes.func,
 };
 
-export default function PoaFilter({ isOpenEvent, onCloseEvent, select }) {
+export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridvalue }) {
   
   
   const [locationS,setLocation] = useState();
@@ -155,14 +155,14 @@ axios(config)
       
     });
   },[])
-
+  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   const postlocation = async => {
 
     navigator.geolocation.getCurrentPosition(function(position) {
     var data = JSON.stringify({
       
       "location_name": locationS,
-      "user_id": 23,
+      "user_id": idvalue,
       "lon": position.coords.longitude,
       "id": select?.id,
       "type": 1,
@@ -226,7 +226,7 @@ const handlecheckout=()=>{
   postlocation()
   
 }
-var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+
   const event = async => {
     var data = JSON.stringify({
       "event_id":select?.id,
@@ -342,7 +342,7 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
             </Card>
 
            
-           {(eventdetails?.check_in=="" || eventdetails?.check_out=="")?<Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
+           {(eventdetails?.check_in=="" || eventdetails?.check_out=="")&&(useridvalue==idvalue)?<Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
             <CardContent>
               <Typography style={{textAlign:'center'}}><u>CheckIn/Out Status</u></Typography>
               <br/>
