@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Card, Stack, Chip, Container, Typography, Grid, IconButton,TextField } from '@mui/material';
+import { Card, Stack, Chip,Button, Container,DialogContent,DialogContentText, Typography, Grid, IconButton,TextField } from '@mui/material';
 import ProjectMultiDrawer from '../Components/ProjectMultiDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Iconify from 'src/components/Iconify';
 import axios from 'axios';
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -17,12 +18,21 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import moment from 'moment';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Dialog from '@mui/material/Dialog';
+import Slide from '@mui/material/Slide';
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
 export default function busTestList() {
   const {state} = useLocation()
 
     const [clcikData, setClickData] = useState()
-    const [date1, setDate1] = useState(new Date())
-    const [date2, setDate2] = useState(new Date())
+    const [date1, setDate1] = useState(null)
+    const [open, setOpen] = React.useState(false);
+    const [date2, setDate2] = useState(null)
+    var  [selected, setSelected] = useState(null)
     const [buses, setBuses] = useState();
     useEffect(() => {
         busesdata()
@@ -38,14 +48,34 @@ export default function busTestList() {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
+        const handleClickOpen = () => {
+        setOpen(true);
+      };
 
+      const handleClose=()=>{
+    
+        setOpen(false)
+      }
+      const onDateSubmit = (e) => {
+        console.log(e,"hyyyyyyyyyyy")
+        setSelected({  name: `${e?.fromDate} - ${e?.toDate}` })  
+        busesdata(e?.fromDate, e?.toDate, "date")
+        handleClose()
+   
+      }
+    const handleDelete = () => {
+      setSelected(null)
+        busesdata();
+    }
+  
+   
     const busesdata = async (i, id, g) => {
         var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
         var role = JSON.parse(localStorage.getItem('userDetails'))?.role
       
         const data = JSON.stringify({
-        "fromDate":moment(date1?.$d)?.format('YYYY-MM-DD'),
-        "toDate":moment(date2?.$d)?.format('YYYY-MM-DD'), 
+        "fromDate":date1 && moment(date1?.$d)?.format('YYYY-MM-DD'),
+        "toDate":date2 && moment(date2?.$d)?.format('YYYY-MM-DD'), 
         "bus_id":state?.id,
         });
     
@@ -73,7 +103,7 @@ export default function busTestList() {
           });
       }
     
-
+{console.log(buses,"buesesssssssssss")}
 
     return (
 
@@ -84,12 +114,29 @@ export default function busTestList() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Bus Details
+                    Bus Details  <Button variant="secondary" title="Choose date"  onClick={handleClickOpen}> <Iconify sx={{width:30,height:30}} icon="material-symbols:calendar-month"/>
+                  </Button>
                 </Typography>
-              
+             
             </Stack> 
-           <div style={{display:'flex'}}> 
-            <Stack>
+             
+            <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+          <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+          <Toolbar>
+          
+       
+                        <IconButton style={{color:"white"}} onClick={handleClose}>
+                            <Iconify icon="material-symbols:arrow-back-rounded" />
+                        </IconButton>
+                        <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+       Choose Date
+       <Button style={{float:'right',color:'white'}} onClick={() => onDateSubmit({ fromDate: moment(date1?.$d)?.format('YYYY-MM-DD'), toDate: moment(date2?.$d)?.format('YYYY-MM-DD') })}>Submit</Button>
+          </Typography>
+        
+          </Toolbar>
+        </AppBar><br/>
+       
+            <Stack sx={{marginTop:5,marginLeft:5,marginRight:5}}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="From"
@@ -105,8 +152,8 @@ export default function busTestList() {
             renderInput={(params) => <TextField {...params} color="common" />}
           />
         </LocalizationProvider>
-      </Stack>&nbsp;&nbsp;
-      <Stack>
+      </Stack>
+      <Stack sx={{margin:5}}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="to"
@@ -122,62 +169,67 @@ export default function busTestList() {
             renderInput={(params) => <TextField {...params} color="common" />}
           />
         </LocalizationProvider>
-      </Stack></div> <br/>
-          <TableContainer component={Paper} sx={{width:'40vw',justifyContent:'center',alignItems:'center',ml:10}}>
+      </Stack><br/>
+ 
+      </Dialog>
+      {
+                    selected && <><Chip label={` ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+      }
+         <TableContainer component={Paper} sx={{width:'40vw',justifyContent:'center',alignItems:'center',ml:10}}>
           <Table aria-label="customized table">
            
             <TableBody>
              <TableRow>
               <TableCell>Bus Number</TableCell>
-                <TableCell>:&nbsp;{buses?.register_number} </TableCell>
+              {(buses?.code!=404)?  <TableCell>:&nbsp;{buses?.register_number} </TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
                <TableRow>
               <TableCell>Register Date</TableCell>
-                <TableCell>:&nbsp;{buses?.register_date}</TableCell>
+              {(buses?.code!=404)?  <TableCell>:&nbsp;{buses?.register_date}</TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
                <TableRow>
               <TableCell>Engine Number</TableCell>
-                <TableCell>:&nbsp;{buses?.engine_number}</TableCell>
+              {(buses?.code!=404)?   <TableCell>:&nbsp;{buses?.engine_number}</TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
                <TableRow>
               <TableCell>Chasis Number</TableCell>
-                <TableCell>:&nbsp;{buses?.chassis_number} </TableCell>
+              {(buses?.code!=404)?<TableCell>:&nbsp;{buses?.chassis_number} </TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
                <TableRow>
               <TableCell>Insurance Number</TableCell>
-                <TableCell>:&nbsp;{buses?.insurance_number}</TableCell>
+              {(buses?.code!=404)?   <TableCell>:&nbsp;{buses?.insurance_number}</TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
                <TableRow>
               <TableCell>Insurance Company</TableCell>
-                <TableCell>:&nbsp;{buses?.insurance_company}</TableCell>
+              {(buses?.code!=404)?  <TableCell>:&nbsp;{buses?.insurance_company}</TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
               <TableRow>
               <TableCell>Insurance Start Date</TableCell>
-                <TableCell>:&nbsp;{buses?.insurance_start_date}</TableCell>
+              {(buses?.code!=404)?<TableCell>:&nbsp;{buses?.insurance_start_date}</TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
               <TableRow>
               <TableCell>Insurance End Date</TableCell>
-                <TableCell>:&nbsp;{buses?.insurance_end_date}</TableCell>
+              {(buses?.code!=404)? <TableCell>:&nbsp;{buses?.insurance_end_date}</TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
               <TableRow>
               <TableCell>Last Service Date</TableCell>
-                <TableCell>:&nbsp;{buses?.last_service_date} </TableCell>
+              {(buses?.code!=404)?  <TableCell>:&nbsp;{buses?.last_service_date} </TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
               <TableRow>
               <TableCell>Next Service Date</TableCell>
-                <TableCell>:&nbsp;{buses?.next_service_due_date} </TableCell>
+              {(buses?.code!=404)? <TableCell>:&nbsp;{buses?.next_service_due_date} </TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
               <TableRow>
               <TableCell>Permit Details</TableCell>
-                <TableCell>:&nbsp;{buses?.permit} </TableCell>
+              {(buses?.code!=404)?   <TableCell>:&nbsp;{buses?.permit} </TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
               <TableRow>
               <TableCell>Fitness Certificate</TableCell>
-                <TableCell>:&nbsp;{buses?.fitness_certificate} </TableCell>
+              {(buses?.code!=404)? <TableCell>:&nbsp;{buses?.fitness_certificate} </TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
               <TableRow>
               <TableCell>Emission Date</TableCell>
-                <TableCell>:&nbsp;{buses?.emission_date} </TableCell>
+              {(buses?.code!=404)?  <TableCell>:&nbsp;{buses?.emission_date} </TableCell>: <TableCell>:&nbsp;null</TableCell>}
              </TableRow>
              
             </TableBody>

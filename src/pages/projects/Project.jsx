@@ -22,7 +22,21 @@ import Peopleprofile from './Components/projectpeopleprofile';
 import Gelathifacilitatorlist from './Components/Gelathifacilitatorslist';
 import Trainerslist from './Components/Trainerslist';
 import Evaluationday2 from './Components/Evaluationday2';
+import Collapse from '@mui/material/Collapse';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { styled } from '@mui/material/styles';
+
 import CreateProj from './Components/CreateProj';
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  //   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  // marginLeft: 'auto' ,
+  //   transition: theme.transitions.create('transform', {
+  //     duration: theme.transitions.duration.shortest,
+  //   }),
+}));
 function Project(props) {
   const location = useLocation()
   const [openFilter, setOpenFilter] = useState(false);
@@ -34,6 +48,11 @@ function Project(props) {
   const open = Boolean(anchorEl);
   const cm = Boolean(circlemeeting);
 
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
 
   const handleClick = (event) => {
@@ -131,9 +150,17 @@ function Project(props) {
                   <IconButton>
                     <Iconify icon="material-symbols:arrow-back-rounded" />
                   </IconButton></Link>
-                <span> Project</span>
+                <span> Project</span>   <Button  sx={{
+              '&:hover': {
+                backgroundColor: '#ffffff',
+              },
+              '&:focus': {
+                  backgroundColor: 'white',
+               
+                 }
+            }} style={{float:'right',color:'#ff7424',position:'absolute',right:0,paddingRight:'150px'}} onClick={() => { setEdit(true) }}>Edit</Button>
               </Typography>
-              <Button onClick={() => { setEdit(true) }}>Edit</Button>
+           
               <Card >
                 <TableContainer >
                   <Table aria-label="customized table">
@@ -168,15 +195,25 @@ function Project(props) {
                 </TableContainer>
 
               </Card><br></br>
-              {(userDetails == 1 || userDetails == 2 || userDetails == 3 || userDetails == 4 || userDetails == 5 || userDetails == 6 || userDetails == 13) ? <Card>
+              {(userDetails == 1 || userDetails == 2 || userDetails == 3 || userDetails == 4 || userDetails == 5 || userDetails == 6 || userDetails == 13) ? 
+              <Card sx={{width:'43vw'}}>
                 <CardContent>
                   Project Team :
+                  <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
                   {data1?.projectPeoplesList?.map((item, index) =>
                     <Card value={item?.emp_id} style={{ cursor: 'pointer', margin: 10, padding: 10 }} onClick={() => viewUser(item, index)}>
                       <span style={{ fontWeight: 700 }}>{item.emp_name}
                         <Iconify style={{ color: "black", float: 'right', width: 20, height: 20 }} icon="fluent:notebook-eye-20-filled" />
                       </span><br></br>{item?.role}&nbsp;</Card>
-                  )}
+                  )}</Collapse>
                 </CardContent>
 
               </Card> :
@@ -229,6 +266,7 @@ function Project(props) {
                 justifyContent="center"
                 alignItems="center"
                 minHeight="10vh"
+                marginTop='80px'
               >
                 <ButtonGroup
                   orientation="vertical"

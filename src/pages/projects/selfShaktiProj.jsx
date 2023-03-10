@@ -14,7 +14,6 @@ export default function selfShaktiProj() {
     const [count,setCount] = useState();
     var [selected, setSelected] = useState(null)
     var [search, setSearch] = useState('')
-    var [selected, setSelected] = useState(null)
     // const [selfShakthi, setselfShakthi] = useState([{ stockname: "fist" }, { stockname: "second" }]);
     const searchFunction = (e) => {
         search = e
@@ -113,10 +112,7 @@ export default function selfShaktiProj() {
     }
 
    
-  
-  
-   
-   
+
     const handleDelete = () => {
       setSelected(null)
         search = ''
