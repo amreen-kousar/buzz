@@ -21,7 +21,7 @@ const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function SimpleDialog(props) {
 
-    const { onClose, selectedValue, open, data, getData } = props;
+    const { onClose, selectedValue, open, data, getData ,sendData} = props;
 
     const handleClose = () => {
         onClose(selectedValue);
@@ -30,7 +30,7 @@ function SimpleDialog(props) {
     const handleListItemClick = (value) => {
         if (arr?.includes(value?.first_name)) {
             var data = JSON.stringify({
-                "project_id": 292,
+                "project_id":sendData?.projectId,
                 "role_id": value?.role_id,
                 "emp_id": value?.id
             });
@@ -58,7 +58,7 @@ function SimpleDialog(props) {
         }
         else {
             var data = JSON.stringify({
-                "project_id": 292,
+                "project_id": sendData?.projectId,
                 "role_id": value?.role_id,
                 "emp_id": value?.id
             });

@@ -509,8 +509,8 @@ function Project(props) {
                   </Link> : null}
                   {(userDetails == 6 || userDetails == 13) ? <br /> : null}
                   {(userDetails == 5) ? <CreateTrainerBatch data1={data1} /> : null} {(userDetails == 5) ? <br /> : null}
-                  {(userDetails == 1) ? <Programevaluationday1 /> : null} {(userDetails == 1) ? <br /> : null}
-                  {(userDetails == 1) ? <Evaluationday2 /> : null} {(userDetails == 1) ? <br /> : null}
+                  {(userDetails == 1) ? <Programevaluationday1 /> : null} 
+                  {(userDetails == 1) ? <Evaluationday2 /> : null} 
 
                   <br />
 

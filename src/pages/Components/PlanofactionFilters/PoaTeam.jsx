@@ -69,7 +69,7 @@ function SimpleDialog(props) {
             <ListItemText primary="Add account" />
           </ListItemButton> 
         </ListItem> */}
-      </List>:<h4 style={{textAlign:'center'}}>No data found</h4>}
+      </List>:<h4 style={{textAlign:'center'}}>No Team Members Found</h4>}
     </Dialog>
   );
 }
