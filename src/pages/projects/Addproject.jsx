@@ -35,7 +35,7 @@ function AddProject({ viewMessage }) {
         setData([])
         location();
         // createProject();
-    }, []
+    }, [open]
     )
 
     const handleClickOpen = () => {
