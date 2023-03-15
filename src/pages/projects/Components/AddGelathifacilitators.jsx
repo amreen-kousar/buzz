@@ -166,7 +166,7 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
         var data = JSON.stringify({
             "role_id": 6,
             "project_id": 292,
-            "operation_manager_id": 122,
+            "operation_manager_id": 35,
             "pageNum": 1
         });
 
