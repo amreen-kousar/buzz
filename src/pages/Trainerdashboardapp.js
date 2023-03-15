@@ -158,21 +158,23 @@ export default function Trainerdashboard() {
     <>
       <Page title="Dashboard">
 
-        <Container maxWidth="xl">
-          <Button style={{ float: "right", color: '#ff7424' }}
-            sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-              },
-            }}
-            onClick={() => {
-              handleOpenFilter()
-            }}>
+       
+        <Stack direction="row" alignItems="center" justifyContent="space-between" >
+          <Typography variant="h5" gutterBottom sx={{ml:4}}>
+            Summary
+
+          </Typography>
+          <Button style={{ float: "right", color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleOpenFilter() }}>
             Filter
           </Button>
+        </Stack>
+        <Container maxWidth="xl">
+          <Grid item spacing={10}> 
           {
             slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
           }
+          </Grid>
+         
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <FiltersHome
               type="Dashboard"

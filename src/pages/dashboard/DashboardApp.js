@@ -36,11 +36,11 @@ export default function DashboardApp() {
 
     { ...itemStyles[0], title: "Women", total: 'summary_women', color: "info", icon: 'twemoji:women-holding-hands' },
 
-    { ...itemStyles[0], title: "Gelathis", total: 'gelathi', color: "gelathis", icon: 'fluent:people-team-16-regular' },
+    { ...itemStyles[0], title: "Gelathis", total: 'summary_enrolled', color: "gelathis", icon: 'fluent:people-team-16-regular' },
 
     { ...itemStyles[1], title: "Green Motivator", total: 'summary_green', color: "motivator" },
 
-    { ...itemStyles[1], title: "Enrolled Vyapar", total: 'summary_enrolled', color: "vyapar" }
+    { ...itemStyles[1], title: "Enrolled Vyapar", total: 'summary_vyapar', color: "vyapar" }
 
   ]
 
@@ -107,7 +107,7 @@ export default function DashboardApp() {
       .then((response) => {
         console.log(response.data)
         setLoader(false)
-        response.data.gelathi = 15022
+        // response.data.gelathi = 15022
         setSummaryData(response.data);
       })
       .catch((error) => {

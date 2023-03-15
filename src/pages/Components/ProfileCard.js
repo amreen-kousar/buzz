@@ -218,7 +218,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                 <TableCell>: &nbsp;{profileData?.contactNum}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >
-                <TableCell> Work</TableCell>
+                <TableCell> Work Mobile Number</TableCell>
                 <TableCell>: &nbsp;{profileData?.workNum}</TableCell>
               </TableRow>
               <TableRow style={{ height: "8px !important" }} >

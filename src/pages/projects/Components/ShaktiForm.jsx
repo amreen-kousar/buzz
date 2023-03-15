@@ -714,7 +714,7 @@ const [sendData,setSendData]= React.useState({
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
-                    <FormControlLabel value="Government Bank"  control={<Checkbox defaultChecked />} label="Goverment Bank" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Government Bank"  control={<Checkbox />} label="Goverment Bank" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
                     <FormControlLabel value="Private Bank" control={<Checkbox />} label="Private Bank" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
                     <FormControlLabel value="Loacl MFI" control={<Checkbox />} label="Local MFI" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
                     <FormControlLabel value="SHG Group" control={<Checkbox />} label="SHG Group" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
@@ -737,7 +737,7 @@ const [sendData,setSendData]= React.useState({
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
-                    <FormControlLabel value="Start/Expand Own Income Generation City" control={<Checkbox defaultChecked />} label="Start/Expand Own Income Generation City" onChange={(event)=>handlecheckedata('loanborrow',event)}/>
+                    <FormControlLabel value="Start/Expand Own Income Generation City" control={<Checkbox />} label="Start/Expand Own Income Generation City" onChange={(event)=>handlecheckedata('loanborrow',event)}/>
                     <FormControlLabel value="Start/Expand Husband's Or His Family Income Generation Activity" control={<Checkbox />} label="Start/Expand Husband's Or His Family Income Generation Activity" onChange={(event)=>handlecheckedata('loanborrow',event)}/>
                     <FormControlLabel value="Education (own)" control={<Checkbox />} label="Education (Own)" onChange={(event)=>handlecheckedata('loanborrow',event)}/>
                     <FormControlLabel value="Pay for Future employment" control={<Checkbox />} label="Pay For Future Employment " onChange={(event)=>handlecheckedata('loanborrow',event)}/>
