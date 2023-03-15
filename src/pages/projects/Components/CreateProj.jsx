@@ -29,6 +29,8 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
   const [openFilter, setOpenFilter] = useState(false);
   const [opengelathiFilter, setOpengelathiFilter] = useState(false);
   const [partner, setPartner] = useState([])
+  const [warn,setWarn]=useState(false)
+  const [message,setMessage]=useState(null)
   const minDate = new Date()
   const [notify, setNotify] = useState(false)
   const [busData, setBusData] = useState([])
@@ -246,9 +248,18 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
   { console.log(data, "i am visible while changing", edit) }
 
   const createProject2 = () => {
-    console.log(data, "dateaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+   if(name.length==0){
+    setWarn(true)
+    setMessage("Please Add trainers")
+
+   }
+   else if(gelathiName.length==0){
+    setWarn(true)
+    setMessage("Please Add Gelathi Facilators ")
+   }
+   else{
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-    console.log(userid, "projectuseridddddd");
     var formdata = new FormData();
     formdata.append('user_id', userid);
     formdata.append('project_id', data.projectId)
@@ -276,6 +287,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
       .catch(function (error) {
         console.log(error);
       });
+   }
 
   }
 
@@ -300,9 +312,15 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 save
               </Button>
             </Toolbar>
-          </AppBar >
+          </AppBar>
           <Grid>
             <CardContent>
+            <Snackbar open={warn} autoHideDuration={3000} onClose={() => { setWarn(false) }}>
+                <Alert onClose={() => { setWarn(false) }} severity="warning" sx={{ width: '100%' }}>
+                {message}
+                </Alert>
+              </Snackbar>
+
               <Snackbar open={notify} autoHideDuration={3000} onClose={() => { setNotify(false) }}>
                 <Alert onClose={() => { setNotify(false) }} severity="success" sx={{ width: '100%' }}>
                   Project created succesfully
@@ -560,13 +578,13 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                   {gelathiName?.length !== 0 &&
                     <Card style={{ marginTop: 10 }}>
                       <CardContent>
-                        <Stack spacing={4}>
+                        <Stack spacing={4}  direction={'row'}>
                           {gelathiName?.map(i => {
                             return (
-                              <Stack direction={'row'} >
+                              <Stack >
                                 <Typography mt={2} variant='subtitle2'>{i}</Typography>
                                 <Stack style={{ marginLeft: 20 }} mt={2} >
-                                  <CancelIcon />
+                                 
                                 </Stack>
                               </Stack>
                             )
