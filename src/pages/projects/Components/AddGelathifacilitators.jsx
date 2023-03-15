@@ -159,12 +159,12 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
     };
     useEffect(() => {
         trainerList()
-    }, [localStorage.getItem("manager_id")]
+    }, []
     )
     const trainerList = () => {
         console.log(sendData, "sendDataaaa")
         var data = JSON.stringify({
-            "role_id": JSON.parse(localStorage.getItem('userDetails'))?.id,
+            "role_id": JSON.parse(localStorage.getItem('userDetails'))?.role,
             "project_id": 292,
             "operation_manager_id": 112,
             "pageNum": 1

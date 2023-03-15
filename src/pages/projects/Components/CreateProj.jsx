@@ -245,7 +245,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
   { console.log(data, "i am visible while changing", edit) }
 
-  const createProject = () => {
+  const createProject2 = () => {
     console.log(data, "dateaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     console.log(userid, "projectuseridddddd");
@@ -270,9 +270,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
     axios(config)
       .then(function (response) {
-
         viewMessage('Project added sucessfully')
-        console.log(response, '<----------createProj');
         setCreatePro(false)
       })
       .catch(function (error) {
@@ -295,7 +293,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <form onSubmit={createProject}>
+        <form onSubmit={(e) => { e.preventDefault(); createProject2() }}>
           <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
             <Toolbar>
               <Button autoFocus color="inherit" type="submit">
@@ -357,7 +355,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
             <CardContent>
               <Stack mt={1} mb={2}>
-                <TextField id="Training Target" required color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
+                <TextField id="Training Target" color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
               </Stack>
             </CardContent>
             <Divider />
@@ -369,7 +367,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
               <Stack>
                 <CardContent>
                   <TextField type="date"
-                    required
+
                     style={{ width: '20vw' }}
                     defaultValue={data.start_date}
                     InputProps={{
@@ -380,7 +378,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                     }} />
 
                   <TextField type="date"
-                    required
+
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     InputProps={{
                       inputProps: { min: moment(data.start_date)?.format('YYYY-MM-DD') }
@@ -424,7 +422,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" color="common">Select Bus</InputLabel>
                   <Select
-                    required
+
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
                     defaultValue={data.bus_id}
@@ -453,7 +451,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Select Operation Manager</InputLabel>
                   <Select
-                    required
+
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
                     value={data.manager_id}
@@ -478,7 +476,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Select Driver</InputLabel>
                   <Select
-                    required
+
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
                     value={data.driver_id}

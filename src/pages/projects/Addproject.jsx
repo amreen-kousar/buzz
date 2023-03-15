@@ -246,7 +246,7 @@ function AddProject({ viewMessage }) {
                                 Create New Project
                             </Typography>
 
-                            <Button type="submit" autoFocus color="inherit" >
+                            <Button type="submit" color="inherit" >
                                 save
                             </Button>
                         </Toolbar>
@@ -372,18 +372,16 @@ function AddProject({ viewMessage }) {
                   </Link><br /> */}
                         {/* <Button onClick={() => createProject()} fullWidth variant="filled" style={{background:"#f5f5f5"}}>Create New Project</Button> */}
 
+                        {console.log(createPro)}
 
-                        {
-                            (sendData && createPro) && <CreateProj sendData={sendData}
-                                setCreatePro={(e) => {
-                                    setCreatePro(e),
-                                        handleClose()
-
-                                }} createPro={sendData && createPro} viewMessage={viewMessage} />
-                        }
 
 
                     </div> </form>
+
+                {
+                    (sendData && createPro && AddProject) ? <CreateProj sendData={sendData}
+                        setCreatePro={(e) => { setCreatePro(e), handleClose() }} createPro={createPro} viewMessage={viewMessage} />
+                        : null}
 
             </Dialog>
         </div>
