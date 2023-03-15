@@ -126,6 +126,7 @@ console.log(userId,"useriddddddddddd")
         console.log(error);
       });
   }
+  let numrex=/^\d+$/
   return (
     <div>
       {/* <Button variant="outlined" onClick={handleClickOpen} style={{float:"right",color:"#ff7424"}} sx={{
@@ -216,8 +217,17 @@ console.log(userId,"useriddddddddddd")
               autoComplete="off"
             >
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
-                <TextField fullWidth value={addData?.name} onChange={(e) => {
-                  setAddData({ ...addData, name: e?.target?.value }),
+                <TextField fullWidth value={addData?.name} type="text" 
+                 InputProps={{
+                   
+                  type: 'text',
+                 
+                }}
+                  onChange={(e) => {
+                  //  if(numrex.test(e?.target?.value)){
+                  setAddData({ ...addData, name: e?.target?.value })
+                  // }
+                 
                     console.log(e, "<---EWWEREWREW")
                 }} id="outlined-basic" label="Add Title" variant="outlined" color="common" />
                 <Stack direction={'row'}>

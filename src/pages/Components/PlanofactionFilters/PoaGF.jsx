@@ -20,21 +20,21 @@ import {
     CardContent,
 } from '@mui/material';
 // components
-import Iconify from '../../components/Iconify';
-import Scrollbar from '../../components/Scrollbar';
-import { ColorManyPicker } from '../../components/color-utils';
-import ShaktiDialog from '../projects/Components/ShaktiDialog'
-import Photos from '../projects/Components/Photos'
+import Iconify from '../../../components/Iconify';
+import Scrollbar from '../../../components/Scrollbar';
+import { ColorManyPicker } from '../../../components/color-utils';
+import ShaktiDialog from '../../../pages/projects/Components/ShaktiDialog'
+import Photos from '../../../pages/projects/Components/Photos'
 
 // ----------------------------------------------------------------------
 
-projectMultiDrawer.propTypes = {
-    isOpenFilter: PropTypes.bool,
-    onOpenFilter: PropTypes.func,
-    onCloseFilter: PropTypes.func,
+PoaGF.propTypes = {
+    isOpenFilterGF: PropTypes.bool,
+    onOpenFilterGF: PropTypes.func,
+    onCloseFilterGF: PropTypes.func,
 };
 
-export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,batchState}) {
+export default function PoaGF({isOpenFilterGF,onOpenFilterGF,onCloseFilterGF,clcikData,batchState}) {
 
      const [batch,setBatch] = useState('')
      const [photos,setPhotos] = React.useState(false)
@@ -124,8 +124,8 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
         <>
             <Drawer
                 anchor="right"
-                open={isOpenFilter}
-                onClose={onCloseFilter}
+                open={isOpenFilterGF}
+                onClose={onCloseFilterGF}
                 PaperProps={{
                     sx: { width: 350, },
                 }}
@@ -135,7 +135,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                         {/* {`${clcikData?.title}: ${clcikData?.name}`} */}
                         {clcikData?.name}
                     </Typography>
-                    <IconButton onClick={onCloseFilter}>
+                    <IconButton onClick={onCloseFilterGF}>
                         <Iconify icon="eva:close-fill" width={20} height={20} />
                     </IconButton>
                 </Stack>
@@ -150,7 +150,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                                     <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
                                         Project :
                                       &nbsp;{batch?.data?.projectName}
-                                        {console.log(batch?.data?.projectName,'<--------njknnjnjn')}
+                                        {console.log(batch?.data?.projectName,'<--------gfgfgfgfgfgdrawer')}
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
                                         Partner :

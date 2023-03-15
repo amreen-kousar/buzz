@@ -95,6 +95,7 @@ export default function Team(props) {
     }
 
     const teamMemberTravelAllowance = (itm, i) => {
+        console.log("this is calllesss",dateValue, itm?.id)
         setSelectedTeamMember(itm?.fullName)
         var data = JSON.stringify({
             "date": dateValue,
@@ -188,7 +189,7 @@ export default function Team(props) {
         <div>
             {
                 teamMembersData.map((itm, i) => {
-                    return <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: '0.5rem' }} >
+                    return <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "red", cursor: "pointer", padding: '0.5rem' }} >
                         <Grid container spacing={2} >
                             <Grid onClick={() => { teamMemberTravelAllowance(itm, i) }} item xs={8}>
                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.fullName}</b><br>

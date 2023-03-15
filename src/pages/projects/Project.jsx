@@ -139,7 +139,7 @@ function Project(props) {
                   <Table aria-label="customized table">
                     <TableBody>
                       <TableRow style={styles.tableRowStyle}>
-                        <TableCell>Project Name : </TableCell>
+                        <TableCell>Project Name  </TableCell>
                         <TableCell>: {data1.project_name} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>

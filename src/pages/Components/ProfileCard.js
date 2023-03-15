@@ -383,7 +383,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
           id="Address2" label="Address2" variant="outlined" color="common" />
       </Grid>
       <Grid item mb={2}>
-        <TextField fullWidth size="small" id="PinCode"
+        <TextField fullWidth size="small" id="PinCode" type="number"
           value={editData?.pincode}
           onChange={(e) => { setEditData({ ...editData, pincode: e?.target?.value }) }}
           label="PinCode" variant="outlined" color="common" />

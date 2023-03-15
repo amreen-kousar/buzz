@@ -23,7 +23,6 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 // components
@@ -33,6 +32,7 @@ import { SecurityUpdate } from '@mui/icons-material';
 import moment from 'moment';
 import Day1SelfShakti from './Components/PlanofactionFilters/Day1SelfShakti'
 import ProjectMultiDrawer from '../pages/Components/ProjectMultiDrawer'
+import PoaGF from './Components/PlanofactionFilters/PoaGF'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -70,6 +70,7 @@ export default function PlanofAction() {
   const [value, setValue] = React.useState(0);
   const [openFilter, setOpenFilter] = useState(false);
   const [drawerEvent, SetDrawerEvent] = useState(false);
+  const [gfDrawer,SetGFDrawer]= useState(false);
   const [poa, SetPoa] = useState([]);
   const [openMessage, setOpenMessage] = useState(false);
   const [day1,setDay1] = useState(false);
@@ -109,6 +110,9 @@ export default function PlanofAction() {
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
   const handleOpenEvent = () => {
     SetDrawerEvent(true);
   };
@@ -116,10 +120,15 @@ export default function PlanofAction() {
     setSelect("")
     SetDrawerEvent(false);
   };
-
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
+  const handleOpenGf = () => {
+    SetGFDrawer(true);
   };
+  const handleCloseGf = () => {
+    setSelect("")
+    SetGFDrawer(false);
+  };
+
+  
   useEffect(() => {
     todaypoa();
   }, [season, date, userId]);
@@ -264,6 +273,16 @@ export default function PlanofAction() {
         /> </Stack>
       }
       {console.log(select?.user_id,"uservalueeeeeeeee")}
+      {gfDrawer && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        <PoaGF
+          select={select}
+          useridvalue ={select?.user_id}
+          clcikData={clcikData}
+          isOpenFilterGF={gfDrawer}
+          onOpenFilterGF={handleOpenGf}
+          onCloseFilterGF={handleCloseGf}
+        /> 
+        </Stack>}
       <Stack>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
@@ -400,7 +419,22 @@ export default function PlanofAction() {
                                 <TableBody>
                                   <TableRow >
 
-                                    <TableCell component="th" scope="row" onClick={handleOpenEvent}>
+                                    <TableCell component="th" scope="row"onClick={()=>{
+                                      console.log(itm,"<---sadasdasdsa")
+                                       setClickData(itm)
+                                      if(itm?.type =="3"){
+
+                                      
+                                       handleOpenEvent()
+                                      }
+                                      else if(itm?.type =="1"){
+                                        setClickData(itm)
+                                        handleOpenFilter()
+                                      }
+                                      else{
+                                        console.log("its opened")
+                                      }
+                                    }}>
                                      {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}
                                        
                                         {/* {(role==6 || role==13)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
@@ -537,7 +571,24 @@ export default function PlanofAction() {
                                 <TableBody>
                                   <TableRow >
                                
-                                    <TableCell component="th" scope="row" onClick={handleOpenEvent}>
+                                    <TableCell component="th" scope="row" onClick={()=>{
+                                      console.log(itm,"<---sadasdasdsa")
+                                       setClickData(itm)
+                                      if(itm?.type =="3"){
+
+                                      
+                                       handleOpenEvent()
+                                      }
+                                      else if(itm?.type =="1"){
+                                        setClickData(itm)
+                                        handleOpenFilter()
+                                      }
+                                      else if (itm?.type =="2") { 
+                                        setClickData(itm)
+                                        handleOpenGf()
+                                        console.log(itm,"<---handleOpenGf")
+                                      }
+                                    }}>
                                    
                                     {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
                                     {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}

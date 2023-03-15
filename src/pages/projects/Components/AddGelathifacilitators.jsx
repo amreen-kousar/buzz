@@ -90,7 +90,7 @@ function SimpleDialog(props) {
     return (
         <Dialog onClose={handleClose} open={open}>
             <Stack direction={'row'}>
-                <Typography variant="subtitle2" style={{ color: '#ed6c02' }} mt={2} onClick={handleClose}>Close</Typography>
+                <Typography variant="subtitle2" style={{ color: '#ed6c02' }} mt={2} onClick={handleClose}>Back</Typography>
                 <DialogTitle>Add Gelathi Facilitators From List</DialogTitle>
                 <Typography mt={2} variant="subtitle2" style={{ color: '#ed6c02' }} onClick={() => {
                     getData(arr), handleClose()

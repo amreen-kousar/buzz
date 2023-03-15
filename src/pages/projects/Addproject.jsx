@@ -33,9 +33,11 @@ function AddProject({viewMessage}) {
 
     useEffect(() => {
         location();
+        getFunder();
         // createProject();
     }, []
     )
+    
 
     const handleClickOpen = () => {
         console.log("clicked")
@@ -51,7 +53,7 @@ function AddProject({viewMessage}) {
             "country_id": "1",
 
         });
-        getFunder();
+        
         var config = {
             method: 'post',
             url: 'http://3.7.7.138/appTest/getLocation.php',
