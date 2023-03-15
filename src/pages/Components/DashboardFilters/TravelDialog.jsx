@@ -100,7 +100,9 @@ export default function TravelDialog({ viewMessage }) {
     drop()
     //imageUpload()
     location()
-  }, [coords]
+    setSendData([])
+    
+  }, [coords,open]
   )
   const [image, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
@@ -138,6 +140,7 @@ export default function TravelDialog({ viewMessage }) {
 
   const SendData = async => {
 
+console.log("submittedddddddd")
     var data = JSON.stringify({
       "date": sendData?.date,
       "insideBangalore": false,
@@ -168,7 +171,7 @@ export default function TravelDialog({ viewMessage }) {
       },
       data: data
     };
-
+console.log("successsssssssss")
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
@@ -354,6 +357,7 @@ axios(config)
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">
         {/* <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}> */}
+      <form onSubmit={(e)=>{e.preventDefault(); SendData()}}>
         <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
           <IconButton edge="start" sx={{ color: "inherit" }} onClick={handleClose} aria-label="close">
             <CloseIcon />
@@ -362,7 +366,7 @@ axios(config)
             Create Allowance
           </Typography>
 
-          <Button autoFocus color="inherit" onClick={() => SendData()}>
+          <Button autoFocus color="inherit" type="submit">
           <Iconify icon="material-symbols:save" width={30} height={30} />
           </Button>
         </Toolbar>
@@ -372,16 +376,16 @@ axios(config)
 
     /> */}
         {/* </AppBar> */}
-        <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
+        {/* <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
           <DialogContentText
             id="scroll-dialog-description"
             tabIndex={-1}
-          >
+          > */}
             <div style={{ margin: "1rem" }}>
 
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading *" variant="outlined" color="common" 
+                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading " variant="outlined" color="common" 
                 />
               </Stack>
               <Stack style={{ marginTop: 20 ,color:'black'}}>
@@ -440,7 +444,7 @@ axios(config)
               {/* {(userDetails===12)?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />:null} */}
              
               <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.poa==""?"Select POA *":"POA *"}</InputLabel>
-                <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
+                <Select required labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                 
                   {datadrop?.data?.map(itm => {
                     return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
@@ -467,7 +471,7 @@ axios(config)
               <Stack style={{ marginTop: 20 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
-                    
+                    required
                     inputFormat="YYYY-MM-DD"
                     views={["year", "month", "day"]}
                     // label="Date"
@@ -483,7 +487,7 @@ axios(config)
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.modeoftravel==""?"Select Mode of Travel":"Mode of Travel"}</InputLabel>
-                  <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
+                  <Select required variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Mode Of Travel"
                     id="demo-simple-select"
                     value={sendData?.modeoftravel}
@@ -500,12 +504,12 @@ axios(config)
               </Stack><br></br>
               {console.log(datadrop?.Mode_of_Travel,"modeeeeeeeeeeee",sendData?.modeoftravel)}
               {(sendData?.modeoftravel&&sendData?.modeoftravel===1 | sendData?.modeoftravel===4 | sendData?.modeoftravel===5 | sendData?.modeoftravel===6)?<Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, fairamount: e?.target?.value }) }} label="Fair amount" variant="outlined" color="common" />
+                <TextField required id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, fairamount: e?.target?.value }) }} label="Fair amount" variant="outlined" color="common" />
               </Stack>:
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.rateperkm==""?"Select Rate per KM":"Rate per KM"}</InputLabel>
-                  <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
+                  <Select required variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Rate Per Km"
                     id="demo-simple-select"
                     value={sendData?.rateperkm}
@@ -522,7 +526,7 @@ axios(config)
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.foodexpenses==""?"Select Food Expenses":"Food Expenses"}</InputLabel>
-                  <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
+                  <Select required variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Food Expenses"
                     id="demo-simple-select"
                     value={sendData?.foodexpenses}
@@ -541,7 +545,7 @@ axios(config)
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.telephonecharges==""?"Select Phone Charges":"Phone Charges"}</InputLabel>
-                  <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
+                  <Select required variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Phone Charges"
                     id="demo-simple-select"
                     value={sendData?.telephonecharges}
@@ -556,7 +560,7 @@ axios(config)
               </Stack>
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="printing" variant="outlined" color="common" 
+                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="printing" variant="outlined" color="common" 
                 InputProps={{
                      endAdornment: (
                        <InputAdornment position="start">
@@ -567,7 +571,7 @@ axios(config)
               
               </Stack>
               <Stack style={{ marginTop: 20 }}>  
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="stationery" variant="outlined" color="common" 
+                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="stationery" variant="outlined" color="common" 
                 InputProps={{
                      endAdornment: (
                        <InputAdornment position="start">
@@ -577,7 +581,7 @@ axios(config)
                   }} />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="Other Expenses" variant="outlined" color="common"
+                <TextField required id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="Other Expenses" variant="outlined" color="common"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="start">
@@ -589,7 +593,7 @@ axios(config)
                }}  />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="Other Expenses Amount" variant="outlined" color="common" 
+                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="Other Expenses Amount" variant="outlined" color="common" 
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="start">
@@ -612,9 +616,10 @@ axios(config)
                }}   />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="Total Kilometer" variant="outlined" color="common"   />
+                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="Total Kilometer" variant="outlined" color="common"   />
               </Stack>
-              <br /><br />
+              <br /><br /> 
+            </div></form> 
               <div>
                 <div style={{ display: "flex" }}>
                   {
@@ -655,7 +660,7 @@ axios(config)
 
               {/* <Button onClick={() => capture()}>Click here to to upload snaps</Button> */}
 
-            </div>
+          
             {/* <Button onClick={() => SendData()}  sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
@@ -664,7 +669,8 @@ axios(config)
 
             }}>Upload</Button><br></br> */}
             
-          </DialogContentText></DialogContent>  </Dialog>
+          {/* </DialogContentText></DialogContent>  */}
+           </Dialog>
     </div>
   );
 }

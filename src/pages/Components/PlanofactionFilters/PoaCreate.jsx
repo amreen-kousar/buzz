@@ -82,7 +82,8 @@ export default function PoaCreate() {
 
   useEffect(() => {
     //AddPoa()
-  }, []
+    setAddData([])
+  }, [open]
   )
 
   const AddPoa = async => {
@@ -182,7 +183,7 @@ console.log(userId,"useriddddddddddd")
             {addPoa}
           </Alert>
         </Snackbar>
-
+        <form onSubmit={AddPoa}> 
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
@@ -193,15 +194,17 @@ console.log(userId,"useriddddddddddd")
             </Typography>
 
 
-            <Button autoFocus color="inherit" onClick={AddPoa}>
+            <Button autoFocus color="inherit" type="submit">
             <Iconify icon="material-symbols:save" width={30} height={30} />
             </Button>
           </Toolbar>
 
         </AppBar>
 
+       
         {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
-        <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
+     
+       {/* <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
           <DialogContentText
             id="scroll-dialog-description"
             //   ref={descriptionElementRef}
@@ -214,12 +217,20 @@ console.log(userId,"useriddddddddddd")
               }}
               noValidate
               autoComplete="off"
-            >
+            > */}
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
-                <TextField fullWidth value={addData?.name} onChange={(e) => {
+                <TextField
+                required
+                fullWidth 
+                // value={addData?.name}  
+                onChange={(e) => {
                   setAddData({ ...addData, name: e?.target?.value }),
                     console.log(e, "<---EWWEREWREW")
-                }} id="outlined-basic" label="Add Title" variant="outlined" color="common" />
+                }} 
+                id="Add title" 
+                label="Add Title" 
+                variant="outlined" 
+                color="common" />
                 <Stack direction={'row'}>
                   <Typography>All Day</Typography>
                   <Switch value={addData?.all_day} onChange={(e) => { setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) }} {...label} />
@@ -228,18 +239,21 @@ console.log(userId,"useriddddddddddd")
                 <Stack direction={'row'}>
 
                   <DateTimePicker
-                    label="Date&Time picker"
+                    required
+                    label="From"
                     value={addData?.date}
                     onChange={(e) => { handleChange(e) }}
                     renderInput={(params) => <TextField {...params} color="common" />}
                   />
 
-                </Stack>
+                </Stack><br/>
                 {addData?.all_day === 0 &&
                   <Stack direction={'row'}>
                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
                     <DateTimePicker
-                      label="Date&Time picker"
+                     required
+                      label="To"
+                      minDate={addData?.date}
                       value={addData?.date2}
                       onChange={(e) => { handleChange2(e) }}
                       renderInput={(params) => <TextField {...params} color="common" />}
@@ -262,9 +276,10 @@ console.log(userId,"useriddddddddddd")
 
                 </Stack>
               </div>
-            </Box>
+            {/* </Box>
           </DialogContentText>
-        </DialogContent>
+        </DialogContent> */}
+        </form>
       </Dialog>
     </div>
   );

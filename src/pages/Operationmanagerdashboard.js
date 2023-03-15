@@ -169,19 +169,16 @@ export default function Operationmanagerdashboard() {
     <>
 
       <Page title="Dashboard">
+      <Stack direction="row" alignItems="center" justifyContent="space-between" >
+          <Typography variant="h5" gutterBottom sx={{ml:4}}>
+            Summary
 
-        <Container maxWidth="xl">
-          <Button style={{ float: "right", color: '#ff7424' }}
-            sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-              },
-            }}
-            onClick={() => {
-              handleOpenFilter()
-            }}>
+          </Typography>
+          <Button style={{ float: "right", color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleOpenFilter() }}>
             Filter
           </Button>
+        </Stack>
+        <Container maxWidth="xl">
 
           {
             slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />

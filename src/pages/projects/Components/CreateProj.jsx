@@ -373,7 +373,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
             <CardContent>
               <Stack mt={1} mb={2}>
-                <TextField id="Training Target" color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
+                <TextField id="Training Target" type="number" required color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
               </Stack>
             </CardContent>
             <Divider />
