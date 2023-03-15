@@ -24,6 +24,7 @@ export default function Funders({ selectDATA, getData }) {
 
   const funder = async () => {
     ApiRequest({ selectDATA: 2 }).then(res => setFund(res))
+    console.log(fund,"funderssssss");
   }
 
   return (

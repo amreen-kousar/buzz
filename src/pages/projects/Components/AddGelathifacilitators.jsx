@@ -164,9 +164,9 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
     const trainerList = () => {
         console.log(sendData, "sendDataaaa")
         var data = JSON.stringify({
-            "role_id": JSON.parse(localStorage.getItem('userDetails'))?.role,
+            "role_id": 6,
             "project_id": 292,
-            "operation_manager_id": 112,
+            "operation_manager_id": 35,
             "pageNum": 1
         });
 

@@ -1,11 +1,16 @@
-import axios from 'axios'
+import axios from 'axios';
+
 export default async function ApiRequest(props) {
+    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var response = []
+    
+    // console.log(idvalue,"hyyyyyyyyyyy",roleid);
     const data = JSON.stringify({
-        "role_id": 1,
+        "role_id": role,
         "filter_type": props.selectDATA,
         "pageNum": 1,
-        "emp_id": 206
+        "emp_id": idvalue
     });
     const config = {
         method: 'post',
