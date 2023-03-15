@@ -5,7 +5,7 @@ import { Button, Dialog, AppBar, Toolbar, IconButton, Typography, InputLabel, Me
 import { useLocation, Link } from 'react-router-dom'
 import CreateProj from './Components/CreateProj';
 
-function AddProject({viewMessage}) {
+function AddProject({ viewMessage }) {
 
     const [open, setAddProject] = useState(false)
     const [country, setCountry] = useState([])
@@ -32,6 +32,7 @@ function AddProject({viewMessage}) {
 
 
     useEffect(() => {
+        setData([])
         location();
         // createProject();
     }, []
@@ -162,7 +163,7 @@ function AddProject({viewMessage}) {
             const fundList = fund?.filter(itm => itm?.id === mainState?.funderId)
             const talukList = taluk?.filter(itm => itm?.id === mainState?.locationID)
             console.log(fundList, talukList, "<----talukListtalukList")
-        const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+            const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
             var data = new FormData();
             data.append('user_id', userid);
             data.append('locationID', talukList[0]?.id);
@@ -233,147 +234,156 @@ function AddProject({viewMessage}) {
                 <span style={{ fontSize: "2rem" }}>+</span>
             </Button>
             <Dialog fullScreen open={open} onClose={handleClose} >
-                <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
-                    <Toolbar>
-                        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-                            <CloseIcon />
-                        </IconButton>
-                        <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-                            Create New Project
-                        </Typography>
 
-                        <Button autoFocus color="inherit" onClick={createProject}>
-                            save
-                        </Button>
-                    </Toolbar>
-                </AppBar>
 
-                <div style={{ margin: "1rem" }}>
+                <form onSubmit={(event) => { event.preventDefault(); createProject() }}>
+                    <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+                        <Toolbar>
+                            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                                <CloseIcon />
+                            </IconButton>
+                            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+                                Create New Project
+                            </Typography>
+
+                            <Button type="submit" autoFocus color="inherit" >
+                                save
+                            </Button>
+                        </Toolbar>
+                    </AppBar>
+
                     <br />
-                    <FormControl fullWidth>
+                    <div style={{ margin: "1rem" }}>
+                        <FormControl fullWidth>
 
-                        <InputLabel id="demo-simple-select-label" color="common" sx={{borderBlockColor:'black'}}> Country</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
+                            <InputLabel id="demo-simple-select-label" color="common" sx={{ borderBlockColor: 'black' }}> Country</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
 
-                            label="Country"
+                                label="Country"
+                                required
+                            >
+                                <MenuItem value="" default disabled>Country </MenuItem>
+                                <MenuItem value="India" >India </MenuItem>
 
-                        >
-                            <MenuItem value="0" default disabled>Country </MenuItem>
-                            <MenuItem value="India" >India </MenuItem>
+                            </Select>
+                        </FormControl><br /><br />
+                        <FormControl fullWidth>
 
+                            <InputLabel id="demo-simple-select-label"> State</InputLabel>
+                            <Select
+                                required
 
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={data.state}
+                                label="State"
+                                onChange={(e => {
+                                    setData({ ...data, state: e?.target?.value }),
+                                        getState(e?.target?.value)
+                                })}
+                            >
+                                <MenuItem value="" default disabled>Choose State </MenuItem>
+                                {states?.map(itm => {
+                                    return (
+                                        <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                                    )
+                                })
+                                }
+                            </Select>
+                        </FormControl><br /><br />
+                        <FormControl fullWidth>
 
-                        </Select>
-                    </FormControl><br /><br />
-                    <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label"> District</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={data.district_id}
+                                label="District"
+                                required
 
-                        <InputLabel id="demo-simple-select-label"> State</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={data.state}
-                            label="State"
-                            onChange={(e => {
-                                setData({ ...data, state: e?.target?.value }),
-                                    getState(e?.target?.value)
-                            })}
-                        >
-                            <MenuItem value="" default disabled>Choose State </MenuItem>
-                            {states?.map(itm => {
-                                return (
-                                    <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
-                                )
-                            })
-                            }
-                        </Select>
-                    </FormControl><br /><br />
-                    <FormControl fullWidth>
+                                onChange={(e => {
+                                    setData({ ...data, district_id: e?.target?.value }),
+                                        getDistrict(e?.target?.value)
+                                })}
+                            >
+                                {district?.map(itm => {
+                                    return (
+                                        <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                                    )
+                                })
+                                }
+                            </Select>
+                        </FormControl><br /><br />
+                        <FormControl fullWidth>
 
-                        <InputLabel id="demo-simple-select-label"> District</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={data.district_id}
-                            label="District"
-                            onChange={(e => {
-                                setData({ ...data, district_id: e?.target?.value }),
-                                    getDistrict(e?.target?.value)
-                            })}
-                        >
-                            {district?.map(itm => {
-                                return (
-                                    <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
-                                )
-                            })
-                            }
-                        </Select>
-                    </FormControl><br /><br />
-                    <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label"> Taluk</InputLabel>
+                            <Select
+                                required
 
-                        <InputLabel id="demo-simple-select-label"> Taluk</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={data.talaq_id}
-                            label="Taluk"
-                            onChange={(e => {
-                                setData({ ...data, talaq_id: e?.target?.value })
-                                setMainState({ ...mainState, locationID: e?.target?.value })
-                                // getTaluk(e?.target?.value)
-                            })}
-                        >
-                            {taluk?.map(itm => {
-                                return (
-                                    <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
-                                )
-                            })
-                            }
-                        </Select>
-                    </FormControl><br /><br />
-                    <FormControl fullWidth>
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={data.talaq_id}
+                                label="Taluk"
+                                onChange={(e => {
+                                    setData({ ...data, talaq_id: e?.target?.value })
+                                    setMainState({ ...mainState, locationID: e?.target?.value })
+                                    // getTaluk(e?.target?.value)
+                                })}
+                            >
+                                {taluk?.map(itm => {
+                                    return (
+                                        <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                                    )
+                                })
+                                }
+                            </Select>
+                        </FormControl><br /><br />
+                        <FormControl fullWidth>
 
-                        <InputLabel id="demo-simple-select-label"> Funder</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={data.funder_id}
-                            label="Funder"
-                            onChange={(e => {
-                                setData({ ...data, funder_id: e?.target?.value })
-                                setMainState({ ...mainState, funderId: e?.target?.value })
-                                // getTaluk(e?.target?.value)
-                            })}
-                        >
-                            {fund?.map(itm => {
-                                return (
-                                    <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
-                                )
-                            })
-                            }
-                        </Select>
-                    </FormControl>
-                    <br /><br />
+                            <InputLabel id="demo-simple-select-label"> Funder</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={data.funder_id}
+                                required
 
-                    {/* <Link to="/dashboard/projects/CreateProj"><Button fullWidth variant="filled">
+                                label="Funder"
+                                onChange={(e => {
+                                    setData({ ...data, funder_id: e?.target?.value })
+                                    setMainState({ ...mainState, funderId: e?.target?.value })
+                                    // getTaluk(e?.target?.value)
+                                })}
+                            >
+                                {fund?.map(itm => {
+                                    return (
+                                        <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                                    )
+                                })
+                                }
+                            </Select>
+                        </FormControl>
+                        <br /><br />
+
+                        {/* <Link to="/dashboard/projects/CreateProj"><Button fullWidth variant="filled">
                     <span style={{ width: "235px" }}>Create New Project</span>
                   </Button>
                   </Link><br /> */}
-                    {/* <Button onClick={() => createProject()} fullWidth variant="filled" style={{background:"#f5f5f5"}}>Create New Project</Button> */}
+                        {/* <Button onClick={() => createProject()} fullWidth variant="filled" style={{background:"#f5f5f5"}}>Create New Project</Button> */}
 
 
-                    {
-                        sendData && <CreateProj sendData={sendData}
-                            setCreatePro={(e) => {
-                                setCreatePro(e),
-                                    handleClose()
+                        {
+                            (sendData && createPro) && <CreateProj sendData={sendData}
+                                setCreatePro={(e) => {
+                                    setCreatePro(e),
+                                        handleClose()
 
-                            }} createPro={sendData && createPro} viewMessage={viewMessage} />
-                    }
+                                }} createPro={sendData && createPro} viewMessage={viewMessage} />
+                        }
 
 
-                </div>
+                    </div> </form>
 
             </Dialog>
         </div>
