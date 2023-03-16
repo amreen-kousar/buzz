@@ -430,8 +430,10 @@ export default function PlanofAction() {
                                         setClickData(itm)
                                         handleOpenFilter()
                                       }
-                                      else{
-                                        console.log("its opened")
+                                      else if (itm?.type =="2") { 
+                                        setClickData(itm)
+                                        handleOpenGf()
+                                        console.log(itm,"<---handleOpenGf")
                                       }
                                     }}>
                                      {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}
@@ -509,8 +511,10 @@ export default function PlanofAction() {
                                         setClickData(itm)
                                         handleOpenFilter()
                                       }
-                                      else{
-                                        console.log("its opened")
+                                      else if (itm?.type =="2") { 
+                                        setClickData(itm)
+                                        handleOpenGf()
+                                        console.log(itm,"<---handleOpenGf")
                                       }
                                     }}
                                      >
