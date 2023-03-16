@@ -184,7 +184,7 @@ console.log(userId,"useriddddddddddd")
             {addPoa}
           </Alert>
         </Snackbar>
-        <form onSubmit={AddPoa}> 
+        <form onSubmit={(e) => { e.preventDefault(); AddPoa() }}> 
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
@@ -220,7 +220,7 @@ console.log(userId,"useriddddddddddd")
               autoComplete="off"
             > */}
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
-                <TextField fullWidth value={addData?.name} type="text" 
+                <TextField fullWidth value={addData?.name} type="text" required
                  InputProps={{
                    
                   type: 'text',
@@ -276,7 +276,7 @@ console.log(userId,"useriddddddddddd")
                 </Stack>
 
                 <Stack>
-                  <TextField id="outlined-basic" value={addData?.description} onChange={(e) => { setAddData({ ...addData, description: e?.target?.value }) }} label="Add Description For Creating Poa" variant="outlined" color="common" />
+                  <TextField required id="outlined-basic" value={addData?.description} onChange={(e) => { setAddData({ ...addData, description: e?.target?.value }) }} label="Add Description For Creating Poa" variant="outlined" color="common" />
                 </Stack>
                 <Stack>
 

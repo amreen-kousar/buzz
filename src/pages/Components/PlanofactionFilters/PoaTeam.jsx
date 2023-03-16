@@ -41,7 +41,7 @@ function SimpleDialog(props) {
       <DialogTitle> <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
         <CloseIcon />
       </IconButton>Select Buzz Team Members</DialogTitle>
-      {(teamData?.data?.length>0)?<List sx={{ pt: 0 }}>
+      {(teamData?.length>0)?<List sx={{ pt: 0 }}>
         {teamData?.map((email) => (
 
           <ListItem disableGutters>
