@@ -275,8 +275,7 @@ export default function PlanofAction() {
       {console.log(select?.user_id,"uservalueeeeeeeee")}
       {gfDrawer && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <PoaGF
-          select={select}
-          useridvalue ={select?.user_id}
+         batchState={batchState}
           clcikData={clcikData}
           isOpenFilterGF={gfDrawer}
           onOpenFilterGF={handleOpenGf}
