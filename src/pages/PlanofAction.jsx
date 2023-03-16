@@ -234,20 +234,22 @@ export default function PlanofAction() {
       <br />
       <Typography variant="h4" style={{ margin: 2 }} >
         Plan Of Actions
-      {(role==1 || role==3 || role==4 ||role==12||role==13 || role==11)?<PoaTeam setUserId={(e) => setUserId(e)} setName={(e) => setName(e)} />:null}
+      
+     {(role==1 || role==3 || role==4 ||role==12||role==13 || role==11)?<PoaTeam setUserId={(e) => setUserId(e)} setName={(e) => setName(e)} />:null}
 {console.log(userId,"useridddddddd")}
 {console.log(name,"nameeeeeeee")}
+<br/>{name !== '' &&
+        <Stack direction="row" spacing={1}>
+          <Chip label={name} onDelete={() => { handleDeleteSelected() }} />
+        </Stack>
+      }
       </Typography>
 
 
       <PoaCreate  />
       <br />
       <br />
-      {name !== '' &&
-        <Stack direction="row" spacing={1}>
-          <Chip label={name} onDelete={() => { handleDeleteSelected() }} />
-        </Stack>
-      }
+      
 
 
       {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
