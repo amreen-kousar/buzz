@@ -349,7 +349,7 @@ export default function UserEditProfile({updateSetUser}) {
                   <TextField id="outlined-basic" label="Address2" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, address2: e?.target?.value }) }} value={editData?.address2}/>
                 </Stack>
                 <Stack>
-                  <TextField id="outlined-basic" label="Pincode" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, pincode: e?.target?.value }) }} value={editData?.pincode}/>
+                  <TextField id="outlined-basic" type="number" label="Pincode" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, pincode: e?.target?.value }) }} value={editData?.pincode}/>
                 </Stack>
                 <Stack>
                  

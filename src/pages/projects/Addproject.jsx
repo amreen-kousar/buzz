@@ -34,9 +34,11 @@ function AddProject({ viewMessage }) {
     useEffect(() => {
         setData([])
         location();
+        getFunder();
         // createProject();
-    }, []
+    }, [open]
     )
+    
 
     const handleClickOpen = () => {
         console.log("clicked")
@@ -52,7 +54,7 @@ function AddProject({ viewMessage }) {
             "country_id": "1",
 
         });
-        getFunder();
+        
         var config = {
             method: 'post',
             url: 'http://3.7.7.138/appTest/getLocation.php',
@@ -246,7 +248,7 @@ function AddProject({ viewMessage }) {
                                 Create New Project
                             </Typography>
 
-                            <Button type="submit" autoFocus color="inherit" >
+                            <Button type="submit" color="inherit" >
                                 save
                             </Button>
                         </Toolbar>
@@ -372,18 +374,16 @@ function AddProject({ viewMessage }) {
                   </Link><br /> */}
                         {/* <Button onClick={() => createProject()} fullWidth variant="filled" style={{background:"#f5f5f5"}}>Create New Project</Button> */}
 
+                        {console.log(createPro)}
 
-                        {
-                            (sendData && createPro) && <CreateProj sendData={sendData}
-                                setCreatePro={(e) => {
-                                    setCreatePro(e),
-                                        handleClose()
-
-                                }} createPro={sendData && createPro} viewMessage={viewMessage} />
-                        }
 
 
                     </div> </form>
+
+                {
+                    (sendData && createPro && AddProject) ? <CreateProj sendData={sendData}
+                        setCreatePro={(e) => { setCreatePro(e), handleClose() }} createPro={createPro} viewMessage={viewMessage} />
+                        : null}
 
             </Dialog>
         </div>

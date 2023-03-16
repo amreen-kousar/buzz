@@ -166,7 +166,7 @@ function Project(props) {
                   <Table aria-label="customized table">
                     <TableBody>
                       <TableRow style={styles.tableRowStyle}>
-                        <TableCell>Project Name : </TableCell>
+                        <TableCell>Project Name  </TableCell>
                         <TableCell>: {data1.project_name} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
@@ -249,9 +249,9 @@ function Project(props) {
                 </>}
 
             </Grid>
-            {
+            {/* {
               edit && <CreateProj edit={true} createPro={edit} sendData={data1} />
-            }
+            } */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ mb: 1 }}>
               <Peopleprofile
                 isOpenFilter={openFilter}
@@ -276,7 +276,7 @@ function Project(props) {
                     <Link to="/dashboard/projects/busTest" state={{ id: data1?.bus_id }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>}>
-                      <span style={{ width: "235px" }}>Bus: & check List</span>
+                      <span style={{ width: "235px" }}>Bus:&nbsp;{data1?.bus_number} & check List</span>
                     </Button>
                     </Link> : null}
                   {(userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 2 || userDetails == 12) ? <br /> : null}
@@ -509,8 +509,8 @@ function Project(props) {
                   </Link> : null}
                   {(userDetails == 6 || userDetails == 13) ? <br /> : null}
                   {(userDetails == 5) ? <CreateTrainerBatch data1={data1} /> : null} {(userDetails == 5) ? <br /> : null}
-                  {(userDetails == 1) ? <Programevaluationday1 /> : null} {(userDetails == 1) ? <br /> : null}
-                  {(userDetails == 1) ? <Evaluationday2 /> : null} {(userDetails == 1) ? <br /> : null}
+                  {(userDetails == 1) ? <Programevaluationday1 /> : null} 
+                  {(userDetails == 1) ? <Evaluationday2 /> : null} 
 
                   <br />
 

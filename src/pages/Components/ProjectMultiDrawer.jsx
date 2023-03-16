@@ -198,7 +198,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                                 </CardContent>
                                 </Card>
                                 <Card  style={{marginTop:20}}>
-                                <input
+                                <input accept="image/png, image/gif, image/jpeg"
         type="file"
         name="myImage"
         onChange={(event) => {

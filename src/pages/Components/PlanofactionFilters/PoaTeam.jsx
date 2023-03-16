@@ -34,14 +34,14 @@ function SimpleDialog(props) {
     console.log(value, "<--valuevalueee")
     onClose(value);
   };
-  // console.log(teamData, "<----teamDatateamDatateamData")
+  console.log(teamData, "<----teamDatateamDatateamData")
 
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle> <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
         <CloseIcon />
       </IconButton>Select Buzz Team Members</DialogTitle>
-      <List sx={{ pt: 0 }}>
+      {(teamData?.data?.length>0)?<List sx={{ pt: 0 }}>
         {teamData?.map((email) => (
 
           <ListItem disableGutters>
@@ -69,7 +69,7 @@ function SimpleDialog(props) {
             <ListItemText primary="Add account" />
           </ListItemButton> 
         </ListItem> */}
-      </List>
+      </List>:<h4 style={{textAlign:'center'}}>No Team Members Found</h4>}
     </Dialog>
   );
 }

@@ -29,6 +29,8 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
   const [openFilter, setOpenFilter] = useState(false);
   const [opengelathiFilter, setOpengelathiFilter] = useState(false);
   const [partner, setPartner] = useState([])
+  const [warn,setWarn]=useState(false)
+  const [message,setMessage]=useState(null)
   const minDate = new Date()
   const [notify, setNotify] = useState(false)
   const [busData, setBusData] = useState([])
@@ -245,10 +247,19 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
   { console.log(data, "i am visible while changing", edit) }
 
-  const createProject = () => {
-    console.log(data, "dateaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+  const createProject2 = () => {
+
+   if(name.length==0){
+    setWarn(true)
+    setMessage("Please Add trainers")
+
+   }
+   else if(gelathiName.length==0){
+    setWarn(true)
+    setMessage("Please Add Gelathi Facilators ")
+   }
+   else{
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-    console.log(userid, "projectuseridddddd");
     var formdata = new FormData();
     formdata.append('user_id', userid);
     formdata.append('project_id', data.projectId)
@@ -261,7 +272,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
     formdata.append("operations_manager_id", data.manager_id)
     formdata.append("locationID", data.locationid)
     formdata.append("location_name", data.locationName),
-      formdata.append("publish", "")
+    formdata.append("publish", "")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
@@ -270,17 +281,58 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
     axios(config)
       .then(function (response) {
-
         viewMessage('Project added sucessfully')
-        console.log(response, '<----------createProj');
         setCreatePro(false)
       })
       .catch(function (error) {
         console.log(error);
       });
+   }
 
   }
+  const createProjectpublish = () => {
 
+    if(name.length==0){
+     setWarn(true)
+     setMessage("Please Add trainers")
+ 
+    }
+    else if(gelathiName.length==0){
+     setWarn(true)
+     setMessage("Please Add Gelathi Facilators ")
+    }
+    else{
+     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+     var formdata = new FormData();
+     formdata.append('user_id', userid);
+     formdata.append('project_id', data.projectId)
+     formdata.append('partnerID', data.partner_id)
+     formdata.append('training_target', data.training_target)
+     formdata.append('start_date', moment(data.start_date?.$d)?.format('YYYY-MM-DD'))
+     formdata.append('end_date', moment(data.end_date?.$d)?.format('YYYY-MM-DD'))
+     formdata.append('busID', data.bus_id)
+     formdata.append('driverID', data.driver_id)
+     formdata.append("operations_manager_id", data.manager_id)
+     formdata.append("locationID", data.locationid)
+     formdata.append("location_name", data.locationName),
+     formdata.append("", "")
+     var config = {
+       method: 'post',
+       url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
+       data: formdata
+     };
+ 
+     axios(config)
+       .then(function (response) {
+         viewMessage('Project added sucessfully')
+         setCreatePro(false)
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+ 
+   }
   return (
     <div>
       {
@@ -295,16 +347,27 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <form onSubmit={createProject}>
+        <form onSubmit={(e) => { e.preventDefault(); createProjectpublish() }}>
           <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
             <Toolbar>
-              <Button autoFocus color="inherit" type="submit">
+             <IconButton edge="start" color="inherit" onClick={()=>{setCreatePro(false)}}> <CloseIcon/></IconButton>
+            
+              <Button sx={{float:'right'}} autoFocus color="inherit" type="submit">
                 save
               </Button>
+              <Button autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
+                publish
+              </Button>
             </Toolbar>
-          </AppBar >
+          </AppBar>
           <Grid>
             <CardContent>
+            <Snackbar open={warn} autoHideDuration={3000} onClose={() => { setWarn(false) }}>
+                <Alert onClose={() => { setWarn(false) }} severity="warning" sx={{ width: '100%' }}>
+                {message}
+                </Alert>
+              </Snackbar>
+
               <Snackbar open={notify} autoHideDuration={3000} onClose={() => { setNotify(false) }}>
                 <Alert onClose={() => { setNotify(false) }} severity="success" sx={{ width: '100%' }}>
                   Project created succesfully
@@ -357,7 +420,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
             <CardContent>
               <Stack mt={1} mb={2}>
-                <TextField id="Training Target" required color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
+                <TextField id="Training Target" type="number" required color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
               </Stack>
             </CardContent>
             <Divider />
@@ -369,7 +432,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
               <Stack>
                 <CardContent>
                   <TextField type="date"
-                    required
+
                     style={{ width: '20vw' }}
                     defaultValue={data.start_date}
                     InputProps={{
@@ -380,7 +443,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                     }} />
 
                   <TextField type="date"
-                    required
+
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     InputProps={{
                       inputProps: { min: moment(data.start_date)?.format('YYYY-MM-DD') }
@@ -424,7 +487,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" color="common">Select Bus</InputLabel>
                   <Select
-                    required
+
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
                     defaultValue={data.bus_id}
@@ -453,7 +516,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Select Operation Manager</InputLabel>
                   <Select
-                    required
+
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
                     value={data.manager_id}
@@ -478,7 +541,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Select Driver</InputLabel>
                   <Select
-                    required
+
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
                     value={data.driver_id}
@@ -562,13 +625,13 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                   {gelathiName?.length !== 0 &&
                     <Card style={{ marginTop: 10 }}>
                       <CardContent>
-                        <Stack spacing={4}>
+                        <Stack spacing={4}  direction={'row'}>
                           {gelathiName?.map(i => {
                             return (
-                              <Stack direction={'row'} >
+                              <Stack >
                                 <Typography mt={2} variant='subtitle2'>{i}</Typography>
                                 <Stack style={{ marginLeft: 20 }} mt={2} >
-                                  <CancelIcon />
+                                 
                                 </Stack>
                               </Stack>
                             )

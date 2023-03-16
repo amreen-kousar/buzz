@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react'
 import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
-import { Button, Dialog, Toolbar, IconButton, Typography, TextField, DialogContent, DialogContentText, Box, DialogActions, FormControl, InputLabel, Select, MenuItem, RadioGroup, Radio, Autocomplete, FormControlLabel, FormGroup, Switch } from '@mui/material'
+import { Button, Dialog, Toolbar, IconButton, Typography, TextField, DialogContent, DialogContentText, Box, DialogActions, FormControl, InputLabel, Select, MenuItem, RadioGroup, Radio, Autocomplete, FormControlLabel, FormGroup, Switch, CardContent } from '@mui/material'
 import Iconify from '../../components/Iconify';
 import AppBar from '@mui/material/AppBar';
 function AddUser(props) {
-
+  
     const [open, setOpen] = useState(false);
     const [count, setCount] = useState('');
     // const [ceoUser, setCeoUser] = useState(props.data)
@@ -311,7 +311,7 @@ console.log(userid,"userrrrrridddddddd")
         handleClose()
         // https://bdms.buzzwomen.org/appTest/createUser.php
     }
-
+    let numrex=/^\d+$/
     return (
 
         <div>
@@ -435,13 +435,21 @@ console.log(userid,"userrrrrridddddddd")
                                 }} value={AddUser.doj} onChange={(e) => { setAddUser({ ...AddUser, doj: e.target.value }) }} variant="outlined" />
                                 } */}
                             </div>
-
-                            <h3>Contact Information</h3>
+                                <CardContent>
+                                <h3>Contact Information</h3>
+                                </CardContent>
+                          
 
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
-                                <TextField fullWidth required id="outlined-basic" label="Mobile number" helperText={`Mobile Number Required (${AddUser?.contactNum?.length}/10)`} inputProps={{ maxLength: 10 }} multiline value={AddUser.contactNum} type="number" onChange={(e) => { setAddUser({ ...AddUser, contactNum: e.target.value }) }} variant="outlined" color="common" />
-                                <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.workNum} onChange={(e) => { setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' />
+                                <TextField fullWidth required id="outlined-basic" label="Mobile number" helperText={`Mobile Number Required (${AddUser?.contactNum?.length}/10)`} inputProps={{ maxLength: 10 }} multiline value={AddUser.contactNum} type="number" onChange={(e) => { 
+                                    if(numrex.test(e?.target?.value)){
+                                        setAddUser({ ...AddUser, contactNum: e.target.value })
+                                    }
+                                    console.log(e,"<---wefewfwef")
+                                    }} variant="outlined" color="common" />
+                                <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.workNum} onChange={(e) => {
+                                     setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' />
 
                                 <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} onChange={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} onPaste={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} variant="outlined" color="common" />
 
@@ -455,7 +463,7 @@ console.log(userid,"userrrrrridddddddd")
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Address 1" value={AddUser.address3} onChange={(e) => { setAddUser({ ...AddUser, address3: e.target.value }) }} variant="outlined" color="common"/>}
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="outlined-basic" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" color="common"/>}
 
-                                <TextField fullWidth id="outlined-basic" label="Pincode" value={AddUser.pincode} onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" color="common"/>
+                                <TextField fullWidth id="outlined-basic" type="number" label="Pincode" value={AddUser.pincode} onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" color="common"/>
                                 {
 
                                     ["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <FormControl fullWidth>

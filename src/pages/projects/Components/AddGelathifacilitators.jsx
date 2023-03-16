@@ -21,7 +21,7 @@ const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function SimpleDialog(props) {
 
-    const { onClose, selectedValue, open, data, getData } = props;
+    const { onClose, selectedValue, open, data, getData ,sendData} = props;
 
     const handleClose = () => {
         onClose(selectedValue);
@@ -30,7 +30,7 @@ function SimpleDialog(props) {
     const handleListItemClick = (value) => {
         if (arr?.includes(value?.first_name)) {
             var data = JSON.stringify({
-                "project_id": 292,
+                "project_id":sendData?.projectId,
                 "role_id": value?.role_id,
                 "emp_id": value?.id
             });
@@ -58,7 +58,7 @@ function SimpleDialog(props) {
         }
         else {
             var data = JSON.stringify({
-                "project_id": 292,
+                "project_id": sendData?.projectId,
                 "role_id": value?.role_id,
                 "emp_id": value?.id
             });
@@ -90,7 +90,7 @@ function SimpleDialog(props) {
     return (
         <Dialog onClose={handleClose} open={open}>
             <Stack direction={'row'}>
-                <Typography variant="subtitle2" style={{ color: '#ed6c02' }} mt={2} onClick={handleClose}>Close</Typography>
+                <Typography variant="subtitle2" style={{ color: '#ed6c02' }} mt={2} onClick={handleClose}>Back</Typography>
                 <DialogTitle>Add Gelathi Facilitators From List</DialogTitle>
                 <Typography mt={2} variant="subtitle2" style={{ color: '#ed6c02' }} onClick={() => {
                     getData(arr), handleClose()
@@ -159,14 +159,14 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
     };
     useEffect(() => {
         trainerList()
-    }, [localStorage.getItem("manager_id")]
+    }, []
     )
     const trainerList = () => {
         console.log(sendData, "sendDataaaa")
         var data = JSON.stringify({
-            "role_id": JSON.parse(localStorage.getItem('userDetails'))?.id,
+            "role_id": 6,
             "project_id": 292,
-            "operation_manager_id": 112,
+            "operation_manager_id": 35,
             "pageNum": 1
         });
 

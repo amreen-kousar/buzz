@@ -134,7 +134,7 @@ const emails = ['username@gmail.com', 'user02@gmail.com'];
 function SimpleDialog(props) {
 
   const { onClose, selectedValue, open, data, getData, sendData } = props;
-
+console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa")
   const handleClose = () => {
     onClose(selectedValue);
   };
@@ -142,7 +142,7 @@ function SimpleDialog(props) {
   const handleListItemClick = (value) => {
     if (arr?.includes(value?.first_name)) {
       var data = JSON.stringify({
-        "project_id": 292,
+        "project_id": sendData?.projectId,
         "role_id": value?.role_id,
         "emp_id": value?.id
       });
@@ -170,10 +170,11 @@ function SimpleDialog(props) {
     }
     else {
       var data = JSON.stringify({
-        "project_id": 292,
+        "project_id": sendData?.projectId,
         "role_id": value?.role_id,
         "emp_id": value?.id
       });
+
 
       var config = {
         method: 'post',
@@ -202,7 +203,7 @@ function SimpleDialog(props) {
   return (
     <Dialog onClose={handleClose} open={open}>
       <Stack direction={'row'}>
-        <Typography variant="subtitle2" style={{ color: '#ff7424' }} mt={2} onClick={handleClose}>Close</Typography>
+        <Typography variant="subtitle2" style={{ color: '#ff7424' }} mt={2} onClick={handleClose}>Back</Typography>
         <DialogTitle>Add Trainer From List</DialogTitle>
         <Typography mt={2} variant="subtitle2" style={{ color: '#ff7424' }} onClick={() => {
           getData(arr),
