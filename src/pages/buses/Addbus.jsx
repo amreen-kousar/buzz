@@ -10,8 +10,8 @@ function Addbus(props) {
 
     const [date, setDate] = useState(moment(new Date())?.format('YYYY-MM-DD'))
     const [addBus, setAddBus] = useState({
-        register_number: '', register_date: new Date(), engine_number: '', chassis_number: '', insurance_number: '',
-        insurance_company: "", insurance_start_date: new Date(), insurance_end_date: new Date(), last_service_date: new Date(), next_service_due_date: new Date(), fitness_certificate: new Date(), permit: new Date(), emission_date: new Date()
+        register_number: '', register_date: moment(date?.$d)?.format('YYYY-MM-DD'), engine_number: '', chassis_number: '', insurance_number: '',
+        insurance_company: "", insurance_start_date: new Date(), insurance_end_date: moment(date?.$d)?.format('YYYY-MM-DD'), last_service_date: moment(date?.$d)?.format('YYYY-MM-DD'), next_service_due_date: moment(date?.$d)?.format('YYYY-MM-DD'), fitness_certificate: moment(date?.$d)?.format('YYYY-MM-DD'), permit: moment(date?.$d)?.format('YYYY-MM-DD'), emission_date:moment(date?.$d)?.format('YYYY-MM-DD')
     })
     const [openAddBus, setOpenAddBus] = useState(false)
 
@@ -28,9 +28,11 @@ function Addbus(props) {
 
 
     const submitBus = () => {
+        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+        var role =JSON.parse(localStorage.getItem('userDetails'))?.role
         var data = JSON.stringify({
-            "lastUpdatedBy": "144",
-            "createdBy": "144",
+            "lastUpdatedBy": userid,
+            "createdBy": userid ,
             ...addBus
         });
 
