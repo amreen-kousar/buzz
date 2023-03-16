@@ -334,7 +334,7 @@ axios(config)
     <div>
 
 
-{(userDetails==2 || userDetails ==3 ||userDetails==4 || userDetails==5 || userDetails==6 || userDetails==12 || userDetails==13)?<Button variant="contained" style={{
+{( userDetails ==3 ||userDetails==4 || userDetails==5 || userDetails==6 || userDetails==12 || userDetails==13)?<Button variant="contained" style={{
         float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
         position: 'fixed', zIndex: '1', bottom: 40, right: 40
       }} onClick={handleClickOpen} sx={{

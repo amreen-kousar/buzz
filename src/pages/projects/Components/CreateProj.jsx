@@ -272,7 +272,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
     formdata.append("operations_manager_id", data.manager_id)
     formdata.append("locationID", data.locationid)
     formdata.append("location_name", data.locationName),
-      formdata.append("publish", "")
+    formdata.append("publish", "")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
@@ -290,7 +290,49 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
    }
 
   }
+  const createProjectpublish = () => {
 
+    if(name.length==0){
+     setWarn(true)
+     setMessage("Please Add trainers")
+ 
+    }
+    else if(gelathiName.length==0){
+     setWarn(true)
+     setMessage("Please Add Gelathi Facilators ")
+    }
+    else{
+     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+     var formdata = new FormData();
+     formdata.append('user_id', userid);
+     formdata.append('project_id', data.projectId)
+     formdata.append('partnerID', data.partner_id)
+     formdata.append('training_target', data.training_target)
+     formdata.append('start_date', moment(data.start_date?.$d)?.format('YYYY-MM-DD'))
+     formdata.append('end_date', moment(data.end_date?.$d)?.format('YYYY-MM-DD'))
+     formdata.append('busID', data.bus_id)
+     formdata.append('driverID', data.driver_id)
+     formdata.append("operations_manager_id", data.manager_id)
+     formdata.append("locationID", data.locationid)
+     formdata.append("location_name", data.locationName),
+     formdata.append("", "")
+     var config = {
+       method: 'post',
+       url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
+       data: formdata
+     };
+ 
+     axios(config)
+       .then(function (response) {
+         viewMessage('Project added sucessfully')
+         setCreatePro(false)
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+ 
+   }
   return (
     <div>
       {
@@ -305,11 +347,14 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <form onSubmit={(e) => { e.preventDefault(); createProject2() }}>
+        <form onSubmit={(e) => { e.preventDefault(); createProjectpublish() }}>
           <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
             <Toolbar>
               <Button autoFocus color="inherit" type="submit">
                 save
+              </Button>
+              <Button autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
+                publish
               </Button>
             </Toolbar>
           </AppBar>
