@@ -261,6 +261,8 @@ axios(config)
   }
 
   const drop = async => {
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
       "emp_id": "329",
       "role_id": "5",
@@ -285,20 +287,6 @@ axios(config)
         console.log(error);
       });
   }
-
-  // const [imgSrc, setImgSrc] = React.useState(null);
-  // const WebcamCapture = () => {
-  // const webcamRef = React.useRef(null);
-
-  // }
-  // const capture =() => {
-  //   // console.log(webcamRef.current,"<----webcamRef.current")
-  //   const imageSrc = webcamRef.current.getScreenshot();
-  //   setImgSrc(imageSrc);
-  // };
-
-
-  // console.log(imgSrc, "<-----gfvimageSrc")
 
 
 
@@ -385,7 +373,8 @@ axios(config)
 
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading " variant="outlined" color="common" 
+                <TextField id="outlined-basic"  type="number"
+  inputProps={{ min:0, pattern: "[0-9]*" }} onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading *" variant="outlined" color="common" 
                 />
               </Stack>
               <Stack style={{ marginTop: 20 ,color:'black'}}>
@@ -560,7 +549,7 @@ axios(config)
               </Stack>
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="printing" variant="outlined" color="common" 
+                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="printing" variant="outlined" color="common" 
                 InputProps={{
                      endAdornment: (
                        <InputAdornment position="start">
@@ -571,7 +560,7 @@ axios(config)
               
               </Stack>
               <Stack style={{ marginTop: 20 }}>  
-                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="stationery" variant="outlined" color="common" 
+                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="stationery" variant="outlined" color="common" 
                 InputProps={{
                      endAdornment: (
                        <InputAdornment position="start">
@@ -581,7 +570,7 @@ axios(config)
                   }} />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField required id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="Other Expenses" variant="outlined" color="common"
+                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="Other Expenses" variant="outlined" color="common"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="start">
@@ -593,7 +582,7 @@ axios(config)
                }}  />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="Other Expenses Amount" variant="outlined" color="common" 
+                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, OtherAmount: e?.target?.value }) }} label="Other Expenses Amount" variant="outlined" color="common" 
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="start">
@@ -603,7 +592,7 @@ axios(config)
                }} />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="End Odometer Reading" variant="outlined" color="common" />
+                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="End Odometer Reading" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
                 <TextField id="outlined-basic" disabled={true} value={locationS} onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="End Location" variant="outlined" 
@@ -643,7 +632,7 @@ axios(config)
                     sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
                   />&nbsp;
                   Click here to Add images
-                  <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
+                  <input style={{ display: "none" }} accept="image/png, image/gif, image/jpeg" id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
                 </label>
                 <Button onClick={postImages} 
                 sx={{

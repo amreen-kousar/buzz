@@ -162,7 +162,7 @@ export default function User() {
       "type": "",
       "pageNum": d ? d : 1
     });
-    console.log(data)
+    console.log(data,"<---efewfewfefrefregferggre")
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getAllPeople.php',

@@ -40,20 +40,6 @@ function createData(name, calories) {
   return { name, calories };
 }
 
-// const rows = [
-//   createData('Biscuits', 567159),
-//   createData('Buzz Financial Booklet', 237),
-//   createData('Certificates', 26200),
-//   createData('Duster', 30512),
-//   createData('NewsLetter', 3526),
-//   createData('Pencils', 35226),
-//   createData('Training Charts', 945356),
-//   createData('Training RolePlay Card', 34356),
-//   createData('Whiteboard', 356),
-//   createData('Whiteboard Maker', 23156),
-//   createData('Whiteboard Stand', 11356),
-// ];
-
 export default function BuzzStock() {
   const [demo, setDemo] = useState([]);
   const [openFilter, setOpenFilter] = useState(false);
@@ -75,16 +61,6 @@ export default function BuzzStock() {
   const handleclosebusfilter = () => {
     setopenbusfilter(false);
   };
-
-  // const getData = (itm, i) => {
-  //   setSelected(itm)
-  //   setopenbusfilter(false);
-  //   console.log(itm, i, "<-----qwertyu")
-  //   setSelected({
-  //     id: i,
-  //     name: itm?.name
-  //   })
-
 
 
   const onDateSubmit = (e) => {
@@ -241,7 +217,7 @@ export default function BuzzStock() {
               {demo && demo.map((row) => (
                 <StyledTableRow >
                   <StyledTableCell component="th" scope="row">
-                    {row.name}
+                    {row.name}        :        
                   </StyledTableCell>
                   <StyledTableCell>{row.current_stock}</StyledTableCell>
                 </StyledTableRow>

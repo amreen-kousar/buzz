@@ -103,8 +103,8 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
     const UploadImages = (e) =>{
         var raw = JSON.stringify({
             "project_id": 292,
-            "tb_id": 81328,
-            "trainer_id": 23,
+            "tb_id":batchState?.id,
+            "trainer_id": idvalue,
             "day": 1,
             "photos": images
         })
@@ -132,7 +132,8 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
             >
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                        {`${clcikData?.title}: ${clcikData?.name}`}
+                        {/* {`${clcikData?.title}: ${clcikData?.name}`} */}
+                        {clcikData?.name}
                     </Typography>
                     <IconButton onClick={onCloseFilter}>
                         <Iconify icon="eva:close-fill" width={20} height={20} />
@@ -197,7 +198,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                                 </CardContent>
                                 </Card>
                                 <Card  style={{marginTop:20}}>
-                                <input
+                                <input accept="image/png, image/gif, image/jpeg"
         type="file"
         name="myImage"
         onChange={(event) => {
