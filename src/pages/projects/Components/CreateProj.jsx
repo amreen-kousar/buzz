@@ -82,8 +82,8 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
   const assignValues = () => {
     let tempdata = {
       ...sendData,
-      start_date: sendData.startDate,
-      end_date: sendData.endDate,
+      startDate: sendData.startDate,
+      endDate: sendData.endDate,
       operations_manager_id: sendData.operations_manager_id,
       driver_id: sendData.driverId,
       training_target:sendData.training_target,
