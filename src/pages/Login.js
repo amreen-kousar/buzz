@@ -62,7 +62,7 @@ export default function Login() {
             if (
               response.data.role == 2
             ) {
-              navigate('/dashboard/buslist')
+              navigate('/dashboard/projects')
             }
             else if (response.data.role == 5) {
               navigate('/dashboard/trainer')

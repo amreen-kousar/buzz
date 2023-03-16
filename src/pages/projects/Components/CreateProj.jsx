@@ -19,6 +19,7 @@ import AddTrainerDrawer from './AddTrainerDrawer';
 import AddGelathifacilitators from './AddGelathifacilitators'
 import Add from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
+import Iconify from 'src/components/Iconify';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -75,7 +76,6 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
     busList();
     teamList();
     driverList();
-
     setNotify(true)
   }, [])
 
@@ -84,8 +84,10 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
       ...sendData,
       start_date: sendData.startDate,
       end_date: sendData.endDate,
-      manager_id: sendData.operations_manager_id,
+      operations_manager_id: sendData.operations_manager_id,
       driver_id: sendData.driverId,
+      training_target:sendData.training_target,
+      project_id:sendData.project_id
 
     }
     setData(tempdata)
@@ -244,7 +246,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
   //     </Button>
 
   // }
-
+ 
   { console.log(data, "i am visible while changing", edit) }
 
   const createProject2 = () => {
@@ -261,17 +263,18 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
    else{
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     var formdata = new FormData();
+    setCreatePro(false)
     formdata.append('user_id', userid);
     formdata.append('project_id', data.projectId)
     formdata.append('partnerID', data.partner_id)
     formdata.append('training_target', data.training_target)
-    formdata.append('start_date', moment(data.start_date?.$d)?.format('YYYY-MM-DD'))
-    formdata.append('end_date', moment(data.end_date?.$d)?.format('YYYY-MM-DD'))
+    formdata.append('startDate', moment(data.start_date?.$d)?.format('YYYY-MM-DD'))
+    formdata.append('endDate', moment(data.end_date?.$d)?.format('YYYY-MM-DD'))
     formdata.append('busID', data.bus_id)
     formdata.append('driverID', data.driver_id)
-    formdata.append("operations_manager_id", data.manager_id)
-    formdata.append("locationID", data.locationid)
-    formdata.append("location_name", data.locationName),
+    formdata.append("operations_manager_id", data.operations_manager_id)
+    formdata.append("locationID", data.location_iD)
+    formdata.append("location_name", data.location_name),
     formdata.append("publish", "")
     var config = {
       method: 'post',
@@ -282,7 +285,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
     axios(config)
       .then(function (response) {
         viewMessage('Project added sucessfully')
-        setCreatePro(false)
+        
       })
       .catch(function (error) {
         console.log(error);
@@ -304,17 +307,19 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
     else{
      var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
      var formdata = new FormData();
+     setCreatePro(false)
+     {console.log(data,"setdataaaaaaa")}
      formdata.append('user_id', userid);
-     formdata.append('project_id', data.projectId)
+     formdata.append('project_id', data.project_id)
      formdata.append('partnerID', data.partner_id)
      formdata.append('training_target', data.training_target)
-     formdata.append('start_date', moment(data.start_date?.$d)?.format('YYYY-MM-DD'))
-     formdata.append('end_date', moment(data.end_date?.$d)?.format('YYYY-MM-DD'))
+     formdata.append('startDate', moment(data.start_date?.$d)?.format('YYYY-MM-DD'))
+     formdata.append('endDate', moment(data.end_date?.$d)?.format('YYYY-MM-DD'))
      formdata.append('busID', data.bus_id)
-     formdata.append('driverID', data.driver_id)
-     formdata.append("operations_manager_id", data.manager_id)
-     formdata.append("locationID", data.locationid)
-     formdata.append("location_name", data.locationName),
+     formdata.append('driverID', data.driverId)
+     formdata.append("operations_manager_id", data.operations_manager_id)
+     formdata.append("locationID", data.location_id)
+     formdata.append("location_name", data.location_name),
      formdata.append("", "")
      var config = {
        method: 'post',
@@ -325,7 +330,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
      axios(config)
        .then(function (response) {
          viewMessage('Project added sucessfully')
-         setCreatePro(false)
+      
        })
        .catch(function (error) {
          console.log(error);
@@ -352,12 +357,15 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             <Toolbar>
              <IconButton edge="start" color="inherit" onClick={()=>{setCreatePro(false)}}> <CloseIcon/></IconButton>
             
-              <Button sx={{float:'right'}} autoFocus color="inherit" type="submit">
+              {/* <Button sx={{float:'right'}} autoFocus color="inherit" type="submit">
                 save
-              </Button>
-              <Button autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
+              </Button> */}
+              <IconButton edge="end"  autoFocus color="inherit" type="submit" sx={{right:40,float:'right',position:'absolute'}}>
+                 <Iconify icon="material-symbols:save"/>
+              </IconButton>
+              {(edit)? <Button autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
                 publish
-              </Button>
+              </Button>:null}
             </Toolbar>
           </AppBar>
           <Grid>
@@ -420,7 +428,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
             <CardContent>
               <Stack mt={1} mb={2}>
-                <TextField id="Training Target" type="number" required color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
+                <TextField id="Training Target" type="number" defaultValue={data?.training_target} color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
               </Stack>
             </CardContent>
             <Divider />
@@ -432,9 +440,9 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
               <Stack>
                 <CardContent>
                   <TextField type="date"
-
+                    defaultValue={sendData?.start_date}
                     style={{ width: '20vw' }}
-                    defaultValue={data.start_date}
+                    value={data.start_date}
                     InputProps={{
                       inputProps: { min: moment(new Date())?.format('YYYY-MM-DD') }
                     }}
@@ -446,7 +454,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     InputProps={{
-                      inputProps: { min: moment(data.start_date)?.format('YYYY-MM-DD') }
+                      inputProps: { min: moment(data.start_date)?.format('YYYY-DD-MM') }
                     }}
                     defaultValue={data.end_date}
                     onChange={(e) => {
@@ -519,11 +527,13 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
-                    value={data.manager_id}
+                    defaultValue={data.operations_manager_id}
+                
+                    value={data.operations_manager_id}
                     label="Select Operation Manager"
                     onChange={(e => {
-                      setData({ ...data, manager_id: e?.target?.value });
-                      localStorage.setItem("manager_id", e?.target?.value)
+                      setData({ ...data, operations_manager_id: e?.target?.value });
+                      localStorage.setItem("operations_manager_id", e?.target?.value)
                     })}
                   >
                     <MenuItem value="" default disabled>Choose Operation Manager</MenuItem>
@@ -544,10 +554,11 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
-                    value={data.driver_id}
+                    value={data.driverId}
+                    defaultValue={data.driverId}
                     label="Select Driver"
                     onChange={(e => {
-                      setData({ ...data, driver_id: e?.target?.value })
+                      setData({ ...data, driverId: e?.target?.value })
                       // driverList(e?.target?.value)
                     })}
                   >
@@ -587,12 +598,20 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
               }}>
                 <CardContent>
 
-                  <Typography variant='h6'>Want To Add Trainers  ({name.length})</Typography>
-
+                 
+                  <Typography variant='h6'>Trainers  ({name.length})<IconButton style={{float:'right'}}>
+                      <Iconify style={{ color: "black" }} icon="material-symbols:add" />
+                    </IconButton></Typography>
+                    {/* {sendData?.trainers_count} */}
+                    {/* {sendData?.trainers.map((itm)=>{
+                       
+                       return (<span value={itm?.emp_id}>{itm?.name}</span>)
+                     })} */}
                   {name?.length !== 0 &&
                     <Card style={{ marginTop: 10 }}>
                       <CardContent>
                         <Stack direction={'row'} spacing={4}>
+                       
                           {name?.map((i, index) => {
                             return (
                               <Stack direction={'row'} >
@@ -605,6 +624,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                             )
                           })
                           }
+                           
                         </Stack >
                       </CardContent >
                     </Card >
@@ -621,7 +641,10 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 handlegelathiOpenFilter()
               }}>
                 <CardContent>
-                  <Typography variant='h6'>Want To Add Gelathi Facilators ({gelathiName.length})</Typography>
+                <Typography variant='h6'>Gelathi Facilators ({gelathiName.length})
+                  <IconButton style={{float:'right'}}>
+                      <Iconify style={{ color: "black" }} icon="material-symbols:add" />
+                    </IconButton></Typography>
                   {gelathiName?.length !== 0 &&
                     <Card style={{ marginTop: 10 }}>
                       <CardContent>

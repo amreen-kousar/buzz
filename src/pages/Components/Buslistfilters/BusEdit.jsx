@@ -158,6 +158,9 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
           '&:hover': {
             backgroundColor: 'white',
           },
+          '&:active':{
+            backgroundColor: 'white',
+          }
         }} >
         <Iconify icon="material-symbols:edit" style={{ width: '30px', height: '30px', color: '#e69138', marginLeft: "190px"  }} 
         
