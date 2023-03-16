@@ -350,7 +350,9 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
         <form onSubmit={(e) => { e.preventDefault(); createProjectpublish() }}>
           <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
             <Toolbar>
-              <Button autoFocus color="inherit" type="submit">
+             <IconButton edge="start" color="inherit" onClick={()=>{setCreatePro(false)}}> <CloseIcon/></IconButton>
+            
+              <Button sx={{float:'right'}} autoFocus color="inherit" type="submit">
                 save
               </Button>
               <Button autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>

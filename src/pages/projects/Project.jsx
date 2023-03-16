@@ -276,7 +276,7 @@ function Project(props) {
                     <Link to="/dashboard/projects/busTest" state={{ id: data1?.bus_id }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>}>
-                      <span style={{ width: "235px" }}>Bus: & check List</span>
+                      <span style={{ width: "235px" }}>Bus:&nbsp;{data1?.bus_number} & check List</span>
                     </Button>
                     </Link> : null}
                   {(userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 2 || userDetails == 12) ? <br /> : null}
