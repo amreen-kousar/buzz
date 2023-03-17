@@ -24,7 +24,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateProj({ createPro, setCreatePro, sendData, viewMessage, edit }) {
+export default function CreateProj({ createPro, setCreatePro, sendData, viewMessage, edit ,projData}) {
   console.log(sendData, "<------sendDatasendDatasendDatasendData")
   const [open, setOpen] = React.useState(false);
   const [openFilter, setOpenFilter] = useState(false);
@@ -265,15 +265,15 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
     var formdata = new FormData();
     setCreatePro(false)
     formdata.append('user_id', userid);
-    formdata.append('project_id', data.projectId)
+    formdata.append('project_id', data.project_id)
     formdata.append('partnerID', data.partner_id)
     formdata.append('training_target', data.training_target)
     formdata.append('startDate', moment(data.start_date?.$d)?.format('YYYY-MM-DD'))
     formdata.append('endDate', moment(data.end_date?.$d)?.format('YYYY-MM-DD'))
     formdata.append('busID', data.bus_id)
-    formdata.append('driverID', data.driver_id)
+    formdata.append('driverID', data.driverId)
     formdata.append("operations_manager_id", data.operations_manager_id)
-    formdata.append("locationID", data.location_iD)
+    formdata.append("locationID", data.location_id)
     formdata.append("location_name", data.location_name),
     formdata.append("publish", "")
     var config = {
@@ -284,6 +284,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
     axios(config)
       .then(function (response) {
+        projData();
         viewMessage('Project added sucessfully')
         
       })
@@ -329,6 +330,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
  
      axios(config)
        .then(function (response) {
+         projData();
          viewMessage('Project added sucessfully')
       
        })
@@ -428,7 +430,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
             <CardContent>
               <Stack mt={1} mb={2}>
-                <TextField id="Training Target" type="number" defaultValue={data?.training_target} color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
+                <TextField id="Training Target" type="number"  defaultValue={data?.training_target} color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
               </Stack>
             </CardContent>
             <Divider />
@@ -440,7 +442,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
               <Stack>
                 <CardContent>
                   <TextField type="date"
-                    defaultValue={sendData?.start_date}
+                    defaultValue={data?.start_date}
                     style={{ width: '20vw' }}
                     value={data.start_date}
                     InputProps={{
@@ -454,7 +456,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     InputProps={{
-                      inputProps: { min: moment(data.start_date)?.format('YYYY-DD-MM') }
+                      inputProps: { min: moment(data.start_date)?.format('YYYY-MM-DD') }
                     }}
                     defaultValue={data.end_date}
                     onChange={(e) => {
