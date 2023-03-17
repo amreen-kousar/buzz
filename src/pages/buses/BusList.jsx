@@ -213,7 +213,7 @@ export default function User() {
       <Container>
         <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
           <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
-            Bus Has Been Created Successfully
+            Bus Has Been Deleted Successfully
           </Alert>
         </Snackbar>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>

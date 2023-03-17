@@ -283,7 +283,7 @@ export default function User() {
         
           <ProductCartWidget /><br></br>
           {
-            users.length > 0 && <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
+            users.length > 0 && <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796",marginBottom:5 }} style={{ float: "right" }} />
           }
         </Container>
       </Page >
