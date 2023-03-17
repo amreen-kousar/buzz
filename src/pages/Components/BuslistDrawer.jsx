@@ -157,7 +157,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           '&:hover': {
             backgroundColor: 'white',
           },
-        }} ><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138'}}></Iconify></Button>:null}
+        }} ><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138',float:'right'}}></Iconify></Button>:null}
            {(userDetails==2)?<BusEdit clcikData={detailsData} busesd={busesd} updatedata={()=>{setUserUpdate(!userUpdate)}} />:null}
             <Card>
                 <CardContent>

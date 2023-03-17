@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, Dialog, AppBar, Toolbar, IconButton, Typography, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 import { useLocation, Link } from 'react-router-dom'
 import CreateProj from './Components/CreateProj';
-
+import Iconify from 'src/components/Iconify';
 function AddProject({ viewMessage }) {
 
     const [open, setAddProject] = useState(false)
@@ -245,17 +245,18 @@ function AddProject({ viewMessage }) {
                                 <CloseIcon />
                             </IconButton>
                             <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-                                Create New Project
+                                New Project
                             </Typography>
 
-                            <Button type="submit" color="inherit" >
-                                save
-                            </Button>
+                            <IconButton type="submit" color="inherit" >
+                                <Iconify icon="material-symbols:save"/>
+                            </IconButton>
                         </Toolbar>
                     </AppBar>
 
-                    <br />
+                    <br /> <Typography style={{textAlign:'center',fontWeight:500}}>Select Location and Funder</Typography>
                     <div style={{ margin: "1rem" }}>
+                       
                         <FormControl fullWidth>
 
                             <InputLabel id="demo-simple-select-label" color="common" sx={{ borderBlockColor: 'black' }}> Country</InputLabel>
@@ -286,7 +287,7 @@ function AddProject({ viewMessage }) {
                                         getState(e?.target?.value)
                                 })}
                             >
-                                <MenuItem value="" default disabled>Choose State </MenuItem>
+                                <MenuItem value="" default disabled>Select State </MenuItem>
                                 {states?.map(itm => {
                                     return (
                                         <MenuItem value={itm?.id}>{itm?.name}</MenuItem>

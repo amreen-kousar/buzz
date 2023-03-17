@@ -249,9 +249,9 @@ function Project(props) {
                 </>}
 
             </Grid>
-            {/* {
-              edit && <CreateProj edit={true} createPro={edit} sendData={data1} />
-            } */}
+           {
+              edit && <CreateProj edit={true} createPro={edit} sendData={data1} setCreatePro={(e)=>setEdit(e)}/>
+            } 
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ mb: 1 }}>
               <Peopleprofile
                 isOpenFilter={openFilter}
