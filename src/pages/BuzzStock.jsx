@@ -84,8 +84,8 @@ export default function BuzzStock() {
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     var role =JSON.parse(localStorage.getItem('userDetails'))?.role
     var data = JSON.stringify({
-      "start_date": g === "date" ? id : '',
-      "end_date": g === "date" ? i : '',
+      "from_date": g === "date" ? id : '',
+      "to_date": g === "date" ? i : '',
       "user_id": userid,
       "role_id": role,
       project_id: g ? "" : i === 3 ? id?.id : '',
@@ -95,11 +95,11 @@ export default function BuzzStock() {
 
     });
     const datas = {
-      end_date: i,
+      to_date: i,
       taluk_id: "",
       district_id: "",
       emp_id: 1,
-      start_date: id,
+      from_date: id,
       funder_id: "",
       partner_id: "",
       project_id: '',
@@ -196,6 +196,7 @@ export default function BuzzStock() {
           onOpenFilter={handleopenbusfilter}
           onCloseFilter={handleclosebusfilter} />
       </Stack>
+      {console.log(selected?.type,"selectedddddddd")}
       <Grid
         sx={{
           p: 1,
@@ -204,7 +205,28 @@ export default function BuzzStock() {
           flexGrow: 1,
         }}
       >
-        <TableContainer component={Paper}>
+      
+        {(selected?.type=='Date Range')?<TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                <StyledTableCell>ITEM</StyledTableCell>
+                <StyledTableCell>Consumed/Available Quantity</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {console.log(demo, "<--demodedede")}
+              {demo && demo.map((row) => (
+                <StyledTableRow >
+                  <StyledTableCell component="th" scope="row">
+                    {row.name}        :        
+                  </StyledTableCell>
+                  <StyledTableCell>{row.consumed}/{row.current_stock}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>:<TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead>
               <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
@@ -224,7 +246,7 @@ export default function BuzzStock() {
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
+        </TableContainer>}
 
       </Grid>
       </Container>

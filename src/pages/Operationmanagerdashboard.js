@@ -31,6 +31,23 @@ export default function Operationmanagerdashboard() {
     fromDate: '',
     toDate: ""
   }
+  const itemStyles = [{ itemXs: 4, itemSm: 8, itemMd: 4 }, { itemXs: 6, itemSm: 8, itemMd: 6 }]
+
+
+  const summarySubDataView = [
+    { ...itemStyles[0], title: "Villages", total: 'villages', color: "villages", icon: 'fontisto:holiday-village' },
+
+    { ...itemStyles[0], title: "Women", total: 'women', color: "info", icon: 'twemoji:women-holding-hands' },
+
+    { ...itemStyles[0], title: "2nd Day TurnOut(%)", total: 'day2', ext: ' % ', color: "warning", icon: 'twemoji:women-holding-hands' },
+
+    { ...itemStyles[0], title: "Gelathis", total: 'enrolled', color: "gelathis", icon: 'fluent:people-team-16-regular' },
+
+    { ...itemStyles[0], title: "Green Motivator", total: 'greenMotivators', color: "motivator", icon: 'openmoji:leafy-green' },
+
+    { ...itemStyles[0], title: "Vyapar", total: 'vyapar', color: "vyapar", icon: 'eos-icons:product-subscriptions-outlined' },
+
+  ]
 
   const [openFilter, setOpenFilter] = useState(false);
 
@@ -196,6 +213,7 @@ export default function Operationmanagerdashboard() {
               onCloseFilter={handleCloseFilter}
             />
           </Stack>
+     
           <Grid container spacing={3} marginTop={4}>
             <Grid item xs={4} sm={8} md={4}>
 
@@ -270,8 +288,55 @@ export default function Operationmanagerdashboard() {
 
               />
             </Grid>
+   <Grid item xs={12} sm={12} md={12} marginTop={3}>
+          {
+            summaryData?.data?.map((itm)=>{
+              return(
+                <Card
+                style={{
+                  backgroundColor: '#f5f5f5',
+                  flexDirection: 'column',
+                  borderRadius: 12,
+                  border: '2px solid',
+                  borderColor: '#ffcc80',
+                  marginBottom: '40px',
+                }}
+                onClick={() => {
+                  navigate('/dashboard/app/chart', {
+                    state: {
+                      filterData: filterData
+                    }
+                  })
+                }}>
+                  <CardContent>
+                  <Typography variant="h6" component="h6" marginLeft={2}>
+                    {itm?.name}
+                  </Typography>
+                  <Typography variant="h6" component="h6" marginLeft={2}>
+                    {`Actual / Target : ${itm?.actual} / ${itm?.target}`}
+                  </Typography>
+                  <Typography variant="h6" component="h6" marginLeft={2}>
+                    {`Duration : ${itm?.startDate} / ${itm?.endDate}`}
+                  </Typography>
+                  <Divider mt={1} />
+                  <Grid container spacing={3} marginTop={1}>
+                    {
+                      summarySubDataView.map(s => {
+                        return <Grid item xs={s.itemXs} sm={s.itemSm} md={s.itemMd}>
 
-
+                          <AppWidgetSummary
+                            title={s.title}
+                            total={`${itm[s.total]} ${s.ext ? s.ext : ''}`}
+                            color={s.color}
+                            icon={s.icon}
+                          />
+                        </Grid>
+                      })
+                    }
+                  </Grid></CardContent></Card>)
+            })
+          }
+          </Grid>
 
           </Grid>
         </Container>

@@ -118,9 +118,10 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             taluk_id: g === "country" ? id : null,
             district_id: g === "country" ? i : null,
             "funder_id": id === 2 ? i?.id : null,
-            opsManager: g ? "" : id === 4 ? i?.id : null,
+            "operations_manager_id": g ? "" : id === 4 ? i?.id : null,
             partner_id: g ? "" : id === 1 ? i?.id : null,
-            trainerId: g ? "" : id === 5 ? i?.id : null,
+            "trainer_id": g ? "" : id === 5 ? i?.id : null,
+            "gelathi_id":g?"":id==13?i?.id:null
         });
 
         const config = {
@@ -154,19 +155,21 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     }
 
     const getData = (itm, i) => {
-        console.log(itm, i, "get Data in projects List")
+     
         setOpenFilter(false);
-        console.log(selected, "Selected ")
+      
         setSelected(itm)
+        console.log(selected, "Selected ")
         projectr(itm, i)
     }
 
     const onSumbit = (e, i) => {
         setSelected({ type: 'Location', name: ` ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
+       
         handleCloseFilter()
         projectr(e?.district_id, e?.talaq_id, "country")
     }
-
+    console.log(selected,"selectedstateeeeeeeeeee")
     const onDateSubmit = (e) => {
         setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
         projectr(e?.startDate, e?.endDate, "date")
@@ -230,10 +233,10 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                 </Typography>
 
 
-                {
-                    selected && <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
-                }
-
+                
+                { selected &&  ( selected?.type=='Location' || selected?.type=='Date Range') && <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /> }
+                  
+                { selected  && ( selected?.type=='Funder' || selected?.type=='Operation Manager' || selected?.type=='Trainers' || selected?.type=='Gelathi Facilitator') && <Chip label={`${selected?.type} : ${selected?.first_name} `} onDelete={() => { handleDelete(selected) }} /> }
                 {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
         </Stack> */}
@@ -326,7 +329,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                        {(p?.project_status_name=='Published')?<Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />:<Chip label={p?.project_status_name} size="small" color="error" variant="outlined" />}
+                                                        {(p?.project_status_name=='Published' || p?.project_status_name=='Completed')?<Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />:<Chip label={p?.project_status_name} size="small" color="error" variant="outlined" />}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>

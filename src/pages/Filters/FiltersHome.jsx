@@ -182,12 +182,12 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
             type != 'People' && <div>
               {
                 selectDATA == 1 && <Grid>
-                  <Partners getData={getData} selectDATA={selectDATA} />
+                  <Partners  getData={getData} selectDATA={selectDATA} />
                 </Grid>
               }
               {
                 selectDATA == 2 && <Grid>
-                  <Funders getData={getData} selectDATA={selectDATA} />
+                  <Funders type={type} getData={getData} selectDATA={selectDATA} />
                 </Grid>
               }
               {
@@ -198,18 +198,18 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
               }
               {
                 selectDATA == 4 && <Grid>
-                  <OperationManager getData={getData} selectDATA={selectDATA} />
+                  <OperationManager type={type} getData={getData} selectDATA={selectDATA} />
                 </Grid>
 
               }
               {
                 selectDATA == 5 && <Grid>
-                  <Trainers getData={getData} selectDATA={selectDATA} />
+                  <Trainers type={type} getData={getData} selectDATA={selectDATA} />
                 </Grid>
               }
               {
                 selectDATA == 6 && <Grid>
-                  <GelathiFacilitator getData={getData} selectDATA={selectDATA} />
+                  <GelathiFacilitator type={type} getData={getData} selectDATA={selectDATA} />
                 </Grid>
               }
               {
