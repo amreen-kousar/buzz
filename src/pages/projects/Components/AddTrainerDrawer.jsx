@@ -170,7 +170,7 @@ console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa")
     }
     else {
       var data = JSON.stringify({
-        "project_id": sendData?.projectId,
+        "project_id": sendData?.project_id,
         "role_id": value?.role_id,
         "emp_id": value?.id
       });

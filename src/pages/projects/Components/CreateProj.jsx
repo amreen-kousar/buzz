@@ -15,6 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Addbus from '../../buses/Addbus';
+import dayjs from 'dayjs';
 import AddTrainerDrawer from './AddTrainerDrawer';
 import AddGelathifacilitators from './AddGelathifacilitators'
 import Add from '@mui/icons-material/Add';
@@ -41,9 +42,16 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
   let [gelathiName, setGelathiName] = useState([])
   const [driverData, setDriverData] = useState([])
   const [deleteData, setDeleteData] = useState([])
-  const [data, setData] = useState({ ...sendData, ...(edit && { start_date: new Date(), end_date: new Date() }) });
 
+  const formatDate = (itm)=>{
+    const currentDATE = itm?.split("-")
+    const newDate = `${currentDATE[2]}-${currentDATE[1]}-${currentDATE[0]}`
+    return newDate
+   
+   }
+  const [data, setData] = useState({ ...sendData,start_date:formatDate(sendData?.startDate),end_date:formatDate(sendData?.endDate)});
 
+  console.log(data,"<-----dascascascascsacascsaascasa")
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -442,7 +450,8 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
               <Stack>
                 <CardContent>
                   <TextField type="date"
-                    defaultValue={data?.start_date}
+                   // defaultValue={dayjs(data?.start_date)}
+                   defaultValue={dayjs( moment(data?.start_date)?.format('YYYY-MM-DD'))}
                     style={{ width: '20vw' }}
                     value={data.start_date}
                     InputProps={{
@@ -451,14 +460,15 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                     onChange={(e) => {
                       setData({ ...data, start_date: e?.target?.value })
                     }} />
-
+{console.log(dayjs( moment(data?.endDate)?.format()),moment(data?.endDate)?.format('YYYY-MM-DD'),new Date(data?.endDate),data?.endDate,"<-- defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}",data?.end_date,data?.start_date)}
                   <TextField type="date"
-
+                defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}
                     style={{ width: '20vw', marginLeft: "2rem" }}
+                    value={data.end_date}
                     InputProps={{
-                      inputProps: { min: moment(data.start_date)?.format('YYYY-MM-DD') }
+                      inputProps: { min: moment(data.end_date)?.format('YYYY-MM-DD') }
                     }}
-                    defaultValue={data.end_date}
+                    // defaultValue={data.endDate}
                     onChange={(e) => {
                       setData({ ...data, end_date: e?.target?.value })
                     }} />
@@ -601,9 +611,20 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 <CardContent>
 
                  
-                  <Typography variant='h6'>Trainers  ({name.length})<IconButton style={{float:'right'}}>
+                  <Typography variant='h6'>Trainers  ({name.length+data?.trainers?.length})<IconButton style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton></Typography>
+                    {data?.trainers?.map(itm=>{
+                      return(
+                        <Card style={{ marginTop: 10 }}>
+                      <CardContent>
+                     
+                        <Typography mt={2} variant='subtitle2'>{itm?.name}</Typography>
+                       
+                        </CardContent >
+                    </Card >
+                      )
+                    })}
                     {/* {sendData?.trainers_count} */}
                     {/* {sendData?.trainers.map((itm)=>{
                        
@@ -643,10 +664,23 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 handlegelathiOpenFilter()
               }}>
                 <CardContent>
-                <Typography variant='h6'>Gelathi Facilators ({gelathiName.length})
+                <Typography variant='h6'>Gelathi Facilators ({data?.gelathiFacilitator.length+gelathiName?.length})
                   <IconButton style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
-                    </IconButton></Typography>
+                    </IconButton>
+                    {data?.gelathiFacilitator?.map(itm=>{
+                      return(
+                        <Card style={{ marginTop: 10 }}>
+                      <CardContent>
+                     
+                        <Typography mt={2} variant='subtitle2'>{itm?.name}</Typography>
+                       
+                        </CardContent >
+                    </Card >
+                      )
+                    })}
+                    
+                    </Typography>
                   {gelathiName?.length !== 0 &&
                     <Card style={{ marginTop: 10 }}>
                       <CardContent>

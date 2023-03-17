@@ -56,9 +56,11 @@ function SimpleDialog(props) {
 
 
         }
+
         else {
+            console.log(sendData,"<---sendDatasendData234234242423423")
             var data = JSON.stringify({
-                "project_id": sendData?.projectId,
+                "project_id": sendData?.project_id,
                 "role_id": value?.role_id,
                 "emp_id": value?.id
             });
