@@ -377,7 +377,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                        <Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />
+                                                        <Chip label={p?.project_status_name} size="small" color="error" variant="outlined" />
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>
