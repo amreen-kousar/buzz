@@ -281,7 +281,7 @@ function Project(props) {
                     </Link> : null}
                   {(userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 2 || userDetails == 12) ? <br /> : null}
 
-                  {(userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 2 || userDetails == 12) ? <Link to="/dashboard/projects/materialStock" style={styles.linkStyle}>
+                  {(userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 2 || userDetails == 12) ? <Link to="/dashboard/projects/materialStock" state={{ id: data1?.project_id }} style={styles.linkStyle}>
                     <Button variant="secondary" style={styles.buttonStyle} startIcon={
                       <IconButton>
                         <Iconify style={{ color: "black" }} icon="material-symbols:list-alt-outline-sharp" />

@@ -246,7 +246,7 @@ export default function PlanofAction() {
       </Typography>
 
 
-      <PoaCreate  />
+     {name=='' && <PoaCreate  />}
       <br />
       <br />
       

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link,useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Iconify from 'src/components/Iconify';
 import Table from '@mui/material/Table';
@@ -33,7 +33,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
   
 export default function MaterialStockList() {
-
+  const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const [materialStock, setmaterialStock] = useState([{ stockname: "fist" }, { stockname: "second" }]);
     const [demo, setDemo] = useState([]);
@@ -58,11 +58,11 @@ export default function MaterialStockList() {
         var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
         var role =JSON.parse(localStorage.getItem('userDetails'))?.role
         var data = JSON.stringify({
-            "project_id":215
+            "project_id":state?.id
         });
      
     
-    
+        console.log(data, "checking for search",state?.id)
         const config = {
           method: 'post',
           url: 'https://bdms.buzzwomen.org/appTest/getStockItems.php', 

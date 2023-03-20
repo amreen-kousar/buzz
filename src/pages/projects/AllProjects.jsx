@@ -101,13 +101,77 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     )
 
     const projectr = async (i, id, g) => {
-        console.log(i, id, g)
+        console.log(id, i, g,"consolevalues")
+var data ={}
+        {(id==4)? 
+             data = JSON.stringify({
+            "search": search,
+            "id": userDetails?.id,
+            "role_id": userIdCheck,
+            "filter_id": 0,
+            "type": "",
+            "pageNum": page,
+            count: count,
+            "operations_manager_id": g ? "" : id === 4 ? i?.id : null,
+         }):(id==5)?
+        data = JSON.stringify({
+            "search": search,
+            "id": userDetails?.id,
+            "role_id": userIdCheck,
+            "filter_id": 0,
+            "type": "",
+            "pageNum": page,
+            count: count,
+            "trainer_id": g ? "" : id === 5 ? i?.id : null,
+        }):(id==13)? data = JSON.stringify({
 
+            "search": search,
+            "id": userDetails?.id,
+            "role_id": userIdCheck,
+            "filter_id": 0,
+            "type": "",
+            "pageNum": page,
+            count: count,
+            "gelathi_id":g?"":id==13?i?.id:null
+        }): 
+       (g=='date') ?
+       data = JSON.stringify({
+            end_date: g === "date" ? id : '',
+            start_date: g === "date" ? i: '',
+            "search": search,
+            "id": userDetails?.id,
+            "role_id": userIdCheck,
+            "filter_id": 0,
+            "type": "",
+            "pageNum": page,
+            count: count,
+           
+        })
+        :   
+         // :(selected.type=='custom')?
+        // data = JSON.stringify({
 
-        const data = JSON.stringify({
+        //     end_date: selected?.endDate,
+        //     start_date: selected?.startDate,
+        //     "search": search,
+        //     "id": userDetails?.id,
+        //     "role_id": userIdCheck,
+        //     "filter_id": 0,
+        //     "type": "",
+        //     "pageNum": page,
+        //     count: count,
+        //     taluk_id: selected?.taluk_id,
+        //     district_id: selected?.district_id,
+        //     "funder_id": selected?.funder_id,
+        //     "opsManager":selected?.opsManager,
+        //     "trainerId":selected?.trainerId,
+        //     "gelathiId":selected?.gelathiId,
+           
+        // })
+        data = JSON.stringify({
 
-            end_date: g === "date" ? i : null,
-            start_date: g === "date" ? id : null,
+            end_date: g === "date" ? id : null,
+            start_date: g === "date" ? i : null,
             "search": search,
             "id": userDetails?.id,
             "role_id": userIdCheck,
@@ -118,11 +182,15 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             taluk_id: g === "country" ? id : null,
             district_id: g === "country" ? i : null,
             "funder_id": id === 2 ? i?.id : null,
-            "operations_manager_id": g ? "" : id === 4 ? i?.id : null,
-            partner_id: g ? "" : id === 1 ? i?.id : null,
-            "trainer_id": g ? "" : id === 5 ? i?.id : null,
-            "gelathi_id":g?"":id==13?i?.id:null
-        });
+            "opsManager":id===4?i?.id:null,
+            "trainerId":g?"":id===5?i?.id:null,
+            "gelathiId":g?"":id===13?i?.id:null,
+            "partner_id": g ? "" : id === 1 ? i?.id : null,
+           
+        })
+
+    }
+
 
         const config = {
             method: 'post',
@@ -132,7 +200,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             },
             data
         };
-
+console.log(data,"dataaaaaaaaaaa")
         axios(config)
             .then((response) => {
                 setCount(response.data.count % 25 == 0 ? parseInt(response.data.count / 25) : parseInt(response.data.count / 25) + 1)
@@ -153,12 +221,13 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                 console.log(error);
             });
     }
-
+    
     const getData = (itm, i) => {
      
         setOpenFilter(false);
       
         setSelected(itm)
+        
         console.log(selected, "Selected ")
         projectr(itm, i)
     }
