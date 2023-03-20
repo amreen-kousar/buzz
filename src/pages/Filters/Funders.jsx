@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import ApiRequest from './components/ApiRequest';
 import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
+import Projectapi from './components/Projectsapi';
 
-
-export default function Funders({ selectDATA, getData }) {
+export default function Funders({ selectDATA, getData,type }) {
 
   const [fund, setFund] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
@@ -23,7 +23,17 @@ export default function Funders({ selectDATA, getData }) {
   }
 
   const funder = async () => {
-    ApiRequest({ selectDATA: 2 }).then(res => setFund(res))
+    console.log(type,"typeeeeeeeeeeeee")
+
+    if(type=="Projects")
+    {
+      console.log("ptooo")
+      Projectapi({ selectDATA:8 }).then(res =>setFund(res))
+    }
+    else{
+      ApiRequest({ selectDATA: 2 }).then(res => setFund(res))
+    }
+    
     console.log(fund,"funderssssss");
   }
 

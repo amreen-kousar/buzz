@@ -25,7 +25,7 @@ function ListTabledata(props) {
                                 <TableBody style={{ marginTop: "10px" }} >
                                     <TableRow onClick={() => { props.getData({ ...itm, type: props.type }, props.selectDATA) }} >
                                         <TableCell sx={{ width: "10px" }}> <Iconify icon="mdi:user-circle" width={25} height={25} /> </TableCell>
-                                        <TableCell >  {itm?.name} </TableCell>
+                                        <TableCell >  {itm?.name} {itm?.first_name} {itm?.last_name}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>

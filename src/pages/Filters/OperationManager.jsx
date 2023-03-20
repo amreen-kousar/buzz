@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import ApiRequest from './components/ApiRequest';
 import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
+import Projectapi from './components/Projectsapi';
 
-
-export default function OperationManager({ selectDATA, getData }) {
+export default function OperationManager({ selectDATA, getData,type }) {
   const [omdata, setOmData] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
 
@@ -22,8 +22,15 @@ export default function OperationManager({ selectDATA, getData }) {
 
 
   const OperationManage = async () => {
-    ApiRequest({ selectDATA: 4 }).then(res => setOmData(res))
+    if(type=="Projects")
+    {
+      Projectapi({ selectDATA:4 }).then(res =>setOmData(res))
+    }
+    else{
+      ApiRequest({ selectDATA: 4 }).then(res => setOmData(res))
 
+    }
+   
   }
   return (
     <div>

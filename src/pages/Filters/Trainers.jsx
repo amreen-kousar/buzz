@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import ApiRequest from './components/ApiRequest';
 import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
-
-export default function Trainers({ selectDATA, getData }) {
+import Projectapi from './components/Projectsapi';
+export default function Trainers({ selectDATA, getData,type}) {
   const [train, setTrain] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
 
@@ -12,8 +12,13 @@ export default function Trainers({ selectDATA, getData }) {
   }, []
   )
   const trainer = async () => {
+    if(type=="Projects")
+    {
+      Projectapi({ selectDATA:5 }).then(res =>setTrain(res))
+    }
+    else{
     ApiRequest({ selectDATA: 5 }).then(res => setTrain(res))
-
+    }
   }
   const getSearchFilter = (e) => {
     setSearchInFilter(e)

@@ -258,6 +258,9 @@ export default function DashboardApp() {
                   <Typography variant="h4" component="h2" marginLeft={2}>
                     {`Actual / Target : ${itm?.actual} / ${itm?.target}`}
                   </Typography>
+                  {/* <Typography variant="h4" component="h2" marginLeft={2}>
+                    {`Duration : ${itm?.startDate} / ${itm?.endDate}`}
+                  </Typography> */}
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={1}>
                     {
