@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container, CardContent, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container, CardContent, Typography, Grid, IconButton,Button } from '@mui/material';
 import GelathiCircleDrawer from '../projects/Components/GelathiCircleDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
-import ChooseGelathi from './Components/ChooseGelathi'
+import ChooseGelathi from './Components/ChooseGelathi';
+import Filtersmain from './projectfilters/filtersmain';
 export default function gelathiCirclesList() {
   const { state } = useLocation()
   const [clcikData, setClickData] = useState()
@@ -67,7 +68,7 @@ export default function gelathiCirclesList() {
 
 
   const [openFilter, setOpenFilter] = useState(false);
-
+  const [filter,setFilter]=useState(false);
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -75,7 +76,13 @@ export default function gelathiCirclesList() {
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
+  const handleopen=()=>{
+    setFilter(true)
+  };
 
+  const handleclose=()=>{
+    setFilter(false)
+  }
 
   const circle = async => {
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
@@ -127,9 +134,20 @@ export default function gelathiCirclesList() {
         {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
+            <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            Filter
+          </Button>
         <ChooseGelathi />
 
       </Stack>
+      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <Filtersmain
+                    type="Gelathicircles"
+                    isOpenFilter={filter}
+                    onOpenFilter={handleopen}
+                    onCloseFilter={handleclose}
+                />
+            </Stack>
       {
         selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br />&nbsp;</>
       }

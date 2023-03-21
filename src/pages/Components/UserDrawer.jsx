@@ -41,18 +41,19 @@ UserDrawer.propTypes = {
 
 export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users }) {
   const [profileData, setProfileData] = useState()
+  const [user,setUser]=useState()
   const userDetails = localStorage?.getItem('userId')
   { console.log(userDetails, "userrrrrrrrrrrrrrrrrrr") }
 
-  // useEffect(() => {
-  //   //   editUser()
-  //   updateSetUser()
-  // }, []
-  // )
+  useEffect(() => {
+    //   editUser()
+    updateSetUser()
+  }, []
+  )
 
-  // const updateSetUser=()=>{
-  //   setUser(JSON.parse(localStorage?.getItem('people')))
-  // }
+  const updateSetUser=()=>{
+    setUser(JSON.parse(localStorage?.getItem('people')))
+  }
 
   useEffect(()=>{
     profile()

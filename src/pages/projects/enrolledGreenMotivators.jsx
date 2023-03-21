@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, Stack, Chip, Container, Typography,CardContent, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container, Typography,CardContent, Grid, IconButton, Button} from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import GreenSurvey from './Components/GreenSurvey'
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import Filtersmain from './projectfilters/filtersmain';
 export default function enrolledGreenMotivatorsList() {
     const {state} = useLocation()
     console.log("nwewepewrwe",state)
@@ -21,7 +22,7 @@ export default function enrolledGreenMotivatorsList() {
     )
 
     const [openFilter, setOpenFilter] = useState(false);
-
+    const [filter,setFilter]=useState(false);
     const searchFunction = (e) => {
       
         search = e
@@ -36,6 +37,13 @@ export default function enrolledGreenMotivatorsList() {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
+    const handleopen=()=>{
+      setFilter(true)
+    };
+
+    const handleclose=()=>{
+      setFilter(false)
+    }
     const enrolledGreenMotivators = async =>{
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -122,6 +130,17 @@ export default function enrolledGreenMotivatorsList() {
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
+            <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            Filter
+          </Button>
+            </Stack>
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <Filtersmain
+                    type="GreenMotivators"
+                    isOpenFilter={filter}
+                    onOpenFilter={handleopen}
+                    onCloseFilter={handleclose}
+                />
             </Stack>
             
             {
@@ -129,6 +148,7 @@ export default function enrolledGreenMotivatorsList() {
             } <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}>Green Motivators : ({count})</Typography> 
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
+
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ParticipantDrawer
                     clcikData={clcikData}

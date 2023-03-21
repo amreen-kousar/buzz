@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton,Button } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import Filtersmain from './projectfilters/filtersmain';
 export default function enrolledGelathiList() {
     const {state} = useLocation()
     const [data1, setData1] = useState('')
@@ -19,7 +20,7 @@ export default function enrolledGelathiList() {
     )
 
     const [openFilter, setOpenFilter] = useState(false);
-
+    const [filter,setFilter]=useState(false);
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
@@ -27,7 +28,13 @@ export default function enrolledGelathiList() {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
+    const handleopen=()=>{
+      setFilter(true)
+    };
 
+    const handleclose=()=>{
+      setFilter(false)
+    }
     const searchFunction = (e) => {
         search = e
         setSearch(search)
@@ -120,9 +127,20 @@ export default function enrolledGelathiList() {
                         </IconButton></Link>
                     All enrolledGelathi
                 </Typography>
+                <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            Filter
+          </Button>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
+            </Stack>
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <Filtersmain
+                    type="Gelathis"
+                    isOpenFilter={filter}
+                    onOpenFilter={handleopen}
+                    onCloseFilter={handleclose}
+                />
             </Stack>
             
             {

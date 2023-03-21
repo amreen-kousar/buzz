@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from "react"
-import { Card, Stack, Chip,CardContent, Container, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip,CardContent, Container, Typography, Grid, IconButton,Button } from '@mui/material';
 import ProjectMultiDrawer from '../Components/ProjectMultiDrawer';
 import Iconify from 'src/components/Iconify';
 import { Link, useLocation } from 'react-router-dom';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
-
+import Filtersmain from './projectfilters/filtersmain';
 export default function selfShaktiProj() {
     const {state} = useLocation()
-    console.log("shaktishakti",state)
+    // console.log("shaktishakti",state)
     const [clcikData, setClickData] = useState()
+    
+  const [filterData, setFilterData] = useState({})
     const [count,setCount] = useState();
     var [selected, setSelected] = useState(null)
     var [search, setSearch] = useState('')
@@ -25,6 +27,7 @@ export default function selfShaktiProj() {
     
     const [data1, setData1] = useState('');
     const [openFilter, setOpenFilter] = useState(false);
+    const [filter,setFilter]=useState(false);
     const [selfShakti,setSelfShakthi] = useState('');
     const [batchState,setBatchState] = useState()
     var  [selected, setSelected] = useState(null)
@@ -36,20 +39,28 @@ export default function selfShaktiProj() {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
+
+    const handleopen=()=>{
+      setFilter(true)
+    };
+
+    const handleclose=()=>{
+      setFilter(false)
+    }
     useEffect(() => {
       shakti();
   
     }, [])
-    const shakti = async =>{
+    const shakti = async(id,i,g) =>{
 
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
-            "end_date": "",
+            "end_date": g==="date"?i:'',
             "search": search,
             "project_id": state?.id,
             "filter_type": "",
-            "start_date": "",
+            "start_date": g==="date"?id:'',
             "trainer_id": "",
             "emp_id": idvalue
           });
@@ -67,7 +78,7 @@ export default function selfShaktiProj() {
           .then(function (response) {
             setSelfShakthi(response.data)
             setCount(response.data.list.length)
-            console.log(response.data,'<-------------setSelfShakthisetSelfShakthisetSelfShakthi');
+            // console.log(response.data,'<-------------setSelfShakthisetSelfShakthisetSelfShakthi');
           })
           .catch(function (error) {
             console.log(error);
@@ -81,7 +92,7 @@ export default function selfShaktiProj() {
     }, [])
     
     const projData = async => {
-      console.log(location, "location props")
+      // console.log(location, "location props")
       var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
       var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
       var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -103,7 +114,7 @@ export default function selfShaktiProj() {
       axios(config)
         .then(function (response) {
           setData1(response.data.list)
-          console.log(response.data, '<--------------setData1setData1');
+          // console.log(response.data, '<--------------setData1setData1');
         })
         .catch(function (error) {
           console.log(error);
@@ -120,7 +131,23 @@ export default function selfShaktiProj() {
         shakti();
     }
   
-   
+    const onDateSubmit = (e) => {
+      setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+  
+      shakti(e?.startDate, e?.endDate, "date")
+      setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
+      handleclose()
+      // console.log(e, "<----scasds")
+    }
+    const getData = (itm, i) => {
+    setSelected(itm)
+    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+    shakti(itm, i)
+    // console.log(data, i, itm, "<----sdfssreerfer")
+    setFilterData(data)
+    handleclose()
+    // console.log("sdfgsdfdfssd", itm, i)
+  }
 
     return (
 
@@ -133,7 +160,21 @@ export default function selfShaktiProj() {
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
                     All Self Shakthi
+                    <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            Filter
+          </Button>
                 </Typography>
+                <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <Filtersmain
+                    type="SelfShakthi"
+                    onDateSubmit={onDateSubmit}
+                    isOpenFilter={filter}
+                    getData={getData}
+                    shakti={shakti}
+                    onOpenFilter={handleopen}
+                    onCloseFilter={handleclose}
+                />
+            </Stack>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
@@ -156,7 +197,7 @@ export default function selfShaktiProj() {
             {/* {selfShakti?.map((itm) => {
                 return ( */}
                     {selfShakti?.list?.length!==0?selfShakti?.list?.map((itm) => {
-                        console.log(itm, "<---asdasdasdsadas")
+                        // console.log(itm, "<---asdasdasdsadas")
                         return (
                           
                      
@@ -169,22 +210,22 @@ export default function selfShaktiProj() {
                     >
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
-                                {` Self Shakthi Name : ${itm?.batch_name}`}
+                           {itm?.batch_name}
                             </Typography>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }} >
                                Day 1 : {itm?.day1}</Typography>
 
-                           
+{/*                            
                             <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                            Day 2 : {itm?.day2}</Typography>
+                            Day 2 : {itm?.day2}</Typography> */}
                             
                         </Grid>
                     </Card>)
             }):
             <>
-            <h1>No Self Shakthi Project  Found</h1>
+            <h4 style={{textAlign:'center'}}>No Self Shakthi Project  Found</h4>
             </>}
 
         </Container>

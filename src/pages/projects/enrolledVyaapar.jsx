@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip,CardContent, Container, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip,CardContent, Container, Typography, Grid, IconButton,Button } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Vyaparprogram from './Components/Vyaparprogram';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import Filtersmain from './projectfilters/filtersmain';
 export default function enrolledVyaaparList() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
@@ -39,7 +40,7 @@ export default function enrolledVyaaparList() {
     )
 
     const [openFilter, setOpenFilter] = useState(false);
-
+    const [filter,setFilter]=useState(false);
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
@@ -47,6 +48,13 @@ export default function enrolledVyaaparList() {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
+    const handleopen=()=>{
+      setFilter(true)
+    };
+
+    const handleclose=()=>{
+      setFilter(false)
+    }
     const enrolledVyaapar= async =>{
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -127,6 +135,17 @@ const id = sessionStorage?.getItem("proId")
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
+            <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            Filter
+          </Button>
+            </Stack>
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <Filtersmain
+                    type="Vyapar"
+                    isOpenFilter={filter}
+                    onOpenFilter={handleopen}
+                    onCloseFilter={handleclose}
+                />
             </Stack>
             
                 {
@@ -170,7 +189,7 @@ const id = sessionStorage?.getItem("proId")
                     </Card>)
             }):
             <>
-            <h1>No  Enrolled  Vyapar Found</h1>
+            <h4 style={{textAlign:'center'}}>No  Enrolled  Vyapar Found</h4>
             </>}
 
         </Container>

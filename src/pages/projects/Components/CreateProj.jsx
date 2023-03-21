@@ -50,7 +50,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
    
    }
   const [data, setData] = useState({ ...sendData,start_date:formatDate(sendData?.startDate),end_date:formatDate(sendData?.endDate)});
-
+console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
   console.log(data,"<-----dascascascascsacascsaascasa")
 
   const handleClickOpen = () => {

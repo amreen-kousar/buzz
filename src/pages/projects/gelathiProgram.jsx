@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container, Typography, Grid, IconButton,CardContent } from '@mui/material';
+import { Card, Stack, Chip, Container, Typography, Grid, IconButton,CardContent,Button } from '@mui/material';
 import GelathiProgrameDrawer from '../projects/Components/GelathiProgrameDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
-
+import Filtersmain from './projectfilters/filtersmain';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 export default function gelathiProgram(props) {
     const {state} = useLocation();
   console.log(props,"<----props",state)
     const [clcikData, setClickData] = useState()
     const [programe,setPrograme] = useState('')
+    const [filterData, setFilterData] = useState({})
     const [data1, setData1] = useState('')
     const [count,setCount]= useState('');
     var [search, setSearch] = useState('')
@@ -19,16 +20,16 @@ export default function gelathiProgram(props) {
         gelathiPrograme();
         }, []
     )
-    const gelathiPrograme = async =>{
+    const gelathiPrograme = async(id,i,g) =>{
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "filter": "",
-            "end_date": "",
+            "end_date":  g==="date"?i:'',
             "search": search,
             "project_id": state?.id,
             "gelathi_id": "",
-            "start_date": "",
+            "start_date":  g==="date"?id:'',
             "emp_id": idvalue
           });
           
@@ -90,7 +91,7 @@ export default function gelathiProgram(props) {
     
       }
     const [openFilter, setOpenFilter] = useState(false);
-
+    const [filter,setFilter]=useState(false);
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
@@ -98,7 +99,13 @@ export default function gelathiProgram(props) {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
+    const handleopen=()=>{
+      setFilter(true)
+    };
 
+    const handleclose=()=>{
+      setFilter(false)
+    }
     const handleDelete = () => {
       setSelected(null)
       search = ''
@@ -113,7 +120,23 @@ export default function gelathiProgram(props) {
         setSelected({ name: e, type: "Search" })
         gelathiPrograme()
     }
-
+    const onDateSubmit = (e) => {
+      setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+  
+      gelathiPrograme(e?.startDate, e?.endDate, "date")
+      setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
+      handleclose()
+      console.log(e, "<----scasds")
+    }
+    const getData = (itm, i) => {
+    setSelected(itm)
+    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+    gelathiPrograme(itm, i)
+    console.log(data, i, itm, "<----sdfssreerfer")
+    setFilterData(data)
+    handleclose()
+    console.log("sdfgsdfdfssd", itm, i)
+  }
     return (
 
         <Container>
@@ -127,14 +150,25 @@ export default function gelathiProgram(props) {
                         </IconButton></Link>
                     All gelathi Program
                 </Typography>
-                {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
+                <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            Filter
+          </Button>
+         
             </Stack>
             
             {
                     selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <Filtersmain
+                    type="GelathiProgram"
+                    isOpenFilter={filter}
+                    onDateSubmit={onDateSubmit}
+                    gelathiPrograme={gelathiPrograme}
+                    onOpenFilter={handleopen}
+                    onCloseFilter={handleclose}
+                />
+            </Stack>
                <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
                <Typography style={{fontWeight:500,marginLeft:2}}> All Gelathi Sessions ({count})</Typography> 
          {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}

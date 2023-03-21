@@ -18,9 +18,10 @@ export default function Gelathis({ selectDATA, getData,type }) {
   {
     Projectapi({ selectDATA:6}).then(res =>setGlead(res))
   }
-    
+  else{
     ApiRequest({ selectDATA: 6 }).then(res => setGlead(res))
   }
+}
   const getSearchFilter = (e) => {
     setSearchInFilter(e)
   }
