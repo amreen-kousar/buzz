@@ -58,6 +58,7 @@ export default function StaticDatePickerDemo(props) {
 
             color: "#ffffff", bgcolor: "#ed6c02"
           }}>Submit</Button>
+          {console.log(moment(startDate?.$d)?.format('YYYY-MM-DD'),"shghjewh",endDate,"enddataaaaa")}
       </CardContent>
     </Card>
   );

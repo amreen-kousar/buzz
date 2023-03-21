@@ -101,13 +101,81 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     )
 
     const projectr = async (i, id, g) => {
-        console.log(i, id, g)
+        console.log(i,"consolevalues")
+var data ={}
+        {(id==4)? 
+             data = JSON.stringify({
+            "search": search,
+            "id": userDetails?.id,
+            "role_id": userIdCheck,
+            "filter_id": 0,
+            "type": "",
+            "pageNum": page,
+            count: count,
+            "operations_manager_id": g ? "" : id === 4 ? i?.id : null,
+         }):(id==5)?
+        data = JSON.stringify({
+            "search": search,
+            "id": userDetails?.id,
+            "role_id": userIdCheck,
+            "filter_id": 0,
+            "type": "",
+            "pageNum": page,
+            count: count,
+            "trainer_id": g ? "" : id === 5 ? i?.id : null,
+        }):(id==13)? data = JSON.stringify({
 
+            "search": search,
+            "id": userDetails?.id,
+            "role_id": userIdCheck,
+            "filter_id": 0,
+            "type": "",
+            "pageNum": page,
+            count: count,
+            "gelathi_id":g?"":id==13?i?.id:null
+        }): 
+       (g=='date') ?
+       data = JSON.stringify({
+            end_date: g === "date" ? id : '',
+            start_date: g === "date" ? i: '',
+            "search": search,
+            "id": userDetails?.id,
+            "role_id": userIdCheck,
+            "filter_id": 0,
+            "type": "",
+            "pageNum": page,
+            count: count,
+           
+        })
+        :(i?.type=='custom')?  
+       
+        data = JSON.stringify({
 
-        const data = JSON.stringify({
+            end_date: i?.endDate,
+            start_date: i?.startDate,
+            "search": search,
+            "id": userDetails?.id,
+            "role_id": userIdCheck,
+            "filter_id": 0,
+            "type": "",
+            "pageNum": page,
+            count: count,
+            taluk_id: i?.taluk_id,
+            district_id: i?.district?.id,
+            districtName:i?.district?.name,
+            "funder_id": i?.funder?.id,
+            funder_name:i?.funder?.name,
+            operations_manager_id:i?.opsManager?.id,
+            operations_manager_name:i?.opsManager?.name,
+            "trainerId":i?.trainer?.id,
+            "gelathiId":i?.gelathi?.id,
+           
+        }) 
+        :
+        data = JSON.stringify({
 
-            end_date: g === "date" ? i : null,
-            start_date: g === "date" ? id : null,
+            end_date: g === "date" ? id : null,
+            start_date: g === "date" ? i : null,
             "search": search,
             "id": userDetails?.id,
             "role_id": userIdCheck,
@@ -118,11 +186,15 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             taluk_id: g === "country" ? id : null,
             district_id: g === "country" ? i : null,
             "funder_id": id === 2 ? i?.id : null,
-            "operations_manager_id": g ? "" : id === 4 ? i?.id : null,
-            partner_id: g ? "" : id === 1 ? i?.id : null,
-            "trainer_id": g ? "" : id === 5 ? i?.id : null,
-            "gelathi_id":g?"":id==13?i?.id:null
-        });
+            "opsManager":id===4?i?.id:null,
+            "trainerId":g?"":id===5?i?.id:null,
+            "gelathiId":g?"":id===13?i?.id:null,
+            "partner_id": g ? "" : id === 1 ? i?.id : null,
+           
+        })
+
+    }
+
 
         const config = {
             method: 'post',
@@ -132,7 +204,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
             },
             data
         };
-
+console.log(data,"dataaaaaaaaaaa")
         axios(config)
             .then((response) => {
                 setCount(response.data.count % 25 == 0 ? parseInt(response.data.count / 25) : parseInt(response.data.count / 25) + 1)
@@ -153,12 +225,13 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                 console.log(error);
             });
     }
-
+    
     const getData = (itm, i) => {
      
         setOpenFilter(false);
       
         setSelected(itm)
+        
         console.log(selected, "Selected ")
         projectr(itm, i)
     }
@@ -176,6 +249,11 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
         setOpenFilter(false);
     }
 
+    const onDatasubmit=(e)=>{
+        setSelected({type:'Custom Filter ',name: `District: ${e?.district?.name};Taluk:${e?.talaq?.name} ; From: ${e?.startDate} to:${e?.endDate}; Funder:${e?.funder?.name}; Operation Manager:${e?.opsManager?.first_name}; Trainer:${e?.trainer?.first_name} ; GelathiFacilitator:${e?.gelathi?.first_name}`})
+        handleCloseFilter()
+        projectr(e,"custom")
+    }
 
     const searchFunction = (e) => {
         page = 1
@@ -233,10 +311,13 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                 </Typography>
 
 
-                
+                {console.log(selected,"selectedd")}
                 { selected &&  ( selected?.type=='Location' || selected?.type=='Date Range') && <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /> }
                   
-                { selected  && ( selected?.type=='Funder' || selected?.type=='Operation Manager' || selected?.type=='Trainers' || selected?.type=='Gelathi Facilitator') && <Chip label={`${selected?.type} : ${selected?.first_name} `} onDelete={() => { handleDelete(selected) }} /> }
+                { selected  && ( selected?.type=='Funder' || selected?.type=='Operation Manager' || selected?.type=='Trainers' || selected?.type=='Gelathi Facilitator' ) && <Chip label={`${selected?.type} : ${selected?.first_name} `} onDelete={() => { handleDelete(selected) }} /> }
+         
+                {selected && (selected?.type=='Custom Filter') && <Chip label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/>}
+               
                 {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
         </Stack> */}
@@ -254,6 +335,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
                         onDateSubmit={onDateSubmit}
                         resetProjects={resetProjects}
                         getData={getData}
+                        onDatasubmit={onDatasubmit}
                         isOpenFilter={openFilter}
                         projectr={projectr}
                         onOpenFilter={handleOpenFilter}

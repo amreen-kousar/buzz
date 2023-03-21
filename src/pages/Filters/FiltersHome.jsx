@@ -16,6 +16,7 @@ import Funders from './Funders';
 import Partners from './Partners';
 import Projects from './Projects';
 import Location from './Location';
+import Customfilter from './Customfilters';
 import SrOperationManager from './SrOperationManager'
 import Participant from './Participant';
 import Trainers from './Trainers';
@@ -58,7 +59,7 @@ FiltersHome.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit, type, resetBus, user, projectr, resetProjects }) {
+export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDatasubmit, onDateSubmit, type, resetBus, user, projectr, resetProjects }) {
 
   var [selectDATA, setSelectData] = useState()
 
@@ -66,7 +67,7 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
 
     Dashboard: [{ id: 2, roles: ['1', '8', '12', '3', '11', '9', '7'] }, { id: 1, roles: ['1', '8', '11', '12', '9', '3', '7'] }, { id: 3, roles: ['1', '4', '8', '5', '6', '12', '13', '11', '3', '9', '7'] }, { id: 4, roles: ['1', '8', '12', '9', '11', '3', '7'] }, { id: 5, roles: ['1', '9', '11', '4', '8', '12', '3', '7'] }, { id: 6, roles: ['13'] }, { id: 9, roles: ['1', '9', '11', '4', '6', '8', '5', '12', '13', '3', '7'] }, { id: 7, roles: ['1', '4', '9', '11', '8', '12', '3', '7'] },  { id: 12, roles: ['1', '3', '11'] }, { id: 13, roles: ['1', '11', '3'] }],
 
-    Projects: [{ id: 31, roles: ['1', '2', '3', '4', '5', '9', '11', '12', '13', '6'] }, { id: 7, roles: ['1', '2', '3', '4', '13', '12', '5', '9', '11', '6'] }, { id: 9, roles: ['1', '2', '3', '13', '4', '12', '11', '5', '9', '6'] }, { id: 2, roles: ['1', '3', '12', '11', '2'] }, { id: 4, roles: ['1', '3', '12', '11', '2'] }, { id: 5, roles: ['1', '3', '12', '11', '2'] }, { id: 6, roles: ['1', '3', '12', '11', '2'] }],
+    Projects: [{ id: 31, roles: ['1', '2', '3', '4', '5', '9', '11', '12', '13', '6'] }, { id: 7, roles: ['1', '2', '3', '4', '13', '12', '5', '9', '11', '6'] }, { id: 9, roles: ['1', '2', '3', '13', '4', '12', '11', '5', '9', '6'] }, { id: 2, roles: ['1', '3', '12', '11', '2'] }, { id: 4, roles: ['1', '3', '12', '11', '2'] }, { id: 5, roles: ['1', '3', '12', '11', '2'] }, { id: 6, roles: ['1', '3', '12', '11', '2'] },{id:35,roles:['1','3']}],
 
     BusList: [{ id: 30, roles: true }, { id: 3, roles: true }, { id: 2, roles: true }, { id: 7, roles: true },],
 
@@ -81,7 +82,7 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
   const data = localStorage?.getItem('userId')
 
   // partner = 1, funder = 2, project = 3, opm = 4, trainer = 5, gelathi = 6 SOM=12 GFl=13
-  const filtersHeaders = { 1: 'Partner', 2: 'Funders', 3: 'Project', 4: 'Operation Managers', 5: 'Trainers', 6: 'Gelathi Facilitators', 12: 'Sr. Operations Manager', 13: 'Gelathi Facilitator Leads', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Drivers' }
+  const filtersHeaders = { 1: 'Partner', 2: 'Funders', 3: 'Project', 4: 'Operation Managers', 5: 'Trainers', 6: 'Gelathi Facilitators', 12: 'Sr. Operations Manager', 13: 'Gelathi Facilitator Leads', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Drivers',35:'Custom Filters' }
 
 
   const setData = (value) => {
@@ -235,6 +236,11 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
               {
                 selectDATA == 13 && <Grid>
                   <GelathisLead getData={getData} selectDATA={selectDATA} />
+                </Grid>
+              }
+              {
+                selectDATA == 35 && <Grid>
+                  <Customfilter getData={getData} selectDATA={selectDATA} onDatasubmit={onDatasubmit}/>
                 </Grid>
               }
             </div>
