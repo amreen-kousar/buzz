@@ -59,7 +59,7 @@ FiltersHome.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDateSubmit, type, resetBus, user, projectr, resetProjects }) {
+export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDatasubmit, onDateSubmit, type, resetBus, user, projectr, resetProjects }) {
 
   var [selectDATA, setSelectData] = useState()
 
@@ -240,7 +240,7 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
               }
               {
                 selectDATA == 35 && <Grid>
-                  <Customfilter getData={getData} selectDATA={selectDATA}/>
+                  <Customfilter getData={getData} selectDATA={selectDATA} onDatasubmit={onDatasubmit}/>
                 </Grid>
               }
             </div>

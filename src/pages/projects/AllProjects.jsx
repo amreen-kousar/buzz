@@ -101,7 +101,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     )
 
     const projectr = async (i, id, g) => {
-        console.log(id, i, g,"consolevalues")
+        console.log(i,"consolevalues")
 var data ={}
         {(id==4)? 
              data = JSON.stringify({
@@ -147,27 +147,31 @@ var data ={}
             count: count,
            
         })
-        :   
-         // :(selected.type=='custom')?
-        // data = JSON.stringify({
+        :(i?.type=='custom')?  
+       
+        data = JSON.stringify({
 
-        //     end_date: selected?.endDate,
-        //     start_date: selected?.startDate,
-        //     "search": search,
-        //     "id": userDetails?.id,
-        //     "role_id": userIdCheck,
-        //     "filter_id": 0,
-        //     "type": "",
-        //     "pageNum": page,
-        //     count: count,
-        //     taluk_id: selected?.taluk_id,
-        //     district_id: selected?.district_id,
-        //     "funder_id": selected?.funder_id,
-        //     "opsManager":selected?.opsManager,
-        //     "trainerId":selected?.trainerId,
-        //     "gelathiId":selected?.gelathiId,
+            end_date: i?.endDate,
+            start_date: i?.startDate,
+            "search": search,
+            "id": userDetails?.id,
+            "role_id": userIdCheck,
+            "filter_id": 0,
+            "type": "",
+            "pageNum": page,
+            count: count,
+            taluk_id: i?.taluk_id,
+            district_id: i?.district?.id,
+            districtName:i?.district?.name,
+            "funder_id": i?.funder?.id,
+            funder_name:i?.funder?.name,
+            operations_manager_id:i?.opsManager?.id,
+            operations_manager_name:i?.opsManager?.name,
+            "trainerId":i?.trainer?.id,
+            "gelathiId":i?.gelathi?.id,
            
-        // })
+        }) 
+        :
         data = JSON.stringify({
 
             end_date: g === "date" ? id : null,
@@ -245,6 +249,11 @@ console.log(data,"dataaaaaaaaaaa")
         setOpenFilter(false);
     }
 
+    const onDatasubmit=(e)=>{
+        setSelected({type:'Custom Filter ',name: `District: ${e?.district?.name};Taluk:${e?.talaq?.name} ; From: ${e?.startDate} to:${e?.endDate}; Funder:${e?.funder?.name}; Operation Manager:${e?.opsManager?.first_name}; Trainer:${e?.trainer?.first_name} ; GelathiFacilitator:${e?.gelathi?.first_name}`})
+        handleCloseFilter()
+        projectr(e,"custom")
+    }
 
     const searchFunction = (e) => {
         page = 1
@@ -302,10 +311,13 @@ console.log(data,"dataaaaaaaaaaa")
                 </Typography>
 
 
-                
+                {console.log(selected,"selectedd")}
                 { selected &&  ( selected?.type=='Location' || selected?.type=='Date Range') && <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /> }
                   
-                { selected  && ( selected?.type=='Funder' || selected?.type=='Operation Manager' || selected?.type=='Trainers' || selected?.type=='Gelathi Facilitator') && <Chip label={`${selected?.type} : ${selected?.first_name} `} onDelete={() => { handleDelete(selected) }} /> }
+                { selected  && ( selected?.type=='Funder' || selected?.type=='Operation Manager' || selected?.type=='Trainers' || selected?.type=='Gelathi Facilitator' ) && <Chip label={`${selected?.type} : ${selected?.first_name} `} onDelete={() => { handleDelete(selected) }} /> }
+         
+                {selected && (selected?.type=='Custom Filter') && <Chip label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/>}
+               
                 {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
         </Stack> */}
@@ -323,6 +335,7 @@ console.log(data,"dataaaaaaaaaaa")
                         onDateSubmit={onDateSubmit}
                         resetProjects={resetProjects}
                         getData={getData}
+                        onDatasubmit={onDatasubmit}
                         isOpenFilter={openFilter}
                         projectr={projectr}
                         onOpenFilter={handleOpenFilter}

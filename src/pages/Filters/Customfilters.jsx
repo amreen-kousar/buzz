@@ -30,12 +30,6 @@ export default function Customfilter(props) {
   var [data, setData] = useState({
     country: 1,
     state: '',
-    district_id: '',
-    taluk_id: '',
-    funder_id: "",
-    opsManager:"",
-    trainerId:"",
-    gelathiId:"",
     startDate:"",
     endDate:"",
     type:"custom"
@@ -48,6 +42,8 @@ export default function Customfilter(props) {
     gelathiList()
   }, []
   )
+
+  console.log(data,"reponssssssss")
   const location = async => {
     var data = JSON.stringify({
       "country_id": "1",
@@ -96,11 +92,12 @@ export default function Customfilter(props) {
         console.log(error);
       });
   }
-  const getDistrict = async (id) => {
+  const getDistrict = async (district) => {
     var data = JSON.stringify({
       "country_id": "1",
       "state_id": data?.state,
-      "district_id": id
+      "district_id": district.id,
+      "district_name":district.name
 
     });
 
@@ -228,7 +225,7 @@ const trainerList = async => {
 
 }
 
-  console.log(data,"reponssssssss")
+
 
   return (
     <div>
@@ -275,13 +272,13 @@ const trainerList = async => {
               defaultValue={data.district_id}
               label="Age"
               onChange={(e => {
-                setData({ ...data, district_id: e?.target?.value }),
+                setData({ ...data, district: e?.target?.value }),
                   getDistrict(e?.target?.value)
               })}
             >
               {district?.map(itm => {
                 return (
-                  <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                  <MenuItem value={itm}>{itm?.name}</MenuItem>
                 )
               })
               }
@@ -294,13 +291,13 @@ const trainerList = async => {
               defaultValue={data.talaq_id}
               label="Age"
               onChange={(e => {
-                setData({ ...data, talaq_id: e?.target?.value })
+                setData({ ...data, talaq: e?.target?.value })
                 // getTaluk(e?.target?.value)
               })}
             >
               {taluk?.map(itm => {
                 return (
-                  <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                  <MenuItem value={itm}>{itm?.name}</MenuItem>
                 )
               })
               }
@@ -340,13 +337,13 @@ const trainerList = async => {
     required
     label="Select Funder"
     onChange={(e => {
-        setData({ ...data, funder_id: e?.target?.value })
+        setData({ ...data, funder: e?.target?.value })
        
     })}
 >
     {fund?.map(itm => {
         return (
-            <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+            <MenuItem value={itm}>{itm?.name}</MenuItem>
         )
     })
     }
@@ -375,7 +372,7 @@ const trainerList = async => {
                     <MenuItem value="" default disabled>Choose Operation Manager</MenuItem>
                     {teamData?.list?.map(itm => {
                       return (
-                        <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
+                        <MenuItem value={itm}>{itm?.first_name}</MenuItem>
                       )
                     })
                     }
@@ -396,14 +393,14 @@ const trainerList = async => {
                     value={data.trainerId}
                     label="Select Operation Manager"
                     onChange={(e => {
-                      setData({ ...data, trainerId: e?.target?.value });
+                      setData({ ...data, trainer: e?.target?.value });
                       localStorage.setItem("trainerdata", e?.target?.value)
                     })}
                   >
                     <MenuItem value="" default disabled>Choose Trainer</MenuItem>
                     {listData?.list?.map(itm => {
                       return (
-                        <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
+                        <MenuItem value={itm}>{itm?.first_name}</MenuItem>
                       )
                     })
                     }
@@ -424,14 +421,14 @@ const trainerList = async => {
                     value={data.gelathiId}
                     label="Select Gelathi Facilitator"
                     onChange={(e => {
-                      setData({ ...data, gelathiId: e?.target?.value });
+                      setData({ ...data, gelathi: e?.target?.value });
                       localStorage.setItem("gelathidata", e?.target?.value)
                     })}
                   >
                     <MenuItem value="" default disabled>Choose Gelathi Faciliatator</MenuItem>
                     {gelathiData?.list?.map(itm => {
                       return (
-                        <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
+                        <MenuItem value={itm}>{itm?.first_name}</MenuItem>
                       )
                     })
                     }
@@ -440,7 +437,7 @@ const trainerList = async => {
              
         </CardContent>
         <Button style={{ float: "right", color: 'white', marginRight: '160px', marginBottom: '10px', backgroundColor: '#ed6c02', }}
-          onClick={() => props.getData(data)}>Submit</Button>
+          onClick={() => props?.onDatasubmit(data)}>Submit</Button>
       </Card>
     </div>
   );
