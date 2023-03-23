@@ -186,7 +186,7 @@ export default function gelathiCirclesList() {
           </Card>)
       }) :
         <>
-          <h1>No  Gelathi Circle Found</h1>
+          <h4 style={{textAlign:'center'}} >No  Gelathi Circle Found</h4 >
         </>}
 
     </Container>

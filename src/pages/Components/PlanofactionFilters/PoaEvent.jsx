@@ -409,7 +409,7 @@ const handlecheckout=()=>{
                     sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
                   />&nbsp;
                   
-                  <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
+                  <input style={{ display: "none" }} accept="image/png, image/gif, image/jpeg" id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
                 </label>Add Photos<br/>
                 <Button onClick={postImages} 
                 sx={{

@@ -22,7 +22,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateGelathiCircle({gelathiData}) {
+export default function CreateGelathiCircle({gelathiData,handleCloseGelathi}) {
     console.log(gelathiData,"<----gelathiDatagelathiData")
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(dayjs('2022-04-17'));
@@ -40,6 +40,7 @@ export default function CreateGelathiCircle({gelathiData}) {
   };
 
   const apiHit = () =>{
+    handleClose();
     var raw = JSON.stringify({
         "project_id": "281",
         "circle_name": sendData?.circle_name,
@@ -54,7 +55,7 @@ export default function CreateGelathiCircle({gelathiData}) {
           };
           fetch("https://bdms.buzzwomen.org/appTest/createCircle.php", requestOptions)
           .then(response => response.text())
-          .then(result => handleClose())
+          .then(result =>{ handleClose();handleCloseGelathi()})
           .catch(error => console.log('error', error));
 
 
@@ -62,7 +63,7 @@ export default function CreateGelathiCircle({gelathiData}) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={()=>{open?apiHit(): handleClickOpen()}}>
+      <Button variant="standard" onClick={()=>{open?apiHit(): handleClickOpen()}} sx={{color:'white'}}>
        Save
       </Button>
       <Dialog
@@ -83,10 +84,10 @@ export default function CreateGelathiCircle({gelathiData}) {
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
              New Gelathi Circle
-            </Typography>
-            <Button autoFocus color="inherit" onClick={apiHit}>
+           
+            <Button autoFocus color="inherit" sx={{float:'right',color:'white'}} onClick={apiHit}>
               save
-            </Button>
+            </Button> </Typography>
           </Toolbar>
         </AppBar>
         <Card style={{marginTop:83}}>

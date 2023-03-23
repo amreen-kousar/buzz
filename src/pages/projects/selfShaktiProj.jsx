@@ -6,7 +6,7 @@ import ProjectMultiDrawer from '../Components/ProjectMultiDrawer';
 import Iconify from 'src/components/Iconify';
 import { Link, useLocation } from 'react-router-dom';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
-import Filtersmain from './projectfilters/filtersmain';
+import Shakthimain from './projectfilters/Shakthimain';
 export default function selfShaktiProj() {
     const {state} = useLocation()
     // console.log("shaktishakti",state)
@@ -47,20 +47,31 @@ export default function selfShaktiProj() {
     const handleclose=()=>{
       setFilter(false)
     }
-    useEffect(() => {
-      shakti();
-  
-    }, [])
-    const shakti = async(id,i,g) =>{
+    const user = async (d, filter_type) => {
+      if (filter_type) {
+        setSelected(filter_type)
+        let ids = { "Rescheduled":1,"Cancelled":2}
+        filter_type.id = ids[filter_type.type]
+      }
+      shakti(d,filter_type);
+      console.log(filter_type?.id,"filterid")
+   }
+   useEffect(() => {
+       shakti();
+       }, []
+   )
 
+    const shakti = async(id,i,g) =>{
+console.log(i,"filtereeeeee")
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "end_date": g==="date"?i:'',
             "search": search,
             "project_id": state?.id,
-            "filter_type": "",
+            "filter_type": i?.id?i?.id:'',
             "start_date": g==="date"?id:'',
+            "type":state?.type,
             "trainer_id": "",
             "emp_id": idvalue
           });
@@ -165,9 +176,10 @@ export default function selfShaktiProj() {
           </Button>
                 </Typography>
                 <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-                <Filtersmain
+                <Shakthimain
                     type="SelfShakthi"
                     onDateSubmit={onDateSubmit}
+                    user={user}
                     isOpenFilter={filter}
                     getData={getData}
                     shakti={shakti}
@@ -183,7 +195,8 @@ export default function selfShaktiProj() {
                     selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
-            {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
+            <Typography style={{fontWeight:500,marginLeft:2}}> All Training Batch : ({count})</Typography> 
+               {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ProjectMultiDrawer
                 batchState={batchState}

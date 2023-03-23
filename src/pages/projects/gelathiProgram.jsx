@@ -16,15 +16,29 @@ export default function gelathiProgram(props) {
     const [count,setCount]= useState('');
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
+
+  // useEffect(() => {
+  //     user()
+  //   })
+    const user = async (d, filter_type) => {
+       if (filter_type) {
+         setSelected(filter_type)
+         let ids = { "Circle Meetings": 1,"Village Visits":2,"Beehive Visits":3,"Rescheduled":4,"Cancelled":5}
+         filter_type.id = ids[filter_type.type]
+       }
+       gelathiPrograme(d,filter_type);
+       console.log(filter_type?.id,"filterid")
+    }
     useEffect(() => {
         gelathiPrograme();
         }, []
     )
     const gelathiPrograme = async(id,i,g) =>{
+      console.log(id,"gelrhaiiii",i)
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
-            "filter": "",
+            "filter": i?.id?i?.id:'',
             "end_date":  g==="date"?i:'',
             "search": search,
             "project_id": state?.id,
@@ -129,14 +143,20 @@ export default function gelathiProgram(props) {
       console.log(e, "<----scasds")
     }
     const getData = (itm, i) => {
+    console.log(itm,"getdata")
     setSelected(itm)
+   
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     gelathiPrograme(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
     setFilterData(data)
     handleclose()
     console.log("sdfgsdfdfssd", itm, i)
-  }
+    }
+  
+   
+  console.log(selected,"value")
+  
     return (
 
         <Container>
@@ -157,14 +177,21 @@ export default function gelathiProgram(props) {
             </Stack>
             
             {
-                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected  && (selected?.type=='Search') && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
+            {
+                    selected  && (selected?.type=='Circle Meetings' || selected?.type=='Beehive Visits' || selected?.type=='Rescheduled'|| selected?.type=='Cancelled' || selected?.type=='Village Visits') && <><Chip label={`${selected?.type} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            }
+            
+            
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <Filtersmain
                     type="GelathiProgram"
+                    user={user}
                     isOpenFilter={filter}
                     onDateSubmit={onDateSubmit}
                     gelathiPrograme={gelathiPrograme}
+                    getData={getData}
                     onOpenFilter={handleopen}
                     onCloseFilter={handleclose}
                 />
@@ -183,7 +210,7 @@ export default function gelathiProgram(props) {
             {/* </Stack> */}
 
             {programe?.list?.length!==0?programe?.list?.map((itm) => {
-                        console.log(itm, "<---programeprogrameprograme")
+                        // console.log(itm, "<---programeprogrameprograme")
                         return (
                             <Card style={styles.card1} onClick={() => {
                                 setClickData({ name: itm.gf_session_id, title: "Gelathi program Name" })

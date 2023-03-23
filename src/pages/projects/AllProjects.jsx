@@ -421,7 +421,7 @@ console.log(data,"dataaaaaaaaaaa")
                                     {
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
                                     }</> :
-                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
+                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
                             }
                         </TabPanel>
 
@@ -446,7 +446,7 @@ console.log(data,"dataaaaaaaaaaa")
                                     {
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countPublished} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
                                     }</> :
-                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
+                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
                             }
                         </TabPanel>
 
@@ -473,7 +473,7 @@ console.log(data,"dataaaaaaaaaaa")
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countCompleted} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
                                     }
                                 </> :
-                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
+                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
 
                             }
                         </TabPanel>

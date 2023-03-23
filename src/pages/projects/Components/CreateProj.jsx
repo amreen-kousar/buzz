@@ -304,16 +304,16 @@ console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
   }
   const createProjectpublish = () => {
 
-    if(name.length==0){
-     setWarn(true)
-     setMessage("Please Add trainers")
+    // if(name.length==0){
+    //  setWarn(true)
+    //  setMessage("Please Add trainers")
  
-    }
-    else if(gelathiName.length==0){
-     setWarn(true)
-     setMessage("Please Add Gelathi Facilators ")
-    }
-    else{
+    // }
+    // else if(gelathiName.length==0){
+    //  setWarn(true)
+    //  setMessage("Please Add Gelathi Facilators ")
+    // }
+    // else{
      var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
      var formdata = new FormData();
      setCreatePro(false)
@@ -345,8 +345,7 @@ console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
        .catch(function (error) {
          console.log(error);
        });
-    }
- 
+    
    }
   return (
     <div>

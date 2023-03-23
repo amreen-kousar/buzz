@@ -188,7 +188,7 @@ export default function enrolledGreenMotivatorsList() {
                     </Card>)
             }):
             <>
-            <h1>No  Green  Motivators Found</h1>
+            <h4 style={{textAlign:'center'}}>No Green  Motivators Found</h4>
             </>}
 
 

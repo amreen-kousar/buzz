@@ -139,6 +139,7 @@ export default function enrolledGelathiList() {
                     type="Gelathis"
                     isOpenFilter={filter}
                     onOpenFilter={handleopen}
+                    getData={getData}
                     onCloseFilter={handleclose}
                 />
             </Stack>
@@ -182,7 +183,7 @@ export default function enrolledGelathiList() {
                         </Grid>
                     </Card>)
             }):<>
-            <h1>No Enrolled Gelathi Found</h1>
+            <h4 style={{textAlign:'center'}}>No Enrolled Gelathi Found</h4>
             </>}
 
         </Container>
