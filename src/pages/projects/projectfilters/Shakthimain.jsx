@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import Trainersdata from './Trainersdata';
 import axios from 'axios';
 // material
 import {
@@ -20,13 +21,13 @@ Shakthimain.propTypes = {
     onCloseFilter: PropTypes.func,
   };
 
-export default function Shakthimain({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, user, getData, onSumbit, onDateSubmit, type, shakti,gelathiPrograme }) {
+export default function Shakthimain({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, user, getData, onSumbit, onDateSubmit, type, shakti,data1 }) {
 
     var [selectDATA, setSelectData] = useState()
   
     const filterPermissions = {
   
-      SelfShakthi: [{ id: 46, roles: ['1', '8', '12', '3', '11', '9', '7'] },  { id: 9, roles: ['1', '9', '11', '4', '6', '8', '5', '12', '13', '3', '7'] }, {id:1,roles:['1','12']},{id:2,roles:['1', '8', '12', '3', '11', '9', '7']},{id:5,roles:['1','12']}],
+      SelfShakthi: [{ id: 46, roles: ['1', '4','5', '12', '3', '11', '9', '7'] },  { id: 9, roles: ['1', '4','5', '12', '3', '11', '9', '7'] }, {id:1,roles:['1', '4','5', '12', '3', '11', '9', '7']},{id:2,roles:['1', '4','5', '12', '3', '11', '9', '7']},{id:5,roles:['1', '4', '12', '3', '11', '9', '7']}],
   
     //   GelathiProgram: [{id:45,roles:['1','8','12']},{id:2,roles:['1','12']},{id:1,roles:['1','12']},{id:3,roles:['1','12']},{ id: 9, roles: ['1', '2', '3', '4', '5', '9', '11', '12', '13', '6'] },{id:6,roles:['1','12']},{id:4,roles:['1','12']},{id:5,roles:['1','12']}],
   
@@ -141,17 +142,18 @@ export default function Shakthimain({ isOpenFilter, onOpenFilter, onCloseFilter,
             </div>
             {
             type != 'people' && <div>
-              {/* {
-                selectDATA == 5 && <Grid>
-                  <Trainers type={type} getData={getData} selectDATA={selectDATA} />
-                </Grid>
-              }*/}
               {
+                selectDATA == 5 && <Grid>
+                  <Trainersdata type={type} getData={getData} selectDATA={selectDATA} data1={data1} />
+                
+                </Grid>
+              }
+              {/* {
                 selectDATA == 6 && <Grid>
                   <GelathiFacilitators type={type} getData={getData} selectDATA={selectDATA} />
                 </Grid>
               } 
-              
+               */}
               {
                 selectDATA == 9 && <Grid>
                   <Daterange getData={getData} selectDATA={selectDATA} onDateSubmit={onDateSubmit} />

@@ -52,14 +52,17 @@ export default function CreateTrainerBatch(props) {
     setOpen(false);
   };
   useEffect(() => {
-    villageList();
+    villageList(props?.data1);
 
-  }, [])
-  const villageList = async => {
+  }, [props?.data1])
+  
+  console.log(props?.data1?.location_id,"location")
+  const villageList = async(i) => {
+    
     var data = JSON.stringify({
-      "taluk_id": props?.data1?.location_id
+      "taluk_id":i?.location_id
     });
-
+console.log(props?.data1.location_id,"<----------------------props?.data1?.location_idprops?.data1?.location_id")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getVillageList.php',
@@ -68,7 +71,7 @@ export default function CreateTrainerBatch(props) {
       },
       data: data
     };
-
+console.log(data,"data")
     axios(config)
       .then(function (response) {
         setVillage(response.data)
@@ -199,6 +202,7 @@ export default function CreateTrainerBatch(props) {
             fullWidth
             color="common"
             id="outlined-error"
+            type="text"
             onChange={(e) => { setTrainerData({ ...trainerData, sub_village: e?.target?.value }) }}
             label="Sub Village" />
         </Stack>
@@ -208,6 +212,7 @@ export default function CreateTrainerBatch(props) {
             color="common"
             id="outlined-error"
             label="Number Of Participants"
+            type='number'
             onChange={(e) => { setTrainerData({ ...trainerData, number_of_participants: e?.target?.value }) }}
           />
         </Stack>
@@ -216,7 +221,7 @@ export default function CreateTrainerBatch(props) {
             fullWidth
             color="common"
             onChange={(e) => { setTrainerData({ ...trainerData, contact_person: e?.target?.value }) }}
-           
+            type="text"
             id="outlined-error"
             label="Contact Person" />
         </Stack>
@@ -225,7 +230,7 @@ export default function CreateTrainerBatch(props) {
             fullWidth
             color="common"
             onChange={(e) => { setTrainerData({ ...trainerData, contact_number: e?.target?.value }) }}
-            
+            type="number"
             id="outlined-error"
             label="Contact Number" />
         </Stack>

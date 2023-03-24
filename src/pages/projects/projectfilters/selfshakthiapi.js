@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export default async function Filtersapirequest(props) {
-    console.log('filtersrequest',props?.data1)
+export default async function shakthiapirequest(props) {
+    console.log('filtersrequest',props?.data1,props)
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var response = []
@@ -15,12 +15,12 @@ export default async function Filtersapirequest(props) {
         "end_date":"",
         "search":"",
         "project_id":props?.data1?.project_id, 
-        "gelathi_id":"", 
+        "trainer_id":"", 
         "start_date":"", 
     });
     const config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getGFSessions.php',
+        url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatch.php',
         headers: {
             'Content-Type': 'application/json'
         },

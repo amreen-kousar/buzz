@@ -84,7 +84,7 @@ export default function Trainerslist(){
     return(
         <>
       
-        <div style={{position:'absolute',right:0,float:'right',padding:5}}>
+        <div style={{position:'absolute',right:'0px',float:'right'}}>
       
       <IconButton onClick={handleClickOpen}>
        <Iconify icon="material-symbols:add" width={20} height={20}  color="black"  />

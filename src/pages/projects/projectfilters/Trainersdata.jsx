@@ -1,27 +1,26 @@
 import { useState, useEffect } from 'react';
-import Filtersapirequest from './Gelathiapirequest';
-import { Card } from '@mui/material';
+import shakthiapirequest from './selfshakthiapi';
 import Iconify from '../../../components/Iconify';
+
+import { Card } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
-export default function GelathiFacilitators({ selectDATA, getData,type,data1 }) {
-
-  const [glead, setGlead] = useState();
+export default function Trainersdata({ selectDATA, getData,type,data1}) {
+ 
+  const [train, setTrain] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
 
-
   useEffect(() => {
-    lead()
-  }, [])
-
-  const lead = async () => { 
+    trainer()
+  }, []
+  )
+  const trainer = async () => {
   
-    Filtersapirequest({ selectDATA: 6 ,data1}).then(res => setGlead(res))
-  
-}
+    shakthiapirequest({ selectDATA: 5,data1}).then(res => setTrain(res))  
+  }
   const getSearchFilter = (e) => {
     setSearchInFilter(e)
   }
@@ -29,10 +28,11 @@ export default function GelathiFacilitators({ selectDATA, getData,type,data1 }) 
   const returnSearchFilter = () => {
     return searchInFilter
   }
-
+  console.log(data1?.trainers)
   return (
-    <Card>
-    {data1?.gelathiFacilitator?.length !== 0 && data1?.gelathiFacilitator?.map(itm => {
+
+     <Card>
+    {data1?.trainers?.length !== 0 && data1?.trainers?.map(itm => {
         if (itm?.name?.toLowerCase())
             return (
                 <TableContainer sx={{ paddingLeft: "1rem" }} ><br />
@@ -48,5 +48,5 @@ export default function GelathiFacilitators({ selectDATA, getData,type,data1 }) 
             )
     })}
   </Card>
-  );
+    );
 }

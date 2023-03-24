@@ -15,7 +15,7 @@ function AddUser(props) {
     let [inputProject, setInputProject] = useState([''])
 
     let [filteredProjects, setFilteredProjects] = useState([])
-
+    const [projects, setProjects] = useState([])
 
     let [errors, setErrors] = useState({ office_email_id: false })
 
@@ -162,12 +162,14 @@ function AddUser(props) {
 
         axios(config)
             .then((response) => {
-                console.log(response.data.list, 'project')
+               
                 let temprepoManagerProject = response.data.list.map(repo => { return { label: repo?.projectName, id: repo.id } })
                 setReportingManagerProject([...temprepoManagerProject,
                     // { id: '210', label: 'testme' }
                 ])
+                console.log(response.data.list, 'project')
             })
+
             .catch((error) => {
                 console.log(error);
             });
@@ -222,7 +224,7 @@ let userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 console.log(userid,"userrrrrridddddddd")
     const submitUser = () => {
         AddUser.project = inputProject.map(i => parseInt(i.id))
-        AddUser.officeMailId = AddUser.office_email_id
+        AddUser.office_email_id = AddUser.office_email_id
         AddUser.empRole = AddUser.role.id
         AddUser.supervisorId = AddUser.reportingManager.id
         AddUser.profile_pic = ''
@@ -388,6 +390,7 @@ console.log(userid,"userrrrrridddddddd")
                                         // label="Role"
                                         onChange={(e) => { getEmpId(e.target.value) }}
                                     >
+                                        {console.log(roles,"role")}
                                         {roles.map(role => {
                                             return <MenuItem value={role ?? ''}>{role?.roleName}</MenuItem>
                                         })}
@@ -426,10 +429,12 @@ console.log(userid,"userrrrrridddddddd")
                                         defaultValue={AddUser.reportingManager}
                                         label="reportingManager"
                                         onChange={(event, value) => getProjectOfManager(value)}
+                                       
                                         renderInput={(params) => <TextField {...params} label="ReportingManger" />}
                                     />
                                 </FormControl>
                                 } 
+                            
                                 {/* {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Date of joining " type="date" InputLabelProps={{
                                     shrink: true,
                                 }} value={AddUser.doj} onChange={(e) => { setAddUser({ ...AddUser, doj: e.target.value }) }} variant="outlined" />

@@ -10,6 +10,7 @@ import {
 // components
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
+import GelathiFacilitators from './Gelathifacilitators';
 import Daterange from './Daterange';
 
 import { id } from 'date-fns/locale';
@@ -20,23 +21,21 @@ Filtersmain.propTypes = {
     onCloseFilter: PropTypes.func,
   };
 
-export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, user, getData, onSumbit, onDateSubmit, type, shakti,gelathiPrograme }) {
+export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, user, getData, onSumbit, onDateSubmit, type, data1, gelathiPrograme }) {
 
     var [selectDATA, setSelectData] = useState()
   
     const filterPermissions = {
   
-      // SelfShakthi: [{ id: 46, roles: ['1', '8', '12', '3', '11', '9', '7'] },  { id: 9, roles: ['1', '9', '11', '4', '6', '8', '5', '12', '13', '3', '7'] }, {id:4,roles:['1','12']},{id:5,roles:['1', '8', '12', '3', '11', '9', '7']},{id:5,roles:['1','12']}],
+      GelathiProgram: [{id:45,roles:['1','3','4','6','12','13']},{id:2,roles:['1','3','4','6','12','13']},{id:1,roles:['1','3','4','6','12','13']},{id:3,roles:['1','3','4','6','12','13']},{ id: 9, roles: ['1','3','4','6','12','13']},{id:4,roles:['1','12']},{id:5,roles:['1','3','4','6','12','13']}],
   
-      GelathiProgram: [{id:45,roles:['1','8','12']},{id:2,roles:['1','12']},{id:1,roles:['1','12']},{id:3,roles:['1','12']},{ id: 9, roles: ['1', '2', '3', '4', '5', '9', '11', '12', '13', '6'] },{id:6,roles:['1','12']},{id:4,roles:['1','12']},{id:5,roles:['1','12']}],
+      GreenMotivators: [{ id: 6, roles: ['1','3','12','4','6','13'] }],
   
-      // Gelathis: [{ id: 6, roles: ['1', '3', '12', '11', '4', '2'] }],
+      Vyapar: [{ id: 6, roles: ['1','3','12','4','6','13'] }],
   
-      // GreenMotivators: [{ id: 6, roles: ['1', '3', '12', '11', '4', '2'] }],
-  
-      // Vyapar: [{ id: 6, roles: ['1', '3', '12', '11', '4', '2'] }],
-  
-      // Gelathicircles: [{ id: 6, roles: ['1', '3', '12', '11', '4', '2'] }]
+      Gelathicircles: [{ id: 6, roles: ['1','3','12','4','6','13'] }],
+
+      Gelathis:[{id:6,roles:['1','3','12','4','6','13']}]
     }
   
   
@@ -145,14 +144,10 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
             </div>
             {
             type != 'people' && <div>
-              {/* {
-                selectDATA == 5 && <Grid>
-                  <Trainers type={type} getData={getData} selectDATA={selectDATA} />
-                </Grid>
-              }*/}
+         
               {
                 selectDATA == 6 && <Grid>
-                  <GelathiFacilitators type={type} getData={getData} selectDATA={selectDATA} />
+                  <GelathiFacilitators type={type} getData={getData} selectDATA={selectDATA} data1={data1} />
                 </Grid>
               } 
               

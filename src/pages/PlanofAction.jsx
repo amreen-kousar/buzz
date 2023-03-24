@@ -265,6 +265,7 @@ export default function PlanofAction() {
       </Stack> */}
 
       {drawerEvent && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        {console.log(select,"selectedvalue")}
         <PoaEvent
           select={select}
           useridvalue ={select?.user_id}
@@ -490,9 +491,9 @@ export default function PlanofAction() {
 
                         return (
                           <Card style={{ marginBottom: 30, marginTop: 10 }} onClick={() => {
-                            console.log(itm,"<-----wqeqwewqewqe")
+                           
                            setSelect(itm)
-
+                           
                           }}>
 
                             <TableContainer component={Paper}>

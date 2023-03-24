@@ -41,7 +41,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   
   
   const [locationS,setLocation] = useState();
-  const [checkin, setCheckIn] = useState();
+  const [checkin, setCheckIn] = useState('');
   const [checkout, setCheckout] = useState('')
   const [checkvisible,setCheckvisible]= useState(false);
   const [image, setImage] = React.useState([]);
@@ -346,8 +346,8 @@ const handlecheckout=()=>{
               </CardContent>
             </Card>
 
-           
-           {(eventdetails?.check_in=="" || eventdetails?.check_out=="")&&(useridvalue==idvalue)?<Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
+           {console.log(select?.status,"status")}
+           {(eventdetails?.check_in=="" || eventdetails?.check_out=="")&&(useridvalue==idvalue)&&(select?.status==0)?<Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
             <CardContent>
               <Typography style={{textAlign:'center'}}><u>CheckIn/Out Status</u></Typography>
               <br/>
