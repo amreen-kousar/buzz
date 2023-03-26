@@ -1,9 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, CardContent, Card, Grid, FormControl, InputLabel, MenuItem, Select, TextField, Stack, Snackbar, Alert } from '@mui/material';
+import {
+  Button,
+  CardContent,
+  Card,
+  Grid,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Stack,
+  Snackbar,
+  Alert,
+} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
-import moment from 'moment'
+import moment from 'moment';
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -17,7 +30,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Addbus from '../../buses/Addbus';
 import dayjs from 'dayjs';
 import AddTrainerDrawer from './AddTrainerDrawer';
-import AddGelathifacilitators from './AddGelathifacilitators'
+import AddGelathifacilitators from './AddGelathifacilitators';
 import Add from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Iconify from 'src/components/Iconify';
@@ -25,33 +38,43 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateProj({ createPro, setCreatePro, sendData, viewMessage, edit ,projData}) {
-  console.log(sendData, "<------sendDatasendDatasendDatasendData")
+export default function CreateProj({ createPro, setCreatePro, sendData, viewMessage, edit, projData }) {
+  console.log(sendData, '<------sendDatasendDatasendDatasendData');
   const [open, setOpen] = React.useState(false);
   const [openFilter, setOpenFilter] = useState(false);
   const [opengelathiFilter, setOpengelathiFilter] = useState(false);
-  const [partner, setPartner] = useState([])
-  const [warn,setWarn]=useState(false)
-  const [message,setMessage]=useState(null)
-  const minDate = new Date()
-  const [notify, setNotify] = useState(false)
-  const [busData, setBusData] = useState([])
-  const [teamData, setTeamData] = useState([])
-  const [trainerData, setTrainerData] = useState([])
-  let [name, setName] = useState([])
-  let [gelathiName, setGelathiName] = useState([])
-  const [driverData, setDriverData] = useState([])
-  const [deleteData, setDeleteData] = useState([])
+  const [partner, setPartner] = useState([]);
+  const [warn, setWarn] = useState(false);
+  const [message, setMessage] = useState(null);
+  const minDate = new Date();
+  const [notify, setNotify] = useState(false);
+  const [busData, setBusData] = useState([]);
+  const [teamData, setTeamData] = useState([]);
+  const [trainerData, setTrainerData] = useState([]);
+  let [name, setName] = useState([]);
+  let [gelathiName, setGelathiName] = useState([]);
+  const [driverData, setDriverData] = useState([]);
+  const [deleteData, setDeleteData] = useState([]);
 
-  const formatDate = (itm)=>{
-    const currentDATE = itm?.split("-")
-    const newDate = `${currentDATE[2]}-${currentDATE[1]}-${currentDATE[0]}`
-    return newDate
-   
-   }
-  const [data, setData] = useState({ ...sendData,start_date:formatDate(sendData?.startDate),end_date:formatDate(sendData?.endDate)});
-console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
-  console.log(data,"<-----dascascascascsacascsaascasa")
+  const [displayCount , setDisplayCount] = useState(true)
+
+  console.log(edit , "edit value")
+  const formatDate = (itm) => {
+    if (itm) {
+      const currentDATE = itm?.split('-');
+      const newDate = `${currentDATE[2]}-${currentDATE[1]}-${currentDATE[0]}`;
+      return newDate;
+    } else {
+      return '';
+    }
+  };
+  const [data, setData] = useState({
+    ...sendData,
+    start_date: formatDate(sendData?.startDate),
+    end_date: formatDate(sendData?.endDate),
+  });
+
+  console.log(data, '<-----dascascascascsacascsaascasa');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -75,17 +98,18 @@ console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
     setOpen(false);
   };
   useEffect(() => {
-    console.log(edit, "eeeeeeeeeeeeeeee")
+    console.log(edit, 'eeeeeeeeeeeeeeee');
     if (edit) {
       setOpen(true);
-      assignValues()
+      assignValues();
     }
     partnerList();
     busList();
     teamList();
     driverList();
-    setNotify(true)
-  }, [])
+    setNotify(true);
+    gelathinamelist()
+  }, [data.gelathiName ,data.trainers]);
 
   const assignValues = () => {
     let tempdata = {
@@ -94,80 +118,77 @@ console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
       endDate: sendData.endDate,
       operations_manager_id: sendData.operations_manager_id,
       driver_id: sendData.driverId,
-      training_target:sendData.training_target,
-      project_id:sendData.project_id
-
-    }
-    setData(tempdata)
-    console.log(tempdata, "tempdataaaaa")
-  }
-  const partnerList = async => {
+      training_target: sendData.training_target,
+      project_id: sendData.project_id,
+    };
+    setData(tempdata);
+    console.log(tempdata, 'tempdataaaaa');
+  };
+  const partnerList = (async) => {
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getPartnerList.php',
-      headers: {}
+      headers: {},
     };
 
     axios(config)
       .then(function (response) {
-        setPartner(response.data)
+        setPartner(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
+  };
 
-  }
-
-  const busList = async => {
+  const busList = (async) => {
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getBusList.php',
-      headers: {}
+      headers: {},
     };
 
     axios(config)
       .then(function (response) {
-        console.log(response.data, "bussssss")
-        setBusData(response.data)
+        console.log(response.data, 'bussssss');
+        setBusData(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
-  const teamList = async => {
+  const teamList = (async) => {
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getOperationsManagerList.php',
-      headers: {}
+      headers: {},
     };
 
     axios(config)
       .then(function (response) {
-        console.log(response.data, "teamlist opers")
-        setTeamData(response.data)
+        console.log(response.data, 'teamlist opers');
+        setTeamData(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-
-  }
-  const driverList = async => {
+  };
+  const driverList = (async) => {
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getDriverList.php',
-      headers: {}
+      headers: {},
     };
 
     axios(config)
       .then(function (response) {
-        setDriverData(response.data)
+        setDriverData(response.data);
         console.log(response.data, '<------driverDatadriverData');
       })
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
   // const showTrainerList = async => {
   //   var gelathidata = JSON.stringify({
   //     "role_id": 13,
@@ -196,56 +217,55 @@ console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
 
   // }
 
-  const gelathinamelist = async => {
+  const gelathinamelist = (async) => {
     var data = JSON.stringify({
-      "project_id": sendData.projectId,
-      "role_id": JSON.parse(localStorage.getItem('userDetails'))?.id,
-      "operation_manager_id": 35
+      project_id: sendData.projectId,
+      role_id: JSON.parse(localStorage.getItem('userDetails'))?.id,
+      operation_manager_id: 35,
     });
 
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      data: data
+      data: data,
     };
     axios(config)
       .then(function (response) {
-        setGelathiData(response?.data)
+        setGelathiData(response?.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
-  const showTrainerList = async => {
+  const showTrainerList = (async) => {
     var data = JSON.stringify({
-      "role_id": 5,
-      "project_id": sendData.projectId,
-      "operation_manager_id": 122,
-      "pageNum": 1
+      role_id: 5,
+      project_id: sendData.projectId,
+      operation_manager_id: 122,
+      pageNum: 1,
     });
 
     var config = {
       method: 'get',
       url: 'http://3.7.7.138/appTest/getPeopleList.php',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      data: data
+      data: data,
     };
 
     axios(config)
       .then(function (response) {
-        setTrainerData(response?.data)
+        setTrainerData(response?.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-
-  }
+  };
 
   // return (
   //   <div>
@@ -254,139 +274,175 @@ console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
   //     </Button>
 
   // }
- 
-  { console.log(data, "i am visible while changing", edit) }
+
+  {
+    console.log(data, 'i am visible while changing', edit);
+  }
 
   const createProject2 = () => {
+    if (name.length == 0) {
+      setWarn(true);
+      setMessage('Please Add trainers');
+    } else if (gelathiName.length == 0) {
+      setWarn(true);
+      setMessage('Please Add Gelathi Facilators ');
+    } else {
+      var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+      var formdata = new FormData();
+      console.log('creatproject working');
+      setCreatePro(false);
+      formdata.append('user_id', userid);
+      formdata.append('project_id', data.project_id);
+      formdata.append('partnerID', data.partner_id);
+      formdata.append('training_target', data.training_target);
+      formdata.append('startDate', moment(data.start_date?.$d)?.format('YYYY-MM-DD'));
+      formdata.append('endDate', moment(data.end_date?.$d)?.format('YYYY-MM-DD'));
+      formdata.append('busID', data.bus_id);
+      formdata.append('driverID', data.driverId);
+      formdata.append('operations_manager_id', data.operations_manager_id);
+      formdata.append('locationID', data.locationid);
+      formdata.append('location_name', data.locationName), formdata.append('publish', '');
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
+        data: formdata,
+      };
 
-   if(name.length==0){
-    setWarn(true)
-    setMessage("Please Add trainers")
+      console.log(data.location_id, 'location id ');
 
-   }
-   else if(gelathiName.length==0){
-    setWarn(true)
-    setMessage("Please Add Gelathi Facilators ")
-   }
-   else{
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-    var formdata = new FormData();
-    setCreatePro(false)
-    formdata.append('user_id', userid);
-    formdata.append('project_id', data.project_id)
-    formdata.append('partnerID', data.partner_id)
-    formdata.append('training_target', data.training_target)
-    formdata.append('startDate', moment(data.start_date?.$d)?.format('YYYY-MM-DD'))
-    formdata.append('endDate', moment(data.end_date?.$d)?.format('YYYY-MM-DD'))
-    formdata.append('busID', data.bus_id)
-    formdata.append('driverID', data.driverId)
-    formdata.append("operations_manager_id", data.operations_manager_id)
-    formdata.append("locationID", data.location_id)
-    formdata.append("location_name", data.location_name),
-    formdata.append("publish", "")
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
-      data: formdata
-    };
-
-    axios(config)
-      .then(function (response) {
-        projData();
-        viewMessage('Project added sucessfully')
-        
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-   }
-
-  }
+      axios(config)
+        .then(function (response) {
+          projData();
+          viewMessage('Project added sucessfully');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
   const createProjectpublish = () => {
+    if (name.length == 0) {
+      setWarn(true);
+      setMessage('Please Add trainers');
+    } else if (gelathiName.length == 0) {
+      setWarn(true);
+      setMessage('Please Add Gelathi Facilators ');
+    } else {
+      var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+      var formdata = new FormData();
+      console.log('creatpublish working');
+      setCreatePro(false);
+      {
+        console.log(data, 'setdataaaaaaa');
+      }
+      formdata.append('user_id', userid);
+      formdata.append('project_id', data.projectId);
+      formdata.append('partnerID', data.partner_id);
+      formdata.append('training_target', data.training_target);
+      formdata.append('startDate', moment(data.start_date)?.format('YYYY-MM-DD'));
+      formdata.append('endDate', moment(data.end_date)?.format('YYYY-MM-DD'));
+      formdata.append('busID', data.bus_id);
+      formdata.append('driverID', data.driverId);
+      formdata.append('operations_manager_id', data.operations_manager_id);
+      formdata.append('locationID', data.locationid);
+      formdata.append('location_name', data.locationName), formdata.append('', '');
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
+        data: formdata,
+      };
 
-    // if(name.length==0){
-    //  setWarn(true)
-    //  setMessage("Please Add trainers")
- 
-    // }
-    // else if(gelathiName.length==0){
-    //  setWarn(true)
-    //  setMessage("Please Add Gelathi Facilators ")
-    // }
-    // else{
-     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-     var formdata = new FormData();
-     setCreatePro(false)
-     {console.log(data,"setdataaaaaaa")}
-     formdata.append('user_id', userid);
-     formdata.append('project_id', data.project_id)
-     formdata.append('partnerID', data.partner_id)
-     formdata.append('training_target', data.training_target)
-     formdata.append('startDate', moment(data.start_date?.$d)?.format('YYYY-MM-DD'))
-     formdata.append('endDate', moment(data.end_date?.$d)?.format('YYYY-MM-DD'))
-     formdata.append('busID', data.bus_id)
-     formdata.append('driverID', data.driverId)
-     formdata.append("operations_manager_id", data.operations_manager_id)
-     formdata.append("locationID", data.location_id)
-     formdata.append("location_name", data.location_name),
-     formdata.append("", "")
-     var config = {
-       method: 'post',
-       url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
-       data: formdata
-     };
- 
-     axios(config)
-       .then(function (response) {
-         projData();
-         viewMessage('Project added sucessfully')
-      
-       })
-       .catch(function (error) {
-         console.log(error);
-       });
-    
-   }
+      axios(config)
+        .then(function (response) {
+          projData();
+          viewMessage('Project added sucessfully');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
   return (
     <div>
-      {
-        !edit && <Button fullWidth variant="filled" onClick={handleClickOpen}>
+      {!edit && (
+        <Button fullWidth variant="filled" onClick={handleClickOpen}>
           Create New Project
         </Button>
-      }
+      )}
 
-      <Dialog
-        fullScreen
-        open={createPro}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <form onSubmit={(e) => { e.preventDefault(); createProjectpublish() }}>
+      <Dialog fullScreen open={createPro} onClose={handleClose} TransitionComponent={Transition}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            createProjectpublish();
+          }}
+        >
           <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
             <Toolbar>
-             <IconButton edge="start" color="inherit" onClick={()=>{setCreatePro(false)}}> <CloseIcon/></IconButton>
-            
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={() => {
+                  setCreatePro(false);
+                }}
+              >
+                {' '}
+                <CloseIcon />
+              </IconButton>
+
               {/* <Button sx={{float:'right'}} autoFocus color="inherit" type="submit">
                 save
               </Button> */}
-              <IconButton edge="end"  autoFocus color="inherit" type="submit" sx={{right:40,float:'right',position:'absolute'}}>
-                 <Iconify icon="material-symbols:save"/>
+              <IconButton
+                edge="end"
+                autoFocus
+                color="inherit"
+                type="submit"
+                sx={{ right: 40, float: 'right', position: 'absolute' }}
+              >
+                <Iconify icon="material-symbols:save" />
               </IconButton>
-              {(edit)? <Button autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
-                publish
-              </Button>:null}
+              {edit ? (
+                <Button autoFocus color="inherit" sx={{ float: 'right' }} onClick={createProject2}>
+                  publish
+                </Button>
+              ) : null}
             </Toolbar>
           </AppBar>
           <Grid>
             <CardContent>
-            <Snackbar open={warn} autoHideDuration={3000} onClose={() => { setWarn(false) }}>
-                <Alert onClose={() => { setWarn(false) }} severity="warning" sx={{ width: '100%' }}>
-                {message}
+              <Snackbar
+                open={warn}
+                autoHideDuration={3000}
+                onClose={() => {
+                  setWarn(false);
+                }}
+              >
+                <Alert
+                  onClose={() => {
+                    setWarn(false);
+                  }}
+                  severity="warning"
+                  sx={{ width: '100%' }}
+                >
+                  {message}
                 </Alert>
               </Snackbar>
 
-              <Snackbar open={notify} autoHideDuration={3000} onClose={() => { setNotify(false) }}>
-                <Alert onClose={() => { setNotify(false) }} severity="success" sx={{ width: '100%' }}>
+              <Snackbar
+                open={notify}
+                autoHideDuration={3000}
+                onClose={() => {
+                  setNotify(false);
+                }}
+              >
+                <Alert
+                  onClose={() => {
+                    setNotify(false);
+                  }}
+                  severity="success"
+                  sx={{ width: '100%' }}
+                >
                   Project created succesfully
                 </Alert>
               </Snackbar>
@@ -404,74 +460,102 @@ console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
           </Grid>
           <Grid>
             <CardContent>
-              <Typography style={{ marginLeft: 10 }} variant="h6">Project Details :</Typography>
+              <Typography style={{ marginLeft: 10 }} variant="h6">
+                Project Details :
+              </Typography>
             </CardContent>
             <CardContent>
               <Stack>
                 <FormControl fullWidth>
                   {console.log(data, '<------------chcjcjcjcididid')}
-                  <InputLabel color="common" id="demo-simple-select-label"> Select Partner</InputLabel>
+                  <InputLabel color="common" id="demo-simple-select-label">
+                    {' '}
+                    Select Partner
+                  </InputLabel>
                   <Select
                     required
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={data.partner_id}
                     label="Select Partner"
-                    onChange={(e => {
-                      console.log(e, "<--hhhbhbh")
-                      setData({ ...data, partner_id: e?.target?.value })
-
-                    })}
+                    onChange={(e) => {
+                      console.log(e, '<--hhhbhbh');
+                      setData({ ...data, partner_id: e?.target?.value });
+                    }}
                   >
                     {/* <MenuItem value="" >Choose Partner </MenuItem> */}
-                    {partner?.list?.map(itm => {
-
-                      return (
-                        <MenuItem value={itm?.partnerID}>{itm?.partnerName}</MenuItem>
-                      )
-                    })
-                    }
+                    {partner?.list?.map((itm) => {
+                      return <MenuItem value={itm?.partnerID}>{itm?.partnerName}</MenuItem>;
+                    })}
                   </Select>
-                </FormControl></Stack>
+                </FormControl>
+              </Stack>
             </CardContent>
 
             <CardContent>
               <Stack mt={1} mb={2}>
-                <TextField id="Training Target" type="number"  defaultValue={data?.training_target} color="common" onChange={(e) => { setData({ ...data, training_target: e?.target?.value }) }} label="Training Target" variant="outlined" />
+                <TextField
+                  id="Training Target"
+                  type="number"
+                  defaultValue={data?.training_target}
+                  color="common"
+                  onChange={(e) => {
+                    setData({ ...data, training_target: e?.target?.value });
+                  }}
+                  label="Training Target"
+                  variant="outlined"
+                />
               </Stack>
             </CardContent>
             <Divider />
 
             <Grid>
               <CardContent>
-                <Typography style={{ marginLeft: 10 }} variant="h6">Project From / To Dates :</Typography>
+                <Typography style={{ marginLeft: 10 }} variant="h6">
+                  Project From / To Dates :
+                </Typography>
               </CardContent>
               <Stack>
                 <CardContent>
-                  <TextField type="date"
-                   // defaultValue={dayjs(data?.start_date)}
-                   defaultValue={dayjs( moment(data?.start_date)?.format('YYYY-MM-DD'))}
+                  <TextField
+                    type="date"
+                    // defaultValue={dayjs(data?.start_date)}
+                    defaultValue={dayjs(moment(data?.start_date)?.format('YYYY-MM-DD'))}
                     style={{ width: '20vw' }}
                     value={data.start_date}
                     InputProps={{
-                      inputProps: { min: moment(new Date())?.format('YYYY-MM-DD') }
+                      inputProps: { min: moment(new Date())?.format('YYYY-MM-DD') },
                     }}
                     onChange={(e) => {
-                      setData({ ...data, start_date: e?.target?.value })
-                    }} />
-{console.log(dayjs( moment(data?.endDate)?.format()),moment(data?.endDate)?.format('YYYY-MM-DD'),new Date(data?.endDate),data?.endDate,"<-- defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}",data?.end_date,data?.start_date)}
-                  <TextField type="date"
-                defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}
-                    style={{ width: '20vw', marginLeft: "2rem" }}
+                      setData({ ...data, start_date: e?.target?.value });
+                    }}
+                  />
+                  {console.log(
+                    dayjs(moment(data?.endDate)?.format()),
+                    moment(data?.endDate)?.format('YYYY-MM-DD'),
+                    new Date(data?.endDate),
+                    data?.endDate,
+                    "<-- defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}",
+                    data?.end_date,
+                    data?.start_date
+                  )}
+                  <TextField
+                    type="date"
+                    defaultValue={
+                      data?.end_date
+                        ? dayjs(moment(data?.end_date)?.format('YYYY-MM-DD'))
+                        : dayjs(moment(data?.endDate)?.format('YYYY-MM-DD'))
+                    }
+                    style={{ width: '20vw', marginLeft: '2rem' }}
                     value={data.end_date}
                     InputProps={{
-                      inputProps: { min: moment(data.end_date)?.format('YYYY-MM-DD') }
+                      inputProps: { min: moment(data.end_date)?.format('YYYY-MM-DD') },
                     }}
                     // defaultValue={data.endDate}
                     onChange={(e) => {
-                      setData({ ...data, end_date: e?.target?.value })
-                    }} />
-
+                      setData({ ...data, end_date: e?.target?.value });
+                    }}
+                  />
                   {/* <DatePicker color="common"
                   label="Date"
                   minDate={minDate}
@@ -480,7 +564,6 @@ console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
                     console.log(newValue, "<----newValuenewValue")
                     setData({ ...data, start_date: newValue })
                   }} */}
-
                   {/* renderInput={(params) => <TextField minDate={minDate}  {...params} style={{ width: '20vw' }} />}
                 /> &nbsp; */}
                   &nbsp;
@@ -504,29 +587,29 @@ console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
               <Typography variant="h6">Resources</Typography>
               <Stack mt={2}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" color="common">Select Bus</InputLabel>
+                  <InputLabel id="demo-simple-select-label" color="common">
+                    Select Bus
+                  </InputLabel>
                   <Select
-
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
                     defaultValue={data.bus_id}
                     value={data.bus_id}
                     label="Select Bus"
-                    onChange={(e => {
-                      setData({ ...data, bus_id: e?.target?.value })
-
-                    })}
+                    onChange={(e) => {
+                      setData({ ...data, bus_id: e?.target?.value });
+                    }}
                   >
-                    <MenuItem value="" default disabled>Choose Bus</MenuItem>
-                    {busData?.list?.map(itm => {
-                      return (
-                        <MenuItem value={itm?.id}>{itm?.register_number}</MenuItem>
-                      )
-                    })
-                    }
+                    <MenuItem value="" default disabled>
+                      Choose Bus
+                    </MenuItem>
+                    {busData?.list?.map((itm) => {
+                      return <MenuItem value={itm?.id}>{itm?.register_number}</MenuItem>;
+                    })}
                   </Select>
-                </FormControl ></Stack >
-            </CardContent >
+                </FormControl>
+              </Stack>
+            </CardContent>
             <Divider />
 
             <CardContent>
@@ -535,59 +618,57 @@ console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Select Operation Manager</InputLabel>
                   <Select
-
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
                     defaultValue={data.operations_manager_id}
-                
                     value={data.operations_manager_id}
                     label="Select Operation Manager"
-                    onChange={(e => {
+                    onChange={(e) => {
                       setData({ ...data, operations_manager_id: e?.target?.value });
-                      localStorage.setItem("operations_manager_id", e?.target?.value)
-                    })}
+                      localStorage.setItem('operations_manager_id', e?.target?.value);
+                    }}
                   >
-                    <MenuItem value="" default disabled>Choose Operation Manager</MenuItem>
-                    {teamData?.list?.map(itm => {
-                      return (
-                        <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
-                      )
-                    })
-                    }
+                    <MenuItem value="" default disabled>
+                      Choose Operation Manager
+                    </MenuItem>
+                    {teamData?.list?.map((itm) => {
+                      return <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>;
+                    })}
                   </Select>
-                </FormControl ></Stack >
-
+                </FormControl>
+              </Stack>
 
               <Stack mt={3}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Select Driver</InputLabel>
                   <Select
-
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
                     value={data.driverId}
                     defaultValue={data.driverId}
                     label="Select Driver"
-                    onChange={(e => {
-                      setData({ ...data, driverId: e?.target?.value })
+                    onChange={(e) => {
+                      setData({ ...data, driverId: e?.target?.value });
                       // driverList(e?.target?.value)
-                    })}
+                    }}
                   >
-                    <MenuItem value="" default disabled>Choose Driver</MenuItem>
-                    {driverData?.list?.map(itm => {
-                      return (
-                        <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
-                      )
-                    })
-                    }
+                    <MenuItem value="" default disabled>
+                      Choose Driver
+                    </MenuItem>
+                    {driverData?.list?.map((itm) => {
+                      return <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>;
+                    })}
                   </Select>
-                </FormControl></Stack>
+                </FormControl>
+              </Stack>
             </CardContent>
             <Divider />
             {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}> */}
             <AddTrainerDrawer
               isOpenFilter={openFilter}
-              getData={(e) => { setName(e) }}
+              getData={(e) => {
+                setName(e);
+              }}
               onOpenFilter={handleOpenFilter}
               sendData={sendData}
               onCloseFilter={handleCloseFilter}
@@ -595,116 +676,123 @@ console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
             <AddGelathifacilitators
               sendData={sendData}
               isOpenFilter={opengelathiFilter}
-              getData={(e) => { setGelathiName(e) }}
+              getData={(e) => {
+                setGelathiName(e);
+              }}
               onOpenFilter={handlegelathiOpenFilter}
               onCloseFilter={handlegelathiCloseFilter}
             />
 
-            {console.log(name, "<---sdfdsfdsfdssddss")}
+            {console.log(name, '<---sdfdsfdsfdssddss')}
             {/* </Stack> */}
             <CardContent>
-              <Card onClick={() => {
-                console.log("its copensdfdsfds")
-                handleOpenFilter()
-              }}>
+              <Card
+                onClick={() => {
+                  console.log('its copensdfdsfds');
+                  handleOpenFilter();
+                }}
+              >
                 <CardContent>
-
-                 
-                  <Typography variant='h6'>Trainers  ({name.length+data?.trainers?.length})<IconButton style={{float:'right'}}>
-                      <Iconify style={{ color: "black" }} icon="material-symbols:add" />
-                    </IconButton></Typography>
-                    {data?.trainers?.map(itm=>{
-                      return(
-                        <Card style={{ marginTop: 10 }}>
-                      <CardContent>
-                     
-                        <Typography mt={2} variant='subtitle2'>{itm?.name}</Typography>
-                       
-                        </CardContent >
-                    </Card >
-                      )
-                    })}
-                    {/* {sendData?.trainers_count} */}
-                    {/* {sendData?.trainers.map((itm)=>{
+                  <Typography variant="h6">
+                { edit? <> Trainers ({name.length + data?.trainers?.length})</> :<> Trainers ({name.length})</> }
+                    <IconButton style={{ float: 'right' }}>
+                      <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
+                    </IconButton>
+                  </Typography>
+                  {data?.trainers?.map((itm) => {
+                    return (
+                      <Card style={{ marginTop: 10 }}>
+                        <CardContent>
+                          <Typography mt={2} variant="subtitle2">
+                            {itm?.name}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                  {/* {sendData?.trainers_count} */}
+                  {/* {sendData?.trainers.map((itm)=>{
                        
                        return (<span value={itm?.emp_id}>{itm?.name}</span>)
                      })} */}
-                  {name?.length !== 0 &&
+                  {name?.length !== 0 && (
                     <Card style={{ marginTop: 10 }}>
                       <CardContent>
                         <Stack direction={'row'} spacing={4}>
-                       
                           {name?.map((i, index) => {
                             return (
-                              <Stack direction={'row'} >
-                                <Typography mt={2} variant='subtitle2'>{i}</Typography>
-                                <Stack style={{ marginLeft: 20 }} mt={2} >
+                              <Stack direction={'row'}>
+                                <Typography mt={2} variant="subtitle2">
+                                  {i}
+                                </Typography>
+                                <Stack style={{ marginLeft: 20 }} mt={2}>
                                   {/* <CancelIcon /> */}
                                 </Stack>
                               </Stack>
-
-                            )
-                          })
-                          }
-                           
-                        </Stack >
-                      </CardContent >
-                    </Card >
-                  }
-                </CardContent >
-              </Card >
-            </CardContent >
-
-
-
-            <CardContent>
-              <Card onClick={() => {
-                console.log("its copensdfdsfds")
-                handlegelathiOpenFilter()
-              }}>
-                <CardContent>
-                <Typography variant='h6'>Gelathi Facilators ({data?.gelathiFacilitator.length+gelathiName?.length})
-                  <IconButton style={{float:'right'}}>
-                      <Iconify style={{ color: "black" }} icon="material-symbols:add" />
-                    </IconButton>
-                    {data?.gelathiFacilitator?.map(itm=>{
-                      return(
-                        <Card style={{ marginTop: 10 }}>
-                      <CardContent>
-                     
-                        <Typography mt={2} variant='subtitle2'>{itm?.name}</Typography>
-                       
-                        </CardContent >
-                    </Card >
-                      )
-                    })}
-                    
-                    </Typography>
-                  {gelathiName?.length !== 0 &&
-                    <Card style={{ marginTop: 10 }}>
-                      <CardContent>
-                        <Stack spacing={4}  direction={'row'}>
-                          {gelathiName?.map(i => {
-                            return (
-                              <Stack >
-                                <Typography mt={2} variant='subtitle2'>{i}</Typography>
-                                <Stack style={{ marginLeft: 20 }} mt={2} >
-                                 
-                                </Stack>
-                              </Stack>
-                            )
+                            );
                           })}
                         </Stack>
                       </CardContent>
                     </Card>
-                  }
+                  )}
                 </CardContent>
               </Card>
             </CardContent>
 
-          </Grid >
+            <CardContent>
+              <Card
+                onClick={() => {
+                  console.log('its copensdfdsfds');
+                  handlegelathiOpenFilter();
+                }}
+              >
+                <CardContent>
+                  <Typography variant="h6">
+                    {
+                      edit ?   <> Gelathi Facilators ({data?.gelathiFacilitator?.length + gelathiName?.length })</> :<>Gelathi Facilators ({gelathiName.length})</> 
+                    }
+                   
+                    <IconButton style={{ float: 'right' }}>
+                      <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
+                    </IconButton>
+                    {data?.gelathiFacilitator?.map((itm) => {
+                      console.log("number of gelati",data?.gelathiFacilitator)
+                      return (
+                        <Card style={{ marginTop: 10 }}>
+                          <CardContent>
+                            <Typography mt={2} variant="subtitle2">
+                              {itm?.name}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </Typography>
+                  {gelathiName?.length !== 0 && (
+                    <Card style={{ marginTop: 10 }}>
+                      <CardContent>
+                        <Stack spacing={4} direction={'row'}>
+                          {console.log("galatiName",gelathiName )}
+                          {gelathiName?.map((i) => {
+                            return (
+                              <Stack>
+                                <Typography mt={2} variant="subtitle2">
+                                  {i}
+                                </Typography>
+                                <Stack style={{ marginLeft: 20 }} mt={2}></Stack>
+                              </Stack>
+                            );
+                          })}
+                        </Stack>
+                      </CardContent>
+                    </Card>
+                  )}
+                </CardContent>
+              </Card>
+            </CardContent>
+          </Grid>
         </form>
-      </Dialog >
-    </div >
+      </Dialog>
+    </div>
   );
 }

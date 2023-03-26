@@ -94,11 +94,28 @@ export default function Projectdashboard() {
 
   const apiHit = async (id, i, g) => {
     setLoader(true)
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    console.log(localStorage.getItem('profiledetails' ), "benak")
+    var userid = JSON.parse(localStorage.getItem('profiledetails'))?.emp_id
+    var role = JSON.parse(localStorage.getItem('profiledetails'))?.role
+
+    let roleid 
+
+    if(role==="Trainer"){
+      roleid=5
+    }else
+    if(role==="Operations Manager"){
+      roleid= 4
+    }else if(role==="Gelathi Facilitator"){
+      roleid= 6
+    }
+    else if(role==="Driver"){
+      roleid= 7
+    }
+
+    console.log(role , userid , "profile details")
     const data = {
       end_date: g === "date" ? i : '',
-      role_id: role,
+      role_id: roleid,
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       trainerId: g ? "" : i === 5 ? id?.id : '',
@@ -122,7 +139,7 @@ export default function Projectdashboard() {
     };
     axios(config)
       .then((response) => {
-        console.log(response.data)
+        console.log(response ,"api response in dashboard")
         setLoader(false)
         response.data.gelathi = 15022
         setSummaryData(response.data);
