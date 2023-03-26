@@ -16,6 +16,7 @@ export default function selfShaktiProj() {
     const [count,setCount] = useState();
     var [selected, setSelected] = useState(null)
     var [search, setSearch] = useState('')
+    const [trainerdata,setrainerdata]=useState('')
     // const [selfShakthi, setselfShakthi] = useState([{ stockname: "fist" }, { stockname: "second" }]);
     const searchFunction = (e) => {
         search = e
@@ -50,7 +51,7 @@ export default function selfShaktiProj() {
     const user = async (d, filter_type) => {
       if (filter_type) {
         setSelected(filter_type)
-        let ids = { "Rescheduled":1,"Cancelled":2}
+        let ids = { "Rescheduled":1,"Cancelled":2,"Trainers":5}
         filter_type.id = ids[filter_type.type]
       }
       shakti(d,filter_type);
@@ -62,7 +63,8 @@ export default function selfShaktiProj() {
    )
 
     const shakti = async(id,i,g) =>{
-console.log(i,"filtereeeeee")
+
+
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
@@ -72,7 +74,7 @@ console.log(i,"filtereeeeee")
             "filter_type": i?.id?i?.id:'',
             "start_date": g==="date"?id:'',
             "type":state?.type,
-            "trainer_id": "",
+            "trainer_id":id?.emp_id,
             "emp_id": idvalue
           });
           
@@ -133,7 +135,7 @@ console.log(i,"filtereeeeee")
   
     }
 
-   
+
 
     const handleDelete = () => {
       setSelected(null)
@@ -151,11 +153,12 @@ console.log(i,"filtereeeeee")
       // console.log(e, "<----scasds")
     }
     const getData = (itm, i) => {
-    setSelected(itm)
-    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+    setSelected({itm,type:'Trainers'})
+    const data = i === 5 ? { "trainer_id": itm?.emp_id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     shakti(itm, i)
     // console.log(data, i, itm, "<----sdfssreerfer")
     setFilterData(data)
+    
     handleclose()
     // console.log("sdfgsdfdfssd", itm, i)
   }
@@ -180,6 +183,7 @@ console.log(i,"filtereeeeee")
                     type="SelfShakthi"
                     onDateSubmit={onDateSubmit}
                     user={user}
+                    data1={data1}
                     isOpenFilter={filter}
                     getData={getData}
                     shakti={shakti}
@@ -192,7 +196,14 @@ console.log(i,"filtereeeeee")
           </Button> */}
             </Stack>
             {
-                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected && (selected?.type=='Search') && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            }
+              {
+                    selected && (selected?.type=='Trainers') && <><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            }
+          
+            {
+              selected && (selected?.type=='Rescheduled' || selected?.type=='Cancelled' )&& <><Chip label={`${selected?.type}`} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}> All Training Batch : ({count})</Typography> 
@@ -224,7 +235,10 @@ console.log(i,"filtereeeeee")
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                            {itm?.batch_name}
+                           {(itm?.day1_status=='Cancelled')?<Iconify sx={{marginLeft:2,width:20}} icon="material-symbols:cancel"/>:null}
+                                {(itm?.day1_status=='Reschedule')?<Iconify sx={{marginLeft:2,width:20,height:20}} icon="mdi:clock-outline"/>:null}
                             </Typography>
+                          
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }} >

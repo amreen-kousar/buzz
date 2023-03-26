@@ -429,23 +429,11 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 </Alert>
               </Snackbar>
 
-              <Snackbar
-                open={notify}
-                autoHideDuration={3000}
-                onClose={() => {
-                  setNotify(false);
-                }}
-              >
-                <Alert
-                  onClose={() => {
-                    setNotify(false);
-                  }}
-                  severity="success"
-                  sx={{ width: '100%' }}
-                >
+              {(!edit)?<Snackbar open={notify} autoHideDuration={3000} onClose={() => { setNotify(false) }}>
+                <Alert onClose={() => { setNotify(false) }} severity="success" sx={{ width: '100%' }}>
                   Project created succesfully
                 </Alert>
-              </Snackbar>
+              </Snackbar>:null}
               <Card style={{ top: 15 }}>
                 <CardContent>
                   <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">

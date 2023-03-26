@@ -23,7 +23,7 @@ export default function gelathiProgram(props) {
     const user = async (d, filter_type) => {
        if (filter_type) {
          setSelected(filter_type)
-         let ids = { "Circle Meetings": 1,"Village Visits":2,"Beehive Visits":3,"Rescheduled":4,"Cancelled":5}
+         let ids = { "Circle Meetings": 1,"Village Visits":2,"Beehive Visits":3,"Rescheduled":4,"Cancelled":5,"Gelathi Facilitators":6}
          filter_type.id = ids[filter_type.type]
        }
        gelathiPrograme(d,filter_type);
@@ -42,7 +42,7 @@ export default function gelathiProgram(props) {
             "end_date":  g==="date"?i:'',
             "search": search,
             "project_id": state?.id,
-            "gelathi_id": "",
+            "gelathi_id": id?.emp_id,
             "start_date":  g==="date"?id:'',
             "emp_id": idvalue
           });
@@ -144,9 +144,8 @@ export default function gelathiProgram(props) {
     }
     const getData = (itm, i) => {
     console.log(itm,"getdata")
-    setSelected(itm)
-   
-    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+    setSelected({itm,type:'Gelathi Facilitators'})
+    const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     gelathiPrograme(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
     setFilterData(data)
@@ -179,6 +178,9 @@ export default function gelathiProgram(props) {
             {
                     selected  && (selected?.type=='Search') && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
+             {
+                    selected  && (selected?.type=='Gelathi Facilitators') && <><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            }
             {
                     selected  && (selected?.type=='Circle Meetings' || selected?.type=='Beehive Visits' || selected?.type=='Rescheduled'|| selected?.type=='Cancelled' || selected?.type=='Village Visits') && <><Chip label={`${selected?.type} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
@@ -189,6 +191,7 @@ export default function gelathiProgram(props) {
                     type="GelathiProgram"
                     user={user}
                     isOpenFilter={filter}
+                    data1={data1}
                     onDateSubmit={onDateSubmit}
                     gelathiPrograme={gelathiPrograme}
                     getData={getData}
@@ -222,6 +225,8 @@ export default function gelathiProgram(props) {
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {` ${itm?.gf_session_name}`}
+                                {(itm?.status=='2')?<Iconify sx={{marginLeft:2,width:20}} icon="material-symbols:cancel"/>:null}
+                                {(itm?.status=='1')?<Iconify sx={{marginLeft:2,width:20,height:20}} icon="mdi:clock-outline"/>:null}
                             </Typography>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
@@ -236,7 +241,7 @@ export default function gelathiProgram(props) {
                     </Card>)
              }):
              <>
-             <h1>No  Gelathi  Program Found</h1>
+             <h4 style={{textAlign:'center'}}>No  Gelathi  Program Found</h4>
              </>}
 
           

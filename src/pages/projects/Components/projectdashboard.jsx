@@ -149,26 +149,26 @@ export default function Projectdashboard() {
       });
   };
 
-  const getData = (itm, i) => {
-    setSelected(itm)
-    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
-    apiHit(itm, i)
-    setFilterData(data)
-    handleCloseFilter()
-  }
+  // const getData = (itm, i) => {
+  //   setSelected(itm)
+  //   const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+  //   apiHit(itm, i)
+  //   setFilterData(data)
+  //   handleCloseFilter()
+  // }
 
-  const onSumbit = (e, i) => {
-    setSelected({ type: 'Location', name: `State : ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
-    handleCloseFilter()
-    apiHit(e?.district_id, e?.talaq_id, "country")
-  }
+  // const onSumbit = (e, i) => {
+  //   setSelected({ type: 'Location', name: `State : ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
+  //   handleCloseFilter()
+  //   apiHit(e?.district_id, e?.talaq_id, "country")
+  // }
 
-  const onDateSubmit = (e) => {
-    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
-    apiHit(e?.startDate, e?.endDate, "date")
-    setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
-    handleCloseFilter()
-  }
+  // const onDateSubmit = (e) => {
+  //   setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+  //   apiHit(e?.startDate, e?.endDate, "date")
+  //   setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
+  //   handleCloseFilter()
+  // }
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
