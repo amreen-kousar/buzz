@@ -250,7 +250,8 @@ console.log(data,"dataaaaaaaaaaa")
     }
 
     const onDatasubmit=(e)=>{
-        setSelected({type:'Custom Filter ',name: `District: ${e?.district?.name};Taluk:${e?.talaq?.name} ; From: ${e?.startDate} to:${e?.endDate}; Funder:${e?.funder?.name}; Operation Manager:${e?.opsManager?.first_name}; Trainer:${e?.trainer?.first_name} ; GelathiFacilitator:${e?.gelathi?.first_name}`})
+        setSelected({type:'Custom Filter',name: `District: ${e?.district?.name};Taluk:${e?.talaq?.name} ; From: ${e?.startDate} to:${e?.endDate}`})
+        // setSelected({type:'Custom Filter',name: `District: ${e?.district?.name};Taluk:${e?.talaq?.name} ; From: ${e?.startDate} to:${e?.endDate}; Funder:${e?.funder?.name}; Operation Manager:${e?.opsManager?.first_name}; Trainer:${e?.trainer?.first_name} ; GelathiFacilitator:${e?.gelathi?.first_name}`})
         handleCloseFilter()
         projectr(e,"custom")
     }
@@ -316,7 +317,7 @@ console.log(data,"dataaaaaaaaaaa")
                   
                 { selected  && ( selected?.type=='Funder' || selected?.type=='Operation Manager' || selected?.type=='Trainers' || selected?.type=='Gelathi Facilitator' ) && <Chip label={`${selected?.type} : ${selected?.first_name} `} onDelete={() => { handleDelete(selected) }} /> }
          
-                {selected && (selected?.type=='Custom Filter') && <Chip label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/>}
+                {selected && (selected?.type=='Custom Filter') && <Chip label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/> }
                
                 {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
@@ -420,7 +421,7 @@ console.log(data,"dataaaaaaaaaaa")
                                     {
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
                                     }</> :
-                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
+                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
                             }
                         </TabPanel>
 
@@ -445,7 +446,7 @@ console.log(data,"dataaaaaaaaaaa")
                                     {
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countPublished} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
                                     }</> :
-                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
+                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
                             }
                         </TabPanel>
 
@@ -472,7 +473,7 @@ console.log(data,"dataaaaaaaaaaa")
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countCompleted} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
                                     }
                                 </> :
-                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No data found</h2>
+                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
 
                             }
                         </TabPanel>

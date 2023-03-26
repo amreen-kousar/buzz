@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip,CardContent, Container, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip,CardContent, Container, Typography, Grid, IconButton,Button } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Vyaparprogram from './Components/Vyaparprogram';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+
+import Filtersmain from './projectfilters/filtersmain';
 export default function enrolledVyaaparList() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
+    const [filterData, setFilterData] = useState({})
      const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
@@ -39,7 +42,7 @@ export default function enrolledVyaaparList() {
     )
 
     const [openFilter, setOpenFilter] = useState(false);
-
+    const [filter,setFilter]=useState(false);
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
@@ -47,13 +50,21 @@ export default function enrolledVyaaparList() {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
-    const enrolledVyaapar= async =>{
+    const handleopen=()=>{
+      setFilter(true)
+    };
+
+    const handleclose=()=>{
+      setFilter(false)
+    }
+    const enrolledVyaapar= async(id,i,g) =>{
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": search,
             "project_id": state?.id,
-            "emp_id": idvalue
+            "emp_id": idvalue,
+            "gelathi_id":id?.emp_id?id?.emp_id:'',
           });
           
           var config = {
@@ -89,7 +100,8 @@ const id = sessionStorage?.getItem("proId")
     var data = JSON.stringify({
       "project_id": id,
       "role_id": role,
-      "emp_id": idvalue
+      "emp_id": idvalue,
+      
     });
 
     var config = {
@@ -111,7 +123,17 @@ const id = sessionStorage?.getItem("proId")
       });
 
   }
-
+  const getData = (itm, i) => {
+    console.log(itm,"getdata")
+    setSelected({itm,type:'Gelathi Facilitators'})
+    const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+    enrolledVyaapar(itm, i)
+    console.log(data, i, itm, "<----sdfssreerfer")
+    setFilterData(data)
+    handleclose()
+    console.log("sdfgsdfdfssd", itm, i)
+    }
+  
 
     return (
 
@@ -127,10 +149,26 @@ const id = sessionStorage?.getItem("proId")
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
+            <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            Filter
+          </Button>
+            </Stack>
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <Filtersmain
+                    type="Vyapar"
+                    data1={data1}
+                    isOpenFilter={filter}
+                    getData={getData}
+                    onOpenFilter={handleopen}
+                    onCloseFilter={handleclose}
+                />
             </Stack>
             
                 {
-                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected && (selected?.type=='Search') && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                }
+                 {
+                    selected && (selected?.type=='Gelathi Facilitators') && <><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
                 }
                 <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
                 <Typography style={{fontWeight:500,marginLeft:2}}>Enrolled Vyapar : ({count})</Typography> 
@@ -146,7 +184,7 @@ const id = sessionStorage?.getItem("proId")
             {/* </Stack> */}
 
             {vyaapar?.list?.length!==0?vyaapar?.list?.map((itm) => {
-               // console.log(itm,'<---------------vyaaparvyaaparvyaaparvyaapar')
+               console.log(itm,'<---------------vyaaparvyaaparvyaaparvyaapar')
                 return (
                     <Card style={styles.card1} onClick={() => {
                         setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
@@ -155,12 +193,16 @@ const id = sessionStorage?.getItem("proId")
                           
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Vyaapar Name : ${itm?.gelathiname}`}
+                                {` Gelathi Name : ${itm?.gelathiname}`}
                             </Typography> <Vyaparprogram/>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
                         <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Village Name : ${itm?.villagename}`}
+                                {`  Village Name : ${itm?.villagename}`}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
+                                {`  Enrolled By : ${itm?.enrolled_by
+}`}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Date : ${itm?.enroll_date}`}
@@ -170,7 +212,7 @@ const id = sessionStorage?.getItem("proId")
                     </Card>)
             }):
             <>
-            <h1>No  Enrolled  Vyapar Found</h1>
+            <h4 style={{textAlign:'center'}}>No  Enrolled  Vyapar Found</h4>
             </>}
 
         </Container>

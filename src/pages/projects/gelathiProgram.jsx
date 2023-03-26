@@ -1,34 +1,49 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container, Typography, Grid, IconButton,CardContent } from '@mui/material';
+import { Card, Stack, Chip, Container, Typography, Grid, IconButton,CardContent,Button } from '@mui/material';
 import GelathiProgrameDrawer from '../projects/Components/GelathiProgrameDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
-
+import Filtersmain from './projectfilters/filtersmain';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 export default function gelathiProgram(props) {
     const {state} = useLocation();
   console.log(props,"<----props",state)
     const [clcikData, setClickData] = useState()
     const [programe,setPrograme] = useState('')
+    const [filterData, setFilterData] = useState({})
     const [data1, setData1] = useState('')
     const [count,setCount]= useState('');
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
+
+  // useEffect(() => {
+  //     user()
+  //   })
+    const user = async (d, filter_type) => {
+       if (filter_type) {
+         setSelected(filter_type)
+         let ids = { "Circle Meetings": 1,"Village Visits":2,"Beehive Visits":3,"Rescheduled":4,"Cancelled":5,"Gelathi Facilitators":6}
+         filter_type.id = ids[filter_type.type]
+       }
+       gelathiPrograme(d,filter_type);
+       console.log(filter_type?.id,"filterid")
+    }
     useEffect(() => {
         gelathiPrograme();
         }, []
     )
-    const gelathiPrograme = async =>{
+    const gelathiPrograme = async(id,i,g) =>{
+      console.log(id,"gelrhaiiii",i)
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
-            "filter": "",
-            "end_date": "",
+            "filter": i?.id?i?.id:'',
+            "end_date":  g==="date"?i:'',
             "search": search,
             "project_id": state?.id,
-            "gelathi_id": "",
-            "start_date": "",
+            "gelathi_id": id?.emp_id,
+            "start_date":  g==="date"?id:'',
             "emp_id": idvalue
           });
           
@@ -90,7 +105,7 @@ export default function gelathiProgram(props) {
     
       }
     const [openFilter, setOpenFilter] = useState(false);
-
+    const [filter,setFilter]=useState(false);
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
@@ -98,7 +113,13 @@ export default function gelathiProgram(props) {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
+    const handleopen=()=>{
+      setFilter(true)
+    };
 
+    const handleclose=()=>{
+      setFilter(false)
+    }
     const handleDelete = () => {
       setSelected(null)
       search = ''
@@ -113,7 +134,28 @@ export default function gelathiProgram(props) {
         setSelected({ name: e, type: "Search" })
         gelathiPrograme()
     }
-
+    const onDateSubmit = (e) => {
+      setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+  
+      gelathiPrograme(e?.startDate, e?.endDate, "date")
+      setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
+      handleclose()
+      console.log(e, "<----scasds")
+    }
+    const getData = (itm, i) => {
+    console.log(itm,"getdata")
+    setSelected({itm,type:'Gelathi Facilitators'})
+    const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+    gelathiPrograme(itm, i)
+    console.log(data, i, itm, "<----sdfssreerfer")
+    setFilterData(data)
+    handleclose()
+    console.log("sdfgsdfdfssd", itm, i)
+    }
+  
+   
+  console.log(selected,"value")
+  
     return (
 
         <Container>
@@ -127,14 +169,36 @@ export default function gelathiProgram(props) {
                         </IconButton></Link>
                     All gelathi Program
                 </Typography>
-                {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
+                <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            Filter
+          </Button>
+         
             </Stack>
             
             {
-                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected  && (selected?.type=='Search') && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
+             {
+                    selected  && (selected?.type=='Gelathi Facilitators') && <><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            }
+            {
+                    selected  && (selected?.type=='Circle Meetings' || selected?.type=='Beehive Visits' || selected?.type=='Rescheduled'|| selected?.type=='Cancelled' || selected?.type=='Village Visits') && <><Chip label={`${selected?.type} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            }
+            
+            
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <Filtersmain
+                    type="GelathiProgram"
+                    user={user}
+                    isOpenFilter={filter}
+                    data1={data1}
+                    onDateSubmit={onDateSubmit}
+                    gelathiPrograme={gelathiPrograme}
+                    getData={getData}
+                    onOpenFilter={handleopen}
+                    onCloseFilter={handleclose}
+                />
+            </Stack>
                <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
                <Typography style={{fontWeight:500,marginLeft:2}}> All Gelathi Sessions ({count})</Typography> 
          {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
@@ -149,7 +213,7 @@ export default function gelathiProgram(props) {
             {/* </Stack> */}
 
             {programe?.list?.length!==0?programe?.list?.map((itm) => {
-                        console.log(itm, "<---programeprogrameprograme")
+                        // console.log(itm, "<---programeprogrameprograme")
                         return (
                             <Card style={styles.card1} onClick={() => {
                                 setClickData({ name: itm.gf_session_id, title: "Gelathi program Name" })
@@ -161,6 +225,8 @@ export default function gelathiProgram(props) {
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {` ${itm?.gf_session_name}`}
+                                {(itm?.status=='2')?<Iconify sx={{marginLeft:2,width:20}} icon="material-symbols:cancel"/>:null}
+                                {(itm?.status=='1')?<Iconify sx={{marginLeft:2,width:20,height:20}} icon="mdi:clock-outline"/>:null}
                             </Typography>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
@@ -175,7 +241,7 @@ export default function gelathiProgram(props) {
                     </Card>)
              }):
              <>
-             <h1>No  Gelathi  Program Found</h1>
+             <h4 style={{textAlign:'center'}}>No  Gelathi  Program Found</h4>
              </>}
 
           

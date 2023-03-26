@@ -169,7 +169,7 @@ export default function Own(props) {
 
             {listdata?.data?.length > 0 ? <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <Box sx={{ width: '100%' }}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    {/* <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs variant="fullWidth" value={value} onChange={handleChange} aria-label="basic tabs example" indicatorColor='warning'>
                             <Tab
                                 sx={{
@@ -208,7 +208,7 @@ export default function Own(props) {
                                     color: "#ff7424",
                                 } : null} {...a11yProps(2)} />
                         </Tabs>
-                    </Box>
+                    </Box> */}
                     <TabPanel value={value} index={0}>
 
                     {listdata?.data?.map((itm) => {

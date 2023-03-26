@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container, CardContent, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container, CardContent, Typography, Grid, IconButton,Button } from '@mui/material';
 import GelathiCircleDrawer from '../projects/Components/GelathiCircleDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
-import ChooseGelathi from './Components/ChooseGelathi'
+import ChooseGelathi from './Components/ChooseGelathi';
+import Filtersmain from './projectfilters/filtersmain';
 export default function gelathiCirclesList() {
   const { state } = useLocation()
   const [clcikData, setClickData] = useState()
   const [gelathiCircles, setgelathiCircles] = useState('');
+  const [filterData, setFilterData] = useState({})
   const [data1, setData1] = useState('')
   var [search, setSearch] = useState('')
   var [selected, setSelected] = useState(null)
@@ -67,7 +69,7 @@ export default function gelathiCirclesList() {
 
 
   const [openFilter, setOpenFilter] = useState(false);
-
+  const [filter,setFilter]=useState(false);
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -75,15 +77,21 @@ export default function gelathiCirclesList() {
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
+  const handleopen=()=>{
+    setFilter(true)
+  };
 
+  const handleclose=()=>{
+    setFilter(false)
+  }
 
-  const circle = async => {
+  const circle = async(id,i,g) => {
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       "search": search,
       "project_id": state?.id,
-      "gelathi_id": idvalue
+      "gelathi_id": id?.emp_id?id?.emp_id:''
     });
 
     var config = {
@@ -112,6 +120,17 @@ export default function gelathiCirclesList() {
     setSearch(search)
     circle();
   }
+  const getData = (itm, i) => {
+    console.log(itm,"getdata")
+    setSelected({itm,type:'Gelathi Facilitators'})
+    const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+    circle(itm, i)
+    console.log(data, i, itm, "<----sdfssreerfer")
+    setFilterData(data)
+    handleclose()
+    console.log("sdfgsdfdfssd", itm, i)
+    }
+  
 
   return (
 
@@ -127,11 +146,27 @@ export default function gelathiCirclesList() {
         {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
+            <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            Filter
+          </Button>
         <ChooseGelathi />
 
       </Stack>
+      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <Filtersmain
+                    type="Gelathicircles"
+                    isOpenFilter={filter}
+                    onOpenFilter={handleopen}
+                    onCloseFilter={handleclose}
+                    data1={data1}
+                    getData={getData}
+                />
+            </Stack>
       {
-        selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br />&nbsp;</>
+        selected &&(selected?.type=='Search')&& <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br />&nbsp;</>
+      }
+      {
+        selected &&(selected?.type=='Gelathi Facilitators')&& <><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br />&nbsp;</>
       }
       <Card><CardContent style={{ fontWeight: 700 }}>Project Name : {data1.project_name}</CardContent> </Card><br />
       <Typography style={{ fontWeight: 500, marginLeft: 2 }}>Circles : ({count})</Typography>
@@ -168,7 +203,7 @@ export default function gelathiCirclesList() {
           </Card>)
       }) :
         <>
-          <h1>No  Gelathi Circle Found</h1>
+          <h4 style={{textAlign:'center'}} >No  Gelathi Circle Found</h4 >
         </>}
 
     </Container>

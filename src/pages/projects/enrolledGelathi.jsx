@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton,Button } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import Filtersmain from './projectfilters/filtersmain';
 export default function enrolledGelathiList() {
     const {state} = useLocation()
     const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')
+    const [filterData, setFilterData] = useState({})
     var [selected, setSelected] = useState(null)
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
@@ -19,7 +21,7 @@ export default function enrolledGelathiList() {
     )
 
     const [openFilter, setOpenFilter] = useState(false);
-
+    const [filter,setFilter]=useState(false);
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
@@ -27,7 +29,13 @@ export default function enrolledGelathiList() {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
+    const handleopen=()=>{
+      setFilter(true)
+    };
 
+    const handleclose=()=>{
+      setFilter(false)
+    }
     const searchFunction = (e) => {
         search = e
         setSearch(search)
@@ -35,7 +43,7 @@ export default function enrolledGelathiList() {
         enrolledGelathi()
     }
 
-    const enrolledGelathi = async =>{
+    const enrolledGelathi = async(id,i,g) =>{
         var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
   var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -43,7 +51,8 @@ export default function enrolledGelathiList() {
             "search": search,
             "project_id": state?.id,
             "emp_id": idvalue,
-            "role_id": role
+            "role_id": role,
+            "gelathi_id":id?.emp_id?id?.emp_id:'',
           });
           
           var config = {
@@ -108,6 +117,17 @@ export default function enrolledGelathiList() {
     setSearch(search)
     enrolledGelathi();
 }
+const getData = (itm, i) => {
+  console.log(itm,"getdata")
+  setSelected({itm,type:'Gelathi Facilitators'})
+  const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+  enrolledGelathi(itm, i)
+  console.log(data, i, itm, "<----sdfssreerfer")
+  setFilterData(data)
+  handleclose()
+  console.log("sdfgsdfdfssd", itm, i)
+  }
+
 
     return (
 
@@ -120,13 +140,29 @@ export default function enrolledGelathiList() {
                         </IconButton></Link>
                     All enrolledGelathi
                 </Typography>
+                <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            Filter
+          </Button>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
             </Stack>
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <Filtersmain
+                    type="Gelathis"
+                    isOpenFilter={filter}
+                    data1={data1}
+                    onOpenFilter={handleopen}
+                    getData={getData}
+                    onCloseFilter={handleclose}
+                />
+            </Stack>
             
             {
-                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected &&(selected?.type=='Search') && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            }
+             {
+                    selected &&(selected?.type=='Gelathi Facilitators') && <><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
                    <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}>Enrolled Gelathis ({count})</Typography> 
@@ -159,12 +195,15 @@ export default function enrolledGelathiList() {
                                 {` Enrolled Village Name : ${itm?.villagename}`}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
+                                {` Enrolled By : ${itm?.enrolled_by}`}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>
                         </Grid>
                     </Card>)
             }):<>
-            <h1>No Enrolled Gelathi Found</h1>
+            <h4 style={{textAlign:'center'}}>No Enrolled Gelathi Found</h4>
             </>}
 
         </Container>

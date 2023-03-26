@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, Stack, Chip, Container, Typography,CardContent, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container, Typography,CardContent, Grid, IconButton, Button} from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import GreenSurvey from './Components/GreenSurvey'
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import Filtersmain from './projectfilters/filtersmain';
 export default function enrolledGreenMotivatorsList() {
     const {state} = useLocation()
     console.log("nwewepewrwe",state)
     const [clcikData, setClickData] = useState()
     const [green , setGreen] = useState('')
+     const [filterData, setFilterData] = useState({})
     var [selected, setSelected] = useState(null)
     const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')
@@ -21,7 +23,7 @@ export default function enrolledGreenMotivatorsList() {
     )
 
     const [openFilter, setOpenFilter] = useState(false);
-
+    const [filter,setFilter]=useState(false);
     const searchFunction = (e) => {
       
         search = e
@@ -36,13 +38,22 @@ export default function enrolledGreenMotivatorsList() {
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
-    const enrolledGreenMotivators = async =>{
+    const handleopen=()=>{
+      setFilter(true)
+    };
+
+    const handleclose=()=>{
+      setFilter(false)
+    }
+    const enrolledGreenMotivators = async(id,i,g) =>{
+      console.log(id,'hy',i)
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": search,
             "project_id": state?.id,
-            "emp_id": idvalue
+            "emp_id": idvalue,
+            "gelathi_id":id?.emp_id?id?.emp_id:""
           });
           
           var config = {
@@ -108,6 +119,18 @@ export default function enrolledGreenMotivatorsList() {
     setSearch(search)
     enrolledGreenMotivators();
 }
+
+const getData = (itm, i) => {
+  console.log(itm,"getdata")
+  setSelected({itm,type:'Gelathi Facilitators'})
+ 
+  const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+  enrolledGreenMotivators(itm, i)
+  console.log(data, i, itm, "<----sdfssreerfer")
+  setFilterData(data)
+  handleclose()
+  console.log("sdfgsdfdfssd", itm, i)
+  }
     return (
 
         <Container><Searchbar getSearch={(e) => searchFunction(e)} />
@@ -122,13 +145,32 @@ export default function enrolledGreenMotivatorsList() {
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
+            <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            Filter
+          </Button>
+            </Stack>
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <Filtersmain
+                    type="GreenMotivators"
+                    isOpenFilter={filter}
+                    data1={data1}
+                    getData={getData}
+                    onOpenFilter={handleopen}
+                    onCloseFilter={handleclose}
+                />
             </Stack>
             
             {
-                    selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
-            } <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
+                    selected &&(selected?.type=='Search')&& <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            } 
+            {
+                    selected &&(selected?.type=='Gelathi Facilitators') &&<><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+            } 
+            
+            <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}>Green Motivators : ({count})</Typography> 
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
+
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ParticipantDrawer
                     clcikData={clcikData}
@@ -168,7 +210,7 @@ export default function enrolledGreenMotivatorsList() {
                     </Card>)
             }):
             <>
-            <h1>No  Green  Motivators Found</h1>
+            <h4 style={{textAlign:'center'}}>No Green  Motivators Found</h4>
             </>}
 
 

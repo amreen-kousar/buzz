@@ -151,7 +151,7 @@ export default function Team(props) {
     }
 
 
-    const approveTA = () => {
+    const verifyTA = () => {
         var data = JSON.stringify({
             "ta_id": checkedData,
             "user_id": localStorage?.getItem('userId'),
@@ -161,7 +161,7 @@ export default function Team(props) {
         console.log(data)
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/approveTa.php',
+            url: 'https://bdms.buzzwomen.org/appTest/new/verifyTa.php',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -217,6 +217,7 @@ export default function Team(props) {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
+                  <form onSubmit={(event) => { event.preventDefault(); verifyTA() }}>
                 <Toolbar sx={{ color: "#ffffff", backgroundColor: "#ff7424" }}>
                     <IconButton edge="start" color="inherit" onClick={handleCloseFilter} aria-label="close">
                         <CloseIcon />
@@ -225,11 +226,11 @@ export default function Team(props) {
                         {selectedTeamMember}
                     </Typography>
                 </Toolbar>
-                <DialogContent dividers={scroll === 'paper'}>
+                {/* <DialogContent dividers={scroll === 'paper'}>
                     <DialogContentText
                         id="scroll-dialog-description"
                         tabIndex={-1}
-                    >
+                    > */}
                         <div>
                             <Checkbox
                                 style={{ color: "#f97d3f" }}
@@ -246,6 +247,7 @@ export default function Team(props) {
                                             <Checkbox
                                                 style={{ color: "#f97d3f" }}
                                                 item={itm}
+
                                                 value={itm.id}
                                                 checked={checkedData.includes(itm.id)}
                                                 onChange={() => { setToCheckedData(itm, i) }}
@@ -265,13 +267,14 @@ export default function Team(props) {
                             onChange={(e) => { setComments(e.target.value) }}
                             multiline
                             rows={4}
+                            required
                             fullWidth
                         />
 
-                        <Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={approveTA}>Submit</Button>
+                        <Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Submit</Button></form>
 
-                    </DialogContentText>
-                </DialogContent>
+                    {/* </DialogContentText>
+                </DialogContent> */}
                 <Dialog onClose={handleDetailsCloseFilter} open={openDetailsFilter}>
 
                     {selectedTeamTA && <div style={{ padding: "2rem" }}>

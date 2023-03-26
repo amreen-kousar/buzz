@@ -50,7 +50,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
    
    }
   const [data, setData] = useState({ ...sendData,start_date:formatDate(sendData?.startDate),end_date:formatDate(sendData?.endDate)});
-
+console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
   console.log(data,"<-----dascascascascsacascsaascasa")
 
   const handleClickOpen = () => {
@@ -304,16 +304,16 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
   }
   const createProjectpublish = () => {
 
-    if(name.length==0){
-     setWarn(true)
-     setMessage("Please Add trainers")
+    // if(name.length==0){
+    //  setWarn(true)
+    //  setMessage("Please Add trainers")
  
-    }
-    else if(gelathiName.length==0){
-     setWarn(true)
-     setMessage("Please Add Gelathi Facilators ")
-    }
-    else{
+    // }
+    // else if(gelathiName.length==0){
+    //  setWarn(true)
+    //  setMessage("Please Add Gelathi Facilators ")
+    // }
+    // else{
      var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
      var formdata = new FormData();
      setCreatePro(false)
@@ -345,8 +345,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
        .catch(function (error) {
          console.log(error);
        });
-    }
- 
+    
    }
   return (
     <div>
@@ -386,11 +385,11 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 </Alert>
               </Snackbar>
 
-              <Snackbar open={notify} autoHideDuration={3000} onClose={() => { setNotify(false) }}>
+              {(!edit)?<Snackbar open={notify} autoHideDuration={3000} onClose={() => { setNotify(false) }}>
                 <Alert onClose={() => { setNotify(false) }} severity="success" sx={{ width: '100%' }}>
                   Project created succesfully
                 </Alert>
-              </Snackbar>
+              </Snackbar>:null}
               <Card style={{ top: 15 }}>
                 <CardContent>
                   <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">

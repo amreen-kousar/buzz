@@ -15,6 +15,7 @@ import {
   CardContent,Icon,RadioGroup
 } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
+import { useEffect } from 'react';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
@@ -149,6 +150,11 @@ const handleshareproblems=(event)=>{
 const handlesharelearning=(event)=>{
   setsharelearning(event.target.value)
 }
+
+// useEffect(()=>{
+//   setSendData([])
+// },[open])
+
 const [sendData,setSendData]= React.useState({
     
     implementationPlan:"",

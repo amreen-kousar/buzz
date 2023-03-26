@@ -308,22 +308,22 @@ const trainerList = async => {
              <TextField type="date"
                    // defaultValue={dayjs(data?.start_date)}
                    defaultValue={dayjs( moment(data?.startDate)?.format('YYYY-MM-DD'))}
-                    style={{ width: '20vw' }}
+                    style={{ margin:2 }}
                     value={data.startDate}
-                  
+                    fullWidth
                     onChange={(e) => {
                       setData({ ...data, startDate: e?.target?.value })
-                    }} />
+                    }} /> <br/>
 
                   <TextField type="date"
                 defaultValue={data?.endDate?dayjs( moment(data?.endDate)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}
-                    style={{ width: '20vw', marginLeft: "2rem" }}
+                    style={{ margin:2}}
                     value={data.endDate}
-                  
+                    fullWidth
                     // defaultValue={data.endDate}
                     onChange={(e) => {
                       setData({ ...data, endDate: e?.target?.value })
-                    }} />
+                    }} /> <br/>
         </CardContent>
         <CardContent>
         <FormControl fullWidth>

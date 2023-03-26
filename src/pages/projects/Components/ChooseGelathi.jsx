@@ -116,10 +116,10 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
              Gelathis
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
-            </Button>
-            <CreateGelathiCircle gelathiData={gelathiData} />
+            </Button> */}
+            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} />
           </Toolbar>
         </AppBar>
         {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
