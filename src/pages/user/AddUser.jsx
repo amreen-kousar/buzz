@@ -65,7 +65,8 @@ function AddUser(props) {
 
               if (response.status) {
                   console.log(response)
-                  setEmailExists(true)
+                  //setEmailExists(true)
+                  setEmailExists(false)
               }
               else {
                   setEmailExists(false)
