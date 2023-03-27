@@ -77,9 +77,49 @@ export default function ShaktiForm() {
   };
 
   const handleClose = () => {
+    console.log("call clos symbol")
     setOpen(false);
+    // setworthperson(false)
+    // setqualitiesgood(false)
+    // setfailureperson(false)
+    // setproblemsdisheartened(false)
+    // setproblemsolutions(false)
+    // setplan(false)
+    // setsolution(false)
+    // setmoneysave(false)
+    // setsavingfrequency(false)
+    // seteducation(false)
+    // sethealthcareaccess(false)
+    // setcreditaccess(false)
+    // setsavemoney(false)
+    // setpurchase(false)
+    // setexpenditure(false)
+    // setlivelihoodvalue(false)
+    // setshareproblems(false)
+    // setsharelearning(false)
   };
-
+  const handledClose = () => {
+    console.log("call clos symbol")
+    setOpen(false);
+    setworthperson(false)
+    setqualitiesgood(false)
+    setfailureperson(false)
+    setproblemsdisheartened(false)
+    setproblemsolutions(false)
+    setplan(false)
+    setsolution(false)
+    setmoneysave(false)
+    setsavingfrequency(false)
+    seteducation(false)
+    sethealthcareaccess(false)
+    setcreditaccess(false)
+    setsavemoney(false)
+    setpurchase(false)
+    setexpenditure(false)
+    setlivelihoodvalue(false)
+    setshareproblems(false)
+    setsharelearning(false)
+  };
 const handleworthperson = (event)=>{
   setworthperson(event.target.value)
 }
@@ -224,6 +264,7 @@ const [sendData,setSendData]= React.useState({
 });
 
   const shakthiformdata= async() =>{
+    console.log("call clos save button")
     console.log("surveyyyyform")
    var data = JSON.stringify({
     "participantId":557663,
@@ -313,7 +354,7 @@ const [sendData,setSendData]= React.useState({
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+            <IconButton edge="start" color="inherit" onClick={handledClose} aria-label="close">
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
@@ -328,7 +369,7 @@ const [sendData,setSendData]= React.useState({
           <Card>
             <CardContent>
               <Stack>
-                <Typography mt={3} variant="h6" color="primary">% of Women With increased Self Esteem</Typography>
+                <Typography mt={3} variant="h6" color="primary">% of Women With increased Self Esteem </Typography>
               </Stack>
               <Stack>
                 <Typography mt={2} variant="body2">1. I feel That I am Person of worth</Typography>
@@ -343,7 +384,7 @@ const [sendData,setSendData]= React.useState({
                    
                   >
                     <MenuItem value="" style={{backgroundColor:'gray'}}>
-                      <em>Select Answer</em>
+                      <em>Select Answer </em>
                     </MenuItem>
                     <MenuItem value="Strongly Agree">Strongly Agree</MenuItem>
                     <MenuItem value="Agree">Agree</MenuItem>

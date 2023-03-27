@@ -33,7 +33,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PoaCreate() {
+export default function PoaCreate(props) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState("");
@@ -45,6 +45,7 @@ export default function PoaCreate() {
   const [value, setValue] = React.useState(false);
  const [successMessage,setsuccessMessage]=useState(false);
  const [message, setMessage] = useState('')
+ const [showDate , setShowDate] = useState(false)
   const handleChangeTime = (newValue) => {
     console.log(newValue, "<----1234567u8")
     // setValue(newValue);
@@ -115,6 +116,7 @@ console.log(userId,"useriddddddddddd")
           setMessage('Poa Created successfully')
           setsuccessMessage(true)
           handleClose()
+          props?.changeState()
         }
         else {
           setValue(true)
@@ -127,6 +129,7 @@ console.log(userId,"useriddddddddddd")
         console.log(error);
       });
   }
+ console.log(addData , "data in poa")
   let numrex=/^\d+$/
   return (
     <div>
@@ -239,37 +242,64 @@ console.log(userId,"useriddddddddddd")
                 color="common" />
                 <Stack direction={'row'}>
                   <Typography>All Day</Typography>
-                  <Switch value={addData?.all_day} onChange={(e) => { setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) }} {...label} />
+                  <Switch value={addData?.all_day} onChange={(e) => {
+                     setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) 
+                     if(addData?.all_day === 1){
+                      setShowDate(false)
+                     }
+                     else
+                     setShowDate(true)
+                     }} {...label} />
                 </Stack>
+{
+  showDate? 
+  <>
+    <Stack direction={'row'}>
 
-                <Stack direction={'row'}>
+<DateTimePicker
+  required
+  label="From"
+  value={addData?.date}
+  onChange={(e) => { handleChange(e) }}
+  renderInput={(params) => <TextField {...params} color="common" />}
+/>
 
-                  <DateTimePicker
-                    required
-                    label="From"
-                    value={addData?.date}
-                    onChange={(e) => { handleChange(e) }}
-                    renderInput={(params) => <TextField {...params} color="common" />}
-                  />
+</Stack><br/>
 
-                </Stack><br/>
-                {addData?.all_day === 0 &&
-                  <Stack direction={'row'}>
-                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-                    <DateTimePicker
-                     required
-                      label="To"
-                      minDate={addData?.date}
-                      value={addData?.date2}
-                      onChange={(e) => { handleChange2(e) }}
-                      renderInput={(params) => <TextField {...params} color="common" />}
-                    />
-                    {/* </LocalizationProvider> */}
-                  </Stack>
+  </>:
+  <>
+   <Stack direction={'row'}>
 
-                }
+<DateTimePicker
+  required
+  label="From"
+  value={addData?.date}
+  onChange={(e) => { handleChange(e) }}
+  renderInput={(params) => <TextField {...params} color="common" />}
+/>
 
-                <br />
+</Stack><br/>
+
+<Stack direction={'row'}>
+  {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
+  <DateTimePicker
+   required
+    label="To"
+    minDate={addData?.date}
+    value={addData?.date2}
+    onChange={(e) => { handleChange2(e) }}
+    renderInput={(params) => <TextField {...params} color="common" />}
+  />
+  {/* </LocalizationProvider> */}
+</Stack>
+
+
+
+<br />
+  </>
+
+}
+               
 
                 <Stack>
                   <Typography variant="body1" color="common">Description</Typography>

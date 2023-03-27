@@ -46,6 +46,36 @@ function AddUser(props) {
         console.log(AddUser)
         setOpen(false);
     };
+    const checkEmailExists = () => {
+      const data = JSON.stringify({
+          office_email_id: AddUser.office_email_id
+      });
+
+      const config = {
+          method: 'post',
+          url: 'https://bdms.buzzwomen.org/appTest/getEmailExist.php',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          data
+      };
+
+      axios(config)
+          .then((response) => {
+
+              if (response.status) {
+                  console.log(response)
+                  //setEmailExists(true)
+                  setEmailExists(false)
+              }
+              else {
+                  setEmailExists(false)
+              }
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+  }
 
 
     const checkEmailValidation = () => {
@@ -67,36 +97,7 @@ function AddUser(props) {
     }
 
 
-    const checkEmailExists = () => {
-        const data = JSON.stringify({
-            office_email_id: AddUser.office_email_id
-        });
-
-        const config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getEmailExist.php',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data
-        };
-
-        axios(config)
-            .then((response) => {
-
-                if (response.success) {
-                    console.log(response)
-                    setEmailExists(true)
-                }
-                else {
-                    setEmailExists(false)
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-
+   
 
     const getRoles = () => {
         const data = JSON.stringify({

@@ -16,8 +16,10 @@ import {
     IconButton,
     Typography,
     RadioGroup,
-    Card,
+    TextField,
+    Card,Dialog,
     CardContent,
+    TextareaAutosize,
 } from '@mui/material';
 // components
 import Iconify from '../../../components/Iconify';
@@ -35,6 +37,8 @@ GelathiProgrameDrawer.propTypes = {
 export default function GelathiProgrameDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
 
      const [session,setSession] = useState('')
+     const [showNote,setShowNote] = useState(false)
+     const [gelatiNote ,setGelatiNote] = useState("")
     useEffect(() => {
         getGFSessionData();
         // console.log(clcikData)
@@ -139,6 +143,48 @@ console.log(clcikData,'<---------clcikDataclcikDataclcikData')
                                    
                                 </CardContent>
                             </Card>
+                            <Card style={{marginTop:20}}>
+                                <CardContent>
+                                   
+                                <Typography variant="h6">
+                    Notes 
+                    <IconButton style={{ float: 'right' }}>
+                      <Iconify style={{ color: 'black' }} icon="material-symbols:add" onClick={()=>{
+                        setShowNote(true)
+                      }}/>
+                    </IconButton>
+                  </Typography>
+                                   
+                                </CardContent>
+                            </Card>
+                         
+                           {showNote? 
+                           <div>
+                            {/* <Dialog fullScreen open={open} onClose={handleClose}TransitionComponent={Transition}></Dialog> */}
+                           <Card style={{marginTop:20 , marginLeft:10}}>
+                                <TextField style={{marginTop:20 , marginLeft:20 }}
+                                id="outlined-multiline-static"
+                                label="Notes"
+                                multiline
+                                rows={5}
+                                variant="outlined" 
+                                onChange={ async (e)=>{
+                                    let note = await e?.target?.value
+                                    setGelatiNote(e?.target?.value)
+                                    console.log("note", note , gelatiNote)
+                                }}></TextField>
+                                <Button style={{marginTop:20 , marginLeft:20 , marginBottom:20}} onClick={()=>{
+                                    setShowNote(false)
+                                }}>Save</Button>
+                            </Card>
+                            
+                            </div>
+                            :null}
+                            <CardContent>
+                
+                 
+               
+                </CardContent>
                         </div>
 
 
@@ -148,3 +194,5 @@ console.log(clcikData,'<---------clcikDataclcikDataclcikData')
         </>
     );
 }
+                           
+                                   

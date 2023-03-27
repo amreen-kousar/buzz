@@ -13,7 +13,8 @@ import {
   IconButton,
   Typography,
   RadioGroup,
-  Card, Avatar,
+  Card,
+  Avatar,
   CardContent,
 } from '@mui/material';
 // components
@@ -28,8 +29,8 @@ import Slide from '@mui/material/Slide';
 import { Color } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import defaultImage from '../../assets/images/default.png'
-import {useState} from 'react'
+import defaultImage from '../../assets/images/default.png';
+import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 // ----------------------------------------------------------------------
@@ -40,50 +41,49 @@ UserDrawer.propTypes = {
 };
 
 export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users }) {
-  const [profileData, setProfileData] = useState()
-  const [user,setUser]=useState()
-  const userDetails = localStorage?.getItem('userId')
-  { console.log(userDetails, "userrrrrrrrrrrrrrrrrrr") }
+  const [profileData, setProfileData] = useState();
+  const [user, setUser] = useState();
+  const userDetails = localStorage?.getItem('userId');
+  {
+    console.log(userDetails, 'userrrrrrrrrrrrrrrrrrr');
+  }
 
   useEffect(() => {
     //   editUser()
-    updateSetUser()
-  }, []
-  )
+    updateSetUser();
+  }, []);
 
-  const updateSetUser=()=>{
-    setUser(JSON.parse(localStorage?.getItem('people')))
-  }
+  const updateSetUser = () => {
+    setUser(JSON.parse(localStorage?.getItem('people')));
+  };
 
-  useEffect(()=>{
-    profile()
-  },
-  [isOpenFilter])
- const profile = async => {
-        const userData = JSON.parse(localStorage?.getItem('people'))?.id
-        var data = JSON.stringify({
-          "id": userData
-        });
-    
-        var config = {
-          method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: data
-        };
-    
-        axios(config)
-          .then(function (response) {
-            setProfileData(response.data)
-            console.log(response.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-    
-      } 
+  useEffect(() => {
+    profile();
+  }, [isOpenFilter]);
+  const profile = (async) => {
+    const userData = JSON.parse(localStorage?.getItem('people'))?.id;
+    var data = JSON.stringify({
+      id: userData,
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        setProfileData(response.data);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <>
@@ -101,53 +101,67 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
       >
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
-
-
-            <IconButton style={{ color: "white", float: 'left' }} onClick={onCloseFilter}>
+            <IconButton style={{ color: 'white', float: 'left' }} onClick={onCloseFilter}>
               <Iconify icon="material-symbols:arrow-back-rounded" />
             </IconButton>
             <Typography variant="subtitle2" style={{ color: 'white' }}>
               Member Detail
             </Typography>
-
           </Toolbar>
         </AppBar>
 
+        <Divider />
+        <br />
 
-        <Divider /><br />
-
-        {userDetails && userDetails == 2 && <Stack direction={'row'} justifyContent="flex-end">
-          <UserEditProfile updateSetUser={updateSetUser} />
-          <Button style={{ float: 'right' }} sx={{
-            '&:hover': {
-              backgroundColor: '#ffd796',
-            },
-          }}><Iconify icon="ic:baseline-delete" style={{ width: '30px', height: '30px', color: '#e69138', marginRight: 0 }}></Iconify></Button>
-
-        </Stack>}
+        {userDetails && userDetails == 2 && (
+          <Stack direction={'row'} justifyContent="flex-end">
+            <UserEditProfile updateSetUser={updateSetUser} />
+            <Button
+              style={{ float: 'right' }}
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#ffd796',
+                },
+              }}
+            >
+              <Iconify
+                icon="ic:baseline-delete"
+                style={{ width: '30px', height: '30px', color: '#e69138', marginRight: 0 }}
+              ></Iconify>
+            </Button>
+          </Stack>
+        )}
         <Scrollbar>
           <Stack spacing={1} sx={{ px: 1 }}>
             <div>
-              <Card >
+              <Card>
                 <CardContent>
                   <div style={{ float: 'left', paddingTop: 30, paddingRight: 5 }}>
-                    <Avatar src={(profileData?.profile_pic) ? profileData.profile_pic : defaultImage} alt="photoURL" />
+                    <Avatar src={profileData?.profile_pic ? profileData.profile_pic : defaultImage} alt="photoURL" />
                   </div>
-                  <Card sx={{ px: 1, boxShadow: 0 }} >
-                    <Typography style={{ flexDirection: 'row', color: '#444444', }} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name}</Typography>
+                  <Card sx={{ px: 1, boxShadow: 0 }}>
+                    <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="subtitle1" gutterBottom>
+                      {profileData?.first_name}&nbsp;{profileData?.last_name}
+                    </Typography>
                     <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
                       Role : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.role_name}</span>
+                    </Typography>
+                    {userDetails && userDetails == 2 && (
+                      <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                        Status :{' '}
+                        <span style={{ fontWeight: 100, color: '#444444' }}>
+                          {profileData?.status === '1' ? 'Active' : null}
+                        </span>
+                      </Typography>
+                    )}
+                    <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                      Reporting Manager :{' '}
+                      <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.supervisorName}</span>
+                    </Typography>
 
-                    </Typography>
-                    {userDetails && userDetails == 2 && <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
-                      Status : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.status === '1' ? "Active" : null}</span>
-                    </Typography>}
                     <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
-                      Reporting Manager : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.supervisorName}</span>
+                      Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.doj}</span>{' '}
                     </Typography>
-            
-                    <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
-                      Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.doj}</span> </Typography>
                   </Card>
                 </CardContent>
               </Card>
@@ -160,15 +174,24 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
             </div>
 
             <div>
-              <Card style={{ width: "auto" }}>
+              <Card style={{ width: 'auto' }}>
                 <CardContent>
-                  <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#999999' }}>
+                  <Card
+                    variant="subtitle1"
+                    gutterBottom
+                    style={{
+                      padding: 10,
+                      color: 'white',
+                      textAlign: 'center',
+                      borderRadius: '0px',
+                      backgroundColor: '#999999',
+                    }}
+                  >
                     Contact Information
                   </Card>
                   <br />
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
                     Mobile Number:<span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.contactNum}</span>
-
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
                     Work: <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.workNum} </span>
@@ -184,35 +207,42 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
                   </Typography>
                 </CardContent>
               </Card>
-
             </div>
-
-
 
             <div>
               <Card>
                 <CardContent>
-                  <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#999999' }}>
+                  <Card
+                    variant="subtitle1"
+                    gutterBottom
+                    style={{
+                      padding: 10,
+                      color: 'white',
+                      textAlign: 'center',
+                      borderRadius: '0px',
+                      backgroundColor: '#999999',
+                    }}
+                  >
                     Projects
                   </Card>
                   <br />
-                  {profileData?.project_list ?
+                  {profileData?.project_list ? (
                     <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                      {profileData?.project_list.map(project => {
+                      {profileData?.project_list.map((project) => {
                         return (
-                          <Typography variant="body1" gutterBottom>   {project.projectName}</Typography>
-                        )
+                          <Typography variant="body1" gutterBottom>
+                            {' '}
+                            {project.projectName}
+                          </Typography>
+                        );
                       })}
                     </Typography>
-                    :
-                    <div style={{ textAlign: "center" }}>No projects found .</div>
-                  }
+                  ) : (
+                    <div style={{ textAlign: 'center' }}>No projects found .</div>
+                  )}
                 </CardContent>
               </Card>
-
             </div>
-
-
           </Stack>
         </Scrollbar>
 
