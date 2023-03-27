@@ -83,6 +83,7 @@ export default function PlanofAction() {
   const [name, setName] = useState('')
   const [batchState,setBatchState] = useState()
   const [clcikData, setClickData] = useState()
+  const [resload , setReload] =useState(false)
  
   const [poaData, setPoaData] = [{
     emp_id: "",
@@ -131,7 +132,8 @@ export default function PlanofAction() {
   
   useEffect(() => {
     todaypoa();
-  }, [season, date, userId]);
+    
+  }, [season, date, userId ,resload ]);
 
   const todaypoa = (async) => {
     console.log(date, "<----ergregerger")
@@ -163,7 +165,7 @@ export default function PlanofAction() {
         //   arr.push(...itm)
         // })
         SetPoa(response?.data?.data);
-        // console.log(arr, '<-----------poaDatalist');
+         console.log(poa, '<-----------poaDatalist');
       })
       .catch(function (error) {
         console.log(error);
@@ -214,6 +216,12 @@ export default function PlanofAction() {
       });
   }
 
+  const changeState=()=>{
+    setReload(true)
+    console.log("changeState is called ")
+    
+  }
+
 
   const handleDeleteSelected = () => {
     setName('')
@@ -246,7 +254,7 @@ export default function PlanofAction() {
       </Typography>
 
 
-     {name=='' && <PoaCreate  />}
+     {name=='' && <PoaCreate  changeState={changeState} />}
       <br />
       <br />
       
