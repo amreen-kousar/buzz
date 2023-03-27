@@ -125,9 +125,10 @@ function AddUser(props) {
     }
 
     const getEmpId = async (value) => {
+        console.log(value.id , "role value ")
         setAddUser({ ...AddUser, role: value })
         let formData = new FormData();
-        formData.append('role_id', value);
+        formData.append('role_id', value.id);
         formData.append('name', '');
 
 
