@@ -33,7 +33,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PoaCreate() {
+export default function PoaCreate(props) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState('');
@@ -43,8 +43,14 @@ export default function PoaCreate() {
   console.log(userDetails, 'userrrrrrrrrrrrr');
   const role_name = JSON.parse(localStorage?.getItem('userDetails'))?.role_name;
   const [value, setValue] = React.useState(false);
+<<<<<<< HEAD
   const [successMessage, setsuccessMessage] = useState(false);
   const [message, setMessage] = useState('');
+=======
+ const [successMessage,setsuccessMessage]=useState(false);
+ const [message, setMessage] = useState('')
+ const [showDate , setShowDate] = useState(false)
+>>>>>>> 97629d7ef8dd78cde4fda96cb6cc2ea10c4eaaf3
   const handleChangeTime = (newValue) => {
     console.log(newValue, '<----1234567u8');
     // setValue(newValue);
@@ -106,6 +112,7 @@ export default function PoaCreate() {
       .then(function (response) {
         if (response?.data?.code === 200) {
           // setSucess("this is success create")
+<<<<<<< HEAD
           setMessage('Poa Created successfully');
           setsuccessMessage(true);
           handleClose();
@@ -113,14 +120,31 @@ export default function PoaCreate() {
           setValue(true);
           console?.log(response?.data?.message, '<---response?.data?.message');
           setAddPoa(response?.data?.message);
+=======
+          setMessage('Poa Created successfully')
+          setsuccessMessage(true)
+          handleClose()
+          props?.changeState()
+        }
+        else {
+          setValue(true)
+          console?.log(response?.data?.message, "<---response?.data?.message")
+          setAddPoa(response?.data?.message)
+>>>>>>> 97629d7ef8dd78cde4fda96cb6cc2ea10c4eaaf3
         }
         // console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
+<<<<<<< HEAD
   };
   let numrex = /^\d+$/;
+=======
+  }
+ console.log(addData , "data in poa")
+  let numrex=/^\d+$/
+>>>>>>> 97629d7ef8dd78cde4fda96cb6cc2ea10c4eaaf3
   return (
     <div>
       {/* <Button variant="outlined" onClick={handleClickOpen} style={{float:"right",color:"#ff7424"}} sx={{
@@ -255,6 +279,7 @@ export default function PoaCreate() {
                 />
                 <Stack direction={'row'}>
                   <Typography>All Day</Typography>
+<<<<<<< HEAD
                   <Switch
                     value={addData?.all_day}
                     onChange={(e) => {
@@ -262,8 +287,23 @@ export default function PoaCreate() {
                     }}
                     {...label}
                   />
+=======
+                  <Switch value={addData?.all_day} onChange={(e) => {
+                     setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) 
+                     if(addData?.all_day === 1){
+                      setShowDate(false)
+                     }
+                     else
+                     setShowDate(true)
+                     }} {...label} />
+>>>>>>> 97629d7ef8dd78cde4fda96cb6cc2ea10c4eaaf3
                 </Stack>
+{
+  showDate? 
+  <>
+    <Stack direction={'row'}>
 
+<<<<<<< HEAD
                 <Stack direction={'row'}>
                   <DateTimePicker
                     label="Date&Time picker"
@@ -288,8 +328,52 @@ export default function PoaCreate() {
                     {/* </LocalizationProvider> */}
                   </Stack>
                 )}
+=======
+<DateTimePicker
+  required
+  label="From"
+  value={addData?.date}
+  onChange={(e) => { handleChange(e) }}
+  renderInput={(params) => <TextField {...params} color="common" />}
+/>
 
-                <br />
+</Stack><br/>
+
+  </>:
+  <>
+   <Stack direction={'row'}>
+
+<DateTimePicker
+  required
+  label="From"
+  value={addData?.date}
+  onChange={(e) => { handleChange(e) }}
+  renderInput={(params) => <TextField {...params} color="common" />}
+/>
+>>>>>>> 97629d7ef8dd78cde4fda96cb6cc2ea10c4eaaf3
+
+</Stack><br/>
+
+<Stack direction={'row'}>
+  {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
+  <DateTimePicker
+   required
+    label="To"
+    minDate={addData?.date}
+    value={addData?.date2}
+    onChange={(e) => { handleChange2(e) }}
+    renderInput={(params) => <TextField {...params} color="common" />}
+  />
+  {/* </LocalizationProvider> */}
+</Stack>
+
+
+
+<br />
+  </>
+
+}
+               
 
                 <Stack>
                   <Typography variant="body1" color="common">
