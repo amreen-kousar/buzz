@@ -20,71 +20,72 @@ import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function SimpleDialog(props) {
-
-    const { onClose, selectedValue, open, data, getData ,sendData} = props;
+    const { onClose, selectedValue, open, data, getData, sendData,name } = props;
 
     const handleClose = () => {
         onClose(selectedValue);
-    };
-    const [arr, setArr] = useState([])
-    const handleListItemClick = (value) => {
-        if (arr?.includes(value?.first_name)) {
-            var data = JSON.stringify({
-                "project_id":sendData?.projectId,
-                "role_id": value?.role_id,
-                "emp_id": value?.id
+      };
+      const [arr, setArr] = useState(name?name:[])
+      const handleListItemClick = (value) => {
+        console.log(arr,"<--dfdsfsdf",value)
+        if (arr?.find(itm=>itm?.name===value?.first_name)) {
+          var data = JSON.stringify({
+            "project_id": sendData?.projectId,
+            "role_id": value?.role_id,
+            "emp_id": value?.id
+          });
+    
+          var config = {
+            method: 'post',
+            url: 'https://bdms.buzzwomen.org/appTest/deleteEmpFromProject.php',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: data
+          };
+    
+          axios(config)
+            .then(function (response) {
+              console.log("added successful;y222")
+              const getList = arr?.filter(ite =>ite?.name !== value?.first_name )
+              console.log(getList, "<--fgetList", value?.first_name, arr)
+              setArr(getList)
+            })
+            .catch(function (error) {
+              console.log(error);
             });
-
-            var config = {
-                method: 'post',
-                url: 'https://bdms.buzzwomen.org/appTest/deleteEmpFromProject.php',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: data
-            };
-
-            axios(config)
-                .then(function (response) {
-                    const getList = arr?.filter(ite => { return (ite !== value?.first_name) })
-                    console.log(getList, "<--fgetList", value?.first_name, arr)
-                    setArr(getList)
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-
+    
+    
         }
-
         else {
-            console.log(sendData,"<---sendDatasendData234234242423423")
-            var data = JSON.stringify({
-                "project_id": sendData?.project_id,
-                "role_id": value?.role_id,
-                "emp_id": value?.id
+          var data = JSON.stringify({
+            "project_id": sendData?.project_id,
+            "role_id": value?.role_id,
+            "emp_id": value?.id
+          });
+    
+    
+          var config = {
+            method: 'post',
+            url: 'https://bdms.buzzwomen.org/appTest/addEmpToProject.php',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: data
+          };
+    
+          axios(config)
+            .then(function (response) {
+              console.log("added successful;y")
+              setArr([...arr, {id:value?.id,name:value?.first_name}])
+              console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+              console.log(error);
             });
-
-            var config = {
-                method: 'post',
-                url: 'https://bdms.buzzwomen.org/appTest/addEmpToProject.php',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: data
-            };
-
-            axios(config)
-                .then(function (response) {
-                    setArr([...arr, value?.first_name])
-                    console.log(JSON.stringify(response.data));
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
         }
         // onClose(value);
-    };
+      };
 
     const [listData, setListData] = useState();
 
@@ -94,46 +95,35 @@ function SimpleDialog(props) {
             <Stack direction={'row'}>
                 <Typography variant="subtitle2" style={{ color: '#ed6c02' }} mt={2} onClick={handleClose}>Back</Typography>
                 <DialogTitle>Add Gelathi Facilitators From List</DialogTitle>
-                <Typography mt={2} variant="subtitle2" style={{ color: '#ed6c02' }} onClick={() => {
-                    getData(arr), handleClose()
-                }}>Save</Typography>
+                <Typography mt={2} variant="subtitle2" style={{ color: '#ff7424' }} onClick={() => {
+          getData(arr),
+            handleClose()
+        }}>Save</Typography>
 
             </Stack>
 
 
-            <List sx={{ pt: 0 }}>
-                {data?.list?.map((email) => (
+          
 
-                    <ListItem disableGutters>
+<List sx={{ pt: 0 }}>
+        {data?.list?.map((email) => (
 
-                        <ListItemButton onClick={() => handleListItemClick(email)} key={email}>
-                            <ListItemAvatar>
+          <ListItem disableGutters>
+            {/* {console.log(email,'<------------nnnjnjnjnnii')} */}
+            <ListItemButton onClick={() => handleListItemClick(email)} key={email}>
+              <ListItemAvatar>
 
-                                <Avatar>
-                                    {!arr?.includes(email?.first_name) ?
-                                        // <AddIcon />:<CheckCircleRoundedIcon sx={{ color: 'red' }}/>}
-                                        <AddIcon /> : null}
-                                </Avatar>
+                <Avatar>
+                  {!arr?.find(itm=>itm?.name===email?.first_name) ?
+                    // <AddIcon />:<CheckCircleRoundedIcon sx={{ color: 'red' }}/>}
+                    <AddIcon /> : null}
+                </Avatar>
 
-                            </ListItemAvatar>
-                            <ListItemText primary={email?.first_name} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-
-                {/* <ListItem disableGutters>
-          <ListItemButton
-            autoFocus
-            onClick={() => handleListItemClick('addAccount')}
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <AddIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Add account" />
-          </ListItemButton>
-        </ListItem> */}
+              </ListItemAvatar>
+              <ListItemText primary={email?.first_name} />
+            </ListItemButton>
+          </ListItem>
+        ))}
             </List>
         </Dialog>
     );
@@ -145,11 +135,12 @@ SimpleDialog.propTypes = {
     selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData }) {
+export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name }) {
+    
+ 
     const [open, setOpen] = React.useState(isOpenFilter);
     const [selectedValue, setSelectedValue] = React.useState(emails[1]);
     const [listData, setListData] = useState();
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -195,14 +186,16 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
         <div>
 
 
-            <SimpleDialog
-                data={listData}
-                getData={getData}
-                selectedValue={selectedValue}
-                open={isOpenFilter}
-                onClose={handleClose}
-                sendData={sendData}
-            />
+            
+              <SimpleDialog
+        sendData={sendData}
+        data={listData}
+        name={name}
+        getData={getData}
+        selectedValue={selectedValue}
+        open={isOpenFilter}
+        onClose={handleClose}
+      />
         </div>
     );
 }

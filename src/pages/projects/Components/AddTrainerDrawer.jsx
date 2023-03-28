@@ -133,14 +133,15 @@ const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function SimpleDialog(props) {
 
-  const { onClose, selectedValue, open, data, getData, sendData } = props;
-console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa")
+  const { onClose, selectedValue, open, data, getData, sendData,name } = props;
+console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa",name)
   const handleClose = () => {
     onClose(selectedValue);
   };
-  const [arr, setArr] = useState([])
+  const [arr, setArr] = useState(name?name:[])
   const handleListItemClick = (value) => {
-    if (arr?.includes(value?.first_name)) {
+    console.log(arr,"<--dfdsfsdf",value)
+    if (arr?.find(itm=>itm?.name===value?.first_name)) {
       var data = JSON.stringify({
         "project_id": sendData?.projectId,
         "role_id": value?.role_id,
@@ -158,7 +159,8 @@ console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa")
 
       axios(config)
         .then(function (response) {
-          const getList = arr?.filter(ite => { return (ite !== value?.first_name) })
+          console.log("added successful;y222")
+          const getList = arr?.filter(ite =>ite?.name !== value?.first_name )
           console.log(getList, "<--fgetList", value?.first_name, arr)
           setArr(getList)
         })
@@ -187,7 +189,8 @@ console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa")
 
       axios(config)
         .then(function (response) {
-          setArr([...arr, value?.first_name])
+          console.log("added successful;y")
+          setArr([...arr, {id:value?.id,name:value?.first_name}])
           console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
@@ -222,7 +225,7 @@ console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa")
               <ListItemAvatar>
 
                 <Avatar>
-                  {!arr?.includes(email?.first_name) ?
+                  {!arr?.find(itm=>itm?.name===email?.first_name) ?
                     // <AddIcon />:<CheckCircleRoundedIcon sx={{ color: 'red' }}/>}
                     <AddIcon /> : null}
                 </Avatar>
@@ -257,7 +260,8 @@ SimpleDialog.propTypes = {
   selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData }) {
+export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name }) {
+  console.log(name,"<----ertfvgbhnj")
   const [open, setOpen] = React.useState(isOpenFilter);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
   const [listData, setListData] = useState();
@@ -309,6 +313,7 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
       <SimpleDialog
         sendData={sendData}
         data={listData}
+        name={name}
         getData={getData}
         selectedValue={selectedValue}
         open={isOpenFilter}

@@ -43,14 +43,9 @@ export default function PoaCreate(props) {
   console.log(userDetails, 'userrrrrrrrrrrrr');
   const role_name = JSON.parse(localStorage?.getItem('userDetails'))?.role_name;
   const [value, setValue] = React.useState(false);
-<<<<<<< HEAD
-  const [successMessage, setsuccessMessage] = useState(false);
-  const [message, setMessage] = useState('');
-=======
  const [successMessage,setsuccessMessage]=useState(false);
  const [message, setMessage] = useState('')
  const [showDate , setShowDate] = useState(false)
->>>>>>> 97629d7ef8dd78cde4fda96cb6cc2ea10c4eaaf3
   const handleChangeTime = (newValue) => {
     console.log(newValue, '<----1234567u8');
     // setValue(newValue);
@@ -112,15 +107,6 @@ export default function PoaCreate(props) {
       .then(function (response) {
         if (response?.data?.code === 200) {
           // setSucess("this is success create")
-<<<<<<< HEAD
-          setMessage('Poa Created successfully');
-          setsuccessMessage(true);
-          handleClose();
-        } else {
-          setValue(true);
-          console?.log(response?.data?.message, '<---response?.data?.message');
-          setAddPoa(response?.data?.message);
-=======
           setMessage('Poa Created successfully')
           setsuccessMessage(true)
           handleClose()
@@ -130,21 +116,15 @@ export default function PoaCreate(props) {
           setValue(true)
           console?.log(response?.data?.message, "<---response?.data?.message")
           setAddPoa(response?.data?.message)
->>>>>>> 97629d7ef8dd78cde4fda96cb6cc2ea10c4eaaf3
         }
         // console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-<<<<<<< HEAD
-  };
-  let numrex = /^\d+$/;
-=======
   }
  console.log(addData , "data in poa")
   let numrex=/^\d+$/
->>>>>>> 97629d7ef8dd78cde4fda96cb6cc2ea10c4eaaf3
   return (
     <div>
       {/* <Button variant="outlined" onClick={handleClickOpen} style={{float:"right",color:"#ff7424"}} sx={{
@@ -279,15 +259,6 @@ export default function PoaCreate(props) {
                 />
                 <Stack direction={'row'}>
                   <Typography>All Day</Typography>
-<<<<<<< HEAD
-                  <Switch
-                    value={addData?.all_day}
-                    onChange={(e) => {
-                      setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 });
-                    }}
-                    {...label}
-                  />
-=======
                   <Switch value={addData?.all_day} onChange={(e) => {
                      setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) 
                      if(addData?.all_day === 1){
@@ -296,39 +267,12 @@ export default function PoaCreate(props) {
                      else
                      setShowDate(true)
                      }} {...label} />
->>>>>>> 97629d7ef8dd78cde4fda96cb6cc2ea10c4eaaf3
                 </Stack>
 {
   showDate? 
   <>
     <Stack direction={'row'}>
 
-<<<<<<< HEAD
-                <Stack direction={'row'}>
-                  <DateTimePicker
-                    label="Date&Time picker"
-                    value={addData?.date}
-                    onChange={(e) => {
-                      handleChange(e);
-                    }}
-                    renderInput={(params) => <TextField {...params} color="common" />}
-                  />
-                </Stack>
-                {addData?.all_day === 0 && (
-                  <Stack direction={'row'}>
-                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-                    <DateTimePicker
-                      label="Date&Time picker"
-                      value={addData?.date2}
-                      onChange={(e) => {
-                        handleChange2(e);
-                      }}
-                      renderInput={(params) => <TextField {...params} color="common" />}
-                    />
-                    {/* </LocalizationProvider> */}
-                  </Stack>
-                )}
-=======
 <DateTimePicker
   required
   label="From"
@@ -350,7 +294,6 @@ export default function PoaCreate(props) {
   onChange={(e) => { handleChange(e) }}
   renderInput={(params) => <TextField {...params} color="common" />}
 />
->>>>>>> 97629d7ef8dd78cde4fda96cb6cc2ea10c4eaaf3
 
 </Stack><br/>
 

@@ -1,784 +1,320 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {
-  Button,
-  CardContent,
-  Card,
-  Grid,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Stack,
-  Snackbar,
-  Alert,
-} from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import moment from 'moment';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
+import React from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import Box from '@mui/material/Box';
+import moment from 'moment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import Addbus from '../../buses/Addbus';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+
 import dayjs from 'dayjs';
-import AddTrainerDrawer from './AddTrainerDrawer';
-import AddGelathifacilitators from './AddGelathifacilitators';
-import Add from '@mui/icons-material/Add';
-import CancelIcon from '@mui/icons-material/Cancel';
+import Stack from '@mui/material/Stack';
+import Switch from '@mui/material/Switch';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 import Iconify from 'src/components/Iconify';
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateProj({ createPro, setCreatePro, sendData, viewMessage, edit, projData }) {
-  console.log(sendData, '<------sendDatasendDatasendDatasendData');
+export default function PoaCreate(props) {
   const [open, setOpen] = React.useState(false);
-  const [openFilter, setOpenFilter] = useState(false);
-  const [opengelathiFilter, setOpengelathiFilter] = useState(false);
-  const [partner, setPartner] = useState([]);
-  const [warn, setWarn] = useState(false);
-  const [message, setMessage] = useState(null);
-  const minDate = new Date();
-  const [notify, setNotify] = useState(false);
-  const [busData, setBusData] = useState([]);
-  const [teamData, setTeamData] = useState([]);
-  const [trainerData, setTrainerData] = useState([]);
-  let [name, setName] = useState([]);
-  let [gelathiName, setGelathiName] = useState([]);
-  const [driverData, setDriverData] = useState([]);
-  const [deleteData, setDeleteData] = useState([]);
-
-  const [displayCount , setDisplayCount] = useState(true)
-
-  console.log(edit , "edit value")
-  const formatDate = (itm) => {
-    if (itm) {
-      const currentDATE = itm?.split('-');
-      const newDate = `${currentDATE[2]}-${currentDATE[1]}-${currentDATE[0]}`;
-      return newDate;
-    } else {
-      return '';
-    }
+  const [scroll, setScroll] = useState('paper');
+  const [addPoa, setAddPoa] = useState("");
+  const [userId, setUserId] = useState();
+  var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
+  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  console.log(userDetails,"userrrrrrrrrrrrr")
+  const role_name =JSON.parse(localStorage?.getItem('userDetails'))?.role_name
+  const [value, setValue] = React.useState(false);
+ const [successMessage,setsuccessMessage]=useState(false);
+ const [message, setMessage] = useState('')
+ const [showDate , setShowDate] = useState(false)
+  const handleChangeTime = (newValue) => {
+    console.log(newValue, "<----1234567u8")
+    // setValue(newValue);
   };
-  const [data, setData] = useState({
-    ...sendData,
-    start_date: formatDate(sendData?.startDate),
-    end_date: formatDate(sendData?.endDate),
-  });
+  const [addData, setAddData] = useState({
+    date: dayjs(new Date()),
+    user_id: "",
+    name: "",
+    all_day: 0,
+    description: "",
+    date2: dayjs(new Date())
+  })
+  const handleChange2 = (event) => {
 
-  console.log(data, '<-----dascascascascsacascsaascasa');
+
+    console.log(event, "<--jyhfgd")
+
+    setAddData({ ...addData, date2: event })
+    console.log(addData?.date2)
+  }
+  const handleChange = (event) => {
+    setAddData({ ...addData, date: event })
+    console.log(addData?.date,"dataaaaa")
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
-  };
-  const handleOpenFilter = () => {
-    setOpenFilter(true);
-  };
-
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
-  const handlegelathiOpenFilter = () => {
-    setOpengelathiFilter(true);
-  };
-
-  const handlegelathiCloseFilter = () => {
-    setOpengelathiFilter(false);
+    setScroll(scrollType);
   };
 
   const handleClose = () => {
     setOpen(false);
+    
   };
+
   useEffect(() => {
-    console.log(edit, 'eeeeeeeeeeeeeeee');
-    if (edit) {
-      setOpen(true);
-      assignValues();
-    }
-    partnerList();
-    busList();
-    teamList();
-    driverList();
-    setNotify(true);
-    gelathinamelist()
-  }, [data.gelathiName ,data.trainers]);
+    //AddPoa()
+    setAddData([])
+  }, [open]
+  )
 
-  const assignValues = () => {
-    let tempdata = {
-      ...sendData,
-      startDate: sendData.startDate,
-      endDate: sendData.endDate,
-      operations_manager_id: sendData.operations_manager_id,
-      driver_id: sendData.driverId,
-      training_target: sendData.training_target,
-      project_id: sendData.project_id,
-    };
-    setData(tempdata);
-    console.log(tempdata, 'tempdataaaaa');
-  };
-  const partnerList = (async) => {
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getPartnerList.php',
-      headers: {},
-    };
-
-    axios(config)
-      .then(function (response) {
-        setPartner(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const busList = (async) => {
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getBusList.php',
-      headers: {},
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(response.data, 'bussssss');
-        setBusData(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const teamList = (async) => {
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getOperationsManagerList.php',
-      headers: {},
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(response.data, 'teamlist opers');
-        setTeamData(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-  const driverList = (async) => {
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getDriverList.php',
-      headers: {},
-    };
-
-    axios(config)
-      .then(function (response) {
-        setDriverData(response.data);
-        console.log(response.data, '<------driverDatadriverData');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-  // const showTrainerList = async => {
-  //   var gelathidata = JSON.stringify({
-  //     "role_id": 13,
-  //     "project_id": 234,
-  //     "operation_manager_id": 35,
-  //     // "pageNum": 1
-  //   });
-
-  //   var config = {
-  //     method: 'get',
-  //     url: 'http://3.7.7.138/appTest/getPeopleList.php',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     gelathidata: gelathidata
-  //   };
-
-  //   axios(config)
-  //     .then(function (response) {
-  //       setGelathiData(response?.data)
-  //       console.log(response?.data,"sddjjjjjjjjjjj");
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-
-  // }
-
-  const gelathinamelist = (async) => {
+  const AddPoa = async => {
+    console.log(addData, "<0hgdfvfdbgdf")
     var data = JSON.stringify({
-      project_id: sendData.projectId,
-      role_id: JSON.parse(localStorage.getItem('userDetails'))?.id,
-      operation_manager_id: 35,
+      "date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+      "user_id": userDetails?.id,
+      "name": addData?.name,
+      "all_day": addData?.all_day,
+      "description": addData?.description,
+      "date2": moment(addData?.date2?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+      // "roleName":role_name
     });
-
+console.log(userId,"useriddddddddddd")
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
+      url: 'https://bdms.buzzwomen.org/appTest/createEvent.php',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      data: data,
-    };
-    axios(config)
-      .then(function (response) {
-        setGelathiData(response?.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const showTrainerList = (async) => {
-    var data = JSON.stringify({
-      role_id: 5,
-      project_id: sendData.projectId,
-      operation_manager_id: 122,
-      pageNum: 1,
-    });
-
-    var config = {
-      method: 'get',
-      url: 'http://3.7.7.138/appTest/getPeopleList.php',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: data,
+      data: data
     };
 
     axios(config)
       .then(function (response) {
-        setTrainerData(response?.data);
+        if (response?.data?.code === 200) {
+
+          // setSucess("this is success create")
+          setMessage('Poa Created successfully')
+          setsuccessMessage(true)
+          handleClose()
+          props?.changeState()
+        }
+        else {
+          setValue(true)
+          console?.log(response?.data?.message, "<---response?.data?.message")
+          setAddPoa(response?.data?.message)
+        }
+        // console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-  };
-
-  // return (
-  //   <div>
-  //     <Button fullWidth variant="filled" onClick={handleClickOpen}>
-  //       Create New Project
-  //     </Button>
-
-  // }
-
-  {
-    console.log(data, 'i am visible while changing', edit);
   }
-
-  const createProject2 = () => {
-    if (name.length == 0) {
-      setWarn(true);
-      setMessage('Please Add trainers');
-    } else if (gelathiName.length == 0) {
-      setWarn(true);
-      setMessage('Please Add Gelathi Facilators ');
-    } else {
-      var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-      var formdata = new FormData();
-      console.log('creatproject working');
-      setCreatePro(false);
-      formdata.append('user_id', userid);
-      formdata.append('project_id', data.project_id);
-      formdata.append('partnerID', data.partner_id);
-      formdata.append('training_target', data.training_target);
-      formdata.append('startDate', moment(data.start_date?.$d)?.format('YYYY-MM-DD'));
-      formdata.append('endDate', moment(data.end_date?.$d)?.format('YYYY-MM-DD'));
-      formdata.append('busID', data.bus_id);
-      formdata.append('driverID', data.driverId);
-      formdata.append('operations_manager_id', data.operations_manager_id);
-      formdata.append('locationID', data.locationid);
-      formdata.append('location_name', data.locationName), formdata.append('publish', '');
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
-        data: formdata,
-      };
-
-      console.log(data.location_id, 'location id ');
-
-      axios(config)
-        .then(function (response) {
-          projData();
-          viewMessage('Project added sucessfully');
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-  };
-  const createProjectpublish = () => {
-    if (name.length == 0) {
-      setWarn(true);
-      setMessage('Please Add trainers');
-    } else if (gelathiName.length == 0) {
-      setWarn(true);
-      setMessage('Please Add Gelathi Facilators ');
-    } else {
-      var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-      var formdata = new FormData();
-      console.log('creatpublish working');
-      setCreatePro(false);
-      {
-        console.log(data, 'setdataaaaaaa');
-      }
-      formdata.append('user_id', userid);
-      formdata.append('project_id', data.projectId);
-      formdata.append('partnerID', data.partner_id);
-      formdata.append('training_target', data.training_target);
-      formdata.append('startDate', moment(data.start_date)?.format('YYYY-MM-DD'));
-      formdata.append('endDate', moment(data.end_date)?.format('YYYY-MM-DD'));
-      formdata.append('busID', data.bus_id);
-      formdata.append('driverID', data.driverId);
-      formdata.append('operations_manager_id', data.operations_manager_id);
-      formdata.append('locationID', data.locationid);
-      formdata.append('location_name', data.locationName), formdata.append('', '');
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
-        data: formdata,
-      };
-
-      axios(config)
-        .then(function (response) {
-          projData();
-          viewMessage('Project added sucessfully');
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-  };
+ console.log(addData , "data in poa")
+  let numrex=/^\d+$/
   return (
     <div>
-      {!edit && (
-        <Button fullWidth variant="filled" onClick={handleClickOpen}>
-          Create New Project
-        </Button>
-      )}
+      {/* <Button variant="outlined" onClick={handleClickOpen} style={{float:"right",color:"#ff7424"}} sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+                borderColor:"#ff7424"
+              },  
+              borderColor:"#ff7424",
+              color:"#ff7424"
+            }}>
+       Create New Poa
+      </Button> */}
+        {successMessage &&
+        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)} >
+          <Alert onClose={() => { setsuccessMessage(false) }} severity="success" sx={{ width: '100%',backgroundColor:'green',color:'white' }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      }
+      {console.log(role,"userrrrrrrrdetailssssss")}
+        {(role==3 ||role==4|| role==5 || role==6 || role==12 || role==13)?<Button variant="contained" onClick={handleClickOpen} style={{
+        float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
+        position: 'fixed', zIndex: '1', bottom: 40, right: 40
+      }} sx={{
+        ':hover': {
+          bgcolor: '#ffd796', // theme.palette.primary.main
+          color: '#ff7424',
+          border: '#ffd796'
+        },
+        bgcolor: '#ffd796',
+        color: "#ff7424",
+        border: 'none'
+      }} title="Create POA">
+        {/* style={{ float: "right", marginLeft:100, borderRadius: "50%", padding: "0.2rem", position:'relative', zIndex: '-1',marginRight:10,marginTop:15}} */}
+      <span style={{ fontSize: "2rem" }}>+</span>
+      </Button>:null}
+      <Dialog
+        open={open}
+        fullScreen
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        {console.log(addPoa, "<----qwedrftgyhujikkmijnuhbygtv")}
+        <Snackbar open={value} autoHideDuration={6000} onClose={() => {
+          setAddPoa(''),
+            setValue(false)
+        }}>
+          <Alert onClose={() => {
+            setAddPoa(''),
+              setValue(false)
+          }} severity="error" sx={{ width: '100%' }}>
+            {addPoa}
+          </Alert>
+        </Snackbar>
+        <form onSubmit={(e) => { e.preventDefault(); AddPoa() }}> 
+        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+          <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+              Schedule an event
+            </Typography>
 
-      <Dialog fullScreen open={createPro} onClose={handleClose} TransitionComponent={Transition}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            createProjectpublish();
-          }}
-        >
-          <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
-            <Toolbar>
-              <IconButton
-                edge="start"
-                color="inherit"
-                onClick={() => {
-                  setCreatePro(false);
-                }}
-              >
-                {' '}
-                <CloseIcon />
-              </IconButton>
 
-              {/* <Button sx={{float:'right'}} autoFocus color="inherit" type="submit">
-                save
-              </Button> */}
-              <IconButton
-                edge="end"
-                autoFocus
-                color="inherit"
-                type="submit"
-                sx={{ right: 40, float: 'right', position: 'absolute' }}
-              >
-                <Iconify icon="material-symbols:save" />
-              </IconButton>
-              {edit ? (
-                <Button autoFocus color="inherit" sx={{ float: 'right' }} onClick={createProject2}>
-                  publish
-                </Button>
-              ) : null}
-            </Toolbar>
-          </AppBar>
-          <Grid>
-            <CardContent>
-              <Snackbar
-                open={warn}
-                autoHideDuration={3000}
-                onClose={() => {
-                  setWarn(false);
-                }}
-              >
-                <Alert
-                  onClose={() => {
-                    setWarn(false);
-                  }}
-                  severity="warning"
-                  sx={{ width: '100%' }}
-                >
-                  {message}
-                </Alert>
-              </Snackbar>
+            <Button autoFocus color="inherit" type="submit">
+            <Iconify icon="material-symbols:save" width={30} height={30} />
+            </Button>
+          </Toolbar>
 
-              {(!edit)?<Snackbar open={notify} autoHideDuration={3000} onClose={() => { setNotify(false) }}>
-                <Alert onClose={() => { setNotify(false) }} severity="success" sx={{ width: '100%' }}>
-                  Project created succesfully
-                </Alert>
-              </Snackbar>:null}
-              <Card style={{ top: 15 }}>
-                <CardContent>
-                  <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                    Project : {edit ? sendData?.project_name : sendData?.projectname}
-                  </Typography>
-                  <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                    District : {edit ? sendData?.location_name : sendData?.locationName}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </CardContent>
-          </Grid>
-          <Grid>
-            <CardContent>
-              <Typography style={{ marginLeft: 10 }} variant="h6">
-                Project Details :
-              </Typography>
-            </CardContent>
-            <CardContent>
-              <Stack>
-                <FormControl fullWidth>
-                  {console.log(data, '<------------chcjcjcjcididid')}
-                  <InputLabel color="common" id="demo-simple-select-label">
-                    {' '}
-                    Select Partner
-                  </InputLabel>
-                  <Select
-                    required
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={data.partner_id}
-                    label="Select Partner"
-                    onChange={(e) => {
-                      console.log(e, '<--hhhbhbh');
-                      setData({ ...data, partner_id: e?.target?.value });
-                    }}
-                  >
-                    {/* <MenuItem value="" >Choose Partner </MenuItem> */}
-                    {partner?.list?.map((itm) => {
-                      return <MenuItem value={itm?.partnerID}>{itm?.partnerName}</MenuItem>;
-                    })}
-                  </Select>
-                </FormControl>
-              </Stack>
-            </CardContent>
+        </AppBar>
 
-            <CardContent>
-              <Stack mt={1} mb={2}>
-                <TextField
-                  id="Training Target"
-                  type="number"
-                  defaultValue={data?.training_target}
-                  color="common"
-                  onChange={(e) => {
-                    setData({ ...data, training_target: e?.target?.value });
-                  }}
-                  label="Training Target"
-                  variant="outlined"
-                />
-              </Stack>
-            </CardContent>
-            <Divider />
-
-            <Grid>
-              <CardContent>
-                <Typography style={{ marginLeft: 10 }} variant="h6">
-                  Project From / To Dates :
-                </Typography>
-              </CardContent>
-              <Stack>
-                <CardContent>
-                  <TextField
-                    type="date"
-                    // defaultValue={dayjs(data?.start_date)}
-                    defaultValue={dayjs(moment(data?.start_date)?.format('YYYY-MM-DD'))}
-                    style={{ width: '20vw' }}
-                    value={data.start_date}
-                    InputProps={{
-                      inputProps: { min: moment(new Date())?.format('YYYY-MM-DD') },
-                    }}
-                    onChange={(e) => {
-                      setData({ ...data, start_date: e?.target?.value });
-                    }}
-                  />
-                  {console.log(
-                    dayjs(moment(data?.endDate)?.format()),
-                    moment(data?.endDate)?.format('YYYY-MM-DD'),
-                    new Date(data?.endDate),
-                    data?.endDate,
-                    "<-- defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}",
-                    data?.end_date,
-                    data?.start_date
-                  )}
-                  <TextField
-                    type="date"
-                    defaultValue={
-                      data?.end_date
-                        ? dayjs(moment(data?.end_date)?.format('YYYY-MM-DD'))
-                        : dayjs(moment(data?.endDate)?.format('YYYY-MM-DD'))
-                    }
-                    style={{ width: '20vw', marginLeft: '2rem' }}
-                    value={data.end_date}
-                    InputProps={{
-                      inputProps: { min: moment(data.end_date)?.format('YYYY-MM-DD') },
-                    }}
-                    // defaultValue={data.endDate}
-                    onChange={(e) => {
-                      setData({ ...data, end_date: e?.target?.value });
-                    }}
-                  />
-                  {/* <DatePicker color="common"
-                  label="Date"
-                  minDate={minDate}
-                  value={data.start_date}
-                  onChange={(newValue) => {
-                    console.log(newValue, "<----newValuenewValue")
-                    setData({ ...data, start_date: newValue })
-                  }} */}
-                  {/* renderInput={(params) => <TextField minDate={minDate}  {...params} style={{ width: '20vw' }} />}
-                /> &nbsp; */}
-                  &nbsp;
-                  {console.log(data)}
-                  {/* <DatePicker
-                  minDate={data.start_date}
-                  label="Date" color="common"
-                  value={data.end_date}
-                  onChange={(newValue) => {
-                    console.log(newValue, "<----newValuenewValue")
-                    setData({ ...data, end_date: newValue })
-                  }}
-                 
-                  renderInput={(params) => <TextField  {...params} style={{ width: '20vw' }} />}
-                /> */}
-                </CardContent>
-              </Stack>
-            </Grid>
-            <Divider />
-            <CardContent>
-              <Typography variant="h6">Resources</Typography>
-              <Stack mt={2}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" color="common">
-                    Select Bus
-                  </InputLabel>
-                  <Select
-                    // labelId="demo-simple-select-label"
-                    //id="demo-simple-select"
-                    defaultValue={data.bus_id}
-                    value={data.bus_id}
-                    label="Select Bus"
-                    onChange={(e) => {
-                      setData({ ...data, bus_id: e?.target?.value });
-                    }}
-                  >
-                    <MenuItem value="" default disabled>
-                      Choose Bus
-                    </MenuItem>
-                    {busData?.list?.map((itm) => {
-                      return <MenuItem value={itm?.id}>{itm?.register_number}</MenuItem>;
-                    })}
-                  </Select>
-                </FormControl>
-              </Stack>
-            </CardContent>
-            <Divider />
-
-            <CardContent>
-              <Typography variant="h6">Team Members</Typography>
-              <Stack mt={3}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Select Operation Manager</InputLabel>
-                  <Select
-                    // labelId="demo-simple-select-label"
-                    //id="demo-simple-select"
-                    defaultValue={data.operations_manager_id}
-                    value={data.operations_manager_id}
-                    label="Select Operation Manager"
-                    onChange={(e) => {
-                      setData({ ...data, operations_manager_id: e?.target?.value });
-                      localStorage.setItem('operations_manager_id', e?.target?.value);
-                    }}
-                  >
-                    <MenuItem value="" default disabled>
-                      Choose Operation Manager
-                    </MenuItem>
-                    {teamData?.list?.map((itm) => {
-                      return <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>;
-                    })}
-                  </Select>
-                </FormControl>
-              </Stack>
-
-              <Stack mt={3}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Select Driver</InputLabel>
-                  <Select
-                    // labelId="demo-simple-select-label"
-                    //id="demo-simple-select"
-                    value={data.driverId}
-                    defaultValue={data.driverId}
-                    label="Select Driver"
-                    onChange={(e) => {
-                      setData({ ...data, driverId: e?.target?.value });
-                      // driverList(e?.target?.value)
-                    }}
-                  >
-                    <MenuItem value="" default disabled>
-                      Choose Driver
-                    </MenuItem>
-                    {driverData?.list?.map((itm) => {
-                      return <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>;
-                    })}
-                  </Select>
-                </FormControl>
-              </Stack>
-            </CardContent>
-            <Divider />
-            {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}> */}
-            <AddTrainerDrawer
-              isOpenFilter={openFilter}
-              getData={(e) => {
-                setName(e);
+       
+        {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
+     
+       {/* <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
+          <DialogContentText
+            id="scroll-dialog-description"
+            //   ref={descriptionElementRef}
+            tabIndex={-1}
+          >
+            <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { m: 1 },
               }}
-              onOpenFilter={handleOpenFilter}
-              sendData={sendData}
-              onCloseFilter={handleCloseFilter}
-            />
-            <AddGelathifacilitators
-              sendData={sendData}
-              isOpenFilter={opengelathiFilter}
-              getData={(e) => {
-                setGelathiName(e);
-              }}
-              onOpenFilter={handlegelathiOpenFilter}
-              onCloseFilter={handlegelathiCloseFilter}
-            />
-
-            {console.log(name, '<---sdfdsfdsfdssddss')}
-            {/* </Stack> */}
-            <CardContent>
-              <Card
-                onClick={() => {
-                  console.log('its copensdfdsfds');
-                  handleOpenFilter();
-                }}
-              >
-                <CardContent>
-                  <Typography variant="h6">
-                { edit? <> Trainers ({name.length + data?.trainers?.length})</> :<> Trainers ({name.length})</> }
-                    <IconButton style={{ float: 'right' }}>
-                      <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
-                    </IconButton>
-                  </Typography>
-                  {data?.trainers?.map((itm) => {
-                    return (
-                      <Card style={{ marginTop: 10 }}>
-                        <CardContent>
-                          <Typography mt={2} variant="subtitle2">
-                            {itm?.name}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    );
-                  })}
-                  {/* {sendData?.trainers_count} */}
-                  {/* {sendData?.trainers.map((itm)=>{
-                       
-                       return (<span value={itm?.emp_id}>{itm?.name}</span>)
-                     })} */}
-                  {name?.length !== 0 && (
-                    <Card style={{ marginTop: 10 }}>
-                      <CardContent>
-                        <Stack direction={'row'} spacing={4}>
-                          {name?.map((i, index) => {
-                            return (
-                              <Stack direction={'row'}>
-                                <Typography mt={2} variant="subtitle2">
-                                  {i}
-                                </Typography>
-                                <Stack style={{ marginLeft: 20 }} mt={2}>
-                                  {/* <CancelIcon /> */}
-                                </Stack>
-                              </Stack>
-                            );
-                          })}
-                        </Stack>
-                      </CardContent>
-                    </Card>
-                  )}
-                </CardContent>
-              </Card>
-            </CardContent>
-
-            <CardContent>
-              <Card
-                onClick={() => {
-                  console.log('its copensdfdsfds');
-                  handlegelathiOpenFilter();
-                }}
-              >
-                <CardContent>
-                  <Typography variant="h6">
-                    {
-                      edit ?   <> Gelathi Facilators ({data?.gelathiFacilitator?.length + gelathiName?.length })</> :<>Gelathi Facilators ({gelathiName.length})</> 
-                    }
+              noValidate
+              autoComplete="off"
+            > */}
+              <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
+                <TextField fullWidth value={addData?.name} type="text" required
+                 InputProps={{
                    
-                    <IconButton style={{ float: 'right' }}>
-                      <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
-                    </IconButton>
-                    {data?.gelathiFacilitator?.map((itm) => {
-                      console.log("number of gelati",data?.gelathiFacilitator)
-                      return (
-                        <Card style={{ marginTop: 10 }}>
-                          <CardContent>
-                            <Typography mt={2} variant="subtitle2">
-                              {itm?.name}
-                            </Typography>
-                          </CardContent>
-                        </Card>
-                      );
-                    })}
-                  </Typography>
-                  {gelathiName?.length !== 0 && (
-                    <Card style={{ marginTop: 10 }}>
-                      <CardContent>
-                        <Stack spacing={4} direction={'row'}>
-                          {console.log("galatiName",gelathiName )}
-                          {gelathiName?.map((i) => {
-                            return (
-                              <Stack>
-                                <Typography mt={2} variant="subtitle2">
-                                  {i}
-                                </Typography>
-                                <Stack style={{ marginLeft: 20 }} mt={2}></Stack>
-                              </Stack>
-                            );
-                          })}
-                        </Stack>
-                      </CardContent>
-                    </Card>
-                  )}
-                </CardContent>
-              </Card>
-            </CardContent>
-          </Grid>
+                  type: 'text',
+                 
+                }}
+                  onChange={(e) => {
+                  //  if(numrex.test(e?.target?.value)){
+                  setAddData({ ...addData, name: e?.target?.value })
+                  // }
+                 
+                    console.log(e, "<---EWWEREWREW")
+                }} 
+                id="Add title" 
+                label="Add Title" 
+                variant="outlined" 
+                color="common" />
+                <Stack direction={'row'}>
+                  <Typography>All Day</Typography>
+                  <Switch value={addData?.all_day} onChange={(e) => {
+                     setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) 
+                     if(addData?.all_day === 1){
+                      setShowDate(false)
+                     }
+                     else
+                     setShowDate(true)
+                     }} {...label} />
+                </Stack>
+{
+  showDate? 
+  <>
+    <Stack direction={'row'}>
+
+<DateTimePicker
+  required
+  label="From"
+  value={addData?.date}
+  onChange={(e) => { handleChange(e) }}
+  renderInput={(params) => <TextField {...params} color="common" />}
+/>
+
+</Stack><br/>
+
+  </>:
+  <>
+   <Stack direction={'row'}>
+
+<DateTimePicker
+  required
+  label="From"
+  value={addData?.date}
+  onChange={(e) => { handleChange(e) }}
+  renderInput={(params) => <TextField {...params} color="common" />}
+/>
+
+</Stack><br/>
+
+<Stack direction={'row'}>
+  {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
+  <DateTimePicker
+   required
+    label="To"
+    minDate={addData?.date}
+    value={addData?.date2}
+    onChange={(e) => { handleChange2(e) }}
+    renderInput={(params) => <TextField {...params} color="common" />}
+  />
+  {/* </LocalizationProvider> */}
+</Stack>
+
+
+
+<br />
+  </>
+
+}
+               
+
+                <Stack>
+                  <Typography variant="body1" color="common">Description</Typography>
+                </Stack>
+
+                <Stack>
+                  <TextField required id="outlined-basic" value={addData?.description} onChange={(e) => { setAddData({ ...addData, description: e?.target?.value }) }} label="Add Description For Creating Poa" variant="outlined" color="common" />
+                </Stack>
+                <Stack>
+
+                </Stack>
+              </div>
+            {/* </Box>
+          </DialogContentText>
+        </DialogContent> */}
         </form>
       </Dialog>
     </div>
