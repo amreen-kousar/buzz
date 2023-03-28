@@ -233,7 +233,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
     var config = {
       method: 'get',
-      url: 'http://3.7.7.138/appTest/getPeopleList.php',
+      url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
       headers: {
         'Content-Type': 'application/json'
       },

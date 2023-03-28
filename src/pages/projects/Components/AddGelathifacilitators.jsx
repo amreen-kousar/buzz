@@ -165,7 +165,7 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
 
         var config = {
             method: 'post',
-            url: 'http://3.7.7.138/appTest/getPeopleList.php',
+            url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
             headers: {
                 'Content-Type': 'application/json'
             },
