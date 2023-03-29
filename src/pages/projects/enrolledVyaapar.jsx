@@ -18,7 +18,7 @@ export default function enrolledVyaaparList() {
     const [vyaapar, setVyaapar] = useState('');
     var [selected, setSelected] = useState(null)
       const [count,setCount]= useState('');
-
+const [remove,setremove]=useState('');
  const searchFunction = (e) => {
        
         search = e
@@ -133,8 +133,33 @@ const id = sessionStorage?.getItem("proId")
     handleclose()
     console.log("sdfgsdfdfssd", itm, i)
     }
-  
-
+    const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  const removevyapar=async(itm)=>{
+    if(confirm("Do You want to Remove Gelathi?")){
+    var data = JSON.stringify({
+      "id": itm?.id,
+      "tb_id": itm?.tb_id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/new/removeVyaparEnrollment.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setremove(response.data)
+      enrolledVyaapar()
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}}
     return (
 
         <Container> <Searchbar getSearch={(e) => searchFunction(e)} />
@@ -144,14 +169,14 @@ const id = sessionStorage?.getItem("proId")
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    All Enrolled Vyaapar
+                   Enrolled Vyaapar
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
-            <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+           {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
-          </Button>
+          </Button>:null}
             </Stack>
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <Filtersmain
@@ -186,17 +211,16 @@ const id = sessionStorage?.getItem("proId")
             {vyaapar?.list?.length!==0?vyaapar?.list?.map((itm) => {
                console.log(itm,'<---------------vyaaparvyaaparvyaaparvyaapar')
                 return (
-                    <Card style={styles.card1} onClick={() => {
+                    <Card style={styles.card1} >
+                      <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removevyapar(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<Vyaparprogram/></div>
+                        <div onClick={() => {
                         setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
                         handleOpenFilter()
-                    }}>
-                          
-                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
+                    }} pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Gelathi Name : ${itm?.gelathiname}`}
-                            </Typography> <Vyaparprogram/>
-                        </Grid>
-                        <Grid style={{ marginLeft: 15 }}>
+                            </Typography>
+                     
                         <Typography variant="subtitle1" gutterBottom>
                                 {`  Village Name : ${itm?.villagename}`}
                             </Typography>
@@ -207,7 +231,7 @@ const id = sessionStorage?.getItem("proId")
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>
-                        </Grid>
+                        </div>
                       
                     </Card>)
             }):

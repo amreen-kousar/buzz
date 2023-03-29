@@ -385,7 +385,8 @@ const handleresources=(label,event)=>{
        
           <Typography style={{color:"#ff7424"}}>Phone Number *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Phone Number"  label="Phone Number" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Phone_number: e?.target?.value })} value={sendData?.Phone_number} />
+            <TextField id="Phone Number"   type="number"
+          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}  label="Phone Number" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Phone_number: e?.target?.value })} value={sendData?.Phone_number} />
           </Stack>
         </CardContent>
       </Card>

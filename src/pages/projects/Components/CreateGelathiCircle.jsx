@@ -22,8 +22,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateGelathiCircle({gelathiData,handleCloseGelathi}) {
-    console.log(gelathiData,"<----gelathiDatagelathiData")
+export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data1}) {
+    console.log(gelathiData,"<----gelathiDatagelathiData",data1)
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(dayjs('2022-04-17'));
   const [sendData,setSendData] = React.useState({
@@ -82,7 +82,7 @@ export default function CreateGelathiCircle({gelathiData,handleCloseGelathi}) {
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" color="inherit">
              New Gelathi Circle
            
             <Button autoFocus color="inherit" sx={{float:'right',color:'white'}} onClick={apiHit}>
@@ -91,21 +91,23 @@ export default function CreateGelathiCircle({gelathiData,handleCloseGelathi}) {
           </Toolbar>
         </AppBar>
         <Card style={{marginTop:83}}>
+          {console.log(data1?.data1,"projectname")}
             <CardContent>
-            <Typography variant="subtitle1">Project:</Typography>
+            <Typography variant="subtitle1">Project: &nbsp;{data1?.data1?.project_name}</Typography>
             </CardContent>
         </Card>
         <CardContent>
-            
+        <Typography variant="subtitle1">Gelathi Circle details</Typography>
             <TextField fullWidth id="name" onChange={(e)=>{setSendData({ ...sendData,circle_name:e?.target?.value})}} label="Circle Name" variant="outlined" />
          <Stack mt={3}>
         <DatePicker
-          label="Controlled picker"
-          value={sendData?.circle_date}
+          label="Date"
+          defaultValue={sendData?.circle_date}
           onChange={(newValue) =>  setSendData({ ...sendData,circle_date:newValue})
         }
           renderInput={(params) => <TextField {...params} fullWidth />}
-          
+          value={sendData?.circle_date}
+
           />
 </Stack>
 <Stack mt={3}>

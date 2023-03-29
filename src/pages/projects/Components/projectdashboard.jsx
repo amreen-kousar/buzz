@@ -53,11 +53,11 @@ export default function Projectdashboard() {
 
     { ...itemStyles[0], title: "Women", total: 'summary_women', color: "info", icon: 'twemoji:women-holding-hands' },
 
-    { ...itemStyles[0], title: "Gelathis", total: 'gelathi', color: "gelathis", icon: 'fluent:people-team-16-regular' },
+    { ...itemStyles[0], title: "Gelathis", total: 'summary_enrolled', color: "gelathis", icon: 'fluent:people-team-16-regular' },
 
     { ...itemStyles[1], title: "Green Motivator", total: 'summary_green', color: "motivator" },
 
-    { ...itemStyles[1], title: "Enrolled Vyapar", total: 'summary_enrolled', color: "vyapar" }
+    { ...itemStyles[1], title: "Enrolled Vyapar", total: 'summary_vyapar', color: "vyapar" }
 
   ]
 
@@ -141,7 +141,7 @@ export default function Projectdashboard() {
       .then((response) => {
         console.log(response ,"api response in dashboard")
         setLoader(false)
-        response.data.gelathi = 15022
+        
         setSummaryData(response.data);
       })
       .catch((error) => {
@@ -149,26 +149,26 @@ export default function Projectdashboard() {
       });
   };
 
-  // const getData = (itm, i) => {
-  //   setSelected(itm)
-  //   const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
-  //   apiHit(itm, i)
-  //   setFilterData(data)
-  //   handleCloseFilter()
-  // }
+  const getData = (itm, i) => {
+    setSelected(itm)
+    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+    apiHit(itm, i)
+    setFilterData(data)
+    handleCloseFilter()
+  }
 
-  // const onSumbit = (e, i) => {
-  //   setSelected({ type: 'Location', name: `State : ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
-  //   handleCloseFilter()
-  //   apiHit(e?.district_id, e?.talaq_id, "country")
-  // }
+  const onSumbit = (e, i) => {
+    setSelected({ type: 'Location', name: `State : ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
+    handleCloseFilter()
+    apiHit(e?.district_id, e?.talaq_id, "country")
+  }
 
-  // const onDateSubmit = (e) => {
-  //   setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
-  //   apiHit(e?.startDate, e?.endDate, "date")
-  //   setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
-  //   handleCloseFilter()
-  // }
+  const onDateSubmit = (e) => {
+    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+    apiHit(e?.startDate, e?.endDate, "date")
+    setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
+    handleCloseFilter()
+  }
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -243,7 +243,17 @@ export default function Projectdashboard() {
  
       <Container maxWidth="xl">
        
-     
+      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <FiltersHome
+            type="Dashboard"
+            onDateSubmit={onDateSubmit}
+            onSumbit={onSumbit}
+            getData={getData}
+            isOpenFilter={openFilter}
+            onOpenFilter={handleOpenFilter}
+            onCloseFilter={handleCloseFilter}
+          />
+        </Stack>
 
         <Grid container spacing={3} marginTop={1}>
             
@@ -284,10 +294,13 @@ export default function Projectdashboard() {
                 }}>
                 <CardContent>
                   <Typography variant="h4" component="h2" marginLeft={2}>
-                    {itm?.name}
+                   Project : {itm?.name}
                   </Typography>
                   <Typography variant="h4" component="h2" marginLeft={2}>
                     {`Actual / Target : ${itm?.actual} / ${itm?.target}`}
+                  </Typography>
+                  <Typography variant="h4" component="h2" marginLeft={2}>
+                    {`Duration : ${itm?.startDate} to ${itm?.endDate}`}
                   </Typography>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={1}>

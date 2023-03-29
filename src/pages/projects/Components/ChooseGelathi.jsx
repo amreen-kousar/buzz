@@ -12,15 +12,16 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
-import CreateGelathiCircle from './CreateGelathiCircle'
+import CreateGelathiCircle from './CreateGelathiCircle';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-export default function ChooseGelathi() {
+export default function ChooseGelathi(data1) {
     const {state} = useLocation()
-
+console.log(data1,"state")
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
    const [gelathiData,setGelathiData] = useState([])
@@ -55,9 +56,9 @@ var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
 var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
         "search": "",
-        "project_id": 281,
-        "emp_id": 465,
-        "role_id": 6
+        "project_id": state?.id,
+        "emp_id": idvalue,
+        "role_id": role
       });
       
       var config = {
@@ -113,24 +114,25 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" color='inherit'>
              Gelathis
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button> */}
-            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} />
+            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} data1={data1}/>
           </Toolbar>
         </AppBar>
+        {/* <Card><CardContent>Project : {data1?.data1?.project_name}</CardContent></Card> */}
         {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
-        <Stack>
-       <CardContent>
+        <Stack> 
+       <CardContent>  
         <Card style={{marginTop:60}}>
         <CardContent direction={'row'}>
         <Stack direction={'row'}>
         <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Gelathi Name : ${itm?.gelathiname}`}
+                                {` ${itm?.gelathiname}`}
                             </Typography>
         <br />
         
@@ -139,7 +141,7 @@ checkBoxData(itm)
         }} />
         </Stack>
         <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Village Name : ${itm?.villagename}`}
+                                {` ${itm?.villagename}`}
                             </Typography>
         </CardContent>
         </Card>

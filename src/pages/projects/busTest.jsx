@@ -156,7 +156,7 @@ export default function busTestList() {
       <Stack sx={{margin:5}}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
-            label="to"
+            label="To"
             inputFormat="DD/MM/YYYY"
             views={["day", "month", "year"]}
             defaultValue={date2}

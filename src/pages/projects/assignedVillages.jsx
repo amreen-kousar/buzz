@@ -5,10 +5,12 @@ import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton,
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
-
+import VillageDialog from './projectfilters/Villagesdialog';
 export default function assignedVillages() {
     const {state} = useLocation()
     const [data1, setData1] = useState('')
+    const [batch,setBatch] = useState('')
+    const [batchState,setBatchState] = useState()
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
     const [count,setCount]= useState('');
@@ -108,6 +110,41 @@ export default function assignedVillages() {
     setSearch(search)
    assignedVillages();
 }
+useEffect(() => {
+  getTrainingBatch();
+ // console.log(batchState)
+  
+}, [batchState])
+const getTrainingBatch = async =>{
+        
+  console.log(batchState,"<---batchStatebatchState",batchState?.training_batch_id?batchState?.training_batch_id:clcikData?.id)
+  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  var data = JSON.stringify({
+      "batch_id": batchState?.training_batch_id?batchState?.training_batch_id:clcikData?.id,
+      "role_id": role
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setBatch(response.data)
+    
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+}
 
 
     return (
@@ -131,28 +168,30 @@ export default function assignedVillages() {
              <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}>Villages ({count})</Typography> 
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
-            {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-                <ParticipantDrawer
-                    clcikData={clcikData}
+            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <VillageDialog
+                    batchState={batchState}
+                    batch={batch}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
                     onCloseFilter={handleCloseFilter}
                 />
-            </Stack> */}
+            </Stack>
             {/* </Stack> */}
             {villageData?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
+                      setBatchState(itm)
                         setClickData({ name: itm.training_batch_name, title: "Participant Details",id:itm?.training_batch_id})
                         handleOpenFilter()
                     }}>
 
-                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
+                        <div pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {`  Training Batch Name  : ${itm?.training_batch_name}`}
                             </Typography>
                             {/* {console.log(itm?.list?.gelathiname,'<-------gelathinamegelathiname')} */}
-                        </Grid>
+                        </div>
                        
                     </Card>)
             })}

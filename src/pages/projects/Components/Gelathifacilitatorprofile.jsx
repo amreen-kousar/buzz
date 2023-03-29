@@ -99,7 +99,7 @@ console.log(profileData,"infoooooooo")
               <Iconify icon="material-symbols:arrow-back-rounded" />
             </IconButton>
             <Typography variant="subtitle2" style={{ color: 'white' }}>
-              Member Detail
+              Profile
             </Typography>
 
           </Toolbar>

@@ -16,7 +16,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
-
+import Iconify from 'src/components/Iconify';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -132,7 +132,7 @@ export default function PoaEdit({ setSucess, itm }) {
   }
   return (
     <div>
-      {(itm?.check_out==0 )?<Button onClick={handleClickOpen} sx={{
+      {(itm?.check_out==0 )?<IconButton onClick={handleClickOpen} sx={{
         '&:hover': {
           backgroundColor: '#ffd796',
           borderColor: "#ff7424"
@@ -140,8 +140,8 @@ export default function PoaEdit({ setSucess, itm }) {
         borderColor: "#ff7424",
         color: "#ed6c02"
       }} variant="outlined" >
-        Edit&nbsp;Poa
-      </Button>:null}
+        <Iconify icon="ic:baseline-mode-edit-outline"></Iconify>
+      </IconButton>:null}
       <Dialog
         open={open}
         fullScreen
