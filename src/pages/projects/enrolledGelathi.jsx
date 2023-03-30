@@ -14,6 +14,7 @@ export default function enrolledGelathiList() {
     var [selected, setSelected] = useState(null)
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
+    const [remove,setRemoved]=useState('');
     const [count,setCount]= useState('');
     useEffect(() => {
         enrolledGelathi();
@@ -128,7 +129,34 @@ const getData = (itm, i) => {
   console.log("sdfgsdfdfssd", itm, i)
   }
 
-
+  const removeGelathi= async(itm)=>{
+    if (confirm("Do You Want To Remove Gelathi?")){
+    var data = JSON.stringify({
+    "id": itm?.id,
+    "tb_id": itm?.tb_id
+  });
+  
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/removeEnrollGelathi.php',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    setRemoved(response.data)
+    enrolledGelathi()
+  })
+  
+  .catch(function (error) {
+    console.log(error);
+  });
+  }}
+  const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     return (
 
         <Container>  <Searchbar getSearch={(e) => searchFunction(e)} />
@@ -138,11 +166,11 @@ const getData = (itm, i) => {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    All enrolledGelathi
+                   Gelathis
                 </Typography>
-                <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+                {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
-          </Button>
+          </Button>:null}
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
@@ -179,18 +207,18 @@ const getData = (itm, i) => {
          
             {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
-                    <Card style={styles.card1} onClick={() => {
+                    <Card style={styles.card1} >
+                     {(role==13 || role==6)?<IconButton style={{float:'right'}} onClick={()=>removeGelathi(itm)}><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}
+                        <div onClick={() => {
                         setClickData({ name: itm.gelathiname, title: "Participant Details",id:itm?.id })
                         handleOpenFilter()
-                    }}>
-
-                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
+                    }} pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Gelathi Name : ${itm?.gelathiname}`}
                             </Typography>
-                            {/* {console.log(itm?.list?.gelathiname,'<-------gelathinamegelathiname')} */}
-                        </Grid>
-                        <Grid style={{ marginLeft: 15 }}>
+                           
+                            {console.log(itm,'<-------gelathinamegelathiname')}
+                        
                         <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Village Name : ${itm?.villagename}`}
                             </Typography>
@@ -200,7 +228,7 @@ const getData = (itm, i) => {
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>
-                        </Grid>
+                        </div>
                     </Card>)
             }):<>
             <h4 style={{textAlign:'center'}}>No Enrolled Gelathi Found</h4>

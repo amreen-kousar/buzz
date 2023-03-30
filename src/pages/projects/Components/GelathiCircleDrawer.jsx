@@ -69,6 +69,34 @@ console.log(clcikData,'<------clcikDataclcikData')
          
     }
 console.log(circleData,"------------------------------>dataaaaa")
+
+const removegelathicircle = async(itm)=>{
+    if(confirm("Are you sure want to remove")){
+    var data = JSON.stringify({
+      "circle_id": clcikData?.id,
+      "flag": 0,
+      "gelathi_id":itm?.gelathi_id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/updateEnrolledGelathi.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      circle();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+  }
     return (
         <>
             <Drawer
@@ -97,29 +125,27 @@ console.log(circleData,"------------------------------>dataaaaa")
                     <Stack spacing={10} sx={{ p: 3 }}>
                         <div>
                         {circleData?.gelathis?.map((itm) => {
+                            {console.log(itm,"hyy")}
                 return (
 
                             <Card style={{marginTop:20,}}>
                                 <CardContent >
-                                    {/* <Stack style={{ flexDirection: 'row' , }}  mb={2}>
+                                    <Stack style={{ float:'right'}}  >
                                         
                                        
                                       
 
-                                       <IconButton style={{marginLeft:70,}}>
+                                       <IconButton style={{marginLeft:70,}} onClick={()=>removegelathicircle(itm)}>
                                         <Icon  icon="material-symbols:check-box-rounded" width={20} height={20} marginTop={20}  color="#ff7424"  />
 
                                         </IconButton>
                                       
-                                        <IconButton style={{marginLeft:20,}}>
-                                        <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
-
-                                        </IconButton>
-                                       
-                                       
-                                     </Stack> */}
-                                   {console.log(circleData?.firstName,'<-------circleData?.firstName')}
-                                   <GelathiCircleForm/>
+                                     
+                                       <GelathiCircleForm />
+                                     </Stack>
+                                   {console.log(circleData?.gelathis,'<-------circleData?.firstName')}
+                                  
+                                   {/* state={{ id: data1?.project_id }} */}
                                    <Typography  variant="subtitle1" >{itm?.firstName}</Typography>
                                     <Typography variant="subtitle1" gutterBottom>
                                    

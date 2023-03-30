@@ -27,7 +27,7 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
   
     const filterPermissions = {
   
-      GelathiProgram: [{id:45,roles:['1','3','4','6','12','13']},{id:2,roles:['1','3','4','6','12','13']},{id:1,roles:['1','3','4','6','12','13']},{id:3,roles:['1','3','4','6','12','13']},{ id: 9, roles: ['1','3','4','6','12','13']},{id:4,roles:['1','12']},{id:5,roles:['1','3','4','6','12','13']}],
+      GelathiProgram: [{id:45,roles:['1','3','4','6','12','13']},{id:2,roles:['1','3','4','6','12','13']},{id:1,roles:['1','3','4','6','12','13']},{id:3,roles:['1','3','4','6','12','13']},{ id: 9, roles: ['1','3','4','6','12','13']},{id:6,roles:['13','4','3','1','12']},{id:4,roles:['1','12','13','6','3']},{id:5,roles:['1','3','4','6','12','13']},],
   
       GreenMotivators: [{ id: 6, roles: ['1','3','12','4','6','13'] }],
   
@@ -35,7 +35,7 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
   
       Gelathicircles: [{ id: 6, roles: ['1','3','12','4','6','13'] }],
 
-      Gelathis:[{id:6,roles:['1','3','12','4','6','13']}]
+      Gelathis:[{id:6,roles:['1','3','12','4','6']}]
     }
   
   

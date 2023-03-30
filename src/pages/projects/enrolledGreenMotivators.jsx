@@ -7,6 +7,13 @@ import Iconify from 'src/components/Iconify';
 import GreenSurvey from './Components/GreenSurvey'
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Filtersmain from './projectfilters/filtersmain';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 export default function enrolledGreenMotivatorsList() {
     const {state} = useLocation()
     console.log("nwewepewrwe",state)
@@ -131,6 +138,36 @@ const getData = (itm, i) => {
   handleclose()
   console.log("sdfgsdfdfssd", itm, i)
   }
+
+  const removeGelathi=async(itm)=>{
+    if(confirm("Are you sure want to remove Gelathi")){
+  var data = JSON.stringify({
+    "id": itm?.id,
+    "tb_id": itm?.tb_id
+  });
+  
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/new/removeGreenMotivators.php',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    enrolledGreenMotivators()
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+}
+
+
+  const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     return (
 
         <Container><Searchbar getSearch={(e) => searchFunction(e)} />
@@ -140,14 +177,14 @@ const getData = (itm, i) => {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    All Enrolled Green Motivators
+                    Green Motivators
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
-            <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
-          </Button>
+          </Button>:null}
             </Stack>
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <Filtersmain
@@ -184,29 +221,54 @@ const getData = (itm, i) => {
             {green?.list?.length!==0?green?.list?.map((itm) => {
                 console.log(itm,'<----------greengreengreen')
                 return (
-                    <Card style={styles.card1} onClick={() => {
+                    <Card  style={styles.card1}>
+                   {(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)}><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey />     
+              <div onClick={() => {
                         setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
                         handleOpenFilter()
-                    }}>
-                        
-              <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
-             <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Gelathi Name : ${itm?.gelathiname}`}     
-                            </Typography><GreenSurvey />
-              </Grid>
-              <Grid style={{ marginLeft: 15 }}>
-              <Typography variant="subtitle2" gutterBottom  >
+                    }} pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
+             <div variant="subtitle1" gutterBottom>
+                                {` Enrolled Village Name : ${itm?.gelathiname}`}
+                            </div>
+              
+              <div variant="subtitle2" gutterBottom  >
               {` Enrolled Village Name : ${itm?.villagename}`}
-                </Typography>
-                <Typography variant="body2"  gutterBottom >
+                </div>
+               {(role==1 || role==3 || role==5 || role==12 || role==4)? <div variant="subtitle2" gutterBottom  >
+              {` Enrolled By : ${itm?.enrolled_by}`}
+                </div>:null}
+                <div variant="body2"  gutterBottom >
                 {` Enrolled Date : ${itm?.enroll_date}`}
                  
-                </Typography>
+                </div>
               
 
-              </Grid>
+              </div>
                       
-                       
+              {/* <TableContainer component={Paper} sx={{width:"50vw"}} style={styles.card1} >
+          <Table aria-label="customized table">
+           
+            <TableBody onClick={() => {
+                        setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
+                        handleOpenFilter()
+                    }}  direction="row" alignItems="center" justifyContent="space-between" >
+             
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                  <Typography >Enrolled Gelathi Name </Typography>
+                  </TableCell>
+                  <TableCell>: {`${itm?.gelathiname}`}     </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                  Enrolled Village Name : 
+                  </TableCell>
+                  <TableCell> {`${itm?.villagename}`}     </TableCell>
+                </TableRow>
+              
+            </TableBody>
+          </Table>
+        </TableContainer>         */}
                     </Card>)
             }):
             <>

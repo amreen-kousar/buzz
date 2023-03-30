@@ -333,7 +333,7 @@ function Project(props) {
                     : null}
                   {(userDetails == 1 || userDetails == 6 || userDetails == 4 || userDetails == 3 || userDetails == 13 || userDetails == 6 || userDetails == 12) ? <br /> : null}
                   {(userDetails == 13 || userDetails == 4 || userDetails == 12) ?
-                    <div><Link to="/dashboard/projects/assignbatches" state={{ id: data1?.project_id }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
+                    <div><Link to="/dashboard/projects/assignbatches"  style={styles.linkStyle}><Button variant="secondary" state={{ id: data1?.project_id }} style={styles.buttonStyle} endIcon={<IconButton>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>} startIcon={<IconButton>
                       <Iconify style={{ color: "black" }} icon="ic:baseline-home" />
@@ -424,7 +424,7 @@ function Project(props) {
                       style={{ justifyContent: 'flex-end' }}
                     >
                       <MenuItem>
-                        <Link to="/dashboard/projects/scheduleVillage" state={{ id: data1?.project_id }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/scheduleVillage" state={{ id: data1?.project_id,name:data1?.project_name }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="mdi:bus-clock" /></IconButton>}>
                           <span style={{ width: "200px" }}> Schedule A Village Visit</span>

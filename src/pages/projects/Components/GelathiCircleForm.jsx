@@ -32,13 +32,15 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { Color } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link ,useLocation} from 'react-router-dom';
 import Iconify from '../../../components/Iconify';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function GelathiCircleForm() {
+export default function GelathiCircleForm(circleData) {
+  const {state} = useLocation()
+  
   const [open, setOpen] = React.useState(false);
   const [vyaapar, setVyaapar] = useState('');
   const [circleform, setcircleform] = useState('');
@@ -184,13 +186,15 @@ export default function GelathiCircleForm() {
       });
       handleClose();
 }
-        
+
+
+
   return (
     <div>
         <Stack style={{ flexDirection: 'row' ,float:'right' }}  mb={2}>
-        <IconButton >
+        {/* <IconButton >
         <Icon  icon="material-symbols:check-box-rounded" width={20} height={20} marginTop={20}  color="#ff7424"  />
-        </IconButton>
+        </IconButton> */}
         <IconButton onClick={handleClickOpen}>
          <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
         </IconButton>

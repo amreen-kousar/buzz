@@ -86,6 +86,7 @@ export default function gelathiCirclesList() {
   }
 
   const circle = async(id,i,g) => {
+    console.log(id,"idvalue",i)
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
@@ -131,7 +132,7 @@ export default function gelathiCirclesList() {
     console.log("sdfgsdfdfssd", itm, i)
     }
   
-
+    const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
   return (
 
     <Container> <Searchbar getSearch={(e) => searchFunction(e)} />
@@ -146,10 +147,10 @@ export default function gelathiCirclesList() {
         {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
-            <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+            {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
-          </Button>
-        <ChooseGelathi />
+          </Button>:null}
+        <ChooseGelathi data1={data1}/>
 
       </Stack>
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -190,13 +191,13 @@ export default function gelathiCirclesList() {
 
             <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
               <Typography variant="subtitle1" gutterBottom>
-                {`  Gelathi Cirlces Name : ${itm?.circle_name}`}
+                {`  ${itm?.circle_name}`}
               </Typography>
             </Grid>
             <Grid style={{ marginLeft: 15 }}>
 
               <Typography variant="subtitle2" gutterBottom>
-                {`   Cirlces Date : ${itm?.circle_date}`}
+                {`   ${itm?.circle_date}`}
               </Typography>
 
             </Grid>

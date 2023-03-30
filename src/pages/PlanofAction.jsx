@@ -4,9 +4,9 @@ import React from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import account from '.././_mock/account';
 import { styled } from '@mui/material/styles';
-
+import Iconify from 'src/components/Iconify';
 import PropTypes from 'prop-types';
-import { Link, Container, Stack, Typography, Box, Button, TextField, CardContent, Card, Avatar, Grid, Chip } from '@mui/material';
+import { Link, Container, Stack, Typography, Box, Button, TextField, CardContent, Card, Avatar, Grid, Chip,IconButton} from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
@@ -419,7 +419,7 @@ export default function PlanofAction() {
 
                         return (
                           
-                          <Card style={{ marginTop: 35 }} onClick={() => {
+                          <Card style={{ marginTop: 10,marginBottom:10 }} onClick={() => {
                             setSelect(itm)
 
                           }}>
@@ -459,14 +459,14 @@ export default function PlanofAction() {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
                                         {(role == 13 || idvalue==itm?.user_id) ? <Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
-                                          {(itm?.check_out==0)?<Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
+                                          {(itm?.check_out==0)?<IconButton onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
                                               backgroundColor: '#ffd796',
                                               borderColor: "#ed6c02"
                                             },
                                             borderColor: "#ed6c02",
                                             color: "#ed6c02"
-                                          }} variant="outlined">Delete</Button>:<span style={{color:'green',fontWeight:500}}>(Event&nbsp;Completed)</span>}
+                                          }} variant="outlined"><Iconify icon="material-symbols:cancel"></Iconify></IconButton>:<span style={{color:'green',fontWeight:500}}>(Event&nbsp;Completed)</span>}
                                         </Stack> : null}
                                       </TableCell>
                                     }
@@ -539,14 +539,14 @@ export default function PlanofAction() {
                                       itm?.status !== '2' && <TableCell component="th" scope="row" width="10px">
                                         {(role == 13 || idvalue==itm?.user_id) ?<Stack direction={'row'} spacing={2} >
                                           <PoaEdit itm={itm} />
-                                          {(itm?.check_out==0)?<Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
+                                          {(itm?.check_out==0)?<IconButton onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
                                               backgroundColor: '#ffd796',
                                               borderColor: "#ed6c02"
                                             },
                                             borderColor: "#ed6c02",
                                             color: "#ed6c02"
-                                          }} variant="outlined">Delete</Button>:<span style={{color:'green',fontWeight:500}}>(Event&nbsp;Completed)</span>}
+                                          }} variant="outlined"><Iconify icon="material-symbols:cancel"></Iconify></IconButton>:<span style={{color:'green',fontWeight:500}}>(Event&nbsp;Completed)</span>}
                                         </Stack> : null}
                                       </TableCell>
                                     }
@@ -620,14 +620,14 @@ export default function PlanofAction() {
                                         {(role == 13 || idvalue==itm?.user_id) ? <Stack direction={'row'} spacing={2} >
                                       
                                           <PoaEdit itm={itm} />
-                                          {(itm?.check_out==0)?<Button onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
+                                          {(itm?.check_out==0)?<IconButton onClick={() => { handleDelete(itm) }} style={{ color: "#ed6c02" }} sx={{
                                             '&:hover': {
                                               backgroundColor: '#ffd796',
                                               borderColor: "#ed6c02"
                                             },
                                             borderColor: "#ed6c02",
                                             color: "#ed6c02"
-                                          }} variant="outlined">Delete</Button>:<span style={{color:'green',fontWeight:500}}>(Event&nbsp;Completed)</span>}
+                                          }} variant="outlined"><Iconify icon="material-symbols:cancel"></Iconify></IconButton>:<span style={{color:'green',fontWeight:500}}>(Event&nbsp;Completed)</span>}
                                         </Stack> : null}
                                       </TableCell>
                                     }

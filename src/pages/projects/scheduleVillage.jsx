@@ -15,7 +15,7 @@ export default function scheduleVillage() {
     var [selected, setSelected] = useState(null)
     const [clcikData, setClickData] = useState()
     const [villageData, setVillageData] = useState('');
-
+   const [count,setCount]=useState('')
     const searchFunction = (e) => {
         search = e
         setSearch(search)
@@ -58,6 +58,7 @@ export default function scheduleVillage() {
           axios(config)
           .then(function (response) {
             setVillageData(response.data)
+            setCount(response?.data?.list.length)
             console.log(response.data,'<---------------setVillageDatasetVillageData');
           })
           .catch(function (error) {
@@ -128,6 +129,7 @@ export default function scheduleVillage() {
                     selected && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
+            <Typography style={{ fontWeight: 500, marginLeft: 2 }}>Villages : ({count})</Typography>
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <Villagevisitdrawer
