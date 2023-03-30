@@ -107,16 +107,12 @@ console.log(partiData,"------------------------------>dataaaaa")
                                     </Typography>
                                     
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
-                                        Contact Person:
+                                        Contact Number:
                                         &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.contact_no}</span>
                                     </Typography>
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
                                     Education:
                                     &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.education}</span>
-                                    </Typography>
-                                    <Typography style={{ flexDirection: 'row' }}  variant="subtitle1" gutterBottom>
-                                       Saving Amount:
-                                       &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.saving_amt}</span>
                                     </Typography>
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
                                      Name of SHG:
@@ -127,17 +123,29 @@ console.log(partiData,"------------------------------>dataaaaa")
                                     &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.caste}</span>
                                     </Typography>
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
-                                    Monthly Saving Wife :
+                                    Wife's Occupation:
+                                    &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.occupation}</span>
+                                    </Typography>
+                                    <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
+                                    Husband's Occupation:
+                                    &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.husbandOccupation}</span>
+                                    </Typography>
+                                    <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
+                                    Monthly wife's Income :
+                                    &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.wifeIncomeMonthly}</span>
+                                    </Typography>
+                                    <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
+                                    Monthly wife Savings:
                                     &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.wifeSavingsMonthly}</span>
                                     </Typography>
-                                    <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
-                                    Monthly Income Wife :
-                                    &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.wifeIncomeMonthly}</span>
-                                    </Typography>
-                                    <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
-                                    Monthly Income Wife :
-                                    &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.wifeIncomeMonthly}</span>
-                                    </Typography>
+                                    {/* <Typography style={{ flexDirection: 'row' }}  variant="subtitle1" gutterBottom>
+                                       Saving Amount:
+                                       &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.saving_amt}</span>
+                                    </Typography> */}
+                                 
+                                   
+                              
+                                 
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
                                     Goal :
                                     &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.saving_goal}</span>
@@ -147,12 +155,12 @@ console.log(partiData,"------------------------------>dataaaaa")
                                     &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.income}</span>
                                     </Typography>
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
-                                    Monthly Family Saving  :
+                                    Monthly Family Savings  :
                                     &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.saving_amt}</span>
                                     </Typography>
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
                                     Bank Account  :
-                                    &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.bank_acc}</span>
+                                    &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{(partiData?.bank_acc=='1')?'Yes':'No'}</span>
                                     </Typography>
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
                                    Type of Enterprise  :

@@ -248,7 +248,7 @@ const convertImage = (e) => {
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="body1" sx={{ ml: 1 }}>
-            {`${clcikData?.title}`}
+            {`${session?.type_name}`}
           </Typography>
           {console.log(clcikData, '<------clcikDataclcikData')}
           <IconButton onClick={onCloseFilter}>

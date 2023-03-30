@@ -36,7 +36,9 @@ export default function Team(props) {
     const [checkedData, setCheckedData] = useState([])
     var [selectedAll, setSelectedAll] = useState(false)
     const [comments, setComments] = useState('')
-
+    const [approve,setapprove]=useState('');
+    const [reject,setreject]=useState('');
+    const [verifylist,setverifylist]=useState('');
     useEffect(() => {
         setFilterData(props.returnDateValue)
         teamMembersApiCall()
@@ -122,7 +124,7 @@ export default function Team(props) {
                 console.log(error);
             });
     }
-
+console.log(teamTAData,"responseeeeeeeeeeeeeeeeeeeeee")
     const setToCheckedData = (itm, i) => {
         console.log(selectedAll, "called in a function")
         if (i == null) {
@@ -152,11 +154,12 @@ export default function Team(props) {
 
 
     const verifyTA = () => {
+        handleCloseFilter()
         var data = JSON.stringify({
             "ta_id": checkedData,
-            "user_id": localStorage?.getItem('userId'),
+            "user_id": localStorage?.getItem('userDetails')?.id,
             "extra_comments": comments,
-            "status": 0
+            "status": 4
         });
         console.log(data)
         var config = {
@@ -170,6 +173,60 @@ export default function Team(props) {
         axios(config)
             .then(function (response) {
                 console.log(response, "Response in team members api call")
+                setverifylist(response?.data?.data)
+               
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
+    const approveTA = () => {
+        var data = JSON.stringify({
+            "ta_id": checkedData,
+            "user_id": localStorage?.getItem('userId'),
+            "extra_comments": comments,
+            "status": 1
+        });
+        console.log(data)
+        var config = {
+            method: 'post',
+            url: 'https://bdms.buzzwomen.org/appTest/new/approveTa.php',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+        axios(config)
+            .then(function (response) {
+                console.log(response, "approve response")
+                setapprove(response?.data)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
+    const rejectTA = () => {
+        var data = JSON.stringify({
+            "ta_id": checkedData,
+            "user_id": localStorage?.getItem('userId'),
+            "extra_comments": comments,
+            "status": 2
+        });
+        console.log(data)
+        var config = {
+            method: 'post',
+            url: 'https://bdms.buzzwomen.org/appTest/new/approveTa.php',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+        axios(config)
+            .then(function (response) {
+                console.log(response, "reject response")
+                setreject(response?.data)
 
             })
             .catch(function (error) {
@@ -177,12 +234,16 @@ export default function Team(props) {
             });
 
     }
+    
+    console.log(reject,"rejecteddata");
+    console.log(approve,"approvedata");
+    console.log(verifylist,"verifyyy")
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-
+const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
     { console.log(checkedData, "checked Dataaaaaaaaaaaa") }
 
     return (
@@ -192,6 +253,7 @@ export default function Team(props) {
                     return <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "f7f7f7", cursor: "pointer", padding: '0.5rem' }} >
                         <Grid container spacing={2} >
                             <Grid onClick={() => { teamMemberTravelAllowance(itm, i) }} item xs={8}>
+                               
                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.fullName}</b><br>
                                 </br>
                                 <Typography variant="body" gutterBottom > <b>{itm?.designation}</b></Typography>
@@ -241,6 +303,7 @@ export default function Team(props) {
                         </div>
                         {
                             teamTAData.map((itm, i) => {
+                                {console.log(itm?.status,"status")}
                                 return <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: '0.5rem', height: "10vh" }} >
                                     <Grid container spacing={2}>
                                         <Grid item sm={11}>
@@ -253,6 +316,7 @@ export default function Team(props) {
                                                 onChange={() => { setToCheckedData(itm, i) }}
                                             />
                                             <b style={{ color: "#3c88ed" }} >{itm?.Ta_Name}</b>
+                                            {(itm?.status==4)?<Typography style={{color:'green',float:'right'}}>Verified</Typography>:(itm?.status==0)?<Typography style={{color:'red',float:'right'}}>Pending</Typography>:(itm.status==1)?<Typography style={{color:'green',float:'right'}}>Approved</Typography>:<Typography style={{color:'red',float:'right'}}>Rejected</Typography>}
                                         </Grid>
                                         <Grid item sm={1}>
                                             <Iconify icon="eva:eye-fill" onClick={() => { setselectedTeamTA(itm); handleDetailsOpenFilter() }} style={{ fontSize: 30, color: "#ab0954" }} />
@@ -271,7 +335,11 @@ export default function Team(props) {
                             fullWidth
                         />
 
-                        <Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Submit</Button></form>
+                        
+                        {(userrole==3)?
+                        <div style={{display:'flex'}}><Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={approveTA}>Approve</Button>&nbsp;&nbsp;
+                        <Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={rejectTA}>Reject</Button></div>:
+                        (userrole==4)?<Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Submit</Button>:null}</form>
 
                     {/* </DialogContentText>
                 </DialogContent> */}
@@ -283,37 +351,37 @@ export default function Team(props) {
 
                             <tr>
                                 <td style={{ color: "#f97d3f" }}>Selected POA</td>
-                                <td>{selectedTeamTA?.Ta_Name}</td>
+                                <td>:&nbsp;{selectedTeamTA?.Ta_Name}</td>
                             </tr>
                             <tr>
                                 <td style={{ color: "#f97d3f" }}>Start Reading</td>
-                                <td>{selectedTeamTA?.start_odometer}</td>
+                                <td>:&nbsp;{selectedTeamTA?.start_odometer}</td>
                             </tr>
 
                             <tr >
                                 <td style={{ color: "#f97d3f" }}> Start Location</td>
-                                <td>{selectedTeamTA?.start_location_name}</td>
+                                <td>:&nbsp;{selectedTeamTA?.start_location_name}</td>
                             </tr>
 
                             <tr>
                                 <td style={{ color: "#f97d3f" }}> End Reading</td>
-                                <td>{selectedTeamTA?.end_odometer}</td>
+                                <td>:&nbsp;{selectedTeamTA?.end_odometer}</td>
                             </tr>
 
                             <tr>
                                 <td style={{ color: "#f97d3f" }}>End Location
                                 </td>
-                                <td>{selectedTeamTA?.end_location_name}</td>
+                                <td>:&nbsp;{selectedTeamTA?.end_location_name}</td>
                             </tr>
 
                             <tr>
                                 <td style={{ color: "#f97d3f" }}>Mode Of Travel</td>
-                                <td>{selectedTeamTA?.mode_of_travel_name}</td>
+                                <td>:&nbsp;{selectedTeamTA?.mode_of_travel_name}</td>
                             </tr>
 
                             <tr>
                                 <td style={{ color: "#f97d3f" }}>Rate per Km</td>
-                                <td>{selectedTeamTA?.rate_per_KM_name}</td>
+                                <td>:&nbsp;{selectedTeamTA?.rate_per_KM_name}</td>
                             </tr>
 
                             {/* <tr>
@@ -323,32 +391,32 @@ export default function Team(props) {
 
                             <tr>
                                 <td style={{ color: "#f97d3f" }}>Phone Charges</td>
-                                <td>{selectedTeamTA?.telephone}</td>
+                                <td>:&nbsp;{selectedTeamTA?.telephone}</td>
                             </tr>
 
                             <tr>
                                 <td style={{ color: "#f97d3f" }}>printing and stationary</td>
-                                <td>{selectedTeamTA?.stationery}</td>
+                                <td>:&nbsp;{selectedTeamTA?.stationery}</td>
                             </tr>
 
                             <tr>
                                 <td style={{ color: "#f97d3f" }}>Other Expenses</td>
-                                <td>{selectedTeamTA?.other_text}</td>
+                                <td>:&nbsp;{selectedTeamTA?.other_text}</td>
                             </tr>
 
                             <tr>
                                 <td style={{ color: "#f97d3f" }}>Other Expenses A</td>
-                                <td>{selectedTeamTA?.others}</td>
+                                <td>:&nbsp;{selectedTeamTA?.others}</td>
                             </tr>
 
                             <tr>
                                 <td style={{ color: "#f97d3f" }}>Total Kilometers</td>
-                                <td>{selectedTeamTA?.klmtr}</td>
+                                <td>:&nbsp;{selectedTeamTA?.klmtr}</td>
                             </tr>
 
                             <tr>
                                 <td style={{ color: "#f97d3f" }}>Total TA</td>
-                                <td>{selectedTeamTA?.total_ta}</td>
+                                <td>:&nbsp;{selectedTeamTA?.total_ta}</td>
                             </tr>
 
 

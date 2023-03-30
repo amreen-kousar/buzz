@@ -458,7 +458,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
                 <TextField id="outlined-basic" defaultValue={editData?.location} onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common" />
               </Stack>
               <br /><br />
-              <div>
+              {/* <div>
                 <div style={{ display: "flex" }}>
                   {
                     viewImage ?
@@ -492,16 +492,53 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
                 }}>Send Images</Button>
               <br /><br />
 
-              {/* <Button onClick={() => capture()}>Click here to to upload snaps</Button> */}
+              <Button onClick={() => capture()}>Click here to to upload snaps</Button>
 
-            </div>
+           
             <Button onClick={() => SendData()} variant="filled" sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
               },
               color: "#ff7424",
 
-            }}>Upload</Button><br></br>
+            }}>Upload</Button><br></br> */}
+            <div>
+                <div style={{ display: "flex" }}>
+                  {
+                    viewImage ?
+                      image.map((i, index) => {
+                        return <div style={{ display: "flex", margin: "1rem" }}>
+                          <img src={i} style={{ height: "50px", width: "70px" }} alt="hello" />
+                          <Iconify
+                            onClick={() => { deleteImage(index) }}
+                            icon={'typcn:delete'}
+                            sx={{ width: 16, height: 16, ml: 1, color: "red" }}
+                          />
+                        </div>
+                      }) : null
+                  }
+                </div>
+                <div style={{display:'flex'}}>
+                <label for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
+                  <Iconify
+                    icon={'mdi:camera'}
+                    sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
+                  />&nbsp;
+                  Click here to Add images
+                  <input style={{ display: "none" }} accept="image/png, image/gif, image/jpeg" id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
+                </label>
+                <Button onClick={postImages} 
+                sx={{
+                  '&:hover': {
+                    backgroundColor: '#ffd796',
+                  },
+                  color: "#ff7424",
+                  backgroundColor:'#ffd796',
+                  marginLeft:'10px'
+                }}>Upload</Button></div>
+              </div>
+
+ </div>
           </DialogContentText></DialogContent>  </Dialog>
     </div>
   );

@@ -5,6 +5,8 @@ import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import BeehiveDrawer from './Components/BeehiveDrawer';
+import Circledrawer from './Components/Circledrawer';
 export default function scheduleCircleMeet() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
@@ -35,36 +37,65 @@ export default function scheduleCircleMeet() {
         setOpenFilter(false);
     };
 
-    const enrolledGelathi = async =>{
-        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-        var data = JSON.stringify({
-            "search": search,
-            "project_id": state?.id,
-            "emp_id": idvalue,
-            // "role_id": 6
-          });
+  //   const enrolledGelathi = async =>{
+  //       var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  // var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  //       var data = JSON.stringify({
+  //           "search": search,
+  //           "project_id": state?.id,
+  //           "emp_id": idvalue,
+  //           // "role_id": 6
+  //         });
           
-          var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
+  //         var config = {
+  //           method: 'post',
+  //           url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
+  //           headers: { 
+  //             'Content-Type': 'application/json'
+  //           },
+  //           data : data
+  //         };
           
-          axios(config)
-          .then(function (response) {
-            setenrolled(response.data)
-            setCount(response?.data?.list.length)
-            console.log(response.data,'<---------------setenrolledsetenrolled');
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-    }
+  //         axios(config)
+  //         .then(function (response) {
+  //           setenrolled(response.data)
+  //           setCount(response?.data?.list.length)
+  //           console.log(response.data,'<---------------setenrolledsetenrolled');
+  //         })
+  //         .catch(function (error) {
+  //           console.log(error);
+  //         });
+  //   }
 
+  const enrolledGelathi = async(id,i,g) => {
+    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var data = JSON.stringify({
+      "search": search,
+      "project_id": state?.id,
+      "gelathi_id": id?.emp_id?id?.emp_id:''
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircle.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        setenrolled(response.data)
+        setCount(response?.data?.list.length)
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
     const id = sessionStorage?.getItem("proId")
     useEffect(() => {
       projData();
@@ -130,35 +161,37 @@ export default function scheduleCircleMeet() {
             <Typography style={{fontWeight:500,marginLeft:2}}>Circles : ({count})</Typography> 
              {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-                <ParticipantDrawer
+              {console.log(clcikData,"cliked")}
+                <Circledrawer
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
                     onCloseFilter={handleCloseFilter}
+                    id={state?.id}
+                    data1={data1}
+                    
                 />
             </Stack>
             {/* </Stack> */}
 
             {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
+              {console.log(itm,"itemeeeeeee")}
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.gelathiname, title: "Participant Details",id:itm?.id })
+                        setClickData({ name: itm.circle_id, title: "Schedule A Circle Meeting",id:itm?.id })
                         handleOpenFilter()
                     }}>
 
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
-                            <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Gelathi Name : ${itm?.gelathiname}`}
-                            </Typography>
-                            {/* {console.log(itm?.list?.gelathiname,'<-------gelathinamegelathiname')} */}
-                        </Grid>
-                        <Grid style={{ marginLeft: 15 }}>
                         <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Village Name : ${itm?.villagename}`}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Date : ${itm?.enroll_date}`}
-                            </Typography>
+                {`  ${itm?.circle_name}`}
+              </Typography>
+            </Grid>
+            <Grid style={{ marginLeft: 15 }}>
+
+              <Typography variant="subtitle2" gutterBottom>
+                {`   ${itm?.circle_date}`}
+              </Typography>
                         </Grid>
                     </Card>)
             }):

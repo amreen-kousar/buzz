@@ -36,40 +36,38 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function PoaCreate(props) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
-  const [addPoa, setAddPoa] = useState("");
+  const [addPoa, setAddPoa] = useState('');
   const [userId, setUserId] = useState();
-  var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-  console.log(userDetails,"userrrrrrrrrrrrr")
-  const role_name =JSON.parse(localStorage?.getItem('userDetails'))?.role_name
+  var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
+  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
+  console.log(userDetails, 'userrrrrrrrrrrrr');
+  const role_name = JSON.parse(localStorage?.getItem('userDetails'))?.role_name;
   const [value, setValue] = React.useState(false);
  const [successMessage,setsuccessMessage]=useState(false);
  const [message, setMessage] = useState('')
  const [showDate , setShowDate] = useState(false)
   const handleChangeTime = (newValue) => {
-    console.log(newValue, "<----1234567u8")
+    console.log(newValue, '<----1234567u8');
     // setValue(newValue);
   };
   const [addData, setAddData] = useState({
     date: dayjs(new Date()),
-    user_id: "",
-    name: "",
+    user_id: '',
+    name: '',
     all_day: 0,
-    description: "",
-    date2: dayjs(new Date())
-  })
+    description: '',
+    date2: dayjs(new Date()),
+  });
   const handleChange2 = (event) => {
+    console.log(event, '<--jyhfgd');
 
-
-    console.log(event, "<--jyhfgd")
-
-    setAddData({ ...addData, date2: event })
-    console.log(addData?.date2)
-  }
+    setAddData({ ...addData, date2: event });
+    console.log(addData?.date2);
+  };
   const handleChange = (event) => {
-    setAddData({ ...addData, date: event })
-    console.log(addData?.date,"dataaaaa")
-  }
+    setAddData({ ...addData, date: event });
+    console.log(addData?.date, 'dataaaaa');
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -78,40 +76,36 @@ export default function PoaCreate(props) {
 
   const handleClose = () => {
     setOpen(false);
-    
   };
 
   useEffect(() => {
     //AddPoa()
-    setAddData([])
-  }, [open]
-  )
+  }, []);
 
-  const AddPoa = async => {
-    console.log(addData, "<0hgdfvfdbgdf")
+  const AddPoa = (async) => {
+    console.log(addData, '<0hgdfvfdbgdf');
     var data = JSON.stringify({
-      "date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
-      "user_id": userDetails?.id,
-      "name": addData?.name,
-      "all_day": addData?.all_day,
-      "description": addData?.description,
-      "date2": moment(addData?.date2?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+      date: moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+      user_id: userDetails?.id,
+      name: addData?.name,
+      all_day: addData?.all_day,
+      description: addData?.description,
+      date2: moment(addData?.date2?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
       // "roleName":role_name
     });
-console.log(userId,"useriddddddddddd")
+    console.log(userId, 'useriddddddddddd');
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createEvent.php',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      data: data
+      data: data,
     };
 
     axios(config)
       .then(function (response) {
         if (response?.data?.code === 200) {
-
           // setSucess("this is success create")
           setMessage('Poa Created successfully')
           setsuccessMessage(true)
@@ -143,30 +137,51 @@ console.log(userId,"useriddddddddddd")
             }}>
        Create New Poa
       </Button> */}
-        {successMessage &&
-        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)} >
-          <Alert onClose={() => { setsuccessMessage(false) }} severity="success" sx={{ width: '100%',backgroundColor:'green',color:'white' }}>
+      {successMessage && (
+        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)}>
+          <Alert
+            onClose={() => {
+              setsuccessMessage(false);
+            }}
+            severity="success"
+            sx={{ width: '100%', backgroundColor: 'green', color: 'white' }}
+          >
             {message}
           </Alert>
         </Snackbar>
-      }
-      {console.log(role,"userrrrrrrrdetailssssss")}
-        {(role==3 ||role==4|| role==5 || role==6 || role==12 || role==13)?<Button variant="contained" onClick={handleClickOpen} style={{
-        float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
-        position: 'fixed', zIndex: '1', bottom: 40, right: 40
-      }} sx={{
-        ':hover': {
-          bgcolor: '#ffd796', // theme.palette.primary.main
-          color: '#ff7424',
-          border: '#ffd796'
-        },
-        bgcolor: '#ffd796',
-        color: "#ff7424",
-        border: 'none'
-      }} title="Create POA">
-        {/* style={{ float: "right", marginLeft:100, borderRadius: "50%", padding: "0.2rem", position:'relative', zIndex: '-1',marginRight:10,marginTop:15}} */}
-      <span style={{ fontSize: "2rem" }}>+</span>
-      </Button>:null}
+      )}
+      {console.log(role, 'userrrrrrrrdetailssssss')}
+      {role == 3 || role == 4 || role == 5 || role == 6 || role == 12 || role == 13 ? (
+        <Button
+          variant="contained"
+          onClick={handleClickOpen}
+          style={{
+            float: 'right',
+            marginLeft: '1rem',
+            borderRadius: '50%',
+            padding: '0.2rem',
+            marginTop: '-0.5rem',
+            position: 'fixed',
+            zIndex: '1',
+            bottom: 40,
+            right: 40,
+          }}
+          sx={{
+            ':hover': {
+              bgcolor: '#ffd796', // theme.palette.primary.main
+              color: '#ff7424',
+              border: '#ffd796',
+            },
+            bgcolor: '#ffd796',
+            color: '#ff7424',
+            border: 'none',
+          }}
+          title="Create POA"
+        >
+          {/* style={{ float: "right", marginLeft:100, borderRadius: "50%", padding: "0.2rem", position:'relative', zIndex: '-1',marginRight:10,marginTop:15}} */}
+          <span style={{ fontSize: '2rem' }}>+</span>
+        </Button>
+      ) : null}
       <Dialog
         open={open}
         fullScreen
@@ -175,40 +190,42 @@ console.log(userId,"useriddddddddddd")
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        {console.log(addPoa, "<----qwedrftgyhujikkmijnuhbygtv")}
-        <Snackbar open={value} autoHideDuration={6000} onClose={() => {
-          setAddPoa(''),
-            setValue(false)
-        }}>
-          <Alert onClose={() => {
-            setAddPoa(''),
-              setValue(false)
-          }} severity="error" sx={{ width: '100%' }}>
+        {console.log(addPoa, '<----qwedrftgyhujikkmijnuhbygtv')}
+        <Snackbar
+          open={value}
+          autoHideDuration={6000}
+          onClose={() => {
+            setAddPoa(''), setValue(false);
+          }}
+        >
+          <Alert
+            onClose={() => {
+              setAddPoa(''), setValue(false);
+            }}
+            severity="error"
+            sx={{ width: '100%' }}
+          >
             {addPoa}
           </Alert>
         </Snackbar>
-        <form onSubmit={(e) => { e.preventDefault(); AddPoa() }}> 
+
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+            <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
               Schedule an event
             </Typography>
 
-
-            <Button autoFocus color="inherit" type="submit">
-            <Iconify icon="material-symbols:save" width={30} height={30} />
+            <Button autoFocus color="inherit" onClick={AddPoa}>
+              <Iconify icon="material-symbols:save" width={30} height={30} />
             </Button>
           </Toolbar>
-
         </AppBar>
 
-       
         {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
-     
-       {/* <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
+        <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
           <DialogContentText
             id="scroll-dialog-description"
             //   ref={descriptionElementRef}
@@ -221,25 +238,25 @@ console.log(userId,"useriddddddddddd")
               }}
               noValidate
               autoComplete="off"
-            > */}
+            >
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
-                <TextField fullWidth value={addData?.name} type="text" required
-                 InputProps={{
-                   
-                  type: 'text',
-                 
-                }}
+                <TextField
+                  required
+                  fullWidth
+                  value={addData?.name}
+                  type="text"
                   onChange={(e) => {
-                  //  if(numrex.test(e?.target?.value)){
-                  setAddData({ ...addData, name: e?.target?.value })
-                  // }
-                 
-                    console.log(e, "<---EWWEREWREW")
-                }} 
-                id="Add title" 
-                label="Add Title" 
-                variant="outlined" 
-                color="common" />
+                    //  if(numrex.test(e?.target?.value)){
+                    setAddData({ ...addData, name: e?.target?.value });
+                    // }
+
+                    console.log(e, '<---EWWEREWREW');
+                  }}
+                  id="outlined-basic"
+                  label="Add Title"
+                  variant="outlined"
+                  color="common"
+                />
                 <Stack direction={'row'}>
                   <Typography>All Day</Typography>
                   <Switch value={addData?.all_day} onChange={(e) => {
@@ -302,20 +319,28 @@ console.log(userId,"useriddddddddddd")
                
 
                 <Stack>
-                  <Typography variant="body1" color="common">Description</Typography>
+                  <Typography variant="body1" color="common">
+                    Description
+                  </Typography>
                 </Stack>
 
                 <Stack>
-                  <TextField required id="outlined-basic" value={addData?.description} onChange={(e) => { setAddData({ ...addData, description: e?.target?.value }) }} label="Add Description For Creating Poa" variant="outlined" color="common" />
+                  <TextField
+                    id="outlined-basic"
+                    value={addData?.description}
+                    onChange={(e) => {
+                      setAddData({ ...addData, description: e?.target?.value });
+                    }}
+                    label="Add Description For Creating Poa"
+                    variant="outlined"
+                    color="common"
+                  />
                 </Stack>
-                <Stack>
-
-                </Stack>
+                <Stack></Stack>
               </div>
-            {/* </Box>
+            </Box>
           </DialogContentText>
-        </DialogContent> */}
-        </form>
+        </DialogContent>
       </Dialog>
     </div>
   );

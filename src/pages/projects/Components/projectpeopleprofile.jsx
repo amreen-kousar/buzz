@@ -89,7 +89,7 @@ console.log(profileData,"infoooooooo")
               <Iconify icon="material-symbols:arrow-back-rounded" />
             </IconButton>
             <Typography variant="subtitle2" style={{ color: 'white' }}>
-              Member Detail working
+              Profile
             </Typography>
 
           </Toolbar>
@@ -175,7 +175,7 @@ console.log(profileData,"infoooooooo")
                       })}
                     </Typography>
                     :
-                    <div style={{ textAlign: "center" }}>No projects found .</div>
+                    <div style={{ textAlign: "center" }}>No Projects.</div>
                   }
                 </CardContent>
               </Card>
