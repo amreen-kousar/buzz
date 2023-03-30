@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography, Stack,DialogContent,DialogContentText, Divider, Card, CardContent, Button, Box,IconButton} from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import Page from 'src/components/Page'
+import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
 import { AppWidgetSummary } from '../../../sections/@dashboard/app';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +16,12 @@ import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import Iconify from 'src/components/Iconify';
 import React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -94,25 +101,33 @@ export default function Projectdashboard() {
 
   const apiHit = async (id, i, g) => {
     setLoader(true)
-    console.log(localStorage.getItem('profiledetails' ), "benak")
+    
     var userid = JSON.parse(localStorage.getItem('profiledetails'))?.emp_id
     var role = JSON.parse(localStorage.getItem('profiledetails'))?.role
 
     let roleid 
 
     if(role==="Trainer"){
-      roleid=5
+      roleid="5"
+      localStorage.setItem('profilerole','5')
     }else
     if(role==="Operations Manager"){
-      roleid= 4
+      roleid="4"
+      localStorage.setItem('profilerole','4')
     }else if(role==="Gelathi Facilitator"){
-      roleid= 6
+      roleid="6"
+    localStorage.setItem('profilerole','6')
     }
     else if(role==="Driver"){
-      roleid= 7
+      roleid= "7"
+      localStorage.setItem('profilerole','7')
+    }
+    else if(role==="Gelathi Facilitator Lead"){
+      roleid="13"
+      localStorage.setItem('profilerole','13')
     }
 
-    console.log(role , userid , "profile details")
+    console.log(roleid , userid , "profile details")
     const data = {
       end_date: g === "date" ? i : '',
       role_id: roleid,
@@ -214,7 +229,8 @@ export default function Projectdashboard() {
   const closefilter = () => {
     console.log("deleted")
   }
-
+const idvalue=JSON.parse(localStorage.getItem('profilerole'))
+console.log(idvalue,"idddddddddddddd")
   return (
 <>
 <IconButton onClick={handleClickOpen}><Iconify style={{ color: "black" ,right:0,float:'right'}} icon="fluent:notebook-eye-20-filled" /></IconButton>
@@ -245,7 +261,7 @@ export default function Projectdashboard() {
        
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <FiltersHome
-            type="Dashboard"
+            type="ProjectDashboard"
             onDateSubmit={onDateSubmit}
             onSumbit={onSumbit}
             getData={getData}
@@ -255,7 +271,7 @@ export default function Projectdashboard() {
           />
         </Stack>
 
-        <Grid container spacing={3} marginTop={1}>
+        {(idvalue==4 || idvalue==5)?<Grid container spacing={3} marginTop={1}>
             
           {
             summaryDataView.map(s => {
@@ -271,9 +287,73 @@ export default function Projectdashboard() {
             })
           }
 
-        </Grid>
+        </Grid>:
+         <Grid container spacing={3} marginTop={4}>
+         <Grid item xs={4} sm={8} md={4}>
 
-        <Grid item xs={12} sm={12} md={12} marginTop={3}>
+           <AppWidgetSummary
+             title="Total Circles"
+             total={summaryData?.summary_circles}
+             color="motivator"
+
+           />
+         </Grid>
+         <Grid item xs={4} sm={8} md={4}>
+
+           <AppWidgetSummary
+             title="Circle Meetings"
+             total={summaryData?.summary_circle_meet}
+             color="motivator"
+
+           />
+         </Grid>
+         <Grid item xs={4} sm={8} md={4}>
+
+           <AppWidgetSummary
+             title="Village Visits"
+             total={summaryData?.summary_villagevisit}
+             color="villages"
+
+           />
+         </Grid>
+         <Grid item xs={6} sm={6} md={6}>
+
+           <AppWidgetSummary
+             title="Beehive Visits"
+             total={summaryData?.summary_beehive}
+             color="motivator"
+
+           />
+         </Grid>
+         <Grid item xs={6} sm={6} md={6}>
+
+           <AppWidgetSummary
+             title="Enrolled Gelathis"
+             total={summaryData?.summary_enroll}
+             color="gelathis"
+
+           />
+         </Grid>
+         <Grid item xs={6} sm={6} md={6}>
+
+           <AppWidgetSummary
+             title="Green Motivators"
+             total={summaryData?.summary_green}
+             color="motivator"
+
+           />
+         </Grid>
+         <Grid item xs={6} sm={6} md={6}>
+           <AppWidgetSummary
+             title="Enrolled Vyapar"
+             total={summaryData?.summary_vyapar}
+             color="vyapar"
+
+           />
+         </Grid>
+       </Grid>}
+
+       {(idvalue==4 || idvalue==5)?<Grid item xs={12} sm={12} md={12} marginTop={3}>
           {summaryData?.data?.map((itm) => {
             return (
               <Card
@@ -322,7 +402,55 @@ export default function Projectdashboard() {
               </Card>
             );
           })}
-        </Grid>
+        </Grid> : 
+        <>{summaryData?.data?.map((item)=>{
+            return(
+              <>
+              {summaryData?.data?
+               <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
+
+            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+              Project : {item?.name}
+            </Typography>
+            {/* <Graphchart/> */}
+            <CardContent style={{ display: "flex" }}>
+              <TableContainer component={Paper}>
+                <Table aria-label="customized table" style={{ width: '200px', float: 'Left' }}>
+                  <TableHead>
+                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                      <TableCell>Total Circles</TableCell>  <TableCell>:&nbsp;{item?.circles}</TableCell>
+                    </TableRow>
+                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                      <TableCell>Circle Meetings</TableCell>  <TableCell>:&nbsp;{item?.circle_meet}</TableCell>
+                    </TableRow>
+
+                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                      <TableCell>Village Visits</TableCell>  <TableCell>:&nbsp;{item?.villagevisit}</TableCell>
+                    </TableRow>
+
+                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                      <TableCell>Beehive Visits</TableCell>  <TableCell>:&nbsp;{item?.beehive}</TableCell>
+                    </TableRow>
+
+                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
+                      <TableCell>Enrolled Gelathis</TableCell>  <TableCell>:&nbsp;{item?.enroll}</TableCell>
+                    </TableRow>
+
+                  </TableHead>
+                  <TableBody>
+
+                  </TableBody>
+                </Table>
+              </TableContainer>
+
+
+            </CardContent>
+          </Card> 
+          :  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Projects</h1>}
+              </>
+            )
+          })
+          }</>}
 
 
       </Container>

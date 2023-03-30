@@ -203,9 +203,9 @@ console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa")
   return (
     <Dialog onClose={handleClose} open={open}>
       <Stack direction={'row'}>
-        <Typography variant="subtitle2" style={{ color: '#ff7424' }} mt={2} onClick={handleClose}>Back</Typography>
+        <Typography variant="subtitle2" style={{ color: '#ff7424' }} mt={2} ml={2} onClick={handleClose}>Back</Typography>
         <DialogTitle>Add Trainer From List</DialogTitle>
-        <Typography mt={2} variant="subtitle2" style={{ color: '#ff7424' }} onClick={() => {
+        <Typography mt={2} mr={2} variant="subtitle2" style={{ color: '#ff7424' }} onClick={() => {
           getData(arr),
             handleClose()
         }}>Save</Typography>

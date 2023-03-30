@@ -127,25 +127,26 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
         <Stack> 
-       <CardContent>  
+       
         <Card style={{marginTop:60}}>
         <CardContent direction={'row'}>
         <Stack direction={'row'}>
         <Typography variant="subtitle1" gutterBottom>
-                                {` ${itm?.gelathiname}`}
-                            </Typography>
-        <br />
-        
-        <Checkbox {...label} onChange={()=>{
+                                {` ${itm?.gelathiname}`}  <Checkbox {...label} onChange={()=>{
 checkBoxData(itm)
         }} />
+                            </Typography>
+                            
+        <br />
+        
+      
         </Stack>
         <Typography variant="subtitle1" gutterBottom>
                                 {` ${itm?.villagename}`}
                             </Typography>
         </CardContent>
         </Card>
-       </CardContent>
+      
        </Stack>)
             }):
             <>

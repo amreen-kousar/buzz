@@ -7,6 +7,13 @@ import Iconify from 'src/components/Iconify';
 import GreenSurvey from './Components/GreenSurvey'
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Filtersmain from './projectfilters/filtersmain';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 export default function enrolledGreenMotivatorsList() {
     const {state} = useLocation()
     console.log("nwewepewrwe",state)
@@ -214,31 +221,54 @@ const getData = (itm, i) => {
             {green?.list?.length!==0?green?.list?.map((itm) => {
                 console.log(itm,'<----------greengreengreen')
                 return (
-                    <Card style={styles.card1} >
+                    <Card  style={styles.card1}>
                    {(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)}><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey />     
               <div onClick={() => {
                         setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
                         handleOpenFilter()
                     }} pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
-             <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Gelathi Name : ${itm?.gelathiname}`}     
-                            </Typography>
+             <div variant="subtitle1" gutterBottom>
+                                {` Enrolled Village Name : ${itm?.gelathiname}`}
+                            </div>
               
-              <Typography variant="subtitle2" gutterBottom  >
+              <div variant="subtitle2" gutterBottom  >
               {` Enrolled Village Name : ${itm?.villagename}`}
-                </Typography>
-               {(role==1 || role==3 || role==5 || role==12 || role==4)? <Typography variant="subtitle2" gutterBottom  >
+                </div>
+               {(role==1 || role==3 || role==5 || role==12 || role==4)? <div variant="subtitle2" gutterBottom  >
               {` Enrolled By : ${itm?.enrolled_by}`}
-                </Typography>:null}
-                <Typography variant="body2"  gutterBottom >
+                </div>:null}
+                <div variant="body2"  gutterBottom >
                 {` Enrolled Date : ${itm?.enroll_date}`}
                  
-                </Typography>
+                </div>
               
 
               </div>
                       
-                       
+              {/* <TableContainer component={Paper} sx={{width:"50vw"}} style={styles.card1} >
+          <Table aria-label="customized table">
+           
+            <TableBody onClick={() => {
+                        setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
+                        handleOpenFilter()
+                    }}  direction="row" alignItems="center" justifyContent="space-between" >
+             
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                  <Typography >Enrolled Gelathi Name </Typography>
+                  </TableCell>
+                  <TableCell>: {`${itm?.gelathiname}`}     </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                  Enrolled Village Name : 
+                  </TableCell>
+                  <TableCell> {`${itm?.villagename}`}     </TableCell>
+                </TableRow>
+              
+            </TableBody>
+          </Table>
+        </TableContainer>         */}
                     </Card>)
             }):
             <>

@@ -348,29 +348,25 @@ const [sendData,setSendData] = useState({
         </IconButton>
         </Stack> 
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-      <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
-          <Toolbar>
+      <form onSubmit={(e)=>{e.preventDefault(); vyaparformdata()}}>
+          <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           
                         <IconButton style={{color:"white"}} onClick={handleClose}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
-                        <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+                        <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div"   >
           Buzz Vyapar Program Baseline
           </Typography>
 
 
-          <Button autoFocus edge="end" color="inherit" onClick={() => vyaparformdata()}>
+          <Button autoFocus edge="end" color="inherit" type="submit" style={{color:'white'}}>
           <Iconify icon="material-symbols:save" width={30} height={30} />
           </Button>
        
          
           </Toolbar>
-        </AppBar>
-        <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
-          <DialogContentText
-            id="scroll-dialog-description"
-            tabIndex={-1}
-          >
+      
+     
         <Grid>
         {/* <Card mt={1} style={{ borderRadius: 20}} >
                 <CardContent>
@@ -393,7 +389,7 @@ const [sendData,setSendData] = useState({
                   <Typography style={{color:"#ff7424"}}>Name of the GF / ಗೆಲತಿಯ ಹೆಸರು *</Typography>
                   <Stack mt={2} mb={2}>
                
-              <Select color="common" label="Choose Gelathi Facilitator" variant="standard" onChange={(e) => setSendData({ ...sendData, gfId: e?.target?.value })} value={sendData?.gfId}>
+              <Select color="common" label="Choose Gelathi Facilitator" required variant="standard" onChange={(e) => setSendData({ ...sendData, gfId: e?.target?.value })} value={sendData?.gfId}>
               
                   {vyaapar?.list?.map((itm)=>{
                     return(
@@ -411,6 +407,7 @@ const [sendData,setSendData] = useState({
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
+                      
                       name="radio-buttons-group"
                       value={survey}
                       onChange={surveydone}
@@ -425,9 +422,9 @@ const [sendData,setSendData] = useState({
            
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff7424"}}>Name of vyapari / ವ್ಯಾಪಾರಿಯ ಹೆಸರು*</Typography>
+                  <Typography style={{color:"#ff7424"}}>Name of vyapari / ವ್ಯಾಪಾರಿಯ ಹೆಸರು *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="vyapari name" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, name_of_the_vyapari: e?.target?.value })} value={sendData?.name_of_the_vyapari}/>
+                    <TextField id="vyapari name" required label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, name_of_the_vyapari: e?.target?.value })} value={sendData?.name_of_the_vyapari}/>
                   </Stack>
                 </CardContent>
               </Card>
@@ -437,7 +434,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Age / ವಯಸ್ಸು *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Age" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, age:e.target.value})} value={sendData?.age}/>
+                    <TextField id="Age" required type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, age:e.target.value})} value={sendData?.age}/>
                   </Stack>
                 </CardContent>
               </Card>
@@ -447,7 +444,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Contact Number /ಸಂಪರ್ಕ ಸಂಖ್ಯೆ *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="phone number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, contact_number:e.target.value})} value={sendData?.contact_number} />
+                    <TextField id="phone number" required type="number"  inputProps={{ maxLength: 10 }} label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, contact_number:e.target.value})} value={sendData?.contact_number} />
                   </Stack>
                 </CardContent>
               </Card>
@@ -457,7 +454,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Village Name *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="village Name" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, village_id:e.target.value})} value={sendData?.village_id}/>
+                    <TextField id="village Name" required label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, village_id:e.target.value})} value={sendData?.village_id}/>
                   </Stack>
                 </CardContent>
               </Card>
@@ -466,7 +463,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Name of the Cohort / ಸ್ಥಳ/ವೃತ್ತ *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="cohort name" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, location_circle:e.target.value})} value={sendData?.location_circle} />
+                    <TextField id="cohort name" required label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, location_circle:e.target.value})} value={sendData?.location_circle} />
                   </Stack>
                 </CardContent>
               </Card>
@@ -520,7 +517,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Number of people in the household / ಮನೆಯಲ್ಲಿರುವ ಜನರ ಸಂಖ್ಯೆ</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="household peoplecount " label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, number_of_people_in_the_household:e.target.value})} value={sendData?.number_of_people_in_the_household}/>
+                    <TextField id="household peoplecount" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, number_of_people_in_the_household:e.target.value})} value={sendData?.number_of_people_in_the_household}/>
                   </Stack>
                 </CardContent>
               </Card>
@@ -614,7 +611,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Household income (Monthly) ಮನೆಯಆದಾಯ (ಮಾಸಿಕ)</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="income" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, household_income_monthly:e.target.value})} value={sendData?.household_income_monthly}/>
+                    <TextField id="income" label="Your Answer" type="number" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, household_income_monthly:e.target.value})} value={sendData?.household_income_monthly}/>
                   </Stack>
                 </CardContent>
               </Card>
@@ -623,7 +620,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Over the last month your average income / ಕಳೆದ ತಿಂಗಳು ನಿಮ್ಮ ಸರಾಸರಿ ಆದಾಯ</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="average income" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, over_the_last_month_your_average_income:e.target.value})} value={sendData?.over_the_last_month_your_average_income} />
+                    <TextField id="average income" type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, over_the_last_month_your_average_income:e.target.value})} value={sendData?.over_the_last_month_your_average_income} />
                   </Stack>
                 </CardContent>
               </Card>
@@ -632,7 +629,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Your profit (last month) / ನಿಮ್ಮ ಲಾಭ (ಕಳೆದ ತಿಂಗಳು) </Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="profit" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, your_business_profit_last_month:e.target.value})} value={sendData?.your_business_profit_last_month} />
+                    <TextField id="profit" label="Your Answer" type="number" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, your_business_profit_last_month:e.target.value})} value={sendData?.your_business_profit_last_month} />
                   </Stack>
                 </CardContent>
               </Card>
@@ -641,7 +638,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>How much monthly income would you like to ideally earn / ನೀವು ಎಷ್ಟು ಮಾಸಿಕ ಆದಾಯವನ್ನು ಆದರ್ಶಪ್ರಾಯವಾಗಿ ಗಳಿಸಲು ಬಯಸುತ್ತೀರಿ</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="monthlyincome" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, how_much_monthly_income_would_you_like_to_ideally_earn:e.target.value})} value={sendData?.how_much_monthly_income_would_you_like_to_ideally_earn}/>
+                    <TextField id="monthlyincome" label="Your Answer" type="number" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, how_much_monthly_income_would_you_like_to_ideally_earn:e.target.value})} value={sendData?.how_much_monthly_income_would_you_like_to_ideally_earn}/>
                   </Stack>
                 </CardContent>
               </Card>
@@ -650,7 +647,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Amount invested when the business started (approximately if they know) / ವ್ಯಾಪಾರ ಪ್ರಾರಂಭವಾದಾಗ ಹೂಡಿಕೆ ಮಾಡಿದ ಮೊತ್ತ (ಅವರು ತಿಳಿದಿದ್ದರೆ)</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="invested amount" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, amount_invested_when_the_business_started:e.target.value})} value={sendData?.amount_invested_when_the_business_started} />
+                    <TextField id="invested amount" type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, amount_invested_when_the_business_started:e.target.value})} value={sendData?.amount_invested_when_the_business_started} />
                   </Stack>
                 </CardContent>
               </Card>
@@ -691,7 +688,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>No.of hours engaged in a day for business / ವ್ಯವಹಾರಕ್ಕಾಗಿ ಒಂದು ದಿನದಲ್ಲಿ ಎಷ್ಟು ಗಂಟೆಗಳು ತೊಡಗಿಸಿಕೊಳ್ಳುವಿರಿ?</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="hours" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, hours_engaged_in_bussiness:e.target.value})} value={sendData?.hours_engaged_in_bussiness}/>
+                    <TextField id="hours" label="Your Answer"  variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, hours_engaged_in_bussiness:e.target.value})} value={sendData?.hours_engaged_in_bussiness}/>
                   </Stack>
                 </CardContent>
               </Card>
@@ -739,7 +736,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Why do you do business / ನೀವು ಯಾಕೆ ವ್ಯಾಪಾರ ಮಾಡುತ್ತೀರಿ</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="business reason" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, why_do_you_do_business:e.target.value})} value={sendData?.why_do_you_do_business}/>
+                    <TextField id="business reason" type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, why_do_you_do_business:e.target.value})} value={sendData?.why_do_you_do_business}/>
                   </Stack>
                 </CardContent>
               </Card>
@@ -1168,8 +1165,7 @@ const [sendData,setSendData] = useState({
             </CardContent>
           </Card>
         </Grid>
-        </DialogContentText>
-        </DialogContent>
+       </form>
       </Dialog>
     </div>
   );

@@ -323,7 +323,7 @@ const handleresources=(label,event)=>{
         </IconButton>
         </Stack> 
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-       
+      <form onSubmit={(e)=>{e.preventDefault();greensurveyformdata()}}>
           <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
           
        
@@ -334,17 +334,13 @@ const handleresources=(label,event)=>{
             Green Baseline Survey
           </Typography>
 
-          <Button autoFocus edge="end" color="inherit" onClick={()=>greensurveyformdata()}>
+          <Button autoFocus edge="end" color="inherit" type="submit">
           <Iconify icon="material-symbols:save" width={30} height={30} />
           </Button>
           
               </Toolbar>
      
-        <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
-          <DialogContentText
-            id="scroll-dialog-description"
-            tabIndex={-1}
-          >
+       
         <Grid>
 
 {/* <Card mt={1} style={{ borderRadius: 20}} >
@@ -366,27 +362,27 @@ const handleresources=(label,event)=>{
         <CardContent>
           <Typography style={{color:"#ff7424"}}>Email *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField  id="Email" label="Enter Email" variant="outlined"  color="common" onChange={(e) => setSendData({ ...sendData, Email: e?.target?.value })} value={sendData?.Email}/>
+            <TextField  id="Email" label="Enter Email" required type="email" variant="outlined"  color="common" onChange={(e) => setSendData({ ...sendData, Email: e?.target?.value })} value={sendData?.Email}/>
           </Stack>
           <Typography style={{color:"#ff7424"}}>Name of surveyor *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Answer"  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Name_of_the_surveyor: e?.target?.value })} value={sendData?.Name_of_the_surveyor}/>
+            <TextField id="Answer"  label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Name_of_the_surveyor: e?.target?.value })} value={sendData?.Name_of_the_surveyor}/>
           </Stack>
        
           <Typography style={{color:"#ff7424"}}>Name of respondent *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Answer"   label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Name_of_the_respondent: e?.target?.value })} value={sendData?.Name_of_the_respondent}/>
+            <TextField id="Answer"   label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Name_of_the_respondent: e?.target?.value })} value={sendData?.Name_of_the_respondent}/>
           </Stack>
       
           <Typography style={{color:"#ff7424"}}>Village Name *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Village"  label="Village Name" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Village_Name: e?.target?.value })} value={sendData?.Village_Name}/>
+            <TextField id="Village"  label="Village Name" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Village_Name: e?.target?.value })} value={sendData?.Village_Name}/>
           </Stack>
        
           <Typography style={{color:"#ff7424"}}>Phone Number *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Phone Number"   type="number"
-          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}  label="Phone Number" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Phone_number: e?.target?.value })} value={sendData?.Phone_number} />
+            <TextField id="Phone Number"   type="number" required class="noscroll"
+          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' , maxLength:10}}  label="Phone Number" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Phone_number: e?.target?.value })} value={sendData?.Phone_number} />
           </Stack>
         </CardContent>
       </Card>
@@ -695,7 +691,7 @@ const handleresources=(label,event)=>{
         <CardContent>
           <Typography style={{color:"#ff7424"}}>If yes,what kind of measures have you taken in the past? / ಹೌದು ಎಂದಾದರೆ, ನೀವು ಹಿಂದೆ ಯಾವ ರೀತಿಯ ಕ್ರಮಗಳನ್ನು ತೆಗೆದುಕೊಂಡಿದ್ದೀರಿ?*</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Ans" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_kind_of_measures: e?.target?.value })} value={sendData?.If_yes_what_kind_of_measures}/>
+            <TextField id="Ans" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_kind_of_measures: e?.target?.value })} value={sendData?.If_yes_what_kind_of_measures}/>
           </Stack>
         </CardContent>
       </Card>
@@ -704,7 +700,7 @@ const handleresources=(label,event)=>{
         <CardContent>
           <Typography style={{color:"#ff7424"}}>Can you list down impact of climate change on your land?/ನಿಮ್ಮ ಭೂಮಿಯ ಮೇಲೆ ಹವಾಮಾನ ಬದಲಾವಣೆಯ ಪರಿಣಾಮವನ್ನು ನೀವು ಪಟ್ಟಿ ಮಾಡಬಹುದೇ? *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Anse" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, list_down_impact_of_climate_change: e?.target?.value })} value={sendData?.list_down_impact_of_climate_change}/>
+            <TextField id="Anse" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, list_down_impact_of_climate_change: e?.target?.value })} value={sendData?.list_down_impact_of_climate_change}/>
           </Stack>
         </CardContent>
       </Card>
@@ -781,7 +777,7 @@ const handleresources=(label,event)=>{
         <CardContent>
           <Typography style={{color:"#ff7424"}}>Are there any native food you believe is environmentally friendly to plant and is good for health?Name any two / ಸಸ್ಯಗಳಿಗೆ ಪರಿಸರ ಸ್ನೇಹಿ ಮತ್ತು ಆರೋಗ್ಯಕ್ಕೆ ಒಳ್ಳೆಯದು ಎಂದು ನೀವು ನಂಬುವ ಯಾವುದೇ ಸ್ಥಳೀಯ ಆಹಾರವಿದೆಯೇ? ಯಾವುದಾದರೂ ಎರಡನ್ನು ಹೆಸರಿಸಿ *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Answ" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, native_food_you_believe_is_envionmentally_friendly: e?.target?.value })} value={sendData?.native_food_you_believe_is_envionmentally_friendly}/>
+            <TextField id="Answ" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, native_food_you_believe_is_envionmentally_friendly: e?.target?.value })} value={sendData?.native_food_you_believe_is_envionmentally_friendly}/>
           </Stack>
         </CardContent>
       </Card>
@@ -834,7 +830,7 @@ const handleresources=(label,event)=>{
         <CardContent>
           <Typography style={{color:"#ff7424"}}>If yes, what are they? / ಹೌದು ಎಂದಾದರೆ, ಅವು ಯಾವುವು? *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Answ" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_are_they: e?.target?.value })} value={sendData?.If_yes_what_are_they}/>
+            <TextField id="Answ" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_are_they: e?.target?.value })} value={sendData?.If_yes_what_are_they}/>
           </Stack>
         </CardContent>
       </Card>
@@ -884,7 +880,7 @@ const handleresources=(label,event)=>{
         <CardContent>
           <Typography style={{color:"#ff7424"}}>What do you think we should make this switch to eco-friendlly products? / ಪರಿಸರ ಸ್ನೇಹಿ ಉತ್ಪನ್ನಗಳಿಗೆ ನಾವು ಈ ಬದಲಾವಣೆಯನ್ನು ಮಾಡಬೇಕೆಂದು ನೀವು ಏನು ಯೋಚಿಸುತ್ತೀರಿ?*</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Answ" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, this_switch_to_eco_friendly_products: e?.target?.value })} value={sendData?.this_switch_to_eco_friendly_products}/>
+            <TextField id="Answ" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, this_switch_to_eco_friendly_products: e?.target?.value })} value={sendData?.this_switch_to_eco_friendly_products}/>
           </Stack>
         </CardContent>
       </Card>
@@ -934,7 +930,7 @@ const handleresources=(label,event)=>{
         <CardContent>
           <Typography style={{color:"#ff7424"}}>If yes,what did you do/are you doing?/ಹೌದು ಎಂದಾದರೆ, ನೀವು ಏನು ಮಾಡಿದ್ದೀರಿ/ನೀವು ಮಾಡುತ್ತಿದ್ದೀರಿ? *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Answ" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_did_you_do_are_you_doing: e?.target?.value })} value={sendData?.If_yes_what_did_you_do_are_you_doing}/>
+            <TextField id="Answ" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_did_you_do_are_you_doing: e?.target?.value })} value={sendData?.If_yes_what_did_you_do_are_you_doing}/>
           </Stack>
         </CardContent>
       </Card>
@@ -1027,8 +1023,7 @@ const handleresources=(label,event)=>{
     </CardContent>
   </Card>
 </Grid>
-</DialogContentText>
-</DialogContent>
+</form>
       </Dialog>
     </div>
   );
