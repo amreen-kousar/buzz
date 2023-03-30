@@ -79,7 +79,7 @@ const navConfig = {
     title: 'Travel Allowance',
     path: '/dashboard/travel',
     icon: getIcon('mdi:wallet-travel'),
-    id: ['0', '1', '2', '3', '4', '5', '6', '9', '7', '8', '12', '13','11']
+    id: ['0', '1', '3', '4', '5', '6', '9', '7', '8', '12', '13','11']
   },
   13: {
     title: 'Logout',

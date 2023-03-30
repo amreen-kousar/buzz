@@ -151,7 +151,7 @@ function Project(props) {
                     <Iconify icon="material-symbols:arrow-back-rounded" />
                   </IconButton></Link>
                 <span> Project</span>  
-                {(userDetails === 2)?  <Button
+                {(userDetails == 2)?  <Button
                   sx={{
                     '&:hover': {
                       backgroundColor: '#ffffff',

@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Iconify from 'src/components/Iconify';
 import axios from 'axios';
+import dayjs from 'dayjs';
 import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,6 +15,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Page from 'src/components/Page';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -136,36 +138,35 @@ export default function busTestList() {
           </Toolbar>
         </AppBar><br/>
        
-            <Stack sx={{marginTop:5,marginLeft:5,marginRight:5}}>
+            <Stack style={{marginTop:5,marginLeft:5,marginRight:5}}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
+          <DatePicker fullWidth
             label="From"
-            inputFormat="DD/MM/YYYY"
-            views={["day", "month", "year"]}
             defaultValue={date1}
-            value={date1}
+            
             onChange={(newValue) => {
               console.log(newValue, "<----newValuenewValue")
               setDate1(newValue)
+             
               busesdata()
             }}
+            value={date1}
             renderInput={(params) => <TextField {...params} color="common" />}
           />
         </LocalizationProvider>
-      </Stack>
-      <Stack sx={{margin:5}}>
+  </Stack>
+  <Stack style={{marginTop:10,marginLeft:5,marginRight:5}}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
+          <DatePicker fullWidth
             label="To"
-            inputFormat="DD/MM/YYYY"
-            views={["day", "month", "year"]}
             defaultValue={date2}
-            value={date2}
+            minDate={dayjs(date1)}
             onChange={(newValue) => {
               console.log(newValue, "<----newValuenewValue")
               setDate2(newValue)
               busesdata()
             }}
+            value={date2}
             renderInput={(params) => <TextField {...params} color="common" />}
           />
         </LocalizationProvider>

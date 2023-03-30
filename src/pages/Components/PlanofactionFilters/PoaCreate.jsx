@@ -209,36 +209,31 @@ export default function PoaCreate(props) {
           </Alert>
         </Snackbar>
 
-        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+        <form onSubmit={(e)=>{e.preventDefault();AddPoa()}}>
+          <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+            <IconButton edge="start" style={{color:"white"}} onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1, color: 'white' }} variant="h6" component="div">
               Schedule an event
             </Typography>
 
-            <Button autoFocus color="inherit" onClick={AddPoa}>
+            <Button autoFocus color="inherit" type="submit" style={{color:'white'}}>
               <Iconify icon="material-symbols:save" width={30} height={30} />
             </Button>
           </Toolbar>
-        </AppBar>
+        
 
         {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
-        <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
-          <DialogContentText
-            id="scroll-dialog-description"
-            //   ref={descriptionElementRef}
-            tabIndex={-1}
-          >
-            <Box
+
+            {/* <Box
               component="form"
               sx={{
                 '& .MuiTextField-root': { m: 1 },
               }}
               noValidate
               autoComplete="off"
-            >
+            > */}
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
                 <TextField
                   required
@@ -327,6 +322,7 @@ export default function PoaCreate(props) {
                 <Stack>
                   <TextField
                     id="outlined-basic"
+                    required
                     value={addData?.description}
                     onChange={(e) => {
                       setAddData({ ...addData, description: e?.target?.value });
@@ -338,9 +334,8 @@ export default function PoaCreate(props) {
                 </Stack>
                 <Stack></Stack>
               </div>
-            </Box>
-          </DialogContentText>
-        </DialogContent>
+            {/* </Box> */}
+            </form>
       </Dialog>
     </div>
   );
