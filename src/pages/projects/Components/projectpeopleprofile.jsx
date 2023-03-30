@@ -36,6 +36,7 @@ export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter})
   
     const [profileData, setProfileData] = useState()
 
+    console.log("calling  Peopleprofile()")
     useEffect(() => {
         profile()
       },
@@ -88,7 +89,7 @@ console.log(profileData,"infoooooooo")
               <Iconify icon="material-symbols:arrow-back-rounded" />
             </IconButton>
             <Typography variant="subtitle2" style={{ color: 'white' }}>
-              Member Detail
+              Member Detail working
             </Typography>
 
           </Toolbar>
@@ -107,7 +108,7 @@ console.log(profileData,"infoooooooo")
                   </div>
                   <Card sx={{ px: 1, boxShadow: 0 }} >
                     <Typography style={{ flexDirection: 'row', color: '#444444', }} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name}
-                   <Projectdashboard/> </Typography> 
+                   <Projectdashboard/> hello </Typography> 
                     <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
                       Role : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.role_name}</span>
 

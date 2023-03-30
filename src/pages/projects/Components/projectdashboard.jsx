@@ -19,7 +19,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 export default function Projectdashboard() {
-   
+   console.log("called Projectdashboard()")
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -30,7 +30,9 @@ export default function Projectdashboard() {
       setOpen(false)
     }
   const data = localStorage?.getItem('userId')
-
+  useEffect(() => {
+    apiHit();
+  }, []);
   const itemStyles = [{ itemXs: 4, itemSm: 8, itemMd: 4 }, { itemXs: 6, itemSm: 8, itemMd: 6 }]
 
   const summaryDataView = [
@@ -88,11 +90,11 @@ export default function Projectdashboard() {
 
   const theme = useTheme();
 
-  useEffect(() => {
-    apiHit();
-  }, []);
+  
 
   const apiHit = async (id, i, g) => {
+    console.log(i , "i data")
+    console.log(g , "g data")
     setLoader(true)
     console.log(localStorage.getItem('profiledetails' ), "benak")
     var userid = JSON.parse(localStorage.getItem('profiledetails'))?.emp_id
@@ -112,7 +114,7 @@ export default function Projectdashboard() {
       roleid= 7
     }
 
-    console.log(role , userid , "profile details")
+    console.log(role , userid , "profile details in dashboard")
     const data = {
       end_date: g === "date" ? i : '',
       role_id: roleid,
@@ -123,11 +125,13 @@ export default function Projectdashboard() {
       start_date: g === "date" ? id : '',
       somId: g ? "" : i === 12 ? id?.id : '',
       gflId: g ? "" : i === 13 ? id?.id : '',
+      
       funder_id: g ? "" : i === 2 ? id?.id : '',
       partner_id: g ? "" : i === 1 ? id?.id : '',
       project_id: g ? "" : i === 3 ? id?.id : '',
       opsManager: g ? "" : i === 4 ? id?.id : '',
     };
+    {console.log(data.gflId, "hello data.gflId")}
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/Scripts/getDashboardData.php',
@@ -252,8 +256,8 @@ export default function Projectdashboard() {
               return <Grid item xs={s.itemXs} sm={s.itemSm} md={s.itemMd}>
 
                 <AppWidgetSummary
-                  title={s.title}
-                  total={`${summaryData[s.total]} ${s.ext ? s.ext : ''}`}
+                  title={s.title }
+                  total={`${summaryData[s.total]} ${s.ext ? s.ext : ''}`|| 0 }
                   color={s.color}
                   icon={s.icon}
                   styles={s.styles} />
@@ -296,8 +300,8 @@ export default function Projectdashboard() {
                         return <Grid item xs={s.itemXs} sm={s.itemSm} md={s.itemMd}>
 
                           <AppWidgetSummary
-                            title={s.title}
-                            total={`${itm[s.total]} ${s.ext ? s.ext : ''}`}
+                            title={s.title || null}
+                            total={`${itm[s.total]} ${s.ext ? s.ext : ''}`|| null }
                             color={s.color}
                             icon={s.icon}
                           />

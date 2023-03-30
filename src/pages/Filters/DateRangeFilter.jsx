@@ -14,11 +14,21 @@ import { CardContent, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 export default function StaticDatePickerDemo(props) {
   const [startDate, setStartDate] = useState(new Date());
+  // const [tomorrow, setTomorrow] = useState(dayjs().add(1, 'day'));
   const [endDate, setEndDate] = useState(new Date());
 
   const [open, setOpen] = React.useState(false);
   const [dateRange, setDateRange] = React.useState({});
+  const today = startDate;
+  const tomorrow = dayjs().add(1, 'day');
+  console.log(dayjs() ,"dayjs")
+ 
+  const [render ,setRender] = useState(false)
 
+  React.useEffect(()=>{
+
+  }, [render])
+ 
   return (
     <Card style={{ marginTop: 20 }} sx={{ color: "#ed6c02" }} >
       <CardContent sx={{ color: "#ed6c02" }}>
@@ -31,23 +41,29 @@ export default function StaticDatePickerDemo(props) {
               // label='From'
               onChange={(newstartvalue) => {
                 setStartDate(newstartvalue)
+                setRender(true)
               }}
               renderInput={(params) => <TextField {...params} sx={{ color: "white" }} />}
 
             />
           </LocalizationProvider></Stack>
         <Stack>
-        <label>To</label>
+        <label>To </label>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <StaticDatePicker
-              defaultValue={endDate}
+              defaultValue={startDate}
+                
+              minDate={dayjs(startDate)}
               onChange={(newendvalue) => {
                 setEndDate(newendvalue)
               }}
               renderInput={(params) => <TextField {...params} sx={{ color: "white" }} variant="outlined" color="" />}
             />
+            {console.log(startDate , "start date state")
+            
+            }
           </LocalizationProvider></Stack>
-
+       
         <Button onClick={() => props?.onDateSubmit({ startDate: moment(startDate?.$d)?.format('YYYY-MM-DD'), endDate: moment(endDate?.$d)?.format('YYYY-MM-DD') })}
           sx=
           {{

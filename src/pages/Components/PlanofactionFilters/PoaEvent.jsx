@@ -26,6 +26,7 @@ import {
   Card,
   CardContent,
 } from '@mui/material';
+import is from 'date-fns/locale/is';
 // components
 
 // ----------------------------------------------------------------------
@@ -116,8 +117,32 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   });
 
   useEffect(() => {
+    let isSubscribe = true
+    if(isSubscribe)
+    {
     location();
-  }, [coords ,eventdetails]);
+  }
+  return ()=>{
+    isSubscribe = false
+
+    
+    console.log("unsubscribe location()")
+  }
+  }, [coords ,eventdetails ]);
+
+  useEffect(()=>{
+    let isSubscribe = true
+
+    if(isSubscribe)
+    {
+      event()
+    }
+    return ()=>{
+      isSubscribe = false
+      console.log("unsubscribe event()")
+    }
+    
+  },[eventdetails])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -146,8 +171,8 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
           console.log(error, ',----ewrwerwer');
         });
     });
-  }, [eventdetails]);
-
+  }, []);
+//checkin ,checkout removed from dependency
   const postlocation = (async) => {
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -171,6 +196,13 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
 
       axios(config)
         .then(function (response) {
+if (response.message === "Check Out Successfully"){
+  setCheckout("change")
+
+}else if(response.message === "Check In Successfully"){
+  setCheckIn("changes")
+}
+
           setlocationdata(response.data);
           console.log(response.data, '<------------locationdataaaaaaaaaaa');
         })
@@ -201,14 +233,15 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   ];
   useEffect(() => {
     event();
-  }, [select , eventdetails]);
+  }, [select , checkin ,checkout ]);
 
   const handlecheckin = () => {
     setCheckIn(locationS);
     setType('2');
     setCheckvisible(true);
     postlocation();
-    setCheckoutBtn(false)
+    setCheckoutBtn(true)
+ event()
   };
 
   const handlecheckout = () => {
@@ -216,6 +249,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
     setCheckvisible(true);
     postlocation();
     setCheckoutBtn(false)
+    event()
   };
 
   const event = (async) => {
@@ -238,7 +272,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
     axios(config)
       .then(function (response) {
         setEventData(response.data);
-        console.log(response.data, '<------------setEventDatasetEventDatasetEventData');
+        console.log(response.data, '<------------setEventDatasetEventDatasetEventDatadetails');
       })
       .catch(function (error) {
         console.log(error);
@@ -246,8 +280,8 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   };
   useEffect(() => {
     getlocationdata();
-  }, [select ,eventdetails]);
-
+  }, [select ]);
+// ,checkin,checkout removed 
   const getlocationdata = (async) => {
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
@@ -336,7 +370,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
                     <u>CheckIn/Out Status</u>
                   </Typography>
                   <br />
-                  {showCheckoutBtn? (
+                  {(eventData?.check_in ==="")? (
                     <Button
                       sx={{
                         '&:hover': {
@@ -346,7 +380,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
                       }}
                       onClick={handlecheckin}
                     >
-                      CHECK IN
+                      CHECK IN 
                     </Button>
                   ) : (
                     <Button
@@ -362,11 +396,12 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
                     </Button>
                   )}
                   {console.log(eventdetails, 'locationnnnnnnnn')}
-                  <Typography variant="body1">Checkin Time:{eventdetails?.check_in} </Typography>
-                  <Typography>Checkin Location: {checkin} </Typography>
-                  <Typography>Checkout Time : {eventdetails?.check_out}</Typography>
-                  {console.log(eventdetails.check_in , eventdetails.check_in ,"check out ")}
-                  <Typography>Checkout Location: {checkout}</Typography>
+                  <Typography variant="body1">Checkin Time:{eventData?.check_in} </Typography>
+                  <Typography>Checkin Location: {eventData?.check_in_location} </Typography>
+                  <Typography>Checkout Time : {eventData?.check_out}</Typography>
+                  {console.log(eventdetails.check_in , eventdetails.check_in ,"eventdetails data check out ")}
+                  {console.log(eventData.check_in , eventData.check_in ,"event datacheck out ")}
+                  <Typography>Checkout Location: {eventData?.check_out_location}</Typography>
                 </CardContent>
               </Card>
             ) : (

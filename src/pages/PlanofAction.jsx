@@ -254,7 +254,7 @@ export default function PlanofAction() {
       </Typography>
 
 
-     {name=='' && <PoaCreate  changeState={changeState} />}
+     {name=='' && <PoaCreate  changeState={changeState}  />}
       <br />
       <br />
       

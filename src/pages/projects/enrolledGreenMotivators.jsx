@@ -202,9 +202,9 @@ const getData = (itm, i) => {
                 {` Enrolled Date : ${itm?.enroll_date}`}
                  
                 </Typography>
-              
+                      
 
-              </Grid>
+        </Grid>
                       
                        
                     </Card>)

@@ -205,9 +205,11 @@ export default function gelathiProgram(props) {
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <GelathiProgrameDrawer
                     clcikData={clcikData}
+                    
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
                     onCloseFilter={handleCloseFilter}
+                    gelathiFacikitatorLead={data1}
                 />
             </Stack>
             {/* </Stack> */}
@@ -217,6 +219,8 @@ export default function gelathiProgram(props) {
                         return (
                             <Card style={styles.card1} onClick={() => {
                                 setClickData({ name: itm.gf_session_id, title: "Gelathi program Name" })
+                               
+                                console.log(clcikData ,"clicked data called")
                                 handleOpenFilter()
                             }}>  
                      
