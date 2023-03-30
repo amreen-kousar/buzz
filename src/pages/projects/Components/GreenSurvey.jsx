@@ -381,7 +381,7 @@ const handleresources=(label,event)=>{
        
           <Typography style={{color:"#ff7424"}}>Phone Number *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Phone Number"   type="number" required class="noscroll"
+            <TextField id="Phone Number"   type="number" required 
           inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' , maxLength:10}}  label="Phone Number" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Phone_number: e?.target?.value })} value={sendData?.Phone_number} />
           </Stack>
         </CardContent>
