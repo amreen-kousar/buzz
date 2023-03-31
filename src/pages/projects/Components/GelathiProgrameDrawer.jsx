@@ -48,23 +48,22 @@ export default function GelathiProgrameDrawer({
   const [gelatiNote, setGelatiNote] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
 
-
-//   image
-const [image, setImage] = React.useState([]);
+  //   image
+  const [image, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
   const [viewImage, setViewImage] = React.useState(false);
-  const [locationS,setLocation] = useState()
-  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-
+  const [locationS, setLocation] = useState();
+  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+const [getImage , setGetImae] = useState([])
   localStorage.setItem('clickData', clcikData);
   const localstoragrClickData = localStorage.getItem('clcikData');
   useEffect(() => {
-    // let isSubscribe =true
+   
 
     getGFSessionData();
     getNoteHandler();
 
-    // console.log(clcikData)
+   
   }, [clcikData]);
   useEffect(() => {
     console.log('useEffect for getnotehandler');
@@ -82,9 +81,8 @@ const [image, setImage] = React.useState([]);
   }, []);
   console.log(clcikData, '<---------gf_session_namegf_session_name');
 
-//   image converting 
-function getBase64(file, callback) {
-
+  //   image converting
+  function getBase64(file, callback) {
     const reader = new FileReader();
 
     reader.addEventListener('load', () => callback(reader.result));
@@ -92,32 +90,32 @@ function getBase64(file, callback) {
     reader.readAsDataURL(file);
   }
   const data = new FormData();
-const convertImage = (e) => {
-    console.log("this is calleddddfdsfs")
+  const convertImage = (e) => {
+    console.log('this is calleddddfdsfs');
     data.append('emp_id', userid);
     data.append('file', e.target.files[0]);
-    setImagePath([...imagePath, e.target.files[0]])
+    setImagePath([...imagePath, e.target.files[0]]);
     const imageData = URL.createObjectURL(e.target.files[0]);
-    console.log(imageData, "files")
+    console.log(imageData, 'files');
     getBase64(e.target.files[0], function (base64Data) {
-      setImage([...image, base64Data])
-      setViewImage(true)
+      setImage([...image, base64Data]);
+      setViewImage(true);
     });
-  }
-  // sending image 
+  };
+  // sending image
   const postImages = async () => {
-    var dataImage = []
-    const form = new FormData()
-    form?.append("emp_id", userid)
+    var dataImage = [];
+    const form = new FormData();
+    form?.append('emp_id', userid);
     //form?.append("file[]",imagePath[0])
 
-    const data = imagePath?.map(itm => {
-      form?.append("file[]", itm)
-    })
+    const data = imagePath?.map((itm) => {
+      form?.append('file[]', itm);
+    });
     var requestOptions = {
       method: 'POST',
       body: form,
-      redirect: 'follow'
+      redirect: 'follow',
     };
     // var config = {
     //   method: 'post',
@@ -128,16 +126,17 @@ const convertImage = (e) => {
     //   body: form
     // };
     //console.log(config)
-    let res = fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn => {
-      console.log(itn, "<--itemgh")
-    })
-      .catch(err => {
-        console.log(err, "<---wertyu")
+    let res = fetch('https://bdms.buzzwomen.org/appTest/new/taAttachments.php', requestOptions)
+      .then((itn) => {
+        console.log(itn, '<--itemgh');
+
+
       })
+      .catch((err) => {
+        console.log(err, '<---wertyu');
+      });
     //console.log(res,"<----2werdcfvghbj")
-
-
-  }
+  };
   const getGFSessionData = (async) => {
     var data = JSON.stringify({
       gf_session_id: clcikData?.name,
@@ -311,39 +310,74 @@ const convertImage = (e) => {
                   </Typography>
                 </CardContent>
               </Card>
-            
+
               <Card style={{ marginTop: 20 }}>
-              <div style={{display:'flex', marginTop:"20px"}}>
-              <div>
-              <label for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
-                  <Iconify
-                    icon={'mdi:camera'}
-                    sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
-                  />&nbsp;
-                 Photos
-                  <input style={{ display: "none" }} accept="image/png, image/gif, image/jpeg" id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
-                </label>
-                </div> 
-                <div >
-                <Button onClick={postImages} 
-                sx={{
-                  
-                }}> <IconButton 
-                
-                >
-                <Iconify
-                  style={{ color: 'black' }}
-                  icon="material-symbols:add"
-                
-                />
-              </IconButton>
-              </Button>
+              <div style={{ display: "flex" }}>
+                  {
+                    viewImage ?
+                      image.map((i, index) => {
+                        return <div style={{ display: "flex", margin: "1rem" }}>
+                          <img src={i} style={{ height: "50px", width: "70px" }} alt="hello" />
+                          <Iconify
+                            onClick={() => { deleteImage(index) }}
+                            icon={'typcn:delete'}
+                            sx={{ width: 16, height: 16, ml: 1, color: "red" }}
+                          />
+                        </div>
+                      }) : null
+                  }
                 </div>
-                
-              
-              </div>
+                <div style={{ display: 'flex', marginTop: '20px' }}>
+                  <div>
+                    <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
+                      <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
+                      &nbsp; Photos
+                      <input
+                        style={{ display: 'none' }}
+                        accept="image/png, image/gif, image/jpeg"
+                        id="inputTag"
+                        type="file"
+                        onChange={(e) => {
+                          convertImage(e);
+                        }}
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    {/* <Button onClick={postImages} style={{ color: 'black', marginLeft: '125px', marginTop: '-12px' }}>
+                      {' '}
+                      <IconButton>
+                        <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
+                      </IconButton>
+                    </Button> */}
+                     <Button onClick={postImages} 
+                sx={{
+                  '&:hover': {
+                    backgroundColor: '#ffd796',
+                  },
+                  color: "#ff7424",
+                  backgroundColor:'#ffd796',
+                  marginLeft:'110px',
+                  marginBottom:"10px"
+
+                }}
+                >Upload</Button>
+                  </div>
+                </div>
+                {/* <div>
+                    {
+                        session?.photos?.map((photo)=>{
+                            return(
+                                <>
+                                {console.log(photo, "photos")}
+                                {console.log(photo, "photos")}
+                                </>
+                            )
+                        })
+                    }
+                </div> */}
               </Card>
-             
+
               <Card style={{ marginTop: 20 }}>
                 <CardContent>
                   <Typography variant="h6">
@@ -378,7 +412,10 @@ const convertImage = (e) => {
                         console.log('note', gelatiNote);
                       }}
                     ></TextField>
-                    <Button style={{ marginTop: 20, marginLeft: 20, marginBottom: 20 }} onClick={noteSubmitHandler}>
+                    <Button
+                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                      onClick={noteSubmitHandler}
+                    >
                       Save
                     </Button>
                   </Card>
