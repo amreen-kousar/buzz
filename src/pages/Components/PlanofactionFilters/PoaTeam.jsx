@@ -79,7 +79,6 @@ SimpleDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   //   selectedValue: PropTypes.string.isRequired,
 };
-var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
 
 export default function PoaTeam({ setUserId, setName }) {
   const [open, setOpen] = React.useState(false);
@@ -90,11 +89,12 @@ export default function PoaTeam({ setUserId, setName }) {
   }, []
   )
   const team = async => {
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id
     var data = JSON.stringify({
-      "emp_id": userDetails?.id,
+      "emp_id": idvalue,
       "team": ""
     });
-console.log(userDetails?.id,"iddddddddddd")
+console.log(idvalue,"iddddddddddd")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getMyTeam.php',
