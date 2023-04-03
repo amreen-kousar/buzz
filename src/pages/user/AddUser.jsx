@@ -22,7 +22,7 @@ function AddUser(props) {
     let [emailExists, setEmailExists] = useState(false)
 
     var [AddUser, setAddUser] = useState({
-        role: { id: '0', roleName: 'Admin' }, first_name: '', last_name: "", contactNum: '', workNum: '', office_email_id: '', address: '', address3: "", address2: "",
+        role:'', first_name: '', last_name: "", contactNum: '', workNum: '', office_email_id: '', address: '', address3: "", address2: "",
         pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project: "",
         emp_id: ""
     })
@@ -63,10 +63,10 @@ function AddUser(props) {
       axios(config)
           .then((response) => {
 
-              if (response.status) {
-                  console.log(response)
-                  //setEmailExists(true)
-                  setEmailExists(false)
+              if (response.code=='409') {
+                  console.log(response,"responseeeeee")
+                  setEmailExists(true)
+                //   setEmailExists(false)
               }
               else {
                   setEmailExists(false)
@@ -226,14 +226,14 @@ let userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 console.log(userid,"userrrrrridddddddd")
     const submitUser = () => {
         AddUser.project = inputProject.map(i => parseInt(i.id))
-        AddUser.office_email_id = AddUser.office_email_id
-        AddUser.empRole = AddUser.role.id
-        AddUser.supervisorId = AddUser.reportingManager.id
+        AddUser.office_email_id = AddUser?.office_email_id
+        AddUser.empRole = AddUser?.role.id
+        AddUser.supervisorId = AddUser?.reportingManager.id
         AddUser.profile_pic = ''
         AddUser.status = AddUser.present_status ? '1' : '0';
         AddUser.createdBy = userid,
             AddUser.lastUpdatedBy = userid
-        console.log(AddUser)
+       
         const data = JSON.stringify(AddUser);
 
         const config = {
@@ -458,7 +458,13 @@ console.log(userid,"userrrrrridddddddd")
                                 <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.workNum} onChange={(e) => {
                                      setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' />
 
-                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} onChange={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} onPaste={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} variant="outlined" color="common" />
+                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} onChange={async(e) => { 
+                                    let email = await e.target.value
+                                    setAddUser({ ...AddUser, office_email_id: email}); checkEmailValidation() }} onPaste={async(e) => 
+                                    
+                                    { 
+                                        let email = await e.target.value
+                                        setAddUser({ ...AddUser, office_email_id: email }); checkEmailValidation() }} variant="outlined" color="common" />
 
                                 <div style={{ marginLeft: "1rem", fontSize: "0.8rem", fontWeight: "700" }}>
                                     {emailExists ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp; Email Id already exists !</span> : (errors.office_email_id) ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp;Invalid Email Id</span> : (AddUser.office_email_id != "") ? <span style={{ color: "green", display: "flex" }}><Iconify icon="mdi:tick-circle" width={20} height={20} /> &nbsp;Valid Email Id</span> : null}

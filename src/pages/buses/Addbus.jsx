@@ -100,12 +100,12 @@ function Addbus(props) {
                             <TextField fullWidth id="outlined-basic" label="Bus Number" helperText="Bus Number required*" defaultValue={addBus.register_number} onChange={(e) => { setAddBus({ ...addBus, register_number: e.target.value }) }} variant="outlined" color="common" /><br />
                             {/* <TextField fullWidth id="outlined-basic" label="Register Date" type="date"  InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.register_date} format={'YYYY/MM/DD'} onChange={(e) => { setAddBus({ ...addBus, register_date: e.target.value }) }} variant="outlined" color="common" /><br />
+                            }} defaultValue={addBus.register_date} format={'DD/MM/YYYY'} onChange={(e) => { setAddBus({ ...addBus, register_date: e.target.value }) }} variant="outlined" color="common" /><br />
                               */}
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
-                                        inputFormat="YYYY/MM/DD"
+                                        inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Register Date"
                                         // deefaultValue={date}
@@ -132,7 +132,7 @@ function Addbus(props) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
-                                        inputFormat="YYYY/MM/DD"
+                                        inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Insurance Start Date"
                                         // defaultValue={date}
@@ -153,7 +153,7 @@ function Addbus(props) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
-                                        inputFormat="YYYY/MM/DD"
+                                        inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Insurance End Date"
                                         // defaultValue={date}
@@ -175,7 +175,7 @@ function Addbus(props) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
-                                        inputFormat="YYYY/MM/DD"
+                                        inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Last Service Date"
                                         // defaultValue={date}
@@ -196,7 +196,7 @@ function Addbus(props) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
-                                        inputFormat="YYYY/MM/DD"
+                                        inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Next Service Date"
                                         // defaultValue={date}
@@ -218,7 +218,7 @@ function Addbus(props) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
-                                        inputFormat="YYYY/MM/DD"
+                                        inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Fitness Certificate"
                                         // defaultValue={date}
@@ -240,7 +240,7 @@ function Addbus(props) {
                             <Stack style={{ marginTop: 20,borderColor:'none' }} color="common">
                                
                                     <DatePicker
-                                        inputFormat="YYYY-MM-DD"
+                                        inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Permit Details"
                                         // defaultValue={date}
@@ -262,10 +262,10 @@ function Addbus(props) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
-                                        inputFormat="YYYY/MM/DD"
+                                        inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Emission Date"
-                                        defaultValue="YYYY/MM/DD"
+                                        defaultValue="DD/MM/YYYY"
                                         onChange={(e) => {
                                             setAddBus({ ...addBus, emission_date: e })
                                         }}

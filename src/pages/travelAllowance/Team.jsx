@@ -159,7 +159,7 @@ console.log(teamTAData,"responseeeeeeeeeeeeeeeeeeeeee")
             "ta_id": checkedData,
             "user_id": localStorage?.getItem('userDetails')?.id,
             "extra_comments": comments,
-            "status": 4
+            "status": 1
         });
         console.log(data)
         var config = {
@@ -207,33 +207,33 @@ console.log(teamTAData,"responseeeeeeeeeeeeeeeeeeeeee")
             });
 
     }
-    const rejectTA = () => {
-        var data = JSON.stringify({
-            "ta_id": checkedData,
-            "user_id": localStorage?.getItem('userId'),
-            "extra_comments": comments,
-            "status": 2
-        });
-        console.log(data)
-        var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/approveTa.php',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: data
-        };
-        axios(config)
-            .then(function (response) {
-                console.log(response, "reject response")
-                setreject(response?.data)
+    // const rejectTA = () => {
+    //     var data = JSON.stringify({
+    //         "ta_id": checkedData,
+    //         "user_id": localStorage?.getItem('userId'),
+    //         "extra_comments": comments,
+    //         "status": 2
+    //     });
+    //     console.log(data)
+    //     var config = {
+    //         method: 'post',
+    //         url: 'https://bdms.buzzwomen.org/appTest/new/approveTa.php',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         data: data
+    //     };
+    //     axios(config)
+    //         .then(function (response) {
+    //             console.log(response, "reject response")
+    //             setreject(response?.data)
 
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
 
-    }
+    // }
     
     console.log(reject,"rejecteddata");
     console.log(approve,"approvedata");
@@ -337,8 +337,8 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
 
                         
                         {(userrole==3)?
-                        <div style={{display:'flex'}}><Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={approveTA}>Approve</Button>&nbsp;&nbsp;
-                        <Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={rejectTA}>Reject</Button></div>:
+                        <div style={{display:'flex'}}><Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(1)}>Approve</Button>&nbsp;&nbsp;
+                        <Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(2)}>Reject</Button></div>:
                         (userrole==4)?<Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Submit</Button>:null}</form>
 
                     {/* </DialogContentText>

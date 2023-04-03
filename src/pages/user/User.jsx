@@ -276,6 +276,7 @@ export default function User() {
                 isOpenFilter={openFilter}
                 onOpenFilter={handleOpenFilter}
                 onCloseFilter={handleCloseFilter}
+                users={users}
               />
             </Stack>
           </Stack>

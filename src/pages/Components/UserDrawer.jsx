@@ -41,6 +41,7 @@ UserDrawer.propTypes = {
 };
 
 export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users }) {
+  console.log(users,"userlist")
   const [profileData, setProfileData] = useState();
   const [user, setUser] = useState();
   const userDetails = localStorage?.getItem('userId');
@@ -85,6 +86,38 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
       });
   };
 
+  const deleteprofile=(async)=>{
+    const userData = JSON.parse(localStorage?.getItem('people'))?.id;
+    const roleid = JSON.parse(localStorage?.getItem('people'))?.role_id;
+    const projectlist = JSON.parse(localStorage?.getItem('people'))?.project_list;
+    if(confirm('Are you sure want to  delete')){
+    var data = JSON.stringify({
+      "emp_id": userData,
+      "delete": 1,
+      "role_id": roleid,
+      "project_id": projectlist,
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/deleteUser.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      updateSetUser()
+      onCloseFilter()
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  }
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -116,7 +149,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
         {userDetails && userDetails == 2 && (
           <Stack direction={'row'} justifyContent="flex-end">
             <UserEditProfile updateSetUser={updateSetUser} />
-            <Button
+            <Button onClick={()=>deleteprofile()}
               style={{ float: 'right' }}
               sx={{
                 '&:hover': {
