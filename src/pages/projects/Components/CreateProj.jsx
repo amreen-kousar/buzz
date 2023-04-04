@@ -279,8 +279,8 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
     formdata.append('project_id', data.project_id)
     formdata.append('partnerID', data.partner_id)
     formdata.append('training_target', data.training_target)
-    formdata.append('startDate', moment(data.start_date)?.format('DD-MM-YYYY'))
-    formdata.append('endDate', moment(data.end_date)?.format('DD-MM-YYYY'))
+    formdata.append('start_date', moment(data.start_date)?.format('DD-MM-YYYY'))
+    formdata.append('end_date', moment(data.end_date)?.format('DD-MM-YYYY'))
     formdata.append('busID', data.bus_id)
     formdata.append('driverID', data.driverId)
     formdata.append("operations_manager_id", data.operations_manager_id)
@@ -325,8 +325,8 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
      formdata.append('project_id', data.project_id)
      formdata.append('partnerID', data.partner_id)
      formdata.append('training_target', data.training_target)
-     formdata.append('startDate', moment(data.start_date)?.format('YYYY-MM-DD'))
-     formdata.append('endDate', moment(data.end_date)?.format('YYYY-MM-DD'))
+     formdata.append('start_date', moment(data.start_date)?.format('DD-MM-YYYY'))
+     formdata.append('end_date', moment(data.end_date)?.format('DD-MM-YYYY'))
      formdata.append('busID', data.bus_id)
      formdata.append('driverID', data.driverId)
      formdata.append("operations_manager_id", data.operations_manager_id)
@@ -458,19 +458,19 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                     style={{ width: '20vw' }}
                     value={data.start_date}
                     InputProps={{
-                      inputProps: { min: moment(new Date())?.format('DD-MM-YYYY') }
+                      // inputProps: { min: moment(new Date())?.format('DD-MM-YYYY') }
                     }}
                     onChange={(e) => {
                       console.log(e?.target?.default,">gbfdvvfghjmnhbgfvdfgthygbfvdcsxs")
                       setData({ ...data, start_date: e?.target?.value })
                     }} />
-{console.log(dayjs( moment(data?.endDate)?.format()),moment(data?.endDate)?.format('YYYY-MM-DD'),new Date(data?.endDate),data?.endDate,"<-- defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}",data?.end_date,data?.start_date)}
+{/* {console.log(dayjs( moment(data?.endDate)?.format()),moment(data?.endDate)?.format('YYYY-MM-DD'),new Date(data?.endDate),data?.endDate,"<-- defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}",data?.end_date,data?.start_date)} */}
                   <TextField type="date"
-                defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}
+                defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('DD-MM-YYYY')):dayjs( moment(data?.endDate)?.format('DD-MM-YYYY'))}
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     value={data.end_date}
                     InputProps={{
-                      inputProps: { min: moment(data.end_date)?.format('YYYY-MM-DD') }
+                      // inputProps: { min: moment(data.end_date)?.format('YYYY-MM-DD') }
                     }}
                     // defaultValue={data.endDate}
                     onChange={(e) => {
