@@ -257,7 +257,7 @@ export default function PlanofAction() {
 
       <br />
       <Typography variant="h4" style={{ margin: 2 }}>
-        Plan Of Actions working
+        Plan Of Actions 
         {role == 1 || role == 3 || role == 4 || role == 12 || role == 13 || role == 11 ? (
           <PoaTeam setUserId={(e) => setUserId(e)} setName={(e) => setName(e)} />
         ) : null}
@@ -303,6 +303,7 @@ export default function PlanofAction() {
             isOpenEvent={drawerEvent}
             onOpenEvent={handleOpenEvent}
             onCloseEvent={handleCloseEvent}
+            clickedItemData = {clcikData}
           />{' '}
         </Stack>
       )}
@@ -520,7 +521,7 @@ export default function PlanofAction() {
                                               </IconButton>
                                             ) : (
                                               <span style={{ color: 'green', fontWeight: 500 }}>
-                                                (Event&nbsp;Completed)
+                                                (Event&nbsp;Completed )
                                               </span>
                                             )}
                                           </Stack>

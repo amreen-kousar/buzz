@@ -37,7 +37,7 @@ PoaFilter.propTypes = {
   onCloseEvent: PropTypes.func,
 };
 
-export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridvalue , changeState}) {
+export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridvalue , changeState ,clickedItemData}) {
   const [locationS, setLocation] = useState();
   const [checkin, setCheckIn] = useState('');
   const [checkout, setCheckout] = useState('');
@@ -81,6 +81,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
       setViewImage(true);
     });
   };
+  console.log(clickedItemData , "event data ")
   const postImages = async () => {
     var dataImage = [];
     const form = new FormData();
@@ -351,7 +352,7 @@ const handlecheckin = () => {
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25, color: 'black' }}>
-            Event Detail wokring
+            Event Detail 
           </Typography>
           <IconButton
             onClick={() => {
@@ -457,7 +458,10 @@ const handlecheckin = () => {
               </div>
               <br />
               
-                 {eventdetails?.event_completed == 0?
+        {clickedItemData.status == 2?
+        null:
+        <>
+                  {eventdetails?.event_completed == 0 ?
                   <>
                  
                 <div style={{ display: 'flex' }}>
@@ -497,7 +501,10 @@ const handlecheckin = () => {
          </>
          :
         null
-        }   
+        }  
+        </>
+
+        }
               </div> 
 
                  

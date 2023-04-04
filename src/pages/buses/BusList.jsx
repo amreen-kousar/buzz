@@ -109,7 +109,7 @@ export default function User() {
         //   }
         // }
 
-
+console.log(response.data.list , "busses data")
         setBuses(response?.data?.list)
         setCount(response?.data?.list.length)
         setCc(response?.data?.checked_count)
@@ -218,7 +218,7 @@ export default function User() {
         </Snackbar>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
-            {selected?.type ? " Bus List" : "All Bus List"}&nbsp;({cc}/{count})
+            {selected?.type ? " Bus List" : "All Bus List "}&nbsp;({cc}/{count})
 
           </Typography>
           <Button style={{ float: "right", color: '#ff7424' }}
@@ -289,7 +289,7 @@ export default function User() {
               <Card sx={{ boxShadow: 0 }} >
               <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
                 <Typography variant="subtitle1" gutterBottom  >
-                  {`Bus Number : ${itm?.register_number}`}
+                  {`Bus Number : ${itm?.register_number}`} 
                 </Typography>
                 
               </Grid>
@@ -303,7 +303,7 @@ export default function User() {
 
                 </Typography>
                 <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                  Checked / Total : {itm?.checked_count}/{totalCount}
+                  Checked / Total : {itm?.checked_count}/{count}
                   {console.log(buses?.total_count, "total counttttttttttt")}
                 </Typography>
 
