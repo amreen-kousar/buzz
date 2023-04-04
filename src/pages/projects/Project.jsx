@@ -213,7 +213,7 @@ function Project(props) {
 
               </Card><br></br>
               {(userDetails == 1 || userDetails == 2 || userDetails == 3 || userDetails == 4 || userDetails == 5 || userDetails == 6 || userDetails == 13) ? 
-              <Card sx={{width:'43vw'}}>
+              <Card sx={{width:"100%"}}>
                 <CardContent>
                   Project Team :
                   <ExpandMore
