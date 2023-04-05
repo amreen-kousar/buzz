@@ -4,7 +4,7 @@ import React from "react";
 import { Link, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import {Stack,Checkbox, Card, CardContent} from '@mui/material';
+import {Stack,Checkbox, Card, CardContent, DialogContent, DialogContentText,Box} from '@mui/material';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,9 +19,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-export default function ChooseGelathi(data1) {
+export default function ChooseGelathi({data1,circle}) {
+    console.log("🚀 ~ file: ChooseGelathi.jsx:23 ~ ChooseGelathi ~ data1,circle:", data1,circle)
     const {state} = useLocation()
-console.log(data1,"state")
+
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
    const [gelathiData,setGelathiData] = useState([])
@@ -120,11 +121,26 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button> */}
-            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} data1={data1}/>
+            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1}/>
           </Toolbar>
         </AppBar>
-        {/* <Card><CardContent>Project : {data1?.data1?.project_name}</CardContent></Card> */}
-        {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
+        
+        {/* <Card><CardContent>Project : {props.data1?.props.data1?.project_name}</CardContent></Card> */}
+       <br/><br/> <DialogContent dividers={scroll === 'paper'}>
+                    <DialogContentText
+                        id="scroll-dialog-description"
+                        tabIndex={-1}
+                    >
+                        <Box
+                            component="form"
+                            sx={{
+                                '& .MuiTextField-root': { m: 1 },
+
+                            }}
+
+                        >
+        <Card><CardContent>Project : {data1?.project_name}</CardContent></Card>
+          {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
         <Stack> 
        
@@ -152,7 +168,9 @@ checkBoxData(itm)
             <>
             <h1>No Enrolled Gelathi Found</h1>
             </>}
-
+            </Box>
+            </DialogContentText>
+            </DialogContent>
       </Dialog>
     </div>
   );

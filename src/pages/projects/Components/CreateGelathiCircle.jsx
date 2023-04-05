@@ -17,16 +17,18 @@ import dayjs from 'dayjs';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import moment from 'moment';
+import axios from 'axios';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data1}) {
-    console.log(gelathiData,"<----gelathiDatagelathiData",data1)
+export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data1,circle}) {
+  
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(dayjs('2022-04-17'));
   const [sendData,setSendData] = React.useState({
+    "project_id":"",
     "circle_name": "",
     "circle_date": "",
     "gelathi_created_id": ""
@@ -38,29 +40,70 @@ export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data
   const handleClose = () => {
     setOpen(false);
   };
-
-  const apiHit = () =>{
-    handleClose();
-    var raw = JSON.stringify({
-        "project_id": "281",
-        "circle_name": sendData?.circle_name,
-        "circle_date":moment(sendData?.circle_date)?.format('YYYY-MM-DD'),
-        "gelathi_created_id": "465",
-        "gelathi":JSON?.stringify(gelathiData)})
-
-        var requestOptions = {
-            method: 'POST',
-            body: raw,
-            redirect: 'follow'
-          };
-          fetch("https://bdms.buzzwomen.org/appTest/createCircle.php", requestOptions)
-          .then(response => response.text())
-          .then(result =>{ handleClose();handleCloseGelathi()})
-          .catch(error => console.log('error', error));
+console.log(data1?.project_id,"projectid")
+gelathiData.forEach((itm) => {
+  itm.isSelected="true"
+});
+//   const apiHit = () =>{
+//     handleClose();
+    
+//     const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+//     var raw = JSON.stringify({
+//         "project_id": data1?.data1?.project_id,
+//         "circle_name": sendData?.circle_name,
+//         "circle_date":moment(sendData?.circle_date)?.format('YYYY-MM-DD'),
+//         "gelathi_created_id": userid,
+//         "gelathi":JSON?.stringify(gelathiData),
+       
+//       })
 
 
-  }
+//         var requestOptions = {
+//             method: 'POST',
+//             body: raw,
+    
+//           };
+//           fetch("https://bdms.buzzwomen.org/appTest/createCircle.php", requestOptions)
+//           .then(response => response.text())
+//           .then(result =>{ handleClose();handleCloseGelathi();circle();})
+//           .catch(error => console.log('error', error));
 
+// console.log(circle,"rawdata")
+//   }
+// let gelathiinfo = JSON?.stringify(gelathiData)
+console.log("🚀 ~ file: CreateGelathiCircle.jsx:28 ~ CreateGelathiCircle ~ data1:", data1)
+const apiHit = () =>{
+  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+var data = JSON.stringify({
+  "project_id": data1?.project_id,
+  "circle_name":sendData?.circle_name,
+  "circle_date": moment(sendData?.circle_date)?.format('YYYY-MM-DD'),
+  "gelathi_created_id": userid,
+  "gelathi":gelathiData
+});
+// let data = JSON?.stringify(gelathiData)
+// parse(data)
+
+var config = {
+  method: 'post',
+  url: 'https://bdms.buzzwomen.org/appTest/createCircle.php',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  handleClose();
+  handleCloseGelathi();
+  circle();
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+}
   return (
     <div>
       <Button variant="standard" onClick={()=>{open?apiHit(): handleClickOpen()}} sx={{color:'white'}}>
@@ -93,7 +136,7 @@ export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data
         <Card style={{marginTop:83}}>
           {console.log(data1?.data1,"projectname")}
             <CardContent>
-            <Typography variant="subtitle1">Project: &nbsp;{data1?.data1?.project_name}</Typography>
+            <Typography variant="subtitle1">Project: &nbsp;{data1?.project_name}</Typography>
             </CardContent>
         </Card>
         <CardContent>

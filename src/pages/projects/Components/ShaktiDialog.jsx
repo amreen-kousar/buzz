@@ -76,7 +76,7 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div">
-              Self Shakthi
+              Self Shakti
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               Add Participants

@@ -132,8 +132,9 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
             >
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                        {/* {`${clcikData?.title}: ${clcikData?.name}`} */}
-                        {clcikData?.name}
+                        {`${clcikData?.title}: ${clcikData?.name}`}
+                        {/* {clcikData?.title} */}
+                        {console.log(clcikData,"clicked data")}
                     </Typography>
                     <IconButton onClick={onCloseFilter}>
                         <Iconify icon="eva:close-fill" width={20} height={20} />
