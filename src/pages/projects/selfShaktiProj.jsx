@@ -97,6 +97,7 @@ export default function selfShaktiProj() {
             console.log(error);
           });
     }
+    console.log(state.id , "project id in state ")
   
     const id = sessionStorage?.getItem("proId")
     useEffect(() => {
@@ -215,6 +216,7 @@ export default function selfShaktiProj() {
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
                     onCloseFilter={handleCloseFilter}
+                    projectId={state.id}
                 />
             </Stack>
             {/* </Stack> */}

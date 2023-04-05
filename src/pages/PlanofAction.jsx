@@ -267,7 +267,7 @@ export default function PlanofAction() {
         {name !== '' && (
           <Stack direction="row" spacing={1}>
             <Chip
-              label={name}
+              label={name }
               onDelete={() => {
                 handleDeleteSelected();
               }}
@@ -448,7 +448,7 @@ export default function PlanofAction() {
                               <Table aria-label="customized table">
                                 <TableBody>
                                   <TableRow>
-                                    <TableCell
+                                    <TableCell style={{    width: "69%"}}
                                       component="th"
                                       scope="row"
                                       onClick={() => {
@@ -491,7 +491,7 @@ export default function PlanofAction() {
                                       {itm?.status == '2' && (
                                         <span style={{ color: 'red' }}>
                                           <br />
-                                          (Canceled)
+                                          (Canceled )
                                         </span>
                                       )}
                                     </TableCell>

@@ -77,23 +77,26 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
     const imageData = URL.createObjectURL(e.target.files[0]);
     console.log(imageData, 'files');
     getBase64(e.target.files[0], function (base64Data) {
-      setImage([...image, base64Data]);
+      setImage( [base64Data]);
+      console.log(base64Data, "base")
       setViewImage(true);
     });
-  };
+  }; 
+
+  console.log(image.toString().slice(22,), "slice")
+
+  console.log(" event id in ", eventdetails.event_id)
   console.log(clickedItemData , "event data ")
   const postImages = async () => {
-    var dataImage = [];
-    const form = new FormData();
-
-    form?.append('event_id', 78385);
-
-    const data = image?.map((itm) => {
-      form?.append('file[]', itm);
+    var dataImage = JSON.stringify({
+      "event_id":eventdetails.event_id , 
+     
+      "photos":image.toString().slice(22,)
     });
+   
     var requestOptions = {
       method: 'POST',
-      body: form,
+      body: dataImage,
       redirect: 'follow',
     };
 
@@ -147,7 +150,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
       console.log("unsubscribe event()")
     }
     
-  },[locationdata])
+  },[locationdata ,image])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -248,7 +251,7 @@ if (response.message === "Check Out Successfully"){
       isSubscribe = false
     }
    
-  }, [select ,locationdata,checkout]);
+  }, [select ,locationdata,checkout, image]);
 //  ,eventData?.check_in
  
 const handlecheckin = () => {
@@ -440,7 +443,7 @@ const handlecheckin = () => {
             <div>
               <div style={{ display: 'flex' }}>
                 {viewImage
-                  ? image.map((i, index) => {
+                  ? image?.map((i, index) => {
                       return (
                         <div style={{ display: 'flex', margin: '1rem' }}>
                           <img src={i} style={{ height: '50px', width: '70px' }} alt="hello" />
@@ -483,7 +486,7 @@ const handlecheckin = () => {
          
            <Button
            onClick={postImages}
-           disable
+           
            sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
@@ -493,7 +496,7 @@ const handlecheckin = () => {
              marginLeft: '10px',
            }}
          >
-           Upload
+           Upload  
          </Button>
          </div>
               

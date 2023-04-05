@@ -364,18 +364,14 @@ const [getImage , setGetImae] = useState([])
                 >Upload</Button>
                   </div>
                 </div>
-                {/* <div>
-                    {
-                        session?.photos?.map((photo)=>{
-                            return(
-                                <>
-                                {console.log(photo, "photos")}
-                                {console.log(photo, "photos")}
-                                </>
-                            )
-                        })
-                    }
-                </div> */}
+                <Card style={{ marginTop: 20 }}>
+              <CardContent>
+                <div>
+                  <img src={session?.photos ? session?.photos[0].photo1 : ''} />
+                  {console.log(session?.photos[0].photo1  , "pathindata")}
+                </div>
+              </CardContent>
+            </Card>
               </Card>
 
               <Card style={{ marginTop: 20 }}>
