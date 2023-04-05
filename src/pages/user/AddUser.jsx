@@ -36,6 +36,39 @@ function AddUser(props) {
         getEmpId(2)
     }, [])
 
+    console.log(AddUser.office_email_id, "outside")
+
+    //to check email exit are not 
+useEffect(()=>{
+    let subscribe =true 
+    if(AddUser.office_email_id.length > 0){
+        if(subscribe){
+            setTimeout(checkEmailExists() , 5000)
+          console.log( " calling inside useEffect")
+        }
+        console.log("useEffect ender even it is null")
+           }
+  
+    
+    return ()=>{
+        subscribe =false
+    }
+       
+},[AddUser.office_email_id])
+
+const emailchangeHandler=(e) => { 
+
+    
+        setAddUser({ ...AddUser, office_email_id: e });
+       checkEmailValidation()
+       setTimeout(checkEmailExists() , 5000)
+        console.log(AddUser.office_email_id , "changes")
+    }
+      
+    
+    console.log(AddUser.office_email_id , " out side changes")
+
+    
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -63,13 +96,15 @@ function AddUser(props) {
       axios(config)
           .then((response) => {
 
-              if (response.code=='409') {
-                  console.log(response,"responseeeeee")
+              if (response.data.code===409) {
+                  console.log(response)
+                  console.log("response is 409", response)
                   setEmailExists(true)
-                //   setEmailExists(false)
+                  
               }
               else {
                   setEmailExists(false)
+                  console.log("response is 200", response)
               }
           })
           .catch((error) => {
@@ -79,12 +114,13 @@ function AddUser(props) {
 
 
     const checkEmailValidation = () => {
-        if (emailExists) {
-            setEmailExists(false)
-        }
+        // if (emailExists) {
+        //     setEmailExists(false)
+        // }
         console.log(AddUser.office_email_id, "office email id")
         if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(AddUser.office_email_id))) {
-            checkEmailExists()
+           
+            console.log((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(AddUser.office_email_id)) ,"validating part")
             setErrors({ ...errors, office_email_id: false })
         }
         else {
@@ -364,6 +400,7 @@ console.log(userid,"userrrrrridddddddd")
                         save
                     </Button>
                 </Toolbar> */}
+                
                 <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
                     <DialogContentText
                         id="scroll-dialog-description"
@@ -458,13 +495,15 @@ console.log(userid,"userrrrrridddddddd")
                                 <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.workNum} onChange={(e) => {
                                      setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' />
 
-                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} onChange={async(e) => { 
-                                    let email = await e.target.value
-                                    setAddUser({ ...AddUser, office_email_id: email}); checkEmailValidation() }} onPaste={async(e) => 
-                                    
-                                    { 
-                                        let email = await e.target.value
-                                        setAddUser({ ...AddUser, office_email_id: email }); checkEmailValidation() }} variant="outlined" color="common" />
+                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} 
+                                onChange={(e)=>{
+                                    emailchangeHandler(e.target.value)
+                                }} 
+                                     onPaste={(e) => { 
+                                        setAddUser({ ...AddUser, office_email_id: e.target.value }); 
+                                        checkEmailValidation()
+                                     }}
+                                         variant="outlined" color="common" />
 
                                 <div style={{ marginLeft: "1rem", fontSize: "0.8rem", fontWeight: "700" }}>
                                     {emailExists ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp; Email Id already exists !</span> : (errors.office_email_id) ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp;Invalid Email Id</span> : (AddUser.office_email_id != "") ? <span style={{ color: "green", display: "flex" }}><Iconify icon="mdi:tick-circle" width={20} height={20} /> &nbsp;Valid Email Id</span> : null}

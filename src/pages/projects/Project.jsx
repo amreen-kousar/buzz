@@ -150,7 +150,7 @@ function Project(props) {
                   <IconButton>
                     <Iconify icon="material-symbols:arrow-back-rounded" />
                   </IconButton></Link>
-                <span> Project</span>  
+                <span> Project </span>  
                 {(userDetails == 2)?  <Button
                   sx={{
                     '&:hover': {
@@ -213,7 +213,7 @@ function Project(props) {
 
               </Card><br></br>
               {(userDetails == 1 || userDetails == 2 || userDetails == 3 || userDetails == 4 || userDetails == 5 || userDetails == 6 || userDetails == 13) ? 
-              <Card sx={{width:'43vw'}}>
+              <Card sx={{width:"100%"}}>
                 <CardContent>
                   Project Team :
                   <ExpandMore
@@ -310,7 +310,7 @@ function Project(props) {
                     </Button>
                   </Link> : null}
                   {(userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 2 || userDetails == 12) ? <br /> : null}
-                  {(userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 5 || userDetails == 12) ? <Link to="/dashboard/projects/selfShakthi" state={{ id: data1?.project_id,type:"SelfShakthi"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                  {(userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 5 || userDetails == 12) ? <Link to="/dashboard/projects/selfShakthi" state={{ id: data1?.project_id,type:"SelfShakthi" , porjectId:data1?.project_id}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                     startIcon={<IconButton>
                       <Iconify style={{ color: "black" }} icon="mdi:bus-school" />
                     </IconButton>} endIcon={<IconButton>

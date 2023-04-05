@@ -19,6 +19,7 @@ export default function StaticDatePickerDemo(props) {
 
   const [open, setOpen] = React.useState(false);
   const [dateRange, setDateRange] = React.useState({});
+  const [showSubmit, setShowSubmit] = useState(false)
   const today = startDate;
   const tomorrow = dayjs().add(1, 'day');
   console.log(dayjs() ,"dayjs")
@@ -56,6 +57,7 @@ export default function StaticDatePickerDemo(props) {
               minDate={dayjs(startDate)}
               onChange={(newendvalue) => {
                 setEndDate(newendvalue)
+                setShowSubmit(true)
               }}
               renderInput={(params) => <TextField {...params} sx={{ color: "white" }} variant="outlined" color="" />}
             />
@@ -64,7 +66,7 @@ export default function StaticDatePickerDemo(props) {
             }
           </LocalizationProvider></Stack>
        
-        <Button onClick={() => props?.onDateSubmit({ startDate: moment(startDate?.$d)?.format('YYYY-MM-DD'), endDate: moment(endDate?.$d)?.format('YYYY-MM-DD') })}
+       {showSubmit? <Button onClick={() => props?.onDateSubmit({ startDate: moment(startDate?.$d)?.format('YYYY-MM-DD'), endDate: moment(endDate?.$d)?.format('YYYY-MM-DD') })}
           sx=
           {{
             ":hover": {
@@ -73,7 +75,9 @@ export default function StaticDatePickerDemo(props) {
             },
 
             color: "#ffffff", bgcolor: "#ed6c02"
-          }}>Submit</Button>
+          }}>Submit </Button> :
+          <Button disabled onClick={() => props?.onDateSubmit({ startDate: moment(startDate?.$d)?.format('YYYY-MM-DD'), endDate: moment(endDate?.$d)?.format('YYYY-MM-DD') })}
+         >Submit </Button> }
           {console.log(moment(startDate?.$d)?.format('YYYY-MM-DD'),"shghjewh",endDate,"enddataaaaa")}
       </CardContent>
     </Card>

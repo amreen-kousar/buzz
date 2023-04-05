@@ -34,13 +34,14 @@ projectMultiDrawer.propTypes = {
     onCloseFilter: PropTypes.func,
 };
 
-export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,batchState}) {
+export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,batchState,projectId}) {
 
      const [batch,setBatch] = useState('')
      const [photos,setPhotos] = React.useState(false)
      const [shown,setShown] = React.useState(false)
    const [images,setImages] = useState([])
-
+   const [viewImage, setViewImage] = React.useState(false);
+   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     useEffect(() => {
         getTrainingBatch();
        // console.log(batchState)
@@ -70,6 +71,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
           axios(config)
           .then(function (response) {
             setBatch(response.data)
+            console.log(batch , "response from ")
           
             
           })
@@ -97,16 +99,20 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
         getBase64(e.target.files[0], function (base64Data) {
           setImages([...images, base64Data])
         //   setViewImage(true)
+        setViewImage(true);
         });
       }
 
+      console.log("projectId", projectId)
     const UploadImages = (e) =>{
+        console.log("upload method is calling ")
         var raw = JSON.stringify({
-            "project_id": 292,
+            "project_id": 292
+            ,
             "tb_id":batchState?.id,
             "trainer_id": idvalue,
             "day": 1,
-            "photos": images
+            "photos": images.toString().slice(22,)
         })
 
         var requestOptions = {
@@ -117,7 +123,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
 
           fetch("https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php", requestOptions)
   .then(response => response.text())
-  .then(result => console.log(result))
+  .then(result => console.log(result, "result in"))
   .catch(error => console.log('error', error));
     }
     return (
@@ -192,34 +198,92 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                                 </CardContent>
                             </Card>
                             <Photos batch={batch} photos={photos} setPhotos={(e)=>{setPhotos(e)}}/>
+
+
+
+                            {/* //photo upload button  */}
+               
+<Card style={{marginTop:20}}>
+<div style={{ display: 'flex' }}>
+                {viewImage
+                  ? images.map((i, index) => {
+                      return (
+                        <div style={{ display: 'flex', margin: '1rem' }}>
+                          <img src={i} style={{ height: '50px', width: '70px' }} alt="hello" />
+                          <Iconify
+                            onClick={() => {
+                              deleteImage(index);
+                            }}
+                            icon={'typcn:delete'}
+                            sx={{ width: 16, height: 16, ml: 1, color: 'red' }}
+                          />
+                        </div>
+                      );
+                    })
+                  : null}
+              </div>
+              <br />
+<div style={{ display: 'flex' ,marginTop:"10px" , marginBottom:"10px"}}>
+                  <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
+                    <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
+                    &nbsp;
+                    <input
+                      style={{ display: 'none' }}
+                      accept="image/png, image/gif, image/jpeg"
+                      id="inputTag"
+                      type="file"
+                      onChange={(e) => {
+                        convertImage(e);
+                      }}
+                    />
+                  </label>
+                  Add Photos
+                  <br />
+         
+           <Button
+           onClick={UploadImages}
+           
+           sx={{
+             '&:hover': {
+               backgroundColor: '#ffd796',
+             },
+             color: '#ff7424',
+             backgroundColor: '#ffd796',
+             marginLeft: '10px',
+           }}
+         >
+           Upload 
+         </Button>
+         </div>
+</Card>
+                         
+
+
+                            {/* photo upload end  */}
                             <Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
                                 <CardContent>
-                                    <Typography>View Photos</Typography>
+                                    <Typography>View Photos working</Typography>
                                     
                                 </CardContent>
                                 </Card>
                                 <Card  style={{marginTop:20}}>
-                                <input accept="image/png, image/gif, image/jpeg"
+                                {/* <input accept="image/png, image/gif, image/jpeg"
         type="file"
         name="myImage"
         onChange={(event) => {
           console.log(event.target,"<------imageesssssssss");
           convertImage(event);
         }}
-      />
-      {images?.map(itm=>{
-        return(
-            <img src={itm} style={{ height: "50px", width: "70px" }}/>
-        )
-      })}
-                                <CardContent>
+      /> */}
+    
+                                {/* <CardContent>
                                    
                                     <Typography >Upload Photos</Typography>
                                     
-                                </CardContent>
+                                </CardContent> */}
                             </Card>
                         </div>
-                        <Button onClick={UploadImages}>upload image</Button>
+                        {/* <Button onClick={UploadImages}>upload image</Button> */}
 
                     </Stack>
                 </Scrollbar>
