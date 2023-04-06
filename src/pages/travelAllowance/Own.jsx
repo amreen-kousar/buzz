@@ -103,7 +103,7 @@ export default function Own(props) {
 
         axios(config)
             .then(function (response) {
-                setMessage("Poa Successfully deleted")
+                setMessage("Travel Allowance Deleted Successfully")
                 setOpenMessage(true)
                 list()
 

@@ -100,7 +100,7 @@ function Addbus(props) {
                             <TextField fullWidth id="outlined-basic" label="Bus Number" helperText="Bus Number required*" defaultValue={addBus.register_number} onChange={(e) => { setAddBus({ ...addBus, register_number: e.target.value }) }} variant="outlined" color="common" /><br />
                             {/* <TextField fullWidth id="outlined-basic" label="Register Date" type="date"  InputLabelProps={{
                                 shrink: true,
-                            }} defaultValue={addBus.register_date} format={'YYYY/MM/DD'} onChange={(e) => { setAddBus({ ...addBus, register_date: e.target.value }) }} variant="outlined" color="common" /><br />
+                            }} defaultValue={addBus.register_date} format={'DD/MM/YYYY'} onChange={(e) => { setAddBus({ ...addBus, register_date: e.target.value }) }} variant="outlined" color="common" /><br />
                               */}
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -265,7 +265,7 @@ function Addbus(props) {
                                         inputFormat="YYYY/MM/DD"
                                         views={["year", "month", "day"]}
                                         label="Emission Date"
-                                        defaultValue="YYYY/MM/DD"
+                                        defaultValue="DD/MM/YYYY"
                                         onChange={(e) => {
                                             setAddBus({ ...addBus, emission_date: e })
                                         }}

@@ -73,7 +73,7 @@ export default function scheduleCircleMeet() {
     var data = JSON.stringify({
       "search": search,
       "project_id": state?.id,
-      "gelathi_id": id?.emp_id?id?.emp_id:''
+      "gelathi_id": id?.emp_id?id?.emp_id:idvalue
     });
 
     var config = {
@@ -162,6 +162,7 @@ export default function scheduleCircleMeet() {
              {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
               {console.log(clcikData,"cliked")}
+              {console.log(enrolled?.list,"enrolledlist")}
                 <Circledrawer
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
@@ -169,6 +170,7 @@ export default function scheduleCircleMeet() {
                     onCloseFilter={handleCloseFilter}
                     id={state?.id}
                     data1={data1}
+                    // enrolled={enrolled}
                     
                 />
             </Stack>
@@ -178,7 +180,7 @@ export default function scheduleCircleMeet() {
               {console.log(itm,"itemeeeeeee")}
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm.circle_id, title: "Schedule A Circle Meeting",id:itm?.id })
+                        setClickData({ name: itm?.circle_name, title: "Schedule A Circle Meeting",id:itm?.circle_id })
                         handleOpenFilter()
                     }}>
 
@@ -196,7 +198,7 @@ export default function scheduleCircleMeet() {
                     </Card>)
             }):
             <>
-            <h1>No Circle Meet  Found</h1>
+            <h1>No Circle Meet Found</h1>
             </>}
 
         </Container>

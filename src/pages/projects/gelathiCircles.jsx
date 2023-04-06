@@ -12,6 +12,7 @@ export default function gelathiCirclesList() {
   const [clcikData, setClickData] = useState()
   const [gelathiCircles, setgelathiCircles] = useState('');
   const [filterData, setFilterData] = useState({})
+  const [reload,setReload]=useState(false);
   const [data1, setData1] = useState('')
   var [search, setSearch] = useState('')
   var [selected, setSelected] = useState(null)
@@ -63,6 +64,7 @@ export default function gelathiCirclesList() {
 
     circle();
     // setgelathiCircles([{ stockname: "fist" }, { stockname: "second" }])
+
   }, []
   )
 
@@ -70,6 +72,7 @@ export default function gelathiCirclesList() {
 
   const [openFilter, setOpenFilter] = useState(false);
   const [filter,setFilter]=useState(false);
+  
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -92,7 +95,7 @@ export default function gelathiCirclesList() {
     var data = JSON.stringify({
       "search": search,
       "project_id": state?.id,
-      "gelathi_id": id?.emp_id?id?.emp_id:''
+      "gelathi_id": idvalue
     });
 
     var config = {
@@ -109,11 +112,12 @@ export default function gelathiCirclesList() {
         setgelathiCircles(response.data)
         setCount(response?.data?.list.length)
         console.log(JSON.stringify(response.data));
+        setReload(!reload)
       })
       .catch(function (error) {
         console.log(error);
       });
-
+console.log("Ihdfgdjhc")
   }
   const handleDelete = () => {
     setSelected(null)
@@ -150,7 +154,7 @@ export default function gelathiCirclesList() {
             {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
           </Button>:null}
-        <ChooseGelathi data1={data1}/>
+        <ChooseGelathi data1={data1} circle={circle}/>
 
       </Stack>
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -178,6 +182,7 @@ export default function gelathiCirclesList() {
           isOpenFilter={openFilter}
           onOpenFilter={handleOpenFilter}
           onCloseFilter={handleCloseFilter}
+          data1={data1}
         />
       </Stack>
       {/* </Stack> */}

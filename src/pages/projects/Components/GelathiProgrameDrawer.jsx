@@ -27,6 +27,12 @@ import {
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
+import { Schedule } from '@mui/icons-material';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import moment from 'moment';
+import EditGelathiSession from './EditGelathisession';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 
@@ -47,12 +53,14 @@ export default function GelathiProgrameDrawer({
   const [showNote, setShowNote] = useState(false);
   const [gelatiNote, setGelatiNote] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
-
+  const [date, setDate] = useState(new Date())
   //   image
   const [image, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
   const [viewImage, setViewImage] = React.useState(false);
+  const [schedule,setReschedule]=React.useState(false);
   const [locationS, setLocation] = useState();
+  const [editSession,setEditsession]=useState(false);
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
 const [getImage , setGetImae] = useState([])
   localStorage.setItem('clickData', clcikData);
@@ -231,6 +239,72 @@ const [getImage , setGetImae] = useState([])
     console.log('submit');
   };
   console.log(getAllNotes, 'getallnotes');
+
+
+  const removesession=(e)=>{
+    if(confirm("Do You want to Cancel?")){
+      var data = JSON.stringify({
+        "poa_id": e?.id,
+        "day": ""
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/updatePoaCancel.php',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        onCloseFilter();
+        getGFSessionData();
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+    }
+  }
+
+  const reschedudlehandler=()=>{
+   setReschedule(true)
+  }
+
+  const Reschedule=(e)=>{
+    
+    var data = JSON.stringify({
+      "poa_id": e,
+      "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss')
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/updateReschedule.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setReschedule(false)
+      onCloseFilter()
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
+
+
+
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -242,14 +316,16 @@ const [getImage , setGetImae] = useState([])
         open={isOpenFilter}
         onClose={onCloseFilter}
         PaperProps={{
-          sx: { width: 350 },
+          sx: { width: 380 },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="body1" sx={{ ml: 1 }}>
-            {`${session?.type_name}`}
+            {`${session?.type_name}`} 
+           
           </Typography>
           {console.log(clcikData, '<------clcikDataclcikData')}
+          
           <IconButton onClick={onCloseFilter}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
@@ -268,7 +344,26 @@ const [getImage , setGetImae] = useState([])
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     Partner :&nbsp;{session?.partnerName}
+                    <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
+            <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
+            {console.log(session,"sessionidddddddd")}
+            <IconButton onClick={()=>removesession(session)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton>
                   </Typography>
+{schedule && <Stack>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+           <DateTimePicker
+   required
+    value={date}
+    onChange={(e) => {setDate(e)}}
+    renderInput={(params) => <TextField {...params} color="common" />}
+  />
+        </LocalizationProvider>
+        {console.log(session,"session?.id")}
+        <Button onClick={()=>Reschedule(session?.id)}>Save</Button>
+      </Stack>}
+ 
+ <EditGelathiSession session={session} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}}/>
+
 
                   <Typography variant="body1" gutterBottom>
                     Training&nbsp;Batch:&nbsp;{session?.training_batch_name}
@@ -364,18 +459,14 @@ const [getImage , setGetImae] = useState([])
                 >Upload</Button>
                   </div>
                 </div>
-                {/* <div>
-                    {
-                        session?.photos?.map((photo)=>{
-                            return(
-                                <>
-                                {console.log(photo, "photos")}
-                                {console.log(photo, "photos")}
-                                </>
-                            )
-                        })
-                    }
-                </div> */}
+                {/* <Card style={{ marginTop: 20 }}>
+              <CardContent>
+                <div>
+                  <img src={session?.photos ? session?.photos[0].photo1 : ''} />
+                  {console.log(session?.photos[0].photo1  , "pathindata")}
+                </div>
+              </CardContent>
+            </Card> */}
               </Card>
 
               <Card style={{ marginTop: 20 }}>

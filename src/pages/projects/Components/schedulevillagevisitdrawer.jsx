@@ -48,18 +48,21 @@ export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onClose
         VillageVisit();
         // console.log(clcikData)
     }, [clcikData])
-
+console.log(scheduleData,"scheduldataaaaaaaaa")
     const createGfSession = async =>{
+      const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+
         var data = JSON.stringify({
+
             "project_id": scheduleData?.data?.project_id,
-            "user_id": 492,
+            "user_id": userid,
             "locationId":scheduleData?.data?.location_id ,
             "tb_name": scheduleData?.data?.name,
             "numOfParticipants":scheduleData?.all_participants?.length ,
             "tb_id": scheduleData?.data?.id,
             "gf_session_type": 2,
             "plan_date": addData?.date,
-            "gf_session_name": null
+            "gf_session_name": null,
           });
           
           var config = {

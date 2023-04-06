@@ -357,7 +357,7 @@ const [sendData,setSendData]= React.useState({
             <IconButton edge="start" color="inherit" onClick={handledClose} aria-label="close">
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1 ,color:'white'}} variant="h6" component="div" >
               Survey Form
             </Typography>
             <Button autoFocus color="inherit" onClick={shakthiformdata}>
