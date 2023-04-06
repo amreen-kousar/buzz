@@ -367,39 +367,39 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
       >
         <form onSubmit={(e) => { e.preventDefault(); createProjectpublish() }}>
           <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
-            <Toolbar>
-             <IconButton edge="start" color="inherit" onClick={()=>{setCreatePro(false)}}> <CloseIcon/></IconButton>
+            <Toolbar id="create-proj-toolbar">
+             <IconButton id="start-icon-button" edge="start" color="inherit" onClick={()=>{setCreatePro(false)}}> <CloseIcon/></IconButton>
             
               {/* <Button sx={{float:'right'}} autoFocus color="inherit" type="submit">
                 save
               </Button> */}
-              <IconButton edge="end"  autoFocus color="inherit" type="submit" sx={{right:40,float:'right',position:'absolute'}}>
+              <IconButton id="material-symbol-save" edge="end"  autoFocus color="inherit" type="submit" sx={{right:40,float:'right',position:'absolute'}}>
                  <Iconify icon="material-symbols:save"/>
               </IconButton>
-              {(edit)? <Button autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
+              {(edit)? <Button id="publish" autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
                 publish
               </Button>:null}
             </Toolbar>
           </AppBar>
           <Grid>
             <CardContent>
-            <Snackbar open={warn} autoHideDuration={3000} onClose={() => { setWarn(false) }}>
+            <Snackbar id="alert-message" open={warn} autoHideDuration={3000} onClose={() => { setWarn(false) }}>
                 <Alert onClose={() => { setWarn(false) }} severity="warning" sx={{ width: '100%' }}>
                 {message}
                 </Alert>
               </Snackbar>
 
-              {(!edit)?<Snackbar open={notify} autoHideDuration={3000} onClose={() => { setNotify(false) }}>
+              {(!edit)?<Snackbar id="success-alert-snackbar" open={notify} autoHideDuration={3000} onClose={() => { setNotify(false) }}>
                 <Alert onClose={() => { setNotify(false) }} severity="success" sx={{ width: '100%' }}>
                   Project created succesfully
                 </Alert>
               </Snackbar>:null}
               <Card style={{ top: 15 }}>
                 <CardContent>
-                  <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                  <Typography id="project-text" sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                     Project : {edit ? sendData?.project_name : sendData?.projectname}
                   </Typography>
-                  <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                  <Typography id="district-text" sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                     District : {edit ? sendData?.location_name : sendData?.locationName}
                   </Typography>
                 </CardContent>
@@ -407,7 +407,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             </CardContent>
           </Grid>
           <Grid>
-            <CardContent>
+            <CardContent id="project-det">
               <Typography style={{ marginLeft: 10 }} variant="h6">Project Details :</Typography>
             </CardContent>
             <CardContent>
@@ -447,12 +447,12 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             <Divider />
 
             <Grid>
-              <CardContent>
+              <CardContent id="project-from-to">
                 <Typography style={{ marginLeft: 10 }} variant="h6">Project From / To Dates :</Typography>
               </CardContent>
               <Stack>
                 <CardContent>
-                  <TextField type="date"
+                  <TextField id="start-date" type="date"
                    // defaultValue={dayjs(data?.start_date)}
                    defaultValue={data?.start_date}
                     style={{ width: '20vw' }}
@@ -465,7 +465,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                       setData({ ...data, start_date: e?.target?.value })
                     }} />
 {/* {console.log(dayjs( moment(data?.endDate)?.format()),moment(data?.endDate)?.format('YYYY-MM-DD'),new Date(data?.endDate),data?.endDate,"<-- defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}",data?.end_date,data?.start_date)} */}
-                  <TextField type="date"
+                  <TextField id="end-date" type="date"
                 defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('DD-MM-YYYY')):dayjs( moment(data?.endDate)?.format('DD-MM-YYYY'))}
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     value={data.end_date}
@@ -506,11 +506,11 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             </Grid>
             <Divider />
             <CardContent>
-              <Typography variant="h6">Resources</Typography>
+              <Typography id="resources" variant="h6">Resources</Typography>
               <Stack mt={2}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" color="common">Select Bus</InputLabel>
-                  <Select
+                  <Select id="select-bus"
 
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
@@ -522,7 +522,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
                     })}
                   >
-                    <MenuItem value="" default disabled>Choose Bus</MenuItem>
+                    <MenuItem id="choose-bus" value="" default disabled>Choose Bus</MenuItem>
                     {busData?.list?.map(itm => {
                       return (
                         <MenuItem value={itm?.id}>{itm?.register_number}</MenuItem>
@@ -535,14 +535,14 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             <Divider />
 
             <CardContent>
-              <Typography variant="h6">Team Members</Typography>
+              <Typography id="team-members" variant="h6">Team Members</Typography>
               <Stack mt={3}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Select Operation Manager</InputLabel>
-                  <Select
+                  <Select 
 
                     // labelId="demo-simple-select-label"
-                    //id="demo-simple-select"
+                    id="select-operation-manager"
                     defaultValue={data.operations_manager_id}
                 
                     value={data.operations_manager_id}
@@ -552,7 +552,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                       localStorage.setItem("operations_manager_id", e?.target?.value)
                     })}
                   >
-                    <MenuItem value="" default disabled>Choose Operation Manager</MenuItem>
+                    <MenuItem id="operation-manager" value="" default disabled>Choose Operation Manager</MenuItem>
                     {teamData?.list?.map(itm => {
                       return (
                         <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
@@ -578,7 +578,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                       // driverList(e?.target?.value)
                     })}
                   >
-                    <MenuItem value="" default disabled>Choose Driver</MenuItem>
+                    <MenuItem id="choose-driver" value="" default disabled>Choose Driver</MenuItem>
                     {driverData?.list?.map(itm => {
                       return (
                         <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
@@ -616,7 +616,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 <CardContent>
 
                  
-                  <Typography variant='h6'>Trainers  ({(name?.length?name?.length:0)})<IconButton style={{float:'right'}}>
+                  <Typography id="trainers" variant='h6'>Trainers  ({(name?.length?name?.length:0)})<IconButton style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton></Typography>
                  
@@ -660,7 +660,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
               }}>
                 <CardContent>
 
-                <Typography variant='h6'>Gelathi Facilators  ({gelathiName?.length?gelathiName?.length:0})
+                <Typography id="gelathi-facilators" variant='h6'>Gelathi Facilators  ({gelathiName?.length?gelathiName?.length:0})
                   <IconButton style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>

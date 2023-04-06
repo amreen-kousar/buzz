@@ -148,158 +148,144 @@ export default function DialogForm({ shown, setShown, batch }) {
                   </FormGroup>
                 </Stack>
               </Stack>
-              <Stack>
-                <Typography variant="body2">1. Do you have a goal? what is it ?</Typography>
+              <Stack mt={2}>
+                <Typography>
+                  5. Name of the District
+                </Typography>
                 <Stack mt={2}>
-                <RadioGroup
-                      aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
-                      name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, haveGoal: value }) }}
-                  
-                    >
-                    <div style={{display:"flex"}}>
-                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
-                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}}  />} label="Yes" />
-                      </div>
-                    </RadioGroup>
+                  <FormGroup>
+                    <FormControlLabel value="Tumkur"  control={<Checkbox />} label="Tumkur" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Bangalore Urban" control={<Checkbox />} label="Banagalore Urban" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Bangalore Rural" control={<Checkbox />} label="Bangalore Rural" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Kolar" control={<Checkbox />} label="Kolar" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Chikaballapur" control={<Checkbox />} label="Chikaballapur" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Chitradurga"  control={<Checkbox />} label="Chitradurga" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Hassan" control={<Checkbox />} label="Hassan" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Ramanagara" control={<Checkbox />} label="Ramanagara" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Mandaya" control={<Checkbox />} label="Mandaya" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Chamrajanagara" control={<Checkbox />} label="Charajanagara" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                  </FormGroup>
                 </Stack>
               </Stack>
-              {/* <Stack mt={2} mb={2}>
-                <TextField id="Correct Answer" label="Correct Answer" variant="outlined" />
-              </Stack> */}
-              <Stack>
-                <Typography variant="body2">2. Is there a pathway to that goal ?</Typography>
+              <Stack mt={2}>
+                <Typography>
+                  6. Name of the Taluk
+                </Typography>
                 <Stack mt={2}>
-                <RadioGroup
-                      aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
-                      name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, pathwayToGoal: value }) }}
-                  
-                    >
-                    <div style={{display:"flex"}}>
-                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
-                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}}  />} label="Yes" />
-                      </div>
-                    </RadioGroup>
+                  <FormGroup>
+                    <FormControlLabel value="Tumkur"  control={<Checkbox />} label="Tumkur" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Bangalore Urban" control={<Checkbox />} label="Banagalore Urban" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Bangalore Rural" control={<Checkbox />} label="Bangalore Rural" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Kolar" control={<Checkbox />} label="Kolar" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Chikaballapur" control={<Checkbox />} label="Chikaballapur" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Chitradurga"  control={<Checkbox />} label="Chitradurga" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Hassan" control={<Checkbox />} label="Hassan" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Ramanagara" control={<Checkbox />} label="Ramanagara" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Mandaya" control={<Checkbox />} label="Mandaya" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Chamrajanagara" control={<Checkbox />} label="Charajanagara" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                  </FormGroup>
                 </Stack>
-              </Stack>
+              </Stack> <br />
+              <Stack>
+                <Typography variant="body2">7. Name of the village and the venue of meeting/training</Typography>
+                <Stack mt={2} mb={2}>
+                    <TextField  label="Your Answer" variant="outlined" color="common" />
+                </Stack>  
+              </Stack><br/>      
               <hr/>
               <Stack>
                &nbsp; <Typography style={{fontWeight:500}} color="primary">
-                  Number of women who believe they can find solutions through self initiative
+                 <b>Self-Shakti </b>
                 </Typography>
-              </Stack>
+              </Stack> <br />
               <Stack>
-                <Typography variant="body2">1. I look at problems and get disheartened</Typography>
+                <Typography variant="body2">1. Day 1 or Day 2</Typography>
                 <Stack mt={2}>
-                <InputLabel variant="standard" id="demo-simple-select-standard-label">Answer</InputLabel>
-                  <Select 
-                    fullWidth variant='standard' color='common'
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                  >
-                    <MenuItem value="" style={{backgroundColor:'gray'}}>
-                      <em>Select Answer</em>
-                    </MenuItem>
-                    <MenuItem value="Strongly Agree">Strongly Agree</MenuItem>
-                    <MenuItem value="Agree">Agree</MenuItem>
-                    <MenuItem value="Disagree">Disagree</MenuItem>
-                    <MenuItem value="Strongly Disagree">Strongly Disagree</MenuItem>
+                <Stack mt={2}>
+                <RadioGroup
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      // defaultValue="Yes"
+                      name="radio-buttons-group"
+                      onChange={(e, value) => { setSendData({ ...sendData, saveRegularly: value }) }}
                   
-                  </Select>
+                    >
+                    <div style={{display:"flex"}}>
+                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
+                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}}  />} label="Yes" />
+                      </div>
+                    </RadioGroup>
+                </Stack>
                 </Stack>
               </Stack>
-              <Stack>
-             &nbsp;   <Typography variant="body2">2. I take problem and attempt to think about solutions for it ?</Typography>
+              <Stack mt={2}>
+                <Typography>
+                  2. Name of the trainer being evaluated
+                </Typography>
                 <Stack mt={2}>
-                <InputLabel variant="standard" id="demo-simple-select-standard-label">Answer</InputLabel>
-                  <Select
-                    fullWidth variant='standard' color='common'
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                  >
-                    <MenuItem value="" style={{backgroundColor:'gray'}}>
-                      <em>Select Answer</em>
-                    </MenuItem>
-                    <MenuItem value="Strongly Agree">Strongly Agree</MenuItem>
-                    <MenuItem value="Agree">Agree</MenuItem>
-                    <MenuItem value="Disagree">Disagree</MenuItem>
-                    <MenuItem value="Strongly Disagree">Strongly Disagree</MenuItem>
-                  </Select>
+                  <FormGroup>
+                    <FormControlLabel value="Tumkur"  control={<Checkbox />} label="Tumkur" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Bangalore Urban" control={<Checkbox />} label="Banagalore Urban" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Bangalore Rural" control={<Checkbox />} label="Bangalore Rural" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Kolar" control={<Checkbox />} label="Kolar" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Chikaballapur" control={<Checkbox />} label="Chikaballapur" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Chitradurga"  control={<Checkbox />} label="Chitradurga" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Hassan" control={<Checkbox />} label="Hassan" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Ramanagara" control={<Checkbox />} label="Ramanagara" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Mandaya" control={<Checkbox />} label="Mandaya" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Chamrajanagara" control={<Checkbox />} label="Charajanagara" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                  </FormGroup>
                 </Stack>
-              </Stack>
-              <Stack>
-               <Typography variant="body2">
-                  3. Once I Choose A Solution I Make An Implementation Plan For It ?
-                  <Stack mt={2}>
-                  <InputLabel variant="standard" id="demo-simple-select-standard-label">Answer</InputLabel>
-                  <Select
-                    fullWidth variant='standard' color='common'
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                  >
-                    <MenuItem value="" style={{backgroundColor:'gray'}}>
-                      <em>Select Answer</em>
-                    </MenuItem>
-                    <MenuItem value="Strongly Agree">Strongly Agree</MenuItem>
-                    <MenuItem value="Agree">Agree</MenuItem>
-                    <MenuItem value="Disagree">Disagree</MenuItem>
-                    <MenuItem value="Strongly Disagree">Strongly Disagree</MenuItem>
-                  </Select>
-                  </Stack>
-                </Typography>&nbsp;
-              </Stack>
-              <Stack>
-                <Typography variant="body2">4. I Look A Solution Since I Don't Have An Choice?</Typography>
-                <Stack mt={2}>
-                <InputLabel variant="standard" id="demo-simple-select-standard-label">Answer</InputLabel>
-                  <Select
-                    fullWidth variant='standard' color='common'
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                  >
-                    <MenuItem value="" style={{backgroundColor:'gray'}}>
-                      <em>Select Answer</em>
-                    </MenuItem>
-                    <MenuItem value="Strongly Agree">Strongly Agree</MenuItem>
-                    <MenuItem value="Agree">Agree</MenuItem>
-                    <MenuItem value="Disagree">Disagree</MenuItem>
-                    <MenuItem value="Strongly Disagree">Strongly Disagree</MenuItem>
-                  </Select>
-                </Stack>
-              </Stack>
+              </Stack> <br />
+
+              <Typography  mt={2} style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
+                  &nbsp;<Stack>
+                    <FormGroup >
+                      <FormControlLabel value="One day before the training, follow up with the Anganwadi teacher. Request her to remind the participants who did not furnish their Voter ID cards on Day 1 to bring them on Day 2." control={<Checkbox style={{color:"#595959"}} />} label="One day before the training, follow up with the Anganwadi teacher. Request her to remind the participants who did not furnish their Voter ID cards on Day 1 to bring them on Day 2." onChange={(event)=>handlecheckedata('training_anyone',event)}/>&nbsp;
+                      <FormControlLabel value="Ask the women walk into the training space, check the completed book keeping activity in the financial book of the women and fill the register with answers required 
+                      for the baseline data against each woman's name?" control={<Checkbox style={{color:"#595959"}} />} label="Ask the women walk into the training space, check the completed book keeping activity in the financial book of the women and fill the register with answers required for the baseline data against each woman's name?" onChange={(event)=>handlecheckedata('training_anyone',event)}/>&nbsp;
+                      <FormControlLabel value="Ask the women to sign the register before beginning the training?" control={<Checkbox style={{color:"#595959"}} />} label="Ask the women to sign the register before beginning the training?" onChange={(event)=>handlecheckedata('training_anyone',event)}/>
+                      <FormControlLabel value="Make sure all the required columns in the register are fully filled?"
+                       control={<Checkbox style={{color:"#595959"}} />} label="Make sure all the required columns in the register are fully filled?" onChange={(event)=>handlecheckedata('training_anyone',event)}/>
+                    
+                    
+                    </FormGroup>
+                    </Stack>
              &nbsp; <hr/>
               <Stack>
                 <Typography  style={{fontWeight:700}} color="primary">
-                  Number of Women With Basic Financial Management Knowledge On Income Vs Expenditure , Book Keeping etc
+                  Buzz Module 1 <br />
                 </Typography>
               </Stack>
               <Stack>
                 <Typography variant="body2">
-                  1. If You Invest Rs 10,000 as Capital In Saree Buisness For 20 Saree . You Spend Rs 100 to Transport the
-                  Saree from the Wholesale to your Village . If You Sell All The Saree In For Rs 12,000 , How Much Profit
-                  You Have Made.
+                  1. How many women attended the training session?
                 </Typography>
                 <Stack mt={3}>
                   <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, profitForSarees: e.target.value }) }}/>
                 </Stack>
               </Stack>
-              <Stack>
-                <Typography variant="body2">
-                  2. You Have Taken A Loan Of Rs 10,000 To be Paid Back In Equally Monthly Payments In One Year And You Have
-                  To Pay Back Rs 1000 A Month. WHat Is The Annual Interest Rate ?
+
+              <Stack mt={2}>
+                <Typography>
+                  2. Check which ones the trainer did not do
                 </Typography>
-                <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                <Stack mt={2}>
+                  <FormGroup>
+                    <FormControlLabel value="Set the ground rules"  control={<Checkbox />} label="Set the ground rules" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Set the expectations of the participants" control={<Checkbox />} label="Set the expectations of the participants" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Introduce Buzz India" control={<Checkbox />} label="Introduce Buzz India" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Create a learning environment" control={<Checkbox />} label="Create a learning environment" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Engaged with participants to build a rapport" control={<Checkbox />} label="Engaged with participants to build a rapport" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Promote trust and confidence in Buzz among participants"  control={<Checkbox />} label="Promote trust and confidence in Buzz among participants" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Introduce himself/herself" control={<Checkbox />} label="Introduce himself/herself" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Ask the women to introduce themselves" control={<Checkbox />} label="Ask the women to introduce themselves" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Play the Buzz India video" control={<Checkbox />} label="Play the Buzz India video" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Tell the participants that this training is for everyone, and that we have multiple processes of learning there’s verbal, texts, videos, pictures, songs" control={<Checkbox />} label="Tell the participants that this training is for everyone, and that we have multiple processes of learning there’s verbal, texts, videos, pictures, songs" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                  </FormGroup>
                 </Stack>
-              </Stack>&nbsp;<hr/>
+              </Stack> <br />
               <Stack>
-                <Typography  style={{fontWeight:700}} color="primary">
-                  Number of Trained Women With Growing Savings (how much saved , frequency , regularities of savings)
-                </Typography>
-                <Typography variant="body2">1. Do You Save Regularly ?</Typography>
+                <Typography variant="body1">3. Were the women interactive?</Typography>
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -316,54 +302,53 @@ export default function DialogForm({ shown, setShown, batch }) {
                 </Stack>
               </Stack>
               <Stack>
-                <Typography variant="body1">2. Where Do You Save Up Money ? </Typography>
-
+                <Typography variant="body1">4. Did any women leave the training session during or after the first module?</Typography>
                 <Stack mt={2}>
-                <InputLabel variant="standard" id="demo-simple-select-standard-label">Answer</InputLabel>
-                  <Select
-                    fullWidth variant='standard' color='common'
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                  >
-                   <MenuItem value="" style={{backgroundColor:'gray'}}>
-                      <em>Select Answer</em>
-                    </MenuItem>
-                    <MenuItem value="Bank">Bank</MenuItem>
-                    <MenuItem value="MFI">MFI</MenuItem>
-                    <MenuItem value="Post Office">Post Office</MenuItem>
-                    <MenuItem value="None of the above">None of the above</MenuItem>
-                    <MenuItem value="Others - specify">Others - specify</MenuItem>
-                  </Select>
-                
-                </Stack>
-              </Stack>
-              <Stack mt={2}>
-                <Typography variant="body1">3. What Is The Frequency Of Your Savings ? </Typography>
-
-                <Stack mt={2}>
-                  <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">Age</InputLabel>
-                  <Select variant="standard" color="common"
-                    fullWidth
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                  >
-                   <MenuItem value="" style={{backgroundColor:'gray'}}>
-                      <em>Select Answer</em>
-                    </MenuItem>
-                    <MenuItem value="Annually">Annually</MenuItem>
-                    <MenuItem value="Half Yearly">Half Yearly</MenuItem>
-                    <MenuItem value="Quaterly">Quaterly</MenuItem>
-                    <MenuItem value="Monthly">Monthly</MenuItem>
-                    <MenuItem value="Weekly">Weekly</MenuItem>
-                    <MenuItem value="Daily">Daily</MenuItem>
-                  </Select>
+                <RadioGroup
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      // defaultValue="Yes"
+                      name="radio-buttons-group"
+                      onChange={(e, value) => { setSendData({ ...sendData, saveRegularly: value }) }}
+                  
+                    >
+                    <div style={{display:"flex"}}>
+                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
+                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}}  />} label="Yes" />
+                      </div>
+                    </RadioGroup>
                 </Stack>
               </Stack>
               <Stack>
-                <Typography  style={{fontWeight:700}} color="primary">Number Of Women Who Decide On How To Handle Their Personal Finances .</Typography>
+                <Typography variant="body1">
+                  5. If so, How many?
+                </Typography>
+                <Stack mt={3}>
+                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                </Stack>
+              </Stack>
+              <Stack>
+                <Typography variant="body1">6. Did this module take 20 minutes as allotted?</Typography>
+                <Stack mt={2}>
+                <RadioGroup
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      // defaultValue="Yes"
+                      name="radio-buttons-group"
+                      onChange={(e, value) => { setSendData({ ...sendData, saveRegularly: value }) }}
+                  
+                    >
+                    <div style={{display:"flex"}}>
+                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
+                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}}  />} label="Yes" />
+                      </div>
+                    </RadioGroup>
+                </Stack>
+              </Stack> <hr />
+              
+              <Stack>
+                <Typography  style={{fontWeight:700}} color="primary">Module 2 (M2) Basics of an Enterprise:</Typography>
               </Stack>
               <Stack mt={2}>
-                <Typography variant="body2">1. Do You Own Assets In Your Name ?</Typography>
+                <Typography variant="body2">1. Did any new women attend the training session during this module?</Typography>
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -379,8 +364,47 @@ export default function DialogForm({ shown, setShown, batch }) {
                     </RadioGroup>
                 </Stack>
               </Stack>
+              <Stack>
+                <Typography variant="body1">
+                  2. If so, How many?
+                </Typography>
+                <Stack mt={3}>
+                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                </Stack>
+              </Stack>
+              <Stack mt={2}>
+                <Typography>
+                  3. Check which ones the trainer did not do
+                </Typography>
+                <Stack mt={2}>
+                  <FormGroup>
+                    <FormControlLabel value="Set the ground rules"  control={<Checkbox />} label="Set the ground rules" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Set the expectations of the participants" control={<Checkbox />} label="Set the expectations of the participants" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Introduce Buzz India" control={<Checkbox />} label="Introduce Buzz India" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Create a learning environment" control={<Checkbox />} label="Create a learning environment" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Engaged with participants to build a rapport" control={<Checkbox />} label="Engaged with participants to build a rapport" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Promote trust and confidence in Buzz among participants"  control={<Checkbox />} label="Promote trust and confidence in Buzz among participants" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Introduce himself/herself" control={<Checkbox />} label="Introduce himself/herself" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Ask the women to introduce themselves" control={<Checkbox />} label="Ask the women to introduce themselves" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Play the Buzz India video" control={<Checkbox />} label="Play the Buzz India video" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Tell the participants that this training is for everyone, and that we have multiple processes of learning there’s verbal, texts, videos, pictures, songs" control={<Checkbox />} label="Tell the participants that this training is for everyone, and that we have multiple processes of learning there’s verbal, texts, videos, pictures, songs" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                  </FormGroup>
+                </Stack>
+              </Stack>
+              <Stack mt={2}>
+                <Typography>
+                  4. During the debrief the trainer did: ( check the ones he/she did)
+                </Typography>
+                <Stack mt={2}>
+                  <FormGroup>
+                    <FormControlLabel value="Ask why is this important to learn?"  control={<Checkbox />} label="Ask why is this important to learn?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Ask which are the places/situations where income, profit, savings could be asked?" control={<Checkbox />} label="Ask which are the places/situations where income, profit, savings could be asked?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Clarify why this is important even if someone said that their business is already running well?" control={<Checkbox />} label="Clarify why this is important even if someone said that their business is already running well?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                  </FormGroup>
+                </Stack>
+              </Stack>
               <Stack mt={2}> 
-                <Typography>2. Do You Seperate Financial Assets/Savings From That of Your Husbands ?</Typography>
+                <Typography>5. Did any women leave the training session during or after the first module?</Typography>
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -396,8 +420,16 @@ export default function DialogForm({ shown, setShown, batch }) {
                     </RadioGroup>
                 </Stack>
               </Stack>
+              <Stack>
+                <Typography variant="body1">
+                  6. If so, How many?
+                </Typography>
+                <Stack mt={3}>
+                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                </Stack>
+              </Stack>
               <Stack mt={2}>
-                <Typography>3. Do You Spend The Money Earned By You As You Want To?</Typography>
+                <Typography>7. Did this module take 20 minutes as allotted?</Typography>
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"

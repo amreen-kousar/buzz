@@ -209,7 +209,7 @@ export default function User() {
 
   return (
     <Page title="User">
-      <Searchbar getSearch={(e) => searchFunction(e)} />
+      <Searchbar id="search-bar" getSearch={(e) => searchFunction(e)} />
       <Container>
         <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
           <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
@@ -221,7 +221,7 @@ export default function User() {
             {selected?.type ? " Bus List" : "All Bus List"}&nbsp;({cc}/{count})
 
           </Typography>
-          <Button style={{ float: "right", color: '#ff7424' }}
+          <Button id="bus-list" style={{ float: "right", color: '#ff7424' }}
             sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',

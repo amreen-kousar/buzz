@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import {Stack,Checkbox, Card, CardContent} from '@mui/material';
 import Divider from '@mui/material/Divider';
+import Searchbar from 'src/layouts/dashboard/Searchbar';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -13,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import CreateGelathiCircle from './CreateGelathiCircle';
+import { Container } from '@mui/system';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -25,8 +27,15 @@ console.log(data1,"state")
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
    const [gelathiData,setGelathiData] = useState([])
-    
+
   const [open, setOpen] = React.useState(false);
+  var [search, setSearch] = useState('')
+  const searchFunction = (e) => {
+    search = e
+    setSearch(search)
+    setSelected({ name: e, type: "Search" })
+    circle()
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -60,16 +69,16 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         "emp_id": idvalue,
         "role_id": role
       });
-      
+
       var config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json'
         },
         data : data
       };
-      
+
       axios(config)
       .then(function (response) {
         setenrolled(response.data)
@@ -87,7 +96,7 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         position: 'fixed', zIndex: '1', bottom: 40, right: 40
       }} sx={{
         ':hover': {
-          bgcolor: '#ffd796', 
+          bgcolor: '#ffd796',
           color: '#ff7424',
           border: '#ffd796'
         },
@@ -97,13 +106,16 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
       }} title="Create POA">
       <span style={{ fontSize: "2rem" }}>+</span>
       </Button>
+
       <Dialog
         fullScreen
         open={open}
-       
+
         onClose={handleClose}
         TransitionComponent={Transition}
       >
+        <Container>
+        <Stack direction="row">
         <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton
@@ -122,12 +134,21 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
             </Button> */}
             <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} data1={data1}/>
           </Toolbar>
+
         </AppBar>
+        </Stack>
+        </Container>
+        
+        <Stack>
+        <Searchbar getSearch={(e) => searchFunction(e)} />
+
+        </Stack>
+
         {/* <Card><CardContent>Project : {data1?.data1?.project_name}</CardContent></Card> */}
         {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
-        <Stack> 
-       
+        <Stack>
+
         <Card style={{marginTop:60}}>
         <CardContent direction={'row'}>
         <Stack direction={'row'}>
@@ -136,17 +157,17 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
 checkBoxData(itm)
         }} />
                             </Typography>
-                            
+
         <br />
-        
-      
+
+
         </Stack>
         <Typography variant="subtitle1" gutterBottom>
                                 {` ${itm?.villagename}`}
                             </Typography>
         </CardContent>
         </Card>
-      
+
        </Stack>)
             }):
             <>
@@ -154,6 +175,7 @@ checkBoxData(itm)
             </>}
 
       </Dialog>
+
     </div>
   );
 }
