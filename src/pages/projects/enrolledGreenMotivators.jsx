@@ -228,11 +228,11 @@ const getData = (itm, i) => {
                         handleOpenFilter()
                     }} pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
              <div variant="subtitle1" gutterBottom>
-                                {` Enrolled Village Name : ${itm?.gelathiname}`}
+                                {` Gelathi Name : ${itm?.gelathiname}`}
                             </div>
               
               <div variant="subtitle2" gutterBottom  >
-              {` Enrolled Village Name : ${itm?.villagename}`}
+              {` Village Name : ${itm?.villagename}`}
                 </div>
                {(role==1 || role==3 || role==5 || role==12 || role==4)? <div variant="subtitle2" gutterBottom  >
               {` Enrolled By : ${itm?.enrolled_by}`}

@@ -124,7 +124,7 @@ const removegelathicircle = async(itm)=>{
 
                 <Scrollbar>
                     <Stack spacing={10} sx={{ p: 3 }}>
-                        <div>
+                        {(circleData?.gelathis?.length>0)?<div>
                         {circleData?.gelathis?.map((itm) => {
                             {console.log(itm,"hyy")}
                 return (
@@ -158,7 +158,7 @@ const removegelathicircle = async(itm)=>{
                             </Card>)
                              })}
                     
-                        </div>
+                        </div>:<h5 style={{textAlign:'center'}}>No Gelathi</h5>}
 
 
                     </Stack>

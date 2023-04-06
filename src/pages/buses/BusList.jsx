@@ -218,7 +218,7 @@ console.log(response.data.list , "busses data")
         </Snackbar>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
-            {selected?.type ? " Bus List" : "All Bus List "}&nbsp;({cc}/{count})
+            {selected?.type ? " Bus List" : "All Bus List "}&nbsp;({count})
 
           </Typography>
           <Button style={{ float: "right", color: '#ff7424' }}
@@ -283,11 +283,11 @@ console.log(response.data.list , "busses data")
                 handleOpenFilter()
               }}>
 
-              <div style={{ float: 'left', paddingLeft: '20px', paddingTop: '50px', paddingBottom: '50px', paddingRight: '20px',backgroundColor:'white' }}>
+              <div style={{ float: 'left', paddingLeft: '20px', paddingTop: '20px', paddingRight: '20px',backgroundColor:'white' }}>
                 <Iconify icon="material-symbols:directions-bus" width={30} height={30} />
               </div>
               <Card sx={{ boxShadow: 0 }} >
-              <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
+              <Grid pt={1} pb={1} container xs={6} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
                 <Typography variant="subtitle1" gutterBottom  >
                   {`Bus Number : ${itm?.register_number}`} 
                 </Typography>
@@ -297,15 +297,15 @@ console.log(response.data.list , "busses data")
               <Typography gutterBottom  >
                   {`Project Name : ${itm?.project_name}`}
                 </Typography>
-                <Typography variant="body2" gutterBottom style={{ color: '#FF337A' }}>
+                {/* <Typography variant="body2" gutterBottom style={{ color: '#FF337A' }}>
                   Today Checklist Status :
-                  {/* <Chip label="Published" size="small" color="success" variant="outlined" /> */}
+                
 
                 </Typography>
                 <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
                   Checked / Total : {itm?.checked_count}/{count}
                   {console.log(buses?.total_count, "total counttttttttttt")}
-                </Typography>
+                </Typography> */}
 
               </Grid></Card>
             </Card>

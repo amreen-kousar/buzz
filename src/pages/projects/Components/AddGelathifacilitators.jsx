@@ -135,7 +135,7 @@ SimpleDialog.propTypes = {
     selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name }) {
+export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name,operations_manager_id }) {
     
  
     const [open, setOpen] = React.useState(isOpenFilter);
@@ -158,8 +158,8 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
         console.log(sendData, "sendDataaaa")
         var data = JSON.stringify({
             "role_id": 6,
-            "project_id": 292,
-            "operation_manager_id": 35,
+            "project_id": sendData?.project_id,
+            "operation_manager_id":operations_manager_id ,
             "pageNum": 1
         });
 

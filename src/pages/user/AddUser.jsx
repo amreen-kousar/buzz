@@ -375,20 +375,21 @@ console.log(userid,"userrrrrridddddddd")
 
             >
 
-                <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
-                    <Toolbar>
+                {/* <AppBar > */}
+                <form onSubmit={(e)=>{e.preventDefault(); submitUser()}}>
+                    <Toolbar sx={{ bgcolor: '#ff7424' }}>
                         <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
                             Add Users
                         </Typography>
-                        <Button autoFocus color="inherit" onClick={submitUser}>
+                        <Button autoFocus color="inherit" type="submit">
                             save
                         </Button>
                     </Toolbar>
 
-                </AppBar>
+                {/* </AppBar> */}
                 {/* <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }} >
                     <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                         <CloseIcon />
@@ -401,7 +402,7 @@ console.log(userid,"userrrrrridddddddd")
                     </Button>
                 </Toolbar> */}
                 
-                <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
+                {/* <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
                     <DialogContentText
                         id="scroll-dialog-description"
                         tabIndex={-1}
@@ -416,7 +417,7 @@ console.log(userid,"userrrrrridddddddd")
 
                             noValidate
                             autoComplete="off"
-                        >
+                        > */}
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
                                 <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem", color: '#ff7424' }}>
@@ -546,9 +547,9 @@ console.log(userid,"userrrrrridddddddd")
                                 {["Driver"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="License Number" value={AddUser.license_number} onChange={(e) => { setAddUser({ ...AddUser, license_number: e.target.value }) }} variant="outlined" />
                                 }
                             </div>
-                        </Box>
+                        {/* </Box>
                     </DialogContentText>
-                </DialogContent>
+                </DialogContent> */}
                 {/* <DialogActions>
                     <Button variant="contained" onClick={submitUser} color="warning" sx={{
                         ':focus': {
@@ -564,6 +565,7 @@ console.log(userid,"userrrrrridddddddd")
                     <Button variant="contained" color="error" onClick={handleClose}>Cancel</Button>
 
                 </DialogActions> */}
+                </form>
             </Dialog>
         </div>
     )

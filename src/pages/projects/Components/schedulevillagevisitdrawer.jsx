@@ -24,7 +24,7 @@ import {
 } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
-
+import moment from 'moment';
 Villagevisitdrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
@@ -61,7 +61,7 @@ console.log(scheduleData,"scheduldataaaaaaaaa")
             "numOfParticipants":scheduleData?.all_participants?.length ,
             "tb_id": scheduleData?.data?.id,
             "gf_session_type": 2,
-            "plan_date": addData?.date,
+            "plan_date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
             "gf_session_name": null,
           });
           

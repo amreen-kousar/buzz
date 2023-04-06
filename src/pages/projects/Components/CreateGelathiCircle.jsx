@@ -115,35 +115,37 @@ axios(config)
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
-          <Toolbar>
+          <form onSubmit={(e)=>{e.preventDefault(); apiHit()}}>
+        {/* <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}> */}
+          <Toolbar  sx={{  bgcolor: '#ff7424' }}>
             <IconButton
               edge="start"
               color="inherit"
               onClick={handleClose}
               aria-label="close"
             >
-              <CloseIcon />
+              <CloseIcon sx={{color:'white'}}/>
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" color="inherit">
+            <Typography sx={{ ml: 2, flex: 1,color:'white' }} variant="h6" component="div" >
              New Gelathi Circle
            
-            <Button autoFocus color="inherit" sx={{float:'right',color:'white'}} onClick={apiHit}>
+            <Button autoFocus color="inherit" sx={{float:'right',color:'white'}} type="submit">
               save
             </Button> </Typography>
           </Toolbar>
-        </AppBar>
-        <Card style={{marginTop:83}}>
+        {/* </AppBar> */}
+        <Card style={{marginTop:30}}>
           {console.log(data1?.data1,"projectname")}
             <CardContent>
             <Typography variant="subtitle1">Project: &nbsp;{data1?.project_name}</Typography>
             </CardContent>
         </Card>
         <CardContent>
-        <Typography variant="subtitle1">Gelathi Circle details</Typography>
-            <TextField fullWidth id="name" onChange={(e)=>{setSendData({ ...sendData,circle_name:e?.target?.value})}} label="Circle Name" variant="outlined" />
+        <Typography variant="subtitle1">Gelathi Circle details</Typography><br/>
+            <TextField fullWidth id="name" required onChange={(e)=>{setSendData({ ...sendData,circle_name:e?.target?.value})}} label="Circle Name" variant="outlined" /><br/>
          <Stack mt={3}>
         <DatePicker
+        required
           label="Date"
           defaultValue={sendData?.circle_date}
           onChange={(newValue) =>  setSendData({ ...sendData,circle_date:newValue})
@@ -153,13 +155,15 @@ axios(config)
 
           />
 </Stack>
-<Stack mt={3}>
+<Stack mt={2}>
+  {console.log(gelathiData,"gelathidataaaaaaaa")}
 <Typography variant="subtitle1">Enrolled Gelathis:</Typography>
 <Card mt={2}>
     <CardContent>
         {gelathiData?.map(itm=>{
             return(
-                <Typography variant="subtitle1">{itm?.gelathiname}</Typography>
+                <Card style={{marginTop:20}}><CardContent><Typography variant="subtitle1">{itm?.gelathiname}</Typography>
+                <Typography variant="subtitle1">{itm?.villagename}</Typography></CardContent></Card>
             )
         })}
 
@@ -172,7 +176,7 @@ axios(config)
             
        
         </CardContent>
-       
+        </form>
 
       </Dialog>
     </div>

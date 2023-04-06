@@ -590,21 +590,24 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             </CardContent>
             <Divider />
             {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}> */}
-            <AddTrainerDrawer
+            {console.log(sendData,"senddataaaaaaaaaaaa")}
+            {data?.operations_manager_id && <AddTrainerDrawer
               isOpenFilter={openFilter}
               getData={(e) => { setName(e) }}
+              operations_manager_id={data.operations_manager_id}
               onOpenFilter={handleOpenFilter}
               sendData={sendData}
               name={name}
               onCloseFilter={handleCloseFilter}
-            />
-            <AddGelathifacilitators
+            />}
+            {data?.operations_manager_id && <AddGelathifacilitators
               sendData={sendData}
               isOpenFilter={opengelathiFilter}
+              operations_manager_id={data.operations_manager_id}
               getData={(e) => { setGelathiName(e) }}
               onOpenFilter={handlegelathiOpenFilter}
               onCloseFilter={handlegelathiCloseFilter}
-            />
+            />}
 
             {console.log(name, "<---sdfdsfdsfdssddss")}
             {/* </Stack> */}
