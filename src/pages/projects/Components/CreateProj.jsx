@@ -590,7 +590,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             </CardContent>
             <Divider />
             {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}> */}
-            {console.log(sendData,"senddataaaaaaaaaaaa")}
+            {/* {console.log(sendData,"senddataaaaaaaaaaaa")} */}
             {data?.operations_manager_id && <AddTrainerDrawer
               isOpenFilter={openFilter}
               getData={(e) => { setName(e) }}
