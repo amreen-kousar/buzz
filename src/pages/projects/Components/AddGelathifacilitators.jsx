@@ -158,7 +158,7 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
         console.log(sendData, "sendDataaaa")
         var data = JSON.stringify({
             "role_id": 6,
-            "project_id": sendData?.project_id,
+            "project_id": sendData?.projectId,
             "operation_manager_id":operations_manager_id ,
             "pageNum": 1
         });

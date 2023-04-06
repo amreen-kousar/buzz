@@ -282,7 +282,7 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
   const trainerList = async => {
     var data = JSON.stringify({
       "role_id": 5,
-      "project_id": sendData?.project_id,
+      "project_id": sendData?.projectId,
       "operation_manager_id": operations_manager_id,
       "pageNum": 1
     });
