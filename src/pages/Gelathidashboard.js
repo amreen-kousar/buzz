@@ -20,6 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
 import FiltersHome from './Filters/FiltersHome';
+import GalathiChart from './Components/Charts/GalathiChart';
 export default function Gelathidashboard() {
   const navigate = useNavigate();
   const data = localStorage?.getItem('userId')
@@ -39,8 +40,48 @@ export default function Gelathidashboard() {
   const [slected, setSelected] = useState(null)
 
   const [summaryData, setSummaryData] = useState([]);
+  const [graphData, setGraphData] = useState(null);
+
+  const GathathiGraphDataFormating=(formatdata) => {
+    console.log("🚀 ~ file: Gelathidashboard.js:171 ~ GathathiGraphDataFormatibg ~ data:",formatdata.data)
+    let data = formatdata.data 
+   
+    console.log("🚀 ~ file: Gelathidashboard.js:47 ~ GathathiGraphDataFormating ~ data:", data)
+    
+    const filteredArr = data.map(({villagevisit, circle_meet, circles,beehive,enroll}) => ({villagevisit, circle_meet, circles,beehive,enroll}));
+    console.log("🚀 ~ file: Gelathidashboard.js:52 ~ GathathiGraphDataFormating ~ filteredArr:", filteredArr)
+    let dataKeys = Object.keys(filteredArr[0]);
+    let tempData=[]
+    for(let i=0;i<dataKeys.length;i++){
+      let data = dataKeys[i]
+      // for(let i=0; i<fil)
+      tempData.push({
+        name:data,
+        value:parseInt(filteredArr[0][data])
+      })
+    }
+    console.log("🚀 ~ file: Gelathidashboard.js:55 ~ GathathiGraphDataFormating ~ tempData:", tempData)
+    setGraphData(tempData)
+    console.log("🚀 ~ file: Gelathidashboard.js:50 ~ GathathiGraphDataFormating ~ keys:", name,value)
+    
+   
+  //   console.log("🚀 ~ file: Gelathidashboard.js:47 ~ GathathiGraphDataFormating ~ data:", data)
+  //   let tempData =[]
+    
+  //  let testData= Object.values(data)
+  //  let a={}
+  //   console.log("🚀 ~ file: Gelathidashboard.js:51 ~ GathathiGraphDataFormating ~ testData:", testData)
+  //   for(let i=0;i<testData.length;i++){
+  //     tempData.push({
+  //       x:testData[i]
+  //     })
+  //     console.log("🚀 ~ file: Gelathidashboard.js:57 ~ GathathiGraphDataFormating ~ tempData:", tempData)
+     
+  //   }
+  }
 
   const apiHit = async (id, i, g) => {
+    console.log("🚀 ~ file: Gelathidashboard.js:45 ~ apiHit ~ id, i, g:", id, i, g)
     setLoader(true)
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
@@ -87,17 +128,20 @@ export default function Gelathidashboard() {
     };
 
     axios(config)
-      .then((response) => {
+      .then((response) => { 
         setLoader(false)
-
-        setSummaryData(response.data);
-        console.log(response.data, '<-------njnnjhnjhjh');
+console.log(response.data,"________>responsedata")
+setSummaryData(response.data);
+GathathiGraphDataFormating(response.data);
+        console.log("responseofapi", response.data)
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
+console.log(summaryData?.data,"resposeapi")
+let formatdata = summaryData?.data
+  console.log("🚀 ~ file: Gelathidashboard.js:105 ~ Gelathidashboard ~ formatdata:", formatdata)
   useEffect(() => {
     apiHit();
   }, []);
@@ -323,44 +367,49 @@ export default function Gelathidashboard() {
             return(
               <>
               {summaryData?.data?
-               <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
+               <Card sx={{ marginTop: 5, marginLeft: 4,justifyContent:'center' }}>
 
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
               Project : {item?.name}
             </Typography>
             {/* <Graphchart/> */}
-            <CardContent style={{ display: "flex" }}>
-              <TableContainer component={Paper}>
-                <Table aria-label="customized table" style={{ width: '200px', float: 'Left' }}>
-                  <TableHead>
-                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                      <TableCell>Total Circles</TableCell>  <TableCell>:&nbsp;{item?.circles}</TableCell>
-                    </TableRow>
-                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                      <TableCell>Circle Meetings</TableCell>  <TableCell>:&nbsp;{item?.circle_meet}</TableCell>
-                    </TableRow>
-
-                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                      <TableCell>Village Visits</TableCell>  <TableCell>:&nbsp;{item?.villagevisit}</TableCell>
-                    </TableRow>
-
-                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                      <TableCell>Beehive Visits</TableCell>  <TableCell>:&nbsp;{item?.beehive}</TableCell>
-                    </TableRow>
-
-                    <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                      <TableCell>Enrolled Gelathis</TableCell>  <TableCell>:&nbsp;{item?.enroll}</TableCell>
-                    </TableRow>
-
-                  </TableHead>
-                  <TableBody>
-
-                  </TableBody>
-                </Table>
-              </TableContainer>
-
-
-            </CardContent>
+            {/* style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} */}
+            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+  <Grid container>
+    <Grid item xs={12} sm={12} md={6}>
+      <TableContainer component={Paper}>
+        <Table aria-label="customized table" style={{ width: '100%' }}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Total Circles</TableCell>
+              <TableCell>:&nbsp;{item?.circles}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Circle Meetings</TableCell>
+              <TableCell>:&nbsp;{item?.circle_meet}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Village Visits</TableCell>
+              <TableCell>:&nbsp;{item?.villagevisit}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Beehive Visits</TableCell>
+              <TableCell>:&nbsp;{item?.beehive}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Enrolled Gelathis</TableCell>
+              <TableCell>:&nbsp;{item?.enroll}</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody></TableBody>
+        </Table>
+      </TableContainer>
+    </Grid>
+    <Grid item xs={12} sm={12} md={6} sx={{padding:0,margin:0,float: 'left'}}>
+  <GalathiChart data={graphData} />
+</Grid>
+  </Grid>
+</CardContent>
           </Card> 
           :  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Projects</h1>}
               </>
