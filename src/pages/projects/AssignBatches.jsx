@@ -7,6 +7,7 @@ import Iconify from '../../components/Iconify';
 import { Icon } from '@iconify/react';
 import { useState, useEffect } from 'react';
 import axios from 'axios'
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Container } from "@mui/system";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -17,57 +18,98 @@ import TableCell from "@mui/material/TableCell";
 import { vi } from "date-fns/locale";
 
 export default function AssignBatches(){
+   
+    const state = useLocation();
     const [gelathi, setGelathi] = useState('');
     const [gl,setGl] = useState(false);
+    const [data1, setData1] = useState('')
     const [villages, setVillages] = useState('');
     const [batch,setBatch] = useState('');
     const [tc, setTc] = useState('');
     let [alloted,setAlloted]=useState(0)
 
    const [selected,setSelected]=useState([])
-  useEffect(() => {
-    gelathinamelist(35)
-   
-  }, []
-  )
-  const gelathinamelist= async() =>{
-   
-    var data = JSON.stringify({
-        "project_id":234,
-        "role_id":13  , 
-        "operation_manager_id":35,
-        "pageNum": 1
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      axios(config)
-      .then(function (response) {
-        setGelathi(response?.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-      
+
+   const id = sessionStorage?.getItem("proId")
+useEffect(() => {
+  projData();
+
+}, [])
+
+const projData = async => {
+  console.log(location, "location props")
+  var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
+  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  var data = JSON.stringify({
+    "project_id": id,
+    "role_id": role,
+    "emp_id": idvalue
+  });
+
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+
+  axios(config)
+    .then(function (response) {
+      setData1({ ...response.data.list })
+      console.log(response.data.list, '<--------------setData1setData1');
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
 }
+  // useEffect(() => {
+  //   gelathinamelist(35)
+   
+  // }, []
+  // )
+//   const gelathinamelist= async() =>{
+   
+//     var data = JSON.stringify({
+//         "project_id":234,
+//         "role_id":13  , 
+//         "operation_manager_id":35,
+//         "pageNum": 1
+//       });
+      
+//       var config = {
+//         method: 'post',
+//         url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         data : data
+//       };
+//       axios(config)
+//       .then(function (response) {
+//         setGelathi(response?.data)
+//       })
+//       .catch(function (error) {
+//         console.log(error);
+//       });
+      
+// }
 
 const villagelist= async(itm) =>{
+  console.log(itm,"itemassignedddddddddddd")
   setGl(true)
   var data = JSON.stringify({
-    "project_id":234, 
-    "emp_id":itm?.id,
+    "project_id":data1?.project_id, 
+    "emp_id":itm?.emp_id,
     
   
     });
 
 
-    setAlloted(itm?.villages_assigned)
+ 
     
     var config = {
       method: 'post',
@@ -80,6 +122,7 @@ const villagelist= async(itm) =>{
     axios(config)
     .then(function (response) {
       setVillages(response?.data)
+      setAlloted(response?.data?.checked_count)
       setTc(response?.data?.list.length)
     })
     .catch(function (error) {
@@ -87,16 +130,17 @@ const villagelist= async(itm) =>{
     });
     
 }
-
-const CreateBatch= async(id) =>{
-  selected.push(id)
+console.log(villages,"checkedlist")
+const CreateBatch= async(itm) =>{
+  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  selected.push(itm?.training_batch_id)
   setSelected(selected)
-  // console.log(createbatch,"createbatchhhhhh")
+  console.log(id,"createbatchhhhhh")
   var data = JSON.stringify({
      
-     "project_id":234, 
+     "project_id":data1?.project_id, 
      "training_batch_id":id,
-      "emp_id":50
+      "emp_id":userid
     });
 console.log(alloted,selected)
       
@@ -121,6 +165,11 @@ console.log(alloted,selected)
     
 }
 
+const deletevillage=(itm)=>{
+  
+   
+  
+}
 
     return(
        
@@ -145,10 +194,10 @@ console.log(alloted,selected)
                   {/* {data.state == "" && "Select "} */}
               <Select color="common" label="Gelathi Facilitator" variant="standard">
              
-                  {gelathi?.list?.map((itm)=>{
+                  {data1?.gelathiFacilitator?.map((itm)=>{
                   
                     return(
-                            <MenuItem onClick={()=>{villagelist(itm)}} value={itm?.id}>{itm?.first_name}</MenuItem>
+                            <MenuItem onClick={()=>{villagelist(itm)}} value={itm?.emp_id}>{itm?.name}</MenuItem>
                             
                     )
                     
@@ -170,7 +219,7 @@ console.log(alloted,selected)
              
              
                   {villages?.list?.map((itm)=>{
-                    // {console.log(villages?.list,"villagesssssssssssssss")}
+                    {console.log(itm,"villagesssssssssssssss")}
                     return(
                       <>
                             {/* <Typography value={itm?.training_batch_id}>{itm?.name}
@@ -185,12 +234,12 @@ console.log(alloted,selected)
                         <Typography value={itm?.training_batch_id}>{itm?.name}
                         
                         
-                        {(selected.includes(itm?.training_batch_id))?<IconButton  style={{float:'right'}}>
+                        {(selected.includes(itm?.training_batch_id)) || (itm?.flag=='1')?<IconButton  style={{float:'right'}} >
                           <Iconify icon="typcn:tick" style={{fontSize:20,color:"green"}}/>
                         </IconButton>:
-                        <IconButton onClick={()=>CreateBatch(itm?.training_batch_id)} style={{float:'right'}}>
+                        (itm?.flag=='0')?<IconButton onClick={()=>CreateBatch(itm)} style={{float:'right'}}>
                           <Iconify icon="material-symbols:add-circle-rounded" style={{fontSize:20,color:"	#0ad5ee"}}/>
-                        </IconButton>}
+                        </IconButton>:null}
                           
                         </Typography>
                        

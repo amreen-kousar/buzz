@@ -279,8 +279,9 @@ const tomorrow = dayjs().add(1, 'day');
                   variant="outlined"
                   color="common"
                 />
+                <br/><br/>
                 <Stack direction={'row'}>
-                  <Typography>All Day</Typography>
+                  <Typography>All Day</Typography><br/>
                   <Switch value={addData?.all_day} onChange={(e) => {
                      setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) 
                      if(addData?.all_day === 1){
@@ -289,7 +290,7 @@ const tomorrow = dayjs().add(1, 'day');
                      else
                      setShowDate(true)
                      }} {...label} />
-                </Stack>
+                </Stack><br/>
 {
   showDate? 
   <>
@@ -350,7 +351,7 @@ minDate={today}
                     Description
                   </Typography>
                 </Stack>
-
+<br/>
                 <Stack>
                   <TextField
                     id="outlined-basic"

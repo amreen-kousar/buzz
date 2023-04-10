@@ -1,21 +1,21 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import {
-  Button,
-  Grid,
-  Stack,
-  TextField,
-  Select,
-  Radio,
-  InputLabel,
-  MenuItem,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-  Card,
-  CardContent,Icon,RadioGroup
-} from '@mui/material';
+    Button,
+    Grid,
+    Stack,
+    TextField,
+    Select,
+    Radio,
+    InputLabel,
+    MenuItem,
+    Checkbox,
+    FormGroup,
+    FormControlLabel,
+    Card,
+    CardContent,Icon,RadioGroup
+  } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
-import { useEffect } from 'react';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
@@ -26,341 +26,65 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
-import Iconify from 'src/components/Iconify';
-import axios from 'axios';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ShaktiForm() {
-  const [open, setOpen] = React.useState(false);
-  const [shaktidata,setshaktidata]=React.useState(false);
-  const [worthperson,setworthperson] = React.useState(false);
-  const [failureperson,setfailureperson] = React.useState(false);
-  const [qualitiesgood,setqualitiesgood] = React.useState(false);
-  const [problemsdisheartened,setproblemsdisheartened] = React.useState(false);
-  const [problemsolutions,setproblemsolutions] = React.useState(false);
-  const [plan,setplan] = React.useState(false);
-  const [solution,setsolution]= React.useState(false);
-  const [expenditure,setexpenditure] = React.useState(false);
-  const [moneysave,setmoneysave] = React.useState(false);
-  const [savemoney,setsavemoney] = React.useState(false);
-  const [education,seteducation] = React.useState(false);
-  const [purchase,setpurchase] = React.useState(false);
-  const [sharelearning,setsharelearning] = React.useState(false);
-  const [shareproblems,setshareproblems] = React.useState(false);
-  const [livelihoodvalue,setlivelihoodvalue] = React.useState(false);
-  const [creditaccess,setcreditaccess] = React.useState(false);
-  const [healthcareaccess,sethealthcareaccess] = React.useState(false)
-  const [savingfrequency,setsavingfrequency] = React.useState(false);
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
- const [checked,setChecked] = React.useState({
-   loanborrow:[],
-   borrowedmoney:[]
-
- });
-  const handlecheckedata = (label,event) => {
-    var updatedList = [...checked[label]];
-    if (event.target.checked) {
-      updatedList = [...checked[label], event.target.value];
-    } else {
-      updatedList.splice(checked[label].indexOf(event.target.value), 1);
-    }
-    let tempData = {...checked}
-    tempData[label]=updatedList
-    setChecked(tempData);
+export default function DialogForm({ shown, setShown, batch }) {
+    const [openFilter, setOpenFilter] = useState(false);
+    const [clcikData, setClickData] = useState()
   
-  };
+    const handleOpenFilter = () => {
+      setOpenFilter(true);
+    };
   
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    console.log("call clos symbol")
-    setOpen(false);
-    // setworthperson(false)
-    // setqualitiesgood(false)
-    // setfailureperson(false)
-    // setproblemsdisheartened(false)
-    // setproblemsolutions(false)
-    // setplan(false)
-    // setsolution(false)
-    // setmoneysave(false)
-    // setsavingfrequency(false)
-    // seteducation(false)
-    // sethealthcareaccess(false)
-    // setcreditaccess(false)
-    // setsavemoney(false)
-    // setpurchase(false)
-    // setexpenditure(false)
-    // setlivelihoodvalue(false)
-    // setshareproblems(false)
-    // setsharelearning(false)
-  };
-  const handledClose = () => {
-    console.log("call clos symbol")
-    setOpen(false);
-    setworthperson(false)
-    setqualitiesgood(false)
-    setfailureperson(false)
-    setproblemsdisheartened(false)
-    setproblemsolutions(false)
-    setplan(false)
-    setsolution(false)
-    setmoneysave(false)
-    setsavingfrequency(false)
-    seteducation(false)
-    sethealthcareaccess(false)
-    setcreditaccess(false)
-    setsavemoney(false)
-    setpurchase(false)
-    setexpenditure(false)
-    setlivelihoodvalue(false)
-    setshareproblems(false)
-    setsharelearning(false)
-  };
-const handleworthperson = (event)=>{
-  setworthperson(event.target.value)
-}
-
-const handlequalitiesgood = (event)=>{
-  setqualitiesgood(event.target.value)
-}
-
-const handlefailureperson = (event)=>{
-  setfailureperson(event.target.value)
-}
-
-const handleproblemsdisheartened = (event)=>{
-  setproblemsdisheartened(event.target.value)
-}
-
-const handleproblemsolutions = (event)=>{
-  setproblemsolutions(event.target.value)
-}
- 
-const handleplan = (event)=>{
-  setplan(event.target.value)
-}
-
-const handlesolution = (event)=>{
-  setsolution(event.target.value)
-}
-
-const handlemoneysave = (event)=>{
-  setmoneysave(event.target.value)
-}
-
-const handlesavingfrequency=(event)=>{
-  setsavingfrequency(event.target.value)
-
-}
+    const handleCloseFilter = () => {
+      setOpenFilter(false);
+    };
   
-const handleducation=(event)=>{
-  seteducation(event.target.value)
-}
-const handlehealthcareaccess=(event)=>{
-  sethealthcareaccess(event.target.value)
-}
-
-const handlecreditaccess=(event)=>{
-  setcreditaccess(event.target.value)
-}
-
-const handlesavemoney=(event)=>{
-  setsavemoney(event.target.value)
-}
-
-const handlepurchase=(event)=>{
-  setpurchase(event.target.value)
-}
-const handlexpenditure=(event)=>{
-  setexpenditure(event.target.value)
-}
-
-const handlelivelihood=(event)=>{
-  setlivelihoodvalue(event.target.value)
-}
-
-const handleshareproblems=(event)=>{
-  setshareproblems(event.target.value)
-}
-
-const handlesharelearning=(event)=>{
-  setsharelearning(event.target.value)
-}
-
-// useEffect(()=>{
-//   setSendData([])
-// },[open])
-
-const [sendData,setSendData]= React.useState({
-    
-    implementationPlan:"",
-    medical:"",
-    goodQuality:"",
-    socialWelfareDepartments:"",
-    personalExpenses:"",
-    accessToHealtcare:"",
-    moneyLender:"",
-    accessToCredit:"",
-    household_books_accounts:"",
-    educationReason:"",
-    saveRegularly:"",
-    middleman:"",
-    specificGoalForSavings:"",
-    solutionToProblems:"",
-    others:"",
-    familyIncomeGeneration:"",
-    goal:"",
-    privateBank:"",
-    householdUse:"",
-    personOfWorth:"",
-    festival:"",
-    reasonOthersToBorrowLoan:"",
-    relatives:"",
-    ownAsset:"",
-    friends:"",
-    separateFinancialAsset:"",
-    NGO:"",
-    partOfCollective:"",
-    whereSaveMoney:"",
-    annualLoanInterest:"",
-    haveLoan:"",
-    parents:"",
-    importantToShareTheirProb:"",
-    account_household:"",
-    profitForSarees:"",
-    brotherMarriage:"",
-    spendMoney:"",
-    coorperatives:"",
-    ownIncomeGeneration:"",
-    localMFI:"",
-    frequencyOfSaving:"",
-    loanOnWhoseName:"",
-    haveGoal:"",
-    pathwayToGoal:"",
-    ownMarriage:"",
-    agroProcessors:"",
-    howMuchSaveToAchieve:"",
-    account_business:"",
-    neighbours:"",
-    educationDecision:"",
-    noChoiceForSolution:"",
-    livelihood:"",
-    futureEmployment:"",
-    houseRepair:"",
-    shareLearningWithCommunity:"",
-    disheartenedToProblems:"",
-    amFailure:"",
-    governmentBank:"",
-    dayTodayExpenditure:"",
-    accounts_for_Self_Enterprises:"",
-    savingMoney:"",
-    assetPurchase:"",
-    moneyborrowed:"",
-
-});
-
-  const shakthiformdata= async() =>{
-    console.log("call clos save button")
-    console.log("surveyyyyform")
-   var data = JSON.stringify({
-    "participantId":557663,
-    "implementationPlan":plan,
-    "goodQuality":qualitiesgood,
-    "accessToHealtcare":healthcareaccess,
-    "accessToCredit":creditaccess,
-    "household_books_accounts":sendData?.household_books_accounts,
-    "saveRegularly":sendData?.saveRegularly,
-    "middleman":null,
-    "specificGoalForSavings":sendData?.specificGoalForSavings,
-    "solutionToProblems":problemsolutions,
-    "others":null,
-    "familyIncomeGeneration":1,
-    "goal":100,
-    "householdUse":null,
-    "personOfWorth":worthperson,
-    "reasonOthersToBorrowLoan":checked['loanborrow'],
-    "moneyborrowed":checked['borrowedmoney'],
-    "ownAsset":sendData?.ownAsset,
-    "separateFinancialAsset":sendData?.separateFinancialAsset,
-    "partOfCollective":sendData?.partOfCollective,
-    "whereSaveMoney":moneysave,
-    "annualLoanInterest":sendData?.annualLoanInterest,
-    "haveLoan":sendData?.haveLoan,
-    "importantToShareTheirProb":shareproblems,
-    "profitForSarees":sendData?.profitForSarees,
-    "spendMoney":sendData?.spendMoney,
-    "frequencyOfSaving":savingfrequency,
-    "loanOnWhoseName":sendData?.loanOnWhoseName,
-    "haveGoal":sendData?.haveGoal,
-    "pathwayToGoal":sendData?.pathwayToGoal,
-    "howMuchSaveToAchieve":sendData?.howMuchSaveToAchieve,
-    "educationDecision":education,
-    "noChoiceForSolution":solution,
-    "livelihood":livelihoodvalue,
-    "shareLearningWithCommunity":sharelearning,
-    "disheartenedToProblems":problemsdisheartened,
-    "amFailure":failureperson,
-    "dayTodayExpenditure":expenditure,
-    "accounts_for_Self_Enterprises":sendData?.accounts_for_Self_Enterprises,
-    "savingMoney":savemoney,
-    "assetPurchase":purchase
-   
-     });
-     
-     var config = {
-       method: 'post',
-       url: 'https://bdms.buzzwomen.org/appTest/addSurveyData.php',
-       headers: {
-         'Content-Type': 'application/json'
-       },
-       data : data
-     };
-     
-     axios(config)
-     .then(function (response) {
-       setshaktidata(response?.data)
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
-     handleClose();
-}
-
-
-
-
-
-
-
-
-
+  
+    const [open, setOpen] = React.useState(false);
+    React.useEffect(() => {
+      //setShown(shown)
+      setOpen(shown)
+    }, [shown])
+  
+    const handleClickOpen = () => {
+      setShown(true)
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setShown(false)
+      setOpen(false);
+    };
 
   return (
-    <>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-     Survey form
-      </Button> */}
-
-      <div style={{position:'absolute',right:0,float:'right'}}>
-      
-      <IconButton onClick={handleClickOpen}>
-       <Iconify  icon="clarity:form-line" width={20} height={20}  color="#ff7424"  />
-      </IconButton>
-      </div> 
-      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+    <div>
+      <Button  onClick={handleClickOpen}>
+       
+      </Button>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handledClose} aria-label="close">
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 ,color:'white'}} variant="h6" component="div" >
-              Survey Form
+            <Typography sx={{ ml: 2, flex: 1, color:"white"  }} variant="h6" component="div">
+              Quality Assurance Form
             </Typography>
-            <Button autoFocus color="inherit" onClick={shakthiformdata}>
+            <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button>
           </Toolbar>
@@ -372,58 +96,25 @@ const [sendData,setSendData]= React.useState({
                 <Typography mt={3} variant="h6" color="primary">% of Women With increased Self Esteem </Typography>
               </Stack>
               <Stack>
-                <Typography mt={2} variant="body2">1. I feel That I am Person of worth</Typography>
-                <Stack mt={2}>
-                  <InputLabel variant="standard" id="demo-simple-select-standard-label">Answer</InputLabel>
-                  <Select
-                    fullWidth variant='standard' color='common'
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                    value={worthperson}
-                    onChange={handleworthperson}
-                   
-                  >
-                    <MenuItem value="" style={{backgroundColor:'gray'}}>
-                      <em>Select Answer </em>
-                    </MenuItem>
-                    <MenuItem value="Strongly Agree">Strongly Agree</MenuItem>
-                    <MenuItem value="Agree">Agree</MenuItem>
-                    <MenuItem value="Disagree">Disagree</MenuItem>
-                    <MenuItem value="Strongly Disagree">Strongly Disagree</MenuItem>
-                  </Select>
+                <Typography mt={2} variant="body2">1. Email</Typography>
+                <Stack mt={2} mb={2}>
+                    <TextField  label="Your Answer" variant="outlined" color="common" />
+                </Stack> 
                 </Stack>
+              <Stack>
+                <Typography variant="body2">2. Name of the Assessor</Typography>
+                <Stack mt={2} mb={2}>
+                    <TextField  label="Your Answer" variant="outlined" color="common" />
+                </Stack>  
               </Stack><br/>
               <Stack>
-                <Typography variant="body2">2. I feel That I have Several good Qualities</Typography>
+                <Typography variant="body2">3. Date of the evaluation of the training/meeting</Typography>
                 <Stack mt={2}>
                   <InputLabel variant="standard" id="demo-simple-select-standard-label">Answer</InputLabel>
                   <Select variant="standard" color="common"
                     fullWidth
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={qualitiesgood}
-                    onChange={handlequalitiesgood}
-                  >
-                  <MenuItem value="" style={{backgroundColor:'gray'}}>
-                      <em>Select Answer</em>
-                    </MenuItem>
-                    <MenuItem value="Strongly Agree">Strongly Agree</MenuItem>
-                    <MenuItem value="Agree">Agree</MenuItem>
-                    <MenuItem value="Disagree">Disagree</MenuItem>
-                    <MenuItem value="Strongly Disagree">Strongly Disagree</MenuItem>
-                  </Select>
-                </Stack>
-              </Stack><br/>
-              <Stack>
-                <Typography variant="body2">3. Sometimes I feel I am a Failure Person</Typography>
-                <Stack mt={2}>
-                  <InputLabel variant="standard" id="demo-simple-select-standard-label">Answer</InputLabel>
-                  <Select variant="standard" color="common"
-                    fullWidth
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                    value={failureperson}
-                    onChange={handlefailureperson}
                   >
                     <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer</em>
@@ -442,6 +133,20 @@ const [sendData,setSendData]= React.useState({
                   Number of Women Work Toward Their Goal and Continuosly Track It Using The Buzz Self Assessment Tools Women
                   Who Have Goal
                 </Typography>
+              </Stack>
+              <Stack mt={2}>
+                <Typography>
+                  4. Program Assessment
+                </Typography>
+                <Stack mt={2}>
+                  <FormGroup>
+                    <FormControlLabel value="Self Shakti Training Program"  control={<Checkbox />} label="Self Shakti Training Program" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Gelathi Program" control={<Checkbox />} label="Gelathi Program" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Self Shakti by Gelathi" control={<Checkbox />} label="Self Shakti by Gelathi" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Green Program" control={<Checkbox />} label="Green Program" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Vyapar Program" control={<Checkbox />} label="Vyapar Program" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                  </FormGroup>
+                </Stack>
               </Stack>
               <Stack>
                 <Typography variant="body2">1. Do you have a goal? what is it ?</Typography>
@@ -494,8 +199,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth variant='standard' color='common'
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={problemsdisheartened}
-                    onChange={handleproblemsdisheartened}
                   >
                     <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer</em>
@@ -516,8 +219,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth variant='standard' color='common'
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={problemsolutions}
-                    onChange={handleproblemsolutions}
                   >
                     <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer</em>
@@ -530,7 +231,7 @@ const [sendData,setSendData]= React.useState({
                 </Stack>
               </Stack>
               <Stack>
-               &nbsp; <Typography variant="body2">
+               <Typography variant="body2">
                   3. Once I Choose A Solution I Make An Implementation Plan For It ?
                   <Stack mt={2}>
                   <InputLabel variant="standard" id="demo-simple-select-standard-label">Answer</InputLabel>
@@ -538,8 +239,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth variant='standard' color='common'
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={plan}
-                    onChange={handleplan}
                   >
                     <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer</em>
@@ -560,8 +259,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth variant='standard' color='common'
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={solution}
-                    onChange={handlesolution}
                   >
                     <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer</em>
@@ -627,8 +324,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth variant='standard' color='common'
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={moneysave}
-                    onChange={handlemoneysave}
                   >
                    <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer</em>
@@ -651,8 +346,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={savingfrequency}
-                    onChange={handlesavingfrequency}
                   >
                    <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer</em>
@@ -843,8 +536,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={education}
-                    onChange={handleducation}
                    
                   >
                     <MenuItem value="" style={{backgroundColor:'gray'}}>
@@ -863,8 +554,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                   value={healthcareaccess}
-                   onChange={handlehealthcareaccess}
                    
                   >
                  <MenuItem value="" style={{backgroundColor:'gray'}}>
@@ -882,8 +571,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={creditaccess}
-                    onChange={handlecreditaccess}
                  
                    
                   >
@@ -902,8 +589,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={savemoney}
-                    onChange={handlesavemoney}
                    
                   >
                   <MenuItem value="" style={{backgroundColor:'gray'}}>
@@ -921,8 +606,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                   value={purchase}
-                   onChange={handlepurchase}
                    
                   >
                     <MenuItem value="" style={{backgroundColor:'gray'}}>
@@ -941,8 +624,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={expenditure}
-                    onChange={handlexpenditure}
                    
                   >
                  <MenuItem value="" style={{backgroundColor:'gray'}}>
@@ -960,9 +641,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={livelihoodvalue}
-                    onChange={handlelivelihood}
-                   
                   >
                 <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer</em>
@@ -991,7 +669,7 @@ const [sendData,setSendData]= React.useState({
                       </div>
                     </RadioGroup>
                 </Stack>
-&nbsp;<hr/>
+
                 <Stack mt={2}>
                 <Typography  style={{fontWeight:700}} color="primary">Number of women who believe that she has a social capital in the community</Typography>
                 <Typography> 1. It Is Important For Woman To Come Together And Share Their Everyday Challenges And Problems </Typography>
@@ -1001,8 +679,6 @@ const [sendData,setSendData]= React.useState({
                     fullWidth
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={shareproblems}
-                    onChange={handleshareproblems}
                   >
                  <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer</em>
@@ -1019,10 +695,7 @@ const [sendData,setSendData]= React.useState({
                   <Select variant="standard" color="common"
                     fullWidth
                     labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                   value={sharelearning}
-                   onChange={handlesharelearning}
-                   
+                    id="demo-simple-select-standard"   
                   >
                   <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer</em>
@@ -1090,6 +763,6 @@ const [sendData,setSendData]= React.useState({
           </Card>
         </Grid>
       </Dialog>
-  </>
+    </div>
   );
-} 
+}

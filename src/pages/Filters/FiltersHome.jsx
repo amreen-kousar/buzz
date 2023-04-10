@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // material
 import {
-  Grid, Radio, Stack, Button, Drawer, Rating, Divider, Checkbox, FormGroup, IconButton, Typography, Chip, Card, CardContent, Box,
+  Grid, Radio, Stack, Button, Drawer,TextField, Rating, Divider, Checkbox, FormGroup, IconButton, Typography, Chip, Card, CardContent, Box,
 } from '@mui/material';
 
 
@@ -24,6 +24,10 @@ import GelathisLead from './GelathisLead';
 import DateRangeFilter from './DateRangeFilter';
 import OperationManager from './OperationManager';
 import GelathiFacilitator from './GelathiFacilitator';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import moment from 'moment';
 
 // ----------------------------------------------------------------------
 
@@ -62,12 +66,13 @@ FiltersHome.propTypes = {
 export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, onDatasubmit, onDateSubmit, type, resetBus, user, projectr, resetProjects }) {
 
   var [selectDATA, setSelectData] = useState()
-
+const [calOpen,setCalOpen] = useState(false);
+const [date, setDate] = useState(new Date())
   const filterPermissions = {
 
     Dashboard: [{ id: 2, roles: ['1', '8', '12', '3', '11', '9', '7'] }, { id: 1, roles: ['1', '8', '11', '12', '9', '3', '7'] }, { id: 3, roles: ['1', '4', '8', '5', '6', '12', '13', '11', '3', '9', '7'] }, { id: 4, roles: ['1', '8', '12', '9', '11', '3', '7'] }, { id: 5, roles: ['1', '9', '11', '4', '8', '12', '3', '7'] }, { id: 6, roles: ['13'] }, { id: 9, roles: ['1', '9', '11', '4', '6', '8', '5', '12', '13', '3', '7'] }, { id: 7, roles: ['1', '4', '9', '11', '8', '12', '3', '7'] },  { id: 12, roles: ['1', '3', '11'] }, { id: 13, roles: ['1', '11', '3'] }],
     ProjectDashboard: [{ id: 2, roles: ['1', '8', '12', '3', '11', '9', '7'] }, { id: 1, roles: ['1', '8', '11', '12', '9', '3', '7'] }, { id: 3, roles: ['1', '4', '8', '5', '6', '12', '13', '11', '3', '9', '7'] }, { id: 4, roles: ['1', '8', '12', '9', '11', '3', '7'] }, { id: 5, roles: ['1', '9', '11', '4', '8', '12', '3', '7'] }, { id: 6, roles: ['13'] }, { id: 9, roles: ['1', '9', '11', '4', '6', '8', '5', '12', '13', '3', '7'] }, { id: 7, roles: ['1', '4', '9', '11', '8', '12', '3', '7'] },  { id: 12, roles: ['1', '3', '11'] }, { id: 13, roles: ['1', '11', '3'] }],
-    Projects: [{ id: 31, roles: ['1', '2', '3', '4', '5', '9', '11', '12', '13', '6'] }, { id: 7, roles: ['1', '2', '3', '4', '13', '12', '5', '9', '11', '6'] }, { id: 9, roles: ['1', '2', '3', '13', '4', '12', '11', '5', '9', '6'] }, { id: 2, roles: ['1', '3', '12', '11', '2'] }, { id: 4, roles: ['1', '3', '12', '11', '2'] }, { id: 5, roles: ['1', '3', '12', '11', '2'] }, { id: 6, roles: ['1', '3', '12', '11', '2'] },{id:35,roles:['1','3','12','2']}],
+    Projects: [{ id: 31, roles: ['1', '2', '3', '4', '5', '9', '11', '12', '13', '6'] }, { id: 7, roles: ['1', '2', '3', '4', '13', '12', '5', '9', '11', '6'] }, { id: 9, roles: ['1', '2', '3', '13', '4', '12', '11', '5', '9', '6'] }, { id: 2, roles: ['1', '3', '12', '11', '2'] }, { id: 4, roles: ['1', '3', '12', '11', '2'] }, { id: 5, roles: ['1', '3', '12', '11', '2'] }, { id: 6, roles: ['1', '3', '12', '11', '2'] },{id:35,roles:['1','3','12','2','4']}],
 
     BusList: [{ id: 30, roles: true }, { id: 3, roles: true }, { id: 2, roles: true }, { id: 7, roles: true },],
 
@@ -140,6 +145,10 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
     }
   }
 
+  const handleCalendar=()=>{
+    setCalOpen(true)
+  }
+
   return (
     <>
       <Drawer
@@ -155,8 +164,11 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25 }}>
-            Filters :  {filtersHeaders[selectDATA]}
+            Filters :  {filtersHeaders[selectDATA]} 
           </Typography>
+          <IconButton onClick={handleCalendar} sx={{float:'right',position:'absolute',right:40}}><Iconify icon="material-symbols:calendar-month" ></Iconify></IconButton>
+         
+ 
           <IconButton onClick={() => {
             setSelectData(null)
             onCloseFilter()
@@ -164,6 +176,19 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
+        {calOpen && <Stack>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+           <DatePicker
+   required
+    value={date}
+    inputFormat='DD/MM/YYYY'
+    onChange={(e) => {setDate(e)}}
+    renderInput={(params) => <TextField {...params} color="common" />}
+  />
+        </LocalizationProvider>
+        {/* {console.log(session,"session?.id")} */}
+        {/* <Button onClick={()=>Reschedule(session?.id)}>Save</Button> */}
+      </Stack>}
         <Divider />
         <Scrollbar>
           <div>

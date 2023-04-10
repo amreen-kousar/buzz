@@ -230,7 +230,7 @@ export default function selfShaktiProj() {
                     <Card style={styles.card1} 
                     onClick={() => {
                         setBatchState(itm)
-                        setClickData({ name: itm.batch_name, title: "self Shakthi name" })
+                        setClickData({ name: itm.batch_name, title: "Self Shakti" })
                         handleOpenFilter()
                     }}
                     >

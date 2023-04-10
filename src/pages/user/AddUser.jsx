@@ -22,7 +22,7 @@ function AddUser(props) {
     let [emailExists, setEmailExists] = useState(false)
 
     var [AddUser, setAddUser] = useState({
-        role: { id: '0', roleName: 'Admin' }, first_name: '', last_name: "", contactNum: '', workNum: '', office_email_id: '', address: '', address3: "", address2: "",
+        role:'', first_name: '', last_name: "", contactNum: '', workNum: '', office_email_id: '', address: '', address3: "", address2: "",
         pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project: "",
         emp_id: ""
     })
@@ -262,14 +262,14 @@ let userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 console.log(userid,"userrrrrridddddddd")
     const submitUser = () => {
         AddUser.project = inputProject.map(i => parseInt(i.id))
-        AddUser.office_email_id = AddUser.office_email_id
-        AddUser.empRole = AddUser.role.id
-        AddUser.supervisorId = AddUser.reportingManager.id
+        AddUser.office_email_id = AddUser?.office_email_id
+        AddUser.empRole = AddUser?.role.id
+        AddUser.supervisorId = AddUser?.reportingManager.id
         AddUser.profile_pic = ''
         AddUser.status = AddUser.present_status ? '1' : '0';
         AddUser.createdBy = userid,
             AddUser.lastUpdatedBy = userid
-        console.log(AddUser)
+       
         const data = JSON.stringify(AddUser);
 
         const config = {
@@ -375,20 +375,21 @@ console.log(userid,"userrrrrridddddddd")
 
             >
 
-                <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
-                    <Toolbar>
+                {/* <AppBar > */}
+                <form onSubmit={(e)=>{e.preventDefault(); submitUser()}}>
+                    <Toolbar sx={{ bgcolor: '#ff7424' }}>
                         <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
                             Add Users
                         </Typography>
-                        <Button autoFocus color="inherit" onClick={submitUser}>
+                        <Button autoFocus color="inherit" type="submit">
                             save
                         </Button>
                     </Toolbar>
 
-                </AppBar>
+                {/* </AppBar> */}
                 {/* <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }} >
                     <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                         <CloseIcon />
@@ -401,7 +402,7 @@ console.log(userid,"userrrrrridddddddd")
                     </Button>
                 </Toolbar> */}
                 
-                <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
+                {/* <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
                     <DialogContentText
                         id="scroll-dialog-description"
                         tabIndex={-1}
@@ -416,7 +417,7 @@ console.log(userid,"userrrrrridddddddd")
 
                             noValidate
                             autoComplete="off"
-                        >
+                        > */}
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
                                 <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem", color: '#ff7424' }}>
@@ -546,9 +547,9 @@ console.log(userid,"userrrrrridddddddd")
                                 {["Driver"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="License Number" value={AddUser.license_number} onChange={(e) => { setAddUser({ ...AddUser, license_number: e.target.value }) }} variant="outlined" />
                                 }
                             </div>
-                        </Box>
+                        {/* </Box>
                     </DialogContentText>
-                </DialogContent>
+                </DialogContent> */}
                 {/* <DialogActions>
                     <Button variant="contained" onClick={submitUser} color="warning" sx={{
                         ':focus': {
@@ -564,6 +565,7 @@ console.log(userid,"userrrrrridddddddd")
                     <Button variant="contained" color="error" onClick={handleClose}>Cancel</Button>
 
                 </DialogActions> */}
+                </form>
             </Dialog>
         </div>
     )
