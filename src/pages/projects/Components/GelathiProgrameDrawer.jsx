@@ -309,6 +309,11 @@ const [getImage , setGetImae] = useState([])
     });
     
   }
+  //Method to delete the images that is selected 
+  const deleteImage = (index) => {
+    image.splice(index, 1);
+    setImage([...image]);
+  };
 
 
 
@@ -537,7 +542,7 @@ const [getImage , setGetImae] = useState([])
                    setShowNote(false)
                   }}
                 >
-                  Cancle
+                  <Cancel></Cancel>
                 </Button> 
                     </>
                     :
@@ -559,7 +564,7 @@ const [getImage , setGetImae] = useState([])
                       setShowNote(false)
                      }}
                    >
-                     Cancle
+                     Cancel
                    </Button> 
                    </>
                    }

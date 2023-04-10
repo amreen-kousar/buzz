@@ -19,6 +19,7 @@ import dayjs from 'dayjs';
 import AddTrainerDrawer from './AddTrainerDrawer';
 import AddGelathifacilitators from './AddGelathifacilitators'
 import Add from '@mui/icons-material/Add';
+import { useNavigate } from 'react-router-dom';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Iconify from 'src/components/Iconify';
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -50,7 +51,8 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
   let [gelathiName, setGelathiName] = useState(sendData?.gelathiFacilitator)
   const [driverData, setDriverData] = useState([])
   const [deleteData, setDeleteData] = useState([])
-
+const [createProj ,setCreateProj] = useState(true)
+const [isReload , setIsReload]= useState(false)
   
    
 // console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
@@ -83,12 +85,19 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
       setOpen(true);
       assignValues()
     }
+
+setShowAddBuss(false)
     partnerList();
     busList();
     teamList();
     driverList();
     setNotify(true)
   }, [])
+
+  useEffect(()=>{
+  
+    setShowAddBuss(false)
+  },[isReload])
 
   const assignValues = () => {
     let tempdata = {
@@ -351,6 +360,32 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
        });
     
    }
+
+  //  naigation to add new bus 
+const [showAddBuss , setShowAddBuss] = useState(false)
+const [showbusForm ,setShowBusForm] =useState(true)
+
+const mainShowBussHandler = ()=>{
+  setShowBusForm(false)
+  setShowAddBuss(false)
+  setIsReload(!isReload)
+}
+  const navigate = useNavigate();
+  const addBusHandler =()=>{
+    console.log("i calling")
+    setShowAddBuss(true)
+    console.log(showAddBuss,"i calling")
+   
+  }
+  //  const navigateToAddBus =()=>{
+  //   navigate('/dashboard/projects/addBuss', {
+  //     state: {
+  //        createProj : true
+  //     },
+  // });
+  // setShowAddBuss(true)
+  //   console.log("navigation is calling ")
+  //  }
   return (
     <div>
       {
@@ -506,7 +541,20 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             </Grid>
             <Divider />
             <CardContent>
-              <Typography variant="h6">Resources</Typography>
+              {/* <div style={{display:"flex"}}> */}
+              <Stack >
+                <CardContent style={{padding:"9px"}} >
+                <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography>
+              <Button onClick={addBusHandler}  style={{ width: '20vw', marginLeft: "80%", marginTop:"-41px"}}>Add New Bus</Button>
+                </CardContent>
+              </Stack>
+              
+              {/* </div> */}
+             
+             
+      {showAddBuss?<Addbus showAddBuss={showAddBuss} createProj={showbusForm} showBussHandler={mainShowBussHandler}/>: null}  
+     
+    
               <Stack mt={2}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" color="common">Select Bus</InputLabel>

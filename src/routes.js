@@ -41,6 +41,7 @@ import Test from './pages/Test';
 import DashboardHome from './pages/dashboard/DashboardHome';
 import AssignTargets from './pages/projects/AssignTargets';
 import QualityAssurance from './pages/qualityAssurance/QualityAssurance';
+import Addbus from './pages/buses/Addbus';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -63,6 +64,7 @@ export default function Router() {
         { path: "scheduleVillage", element: <ScheduleVillage /> },
         { path: "scheduleBeehiveVisit", element: <ScheduleBeehiveVisit /> },
         { path: "projectProfile", element: <ProjectProfile /> },
+        { path: "addBuss", element: <Addbus /> },
 
     ]
 
@@ -105,7 +107,8 @@ export default function Router() {
             { path: 'travel', element: <TravelA />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,11] },
             { path: 'demogrphy', element: <Demography />, id: [0, 1, 2, 3, 12,11] },
             { path: 'logout', element: <Logout />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13] },
-            { path: 'qualityAssurance',element: <QualityAssurance/>, id:[1,2,3,4,12]}
+            { path: 'qualityAssurance',element: <QualityAssurance/>, id:[1,2,3,4,12]},
+            {path:"addBus", element: <Addbus/>, id:[2]}
         ]
 
 
@@ -152,5 +155,6 @@ export default function Router() {
             path: '*',
             element: <Navigate to="/404" replace />,
         },
+      
     ]);
 }

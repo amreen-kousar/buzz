@@ -115,12 +115,12 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" color='inherit'>
-             Gelathis
+             Gelathis 
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button> */}
-            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1}/>
+            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1} clic/>
           </Toolbar>
         </AppBar>
         
@@ -138,7 +138,7 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
                             }}
 
                         >
-        <Card><CardContent>Project : {data1?.project_name}</CardContent></Card>
+        <Card><CardContent>Project : {data1?.project_name} </CardContent></Card>
           {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
         <Stack> 

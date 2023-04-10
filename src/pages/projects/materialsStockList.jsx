@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Card, Stack, Chip, Container, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container, Typography, Grid, IconButton,Button } from '@mui/material';
 import { Link,useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Iconify from 'src/components/Iconify';
@@ -48,6 +48,7 @@ const [reloadMaterialData , setReloadMaterialData] = useState(false)
     const [openFilter, setOpenFilter] = useState(false);
     const [admin, setAdmin] = useState(false);
     const [data1, setData1] = useState({});
+    const [close , setClose ] = useState(false)
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
@@ -150,7 +151,8 @@ console.log(materialStock , " chnaged data")
             console.log(error);
           });
       }
-      let stock = materialStock;
+      let 
+      stock = materialStock;
       
       const onSubmit = ()=>{
         var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
@@ -204,15 +206,32 @@ console.log(materialStock , " chnaged data")
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
                    Material Stock List 
-                  {Userrole == 2?
-                  
-                  <IconButton  style={{ float: 'right', color: '#ff7424', position: 'absolute', right: 0, marginRight: '125px' }} onClick={
-                    ()=>{
-                      setAdmin(true)
-                    }
-                   }>
-                      <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
-                    </IconButton>:null }
+                  {Userrole == 2 || 4?
+                  <>
+                  {close?
+                    <IconButton  style={{ float: 'right', color: '#ff7424', position: 'absolute', right: 0, marginRight: '125px' }} onClick={
+                      ()=>{
+                        setAdmin(false)
+                        setClose(false)
+                      }
+                     }>
+                        <Iconify style={{ color: 'black' }} icon="material-symbols:close" />
+                      </IconButton>
+                  :
+                    <IconButton  style={{ float: 'right', color: '#ff7424', position: 'absolute', right: 0, marginRight: '125px' }} onClick={
+                      ()=>{
+                        setAdmin(true)
+                        setClose(true)
+                      }
+                     }>
+                        <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
+                      </IconButton>
+
+                  }
+                  </>
+                
+                    
+                    :null }
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
@@ -266,13 +285,35 @@ console.log(materialStock , " chnaged data")
             </TableBody>
           </Table>
         </TableContainer>
-        {Userrole == 2?
+        {Userrole == 2 || 4?
                   
-                  <IconButton  style={{ float: 'right', color: '#ff7424', position: 'absolute', right: 0, marginRight: '125px' }} onClick={
-                   onSubmit
-                   }>
-                      <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
-                    </IconButton>:null }
+                  // <IconButton  style={{ float: 'right', color: '#ff7424', position: 'absolute', right: 0, marginRight: '125px' }} onClick={
+                  //  onSubmit
+                  //  }>
+                  <div style={{ display: 'flex' ,marginTop:"20px", marginLeft:"97%" }}>
+                   
+                    
+                    <Button
+           onClick={onSubmit}
+           
+           sx={{
+             '&:hover': {
+               backgroundColor: '#ffd796',
+             },
+             color: '#ff7424',
+             backgroundColor: '#ffd796',
+             marginLeft: '10px',
+           }}
+         >
+           Save  
+         </Button>
+                  
+      
+                  </div>
+               
+                      // <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
+                    // </IconButton>
+                    :null }
         </Grid>
         </Container>
         </Page>
