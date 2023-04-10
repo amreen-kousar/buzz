@@ -23,6 +23,7 @@ import {
   TextareaAutosize,
   Grid,
 } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 // components
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
@@ -47,6 +48,9 @@ export default function GelathiProgrameDrawer({
   const [showNote, setShowNote] = useState(false);
   const [gelatiNote, setGelatiNote] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
+//notes save button
+
+const [SaveBtn , setSaveBtn] = useState(false) 
 
   //   image
   const [image, setImage] = React.useState([]);
@@ -189,6 +193,8 @@ const [getImage , setGetImae] = useState([])
           // viewMessage('Project added sucessfully');
           setShowNote(false);
           getNoteHandler();
+          setSaveBtn(false)
+          alert("Note Added Successfully...")
           console.log('susscesfully added data material');
         }
       })
@@ -364,14 +370,16 @@ const [getImage , setGetImae] = useState([])
                 >Upload</Button>
                   </div>
                 </div>
-                <Card style={{ marginTop: 20 }}>
+
+                {/* Image displaying div  */}
+                {/* <Card style={{ marginTop: 20 }}>
               <CardContent>
                 <div>
-                  <img src={session?.photos ? session?.photos[0].photo1 : ''} />
-                  {console.log(session?.photos[0].photo1  , "pathindata")}
+                  <img src={session?.photos? session?.photos[0].photo1 : ''} /> 
+                   {console.log(session?.photos[0].photo1  , "pathindata")}
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
               </Card>
 
               <Card style={{ marginTop: 20 }}>
@@ -404,16 +412,62 @@ const [getImage , setGetImae] = useState([])
                       variant="outlined"
                       onChange={async (e) => {
                         let note = await e?.target?.value;
+                        if(note.length <= 0){
+                          alert("Text cannot be empty")
+                          setSaveBtn(false)
+                        }
+                        else{
+                          setGelatiNote(e?.target?.value);
+                          setSaveBtn(true)
+                        }
                         setGelatiNote(e?.target?.value);
                         console.log('note', gelatiNote);
                       }}
                     ></TextField>
-                    <Button
+                    {SaveBtn? 
+                    
+                    <>
+                     <Button
                       style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
                       onClick={noteSubmitHandler}
                     >
                       Save
+                    </Button> 
+                    
+                    <Button
+                  
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                  onClick={()=>{
+                   setShowNote(false)
+                  }}
+                >
+                  Cancle
+                </Button> 
+                    </>
+                    :
+                    <>
+                  
+                      <Button
+                      disabled
+                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                      onClick={()=>{
+                        alert("Text cannot be empty")
+                      }}
+                    >
+                      Save
                     </Button>
+                     <Button
+                  
+                     style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                     onClick={()=>{
+                      setShowNote(false)
+                     }}
+                   >
+                     Cancle
+                   </Button> 
+                   </>
+                   }
+                  
                   </Card>
                 </div>
               ) : null}
