@@ -28,7 +28,11 @@ export default function Location(props) {
     country: 1,
     state: '',
     district_id: '',
-    talaq_id: ''
+    talaq_id: '',
+    start_date:props?.date,
+    end_date:props?.endDate,
+    startvalue:props?.dateValue,
+    endValue:props?.endDateValue
   })
   useEffect(() => {
     location()

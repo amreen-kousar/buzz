@@ -90,6 +90,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
     setNotify(true)
   }, [])
 
+
   const assignValues = () => {
     let tempdata = {
       ...sendData,
@@ -351,6 +352,10 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
        });
     
    }
+   useEffect(()=>{
+     
+  },[data?.operations_manager_id])
+
   return (
     <div>
       {
@@ -600,6 +605,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
               name={name}
               onCloseFilter={handleCloseFilter}
             />}
+            {console.log(name,"namessssssssssssss",sendData)}
             {data?.operations_manager_id && <AddGelathifacilitators
               sendData={sendData}
               isOpenFilter={opengelathiFilter}

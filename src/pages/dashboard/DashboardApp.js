@@ -8,7 +8,7 @@ import Chip from '@mui/material/Chip';
 import { AppWidgetSummary } from '../../sections/@dashboard/app';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from '../Filters/FiltersHome';
-
+import moment from 'moment';
 export default function DashboardApp() {
   const navigate = useNavigate();
 
@@ -115,19 +115,86 @@ export default function DashboardApp() {
       });
   };
 
-  const getData = (itm, i) => {
+  const Dateapihit=async(id,i,g,date1,date2)=>{
+    setLoader(true)
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    console.log(date1,date2,"date 1 and date 2 ")
+    var data = JSON.stringify({
+      end_date: moment(date2?.$d)?.format('YYYY-MM-DD'),
+      role_id: role,
+      emp_id: userid,
+      taluk_id: g === "country" ? i : "",
+      district_id: g === "country" ? id : "",
+      trainerId: g ? "" : i === 5 ? id?.id : '',
+      start_date:moment(date1?.$d)?.format('YYYY-MM-DD'),
+      somId: g ? "" : i === 12 ? id?.id : '',
+      gflId: g ? "" : i === 13 ? id?.id : '',
+      funder_id: g ? "" : i === 2 ? id?.id : '',
+      partner_id: g ? "" : i === 1 ? id?.id : '',
+      project_id: g ? "" : i === 3 ? id?.id : '',
+      opsManager: g ? "" : i == 4 ? id?.id : '',
+     
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/Scripts/getParticipantFilterDashboard.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setLoader(false)
+      setSummaryData(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
+
+  const getData = (itm, i, date1,date2,dateValue,endDateValue,g) => {
+    console.log("🚀 ~ file: DashboardApp.js:162 ~ getData ~ itm, i, g, date1,date2,dateValue,endDateValue:", itm, i, g, date1,date2,dateValue,endDateValue)
+    console.log(date1?.$d,"datevaluinfunder",date2?.$d,itm)
+    console.log(i,"ivalueeeeeeeeeee",g)
+    {console.log('startingvalues',dateValue,"endingvalues",endDateValue)}
     setSelected(itm)
-    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
-    apiHit(itm, i)
+    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
+    i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
+    if(dateValue || endDateValue)
+    {
+      console.log("dateapihitttttt",date1.$d||date2.$d)
+      Dateapihit(itm, i,g,date1,date2)
+      
+    }
+    else{
+      console.log("apihit")
+      apiHit(itm,i)
+    }
     setFilterData(data)
+    console.log(filterData,"hyyyyyyyyyyy")
     handleCloseFilter()
   }
 
   const onSumbit = (e, i) => {
+    
     setSelected({ type: 'Location', name: `State : ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
     handleCloseFilter()
+    // {console.log(e,"locationvalues",e?.date.$d)}
+    // if(e?.dateValue || e?.endDateValue)
+    // {
+    //   console.log("locationdateeeeee")
+  //  Dateapihit(e?.district_id, e?.talaq_id, "country",e?.date,e?.endDate)
+  // }
+  // else{
     apiHit(e?.district_id, e?.talaq_id, "country")
-  }
+  
+    }
 
   const onDateSubmit = (e) => {
     setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
@@ -135,6 +202,9 @@ export default function DashboardApp() {
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
     handleCloseFilter()
   }
+
+
+
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -207,6 +277,7 @@ export default function DashboardApp() {
           <FiltersHome
             type="Dashboard"
             onDateSubmit={onDateSubmit}
+
             onSumbit={onSumbit}
             getData={getData}
             isOpenFilter={openFilter}
@@ -214,7 +285,6 @@ export default function DashboardApp() {
             onCloseFilter={handleCloseFilter}
           />
         </Stack>
-
         <Grid container spacing={3} marginTop={1}>
           {
             summaryDataView.map(s => {
