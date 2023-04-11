@@ -214,17 +214,17 @@ const getData = (itm, i) => {
                         handleOpenFilter()
                     }} pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Gelathi Name : ${itm?.gelathiname}`}
+                                {` Gelathi Name : ${itm?.gelathiname}`}
                             </Typography>
                            
                             {console.log(itm,'<-------gelathinamegelathiname')}
                         
                         <Typography variant="subtitle1" gutterBottom>
-                                {` Enrolled Village Name : ${itm?.villagename}`}
+                                {` Village Name : ${itm?.villagename}`}
                             </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
+                            {/* <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled By : ${itm?.enrolled_by}`}
-                            </Typography>
+                            </Typography> */}
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>

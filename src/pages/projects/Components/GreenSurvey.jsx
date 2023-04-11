@@ -87,7 +87,12 @@ export default function GreenSurvey(props) {
   const [climatechanges, setclimatechanges] = React.useState([]);
 
   const [sourceofwater, setsourceofwater] = React.useState([]);
-
+  const [showClimateDiscription , setShowClimateDiscription]= React.useState(false)
+  const [showWaterConsuDiscription , setShowWaterConsuDiscription]= React.useState(false)
+  const [showHouseHoldDiscription , setShowHouseHoldDiscription]= React.useState(false)
+  const [showEcoFriendlyDiscription , setShowEcoFriendlyDiscription]= React.useState(false)
+  const [showClimateChangeDiscription , setShowClimateChangeDiscription]= React.useState(false)
+  const [showpark , setShowPark]= React.useState(false)
   const [sendData,setSendData]= React.useState({
     Email:"" ,
     Name_of_the_surveyor:"" ,
@@ -230,6 +235,12 @@ const wealthvalue=(event)=>{
 
 const climatechangevalue=(event)=>{
   setClimate(event.target.value)
+  if(event.target.value == "Yes"){
+    setShowClimateDiscription(true)
+  }else{
+    setShowClimateDiscription(false)
+  }
+  console.log(climate," value is climate")
 }
 
 const weathervalue=(event)=>{
@@ -263,6 +274,11 @@ const wateraffectvalue=(event)=>{
 
 const conservationmeasures=(event)=>{
   setwaterconservation(event.target.value)
+  if(event.target.value =="Yes"){
+    setShowWaterConsuDiscription(true)
+  }else{
+    setShowWaterConsuDiscription(false)
+  }
 }
 
 const handleland=(event)=>{
@@ -279,10 +295,20 @@ const communityvalue=(event)=>{
 
 const handleinitiativemeasures=(event)=>{
   setinitiativemeasures(event.target.value)
+  if(event.target.value =="Yes"){
+    setShowPark(true)
+  }else{
+    setShowPark(false)
+  }
 }
 
 const handleclimateaction=(event)=>{
   setclimateaction(event.target.value)
+  if(event.target.value =="Yes"){
+    setShowClimateChangeDiscription(true)
+  }else{
+    setShowClimateChangeDiscription(false)
+  }
 }
 
 const handleclimateffort=(event)=>{
@@ -291,6 +317,11 @@ const handleclimateffort=(event)=>{
 
 const handlechemicals=(event)=>{
   setpaychemicals(event.target.value)
+  if(event.target.value =="Yes"){
+    setShowEcoFriendlyDiscription(true)
+  }else{
+    setShowEcoFriendlyDiscription(false)
+  }
 }
 
 const handleproducts=(event)=>{
@@ -299,6 +330,11 @@ const handleproducts=(event)=>{
 
 const handlepollutioncause=(event)=>{
   setpollutioncause(event.target.value)
+  if(event.target.value =="Yes"){
+    setShowHouseHoldDiscription(true)
+  }else{
+    setShowHouseHoldDiscription(false)
+  }
 }
 
 const handlehouseholdactivity=(event)=>{
@@ -373,7 +409,7 @@ const handleresources=(label,event)=>{
           <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
           
        
-                        <IconButton style={{color:"white"}} onClick={handleClose, handleClickOpen}>
+                        <IconButton style={{color:"white"}} onClick={handleClose}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
@@ -428,7 +464,11 @@ const handleresources=(label,event)=>{
           <Typography style={{color:"#ff7424"}}>Phone Number *</Typography>
           <Stack mt={2} mb={2}>
             <TextField id="Phone Number"   type="number" required 
-          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' , maxLength:10}}  label="Phone Number" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, Phone_number: e?.target?.value })} value={sendData?.Phone_number} />
+          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' , maxLength:10}}  label="Phone Number" variant="outlined" color="common" onChange={(e) => 
+          {if(e.target.value.length <=10){
+            setSendData({ ...sendData, Phone_number: e?.target?.value })
+          }
+           }} value={sendData?.Phone_number} />
           </Stack>
         </CardContent>
       </Card>
@@ -512,15 +552,17 @@ const handleresources=(label,event)=>{
           </Stack>
         </CardContent>
       </Card>
-
-      <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
+{showClimateDiscription?
+  <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Typography style={{color:"#ff7424"}}>What do you know about it? / ಅದರ ಬಗ್ಗೆ ನಿನಗೇನು ಗೊತ್ತು *</Typography>
           <Stack mt={2} mb={2}>
             <TextField id="Answe" label="Your Answer" variant="outlined" color="common"  onChange={(e) => setSendData({ ...sendData, What_do_you_know_about_it: e?.target?.value })} value={sendData?.What_do_you_know_about_it}/>
           </Stack>
         </CardContent>
-      </Card>
+      </Card>: null
+}
+      
 
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
@@ -732,15 +774,18 @@ const handleresources=(label,event)=>{
           </Stack>
         </CardContent>
       </Card>
-    
-      <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
-        <CardContent>
-          <Typography style={{color:"#ff7424"}}>If yes,what kind of measures have you taken in the past? / ಹೌದು ಎಂದಾದರೆ, ನೀವು ಹಿಂದೆ ಯಾವ ರೀತಿಯ ಕ್ರಮಗಳನ್ನು ತೆಗೆದುಕೊಂಡಿದ್ದೀರಿ?*</Typography>
-          <Stack mt={2} mb={2}>
-            <TextField id="Ans" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_kind_of_measures: e?.target?.value })} value={sendData?.If_yes_what_kind_of_measures}/>
-          </Stack>
-        </CardContent>
-      </Card>
+    {showWaterConsuDiscription?
+    <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
+    <CardContent>
+      <Typography style={{color:"#ff7424"}}>If yes,what kind of measures have you taken in the past? / ಹೌದು ಎಂದಾದರೆ, ನೀವು ಹಿಂದೆ ಯಾವ ರೀತಿಯ ಕ್ರಮಗಳನ್ನು ತೆಗೆದುಕೊಂಡಿದ್ದೀರಿ?*</Typography>
+      <Stack mt={2} mb={2}>
+        <TextField id="Ans" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_kind_of_measures: e?.target?.value })} value={sendData?.If_yes_what_kind_of_measures}/>
+      </Stack>
+    </CardContent>
+  </Card>
+  : null
+    }
+      
     
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
@@ -870,17 +915,21 @@ const handleresources=(label,event)=>{
         </CardContent>
       </Card>
 
-      
-
-      <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
-        <CardContent>
-          <Typography style={{color:"#ff7424"}}>If yes, what are they? / ಹೌದು ಎಂದಾದರೆ, ಅವು ಯಾವುವು? *</Typography>
-          <Stack mt={2} mb={2}>
-            <TextField id="Answ" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_are_they: e?.target?.value })} value={sendData?.If_yes_what_are_they}/>
-          </Stack>
-        </CardContent>
-      </Card>
+      {showHouseHoldDiscription?
+       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
+       <CardContent>
+         <Typography style={{color:"#ff7424"}}>If yes, what are they? / ಹೌದು ಎಂದಾದರೆ, ಅವು ಯಾವುವು? *</Typography>
+         <Stack mt={2} mb={2}>
+           <TextField id="Answ" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_are_they: e?.target?.value })} value={sendData?.If_yes_what_are_they}/>
+         </Stack>
+       </CardContent>
+     </Card>
     
+    : null
+
+      }
+
+     
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
@@ -921,8 +970,8 @@ const handleresources=(label,event)=>{
           </Stack>
         </CardContent>
       </Card>
-
-      <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
+{showEcoFriendlyDiscription? 
+  <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Typography style={{color:"#ff7424"}}>What do you think we should make this switch to eco-friendlly products? / ಪರಿಸರ ಸ್ನೇಹಿ ಉತ್ಪನ್ನಗಳಿಗೆ ನಾವು ಈ ಬದಲಾವಣೆಯನ್ನು ಮಾಡಬೇಕೆಂದು ನೀವು ಏನು ಯೋಚಿಸುತ್ತೀರಿ?*</Typography>
           <Stack mt={2} mb={2}>
@@ -930,6 +979,8 @@ const handleresources=(label,event)=>{
           </Stack>
         </CardContent>
       </Card>
+: null}
+      
 
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
@@ -971,15 +1022,17 @@ const handleresources=(label,event)=>{
           </Stack>
         </CardContent>
       </Card>
-    
-      <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
-        <CardContent>
-          <Typography style={{color:"#ff7424"}}>If yes,what did you do/are you doing?/ಹೌದು ಎಂದಾದರೆ, ನೀವು ಏನು ಮಾಡಿದ್ದೀರಿ/ನೀವು ಮಾಡುತ್ತಿದ್ದೀರಿ? *</Typography>
-          <Stack mt={2} mb={2}>
-            <TextField id="Answ" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_did_you_do_are_you_doing: e?.target?.value })} value={sendData?.If_yes_what_did_you_do_are_you_doing}/>
-          </Stack>
-        </CardContent>
-      </Card>
+    {showClimateChangeDiscription?
+     <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
+     <CardContent>
+       <Typography style={{color:"#ff7424"}}>If yes,what did you do/are you doing?/ಹೌದು ಎಂದಾದರೆ, ನೀವು ಏನು ಮಾಡಿದ್ದೀರಿ/ನೀವು ಮಾಡುತ್ತಿದ್ದೀರಿ? *</Typography>
+       <Stack mt={2} mb={2}>
+         <TextField id="Answ" label="Your Answer" required variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_did_you_do_are_you_doing: e?.target?.value })} value={sendData?.If_yes_what_did_you_do_are_you_doing}/>
+       </Stack>
+     </CardContent>
+   </Card>
+  :null}
+     
       
 
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
@@ -1001,15 +1054,18 @@ const handleresources=(label,event)=>{
           </Stack>
         </CardContent>
       </Card>
-    
-      <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
-        <CardContent>
-          <Typography style={{color:"#ff7424"}}>If yes,what is that resource? / ಹೌದು ಎಂದಾದರೆ, ಆ ಸಂಪನ್ಮೂಲ ಯಾವುದು?*</Typography>
-          <Stack mt={2} mb={2}>
-            <TextField id="Answ" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_is_that_resource: e?.target?.value })} value={sendData?.If_yes_what_is_that_resource}/>
-          </Stack>
-        </CardContent>
-      </Card>
+    {showpark?
+     <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
+     <CardContent>
+       <Typography style={{color:"#ff7424"}}>If yes,what is that resource? / ಹೌದು ಎಂದಾದರೆ, ಆ ಸಂಪನ್ಮೂಲ ಯಾವುದು?*</Typography>
+       <Stack mt={2} mb={2}>
+         <TextField id="Answ" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, If_yes_what_is_that_resource: e?.target?.value })} value={sendData?.If_yes_what_is_that_resource}/>
+       </Stack>
+     </CardContent>
+   </Card>
+    :
+    null}
+     
 
               
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>

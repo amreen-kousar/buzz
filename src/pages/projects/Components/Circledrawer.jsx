@@ -24,7 +24,7 @@ import {
 } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
-
+import moment from 'moment';
 Circledrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
@@ -59,7 +59,7 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
             "tb_name": clcikData?.name,
             "tb_id": scheduleData?.data?.id,
             "gf_session_type": 1,
-            "plan_date": addData?.date,
+            "plan_date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
             "gf_session_name": clcikData?.name,
           });
           

@@ -47,6 +47,9 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
        // console.log(batchState)
         
     }, [batchState,clcikData])
+    // useEffect(()=>{
+    //   setImages([])
+    // },[])
     console.log(clcikData,"<---sads",batchState)
     const getTrainingBatch = async =>{
         
@@ -126,6 +129,12 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
   .then(result => console.log(result, "result in"))
   .catch(error => console.log('error', error));
     }
+
+    //Method to delete the images that is selected 
+  const deleteImage = (index) => {
+    images.splice(index, 1);
+    setImages([...images]);
+  };
     return (
         <>
             <Drawer
@@ -252,7 +261,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
              marginLeft: '10px',
            }}
          >
-           Upload 
+           Upload  
          </Button>
          </div>
 </Card>
@@ -262,7 +271,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                             {/* photo upload end  */}
                             <Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
                                 <CardContent>
-                                    <Typography>View Photos working</Typography>
+                                    <Typography>View Photos </Typography>
                                     
                                 </CardContent>
                                 </Card>

@@ -134,7 +134,7 @@ const changeText = (e) => {
       >
        
       
-        <DialogContent> 
+        
         <Stack direction="row">
         <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
           <Toolbar>
@@ -147,73 +147,56 @@ const changeText = (e) => {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" color='inherit'>
-             Gelathis
+             Gelathis 
             </Typography>
              
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button> */}
-            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} data1={data1}/>
+            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1} clic/>
           </Toolbar>
          
 
         </AppBar>
-       
-      
         </Stack>
-        </DialogContent> 
-        
-       
-  
-      
-      
+        {/* <Card><CardContent>Project : {props.data1?.props.data1?.project_name}</CardContent></Card> */}
+       <br/><br/> 
+       <DialogContent dividers={scroll === 'paper'}>
+                    <DialogContentText
+                        id="scroll-dialog-description"
+                        tabIndex={-1}
+                    >
+                        <Box
+                            component="form"
+                            sx={{
+                                '& .MuiTextField-root': { m: 1 },
 
-       
-        <TextField id="outlined-basic" label="Search..." sx={{flex: 10}}  onChange={(e) => { changeText(e) } } InputProps={{
-          startAdornment: (
-            <Button ><InputAdornment position="start">
-              
-            <SearchIcon />
-          </InputAdornment></Button>
-            
-          ),
-        }}variant="outlined" style={{marginTop: 40, marginLeft:10,  width: 1240}}/>
-         
+                            }}
 
-        
-
-        
-        
-     
-
-        {/* <Card><CardContent>Project : {data1?.data1?.project_name}</CardContent></Card> */}
-        {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
+                        >
+        <Card><CardContent>Project : {data1?.project_name} </CardContent></Card>
+          {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
-                  
-                  
-        <Stack>
-           
-          
-         
-
-        <Card style={{marginTop:20}}>
+        <Stack> 
+       
+        <Card style={{marginTop:10}}>
         <CardContent direction={'row'}>
-          
-        <Stack direction={'row'}>
-                  
+        <Stack>
         <Typography variant="subtitle1" gutterBottom>
                                 {` ${itm?.gelathiname}`}  <Checkbox style={{marginRight: 10}} {...label} onChange={()=>{
 checkBoxData(itm)
         }} />
                             </Typography>
-
-        <br />
-
-
-        </Stack>
+                          
+    
         <Typography variant="subtitle1" gutterBottom>
                                 {` ${itm?.villagename}`}
                             </Typography>
+      
+        </Stack>
+        {/* <Typography variant="subtitle1" gutterBottom>
+                                {` ${itm?.villagename}`}
+                            </Typography> */}
         </CardContent>
         </Card>
         
@@ -231,7 +214,10 @@ checkBoxData(itm)
             {/* <h1>No Enrolled Gelathi Found</h1> */}
             </>}
            
+</Box>
+</DialogContentText>
 
+</DialogContent>
       </Dialog>
 
 
