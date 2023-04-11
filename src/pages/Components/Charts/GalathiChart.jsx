@@ -1,26 +1,8 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import "./glatharichart.css"
 import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 
-// const data = [
-//   { name: 'Group A', value: 400 },
-//   { name: 'Group B', value: 300 },
-//   { name: 'Group C', value: 300 },
-//   { name: 'Group D', value: 200 },
-//   { name: 'Group e', value: 500 },
-// ];
-// const data = [
 
-//     {name: 'villagevisit', value: '0'},
-    
-//     {name: 'circle_meet', value: '0'},
-     
-//     {name: 'circles', value: '2'},
-     
-//     {name: 'beehive', value: '0'},
-    
-//     {name: 'enroll', value: '0'},
-//     ];
 
 const COLORS = ['#454545', '#e2e3c8', '#cdd0ae', '#9c9e7f','#656755'];
 
