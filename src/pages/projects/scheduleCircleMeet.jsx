@@ -12,6 +12,7 @@ export default function scheduleCircleMeet() {
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
     const [data1, setData1] = useState('')
+    console.log("🚀 ~ file: scheduleCircleMeet.jsx:15 ~ scheduleCircleMeet ~ data1:", data1)
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from "react"
+import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
@@ -25,6 +26,7 @@ import {
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import moment from 'moment';
+import GelathiCircleForm from './GelathiCircleForm';
 Circledrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
@@ -32,7 +34,36 @@ Circledrawer.propTypes = {
 }; 
 
 export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,data1,id }){
+    console.log("🚀 ~ file: Circledrawer.jsx:35 ~ Circledrawer ~ clcikData:", clcikData)
+    console.log("🚀 ~ file: Circledrawer.jsx:35 ~ Circledrawer ~ data1:", data1)
     const [scheduleData,setScheduleData] = useState('')
+    const removegelathicircle = async(itm)=>{
+      if(confirm("Are you sure want to remove")){
+      var data = JSON.stringify({
+        "circle_id": clcikData?.id,
+        "flag": 0,
+        "gelathi_id":itm?.gelathi_id
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/updateEnrolledGelathi.php',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        circle();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+    }
       const navigate = useNavigate();
       console.log(data1,'<------data',data1)
     const [addData, setAddData] = useState({
@@ -46,9 +77,11 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
 // console.log(data,"clicked dataaaaaaaaa")
     useEffect(() => {
         VillageVisit();
+        circle();
+        
         // console.log(clcikData)
     }, [clcikData])
-
+ const [circleData,setcircleData] = useState('')
     const createGfSession = async =>{
       const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 
@@ -121,6 +154,37 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
            
       }
       console.log(scheduleData,"Scheduleddataaaaaaaaaaaaa")
+      console.log("🚀 ~ file: Circledrawer.jsx:132 ~ circle ~ data1?.project_id:", data1?.project_id,clcikData?.id)
+      const circle = async () =>{
+        const userid = await JSON.parse(localStorage.getItem('userDetails'))?.id
+          var data = JSON.stringify({
+              "circle_id": clcikData?.id,
+              "project_id": data1?.project_id,
+              "emp_id": userid
+            });
+            console.log("🚀 ~ file: Circledrawer.jsx:135 ~ circle ~ data:", data)
+             
+            
+            var config = {
+              method: 'post',
+              url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircleData.php',
+              headers: { 
+                'Content-Type': 'application/json'
+              },
+              data : data
+            };
+            
+            axios(config)
+            .then(function (response) {
+              setcircleData(response?.data)
+              console.log("🚀 ~ file: Circledrawer.jsx:145 ~ response?.data:", response?.data)
+              // console.log(response.data,"<----------setcircleDatasetcircleData");
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+           
+      }
     return(
         <>
           <Drawer
@@ -141,6 +205,47 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
                     </IconButton>
                 </Stack>
                 <Divider />
+                    <Scrollbar>
+                    <Stack spacing={10} sx={{ p: 3 }}>
+                        {(circleData?.gelathis?.length>0)?<div>
+                        {circleData?.gelathis?.map((itm) => {
+                            {console.log(itm,"hyy")}
+                return (
+
+                            <Card style={{marginTop:20,}}>
+                                <CardContent >
+                                    <Stack style={{ float:'right'}}  >
+                                        
+                                       
+                                      
+
+                                       <IconButton style={{marginLeft:70,}} onClick={()=>removegelathicircle(itm)}>
+                                        <Icon  icon="material-symbols:check-box-rounded" width={20} height={20} marginTop={20}  color="#ff7424"  />
+
+                                        </IconButton>
+                                      
+                                     
+                                       <GelathiCircleForm />
+                                     </Stack>
+                                   {console.log(circleData?.gelathis,'<-------circleData?.firstName')}
+                                  
+                                   {/* state={{ id: data1?.project_id }} */}
+                                   <Typography  variant="subtitle1" >{itm?.firstName}</Typography>
+                                    <Typography variant="subtitle1" gutterBottom>
+                                   
+                                        <Typography variant="body1" gutterBottom>{itm?.villagename}</Typography>
+                                    </Typography>
+                                
+                                   
+                                </CardContent>
+                            </Card>)
+                             })}
+                    
+                        </div>:<h5 style={{textAlign:'center',marginTop:"50%"}}>No Gelathi</h5>}
+
+
+                    </Stack>
+                </Scrollbar>
                 <Scrollbar>
                     <Stack spacing={3} sx={{ p: 3 }}>
                         <div>
@@ -181,7 +286,6 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
 
                                 </Stack>
                 </div>
-
                     </Stack>
                 </Scrollbar>
                 </Drawer>
