@@ -21,14 +21,14 @@ import { Container } from '@mui/system';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 // import SearchBar from '@mkyy/mui-search-bar';
-
+import Box from '@mui/material/Box';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-export default function ChooseGelathi({ getSearch}, data1) {
+export default function ChooseGelathi( {data1,circle}) {
   var [searchData,setSearchData]=useState('')
     const {state} = useLocation()
 console.log(data1,"state")
@@ -101,7 +101,7 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
 const changeText = (e) => {
   setSearchData(e?.target?.value)
   searchFunction(e?.target?.value)
-  // console.log(e?.target?.value,"evalueeeeeeee")
+  console.log(e?.target?.value,"evalueeeeeeee")
 }
 
 
@@ -174,6 +174,15 @@ const changeText = (e) => {
                             }}
 
                         >
+                          <TextField id="outlined-basic" label="Search..." sx={{flex: 10}}  onChange={(e) => { changeText(e) } } InputProps={{
+          startAdornment: (
+            <Button ><InputAdornment position="start">
+              
+            <SearchIcon />
+          </InputAdornment></Button>
+            
+          ),
+        }}variant="outlined" style={{marginTop: 40, marginLeft:10,  width: 1240}}/>
         <Card><CardContent>Project : {data1?.project_name} </CardContent></Card>
           {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
