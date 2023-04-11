@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   Button,
@@ -33,13 +34,18 @@ import { Link } from 'react-router-dom';
 import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
 import products from 'src/_mock/products';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function GreenSurvey() {
+
+export default function GreenSurvey(props) {
   const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState('a');
   const [age, setAge] = React.useState('');
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -63,6 +69,8 @@ export default function GreenSurvey() {
   const [products,setproducts]=React.useState('');
   const [foodconnection,setfoodconnection]=React.useState('');
   const [trees,settrees]=React.useState('');
+  const [successMessage,setsuccessMessage]=useState(false);
+ const [message, setMessage] = useState('')
   const [checked,setChecked]=React.useState({
    natural_resources:[],
    natural_resources_impacting_your_life:[],
@@ -140,6 +148,8 @@ export default function GreenSurvey() {
   const handleClose = () => {
     setOpen(false);
   };
+  
+  
 
 
   const greensurveyformdata= async() =>{
@@ -201,7 +211,12 @@ export default function GreenSurvey() {
       axios(config)
       .then(function (response) {
         setgreensurveyform(response?.data)
+        setMessage('Form saved successfully')
+        setsuccessMessage(true)
+        handleClose()
+        props?.changeState()
       })
+      
       .catch(function (error) {
         console.log(error);
       });
@@ -315,19 +330,50 @@ const handleresources=(label,event)=>{
 
   return (
     <div>
+       {/* {successMessage && (
+        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)}>
+          <Alert
+            onClose={() => {
+              setsuccessMessage(false);
+            }}
+            severity="success"
+            sx={{ width: '100%', backgroundColor: 'green', color: 'white' }}
+          >
+            {message}
+          </Alert>
+        </Snackbar>
+      )} */}
     
-       <Stack sx={{position:'absolute',right:0,float:'right'}}>
+      {/* {successMessage && (
+        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)}>
+          <Alert
+            onClose={() => {
+              setsuccessMessage(false);
+            }}
+            severity="success"
+            sx={{ width: '100%', backgroundColor: 'green', color: 'white' }}
+          >
+            {message}
+          </Alert>
+        </Snackbar>
+      )} */}
+    
+       <Stack sx={{position:'relative',right:0,float:'right'}}>
       
         <IconButton onClick={handleClickOpen}>
          <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
         </IconButton>
+        
         </Stack> 
+       
+       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+        
       <form onSubmit={(e)=>{e.preventDefault();greensurveyformdata()}}>
           <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
           
        
-                        <IconButton style={{color:"white"}} onClick={handleClose}>
+                        <IconButton style={{color:"white"}} onClick={handleClose, handleClickOpen}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
@@ -1022,9 +1068,12 @@ const handleresources=(label,event)=>{
       {/* -------------------------------- */}
     </CardContent>
   </Card>
+  
 </Grid>
 </form>
+
       </Dialog>
+     
     </div>
   );
 }

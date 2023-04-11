@@ -79,6 +79,7 @@ export default function Searchbar({ getSearch }) {
     searchData = e?.target?.value
   }
 
+  
   // ----------------------------------------------------------------------
   return (
     <RootStyle>

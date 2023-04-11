@@ -146,7 +146,7 @@ export default function PoaCreate(props) {
             severity="success"
             sx={{ width: '100%', backgroundColor: 'green', color: 'white' }}
           >
-            {message}
+          {message}
           </Alert>
         </Snackbar>
       )}
