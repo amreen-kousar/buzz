@@ -120,7 +120,7 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button> */}
-            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1} clic/>
+            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1} />
           </Toolbar>
         </AppBar>
         
