@@ -184,7 +184,7 @@ function AddProject({ viewMessage }) {
             axios(config)
                 .then(function (response) {
                     setSendData({
-                        projectId: response?.data?.project_id,
+                        project_id: response?.data?.project_id,
                         projectname: response?.data?.projectName,
                         locationid: response?.data?.locationID,
                         locationName: response?.data?.location_name

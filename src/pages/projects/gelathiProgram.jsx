@@ -112,7 +112,7 @@ export default function gelathiProgram(props) {
 
     const handleCloseFilter = () => {
         setOpenFilter(false);
-        gelathiPrograme();
+        
     };
     const handleopen=()=>{
       setFilter(true)

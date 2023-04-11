@@ -68,6 +68,9 @@ export default function FiltersHome({ isOpenFilter, onOpenFilter, onCloseFilter,
   var [selectDATA, setSelectData] = useState()
 const [calOpen,setCalOpen] = useState(false);
 const [date, setDate] = useState(new Date())
+const [dateValue,setdateValue]=useState(false);
+const [endDateValue,setendateValue]=useState(false);
+const [endDate, setEndDate] = useState(new Date())
   const filterPermissions = {
 
     Dashboard: [{ id: 2, roles: ['1', '8', '12', '3', '11', '9', '7'] }, { id: 1, roles: ['1', '8', '11', '12', '9', '3', '7'] }, { id: 3, roles: ['1', '4', '8', '5', '6', '12', '13', '11', '3', '9', '7'] }, { id: 4, roles: ['1', '8', '12', '9', '11', '3', '7'] }, { id: 5, roles: ['1', '9', '11', '4', '8', '12', '3', '7'] }, { id: 6, roles: ['13'] }, { id: 9, roles: ['1', '9', '11', '4', '6', '8', '5', '12', '13', '3', '7'] }, { id: 7, roles: ['1', '4', '9', '11', '8', '12', '3', '7'] },  { id: 12, roles: ['1', '3', '11'] }, { id: 13, roles: ['1', '11', '3'] }],
@@ -148,6 +151,9 @@ const [date, setDate] = useState(new Date())
   const handleCalendar=()=>{
     setCalOpen(true)
   }
+  const handlecloseCalendar=()=>{
+    setCalOpen(false)
+  }
 
   return (
     <>
@@ -157,16 +163,19 @@ const [date, setDate] = useState(new Date())
         onClose={() => {
           setSelectData(null)
           onCloseFilter()
+
         }}
         PaperProps={{
-          sx: { width: 400, },
+          sx: { width: 380, },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25 }}>
             Filters :  {filtersHeaders[selectDATA]} 
           </Typography>
-          <IconButton onClick={handleCalendar} sx={{float:'right',position:'absolute',right:40}}><Iconify icon="material-symbols:calendar-month" ></Iconify></IconButton>
+          {console.log(type,"filterpermissionssssssssss")}
+          {(filtersHeaders[selectDATA] !="Date Range" && type=='Dashboard')?
+          <><IconButton onClick={handleCalendar} sx={{float:'right',position:'absolute',right:40}}><Iconify icon="material-symbols:calendar-month" ></Iconify></IconButton></>:null}
          
  
           <IconButton onClick={() => {
@@ -176,19 +185,33 @@ const [date, setDate] = useState(new Date())
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
-        {calOpen && <Stack>
+        {calOpen && 
+        <><Stack>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
            <DatePicker
-   required
-    value={date}
-    inputFormat='DD/MM/YYYY'
-    onChange={(e) => {setDate(e)}}
-    renderInput={(params) => <TextField {...params} color="common" />}
-  />
+    onChange={(e) => {setDate(e),setdateValue(true)}}
+    renderInput={(params) => <TextField {...params} sx={{margin:1}} color="common" />}
+    value={date} />
+    {console.log(date,"datevalueeeeeeeeeee")}
         </LocalizationProvider>
         {/* {console.log(session,"session?.id")} */}
-        {/* <Button onClick={()=>Reschedule(session?.id)}>Save</Button> */}
-      </Stack>}
+        
+      </Stack>
+      <Stack>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+         <DatePicker
+sx={{margin:5}}
+  onChange={(e) => {setEndDate(e),setendateValue(true)}}
+  renderInput={(params) => <TextField {...params} sx={{margin:1}} color="common" />}
+  value={endDate} />
+  {console.log(endDate,"datevalueeeeeeeeeee",date)}
+      </LocalizationProvider>
+      {/* {console.log(session,"session?.id")} */}
+      {/* <Button onClick={()=>Reschedule(session?.id)}>Save</Button> */}
+    </Stack><br/>
+    {console.log('valuesstartend',dateValue,"hdhsydueyjdtu",endDateValue)}
+    <Button onClick={handlecloseCalendar} style={styles.highlightStyle} sx={{width:20,textAlign:'center',left:30}}>OK</Button></>}
+<br/>
         <Divider />
         <Scrollbar>
           <div>
@@ -208,39 +231,39 @@ const [date, setDate] = useState(new Date())
             type != 'People' && <div>
               {
                 selectDATA == 1 && <Grid>
-                  <Partners  getData={getData} selectDATA={selectDATA} />
+                  <Partners date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} getData={getData} selectDATA={selectDATA} />
                 </Grid>
               }
               {
                 selectDATA == 2 && <Grid>
-                  <Funders type={type} getData={getData} selectDATA={selectDATA} />
+                  <Funders type={type} date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} getData={getData} selectDATA={selectDATA} />
                 </Grid>
               }
               {
                 selectDATA == 3 && <Grid>
-                  <Projects getData={getData} selectDATA={selectDATA} />
+                  <Projects getData={getData} date={date} dateValue={dateValue} endDateValue={endDateValue} endDate={endDate} selectDATA={selectDATA} />
                 </Grid>
 
               }
               {
                 selectDATA == 4 && <Grid>
-                  <OperationManager type={type} getData={getData} selectDATA={selectDATA} />
+                  <OperationManager type={type} date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} getData={getData} selectDATA={selectDATA} />
                 </Grid>
 
               }
               {
                 selectDATA == 5 && <Grid>
-                  <Trainers type={type} getData={getData} selectDATA={selectDATA} />
+                  <Trainers type={type} date={date} endDate={endDate} getData={getData} dateValue={dateValue} endDateValue={endDateValue} selectDATA={selectDATA} />
                 </Grid>
               }
               {
                 selectDATA == 6 && <Grid>
-                  <GelathiFacilitator type={type} getData={getData} selectDATA={selectDATA} />
+                  <GelathiFacilitator type={type} date={date} endDate={endDate} getData={getData} dateValue={dateValue} endDateValue={endDateValue} selectDATA={selectDATA} />
                 </Grid>
               }
               {
                 selectDATA == 7 && <Grid>
-                  <Location getData={getData} selectDATA={selectDATA} onSumbit={onSumbit} />
+                  <Location getData={getData} date={date} endDate={endDate} selectDATA={selectDATA} dateValue={dateValue} endDateValue={endDateValue} onSumbit={onSumbit} />
                 </Grid>
               }
               {
@@ -250,22 +273,22 @@ const [date, setDate] = useState(new Date())
               }
               {
                 selectDATA == 10 && <Grid>
-                  <Participant getData={getData} selectDATA={selectDATA} onDateSubmit={onDateSubmit} />
+                  <Participant getData={getData} date={date} selectDATA={selectDATA} onDateSubmit={onDateSubmit} dateValue={dateValue} endDateValue={endDateValue} />
                 </Grid>
               }
               {
                 selectDATA == 12 && <Grid>
-                  <SrOperationManager getData={getData} selectDATA={selectDATA} />
+                  <SrOperationManager getData={getData} date={date} endDate={endDate} selectDATA={selectDATA} dateValue={dateValue} endDateValue={endDateValue} />
                 </Grid>
               }
               {
                 selectDATA == 13 && <Grid>
-                  <GelathisLead getData={getData} selectDATA={selectDATA} />
+                  <GelathisLead getData={getData} date={date} endDate={endDate} selectDATA={selectDATA} dateValue={dateValue} endDateValue={endDateValue} />
                 </Grid>
               }
               {
                 selectDATA == 35 && <Grid>
-                  <Customfilter getData={getData} selectDATA={selectDATA} onDatasubmit={onDatasubmit}/>
+                  <Customfilter getData={getData} selectDATA={selectDATA} onDatasubmit={onDatasubmit} />
                 </Grid>
               }
             </div>

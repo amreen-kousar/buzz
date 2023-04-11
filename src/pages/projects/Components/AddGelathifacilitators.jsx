@@ -137,7 +137,10 @@ SimpleDialog.propTypes = {
 
 export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name,operations_manager_id }) {
     
- 
+  useEffect(() => {
+    trainerList()
+}, [operations_manager_id]
+)
     const [open, setOpen] = React.useState(isOpenFilter);
     const [selectedValue, setSelectedValue] = React.useState(emails[1]);
     const [listData, setListData] = useState();
@@ -158,7 +161,7 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
         console.log(sendData, "sendDataaaa")
         var data = JSON.stringify({
             "role_id": 6,
-            "project_id": sendData?.projectId,
+            "project_id": sendData?.project_id?sendData?.project_id:sendData?.projectId,
             "operation_manager_id":operations_manager_id ,
             "pageNum": 1
         });

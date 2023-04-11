@@ -153,7 +153,7 @@ const changeText = (e) => {
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button> */}
-            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1} clic/>
+            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1} />
           </Toolbar>
          
 

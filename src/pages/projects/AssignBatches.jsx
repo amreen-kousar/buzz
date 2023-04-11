@@ -27,7 +27,7 @@ export default function AssignBatches(){
     const [batch,setBatch] = useState('');
     const [tc, setTc] = useState('');
     let [alloted,setAlloted]=useState(0)
-
+    const [item,setItem]=useState('')
    const [selected,setSelected]=useState([])
 
    const id = sessionStorage?.getItem("proId")
@@ -101,6 +101,7 @@ const projData = async => {
 const villagelist= async(itm) =>{
   console.log(itm,"itemassignedddddddddddd")
   setGl(true)
+  setItem(itm)
   var data = JSON.stringify({
     "project_id":data1?.project_id, 
     "emp_id":itm?.emp_id,
@@ -108,9 +109,6 @@ const villagelist= async(itm) =>{
   
     });
 
-
- 
-    
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchList.php',
@@ -130,17 +128,17 @@ const villagelist= async(itm) =>{
     });
     
 }
-console.log(villages,"checkedlist")
+
 const CreateBatch= async(itm) =>{
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   selected.push(itm?.training_batch_id)
   setSelected(selected)
-  console.log(id,"createbatchhhhhh")
+  console.log(itm,"createbatchhhhhh")
   var data = JSON.stringify({
      
      "project_id":data1?.project_id, 
-     "training_batch_id":id,
-      "emp_id":userid
+     "training_batch_id":itm?.training_batch_id,
+      "emp_id":item?.emp_id
     });
 console.log(alloted,selected)
       
@@ -165,12 +163,16 @@ console.log(alloted,selected)
     
 }
 
-const deletevillage=(itm)=>{
-  
-   
-  
+const changeFlag=(itm,i)=>{
+
+  console.log(itm,"villagessssssssss")
+  villages.list[i].flag=0;
+  console.log(villages.list[i],"villagelist")
+  setAlloted(alloted=>parseInt(alloted)-1) 
+     
 }
 
+console.log(alloted,"allottedddddddddddddddddd")
     return(
        
      
@@ -218,8 +220,8 @@ const deletevillage=(itm)=>{
                   <Stack mt={2} mb={2}>
              
              
-                  {villages?.list?.map((itm)=>{
-                    {console.log(itm,"villagesssssssssssssss")}
+                  {villages?.list?.map((itm,i)=>{
+                  
                     return(
                       <>
                             {/* <Typography value={itm?.training_batch_id}>{itm?.name}
@@ -234,7 +236,8 @@ const deletevillage=(itm)=>{
                         <Typography value={itm?.training_batch_id}>{itm?.name}
                         
                         
-                        {(selected.includes(itm?.training_batch_id)) || (itm?.flag=='1')?<IconButton  style={{float:'right'}} >
+                        {(selected.includes(itm?.training_batch_id)) || (itm?.flag=='1')?<IconButton  style={{float:'right'}} onClick={()=>changeFlag(itm,i)}>
+                         {/* {console.log(itm,"itemvalue")} */}
                           <Iconify icon="typcn:tick" style={{fontSize:20,color:"green"}}/>
                         </IconButton>:
                         (itm?.flag=='0')?<IconButton onClick={()=>CreateBatch(itm)} style={{float:'right'}}>

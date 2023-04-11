@@ -94,9 +94,6 @@ setShowAddBuss(false)
     setNotify(true)
   }, [])
 
- 
-
-  
 
   const assignValues = () => {
     let tempdata = {
@@ -359,6 +356,10 @@ setShowAddBuss(false)
        });
     
    }
+   useEffect(()=>{
+     
+  },[data?.operations_manager_id])
+
 
   //  naigation to add new bus 
 const [showAddBuss , setShowAddBuss] = useState(false)
@@ -657,6 +658,7 @@ const mainShowBussHandler = ()=>{
               name={name}
               onCloseFilter={handleCloseFilter}
             />}
+            {console.log(name,"namessssssssssssss",sendData)}
             {data?.operations_manager_id && <AddGelathifacilitators
               sendData={sendData}
               isOpenFilter={opengelathiFilter}

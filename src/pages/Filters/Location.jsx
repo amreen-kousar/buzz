@@ -28,8 +28,13 @@ export default function Location(props) {
     country: 1,
     state: '',
     district_id: '',
-    talaq_id: ''
+    talaq_id: '',
+    start_date:props.date,
+    end_date:props.endDate,
+    startvalue:props.dateValue,
+    endValue:props.endDateValue
   })
+  console.log(data,"locationdata")
   useEffect(() => {
     location()
   }, []
@@ -118,10 +123,12 @@ export default function Location(props) {
       districtName = districtName[0]?.name
       let talukName = taluk.filter(d => d.id == data.talaq_id)
       talukName = talukName[0]?.name
-      data = { ...data, districtName: districtName, talukName: talukName, stateName: "Karnataka" }
+      data = { ...data, districtName: districtName, talukName: talukName, stateName: "Karnataka" ,start_date:props.date,end_date:props.endDate}
       props?.onSumbit(data)
+      console.log(data,"submitteddataaaaaaaaaa")
     }
   }
+ 
   return (
     <div>
       <Card>
