@@ -33,6 +33,8 @@ export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data
     "circle_date": "",
     "gelathi_created_id": ""
   })
+
+  console.log(gelathiData ,"clicket data")
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -106,9 +108,18 @@ axios(config)
 }
   return (
     <div>
-      <Button variant="standard" onClick={()=>{open?apiHit(): handleClickOpen()}} sx={{color:'white'}}>
-       Save
-      </Button>
+      {gelathiData.length<= 0 ?
+       <Button  disabled variant="standard" onClick={()=>{
+        
+       }} sx={{color:'black'}}>
+       Save 
+      </Button> 
+     :
+   
+     <Button variant="standard" onClick={()=>{open?apiHit(): handleClickOpen()}} sx={{color:'white'}}>
+     Save 
+    </Button>}
+      
       <Dialog
         fullScreen
         open={open}
@@ -137,7 +148,7 @@ axios(config)
         <Card style={{marginTop:30}}>
           {console.log(data1?.data1,"projectname")}
             <CardContent>
-            <Typography variant="subtitle1">Project: &nbsp;{data1?.project_name}</Typography>
+            <Typography variant="subtitle1">Project: &nbsp;{data1?.project_name} </Typography>
             </CardContent>
         </Card>
         <CardContent>

@@ -59,6 +59,10 @@ export default function PoaCreate(props) {
     date2: dayjs(new Date()),
   });
 
+  //min date 
+  const today = dayjs();
+const tomorrow = dayjs().add(1, 'day');
+
   const [newForm , setNewForm] = useState(false)
   const handleChange2 = (event) => {
     console.log(event, '<--jyhfgd');
@@ -69,6 +73,8 @@ export default function PoaCreate(props) {
   const handleChange = (event) => {
     setAddData({ ...addData, date: event });
     console.log(addData?.date, 'dataaaaa');
+    // let time =event.slice(1)
+    // console.log(time , "time")
   };
 
   const handleClickOpen = () => {
@@ -81,6 +87,14 @@ export default function PoaCreate(props) {
   const handleClose = () => {
     setOpen(false);
     setNewForm(false)
+    setAddData({
+      date: dayjs(new Date()),
+      user_id: '',
+      name: '',
+      all_day: 0,
+      description: '',
+      date2: dayjs(new Date()),
+    })
   };
 
   useEffect(() => {
@@ -283,6 +297,9 @@ export default function PoaCreate(props) {
     <Stack direction={'row'}>
 
 <DateTimePicker
+ 
+ defaultValue={today}
+            minDate={today}
   required
   label="From"
   value={addData?.date}
@@ -297,6 +314,8 @@ export default function PoaCreate(props) {
    <Stack direction={'row'}>
 
 <DateTimePicker
+defaultValue={today}
+minDate={today}
   required
   label="From"
   value={addData?.date}

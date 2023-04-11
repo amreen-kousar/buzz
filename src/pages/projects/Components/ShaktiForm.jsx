@@ -310,24 +310,33 @@ const [sendData,setSendData]= React.useState({
     "assetPurchase":purchase
    
      });
+
+     if(sendData.NGO=="" || sendData.accessToCredit==""|| sendData.accessToHealtcare==""||sendData.account_business==""){
+        alert("Please Fill the form completely.")
+     }
+     else{
+
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/addSurveyData.php',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        setshaktidata(response?.data)
+        console.log("survey form data ", response)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      handleClose();
+     }
      
-     var config = {
-       method: 'post',
-       url: 'https://bdms.buzzwomen.org/appTest/addSurveyData.php',
-       headers: {
-         'Content-Type': 'application/json'
-       },
-       data : data
-     };
-     
-     axios(config)
-     .then(function (response) {
-       setshaktidata(response?.data)
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
-     handleClose();
+    
 }
 
 
@@ -361,7 +370,7 @@ const [sendData,setSendData]= React.useState({
               Survey Form
             </Typography>
             <Button autoFocus color="inherit" onClick={shakthiformdata}>
-              save
+              save 
             </Button>
           </Toolbar>
         </AppBar>
@@ -381,7 +390,7 @@ const [sendData,setSendData]= React.useState({
                     id="demo-simple-select-standard"
                     value={worthperson}
                     onChange={handleworthperson}
-                   
+                   required
                   >
                     <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer </em>

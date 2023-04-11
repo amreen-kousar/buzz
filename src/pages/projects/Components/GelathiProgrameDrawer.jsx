@@ -23,6 +23,7 @@ import {
   TextareaAutosize,
   Grid,
 } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 // components
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
@@ -53,18 +54,35 @@ export default function GelathiProgrameDrawer({
   const [showNote, setShowNote] = useState(false);
   const [gelatiNote, setGelatiNote] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
+//notes save button
+
+const [SaveBtn , setSaveBtn] = useState(false) 
+
   const [date, setDate] = useState(new Date())
   //   image
-  const [image, setImage] = React.useState([]);
+  const [isLoading, setISLoading] = useState(false)
+  // const [dataImage, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
-  const [viewImage, setViewImage] = React.useState(false);
+  // const [viewImage, setViewImage] = React.useState(false);
   const [schedule,setReschedule]=React.useState(false);
   const [locationS, setLocation] = useState();
   const [editSession,setEditsession]=useState(false);
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
 const [getImage , setGetImae] = useState([])
+
+// const [images,setImages] = useState([])
+const [photos,setPhotos] = React.useState(false)
+const [shown,setShown] = React.useState(false)
+const [images,setImages] = useState([])
+const [viewImage, setViewImage] = React.useState(false);
+
   localStorage.setItem('clickData', clcikData);
   const localstoragrClickData = localStorage.getItem('clcikData');
+
+  useEffect(()=>{
+    setImages([])
+    // setGetAllNotes([])
+  },[session.tb_id])
   useEffect(() => {
    
 
@@ -90,60 +108,57 @@ const [getImage , setGetImae] = useState([])
   console.log(clcikData, '<---------gf_session_namegf_session_name');
 
   //   image converting
+  
   function getBase64(file, callback) {
+
     const reader = new FileReader();
 
     reader.addEventListener('load', () => callback(reader.result));
 
     reader.readAsDataURL(file);
   }
-  const data = new FormData();
-  const convertImage = (e) => {
-    console.log('this is calleddddfdsfs');
-    data.append('emp_id', userid);
-    data.append('file', e.target.files[0]);
-    setImagePath([...imagePath, e.target.files[0]]);
+const convertImage = (e) => {
+    console.log("this is calleddddfdsfs")
+    // data.append('emp_id', userid);
+    // data.append('file', e.target.files[0]);
+    // setImagePath([...imagePath, e.target.files[0]])
     const imageData = URL.createObjectURL(e.target.files[0]);
-    console.log(imageData, 'files');
+    console.log(imageData, "files")
     getBase64(e.target.files[0], function (base64Data) {
-      setImage([...image, base64Data]);
-      setViewImage(true);
+      setImages([...images, base64Data])
+    //   setViewImage(true)
+    setViewImage(true);
     });
-  };
-  // sending image
-  const postImages = async () => {
-    var dataImage = [];
-    const form = new FormData();
-    form?.append('emp_id', userid);
-    //form?.append("file[]",imagePath[0])
+  }
+  // sending image we need to 
+  const UploadImages = async () => {
+   
+    var raw = JSON.stringify({
+      project_id:session.project_id,
+      gf_session_id:session.id,
+      gelathi_id:session.user_id,
+        photos: images.toString().slice(22,)
+    })
 
-    const data = imagePath?.map((itm) => {
-      form?.append('file[]', itm);
-    });
+   
     var requestOptions = {
       method: 'POST',
-      body: form,
+      body: raw,
       redirect: 'follow',
     };
-    // var config = {
-    //   method: 'post',
-    //   url: "https://bdms.buzzwomen.org/appTest/new/taAttachments.php",
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    //   body: form
-    // };
-    //console.log(config)
-    let res = fetch('https://bdms.buzzwomen.org/appTest/new/taAttachments.php', requestOptions)
+   
+    let res = fetch('https://bdms.buzzwomen.org/appTest/uploadGFSessionPhotos.php', requestOptions)
       .then((itn) => {
         console.log(itn, '<--itemgh');
-
-
+        getGFSessionData()
+        setImages([])
+        alert("Image uploaded successfully..")
+        setISLoading(false)
       })
       .catch((err) => {
         console.log(err, '<---wertyu');
       });
-    //console.log(res,"<----2werdcfvghbj")
+   
   };
   const getGFSessionData = (async) => {
     var data = JSON.stringify({
@@ -197,6 +212,8 @@ const [getImage , setGetImae] = useState([])
           // viewMessage('Project added sucessfully');
           setShowNote(false);
           getNoteHandler();
+          setSaveBtn(false)
+          alert("Note Added Successfully...")
           console.log('susscesfully added data material');
         }
       })
@@ -302,6 +319,11 @@ const [getImage , setGetImae] = useState([])
     });
     
   }
+  //Method to delete the images that is selected 
+  const deleteImage = (index) => {
+    images.splice(index, 1);
+    setImages([...images]);
+  };
 
 
 
@@ -406,11 +428,11 @@ const [getImage , setGetImae] = useState([])
                 </CardContent>
               </Card>
 
-              <Card style={{ marginTop: 20 }}>
+              {/* <Card style={{ marginTop: 20 }}>
               <div style={{ display: "flex" }}>
                   {
                     viewImage ?
-                      image.map((i, index) => {
+                    images.map((i, index) => {
                         return <div style={{ display: "flex", margin: "1rem" }}>
                           <img src={i} style={{ height: "50px", width: "70px" }} alt="hello" />
                           <Iconify
@@ -445,7 +467,7 @@ const [getImage , setGetImae] = useState([])
                         <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
                       </IconButton>
                     </Button> */}
-                     <Button onClick={postImages} 
+                     {/* <Button onClick={postImages} 
                 sx={{
                   '&:hover': {
                     backgroundColor: '#ffd796',
@@ -458,16 +480,83 @@ const [getImage , setGetImae] = useState([])
                 }}
                 >Upload</Button>
                   </div>
-                </div>
+                </div> */}
+
+                {/* Image displaying div  */}
                 {/* <Card style={{ marginTop: 20 }}>
               <CardContent>
                 <div>
-                  <img src={session?.photos ? session?.photos[0].photo1 : ''} />
-                  {console.log(session?.photos[0].photo1  , "pathindata")}
+                  <img src={session?.photos? session?.photos[0].photo1 : ''} /> 
+                   {console.log(session?.photos[0].photo1  , "pathindata")}
                 </div>
               </CardContent>
             </Card> */}
-              </Card>
+              {/* </Card>  */}
+
+              {/* IMAGE UPLOAD  */}
+              <Card style={{marginTop:20}}>
+<div style={{ display: 'flex' }}>
+                {viewImage
+                  ? images.map((i, index) => {
+                      return (
+                        <div style={{ display: 'flex', margin: '1rem' }}>
+                          <img src={i} style={{ height: '50px', width: '70px' }} alt="hello" />
+                          <Iconify
+                            onClick={() => {
+                              deleteImage(index);
+                            }}
+                            icon={'typcn:delete'}
+                            sx={{ width: 16, height: 16, ml: 1, color: 'red' }}
+                          />
+                        </div>
+                      );
+                    })
+                  : null}
+              </div>
+              <br />
+<div style={{ display: 'flex' ,marginTop:"10px" , marginBottom:"10px"}}>
+                  <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
+                    <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
+                    &nbsp;
+                    <input
+                      style={{ display: 'none' }}
+                      accept="image/png, image/gif, image/jpeg"
+                      id="inputTag"
+                      type="file"
+                      onChange={(e) => {
+                        convertImage(e);
+                      }}
+                    />
+                  </label>
+                  Add Photos 
+                  <br />
+         
+           <Button
+           onClick={UploadImages}
+           
+           sx={{
+             '&:hover': {
+               backgroundColor: '#ffd796',
+             },
+             color: '#ff7424',
+             backgroundColor: '#ffd796',
+             marginLeft: '10px',
+           }}
+         >
+           Upload 
+         </Button>
+         </div>
+         {/* <Card style={{ marginTop: 20 }}>
+              <CardContent>
+               
+             {isLoading? <CircularProgress /> : 
+                <div>
+                  <img src={eventData?.photo1 ? eventData?.photo1 : ''} />
+                </div>
+                }
+              </CardContent>
+            </Card> */}
+</Card>
 
               <Card style={{ marginTop: 20 }}>
                 <CardContent>
@@ -499,16 +588,71 @@ const [getImage , setGetImae] = useState([])
                       variant="outlined"
                       onChange={async (e) => {
                         let note = await e?.target?.value;
+                        if(note.length <= 0){
+                          alert("Text cannot be empty")
+                          setSaveBtn(false)
+                        }
+                        else{
+                          setGelatiNote(e?.target?.value);
+                          setSaveBtn(true)
+                        }
                         setGelatiNote(e?.target?.value);
                         console.log('note', gelatiNote);
                       }}
                     ></TextField>
-                    <Button
+                    {SaveBtn? 
+                    
+                    <>
+                     <Button
                       style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
                       onClick={noteSubmitHandler}
                     >
                       Save
+                    </Button> 
+                    
+                    <Button
+                  
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                  onClick={()=>{
+                   setShowNote(false)
+                  }}
+                >
+                  {/* <Cancel></Cancel> */}
+                  <Button
+                  
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                  onClick={()=>{
+                   setShowNote(false)
+                  }}
+                >
+                  Cancel
+                </Button> 
+                </Button> 
+                    </>
+                    :
+                    <>
+                  
+                      <Button
+                      disabled
+                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                      onClick={()=>{
+                        alert("Text cannot be empty")
+                      }}
+                    >
+                      Save
                     </Button>
+                     <Button
+                  
+                     style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                     onClick={()=>{
+                      setShowNote(false)
+                     }}
+                   >
+                     Cancel
+                   </Button> 
+                   </>
+                   }
+                  
                   </Card>
                 </div>
               ) : null}
