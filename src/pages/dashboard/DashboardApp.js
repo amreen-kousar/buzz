@@ -75,18 +75,19 @@ export default function DashboardApp() {
     apiHit();
   }, []);
 
-  const apiHit = async (id, i, g) => {
+  const apiHit = async (id, i, g,date1,date2) => {
+    console.log(date1,date2,"date 1 and date 2 ",g)
     setLoader(true)
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     const data = {
-      end_date: g === "date" ? i : '',
+      end_date: (g === "date")? i: (g==='country')? moment(date2.$d)?.format('YYYY-MM-DD'): '',
       role_id: role,
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       trainerId: g ? "" : i === 5 ? id?.id : '',
       emp_id: userid,
-      start_date: g === "date" ? id : '',
+      start_date: (g === "date")? id: (g==='country')? moment(date1.$d)?.format('YYYY-MM-DD'): '',
       somId: g ? "" : i === 12 ? id?.id : '',
       gflId: g ? "" : i === 13 ? id?.id : '',
       funder_id: g ? "" : i === 2 ? id?.id : '',
@@ -182,17 +183,13 @@ export default function DashboardApp() {
   }
 
   const onSumbit = (e, i) => {
-    
+    console.log(e,"locationvaluesssssssssssss")
     setSelected({ type: 'Location', name: `State : ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
     handleCloseFilter()
-    // {console.log(e,"locationvalues",e?.date.$d)}
-    // if(e?.dateValue || e?.endDateValue)
-    // {
-    //   console.log("locationdateeeeee")
-  //  Dateapihit(e?.district_id, e?.talaq_id, "country",e?.date,e?.endDate)
-  // }
-  // else{
-    apiHit(e?.district_id, e?.talaq_id, "country")
+    
+ 
+    apiHit(e?.district_id, e?.talaq_id,"country",e?.start_date,e?.end_date)
+    console.log(e?.start_date,e?.end_date,"datesssssssssssssss")
   
     }
 

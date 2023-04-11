@@ -168,7 +168,8 @@ const changeFlag=(itm,i)=>{
   console.log(itm,"villagessssssssss")
   villages.list[i].flag=0;
   console.log(villages.list[i],"villagelist")
-  setAlloted(alloted=>parseInt(alloted)-1)    
+  setAlloted(alloted=>parseInt(alloted)-1) 
+     
 }
 
 console.log(alloted,"allottedddddddddddddddddd")

@@ -37,6 +37,7 @@ export default function Team(props) {
     var [selectedAll, setSelectedAll] = useState(false)
     const [comments, setComments] = useState('')
     const [approve,setapprove]=useState('');
+    const [statusValue,setStatus]=useState([]);
     const [reject,setreject]=useState('');
     const [verifylist,setverifylist]=useState('');
     useEffect(() => {
@@ -155,11 +156,12 @@ console.log(teamTAData,"responseeeeeeeeeeeeeeeeeeeeee")
 
     const verifyTA = () => {
         handleCloseFilter()
+        const idvalue = JSON.parse(localStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
             "ta_id": checkedData,
-            "user_id": localStorage?.getItem('userDetails')?.id,
+            "user_id": idvalue,
             "extra_comments": comments,
-            "status": 1
+            "status": 4
         });
         console.log(data)
         var config = {
@@ -181,12 +183,14 @@ console.log(teamTAData,"responseeeeeeeeeeeeeeeeeeeeee")
             });
 
     }
-    const approveTA = () => {
+    const approveTA = (e) => {
+        handleCloseFilter()
+        const idvalue = JSON.parse(localStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
             "ta_id": checkedData,
-            "user_id": localStorage?.getItem('userId'),
+            "user_id":idvalue,
             "extra_comments": comments,
-            "status": 1
+            "status": e
         });
         console.log(data)
         var config = {
@@ -207,33 +211,7 @@ console.log(teamTAData,"responseeeeeeeeeeeeeeeeeeeeee")
             });
 
     }
-    // const rejectTA = () => {
-    //     var data = JSON.stringify({
-    //         "ta_id": checkedData,
-    //         "user_id": localStorage?.getItem('userId'),
-    //         "extra_comments": comments,
-    //         "status": 2
-    //     });
-    //     console.log(data)
-    //     var config = {
-    //         method: 'post',
-    //         url: 'https://bdms.buzzwomen.org/appTest/new/approveTa.php',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         data: data
-    //     };
-    //     axios(config)
-    //         .then(function (response) {
-    //             console.log(response, "reject response")
-    //             setreject(response?.data)
 
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         });
-
-    // }
     
     console.log(reject,"rejecteddata");
     console.log(approve,"approvedata");
@@ -249,7 +227,9 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
     return (
         <div>
             {
+          
                 teamMembersData.map((itm, i) => {
+                   
                     return <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "f7f7f7", cursor: "pointer", padding: '0.5rem' }} >
                         <Grid container spacing={2} >
                             <Grid onClick={() => { teamMemberTravelAllowance(itm, i) }} item xs={8}>
@@ -257,13 +237,16 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.fullName}</b><br>
                                 </br>
                                 <Typography variant="body" gutterBottom > <b>{itm?.designation}</b></Typography>
+                                {console.log(itm,"itemsssssssss")}
                             </Grid>
                             <Grid item xs={4}>
                                 <Iconify onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
-                                <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
+                                {(itm?.status==0)?<Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>:
+                                <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "green" }} icon="mdi:tick-circle"></Iconify>}
                             </Grid>
                         </Grid>
                     </Card>
+                      
                 })
             }
 
@@ -293,28 +276,31 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
                         id="scroll-dialog-description"
                         tabIndex={-1}
                     > */}
-                        <div>
+                        
+                        {( teamTAData.filter(e=>e?.status=='0')).length>0 &&<div>
                             <Checkbox
                                 style={{ color: "#f97d3f" }}
                                 checked={selectedAll}
                                 onChange={() => { setToCheckedData(null, null) }}
                             />
                             Select All
-                        </div>
+                        </div>}
                         {
                             teamTAData.map((itm, i) => {
-                                {console.log(itm?.status,"status")}
+                            //    {console.log(itm?.status,"status")}
+                            //     statusValue.push(itm?.status)
+                            //     setStatus(statusValue)
+                                // {console.log(statusValue,"statusvalues")}
                                 return <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: '0.5rem', height: "10vh" }} >
                                     <Grid container spacing={2}>
                                         <Grid item sm={11}>
-                                            <Checkbox
+                                            {(itm?.status==0)?<Checkbox
                                                 style={{ color: "#f97d3f" }}
                                                 item={itm}
-
                                                 value={itm.id}
                                                 checked={checkedData.includes(itm.id)}
                                                 onChange={() => { setToCheckedData(itm, i) }}
-                                            />
+                                            />:null}
                                             <b style={{ color: "#3c88ed" }} >{itm?.Ta_Name}</b>
                                             {(itm?.status==4)?<Typography style={{color:'green',float:'right'}}>Verified</Typography>:(itm?.status==0)?<Typography style={{color:'red',float:'right'}}>Pending</Typography>:(itm.status==1)?<Typography style={{color:'green',float:'right'}}>Approved</Typography>:<Typography style={{color:'red',float:'right'}}>Rejected</Typography>}
                                         </Grid>
@@ -335,11 +321,11 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
                             fullWidth
                         />
 
-                        
-                        {(userrole==3)?
+                        {console.log(teamTAData,"teamdata")}
+                        {(userrole==3)&&( teamTAData.filter(e=>e?.status=='4')).length>0 &&
                         <div style={{display:'flex'}}><Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(1)}>Approve</Button>&nbsp;&nbsp;
-                        <Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(2)}>Reject</Button></div>:
-                        (userrole==4)?<Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Submit</Button>:null}</form>
+                        <Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(2)}>Reject</Button></div>}
+                      {(userrole==4)&& ( teamTAData.filter(e=>e?.status=='0')).length>0 &&<Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Verify</Button>}</form>
 
                     {/* </DialogContentText>
                 </DialogContent> */}

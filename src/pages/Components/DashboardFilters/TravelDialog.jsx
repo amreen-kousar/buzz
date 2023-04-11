@@ -264,9 +264,9 @@ axios(config)
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
-      "emp_id": "329",
-      "role_id": "5",
-      "date": "2022/08/11"
+      "emp_id": userid,
+     
+      
     });
 
     var config = {
