@@ -416,19 +416,19 @@ const handlecheckin = () => {
                     </Button>
                   )}
                   {console.log(eventdetails, 'locationnnnnnnnn')}
-                  <Typography variant="body1">Checkin Time:{eventData?.check_in} </Typography>
-                  <Typography>Checkin Location: {eventData?.check_in_location} </Typography>
-                  <Typography>Checkout Time : {eventData?.check_out}</Typography>
+                  <Typography variant="body1"><span>Checkin Time</span><span style={{marginLeft:"2.8rem"}}>:</span>{eventData?.check_in} </Typography>
+                  <Typography> <span>Checkin Location</span><span style={{marginLeft:"1.1rem"}}>:</span>{eventData?.check_in_location} </Typography>
+                  <Typography>  <span>Checkout Time</span><span style={{marginLeft:"2.2rem"}}>:</span> {eventData?.check_out}</Typography>
                   {console.log(eventdetails.check_in , eventdetails.check_in ,"eventdetails data check out ")}
                   {console.log(eventData.check_in , eventData.check_in ,"event datacheck out ")}
-                  <Typography>Checkout Location: {eventData?.check_out_location}</Typography>
+                  <Typography> <span>Checkout Location</span><span style={{marginLeft:".5rem"}}>:</span> {eventData?.check_out_location}</Typography>
                 </CardContent>
               </Card>
             ) : (
               <Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
                 <CardContent>
                   <Typography style={{ textAlign: 'center' }}>
-                    <u>CheckIn/Out Status</u>
+                    <u >CheckIn/Out Status</u>
                   </Typography>
                   <br />
 
