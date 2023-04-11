@@ -209,7 +209,7 @@ console.log(response.data.list , "busses data")
 
   return (
     <Page title="User">
-      <Searchbar getSearch={(e) => searchFunction(e)} />
+      <Searchbar id="search-bar" getSearch={(e) => searchFunction(e)} />
       <Container>
         <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
           <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
@@ -221,7 +221,7 @@ console.log(response.data.list , "busses data")
             {selected?.type ? " Bus List" : "All Bus List "}&nbsp;({count})
 
           </Typography>
-          <Button style={{ float: "right", color: '#ff7424' }}
+          <Button id="bus-list" style={{ float: "right", color: '#ff7424' }}
             sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',
@@ -313,9 +313,12 @@ console.log(response.data.list , "busses data")
         })}
       </Container>
 
-      {userAccess.includes(userIdCheck) && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+      {userAccess.includes(userIdCheck) &&
+       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <Addbus />
-      </Stack>}
+     
+      </Stack>
+      }
 
     </Page>
   );

@@ -26,6 +26,7 @@ import {
   Card,
   CardContent,
 } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress'
 import is from 'date-fns/locale/is';
 // components
 
@@ -87,7 +88,10 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
 
   console.log(" event id in ", eventdetails.event_id)
   console.log(clickedItemData , "event data ")
+
+  const [isLoading, setISLoading] = useState(false)
   const postImages = async () => {
+    setISLoading(true)
     var dataImage = JSON.stringify({
       "event_id":eventdetails.event_id , 
      
@@ -103,6 +107,9 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
     let res = fetch('https://bdms.buzzwomen.org/appTest/uploadEventPhotos.php', requestOptions)
       .then((itn) => {
         console.log(itn, '<--itemgh');
+        setImage([])
+        alert("Image uploaded successfully..")
+        setISLoading(false)
       })
       .catch((err) => {
         console.log(err, '<---wertyu');
@@ -515,9 +522,11 @@ const handlecheckin = () => {
 
             <Card style={{ marginTop: 20 }}>
               <CardContent>
+               
+             {isLoading? <CircularProgress /> : 
                 <div>
                   <img src={eventData?.photo1 ? eventData?.photo1 : ''} />
-                </div>
+                </div>}
               </CardContent>
             </Card>
           </div>

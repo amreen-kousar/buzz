@@ -77,11 +77,12 @@ var config = {
 
 axios(config)
 .then(function (response) {
- 
+ alert("Target Added Successfully")
     console.log(JSON.stringify(response.data));
 })
 .catch(function (error) {
   console.log(error);
+  alert("Something went wrong!")
 });
 
 }
@@ -94,7 +95,7 @@ axios(config)
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Assign Targets   <IconButton sx={{float:'right',color:'#ff7424',position:'absolute',right:50}} onClick={createTrainerTarget} title="save"><Iconify icon="material-symbols:save"></Iconify></IconButton>
+                    Assign Targets    <IconButton sx={{float:'right',color:'#ff7424',position:'absolute',right:50}} onClick={createTrainerTarget} title="save"><Iconify icon="material-symbols:save"></Iconify></IconButton>
                 </Typography> 
          
            
@@ -121,12 +122,16 @@ axios(config)
                 
                  {trainersTargets?.target_list?.map((item,index)=>{
                   return(
-                   <> <Typography value={item?.emp_id}>
+                   <>
+                   <div style={{marginLeft:"20px"}}>
+                   <Typography value={item?.emp_id}>
                        {item?.emp_name}
                     </Typography>
+                    </div> 
                     {/* {(item?.emp_target=="")?<TextField sx={{ml:5,mt:1,mb:2}} placeholder="Targets" typeof="number" onChange={(e) => { setCreateTarget({ ...createTarget, emp_target: e?.target?.value }) }} value={item?.emp_target} />:<TextField sx={{ml:5,mt:1,mb:2}} placeholder="Targets" value={item?.emp_target} />} */}
-                    <TextField sx={{ml:5,mt:1,mb:2}} placeholder="Targets" onChange={(e) => { assign(e?.target?.value,index) }} defaultValue={createTarget[index]?.emp_target}  /> 
-                      </>
+                    <TextField type="number" sx={{ml:5,mt:1,mb:2}} placeholder="Targets" onChange={(e) => { assign(e?.target?.value,index) }} defaultValue={createTarget[index]?.emp_target}  /> 
+                      
+                   </>
                   )}
                  )}
                   

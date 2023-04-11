@@ -355,6 +355,8 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
         <TextField fullWidth size="small" id="Work"  margin="dense"
           value={editData?.workNum}
           onChange={(e) => { setEditData({ ...editData, workNum: e?.target?.value }) }}
+          type="number"
+          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
           label="Work" variant="outlined" color="common" />
           
       </Grid>
