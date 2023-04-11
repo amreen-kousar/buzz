@@ -61,7 +61,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
     contactNum: profileData?.contactNum,
     workNum: profileData?.workNum,
     address: profileData?.address,
-    address1: profileData?.address1,
+    address3: profileData?.address3,
     address2: profileData?.address2,
     empRole: profileData?.role_name,
     supervisorId: profileData?.supervisorId,
@@ -84,7 +84,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       contactNum: profileData?.contactNum,
       workNum: profileData?.workNum,
       address: profileData?.address,
-      address1: profileData?.address1,
+      address3: profileData?.address3,
       address2: profileData?.address2,
       empRole: profileData?.role_name,
       supervisorId: profileData?.supervisorId,
@@ -105,7 +105,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };
-  
+  console.log(profileData?.address3,"addresssssssss")
   const editProfile = async => {
     // console.log(editData,"<----editProfileeditProfile")
     handleCloseClick();
@@ -124,7 +124,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "contactNum": editData?.contactNum,
       "workNum": editData?.workNum,
       "address": editData?.address,
-      "address1": editData?.address1,
+      "address3": editData?.address3,
       "address2": editData?.address2,
       "empRole": editData?.empRole,
       "supervisorId": editData?.supervisorId,
@@ -256,7 +256,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
             )
           }
           </CardContent>
-          </Card>:<>No data</>}
+          </Card>:<span style={{textAlign:'center'}}>No data</span>}
   </div>
 
 
@@ -374,8 +374,8 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       </Grid>
       <Grid item mb={2}>
         <TextField fullWidth size="small" id="Address1"
-          value={editData?.address1}
-          onChange={(e) => { setEditData({ ...editData, address1: e?.target?.value }) }}
+          value={editData?.address3}
+          onChange={(e) => { setEditData({ ...editData, address3: e?.target?.value }) }}
           label="Address1" variant="outlined" color="common" />
       </Grid>
       <Grid item mb={2}>

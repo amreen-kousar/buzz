@@ -133,24 +133,24 @@ console.log(profileData,"infoooooooo")
               <Card style={{ width: "auto" }}>
                 <CardContent>
                   <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#999999' }}>
-                    Contact Information
+                    Contact Information 
                   </Card>
                   <br />
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                    Mobile Number:<span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.contactNum}</span>
+                    Mobile Number &nbsp;: &nbsp;<span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.contactNum}</span>
 
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                    Work: <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.workNum} </span>
+                    Work &nbsp;:  &nbsp;<span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.workNum} </span>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                    Email:<span style={{ fontWeight: 100, color: '#444444' }}> {profileData?.officeMailId}</span>
+                    Email &nbsp;: &nbsp;<span style={{ fontWeight: 100, color: '#444444' }}> {profileData?.officeMailId}</span>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                    Address:<span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.address}</span>
+                    Address &nbsp;: &nbsp;<span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.address}</span>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                    PinCode:<span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.pincode}</span>
+                    PinCode &nbsp;: &nbsp;<span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.pincode}</span>
                   </Typography>
                 </CardContent>
               </Card>

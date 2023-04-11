@@ -58,6 +58,8 @@ export default function PoaCreate(props) {
     description: '',
     date2: dayjs(new Date()),
   });
+
+  const [newForm , setNewForm] = useState(false)
   const handleChange2 = (event) => {
     console.log(event, '<--jyhfgd');
 
@@ -72,10 +74,13 @@ export default function PoaCreate(props) {
   const handleClickOpen = () => {
     setOpen(true);
     setScroll(scrollType);
+    setNewForm(true)
+    console.log("showing ")
   };
 
   const handleClose = () => {
     setOpen(false);
+    setNewForm(false)
   };
 
   useEffect(() => {
@@ -111,6 +116,14 @@ export default function PoaCreate(props) {
           setsuccessMessage(true)
           handleClose()
           props?.changeState()
+          setAddData({
+            date: dayjs(new Date()),
+            user_id: '',
+            name: '',
+            all_day: 0,
+            description: '',
+            date2: dayjs(new Date()),
+          })
         }
         else {
           setValue(true)
@@ -238,7 +251,7 @@ export default function PoaCreate(props) {
                 <TextField
                   required
                   fullWidth
-                  value={addData?.name}
+                  value={addData.name}
                   type="text"
                   onChange={(e) => {
                     //  if(numrex.test(e?.target?.value)){
@@ -252,8 +265,9 @@ export default function PoaCreate(props) {
                   variant="outlined"
                   color="common"
                 />
+                <br/><br/>
                 <Stack direction={'row'}>
-                  <Typography>All Day</Typography>
+                  <Typography>All Day</Typography><br/>
                   <Switch value={addData?.all_day} onChange={(e) => {
                      setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) 
                      if(addData?.all_day === 1){
@@ -262,7 +276,7 @@ export default function PoaCreate(props) {
                      else
                      setShowDate(true)
                      }} {...label} />
-                </Stack>
+                </Stack><br/>
 {
   showDate? 
   <>
@@ -318,7 +332,7 @@ export default function PoaCreate(props) {
                     Description
                   </Typography>
                 </Stack>
-
+<br/>
                 <Stack>
                   <TextField
                     id="outlined-basic"

@@ -94,11 +94,11 @@ axios(config)
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Assign Targets
-                </Typography>
+                    Assign Targets   <IconButton sx={{float:'right',color:'#ff7424',position:'absolute',right:50}} onClick={createTrainerTarget} title="save"><Iconify icon="material-symbols:save"></Iconify></IconButton>
+                </Typography> 
+         
            
             </Stack>
-            <Button onClick={createTrainerTarget}>Save</Button>
             <TableContainer >
                   <Table aria-label="customized table">
                     <TableBody>
@@ -109,12 +109,12 @@ axios(config)
                         <TableCell>Taluk &nbsp;:&nbsp;{trainersTargets?.location_name}</TableCell>
                       </TableRow>
                       <TableRow >
-                        <TableCell>Partner &nbsp; : &nbsp;{trainersTargets?.partnerName}</TableCell>
+                        <TableCell>Partner &nbsp;:&nbsp;{trainersTargets?.partnerName}</TableCell>
                       </TableRow>
                      
                     </TableBody>
                   </Table>
-                </TableContainer>
+                </TableContainer><br/>
                 <Typography gutterBottom style={{textAlign:'center'}}>
                      Total Targets : {trainersTargets?.training_target}
                 </Typography>
