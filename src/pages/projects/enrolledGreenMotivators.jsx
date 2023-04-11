@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import axios from 'axios';
 import { Card, Stack, Chip, Container, Typography,CardContent, Grid, IconButton, Button} from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
@@ -14,12 +14,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 export default function enrolledGreenMotivatorsList() {
     const {state} = useLocation()
     console.log("nwewepewrwe",state)
     const [clcikData, setClickData] = useState()
     const [green , setGreen] = useState('')
      const [filterData, setFilterData] = useState({})
+     const [openMessage, setOpenMessage] = useState(false);
+     const [message, setMessage] = useState('')
     var [selected, setSelected] = useState(null)
     const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')
@@ -28,6 +32,7 @@ export default function enrolledGreenMotivatorsList() {
         enrolledGreenMotivators();
     }, []
     )
+    const [successMessage,setsuccessMessage]=useState(false);
 
     const [openFilter, setOpenFilter] = useState(false);
     const [filter,setFilter]=useState(false);
@@ -126,6 +131,9 @@ export default function enrolledGreenMotivatorsList() {
     setSearch(search)
     enrolledGreenMotivators();
 }
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const getData = (itm, i) => {
   console.log(itm,"getdata")
@@ -159,6 +167,8 @@ const getData = (itm, i) => {
   .then(function (response) {
     console.log(JSON.stringify(response.data));
     enrolledGreenMotivators()
+    // setMessage('Poa deleted successfully')
+    // setOpenMessage(true)
   })
   .catch(function (error) {
     console.log(error);
@@ -169,8 +179,30 @@ const getData = (itm, i) => {
 
   const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     return (
+      // {openMessage &&
+      //   <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+      //     <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
+      //       {message}
+      //     </Alert>
+      //   </Snackbar>
+      // }
+
+
 
         <Container><Searchbar getSearch={(e) => searchFunction(e)} />
+         {successMessage && (
+        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)}>
+          <Alert
+            onClose={() => {
+              setsuccessMessage(false);
+            }}
+            severity="success"
+            sx={{ width: '100%', marginLeft:'250%' }}
+          >
+            {message}
+          </Alert>
+        </Snackbar>
+      )}
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
                     <Link to="/dashboard/projects/project">

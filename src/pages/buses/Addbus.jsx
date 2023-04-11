@@ -321,11 +321,11 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <Toolbar sx={{ color: "#ffffff", backgroundColor: "#ff7424" }}>
-                    <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                <Toolbar id="add-bus-toolbar" sx={{ color: "#ffffff", backgroundColor: "#ff7424" }}>
+                    <IconButton id="start-icon-button" edge="start" color="inherit" onClick={handleClose} aria-label="close">
                         <CloseIcon />
                     </IconButton>
-                    <Typography sx={{ ml: 2, flex: 1, color: "#ffffff" }} variant="h6" component="div" >
+                    <Typography id="add-new-bus" sx={{ ml: 2, flex: 1, color: "#ffffff" }} variant="h6" component="div" >
                         Add New Bus
                     </Typography>
                 </Toolbar>
@@ -334,7 +334,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                         id="scroll-dialog-description"
                         tabIndex={-1}
                     >
-                        <Box
+                        <Box id="form"
                             component="form"
                             sx={{
                                 '& .MuiTextField-root': { m: 1 },
@@ -350,8 +350,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                               */}
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        inputFormat="DD/MM/YYYY"
+                                    <DatePicker id="register-date"
+                                        inputFormat="YYYY/MM/DD"
                                         views={["year", "month", "day"]}
                                         label="Register Date"
                                         // deefaultValue={date}
@@ -365,10 +365,10 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                             </Stack>
 
 
-                            <TextField fullWidth id="outlined-basic" label="Engine Number" defaultValue={addBus.engine_number} onChange={(e) => { setAddBus({ ...addBus, engine_number: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Chassis Number" defaultValue={addBus.chassis_number} onChange={(e) => { setAddBus({ ...addBus, chassis_number: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Insurance Number" defaultValue={addBus.insurance_number} onChange={(e) => { setAddBus({ ...addBus, insurance_number: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Insurance Company" defaultValue={addBus.insurance_company} onChange={(e) => { setAddBus({ ...addBus, insurance_company: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="engine-number" label="Engine Number" defaultValue={addBus.engine_number} onChange={(e) => { setAddBus({ ...addBus, engine_number: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="chassis-number" label="Chassis Number" defaultValue={addBus.chassis_number} onChange={(e) => { setAddBus({ ...addBus, chassis_number: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="insurance-number" label="Insurance Number" defaultValue={addBus.insurance_number} onChange={(e) => { setAddBus({ ...addBus, insurance_number: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="insurance-company" label="Insurance Company" defaultValue={addBus.insurance_company} onChange={(e) => { setAddBus({ ...addBus, insurance_company: e.target.value }) }} variant="outlined" color="common" /><br />
 
 
                             {/* <TextField fullWidth id="outlined-basic" label="Insurance Start Date" type="date" InputLabelProps={{
@@ -377,8 +377,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        inputFormat="DD/MM/YYYY"
+                                    <DatePicker id ="insurance-start"
+                                        inputFormat="YYYY/MM/DD"
                                         views={["year", "month", "day"]}
                                         label="Insurance Start Date"
                                         // defaultValue={date}
@@ -398,8 +398,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        inputFormat="DD/MM/YYYY"
+                                    <DatePicker id="insurance-end"
+                                        inputFormat="YYYY/MM/DD"
                                         views={["year", "month", "day"]}
                                         label="Insurance End Date"
                                         // defaultValue={date}
@@ -420,8 +420,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        inputFormat="DD/MM/YYYY"
+                                    <DatePicker id="last-service"
+                                        inputFormat="YYYY/MM/DD"
                                         views={["year", "month", "day"]}
                                         label="Last Service Date"
                                         // defaultValue={date}
@@ -441,8 +441,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        inputFormat="DD/MM/YYYY"
+                                    <DatePicker id="next-service"
+                                        inputFormat="YYYY/MM/DD"
                                         views={["year", "month", "day"]}
                                         label="Next Service Date"
                                         // defaultValue={date}
@@ -463,8 +463,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        inputFormat="DD/MM/YYYY"
+                                    <DatePicker id="fitness-certificate"
+                                        inputFormat="YYYY/MM/DD"
                                         views={["year", "month", "day"]}
                                         label="Fitness Certificate"
                                         // defaultValue={date}
@@ -485,8 +485,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20,borderColor:'none' }} color="common">
                                
-                                    <DatePicker
-                                        inputFormat="DD/MM/YYYY"
+                                    <DatePicker id="permit-details"
+                                        inputFormat="YYYY-MM-DD"
                                         views={["year", "month", "day"]}
                                         label="Permit Details"
                                         // defaultValue={date}
@@ -507,8 +507,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                       */}
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        inputFormat="DD/MM/YYYY"
+                                    <DatePicker id="emission-date"
+                                        inputFormat="YYYY/MM/DD"
                                         views={["year", "month", "day"]}
                                         label="Emission Date"
                                         defaultValue="DD/MM/YYYY"
@@ -526,7 +526,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="contained" onClick={submitBus} sx={{
+                    <Button id="add-button" variant="contained" onClick={submitBus} sx={{
                         '&:hover': {
                             backgroundColor: '#ffd796',
                             color: '#ff7424'
