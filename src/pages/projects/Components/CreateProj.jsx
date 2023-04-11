@@ -88,16 +88,15 @@ const [isReload , setIsReload]= useState(false)
 
 setShowAddBuss(false)
     partnerList();
-    busList();
+   
     teamList();
     driverList();
     setNotify(true)
   }, [])
 
-  useEffect(()=>{
+ 
+
   
-    setShowAddBuss(false)
-  },[isReload])
 
   const assignValues = () => {
     let tempdata = {
@@ -366,7 +365,8 @@ const [showAddBuss , setShowAddBuss] = useState(false)
 const [showbusForm ,setShowBusForm] =useState(true)
 
 const mainShowBussHandler = ()=>{
-  setShowBusForm(false)
+  setShowBusForm(true)
+  console.log(showbusForm, "showbusForm mainShowBussHandler")
   setShowAddBuss(false)
   setIsReload(!isReload)
 }
@@ -374,9 +374,17 @@ const mainShowBussHandler = ()=>{
   const addBusHandler =()=>{
     console.log("i calling")
     setShowAddBuss(true)
-    console.log(showAddBuss,"i calling")
+    console.log(showAddBuss,"showAddBuss")
    
   }
+  useEffect(()=>{
+    busList();
+  }, [showAddBuss])
+
+  // useEffect(()=>{
+  
+  //   setShowAddBuss(false)
+  // },[isReload])
   //  const navigateToAddBus =()=>{
   //   navigate('/dashboard/projects/addBuss', {
   //     state: {

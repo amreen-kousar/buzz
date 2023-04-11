@@ -54,13 +54,15 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
             },
             data: data
         };
+        showBussHandler()
+
 
         axios(config)
             .then(function (response) {
                 console.log(response.data)
                 if (response.data.code == 200) {
                     setOpenAddBus(false)
-                    showBussHandler()
+                    
                     console.log("calling the api ")
                 }
             })
@@ -73,7 +75,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
     return (
         <div>
-            {showAddBuss ? <>
+            {showAddBuss ? 
+            <>
           
                 <Dialog
                 open={createProj}
