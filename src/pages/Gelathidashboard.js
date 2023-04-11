@@ -48,7 +48,7 @@ export default function Gelathidashboard() {
    
     console.log("🚀 ~ file: Gelathidashboard.js:47 ~ GathathiGraphDataFormating ~ data:", data)
     
-    const filteredArr = data.map(({villagevisit, circle_meet, circles,beehive,enroll}) => ({villagevisit, circle_meet, circles,beehive,enroll}));
+    const filteredArr = data.map(({villagevisit, circle_meet, circles,beehive,enroll}) => ({Villagevisit:villagevisit, Circlemeetings:circle_meet, TotalCircles:circles,BeehiveVisits:beehive,EnrolledGelathis:enroll}));
     console.log("🚀 ~ file: Gelathidashboard.js:52 ~ GathathiGraphDataFormating ~ filteredArr:", filteredArr)
     let dataKeys = Object.keys(filteredArr[0]);
     let tempData=[]

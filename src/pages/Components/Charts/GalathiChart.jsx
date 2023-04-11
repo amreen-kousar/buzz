@@ -49,10 +49,11 @@ const GalathiChart = (props) => {
           <Legend layout="vertical" verticalAlign="middle" align="right" />
           <Tooltip  
             isAnimationActive={false}
-            cursor={{fill: 'transparent'}}
+            cursor={{fill: 'transparent', border: 'none',backgroundColor: 'none',}}
             contentStyle={{
-              backgroundColor: '#333',
-              border: 'none',
+              backgroundColor: 'none',
+              boxShadow: 'none',
+              border: '0px',
               borderRadius: '10px',
               padding: '10px',
               color: '#fff'
