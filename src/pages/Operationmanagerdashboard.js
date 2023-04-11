@@ -10,6 +10,7 @@ import Chip from '@mui/material/Chip';
 import { AppWidgetSummary } from '../sections/@dashboard/app';
 import DashboardFilter from './Components/DashboardFilters/DashboardFilter';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
+import moment from 'moment';
 
 import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
@@ -316,7 +317,8 @@ export default function Operationmanagerdashboard() {
                     {`Actual / Target : ${itm?.actual} / ${itm?.target}`}
                   </Typography>
                   <Typography variant="h6" component="h6" marginLeft={2}>
-                    {`Duration : ${itm?.startDate} / ${itm?.endDate}`}
+                  
+                    {`Duration :   ${moment(itm?.startDate)?.format('DD-MM-YYYY')} /  ${moment(itm?.endDate)?.format('DD-MM-YYYY')}`}
                   </Typography>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={1}>
