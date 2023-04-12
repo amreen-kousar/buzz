@@ -24,8 +24,9 @@ import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import { ColorManyPicker } from '../../components/color-utils';
 import ShaktiDialog from '../projects/Components/ShaktiDialog'
-import Photos from '../projects/Components/Photos'
-
+import Photos from '../projects/Components/Photos';
+import Programevaluationday1 from '../projects/Components/Programevaluationday1';
+import Evaluationday2 from '../projects/Components/Evaluationday2';
 // ----------------------------------------------------------------------
 
 projectMultiDrawer.propTypes = {
@@ -291,6 +292,8 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                                     
                                 </CardContent> */}
                             </Card>
+                            <Programevaluationday1 />
+                            <Evaluationday2 />
                         </div>
                         {/* <Button onClick={UploadImages}>upload image</Button> */}
 

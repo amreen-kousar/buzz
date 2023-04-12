@@ -119,6 +119,10 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       .catch((error) => console.log('error', error));
   };
   
+  const deleteImage = (index) => {
+    images.splice(index, 1);
+    setImages([...images]);
+  };
   return (
     <>
       <Drawer
@@ -217,21 +221,50 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                 </CardContent>
               </Card>
               <Card style={{ marginTop: 20 }}>
-                <input
+              <CardContent>
+                {/* <input
+                  
                   accept="image/png, image/gif, image/jpeg"
                   type="file"
-                  name="myImage"
                   onChange={(event) => {
                     console.log(event.target, '<------imageesssssssss');
                     convertImage(event);
                   }}
-                />
-                {images?.map((itm) => {
-                  return <img src={itm} style={{ height: '50px', width: '70px' }} />;
+                /> */}
+                 <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
+                    <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
+                    &nbsp;
+                    <input
+                      style={{ display: 'none' }}
+                      accept="image/png, image/gif, image/jpeg"
+                      id="inputTag"
+                      type="file"
+                      onChange={(e) => {
+                        convertImage(e);
+                      }}
+                    /> Add Photos
+                  </label>
+                 
+                  <br />
+                {images?.map((itm,index) => {
+                   
+                  return <div style={{ display: 'flex', margin: '1rem' }}>
+                    <img src={itm} style={{ height: '50px', width: '70px',marginTop:20 }} />
+                    <Iconify
+                            onClick={() => {
+                              deleteImage(index);
+                            }}
+                            icon={'typcn:delete'}
+                            sx={{ width: 16, height: 16, ml: 1, color: 'red' }}
+                          />
+                    </div>
+                  
                 })}
+               
                 {/* <CardContent>
                   <Typography>Upload Photos</Typography>
                 </CardContent> */}
+                </CardContent>
               </Card>
             </div>
             <Button sx={{  color: '#ff7424' }} onClick={UploadImages}>Upload Photos</Button>
