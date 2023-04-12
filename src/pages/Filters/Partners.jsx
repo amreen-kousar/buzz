@@ -3,7 +3,7 @@ import ApiRequest from './components/ApiRequest';
 import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
 
-export default function Partners({ selectDATA, getData }) {
+export default function Partners({ selectDATA, getData, date,endDate,dateValue,endDateValue}) {
 
   const [partner, setPartner] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
@@ -27,7 +27,7 @@ export default function Partners({ selectDATA, getData }) {
   return (
     <div>
       <SearchCommon getSearchFilter={(e) => { getSearchFilter(e) }} />
-      <ListTabledata data={partner} getData={getData} selectDATA={1} type="Partner" returnSearchFilter={returnSearchFilter} />
+      <ListTabledata data={partner} getData={getData} date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} selectDATA={1} type="Partner" returnSearchFilter={returnSearchFilter} />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import ApiRequest from './components/ApiRequest';
 import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
 
-export default function SrOperationManager({ selectDATA, getData }) {
+export default function SrOperationManager({ selectDATA, getData,date,endDate ,dateValue,endDateValue}) {
 
   const [fund, setFund] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
@@ -28,7 +28,7 @@ export default function SrOperationManager({ selectDATA, getData }) {
     <div>
       <SearchCommon getSearchFilter={(e) => { getSearchFilter(e) }} />
 
-      <ListTabledata data={fund} getData={getData} selectDATA={12} type="Sr . OperationManager"
+      <ListTabledata data={fund} getData={getData}  date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} selectDATA={12} type="Sr . OperationManager"
         returnSearchFilter={returnSearchFilter} />
     </div>)
 }

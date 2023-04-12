@@ -4,7 +4,7 @@ import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
 import Projectapi from './components/Projectsapi';
 
-export default function Funders({ selectDATA, getData,type }) {
+export default function Funders({ selectDATA, getData,type ,date,endDate,dateValue,endDateValue}) {
 
   const [fund, setFund] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
@@ -40,7 +40,7 @@ export default function Funders({ selectDATA, getData,type }) {
   return (
     <div>
       <SearchCommon getSearchFilter={(e) => { getSearchFilter(e) }} />
-      <ListTabledata data={fund} getData={getData} selectDATA={2} type="Funder" returnSearchFilter={returnSearchFilter} />
+      <ListTabledata data={fund} getData={getData} date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} selectDATA={2} type="Funder" returnSearchFilter={returnSearchFilter} />
     </div>
   )
 }

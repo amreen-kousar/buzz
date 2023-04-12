@@ -19,6 +19,7 @@ import dayjs from 'dayjs';
 import AddTrainerDrawer from './AddTrainerDrawer';
 import AddGelathifacilitators from './AddGelathifacilitators'
 import Add from '@mui/icons-material/Add';
+import { useNavigate } from 'react-router-dom';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Iconify from 'src/components/Iconify';
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -50,7 +51,8 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
   let [gelathiName, setGelathiName] = useState(sendData?.gelathiFacilitator)
   const [driverData, setDriverData] = useState([])
   const [deleteData, setDeleteData] = useState([])
-
+const [createProj ,setCreateProj] = useState(true)
+const [isReload , setIsReload]= useState(false)
   
    
 // console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
@@ -83,12 +85,15 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
       setOpen(true);
       assignValues()
     }
+
+setShowAddBuss(false)
     partnerList();
-    busList();
+   
     teamList();
     driverList();
     setNotify(true)
   }, [])
+
 
   const assignValues = () => {
     let tempdata = {
@@ -351,6 +356,45 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
        });
     
    }
+   useEffect(()=>{
+     
+  },[data?.operations_manager_id])
+
+
+  //  naigation to add new bus 
+const [showAddBuss , setShowAddBuss] = useState(false)
+const [showbusForm ,setShowBusForm] =useState(true)
+
+const mainShowBussHandler = ()=>{
+  setShowBusForm(true)
+  console.log(showbusForm, "showbusForm mainShowBussHandler")
+  setShowAddBuss(false)
+  setIsReload(!isReload)
+}
+  const navigate = useNavigate();
+  const addBusHandler =()=>{
+    console.log("i calling")
+    setShowAddBuss(true)
+    console.log(showAddBuss,"showAddBuss")
+   
+  }
+  useEffect(()=>{
+    busList();
+  }, [showAddBuss])
+
+  // useEffect(()=>{
+  
+  //   setShowAddBuss(false)
+  // },[isReload])
+  //  const navigateToAddBus =()=>{
+  //   navigate('/dashboard/projects/addBuss', {
+  //     state: {
+  //        createProj : true
+  //     },
+  // });
+  // setShowAddBuss(true)
+  //   console.log("navigation is calling ")
+  //  }
   return (
     <div>
       {
@@ -367,39 +411,39 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
       >
         <form onSubmit={(e) => { e.preventDefault(); createProjectpublish() }}>
           <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
-            <Toolbar>
-             <IconButton edge="start" color="inherit" onClick={()=>{setCreatePro(false)}}> <CloseIcon/></IconButton>
+            <Toolbar id="create-proj-toolbar">
+             <IconButton id="start-icon-button" edge="start" color="inherit" onClick={()=>{setCreatePro(false)}}> <CloseIcon/></IconButton>
             
               {/* <Button sx={{float:'right'}} autoFocus color="inherit" type="submit">
                 save
               </Button> */}
-              <IconButton edge="end"  autoFocus color="inherit" type="submit" sx={{right:40,float:'right',position:'absolute'}}>
+              <IconButton id="material-symbol-save" edge="end"  autoFocus color="inherit" type="submit" sx={{right:40,float:'right',position:'absolute'}}>
                  <Iconify icon="material-symbols:save"/>
               </IconButton>
-              {(edit)? <Button autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
+              {(edit)? <Button id="publish" autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
                 publish
               </Button>:null}
             </Toolbar>
           </AppBar>
           <Grid>
             <CardContent>
-            <Snackbar open={warn} autoHideDuration={3000} onClose={() => { setWarn(false) }}>
+            <Snackbar id="alert-message" open={warn} autoHideDuration={3000} onClose={() => { setWarn(false) }}>
                 <Alert onClose={() => { setWarn(false) }} severity="warning" sx={{ width: '100%' }}>
                 {message}
                 </Alert>
               </Snackbar>
 
-              {(!edit)?<Snackbar open={notify} autoHideDuration={3000} onClose={() => { setNotify(false) }}>
+              {(!edit)?<Snackbar id="success-alert-snackbar" open={notify} autoHideDuration={3000} onClose={() => { setNotify(false) }}>
                 <Alert onClose={() => { setNotify(false) }} severity="success" sx={{ width: '100%' }}>
                   Project created succesfully
                 </Alert>
               </Snackbar>:null}
               <Card style={{ top: 15 }}>
                 <CardContent>
-                  <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                  <Typography id="project-text" sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                     Project : {edit ? sendData?.project_name : sendData?.projectname}
                   </Typography>
-                  <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                  <Typography id="district-text" sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                     District : {edit ? sendData?.location_name : sendData?.locationName}
                   </Typography>
                 </CardContent>
@@ -407,7 +451,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             </CardContent>
           </Grid>
           <Grid>
-            <CardContent>
+            <CardContent id="project-det">
               <Typography style={{ marginLeft: 10 }} variant="h6">Project Details :</Typography>
             </CardContent>
             <CardContent>
@@ -447,30 +491,31 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             <Divider />
 
             <Grid>
-              <CardContent>
+              <CardContent id="project-from-to">
                 <Typography style={{ marginLeft: 10 }} variant="h6">Project From / To Dates :</Typography>
               </CardContent>
               <Stack>
                 <CardContent>
-                  <TextField type="date"
+                  <TextField id="start-date" type="date"
                    // defaultValue={dayjs(data?.start_date)}
                    defaultValue={data?.start_date}
                     style={{ width: '20vw' }}
-                    value={data.start_date}
+                    
                     InputProps={{
-                      // inputProps: { min: moment(new Date())?.format('DD-MM-YYYY') }
+                      inputProps: { min: moment(new Date())?.format('DD-MM-YYYY') }
                     }}
+                    value={data.start_date}
                     onChange={(e) => {
                       console.log(e?.target?.default,">gbfdvvfghjmnhbgfvdfgthygbfvdcsxs")
                       setData({ ...data, start_date: e?.target?.value })
                     }} />
 {/* {console.log(dayjs( moment(data?.endDate)?.format()),moment(data?.endDate)?.format('YYYY-MM-DD'),new Date(data?.endDate),data?.endDate,"<-- defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}",data?.end_date,data?.start_date)} */}
-                  <TextField type="date"
+                  <TextField id="end-date" type="date"
                 defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('DD-MM-YYYY')):dayjs( moment(data?.endDate)?.format('DD-MM-YYYY'))}
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     value={data.end_date}
                     InputProps={{
-                      // inputProps: { min: moment(data.end_date)?.format('YYYY-MM-DD') }
+                      inputProps: { min: moment(data.start_date)?.format('DD-MM-YYYY') }
                     }}
                     // defaultValue={data.endDate}
                     onChange={(e) => {
@@ -506,11 +551,25 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             </Grid>
             <Divider />
             <CardContent>
-              <Typography variant="h6">Resources</Typography>
+              <Typography id="resources" variant="h6">Resources</Typography>
+              {/* <div style={{display:"flex"}}> */}
+              <Stack >
+                <CardContent style={{padding:"9px"}} >
+                <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography>
+              <Button onClick={addBusHandler}  style={{ width: '20vw', marginLeft: "80%", marginTop:"-41px"}}>Add New Bus</Button>
+                </CardContent>
+              </Stack>
+              
+              {/* </div> */}
+             
+             
+      {showAddBuss?<Addbus showAddBuss={showAddBuss} createProj={showbusForm} showBussHandler={mainShowBussHandler}/>: null}  
+     
+    
               <Stack mt={2}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" color="common">Select Bus</InputLabel>
-                  <Select
+                  <Select id="select-bus"
 
                     // labelId="demo-simple-select-label"
                     //id="demo-simple-select"
@@ -522,7 +581,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 
                     })}
                   >
-                    <MenuItem value="" default disabled>Choose Bus</MenuItem>
+                    <MenuItem id="choose-bus" value="" default disabled>Choose Bus</MenuItem>
                     {busData?.list?.map(itm => {
                       return (
                         <MenuItem value={itm?.id}>{itm?.register_number}</MenuItem>
@@ -535,14 +594,14 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             <Divider />
 
             <CardContent>
-              <Typography variant="h6">Team Members</Typography>
+              <Typography id="team-members" variant="h6">Team Members</Typography>
               <Stack mt={3}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Select Operation Manager</InputLabel>
-                  <Select
+                  <Select 
 
                     // labelId="demo-simple-select-label"
-                    //id="demo-simple-select"
+                    id="select-operation-manager"
                     defaultValue={data.operations_manager_id}
                 
                     value={data.operations_manager_id}
@@ -552,7 +611,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                       localStorage.setItem("operations_manager_id", e?.target?.value)
                     })}
                   >
-                    <MenuItem value="" default disabled>Choose Operation Manager</MenuItem>
+                    <MenuItem id="operation-manager" value="" default disabled>Choose Operation Manager</MenuItem>
                     {teamData?.list?.map(itm => {
                       return (
                         <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
@@ -578,7 +637,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                       // driverList(e?.target?.value)
                     })}
                   >
-                    <MenuItem value="" default disabled>Choose Driver</MenuItem>
+                    <MenuItem id="choose-driver" value="" default disabled>Choose Driver</MenuItem>
                     {driverData?.list?.map(itm => {
                       return (
                         <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
@@ -590,21 +649,25 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
             </CardContent>
             <Divider />
             {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}> */}
-            <AddTrainerDrawer
+            {/* {console.log(sendData,"senddataaaaaaaaaaaa")} */}
+            {data?.operations_manager_id && <AddTrainerDrawer
               isOpenFilter={openFilter}
               getData={(e) => { setName(e) }}
+              operations_manager_id={data.operations_manager_id}
               onOpenFilter={handleOpenFilter}
               sendData={sendData}
               name={name}
               onCloseFilter={handleCloseFilter}
-            />
-            <AddGelathifacilitators
+            />}
+            {console.log(name,"namessssssssssssss",sendData)}
+            {data?.operations_manager_id && <AddGelathifacilitators
               sendData={sendData}
               isOpenFilter={opengelathiFilter}
+              operations_manager_id={data.operations_manager_id}
               getData={(e) => { setGelathiName(e) }}
               onOpenFilter={handlegelathiOpenFilter}
               onCloseFilter={handlegelathiCloseFilter}
-            />
+            />}
 
             {console.log(name, "<---sdfdsfdsfdssddss")}
             {/* </Stack> */}
@@ -616,7 +679,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
                 <CardContent>
 
                  
-                  <Typography variant='h6'>Trainers  ({(name?.length?name?.length:0)})<IconButton style={{float:'right'}}>
+                  <Typography id="trainers" variant='h6'>Trainers  ({(name?.length?name?.length:0)})<IconButton style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton></Typography>
                  
@@ -660,7 +723,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
               }}>
                 <CardContent>
 
-                <Typography variant='h6'>Gelathi Facilators  ({gelathiName?.length?gelathiName?.length:0})
+                <Typography id="gelathi-facilators" variant='h6'>Gelathi Facilators  ({gelathiName?.length?gelathiName?.length:0})
                   <IconButton style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>

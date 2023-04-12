@@ -260,8 +260,14 @@ SimpleDialog.propTypes = {
   selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name }) {
-  console.log(name,"<----ertfvgbhnj")
+export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name,operations_manager_id}) {
+
+
+  useEffect(()=>{
+    trainerList()
+  },[operations_manager_id])
+  console.log(name,"<----ertfvgbhnj",sendData,"ehgfjr",getData,"hyyyyy",operations_manager_id)
+  console.log(sendData,"senddataaaaaaaaaaaaa")
   const [open, setOpen] = React.useState(isOpenFilter);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
   const [listData, setListData] = useState();
@@ -282,8 +288,8 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
   const trainerList = async => {
     var data = JSON.stringify({
       "role_id": 5,
-      "project_id": 292,
-      "operation_manager_id": 122,
+      "project_id": sendData?.project_id?sendData?.project_id:sendData?.projectId,
+      "operation_manager_id": operations_manager_id,
       "pageNum": 1
     });
 

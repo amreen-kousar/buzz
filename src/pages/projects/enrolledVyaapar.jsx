@@ -224,10 +224,9 @@ const id = sessionStorage?.getItem("proId")
                         <Typography variant="subtitle1" gutterBottom>
                                 {`  Village Name : ${itm?.villagename}`}
                             </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
-                                {`  Enrolled By : ${itm?.enrolled_by
-}`}
-                            </Typography>
+                            {/* <Typography variant="subtitle1" gutterBottom>
+                                {`  Enrolled By : ${itm?.enrolled_by}`}
+                            </Typography> */}
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>

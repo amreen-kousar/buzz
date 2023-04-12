@@ -30,8 +30,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 // import { useHistory } from "react-router-dom";
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
+import moment from 'moment';
 import { Navigate } from 'react-router-dom';
-
 BeehiveDrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
@@ -50,23 +50,25 @@ console.log(data,'<------clcikDataclcikData',data)
         date: dayjs(new Date()),
         user_id: "",
       })
-
+console.log(addData?.date)
     useEffect(() => {
         beehiveVillageVisit();
         // console.log(clcikData)
     }, [clcikData])
-
+console.log(scheduleData,"scheduledata")
     const createGfSession = async =>{
+      const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
             "project_id": scheduleData?.data?.project_id,
-            "user_id": 492,
+            "user_id": userid,
             "locationId":scheduleData?.data?.location_id ,
             "tb_name": scheduleData?.data?.name,
             "numOfParticipants":scheduleData?.all_participants?.length ,
             "tb_id": scheduleData?.data?.id,
-            "gf_session_type": 2,
-            "plan_date": addData?.date,
-            "gf_session_name": null
+            "gf_session_type": 3,
+            "plan_date":  moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+            "gf_session_name": null,
+            "circle_id":""
           });
           
           var config = {
@@ -129,7 +131,7 @@ console.log(data,'<------clcikDataclcikData',data)
     const handleChange = (event) => {
         setAddData({ ...addData, date: event })
       }
-console.log(scheduleData,"------------------------------>dataaaaascheduleDatascheduleData")
+console.log(scheduleData,"------------------------------>scheduleDatascheduleData")
     return (
         <>
             <Drawer

@@ -81,19 +81,19 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
       chassis_number: clcikData?.chassis_number,
       "lastUpdatedBy": "",
       "insurance_number": clcikData?.insurance_number,
-      "register_date": moment(clcikData?.register_date).format('MM-DD-YYYY'),
+      "register_date": moment(clcikData?.register_date).format('DD/MM/YYYY'),
       "insurance_company": clcikData?.insurance_company,
-      "insurance_start_date": moment(clcikData?.insurance_start_date).format('MM-DD-YYYY'),
-      "last_service_date":moment( clcikData?.last_service_date).format('MM-DD-YYYY'),
-      "emission_date": moment(clcikData?.emission_date).format('MM-DD-YYYY'),
-      "insurance_end_date":moment( clcikData?.insurance_end_date).format('MM-DD-YYYY'),
+      "insurance_start_date": moment(clcikData?.insurance_start_date).format('DD/MM/YYYY'),
+      "last_service_date":moment( clcikData?.last_service_date).format('DD/MM/YYYY'),
+      "emission_date": moment(clcikData?.emission_date).format('DD/MM/YYYY'),
+      "insurance_end_date":moment( clcikData?.insurance_end_date).format('DD/MM/YYYY'),
       "createdBy": clcikData?.createdBy,
       "engine_number": clcikData?.engine_number,
-      "permit": moment(clcikData?.permit).format('MM-DD-YYYY'),
-      "fitness_certificate": moment(clcikData?.fitness_certificate).format('MM-DD-YYYY'),
+      "permit": moment(clcikData?.permit).format('DD/MM/YYYY'),
+      "fitness_certificate": moment(clcikData?.fitness_certificate).format('DD/MM/YYYY'),
       "register_number": clcikData?.register_number,
       "bus_id": clcikData?.bus_id,
-      "next_service_due_date":moment( clcikData?.next_service_due_date).format('MM-DD-YYYY')
+      "next_service_due_date":moment( clcikData?.next_service_due_date).format('DD/MM/YYYY')
 
     })
   }
@@ -180,7 +180,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-              Edit Bus Details {clcikData?.register_number}
+              Edit Bus Details <br/>{clcikData?.register_number}
             </Typography>
 
 
@@ -209,17 +209,18 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
             >
               <div style={{ background: 'white', padding: '2rem', borderRadius: '10px' }}>
                 <TextField fullWidth id="outlined-basic" value={sendData?.register_number} onChange={(e) => { setSendData({ ...sendData, register_number: e?.target?.value }) }} label="Bus Number" variant="outlined" />
+              {console.log(clcikData?.register_date,"registerdateeeeeeeee")}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
-                  
+                   defaultValue={clcikData?.register_date}
                     onChange={(e) => {
-                      setSendData({ ...sendData, register_date: moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                      setSendData({ ...sendData, register_date: e }),
                       // setSendData({...sendData, register_date:e })
                       console.log(e, "<----werewrewrewrewr")
                       console.log(moment(new Date(e?.$d)))
                     }}
                     label="Registration Date"
-                    value={sendData?.register_date}
+                   
 
                     renderInput={(params) => <TextField value={sendData?.register_date} {...params} fullWidth />}
                   /></LocalizationProvider>
@@ -235,7 +236,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                     renderInput={(params) => <TextField value={sendData?.register_date} {...params} fullWidth />}
                   />
                 </LocalizationProvider> */}
-                  {console.log(moment(new Date(sendData?.register_date)).format("MM-DD-YYYY"), "<----(sendData?.register_date(sendData?.register_date")}
+                  {/* {console.log(moment(new Date(sendData?.register_date)).format("DD/MM/YYYY"), "<----(sendData?.register_date(sendData?.register_date")} */}
                
                 <Stack style={{ marginTop: 10 }}>
                   <TextField id="outlined-basic" value={sendData?.engine_number} onChange={(e) => { setSendData({ ...sendData, engine_number: e?.target?.value }) }} label="Engine Number" variant="outlined" />
@@ -253,11 +254,11 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, insurance_start_date:moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                        setSendData({ ...sendData, insurance_start_date:e }),
                         console.log(e, "<----werewrewrewrewr")
                       }}
                       label="Insurance Start Date"
-                      value={sendData?.insurance_start_date}
+                      defaultValue={sendData?.insurance_start_date}
 
                       renderInput={(params) => <TextField value={sendData?.insurance_start_date} {...params} fullWidth />}
                     />
@@ -269,7 +270,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, insurance_end_date:moment(new Date(e?.$d)).format("MM-DD-YYYY") }),
+                        setSendData({ ...sendData, insurance_end_date:e}),
                         console.log(e, "<----insurance_end_date")
                       }}
                       label="Insurance End Date"
@@ -283,7 +284,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, last_service_date:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
+                        setSendData({ ...sendData, last_service_date:e}),
                         console.log(e, "<----last_service_date")
                       }}
                       label="Last Service Date"
@@ -297,7 +298,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, next_service_due_date:moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
+                        setSendData({ ...sendData, next_service_due_date:e}),
                         console.log(e, "<----next_service_due_date")
                       }}
                       label="Next Service Date"
@@ -311,22 +312,23 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, fitness_certificate: moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
+                        setSendData({ ...sendData, fitness_certificate: e}),
                         console.log(e, "<----fitness_certificate")
                       }}
                       label="Fitness Certificate"
-                      value={sendData?.fitness_certificate}
+                     
 
                       renderInput={(params) => <TextField value={sendData?.fitness_certificate} {...params} fullWidth />}
+                      value={sendData?.fitness_certificate}
                     />
                   </LocalizationProvider>
                 </Stack>
                 <Stack style={{ marginTop: 10 }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
-                    // moment(new Date(e?.$d)).format("MM-DD-YYYY")
+                    // moment(new Date(e?.$d)).format("DD/MM/YYYY")
                       onChange={(e) => {
-                        setSendData({ ...sendData, permit: moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
+                        setSendData({ ...sendData, permit: moment(new Date(e?.$d)).format("DD/MM/YYYY")}),
                         console.log(e, "<----permit")
                       }}
                       label="Permit Details"
@@ -340,7 +342,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, emission_date: moment(new Date(e?.$d)).format("MM-DD-YYYY")}),
+                        setSendData({ ...sendData, emission_date: moment(new Date(e?.$d)).format("DD/MM/YYYY")}),
                         console.log(e, "<----emission_date")
                       }}
                       label="Emission Date"

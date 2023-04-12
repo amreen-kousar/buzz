@@ -33,8 +33,8 @@ GelathiCircleDrawer.propTypes = {
     onCloseFilter: PropTypes.func,
 };
 
-export default function GelathiCircleDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
-console.log(clcikData,'<------clcikDataclcikData')
+export default function GelathiCircleDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,data1 }) {
+console.log(data1,'<------clcikDataclcikData')
      const [session,setSession] = useState('')
      const [circleData,setcircleData] = useState('')
     useEffect(() => {
@@ -43,10 +43,11 @@ console.log(clcikData,'<------clcikDataclcikData')
     }, [clcikData])
  console.log(clcikData,'<-----------mkmkmkmnjknk')
     const circle = async =>{
+      const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
             "circle_id": clcikData?.id,
-            "project_id": 225,
-            "emp_id": 343
+            "project_id": data1?.project_id,
+            "emp_id": userid
           });
           
           var config = {
@@ -123,7 +124,7 @@ const removegelathicircle = async(itm)=>{
 
                 <Scrollbar>
                     <Stack spacing={10} sx={{ p: 3 }}>
-                        <div>
+                        {(circleData?.gelathis?.length>0)?<div>
                         {circleData?.gelathis?.map((itm) => {
                             {console.log(itm,"hyy")}
                 return (
@@ -157,7 +158,7 @@ const removegelathicircle = async(itm)=>{
                             </Card>)
                              })}
                     
-                        </div>
+                        </div>:<h5 style={{textAlign:'center'}}>No Gelathi</h5>}
 
 
                     </Stack>

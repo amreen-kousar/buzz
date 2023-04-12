@@ -23,7 +23,8 @@ function ListTabledata(props) {
                         <TableContainer sx={{ paddingLeft: "1rem" }} ><br />
                             <Table aria-label="customized table"  >
                                 <TableBody style={{ marginTop: "10px" }} >
-                                    <TableRow onClick={() => { props.getData({ ...itm, type: props.type }, props.selectDATA) }} >
+                                    {console.log(props.endDateValue,"endDateeeeee",props.dateValue)}
+                                    <TableRow onClick={() => { props.getData({ ...itm, type: props.type }, props.selectDATA,props.date,props.endDate,props.dateValue,props.endDateValue) }} >
                                         <TableCell sx={{ width: "10px" }}> <Iconify icon="mdi:user-circle" width={25} height={25} /> </TableCell>
                                         <TableCell >  {itm?.name} {itm?.first_name} {itm?.last_name}</TableCell>
                                     </TableRow>

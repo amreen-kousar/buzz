@@ -3,7 +3,7 @@ import ListTabledata from './components/ListTabledata';
 import ApiRequest from './components/ApiRequest';
 import SearchCommon from './components/SearchCommon';
 
-export default function GelathisLead({ selectDATA, getData }) {
+export default function GelathisLead({ selectDATA, getData ,date,endDate,dateValue,endDateValue}) {
 
   const [glead, setGlead] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
@@ -27,7 +27,7 @@ export default function GelathisLead({ selectDATA, getData }) {
   return (
     <div>
       <SearchCommon getSearchFilter={(e) => { getSearchFilter(e) }} />
-      <ListTabledata data={glead} getData={getData} selectDATA={13} type="Gelathi Facilitator Lead" returnSearchFilter={returnSearchFilter} />
+      <ListTabledata data={glead} getData={getData} date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} selectDATA={13} type="Gelathi Facilitator Lead" returnSearchFilter={returnSearchFilter} />
     </div>
   );
 }

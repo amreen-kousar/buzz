@@ -112,6 +112,7 @@ export default function gelathiProgram(props) {
 
     const handleCloseFilter = () => {
         setOpenFilter(false);
+        
     };
     const handleopen=()=>{
       setFilter(true)
@@ -224,13 +225,15 @@ export default function gelathiProgram(props) {
                                 handleOpenFilter()
                             }}>  
                      
-                   
-
-                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
-                            <Typography variant="subtitle1" gutterBottom>
+                     
+                     {/* <div style={{ float: 'left'}}>
+                <Iconify icon="mdi:flower-lotus" width={20} height={20} />
+              </div>  */}
+                        <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{marginLeft:15}}>
+                         <Typography variant="subtitle1" gutterBottom>
                                 {` ${itm?.gf_session_name}`}
-                                {(itm?.status=='2')?<Iconify sx={{marginLeft:2,width:20}} icon="material-symbols:cancel"/>:null}
-                                {(itm?.status=='1')?<Iconify sx={{marginLeft:2,width:20,height:20}} icon="mdi:clock-outline"/>:null}
+                                {(itm?.status=='2')?<IconButton sx={{float:'right',position:'absolute',right:'0'}}><Iconify  icon="material-symbols:cancel"></Iconify></IconButton>:null}
+                                {(itm?.status=='1')?<IconButton sx={{float:'right',position:'absolute',right:'0'}}><Iconify  icon="mdi:clock-outline"></Iconify></IconButton>:null}
                             </Typography>
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>

@@ -30,6 +30,7 @@ export default function VillageDialog({ shown, setShown, batchState,batch,isOpen
   console.log(batch,"----------->batch")
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
+  const [suggestedName,setSuggestedname]=useState([]);
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -56,6 +57,7 @@ export default function VillageDialog({ shown, setShown, batchState,batch,isOpen
     setOpen(false);
   };
 
+  
   return (
     <div>
        <Drawer
@@ -79,7 +81,7 @@ export default function VillageDialog({ shown, setShown, batchState,batch,isOpen
          
           </Toolbar>
         </AppBar>
-        
+   
 
         <Stack style={{ top: 40 }}>
           <Card sx={{mt:2,ml:2}}>
@@ -93,8 +95,8 @@ export default function VillageDialog({ shown, setShown, batchState,batch,isOpen
               <Typography variant="subtitle2" sx={{color:"black"}}> Contact Number : {batch?.data?.contact_person}</Typography> 
               <Typography variant="subtitle2" sx={{color:"black"}}> Trainer Name : {batch?.data?.trainer_name}</Typography> 
               </CardContent>
-          </Card>
-          <Card>
+          </Card><br/>
+          <Card style={{borderRadius:'0'}}>
             <CardContent>All Participants ({batch?.total_participants})</CardContent>
         </Card>
       
@@ -107,11 +109,13 @@ export default function VillageDialog({ shown, setShown, batchState,batch,isOpen
                 handleOpenFilter()
                 setClickData({ name: itm.gelathiname, title: "Enrolled  Name" })
                 
-              }}>
-                <CardContent >
+              }} style={{borderRadius:'0'}}>
+                <CardContent>
                  
-                     
-                      <Typography variant="subtitle2">{itm?.participant_name}</Typography>
+                     {console.log(itm?.participant_name==batch?.suggested?.participant_name,"hyyyyyyy",batch?.suggested[0]?.participant_name,"helloooooo",itm?.participant_name)}
+                      <Typography variant="subtitle2">{itm?.participant_name}
+                      {(batch?.suggested.findIndex(data=>data.participant_name === itm?.participant_name)!=-1)&& <IconButton sx={{float:'right',width:35,height:30,color:'green'}}><Iconify icon="mdi:tick-circle"></Iconify></IconButton>}
+                      </Typography>
                 
                 </CardContent>
               </Card>
