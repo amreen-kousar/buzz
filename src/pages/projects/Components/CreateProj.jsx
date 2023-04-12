@@ -500,10 +500,11 @@ const mainShowBussHandler = ()=>{
                    // defaultValue={dayjs(data?.start_date)}
                    defaultValue={data?.start_date}
                     style={{ width: '20vw' }}
-                    value={data.start_date}
+                    
                     InputProps={{
-                      // inputProps: { min: moment(new Date())?.format('DD-MM-YYYY') }
+                      inputProps: { min: moment(new Date())?.format('DD-MM-YYYY') }
                     }}
+                    value={data.start_date}
                     onChange={(e) => {
                       console.log(e?.target?.default,">gbfdvvfghjmnhbgfvdfgthygbfvdcsxs")
                       setData({ ...data, start_date: e?.target?.value })
@@ -514,7 +515,7 @@ const mainShowBussHandler = ()=>{
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     value={data.end_date}
                     InputProps={{
-                      // inputProps: { min: moment(data.end_date)?.format('YYYY-MM-DD') }
+                      inputProps: { min: moment(data.start_date)?.format('DD-MM-YYYY') }
                     }}
                     // defaultValue={data.endDate}
                     onChange={(e) => {

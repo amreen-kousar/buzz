@@ -13,7 +13,7 @@ const GalathiChart = (props) => {
   return (
     <div className="chart-container">
       <ResponsiveContainer  width="100%" height="100%" aspect={1.5}>
-        <PieChart  style={{float: 'left'}}>
+        <PieChart >
           <Pie
             data={data}
             innerRadius={60}
@@ -37,7 +37,7 @@ const GalathiChart = (props) => {
               boxShadow: 'none',
               border: '0px',
               borderRadius: '10px',
-              padding: '10px',
+              
               color: '#fff'
             }}
             labelStyle={{ color: '#fff' }}
