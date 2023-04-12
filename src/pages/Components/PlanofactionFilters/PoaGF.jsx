@@ -234,7 +234,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                 </CardContent> */}
               </Card>
             </div>
-            <Button onClick={UploadImages}>Upload Photos</Button>
+            <Button sx={{  color: '#ff7424' }} onClick={UploadImages}>Upload Photos</Button>
           </Stack>
         </Scrollbar>
 
