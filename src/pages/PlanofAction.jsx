@@ -466,7 +466,7 @@ export default function PlanofAction() {
                                         }
                                       }}
                                     >
-                                      {itm?.type == '2' ? (
+                                      {/* {itm?.type == '2' ? (
                                         <>
                                           {itm?.time}
                                           <br />
@@ -485,8 +485,58 @@ export default function PlanofAction() {
                                           <br></br>
                                           {itm?.roleName}:{itm?.emp_name}
                                         </>
-                                      )}
-
+                                      )} */}
+{(itm?.type == '2') ?
+                                        <>
+                                       
+                                        
+                                        
+                                        {itm?.time}
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Gelathi Facilitator :{itm?.emp_name}
+                                          <br/>
+                                          
+                                        </>
+                                       :(itm?.type=='1')?
+                                        <>
+                                         
+                                          
+                                          {itm?.time}
+                                          
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Trainer :{itm?.emp_name}
+                                         <br/>
+                                        </>
+                                      :
+                                       
+                                      
+                                        <>
+                                        
+                                          
+                                          {itm?.time}
+                                         
+                                         <h4> Title: {itm?.name}</h4> 
+                                         
+                                          {itm?.roleName}:{itm?.emp_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                         <br/>
+                                          
+                                          
+                                        </>
+                                      }
                                       {/* {(role==6 || role==13)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
                                       {itm?.status == '2' && (
                                         <span style={{ color: 'red' }}>
@@ -587,7 +637,7 @@ export default function PlanofAction() {
                                       }}
                                     >
                                       {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
-                                      {itm?.type == '2' ? (
+                                      {/* {itm?.type == '2' ? (
                                         <>
                                           {itm?.time}
                                           <br />
@@ -606,7 +656,58 @@ export default function PlanofAction() {
                                           <br></br>
                                           {itm?.roleName}:{itm?.emp_name}
                                         </>
-                                      )}
+                                      )} */}
+                                      {(itm?.type == '2') ?
+                                        <>
+                                       
+                                        
+                                        
+                                        {itm?.time}
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Gelathi Facilitator :{itm?.emp_name}
+                                          <br/>
+                                          
+                                        </>
+                                       :(itm?.type=='1')?
+                                        <>
+                                         
+                                          
+                                          {itm?.time}
+                                          
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Trainer :{itm?.emp_name}
+                                         <br/>
+                                        </>
+                                      :
+                                       
+                                      
+                                        <>
+                                        
+                                          
+                                          {itm?.time}
+                                         
+                                         <h4> Title: {itm?.name}</h4> 
+                                         
+                                          {itm?.roleName}:{itm?.emp_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                         <br/>
+                                          
+                                          
+                                        </>
+                                      }
                                       {itm?.status == '2' && (
                                         <span style={{ color: 'red' }}>
                                           <br />
@@ -705,7 +806,7 @@ export default function PlanofAction() {
                                     >
                                       {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
 
-                                      {itm?.type == '2' ? (
+                                      {/* {itm?.type == '2' ? (
                                         <>
                                           {itm?.time}
                                           <br />
@@ -724,12 +825,63 @@ export default function PlanofAction() {
                                           <br></br>
                                           {itm?.roleName}:{itm?.emp_name}
                                         </>
-                                      )}
+                                      )} */}
+                                      {(itm?.type == '2') ?
+                                        <>
+                                       
+                                        
+                                        
+                                        {itm?.time}
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Gelathi Facilitator :{itm?.emp_name}
+                                          <br/>
+                                          
+                                        </>
+                                       :(itm?.type=='1')?
+                                        <>
+                                         
+                                          
+                                          {itm?.time}
+                                          
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Trainer :{itm?.emp_name}
+                                         <br/>
+                                        </>
+                                      :
+                                       
+                                      
+                                        <>
+                                        
+                                          
+                                          {itm?.time}
+                                         
+                                         <h4> Title: {itm?.name}</h4> 
+                                         
+                                          {itm?.roleName}:{itm?.emp_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                         <br/>
+                                          
+                                          
+                                        </>
+                                      }
                                       {console.log(idvalue, 'hyyyyyyyyy')}
 
                                       {itm?.status == '2' && (
                                         <span style={{ color: 'red' }}>
-                                          <br />
+                                        
                                           (Canceled)
                                         </span>
                                       )}

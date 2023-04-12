@@ -106,11 +106,11 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
         });
       }
 
-      console.log("projectId", projectId)
+      console.log("batch?.project_id", batch?.data?.project_id)
     const UploadImages = (e) =>{
         console.log("upload method is calling ")
         var raw = JSON.stringify({
-            "project_id": projectId,
+            "project_id":  batch?.data?.project_id,
             "tb_id":batchState?.id,
             "trainer_id": idvalue,
             "day": 1,
@@ -124,7 +124,11 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
           };
 
           fetch("https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php", requestOptions)
-  .then(response => response.text())
+  .then(response => {response.text()
+  alert("Photo Uploaded Successfully..")
+  setImages([])
+  })
+
   .then(result => console.log(result, "result in"))
   .catch(error => console.log('error', error));
     }
@@ -146,7 +150,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
             >
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                        {`${clcikData?.title}: ${clcikData?.name}`}
+                        {` ${clcikData?.name}`}
                         {/* {clcikData?.title} */}
                         {console.log(clcikData,"clicked data")}
                     </Typography>

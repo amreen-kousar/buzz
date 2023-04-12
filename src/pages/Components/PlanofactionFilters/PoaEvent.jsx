@@ -54,6 +54,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   const [eventData, setEventData] = useState('');
   const [addImage, setAddImage] = useState('');
+  const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
 
   const [showCheckoutBtn , setCheckoutBtn] = useState(true)
   const handleClick = (event) => {
@@ -471,7 +472,7 @@ const handlecheckin = () => {
         {clickedItemData.status == 2?
         null:
         <>
-                  {eventdetails?.event_completed == 0 ?
+                  {eventdetails?.event_completed == 0 &&  role !=1  ?
                   <>
                  
                 <div style={{ display: 'flex' }}>
