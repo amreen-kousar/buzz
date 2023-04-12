@@ -368,7 +368,7 @@ let formatdata = summaryData?.data
               <>
               {summaryData?.data?
                <Card sx={{ marginTop: 5, marginLeft: 4,justifyContent:'center' }}>
-
+<CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
               Project : {item?.name}
             </Typography>
@@ -405,10 +405,12 @@ let formatdata = summaryData?.data
         </Table>
       </TableContainer>
     </Grid>
-    <Grid item xs={12} sm={12} md={6} sx={{padding:0,margin:0,float: 'left'}}>
-  <GalathiChart data={graphData} />
-</Grid>
+    {/* <Grid item xs={12} sm={12} md={6} > */}
+ 
+{/* </Grid> */}
   </Grid>
+  <GalathiChart data={graphData} />
+</CardContent>
 </CardContent>
           </Card> 
           :  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Projects</h1>}

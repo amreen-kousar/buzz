@@ -166,6 +166,7 @@ export default function Operationmanagerdashboard() {
     apiHit(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
     setFilterData(data)
+    console.log(filterData,"hyyyyyyyyyyy")
     handleCloseFilter()
     console.log("sdfgsdfdfssd", itm, i)
   }
@@ -292,6 +293,7 @@ export default function Operationmanagerdashboard() {
    <Grid item xs={12} sm={12} md={12} marginTop={3}>
           {
             summaryData?.data?.map((itm)=>{
+            
               return(
                 <Card
                 style={{
@@ -302,13 +304,15 @@ export default function Operationmanagerdashboard() {
                   borderColor: '#ffcc80',
                   marginBottom: '40px',
                 }}
-                onClick={() => {
-                  navigate('/dashboard/app/chart', {
-                    state: {
-                      filterData: filterData
-                    }
-                  })
-                }}>
+                
+                // onClick={() => {
+                //   navigate('/dashboard/operationmanager/chart', {
+                //     state: {
+                //       filterData: filterData
+                //     }
+                //   })
+                // }}
+                >
                   <CardContent>
                   <Typography variant="h6" component="h6" marginLeft={2}>
                     {itm?.name}
@@ -338,6 +342,8 @@ export default function Operationmanagerdashboard() {
                   </Grid></CardContent></Card>)
             })
           }
+            {console.log(filterData,"filterdataaaaaaaaa")}
+
           </Grid>
 
           </Grid>
