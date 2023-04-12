@@ -77,11 +77,12 @@ var config = {
 
 axios(config)
 .then(function (response) {
- 
+ alert("Target Added Successfully")
     console.log(JSON.stringify(response.data));
 })
 .catch(function (error) {
   console.log(error);
+  alert("Something went wrong!")
 });
 
 }
@@ -94,11 +95,11 @@ axios(config)
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Assign Targets
-                </Typography>
+                    Assign Targets    <IconButton sx={{float:'right',color:'#ff7424',position:'absolute',right:50}} onClick={createTrainerTarget} title="save"><Iconify icon="material-symbols:save"></Iconify></IconButton>
+                </Typography> 
+         
            
             </Stack>
-            <Button onClick={createTrainerTarget}>Save</Button>
             <TableContainer >
                   <Table style={{textAlign:"left"}}aria-label="customized table">
                     <TableBody>
@@ -109,24 +110,28 @@ axios(config)
                         <TableCell>Taluk &nbsp;:&nbsp;{trainersTargets?.location_name}</TableCell>
                       </TableRow>
                       <TableRow >
-                        <TableCell>Partner &nbsp; : &nbsp;{trainersTargets?.partnerName}</TableCell>
+                        <TableCell>Partner &nbsp;:&nbsp;{trainersTargets?.partnerName}</TableCell>
                       </TableRow>
                      
                     </TableBody>
                   </Table>
-                </TableContainer>
+                </TableContainer><br/>
                 <Typography gutterBottom style={{textAlign:'center'}}>
                      Total Targets : {trainersTargets?.training_target}
                 </Typography>
                 
                  {trainersTargets?.target_list?.map((item,index)=>{
                   return(
-                   <> <Typography style={{ marginLeft:"1.5%", textAlign:"initial"}} value={item?.emp_id}>
+                   <>
+                   <div style={{marginLeft:"20px"}}>
+                   <Typography value={item?.emp_id}>
                        {item?.emp_name}
                     </Typography>
+                    </div> 
                     {/* {(item?.emp_target=="")?<TextField sx={{ml:5,mt:1,mb:2}} placeholder="Targets" typeof="number" onChange={(e) => { setCreateTarget({ ...createTarget, emp_target: e?.target?.value }) }} value={item?.emp_target} />:<TextField sx={{ml:5,mt:1,mb:2}} placeholder="Targets" value={item?.emp_target} />} */}
-                    <TextField sx={{ml:5,mt:1,mb:2}} placeholder="Targets" onChange={(e) => { assign(e?.target?.value,index) }} defaultValue={createTarget[index]?.emp_target}  /> 
-                      </>
+                    <TextField type="number" sx={{ml:5,mt:1,mb:2}} placeholder="Targets" onChange={(e) => { assign(e?.target?.value,index) }} defaultValue={createTarget[index]?.emp_target}  /> 
+                      
+                   </>
                   )}
                  )}
                   

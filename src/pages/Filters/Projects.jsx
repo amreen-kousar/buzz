@@ -3,7 +3,7 @@ import ApiRequest from './components/ApiRequest';
 import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
 
-export default function Projects({ selectDATA, getData }) {
+export default function Projects({ selectDATA, getData,date,endDate,dateValue,endDateValue}) {
   const [projects, setProjects] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
 
@@ -28,6 +28,6 @@ export default function Projects({ selectDATA, getData }) {
   return (
     <div>
       <SearchCommon getSearchFilter={(e) => { getSearchFilter(e) }} />
-      <ListTabledata data={projects} getData={getData} selectDATA={3} type="Projects" returnSearchFilter={returnSearchFilter} />
+      <ListTabledata data={projects} getData={getData} date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} selectDATA={3} type="Projects" returnSearchFilter={returnSearchFilter} />
     </div>);
 }

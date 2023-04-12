@@ -1,10 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import axios from 'axios'
 import React from "react";
+import { PropTypes } from 'prop-types';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
 import { Link, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import {Stack,Checkbox, Card, CardContent} from '@mui/material';
+import {Stack,Checkbox, Card, CardContent, Grid} from '@mui/material';
+import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,25 +17,44 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import CreateGelathiCircle from './CreateGelathiCircle';
+import { Container } from '@mui/system';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
+// import SearchBar from '@mkyy/mui-search-bar';
+import Box from '@mui/material/Box';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-export default function ChooseGelathi(data1) {
+export default function ChooseGelathi( {data1,circle}) {
+  var [searchData,setSearchData]=useState('')
     const {state} = useLocation()
 console.log(data1,"state")
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
    const [gelathiData,setGelathiData] = useState([])
-    
+//  const [selected,setSelected]=useState([])
   const [open, setOpen] = React.useState(false);
+  var [search, setSearch] = useState('')
+  const searchFunction = (e) => {
+    console.log("searchfunctioniscalled",e)
+    search = e
+    setSearch(search)
+    // setSelected({ name: e, type: "Search" })
+    enrolledGelathi()
+  }
+  console.log(search,"serachapi")
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
+  const setGelathiDataToEmpty = ()=>{
+    console.log("data clearing ")
+    setGelathiData([])
+  }
   const checkBoxData = (itm) =>{
     if(gelathiData?.find(i=>i?.id===itm?.id))
     {
@@ -55,21 +78,21 @@ console.log(data1,"state")
 var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
 var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
-        "search": "",
+        "search": search,
         "project_id": state?.id,
         "emp_id": idvalue,
         "role_id": role
       });
-      
+
       var config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json'
         },
         data : data
       };
-      
+
       axios(config)
       .then(function (response) {
         setenrolled(response.data)
@@ -79,15 +102,23 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         console.log(error);
       });
 }
+const changeText = (e) => {
+  setSearchData(e?.target?.value)
+  searchFunction(e?.target?.value)
+  console.log(e?.target?.value,"evalueeeeeeee")
+}
+
 
   return (
     <div>
+
+        
      <Button variant="contained" onClick={handleClickOpen} style={{
         float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
         position: 'fixed', zIndex: '1', bottom: 40, right: 40
       }} sx={{
         ':hover': {
-          bgcolor: '#ffd796', 
+          bgcolor: '#ffd796',
           color: '#ff7424',
           border: '#ffd796'
         },
@@ -97,13 +128,18 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
       }} title="Create POA">
       <span style={{ fontSize: "2rem" }}>+</span>
       </Button>
+
       <Dialog
         fullScreen
         open={open}
-       
+
         onClose={handleClose}
         TransitionComponent={Transition}
       >
+       
+      
+        
+        <Stack direction="row">
         <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton
@@ -115,45 +151,89 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" color='inherit'>
-             Gelathis
+             Gelathis 
             </Typography>
+             
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button> */}
-            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} data1={data1}/>
+            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1} setGelathidataemptyInChild={setGelathiDataToEmpty}/>
           </Toolbar>
+         
+
         </AppBar>
-        {/* <Card><CardContent>Project : {data1?.data1?.project_name}</CardContent></Card> */}
-        {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
+        </Stack>
+        {/* <Card><CardContent>Project : {props.data1?.props.data1?.project_name}</CardContent></Card> */}
+       <br/><br/> 
+       <DialogContent dividers={scroll === 'paper'}>
+                    <DialogContentText
+                        id="scroll-dialog-description"
+                        tabIndex={-1}
+                    >
+                        <Box
+                            component="form"
+                            sx={{
+                                '& .MuiTextField-root': { m: 1 },
+
+                            }}
+
+                        >
+                          <TextField id="outlined-basic" label="Search..." sx={{flex: 10}}  onChange={(e) => { changeText(e) } } InputProps={{
+          startAdornment: (
+            <Button ><InputAdornment position="start">
+              
+            <SearchIcon />
+          </InputAdornment></Button>
+            
+          ),
+        }}variant="outlined" style={{marginTop: 40, marginLeft:10,  width: 1240}}/>
+        <Card><CardContent>Project : {data1?.project_name} </CardContent></Card>
+          {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
         <Stack> 
        
-        <Card style={{marginTop:60}}>
+        <Card style={{marginTop:10}}>
         <CardContent direction={'row'}>
-        <Stack direction={'row'}>
+        <Stack>
         <Typography variant="subtitle1" gutterBottom>
-                                {` ${itm?.gelathiname}`}  <Checkbox {...label} onChange={()=>{
+                                {` ${itm?.gelathiname}`}  <Checkbox style={{marginRight: 10}} {...label} onChange={()=>{
 checkBoxData(itm)
         }} />
                             </Typography>
-                            
-        <br />
-        
-      
-        </Stack>
+                          
+    
         <Typography variant="subtitle1" gutterBottom>
                                 {` ${itm?.villagename}`}
                             </Typography>
+      
+        </Stack>
+        {/* <Typography variant="subtitle1" gutterBottom>
+                                {` ${itm?.villagename}`}
+                            </Typography> */}
         </CardContent>
         </Card>
-      
+        
+       
+       
+
+
        </Stack>)
             }):
             <>
-            <h1>No Enrolled Gelathi Found</h1>
+            <Typography sx={{ ml: 2, flex: 55 }} variant="h6" component="div" color='inherit'>
+            No Enrolled Gelathi Found
+            </Typography>
+             
+            {/* <h1>No Enrolled Gelathi Found</h1> */}
             </>}
+           
+</Box>
+</DialogContentText>
 
+</DialogContent>
       </Dialog>
+
+
     </div>
   );
 }

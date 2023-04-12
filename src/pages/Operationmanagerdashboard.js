@@ -10,6 +10,7 @@ import Chip from '@mui/material/Chip';
 import { AppWidgetSummary } from '../sections/@dashboard/app';
 import DashboardFilter from './Components/DashboardFilters/DashboardFilter';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
+import moment from 'moment';
 
 import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
@@ -165,6 +166,7 @@ export default function Operationmanagerdashboard() {
     apiHit(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
     setFilterData(data)
+    console.log(filterData,"hyyyyyyyyyyy")
     handleCloseFilter()
     console.log("sdfgsdfdfssd", itm, i)
   }
@@ -291,6 +293,7 @@ export default function Operationmanagerdashboard() {
    <Grid item xs={12} sm={12} md={12} marginTop={3}>
           {
             summaryData?.data?.map((itm)=>{
+            
               return(
                 <Card
                 style={{
@@ -301,13 +304,15 @@ export default function Operationmanagerdashboard() {
                   borderColor: '#ffcc80',
                   marginBottom: '40px',
                 }}
-                onClick={() => {
-                  navigate('/dashboard/app/chart', {
-                    state: {
-                      filterData: filterData
-                    }
-                  })
-                }}>
+                
+                // onClick={() => {
+                //   navigate('/dashboard/operationmanager/chart', {
+                //     state: {
+                //       filterData: filterData
+                //     }
+                //   })
+                // }}
+                >
                   <CardContent>
                   <Typography variant="h6" component="h6" marginLeft={2}>
                     {itm?.name}
@@ -316,7 +321,8 @@ export default function Operationmanagerdashboard() {
                     {`Actual / Target : ${itm?.actual} / ${itm?.target}`}
                   </Typography>
                   <Typography variant="h6" component="h6" marginLeft={2}>
-                    {`Duration : ${itm?.startDate} / ${itm?.endDate}`}
+                  
+                    {`Duration :   ${moment(itm?.startDate)?.format('DD-MM-YYYY')} /  ${moment(itm?.endDate)?.format('DD-MM-YYYY')}`}
                   </Typography>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={1}>
@@ -336,6 +342,8 @@ export default function Operationmanagerdashboard() {
                   </Grid></CardContent></Card>)
             })
           }
+            {console.log(filterData,"filterdataaaaaaaaa")}
+
           </Grid>
 
           </Grid>

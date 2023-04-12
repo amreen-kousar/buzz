@@ -28,6 +28,9 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 import Slide from '@mui/material/Slide';
 import { Color } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -39,6 +42,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function Vyaparprogram() {
   const [open, setOpen] = React.useState(false);
+  // const [openMessage, setOpenMessage] = useState(false);
+  const [successMessage,setsuccessMessage]=useState(false);
+  const [message, setMessage] = useState('')
   const [selectedValue, setSelectedValue] = React.useState('a');
   const [vyaparform,setvyaparform]=useState('');
   const [survey,setsurvey] = React.useState('');
@@ -206,6 +212,10 @@ const [sendData,setSendData] = useState({
       axios(config)
       .then(function (response) {
         setvyaparform(response?.data)
+        setMessage('Poa Created successfully')
+          setsuccessMessage(true)
+          handleClose()
+          props?.changeState()
       })
       .catch(function (error) {
         console.log(error);
@@ -340,7 +350,19 @@ const [sendData,setSendData] = useState({
   
   return (
     <div>
-     
+      {successMessage && (
+        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)}>
+          <Alert
+            onClose={() => {
+              setsuccessMessage(false);
+            }}
+            severity="success"
+            sx={{ width: '100%', backgroundColor: 'green', color: 'white' }}
+          >
+          {message}
+          </Alert>
+        </Snackbar>
+      )}
         <Stack style={{ position:'absolute',right:0 ,float:'right',margin:2,padding:2 }}  mb={2}>
       
         <IconButton onClick={handleClickOpen}>

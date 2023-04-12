@@ -4,7 +4,7 @@ import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
 import Projectapi from './components/Projectsapi';
 
-export default function OperationManager({ selectDATA, getData,type }) {
+export default function OperationManager({ selectDATA, getData,type,date,endDate,dateValue,endDateValue}) {
   const [omdata, setOmData] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
 
@@ -35,7 +35,7 @@ export default function OperationManager({ selectDATA, getData,type }) {
   return (
     <div>
       <SearchCommon getSearchFilter={(e) => { getSearchFilter(e) }} />
-      <ListTabledata data={omdata} getData={getData} selectDATA={4} type="Operation Manager" returnSearchFilter={returnSearchFilter} />
+      <ListTabledata data={omdata} getData={getData} date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} selectDATA={4} type="Operation Manager" returnSearchFilter={returnSearchFilter} />
     </div>
   );
 }

@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { DialogContentText } from '@mui/material';
 import dayjs from 'dayjs';
 import moment from 'moment/moment';
 import Iconify from 'src/components/Iconify';
@@ -154,14 +155,14 @@ console.log(data,"data")
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" style={{color:"white"}}>
-              Create  New Training Batch
+              Create  New Training Batch 
             </Typography>
             <Button autoFocus color="inherit" onClick={createTrainerBatch}>
               Save
             </Button>
           </Toolbar>
         </AppBar>
-        <Card style={{ marginTop: 20 }}>
+        {/* <Card style={{ marginTop: 20 }}>
           <CardContent>
             <Stack style={{ marginTop: 20 }}>
               <Typography>Project : {props?.data1?.project_name}</Typography>
@@ -170,7 +171,14 @@ console.log(data,"data")
               <Typography> Partner : {props?.data1?.partnerName}</Typography>
             </Stack>
           </CardContent>
-        </Card>
+        </Card> */}
+      <DialogContentText style={{ marginLeft: 20 ,marginTop: 20}}>
+      <Typography>Project&nbsp;:&nbsp; {props?.data1?.project_name}</Typography>
+        <Typography> Partner &nbsp;:&nbsp; {props?.data1?.partnerName}</Typography>
+      </DialogContentText>
+     
+        
+       
         <Stack mt={3}>
           {console.log(trainerData, "><0khjhgbfd")}
           <FormControl fullWidth>
@@ -229,10 +237,18 @@ console.log(data,"data")
           <TextField
             fullWidth
             color="common"
-            onChange={(e) => { setTrainerData({ ...trainerData, contact_number: e?.target?.value }) }}
+            onChange={(e) => { 
+              const limitChar = 10
+              if (e.target.value.toString().length <= limitChar) {
+                console.log("number change", e.target.value)
+                setTrainerData({ ...trainerData, contact_number: e?.target?.value }) 
+              }
+            }}
+            value= {trainerData.contact_number}
             type="number"
             id="outlined-error"
-            label="Contact Number" />
+            inputProps={{ maxLength: 10 }}
+            label="Contact Number " />
         </Stack>
         <Stack style={{ marginTop: 40 }}>
           <Typography>Day 1</Typography>

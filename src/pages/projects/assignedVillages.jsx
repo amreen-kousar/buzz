@@ -188,7 +188,7 @@ const getTrainingBatch = async =>{
 
                         <div pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
-                                {`  Training Batch Name  : ${itm?.training_batch_name}`}
+                                {`  ${itm?.training_batch_name}`}
                             </Typography>
                             {/* {console.log(itm?.list?.gelathiname,'<-------gelathinamegelathiname')} */}
                         </div>

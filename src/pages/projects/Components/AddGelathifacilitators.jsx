@@ -93,9 +93,9 @@ function SimpleDialog(props) {
     return (
         <Dialog onClose={handleClose} open={open}>
             <Stack direction={'row'}>
-                <Typography variant="subtitle2" style={{ color: '#ed6c02' }} mt={2} onClick={handleClose}>Back</Typography>
+                <Typography variant="subtitle2" style={{ color: '#ed6c02' }} mt={2} ml={2} onClick={handleClose}>Back</Typography>
                 <DialogTitle>Add Gelathi Facilitators From List</DialogTitle>
-                <Typography mt={2} variant="subtitle2" style={{ color: '#ff7424' }} onClick={() => {
+                <Typography mt={2} mr={2} variant="subtitle2" style={{ color: '#ff7424' }} onClick={() => {
           getData(arr),
             handleClose()
         }}>Save</Typography>
@@ -135,9 +135,12 @@ SimpleDialog.propTypes = {
     selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name }) {
+export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name,operations_manager_id }) {
     
- 
+  useEffect(() => {
+    trainerList()
+}, [operations_manager_id]
+)
     const [open, setOpen] = React.useState(isOpenFilter);
     const [selectedValue, setSelectedValue] = React.useState(emails[1]);
     const [listData, setListData] = useState();
@@ -158,8 +161,8 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
         console.log(sendData, "sendDataaaa")
         var data = JSON.stringify({
             "role_id": 6,
-            "project_id": 292,
-            "operation_manager_id": 35,
+            "project_id": sendData?.project_id?sendData?.project_id:sendData?.projectId,
+            "operation_manager_id":operations_manager_id ,
             "pageNum": 1
         });
 

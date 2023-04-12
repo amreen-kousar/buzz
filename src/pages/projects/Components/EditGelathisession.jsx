@@ -29,8 +29,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function EditGelathiSession({session,editSession, setEditsession}) {
-  console.log("🚀 ~ file: EditGelathisession.jsx:32 ~ EditGelathiSession ~ session:", session)
-  // console.log(session, '<--------shownshownshown')
+  console.log(session, '<--------shownshownshown')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
 
@@ -59,7 +58,6 @@ export default function EditGelathiSession({session,editSession, setEditsession}
     setEditsession(false)
     setOpen(false);
   };
-  console.log("🚀 ~ file: EditGelathisession.jsx:71 ~ UpdateSession ~ session?.tb_id:", session?.tb_id)
   const UpdateSession=()=>{
     var data = JSON.stringify({
         "tb_name": session?.training_batch_name,
@@ -68,7 +66,6 @@ export default function EditGelathiSession({session,editSession, setEditsession}
         "plan_date": moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
         "gf_session_id": session?.id
       });
-        
       
       var config = {
         method: 'post',

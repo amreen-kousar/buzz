@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
 import FiltersHome from './Filters/FiltersHome';
-import GalathiChart from './Components/Charts/GalathiChart';
+// import GalathiChart from './Components/Charts/GalathiChart';
 export default function Gelathidashboard() {
   const navigate = useNavigate();
   const data = localStorage?.getItem('userId')
@@ -405,11 +405,13 @@ let formatdata = summaryData?.data
         </Table>
       </TableContainer>
     </Grid>
-    <Grid item xs={12} sm={12} md={6} sx={{padding:0,margin:0,float: 'left'}}>
-  <GalathiChart data={graphData} />
-</Grid>
+    {/* <Grid item xs={12} sm={12} md={6} > */}
+ 
+{/* </Grid> */}
   </Grid>
-</CardContent></CardContent>
+  <GalathiChart data={graphData} />
+</CardContent>
+</CardContent>
           </Card> 
           :  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Projects</h1>}
               </>

@@ -26,6 +26,7 @@ import {
   Card,
   CardContent,
 } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress'
 import is from 'date-fns/locale/is';
 // components
 
@@ -37,7 +38,7 @@ PoaFilter.propTypes = {
   onCloseEvent: PropTypes.func,
 };
 
-export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridvalue }) {
+export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridvalue , changeState ,clickedItemData}) {
   const [locationS, setLocation] = useState();
   const [checkin, setCheckIn] = useState('');
   const [checkout, setCheckout] = useState('');
@@ -51,6 +52,8 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   const [locationdata, setlocationdata] = React.useState('');
   const hiddenFileInput = React.useRef(null);
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  const [eventData, setEventData] = useState('');
+  const [addImage, setAddImage] = useState('');
 
   const [showCheckoutBtn , setCheckoutBtn] = useState(true)
   const handleClick = (event) => {
@@ -75,28 +78,38 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
     const imageData = URL.createObjectURL(e.target.files[0]);
     console.log(imageData, 'files');
     getBase64(e.target.files[0], function (base64Data) {
-      setImage([...image, base64Data]);
+      setImage( [base64Data]);
+      console.log(base64Data, "base")
       setViewImage(true);
     });
-  };
+  }; 
+
+  console.log(image.toString().slice(22,), "slice")
+
+  console.log(" event id in ", eventdetails.event_id)
+  console.log(clickedItemData , "event data ")
+
+  const [isLoading, setISLoading] = useState(false)
   const postImages = async () => {
-    var dataImage = [];
-    const form = new FormData();
-
-    form?.append('event_id', 78385);
-
-    const data = image?.map((itm) => {
-      form?.append('file[]', itm);
+    setISLoading(true)
+    var dataImage = JSON.stringify({
+      "event_id":eventdetails.event_id , 
+     
+      "photos":image.toString().slice(22,)
     });
+   
     var requestOptions = {
       method: 'POST',
-      body: form,
+      body: dataImage,
       redirect: 'follow',
     };
 
     let res = fetch('https://bdms.buzzwomen.org/appTest/uploadEventPhotos.php', requestOptions)
       .then((itn) => {
         console.log(itn, '<--itemgh');
+        setImage([])
+        alert("Image uploaded successfully..")
+        setISLoading(false)
       })
       .catch((err) => {
         console.log(err, '<---wertyu');
@@ -121,6 +134,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
     if(isSubscribe)
     {
     location();
+    getlocationdata()
   }
   return ()=>{
     isSubscribe = false
@@ -128,21 +142,22 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
     
     console.log("unsubscribe location()")
   }
-  }, [coords ,eventdetails ]);
-
+  }, [coords ,locationdata]);
+//eventdetails
   useEffect(()=>{
     let isSubscribe = true
 
     if(isSubscribe)
     {
       event()
+      getlocationdata()
     }
     return ()=>{
       isSubscribe = false
       console.log("unsubscribe event()")
     }
     
-  },[eventdetails])
+  },[locationdata ,image])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -172,7 +187,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
         });
     });
   }, []);
-//checkin ,checkout removed from dependency
+//checkin ,checkout removed from dependency eventdetails?.check_in
   const postlocation = (async) => {
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -222,8 +237,7 @@ if (response.message === "Check Out Successfully"){
       }
     );
   };
-  const [eventData, setEventData] = useState('');
-  const [addImage, setAddImage] = useState('');
+
 
   const [idEvent, setIdEvent] = [
     {
@@ -232,10 +246,22 @@ if (response.message === "Check Out Successfully"){
     },
   ];
   useEffect(() => {
-    event();
-  }, [select , checkin ,checkout ]);
+    let isSubscribe = true
 
-  const handlecheckin = () => {
+    if(isSubscribe)
+    {
+
+      event();
+      getlocationdata()
+    }
+    return ()=>{
+      isSubscribe = false
+    }
+   
+  }, [select ,locationdata,checkout, image]);
+//  ,eventData?.check_in
+ 
+const handlecheckin = () => {
     setCheckIn(locationS);
     setType('2');
     setCheckvisible(true);
@@ -248,6 +274,7 @@ if (response.message === "Check Out Successfully"){
     setCheckout(locationS);
     setCheckvisible(true);
     postlocation();
+    changeState()
     setCheckoutBtn(false)
     event()
   };
@@ -335,7 +362,7 @@ if (response.message === "Check Out Successfully"){
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25, color: 'black' }}>
-            Event Detail
+            Event Detail 
           </Typography>
           <IconButton
             onClick={() => {
@@ -423,7 +450,7 @@ if (response.message === "Check Out Successfully"){
             <div>
               <div style={{ display: 'flex' }}>
                 {viewImage
-                  ? image.map((i, index) => {
+                  ? image?.map((i, index) => {
                       return (
                         <div style={{ display: 'flex', margin: '1rem' }}>
                           <img src={i} style={{ height: '50px', width: '70px' }} alt="hello" />
@@ -440,7 +467,13 @@ if (response.message === "Check Out Successfully"){
                   : null}
               </div>
               <br />
-              {
+              
+        {clickedItemData.status == 2?
+        null:
+        <>
+                  {eventdetails?.event_completed == 0 ?
+                  <>
+                 
                 <div style={{ display: 'flex' }}>
                   <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
                     <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
@@ -457,28 +490,43 @@ if (response.message === "Check Out Successfully"){
                   </label>
                   Add Photos
                   <br />
-                  <Button
-                    onClick={postImages}
-                    sx={{
-                      '&:hover': {
-                        backgroundColor: '#ffd796',
-                      },
-                      color: '#ff7424',
-                      backgroundColor: '#ffd796',
-                      marginLeft: '10px',
-                    }}
-                  >
-                    Upload
-                  </Button>
-                </div>
-              }
-            </div>
+         
+           <Button
+           onClick={postImages}
+           
+           sx={{
+             '&:hover': {
+               backgroundColor: '#ffd796',
+             },
+             color: '#ff7424',
+             backgroundColor: '#ffd796',
+             marginLeft: '10px',
+           }}
+         >
+           Upload  
+         </Button>
+         </div>
+              
+           
+         </>
+         :
+        null
+        }  
+        </>
+
+        }
+              </div> 
+
+                 
+             
 
             <Card style={{ marginTop: 20 }}>
               <CardContent>
+               
+             {isLoading? <CircularProgress /> : 
                 <div>
                   <img src={eventData?.photo1 ? eventData?.photo1 : ''} />
-                </div>
+                </div>}
               </CardContent>
             </Card>
           </div>

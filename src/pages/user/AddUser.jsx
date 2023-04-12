@@ -22,7 +22,7 @@ function AddUser(props) {
     let [emailExists, setEmailExists] = useState(false)
 
     var [AddUser, setAddUser] = useState({
-        role: { id: '0', roleName: 'Admin' }, first_name: '', last_name: "", contactNum: '', workNum: '', office_email_id: '', address: '', address3: "", address2: "",
+        role:'', first_name: '', last_name: "", contactNum: '', workNum: '', office_email_id: '', address: '', address3: "", address2: "",
         pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project: "",
         emp_id: ""
     })
@@ -36,6 +36,39 @@ function AddUser(props) {
         getEmpId(2)
     }, [])
 
+    console.log(AddUser.office_email_id, "outside")
+
+    //to check email exit are not 
+useEffect(()=>{
+    let subscribe =true 
+    if(AddUser.office_email_id.length > 0){
+        if(subscribe){
+            setTimeout(checkEmailExists() , 5000)
+          console.log( " calling inside useEffect")
+        }
+        console.log("useEffect ender even it is null")
+           }
+  
+    
+    return ()=>{
+        subscribe =false
+    }
+       
+},[AddUser.office_email_id])
+
+const emailchangeHandler=(e) => { 
+
+    
+        setAddUser({ ...AddUser, office_email_id: e });
+       checkEmailValidation()
+       setTimeout(checkEmailExists() , 5000)
+        console.log(AddUser.office_email_id , "changes")
+    }
+      
+    
+    console.log(AddUser.office_email_id , " out side changes")
+
+    
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -63,13 +96,15 @@ function AddUser(props) {
       axios(config)
           .then((response) => {
 
-              if (response.status) {
+              if (response.data.code===409) {
                   console.log(response)
-                  //setEmailExists(true)
-                  setEmailExists(false)
+                  console.log("response is 409", response)
+                  setEmailExists(true)
+                  
               }
               else {
                   setEmailExists(false)
+                  console.log("response is 200", response)
               }
           })
           .catch((error) => {
@@ -79,12 +114,13 @@ function AddUser(props) {
 
 
     const checkEmailValidation = () => {
-        if (emailExists) {
-            setEmailExists(false)
-        }
+        // if (emailExists) {
+        //     setEmailExists(false)
+        // }
         console.log(AddUser.office_email_id, "office email id")
         if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(AddUser.office_email_id))) {
-            checkEmailExists()
+           
+            console.log((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(AddUser.office_email_id)) ,"validating part")
             setErrors({ ...errors, office_email_id: false })
         }
         else {
@@ -226,14 +262,14 @@ let userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 console.log(userid,"userrrrrridddddddd")
     const submitUser = () => {
         AddUser.project = inputProject.map(i => parseInt(i.id))
-        AddUser.office_email_id = AddUser.office_email_id
-        AddUser.empRole = AddUser.role.id
-        AddUser.supervisorId = AddUser.reportingManager.id
+        AddUser.office_email_id = AddUser?.office_email_id
+        AddUser.empRole = AddUser?.role.id
+        AddUser.supervisorId = AddUser?.reportingManager.id
         AddUser.profile_pic = ''
         AddUser.status = AddUser.present_status ? '1' : '0';
         AddUser.createdBy = userid,
             AddUser.lastUpdatedBy = userid
-        console.log(AddUser)
+       
         const data = JSON.stringify(AddUser);
 
         const config = {
@@ -339,20 +375,21 @@ console.log(userid,"userrrrrridddddddd")
 
             >
 
-                <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
-                    <Toolbar>
+                {/* <AppBar > */}
+                <form onSubmit={(e)=>{e.preventDefault(); submitUser()}}>
+                    <Toolbar sx={{ bgcolor: '#ff7424' }}>
                         <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
                             Add Users
                         </Typography>
-                        <Button autoFocus color="inherit" onClick={submitUser}>
+                        <Button autoFocus color="inherit" type="submit">
                             save
                         </Button>
                     </Toolbar>
 
-                </AppBar>
+                {/* </AppBar> */}
                 {/* <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }} >
                     <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                         <CloseIcon />
@@ -364,7 +401,8 @@ console.log(userid,"userrrrrridddddddd")
                         save
                     </Button>
                 </Toolbar> */}
-                <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
+                
+                {/* <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
                     <DialogContentText
                         id="scroll-dialog-description"
                         tabIndex={-1}
@@ -379,7 +417,7 @@ console.log(userid,"userrrrrridddddddd")
 
                             noValidate
                             autoComplete="off"
-                        >
+                        > */}
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
                                 <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem", color: '#ff7424' }}>
@@ -458,7 +496,15 @@ console.log(userid,"userrrrrridddddddd")
                                 <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.workNum} onChange={(e) => {
                                      setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' />
 
-                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} onChange={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} onPaste={(e) => { setAddUser({ ...AddUser, office_email_id: e.target.value }); checkEmailValidation() }} variant="outlined" color="common" />
+                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} 
+                                onChange={(e)=>{
+                                    emailchangeHandler(e.target.value)
+                                }} 
+                                     onPaste={(e) => { 
+                                        setAddUser({ ...AddUser, office_email_id: e.target.value }); 
+                                        checkEmailValidation()
+                                     }}
+                                         variant="outlined" color="common" />
 
                                 <div style={{ marginLeft: "1rem", fontSize: "0.8rem", fontWeight: "700" }}>
                                     {emailExists ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp; Email Id already exists !</span> : (errors.office_email_id) ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp;Invalid Email Id</span> : (AddUser.office_email_id != "") ? <span style={{ color: "green", display: "flex" }}><Iconify icon="mdi:tick-circle" width={20} height={20} /> &nbsp;Valid Email Id</span> : null}
@@ -501,9 +547,9 @@ console.log(userid,"userrrrrridddddddd")
                                 {["Driver"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="License Number" value={AddUser.license_number} onChange={(e) => { setAddUser({ ...AddUser, license_number: e.target.value }) }} variant="outlined" />
                                 }
                             </div>
-                        </Box>
+                        {/* </Box>
                     </DialogContentText>
-                </DialogContent>
+                </DialogContent> */}
                 {/* <DialogActions>
                     <Button variant="contained" onClick={submitUser} color="warning" sx={{
                         ':focus': {
@@ -519,6 +565,7 @@ console.log(userid,"userrrrrridddddddd")
                     <Button variant="contained" color="error" onClick={handleClose}>Cancel</Button>
 
                 </DialogActions> */}
+                </form>
             </Dialog>
         </div>
     )

@@ -264,9 +264,9 @@ axios(config)
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
-      "emp_id": "329",
-      "role_id": "5",
-      "date": "2022/08/11"
+      "emp_id": userid,
+     
+      
     });
 
     var config = {
@@ -373,8 +373,8 @@ axios(config)
 
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic"  type="number"
-  inputProps={{ min:0, pattern: "[0-9]*" }} onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading *" variant="outlined" color="common" 
+                <TextField id="outlined-basic" 
+  inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading *" variant="outlined" color="common" 
                 />
               </Stack>
               <Stack style={{ marginTop: 20 ,color:'black'}}>
