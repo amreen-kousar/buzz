@@ -367,7 +367,7 @@ let formatdata = summaryData?.data
             return(
               <>
               {summaryData?.data?
-               <Card sx={{ marginTop: 5, marginLeft: 4,justifyContent:'center' }}>
+               <Card sx={{ marginTop: 5,justifyContent:'center' }}>
 <CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
               Project : {item?.name}
