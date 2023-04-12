@@ -11,13 +11,13 @@ const GalathiChart = (props) => {
 
     console.log("🚀 ~ file: GalathiChart.jsx:17 ~ GalathiChart ~ props.data:", data)
   return (
-    <div className="chart-container">
-      <ResponsiveContainer  width="100%" height="100%" aspect={1.5}>
-        <PieChart >
+    <div className="chart-container" style={{display:"flex"}}>
+      <ResponsiveContainer  width="100%" height="auto" aspect={1.6}>
+        <PieChart  style={{float: 'left'}}>
           <Pie
             data={data}
-            innerRadius={60}
-            outerRadius={80}
+            innerRadius={"60%"}
+            outerRadius={"80%"}
             fill="#8884d8"
            
             
@@ -28,7 +28,7 @@ const GalathiChart = (props) => {
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}/>
             ))}
           </Pie>
-          <Legend layout="vertical" verticalAlign="middle" align="right" />
+          <Legend style={{maxwidth:"30wh"}} layout="vertical" verticalAlign="middle" align="right" />
           <Tooltip  
             isAnimationActive={false}
             cursor={{fill: 'transparent', border: 'none',backgroundColor: 'none',}}

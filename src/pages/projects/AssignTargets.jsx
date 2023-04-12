@@ -101,7 +101,7 @@ axios(config)
            
             </Stack>
             <TableContainer >
-                  <Table aria-label="customized table">
+                  <Table style={{textAlign:"left"}}aria-label="customized table">
                     <TableBody>
                       <TableRow >
                         <TableCell>Project &nbsp;:&nbsp;{trainersTargets?.project_name}</TableCell>
