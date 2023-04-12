@@ -267,6 +267,7 @@ console.log(materialStock , " chnaged data")
                     <TextField
           required
           id="standard-required"
+          type="number"
          onChange={
           
             (e)=>{onChangeMaterialValue(index , e.target.value) }

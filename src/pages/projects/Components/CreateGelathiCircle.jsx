@@ -23,7 +23,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data1,circle}) {
+export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data1,circle,setGelathiDataToEmpty}) {
   
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(dayjs('2022-04-17'));
@@ -37,10 +37,13 @@ export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data
   console.log(gelathiData ,"clicket data")
   const handleClickOpen = () => {
     setOpen(true);
+    
   };
 
   const handleClose = () => {
     setOpen(false);
+    
+    
   };
 console.log(data1?.project_id,"projectid")
 gelathiData.forEach((itm) => {

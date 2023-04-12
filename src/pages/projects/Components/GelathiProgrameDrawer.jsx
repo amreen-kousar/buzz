@@ -78,6 +78,8 @@ const [viewImage, setViewImage] = React.useState(false);
 
   localStorage.setItem('clickData', clcikData);
   const localstoragrClickData = localStorage.getItem('clcikData');
+  const userName = JSON.parse(localStorage.getItem('userDetails'))?.first_name;
+  console.log("userNAme in localstorage", userName)
 
   useEffect(()=>{
     setImages([])
@@ -105,6 +107,22 @@ const [viewImage, setViewImage] = React.useState(false);
       isSubscribe = false;
     };
   }, []);
+
+  // geting notes for each drawer 
+  useEffect(() => {
+    console.log('useEffect for getnotehandler');
+
+    let isSubscribe = true;
+
+    if (isSubscribe) {
+      getNoteHandler();
+      getGFSessionData();
+    }
+
+    return () => {
+      isSubscribe = false;
+    };
+  }, [session.tb_id]);
   console.log(clcikData, '<---------gf_session_namegf_session_name');
 
   //   image converting
@@ -659,6 +677,7 @@ const convertImage = (e) => {
 
               <CardContent>
                 <div>
+                <Card style={{ marginTop: 20, marginLeft: 10 }}>
                   {getAllNotes &&
                     getAllNotes.map((i, index) => {
                       {
@@ -666,7 +685,7 @@ const convertImage = (e) => {
                       }
                       return (
                         <>
-                          <Card style={{ marginTop: 20, marginLeft: 10 }}>
+                         
                             {/* <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}> */}
                             <Grid
                               container
@@ -677,7 +696,7 @@ const convertImage = (e) => {
                             >
                               <Typography variant="body1">
                                 {' '}
-                                {gelathiFacikitatorLead.gfl_name} {i?.date}
+                                {userName} {i?.date}
                               </Typography>
 
                               {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
@@ -685,10 +704,11 @@ const convertImage = (e) => {
                             <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
                               {i?.notes}{' '}
                             </Typography>
-                          </Card>
+                         
                         </>
                       );
                     })}
+                     </Card>
                 </div>
               </CardContent>
             </div>

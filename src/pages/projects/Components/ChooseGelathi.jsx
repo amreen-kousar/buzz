@@ -51,6 +51,10 @@ console.log(data1,"state")
     setOpen(true);
   };
 
+  const setGelathiDataToEmpty = ()=>{
+    console.log("data clearing ")
+    setGelathiData([])
+  }
   const checkBoxData = (itm) =>{
     if(gelathiData?.find(i=>i?.id===itm?.id))
     {
@@ -153,7 +157,7 @@ const changeText = (e) => {
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button> */}
-            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1} />
+            <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1} setGelathidataemptyInChild={setGelathiDataToEmpty}/>
           </Toolbar>
          
 

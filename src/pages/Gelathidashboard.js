@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
 import FiltersHome from './Filters/FiltersHome';
-import GalathiChart from './Components/Charts/GalathiChart';
+// import GalathiChart from './Components/Charts/GalathiChart';
 export default function Gelathidashboard() {
   const navigate = useNavigate();
   const data = localStorage?.getItem('userId')

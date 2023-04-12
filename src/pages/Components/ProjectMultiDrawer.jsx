@@ -47,9 +47,9 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
        // console.log(batchState)
         
     }, [batchState,clcikData])
-    // useEffect(()=>{
-    //   setImages([])
-    // },[])
+    useEffect(()=>{
+      setImages([])
+    },[batchState?.training_batch_id])
     console.log(clcikData,"<---sads",batchState)
     const getTrainingBatch = async =>{
         
@@ -110,8 +110,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
     const UploadImages = (e) =>{
         console.log("upload method is calling ")
         var raw = JSON.stringify({
-            "project_id": 292
-            ,
+            "project_id": projectId,
             "tb_id":batchState?.id,
             "trainer_id": idvalue,
             "day": 1,
@@ -271,7 +270,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                             {/* photo upload end  */}
                             <Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
                                 <CardContent>
-                                    <Typography>View Photos </Typography>
+                                    <Typography>View Photos  </Typography>
                                     
                                 </CardContent>
                                 </Card>

@@ -162,7 +162,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
-            Profile
+            Profile 
           </Typography>
          
         </Stack>
@@ -353,10 +353,14 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       </Grid>
       <Grid item mb={2}>
         <TextField fullWidth size="small" id="Work"  margin="dense"
+         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+         type="number"
           value={editData?.workNum}
-          onChange={(e) => { setEditData({ ...editData, workNum: e?.target?.value }) }}
-          type="number"
-          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+          onChange={(e) => { 
+            if(e?.target?.value.toString().length <= 10){
+              setEditData({ ...editData, workNum: e?.target?.value })
+            }
+            }}
           label="Work" variant="outlined" color="common" />
           
       </Grid>
