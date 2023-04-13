@@ -16,15 +16,19 @@ import {
   IconButton,
   Typography,
   RadioGroup,
-  Card,
+  Card,TextField,
   CardContent,
 } from '@mui/material';
 // components
+import moment from 'moment';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
 import AddAttendance from './AddAttendance';
 import Photos from '../../../pages/projects/Components/Photos';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +43,10 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [photos, setPhotos] = React.useState(false);
   const [shown, setShown] = React.useState(false);
   const [images, setImages] = useState([]);
-
+  const [schedule,setReschedule]=React.useState(false);
+  const [editSession,setEditsession]=useState(false);
+  const [session, setSession] = useState('');
+  const [date, setDate] = useState(new Date())
   useEffect(() => {
     getTrainingBatch();
     // console.log(batchState)
@@ -123,6 +130,66 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     images.splice(index, 1);
     setImages([...images]);
   };
+  const reschedudlehandler=()=>{
+    setReschedule(true)
+   }
+ 
+   const Reschedule=(e)=>{
+     
+     var data = JSON.stringify({
+       "poa_id": e,
+       "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss')
+     });
+     
+     var config = {
+       method: 'post',
+       url: 'https://bdms.buzzwomen.org/appTest/updateReschedule.php',
+       headers: { 
+         'Content-Type': 'application/json'
+       },
+       data : data
+     };
+     
+     axios(config)
+     .then(function (response) {
+       setReschedule(false)
+       onCloseFilterGF()
+       console.log(JSON.stringify(response.data));
+     })
+     .catch(function (error) {
+       console.log(error);
+     });
+     
+   }
+   const removesession=(e)=>{
+    if(confirm("Do You want to Cancel?")){
+      var data = JSON.stringify({
+        "poa_id": e?.id,
+        "day": ""
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/updatePoaCancel.php',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        onCloseFilterGF();
+        getTrainingBatch();
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+    }
+  }
   return (
     <>
       <Drawer
@@ -156,12 +223,27 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                 <CardContent>
                   <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
                     Project : &nbsp;{batch?.projectName}
-                    {console.log(batch?.projectName, '<--------gfgfgfgfgfgdrawer')}
+                    {console.log(batch, '<--------gfgfgfgfgfgdrawer')}
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     Partner : &nbsp;{batch?.partnerName}
+                    {/* <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton> */}
+            {(clcikData?.status=='1' || clcikData?.status=='0')?<><IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
+            {console.log(batch,"sessionidddddddd")}
+            <IconButton onClick={()=>removesession(batch)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton></>:null}
                   </Typography>
-
+                  {schedule && <Stack>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+           <DateTimePicker
+   required
+    value={date}
+    onChange={(e) => {setDate(e)}}
+    renderInput={(params) => <TextField {...params} color="common" />}
+  />
+        </LocalizationProvider>
+        {console.log(batch,"batch?.id")}
+        <Button onClick={()=>Reschedule(batch?.id)}>Save</Button>
+      </Stack>}
                   <Typography variant="body1" gutterBottom>
                     Plan Day:&nbsp;{batch?.plan_date}
                   </Typography>

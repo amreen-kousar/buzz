@@ -9,6 +9,13 @@ import { AppWidgetSummary } from '../../sections/@dashboard/app';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from '../Filters/FiltersHome';
 import moment from 'moment';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableContainer from '@mui/material/TableContainer';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow';
+
 export default function DashboardApp() {
   const navigate = useNavigate();
 
@@ -319,15 +326,18 @@ export default function DashboardApp() {
                   })
                 }}>
                 <CardContent>
-                  <Typography variant="h4" component="h2" marginLeft={2}>
-                    {itm?.name}
-                  </Typography>
-                  <Typography variant="h4" component="h2" marginLeft={2}>
-                    {`Actual / Target : ${itm?.actual} / ${itm?.target}`}
-                  </Typography>
-                  {/* <Typography variant="h4" component="h2" marginLeft={2}>
-                    {`Duration : ${itm?.startDate} / ${itm?.endDate}`}
-                  </Typography> */}
+                <TableContainer >
+                  <Table aria-label="customized table">
+                    <TableBody>
+                      <TableRow >
+                        <TableCell><span style={{fontWeight:700,fontSize:15}}>Project<br/>Actual / Target</span> </TableCell>
+                        <TableCell><span style={{fontWeight:700,fontSize:15}}>:&nbsp;{itm?.name}<br/>:&nbsp; {itm?.actual} / {itm?.target} </span>  </TableCell>
+                      </TableRow>
+                      
+                     
+                    </TableBody>
+                  </Table>
+                </TableContainer>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={1}>
                     {

@@ -492,11 +492,11 @@ console.log(userid,"userrrrrridddddddd")
                                         setAddUser({ ...AddUser, contactNum: e.target.value })
                                     }
                                     console.log(e,"<---wefewfwef")
-                                    }} variant="outlined" color="common" />
+                                    }} variant="outlined" color="common" /><br/>
                                 <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.workNum} onChange={(e) => {
-                                     setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' />
+                                     setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' /><br/><br/>
 
-                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required*' value={AddUser.office_email_id} 
+                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required' value={AddUser.office_email_id} 
                                 onChange={(e)=>{
                                     emailchangeHandler(e.target.value)
                                 }} 
@@ -504,19 +504,19 @@ console.log(userid,"userrrrrridddddddd")
                                         setAddUser({ ...AddUser, office_email_id: e.target.value }); 
                                         checkEmailValidation()
                                      }}
-                                         variant="outlined" color="common" />
+                                         variant="outlined" color="common" /><br/><br/>
 
                                 <div style={{ marginLeft: "1rem", fontSize: "0.8rem", fontWeight: "700" }}>
                                     {emailExists ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp; Email Id already exists !</span> : (errors.office_email_id) ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp;Invalid Email Id</span> : (AddUser.office_email_id != "") ? <span style={{ color: "green", display: "flex" }}><Iconify icon="mdi:tick-circle" width={20} height={20} /> &nbsp;Valid Email Id</span> : null}
                                 </div>
 
 
-                                <TextField fullWidth required id="outlined-basic" label="Address" helperText='Address Required*' value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" color="common"/>
+                                <TextField fullWidth required id="outlined-basic" label="Address" helperText='Address Required*' value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" color="common"/><br/><br/>
 
-                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Address 1" value={AddUser.address3} onChange={(e) => { setAddUser({ ...AddUser, address3: e.target.value }) }} variant="outlined" color="common"/>}
-                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="outlined-basic" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" color="common"/>}
+                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Address 1" value={AddUser.address3} onChange={(e) => { setAddUser({ ...AddUser, address3: e.target.value }) }} variant="outlined" color="common"/>}<br/><br/>
+                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="outlined-basic" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" color="common"/>}<br/><br/>
 
-                                <TextField fullWidth id="outlined-basic" type="number" label="Pincode" value={AddUser.pincode} inputProps={{ maxLength: 6 }} onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" color="common"/>
+                                <TextField fullWidth id="outlined-basic"  label="Pincode" inputProps={{ maxLength: 6 }} type="number" required value={AddUser.pincode}  onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" color="common"/><br/><br/>
                                 {
 
                                     ["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <FormControl fullWidth>

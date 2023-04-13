@@ -9,10 +9,15 @@ import Chip from '@mui/material/Chip';
 import { AppWidgetSummary } from '../sections/@dashboard/app';
 import DashboardFilter from './Components/DashboardFilters/DashboardFilter';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
-
+import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from './Filters/FiltersHome';
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableContainer from '@mui/material/TableContainer';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow';
 
 export default function Trainerdashboard() {
   const navigate = useNavigate();
@@ -251,22 +256,19 @@ export default function Trainerdashboard() {
             return (
               <>
                 <Card>
-                  <CardContent style={{ fontWeight: 700 }}>
-                    <Stack direction="row" spacing={8}>
-                      <Grid>Project</Grid>
-                      <Grid>{item?.name}</Grid>
-
-                    </Stack>
-                    <Stack direction="row" spacing={2}>
-                      <Grid>Actual Target</Grid>
-                      <Grid>{item?.actual}/{item?.target}</Grid>
-
-                    </Stack>
-                    <Stack direction="row" spacing={7}>
-                      <Grid>Duration</Grid>
-                      <Grid>{item?.startDate}&nbsp;&nbsp;to&nbsp;&nbsp;{item?.endDate}</Grid>
-
-                    </Stack>
+                  <CardContent>
+                  <TableContainer >
+                  <Table aria-label="customized table">
+                    <TableBody>
+                      <TableRow >
+                        <TableCell><span style={{fontWeight:700,fontSize:15}}>Project<br/>Actual / Target<br/>Duration</span> </TableCell>
+                        <TableCell><span style={{fontWeight:700,fontSize:15}}>:&nbsp;{item?.name}<br/>:&nbsp; {item?.actual} / {item?.target} <br/>:&nbsp;{moment(item?.startDate)?.format('DD-MM-YYYY')} / {moment(item?.endDate)?.format('DD-MM-YYYY')}</span>  </TableCell>
+                      </TableRow>
+                      
+                     
+                    </TableBody>
+                  </Table>
+                </TableContainer>
                     <Grid container spacing={3} marginTop={4}>
                       <Grid item xs={4} sm={8} md={4}>
 

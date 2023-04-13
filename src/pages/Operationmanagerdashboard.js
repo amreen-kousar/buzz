@@ -11,12 +11,27 @@ import { AppWidgetSummary } from '../sections/@dashboard/app';
 import DashboardFilter from './Components/DashboardFilters/DashboardFilter';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
 import moment from 'moment';
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableContainer from '@mui/material/TableContainer';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
 import FiltersHome from './Filters/FiltersHome';
-
+import { styled } from '@mui/material/styles';
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  //   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  // marginLeft: 'auto' ,
+  //   transition: theme.transitions.create('transform', {
+  //     duration: theme.transitions.duration.shortest,
+  //   }),
+}));
 export default function Operationmanagerdashboard() {
 
   const navigate = useNavigate();
@@ -217,9 +232,9 @@ export default function Operationmanagerdashboard() {
           </Stack>
      
           <Grid container spacing={3} marginTop={4}>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={4} sm={8} md={4} >
 
-              <AppWidgetSummary
+              <AppWidgetSummary 
                 title="Target"
                 total={summaryData?.summary_target}
                 color="actual"
@@ -305,32 +320,42 @@ export default function Operationmanagerdashboard() {
                   marginBottom: '40px',
                 }}
                 
-                // onClick={() => {
-                //   navigate('/dashboard/operationmanager/chart', {
-                //     state: {
-                //       filterData: filterData
-                //     }
-                //   })
-                // }}
+                onClick={() => {
+                  navigate('/dashboard/operationmanager/chart', {
+                    state: {
+                      filterData: filterData
+                    }
+                  })
+                }}
                 >
                   <CardContent>
-                  <Typography variant="h6" component="h6" marginLeft={2}>
-                    {itm?.name}
-                  </Typography>
-                  <Typography variant="h6" component="h6" marginLeft={2}>
-                    {`Actual / Target : ${itm?.actual} / ${itm?.target}`}
-                  </Typography>
-                  <Typography variant="h6" component="h6" marginLeft={2}>
-                  
-                    {`Duration :   ${moment(itm?.startDate)?.format('DD-MM-YYYY')} /  ${moment(itm?.endDate)?.format('DD-MM-YYYY')}`}
-                  </Typography>
+                  {/* <Typography variant="h6" component="h6" marginLeft={2}>
+                    Project  :{itm?.name}<br/>
+                 
+                    {`Actual / Target : ${itm?.actual} / ${itm?.target}`}<br/>
+                 
+                    {`Duration :   ${moment(itm?.startDate)?.format('DD-MM-YYYY')} /  ${moment(itm?.endDate)?.format('DD-MM-YYYY')}`}<br/>
+                  </Typography> */}
+                  <TableContainer >
+                  <Table aria-label="customized table">
+                    <TableBody>
+                      <TableRow >
+                        <TableCell><span style={{fontWeight:700,fontSize:15}}>Project<br/>Actual / Target<br/>Duration</span> </TableCell>
+                        <TableCell><span style={{fontWeight:700,fontSize:15}}>:&nbsp;{itm?.name}<br/>:&nbsp; {itm?.actual} / {itm?.target} <br/>:&nbsp;{moment(itm?.startDate)?.format('DD-MM-YYYY')} / {moment(itm?.endDate)?.format('DD-MM-YYYY')}</span>  </TableCell>
+                      </TableRow>
+                      
+                     
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={1}>
                     {
                       summarySubDataView.map(s => {
-                        return <Grid item xs={s.itemXs} sm={s.itemSm} md={s.itemMd}>
+                        return <Grid item xs={s.itemXs} sm={s.itemSm} md={s.itemMd} >
 
-                          <AppWidgetSummary
+                          <AppWidgetSummary 
                             title={s.title}
                             total={`${itm[s.total]} ${s.ext ? s.ext : ''}`}
                             color={s.color}
