@@ -29,6 +29,7 @@ import Photos from '../../../pages/projects/Components/Photos';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import CheckinOut from './CheckinOut';
 
 // ----------------------------------------------------------------------
 
@@ -46,6 +47,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [schedule,setReschedule]=React.useState(false);
   const [editSession,setEditsession]=useState(false);
   const [session, setSession] = useState('');
+  const [check, setCheck] = useState(false);
   const [date, setDate] = useState(new Date())
   useEffect(() => {
     getTrainingBatch();
@@ -266,6 +268,13 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                   setShown(e);
                 }}
               />
+               <CheckinOut
+              photos={check}
+              batch={batch}
+              setCheck={(e) => {
+                setCheck(e);
+              }}
+               />
               <Card
                 onClick={() => {
                   setShown(true), console.log('ferfgreg');
@@ -327,7 +336,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                     /> Add Photos
                   </label>
                  
-                  <br />
+                  <br />   <Button sx={{  color: '#ff7424' }} onClick={UploadImages}>Upload Photos</Button>
                 {images?.map((itm,index) => {
                    
                   return <div style={{ display: 'flex', margin: '1rem' }}>
@@ -348,8 +357,21 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                 </CardContent> */}
                 </CardContent>
               </Card>
+              <Card
+                onClick={() => {
+                  setCheck(true), console.log('ferfgreg');
+                }}
+                style={{ marginTop: 20 }}
+              >
+                <CardContent>
+                <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
+                    <Iconify icon="material-symbols:add" width={30} height={30} />
+                  </div>
+                  <Typography>Check in/ Check Out</Typography>
+                </CardContent>
+              </Card>
             </div>
-            <Button sx={{  color: '#ff7424' }} onClick={UploadImages}>Upload Photos</Button>
+         
           </Stack>
         </Scrollbar>
 

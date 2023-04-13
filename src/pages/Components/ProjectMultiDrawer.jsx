@@ -27,6 +27,7 @@ import ShaktiDialog from '../projects/Components/ShaktiDialog'
 import Photos from '../projects/Components/Photos';
 import Programevaluationday1 from '../projects/Components/Programevaluationday1';
 import Evaluationday2 from '../projects/Components/Evaluationday2';
+import CheckinOut from './PlanofactionFilters/CheckinOut';
 // ----------------------------------------------------------------------
 
 projectMultiDrawer.propTypes = {
@@ -41,6 +42,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
      const [photos,setPhotos] = React.useState(false)
      const [shown,setShown] = React.useState(false)
    const [images,setImages] = useState([])
+   const [check,setCheck]=useState(false)
    const [viewImage, setViewImage] = React.useState(false);
    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     useEffect(() => {
@@ -297,6 +299,14 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                             </Card>
                             <Programevaluationday1 />
                             <Evaluationday2 />
+                           {batch && <CheckinOut
+              photos={check}
+              batch={batch}
+              setCheck={(e) => {
+                setCheck(e);
+              }}
+               />}
+                 
                         </div>
                         {/* <Button onClick={UploadImages}>upload image</Button> */}
 
