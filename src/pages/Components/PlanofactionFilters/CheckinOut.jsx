@@ -223,9 +223,39 @@ console.log(checkIn,"checkintime")
         </AppBar>
         <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs  value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Day1" {...a11yProps(0)} />
-          <Tab label="Day2" {...a11yProps(1)} />
+        <Tabs  value={value} onChange={handleChange} indicatorColor='warning' aria-label="basic tabs example">
+          <Tab label="Day1" {...a11yProps(0)}  sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ed6c02',
+                  },
+
+                  color: 'black',
+                }} style={
+                  value == 0
+                    ? {
+                        borderBottom: '3px solid #ed6c02',
+                        color: '#ed6c02',
+                      }
+                    : null
+                }/>
+          <Tab label="Day2" {...a11yProps(1)} sx={{
+                  ':hover': {
+                    bgcolor: '#ffd796', // theme.palette.primary.main
+                    color: '#ed6c02',
+                  },
+
+                  color: 'black',
+                }} 
+                 style={
+                  value == 1
+                    ? {
+                        borderBottom: '3px solid #ed6c02',
+                        color: '#ed6c02',
+                      }
+                    : null
+                }
+                />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
