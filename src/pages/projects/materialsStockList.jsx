@@ -162,7 +162,12 @@ console.log(materialStock , " chnaged data")
         // var formdata = new FormData();
         
         // console.log(formdata , "formdata look")
-        
+        if(stock.length<=0){
+          alert("nothng ")
+          
+        }{
+          console.log(stock, " updated stock")
+        }
         var data = JSON.stringify({
           
             "project_id": data1.project_id,
@@ -184,6 +189,7 @@ console.log(materialStock , " chnaged data")
         axios(config)
         .then(function (response) {
          if(response.status == 200){
+          setClose(false)
           
          demoi()
           console.log("susscesfully added data material")
@@ -209,22 +215,22 @@ console.log(materialStock , " chnaged data")
                   {Userrole == 2 || 4?
                   <>
                   {close?
-                    <IconButton  style={{ float: 'right', color: '#ff7424', position: 'absolute', right: 0, marginRight: '125px' }} onClick={
+                    <IconButton  style={{ float: 'right',backgroundColor: '#ed6c02', color:"white", position: 'absolute', right: 0, marginRight: '125px' }} onClick={
                       ()=>{
                         setAdmin(false)
                         setClose(false)
                       }
                      }>
-                        <Iconify style={{ color: 'black' }} icon="material-symbols:close" />
+                        <Iconify style={{ color:"white" }} icon="material-symbols:close" />
                       </IconButton>
                   :
-                    <IconButton  style={{ float: 'right', color: '#ff7424', position: 'absolute', right: 0, marginRight: '125px' }} onClick={
+                    <IconButton  style={{ float: 'right', backgroundColor: '#ed6c02', color:"white", position: 'absolute', right: 0, marginRight: '125px' }} onClick={
                       ()=>{
                         setAdmin(true)
                         setClose(true)
                       }
                      }>
-                        <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
+                        <Iconify style={{color:"white"  }} icon="material-symbols:add" />
                       </IconButton>
 
                   }

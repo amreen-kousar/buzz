@@ -46,31 +46,38 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
             ...addBus
         });
 
-        var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/createBus.php',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: data
-        };
-        showBussHandler()
+        if(addBus.chassis_number ==" " || addBus.engine_number =="" || addBus.insurance_company=="" || addBus.insurance_number==""|| addBus.permit==""){
+            alert("Please Fill the complte detail")
+        }else{
+            var config = {
+                method: 'post',
+                url: 'https://bdms.buzzwomen.org/appTest/createBus.php',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            };
+            showBussHandler()
+    
+    
+            axios(config)
+                .then(function (response) {
+                    console.log(response.data)
+                    if (response.data.code == 200) {
+                        setOpenAddBus(false)
+                        
+                        console.log("calling the api ")
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    console.log("calling the api  in failure")
+                });
+            console.log(addBus)
 
+        }
 
-        axios(config)
-            .then(function (response) {
-                console.log(response.data)
-                if (response.data.code == 200) {
-                    setOpenAddBus(false)
-                    
-                    console.log("calling the api ")
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-                console.log("calling the api  in failure")
-            });
-        console.log(addBus)
+      
     }
 
     return (

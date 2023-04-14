@@ -161,7 +161,7 @@ export default function Trainerdashboard() {
        
         <Stack direction="row" alignItems="center" justifyContent="space-between" >
           <Typography variant="h5" gutterBottom sx={{ml:4}}>
-            Summary
+            Summary 
 
           </Typography>
           <Button style={{ float: "right", color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleOpenFilter() }}>
@@ -253,17 +253,17 @@ export default function Trainerdashboard() {
                 <Card>
                   <CardContent style={{ fontWeight: 700 }}>
                     <Stack direction="row" spacing={8}>
-                      <Grid>Project</Grid>
+                      <Grid>Project </Grid>
                       <Grid>{item?.name}</Grid>
 
                     </Stack>
                     <Stack direction="row" spacing={2}>
-                      <Grid>Actual Target</Grid>
-                      <Grid>{item?.actual}/{item?.target}</Grid>
+                      <Grid>Actual Target </Grid>
+                      <Grid>{item?.actual}/{item?.target ?item?.target : 0 }</Grid>
 
                     </Stack>
                     <Stack direction="row" spacing={7}>
-                      <Grid>Duration</Grid>
+                      <Grid>Duration </Grid>
                       <Grid>{item?.startDate}&nbsp;&nbsp;to&nbsp;&nbsp;{item?.endDate}</Grid>
 
                     </Stack>

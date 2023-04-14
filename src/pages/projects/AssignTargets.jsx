@@ -104,13 +104,13 @@ axios(config)
                   <Table style={{textAlign:"left"}}aria-label="customized table">
                     <TableBody>
                       <TableRow >
-                        <TableCell>Project &nbsp;:&nbsp;{trainersTargets?.project_name}</TableCell>
+                        <TableCell style={{ borderBottom: "none"}}>Project &nbsp;:&nbsp;{trainersTargets?.project_name}</TableCell>
                       </TableRow>
                       <TableRow >
-                        <TableCell>Taluk &nbsp;:&nbsp;{trainersTargets?.location_name}</TableCell>
+                        <TableCell style={{ borderBottom: "none"}}>Taluk &nbsp;:&nbsp;{trainersTargets?.location_name}</TableCell>
                       </TableRow>
                       <TableRow >
-                        <TableCell>Partner &nbsp;:&nbsp;{trainersTargets?.partnerName}</TableCell>
+                        <TableCell style={{ borderBottom: "none"}}>Partner &nbsp;:&nbsp;{trainersTargets?.partnerName}</TableCell>
                       </TableRow>
                      
                     </TableBody>
