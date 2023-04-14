@@ -28,7 +28,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography id="children">{children}</Typography>
         </Box>
       )}
     </div>
@@ -108,25 +108,26 @@ export default function TravelA() {
 
 
   return (
-    <Page title="Dashboard: Products">
-      <Container>
+    <Page id="dashboard-products" title="Dashboard: Products">
+      <Container id="container-travel-allowance">
 
 
-        <Typography variant="h4" sx={{ mb: 5 }}>
+        <Typography id="travel-allowance" variant="h4" sx={{ mb: 5 }}>
           Travel Allowance
           {/* <Button style={{ float: "right" }}>Filters</Button> */}
         </Typography>
-        <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
-          <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
+        <Snackbar id="ta-snackbar" open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+          <Alert id="ta-message-alert" onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
             {message}
           </Alert>
         </Snackbar>
-    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs variant="fullWidth" indicatorColor='warning'>
+    <Box id="warning-box" sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs id="warning" variant="fullWidth" indicatorColor='warning'>
 
            {
             userOwnPermissions.includes(data) &&  
             <Tab
+            id="own"
             onClick={() => { setMainValue(0) }}
             sx={{
               ':hover': {
@@ -145,6 +146,7 @@ export default function TravelA() {
 {
 userTeamPermissions.includes(data) &&
 <Tab
+id="team"
 onClick={() => { setMainValue(1) }}
 sx={{
   ':hover': {
@@ -186,10 +188,10 @@ sx={{
                 </LocalizationProvider>
               </Stack> */}
       {
-        userTeamPermissions.includes(data) &&   <TabPanel value={mainValue} index={1}>
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <Box sx={{ width: '100%' }}>
-            <Team returnDateValue={returnDateValue} />
+        userTeamPermissions.includes(data) &&   <TabPanel id="return-date-tab" value={mainValue} index={1}>
+        <Stack id="return-date-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <Box id="team-box" sx={{ width: '100%' }}>
+            <Team id="return-date" returnDateValue={returnDateValue} />
           </Box>
         </Stack>
       </TabPanel>
@@ -204,8 +206,8 @@ sx={{
 
         <br></br>
 
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <TravelDialog viewMessage={(text) => {
+        <Stack id="travel-dialog-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+          <TravelDialog id="travel-dialog" viewMessage={(text) => {
             setMessage(text)
             setOpenMessage(true)
             // list()
