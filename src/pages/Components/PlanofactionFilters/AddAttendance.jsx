@@ -70,7 +70,8 @@ export default function AddAttendance({ shown, setShown, batch }) {
       else{
         setAddValue([...addValue,itm?.participant_id])
       }
-      console.log(JSON.stringify(response.data));
+      console.log(JSON.stringify(response.message,'<-----------------response.message'));
+      alert(response.data.message)
     })
     .catch(function (error) {
       console.log(error);

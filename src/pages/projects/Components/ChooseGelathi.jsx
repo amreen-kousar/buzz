@@ -196,20 +196,20 @@ const changeText = (e) => {
         <CardContent direction={'row'}>
         <Stack>
         <Typography variant="subtitle1" gutterBottom>
-                                {` ${itm?.gelathiname}`}  <Checkbox style={{marginRight: 10}} {...label} onChange={()=>{
-checkBoxData(itm)
-        }} />
-                            </Typography>
-                          
-    
-        <Typography variant="subtitle1" gutterBottom>
-                                {` ${itm?.villagename}`}
-                            </Typography>
-      
+        <Checkbox style={{marginRight: 10}} {...label} onChange={()=>{checkBoxData(itm)}} />    
+        {` ${itm?.gelathiname}`} ; {` ${itm?.villagename}`}</Typography>
+                           
         </Stack>
-        {/* <Typography variant="subtitle1" gutterBottom>
-                                {` ${itm?.villagename}`}
-                            </Typography> */}
+        {/* <Grid container spacing={2} columns={16}>
+  <Grid item xs={4}>
+  <Checkbox style={{marginRight: 10}} {...label} onChange={()=>{checkBoxData(itm)}} />    {` ${itm?.gelathiname}`} 
+ 
+  </Grid>
+  <Grid item xs={4}>
+  Village Name: {itm?.villagename}
+  </Grid>
+</Grid> */}
+       
         </CardContent>
         </Card>
         

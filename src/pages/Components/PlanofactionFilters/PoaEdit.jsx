@@ -20,7 +20,7 @@ import Iconify from 'src/components/Iconify';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
+import moment from 'moment';
 import dayjs from 'dayjs';
 import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
@@ -93,12 +93,12 @@ export default function PoaEdit({ setSucess, itm }) {
 
     var data = JSON.stringify({
       "poa_id": addData?.poa_id,
-      "date": addData?.date,
+      "date": moment(addData?.date?.$d)?.format('DD-MM-YYYY HH:mm:ss'),
       "user_id": localStorage?.getItem('userId'),
       "name": addData?.name,
       "all_day": addData?.all_day,
       "description": addData?.description,
-      "date2": addData?.date2
+      "date2": moment(addData?.date?.$d)?.format('DD-MM-YYYY HH:mm:ss')
     });
 
     var config = {

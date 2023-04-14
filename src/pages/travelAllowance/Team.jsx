@@ -277,14 +277,15 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
                         tabIndex={-1}
                     > */}
                         
-                        {( teamTAData.filter(e=>e?.status=='0')).length>0 &&<div>
+                        {/* {( teamTAData.filter(e=>e?.status=='0')).length>0 && */}
+                        <div>
                             <Checkbox
                                 style={{ color: "#f97d3f" }}
                                 checked={selectedAll}
                                 onChange={() => { setToCheckedData(null, null) }}
                             />
                             Select All
-                        </div>}
+                        </div>
                         {
                             teamTAData.map((itm, i) => {
                             //    {console.log(itm?.status,"status")}
@@ -294,13 +295,14 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
                                 return <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: '0.5rem', height: "10vh" }} >
                                     <Grid container spacing={2}>
                                         <Grid item sm={11}>
-                                            {(itm?.status==0)?<Checkbox
+                                            {/* {(itm?.status==0)? */}
+                                            <Checkbox
                                                 style={{ color: "#f97d3f" }}
                                                 item={itm}
                                                 value={itm.id}
                                                 checked={checkedData.includes(itm.id)}
                                                 onChange={() => { setToCheckedData(itm, i) }}
-                                            />:null}
+                                            />
                                             <b style={{ color: "#3c88ed" }} >{itm?.Ta_Name}</b>
                                             {(itm?.status==4)?<Typography style={{color:'green',float:'right'}}>Verified</Typography>:(itm?.status==0)?<Typography style={{color:'red',float:'right'}}>Pending</Typography>:(itm.status==1)?<Typography style={{color:'green',float:'right'}}>Approved</Typography>:<Typography style={{color:'red',float:'right'}}>Rejected</Typography>}
                                         </Grid>

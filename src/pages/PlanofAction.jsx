@@ -531,24 +531,27 @@ export default function PlanofAction() {
                                          
                                           {itm?.roleName}:{itm?.emp_name}
                                           <br />
-                                          District : {itm?.location_name}
-                                         <br/>
+                                         
                                           
                                           
                                         </>
                                       }
                                       {/* {(role==6 || role==13)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
-                                      {itm?.status == '2' && (
-                                        <span style={{ color: 'red' }}>
-                                          <br />
-                                          (Canceled )
+                                      {(itm?.type=='2' && itm?.status=='1') ? 
+                                        <span style={{ color: 'green' }}>
+                                           (Rescheduled)
+                                          
                                         </span>
-                                      )}
+                                      :(itm?.status=='2')
+                                      ? <span style={{ color: 'red' }}>
+                                      
+                                      (Cancelled)
+                                    </span>:null}
                                     </TableCell>
 
-                                    {itm?.status !== '2' && (
+                                    {itm?.status !== '2'  && (
                                       <TableCell component="th" scope="row" width="10px">
-                                        {role == 13 || idvalue == itm?.user_id ? (
+                                      {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id)  ? (
                                           <Stack direction={'row'} spacing={2}>
                                             <PoaEdit itm={itm} />
                                             {itm?.check_out == 0 ? (
@@ -702,22 +705,24 @@ export default function PlanofAction() {
                                          
                                           {itm?.roleName}:{itm?.emp_name}
                                           <br />
-                                          District : {itm?.location_name}
-                                         <br/>
-                                          
+                                        
                                           
                                         </>
                                       }
-                                      {itm?.status == '2' && (
-                                        <span style={{ color: 'red' }}>
-                                          <br />
-                                          (Canceled)
+                                       {(itm?.type=='2' && itm?.status=='1') ? 
+                                        <span style={{ color: 'green' }}>
+                                           (Rescheduled)
+                                          
                                         </span>
-                                      )}
+                                      :(itm?.status=='2')
+                                      ? <span style={{ color: 'red' }}>
+                                      
+                                      (Cancelled)
+                                    </span>:null}
                                     </TableCell>
                                     {itm?.status !== '2' && (
                                       <TableCell component="th" scope="row" width="10px">
-                                        {role == 13 || idvalue == itm?.user_id ? (
+                                       {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id) ? (
                                           <Stack direction={'row'} spacing={2}>
                                             <PoaEdit itm={itm} />
                                             {itm?.check_out == 0 ? (
@@ -871,24 +876,27 @@ export default function PlanofAction() {
                                          
                                           {itm?.roleName}:{itm?.emp_name}
                                           <br />
-                                          District : {itm?.location_name}
-                                         <br/>
+                                        
                                           
                                           
                                         </>
                                       }
                                       {console.log(idvalue, 'hyyyyyyyyy')}
 
-                                      {itm?.status == '2' && (
-                                        <span style={{ color: 'red' }}>
+                                     {(itm?.type=='2' && itm?.status=='1') ? 
+                                      <span style={{ color: 'green' }}>
+                                         (Rescheduled)
                                         
-                                          (Canceled)
-                                        </span>
-                                      )}
+                                      </span>
+                                    :(itm?.status=='2')
+                                    ? <span style={{ color: 'red' }}>
+                                    
+                                    (Cancelled)
+                                  </span>:null}
                                     </TableCell>
                                     {itm?.status !== '2' && (
                                       <TableCell component="th" scope="row" width="10px">
-                                        {role == 13 || idvalue == itm?.user_id ? (
+                                        {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id)  ? (
                                           <Stack direction={'row'} spacing={2}>
                                             <PoaEdit itm={itm} />
                                             {itm?.check_out == 0 ? (
