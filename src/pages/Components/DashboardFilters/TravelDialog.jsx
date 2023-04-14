@@ -549,7 +549,9 @@ axios(config)
               </Stack>
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="printing" variant="outlined" color="common" 
+                <TextField id="outlined-basic" type="number" onChange={(e) => { 
+                
+                  setSendData({ ...sendData, printing: e?.target?.value }) }} label="printing" variant="outlined" color="common" 
                 InputProps={{
                      endAdornment: (
                        <InputAdornment position="start">

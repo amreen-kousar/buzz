@@ -166,7 +166,7 @@ export default function Trainerdashboard() {
        
         <Stack direction="row" alignItems="center" justifyContent="space-between" >
           <Typography variant="h5" gutterBottom sx={{ml:4}}>
-            Summary
+            Summary 
 
           </Typography>
           <Button style={{ float: "right", color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleOpenFilter() }}>
@@ -262,7 +262,7 @@ export default function Trainerdashboard() {
                     <TableBody>
                       <TableRow >
                         <TableCell><span style={{fontWeight:700,fontSize:15}}>Project<br/>Actual / Target<br/>Duration</span> </TableCell>
-                        <TableCell><span style={{fontWeight:700,fontSize:15}}>:&nbsp;{item?.name}<br/>:&nbsp; {item?.actual} / {item?.target} <br/>:&nbsp;{moment(item?.startDate)?.format('DD-MM-YYYY')} / {moment(item?.endDate)?.format('DD-MM-YYYY')}</span>  </TableCell>
+                        <TableCell><span style={{fontWeight:700,fontSize:15}}>:&nbsp;{item?.name}<br/>:&nbsp; {item?.actual} / {item?.target ?item?.target : 0 } <br/>:&nbsp;{moment(item?.startDate)?.format('DD-MM-YYYY')} / {moment(item?.endDate)?.format('DD-MM-YYYY')}</span>  </TableCell>
                       </TableRow>
                       
                      

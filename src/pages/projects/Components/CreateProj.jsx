@@ -555,8 +555,8 @@ const mainShowBussHandler = ()=>{
               {/* <div style={{display:"flex"}}> */}
               <Stack >
                 <CardContent style={{padding:"9px"}} >
-                <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography>
-              <Button onClick={addBusHandler} id="add_new_bus" style={{ width: '20vw', marginLeft: "80%", marginTop:"-41px"}}>Add New Bus</Button>
+                {/* <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography> */}
+              <Button onClick={addBusHandler} id="add new bus" style={{ width: '20vw', marginLeft: "80%", marginTop:"-41px" ,backgroundColor: '#ed6c02', color:"white" }}>Add New Bus</Button>
                 </CardContent>
               </Stack>
               
