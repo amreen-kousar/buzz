@@ -263,7 +263,7 @@ export default function DashboardApp() {
             Summary
 
           </Typography>
-          <Button style={{ float: "right", color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleOpenFilter() }}>
+          <Button style={{ float: "right", color: '#ff7424' }} id="filter" sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleOpenFilter() }}>
             Filter
           </Button>
         </Stack>

@@ -171,7 +171,7 @@ console.log(checkIn,"checkintime")
   const GetStatus = async=>{
     var data = JSON.stringify({
       "project_id": batch?.data?.project_id,
-      "poa_type": 2,
+      "poa_type": 1,
       "type": 2,
       "tb_id": batch?.data?.id
     });
@@ -243,31 +243,31 @@ console.log(checkIn,"checkintime")
         <Typography mt={2}>
             Start :{batch?.data?.day1?.split(" ")[1]}&nbsp;{batch?.data?.day1?.split(" ")[2]}
         </Typography>
-        {(checkIn?.time=='')?<Button style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)}>
+        {(checkData?.data?.check_in_date_day1=='')?<Button style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)}>
             CHECK IN</Button>
         :<Button disabled style={{float:'left',position:'absolute',left:20,top:300,marginTop:5,marginBottom:5}}>CheckIN</Button>
         
         }<br/><br/>
-        {/* {(checkData?.check_out_date_day1 =="")?<> */}
-        <Typography>
-            Checked In  : {(checkIn?.time!="") && moment(checkIn?.time)?.format('DD-MM-YYYY HH:mm a')}
+     
+        {(checkData?.data?.check_in_date_day1!='')?<><Typography>
+            Checked In  : {checkData?.data?.check_in_date_day1}
         </Typography>
         <Typography>
-           Location  : {checkIn?.location}
-        </Typography><br/> <Divider />
+           Location  : {checkData?.data?.check_in_location_day1}
+        </Typography></>:null}<br/> <Divider />
         {/* </>:null} */}
         <Typography mt={2}>
             End :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
         </Typography>
-        {(checkOut?.time=="")?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:460,color:'#ff7424'}}>
+        {(checkData?.data?.check_in_date_day1!='' && checkData?.data?.check_out_date_day1=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:500,marginBottom:2,color:'#ff7424'}}>
             CHECK OUT
-        </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:460}}>CHECKOUT</Button>}<br/>
-       <Typography>
-            Checked Out  : {(checkOut?.time!="") && moment(checkIn?.time)?.format('DD-MM-YYYY HH:mm a')}
+        </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:500,marginBottom:2}}>CHECKOUT</Button>}<br/><br/><br/>
+       {(checkData?.data?.check_out_date_day1!="")?<><Typography>
+            Checked Out  : {checkData?.data?.check_out_date_day1}
         </Typography>
         <Typography>
-           Location  :  {checkOut?.location}
-        </Typography>
+           Location  :  {checkData?.data?.check_out_location_day1}
+        </Typography></>:null}
        </Stack>
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -285,31 +285,31 @@ console.log(checkIn,"checkintime")
         <Typography mt={2}>
             Start :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
         </Typography>
-        {(checkIn?.time=='')?<Button style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)}>
+        {(checkData?.data?.check_in_date_day2=='')?<Button style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)}>
             CHECK IN</Button>
         :<Button disabled style={{float:'left',position:'absolute',left:20,top:300,marginTop:5,marginBottom:5}}>CheckIN</Button>
         
         }<br/><br/>
-        {/* {(checkData?.check_out_date_day1 =="")?<> */}
-        <Typography>
-            Checked In  : {(Day2checkIn?.time!="") && moment(Day2checkIn?.time)?.format('DD-MM-YYYY HH:mm a')}
+       
+        {(checkData?.data?.check_in_date_day2!='')?<><Typography>
+            Checked In  : {checkData?.data?.check_in_date_day2}
         </Typography>
         <Typography>
-           Location  : {Day2checkIn?.location}
-        </Typography><br/> <Divider />
-        {/* </>:null} */}
+           Location  : {checkData?.data?.check_in_location_day2}
+        </Typography></>:null}<br/> <Divider />
+  
         <Typography mt={2}>
             End :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
         </Typography>
-        {(Day2checkOut?.time=="")?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:460,color:'#ff7424'}}>
+        {(checkData?.data?.check_in_date_day2!='' && checkData?.data?.check_out_date_day2=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:500,marginTop:5,marginBottom:5,color:'#ff7424'}}>
             CHECK OUT
-        </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:460}}>CHECKOUT</Button>}<br/>
-       <Typography>
-            Checked Out  : {(Day2checkOut?.time!="") && moment(Day2checkOut?.time)?.format('DD-MM-YYYY HH:mm a')}
+        </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:500,marginBottom:10}}>CHECKOUT</Button>}<br/><br/>
+       {(checkData?.data?.check_out_date_day2!='')?<><Typography>
+            Checked Out  : {checkData?.data?.check_out_date_day2}
         </Typography>
         <Typography>
-           Location  :  {checkOut?.location}
-        </Typography>
+           Location  :  {checkData?.data?.check_out_location_day2}
+        </Typography></>:null}
        </Stack>
       </TabPanel>
     
