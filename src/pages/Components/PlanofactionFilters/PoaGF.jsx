@@ -139,9 +139,131 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
 
         <Divider />
 
-       <CardContent>
-       <h1 style={{marginTop:50}}>Work In Progress for Gelathi Drawer Having Branch Conflict</h1>
-       </CardContent>
+       
+
+<Scrollbar>
+          <Stack spacing={3} sx={{ p: 2 }}>
+            <div>
+              <Card>
+                <CardContent>
+                  <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
+                    Project : &nbsp;{batch?.projectName}
+                    {console.log(batch?.projectName, '<--------gfgfgfgfgfgdrawer')}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Partner : &nbsp;{batch?.partnerName}
+                  </Typography>
+
+                  <Typography variant="body1" gutterBottom>
+                    Plan Day:&nbsp;{batch?.plan_date}
+                  </Typography>
+
+                  <Typography variant="body1" gutterBottom>
+                    Contact Person:&nbsp;{batch?.contact_person}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Contact Number:&nbsp;{batch?.contact_number}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    GF Name:&nbsp;{batch?.gf_name}
+                  </Typography>
+                </CardContent>
+              </Card>
+              <AddAttendance
+                batch={batch}
+                shown={shown}
+                setShown={(e) => {
+                  setShown(e);
+                }}
+              />
+              <Card
+                onClick={() => {
+                  setShown(true), console.log('ferfgreg');
+                }}
+                style={{ marginTop: 20 }}
+              >
+                <CardContent>
+                  <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
+                    <Iconify icon="material-symbols:add" width={30} height={30} />
+                  </div>
+                  <Typography>
+                    Visit Participants: {batch?.total_participants}
+                    {/* <IconButton>
+                      <Iconify style={{ color: "black",float:'right'}} icon="material-symbols:add" />
+                    </IconButton> */}
+                  </Typography>
+                  {/* <Typography>Target Participants: {batch?.data?.participants} </Typography> */}
+                </CardContent>
+              </Card>
+              <Photos
+                batch={batch}
+                photos={photos}
+                setPhotos={(e) => {
+                  setPhotos(e);
+                }}
+              />
+              <Card
+                onClick={() => {
+                  setPhotos(true), console.log('ferfgreg');
+                }}
+                style={{ marginTop: 20 }}
+              >
+                <CardContent>
+                  <Typography>View Photos</Typography>
+                </CardContent>
+              </Card>
+              <Card style={{ marginTop: 20 }}>
+              <CardContent>
+                {/* <input
+                  
+                  accept="image/png, image/gif, image/jpeg"
+                  type="file"
+                  onChange={(event) => {
+                    console.log(event.target, '<------imageesssssssss');
+                    convertImage(event);
+                  }}
+                /> */}
+                 <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
+                    <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
+                    &nbsp;
+                    <input
+                      style={{ display: 'none' }}
+                      accept="image/png, image/gif, image/jpeg"
+                      id="inputTag"
+                      type="file"
+                      onChange={(e) => {
+                        convertImage(e);
+                      }}
+                    /> Add Photos
+                  </label>
+                 
+                  <br />
+                {images?.map((itm,index) => {
+                   
+                  return <div style={{ display: 'flex', margin: '1rem' }}>
+                    <img src={itm} style={{ height: '50px', width: '70px',marginTop:20 }} />
+                    <Iconify
+                            onClick={() => {
+                              deleteImage(index);
+                            }}
+                            icon={'typcn:delete'}
+                            sx={{ width: 16, height: 16, ml: 1, color: 'red' }}
+                          />
+                    </div>
+                  
+                })}
+               
+                {/* <CardContent>
+                  <Typography>Upload Photos</Typography>
+                </CardContent> */}
+                </CardContent>
+              </Card>
+            </div>
+            <Button sx={{  color: '#ff7424' }} onClick={UploadImages}>Upload Photos</Button>
+          </Stack>
+        </Scrollbar>
+
+       
 
 
         
