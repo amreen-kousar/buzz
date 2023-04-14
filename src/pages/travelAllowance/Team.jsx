@@ -327,7 +327,7 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
                         {(userrole==3)&&( teamTAData.filter(e=>e?.status=='4')).length>0 &&
                         <div style={{display:'flex'}}><Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(1)}>Approve</Button>&nbsp;&nbsp;
                         <Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(2)}>Reject</Button></div>}
-                      {(userrole==4)&& ( teamTAData.filter(e=>e?.status=='0')).length>0 &&<Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Verify</Button>}</form>
+                      {(userrole==4 || userrole==12)&& ( teamTAData.filter(e=>e?.status=='0')).length>0 &&<Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Verify</Button>}</form>
 
                     {/* </DialogContentText>
                 </DialogContent> */}
