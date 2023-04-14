@@ -237,9 +237,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
 
         <Divider />
 
-       {/* <CardContent>
-       <h1 style={{marginTop:50}}>Work In Progress for Gelathi Drawer Having Branch Conflict</h1>
-       </CardContent> */}
+       
 
 <Scrollbar>
           <Stack spacing={3} sx={{ p: 2 }}>
