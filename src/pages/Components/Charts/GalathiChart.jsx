@@ -8,7 +8,10 @@ const COLORS = ['#454545', '#e2e3c8', '#cdd0ae', '#9c9e7f','#656755'];
 
 const GalathiChart = (props) => {
     const [data,setData]= useState(props.data)
-
+    const sum = data.reduce((acc, curr) => acc + curr.value, 0);
+    if (sum === 0) {
+      return <p style={{alignContent:"center",marginLeft:"30%",marginTop:"20%"}}>No Chart Data </p>;
+    }
     console.log("🚀 ~ file: GalathiChart.jsx:17 ~ GalathiChart ~ props.data:", data)
   return (
     <div className="chart-container" style={{display:"flex"}}>
