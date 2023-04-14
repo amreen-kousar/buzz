@@ -25,6 +25,7 @@ import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
 import AddAttendance from './AddAttendance';
 import Photos from '../../../pages/projects/Components/Photos';
+import CheckinCheckOutDialog from './CheckinCheckOutDialog';
 
 // ----------------------------------------------------------------------
 
@@ -39,12 +40,13 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [photos, setPhotos] = React.useState(false);
   const [shown, setShown] = React.useState(false);
   const [images, setImages] = useState([]);
+  const [check, setCheck] = useState(false);
 
   useEffect(() => {
     getTrainingBatch();
     // console.log(batchState)
   }, [batchState, clcikData]);
-  console.log(clcikData, '<---sads', batchState);
+  console.log(clcikData, '<---clcikDataPoaGF',batchState);
   const getTrainingBatch = (async) => {
     console.log(
       batchState,
@@ -54,7 +56,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
-      gf_session_id: 81421,
+      gf_session_id: clcikData?.id,
       role_id: role,
       user_id: idvalue,
     });
@@ -71,6 +73,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     axios(config)
       .then(function (response) {
         setBatch(response.data);
+        console.log(response.data,'<----------------setBatchsetBatch')
       })
       .catch(function (error) {
         console.log(error);
@@ -96,10 +99,10 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       //   setViewImage(true)
     });
   };
-
   const UploadImages = (e) => {
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var raw = JSON.stringify({
-      project_id: 292,
+      project_id: batch?.project_id,
       tb_id: batchState?.id,
       trainer_id: idvalue,
       day: 1,
@@ -116,6 +119,11 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log('error', error));
+  };
+  
+  const deleteImage = (index) => {
+    images.splice(index, 1);
+    setImages([...images]);
   };
   return (
     <>
@@ -139,7 +147,9 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
 
         <Divider />
 
-       
+       {/* <CardContent>
+       <h1 style={{marginTop:50}}>Work In Progress for Gelathi Drawer Having Branch Conflict</h1>
+       </CardContent> */}
 
 <Scrollbar>
           <Stack spacing={3} sx={{ p: 2 }}>
@@ -176,6 +186,13 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                   setShown(e);
                 }}
               />
+             {batch && <CheckinCheckOutDialog
+              photos={check}
+              batch={batch}
+              setCheck={(e) => {
+                setCheck(e);
+              }}
+               />}
               <Card
                 onClick={() => {
                   setShown(true), console.log('ferfgreg');
@@ -237,7 +254,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                     /> Add Photos
                   </label>
                  
-                  <br />
+                  <br /><Button sx={{  color: '#ff7424' }} onClick={UploadImages}>Upload Photos</Button>
                 {images?.map((itm,index) => {
                    
                   return <div style={{ display: 'flex', margin: '1rem' }}>
@@ -258,8 +275,21 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                 </CardContent> */}
                 </CardContent>
               </Card>
+              <Card
+                onClick={() => {
+                  setCheck(true), console.log('ferfgreg');
+                }}
+                style={{ marginTop: 20 }}
+              >
+                <CardContent>
+                <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
+                    <Iconify icon="material-symbols:add" width={30} height={30} />
+                  </div>
+                  <Typography>Check in/ Check Out</Typography>
+                </CardContent>
+              </Card>
             </div>
-            <Button sx={{  color: '#ff7424' }} onClick={UploadImages}>Upload Photos</Button>
+            
           </Stack>
         </Scrollbar>
 
