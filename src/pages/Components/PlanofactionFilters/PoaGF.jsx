@@ -268,13 +268,13 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                   setShown(e);
                 }}
               />
-               <CheckinOut
+               {/* <CheckinOut
               photos={check}
               batch={batch}
               setCheck={(e) => {
                 setCheck(e);
               }}
-               />
+               /> */}
               <Card
                 onClick={() => {
                   setShown(true), console.log('ferfgreg');
@@ -357,7 +357,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                 </CardContent> */}
                 </CardContent>
               </Card>
-              <Card
+              {/* <Card
                 onClick={() => {
                   setCheck(true), console.log('ferfgreg');
                 }}
@@ -369,7 +369,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                   </div>
                   <Typography>Check in/ Check Out</Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
             </div>
          
           </Stack>
