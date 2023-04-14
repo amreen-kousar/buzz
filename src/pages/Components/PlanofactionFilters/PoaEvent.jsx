@@ -400,24 +400,28 @@ const handlecheckin = () => {
                   <br />
                   {(eventData?.check_in ==="")? (
                     <Button
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: '#ffd796',
-                        },
-                        color: '#ff7424',
-                      }}
+                    sx={{
+                      '&:hover': {
+                        backgroundColor: '#ffd796',
+                      },
+                      color: '#ff7424',
+                      backgroundColor: '#ffd796',
+                      marginLeft: '10px',
+                    }}
                       onClick={handlecheckin}
                     >
                       CHECK IN 
                     </Button>
                   ) : (
                     <Button
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: '#ffd796',
-                        },
-                        color: '#ff7424',
-                      }}
+                    sx={{
+                      '&:hover': {
+                        backgroundColor: '#ffd796',
+                      },
+                      color: '#ff7424',
+                      backgroundColor: '#ffd796',
+                      marginLeft: '10px',
+                    }}
                       onClick={handlecheckout}
                     >
                       CHECK OUT
