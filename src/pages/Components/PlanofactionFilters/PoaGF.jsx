@@ -16,7 +16,7 @@ import {
   IconButton,
   Typography,
   RadioGroup,
-  Card,
+  Card,Grid,
   CardContent,
 } from '@mui/material';
 // components
@@ -367,7 +367,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
             
           </Stack>
       
-      {getAllNotes?.length>0? 
+      {/* {getAllNotes?.length>0? 
       <CardContent>
       <div>
       <Card style={{ marginTop: 20, marginLeft: 10 }}>
@@ -379,7 +379,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
             return (
               <>
                
-                  {/* <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}> */}
+                  <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}> 
                   <Grid
                     container
                     direction="column"
@@ -388,8 +388,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                     style={{ marginTop: 10 }}
                   >
                     <Typography variant="body1">
-                      {' '}
-                      {userName} {i?.date}
+                      {i?.date}
                     </Typography>
 
                     {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
@@ -405,7 +404,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       </div>
     </CardContent>
       : null}  
-        
+         */}
         </Scrollbar>
 
        
