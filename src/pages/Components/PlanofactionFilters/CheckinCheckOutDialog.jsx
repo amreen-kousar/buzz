@@ -201,7 +201,7 @@ const GetStatus = async=>{
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" style={{color:'white'}}>
               Check in / CheckOut 
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
