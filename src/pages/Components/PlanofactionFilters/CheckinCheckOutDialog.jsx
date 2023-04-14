@@ -132,7 +132,7 @@ axios(config)
       
       axios(config)
       .then(function (response) {
-        
+        GetStatus();
         if(type ===1){
             setCheckIn({
                 location:location,
@@ -145,7 +145,7 @@ axios(config)
               time:newTime
           })
       }
-      GetStatus();
+     
       })
       .catch(function (error) {
         console.log(error);
