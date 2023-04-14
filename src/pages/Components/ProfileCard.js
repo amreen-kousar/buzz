@@ -162,7 +162,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
-            Profile
+            Profile 
           </Typography>
          
         </Stack>
@@ -264,7 +264,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
 <CardActions disableSpacing>
   
   {(!expanded)?<ExpandMore disableRipple style={{ backgroundColor: 'transparent' }} expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-    <Button variant="warning" style={{textAlign:'right'}}
+    <Button variant="warning" style={{textAlign:'right'}} id="edit_user"
       sx={{
         ':hover': {
           bgcolor: '#ffd796', // theme.palette.primary.main
@@ -281,7 +281,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
     </Button> 
 
   </ExpandMore>: 
-  <IconButton  title="close" onClick={handleCloseClick} color="inherit" aria-label="close"  style={{float:'right'}}>
+  <IconButton  title="close" onClick={handleCloseClick} color="inherit" aria-label="close"  style={{float:'right'}} id="close">
       <CloseIcon />
           </IconButton>}
 </CardActions>
@@ -353,10 +353,14 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       </Grid>
       <Grid item mb={2}>
         <TextField fullWidth size="small" id="Work"  margin="dense"
+         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+         type="number"
           value={editData?.workNum}
-          onChange={(e) => { setEditData({ ...editData, workNum: e?.target?.value }) }}
-          type="number"
-          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+          onChange={(e) => { 
+            if(e?.target?.value.toString().length <= 10){
+              setEditData({ ...editData, workNum: e?.target?.value })
+            }
+            }}
           label="Work" variant="outlined" color="common" />
           
       </Grid>
@@ -392,7 +396,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       </Grid>
     </Grid>
     <Box display="flex" justifyContent="flex-end">
-      <Button onClick={editProfile} variant="warning"
+      <Button onClick={editProfile} variant="warning" id="save_details"
         sx={{
           ':hover': {
             bgcolor: '#ffd796', // theme.palette.primary.main

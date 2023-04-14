@@ -24,8 +24,10 @@ import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import { ColorManyPicker } from '../../components/color-utils';
 import ShaktiDialog from '../projects/Components/ShaktiDialog'
-import Photos from '../projects/Components/Photos'
-
+import Photos from '../projects/Components/Photos';
+import Programevaluationday1 from '../projects/Components/Programevaluationday1';
+import Evaluationday2 from '../projects/Components/Evaluationday2';
+import CheckinOut from './PlanofactionFilters/CheckinOut';
 // ----------------------------------------------------------------------
 
 projectMultiDrawer.propTypes = {
@@ -40,6 +42,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
      const [photos,setPhotos] = React.useState(false)
      const [shown,setShown] = React.useState(false)
    const [images,setImages] = useState([])
+   const [check,setCheck]=useState(false)
    const [viewImage, setViewImage] = React.useState(false);
    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     useEffect(() => {
@@ -47,9 +50,9 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
        // console.log(batchState)
         
     }, [batchState,clcikData])
-    // useEffect(()=>{
-    //   setImages([])
-    // },[])
+    useEffect(()=>{
+      setImages([])
+    },[batchState?.training_batch_id])
     console.log(clcikData,"<---sads",batchState)
     const getTrainingBatch = async =>{
         
@@ -106,12 +109,15 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
         });
       }
 
-      console.log("projectId", projectId)
+      console.log("batch?.project_id", batch?.data?.project_id)
     const UploadImages = (e) =>{
         console.log("upload method is calling ")
-        var raw = JSON.stringify({
-            "project_id": 292
-            ,
+
+        if(images.length<=0){
+          alert("No Image is Selected!")
+        }else{
+          var raw = JSON.stringify({
+            "project_id":  batch?.data?.project_id,
             "tb_id":batchState?.id,
             "trainer_id": idvalue,
             "day": 1,
@@ -125,10 +131,17 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
           };
 
           fetch("https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php", requestOptions)
-  .then(response => response.text())
+  .then(response => {response.text()
+  alert("Photo Uploaded Successfully..")
+  setImages([])
+  })
+
   .then(result => console.log(result, "result in"))
   .catch(error => console.log('error', error));
     }
+    
+        }
+ 
 
     //Method to delete the images that is selected 
   const deleteImage = (index) => {
@@ -146,9 +159,9 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                     sx: { width: 350, },
                 }}
             >
-                <Stack id="pro-mutlidrawer-stack" direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-                    <Typography id="subtitle-pro-multidrawer" variant="subtitle1" sx={{ ml: 1 }}>
-                        {`${clcikData?.title}: ${clcikData?.name}`}
+                <Stack  id="pro-mutlidrawer-stack" direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
+                    <Typography variant="subtitle1" sx={{ ml: 1 }}>
+                        {` ${clcikData?.name}`}
                         {/* {clcikData?.title} */}
                         {console.log(clcikData,"clicked data")}
                     </Typography>
@@ -263,7 +276,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
              marginLeft: '10px',
            }}
          >
-           Upload  
+           Upload   
          </Button>
          </div>
 </Card>
@@ -271,9 +284,9 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
 
 
                             {/* photo upload end  */}
-                            <Card id="view-photos-card" onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
-                                <CardContent id="view-phots-card-content">
-                                    <Typography id="view-phots">View Photos </Typography>
+                            <Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
+                                <CardContent>
+                                    <Typography>View Photos  </Typography>
                                     
                                 </CardContent>
                                 </Card>
@@ -293,6 +306,16 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                                     
                                 </CardContent> */}
                             </Card>
+                            <Programevaluationday1 />
+                            <Evaluationday2 />
+                           {batch && <CheckinOut
+              photos={check}
+              batch={batch}
+              setCheck={(e) => {
+                setCheck(e);
+              }}
+               />}
+                 
                         </div>
                         {/* <Button onClick={UploadImages}>upload image</Button> */}
 

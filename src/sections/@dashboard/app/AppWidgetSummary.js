@@ -49,7 +49,8 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         height: "210px",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        cursor:'context-menu'
       }}
       {...other}
     >

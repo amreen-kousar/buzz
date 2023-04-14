@@ -224,8 +224,8 @@ export default function User() {
     return (
       <Page title="All Users">
         {/* <DashboardNavbar getSearch={(e) => setSearchUser(e)}  onOpenSidebar={() => setOpen(true)} /> */}
-        <Searchbar getSearch={(e) => { searchBarCall(e) }} />
-        <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+        <Searchbar getSearch={(e) => { searchBarCall(e) }} id="searchbar" />
+        <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)} id="alert_message">
           <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
             {message}
           </Alert>
@@ -251,7 +251,7 @@ export default function User() {
         <Container>
           <Typography variant="h4" sx={{ mb: 5 }}>
             People
-            <Button style={{ float: "right", color: '#ff7424' }}
+            <Button style={{ float: "right", color: '#ff7424' }} id="filters"
               sx={{
                 '&:hover': {
                   backgroundColor: '#ffd796',

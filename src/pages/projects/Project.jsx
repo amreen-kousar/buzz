@@ -184,28 +184,30 @@ function Project(props) {
                     <TableBody>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Project Name  </TableCell>
-                        <TableCell>: {data1.project_name} </TableCell>
+                        <TableCell>:&nbsp; {data1.project_name} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>District Name</TableCell>
-                        <TableCell>: {data1.location_name} </TableCell>
+                        <TableCell>:&nbsp; {data1.location_name} </TableCell>
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Partner Name </TableCell>
-                        <TableCell>: {data1.partnerName} </TableCell>
+                        <TableCell>:&nbsp; {data1.partnerName} </TableCell>
                       </TableRow>
                       {(roleid == 1 || roleid == 2 || roleid == 3 || roleid == 4 || roleid == 12 || roleid == 5) ? <TableRow style={styles.tableRowStyle}>
                         <TableCell>Training Target</TableCell>
-                        <TableCell>: {data1.training_target} </TableCell>
+                        <TableCell>:&nbsp; {data1.training_target} </TableCell>
                       </TableRow> : null}
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Project Duration</TableCell>
-                        <TableCell> : From : {data1.startDate} </TableCell>
-                        <TableCell> To : {data1.endDate}</TableCell>
+                        <TableCell> :&nbsp; From : {data1.startDate}<br/>
+                        &nbsp;&nbsp;&nbsp;To : {data1.endDate}
+                         </TableCell>
+                    
                       </TableRow>
                       <TableRow style={styles.tableRowStyle}>
                         <TableCell>Project Status</TableCell>
-                        <TableCell>: {data1.project_status} </TableCell>
+                        <TableCell>:&nbsp; {data1.project_status} </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
@@ -293,7 +295,7 @@ function Project(props) {
                     <Link to="/dashboard/projects/busTest" state={{ id: data1?.bus_id }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>}>
-                      <span style={{ width: "235px" }}>Bus:&nbsp;{data1?.bus_number} & check List</span>
+                      <span style={{ width: "235px" }}>Bus&nbsp;{data1?.bus_number} & check List</span>
                     </Button>
                     </Link> : null}
                   {(userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 2 || userDetails == 12) ? <br /> : null}
@@ -526,8 +528,8 @@ function Project(props) {
                   </Link> : null}
                   {(userDetails == 6 || userDetails == 13) ? <br /> : null}
                   {(userDetails == 5) ? <CreateTrainerBatch data1={data1} /> : null} {(userDetails == 5) ? <br /> : null}
-                  {(userDetails == 1) ? <Programevaluationday1 /> : null} 
-                  {(userDetails == 1) ? <Evaluationday2 /> : null} 
+                  {/* {(userDetails == 5) ? <Programevaluationday1 /> : null} 
+                  {(userDetails == 5) ? <Evaluationday2 /> : null}  */}
 
                   <br />
 

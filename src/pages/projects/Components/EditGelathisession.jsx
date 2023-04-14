@@ -58,7 +58,6 @@ export default function EditGelathiSession({session,editSession, setEditsession}
     setEditsession(false)
     setOpen(false);
   };
-
   const UpdateSession=()=>{
     var data = JSON.stringify({
         "tb_name": session?.training_batch_name,

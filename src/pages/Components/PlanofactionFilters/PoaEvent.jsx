@@ -54,6 +54,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   const [eventData, setEventData] = useState('');
   const [addImage, setAddImage] = useState('');
+  const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
 
   const [showCheckoutBtn , setCheckoutBtn] = useState(true)
   const handleClick = (event) => {
@@ -400,24 +401,28 @@ const handlecheckin = () => {
                   <br />
                   {(eventData?.check_in ==="")? (
                     <Button id="check-in-button"
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: '#ffd796',
-                        },
-                        color: '#ff7424',
-                      }}
+                    sx={{
+                      '&:hover': {
+                        backgroundColor: '#ffd796',
+                      },
+                      color: '#ff7424',
+                      backgroundColor: '#ffd796',
+                      marginLeft: '10px',
+                    }}
                       onClick={handlecheckin}
                     >
                       CHECK IN 
                     </Button>
                   ) : (
                     <Button id="check-out-button"
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: '#ffd796',
-                        },
-                        color: '#ff7424',
-                      }}
+                    sx={{
+                      '&:hover': {
+                        backgroundColor: '#ffd796',
+                      },
+                      color: '#ff7424',
+                      backgroundColor: '#ffd796',
+                      marginLeft: '10px',
+                    }}
                       onClick={handlecheckout}
                     >
                       CHECK OUT
@@ -472,7 +477,7 @@ const handlecheckin = () => {
         {clickedItemData.status == 2?
         null:
         <>
-                  {eventdetails?.event_completed == 0 ?
+                  {eventdetails?.event_completed == 0 &&  role !=1  ?
                   <>
                  
                 <div id="input-icon-camera" style={{ display: 'flex' }}>
