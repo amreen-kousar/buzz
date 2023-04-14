@@ -355,7 +355,7 @@ console.log(userid,"userrrrrridddddddd")
     return (
 
         <div>
-            <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} variant="contained" onClick={handleClickOpen} sx={{
+            <Button id="add-new-user" style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} variant="contained" onClick={handleClickOpen} sx={{
                 ':focus': {
                     backgroundColor: '#ffd796',
                     color: '#ff7424'
@@ -378,13 +378,13 @@ console.log(userid,"userrrrrridddddddd")
                 {/* <AppBar > */}
                 <form onSubmit={(e)=>{e.preventDefault(); submitUser()}}>
                     <Toolbar sx={{ bgcolor: '#ff7424' }}>
-                        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close" id="close-user">
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
                             Add Users
                         </Typography>
-                        <Button autoFocus color="inherit" type="submit">
+                        <Button autoFocus color="inherit" type="submit" id="save_user">
                             save
                         </Button>
                     </Toolbar>
@@ -421,10 +421,10 @@ console.log(userid,"userrrrrridddddddd")
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
                                 <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: "0.5rem", color: '#ff7424' }}>
-                                    <InputLabel id="demo-simple-select-label" fullWidth color="common" style={{ color: '#ff7424' }}>{AddUser.role.id>1?"Role":"Choose Role"} </InputLabel>
+                                    <InputLabel id="choose_role" fullWidth color="common" style={{ color: '#ff7424' }}>{AddUser.role.id>1?"Role":"Choose Role"} </InputLabel>
 
                                     <Select fullWidth color="common" variant='standard'
-                                        labelId="demo-simple-select-label"
+                                        labelId="role-label"
                                         id="role"
                                         // defaultValue={AddUser.role}
                                         // label="Role"
@@ -438,9 +438,9 @@ console.log(userid,"userrrrrridddddddd")
                                     </Select>
                                 </FormControl>
 
-                                <TextField fullWidth id="outlined-basic" helperText='Name required*' label="Name" value={AddUser.first_name} required onChange={(e) => { setAddUser({ ...AddUser, first_name: e.target.value }) }} variant="outlined" color="common" />
+                                <TextField fullWidth id="First_name" helperText='Name required*' label="Name" value={AddUser.first_name} required onChange={(e) => { setAddUser({ ...AddUser, first_name: e.target.value }) }} variant="outlined" color="common" />
                                 {
-                                    ["Admin", "Program Manager", "Operations Manager", "Gelathi Facilitator Lead", 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Last Name" variant="outlined" value={AddUser.last_name} onChange={(e) => { setAddUser({ ...AddUser, last_name: e.target.value }) }} />
+                                    ["Admin", "Program Manager", "Operations Manager", "Gelathi Facilitator Lead", 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <TextField fullWidth id="last_name" label="Last Name" variant="outlined" value={AddUser.last_name} onChange={(e) => { setAddUser({ ...AddUser, last_name: e.target.value }) }} />
                                 }
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl style={{ marginLeft: "1rem" }}>
                                     <RadioGroup
@@ -450,8 +450,8 @@ console.log(userid,"userrrrrridddddddd")
                                         defaultValue="male"
                                         first_name="radio-buttons-group"
                                     >
-                                        <FormControlLabel value="female" control={<Radio />} label="Female" color='#ff7424'/>
-                                        <FormControlLabel value="male" control={<Radio />} label="Male" />
+                                        <FormControlLabel id="female" value="female" control={<Radio />} label="Female" color='#ff7424'/>
+                                        <FormControlLabel id="male" value="male" control={<Radio />} label="Male" />
 
                                     </RadioGroup>
                                 </FormControl>}
@@ -470,7 +470,7 @@ console.log(userid,"userrrrrridddddddd")
                                         label="reportingManager"
                                         onChange={(event, value) => getProjectOfManager(value)}
                                        
-                                        renderInput={(params) => <TextField {...params} label="ReportingManger" />}
+                                        renderInput={(params) => <TextField id="reposrting-manager" {...params} label="ReportingManger" />}
                                     />
                                 </FormControl>
                                 } 
@@ -487,16 +487,16 @@ console.log(userid,"userrrrrridddddddd")
 
                             <div style={{ background: "white", padding: "2rem", borderRadius: "10px" }}>
 
-                                <TextField fullWidth required id="outlined-basic" label="Mobile number" helperText={`Mobile Number Required (${AddUser?.contactNum?.length}/10)`} inputProps={{ maxLength: 10 }} multiline value={AddUser.contactNum} type="number" onChange={(e) => { 
+                                <TextField fullWidth required id="Mobile_number" label="Mobile number" helperText={`Mobile Number Required (${AddUser?.contactNum?.length}/10)`} inputProps={{ maxLength: 10 }} multiline value={AddUser.contactNum} type="number" onChange={(e) => { 
                                     if(numrex.test(e?.target?.value)){
                                         setAddUser({ ...AddUser, contactNum: e.target.value })
                                     }
                                     console.log(e,"<---wefewfwef")
                                     }} variant="outlined" color="common" /><br/>
-                                <TextField fullWidth id="outlined-basic" label="Work" value={AddUser.workNum} onChange={(e) => {
+                                <TextField fullWidth id="Work" label="Work" value={AddUser.workNum} onChange={(e) => {
                                      setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' /><br/><br/>
 
-                                <TextField fullWidth required id="outlined-basic" label="Email" helperText='Email required' value={AddUser.office_email_id} 
+                                <TextField fullWidth required id="Email" label="Email" helperText='Email required' value={AddUser.office_email_id} 
                                 onChange={(e)=>{
                                     emailchangeHandler(e.target.value)
                                 }} 
@@ -511,12 +511,12 @@ console.log(userid,"userrrrrridddddddd")
                                 </div>
 
 
-                                <TextField fullWidth required id="outlined-basic" label="Address" helperText='Address Required*' value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" color="common"/><br/><br/>
+                                <TextField fullWidth required id="Address" label="Address" helperText='Address Required*' value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" color="common"/><br/><br/>
 
-                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="Address 1" value={AddUser.address3} onChange={(e) => { setAddUser({ ...AddUser, address3: e.target.value }) }} variant="outlined" color="common"/>}<br/><br/>
-                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="outlined-basic" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" color="common"/>}<br/><br/>
+                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="Address1" label="Address 1" value={AddUser.address3} onChange={(e) => { setAddUser({ ...AddUser, address3: e.target.value }) }} variant="outlined" color="common"/>}<br/><br/>
+                                {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="Address2" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" color="common"/>}<br/><br/>
 
-                                <TextField fullWidth id="outlined-basic"  label="Pincode" inputProps={{ maxLength: 6 }} type="number" required value={AddUser.pincode}  onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" color="common"/><br/><br/>
+                                <TextField fullWidth id="pincode"  label="Pincode" inputProps={{ maxLength: 6 }} type="number" required value={AddUser.pincode}  onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" color="common"/><br/><br/>
                                 {
 
                                     ["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <FormControl fullWidth>
@@ -532,19 +532,19 @@ console.log(userid,"userrrrrridddddddd")
 
                                             multiple
                                             limitTags={2}
-                                            id="multiple-limit-tags"
+                                            id="Projects"
                                             options={reportingManagerProject}
                                             onChange={(e, value) => changeProject(value)}
                                             getOptionLabel={(option) => option.label}
                                             renderInput={(params) => (
-                                                <TextField {...params} label="Choose project" placeholder="Choose project" color="common"/>
+                                                <TextField {...params} id="choose_project" label="Choose project" placeholder="Choose project" color="common"/>
                                             )}
                                         />
 
                                     </FormControl>
 
                                 }
-                                {["Driver"].includes(AddUser.role?.roleName) && <TextField fullWidth id="outlined-basic" label="License Number" value={AddUser.license_number} onChange={(e) => { setAddUser({ ...AddUser, license_number: e.target.value }) }} variant="outlined" />
+                                {["Driver"].includes(AddUser.role?.roleName) && <TextField fullWidth id="license_number" label="License Number" value={AddUser.license_number} onChange={(e) => { setAddUser({ ...AddUser, license_number: e.target.value }) }} variant="outlined" />
                                 }
                             </div>
                         {/* </Box>

@@ -288,16 +288,16 @@ console.log(data,"dataaaaaaaaaaa")
     return (
         <Page title="Dashboard: Projects">
 
-            <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+            <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)} id="alertmessage">
                 <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
                     {message}
                 </Alert>
             </Snackbar>
 
-            <Searchbar getSearch={(e) => searchFunction(e)} />
+            <Searchbar getSearch={(e) => searchFunction(e)} id="search-bar"/>
             <Container>
                 <Typography variant="h4" sx={{ mb: 5 }}>
-                    All Projects    <Button style={{ float: "right", color: '#ff7424' }}
+                    All Projects    <Button style={{ float: "right", color: '#ff7424' }} id="filter"
                         sx={{
                             '&:hover': {
                                 backgroundColor: '#ffd796',
@@ -354,7 +354,7 @@ console.log(data,"dataaaaaaaaaaa")
                             <Tabs variant="fullWidth" value={value} onChange={handleChange} indicatorColor="warning"
 
                                 aria-label="basic tabs example">
-                                <Tab
+                                <Tab id="All_projects"
 
                                     sx={{
                                         ':hover': {
@@ -369,7 +369,7 @@ console.log(data,"dataaaaaaaaaaa")
                                         borderBottom: '3px solid #ff7424',
                                         color: "#ff7424",
                                     } : null} />
-                                <Tab
+                                <Tab id="Published"
                                     sx={{
                                         ':hover': {
                                             bgcolor: '#ffd796', // theme.palette.primary.main
@@ -382,7 +382,7 @@ console.log(data,"dataaaaaaaaaaa")
                                         borderBottom: '3px solid #ff7424',
                                         color: "#ff7424",
                                     } : null} label="Published" {...a11yProps(1)} />
-                                <Tab
+                                <Tab id="completed"
                                     sx={{
                                         ':hover': {
                                             bgcolor: '#ffd796', // theme.palette.primary.main
@@ -412,7 +412,7 @@ console.log(data,"dataaaaaaaaaaa")
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                        {(p?.project_status_name=='Published' || p?.project_status_name=='Completed')?<Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />:<Chip label={p?.project_status_name} size="small" color="error" variant="outlined" />}
+                                                        {( p?.project_status_name=='Completed')?<Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')?<Chip label={p?.project_status_name} size="small" color="secondary" variant="outlined" />:<Chip label={p?.project_status_name} size="small" color="error" variant="outlined" />}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>
@@ -437,7 +437,7 @@ console.log(data,"dataaaaaaaaaaa")
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                        <Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />
+                                                    {( p?.project_status_name=='Completed')?<Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')?<Chip label={p?.project_status_name} size="small" color="secondary" variant="outlined" />:<Chip label={p?.project_status_name} size="small" color="error" variant="outlined" />}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>
@@ -463,7 +463,7 @@ console.log(data,"dataaaaaaaaaaa")
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                        <Chip label={p?.project_status_name} size="small" color="error" variant="outlined" />
+                                                    {( p?.project_status_name=='Completed')?<Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')?<Chip label={p?.project_status_name} size="small" color="secondary" variant="outlined" />:<Chip label={p?.project_status_name} size="small" color="error" variant="outlined" />}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>

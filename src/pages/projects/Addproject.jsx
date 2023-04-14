@@ -219,7 +219,7 @@ function AddProject({ viewMessage }) {
         <div>
 
 
-            <Button variant="contained" style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} onClick={handleClickOpen} sx={{
+            <Button variant="contained" id="New_Project" style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} onClick={handleClickOpen} sx={{
                 ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ff7424',
@@ -241,14 +241,14 @@ function AddProject({ viewMessage }) {
                 <form onSubmit={(event) => { event.preventDefault(); createProject() }}>
                     <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
                         <Toolbar>
-                            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close" id="close_project" >
                                 <CloseIcon />
                             </IconButton>
                             <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
                                 New Project
                             </Typography>
 
-                            <IconButton type="submit" color="inherit" >
+                            <IconButton type="submit" color="inherit" id="save_project" >
                                 <Iconify icon="material-symbols:save"/>
                             </IconButton>
                         </Toolbar>
@@ -259,10 +259,10 @@ function AddProject({ viewMessage }) {
                        
                         <FormControl fullWidth>
 
-                            <InputLabel id="demo-simple-select-label" color="common" sx={{ borderBlockColor: 'black' }}> Country</InputLabel>
+                            <InputLabel id="Country" color="common" sx={{ borderBlockColor: 'black' }}> Country</InputLabel>
                             <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
+                                labelId="country-label"
+                                id="Select_country"
 
                                 label="Country"
                                 required
@@ -274,12 +274,12 @@ function AddProject({ viewMessage }) {
                         </FormControl><br /><br />
                         <FormControl fullWidth>
 
-                            <InputLabel id="demo-simple-select-label"> State</InputLabel>
+                            <InputLabel id="State"> State</InputLabel>
                             <Select
                                 required
 
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
+                                labelId="state-label"
+                                id="Select_state"
                                 value={data.state}
                                 label="State"
                                 onChange={(e => {
@@ -298,10 +298,10 @@ function AddProject({ viewMessage }) {
                         </FormControl><br /><br />
                         <FormControl fullWidth>
 
-                            <InputLabel id="demo-simple-select-label"> District</InputLabel>
+                            <InputLabel id="District"> District</InputLabel>
                             <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
+                                labelId="district-label"
+                                id="Select_district"
                                 value={data.district_id}
                                 label="District"
                                 required
@@ -321,12 +321,12 @@ function AddProject({ viewMessage }) {
                         </FormControl><br /><br />
                         <FormControl fullWidth>
 
-                            <InputLabel id="demo-simple-select-label"> Taluk</InputLabel>
+                            <InputLabel id="Taluk"> Taluk</InputLabel>
                             <Select
                                 required
 
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
+                                labelId="Taluk-label"
+                                id="select_taluk"
                                 value={data.talaq_id}
                                 label="Taluk"
                                 onChange={(e => {
@@ -345,10 +345,10 @@ function AddProject({ viewMessage }) {
                         </FormControl><br /><br />
                         <FormControl fullWidth>
 
-                            <InputLabel id="demo-simple-select-label"> Funder</InputLabel>
+                            <InputLabel id="Funder"> Funder</InputLabel>
                             <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
+                                labelId="Funder-label"
+                                id="select_funder"
                                 value={data.funder_id}
                                 required
 
