@@ -10,6 +10,10 @@ const GalathiChart = (props) => {
     const [data,setData]= useState(props.data)
 
     console.log("🚀 ~ file: GalathiChart.jsx:17 ~ GalathiChart ~ props.data:", data)
+    const sum = data.reduce((acc, curr) => acc + curr.value, 0);
+if (sum === 0) {
+  return <p style={{alignContent:"center",marginLeft:"30%",marginTop:"20%"}}>No Chart Data </p>;
+}
   return (
     <div className="chart-container" style={{display:"flex"}}>
       <ResponsiveContainer  width="100%" height="auto" aspect={1.6}>
