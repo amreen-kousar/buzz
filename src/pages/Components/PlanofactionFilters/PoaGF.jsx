@@ -16,7 +16,7 @@ import {
   IconButton,
   Typography,
   RadioGroup,
-  Card,
+  Card,Grid,
   CardContent,
 } from '@mui/material';
 // components
@@ -39,12 +39,40 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [photos, setPhotos] = React.useState(false);
   const [shown, setShown] = React.useState(false);
   const [images, setImages] = useState([]);
+  const [getAllNotes, setGetAllNotes] = useState([]);
 
+  const [session, setSession] = useState('');
+
+   const role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
   useEffect(() => {
     getTrainingBatch();
     // console.log(batchState)
   }, [batchState, clcikData]);
-  console.log(clcikData, '<---sads', batchState);
+
+  useEffect(() => {
+   
+
+    getGFSessionData();
+    getNoteHandler();
+
+   
+  }, [clcikData]);
+   // geting notes for each drawer 
+   useEffect(() => {
+    console.log('useEffect for getnotehandler');
+
+    let isSubscribe = true;
+
+    if (isSubscribe) {
+      getNoteHandler();
+      getGFSessionData();
+    }
+
+    return () => {
+      isSubscribe = false;
+    };
+  }, [session.tb_id]);
+  console.log(clcikData, '<---clcikDataPoaGF',batchState);
   const getTrainingBatch = (async) => {
     console.log(
       batchState,
@@ -76,6 +104,67 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
         console.log(error);
       });
   };
+ 
+  const getGFSessionData = (async) => {
+    var data = JSON.stringify({
+      gf_session_id: clcikData?.id,
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData.php',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        setSession(response.data);
+        console.log(response.data, '<---------setSessionsetSession');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+
+   //getting Notes\
+
+   const getNoteHandler = () => {
+    console.log('getNoteHandler');
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+    var data = JSON.stringify({
+      type: session.type,
+      tb_id: session.tb_id,
+      // "type":2, "tb_id":21407
+    });
+
+    console.log(data, 'material api');
+    const config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getNotes.php',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        if (response.status == 200) {
+          setGetAllNotes(response?.data?.notes);
+          console.log(response, 'notesData');
+        }
+      })
+      .catch(function (error) {
+        console.log(error, 'failed');
+      });
+    console.log('submit');
+  };
+
 
   function getBase64(file, callback) {
     const reader = new FileReader();
@@ -187,7 +276,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                     <Iconify icon="material-symbols:add" width={30} height={30} />
                   </div>
                   <Typography>
-                    Visit Participants: {batch?.total_participants}
+                    Visit Participants: {batch?.total_participants} 
                     {/* <IconButton>
                       <Iconify style={{ color: "black",float:'right'}} icon="material-symbols:add" />
                     </IconButton> */}
@@ -212,55 +301,102 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                   <Typography>View Photos</Typography>
                 </CardContent>
               </Card>
-              <Card style={{ marginTop: 20 }}>
-              <CardContent>
-                {/* <input
-                  
-                  accept="image/png, image/gif, image/jpeg"
-                  type="file"
-                  onChange={(event) => {
-                    console.log(event.target, '<------imageesssssssss');
-                    convertImage(event);
-                  }}
-                /> */}
-                 <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
-                    <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
-                    &nbsp;
-                    <input
-                      style={{ display: 'none' }}
-                      accept="image/png, image/gif, image/jpeg"
-                      id="inputTag"
-                      type="file"
-                      onChange={(e) => {
-                        convertImage(e);
-                      }}
-                    /> Add Photos
-                  </label>
-                 
-                  <br />
-                {images?.map((itm,index) => {
-                   
-                  return <div style={{ display: 'flex', margin: '1rem' }}>
-                    <img src={itm} style={{ height: '50px', width: '70px',marginTop:20 }} />
-                    <Iconify
-                            onClick={() => {
-                              deleteImage(index);
-                            }}
-                            icon={'typcn:delete'}
-                            sx={{ width: 16, height: 16, ml: 1, color: 'red' }}
-                          />
-                    </div>
-                  
-                })}
+            {role== '1'?  <>
+            </>:
+            <Card style={{ marginTop: 20 }}>
+            <CardContent>
+              {/* <input
+                
+                accept="image/png, image/gif, image/jpeg"
+                type="file"
+                onChange={(event) => {
+                  console.log(event.target, '<------imageesssssssss');
+                  convertImage(event);
+                }}
+              /> */}
+               <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
+                  <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
+                  &nbsp;
+                  <input
+                    style={{ display: 'none' }}
+                    accept="image/png, image/gif, image/jpeg"
+                    id="inputTag"
+                    type="file"
+                    onChange={(e) => {
+                      convertImage(e);
+                    }}
+                  /> Add Photos
+                </label>
                
-                {/* <CardContent>
-                  <Typography>Upload Photos</Typography>
-                </CardContent> */}
-                </CardContent>
-              </Card>
+                <br />
+              {images?.map((itm,index) => {
+                 
+                return <div style={{ display: 'flex', margin: '1rem' }}>
+                  <img src={itm} style={{ height: '50px', width: '70px',marginTop:20 }} />
+                  <Iconify
+                          onClick={() => {
+                            deleteImage(index);
+                          }}
+                          icon={'typcn:delete'}
+                          sx={{ width: 16, height: 16, ml: 1, color: 'red' }}
+                        />
+                  </div>
+                
+              })}
+             
+              {/* <CardContent>
+                <Typography>Upload Photos</Typography>
+              </CardContent> */}
+              </CardContent>
+            </Card>
+            }
+              
             </div>
-            <Button sx={{  color: '#ff7424' }} onClick={UploadImages}>Upload Photos</Button>
+          {role=="1"?<></>
+          :
+          <Button sx={{  color: '#ff7424' }} onClick={UploadImages}>Upload Photos  </Button>
+          }
+            
           </Stack>
+      
+      {/* {getAllNotes?.length>0? 
+      <CardContent>
+      <div>
+      <Card style={{ marginTop: 20, marginLeft: 10 }}>
+        {getAllNotes &&
+          getAllNotes.map((i, index) => {
+            {
+              console.log(i, 'ivalue');
+            }
+            return (
+              <>
+               
+                  <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}> 
+                  <Grid
+                    container
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    style={{ marginTop: 10 }}
+                  >
+                    <Typography variant="body1">
+                      {i?.date}
+                    </Typography>
+
+                    {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
+                  </Grid>
+                  <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
+                    {i?.notes}{' '}
+                  </Typography>
+               
+              </>
+            );
+          })}
+           </Card>
+      </div>
+    </CardContent>
+      : null}  
+         */}
         </Scrollbar>
 
        
