@@ -320,7 +320,8 @@ minDate={today}
   label="From"
   value={addData?.date}
   onChange={(e) => { handleChange(e) }}
-  renderInput={(params) => <TextField {...params} color="common" />}
+  renderInput={(params) => <TextField {...params}  color="common" />}
+ 
 />
 
 </Stack><br/>

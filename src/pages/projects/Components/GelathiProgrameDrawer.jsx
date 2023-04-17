@@ -150,7 +150,10 @@ const convertImage = (e) => {
   }
   // sending image we need to 
   const UploadImages = async () => {
-   
+    if (images.length === 0) {
+      alert("No photos to upload.")
+      throw new Error('No photos to upload.');
+    }
     var raw = JSON.stringify({
       project_id:session.project_id,
       gf_session_id:session.id,

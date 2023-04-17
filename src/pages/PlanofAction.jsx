@@ -444,11 +444,11 @@ export default function PlanofAction() {
                               setSelect(itm);
                             }}
                           >
-                            <TableContainer component={Paper}>
+                        <TableContainer component={Paper}>
                               <Table aria-label="customized table">
                                 <TableBody>
                                   <TableRow>
-                                    <TableCell style={{    width: "69%"}}
+                                    <TableCell
                                       component="th"
                                       scope="row"
                                       onClick={() => {
@@ -466,6 +466,7 @@ export default function PlanofAction() {
                                         }
                                       }}
                                     >
+                                      {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
                                       {/* {itm?.type == '2' ? (
                                         <>
                                           {itm?.time}
@@ -486,7 +487,7 @@ export default function PlanofAction() {
                                           {itm?.roleName}:{itm?.emp_name}
                                         </>
                                       )} */}
-{(itm?.type == '2') ?
+                                      {(itm?.type == '2') ?
                                         <>
                                        
                                         
@@ -531,13 +532,11 @@ export default function PlanofAction() {
                                          
                                           {itm?.roleName}:{itm?.emp_name}
                                           <br />
-                                         
-                                          
+                                        
                                           
                                         </>
                                       }
-                                      {/* {(role==6 || role==13)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
-                                      {(itm?.type=='2' && itm?.status=='1') ? 
+                                       {(itm?.type=='2' && itm?.status=='1') ? 
                                         <span style={{ color: 'green' }}>
                                            (Rescheduled)
                                           
@@ -548,10 +547,9 @@ export default function PlanofAction() {
                                       (Cancelled)
                                     </span>:null}
                                     </TableCell>
-
-                                    {itm?.status !== '2'  && (
+                                    {itm?.status !== '2' && (
                                       <TableCell component="th" scope="row" width="10px">
-                                      {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id)  ? (
+                                       {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id) ? (
                                           <Stack direction={'row'} spacing={2}>
                                             <PoaEdit itm={itm} />
                                             {itm?.check_out == 0 ? (
@@ -574,7 +572,7 @@ export default function PlanofAction() {
                                               </IconButton>
                                             ) : (
                                               <span style={{ color: 'green', fontWeight: 500 }}>
-                                                (Event&nbsp;Completed )
+                                                (Event&nbsp;Completed)
                                               </span>
                                             )}
                                           </Stack>

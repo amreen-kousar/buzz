@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import Swal from 'sweetalert2'
 import axios from 'axios';
 import {
   Button,
@@ -218,14 +219,30 @@ export default function GreenSurvey(props) {
         setgreensurveyform(response?.data)
         setMessage('Form saved successfully')
         setsuccessMessage(true)
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: response.data.message,
+          confirmButtonText: 'Ok',
+          timer: 2000
+        });
         handleClose()
         props?.changeState()
+
       })
       
       .catch(function (error) {
         console.log(error);
       });
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: response.data.message,
+        confirmButtonText: 'Ok',
+        timer: 2000
+      });
       handleClose();
+
 }
 
 
@@ -463,7 +480,9 @@ const handleresources=(label,event)=>{
        
           <Typography style={{color:"#ff7424"}}>Phone Number *</Typography>
           <Stack mt={2} mb={2}>
-            <TextField id="Phone Number"   type="number" required 
+            <TextField id="Phone Number"  
+             type="number" 
+            required 
           inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' , maxLength:10}}  label="Phone Number" variant="outlined" color="common" onChange={(e) => 
           {if(e.target.value.length <=10){
             setSendData({ ...sendData, Phone_number: e?.target?.value })

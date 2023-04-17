@@ -374,6 +374,7 @@ axios(config)
 
               <Stack style={{ marginTop: 20 }}>
                 <TextField id="outlined-basic" 
+                 type="number"  
   inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading *" variant="outlined" color="common" 
                 />
               </Stack>
