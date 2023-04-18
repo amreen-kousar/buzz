@@ -456,7 +456,9 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Age / ವಯಸ್ಸು *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Age" required type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, age:e.target.value})} value={sendData?.age}/>
+                    <TextField id="Age" required type="number" label="Your Answer" variant="outlined" color="common" inputProps={{
+            pattern: "^((?!-).)", min:0
+        }} onChange={(e) => setSendData({ ...sendData, age:e.target.value})} value={sendData?.age}/>
                   </Stack>
                 </CardContent>
               </Card>

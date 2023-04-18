@@ -23,6 +23,7 @@ export default function Programevaluationday1()
       communicate_m3:[],
       feel_role_m3:[],
       daytraining:[],
+      trainingday1:[],
       pretraining:[]
     });
     const handleClickOpen = () => {
@@ -88,8 +89,8 @@ export default function Programevaluationday1()
        "allotted_m1":sendData?.allotted_m1, 
        "leave_first_module_m2":sendData?.leave_first_module_m2,
        "leave_first_module_m3":sendData?.leave_first_module_m3,
-       "trainingday1":checked[daytraining],
-       "training":checked[pretraining]
+      //  "trainingday1":checked[trainingday1],
+      //  "training":checked[pretraining]
          });
          
          var config = {
@@ -101,8 +102,16 @@ export default function Programevaluationday1()
            data : data
          };
          
+         
          axios(config)
          .then(function (response) {
+          if (response?.data?.code) {
+            alert(response?.data?.message)
+          }
+          else{
+            alert("Saved succesfully")
+            handleClose()
+          }
            setgreensurveyform(response?.data)
          })
          .catch(function (error) {
@@ -147,7 +156,7 @@ export default function Programevaluationday1()
           </Typography>
 
 
-          <Button autoFocus edge="end" color="inherit" onClick={() => evaluationday1form()}>
+          <Button type="submit" autoFocus edge="end" color="inherit" onClick={() => evaluationday1form()}>
           <Iconify icon="material-symbols:save" width={30} height={30} />
           </Button>
         

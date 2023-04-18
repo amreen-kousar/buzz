@@ -160,6 +160,13 @@ export default function Evaluationday2()
          
          axios(config)
          .then(function (response) {
+          if (response?.data?.code) {
+            alert(response?.data?.message)
+          }
+          else{
+            alert("Saved succesfully")
+            handleClose()
+          }
            setformdata(response?.data)
          })
          .catch(function (error) {
@@ -191,7 +198,7 @@ export default function Evaluationday2()
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
           Program Evaluation Day 2
           </Typography>
-          <Button autoFocus color="inherit" onClick={evaluationday2data}>
+          <Button type="submit" autoFocus color="inherit" onClick={evaluationday2data}>
               save
             </Button>
 

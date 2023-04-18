@@ -288,13 +288,13 @@ console.log(response.data.list , "busses data")
               </div>
               <Card sx={{ boxShadow: 0 }} >
               <Grid pt={1} pb={1} container xs={6} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
-                <Typography variant="subtitle1" gutterBottom  >
+                <Typography id="bus-number" variant="subtitle1" gutterBottom  >
                   {`Bus Number : ${itm?.register_number}`} 
                 </Typography>
                 
               </Grid>
               <Grid style={{ marginLeft: 15 }}>
-              <Typography gutterBottom  >
+              <Typography id="project-name" gutterBottom  >
                   {`Project Name : ${itm?.project_name}`}
                 </Typography>
                 {/* <Typography variant="body2" gutterBottom style={{ color: '#FF337A' }}>
