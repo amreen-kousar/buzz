@@ -9,6 +9,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -161,8 +162,22 @@ export default function Evaluationday2()
          axios(config)
          .then(function (response) {
            setformdata(response?.data)
+           Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: response.data.message,
+            confirmButtonText: 'Ok',
+            timer: 2000
+          });
          })
          .catch(function (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: response.data.message,
+            confirmButtonText: 'Ok',
+            timer: 2000
+          });
            console.log(error);
          });
          handleClose();

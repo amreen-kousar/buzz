@@ -185,6 +185,10 @@ console.log("successsssssssss")
   }
 
   const postImages = async () => {
+    if(image.length===0){
+      alert("No photos to upload.")
+      throw new Error('No photos to upload.');
+    }
     var dataImage = []
     const form = new FormData()
     form?.append("emp_id", userid)
@@ -209,6 +213,7 @@ console.log("successsssssssss")
     //console.log(config)
     let res = fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn => {
       console.log(itn, "<--itemgh")
+      alert("added succesfully ")
     })
       .catch(err => {
         console.log(err, "<---wertyu")

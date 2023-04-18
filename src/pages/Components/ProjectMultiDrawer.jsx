@@ -111,6 +111,10 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
 
       console.log("batch?.project_id", batch?.data?.project_id)
     const UploadImages = (e) =>{
+      if (images.length === 0) {
+        alert("No photos to upload.")
+        throw new Error('No photos to upload.');
+      }
         console.log("upload method is calling ")
         var raw = JSON.stringify({
             "project_id":  batch?.data?.project_id,

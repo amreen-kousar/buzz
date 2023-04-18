@@ -36,6 +36,7 @@ import { Color } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
+import Swal from 'sweetalert2'
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -212,12 +213,27 @@ const [sendData,setSendData] = useState({
       axios(config)
       .then(function (response) {
         setvyaparform(response?.data)
-        setMessage('Poa Created successfully')
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: response.data.message,
+          confirmButtonText: 'Ok',
+          timer: 2000
+        });
+        setMessage(response?.data.message)
           setsuccessMessage(true)
+          
           handleClose()
           props?.changeState()
       })
       .catch(function (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: response.data.message,
+          confirmButtonText: 'Ok',
+          timer: 2000
+        });
         console.log(error);
       });
       
@@ -456,7 +472,16 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Age / ವಯಸ್ಸು *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Age" required type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, age:e.target.value})} value={sendData?.age}/>
+                    {/* <TextField id="Age" required type="number" min="0" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, age:e.target.value})} value={sendData?.age}/> */}
+                    <TextField id="Age" required type="number" step="0.01" label="Your Answer" variant="outlined" color="common" 
+  onChange={(e) => {
+    const newValue = e.target.value;
+    if (newValue >= 0) {
+      setSendData({ ...sendData, age: newValue });
+    }
+  }} 
+  value={sendData?.age}
+/>
                   </Stack>
                 </CardContent>
               </Card>

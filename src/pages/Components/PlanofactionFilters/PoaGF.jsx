@@ -100,6 +100,10 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     });
   };
   const UploadImages = (e) => {
+    if(images.length === 0 ){
+      alert("No photos to upload.")
+      throw new Error('No photos to upload.');
+    }
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var raw = JSON.stringify({
       project_id: batch?.project_id,
