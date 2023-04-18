@@ -211,8 +211,8 @@ console.log(response.data.list , "busses data")
     <Page title="User">
       <Searchbar id="search-bar" getSearch={(e) => searchFunction(e)} />
       <Container>
-        <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
-          <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
+        <Snackbar id="snackbar-alert-bus" open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+          <Alert id="delete-bus-alert" onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
             Bus Has Been Deleted Successfully
           </Alert>
         </Snackbar>
@@ -234,7 +234,7 @@ console.log(response.data.list , "busses data")
           </Button>
         </Stack>
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <BuslistDrawer updatedata={() => { setDw(!dw) }}
+          <BuslistDrawer id="bus-list-drawer" updatedata={() => { setDw(!dw) }}
             clcikData={clcikData}
             busesd={busesd}
             isOpenFilter={openFilter}
@@ -257,6 +257,7 @@ console.log(response.data.list , "busses data")
 
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <FiltersHome
+            id="list-bus"
             onSumbit={onSumbit}
             type="BusList"
             resetBus={resetBus}
@@ -271,30 +272,30 @@ console.log(response.data.list , "busses data")
 
         {buses?.length == 0 && (
           <div>
-            <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
+            <h1 id="bus-no-data-fnd" style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
           </div>
         )}
 
         {buses?.map((itm) => {
           return (
-            <Card style={styles.card1}
+            <Card id="bus-card" style={styles.card1}
               onClick={() => {
                 setClickData(itm)
                 handleOpenFilter()
               }}>
 
               <div style={{ float: 'left', paddingLeft: '20px', paddingTop: '20px', paddingRight: '20px',backgroundColor:'white' }}>
-                <Iconify icon="material-symbols:directions-bus" width={30} height={30} />
+                <Iconify id="direction-bus-icon" icon="material-symbols:directions-bus" width={30} height={30} />
               </div>
-              <Card sx={{ boxShadow: 0 }} >
+              <Card id="bus-list-card" sx={{ boxShadow: 0 }} >
               <Grid pt={1} pb={1} container xs={6} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
-                <Typography variant="subtitle1" gutterBottom  >
+                <Typography id="bus-number" variant="subtitle1" gutterBottom  >
                   {`Bus Number : ${itm?.register_number}`} 
                 </Typography>
                 
               </Grid>
               <Grid style={{ marginLeft: 15 }}>
-              <Typography gutterBottom  >
+              <Typography id="project-name" gutterBottom  >
                   {`Project Name : ${itm?.project_name}`}
                 </Typography>
                 {/* <Typography variant="body2" gutterBottom style={{ color: '#FF337A' }}>

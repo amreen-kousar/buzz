@@ -79,6 +79,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
             <>
           
                 <Dialog
+                id="scroll-dialog-title"
                 open={createProj}
                 fullScreen
                 onClose={handleClose}
@@ -89,7 +90,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                     <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                         <CloseIcon />
                     </IconButton>
-                    <Typography sx={{ ml: 2, flex: 1, color: "#ffffff" }} variant="h6" component="div" >
+                    <Typography id="add-new-bus" sx={{ ml: 2, flex: 1, color: "#ffffff" }} variant="h6" component="div" >
                         Add New Bus
                     </Typography>
                 </Toolbar>
@@ -99,6 +100,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                         tabIndex={-1}
                     >
                         <Box
+                            id="add-bus-form"
                             component="form"
                             sx={{
                                 '& .MuiTextField-root': { m: 1 },
@@ -115,6 +117,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
+                                    id="register-date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Register Date"
@@ -142,6 +145,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
+                                        id="insurance-start-date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Insurance Start Date"
@@ -163,6 +167,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
+                                        id="insurance-end-date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Insurance End Date"
@@ -185,6 +190,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
+                                        id="last-service-date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Last Service Date"
@@ -206,6 +212,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
+                                        id="next-service-date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Next Service Date"
@@ -228,6 +235,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
+                                        id="ftness-certificate"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Fitness Certificate"
@@ -250,6 +258,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                             <Stack style={{ marginTop: 20,borderColor:'none' }} color="common">
                                
                                     <DatePicker
+                                        id="permit-details"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Permit Details"
@@ -272,6 +281,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
+                                        id="emission-date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Emission Date"
@@ -290,7 +300,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="contained" onClick={submitBus} sx={{
+                    <Button id="submit-bus-btn" variant="contained" onClick={submitBus} sx={{
                         '&:hover': {
                             backgroundColor: '#ffd796',
                             color: '#ff7424'
@@ -298,12 +308,12 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                         color: "#ffffff",
                         backgroundColor: '#ff7424'
                     }}>Add</Button>
-                    <Button variant="contained" color="error" onClick={handleClose}>Cancel</Button>
+                    <Button id="cancel-bus-btn" variant="contained" color="error" onClick={handleClose}>Cancel</Button>
 
                 </DialogActions>
             </Dialog>
             </>:
-            <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }}
+            <Button id="add-bus-btn" style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }}
             sx={{
                 '&:hover': {
                     backgroundColor: '#ffd796',
@@ -315,6 +325,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
             }
             
             <Dialog
+                id="scroll-dialog-desc"
                 open={openAddBus}
                 fullScreen
                 onClose={handleClose}

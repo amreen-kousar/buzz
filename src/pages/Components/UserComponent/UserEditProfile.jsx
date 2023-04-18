@@ -358,6 +358,7 @@ export default function UserEditProfile({ updateSetUser }) {
                 <Stack>
                   <TextField
                     id="outlined-basic"
+                    inputProps={{ inputMode: 'numeric', pattern: '[1-9]{1}[0-9]{9}', maxLength: 10 }}
                     label="Mobile Number"
                     type="number"
                     variant="outlined"
