@@ -235,10 +235,10 @@ function Project(props) {
                   )}</Collapse>
                 </CardContent>
 
-              </Card> :
-                <>
+              </Card>:null }
+                {(userDetails==12)?<>
 
-                  <Card value={data1?.operations_manager_id} style={{ cursor: 'pointer', margin: 20, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.operations_manager_id)} >
+                  <Card  value={data1?.operations_manager_id} style={{ cursor: 'pointer', margin: 20, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.operations_manager_id)} >
                     <span  >
                       {data1?.operations_manager_name} <Iconify style={{ color: "black", float: 'right', width: 20, height: 20}} icon="material-symbols:add" />
                     </span></Card>
@@ -265,7 +265,7 @@ function Project(props) {
                     </span></Card>
 
 
-                </>}
+                </>:null}
 
             </Grid>
            {
