@@ -541,7 +541,8 @@ const noteSubmitHandler = () => {
                             >
                               <Typography variant="body1">
                                 {' '}
-                                {userName} {i?.date}
+                                {/* {userName} */}
+                                 {i?.date}
                               </Typography>
 
                               {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
