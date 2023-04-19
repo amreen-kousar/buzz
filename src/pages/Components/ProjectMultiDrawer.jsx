@@ -24,8 +24,10 @@ import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import { ColorManyPicker } from '../../components/color-utils';
 import ShaktiDialog from '../projects/Components/ShaktiDialog'
-import Photos from '../projects/Components/Photos'
-
+import Photos from '../projects/Components/Photos';
+import Programevaluationday1 from '../projects/Components/Programevaluationday1';
+import Evaluationday2 from '../projects/Components/Evaluationday2';
+import CheckinOut from './PlanofactionFilters/CheckinOut';
 // ----------------------------------------------------------------------
 
 projectMultiDrawer.propTypes = {
@@ -40,6 +42,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
      const [photos,setPhotos] = React.useState(false)
      const [shown,setShown] = React.useState(false)
    const [images,setImages] = useState([])
+   const [check,setCheck]=useState(false)
    const [viewImage, setViewImage] = React.useState(false);
    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     useEffect(() => {
@@ -47,9 +50,9 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
        // console.log(batchState)
         
     }, [batchState,clcikData])
-    // useEffect(()=>{
-    //   setImages([])
-    // },[])
+    useEffect(()=>{
+      setImages([])
+    },[batchState?.training_batch_id])
     console.log(clcikData,"<---sads",batchState)
     const getTrainingBatch = async =>{
         
@@ -106,12 +109,15 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
         });
       }
 
-      console.log("projectId", projectId)
+      console.log("batch?.project_id", batch?.data?.project_id)
     const UploadImages = (e) =>{
         console.log("upload method is calling ")
-        var raw = JSON.stringify({
-            "project_id": 292
-            ,
+
+        if(images.length<=0){
+          alert("No Image is Selected!")
+        }else{
+          var raw = JSON.stringify({
+            "project_id":  batch?.data?.project_id,
             "tb_id":batchState?.id,
             "trainer_id": idvalue,
             "day": 1,
@@ -125,10 +131,17 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
           };
 
           fetch("https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php", requestOptions)
-  .then(response => response.text())
+  .then(response => {response.text()
+  alert("Photo Uploaded Successfully..")
+  setImages([])
+  })
+
   .then(result => console.log(result, "result in"))
   .catch(error => console.log('error', error));
     }
+    
+        }
+ 
 
     //Method to delete the images that is selected 
   const deleteImage = (index) => {
@@ -138,6 +151,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
     return (
         <>
             <Drawer
+              id="project-mutidrawer-drwer"
                 anchor="right"
                 open={isOpenFilter}
                 onClose={onCloseFilter}
@@ -145,81 +159,81 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                     sx: { width: 350, },
                 }}
             >
-                <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
+                <Stack  id="pro-mutlidrawer-stack" direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                        {`${clcikData?.title}: ${clcikData?.name}`}
+                        {` ${clcikData?.name}`}
                         {/* {clcikData?.title} */}
                         {console.log(clcikData,"clicked data")}
                     </Typography>
-                    <IconButton onClick={onCloseFilter}>
-                        <Iconify icon="eva:close-fill" width={20} height={20} />
+                    <IconButton id="project-close-icon-btn" onClick={onCloseFilter}>
+                        <Iconify id="project-close-icon" icon="eva:close-fill" width={20} height={20} />
                     </IconButton>
                 </Stack>
 
                 <Divider />
 
-                <Scrollbar>
-                    <Stack spacing={3} sx={{ p: 2 }}>
+                <Scrollbar id="scrollbar-project-multidrawer">
+                    <Stack id="project-multidrawer-stack" spacing={3} sx={{ p: 2 }}>
                         <div>
-                            <Card>
-                                <CardContent>
-                                    <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
+                            <Card id="project-card">
+                                <CardContent id="project-multidrawer-card-content">
+                                    <Typography id="project" style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
                                         Project :
                                       &nbsp;{batch?.data?.projectName}
                                         {console.log(batch?.data?.projectName,'<--------njknnjnjn')}
                                     </Typography>
-                                    <Typography variant="body1" gutterBottom>
+                                    <Typography id="partner" variant="body1" gutterBottom>
                                         Partner :
                                         &nbsp;{batch?.data?.partnerName}
                                     </Typography>
-                                    <Typography variant="body1" gutterBottom>
+                                    <Typography id="training" variant="body1" gutterBottom>
                                         Training&nbsp;Batch:{batch?.data?.name}
                                     </Typography>
-                                    <Typography variant="body1" gutterBottom>
+                                    <Typography id="day1" variant="body1" gutterBottom>
                                         Day1:&nbsp;{batch?.data?.day1_actual}
                                     </Typography>
-                                    <Typography variant="body1" gutterBottom>
+                                    <Typography id="day2" variant="body1" gutterBottom>
                                         Day2:&nbsp;{batch?.data?.day2_actual}
                                     </Typography>
-                                    <Typography variant="body1" gutterBottom>
+                                    <Typography id="contact-person" variant="body1" gutterBottom>
                                         Contact Person:&nbsp;{batch?.data?.contact_person}
                                     </Typography>
-                                    <Typography variant="body1" gutterBottom>
+                                    <Typography id="conatct-number" variant="body1" gutterBottom>
                                     Contact Number:&nbsp;{batch?.data?.contact_number}
                                     </Typography>
-                                    <Typography variant="body1" gutterBottom>
+                                    <Typography id="trainer-name" variant="body1" gutterBottom>
                                        Trainer Name:&nbsp;{batch?.data?.trainer_name}
                                     </Typography>
                                 </CardContent>
                             </Card>
-                            <ShaktiDialog batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />
-                            <Card onClick={()=>{setShown(true),console.log("ferfgreg")}} style={{marginTop:20}}>
-                                <CardContent>
-                                <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px',backgroundColor:'white' }}>
-                <Iconify icon="material-symbols:add" width={30} height={30} />
+                            <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />
+                            <Card id="project-mutlidrawer-card" onClick={()=>{setShown(true),console.log("ferfgreg")}} style={{marginTop:20}}>
+                                <CardContent id="project-card-content">
+                                <div id="material-pro-multi-drawer" style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px',backgroundColor:'white' }}>
+                <Iconify id="add-symbol-material" icon="material-symbols:add" width={30} height={30} />
               </div>
-                                 <Typography >Actual Participants:   {batch?.total_participants}     
+                                 <Typography id="actual-participants" >Actual Participants:   {batch?.total_participants}     
                      {/* <IconButton>
                       <Iconify style={{ color: "black",float:'right'}} icon="material-symbols:add" />
                     </IconButton> */}
                     </Typography>
-                                    <Typography>Target Participants:   {batch?.data?.participants}    </Typography>
+                                    <Typography id="target particpants">Target Participants:   {batch?.data?.participants}    </Typography>
                                 </CardContent>
                             </Card>
-                            <Photos batch={batch} photos={photos} setPhotos={(e)=>{setPhotos(e)}}/>
+                            <Photos id="photos-project-multidrawer" batch={batch} photos={photos} setPhotos={(e)=>{setPhotos(e)}}/>
 
 
 
                             {/* //photo upload button  */}
                
-<Card style={{marginTop:20}}>
-<div style={{ display: 'flex' }}>
+<Card id="delete-card-project" style={{marginTop:20}}>
+<div id="project-multidrawwer-div" style={{ display: 'flex' }}>
                 {viewImage
                   ? images.map((i, index) => {
                       return (
                         <div style={{ display: 'flex', margin: '1rem' }}>
-                          <img src={i} style={{ height: '50px', width: '70px' }} alt="hello" />
-                          <Iconify
+                          <img id="img-delete-project-multidrawer" src={i} style={{ height: '50px', width: '70px' }} alt="hello" />
+                          <Iconify id="icon-delete-image"
                             onClick={() => {
                               deleteImage(index);
                             }}
@@ -232,9 +246,9 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                   : null}
               </div>
               <br />
-<div style={{ display: 'flex' ,marginTop:"10px" , marginBottom:"10px"}}>
-                  <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
-                    <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
+<div id="project-input-tag-div" style={{ display: 'flex' ,marginTop:"10px" , marginBottom:"10px"}}>
+                  <label id="input-tag-project-multi-drawer" for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
+                    <Iconify id="camera-icon" icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
                     &nbsp;
                     <input
                       style={{ display: 'none' }}
@@ -250,6 +264,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                   <br />
          
            <Button
+           id="upload-btn"
            onClick={UploadImages}
            
            sx={{
@@ -261,7 +276,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
              marginLeft: '10px',
            }}
          >
-           Upload  
+           Upload   
          </Button>
          </div>
 </Card>
@@ -271,7 +286,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                             {/* photo upload end  */}
                             <Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
                                 <CardContent>
-                                    <Typography>View Photos </Typography>
+                                    <Typography>View Photos  </Typography>
                                     
                                 </CardContent>
                                 </Card>
@@ -291,6 +306,16 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                                     
                                 </CardContent> */}
                             </Card>
+                            <Programevaluationday1 />
+                            <Evaluationday2 />
+                           {batch && <CheckinOut
+              photos={check}
+              batch={batch}
+              setCheck={(e) => {
+                setCheck(e);
+              }}
+               />}
+                 
                         </div>
                         {/* <Button onClick={UploadImages}>upload image</Button> */}
 

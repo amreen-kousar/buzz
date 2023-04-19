@@ -165,8 +165,9 @@ const tomorrow = dayjs().add(1, 'day');
        Create New Poa
       </Button> */}
       {successMessage && (
-        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)}>
+        <Snackbar id="poa-create-snackbar" open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)}>
           <Alert
+            id="poa-create-success-alert"
             onClose={() => {
               setsuccessMessage(false);
             }}
@@ -180,6 +181,7 @@ const tomorrow = dayjs().add(1, 'day');
       {console.log(role, 'userrrrrrrrdetailssssss')}
       {role == 3 || role == 4 || role == 5 || role == 6 || role == 12 || role == 13 ? (
         <Button
+          id="create-poa-button"
           variant="contained"
           onClick={handleClickOpen}
           style={{
@@ -210,6 +212,7 @@ const tomorrow = dayjs().add(1, 'day');
         </Button>
       ) : null}
       <Dialog
+        id="create-poa-dialog"
         open={open}
         fullScreen
         onClose={handleClose}
@@ -219,6 +222,7 @@ const tomorrow = dayjs().add(1, 'day');
       >
         {console.log(addPoa, '<----qwedrftgyhujikkmijnuhbygtv')}
         <Snackbar
+          id="add-create-poa-snackbar"
           open={value}
           autoHideDuration={6000}
           onClose={() => {
@@ -226,6 +230,7 @@ const tomorrow = dayjs().add(1, 'day');
           }}
         >
           <Alert
+            id="add-poa-create-alert"
             onClose={() => {
               setAddPoa(''), setValue(false);
             }}
@@ -236,17 +241,17 @@ const tomorrow = dayjs().add(1, 'day');
           </Alert>
         </Snackbar>
 
-        <form onSubmit={(e)=>{e.preventDefault();AddPoa()}}>
-          <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
-            <IconButton edge="start" style={{color:"white"}} onClick={handleClose} aria-label="close">
+        <form id="schedule-event-form" onSubmit={(e)=>{e.preventDefault();AddPoa()}}>
+          <Toolbar id="create-poa-toolbar" sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+            <IconButton id="icon-button-create-poa-toolbar" edge="start" style={{color:"white"}} onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1, color: 'white' }} variant="h6" component="div">
+            <Typography id="schedule-an-event" sx={{ ml: 2, flex: 1, color: 'white' }} variant="h6" component="div">
               Schedule an event
             </Typography>
 
-            <Button autoFocus color="inherit" type="submit" style={{color:'white'}}>
-              <Iconify icon="material-symbols:save" width={30} height={30} />
+            <Button id="button-icon-save" autoFocus color="inherit" type="submit" style={{color:'white'}}>
+              <Iconify id="save-icon" icon="material-symbols:save" width={30} height={30} />
             </Button>
           </Toolbar>
         
@@ -280,9 +285,9 @@ const tomorrow = dayjs().add(1, 'day');
                   color="common"
                 />
                 <br/><br/>
-                <Stack direction={'row'}>
-                  <Typography>All Day</Typography><br/>
-                  <Switch value={addData?.all_day} onChange={(e) => {
+                <Stack id="create-poa-stack" direction={'row'}>
+                  <Typography id="all-day">All Day</Typography><br/>
+                  <Switch id="switch-create-poa" value={addData?.all_day} onChange={(e) => {
                      setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) 
                      if(addData?.all_day === 1){
                       setShowDate(false)
@@ -297,7 +302,7 @@ const tomorrow = dayjs().add(1, 'day');
     <Stack direction={'row'}>
 
 <DateTimePicker
- 
+id="date-time-picker" 
  defaultValue={today}
             minDate={today}
   required
@@ -314,6 +319,7 @@ const tomorrow = dayjs().add(1, 'day');
    <Stack direction={'row'}>
 
 <DateTimePicker
+id="from-date"
 defaultValue={today}
 minDate={today}
   required
@@ -328,6 +334,7 @@ minDate={today}
 <Stack direction={'row'}>
   {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
   <DateTimePicker
+  id="to-date"
    required
     label="To"
     minDate={addData?.date}
@@ -346,13 +353,13 @@ minDate={today}
 }
                
 
-                <Stack>
-                  <Typography variant="body1" color="common">
+                <Stack id="desc-stack">
+                  <Typography id="description" variant="body1" color="common">
                     Description
                   </Typography>
                 </Stack>
 <br/>
-                <Stack>
+                <Stack id="add-desc-for-poa">
                   <TextField
                     id="outlined-basic"
                     required

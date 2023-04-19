@@ -54,6 +54,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   const [eventData, setEventData] = useState('');
   const [addImage, setAddImage] = useState('');
+  const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
 
   const [showCheckoutBtn , setCheckoutBtn] = useState(true)
   const handleClick = (event) => {
@@ -349,6 +350,7 @@ const handlecheckin = () => {
       </Button> */}
 
       <Drawer
+        id="poa-event-drawer"
         anchor="right"
         open={isOpenEvent}
         onClose={() => {
@@ -360,30 +362,30 @@ const handlecheckin = () => {
           sx: { width: 320 },
         }}
       >
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25, color: 'black' }}>
+        <Stack id="event-detail-stack" direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
+          <Typography id="event-detail" variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25, color: 'black' }}>
             Event Detail 
           </Typography>
-          <IconButton
+          <IconButton id="close-fill-icon-button"
             onClick={() => {
               onCloseEvent();
             }}
           >
-            <Iconify icon="eva:close-fill" width={20} height={20} />
+            <Iconify id="close-fill-icon" icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
 
         <Divider />
         {console.log(eventData, '<--hgdsgdsgfdgfdgfd')}
-        <Scrollbar>
+        <Scrollbar id="poa-event-scrollbar">
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
           <div>
-            <Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
-              <CardContent>
-                <Typography variant="body1">Event Title :{eventData?.name}</Typography>
-                <Typography variant="body1">Event&nbsp;date&nbsp;and&nbsp;time :{eventData?.date1}</Typography>
+            <Card id="poa-event-card" style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
+              <CardContent id="poa-event-card-content">
+                <Typography id="event-title" variant="body1">Event Title :{eventData?.name}</Typography>
+                <Typography id="event-date" variant="body1">Event&nbsp;date&nbsp;and&nbsp;time :{eventData?.date1}</Typography>
 
-                <Typography variant="body1">Description :{eventData?.description}</Typography>
+                <Typography id="description" variant="body1">Description :{eventData?.description}</Typography>
               </CardContent>
             </Card>
 
@@ -391,58 +393,62 @@ const handlecheckin = () => {
             {(eventdetails?.check_in == '' || eventdetails?.check_out == '') &&
             useridvalue == idvalue &&
             select?.status == 0 ? (
-              <Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
+              <Card id="check-in-out-status-card" style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
                 <CardContent>
-                  <Typography style={{ textAlign: 'center' }}>
+                  <Typography id="check-in-out-status" style={{ textAlign: 'center' }}>
                     <u>CheckIn/Out Status</u>
                   </Typography>
                   <br />
                   {(eventData?.check_in ==="")? (
-                    <Button
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: '#ffd796',
-                        },
-                        color: '#ff7424',
-                      }}
+                    <Button id="check-in-button"
+                    sx={{
+                      '&:hover': {
+                        backgroundColor: '#ffd796',
+                      },
+                      color: '#ff7424',
+                      backgroundColor: '#ffd796',
+                      marginLeft: '10px',
+                    }}
                       onClick={handlecheckin}
                     >
                       CHECK IN 
                     </Button>
                   ) : (
-                    <Button
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: '#ffd796',
-                        },
-                        color: '#ff7424',
-                      }}
+                    <Button id="check-out-button"
+                    sx={{
+                      '&:hover': {
+                        backgroundColor: '#ffd796',
+                      },
+                      color: '#ff7424',
+                      backgroundColor: '#ffd796',
+                      marginLeft: '10px',
+                    }}
                       onClick={handlecheckout}
                     >
                       CHECK OUT
                     </Button>
                   )}
                   {console.log(eventdetails, 'locationnnnnnnnn')}
-                  <Typography variant="body1"><span>Checkin Time</span><span style={{marginLeft:"2.8rem"}}>:</span>{eventData?.check_in} </Typography>
-                  <Typography> <span>Checkin Location</span><span style={{marginLeft:"1.1rem"}}>:</span>{eventData?.check_in_location} </Typography>
-                  <Typography>  <span>Checkout Time</span><span style={{marginLeft:"2.2rem"}}>:</span> {eventData?.check_out}</Typography>
+                  <Typography id="check-in-time" variant="body1"><span>Checkin Time</span><span style={{marginLeft:"2.8rem"}}>:</span>{eventData?.check_in} </Typography>
+                  <Typography id="checkin-location"> <span>Checkin Location</span><span style={{marginLeft:"1.1rem"}}>:</span>{eventData?.check_in_location} </Typography>
+                  <Typography id="checkout-time">  <span>Checkout Time</span><span style={{marginLeft:"2.2rem"}}>:</span> {eventData?.check_out}</Typography>
                   {console.log(eventdetails.check_in , eventdetails.check_in ,"eventdetails data check out ")}
                   {console.log(eventData.check_in , eventData.check_in ,"event datacheck out ")}
-                  <Typography> <span>Checkout Location</span><span style={{marginLeft:".5rem"}}>:</span> {eventData?.check_out_location}</Typography>
+                  <Typography id="checkout-location"> <span>Checkout Location</span><span style={{marginLeft:".5rem"}}>:</span> {eventData?.check_out_location}</Typography>
                 </CardContent>
               </Card>
             ) : (
-              <Card style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
-                <CardContent>
-                  <Typography style={{ textAlign: 'center' }}>
+              <Card id="check-in-out-card" style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
+                <CardContent id="check-in-out-card-content">
+                  <Typography id="check-in-out-status" style={{ textAlign: 'center' }}>
                     <u >CheckIn/Out Status</u>
                   </Typography>
                   <br />
 
-                  <Typography variant="body1">Checkin Time:{eventdetails?.check_in} </Typography>
-                  <Typography>Checkin Location: {eventdetails?.check_in_location} </Typography>
-                  <Typography>Checkout Time : {eventdetails?.check_out}</Typography>
-                  <Typography>Checkout Location: {eventdetails?.check_out_location}</Typography>
+                  <Typography id="checkin-time-event" variant="body1">Checkin Time:{eventdetails?.check_in} </Typography>
+                  <Typography id="checkin-location-event">Checkin Location: {eventdetails?.check_in_location} </Typography>
+                  <Typography id="checkout-time-event">Checkout Time : {eventdetails?.check_out}</Typography>
+                  <Typography id="checkout-location-event">Checkout Location: {eventdetails?.check_out_location}</Typography>
                 </CardContent>
               </Card>
             )}
@@ -452,9 +458,9 @@ const handlecheckin = () => {
                 {viewImage
                   ? image?.map((i, index) => {
                       return (
-                        <div style={{ display: 'flex', margin: '1rem' }}>
-                          <img src={i} style={{ height: '50px', width: '70px' }} alt="hello" />
-                          <Iconify
+                        <div id="image-icon" style={{ display: 'flex', margin: '1rem' }}>
+                          <img id="delete-img" src={i} style={{ height: '50px', width: '70px' }} alt="hello" />
+                          <Iconify id="delete-img-icon"
                             onClick={() => {
                               deleteImage(index);
                             }}
@@ -471,12 +477,12 @@ const handlecheckin = () => {
         {clickedItemData.status == 2?
         null:
         <>
-                  {eventdetails?.event_completed == 0 ?
+                  {eventdetails?.event_completed == 0 &&  role !=1  ?
                   <>
                  
-                <div style={{ display: 'flex' }}>
-                  <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
-                    <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
+                <div id="input-icon-camera" style={{ display: 'flex' }}>
+                  <label id="input-tag-event" for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
+                    <Iconify id="icon-camera-poa-event" icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
                     &nbsp;
                     <input
                       style={{ display: 'none' }}
@@ -492,6 +498,7 @@ const handlecheckin = () => {
                   <br />
          
            <Button
+           id="upload-btn"
            onClick={postImages}
            
            sx={{
@@ -520,12 +527,12 @@ const handlecheckin = () => {
                  
              
 
-            <Card style={{ marginTop: 20 }}>
-              <CardContent>
+            <Card id="event-data-card" style={{ marginTop: 20 }}>
+              <CardContent id="card-content-poa-event-data">
                
              {isLoading? <CircularProgress /> : 
                 <div>
-                  <img src={eventData?.photo1 ? eventData?.photo1 : ''} />
+                  <img id="img-event-data" src={eventData?.photo1 ? eventData?.photo1 : ''} />
                 </div>}
               </CardContent>
             </Card>

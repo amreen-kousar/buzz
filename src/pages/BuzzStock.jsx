@@ -159,7 +159,7 @@ export default function BuzzStock() {
           <Typography variant="h5" gutterBottom >
            Consolidated Org Stock
           </Typography>
-          <Button style={{ float: "right", color: '#ff7424' }}
+          <Button style={{ float: "right", color: '#ff7424' }} id="filters"
             sx={{
               '&:hover': {
                 backgroundColor: '#ffd796',

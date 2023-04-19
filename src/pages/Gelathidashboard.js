@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
 import FiltersHome from './Filters/FiltersHome';
-import GalathiChart from './Components/Charts/GalathiChart';
+ import GalathiChart from './Components/Charts/GalathiChart';
 export default function Gelathidashboard() {
   const navigate = useNavigate();
   const data = localStorage?.getItem('userId')
@@ -42,43 +42,44 @@ export default function Gelathidashboard() {
   const [summaryData, setSummaryData] = useState([]);
   const [graphData, setGraphData] = useState(null);
 
-  const GathathiGraphDataFormating=(formatdata) => {
-    console.log("🚀 ~ file: Gelathidashboard.js:171 ~ GathathiGraphDataFormatibg ~ data:",formatdata.data)
-    let data = formatdata.data 
-   
-    console.log("🚀 ~ file: Gelathidashboard.js:47 ~ GathathiGraphDataFormating ~ data:", data)
-    
-    const filteredArr = data.map(({villagevisit, circle_meet, circles,beehive,enroll}) => ({Villagevisit:villagevisit, Circlemeetings:circle_meet, TotalCircles:circles,BeehiveVisits:beehive,EnrolledGelathis:enroll}));
-    console.log("🚀 ~ file: Gelathidashboard.js:52 ~ GathathiGraphDataFormating ~ filteredArr:", filteredArr)
-    let dataKeys = Object.keys(filteredArr[0]);
-    let tempData=[]
-    for(let i=0;i<dataKeys.length;i++){
-      let data = dataKeys[i]
-      // for(let i=0; i<fil)
-      tempData.push({
-        name:data,
-        value:parseInt(filteredArr[0][data])
-      })
-    }
-    console.log("🚀 ~ file: Gelathidashboard.js:55 ~ GathathiGraphDataFormating ~ tempData:", tempData)
-    setGraphData(tempData)
-    console.log("🚀 ~ file: Gelathidashboard.js:50 ~ GathathiGraphDataFormating ~ keys:", name,value)
-    
+  // const GathathiGraphDataFormating=(formatdata) => {
+  //   console.log("🚀 ~ file: Gelathidashboard.js:171 ~ GathathiGraphDataFormatibg ~ data:",formatdata.data)
+  //   let data = formatdata.data 
    
   //   console.log("🚀 ~ file: Gelathidashboard.js:47 ~ GathathiGraphDataFormating ~ data:", data)
-  //   let tempData =[]
     
-  //  let testData= Object.values(data)
-  //  let a={}
-  //   console.log("🚀 ~ file: Gelathidashboard.js:51 ~ GathathiGraphDataFormating ~ testData:", testData)
-  //   for(let i=0;i<testData.length;i++){
+  //   const filteredArr = data.map(({villagevisit, circle_meet, circles,beehive,enroll}) => ({Villagevisit:villagevisit, Circlemeetings:circle_meet, TotalCircles:circles,BeehiveVisits:beehive,EnrolledGelathis:enroll}));
+  //   console.log("🚀 ~ file: Gelathidashboard.js:52 ~ GathathiGraphDataFormating ~ filteredArr:", filteredArr)
+  //   let dataKeys = Object.keys(filteredArr[0]);
+  //   let tempData=[]
+  //   for(let i=0;i<dataKeys.length;i++){
+  //     let data = dataKeys[i]
+  //     // for(let i=0; i<fil)
   //     tempData.push({
-  //       x:testData[i]
+  //       name:data,
+  //       value:parseInt(filteredArr[0][data])
   //     })
-  //     console.log("🚀 ~ file: Gelathidashboard.js:57 ~ GathathiGraphDataFormating ~ tempData:", tempData)
-     
   //   }
-  }
+    
+  //   console.log("🚀 ~ file: Gelathidashboard.js:55 ~ GathathiGraphDataFormating ~ tempData:", tempData)
+  //   setGraphData(tempData)
+  //   console.log("🚀 ~ file: Gelathidashboard.js:50 ~ GathathiGraphDataFormating ~ keys:", name,value)
+    
+   
+  // //   console.log("🚀 ~ file: Gelathidashboard.js:47 ~ GathathiGraphDataFormating ~ data:", data)
+  // //   let tempData =[]
+    
+  // //  let testData= Object.values(data)
+  // //  let a={}
+  // //   console.log("🚀 ~ file: Gelathidashboard.js:51 ~ GathathiGraphDataFormating ~ testData:", testData)
+  // //   for(let i=0;i<testData.length;i++){
+  // //     tempData.push({
+  // //       x:testData[i]
+  // //     })
+  // //     console.log("🚀 ~ file: Gelathidashboard.js:57 ~ GathathiGraphDataFormating ~ tempData:", tempData)
+     
+  // //   }
+  // }
 
   const apiHit = async (id, i, g) => {
     console.log("🚀 ~ file: Gelathidashboard.js:45 ~ apiHit ~ id, i, g:", id, i, g)
@@ -367,8 +368,8 @@ let formatdata = summaryData?.data
             return(
               <>
               {summaryData?.data?
-               <Card sx={{ marginTop: 5, marginLeft: 4,justifyContent:'center' }}>
-
+               <Card sx={{ marginTop: 5,justifyContent:'center' }}>
+<CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
               Project : {item?.name}
             </Typography>
@@ -405,11 +406,14 @@ let formatdata = summaryData?.data
         </Table>
       </TableContainer>
     </Grid>
-    <Grid item xs={12} sm={12} md={6} sx={{padding:0,margin:0,float: 'left'}}>
-  <GalathiChart data={graphData} />
+    {/* <Grid item xs={12} sm={12} md={6} > */}
+ 
+{/* </Grid> */}
+<Grid item xs={12} sm={12} md={6} sx={{padding:0,margin:0,float: 'left'}}>
+  <GalathiChart data={[{name:'VV',value:parseInt(item?.villagevisit)},{name:'CM',value:parseInt(item?.circle_meet)},{name:'TC',value:parseInt(item?.circles)},{name:'BV',value:parseInt(item?.beehive)},{name:'EG',value:parseInt(item?.enroll)}]} />
 </Grid>
-  </Grid>
-</CardContent>
+</Grid>
+</CardContent></CardContent>
           </Card> 
           :  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Projects</h1>}
               </>

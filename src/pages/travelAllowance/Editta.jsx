@@ -301,20 +301,20 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
   //   }
   return (
     <div>
-      <Dialog fullScreen open={isOpenFilter} onClose={onCloseFilter}
+      <Dialog id="edit-ta-dialog" fullScreen open={isOpenFilter} onClose={onCloseFilter}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">
         {/* <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}> */}
-        <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
-          <IconButton edge="start" sx={{ color: "inherit" }} onClick={onCloseFilter} aria-label="close">
+        <Toolbar id="edit-ta-toolbar" sx={{ bgcolor: '#ff7424', color: 'white' }} >
+          <IconButton id="close-icon" edge="start" sx={{ color: "inherit" }} onClick={onCloseFilter} aria-label="close">
             <CloseIcon />
           </IconButton>
-          <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+          <Typography id="edit-travel-allowances" sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
             Edit Travel Allowances
           </Typography>
 
 
-          <Button autoFocus color="inherit" onClick={() => SendData()}>
+          <Button id="save-button" autoFocus color="inherit" onClick={() => SendData()}>
             save
           </Button>
         </Toolbar>
@@ -332,13 +332,13 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
             <div style={{ margin: "1rem" }}>
 
 
-              <Stack style={{ marginTop: 20 }}>
+              <Stack id="start-odometer-reading" style={{ marginTop: 20 }}>
                 <TextField id="outlined-basic" defaultValue={editData?.start_odometer} onChange={(e) => { setSendData({ ...sendData, start_odometer: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
               </Stack>
-              <Stack style={{ marginTop: 20 }}>
+              <Stack id="location" style={{ marginTop: 20 }}>
                 <TextField defaultValue={editData?.start_location_name} id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, start_location_name: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
               </Stack><br></br>
-              <Stack style={{ marginTop: 20 }}>
+              <Stack id="form" style={{ marginTop: 20 }}>
                 <FormControl fullWidth >
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
                   <Select labelId="Select Poa" id="demo-simple-select" defaultValue={editData?.poa_id} label="Poa" onChange={(e) => setSendData({ ...sendData, poa_id: e?.target?.value })} variant="standard" color="common">
@@ -353,10 +353,11 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
 
               </Stack><br></br>
 
-              <Stack style={{ marginTop: 20 }}>
+              <Stack id="date-pickers" style={{ marginTop: 20 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     // label="Date"
+                    id="edit-data-date"
                     defaultValue={editData?.date}
                     onChange={(newValue) => {
                       setSendData({ ...sendData, date: newValue })
@@ -365,7 +366,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
                   />
                 </LocalizationProvider>
               </Stack><br></br>
-              <Stack style={{ marginTop: 20 }}>
+              <Stack id="mode-of-travel" style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Mode Of Travel</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
@@ -383,7 +384,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
                   </Select>
                 </FormControl>
               </Stack><br></br>
-              <Stack style={{ marginTop: 20 }}>
+              <Stack id="rate-per-km" style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Rate Per Km</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
@@ -419,7 +420,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
               <Stack style={{ marginTop: 20 }}>
                 <h4>Other Benefits</h4>
               </Stack>
-              <Stack style={{ marginTop: 20 }}>
+              <Stack id="phone-charges" style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }} >Phone Charges</InputLabel>
                   <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
@@ -508,8 +509,9 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
                     viewImage ?
                       image.map((i, index) => {
                         return <div style={{ display: "flex", margin: "1rem" }}>
-                          <img src={i} style={{ height: "50px", width: "70px" }} alt="hello" />
+                          <img id="img-hello" src={i} style={{ height: "50px", width: "70px" }} alt="hello" />
                           <Iconify
+                            id="delete-image-icon"
                             onClick={() => { deleteImage(index) }}
                             icon={'typcn:delete'}
                             sx={{ width: 16, height: 16, ml: 1, color: "red" }}
@@ -519,15 +521,16 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
                   }
                 </div>
                 <div style={{display:'flex'}}>
-                <label for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
+                <label id="input-tag" for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
                   <Iconify
+                    id="icon-camera"
                     icon={'mdi:camera'}
                     sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
                   />&nbsp;
                   Click here to Add images
                   <input style={{ display: "none" }} accept="image/png, image/gif, image/jpeg" id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
                 </label>
-                <Button onClick={postImages} 
+                <Button id="post-images-button" onClick={postImages} 
                 sx={{
                   '&:hover': {
                     backgroundColor: '#ffd796',

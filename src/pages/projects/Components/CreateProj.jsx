@@ -458,11 +458,11 @@ const mainShowBussHandler = ()=>{
               <Stack>
                 <FormControl fullWidth>
                   {console.log(data, '<------------chcjcjcjcididid')}
-                  <InputLabel color="common" id="demo-simple-select-label"> Select Partner</InputLabel>
+                  <InputLabel color="common" id="Partner"> Select Partner</InputLabel>
                   <Select
                     required
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    labelId="Partner-label"
+                    id="select_partner"
                     value={data.partner_id}
                     label="Select Partner"
                     onChange={(e => {
@@ -500,10 +500,11 @@ const mainShowBussHandler = ()=>{
                    // defaultValue={dayjs(data?.start_date)}
                    defaultValue={data?.start_date}
                     style={{ width: '20vw' }}
-                    value={data.start_date}
+                    
                     InputProps={{
-                      // inputProps: { min: moment(new Date())?.format('DD-MM-YYYY') }
+                      inputProps: { min: moment(new Date())?.format('DD-MM-YYYY') }
                     }}
+                    value={data.start_date}
                     onChange={(e) => {
                       console.log(e?.target?.default,">gbfdvvfghjmnhbgfvdfgthygbfvdcsxs")
                       setData({ ...data, start_date: e?.target?.value })
@@ -514,7 +515,7 @@ const mainShowBussHandler = ()=>{
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     value={data.end_date}
                     InputProps={{
-                      // inputProps: { min: moment(data.end_date)?.format('YYYY-MM-DD') }
+                      inputProps: { min: moment(data.start_date)?.format('DD-MM-YYYY') }
                     }}
                     // defaultValue={data.endDate}
                     onChange={(e) => {
@@ -554,8 +555,8 @@ const mainShowBussHandler = ()=>{
               {/* <div style={{display:"flex"}}> */}
               <Stack >
                 <CardContent style={{padding:"9px"}} >
-                <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography>
-              <Button onClick={addBusHandler}  style={{ width: '20vw', marginLeft: "80%", marginTop:"-41px"}}>Add New Bus</Button>
+                {/* <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography> */}
+              <Button onClick={addBusHandler} id="add new bus" style={{ width: '20vw', marginLeft: "80%", marginTop:"-41px" ,backgroundColor: '#ed6c02', color:"white" }}>Add New Bus</Button>
                 </CardContent>
               </Stack>
               
@@ -567,7 +568,7 @@ const mainShowBussHandler = ()=>{
     
               <Stack mt={2}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" color="common">Select Bus</InputLabel>
+                  <InputLabel id="Bus" color="common">Select Bus</InputLabel>
                   <Select id="select-bus"
 
                     // labelId="demo-simple-select-label"
@@ -596,7 +597,7 @@ const mainShowBussHandler = ()=>{
               <Typography id="team-members" variant="h6">Team Members</Typography>
               <Stack mt={3}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Select Operation Manager</InputLabel>
+                  <InputLabel id="operation_manager_value">Select Operation Manager</InputLabel>
                   <Select 
 
                     // labelId="demo-simple-select-label"
@@ -623,11 +624,11 @@ const mainShowBussHandler = ()=>{
 
               <Stack mt={3}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Select Driver</InputLabel>
+                  <InputLabel id="driver">Select Driver</InputLabel>
                   <Select
 
                     // labelId="demo-simple-select-label"
-                    //id="demo-simple-select"
+                    id="select_driver"
                     value={data.driverId}
                     defaultValue={data.driverId}
                     label="Select Driver"
@@ -678,7 +679,7 @@ const mainShowBussHandler = ()=>{
                 <CardContent>
 
                  
-                  <Typography id="trainers" variant='h6'>Trainers  ({(name?.length?name?.length:0)})<IconButton style={{float:'right'}}>
+                  <Typography id="trainerslist" variant='h6'>Trainers  ({(name?.length?name?.length:0)})<IconButton style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton></Typography>
                  
@@ -722,7 +723,7 @@ const mainShowBussHandler = ()=>{
               }}>
                 <CardContent>
 
-                <Typography id="gelathi-facilators" variant='h6'>Gelathi Facilators  ({gelathiName?.length?gelathiName?.length:0})
+                <Typography id="gelathi-facilators-list" variant='h6'>Gelathi Facilators  ({gelathiName?.length?gelathiName?.length:0})
                   <IconButton style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>

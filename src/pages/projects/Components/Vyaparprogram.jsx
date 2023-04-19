@@ -40,7 +40,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Vyaparprogram() {
+export default function Vyaparprogram({itm}) {
   const [open, setOpen] = React.useState(false);
   // const [openMessage, setOpenMessage] = useState(false);
   const [successMessage,setsuccessMessage]=useState(false);
@@ -71,7 +71,7 @@ export default function Vyaparprogram() {
   const [checked,setChecked] = React.useState({
     tell_us_three_things_about_you_as_an_entrepreneur:[],
     please_list_down_the_various_components_of_business:[],
-    what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need:[]
+    what_are_the_prerequisites_to_access_a_loan:[]
   });
   const [vyaapar, setVyaapar] = useState('');  
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -82,8 +82,8 @@ const [sendData,setSendData] = useState({
   age:"",
   contact_number:"",
   village_id:"",
-  location_circle:"",
-  higher_education:"",
+  name_of_the_cohort:"",
+  highter_education:"",
   marital_status:"",
   number_of_people_in_the_household:"",
   do_you_own_a_smart_phone:"",
@@ -97,10 +97,10 @@ const [sendData,setSendData] = useState({
   how_much_monthly_income_would_you_like_to_ideally_earn:"",
   amount_invested_when_the_business_started:"",
   number_of_years_the_business_has_been_operating:"",
-  reason_for_stopping_bussiness:"",
-  hours_engaged_in_bussiness:"",
-  license_for_existing_bussiness:"",
-  home_based_or_will_you_work_from_home:"",
+  you_stopped_hold_your_business:"",
+  no_hours_engaged_business:"",
+  license_for_existing_business:"",
+  home_based_work_from_shop:"",
   why_do_you_do_business:"",
   tell_us_three_things_about_you_as_an_entrepreneur:"",
   tell_us_three_things_about_your_role_as_a_woman_at_home:"",
@@ -110,22 +110,22 @@ const [sendData,setSendData] = useState({
   what_are_the_resources_available_with_you_for_your_business:"",
   who_is_your_customer_Describe_them_to_us:"",
   please_list_down_the_various_components_of_business:"",
-  I_know_the_current_state_of_my_business_in_terms_of_is_it_making_profit_loss_revenue:"",
+  I_know_the_current_state_of_my_business_in_profit_loss_revenue:"",
   what_kind_of_books_of_accounts_do_you_maintain:"",
-  i_am_confident_that_I_can_generate_ideas_to_solve_my_business_problems:"",
-  tell_us_about_one_business_problem_you_solved_how_did_you_solve_it:"",
+  i_can_generate_ideas_to_solve_my_business_problems:"",
+  tell_us_about_one_business_problem:"",
   what_is_your_business_goal_Business_impurumenet_madodu:"",
   do_you_have_a_business_plan_to_reach_that_goal:"",
   can_you_submit_a_business_plan_for_your_goal_to_us_right_now:"",
   what_are_the_strenghts_of_your_business:"",
   what_are_the_weaknesses_of_your_business:"",
   what_are_the_oppourtunities_for_your_business:"",
-  are_you_able_to_raise_the_required_finance_for_your_business_right_now:"",
+  are_you_able_to_raise_the_required_finance:"",
   i_have_taken_a_loan_from:"",
   i_have_trouble_accessing_loan_for_my_business:"",
-  what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need:"",
-  any_loan_currently_availed_by_your_family:"",
-  need_any_additional_skills_to_run_your_bussiness:"",
+  what_are_the_prerequisites_to_access_a_loan:"",
+  loan_currently_availed:"",
+  need_additional_skills_business:"",
 })
  
   const handleClickOpen = () => {
@@ -146,15 +146,15 @@ const [sendData,setSendData] = useState({
 
   const vyaparformdata= async =>{
     var data = JSON.stringify({
-      "partcipantId":2,
+      "partcipantId":itm?.id,
       "gfId":sendData?.gfId,
       "when_was_survey_done":survey,
       "name_of_the_vyapari":sendData?.name_of_the_vyapari,
       "age":sendData?.age,
       "contact_number":sendData?.contact_number,
       "village_id":sendData?.village_id,
-      "location_circle":sendData?.location_circle,
-      "higher_education":education,
+      "name_of_the_cohort":sendData?.name_of_the_cohort,
+      "highter_education":education,
       "marital_status":maritalstatus,
       "number_of_people_in_the_household":sendData?.number_of_people_in_the_household,
       "do_you_own_a_smart_phone":phone,
@@ -168,10 +168,10 @@ const [sendData,setSendData] = useState({
       "how_much_monthly_income_would_you_like_to_ideally_earn":sendData?.how_much_monthly_income_would_you_like_to_ideally_earn,
       "amount_invested_when_the_business_started":sendData?.amount_invested_when_the_business_started,
       "number_of_years_the_business_has_been_operating":bussinessyears,
-      "reason_for_stopping_bussiness":sendData?.reason_for_stopping_bussiness,
-      "hours_engaged_in_bussiness":sendData?.hours_engaged_in_bussiness,
-      "license_for_existing_bussiness":licensevalue,
-      "home_based_or_will_you_work_from_home":homebased,
+      "you_stopped_hold_your_business":sendData?.you_stopped_hold_your_business,
+      "no_hours_engaged_business":sendData?.no_hours_engaged_business,
+      "license_for_existing_business":licensevalue,
+      "home_based_work_from_shop":homebased,
       "why_do_you_do_business":sendData?.why_do_you_do_business,
       "tell_us_three_things_about_you_as_an_entrepreneur":checked['tell_us_three_things_about_you_as_an_entrepreneur'],
       "tell_us_three_things_about_your_role_as_a_woman_at_home":sendData?.tell_us_three_things_about_your_role_as_a_woman_at_home,
@@ -181,22 +181,22 @@ const [sendData,setSendData] = useState({
       "what_are_the_resources_available_with_you_for_your_business":sendData?.what_are_the_resources_available_with_you_for_your_business,
       "who_is_your_customer_Describe_them_to_us":sendData?.who_is_your_customer_Describe_them_to_us,
       "please_list_down_the_various_components_of_business":checked['please_list_down_the_various_components_of_business'],
-      "I_know_the_current_state_of_my_business_in_terms_of_is_it_making_profit_loss_revenue":bussinesscurrentstate,
+      "I_know_the_current_state_of_my_business_in_profit_loss_revenue":bussinesscurrentstate,
       "what_kind_of_books_of_accounts_do_you_maintain":accountbooks,
-      "i_am_confident_that_I_can_generate_ideas_to_solve_my_business_problems":generateideas,
-      "tell_us_about_one_business_problem_you_solved_how_did_you_solve_it":sendData?.tell_us_about_one_business_problem_you_solved_how_did_you_solve_it,
+      "i_can_generate_ideas_to_solve_my_business_problems":generateideas,
+      "tell_us_about_one_business_problem":sendData?.tell_us_about_one_business_problem,
       "what_is_your_business_goal_Business_impurumenet_madodu":sendData?.what_is_your_business_goal_Business_impurumenet_madodu,
       "do_you_have_a_business_plan_to_reach_that_goal":bussinessplan,
       "can_you_submit_a_business_plan_for_your_goal_to_us_right_now":submitbussinessplan,
       "what_are_the_strenghts_of_your_business":sendData?.what_are_the_strenghts_of_your_business,
       "what_are_the_weaknesses_of_your_business":sendData?.what_are_the_weaknesses_of_your_business,
       "what_are_the_oppourtunities_for_your_business":sendData?.what_are_the_oppourtunities_for_your_business,
-      "are_you_able_to_raise_the_required_finance_for_your_business_right_now":finance,
+      "are_you_able_to_raise_the_required_finance":finance,
       "i_have_taken_a_loan_from":loan,
       "i_have_trouble_accessing_loan_for_my_business":accessingloan,
-      "what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need":checked['what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need'],
-      "any_loan_currently_availed_by_your_family":currentloan,
-      " need_any_additional_skills_to_run_your_bussiness":bussinesskills
+      "what_are_the_prerequisites_to_access_a_loan":checked['what_are_the_prerequisites_to_access_a_loan'],
+      "loan_currently_availed":currentloan,
+      " need_additional_skills_business":bussinesskills
       });
       
       var config = {
@@ -212,7 +212,8 @@ const [sendData,setSendData] = useState({
       axios(config)
       .then(function (response) {
         setvyaparform(response?.data)
-        setMessage('Poa Created successfully')
+        // setMessage('Poa Created successfully')
+        alert("Poa Created successfully")
           setsuccessMessage(true)
           handleClose()
           props?.changeState()
@@ -415,7 +416,7 @@ const [sendData,setSendData] = useState({
               
                   {vyaapar?.list?.map((itm)=>{
                     return(
-                            <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
+                            <MenuItem value={itm.id}>{itm?.first_name}</MenuItem>
                     )
                   })}
                 </Select>
@@ -468,7 +469,12 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Contact Number /ಸಂಪರ್ಕ ಸಂಖ್ಯೆ *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="phone number" required type="number"  inputProps={{ maxLength: 10 }} label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, contact_number:e.target.value})} value={sendData?.contact_number} />
+                    <TextField id="phone number" required type="number"  inputProps={{ maxLength: 10 }} label="Your Answer" variant="outlined" color="common" 
+                    onChange={(e) => {
+                       if(e.target.value.toString().length <=10){
+                        setSendData({ ...sendData, contact_number:e.target.value})
+                       }
+                     }} value={sendData?.contact_number} />
                   </Stack>
                 </CardContent>
               </Card>
@@ -487,7 +493,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Name of the Cohort / ಸ್ಥಳ/ವೃತ್ತ *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="cohort name" required label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, location_circle:e.target.value})} value={sendData?.location_circle} />
+                    <TextField id="cohort name" required label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, name_of_the_cohort:e.target.value})} value={sendData?.name_of_the_cohort} />
                   </Stack>
                 </CardContent>
               </Card>
@@ -703,7 +709,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>For any reason have you stopped or kept hold your business / ಯಾವುದೇ ಕಾರಣಕ್ಕಾಗಿ ನೀವು ನಿಮ್ಮ ವ್ಯಾಪಾರವನ್ನು ನಿಲ್ಲಿಸಿದ್ದೀರಿ ಅಥವಾ ಹಿಡಿದಿಟ್ಟುಕೊಳ್ಳುತ್ತೀರಿ</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="reason" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, reason_for_stopping_bussiness:e.target.value})} value={sendData?.reason_for_stopping_bussiness}/>
+                    <TextField id="reason" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, you_stopped_hold_your_business:e.target.value})} value={sendData?.you_stopped_hold_your_business}/>
                   </Stack>
                 </CardContent>
               </Card>
@@ -712,7 +718,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>No.of hours engaged in a day for business / ವ್ಯವಹಾರಕ್ಕಾಗಿ ಒಂದು ದಿನದಲ್ಲಿ ಎಷ್ಟು ಗಂಟೆಗಳು ತೊಡಗಿಸಿಕೊಳ್ಳುವಿರಿ?</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="hours" label="Your Answer"  variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, hours_engaged_in_bussiness:e.target.value})} value={sendData?.hours_engaged_in_bussiness}/>
+                    <TextField id="hours" label="Your Answer"  variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, no_hours_engaged_business:e.target.value})} value={sendData?.no_hours_engaged_business}/>
                   </Stack>
                 </CardContent>
               </Card>
@@ -955,7 +961,7 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Tell us about one business problm you solved, how did you solve it?</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="business sol" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, tell_us_about_one_business_problem_you_solved_how_did_you_solve_it:e.target.value})} value={sendData?.tell_us_about_one_business_problem_you_solved_how_did_you_solve_it}  />
+                    <TextField id="business sol" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, tell_us_about_one_business_problem:e.target.value})} value={sendData?.tell_us_about_one_business_problem}  />
                   </Stack>
                 </CardContent>
               </Card>
@@ -1137,13 +1143,13 @@ const [sendData,setSendData] = useState({
                   <Typography style={{color:"#ff7424"}}>What are the prerequisites to access a loan? Tick the one's you think you need / ಸಾಲವನ್ನು ಪ್ರವೇಶಿಸಲು ಪೂರ್ವಾಪೇಕ್ಷಿತಗಳು ಯಾವುವು? ನಿಮಗೆ ಬೇಕು ಎಂದು ನೀವು ಭಾವಿಸುವದನ್ನು ಟಿಕ್ ಮಾಡಿ</Typography>
                   <Stack mt={2}>
                     <FormGroup >
-                      <FormControlLabel value="KYC documents of all the applicants - PAN card, Aadhar Crad, address proof" control={<Checkbox style={{color:"#595959"}} />} label="KYC documents of all the applicants - PAN card, Aadhar Crad, address proof" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need',event)}/>
-                      <FormControlLabel value="Address Proof of the business premises" control={<Checkbox style={{color:"#595959"}} />} label="Address Proof of the business premises" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need',event)} />
-                      <FormControlLabel value="2 Passport size photographs of the applicant" control={<Checkbox style={{color:"#595959"}} />} label="2 Passport size photographs of the applicant" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need',event)}/>
-                      <FormControlLabel value="Light bill & rent agreement" control={<Checkbox style={{color:"#595959"}} />} label="Light bill & rent agreement" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need',event)}/>
-                      <FormControlLabel value="Balance sheet and profit & Loss statement for the last 2-3 years" control={<Checkbox style={{color:"#595959"}} />} label="Balance sheet and profit & Loss statement for the last 2-3 years" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need',event)}/>
-                      <FormControlLabel value="Quotations of machinery,equipment,furniture & other assets to be purchased" control={<Checkbox style={{color:"#595959"}} />} label="Quotations of machinery,equipment,furniture & other assets to be purchased" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need',event)} />
-                      <FormControlLabel value="Letters of support, reference" control={<Checkbox style={{color:"#595959"}} />} label="Letters of support, reference" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need',event)}/>
+                      <FormControlLabel value="KYC documents of all the applicants - PAN card, Aadhar Crad, address proof" control={<Checkbox style={{color:"#595959"}} />} label="KYC documents of all the applicants - PAN card, Aadhar Crad, address proof" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan',event)}/>
+                      <FormControlLabel value="Address Proof of the business premises" control={<Checkbox style={{color:"#595959"}} />} label="Address Proof of the business premises" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan',event)} />
+                      <FormControlLabel value="2 Passport size photographs of the applicant" control={<Checkbox style={{color:"#595959"}} />} label="2 Passport size photographs of the applicant" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan',event)}/>
+                      <FormControlLabel value="Light bill & rent agreement" control={<Checkbox style={{color:"#595959"}} />} label="Light bill & rent agreement" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan',event)}/>
+                      <FormControlLabel value="Balance sheet and profit & Loss statement for the last 2-3 years" control={<Checkbox style={{color:"#595959"}} />} label="Balance sheet and profit & Loss statement for the last 2-3 years" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan',event)}/>
+                      <FormControlLabel value="Quotations of machinery,equipment,furniture & other assets to be purchased" control={<Checkbox style={{color:"#595959"}} />} label="Quotations of machinery,equipment,furniture & other assets to be purchased" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan',event)} />
+                      <FormControlLabel value="Letters of support, reference" control={<Checkbox style={{color:"#595959"}} />} label="Letters of support, reference" onChange={(event)=>handleprerequisites('what_are_the_prerequisites_to_access_a_loan',event)}/>
                      
                     </FormGroup>
                   </Stack>

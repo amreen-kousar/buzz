@@ -230,19 +230,19 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
           
                 teamMembersData.map((itm, i) => {
                    
-                    return <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "f7f7f7", cursor: "pointer", padding: '0.5rem' }} >
-                        <Grid container spacing={2} >
-                            <Grid onClick={() => { teamMemberTravelAllowance(itm, i) }} item xs={8}>
+                    return <Card id="teams-card" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "f7f7f7", cursor: "pointer", padding: '0.5rem' }} >
+                        <Grid id="grid-team" container spacing={2} >
+                            <Grid id="travel-allowance" onClick={() => { teamMemberTravelAllowance(itm, i) }} item xs={8}>
                                
                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.fullName}</b><br>
                                 </br>
-                                <Typography variant="body" gutterBottom > <b>{itm?.designation}</b></Typography>
+                                <Typography id="designation" variant="body" gutterBottom > <b>{itm?.designation}</b></Typography>
                                 {console.log(itm,"itemsssssssss")}
                             </Grid>
-                            <Grid item xs={4}>
-                                <Iconify onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+                            <Grid id="grid-delete-ta" item xs={4}>
+                                <Iconify id="icon-delete-ta" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
                                 {(itm?.status==0)?<Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>:
-                                <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "green" }} icon="mdi:tick-circle"></Iconify>}
+                                <Iconify id="icon-tick-circle" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "green" }} icon="mdi:tick-circle"></Iconify>}
                             </Grid>
                         </Grid>
                     </Card>
@@ -256,6 +256,7 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 
             <Dialog
+            id="scroll-dialog-title"
                 open={openFilter}
                 fullScreen
                 onClose={handleCloseFilter}
@@ -263,11 +264,11 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
                 aria-describedby="scroll-dialog-description"
             >
                   <form onSubmit={(event) => { event.preventDefault(); verifyTA() }}>
-                <Toolbar sx={{ color: "#ffffff", backgroundColor: "#ff7424" }}>
-                    <IconButton edge="start" color="inherit" onClick={handleCloseFilter} aria-label="close">
+                <Toolbar id="team-toolbar" sx={{ color: "#ffffff", backgroundColor: "#ff7424" }}>
+                    <IconButton id="icon-team-close" edge="start" color="inherit" onClick={handleCloseFilter} aria-label="close">
                         <CloseIcon />
                     </IconButton>
-                    <Typography sx={{ ml: 2, flex: 1, color: "#ffffff" }} variant="h6" component="div" >
+                    <Typography id="selected-team-member" sx={{ ml: 2, flex: 1, color: "#ffffff" }} variant="h6" component="div" >
                         {selectedTeamMember}
                     </Typography>
                 </Toolbar>
@@ -277,35 +278,38 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
                         tabIndex={-1}
                     > */}
                         
-                        {( teamTAData.filter(e=>e?.status=='0')).length>0 &&<div>
+                        {/* {( teamTAData.filter(e=>e?.status=='0')).length>0 && */}
+                        <div>
                             <Checkbox
+                                id="checkbox-team-select-all"
                                 style={{ color: "#f97d3f" }}
                                 checked={selectedAll}
                                 onChange={() => { setToCheckedData(null, null) }}
                             />
                             Select All
-                        </div>}
+                        </div>
                         {
                             teamTAData.map((itm, i) => {
                             //    {console.log(itm?.status,"status")}
                             //     statusValue.push(itm?.status)
                             //     setStatus(statusValue)
                                 // {console.log(statusValue,"statusvalues")}
-                                return <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: '0.5rem', height: "10vh" }} >
-                                    <Grid container spacing={2}>
-                                        <Grid item sm={11}>
-                                            {(itm?.status==0)?<Checkbox
+                                return <Card id="team-verified-data-card"  style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: '0.5rem', height: "10vh" }} >
+                                    <Grid id="team-verified-data-grid" container spacing={2}>
+                                        <Grid id="checked-data-grid" item sm={11}>
+                                            {/* {(itm?.status==0)? */}
+                                            <Checkbox
                                                 style={{ color: "#f97d3f" }}
                                                 item={itm}
                                                 value={itm.id}
                                                 checked={checkedData.includes(itm.id)}
                                                 onChange={() => { setToCheckedData(itm, i) }}
-                                            />:null}
+                                            />
                                             <b style={{ color: "#3c88ed" }} >{itm?.Ta_Name}</b>
-                                            {(itm?.status==4)?<Typography style={{color:'green',float:'right'}}>Verified</Typography>:(itm?.status==0)?<Typography style={{color:'red',float:'right'}}>Pending</Typography>:(itm.status==1)?<Typography style={{color:'green',float:'right'}}>Approved</Typography>:<Typography style={{color:'red',float:'right'}}>Rejected</Typography>}
+                                            {(itm?.status==4)?<Typography id="verified" style={{color:'green',float:'right'}}>Verified</Typography>:(itm?.status==0)?<Typography style={{color:'red',float:'right'}}>Pending</Typography>:(itm.status==1)?<Typography style={{color:'green',float:'right'}}>Approved</Typography>:<Typography style={{color:'red',float:'right'}}>Rejected</Typography>}
                                         </Grid>
-                                        <Grid item sm={1}>
-                                            <Iconify icon="eva:eye-fill" onClick={() => { setselectedTeamTA(itm); handleDetailsOpenFilter() }} style={{ fontSize: 30, color: "#ab0954" }} />
+                                        <Grid id ="grid-iconify-team" item sm={1}>
+                                            <Iconify id="icon-eye-fill" icon="eva:eye-fill" onClick={() => { setselectedTeamTA(itm); handleDetailsOpenFilter() }} style={{ fontSize: 30, color: "#ab0954" }} />
                                         </Grid>
                                     </Grid>
 
@@ -313,6 +317,7 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
                             })
                         }
                         <TextField
+                            id="comments"
                             placeholder="Comments"
                             onChange={(e) => { setComments(e.target.value) }}
                             multiline
@@ -323,51 +328,51 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
 
                         {console.log(teamTAData,"teamdata")}
                         {(userrole==3)&&( teamTAData.filter(e=>e?.status=='4')).length>0 &&
-                        <div style={{display:'flex'}}><Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(1)}>Approve</Button>&nbsp;&nbsp;
-                        <Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(2)}>Reject</Button></div>}
-                      {(userrole==4)&& ( teamTAData.filter(e=>e?.status=='0')).length>0 &&<Button fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Verify</Button>}</form>
+                        <div id="team-buttons" style={{display:'flex'}}><Button id="approve-button" fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(1)}>Approve</Button>&nbsp;&nbsp;
+                        <Button id="reject-button" fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(2)}>Reject</Button></div>}
+                      {(userrole==4 || userrole==12)&& ( teamTAData.filter(e=>e?.status=='0')).length>0 &&<Button id="verify-button" fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Verify</Button>}</form>
 
                     {/* </DialogContentText>
                 </DialogContent> */}
-                <Dialog onClose={handleDetailsCloseFilter} open={openDetailsFilter}>
+                <Dialog id="team-dialog" onClose={handleDetailsCloseFilter} open={openDetailsFilter}>
 
                     {selectedTeamTA && <div style={{ padding: "2rem" }}>
 
                         <table>
 
                             <tr>
-                                <td style={{ color: "#f97d3f" }}>Selected POA</td>
-                                <td>:&nbsp;{selectedTeamTA?.Ta_Name}</td>
+                                <td id="selected-poa" style={{ color: "#f97d3f" }}>Selected POA</td>
+                                <td id="selected-team-ta-name">:&nbsp;{selectedTeamTA?.Ta_Name}</td>
                             </tr>
                             <tr>
-                                <td style={{ color: "#f97d3f" }}>Start Reading</td>
-                                <td>:&nbsp;{selectedTeamTA?.start_odometer}</td>
+                                <td id="start-reading" style={{ color: "#f97d3f" }}>Start Reading</td>
+                                <td id="start-odometer">:&nbsp;{selectedTeamTA?.start_odometer}</td>
                             </tr>
 
                             <tr >
-                                <td style={{ color: "#f97d3f" }}> Start Location</td>
-                                <td>:&nbsp;{selectedTeamTA?.start_location_name}</td>
+                                <td id="start-location" style={{ color: "#f97d3f" }}> Start Location</td>
+                                <td id="start-location-name">:&nbsp;{selectedTeamTA?.start_location_name}</td>
                             </tr>
 
                             <tr>
-                                <td style={{ color: "#f97d3f" }}> End Reading</td>
-                                <td>:&nbsp;{selectedTeamTA?.end_odometer}</td>
+                                <td id="end-reading"style={{ color: "#f97d3f" }}> End Reading</td>
+                                <td id="end-odometer">:&nbsp;{selectedTeamTA?.end_odometer}</td>
                             </tr>
 
                             <tr>
-                                <td style={{ color: "#f97d3f" }}>End Location
+                                <td id="end-location" style={{ color: "#f97d3f" }}>End Location
                                 </td>
-                                <td>:&nbsp;{selectedTeamTA?.end_location_name}</td>
+                                <td id="end-location-name">:&nbsp;{selectedTeamTA?.end_location_name}</td>
                             </tr>
 
                             <tr>
-                                <td style={{ color: "#f97d3f" }}>Mode Of Travel</td>
-                                <td>:&nbsp;{selectedTeamTA?.mode_of_travel_name}</td>
+                                <td id="mode-of-travel" style={{ color: "#f97d3f" }}>Mode Of Travel</td>
+                                <td id="mode-of-travel-name">:&nbsp;{selectedTeamTA?.mode_of_travel_name}</td>
                             </tr>
 
                             <tr>
-                                <td style={{ color: "#f97d3f" }}>Rate per Km</td>
-                                <td>:&nbsp;{selectedTeamTA?.rate_per_KM_name}</td>
+                                <td id="rate-per-km" style={{ color: "#f97d3f" }}>Rate per Km</td>
+                                <td id="rate-per-km-name">:&nbsp;{selectedTeamTA?.rate_per_KM_name}</td>
                             </tr>
 
                             {/* <tr>
@@ -376,33 +381,33 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
 </tr> */}
 
                             <tr>
-                                <td style={{ color: "#f97d3f" }}>Phone Charges</td>
-                                <td>:&nbsp;{selectedTeamTA?.telephone}</td>
+                                <td id="phone-charges" style={{ color: "#f97d3f" }}>Phone Charges</td>
+                                <td id="telephone">:&nbsp;{selectedTeamTA?.telephone}</td>
                             </tr>
 
                             <tr>
-                                <td style={{ color: "#f97d3f" }}>printing and stationary</td>
-                                <td>:&nbsp;{selectedTeamTA?.stationery}</td>
+                                <td id="printing-and-stationary" style={{ color: "#f97d3f" }}>printing and stationary</td>
+                                <td id="selected-team-stationary">:&nbsp;{selectedTeamTA?.stationery}</td>
                             </tr>
 
                             <tr>
-                                <td style={{ color: "#f97d3f" }}>Other Expenses</td>
-                                <td>:&nbsp;{selectedTeamTA?.other_text}</td>
+                                <td id="other-expenses"  style={{ color: "#f97d3f" }}>Other Expenses</td>
+                                <td id="other-text">:&nbsp;{selectedTeamTA?.other_text}</td>
                             </tr>
 
                             <tr>
-                                <td style={{ color: "#f97d3f" }}>Other Expenses A</td>
-                                <td>:&nbsp;{selectedTeamTA?.others}</td>
+                                <td id="other-expenses-a" style={{ color: "#f97d3f" }}>Other Expenses A</td>
+                                <td id="others">:&nbsp;{selectedTeamTA?.others}</td>
                             </tr>
 
                             <tr>
-                                <td style={{ color: "#f97d3f" }}>Total Kilometers</td>
-                                <td>:&nbsp;{selectedTeamTA?.klmtr}</td>
+                                <td id="total-kilometers" style={{ color: "#f97d3f" }}>Total Kilometers</td>
+                                <td id="klmtr">:&nbsp;{selectedTeamTA?.klmtr}</td>
                             </tr>
 
                             <tr>
-                                <td style={{ color: "#f97d3f" }}>Total TA</td>
-                                <td>:&nbsp;{selectedTeamTA?.total_ta}</td>
+                                <td id="total-ta" style={{ color: "#f97d3f" }}>Total TA</td>
+                                <td id="selected-team-total-ta">:&nbsp;{selectedTeamTA?.total_ta}</td>
                             </tr>
 
 

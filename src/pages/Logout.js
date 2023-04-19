@@ -33,7 +33,7 @@ function SimpleDialog(props) {
     <Dialog open={open} style={{ width: "100vw" }}>
       <DialogTitle style={{ textAlign: "center" }}>Are You Sure?</DialogTitle>
       <DialogContent>Do you want to logout?</DialogContent>
-      <div style={{ margin: "5px", textAlign: "center" }}> <Button
+      <div style={{ margin: "5px", textAlign: "center" }}> <Button id="No"
         sx={{
           ':hover': {
             color: "#ffffff", bgcolor: "#ff7424"
@@ -45,7 +45,7 @@ function SimpleDialog(props) {
             color: "#ffffff", bgcolor: "#ff7424"
           },
           color: "#ffffff", bgcolor: "#ff7424"
-        }} onClick={logoutuser}>Yes</Button>
+        }} onClick={logoutuser} id="yes">Yes</Button>
       </div>
     </Dialog>
   );
