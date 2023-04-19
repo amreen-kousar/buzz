@@ -345,7 +345,10 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
           value={editData?.contactNum}
           onChange={(e) => { setEditData({ ...editData, contactNum: e?.target?.value }) }}
           type="number"
-          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+          inputProps={{ inputMode: 'numeric', pattern: '[1-9]{1}[0-9]{9}', maxLength: 10 }}
+          onInput = {(e) =>{
+            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+        }}
           id="Mobile-Number"
           label="Mobile Number"
           variant="outlined" color="common"
@@ -353,14 +356,14 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       </Grid>
       <Grid item mb={2}>
         <TextField fullWidth size="small" id="Work"  margin="dense"
-         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+        
          type="number"
           value={editData?.workNum}
-          onChange={(e) => { 
-            if(e?.target?.value.toString().length <= 10){
-              setEditData({ ...editData, workNum: e?.target?.value })
-            }
-            }}
+          onChange={(e) => { setEditData({ ...editData, workNum: e?.target?.value }) }}
+          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+          onInput = {(e) =>{
+            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+        }}
           label="Work" variant="outlined" color="common" />
           
       </Grid>
@@ -392,7 +395,12 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
         <TextField fullWidth size="small" id="PinCode" type="number"
           value={editData?.pincode}
           onChange={(e) => { setEditData({ ...editData, pincode: e?.target?.value }) }}
-          label="PinCode" variant="outlined" color="common" />
+          label="PinCode" variant="outlined" color="common" 
+          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*'}}
+          onInput = {(e) =>{
+            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,6)
+          }} />
+          
       </Grid>
     </Grid>
     <Box display="flex" justifyContent="flex-end">
