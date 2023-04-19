@@ -276,9 +276,9 @@ console.log(response.data.list , "busses data")
           </div>
         )}
 
-        {buses?.map((itm) => {
+        {buses?.map((itm,index) => {
           return (
-            <Card id="bus-card" style={styles.card1}
+            <Card id={index} style={styles.card1}
               onClick={() => {
                 setClickData(itm)
                 handleOpenFilter()
@@ -287,7 +287,7 @@ console.log(response.data.list , "busses data")
               <div style={{ float: 'left', paddingLeft: '20px', paddingTop: '20px', paddingRight: '20px',backgroundColor:'white' }}>
                 <Iconify id="direction-bus-icon" icon="material-symbols:directions-bus" width={30} height={30} />
               </div>
-              <Card id="bus-list-card" sx={{ boxShadow: 0 }} >
+              <Card sx={{ boxShadow: 0 }} >
               <Grid pt={1} pb={1} container xs={6} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
                 <Typography id="bus-number" variant="subtitle1" gutterBottom  >
                   {`Bus Number : ${itm?.register_number}`} 
