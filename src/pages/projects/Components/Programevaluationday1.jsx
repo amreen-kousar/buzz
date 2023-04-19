@@ -202,7 +202,7 @@ export default function Programevaluationday1()
                 <Typography variant='h6' color="primary">Module 1 (M1) Introduction to Buzz:</Typography>
                 <Typography>How many women attended the training session *</Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_m1:e.target.value})} value={sendData?.women_m1}/>
+                    <TextField required  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_m1:e.target.value})} value={sendData?.women_m1}/>
                 </Stack>
                   <Typography style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack mt={2}>
@@ -258,7 +258,7 @@ export default function Programevaluationday1()
                   </Stack>
                   <Typography style={{fontWeight:'700'}}>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m1:e.target.value})} value={sendData?.many_m1}/>
+                    <TextField required  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m1:e.target.value})} value={sendData?.many_m1}/>
                 </Stack>
                 <Stack mt={2}>
                     <Typography style={{fontWeight:700}}>Did this module take 20 minutes as allotted? *</Typography>
@@ -294,7 +294,7 @@ export default function Programevaluationday1()
                   </Stack>
                   <Typography style={{fontWeight:'700'}}>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m2:e.target.value})} value={sendData?.many_m2}/>
+                    <TextField required  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m2:e.target.value})} value={sendData?.many_m2}/>
                 </Stack>
                 <Typography style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack mt={2}>
@@ -336,7 +336,7 @@ export default function Programevaluationday1()
                   </Stack>
                   <Typography style={{fontWeight:'700'}}>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m2:e.target.value})} value={sendData?.many_m2}/>
+                    <TextField required  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m2:e.target.value})} value={sendData?.many_m2}/>
                 </Stack>
                 <Stack mt={2}>
                     <Typography style={{fontWeight:700}}>Did this module take 20 minutes as allotted? *</Typography>
@@ -370,11 +370,11 @@ export default function Programevaluationday1()
                   </Stack>
                   <Typography style={{fontWeight:'700'}}>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m3:e.target.value})} value={sendData?.many_m3}/>
+                    <TextField required label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m3:e.target.value})} value={sendData?.many_m3}/>
                 </Stack>
                 <Typography style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack mt={2}>
-                    <FormGroup >
+                    <FormGroup required>
                       <FormControlLabel value="Ask what are some of the elements needed, apart from money, to either become more profitable at business or to become more adept at saving or to increase your income?" control={<Checkbox style={{color:"#595959"}} />} label="Ask what are some of the elements needed, apart from money, to either become more profitable at business or to become more adept at saving or to increase your income?" onChange={(event)=>handlecheckedata('communicate_m3',event)}/>
                       <FormControlLabel value="Ask what needs to be done to run a business more successfully or even run your life successfully?" control={<Checkbox style={{color:"#595959"}} />} label="Ask what needs to be done to run a business more successfully or even run your life successfully?"  onChange={(event)=>handlecheckedata('communicate_m3',event)}/>
                       <FormControlLabel value="Reward those who answered?" control={<Checkbox style={{color:"#595959"}} />} label="Reward those who answered?"  onChange={(event)=>handlecheckedata('communicate_m3',event)}/>
