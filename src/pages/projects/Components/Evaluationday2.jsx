@@ -2,7 +2,7 @@ import React from 'react';
 
 import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
-import { Stack,IconButton,Button, DialogContent,DialogContentText,TextField,Grid,Typography , Radio,FormControlLabel,Card,CardContent,FormGroup,Checkbox} from '@mui/material';
+import { Stack,IconButton,Button, DialogContent,DialogContentText,TextField ,Grid,Typography , Radio,FormControlLabel,Card,CardContent,FormGroup,Checkbox} from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -203,7 +203,10 @@ export default function Evaluationday2()
                   </Button>
         </Stack>
         <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+        <form onSubmit={evaluationday2data}>
       <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+
+        
           <Toolbar>
           
        
@@ -213,7 +216,7 @@ export default function Evaluationday2()
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
           Program Evaluation Day 2
           </Typography>
-          <Button type="submit" autoFocus color="inherit" onClick={evaluationday2data}>
+          <Button type="submit" autoFocus color="inherit" >
               save
             </Button>
 
@@ -237,7 +240,7 @@ export default function Evaluationday2()
         <Typography variant="h5" style={{textAlign:"center"}}>Training Quality Review Questions - Day 2</Typography>
         <Typography>How many women attended the training session? *</Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attended:e.target.value})} value={sendData?.women_attended}/>
+                    <TextField required inputProps={{ required: true }} type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attended:e.target.value})} value={sendData?.women_attended}/>
                 </Stack> 
 
                 <Typography  mt={2} style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
@@ -309,7 +312,7 @@ export default function Evaluationday2()
                   <Typography color="primary" style={{fontWeight:700}}>Module 5 (M5) Assets and Liabilities</Typography>&nbsp;
                   <Typography>How many women attended the training session? *</Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attend_m5:e.target.value})} value={sendData?.women_attend_m5}/>
+                    <TextField required inputProps={{ required: true }} type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attend_m5:e.target.value})} value={sendData?.women_attend_m5}/>
                 </Stack> 
                 <Typography  mt={2} style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack >
@@ -378,7 +381,7 @@ export default function Evaluationday2()
 
             <Typography>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common"  onChange={(e) => setSendData({ ...sendData, many_m5:e.target.value})} value={sendData?.many_m5}/>
+                    <TextField required inputProps={{ required: true }} type="number"  label="Your Answer" variant="outlined" color="common"  onChange={(e) => setSendData({ ...sendData, many_m5:e.target.value})} value={sendData?.many_m5}/>
                 </Stack>
 
                 <Stack mt={2}>
@@ -412,7 +415,7 @@ export default function Evaluationday2()
                   <Typography color="primary" style={{fontWeight:700}}>Module 6 (M6): Goal setting game</Typography>&nbsp;
                   <Typography>How many women attended the training session? *</Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attend:e.target.value})} value={sendData?.women_attend}/>
+                    <TextField required inputProps={{ required: true }} type="number"  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attend:e.target.value})} value={sendData?.women_attend}/>
                 </Stack> 
                 <Typography  mt={2} style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack >
@@ -512,7 +515,7 @@ export default function Evaluationday2()
 
                 <Typography>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m6:e.target.value})} value={sendData?.many_m6}/>
+                    <TextField required inputProps={{ required: true }} type="number"  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m6:e.target.value})} value={sendData?.many_m6}/>
                 </Stack>
 
                 <Stack mt={2}>
@@ -548,7 +551,7 @@ export default function Evaluationday2()
                   <Typography color="primary" style={{fontWeight:700}}>Module 7 (M7): Financial goals</Typography>&nbsp;
                   <Typography>How many women attended the training session? *</Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attended_m7:e.target.value})} value={sendData?.women_attended_m7}/>
+                    <TextField required inputProps={{ required: true }} type="number"  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attended_m7:e.target.value})} value={sendData?.women_attended_m7}/>
                 </Stack> 
 
                   <Typography  mt={2} style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
@@ -642,7 +645,7 @@ export default function Evaluationday2()
 
                 <Typography>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m7:e.target.value})} value={sendData?.many_m7}/>
+                    <TextField required inputProps={{ required: true }} type="number"  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m7:e.target.value})} value={sendData?.many_m7}/>
                 </Stack>
 
                 <Stack mt={2}>
@@ -679,7 +682,7 @@ export default function Evaluationday2()
   <Typography color="primary" style={{fontWeight:700}}>Module 8 (M8): Loans - group discussion of case studies</Typography>&nbsp;
   <Typography>How many women attended the training session? *</Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attended_m8:e.target.value})} value={sendData?.women_attended_m8}/>
+                    <TextField required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attended_m8:e.target.value})} value={sendData?.women_attended_m8}/>
                 </Stack>
 
 
@@ -742,7 +745,7 @@ export default function Evaluationday2()
                   </Stack>
                   <Typography style={{fontWeight:'500'}}>If so, how many? </Typography>
                 <Stack mt={2} >
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m8:e.target.value})} value={sendData?.many_m8}/>
+                    <TextField required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m8:e.target.value})} value={sendData?.many_m8}/>
                 </Stack>
                 <Stack mt={2}>
                     <Typography style={{fontWeight:500}}>Did this module take 30 minutes as allotted? *</Typography>
@@ -780,6 +783,7 @@ export default function Evaluationday2()
         </Grid>
         </DialogContentText>
         </DialogContent>
+        </form>
       </Dialog>
          </div>
         
