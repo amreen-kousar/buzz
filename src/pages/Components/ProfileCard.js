@@ -394,7 +394,12 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
         <TextField fullWidth size="small" id="PinCode" type="number"
           value={editData?.pincode}
           onChange={(e) => { setEditData({ ...editData, pincode: e?.target?.value }) }}
-          label="PinCode" variant="outlined" color="common" />
+          label="PinCode" variant="outlined" color="common" 
+          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*'}}
+          onInput = {(e) =>{
+            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,6)
+          }} />
+          
       </Grid>
     </Grid>
     <Box display="flex" justifyContent="flex-end">
