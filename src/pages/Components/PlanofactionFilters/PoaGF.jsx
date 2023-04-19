@@ -410,8 +410,22 @@ const noteSubmitHandler = () => {
               </Card>
 
             
-            {/* notes */}
-                          <Card style={{ marginTop: 20 }}>
+            
+              <Card
+                onClick={() => {
+                  setCheck(true), console.log('ferfgreg');
+                }}
+                style={{ marginTop: 20 }}
+              >
+                <CardContent>
+                <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
+                    <Iconify icon="material-symbols:add" width={30} height={30} />
+                  </div>
+                  <Typography>Check in/ Check Out</Typography>
+                </CardContent>
+              </Card>
+
+              <Card style={{ marginTop: 20 }}>
                 <CardContent>
                   <Typography variant="h6">
                     Notes
@@ -454,11 +468,11 @@ const noteSubmitHandler = () => {
                         console.log('note', gelatiNote);
                       }}
                     ></TextField>
-                    {SaveBtn? 
+                    {/* {SaveBtn? 
                     
-                    <>
+                    <> */}
                      <Button
-                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                      style={{ color: "#ff7424", marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:"#ffd796"}}
                       onClick={noteSubmitHandler}
                       disabled={gelatiNote.trim()===""}
                     >
@@ -467,24 +481,18 @@ const noteSubmitHandler = () => {
                     
                     <Button
                   
-                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:'#aec6c1'}}
                   onClick={()=>{
                    setShowNote(false)
                   }}
                 >
-                  {/* <Cancel></Cancel> */}
-                  <Button
                   
-                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
-                  onClick={()=>{
-                   setShowNote(false)
-                  }}
-                >
+                
                   Cancel
+         
                 </Button> 
-                </Button> 
-                    </>
-                    :
+                    {/* </> */}
+                    {/* :
                     <>
                   
                       <Button
@@ -507,7 +515,7 @@ const noteSubmitHandler = () => {
                    </Button> 
                    </>
                    }
-                  
+                   */}
                   </Card>
                 </div>
               ) : null}
@@ -533,8 +541,7 @@ const noteSubmitHandler = () => {
                             >
                               <Typography variant="body1">
                                 {' '}
-                                {/* {userName} */}
-                                 {i?.date}
+                                {userName} {i?.date}
                               </Typography>
 
                               {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
@@ -549,22 +556,10 @@ const noteSubmitHandler = () => {
                      </Card>
                 </div>
               </CardContent>
-              <Card
-                onClick={() => {
-                  setCheck(true), console.log('ferfgreg');
-                }}
-                style={{ marginTop: 20 }}
-              >
-                <CardContent>
-                <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
-                    <Iconify icon="material-symbols:add" width={30} height={30} />
-                  </div>
-                  <Typography>Check in/ Check Out</Typography>
-                </CardContent>
-              </Card>
             </div>
             
           </Stack>
+
       
       {/* {getAllNotes?.length>0? 
       <CardContent>

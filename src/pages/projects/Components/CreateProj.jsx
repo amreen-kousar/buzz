@@ -52,6 +52,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
   const [driverData, setDriverData] = useState([])
   const [deleteData, setDeleteData] = useState([])
 const [createProj ,setCreateProj] = useState(true)
+const [assproject,setAssproject]=useState([])
 const [isReload , setIsReload]= useState(false)
   
    
@@ -88,7 +89,7 @@ const [isReload , setIsReload]= useState(false)
 
 setShowAddBuss(false)
     partnerList();
-   
+    Associateproject();
     teamList();
     driverList();
     setNotify(true)
@@ -262,7 +263,39 @@ setShowAddBuss(false)
   //     </Button>
 
   // }
- 
+
+  console.log(data?.operations_manager_id,"operationmnageriddddddddddd")
+  useEffect(()=>{
+     Associateproject()
+  },[data?.operations_manager_id])
+  const Associateproject=()=>{
+    var associatedata = JSON.stringify({
+      "oprMgrId": 9,
+      "locationId": 43,
+      "funderId": 5,
+      "projectId": 180
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getProjectsListToAssociate.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      associatedata : associatedata
+    };
+    console.log(associatedata,"associatedata")
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setAssproject(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  }
+ console.log(assproject,"associteprojectssssssssssss")
   { console.log(data, "i am visible while changing", edit) }
 
   const createProject2 = () => {
@@ -395,6 +428,7 @@ const mainShowBussHandler = ()=>{
   // setShowAddBuss(true)
   //   console.log("navigation is calling ")
   //  }
+
   return (
     <div>
       {
@@ -645,7 +679,34 @@ const mainShowBussHandler = ()=>{
                     })
                     }
                   </Select>
-                </FormControl></Stack>
+                </FormControl></Stack> 
+
+                {/* <Stack mt={3}>
+                <FormControl fullWidth>
+                  <InputLabel id="associate_project_value">Select Associate Project</InputLabel>
+                  <Select 
+
+                    // labelId="demo-simple-select-label"
+                    id="select-associate-project"
+                    defaultValue={data.operations_manager_id}
+                
+                    value={data.operations_manager_id}
+                    label="Select Associate Project"
+                    onChange={(e => {
+                      setData({ ...data, operations_manager_id: e?.target?.value });
+                      localStorage.setItem("operations_manager_id", e?.target?.value)
+                    })}
+                  >
+                    <MenuItem id="associate-project" value="" default disabled>Select associate Project</MenuItem>
+                    {assproject?.data?.map(itm => {
+                      return (
+                        <MenuItem value={itm?.id}>{itm?.projectName}</MenuItem>
+                      )
+                    })
+                    }
+                  </Select>
+                </FormControl ></Stack > */}
+
             </CardContent>
             <Divider />
             {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}> */}
