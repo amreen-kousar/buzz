@@ -25,8 +25,12 @@ import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
 import AddAttendance from './AddAttendance';
 import Photos from '../../../pages/projects/Components/Photos';
+import EditGelathiSession from 'src/pages/projects/Components/EditGelathisession';
 import CheckinCheckOutDialog from './CheckinCheckOutDialog';
-
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import moment from 'moment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 // ----------------------------------------------------------------------
 
 PoaGF.propTypes = {
@@ -41,6 +45,10 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [shown, setShown] = React.useState(false);
   const [images, setImages] = useState([]);
   const [showNote, setShowNote] = useState(false);
+  const [schedule,setReschedule]=React.useState(false);
+  const [date, setDate] = useState(new Date())
+
+  const [editSession,setEditsession]=useState(false);
   const [check, setCheck] = useState(false);
   const [getAllNotes, setGetAllNotes] = useState([]);
 const [SaveBtn , setSaveBtn] = useState(false) 
@@ -259,6 +267,76 @@ const noteSubmitHandler = () => {
     images.splice(index, 1);
     setImages([...images]);
   };
+
+
+
+   
+  const removesession=(e)=>{
+    if(confirm("Do You want to Cancel?")){
+      var data = JSON.stringify({
+        "poa_id": e?.id,
+        "day": ""
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/updatePoaCancel.php',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        
+        onCloseFilterGF();
+        getTrainingBatch()
+        getGFSessionData();
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+    }
+  }
+
+  const reschedudlehandler=()=>{
+   setReschedule(true)
+  }
+
+  const Reschedule=(e)=>{
+    
+    var data = JSON.stringify({
+      "poa_id": e,
+      "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss')
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/updateReschedule.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+
+      setReschedule(false)
+      onCloseFilterGF()
+      getTrainingBatch()
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
+
   return (
     <>
       <Drawer
@@ -295,7 +373,25 @@ const noteSubmitHandler = () => {
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     Partner : &nbsp;{batch?.partnerName}
-                  </Typography>
+                      {/* <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton> */}
+            <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
+            {console.log(session,"sessionidddddddd")}
+            <IconButton onClick={()=>removesession(session)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton></Typography>
+                    {schedule && <Stack>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+           <DateTimePicker
+   required
+    value={date}
+    onChange={(e) => {setDate(e)}}
+    renderInput={(params) => <TextField {...params} color="common" />}
+  />
+        </LocalizationProvider>
+        {console.log(session,"session?.id")}
+        <Button onClick={()=>Reschedule(session?.id)}>Save</Button>
+      </Stack>}
+ 
+ <EditGelathiSession session={session} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}}/>
+                  
 
                   <Typography variant="body1" gutterBottom>
                     Plan Day:&nbsp;{batch?.plan_date}

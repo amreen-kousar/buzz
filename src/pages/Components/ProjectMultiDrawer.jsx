@@ -8,7 +8,7 @@ import {
     Radio,
     Stack,
     Button,
-    Drawer,
+    Drawer,TextField,
     Rating,
     Divider,
     Checkbox,
@@ -28,6 +28,11 @@ import Photos from '../projects/Components/Photos';
 import Programevaluationday1 from '../projects/Components/Programevaluationday1';
 import Evaluationday2 from '../projects/Components/Evaluationday2';
 import CheckinOut from './PlanofactionFilters/CheckinOut';
+import moment from 'moment';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import EditGelathiSession from '../projects/Components/EditGelathisession';
 // ----------------------------------------------------------------------
 
 projectMultiDrawer.propTypes = {
@@ -39,9 +44,14 @@ projectMultiDrawer.propTypes = {
 export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,batchState,projectId}) {
 
      const [batch,setBatch] = useState('')
+     const [schedule,setReschedule]=React.useState(false);
      const [photos,setPhotos] = React.useState(false)
      const [shown,setShown] = React.useState(false)
    const [images,setImages] = useState([])
+   
+  const [date, setDate] = useState(new Date())
+   const [session, setSession] = useState('');
+   const [editSession,setEditsession]=useState(false);
    const [check,setCheck]=useState(false)
    const [viewImage, setViewImage] = React.useState(false);
    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -152,6 +162,69 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
     images.splice(index, 1);
     setImages([...images]);
   };
+
+  
+  const removesession=(e)=>{
+    if(confirm("Do You want to Cancel?")){
+      var data = JSON.stringify({
+        "poa_id": e?.id,
+        "day": ""
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/updatePoaCancel.php',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        onCloseFilter();
+        getGFSessionData();
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+    }
+  }
+
+  const reschedudlehandler=()=>{
+   setReschedule(true)
+  }
+
+  const Reschedule=(e)=>{
+    
+    var data = JSON.stringify({
+      "poa_id": e,
+      "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss')
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/updateReschedule.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setReschedule(false)
+      onCloseFilter()
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
     return (
         <>
             <Drawer
@@ -189,7 +262,11 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                                     <Typography id="partner" variant="body1" gutterBottom>
                                         Partner :
                                         &nbsp;{batch?.data?.partnerName}
+                                      
                                     </Typography>
+
+                                    
+
                                     <Typography id="training" variant="body1" gutterBottom>
                                         Training&nbsp;Batch:{batch?.data?.name}
                                     </Typography>
