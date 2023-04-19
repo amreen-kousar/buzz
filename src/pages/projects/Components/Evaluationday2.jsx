@@ -13,7 +13,7 @@ import Swal from 'sweetalert2'
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
-export default function Evaluationday2()
+export default function Evaluationday2({onCloseFilter})
 {
     const [open, setOpen] = React.useState(false);
     const [formdata,setformdata] = React.useState(false);
@@ -161,12 +161,14 @@ export default function Evaluationday2()
          
          axios(config)
          .then(function (response) {
-          if (response?.data?.code) {
-            alert(response?.data?.message)
+          if (response?.data?.code == 200) {
+            onCloseFilter();
           }
           else{
-            alert("Saved succesfully")
+           
             handleClose()
+            onCloseFilter();
+
           }
            setformdata(response?.data)
            Swal.fire({
@@ -203,7 +205,7 @@ export default function Evaluationday2()
                   </Button>
         </Stack>
         <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <form onSubmit={evaluationday2data}>
+        <form onSubmit={(e)=>{e.preventDefault(); evaluationday2data()}}>
       <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
 
         
@@ -216,7 +218,7 @@ export default function Evaluationday2()
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
           Program Evaluation Day 2
           </Typography>
-          <Button type="submit" autoFocus color="inherit" >
+          <Button type="submit" color="inherit" >
               save
             </Button>
 

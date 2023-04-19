@@ -468,7 +468,7 @@ const noteSubmitHandler = () => {
                                 </CardContent> */}
                             </Card>
                             <Programevaluationday1 />
-                            <Evaluationday2 />
+                            <Evaluationday2  onCloseFilter={onCloseFilter}/>
                            {batch && <CheckinOut
               photos={check}
               batch={batch}
