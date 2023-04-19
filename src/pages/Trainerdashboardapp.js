@@ -212,7 +212,7 @@ export default function Trainerdashboard() {
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
 
-                total={summaryData?.summary_day2}
+                total={`${summaryData?.summary_day2} %`}
                 title="2nd Day TurnOut(%)"
                 color="warning"
 
@@ -292,7 +292,8 @@ export default function Trainerdashboard() {
                       <Grid item xs={4} sm={8} md={4}>
                         <AppWidgetSummary
 
-                          total={item?.day2}
+                          total={`${item?.day2} %`}
+
                           title="2nd Day TurnOut(%)"
                           color="warning"
 
