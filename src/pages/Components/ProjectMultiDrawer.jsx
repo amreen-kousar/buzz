@@ -116,7 +116,11 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
         throw new Error('No photos to upload.');
       }
         console.log("upload method is calling ")
-        var raw = JSON.stringify({
+
+        if(images.length<=0){
+          alert("No Image is Selected!")
+        }else{
+          var raw = JSON.stringify({
             "project_id":  batch?.data?.project_id,
             "tb_id":batchState?.id,
             "trainer_id": idvalue,
@@ -139,6 +143,9 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
   .then(result => console.log(result, "result in"))
   .catch(error => console.log('error', error));
     }
+    
+        }
+ 
 
     //Method to delete the images that is selected 
   const deleteImage = (index) => {
@@ -271,7 +278,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
              marginLeft: '10px',
            }}
          >
-           Upload  
+           Upload   
          </Button>
          </div>
 </Card>

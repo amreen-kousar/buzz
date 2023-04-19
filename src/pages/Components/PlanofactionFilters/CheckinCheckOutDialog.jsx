@@ -42,6 +42,7 @@ console.log("🚀 ~ file: CheckinCheckOutDialog.jsx:30 ~ FullScreenDialog ~ data
     //setShown(shown)
     
     setOpen(photos)
+    GetStatus()
   }, [photos])
 
   const handleClickOpen = () => {
@@ -112,9 +113,9 @@ axios(config)
   const checkinout = async(type) =>{
     var data = JSON.stringify({
         "location_name": location,
-        "user_id": batch?.data?.user_id,
+        "user_id": batch?.user_id,
         "lon": lats?.lng,
-        "id": batch?.data?.id,
+        "id": batch?.id,
         "type": type,
         "lat": lats?.lat
       });
@@ -131,7 +132,7 @@ axios(config)
       
       axios(config)
       .then(function (response) {
-        
+        GetStatus();
         if(type ===1){
             setCheckIn({
                 location:location,
@@ -144,7 +145,7 @@ axios(config)
               time:newTime
           })
       }
-      GetStatus();
+     
       })
       .catch(function (error) {
         console.log(error);
@@ -154,38 +155,39 @@ axios(config)
 //   GetStatus()
 // })
 console.log(checkIn,"checkintime")
-  const GetStatus = async=>{
-    var data = JSON.stringify({
-      "project_id": batch?.data?.project_id,
-      "poa_type": 2,
-      "type": 2,
-      "tb_id": batch?.data?.id
-    });
-    
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
-    
-    axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data),"dataaaaaaaaaaaa");
-      setCheckData(response.data)
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
+const GetStatus = async=>{
+  var data = JSON.stringify({
+    "project_id": batch?.project_id,
+    "poa_type": 2,
+    "type": 3,
+    "tb_id": batch?.id
+  });
+  
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data),"dataaaaaaaaaaaa");
+    setCheckData(response.data)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
   {console.log(checkData,"checkdataaaaaaaaaaaaa")}
   return (
     <div>
       <Dialog
         fullScreen
         open={open}
+        
         onClose={handleClose}
         TransitionComponent={Transition}
       >
@@ -199,7 +201,7 @@ console.log(checkIn,"checkintime")
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" style={{color:'white'}}>
               Check in / CheckOut 
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
@@ -213,7 +215,7 @@ console.log(checkIn,"checkintime")
 <CardContent>
 <Stack>
         <Typography>
-        <h4>Gelathi Session</h4>
+     Gelathi Session
         </Typography>
         <Typography mt={3} mb={2}>
         {batch?.data?.name}
@@ -223,33 +225,33 @@ console.log(checkIn,"checkintime")
         </Typography>
         <Divider />
         <Typography mt={2}>
-            Start :{batch?.data?.day1?.split(" ")[1]}&nbsp;{batch?.data?.day1?.split(" ")[2]}
+            Start :{batch?.plan_date?.split(" ")[0]}
         </Typography>
-        {(checkIn?.time=='')?<Button style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)}>
+        {(checkData?.data?.check_in_date_day1=='')?<Button style={{float:'left',position:'absolute',left:20,top:180,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)}>
             CHECK IN</Button>
-        :<Button disabled style={{float:'left',position:'absolute',left:20,top:300,marginTop:5,marginBottom:5}}>CheckIN</Button>
+        :<Button disabled style={{float:'left',position:'absolute',left:20,top:180,marginTop:5,marginBottom:5}}>CheckIN</Button>
         
         }<br/><br/>
-        {/* {(checkData?.check_out_date_day1 =="")?<> */}
-        <Typography>
-            Checked In  : {(checkIn?.time!="") && moment(checkIn?.time)?.format('DD-MM-YYYY HH:mm a')}
+     
+        {(checkData?.data?.check_in_date_day1!='')?<><Typography>
+            Checked In  : {checkData?.data?.check_in_date_day1}
         </Typography>
         <Typography>
-           Location  : {checkIn?.location}
-        </Typography><br/> <Divider />
+           Location  : {checkData?.data?.check_in_location_day1}
+        </Typography></>:null}<br/> <Divider />
         {/* </>:null} */}
         <Typography mt={2}>
-            End :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
+            End :{batch?.day2?.split(" ")[1]}&nbsp;{batch?.day2?.split(" ")[2]}
         </Typography>
-        {(checkOut?.time=="")?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:440,color:'#ff7424'}}>
+        {(checkData?.data?.check_out_date_day1=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:350,marginBottom:2,color:'#ff7424'}}>
             CHECK OUT
-        </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:460}}>CHECKOUT</Button>}<br/>
-       <Typography>
-            Checked Out  : {(checkOut?.time!="") && moment(checkIn?.time)?.format('DD-MM-YYYY HH:mm a')}
+        </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:350,marginBottom:2}}>CHECKOUT</Button>}<br/><br/>
+       {(checkData?.data?.check_out_date_day1!="")?<><Typography>
+            Checked Out  : {checkData?.data?.check_out_date_day1}
         </Typography>
         <Typography>
-           Location  :  {checkOut?.location}
-        </Typography>
+           Location  :  {checkData?.data?.check_out_location_day1}
+        </Typography></>:null}
        </Stack>
 </CardContent>
 </Card>

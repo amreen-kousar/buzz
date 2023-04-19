@@ -16,7 +16,7 @@ import {
   IconButton,
   Typography,
   RadioGroup,
-  Card,
+  Card,Grid,
   CardContent,
 } from '@mui/material';
 // components
@@ -41,11 +41,39 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [shown, setShown] = React.useState(false);
   const [images, setImages] = useState([]);
   const [check, setCheck] = useState(false);
+  const [getAllNotes, setGetAllNotes] = useState([]);
 
+  const [session, setSession] = useState('');
+
+   const role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
   useEffect(() => {
     getTrainingBatch();
     // console.log(batchState)
   }, [batchState, clcikData]);
+
+  useEffect(() => {
+   
+
+    getGFSessionData();
+    getNoteHandler();
+
+   
+  }, [clcikData]);
+   // geting notes for each drawer 
+   useEffect(() => {
+    console.log('useEffect for getnotehandler');
+
+    let isSubscribe = true;
+
+    if (isSubscribe) {
+      getNoteHandler();
+      getGFSessionData();
+    }
+
+    return () => {
+      isSubscribe = false;
+    };
+  }, [session.tb_id]);
   console.log(clcikData, '<---clcikDataPoaGF',batchState);
   const getTrainingBatch = (async) => {
     console.log(
@@ -79,6 +107,67 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
         console.log(error);
       });
   };
+ 
+  const getGFSessionData = (async) => {
+    var data = JSON.stringify({
+      gf_session_id: clcikData?.id,
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData.php',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        setSession(response.data);
+        console.log(response.data, '<---------setSessionsetSession');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+
+   //getting Notes\
+
+   const getNoteHandler = () => {
+    console.log('getNoteHandler');
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+    var data = JSON.stringify({
+      type: session.type,
+      tb_id: session.tb_id,
+      // "type":2, "tb_id":21407
+    });
+
+    console.log(data, 'material api');
+    const config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getNotes.php',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        if (response.status == 200) {
+          setGetAllNotes(response?.data?.notes);
+          console.log(response, 'notesData');
+        }
+      })
+      .catch(function (error) {
+        console.log(error, 'failed');
+      });
+    console.log('submit');
+  };
+
 
   function getBase64(file, callback) {
     const reader = new FileReader();
@@ -208,7 +297,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
                     <Iconify icon="material-symbols:add" width={30} height={30} />
                   </div>
                   <Typography>
-                    Visit Participants: {batch?.total_participants}
+                    Visit Participants: {batch?.total_participants} 
                     {/* <IconButton>
                       <Iconify style={{ color: "black",float:'right'}} icon="material-symbols:add" />
                     </IconButton> */}
@@ -295,6 +384,45 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
             </div>
             
           </Stack>
+      
+      {/* {getAllNotes?.length>0? 
+      <CardContent>
+      <div>
+      <Card style={{ marginTop: 20, marginLeft: 10 }}>
+        {getAllNotes &&
+          getAllNotes.map((i, index) => {
+            {
+              console.log(i, 'ivalue');
+            }
+            return (
+              <>
+               
+                  <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}> 
+                  <Grid
+                    container
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    style={{ marginTop: 10 }}
+                  >
+                    <Typography variant="body1">
+                      {i?.date}
+                    </Typography>
+
+                    {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
+                  </Grid>
+                  <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
+                    {i?.notes}{' '}
+                  </Typography>
+               
+              </>
+            );
+          })}
+           </Card>
+      </div>
+    </CardContent>
+      : null}  
+         */}
         </Scrollbar>
 
        

@@ -491,7 +491,12 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Contact Number /ಸಂಪರ್ಕ ಸಂಖ್ಯೆ *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="phone number" required type="number"  inputProps={{ maxLength: 10 }} label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, contact_number:e.target.value})} value={sendData?.contact_number} />
+                    <TextField id="phone number" required type="number"  inputProps={{ maxLength: 10 }} label="Your Answer" variant="outlined" color="common" 
+                    onChange={(e) => {
+                       if(e.target.value.toString().length <=10){
+                        setSendData({ ...sendData, contact_number:e.target.value})
+                       }
+                     }} value={sendData?.contact_number} />
                   </Stack>
                 </CardContent>
               </Card>

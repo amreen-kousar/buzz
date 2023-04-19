@@ -634,7 +634,7 @@ const convertImage = (e) => {
                     
                     <>
                      <Button
-                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                      style={{ backgroundColor: '#ff7424',color:"white", marginTop: 20, marginLeft: 20, marginBottom: 20 }}
                       onClick={noteSubmitHandler}
                     >
                       Save
