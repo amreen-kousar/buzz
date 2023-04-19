@@ -242,8 +242,8 @@ export default function PlanofAction() {
   return (
     <div>
       {openMessage && (
-        <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
-          <Alert
+        <Snackbar id="poa-snackbar" open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+          <Alert id="alert-open-message"
             onClose={() => {
               setOpenMessage(false);
             }}
@@ -256,7 +256,7 @@ export default function PlanofAction() {
       )}
 
       <br />
-      <Typography variant="h4" style={{ margin: 2 }}>
+      <Typography id="plan-of-actions" variant="h4" style={{ margin: 2 }}>
         Plan Of Actions 
         {role == 1 || role == 3 || role == 4 || role == 12 || role == 13 || role == 11 ? (
           <PoaTeam setUserId={(e) => setUserId(e)} setName={(e) => setName(e)} />
@@ -265,8 +265,9 @@ export default function PlanofAction() {
         {console.log(name, 'nameeeeeeee')}
         <br />
         {name !== '' && (
-          <Stack direction="row" spacing={1}>
+          <Stack id="delete-selected" direction="row" spacing={1}>
             <Chip
+              id="name-delete-selected"
               label={name }
               onDelete={() => {
                 handleDeleteSelected();
@@ -293,9 +294,9 @@ export default function PlanofAction() {
       </Stack> */}
 
       {drawerEvent && (
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        <Stack id="poa-event-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           {console.log(select, 'selectedvalue')}
-          <PoaEvent
+          <PoaEvent id="poa-event"
           changeState={changeState}
             select={select}
             useridvalue={select?.user_id}
@@ -309,7 +310,7 @@ export default function PlanofAction() {
       )}
       {console.log(select?.user_id, 'uservalueeeeeeeee')}
       {gfDrawer && (
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        <Stack id="poagf-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <PoaGF
             batchState={batchState}
             clcikData={clcikData}
@@ -319,9 +320,10 @@ export default function PlanofAction() {
           />
         </Stack>
       )}
-      <Stack>
+      <Stack id="date-picker-stack">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
+            id="date"
             label="Date"
             inputFormat="DD/MM/YYYY"
             views={['day', 'month', 'year']}
@@ -346,8 +348,9 @@ export default function PlanofAction() {
                  onCloseDay1={handleCloseDay1} 
                  />
               </Stack> */}
-      <Stack>
+      <Stack id="project-multi-drawer-stack">
         <ProjectMultiDrawer
+          id="poa-project-multi-drawer"
           batchState={batchState}
           clcikData={clcikData}
           isOpenFilter={openFilter}
@@ -356,10 +359,11 @@ export default function PlanofAction() {
         />
       </Stack>
 
-      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-        <Box sx={{ width: '100%' }}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Stack id="tabs-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        <Box id="tabs-box" sx={{ width: '100%' }}>
+          <Box id="tabs-example" sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
+              id="basic-tabs-example"
               variant="fullWidth"
               value={value}
               indicatorColor="warning"
@@ -367,6 +371,7 @@ export default function PlanofAction() {
               aria-label="basic tabs example"
             >
               <Tab
+                id="today"
                 sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
@@ -387,6 +392,7 @@ export default function PlanofAction() {
                 {...a11yProps(0)}
               />
               <Tab
+                id="week"
                 sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
@@ -407,6 +413,7 @@ export default function PlanofAction() {
                 {...a11yProps(1)}
               />
               <Tab
+                id="month"
                 sx={{
                   ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
@@ -429,7 +436,7 @@ export default function PlanofAction() {
             </Tabs>
           </Box>
 
-          <TabPanel value={value} index={0}>
+          <TabPanel id="tab-panel-1" value={value} index={0}>
             {poa?.length !== 0 ? (
               poa?.map((item) => {
                 return (
@@ -438,17 +445,17 @@ export default function PlanofAction() {
                     {item?.length !== 0 &&
                       item?.map((itm) => {
                         return (
-                          <Card
+                          <Card id="select-item-card"
                             style={{ marginTop: 10, marginBottom: 10 }}
                             onClick={() => {
                               setSelect(itm);
                             }}
                           >
-                        <TableContainer component={Paper}>
-                              <Table aria-label="customized table">
-                                <TableBody>
-                                  <TableRow>
-                                    <TableCell
+                            <TableContainer id="poa-table-container" component={Paper}>
+                              <Table id="customized-table" aria-label="customized table">
+                                <TableBody id="poa-table-body">
+                                  <TableRow id="poa-table-row">
+                                    <TableCell id="table-cell" style={{    width: "69%"}}
                                       component="th"
                                       scope="row"
                                       onClick={() => {
@@ -548,12 +555,12 @@ export default function PlanofAction() {
                                     </span>:null}
                                     </TableCell>
                                     {itm?.status !== '2' && (
-                                      <TableCell component="th" scope="row" width="10px">
+                                      <TableCell id="table-cell-poa-edit" component="th" scope="row" width="10px">
                                        {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id) ? (
                                           <Stack direction={'row'} spacing={2}>
                                             <PoaEdit itm={itm} />
                                             {itm?.check_out == 0 ? (
-                                              <IconButton
+                                              <IconButton id="icon-button-cancel"
                                                 onClick={() => {
                                                   handleDelete(itm);
                                                 }}
@@ -568,11 +575,11 @@ export default function PlanofAction() {
                                                 }}
                                                 variant="outlined"
                                               >
-                                                <Iconify icon="material-symbols:cancel"></Iconify>
+                                                <Iconify id="cancel-icon-button" icon="material-symbols:cancel"></Iconify>
                                               </IconButton>
                                             ) : (
-                                              <span style={{ color: 'green', fontWeight: 500 }}>
-                                                (Event&nbsp;Completed)
+                                              <span id="event-completd" style={{ color: 'green', fontWeight: 500 }}>
+                                                (Event&nbsp;Completed )
                                               </span>
                                             )}
                                           </Stack>
@@ -590,9 +597,9 @@ export default function PlanofAction() {
                 );
               })
             ) : (
-              <Grid>
+              <Grid id="no-poa-grid">
                 {' '}
-                <h1 style={{ fontWeight: 900, textAlign: 'center' }}>
+                <h1 id="no-poa" style={{ fontWeight: 900, textAlign: 'center' }}>
                   <br />
                   No Poa
                 </h1>
@@ -600,26 +607,26 @@ export default function PlanofAction() {
             )}
           </TabPanel>
 
-          <TabPanel value={value} index={1}>
+          <TabPanel id="tab-panel-plan-of-action" value={value} index={1}>
             {poa?.length !== 0 ? (
               poa?.map((item) => {
                 return (
                   <>
-                    <h3>{item[0]?.date}</h3>
+                    <h3 id="item-date">{item[0]?.date}</h3>
                     {item?.length !== 0 &&
                       item?.map((itm) => {
                         return (
-                          <Card
+                          <Card id="card-set-select-item"
                             style={{ marginBottom: 30, marginTop: 10 }}
                             onClick={() => {
                               setSelect(itm);
                             }}
                           >
-                            <TableContainer component={Paper}>
-                              <Table aria-label="customized table">
-                                <TableBody>
-                                  <TableRow>
-                                    <TableCell
+                            <TableContainer id="table-container-paper-component" component={Paper}>
+                              <Table id="table-plan-of-action" aria-label="customized table">
+                                <TableBody id="table-body-poa">
+                                  <TableRow id="table-row-poa">
+                                    <TableCell id="table-cell-plan-of-action"
                                       component="th"
                                       scope="row"
                                       onClick={() => {
@@ -719,12 +726,12 @@ export default function PlanofAction() {
                                     </span>:null}
                                     </TableCell>
                                     {itm?.status !== '2' && (
-                                      <TableCell component="th" scope="row" width="10px">
+                                      <TableCell id="table-cell-edit-poa" component="th" scope="row" width="10px">
                                        {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id) ? (
                                           <Stack direction={'row'} spacing={2}>
                                             <PoaEdit itm={itm} />
                                             {itm?.check_out == 0 ? (
-                                              <IconButton
+                                              <IconButton id="cancel-iconbutton"
                                                 onClick={() => {
                                                   handleDelete(itm);
                                                 }}
@@ -739,10 +746,10 @@ export default function PlanofAction() {
                                                 }}
                                                 variant="outlined"
                                               >
-                                                <Iconify icon="material-symbols:cancel"></Iconify>
+                                                <Iconify id="material-symbol-cancel" icon="material-symbols:cancel"></Iconify>
                                               </IconButton>
                                             ) : (
-                                              <span style={{ color: 'green', fontWeight: 500 }}>
+                                              <span id="event-compltd" style={{ color: 'green', fontWeight: 500 }}>
                                                 (Event&nbsp;Completed)
                                               </span>
                                             )}
@@ -761,16 +768,16 @@ export default function PlanofAction() {
                 );
               })
             ) : (
-              <Grid>
+              <Grid id="grid-no-poa">
                 {' '}
-                <h1 style={{ fontWeight: 900, textAlign: 'center' }}>
+                <h1 id="no-poa-h1" style={{ fontWeight: 900, textAlign: 'center' }}>
                   <br />
                   No Poa
                 </h1>
               </Grid>
             )}
           </TabPanel>
-          <TabPanel value={value} index={2}>
+          <TabPanel id="tab-panel-poa" value={value} index={2}>
             {poa?.length !== 0 ? (
               poa?.map((item) => {
                 return (
@@ -779,17 +786,17 @@ export default function PlanofAction() {
                     {item?.length !== 0 &&
                       item?.map((itm) => {
                         return (
-                          <Card
+                          <Card id="poa-card"
                             style={{ marginBottom: 30, marginTop: 10 }}
                             onClick={() => {
                               setSelect(itm);
                             }}
                           >
-                            <TableContainer component={Paper}>
-                              <Table aria-label="customized table">
-                                <TableBody>
-                                  <TableRow>
-                                    <TableCell
+                            <TableContainer id="table-container" component={Paper}>
+                              <Table id="customized-table-poa" aria-label="customized table">
+                                <TableBody id="customized-table-body">
+                                  <TableRow id="row-customized-table">
+                                    <TableCell id="table-cell-customized"
                                       component="th"
                                       scope="row"
                                       onClick={() => {
@@ -893,12 +900,12 @@ export default function PlanofAction() {
                                   </span>:null}
                                     </TableCell>
                                     {itm?.status !== '2' && (
-                                      <TableCell component="th" scope="row" width="10px">
+                                      <TableCell id="icon-button-table" component="th" scope="row" width="10px">
                                         {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id)  ? (
                                           <Stack direction={'row'} spacing={2}>
                                             <PoaEdit itm={itm} />
                                             {itm?.check_out == 0 ? (
-                                              <IconButton
+                                              <IconButton id="icon-button-cncl-btn"
                                                 onClick={() => {
                                                   handleDelete(itm);
                                                 }}
@@ -913,10 +920,10 @@ export default function PlanofAction() {
                                                 }}
                                                 variant="outlined"
                                               >
-                                                <Iconify icon="material-symbols:cancel"></Iconify>
+                                                <Iconify id="mui-symbols-cncl" icon="material-symbols:cancel"></Iconify>
                                               </IconButton>
                                             ) : (
-                                              <span style={{ color: 'green', fontWeight: 500 }}>
+                                              <span id="evnt-cmpltd" style={{ color: 'green', fontWeight: 500 }}>
                                                 (Event&nbsp;Completed)
                                               </span>
                                             )}
@@ -935,8 +942,8 @@ export default function PlanofAction() {
                 );
               })
             ) : (
-              <Grid>
-                <h1 style={{ fontWeight: 900, textAlign: 'center' }}>
+              <Grid id="plan-of=actn-no-poa-grid">
+                <h1 id="no-poa-heading" style={{ fontWeight: 900, textAlign: 'center' }}>
                   <br />
                   No Poa
                 </h1>

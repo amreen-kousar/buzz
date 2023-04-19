@@ -37,20 +37,20 @@ function SimpleDialog(props) {
   console.log(teamData, "<----teamDatateamDatateamData")
 
   return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle> <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+    <Dialog id="poa-team-dialog" onClose={handleClose} open={open}>
+      <DialogTitle id="poa-team-dialog-content"> <IconButton id="poa-team-icon-button" edge="start" color="inherit" onClick={handleClose} aria-label="close">
         <CloseIcon />
       </IconButton>Select Buzz Team Members</DialogTitle>
       {(teamData?.length>0)?<List sx={{ pt: 0 }}>
         {teamData?.map((email) => (
 
-          <ListItem disableGutters>
-            <ListItemButton onClick={() => handleListItemClick(email)} >
-              <ListItemAvatar>
-                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }} src={email?.profile_pic} />
+          <ListItem id="poa-team-list-item" disableGutters>
+            <ListItemButton id="list-item-btn" onClick={() => handleListItemClick(email)} >
+              <ListItemAvatar id="list-item-avatar">
+                <Avatar id="poa-team-avatar" sx={{ bgcolor: blue[100], color: blue[600] }} src={email?.profile_pic} />
 
               </ListItemAvatar>
-              <ListItemText primary={email?.name} />
+              <ListItemText id="list-item-text" primary={email?.name} />
             </ListItemButton>
           </ListItem>
 
@@ -69,7 +69,7 @@ function SimpleDialog(props) {
             <ListItemText primary="Add account" />
           </ListItemButton> 
         </ListItem> */}
-      </List>:<h4 style={{textAlign:'center'}}>No Team Members Found</h4>}
+      </List>:<h4 id="no-team-members-found" style={{textAlign:'center'}}>No Team Members Found</h4>}
     </Dialog>
   );
 }
@@ -127,7 +127,7 @@ console.log(idvalue,"iddddddddddd")
   return (
     <div>
 
-      <Button onClick={handleClickOpen} style={{ float: "right", color: "#ff7424", margin: 10, marginTop: 0 }} sx={{
+      <Button id="poa-team-button-people" onClick={handleClickOpen} style={{ float: "right", color: "#ff7424", margin: 10, marginTop: 0 }} sx={{
         '&:hover': {
           backgroundColor: '#ffd796',
           borderColor: "#ff7424",
@@ -137,9 +137,10 @@ console.log(idvalue,"iddddddddddd")
         color: "#ff7424",
         backgroundColor: '#ffd796',
       }} title="Select Buzz member">
-        <Iconify icon="mdi:people" style={{ width: '30px', height: '30px' }} ></Iconify>
+        <Iconify id="people-icon" icon="mdi:people" style={{ width: '30px', height: '30px' }} ></Iconify>
       </Button>
       <SimpleDialog
+        id="poa-team-simple-dialog"
         teamData={teamData}
         setUserId={setUserId}
         setName={setName}

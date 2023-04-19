@@ -221,6 +221,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   return (
     <>
       <Drawer
+        id="poa-gf-drawer"
         anchor="right"
         open={isOpenFilterGF}
         onClose={onCloseFilterGF}
@@ -228,21 +229,19 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
           sx: { width: 350 },
         }}
       >
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }}>
+        <Stack id="poa-gf-stack" direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
+          <Typography id="poa-gf-subtitle" variant="subtitle1" sx={{ ml: 1 }}>
             {/* {`${clcikData?.title}: ${clcikData?.name}`} */}
             {clcikData?.name}
           </Typography>
-          <IconButton onClick={onCloseFilterGF}>
-            <Iconify icon="eva:close-fill" width={20} height={20} />
+          <IconButton id="poa-gf-close-icon-button" onClick={onCloseFilterGF}>
+            <Iconify id="close-icon-poa-gf" icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
 
         <Divider />
 
-       {/* <CardContent>
-       <h1 style={{marginTop:50}}>Work In Progress for Gelathi Drawer Having Branch Conflict</h1>
-       </CardContent> */}
+       
 
 <Scrollbar>
           <Stack spacing={3} sx={{ p: 2 }}>

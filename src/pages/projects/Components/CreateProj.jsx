@@ -551,7 +551,7 @@ const mainShowBussHandler = ()=>{
             </Grid>
             <Divider />
             <CardContent>
-              <Typography id="resources" variant="h6">Resources</Typography>
+              {/* <Typography id="resources" variant="h6">Resources</Typography> */}
               {/* <div style={{display:"flex"}}> */}
               <Stack >
                 <CardContent style={{padding:"9px"}} >

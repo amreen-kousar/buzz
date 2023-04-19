@@ -86,6 +86,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
             <>
           
                 <Dialog
+                id="scroll-dialog-title"
                 open={createProj}
                 fullScreen
                 onClose={handleClose}
@@ -96,7 +97,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                     <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                         <CloseIcon />
                     </IconButton>
-                    <Typography sx={{ ml: 2, flex: 1, color: "#ffffff" }} variant="h6" component="div" >
+                    <Typography id="add-new-bus" sx={{ ml: 2, flex: 1, color: "#ffffff" }} variant="h6" component="div" >
                         Add New Bus
                     </Typography>
                 </Toolbar>
@@ -106,6 +107,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                         tabIndex={-1}
                     >
                         <Box
+                            id="add-bus-form"
                             component="form"
                             sx={{
                                 '& .MuiTextField-root': { m: 1 },
@@ -310,7 +312,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                 </DialogActions>
             </Dialog>
             </>:
-            <Button style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} id="add"
+            <Button id="add-bus-btn" style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }}
             sx={{
                 '&:hover': {
                     backgroundColor: '#ffd796',
@@ -322,6 +324,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
             }
             
             <Dialog
+                id="scroll-dialog-desc"
                 open={openAddBus}
                 fullScreen
                 onClose={handleClose}

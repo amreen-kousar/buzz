@@ -226,12 +226,19 @@ const GetStatus = async=>{
         <Divider />
         <Typography mt={2}>
             Start :{batch?.plan_date?.split(" ")[0]}
-        </Typography>
-        {(checkData?.data?.check_in_date_day1=='')?<Button style={{float:'left',position:'absolute',left:20,top:180,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)}>
+        </Typography><br/>
+        {(checkData?.data?.check_in_date_day1=='')?<Button style={{float:'left',position:'absolute',left:20,top:170,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)} sx={{
+             '&:hover': {
+               backgroundColor: '#ffd796',
+             },
+             color: '#ff7424',
+             backgroundColor: '#ffd796',
+             marginLeft: '10px',
+           }}>
             CHECK IN</Button>
-        :<Button disabled style={{float:'left',position:'absolute',left:20,top:180,marginTop:5,marginBottom:5}}>CheckIN</Button>
+        :<Button disabled style={{float:'left',position:'absolute',left:20,top:160,marginTop:5,marginBottom:5}}>CheckIN</Button>
         
-        }<br/><br/>
+        }<br/>
      
         {(checkData?.data?.check_in_date_day1!='')?<><Typography>
             Checked In  : {checkData?.data?.check_in_date_day1}
@@ -243,7 +250,14 @@ const GetStatus = async=>{
         <Typography mt={2}>
             End :{batch?.day2?.split(" ")[1]}&nbsp;{batch?.day2?.split(" ")[2]}
         </Typography>
-        {(checkData?.data?.check_out_date_day1=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:350,marginBottom:2,color:'#ff7424'}}>
+        {(checkData?.data?.check_in_date_day1!='' && checkData?.data?.check_out_date_day1=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:350,marginBottom:2,color:'#ff7424'}} sx={{
+             '&:hover': {
+               backgroundColor: '#ffd796',
+             },
+             color: '#ff7424',
+             backgroundColor: '#ffd796',
+             marginLeft: '10px',
+           }}>
             CHECK OUT
         </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:350,marginBottom:2}}>CHECKOUT</Button>}<br/><br/>
        {(checkData?.data?.check_out_date_day1!="")?<><Typography>

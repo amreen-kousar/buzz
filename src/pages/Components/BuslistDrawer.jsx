@@ -139,7 +139,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
                         <IconButton style={{color:"white"}} onClick={onCloseFilter}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
-                        <Typography variant="subtitle2" style={{color:'white'}}>
+                        <Typography id="bus-details" variant="subtitle2" style={{color:'white'}}>
                     Bus Details
           </Typography>
          
@@ -157,7 +157,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           '&:hover': {
             backgroundColor: 'white',
           },
-        }} ><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138',float:'right'}}></Iconify></Button>:null}
+        }} ><Iconify id="delete-icon" icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138',float:'right'}}></Iconify></Button>:null}
            {(userDetails==2)?<BusEdit clcikData={detailsData} busesd={busesd} updatedata={()=>{setUserUpdate(!userUpdate)}} />:null}
             <Card>
                 <CardContent>

@@ -217,7 +217,7 @@ export default function Trainerdashboard() {
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
 
-                total={summaryData?.summary_day2}
+                total={`${summaryData?.summary_day2} %`}
                 title="2nd Day TurnOut(%)"
                 color="warning"
 
@@ -262,7 +262,7 @@ export default function Trainerdashboard() {
                     <TableBody>
                       <TableRow >
                         <TableCell><span style={{fontWeight:700,fontSize:15}}>Project<br/>Actual / Target<br/>Duration</span> </TableCell>
-                        <TableCell><span style={{fontWeight:700,fontSize:15}}>:&nbsp;{item?.name}<br/>:&nbsp; {item?.actual} / {item?.target ?item?.target : 0 } <br/>:&nbsp;{moment(item?.startDate)?.format('DD-MM-YYYY')} / {moment(item?.endDate)?.format('DD-MM-YYYY')}</span>  </TableCell>
+                        <TableCell><span style={{fontWeight:700,fontSize:15}}>:&nbsp;{item?.name}<br/>:&nbsp; {item?.actual?item.actual:0} / {item?.target ?item?.target : 0 } <br/>:&nbsp;{moment(item?.startDate)?.format('DD-MM-YYYY')} / {moment(item?.endDate)?.format('DD-MM-YYYY')}</span>  </TableCell>
                       </TableRow>
                       
                      
@@ -294,7 +294,8 @@ export default function Trainerdashboard() {
                       <Grid item xs={4} sm={8} md={4}>
                         <AppWidgetSummary
 
-                          total={item?.day2}
+                          total={`${item?.day2} %`}
+
                           title="2nd Day TurnOut(%)"
                           color="warning"
 

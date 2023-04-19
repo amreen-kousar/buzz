@@ -157,7 +157,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
                 },
               }}
             >
-              <Iconify
+              <Iconify id="delete-icon"
                 icon="ic:baseline-delete"
                 style={{ width: '30px', height: '30px', color: '#e69138', marginRight: 0 }}
               ></Iconify>

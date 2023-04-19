@@ -161,8 +161,8 @@ export default function Own(props) {
 
     return (
         <div>
-            <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
-                <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
+            <Snackbar id="open-message" open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+                <Alert id="success-message-alert" onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
                     {message}
                 </Alert>
             </Snackbar>
@@ -214,17 +214,17 @@ export default function Own(props) {
                     {listdata?.data?.map((itm) => {
                             return (
                                 <>
-                                    <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
+                                    <Card id="own-main-card" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
 
-                                        <Grid container spacing={2} >
-                                            <Grid onClick={() => { handleOpenFilter(itm) }} item xs={8}>
+                                        <Grid id="own-grid" container spacing={2} >
+                                            <Grid id="open-filter" onClick={() => { handleOpenFilter(itm) }} item xs={8}>
                                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.Ta_Name}</b><br>
                                                 </br>
-                                                <Typography variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
+                                                <Typography id="TA-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <Iconify onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
-                                                <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
+                                                <Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+                                                <Iconify id="icon-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
                                             </Grid>
 
 
@@ -241,17 +241,17 @@ export default function Own(props) {
                     {listdata?.data?.map((itm) => {
                             return (
                                 <>
-                                    <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
+                                    <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
 
-                                        <Grid container spacing={2} >
-                                            <Grid onClick={() => { handleOpenFilter(itm) }} item xs={8}>
+                                        <Grid id="grid-own-ta-amount" container spacing={2} >
+                                            <Grid id="grid-own-open-filter" onClick={() => { handleOpenFilter(itm) }} item xs={8}>
                                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.Ta_Name}</b><br>
                                                 </br>
-                                                <Typography variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
+                                                <Typography id="typography-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <Iconify onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
-                                                <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
+                                                <Iconify id="uiicons-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+                                                <Iconify id="icon-outline-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
                                             </Grid>
 
 
@@ -267,17 +267,17 @@ export default function Own(props) {
                         {listdata?.data?.map((itm) => {
                             return (
                                 <>
-                                    <Card style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
+                                    <Card id="third-card-own" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
 
-                                        <Grid container spacing={2} >
-                                            <Grid onClick={() => { handleOpenFilter(itm) }} item xs={8}>
+                                        <Grid id="grid-own" container spacing={2} >
+                                            <Grid id="own-open-filter" onClick={() => { handleOpenFilter(itm) }} item xs={8}>
                                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.Ta_Name}</b><br>
                                                 </br>
-                                                <Typography variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
+                                                <Typography id="own-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <Iconify onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
-                                                <Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
+                                                <Iconify id="icon-delete" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+                                                <Iconify id="uiicon-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
                                             </Grid>
 
 
@@ -290,7 +290,7 @@ export default function Own(props) {
                         })}
                     </TabPanel >
                 </Box >
-            </Stack > : <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>}
+            </Stack > : <h1 id="No-data-found" style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>}
 
 
             {editData && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>

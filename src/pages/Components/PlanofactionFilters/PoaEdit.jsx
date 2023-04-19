@@ -132,7 +132,7 @@ export default function PoaEdit({ setSucess, itm }) {
   }
   return (
     <div>
-      {(itm?.check_out==0 )?<IconButton onClick={handleClickOpen} sx={{
+      {(itm?.check_out==0 )?<IconButton id="icon-button-edit-poa" onClick={handleClickOpen} sx={{
         '&:hover': {
           backgroundColor: '#ffd796',
           borderColor: "#ff7424"
@@ -140,9 +140,10 @@ export default function PoaEdit({ setSucess, itm }) {
         borderColor: "#ff7424",
         color: "#ed6c02"
       }} variant="outlined" >
-        <Iconify icon="ic:baseline-mode-edit-outline"></Iconify>
+        <Iconify id="icon-edit-outline" icon="ic:baseline-mode-edit-outline"></Iconify>
       </IconButton>:null}
       <Dialog
+      id="scroll-dialog-desc"
         open={open}
         fullScreen
         onClose={handleClose}
@@ -151,11 +152,11 @@ export default function PoaEdit({ setSucess, itm }) {
         aria-describedby="scroll-dialog-description"
       >
 
-        <Snackbar open={value} autoHideDuration={6000} onClose={() => {
+        <Snackbar id="poa-edit-snackbar" open={value} autoHideDuration={6000} onClose={() => {
           setAddPoa(''),
             setValue(false)
         }}>
-          <Alert onClose={() => {
+          <Alert id="edit-poa-add-alert" onClose={() => {
             setAddPoa(''),
               setValue(false)
           }} severity="error" sx={{ width: '100%' }}>
@@ -163,17 +164,17 @@ export default function PoaEdit({ setSucess, itm }) {
           </Alert>
         </Snackbar>
 
-        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+        <AppBar id="edit-poa-appbar" sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+          <Toolbar id="edit-poa-toolbar">
+            <IconButton id="close-icon" edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div"  >
+            <Typography id="edit-your-poa" sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div"  >
               Edit Your POA
             </Typography>
 
 
-            <Button autoFocus color="inherit" onClick={AddPoa}>
+            <Button id="edit-poa-save-btn" autoFocus color="inherit" onClick={AddPoa}>
               save
             </Button>
           </Toolbar>
@@ -181,8 +182,8 @@ export default function PoaEdit({ setSucess, itm }) {
         </AppBar>
 
         {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
-        <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
-          <DialogContentText
+        <DialogContent id="edit-poa-dialog-content" dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
+          <DialogContentText 
             id="scroll-dialog-description"
             //   ref={descriptionElementRef}
             tabIndex={-1}
@@ -200,14 +201,15 @@ export default function PoaEdit({ setSucess, itm }) {
                   setAddData({ ...addData, name: e?.target?.value })
                  
                 }} id="outlined-basic" label="Add Title" variant="outlined" color="common" />
-                <Stack direction={'row'} color="common">
-                  <Typography>All Day</Typography>
-                  <Switch value={addData?.all_day} onChange={(e) => { setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) }} {...label} />
+                <Stack id="all-day-edit-poa-stack" direction={'row'} color="common">
+                  <Typography id="all-day">All Day</Typography>
+                  <Switch id="swithc-edit-poa"value={addData?.all_day} onChange={(e) => { setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) }} {...label} />
                 </Stack>
 
-                <Stack direction={'row'}>
+                <Stack id="date-time-edit-poa-stack" direction={'row'}>
 
                   <DateTimePicker
+                  id="date-time-picker"
                     label="Date&Time picker"
                     value={addData?.date}
                     onChange={(e) => { handleChange(e) }}
@@ -219,6 +221,7 @@ export default function PoaEdit({ setSucess, itm }) {
                   <Stack direction={'row'}>
                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
                     <DateTimePicker
+                      id="date&time-picker"
                       label="Date&Time picker"
                       value={addData?.date2}
                       onChange={(e) => { handleChange2(e) }}
@@ -232,7 +235,7 @@ export default function PoaEdit({ setSucess, itm }) {
                 <br />
 
                 <Stack>
-                  <Typography variant="body1">Description</Typography>
+                  <Typography id="description" variant="body1">Description</Typography>
                 </Stack>
 
                 <Stack>

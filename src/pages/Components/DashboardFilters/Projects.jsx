@@ -72,7 +72,7 @@ return(
               <Table aria-label="customized table"  >
                 <TableBody  >
                   <TableRow style={{ height: "10px !important" }} onClick={() => getData(itm, selectDATA)} >
-                    <TableCell style={{ width: "10px" }}> <Iconify icon="mdi:user-circle" width={20} height={20} /> </TableCell>
+                    <TableCell id="icon-user-circle-table-cell" style={{ width: "10px" }}> <Iconify id="user-circle-icon" icon="mdi:user-circle" width={20} height={20} /> </TableCell>
                     <TableCell >  {itm?.name}</TableCell>
                   </TableRow>
                 </TableBody>

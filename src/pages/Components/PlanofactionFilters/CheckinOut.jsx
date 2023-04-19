@@ -273,7 +273,14 @@ console.log(checkIn,"checkintime")
         <Typography mt={2}>
             Start :{batch?.data?.day1?.split(" ")[1]}&nbsp;{batch?.data?.day1?.split(" ")[2]}
         </Typography>
-        {(checkData?.data?.check_in_date_day1=='')?<Button style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)}>
+        {(checkData?.data?.check_in_date_day1=='')?<Button style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)} sx={{
+             '&:hover': {
+               backgroundColor: '#ffd796',
+             },
+             color: '#ff7424',
+             backgroundColor: '#ffd796',
+             marginLeft: '10px',
+           }}>
             CHECK IN</Button>
         :<Button disabled style={{float:'left',position:'absolute',left:20,top:300,marginTop:5,marginBottom:5}}>CheckIN</Button>
         
@@ -289,7 +296,14 @@ console.log(checkIn,"checkintime")
         <Typography mt={2}>
             End :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
         </Typography>
-        {(checkData?.data?.check_in_date_day1!='' && checkData?.data?.check_out_date_day1=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:500,marginBottom:2,color:'#ff7424'}}>
+        {(checkData?.data?.check_in_date_day1!='' && checkData?.data?.check_out_date_day1=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:500,marginBottom:2,color:'#ff7424'}} sx={{
+             '&:hover': {
+               backgroundColor: '#ffd796',
+             },
+             color: '#ff7424',
+             backgroundColor: '#ffd796',
+             marginLeft: '10px',
+           }}>
             CHECK OUT
         </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:500,marginBottom:2}}>CHECKOUT</Button>}<br/><br/><br/>
        {(checkData?.data?.check_out_date_day1!="")?<><Typography>
@@ -315,7 +329,14 @@ console.log(checkIn,"checkintime")
         <Typography mt={2}>
             Start :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
         </Typography>
-        {(checkData?.data?.check_in_date_day2=='')?<Button style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)}>
+        {(checkData?.data?.check_in_date_day2=='')?<Button sx={{
+             '&:hover': {
+               backgroundColor: '#ffd796',
+             },
+             color: '#ff7424',
+             backgroundColor: '#ffd796',
+             marginLeft: '10px',
+           }} style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)}>
             CHECK IN</Button>
         :<Button disabled style={{float:'left',position:'absolute',left:20,top:300,marginTop:5,marginBottom:5}}>CheckIN</Button>
         
@@ -331,7 +352,14 @@ console.log(checkIn,"checkintime")
         <Typography mt={2}>
             End :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
         </Typography>
-        {(checkData?.data?.check_in_date_day2!='' && checkData?.data?.check_out_date_day2=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:500,marginTop:5,marginBottom:5,color:'#ff7424'}}>
+        {(checkData?.data?.check_in_date_day2!='' && checkData?.data?.check_out_date_day2=='' )?<Button sx={{
+             '&:hover': {
+               backgroundColor: '#ffd796',
+             },
+             color: '#ff7424',
+             backgroundColor: '#ffd796',
+             marginLeft: '10px',
+           }} onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:500,marginTop:5,marginBottom:5,color:'#ff7424'}}>
             CHECK OUT
         </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:500,marginBottom:10}}>CHECKOUT</Button>}<br/><br/>
        {(checkData?.data?.check_out_date_day2!='')?<><Typography>

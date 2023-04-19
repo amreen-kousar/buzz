@@ -162,11 +162,12 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
             backgroundColor: 'white',
           }
         }} >
-        <Iconify icon="material-symbols:edit" style={{ width: '30px', height: '30px', color: '#e69138', marginLeft: "190px"  }} 
+        <Iconify id="edit-bus-btn" icon="material-symbols:edit" style={{ width: '30px', height: '30px', color: '#e69138', marginLeft: "190px"  }} 
         
         ></Iconify>
       </Button>
       <Dialog
+        id="edit-bus-scroll-dialog-title"
         open={open}
         fullScreen
         onClose={handleClose}
@@ -179,12 +180,12 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+            <Typography id="edit-bus-details" sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
               Edit Bus Details <br/>{clcikData?.register_number}
             </Typography>
 
 
-            <Button autoFocus color="inherit" onClick={getCaaled}>
+            <Button id="save-btn" autoFocus color="inherit" onClick={getCaaled}>
               save
             </Button>
           </Toolbar>

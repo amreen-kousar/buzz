@@ -16,7 +16,7 @@ export default function Charts(props) {
   // Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale,Bar);
   Chart.register(...registerables)
   const userDetails = JSON.parse(localStorage.getItem('userDetails'))
-  console.log(props, "<----propss")
+  console.log("🚀 ~ file: Charts.jsx:20 ~ Charts ~ props:", props)
   const location = useLocation();
   const [searchparams] = useSearchParams()
   console.log(searchparams.get("state"), "<---location", location?.state?.filterData)
