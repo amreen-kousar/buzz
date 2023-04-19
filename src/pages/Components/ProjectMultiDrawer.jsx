@@ -16,7 +16,7 @@ import {
     IconButton,
     Typography,
     RadioGroup,
-    Card,
+    Card,Grid,
     CardContent,
 } from '@mui/material';
 // components
@@ -48,6 +48,10 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
      const [photos,setPhotos] = React.useState(false)
      const [shown,setShown] = React.useState(false)
    const [images,setImages] = useState([])
+     const [getAllNotes, setGetAllNotes] = useState([]);
+const [SaveBtn , setSaveBtn] = useState(false) 
+const [gelatiNote, setGelatiNote] = useState('');
+ const [showNote, setShowNote] = useState(false);
    
   const [date, setDate] = useState(new Date())
    const [session, setSession] = useState('');
@@ -184,7 +188,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         onCloseFilter();
-        getGFSessionData();
+        getTrainingBatch();
 
       })
       .catch(function (error) {
@@ -225,6 +229,82 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
     });
     
   }
+
+    //createnotes
+const noteSubmitHandler = () => {
+    
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+
+    var data = JSON.stringify({
+      notes: gelatiNote,
+      type: 1,
+      tb_id: batch?.data?.id,
+      emp_id: batch?.data?.user_id,
+    });
+
+    console.log(data, 'material api');
+    const config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/createNotes.php',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        if (response.status == 200) {
+          // viewMessage('Project added sucessfully');
+          setShowNote(false);
+          getNoteHandler();
+          setSaveBtn(false)
+          alert("Note Added Successfully...")
+          console.log('susscesfully added data material');
+        }
+      })
+      .catch(function (error) {
+        console.log(error, 'failed');
+      });
+    console.log('submit');
+
+  }
+   //getting Notes\
+
+   const getNoteHandler = () => {
+    console.log('getNoteHandler');
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+    var data = JSON.stringify({
+      type: 1,
+      tb_id: batch?.data?.id,
+      // "type":2, "tb_id":21407
+    });
+
+    console.log(data, 'material api');
+    const config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getNotes.php',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        if (response.status == 200) {
+          setGetAllNotes(response?.data?.notes);
+          console.log(response, 'notesData');
+        }
+      })
+      .catch(function (error) {
+        console.log(error, 'failed');
+      });
+    console.log('submit');
+  };
+
     return (
         <>
             <Drawer
@@ -396,6 +476,139 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                 setCheck(e);
               }}
                />}
+
+                  <Card style={{ marginTop: 20 }}>
+                <CardContent>
+                  <Typography variant="h6">
+                    Notes
+                    <IconButton style={{ float: 'right' }}>
+                      <Iconify
+                        style={{ color: 'black' }}
+                        icon="material-symbols:add"
+                        onClick={() => {
+                          setShowNote(true);
+                        }}
+                      />
+                    </IconButton>
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {showNote ? (
+                <div>
+                  {/* <Dialog fullScreen open={open} onClose={handleClose}TransitionComponent={Transition}></Dialog> */}
+                  <Card style={{ marginTop: 20, marginLeft: 10 }}>
+                    <TextField
+                      style={{ marginTop: 20, marginLeft: 20 }}
+                      id="outlined-multiline-static"
+                      label="Notes"
+                      multiline
+                      rows={5}
+                      variant="outlined"
+                      onChange={async (e) => {
+                        let note = await e?.target?.value;
+                        // if(note.length <= 0){
+                        //   alert("Text cannot be empty")
+                        //   setSaveBtn(false)
+                        // }
+                        // else{
+                        //   setGelatiNote(e?.target?.value);
+                        //   setSaveBtn(true)
+                        // }
+                        setSaveBtn(true)
+                        setGelatiNote(e?.target?.value);
+                        console.log('note', gelatiNote);
+                      }}
+                    ></TextField>
+                    {/* {SaveBtn? 
+                    
+                    <> */}
+                     <Button
+                      style={{ color: "#ff7424", marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:"#ffd796"}}
+                      onClick={noteSubmitHandler}
+                      disabled={gelatiNote.trim()===""}
+                    >
+                      Save
+                    </Button> 
+                    
+                    <Button
+                  
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:'#aec6c1'}}
+                  onClick={()=>{
+                   setShowNote(false)
+                  }}
+                >
+                  
+                
+                  Cancel
+         
+                </Button> 
+                    {/* </> */}
+                    {/* :
+                    <>
+                  
+                      <Button
+                      disabled
+                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                      onClick={()=>{
+                        alert("Text cannot be empty")
+                      }}
+                    >
+                      Save
+                    </Button>
+                     <Button
+                  
+                     style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                     onClick={()=>{
+                      setShowNote(false)
+                     }}
+                   >
+                     Cancel
+                   </Button> 
+                   </>
+                   }
+                   */}
+                  </Card>
+                </div>
+              ) : null}
+
+              <CardContent>
+                <div>
+                <Card style={{ marginTop: 20, marginLeft: 10 }}>
+                  {getAllNotes &&
+                    getAllNotes.map((i, index) => {
+                      {
+                        console.log(i, 'ivalue');
+                      }
+                      return (
+                        <>
+                         
+                            {/* <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}> */}
+                            <Grid
+                              container
+                              direction="column"
+                              justifyContent="center"
+                              alignItems="center"
+                              style={{ marginTop: 10 }}
+                            >
+                              <Typography variant="body1">
+                                {' '}
+                                {/* {userName} */}
+                                 {i?.date}
+                              </Typography>
+
+                              {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
+                            </Grid>
+                            <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
+                              {i?.notes}{' '}
+                            </Typography>
+                         
+                        </>
+                      );
+                    })}
+                     </Card>
+                </div>
+              </CardContent>
                  
                         </div>
                         {/* <Button onClick={UploadImages}>upload image</Button> */}
