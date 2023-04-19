@@ -101,16 +101,16 @@ axios(config)
            
             </Stack>
             <TableContainer >
-                  <Table aria-label="customized table">
+                  <Table style={{textAlign:"left"}}aria-label="customized table">
                     <TableBody>
                       <TableRow >
-                        <TableCell>Project &nbsp;:&nbsp;{trainersTargets?.project_name}</TableCell>
+                        <TableCell style={{ borderBottom: "none"}}>Project &nbsp;:&nbsp;{trainersTargets?.project_name}</TableCell>
                       </TableRow>
                       <TableRow >
-                        <TableCell>Taluk &nbsp;:&nbsp;{trainersTargets?.location_name}</TableCell>
+                        <TableCell style={{ borderBottom: "none"}}>Taluk &nbsp;:&nbsp;{trainersTargets?.location_name}</TableCell>
                       </TableRow>
                       <TableRow >
-                        <TableCell>Partner &nbsp;:&nbsp;{trainersTargets?.partnerName}</TableCell>
+                        <TableCell style={{ borderBottom: "none"}}>Partner &nbsp;:&nbsp;{trainersTargets?.partnerName}</TableCell>
                       </TableRow>
                      
                     </TableBody>
@@ -129,8 +129,8 @@ axios(config)
                     </Typography>
                     </div> 
                     {/* {(item?.emp_target=="")?<TextField sx={{ml:5,mt:1,mb:2}} placeholder="Targets" typeof="number" onChange={(e) => { setCreateTarget({ ...createTarget, emp_target: e?.target?.value }) }} value={item?.emp_target} />:<TextField sx={{ml:5,mt:1,mb:2}} placeholder="Targets" value={item?.emp_target} />} */}
-                    <TextField type="number" sx={{ml:5,mt:1,mb:2}} placeholder="Targets" onChange={(e) => { assign(e?.target?.value,index) }} defaultValue={createTarget[index]?.emp_target}  /> 
-                      
+                    <TextField type="number" id="targets" label="Targets" sx={{ml:5,mt:1,mb:2}}  onChange={(e) => { assign(e?.target?.value,index) }} defaultValue={createTarget[index]?.emp_target} color="common" /> 
+                    
                    </>
                   )}
                  )}

@@ -19,6 +19,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import axios from 'axios';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -29,6 +30,54 @@ export default function AddAttendance({ shown, setShown, batch }) {
   // console.log(batch, '<--------shownshownshown')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
+  const [addValue,setAddValue]= useState([])
+    console.log(batch,"<---asdsadasdasdasdasd")
+
+  const addAttendance = (itm) =>{
+    var data = 
+    addValue?.includes(itm?.participant_id)?
+    JSON.stringify({
+      "flag": 0,
+      "participant_id": itm?.participant_id,
+      "tbl_poa_id": batch?.tb_id,
+      "type": 2
+    }):
+    JSON.stringify({
+      "flag": 1,
+      "participant_id": itm?.participant_id,
+      "tbl_poa_id": batch?.tb_id,
+      "type": 2
+    })
+    
+    var config = {
+      method: 'post',
+    maxBodyLength: Infinity,
+      url: 'https://bdms.buzzwomen.org/appTest/participantsAttendance.php',
+      
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+
+      if( addValue?.includes(itm?.participant_id)){
+        const filteredData = addValue?.filter(item=>item!==itm?.participant_id)
+        setAddValue(filteredData)
+      }
+      else{
+        setAddValue([...addValue,itm?.participant_id])
+      }
+      console.log(JSON.stringify(response.message,'<-----------------response.message'));
+      alert(response.data.message)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -76,7 +125,7 @@ export default function AddAttendance({ shown, setShown, batch }) {
             <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div">
             Participants List
             </Typography>
-            <Button sx={{ color:"white" }}>Save</Button>
+            {/* <Button sx={{ color:"white" }}>Save</Button> */}
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               Add Participants
             </Button> */}
@@ -110,7 +159,10 @@ export default function AddAttendance({ shown, setShown, batch }) {
                       <Typography variant="subtitle2">{itm?.participant_name}</Typography>
                   
                     </div>
-                    <Checkbox {...label} />
+                    <Checkbox onClick={()=>{
+                      addAttendance(itm)
+                      console.log(itm,"<---sadasdasd")
+                    }} {...label} />
                   </CardActions>
 
                   {console.log(itm?.participant_name, '<----------itm?.participant_name')}
@@ -125,3 +177,6 @@ export default function AddAttendance({ shown, setShown, batch }) {
     </div>
   );
 }
+
+
+

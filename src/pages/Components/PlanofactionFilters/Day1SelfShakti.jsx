@@ -55,7 +55,7 @@ export default function Day1SelfShakti({ isOpenDay1, onOpenDay1, onCloseDay1, cl
     const [photos,setPhotos] = React.useState(false)
     const [shown,setShown] = React.useState(false)
        const [checkinout,setCheckInOut]  = React.useState(false)
-
+       const [check, setCheck] = useState(false);
    useEffect(() => {
        getTrainingBatch();
       // console.log(batchState)
@@ -162,7 +162,13 @@ export default function Day1SelfShakti({ isOpenDay1, onOpenDay1, onCloseDay1, cl
                                </CardContent>
                            </Card>
                          
-                           <CheckinOut  checkinout={checkinout} />
+                           <CheckinOut
+              photos={check}
+              batch={batch}
+              setCheck={(e) => {
+                setCheck(e);
+              }}
+               />
                            
                            <Card onClick={()=>{setCheckInOut(true),console.log("knmknmk")}} style={{marginTop:20}}>
                                <CardContent>
@@ -179,7 +185,7 @@ export default function Day1SelfShakti({ isOpenDay1, onOpenDay1, onCloseDay1, cl
                                <Typography>Programe Evaluation Day2  </Typography>
                                </CardContent>
                            </Card>
-                           
+                                     
                        </div>
 
 

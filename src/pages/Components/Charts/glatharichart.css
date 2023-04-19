@@ -18,6 +18,7 @@
   
   @media (max-width: 576px) {
     .chart-container {
-      max-width: 300px;
+      max-width: 100%;
+      width: 100%;
     }
   }

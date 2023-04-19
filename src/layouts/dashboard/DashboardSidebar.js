@@ -99,7 +99,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       
       {console.log(account.displayName, account.role, "<--yghuj")}
       <Box sx={{ mb: 5, mx: 2.5 }} backgroundColor="#ff7424">
-        <Link underline="none" component={RouterLink} to="#">
+        <Link underline="none" component={RouterLink} to="/dashboard/profile">
           {/* <AccountStyle > */}
           <div style={{ paddingTop: 20, paddingLeft: 100 }}>
             <Avatar src={account?.profile_pic} alt="photoURL" />

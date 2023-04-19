@@ -46,31 +46,38 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
             ...addBus
         });
 
-        var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/createBus.php',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: data
-        };
-        showBussHandler()
+        if(addBus.chassis_number ==" " || addBus.engine_number =="" || addBus.insurance_company=="" || addBus.insurance_number==""|| addBus.permit==""){
+            alert("Please Fill the complte detail")
+        }else{
+            var config = {
+                method: 'post',
+                url: 'https://bdms.buzzwomen.org/appTest/createBus.php',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            };
+            showBussHandler()
+    
+    
+            axios(config)
+                .then(function (response) {
+                    console.log(response.data)
+                    if (response.data.code == 200) {
+                        setOpenAddBus(false)
+                        
+                        console.log("calling the api ")
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    console.log("calling the api  in failure")
+                });
+            console.log(addBus)
 
+        }
 
-        axios(config)
-            .then(function (response) {
-                console.log(response.data)
-                if (response.data.code == 200) {
-                    setOpenAddBus(false)
-                    
-                    console.log("calling the api ")
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-                console.log("calling the api  in failure")
-            });
-        console.log(addBus)
+      
     }
 
     return (
@@ -116,8 +123,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                               */}
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                    id="register-date"
+                                    <DatePicker id="Register_date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Register Date"
@@ -132,10 +138,10 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                             </Stack>
 
 
-                            <TextField fullWidth id="outlined-basic" label="Engine Number" defaultValue={addBus.engine_number} onChange={(e) => { setAddBus({ ...addBus, engine_number: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Chassis Number" defaultValue={addBus.chassis_number} onChange={(e) => { setAddBus({ ...addBus, chassis_number: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Insurance Number" defaultValue={addBus.insurance_number} onChange={(e) => { setAddBus({ ...addBus, insurance_number: e.target.value }) }} variant="outlined" color="common" /><br />
-                            <TextField fullWidth id="outlined-basic" label="Insurance Company" defaultValue={addBus.insurance_company} onChange={(e) => { setAddBus({ ...addBus, insurance_company: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="Engine Number" label="Engine Number" defaultValue={addBus.engine_number} onChange={(e) => { setAddBus({ ...addBus, engine_number: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="Chassis Number" label="Chassis Number" defaultValue={addBus.chassis_number} onChange={(e) => { setAddBus({ ...addBus, chassis_number: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="Insurance Number" label="Insurance Number" defaultValue={addBus.insurance_number} onChange={(e) => { setAddBus({ ...addBus, insurance_number: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="Insurance Company" label="Insurance Company" defaultValue={addBus.insurance_company} onChange={(e) => { setAddBus({ ...addBus, insurance_company: e.target.value }) }} variant="outlined" color="common" /><br />
 
 
                             {/* <TextField fullWidth id="outlined-basic" label="Insurance Start Date" type="date" InputLabelProps={{
@@ -144,8 +150,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        id="insurance-start-date"
+                                    <DatePicker id="insurance_start_date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Insurance Start Date"
@@ -166,8 +171,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        id="insurance-end-date"
+                                    <DatePicker id="insuarnce_end_date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Insurance End Date"
@@ -189,8 +193,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        id="last-service-date"
+                                    <DatePicker id="last_service_date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Last Service Date"
@@ -211,8 +214,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        id="next-service-date"
+                                    <DatePicker id="next_service_due_date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Next Service Date"
@@ -234,8 +236,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        id="ftness-certificate"
+                                    <DatePicker id="fitness_certificate"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Fitness Certificate"
@@ -257,8 +258,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                             <Stack style={{ marginTop: 20,borderColor:'none' }} color="common">
                                
-                                    <DatePicker
-                                        id="permit-details"
+                                    <DatePicker id="permit"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Permit Details"
@@ -280,8 +280,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                       */}
                             <Stack style={{ marginTop: 20 }} color="common">
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        id="emission-date"
+                                    <DatePicker id="emission_date"
                                         inputFormat="DD/MM/YYYY"
                                         views={["year", "month", "day"]}
                                         label="Emission Date"
@@ -300,7 +299,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button id="submit-bus-btn" variant="contained" onClick={submitBus} sx={{
+                    <Button variant="contained" id="Add" onClick={submitBus} sx={{
                         '&:hover': {
                             backgroundColor: '#ffd796',
                             color: '#ff7424'
@@ -308,7 +307,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                         color: "#ffffff",
                         backgroundColor: '#ff7424'
                     }}>Add</Button>
-                    <Button id="cancel-bus-btn" variant="contained" color="error" onClick={handleClose}>Cancel</Button>
+                    <Button id="Cancel" variant="contained" color="error" onClick={handleClose}>Cancel</Button>
 
                 </DialogActions>
             </Dialog>
@@ -354,7 +353,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
 
                         >
                             {/* work here  */}
-                            <TextField fullWidth id="outlined-basic" label="Bus Number" helperText="Bus Number required*" defaultValue={addBus.register_number} onChange={(e) => { setAddBus({ ...addBus, register_number: e.target.value }) }} variant="outlined" color="common" /><br />
+                            <TextField fullWidth id="Bus Number" label="Bus Number" helperText="Bus Number required*" defaultValue={addBus.register_number} onChange={(e) => { setAddBus({ ...addBus, register_number: e.target.value }) }} variant="outlined" color="common" /><br />
                             {/* <TextField fullWidth id="outlined-basic" label="Register Date" type="date"  InputLabelProps={{
                                 shrink: true,
                             }} defaultValue={addBus.register_date} format={'DD/MM/YYYY'} onChange={(e) => { setAddBus({ ...addBus, register_date: e.target.value }) }} variant="outlined" color="common" /><br />
@@ -545,7 +544,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                         color: "#ffffff",
                         backgroundColor: '#ff7424'
                     }}>Add</Button>
-                    <Button variant="contained" color="error" onClick={handleClose}>Cancel</Button>
+                    <Button variant="contained" id="cancelbutton" color="error" onClick={handleClose}>Cancel</Button>
 
                 </DialogActions>
             </Dialog>

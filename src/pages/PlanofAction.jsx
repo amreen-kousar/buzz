@@ -473,7 +473,7 @@ export default function PlanofAction() {
                                         }
                                       }}
                                     >
-                                      {itm?.type == '2' ? (
+                                      {/* {itm?.type == '2' ? (
                                         <>
                                           {itm?.time}
                                           <br />
@@ -492,22 +492,75 @@ export default function PlanofAction() {
                                           <br></br>
                                           {itm?.roleName}:{itm?.emp_name}
                                         </>
-                                      )}
-
-                                      {/* {(role==6 || role==13)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
-                                      {itm?.status == '2' && (
-                                        <span id="cancelled" style={{ color: 'red' }}>
+                                      )} */}
+{(itm?.type == '2') ?
+                                        <>
+                                       
+                                        
+                                        
+                                        {itm?.time}
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
                                           <br />
-                                          (Canceled )
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Gelathi Facilitator :{itm?.emp_name}
+                                          <br/>
+                                          
+                                        </>
+                                       :(itm?.type=='1')?
+                                        <>
+                                         
+                                          
+                                          {itm?.time}
+                                          
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Trainer :{itm?.emp_name}
+                                         <br/>
+                                        </>
+                                      :
+                                       
+                                      
+                                        <>
+                                        
+                                          
+                                          {itm?.time}
+                                         
+                                         <h4> Title: {itm?.name}</h4> 
+                                         
+                                          {itm?.roleName}:{itm?.emp_name}
+                                          <br />
+                                         
+                                          
+                                          
+                                        </>
+                                      }
+                                      {/* {(role==6 || role==13)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
+                                      {(itm?.type=='2' && itm?.status=='1') ? 
+                                        <span style={{ color: 'green' }}>
+                                           (Rescheduled)
+                                          
                                         </span>
-                                      )}
+                                      :(itm?.status=='2')
+                                      ? <span style={{ color: 'red' }}>
+                                      
+                                      (Cancelled)
+                                    </span>:null}
                                     </TableCell>
 
-                                    {itm?.status !== '2' && (
+                                    {itm?.status !== '2'  && (
                                       <TableCell id="table-cell-poa-edit" component="th" scope="row" width="10px">
-                                        {role == 13 || idvalue == itm?.user_id ? (
-                                          <Stack id="stack-row-poa" direction={'row'} spacing={2}>
-                                            <PoaEdit id="poa-edit-table" itm={itm} />
+                                      {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id)  ? (
+                                          <Stack direction={'row'} spacing={2}>
+                                            <PoaEdit itm={itm} />
                                             {itm?.check_out == 0 ? (
                                               <IconButton id="icon-button-cancel"
                                                 onClick={() => {
@@ -594,7 +647,7 @@ export default function PlanofAction() {
                                       }}
                                     >
                                       {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
-                                      {itm?.type == '2' ? (
+                                      {/* {itm?.type == '2' ? (
                                         <>
                                           {itm?.time}
                                           <br />
@@ -613,18 +666,71 @@ export default function PlanofAction() {
                                           <br></br>
                                           {itm?.roleName}:{itm?.emp_name}
                                         </>
-                                      )}
-                                      {itm?.status == '2' && (
-                                        <span id="span-cancelled" style={{ color: 'red' }}>
+                                      )} */}
+                                      {(itm?.type == '2') ?
+                                        <>
+                                       
+                                        
+                                        
+                                        {itm?.time}
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
                                           <br />
-                                          (Canceled)
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Gelathi Facilitator :{itm?.emp_name}
+                                          <br/>
+                                          
+                                        </>
+                                       :(itm?.type=='1')?
+                                        <>
+                                         
+                                          
+                                          {itm?.time}
+                                          
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Trainer :{itm?.emp_name}
+                                         <br/>
+                                        </>
+                                      :
+                                       
+                                      
+                                        <>
+                                        
+                                          
+                                          {itm?.time}
+                                         
+                                         <h4> Title: {itm?.name}</h4> 
+                                         
+                                          {itm?.roleName}:{itm?.emp_name}
+                                          <br />
+                                        
+                                          
+                                        </>
+                                      }
+                                       {(itm?.type=='2' && itm?.status=='1') ? 
+                                        <span style={{ color: 'green' }}>
+                                           (Rescheduled)
+                                          
                                         </span>
-                                      )}
+                                      :(itm?.status=='2')
+                                      ? <span style={{ color: 'red' }}>
+                                      
+                                      (Cancelled)
+                                    </span>:null}
                                     </TableCell>
                                     {itm?.status !== '2' && (
                                       <TableCell id="table-cell-edit-poa" component="th" scope="row" width="10px">
-                                        {role == 13 || idvalue == itm?.user_id ? (
-                                          <Stack id="poa-edit-stack" direction={'row'} spacing={2}>
+                                       {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id) ? (
+                                          <Stack direction={'row'} spacing={2}>
                                             <PoaEdit itm={itm} />
                                             {itm?.check_out == 0 ? (
                                               <IconButton id="cancel-iconbutton"
@@ -712,7 +818,7 @@ export default function PlanofAction() {
                                     >
                                       {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
 
-                                      {itm?.type == '2' ? (
+                                      {/* {itm?.type == '2' ? (
                                         <>
                                           {itm?.time}
                                           <br />
@@ -731,21 +837,75 @@ export default function PlanofAction() {
                                           <br></br>
                                           {itm?.roleName}:{itm?.emp_name}
                                         </>
-                                      )}
+                                      )} */}
+                                      {(itm?.type == '2') ?
+                                        <>
+                                       
+                                        
+                                        
+                                        {itm?.time}
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Gelathi Facilitator :{itm?.emp_name}
+                                          <br/>
+                                          
+                                        </>
+                                       :(itm?.type=='1')?
+                                        <>
+                                         
+                                          
+                                          {itm?.time}
+                                          
+                                         
+                                         <h4>Village :{itm?.name}</h4> 
+                                         
+                                          Project : {itm?.project_name}
+                                          <br />
+                                          District : {itm?.location_name}
+                                          <br />
+                                          Trainer :{itm?.emp_name}
+                                         <br/>
+                                        </>
+                                      :
+                                       
+                                      
+                                        <>
+                                        
+                                          
+                                          {itm?.time}
+                                         
+                                         <h4> Title: {itm?.name}</h4> 
+                                         
+                                          {itm?.roleName}:{itm?.emp_name}
+                                          <br />
+                                        
+                                          
+                                          
+                                        </>
+                                      }
                                       {console.log(idvalue, 'hyyyyyyyyy')}
 
-                                      {itm?.status == '2' && (
-                                        <span id="span-cancel" style={{ color: 'red' }}>
-                                          <br />
-                                          (Canceled)
-                                        </span>
-                                      )}
+                                     {(itm?.type=='2' && itm?.status=='1') ? 
+                                      <span style={{ color: 'green' }}>
+                                         (Rescheduled)
+                                        
+                                      </span>
+                                    :(itm?.status=='2')
+                                    ? <span style={{ color: 'red' }}>
+                                    
+                                    (Cancelled)
+                                  </span>:null}
                                     </TableCell>
                                     {itm?.status !== '2' && (
                                       <TableCell id="icon-button-table" component="th" scope="row" width="10px">
-                                        {role == 13 || idvalue == itm?.user_id ? (
-                                          <Stack id="icon-button-stack" direction={'row'} spacing={2}>
-                                            <PoaEdit id="poa-edit-icon" itm={itm} />
+                                        {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id)  ? (
+                                          <Stack direction={'row'} spacing={2}>
+                                            <PoaEdit itm={itm} />
                                             {itm?.check_out == 0 ? (
                                               <IconButton id="icon-button-cncl-btn"
                                                 onClick={() => {

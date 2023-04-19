@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Vyaparprogram from './Components/Vyaparprogram';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
-
+import GetVyaparProgram from './Getvyaparprogram';
 import Filtersmain from './projectfilters/filtersmain';
 export default function enrolledVyaaparList() {
     const {state} = useLocation()
@@ -174,6 +174,7 @@ const id = sessionStorage?.getItem("proId")
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
+          {console.log(clcikData,"clickeddataaaaaa")}
            {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
           </Button>:null}
@@ -212,7 +213,7 @@ const id = sessionStorage?.getItem("proId")
                console.log(itm,'<---------------vyaaparvyaaparvyaaparvyaapar')
                 return (
                     <Card style={styles.card1} >
-                      <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removevyapar(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<Vyaparprogram/></div>
+                      <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removevyapar(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}{(itm?.is_survey)?<GetVyaparProgram itm={itm}/>:<Vyaparprogram itm={itm}/>}</div>
                         <div onClick={() => {
                         setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
                         handleOpenFilter()
