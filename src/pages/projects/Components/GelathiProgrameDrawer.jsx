@@ -206,11 +206,16 @@ const convertImage = (e) => {
   };
 
   const noteSubmitHandler = () => {
+    if(note===""){
+      alert("No Text ")
+      throw new Error('No Text');
+    }
     setShowNote(false);
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
 
     var data = JSON.stringify({
+
       notes: gelatiNote,
       type: session.type,
       tb_id: session.tb_id,
@@ -610,6 +615,10 @@ const convertImage = (e) => {
                       onChange={async (e) => {
                         let note = await e?.target?.value;
                         if(note.length <= 0){
+                          alert("Text cannot be empty")
+                          setSaveBtn(false)
+                        } 
+                        if(note===" "){
                           alert("Text cannot be empty")
                           setSaveBtn(false)
                         }
