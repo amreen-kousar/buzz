@@ -623,7 +623,7 @@ const mainShowBussHandler = ()=>{
               {/* <div style={{display:"flex"}}> */}
               <Stack >
                 <CardContent style={{padding:"9px"}} >
-                {/* <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography> */}
+                <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography>
               <Button onClick={addBusHandler} id="add new bus" style={{ width: '20vw', marginLeft: "80%", marginTop:"-41px" ,backgroundColor: '#ed6c02', color:"white" }}>Add New Bus</Button>
                 </CardContent>
               </Stack>
@@ -719,7 +719,7 @@ const mainShowBussHandler = ()=>{
                 <Stack mt={3}>
                 <FormControl fullWidth>
                   <InputLabel id="driver">Select Gelathi Facilitator Leads</InputLabel>
-                  <Select
+                 {(Gf?.length>0)? <Select
                     id="select_GF"
                     value={data.gfl_id}
                     defaultValue={data.gfl_id}
@@ -736,7 +736,7 @@ const mainShowBussHandler = ()=>{
                       )
                     })
                     }
-                  </Select>
+                  </Select>:null}
                 </FormControl></Stack>  
 
                 {/* <Stack mt={3}>

@@ -80,7 +80,7 @@ const [viewImage, setViewImage] = React.useState(false);
   const localstoragrClickData = localStorage.getItem('clcikData');
   const userName = JSON.parse(localStorage.getItem('userDetails'))?.first_name;
   console.log("userNAme in localstorage", userName)
-
+const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
   useEffect(()=>{
     setImages([])
     // setGetAllNotes([])
@@ -360,12 +360,12 @@ const convertImage = (e) => {
         open={isOpenFilter}
         onClose={onCloseFilter}
         PaperProps={{
-          sx: { width: 380 },
+          sx: { width: 400 },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="body1" sx={{ ml: 1 }}>
-            {`${session?.type_name}`} 
+          {(session?.type_name=='Circle Metting')? "Circle Meeting" :(session?.type_name)}
            
           </Typography>
           {console.log(clcikData, '<------clcikDataclcikData')}
@@ -410,7 +410,7 @@ const convertImage = (e) => {
 
 
                   <Typography variant="body1" gutterBottom>
-                    Training&nbsp;Batch:&nbsp;{session?.training_batch_name}
+                    {(session?.type_name=='Circle Metting')? "Circle Meeting" :(session?.type_name)} : <br/>{session?.gf_session_name}
                   </Typography>
 
                   <Typography variant="body1" gutterBottom>
@@ -516,7 +516,7 @@ const convertImage = (e) => {
               {/* </Card>  */}
 
               {/* IMAGE UPLOAD  */}
-              <Card style={{marginTop:20}}>
+             {(userId==6 || userId==13 || userId==1 || userId==3)? <Card style={{marginTop:20}}>
 <div style={{ display: 'flex' }}>
                 {viewImage
                   ? images.map((i, index) => {
@@ -578,7 +578,7 @@ const convertImage = (e) => {
                 }
               </CardContent>
             </Card> */}
-</Card>
+</Card>:null}
 
               <Card style={{ marginTop: 20 }}>
                 <CardContent>
