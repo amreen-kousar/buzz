@@ -54,7 +54,7 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
 const [createProj ,setCreateProj] = useState(true)
 const [assproject,setAssproject]=useState([])
 const [isReload , setIsReload]= useState(false)
-  
+  const [Gf,setGf]=useState([]);
    
 // console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
   console.log(sendData?.trainers,"<-----dascascascascsacascsaascasa",sendData?.gelathiFacilitator)
@@ -92,7 +92,7 @@ setShowAddBuss(false)
     Associateproject();
     teamList();
     driverList();
-    setNotify(true)
+    setNotify(true);
   }, [])
 
 
@@ -104,7 +104,8 @@ setShowAddBuss(false)
       operations_manager_id: sendData.operations_manager_id,
       driver_id: sendData.driverId,
       training_target:sendData.training_target,
-      project_id:sendData.project_id
+      project_id:sendData.project_id,
+      gfl_id:sendData.gfl_id
 
     }
     setData(tempdata)
@@ -155,6 +156,7 @@ setShowAddBuss(false)
       .then(function (response) {
         console.log(response.data, "teamlist opers")
         setTeamData(response.data)
+       
       })
       .catch(function (error) {
         console.log(error);
@@ -177,6 +179,36 @@ setShowAddBuss(false)
         console.log(error);
       });
   }
+var userdata = localStorage?.getItem('operations_manager_id')
+  useEffect(() => {
+    Gfl();
+  },[userdata])
+  const Gfl = async=>{
+    
+  var data = JSON.stringify({
+  "user_id": userdata
+  });
+
+var config = {
+  method: 'post',
+  url: 'https://bdms.buzzwomen.org/appTest/new/getgfl.php',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+  setGf(response.data.gfl_list);
+})
+.catch(function (error) {
+  console.log(error);
+});
+  
+  }
+  console.log(Gf,"gflllllll")
   // const showTrainerList = async => {
   //   var gelathidata = JSON.stringify({
   //     "role_id": 13,
@@ -321,6 +353,7 @@ setShowAddBuss(false)
     formdata.append('end_date', moment(data.end_date)?.format('DD-MM-YYYY'))
     formdata.append('busID', data.bus_id)
     formdata.append('driverID', data.driverId)
+    formdata.append("gfl_id",data.gfl_id)
     formdata.append("operations_manager_id", data.operations_manager_id)
     formdata.append("locationID", data.location_id)
     formdata.append("location_name", data.location_name),
@@ -368,6 +401,7 @@ setShowAddBuss(false)
      formdata.append('busID', data.bus_id)
      formdata.append('driverID', data.driverId)
      formdata.append("operations_manager_id", data.operations_manager_id)
+     formdata.append("gfl_id",data.gfl_id)
      formdata.append("locationID", data.location_id)
      formdata.append("location_name", data.location_name),
      formdata.append("", "")
@@ -639,6 +673,7 @@ const mainShowBussHandler = ()=>{
                     defaultValue={data.operations_manager_id}
                 
                     value={data.operations_manager_id}
+                    
                     label="Select Operation Manager"
                     onChange={(e => {
                       setData({ ...data, operations_manager_id: e?.target?.value });
@@ -680,6 +715,29 @@ const mainShowBussHandler = ()=>{
                     }
                   </Select>
                 </FormControl></Stack> 
+
+                <Stack mt={3}>
+                <FormControl fullWidth>
+                  <InputLabel id="driver">Select Gelathi Facilitator Leads</InputLabel>
+                  <Select
+                    id="select_GF"
+                    value={data.gfl_id}
+                    defaultValue={data.gfl_id}
+                    label="Select Gelathi Facilitator Lead"
+                    onChange={(e => {
+                      setData({ ...data, gfl_id: e?.target?.value })
+                      // driverList(e?.target?.value)
+                    })}
+                  >
+                    <MenuItem id="Choose Gelathi Facilitator Lead" value="" default disabled>Choose Gelathi Facilitator Lead</MenuItem>
+                    {Gf.map(itm => {
+                      return (
+                        <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
+                      )
+                    })
+                    }
+                  </Select>
+                </FormControl></Stack>  
 
                 {/* <Stack mt={3}>
                 <FormControl fullWidth>

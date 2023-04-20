@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Grid, Container, Typography, Stack, Divider, Card, CardContent, Button, } from '@mui/material';
+import { Grid, Container, Typography, Stack, Divider, Card, CardContent, Button,IconButton } from '@mui/material';
 import BarChart from 'react-bar-chart';
 import Link from '@mui/material/Link';
 import { useLocation, useSearchParams } from 'react-router-dom';
+import Iconify from 'src/components/Iconify';
+import { useNavigate } from 'react-router-dom';
 // import "chartjs-plugin-datalabels";
 import { Bar } from "react-chartjs-2";
 // import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -18,6 +20,7 @@ export default function Charts(props) {
   const userDetails = JSON.parse(localStorage.getItem('userDetails'))
   console.log("🚀 ~ file: Charts.jsx:20 ~ Charts ~ props:", props)
   const location = useLocation();
+  const navigate = useNavigate();
   const [searchparams] = useSearchParams()
   console.log(searchparams.get("state"), "<---location", location?.state?.filterData)
   const [chartData, setChartData] = useState({
@@ -200,6 +203,12 @@ export default function Charts(props) {
         data={dayper}
        />
       } */}
+      
+                        <Typography variant="h5"> 
+                        <IconButton sx={{height:40,width:40}}   
+                        onClick={() => navigate('/dashboard/app')}>
+                            <Iconify icon="material-symbols:arrow-back-rounded" />
+                        </IconButton>Charts</Typography>
      
       <br />
       {/* 
