@@ -33,6 +33,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import EditGelathiSession from '../projects/Components/EditGelathisession';
+import EditTrainingBatch from '../projects/EditTrainingSession';
 // ----------------------------------------------------------------------
 
 projectMultiDrawer.propTypes = {
@@ -45,6 +46,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
 
      const [batch,setBatch] = useState('')
      const [schedule,setReschedule]=React.useState(false);
+     const [day2Schedule,setday2Reschedule]=React.useState(false);
      const [photos,setPhotos] = React.useState(false)
      const [shown,setShown] = React.useState(false)
    const [images,setImages] = useState([])
@@ -54,11 +56,13 @@ const [gelatiNote, setGelatiNote] = useState('');
  const [showNote, setShowNote] = useState(false);
    
   const [date, setDate] = useState(new Date())
+  const [day2date,setday2date] = useState(new Date())
    const [session, setSession] = useState('');
    const [editSession,setEditsession]=useState(false);
    const [check,setCheck]=useState(false)
    const [viewImage, setViewImage] = React.useState(false);
    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+   const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
     useEffect(() => {
         getTrainingBatch();
        // console.log(batchState)
@@ -171,7 +175,7 @@ const [gelatiNote, setGelatiNote] = useState('');
   const removesession=(e)=>{
     if(confirm("Do You want to Cancel?")){
       var data = JSON.stringify({
-        "poa_id": e?.id,
+        "poa_id": e,
         "day": ""
       });
       
@@ -202,6 +206,11 @@ const [gelatiNote, setGelatiNote] = useState('');
    setReschedule(true)
   }
 
+  const day2Reschedudlehandler=()=>{
+    setday2Reschedule(true)
+  }
+ 
+  
   const Reschedule=(e)=>{
     
     var data = JSON.stringify({
@@ -271,7 +280,11 @@ const noteSubmitHandler = () => {
 
   }
    //getting Notes\
-
+   useEffect(() => {
+    getNoteHandler();
+   // console.log(batchState)
+    
+},[batch?.data?.id])
    const getNoteHandler = () => {
     console.log('getNoteHandler');
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
@@ -279,7 +292,7 @@ const noteSubmitHandler = () => {
     var data = JSON.stringify({
       type: 1,
       tb_id: batch?.data?.id,
-      // "type":2, "tb_id":21407
+      
     });
 
     console.log(data, 'material api');
@@ -305,6 +318,7 @@ const noteSubmitHandler = () => {
     console.log('submit');
   };
 
+ 
     return (
         <>
             <Drawer
@@ -348,14 +362,46 @@ const noteSubmitHandler = () => {
                                     
 
                                     <Typography id="training" variant="body1" gutterBottom>
-                                        Training&nbsp;Batch:{batch?.data?.name}
+                                        Training&nbsp;Batch:<br/>{batch?.data?.name} <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
                                     </Typography>
                                     <Typography id="day1" variant="body1" gutterBottom>
                                         Day1:&nbsp;{batch?.data?.day1_actual}
+                                        
+            <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
+            {console.log(session,"sessionidddddddd")}
+            <IconButton onClick={()=>removesession(batch?.data?.day1_id)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton>
                                     </Typography>
+                                    {schedule && <Stack>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+           <DateTimePicker
+   required
+    value={date}
+    onChange={(e) => {setDate(e)}}
+    renderInput={(params) => <TextField {...params} color="common" />}
+  />
+        </LocalizationProvider>
+        {console.log(batch,"session?.id")}
+        <Button onClick={()=>Reschedule(batch?.data?.day1_id)}>Save</Button>
+      </Stack>}
+      <EditTrainingBatch batch={batch} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}}/>
                                     <Typography id="day2" variant="body1" gutterBottom>
                                         Day2:&nbsp;{batch?.data?.day2_actual}
+                                        <IconButton onClick={day2Reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
+            <IconButton onClick={()=>removesession(batch?.data?.day2_id)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton>
+                                        
                                     </Typography>
+                                    {day2Schedule && <Stack>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+           <DateTimePicker
+   required
+    value={date}
+    onChange={(e) => {setDate(e)}}
+    renderInput={(params) => <TextField {...params} color="common" />}
+  />
+        </LocalizationProvider>
+        {console.log(batch,"session?.id")}
+        <Button onClick={()=>Reschedule(batch?.data?.day2_id)}>Save</Button>
+      </Stack>}
                                     <Typography id="contact-person" variant="body1" gutterBottom>
                                         Contact Person:&nbsp;{batch?.data?.contact_person}
                                     </Typography>
@@ -387,6 +433,7 @@ const noteSubmitHandler = () => {
 
                             {/* //photo upload button  */}
                
+{(userId==1 || userId==3 || userId==5)?<>
 <Card id="delete-card-project" style={{marginTop:20}}>
 <div id="project-multidrawwer-div" style={{ display: 'flex' }}>
                 {viewImage
@@ -443,15 +490,15 @@ const noteSubmitHandler = () => {
 </Card>
                          
 
-
-                            {/* photo upload end  */}
-                            <Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
+<Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
                                 <CardContent>
                                     <Typography>View Photos  </Typography>
                                     
                                 </CardContent>
                                 </Card>
-                                <Card  style={{marginTop:20}}>
+                                <Card  style={{marginTop:20}}> </Card></>:null} <br/>
+                            {/* photo upload end  */}
+                           
                                 {/* <input accept="image/png, image/gif, image/jpeg"
         type="file"
         name="myImage"
@@ -466,7 +513,7 @@ const noteSubmitHandler = () => {
                                     <Typography >Upload Photos</Typography>
                                     
                                 </CardContent> */}
-                            </Card>
+                            {/* </Card> */}
                             <Programevaluationday1 onCloseFilter={onCloseFilter} />
                             <Evaluationday2  onCloseFilter={onCloseFilter}/>
                            {batch && <CheckinOut

@@ -565,6 +565,7 @@ const mainShowBussHandler = ()=>{
               <Stack>
                 <CardContent>
                   <TextField id="start-date" type="date"
+                  required
                    // defaultValue={dayjs(data?.start_date)}
                    defaultValue={data?.start_date}
                     style={{ width: '20vw' }}
@@ -578,7 +579,7 @@ const mainShowBussHandler = ()=>{
                       setData({ ...data, start_date: e?.target?.value })
                     }} />
 {/* {console.log(dayjs( moment(data?.endDate)?.format()),moment(data?.endDate)?.format('YYYY-MM-DD'),new Date(data?.endDate),data?.endDate,"<-- defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}",data?.end_date,data?.start_date)} */}
-                  <TextField id="end-date" type="date"
+                  <TextField id="end-date" type="date" required
                 defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('DD-MM-YYYY')):dayjs( moment(data?.endDate)?.format('DD-MM-YYYY'))}
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     value={data.end_date}
@@ -623,7 +624,7 @@ const mainShowBussHandler = ()=>{
               {/* <div style={{display:"flex"}}> */}
               <Stack >
                 <CardContent style={{padding:"9px"}} >
-                {/* <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography> */}
+                <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography>
               <Button onClick={addBusHandler} id="add new bus" style={{ width: '20vw', marginLeft: "80%", marginTop:"-41px" ,backgroundColor: '#ed6c02', color:"white" }}>Add New Bus</Button>
                 </CardContent>
               </Stack>
@@ -719,7 +720,7 @@ const mainShowBussHandler = ()=>{
                 <Stack mt={3}>
                 <FormControl fullWidth>
                   <InputLabel id="driver">Select Gelathi Facilitator Leads</InputLabel>
-                  <Select
+                 {(Gf?.length>0)? <Select
                     id="select_GF"
                     value={data.gfl_id}
                     defaultValue={data.gfl_id}
@@ -730,13 +731,13 @@ const mainShowBussHandler = ()=>{
                     })}
                   >
                     <MenuItem id="Choose Gelathi Facilitator Lead" value="" default disabled>Choose Gelathi Facilitator Lead</MenuItem>
-                    {Gf.map(itm => {
+                    {Gf?.map(itm => {
                       return (
                         <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
                       )
                     })
                     }
-                  </Select>
+                  </Select>:<Select label="Select Gelathi Facilitator Lead"><MenuItem id="Select Gelathi Facilitator Lead" value="" disabled>No Gelathi Facilitator Lead</MenuItem></Select>}
                 </FormControl></Stack>  
 
                 {/* <Stack mt={3}>
