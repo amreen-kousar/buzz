@@ -22,16 +22,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import AddParticipants from './AddParticipants'
+import axios from 'axios';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function ShaktiDialog({ shown, setShown, batch }) {
-  // console.log(batch, '<--------shownshownshown')
+  console.log(batch, '<--------shownshownshown')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
-
+  const [checkData,setCheckData]=React.useState('');
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -44,7 +45,8 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
     //setShown(shown)
-    setOpen(shown)
+    setOpen(shown);
+   
   }, [shown])
 
   const handleClickOpen = () => {
@@ -56,7 +58,39 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
     setShown(false)
     setOpen(false);
   };
+  React.useEffect(() => {
+    //setShown(shown)
+    GetStatus();
+   
+  }, [batch])
 
+  const GetStatus = async=>{
+    var data = JSON.stringify({
+      "project_id": batch?.data?.project_id,
+      "poa_type": 1,
+      "type": 2,
+      "tb_id": batch?.data?.id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data),"dataaaaaaaaaaaa");
+      setCheckData(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+console.log(checkData,"checkedta")
   return (
     <div>
       <Dialog
@@ -81,7 +115,8 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               Add Participants
             </Button> */}
-            <AddParticipants batch={batch} />
+            {console.log(checkData,"addparticipants")}
+            <AddParticipants batch={batch} checkData={checkData}/>
 
           </Toolbar>
         </AppBar>

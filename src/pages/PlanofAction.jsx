@@ -543,7 +543,7 @@ export default function PlanofAction() {
                                           
                                         </>
                                       }
-                                       {(itm?.type=='2' && itm?.status=='1') ? 
+                                       {(itm?.type=='2' && itm?.status=='1' || itm?.type=='3' && itm?.status=='1') ? 
                                         <span style={{ color: 'green' }}>
                                            (Rescheduled)
                                           
