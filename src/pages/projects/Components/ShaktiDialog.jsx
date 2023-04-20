@@ -22,6 +22,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import AddParticipants from './AddParticipants'
+import ParticipentDetailsDailoge from './ParticipentDetailsDailoge';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -31,6 +32,7 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
   // console.log(batch, '<--------shownshownshown')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
+  console.log("🚀 ~ file: ShaktiDialog.jsx:35 ~ ShaktiDialog ~ clcikData:", clcikData)
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -91,6 +93,7 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
             <TableContainer component={Paper} sx={{width:'50vw'}}>
           <Table aria-label="customized table">
            
+           <ParticipentDetailsDailoge/>
             <TableBody>
               
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Project </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.projectName}</TableCell></TableRow>
@@ -113,8 +116,14 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
         </Stack>
         {/* <Typography variant="subtitle1"> ALl Participants</Typography> */}
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <ParticipantDrawer
+          {/* <ParticipantDrawer
         
+            clcikData={clcikData}
+            isOpenFilter={openFilter}
+            onOpenFilter={handleOpenFilter}
+            onCloseFilter={handleCloseFilter}
+          /> */}
+          <ParticipentDetailsDailoge
             clcikData={clcikData}
             isOpenFilter={openFilter}
             onOpenFilter={handleOpenFilter}
@@ -126,7 +135,8 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
             <Stack style={{ top: 100 }}>
               <Card onClick={() => {
                 handleOpenFilter()
-                setClickData({ name: itm.gelathiname, title: "Enrolled  Name" })
+                setClickData({ name: itm.gelathiname, title: "Enrolled  Name",id:itm?.participant_id})
+                console.log("🚀 ~ file: ShaktiDialog.jsx:139 ~ ShaktiDialog ~ itm?.id:", itm?.id)
                 
               }}>
                 <CardContent >
@@ -138,7 +148,7 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
                     </div>
                   </CardActions>
 
-                  {console.log(itm?.participant_name, '<----------itm?.participant_name')}
+                  {console.log(itm, '<----------itm?.participant_name')}
                 </CardContent>
               </Card>
             </Stack>

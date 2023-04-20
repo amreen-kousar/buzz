@@ -202,7 +202,7 @@ const [sendData,setSendData] = useState({
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/updateBuzzVyaparProgramBaseline.php',
+        url: 'https://bdms.buzzwomen.org/appTest/new/addBuzzVyaparProgramBaseline.php',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -424,7 +424,7 @@ const [sendData,setSendData] = useState({
             
             <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff7424"}}>Name of the GF / ಗೆಲತಿಯ ಹೆಸರು *</Typography>
+                  <Typography style={{color:"#ff7424"}}>Name of the GF / ಗೆಳತಿಯ ಹೆಸರು *</Typography>
                   <Stack mt={2} mb={2}>
                
               <Select color="common" label="Choose Gelathi Facilitator" required variant="standard" onChange={(e) => setSendData({ ...sendData, gfId: e?.target?.value })} value={sendData?.gfId}>
