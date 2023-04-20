@@ -2,17 +2,18 @@ import React from 'react';
 
 import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
-import { Stack,IconButton,Button, DialogContent,DialogContentText,TextField,Grid,Typography , Radio,FormControlLabel,Card,CardContent,FormGroup,Checkbox} from '@mui/material';
+import { Stack,IconButton,Button, DialogContent,DialogContentText,TextField ,Grid,Typography , Radio,FormControlLabel,Card,CardContent,FormGroup,Checkbox} from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
-export default function Programevaluationday1()
+export default function Programevaluationday1({onCloseFilter})
 {
     const [open, setOpen] = React.useState(false);
     
@@ -106,15 +107,36 @@ export default function Programevaluationday1()
          axios(config)
          .then(function (response) {
           if (response?.data?.code) {
-            alert(response?.data?.message)
+            Swal.fire({
+              icon:'success',
+              title:'Success',
+              text:response.data.message,
+              timer:2000
+             })
+             onCloseFilter()
           }
           else{
-            alert("Saved succesfully")
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: response.data.message,
+              confirmButtonText: 'Ok',
+              timer: 2000
+            });
             handleClose()
+            onCloseFilter()
           }
            setgreensurveyform(response?.data)
+        
          })
          .catch(function (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: response.data.message,
+            confirmButtonText: 'Ok',
+            timer: 2000
+          });
            console.log(error);
          });
          handleClose();
@@ -144,6 +166,7 @@ export default function Programevaluationday1()
         </Button><br/>
         </Stack>
         <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+          <form onSubmit={(e) => {e .preventDefault(); evaluationday1form()}}>
       <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
           
@@ -156,7 +179,7 @@ export default function Programevaluationday1()
           </Typography>
 
 
-          <Button type="submit" autoFocus edge="end" color="inherit" onClick={() => evaluationday1form()}>
+          <Button type="submit" autoFocus edge="end" color="inherit" >
           <Iconify icon="material-symbols:save" width={30} height={30} />
           </Button>
         
@@ -202,7 +225,7 @@ export default function Programevaluationday1()
                 <Typography variant='h6' color="primary">Module 1 (M1) Introduction to Buzz:</Typography>
                 <Typography>How many women attended the training session *</Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_m1:e.target.value})} value={sendData?.women_m1}/>
+                    <TextField required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_m1:e.target.value})} value={sendData?.women_m1}/>
                 </Stack>
                   <Typography style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack mt={2}>
@@ -258,7 +281,7 @@ export default function Programevaluationday1()
                   </Stack>
                   <Typography style={{fontWeight:'700'}}>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m1:e.target.value})} value={sendData?.many_m1}/>
+                    <TextField required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m1:e.target.value})} value={sendData?.many_m1}/>
                 </Stack>
                 <Stack mt={2}>
                     <Typography style={{fontWeight:700}}>Did this module take 20 minutes as allotted? *</Typography>
@@ -294,7 +317,7 @@ export default function Programevaluationday1()
                   </Stack>
                   <Typography style={{fontWeight:'700'}}>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m2:e.target.value})} value={sendData?.many_m2}/>
+                    <TextField required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m2:e.target.value})} value={sendData?.many_m2}/>
                 </Stack>
                 <Typography style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack mt={2}>
@@ -336,7 +359,7 @@ export default function Programevaluationday1()
                   </Stack>
                   <Typography style={{fontWeight:'700'}}>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m2:e.target.value})} value={sendData?.many_m2}/>
+                    <TextField required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m2:e.target.value})} value={sendData?.many_m2}/>
                 </Stack>
                 <Stack mt={2}>
                     <Typography style={{fontWeight:700}}>Did this module take 20 minutes as allotted? *</Typography>
@@ -370,7 +393,7 @@ export default function Programevaluationday1()
                   </Stack>
                   <Typography style={{fontWeight:'700'}}>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m3:e.target.value})} value={sendData?.many_m3}/>
+                    <TextField required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m3:e.target.value})} value={sendData?.many_m3}/>
                 </Stack>
                 <Typography style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack mt={2}>
@@ -462,6 +485,7 @@ export default function Programevaluationday1()
         </Grid>
         </DialogContentText>
         </DialogContent>
+        </form>
       </Dialog>
          </div>
         

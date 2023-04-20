@@ -565,6 +565,7 @@ const mainShowBussHandler = ()=>{
               <Stack>
                 <CardContent>
                   <TextField id="start-date" type="date"
+                  required
                    // defaultValue={dayjs(data?.start_date)}
                    defaultValue={data?.start_date}
                     style={{ width: '20vw' }}
@@ -578,7 +579,7 @@ const mainShowBussHandler = ()=>{
                       setData({ ...data, start_date: e?.target?.value })
                     }} />
 {/* {console.log(dayjs( moment(data?.endDate)?.format()),moment(data?.endDate)?.format('YYYY-MM-DD'),new Date(data?.endDate),data?.endDate,"<-- defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}",data?.end_date,data?.start_date)} */}
-                  <TextField id="end-date" type="date"
+                  <TextField id="end-date" type="date" required
                 defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('DD-MM-YYYY')):dayjs( moment(data?.endDate)?.format('DD-MM-YYYY'))}
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     value={data.end_date}
@@ -730,13 +731,13 @@ const mainShowBussHandler = ()=>{
                     })}
                   >
                     <MenuItem id="Choose Gelathi Facilitator Lead" value="" default disabled>Choose Gelathi Facilitator Lead</MenuItem>
-                    {Gf.map(itm => {
+                    {Gf?.map(itm => {
                       return (
                         <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
                       )
                     })
                     }
-                  </Select>:null}
+                  </Select>:<Select label="Select Gelathi Facilitator Lead"><MenuItem id="Select Gelathi Facilitator Lead" value="" disabled>No Gelathi Facilitator Lead</MenuItem></Select>}
                 </FormControl></Stack>  
 
                 {/* <Stack mt={3}>

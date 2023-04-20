@@ -513,7 +513,7 @@ const noteSubmitHandler = () => {
                                     <Typography >Upload Photos</Typography>
                                     
                                 </CardContent> */}
-                           
+                            {/* </Card> */}
                             <Programevaluationday1 onCloseFilter={onCloseFilter} />
                             <Evaluationday2  onCloseFilter={onCloseFilter}/>
                            {batch && <CheckinOut
