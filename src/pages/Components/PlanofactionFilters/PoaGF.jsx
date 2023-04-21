@@ -538,7 +538,9 @@ const noteSubmitHandler = () => {
                 </CardContent>
               </Card>
 
-              {showNote ? (
+       
+
+{showNote ? (
                 <div>
                   {/* <Dialog fullScreen open={open} onClose={handleClose}TransitionComponent={Transition}></Dialog> */}
                   <Card style={{ marginTop: 20, marginLeft: 10 }}>
@@ -563,12 +565,13 @@ const noteSubmitHandler = () => {
                         setGelatiNote(e?.target?.value);
                         console.log('note', gelatiNote);
                       }}
+                      
                     ></TextField>
-                    {/* {SaveBtn? 
+                                        {SaveBtn? 
                     
-                    <> */}
+                    <>
                      <Button
-                      style={{ color: "#ff7424", marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:"#ffd796"}}
+                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
                       onClick={noteSubmitHandler}
                       disabled={gelatiNote.trim()===""}
                     >
@@ -577,18 +580,24 @@ const noteSubmitHandler = () => {
                     
                     <Button
                   
-                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:'#aec6c1'}}
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
                   onClick={()=>{
                    setShowNote(false)
                   }}
                 >
+                  {/* <Cancel></Cancel> */}
+                  <Button
                   
-                
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                  onClick={()=>{
+                   setShowNote(false)
+                  }}
+                >
                   Cancel
-         
                 </Button> 
-                    {/* </> */}
-                    {/* :
+                </Button> 
+                    </>
+                    :
                     <>
                   
                       <Button
@@ -611,7 +620,6 @@ const noteSubmitHandler = () => {
                    </Button> 
                    </>
                    }
-                   */}
                   </Card>
                 </div>
               ) : null}
