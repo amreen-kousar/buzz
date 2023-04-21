@@ -15,7 +15,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow';
-
+import './dashboard.css'
 export default function DashboardApp() {
   const navigate = useNavigate();
 
@@ -326,7 +326,7 @@ export default function DashboardApp() {
                   })
                 }}>
                 <CardContent>
-                <TableContainer >
+                {/* <TableContainer >
                   <Table aria-label="customized table">
                     <TableBody>
                       <TableRow >
@@ -337,7 +337,20 @@ export default function DashboardApp() {
                      
                     </TableBody>
                   </Table>
-                </TableContainer>
+                </TableContainer> */}
+<Container style={{ display: 'flex', flexDirection: 'row' }}>
+  <Grid item xs={6}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
+      Project<br />
+      Actual / Target
+    </span></Grid>
+    <Grid item xs={6}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
+      &nbsp;:&nbsp;{itm?.name}<br />
+      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
+    </span>
+  </Grid>
+</Container>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={1}>
                     {

@@ -28,6 +28,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import Iconify from 'src/components/Iconify';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -311,10 +312,7 @@ const [sendData,setSendData]= React.useState({
    
      });
 
-     if(sendData.NGO=="" || sendData.accessToCredit==""|| sendData.accessToHealtcare==""||sendData.account_business==""){
-        alert("Please Fill the form completely.")
-     }
-     else{
+
 
       var config = {
         method: 'post',
@@ -327,23 +325,34 @@ const [sendData,setSendData]= React.useState({
       
       axios(config)
       .then(function (response) {
+        alert(response.data.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: response.data.message,
+          confirmButtonText: 'Ok',
+          timer: 2000
+        });
         setshaktidata(response?.data)
+       
         console.log("survey form data ", response)
       })
       .catch(function (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: response.data.message,
+          confirmButtonText: 'Ok',
+          timer: 2000
+        });
+        
         console.log(error);
       });
       handleClose();
-     }
+     
      
     
 }
-
-
-
-
-
-
 
 
 
@@ -361,6 +370,9 @@ const [sendData,setSendData]= React.useState({
       </IconButton>
       </div> 
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+
+         <form onSubmit={(e)=>{e.preventDefault(); shakthiformdata()}}>
+      
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handledClose} aria-label="close">
@@ -369,7 +381,7 @@ const [sendData,setSendData]= React.useState({
             <Typography sx={{ ml: 2, flex: 1 ,color:'white'}} variant="h6" component="div" >
               Survey Form
             </Typography>
-            <Button autoFocus color="inherit" onClick={shakthiformdata}>
+            <Button autoFocus color="inherit" type="submit">
               save 
             </Button>
           </Toolbar>
@@ -384,13 +396,13 @@ const [sendData,setSendData]= React.useState({
                 <Typography mt={2} variant="body2">1. I feel That I am Person of worth</Typography>
                 <Stack mt={2}>
                   <InputLabel variant="standard" id="demo-simple-select-standard-label">Answer</InputLabel>
-                  <Select
+                  <Select required inputProps={{required:true}}
                     fullWidth variant='standard' color='common'
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
                     value={worthperson}
                     onChange={handleworthperson}
-                   required
+                   
                   >
                     <MenuItem value="" style={{backgroundColor:'gray'}}>
                       <em>Select Answer </em>
@@ -595,7 +607,7 @@ const [sendData,setSendData]= React.useState({
                   You Have Made.
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, profitForSarees: e.target.value }) }}/>
+                  <TextField id="Correct Answer" required label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, profitForSarees: e.target.value }) }}/>
                 </Stack>
               </Stack>
               <Stack>
@@ -604,7 +616,7 @@ const [sendData,setSendData]= React.useState({
                   To Pay Back Rs 1000 A Month. WHat Is The Annual Interest Rate ?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField id="Correct Answer" required label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
                 </Stack>
               </Stack>&nbsp;<hr/>
               <Stack>
@@ -820,6 +832,7 @@ const [sendData,setSendData]= React.useState({
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
+                      required
                       name="radio-buttons-group"
                       onChange={(e, value) => { setSendData({ ...sendData, specificGoalForSavings: value }) }}
                   
@@ -834,7 +847,7 @@ const [sendData,setSendData]= React.useState({
                   2. How Much Do You Need To Save Up To Achieve This Goal  ?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, howMuchSaveToAchieve
+                  <TextField id="Correct Answer" required label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, howMuchSaveToAchieve
                     : e.target.value }) }} />
                 </Stack>
               </Stack>
@@ -1097,7 +1110,7 @@ const [sendData,setSendData]= React.useState({
               </Stack>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid></form>
       </Dialog>
   </>
   );

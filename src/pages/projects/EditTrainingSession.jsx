@@ -21,24 +21,25 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateTrainerBatch(props) {
-  console.log(props?.data1,"<------qwewqeqweqweqw")
+export default function EditTrainingBatch({batch,editSession, setEditsession}) {
+  
+    console.log(batch,"batchdataaaaaaaaaaa")
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(dayjs('2022-04-07'));
   const [village, setVillage] = useState([]);
   const [date, setDate] = useState("")
   const [trainerData, setTrainerData] = useState({
-    "batch_name": "",
-    "sub_village": "",
-    "project_id": "",
-    "contact_person": "",
-    "number_of_participants": "",
+    "batch_name":batch?.data?.batch_name,
+    "sub_village": batch?.data?.sub_village,
+    "project_id": batch?.data?.project_id,
+    "contact_person": batch?.data?.contact_person,
+    "number_of_participants": batch?.data?.participants,
     "day1": new Date(),
     "day2": new Date(),
-    "location_id": "",
-    "contact_number": "",
-    "trainer_id": "",
-    "talaq_id": ""
+    "location_id": batch?.data?.location_id,
+    "contact_number": batch?.data?.contact_number,
+    "trainer_id": batch?.data?.trainer_name,
+    "talaq_id": batch?.data?.taluk_id
   })
   const [data, setData] = useState({
 
@@ -52,18 +53,22 @@ export default function CreateTrainerBatch(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  useEffect(() => {
-    villageList(props?.data1);
+//   useEffect(() => {
+//     villageList(props?.data1);
 
-  }, [props?.data1])
+//   }, [props?.data1])
   
-  console.log(props?.data1?.location_id,"location")
+//   console.log(props?.data1?.location_id,"location")
+
+useEffect(()=>{
+    villageList(batch?.data)
+},[batch?.data])
   const villageList = async(i) => {
     
     var data = JSON.stringify({
-      "taluk_id":i?.location_id
+      "taluk_id":i?.taluk_id
     });
-console.log(props?.data1.location_id,"<----------------------props?.data1?.location_idprops?.data1?.location_id")
+console.log(batch?.data?.taluk_id    ,"<----------------------props?.data1?.location_idprops?.data1?.location_id")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getVillageList.php',
@@ -82,69 +87,67 @@ console.log(data,"data")
         console.log(error);
       });
   }
-  const createTrainerBatch = async => {
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-    const datass = village?.list?.filter(it => { return it?.id === trainerData?.talaq_id })
-    console?.log(datass, village?.list, trainerData?.talaq_id, "<--kjughfd")
+  const EditTraining= ()=>{
     var data = JSON.stringify({
-      "batch_name": datass[0]?.name,
+      "batch_name": batch?.data?.batch_name,
       "sub_village": trainerData?.sub_village,
-      "project_id": props?.data1?.project_id,
       "contact_person": trainerData?.contact_person,
-      "number_of_participants": trainerData?.number_of_participants,
-      "day1": moment(trainerData?.day1)?.format('YYYY/MM/DD  h:mm:ss a'),
-      "day2": moment(trainerData?.day2)?.format('YYYY/MM/DD  h:mm:ss a'),
-      "location_id": props?.data1?.location_id,
-      "contact_number": trainerData?.contact_number,
-      "trainer_id": idvalue
+      "number_of_participants":trainerData?.number_of_participants,
+      "day2": trainerData?.day2,
+      "day1": trainerData?.day1,
+      "tb_id": batch?.data?.id,
+      "location_id": trainerData?.location_id,
+      "contact_number": trainerData?.contact_number
     });
-
+    
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createTrainingBatch.php',
-      headers: {
+      url: 'https://bdms.buzzwomen.org/appTest/editTrainingBatch.php',
+      headers: { 
         'Content-Type': 'application/json'
       },
-      data: data
+      data : data
     };
 
+
+    
     axios(config)
-      .then(function (response) {
-        if (response?.data?.code) {
-          alert(response?.data?.message)
-        }
-        else{
-          alert("added succesfully")
-          handleClose()
-        }
-        /// setTrainerData(response.data)
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      handleClose();
+    })
+    .catch(function (error) {
+      console.log(error);
+      
+    });
+    alert(response.data.message)
+   
+  
   }
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
     linkStyle: { textDecoration: 'none', color: "black" }
   }
+ 
+ 
+  React.useEffect(() => {
+    //setShown(shown)
+    setOpen(editSession)
+  }, [editSession])
+
+
   return (
     <div>
 
-      <Button variant="secondary" style={styles.buttonStyle} onClick={handleClickOpen}
-                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
-                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
-                    <span style={{ width: "200px" }}>New Training Batch</span>
-                  </Button>
+      
       <Dialog
         fullScreen
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
+        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton
               edge="start"
@@ -155,9 +158,9 @@ console.log(data,"data")
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" style={{color:"white"}}>
-              Create  New Training Batch 
+               Training Batch 
             </Typography>
-            <Button autoFocus color="inherit" onClick={createTrainerBatch}>
+            <Button autoFocus color="inherit" onClick={EditTraining} >
               
               Save
             </Button>
@@ -173,21 +176,22 @@ console.log(data,"data")
             </Stack>
           </CardContent>
         </Card> */}
-      <DialogContentText style={{ marginLeft: 20 ,marginTop: 80}}>
-      <Typography>Project&nbsp;:&nbsp; {props?.data1?.project_name}</Typography>
-        <Typography> Partner &nbsp;:&nbsp; {props?.data1?.partnerName}</Typography>
+      <DialogContentText style={{ marginLeft: 20 ,marginTop: 20}}>
+      {/* <Typography>Project&nbsp;:&nbsp; {props?.data1?.project_name}</Typography>
+        <Typography> Partner &nbsp;:&nbsp; {props?.data1?.partnerName}</Typography> */}
       </DialogContentText>
      
         
        
-        <Stack mt={3} style={{ marginTop: 50 }}>
+        <Stack mt={3}>
           {console.log(trainerData, "><0khjhgbfd")}
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label" color="common">Select Village</InputLabel>
             <Select color="common"
               // labelId="demo-simple-select-label"
               //id="demo-simple-select"
-              value={trainerData?.talaq_id}
+              
+              defaultValue={batch?.data?.taluq_id}
               label="Select Village"
               
               onChange={(e => {
@@ -210,6 +214,7 @@ console.log(data,"data")
           <TextField
             fullWidth
             color="common"
+            defaultValue={batch?.data?.sub_village}
             id="outlined-error"
             type="text"
             onChange={(e) => { setTrainerData({ ...trainerData, sub_village: e?.target?.value }) }}
@@ -221,6 +226,7 @@ console.log(data,"data")
             color="common"
             id="outlined-error"
             label="Number Of Participants"
+            defaultValue={batch?.data?.participants}
             type='number'
             onChange={(e) => { setTrainerData({ ...trainerData, number_of_participants: e?.target?.value }) }}
           />
@@ -229,15 +235,17 @@ console.log(data,"data")
           <TextField
             fullWidth
             color="common"
+            defaultValue={batch?.data?.contact_person}
             onChange={(e) => { setTrainerData({ ...trainerData, contact_person: e?.target?.value }) }}
             type="text"
             id="outlined-error"
             label="Contact Person" />
         </Stack>
         <Stack style={{ marginTop: 20 }}>
-          <TextField
+          <TextField defaultValue={batch?.data?.contact_number}
             fullWidth
             color="common"
+            
             onChange={(e) => { 
               const limitChar = 10
               if (e.target.value.toString().length <= limitChar) {
@@ -260,6 +268,7 @@ console.log(data,"data")
             renderInput={(props) => <TextField {...props} />}
             label="DateTimePicker"
             color="common"
+            defaultValue={batch?.data?.day1}
             value={trainerData?.day1}
             onChange={(newValue) => {
               setTrainerData({ ...trainerData, day1: newValue })
@@ -273,7 +282,7 @@ console.log(data,"data")
         </Stack>
         <Stack style={{ marginTop: 20 }}>
 
-          <DateTimePicker popperPlacement="auto"
+          <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
             label="DateTimePicker"
             value={trainerData?.day2}
@@ -284,7 +293,7 @@ console.log(data,"data")
               //setValue(newValue);
             }}
           />
-        </Stack><br/><br/><br/>
+        </Stack>
       </Dialog>
     </div>
   );

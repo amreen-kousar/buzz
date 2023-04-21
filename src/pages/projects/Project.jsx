@@ -214,7 +214,7 @@ function Project(props) {
                 </TableContainer>
 
               </Card><br></br>
-              {(userDetails == 1 || userDetails == 2 || userDetails == 3 || userDetails == 4 || userDetails == 5 || userDetails == 6 || userDetails == 13) ? 
+              {(userDetails == 1 || userDetails == 2 || userDetails == 3 || userDetails == 4 || userDetails == 5 || userDetails == 6 || userDetails == 13 || userDetails == 12) ? 
               <Card sx={{width:"100%"}}>
                 <CardContent>
                   Project Team :
@@ -235,10 +235,10 @@ function Project(props) {
                   )}</Collapse>
                 </CardContent>
 
-              </Card> :
-                <>
+              </Card>:null }
+                {(userDetails==12)?<>
 
-                  <Card value={data1?.operations_manager_id} style={{ cursor: 'pointer', margin: 20, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.operations_manager_id)} >
+                  <Card  value={data1?.operations_manager_id} style={{ cursor: 'pointer', margin: 20, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.operations_manager_id)} >
                     <span  >
                       {data1?.operations_manager_name} <Iconify style={{ color: "black", float: 'right', width: 20, height: 20}} icon="material-symbols:add" />
                     </span></Card>
@@ -265,7 +265,7 @@ function Project(props) {
                     </span></Card>
 
 
-                </>}
+                </>:null}
 
             </Grid>
            {

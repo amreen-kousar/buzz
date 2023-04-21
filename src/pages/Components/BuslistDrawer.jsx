@@ -154,13 +154,13 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>
             {/* {userAccess.includes(userIdCheck) && */}
-            {(userDetails==2)?<Button onClick={DeleteBus} style={{float:'right',textAlign:'left'}} sx={{
+            {(userDetails==2)?<Button id="delete-icon" onClick={DeleteBus} style={{float:'right',textAlign:'left'}} sx={{
           '&:hover': {
             backgroundColor: 'white',
           },
-        }} ><Iconify id="delete-icon" icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138',float:'right'}}></Iconify></Button>:null}
+        }} ><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138',float:'right'}}></Iconify></Button>:null}
            {(userDetails==2)?<BusEdit clcikData={detailsData} busesd={busesd} updatedata={()=>{setUserUpdate(!userUpdate)}} />:null}
-            <Card>
+            <Card> 
                 <CardContent>
                 {/* <Typography variant="subtitle1" style={{color:"#494646"}}>
                    {`Bus Number : ${detailsData?.register_number}`}

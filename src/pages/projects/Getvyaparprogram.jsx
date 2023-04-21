@@ -134,7 +134,7 @@ const GetVyaparformData=()=>{
             
             <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff7424"}}>Name of the GF / ಗೆಲತಿಯ ಹೆಸರು *</Typography>
+                  <Typography style={{color:"#ff7424"}}>Name of the GF / ಗೆಳತಿಯ ಹೆಸರು*</Typography>
                   <Stack mt={2} >
                 <Typography>Answer: {surveyData?.gfId}</Typography>
              

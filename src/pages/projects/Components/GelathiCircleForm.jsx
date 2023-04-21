@@ -250,7 +250,7 @@ export default function GelathiCircleForm(circleData) {
 
           <Card mt={1} style={{marginTop:10, borderRadius: 20 }}>
           <CardContent>
-            <Typography variant="subtitle2" style={{color:"#ff7424"}}>Name of the Gelathi / ಗೆಲತಿಯ ಹೆಸರು *</Typography>
+            <Typography variant="subtitle2" style={{color:"#ff7424"}}>Name of the Gelathi / ಗೆಳತಿಯ ಹೆಸರು*</Typography>
             <Stack mt={2} mb={2}>      
               <Select color="common" label="Choose Gelathi Facilitator" variant="standard" required onChange={(e) => setSendData({ ...sendData, GelathiId: e?.target?.value })} value={sendData?.GelathiId} >
                   {vyaapar?.list?.map((itm)=>{

@@ -193,6 +193,10 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
   }
 
   const postImages = async () => {
+    if (image.length === 0) {
+      alert("No photos to upload.")
+      throw new Error('No photos to upload.');
+    }
     var dataImage = []
     const form = new FormData()
     form?.append("emp_id", userid)
@@ -332,8 +336,8 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
             <div style={{ margin: "1rem" }}>
 
 
-              <Stack id="start-odometer-reading" style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" defaultValue={editData?.start_odometer} onChange={(e) => { setSendData({ ...sendData, start_odometer: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
+              <Stack style={{ marginTop: 20 }}>
+                <TextField type="number" id="outlined-basic" defaultValue={editData?.start_odometer} onChange={(e) => { setSendData({ ...sendData, start_odometer: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
               </Stack>
               <Stack id="location" style={{ marginTop: 20 }}>
                 <TextField defaultValue={editData?.start_location_name} id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, start_location_name: e?.target?.value }) }} label="Location" variant="outlined" color="common" />

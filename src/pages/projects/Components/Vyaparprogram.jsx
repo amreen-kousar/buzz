@@ -36,6 +36,7 @@ import { Color } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
+import Swal from 'sweetalert2'
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -201,7 +202,7 @@ const [sendData,setSendData] = useState({
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/updateBuzzVyaparProgramBaseline.php',
+        url: 'https://bdms.buzzwomen.org/appTest/new/addBuzzVyaparProgramBaseline.php',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -212,13 +213,27 @@ const [sendData,setSendData] = useState({
       axios(config)
       .then(function (response) {
         setvyaparform(response?.data)
-        // setMessage('Poa Created successfully')
-        alert("Poa Created successfully")
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: response.data.message,
+          confirmButtonText: 'Ok',
+          timer: 2000
+        });
+        setMessage(response?.data.message)
           setsuccessMessage(true)
+          
           handleClose()
           props?.changeState()
       })
       .catch(function (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: response.data.message,
+          confirmButtonText: 'Ok',
+          timer: 2000
+        });
         console.log(error);
       });
       
@@ -411,7 +426,7 @@ const [sendData,setSendData] = useState({
             
             <Card style={{ marginTop: 50,  borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff7424"}}>Name of the GF / ಗೆಲತಿಯ ಹೆಸರು *</Typography>
+                  <Typography style={{color:"#ff7424"}}>Name of the GF / ಗೆಳತಿಯ ಹೆಸರು *</Typography>
                   <Stack mt={2} mb={2}>
                
               <Select color="common" label="Choose Gelathi Facilitator" required variant="standard" onChange={(e) => setSendData({ ...sendData, gfId: e?.target?.value })} value={sendData?.gfId}>
@@ -459,9 +474,16 @@ const [sendData,setSendData] = useState({
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Age / ವಯಸ್ಸು *</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="Age" required type="number" label="Your Answer" variant="outlined" color="common" inputProps={{
-            pattern: "^((?!-).)", min:0
-        }} onChange={(e) => setSendData({ ...sendData, age:e.target.value})} value={sendData?.age}/>
+                    {/* <TextField id="Age" required type="number" min="0" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, age:e.target.value})} value={sendData?.age}/> */}
+                    <TextField id="Age" required type="number" step="0.01" label="Your Answer" variant="outlined" color="common" 
+  onChange={(e) => {
+    const newValue = e.target.value;
+    if (newValue >= 0) {
+      setSendData({ ...sendData, age: newValue });
+    }
+  }} 
+  value={sendData?.age}
+/>
                   </Stack>
                 </CardContent>
               </Card>
@@ -698,7 +720,7 @@ const [sendData,setSendData] = useState({
                     >
                       <FormControlLabel value="Less than 1 year" control={<Radio style={{color:"#595959"}} />} label="Less than 1 year" />
                       <FormControlLabel value="1-3 years" control={<Radio style={{color:"#595959"}} />} label="1-3 years" />
-                      <FormControlLabel value="4-6 years" control={<Radio style={{color:"#595959"}} />} label="4-6 years" />
+                      <FormControlLabel value="4-6 years" control={<Radio style={{color:"#595959"}} />} label="4-6 years" />   
                       <FormControlLabel value="5-8 years" control={<Radio style={{color:"#595959"}} />} label="5-8 years" />
                       <FormControlLabel value="8-10 years" control={<Radio style={{color:"#595959"}} />} label="8-10 years" />
                       <FormControlLabel value="more than 10 years" control={<Radio style={{color:"#595959"}} />} label="more than 10 years" />

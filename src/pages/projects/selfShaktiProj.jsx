@@ -97,7 +97,7 @@ export default function selfShaktiProj() {
             console.log(error);
           });
     }
-    console.log(state.id , "project id in state ")
+    // console.log(state.id , "project id in state ")
   
     const id = sessionStorage?.getItem("proId")
     useEffect(() => {
@@ -209,14 +209,14 @@ export default function selfShaktiProj() {
             <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}> All Training Batch : ({count})</Typography> 
                {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
-            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ProjectMultiDrawer
                 batchState={batchState}
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}
                     onCloseFilter={handleCloseFilter}
-                    projectId={state.id}
+                    projectId={state?.id}
                 />
             </Stack>
             {/* </Stack> */}

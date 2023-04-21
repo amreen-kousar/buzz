@@ -8,7 +8,7 @@ import {
     Radio,
     Stack,
     Button,
-    Drawer,
+    Drawer,TextField,
     Rating,
     Divider,
     Checkbox,
@@ -16,7 +16,7 @@ import {
     IconButton,
     Typography,
     RadioGroup,
-    Card,
+    Card,Grid,
     CardContent,
 } from '@mui/material';
 // components
@@ -28,6 +28,12 @@ import Photos from '../projects/Components/Photos';
 import Programevaluationday1 from '../projects/Components/Programevaluationday1';
 import Evaluationday2 from '../projects/Components/Evaluationday2';
 import CheckinOut from './PlanofactionFilters/CheckinOut';
+import moment from 'moment';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import EditGelathiSession from '../projects/Components/EditGelathisession';
+import EditTrainingBatch from '../projects/EditTrainingSession';
 // ----------------------------------------------------------------------
 
 projectMultiDrawer.propTypes = {
@@ -39,12 +45,24 @@ projectMultiDrawer.propTypes = {
 export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,batchState,projectId}) {
 
      const [batch,setBatch] = useState('')
+     const [schedule,setReschedule]=React.useState(false);
+     const [day2Schedule,setday2Reschedule]=React.useState(false);
      const [photos,setPhotos] = React.useState(false)
      const [shown,setShown] = React.useState(false)
    const [images,setImages] = useState([])
+     const [getAllNotes, setGetAllNotes] = useState([]);
+const [SaveBtn , setSaveBtn] = useState(false) 
+const [gelatiNote, setGelatiNote] = useState('');
+ const [showNote, setShowNote] = useState(false);
+   
+  const [date, setDate] = useState(new Date())
+  const [day2date,setday2date] = useState(new Date())
+   const [session, setSession] = useState('');
+   const [editSession,setEditsession]=useState(false);
    const [check,setCheck]=useState(false)
    const [viewImage, setViewImage] = React.useState(false);
    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+   const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
     useEffect(() => {
         getTrainingBatch();
        // console.log(batchState)
@@ -54,6 +72,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
       setImages([])
     },[batchState?.training_batch_id])
     console.log(clcikData,"<---sads",batchState)
+
     const getTrainingBatch = async =>{
         
         
@@ -84,6 +103,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
           .catch(function (error) {
             console.log(error);
           });
+          GetStatus();
           
     }
 
@@ -111,6 +131,10 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
 
       console.log("batch?.project_id", batch?.data?.project_id)
     const UploadImages = (e) =>{
+      if (images.length === 0) {
+        alert("No photos to upload.")
+        throw new Error('No photos to upload.');
+      }
         console.log("upload method is calling ")
 
         if(images.length<=0){
@@ -148,6 +172,183 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
     images.splice(index, 1);
     setImages([...images]);
   };
+
+  
+  const removesession=(e)=>{
+    if(confirm("Do You want to Cancel?")){
+      var data = JSON.stringify({
+        "poa_id": e,
+        "day": ""
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/updatePoaCancel.php',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        onCloseFilter();
+        getTrainingBatch();
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+    }
+  }
+
+  const reschedudlehandler=()=>{
+   setReschedule(true)
+  }
+
+  const day2Reschedudlehandler=()=>{
+    setday2Reschedule(true)
+  }
+ 
+  
+  const Reschedule=(e)=>{
+    
+    var data = JSON.stringify({
+      "poa_id": e,
+      "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss')
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/updateReschedule.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setReschedule(false)
+      onCloseFilter()
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
+
+    //createnotes
+const noteSubmitHandler = () => {
+    
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+
+    var data = JSON.stringify({
+      notes: gelatiNote,
+      type: 1,
+      tb_id: batch?.data?.id,
+      emp_id: batch?.data?.user_id,
+    });
+
+    console.log(data, 'material api');
+    const config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/createNotes.php',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        if (response.status == 200) {
+          // viewMessage('Project added sucessfully');
+          setShowNote(false);
+          getNoteHandler();
+          setSaveBtn(false)
+          alert("Note Added Successfully...")
+          console.log('susscesfully added data material');
+        }
+      })
+      .catch(function (error) {
+        console.log(error, 'failed');
+      });
+    console.log('submit');
+
+  }
+   //getting Notes\
+   useEffect(() => {
+    getNoteHandler();
+   
+   // console.log(batchState)
+    
+},[batch?.data?.id])
+   const getNoteHandler = () => {
+    console.log('getNoteHandler');
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+    var data = JSON.stringify({
+      type: 1,
+      tb_id: batch?.data?.id,
+      
+    });
+
+    console.log(data, 'material api');
+    const config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getNotes.php',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        if (response.status == 200) {
+          setGetAllNotes(response?.data?.notes);
+          console.log(response, 'notesData');
+        }
+      })
+      .catch(function (error) {
+        console.log(error, 'failed');
+      });
+    console.log('submit');
+  };
+
+
+  const GetStatus = async=>{
+    var data = JSON.stringify({
+      "project_id": projectId,
+      "poa_type": 1,
+      "type": 2,
+      "tb_id": batchState?.training_batch_id?batchState?.training_batch_id:clcikData?.id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data),"dataaaaaaaaaaaa");
+      setCheckData(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+ 
     return (
         <>
             <Drawer
@@ -185,16 +386,52 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                                     <Typography id="partner" variant="body1" gutterBottom>
                                         Partner :
                                         &nbsp;{batch?.data?.partnerName}
+                                      
                                     </Typography>
+
+                                    
+
                                     <Typography id="training" variant="body1" gutterBottom>
-                                        Training&nbsp;Batch:{batch?.data?.name}
+                                        Training&nbsp;Batch:<br/>{batch?.data?.name} <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
                                     </Typography>
                                     <Typography id="day1" variant="body1" gutterBottom>
                                         Day1:&nbsp;{batch?.data?.day1_actual}
+                                        
+            <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
+            {console.log(session,"sessionidddddddd")}
+            <IconButton onClick={()=>removesession(batch?.data?.day1_id)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton>
                                     </Typography>
+                                    {schedule && <Stack>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+           <DateTimePicker
+   required
+    value={date}
+    onChange={(e) => {setDate(e)}}
+    renderInput={(params) => <TextField {...params} color="common" />}
+  />
+        </LocalizationProvider>
+        {console.log(batch,"session?.id")}
+        <Button onClick={()=>Reschedule(batch?.data?.day1_id)}>Save</Button>
+      </Stack>}
+      <EditTrainingBatch batch={batch} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}}/>
                                     <Typography id="day2" variant="body1" gutterBottom>
                                         Day2:&nbsp;{batch?.data?.day2_actual}
+                                        <IconButton onClick={day2Reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
+            <IconButton onClick={()=>removesession(batch?.data?.day2_id)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton>
+                                        
                                     </Typography>
+                                    {day2Schedule && <Stack>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+           <DateTimePicker
+   required
+    value={date}
+    onChange={(e) => {setDate(e)}}
+    renderInput={(params) => <TextField {...params} color="common" />}
+  />
+        </LocalizationProvider>
+        {console.log(batch,"session?.id")}
+        <Button onClick={()=>Reschedule(batch?.data?.day2_id)}>Save</Button>
+      </Stack>}
                                     <Typography id="contact-person" variant="body1" gutterBottom>
                                         Contact Person:&nbsp;{batch?.data?.contact_person}
                                     </Typography>
@@ -226,6 +463,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
 
                             {/* //photo upload button  */}
                
+{(userId==1 || userId==3 || userId==5)?<>
 <Card id="delete-card-project" style={{marginTop:20}}>
 <div id="project-multidrawwer-div" style={{ display: 'flex' }}>
                 {viewImage
@@ -282,15 +520,15 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
 </Card>
                          
 
-
-                            {/* photo upload end  */}
-                            <Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
+<Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
                                 <CardContent>
                                     <Typography>View Photos  </Typography>
                                     
                                 </CardContent>
                                 </Card>
-                                <Card  style={{marginTop:20}}>
+                                <Card  style={{marginTop:20}}> </Card></>:null} <br/>
+                            {/* photo upload end  */}
+                           
                                 {/* <input accept="image/png, image/gif, image/jpeg"
         type="file"
         name="myImage"
@@ -305,9 +543,9 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                                     <Typography >Upload Photos</Typography>
                                     
                                 </CardContent> */}
-                            </Card>
-                            <Programevaluationday1 />
-                            <Evaluationday2 />
+                            {/* </Card> */}
+                            <Programevaluationday1 onCloseFilter={onCloseFilter} />
+                            <Evaluationday2  onCloseFilter={onCloseFilter}/>
                            {batch && <CheckinOut
               photos={check}
               batch={batch}
@@ -315,6 +553,139 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
                 setCheck(e);
               }}
                />}
+
+                  <Card style={{ marginTop: 20 }}>
+                <CardContent>
+                  <Typography variant="h6">
+                    Notes
+                    <IconButton style={{ float: 'right' }}>
+                      <Iconify
+                        style={{ color: 'black' }}
+                        icon="material-symbols:add"
+                        onClick={() => {
+                          setShowNote(true);
+                        }}
+                      />
+                    </IconButton>
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {showNote ? (
+                <div>
+                  {/* <Dialog fullScreen open={open} onClose={handleClose}TransitionComponent={Transition}></Dialog> */}
+                  <Card style={{ marginTop: 20, marginLeft: 10 }}>
+                    <TextField
+                      style={{ marginTop: 20, marginLeft: 20 }}
+                      id="outlined-multiline-static"
+                      label="Notes"
+                      multiline
+                      rows={5}
+                      variant="outlined"
+                      onChange={async (e) => {
+                        let note = await e?.target?.value;
+                        // if(note.length <= 0){
+                        //   alert("Text cannot be empty")
+                        //   setSaveBtn(false)
+                        // }
+                        // else{
+                        //   setGelatiNote(e?.target?.value);
+                        //   setSaveBtn(true)
+                        // }
+                        setSaveBtn(true)
+                        setGelatiNote(e?.target?.value);
+                        console.log('note', gelatiNote);
+                      }}
+                    ></TextField>
+                    {/* {SaveBtn? 
+                    
+                    <> */}
+                     <Button
+                      style={{ color: "#ff7424", marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:"#ffd796"}}
+                      onClick={noteSubmitHandler}
+                      disabled={gelatiNote.trim()===""}
+                    >
+                      Save
+                    </Button> 
+                    
+                    <Button
+                  
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:'#aec6c1'}}
+                  onClick={()=>{
+                   setShowNote(false)
+                  }}
+                >
+                  
+                
+                  Cancel
+         
+                </Button> 
+                    {/* </> */}
+                    {/* :
+                    <>
+                  
+                      <Button
+                      disabled
+                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                      onClick={()=>{
+                        alert("Text cannot be empty")
+                      }}
+                    >
+                      Save
+                    </Button>
+                     <Button
+                  
+                     style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                     onClick={()=>{
+                      setShowNote(false)
+                     }}
+                   >
+                     Cancel
+                   </Button> 
+                   </>
+                   }
+                   */}
+                  </Card>
+                </div>
+              ) : null}
+
+              <CardContent>
+                <div>
+                <Card style={{ marginTop: 20, marginLeft: 10 }}>
+                  {getAllNotes &&
+                    getAllNotes.map((i, index) => {
+                      {
+                        console.log(i, 'ivalue');
+                      }
+                      return (
+                        <>
+                         
+                            {/* <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}> */}
+                            <Grid
+                              container
+                              direction="column"
+                              justifyContent="center"
+                              alignItems="center"
+                              style={{ marginTop: 10 }}
+                            >
+                              <Typography variant="body1">
+                                {' '}
+                                {/* {userName} */}
+                                 {i?.date}
+                              </Typography>
+
+                              {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
+                            </Grid>
+                            <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
+                              {i?.notes}{' '}
+                            </Typography>
+                         
+                        </>
+                      );
+                    })}
+                     </Card>
+                </div>
+              </CardContent>
                  
                         </div>
                         {/* <Button onClick={UploadImages}>upload image</Button> */}
