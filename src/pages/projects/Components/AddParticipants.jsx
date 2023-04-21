@@ -152,7 +152,7 @@ alert("error!!!!!!")
       {(checkData?.data?.check_in_time_day1!="" )?
       <Button  onClick={handleClickOpen} color="inherit">
       Add Participants
-      </Button>:<Button disabled>Add Participants</Button>}
+      </Button>:null}
       <Dialog
         fullScreen
         open={open}
