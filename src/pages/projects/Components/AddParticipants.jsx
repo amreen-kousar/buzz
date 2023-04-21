@@ -20,8 +20,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddParticipants({batch}) {
-    console.log(batch,"<------batchbatchbatchbatchbatch")
+export default function AddParticipants({batch,checkData}) {
+    console.log(batch,"<------batchbatchbatchbatchbatch",checkData)
   const intialState={
     "education":"",
      "husbandName":"",
@@ -149,9 +149,10 @@ alert("error!!!!!!")
   }
   return (
     <div>
+      {(checkData?.data?.check_in_time_day1!="" )?
       <Button  onClick={handleClickOpen} color="inherit">
       Add Participants
-      </Button>
+      </Button>:<Button disabled>Add Participants</Button>}
       <Dialog
         fullScreen
         open={open}
