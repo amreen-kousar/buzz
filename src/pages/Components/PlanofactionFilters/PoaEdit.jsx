@@ -27,7 +27,7 @@ import Switch from '@mui/material/Switch';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
-
+import Swal from 'sweetalert2'
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -113,20 +113,38 @@ export default function PoaEdit({ setSucess, itm }) {
     axios(config)
       .then(function (response) {
         if (response?.data?.code === 200) {
+          alert(response.data.message)
           handleClose()
-
           setSucess("this is success create")
+          alert(response.data.message)
+       
 
           handleClose()
         }
         else {
+
           setValue(true)
+          alert(response.data.message)
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: response.data.message,
+            confirmButtonText: 'Ok',
+            timer: 2000
+          });
           console?.log(response?.data?.message, "<---response?.data?.message")
           setAddPoa(response?.data?.message)
         }
         // console.log(response.data);
       })
       .catch(function (error) {
+             Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: response.data.message,
+            confirmButtonText: 'Ok',
+            timer: 2000
+          });
         console.log(error);
       });
   }

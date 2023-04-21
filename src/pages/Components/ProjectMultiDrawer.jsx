@@ -43,6 +43,7 @@ projectMultiDrawer.propTypes = {
 };
 
 export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,batchState,projectId}) {
+console.log("🚀 ~ file: ProjectMultiDrawer.jsx:46 ~ projectMultiDrawer ~ clcikData:", clcikData)
 
      const [batch,setBatch] = useState('')
      const [schedule,setReschedule]=React.useState(false);
@@ -332,9 +333,7 @@ const noteSubmitHandler = () => {
             >
                 <Stack  id="pro-mutlidrawer-stack" direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                        {` ${clcikData?.name}`}
-                        {/* {clcikData?.title} */}
-                        {console.log(clcikData,"clicked data")}
+                      {clcikData?.title!=='Self Shakti'? clcikData?.name : clcikData?.title}
                     </Typography>
                     <IconButton id="project-close-icon-btn" onClick={onCloseFilter}>
                         <Iconify id="project-close-icon" icon="eva:close-fill" width={20} height={20} />
@@ -566,12 +565,13 @@ const noteSubmitHandler = () => {
                         setGelatiNote(e?.target?.value);
                         console.log('note', gelatiNote);
                       }}
+                      
                     ></TextField>
-                    {/* {SaveBtn? 
+                                        {SaveBtn? 
                     
-                    <> */}
+                    <>
                      <Button
-                      style={{ color: "#ff7424", marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:"#ffd796"}}
+                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
                       onClick={noteSubmitHandler}
                       disabled={gelatiNote.trim()===""}
                     >
@@ -580,18 +580,24 @@ const noteSubmitHandler = () => {
                     
                     <Button
                   
-                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:'#aec6c1'}}
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
                   onClick={()=>{
                    setShowNote(false)
                   }}
                 >
+                  {/* <Cancel></Cancel> */}
+                  <Button
                   
-                
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                  onClick={()=>{
+                   setShowNote(false)
+                  }}
+                >
                   Cancel
-         
                 </Button> 
-                    {/* </> */}
-                    {/* :
+                </Button> 
+                    </>
+                    :
                     <>
                   
                       <Button
@@ -614,7 +620,6 @@ const noteSubmitHandler = () => {
                    </Button> 
                    </>
                    }
-                   */}
                   </Card>
                 </div>
               ) : null}

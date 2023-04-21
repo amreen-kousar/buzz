@@ -88,13 +88,13 @@ export default function DashboardApp() {
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     const data = {
-      end_date: (g === "date")? i: (g==='country')? moment(date2.$d)?.format('YYYY-MM-DD'): '',
+      end_date: (g === "date")? i: '',
       role_id: role,
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       trainerId: g ? "" : i === 5 ? id?.id : '',
       emp_id: userid,
-      start_date: (g === "date")? id: (g==='country')? moment(date1.$d)?.format('YYYY-MM-DD'): '',
+      start_date: (g === "date")? id: '',
       somId: g ? "" : i === 12 ? id?.id : '',
       gflId: g ? "" : i === 13 ? id?.id : '',
       funder_id: g ? "" : i === 2 ? id?.id : '',
@@ -195,7 +195,7 @@ export default function DashboardApp() {
     handleCloseFilter()
     
  
-    apiHit(e?.district_id, e?.talaq_id,"country",e?.start_date,e?.end_date)
+    apiHit(e?.district_id, e?.talaq_id,"country")
     console.log(e?.start_date,e?.end_date,"datesssssssssssssss")
   
     }

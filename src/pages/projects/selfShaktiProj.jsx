@@ -245,10 +245,9 @@ export default function selfShaktiProj() {
                         <Grid style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }} >
                                Day 1 : {itm?.day1}</Typography>
-
-{/*                            
+                          
                             <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                            Day 2 : {itm?.day2}</Typography> */}
+                            Day 2 : {itm?.day2}</Typography> 
                             
                         </Grid>
                     </Card>)

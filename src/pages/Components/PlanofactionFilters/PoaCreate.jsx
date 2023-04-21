@@ -302,6 +302,7 @@ const tomorrow = dayjs().add(1, 'day');
     <Stack direction={'row'}>
 
 <DateTimePicker
+required
 id="date-time-picker" 
  defaultValue={today}
             minDate={today}

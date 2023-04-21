@@ -67,6 +67,7 @@ export default function Demography() {
     setOpenFilter(false);
   };
   const [demo, setDemo] = useState();
+  console.log("🚀 ~ file: Demography.jsx:70 ~ Demography ~ demo:", demo)
   useEffect(() => {
     demoi()
   }, []
@@ -83,6 +84,7 @@ export default function Demography() {
       partner_id: g ? "" : i === 1 ? id?.id : '',
       project_id: g ? "" : i === 3 ? id?.id : '',
       opsManager: g ? "" : i === 4 ? id?.id : '',
+      
     };
     const datas = {
       end_date: i,
@@ -126,9 +128,10 @@ export default function Demography() {
 
 
   const onSumbit = (e, i) => {
+    console.log("🚀 ~ file: Demography.jsx:130 ~ onSumbit ~ e:", e)
     setSelected({ type: 'Location', name: ` ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
     handleCloseFilter()
-    demoi(e?.district_id, e?.taluk_id, "country")
+    demoi(e?.district_id, e?.talaq_id, "country")
     console.log(e, i, "<----datssdasdsa")
   }
 
