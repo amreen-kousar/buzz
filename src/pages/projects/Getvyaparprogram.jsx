@@ -98,9 +98,10 @@ const GetVyaparformData=()=>{
          <Icon  icon="ic:twotone-fact-check" width={30} height={25} marginTop={5}  color="green"  />
         </IconButton>
         </Stack> 
+
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-    
-          <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+      <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
+          <Toolbar sx={{ bgcolor: '#ff7424' }}>
           
                         <IconButton style={{color:"white"}} onClick={handleClose}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
@@ -111,6 +112,7 @@ const GetVyaparformData=()=>{
        
          
           </Toolbar>
+          </AppBar>
       
      
         <Grid>

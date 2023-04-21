@@ -259,7 +259,7 @@ export default function PlanofAction() {
       <Typography id="plan-of-actions" variant="h4" style={{ margin: 2 }}>
         Plan Of Actions 
         {role == 1 || role == 3 || role == 4 || role == 12 || role == 13 || role == 11 ? (
-          <PoaTeam setUserId={(e) => setUserId(e)} setName={(e) => setName(e)} />
+          <PoaTeam setUserId={(e) => setUserId(e)} setName={(e) => setName(e)}  />
         ) : null}
         {console.log(userId, 'useridddddddd')}
         {console.log(name, 'nameeeeeeee')}

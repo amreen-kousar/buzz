@@ -346,6 +346,7 @@ axios(config)
         aria-describedby="scroll-dialog-description">
         {/* <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}> */}
       <form onSubmit={(e)=>{e.preventDefault(); SendData()}}>
+      <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
         <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
           <IconButton edge="start" sx={{ color: "inherit" }} onClick={handleClose} aria-label="close">
             <CloseIcon />
@@ -358,6 +359,7 @@ axios(config)
           <Iconify icon="material-symbols:save" width={30} height={30} />
           </Button>
         </Toolbar>
+        </AppBar>
         {/* <Webcam
     ref={webcamRef}
     screenshotFormat="image/jpeg"odimeter:"",
@@ -372,7 +374,7 @@ axios(config)
             <div style={{ margin: "1rem" }}>
 
 
-              <Stack style={{ marginTop: 20 }}>
+              <Stack style={{ marginTop: 90 }}>
                 <TextField id="outlined-basic" 
   inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading *" variant="outlined" color="common" 
                 />

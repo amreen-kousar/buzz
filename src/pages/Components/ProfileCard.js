@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import React from "react";
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import { Button, Stack, TextField, Grid, Divider, Box, Container } from '@mui/material';
@@ -31,6 +32,10 @@ import TableRow from '@mui/material/TableRow';
 import CloseIcon from '@mui/icons-material/Close';
 import Page from 'src/components/Page';
 import defaultImage from '../../assets/images/default.png';
+import { useNavigate } from 'react-router-dom';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import { DialogContent } from '@mui/material';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -45,9 +50,59 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
+function SimpleDialog(props) {
+  const { onClose, selectedValue, open } = props;
+  const navigate = useNavigate();
+  const logoutuser = (path) => {
+    //  localStorage.removeItem('userId')
+    // localStorage.removeItem('userDetails')
+    localStorage.clear()
+    navigate('/')
+
+  }
+  const loginuser = (path) => {
+    // navigate('/dashboard/app')
+    navigate(-1)
+  }
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
+
+  const handleListItemClick = (value) => {
+    onClose(value);
+  };
+  return (
+    <Dialog open={open} style={{ width: "100vw" }}>
+      <DialogTitle style={{ textAlign: "center" }}>Are You Sure?</DialogTitle>
+      <DialogContent>Do you want to logout?</DialogContent>
+      <div style={{ margin: "5px", textAlign: "center" }}> <Button id="No"
+        sx={{
+          ':hover': {
+            color: "#ffffff", bgcolor: "#ff7424"
+          },
+          color: "#ffffff", bgcolor: "#ff7424", borderRadius: "5px"
+        }} onClick={loginuser}>No</Button>&nbsp;&nbsp;&nbsp;
+        <Button sx={{
+          ':hover': {
+            color: "#ffffff", bgcolor: "#ff7424"
+          },
+          color: "#ffffff", bgcolor: "#ff7424"
+        }} onClick={logoutuser} id="yes">Yes</Button>
+      </div>
+    </Dialog>
+  );
+}
+
+SimpleDialog.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  //   selectedValue: PropTypes.string.isRequired,
+};
+
 export default function RecipeReviewCard({ profileData, changeUser }) {
   const [expanded, setExpanded] = React.useState(false);
   const userDetails = JSON.parse(localStorage.getItem('userDetails'))
+  const [open, setOpen] = React.useState(false);
   const [count, setCount] = React.useState('');
   const [editData, setEditData] = useState({
     firstName: profileData?.first_name,
@@ -95,6 +150,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       lastUpdatedBy: profileData?.id
     })
   }, [profileData])
+ 
   const handleExpandClick = () => {
     setExpanded(true);
   };
@@ -105,6 +161,15 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
+  
   console.log(profileData?.address3,"addresssssssss")
   const editProfile = async => {
     // console.log(editData,"<----editProfileeditProfile")
@@ -164,6 +229,15 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
           <Typography variant="h5" gutterBottom>
             Profile 
           </Typography>
+
+          <IconButton >
+                   <Iconify sutofocus icon="material-symbols:exit-to-app"  sx={{ float: "right", marginLeft: 85 }}  onClick={handleClickOpen} />
+                   <SimpleDialog
+        // selectedValue={selectedValue}
+        open={open}
+        onClose={handleClose}
+      />
+                    </IconButton>
          
         </Stack>
      

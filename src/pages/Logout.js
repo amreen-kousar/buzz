@@ -7,6 +7,7 @@ import { DialogContent } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
+
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
   const navigate = useNavigate();

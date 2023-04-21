@@ -406,6 +406,7 @@ const handleresources=(label,event)=>{
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         
       <form onSubmit={(e)=>{e.preventDefault();greensurveyformdata()}}>
+      <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
           <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
           
        
@@ -421,6 +422,7 @@ const handleresources=(label,event)=>{
           </Button>
           
               </Toolbar>
+              </AppBar>
      
        
         <Grid>
@@ -440,7 +442,7 @@ const handleresources=(label,event)=>{
   <Card>
 
     <CardContent>
-      <Card mt={1} style={{backgroundColor: '#F6F8FB'}}>
+      <Card mt={1} style={{backgroundColor: '#F6F8FB',  marginTop: 50 }}>
         <CardContent>
           <Typography style={{color:"#ff7424"}}>Email *</Typography>
           <Stack mt={2} mb={2}>

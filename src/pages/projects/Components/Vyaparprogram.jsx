@@ -372,6 +372,7 @@ const [sendData,setSendData] = useState({
         </Stack> 
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
       <form onSubmit={(e)=>{e.preventDefault(); vyaparformdata()}}>
+      <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
           <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           
                         <IconButton style={{color:"white"}} onClick={handleClose}>
@@ -388,6 +389,7 @@ const [sendData,setSendData] = useState({
        
          
           </Toolbar>
+          </AppBar>
       
      
         <Grid>
@@ -407,7 +409,7 @@ const [sendData,setSendData] = useState({
      
             <CardContent>
             
-            <Card style={{ marginTop: 20,  borderRadius: 20 }}>
+            <Card style={{ marginTop: 50,  borderRadius: 20 }}>
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Name of the GF / ಗೆಲತಿಯ ಹೆಸರು *</Typography>
                   <Stack mt={2} mb={2}>

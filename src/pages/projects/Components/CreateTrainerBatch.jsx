@@ -144,7 +144,7 @@ console.log(data,"data")
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+        <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton
               edge="start"
@@ -173,14 +173,14 @@ console.log(data,"data")
             </Stack>
           </CardContent>
         </Card> */}
-      <DialogContentText style={{ marginLeft: 20 ,marginTop: 20}}>
+      <DialogContentText style={{ marginLeft: 20 ,marginTop: 80}}>
       <Typography>Project&nbsp;:&nbsp; {props?.data1?.project_name}</Typography>
         <Typography> Partner &nbsp;:&nbsp; {props?.data1?.partnerName}</Typography>
       </DialogContentText>
      
         
        
-        <Stack mt={3}>
+        <Stack mt={3} style={{ marginTop: 50 }}>
           {console.log(trainerData, "><0khjhgbfd")}
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label" color="common">Select Village</InputLabel>

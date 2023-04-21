@@ -63,6 +63,7 @@ export default function PoaCreate(props) {
   const today = dayjs();
 const tomorrow = dayjs().add(1, 'day');
 
+
   const [newForm , setNewForm] = useState(false)
   const handleChange2 = (event) => {
     console.log(event, '<--jyhfgd');
@@ -302,14 +303,15 @@ const tomorrow = dayjs().add(1, 'day');
     <Stack direction={'row'}>
 
 <DateTimePicker
+required
 id="date-time-picker" 
  defaultValue={today}
             minDate={today}
-  required
   label="From"
   value={addData?.date}
   onChange={(e) => { handleChange(e) }}
-  renderInput={(params) => <TextField {...params} color="common" />}
+  
+  renderInput={(params) => <TextField required {...params} color="common" />}
 />
 
 </Stack><br/>
