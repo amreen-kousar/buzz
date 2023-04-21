@@ -168,6 +168,11 @@ export default function TravelDialog({ viewMessage }) {
   }
 
   const postImages = async () => {
+    if(image.length === 0){
+      console.log("🚀 ~ file: TravelDialog.jsx:172 ~ postImages ~ image.length:", image.length)
+      alert("No photos to upload.")
+      throw new Error('No photos to upload.');
+    }
     var dataImage = []
     const form = new FormData()
     form?.append("emp_id", 651)

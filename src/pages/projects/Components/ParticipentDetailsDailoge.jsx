@@ -18,24 +18,29 @@ import {
     RadioGroup,
     Card,
     CardContent,
+    Dialog,
+    Toolbar,
 } from '@mui/material';
 // components
+import CloseIcon from '@mui/icons-material/Close';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 
-ParticipantDrawer.propTypes = {
+ParticipentDetailsDailoge.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
 };
 
-export default function ParticipantDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
+export default function ParticipentDetailsDailoge({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
+console.log("🚀 ~ file: ParticipentDetailsDailoge.jsx:37 ~ ParticipentDetailsDailoge ~ onOpenFilter:", clcikData)
 // console.log(batch,'<------clcikDataclcikData')
      const [session,setSession] = useState('')
      const [partiData,setpartiData] = useState('')
+     console.log("🚀 ~ file: ParticipentDetailsDailoge.jsx:43 ~ ParticipentDetailsDailoge ~ partiData:", partiData)
     useEffect(() => {
         Participant();
         // console.log(clcikData)
@@ -71,22 +76,28 @@ export default function ParticipantDrawer({ isOpenFilter, onOpenFilter, onCloseF
 console.log(partiData,"------------------------------>dataaaaa")
     return (
         <>
-            <Drawer
+            <Dialog
+                //   maxWidth={false}
+                //   fullWidth={true}
                 anchor="right"
+                fullScreen
                 open={isOpenFilter}
                 onClose={onCloseFilter}
-                PaperProps={{
-                    sx: { width: 350, },
-                }}
+                // PaperProps={{
+                //     sx: { width: '100%', },
+                // }}
             >
-                <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-                    <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                        {`${clcikData?.title}`}
-                    </Typography>
-                    {console.log(clcikData,'<------clcikDataclcikData')}
-                    <IconButton onClick={onCloseFilter}>
-                        <Iconify icon="eva:close-fill" width={20} height={20} />
+                                <Toolbar sx={{ color: "#ffffff", backgroundColor: "#ff7424" }}>
+                    <IconButton edge="start" color="inherit" onClick={onCloseFilter}aria-label="close">
+                        <CloseIcon />
                     </IconButton>
+                    <Typography id="add-new-bus" sx={{ ml: 2, flex: 1, color: "#ffffff" }} variant="h6" component="div" >
+                    Participant Details
+                    </Typography>
+                </Toolbar>
+                <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
+
+    
                 </Stack>
 
                 <Divider />
@@ -186,7 +197,7 @@ console.log(partiData,"------------------------------>dataaaaa")
 
                     </Stack>
                 </Scrollbar>
-            </Drawer>
+            </Dialog>
         </>
     );
 }

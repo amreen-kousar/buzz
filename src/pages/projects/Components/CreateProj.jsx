@@ -52,8 +52,9 @@ export default function CreateProj({ createPro, setCreatePro, sendData, viewMess
   const [driverData, setDriverData] = useState([])
   const [deleteData, setDeleteData] = useState([])
 const [createProj ,setCreateProj] = useState(true)
+const [assproject,setAssproject]=useState([])
 const [isReload , setIsReload]= useState(false)
-  
+  const [Gf,setGf]=useState([]);
    
 // console.log(formatDate(sendData?.startDate),"startdateeeeeeeeeee")
   console.log(sendData?.trainers,"<-----dascascascascsacascsaascasa",sendData?.gelathiFacilitator)
@@ -88,10 +89,10 @@ const [isReload , setIsReload]= useState(false)
 
 setShowAddBuss(false)
     partnerList();
-   
+    Associateproject();
     teamList();
     driverList();
-    setNotify(true)
+    setNotify(true);
   }, [])
 
 
@@ -103,7 +104,8 @@ setShowAddBuss(false)
       operations_manager_id: sendData.operations_manager_id,
       driver_id: sendData.driverId,
       training_target:sendData.training_target,
-      project_id:sendData.project_id
+      project_id:sendData.project_id,
+      gfl_id:sendData.gfl_id
 
     }
     setData(tempdata)
@@ -154,6 +156,7 @@ setShowAddBuss(false)
       .then(function (response) {
         console.log(response.data, "teamlist opers")
         setTeamData(response.data)
+       
       })
       .catch(function (error) {
         console.log(error);
@@ -176,6 +179,36 @@ setShowAddBuss(false)
         console.log(error);
       });
   }
+var userdata = localStorage?.getItem('operations_manager_id')
+  useEffect(() => {
+    Gfl();
+  },[userdata])
+  const Gfl = async=>{
+    
+  var data = JSON.stringify({
+  "user_id": userdata
+  });
+
+var config = {
+  method: 'post',
+  url: 'https://bdms.buzzwomen.org/appTest/new/getgfl.php',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+  setGf(response.data.gfl_list);
+})
+.catch(function (error) {
+  console.log(error);
+});
+  
+  }
+  console.log(Gf,"gflllllll")
   // const showTrainerList = async => {
   //   var gelathidata = JSON.stringify({
   //     "role_id": 13,
@@ -262,7 +295,39 @@ setShowAddBuss(false)
   //     </Button>
 
   // }
- 
+
+  console.log(data?.operations_manager_id,"operationmnageriddddddddddd")
+  useEffect(()=>{
+     Associateproject()
+  },[data?.operations_manager_id])
+  const Associateproject=()=>{
+    var associatedata = JSON.stringify({
+      "oprMgrId": 9,
+      "locationId": 43,
+      "funderId": 5,
+      "projectId": 180
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getProjectsListToAssociate.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      associatedata : associatedata
+    };
+    console.log(associatedata,"associatedata")
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setAssproject(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  }
+ console.log(assproject,"associteprojectssssssssssss")
   { console.log(data, "i am visible while changing", edit) }
 
   const createProject2 = () => {
@@ -288,6 +353,7 @@ setShowAddBuss(false)
     formdata.append('end_date', moment(data.end_date)?.format('DD-MM-YYYY'))
     formdata.append('busID', data.bus_id)
     formdata.append('driverID', data.driverId)
+    formdata.append("gfl_id",data.gfl_id)
     formdata.append("operations_manager_id", data.operations_manager_id)
     formdata.append("locationID", data.location_id)
     formdata.append("location_name", data.location_name),
@@ -335,6 +401,7 @@ setShowAddBuss(false)
      formdata.append('busID', data.bus_id)
      formdata.append('driverID', data.driverId)
      formdata.append("operations_manager_id", data.operations_manager_id)
+     formdata.append("gfl_id",data.gfl_id)
      formdata.append("locationID", data.location_id)
      formdata.append("location_name", data.location_name),
      formdata.append("", "")
@@ -395,6 +462,7 @@ const mainShowBussHandler = ()=>{
   // setShowAddBuss(true)
   //   console.log("navigation is calling ")
   //  }
+
   return (
     <div>
       {
@@ -497,6 +565,7 @@ const mainShowBussHandler = ()=>{
               <Stack>
                 <CardContent>
                   <TextField id="start-date" type="date"
+                  required
                    // defaultValue={dayjs(data?.start_date)}
                    defaultValue={data?.start_date}
                     style={{ width: '20vw' }}
@@ -510,7 +579,7 @@ const mainShowBussHandler = ()=>{
                       setData({ ...data, start_date: e?.target?.value })
                     }} />
 {/* {console.log(dayjs( moment(data?.endDate)?.format()),moment(data?.endDate)?.format('YYYY-MM-DD'),new Date(data?.endDate),data?.endDate,"<-- defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}",data?.end_date,data?.start_date)} */}
-                  <TextField id="end-date" type="date"
+                  <TextField id="end-date" type="date" required
                 defaultValue={data?.end_date?dayjs( moment(data?.end_date)?.format('DD-MM-YYYY')):dayjs( moment(data?.endDate)?.format('DD-MM-YYYY'))}
                     style={{ width: '20vw', marginLeft: "2rem" }}
                     value={data.end_date}
@@ -555,7 +624,7 @@ const mainShowBussHandler = ()=>{
               {/* <div style={{display:"flex"}}> */}
               <Stack >
                 <CardContent style={{padding:"9px"}} >
-                {/* <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography> */}
+                <Typography  style={{ width: '20vw' }}variant="h6">Resources</Typography>
               <Button onClick={addBusHandler} id="add new bus" style={{ width: '20vw', marginLeft: "80%", marginTop:"-41px" ,backgroundColor: '#ed6c02', color:"white" }}>Add New Bus</Button>
                 </CardContent>
               </Stack>
@@ -605,6 +674,7 @@ const mainShowBussHandler = ()=>{
                     defaultValue={data.operations_manager_id}
                 
                     value={data.operations_manager_id}
+                    
                     label="Select Operation Manager"
                     onChange={(e => {
                       setData({ ...data, operations_manager_id: e?.target?.value });
@@ -645,12 +715,62 @@ const mainShowBussHandler = ()=>{
                     })
                     }
                   </Select>
-                </FormControl></Stack>
+                </FormControl></Stack> 
+
+                <Stack mt={3}>
+                <FormControl fullWidth>
+                  <InputLabel id="driver">Select Gelathi Facilitator Leads</InputLabel>
+                 {(Gf?.length>0)? <Select
+                    id="select_GF"
+                    value={data.gfl_id}
+                    defaultValue={data.gfl_id}
+                    label="Select Gelathi Facilitator Lead"
+                    onChange={(e => {
+                      setData({ ...data, gfl_id: e?.target?.value })
+                      // driverList(e?.target?.value)
+                    })}
+                  >
+                    <MenuItem id="Choose Gelathi Facilitator Lead" value="" default disabled>Choose Gelathi Facilitator Lead</MenuItem>
+                    {Gf?.map(itm => {
+                      return (
+                        <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
+                      )
+                    })
+                    }
+                  </Select>:<Select label="Select Gelathi Facilitator Lead"><MenuItem id="Select Gelathi Facilitator Lead" value="" disabled>No Gelathi Facilitator Lead</MenuItem></Select>}
+                </FormControl></Stack>  
+
+                {/* <Stack mt={3}>
+                <FormControl fullWidth>
+                  <InputLabel id="associate_project_value">Select Associate Project</InputLabel>
+                  <Select 
+
+                    // labelId="demo-simple-select-label"
+                    id="select-associate-project"
+                    defaultValue={data.operations_manager_id}
+                
+                    value={data.operations_manager_id}
+                    label="Select Associate Project"
+                    onChange={(e => {
+                      setData({ ...data, operations_manager_id: e?.target?.value });
+                      localStorage.setItem("operations_manager_id", e?.target?.value)
+                    })}
+                  >
+                    <MenuItem id="associate-project" value="" default disabled>Select associate Project</MenuItem>
+                    {assproject?.data?.map(itm => {
+                      return (
+                        <MenuItem value={itm?.id}>{itm?.projectName}</MenuItem>
+                      )
+                    })
+                    }
+                  </Select>
+                </FormControl ></Stack > */}
+
             </CardContent>
             <Divider />
             {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}> */}
             {/* {console.log(sendData,"senddataaaaaaaaaaaa")} */}
-            {data?.operations_manager_id && <AddTrainerDrawer
+            {data?.operations_manager_id && <AddTrainerDrawer id="add_trainers"
               isOpenFilter={openFilter}
               getData={(e) => { setName(e) }}
               operations_manager_id={data.operations_manager_id}
@@ -660,7 +780,7 @@ const mainShowBussHandler = ()=>{
               onCloseFilter={handleCloseFilter}
             />}
             {console.log(name,"namessssssssssssss",sendData)}
-            {data?.operations_manager_id && <AddGelathifacilitators
+            {data?.operations_manager_id && <AddGelathifacilitators id="add_gelathifacilitators"
               sendData={sendData}
               isOpenFilter={opengelathiFilter}
               operations_manager_id={data.operations_manager_id}

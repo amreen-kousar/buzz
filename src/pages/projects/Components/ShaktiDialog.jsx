@@ -22,16 +22,20 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import AddParticipants from './AddParticipants'
+import ParticipentDetailsDailoge from './ParticipentDetailsDailoge';
+import axios from 'axios';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function ShaktiDialog({ shown, setShown, batch }) {
-  // console.log(batch, '<--------shownshownshown')
+  console.log(batch, '<--------shownshownshown')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
+  console.log("🚀 ~ file: ShaktiDialog.jsx:35 ~ ShaktiDialog ~ clcikData:", clcikData)
 
+  const [checkData,setCheckData]=React.useState('');
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -44,7 +48,8 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
     //setShown(shown)
-    setOpen(shown)
+    setOpen(shown);
+   
   }, [shown])
 
   const handleClickOpen = () => {
@@ -56,7 +61,39 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
     setShown(false)
     setOpen(false);
   };
+  React.useEffect(() => {
+    //setShown(shown)
+    GetStatus();
+   
+  }, [batch])
 
+  const GetStatus = async=>{
+    var data = JSON.stringify({
+      "project_id": batch?.data?.project_id,
+      "poa_type": 1,
+      "type": 2,
+      "tb_id": batch?.data?.id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data),"dataaaaaaaaaaaa");
+      setCheckData(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+console.log(checkData,"checkedta")
   return (
     <div>
       <Dialog
@@ -81,7 +118,8 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               Add Participants
             </Button> */}
-            <AddParticipants batch={batch} />
+            {console.log(checkData,"addparticipants")}
+            <AddParticipants batch={batch} checkData={checkData}/>
 
           </Toolbar>
         </AppBar>
@@ -91,6 +129,7 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
             <TableContainer component={Paper} sx={{width:'50vw'}}>
           <Table aria-label="customized table">
            
+           <ParticipentDetailsDailoge/>
             <TableBody>
               
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Project </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.projectName}</TableCell></TableRow>
@@ -113,8 +152,14 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
         </Stack>
         {/* <Typography variant="subtitle1"> ALl Participants</Typography> */}
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <ParticipantDrawer
+          {/* <ParticipantDrawer
         
+            clcikData={clcikData}
+            isOpenFilter={openFilter}
+            onOpenFilter={handleOpenFilter}
+            onCloseFilter={handleCloseFilter}
+          /> */}
+          <ParticipentDetailsDailoge
             clcikData={clcikData}
             isOpenFilter={openFilter}
             onOpenFilter={handleOpenFilter}
@@ -126,7 +171,8 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
             <Stack style={{ top: 100 }}>
               <Card onClick={() => {
                 handleOpenFilter()
-                setClickData({ name: itm.gelathiname, title: "Enrolled  Name" })
+                setClickData({ name: itm.gelathiname, title: "Enrolled  Name",id:itm?.participant_id})
+                console.log("🚀 ~ file: ShaktiDialog.jsx:139 ~ ShaktiDialog ~ itm?.id:", itm?.id)
                 
               }}>
                 <CardContent >
@@ -138,7 +184,7 @@ export default function ShaktiDialog({ shown, setShown, batch }) {
                     </div>
                   </CardActions>
 
-                  {console.log(itm?.participant_name, '<----------itm?.participant_name')}
+                  {console.log(itm, '<----------itm?.participant_name')}
                 </CardContent>
               </Card>
             </Stack>

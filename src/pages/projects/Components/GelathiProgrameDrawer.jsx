@@ -80,7 +80,7 @@ const [viewImage, setViewImage] = React.useState(false);
   const localstoragrClickData = localStorage.getItem('clcikData');
   const userName = JSON.parse(localStorage.getItem('userDetails'))?.first_name;
   console.log("userNAme in localstorage", userName)
-
+const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
   useEffect(()=>{
     setImages([])
     // setGetAllNotes([])
@@ -150,7 +150,10 @@ const convertImage = (e) => {
   }
   // sending image we need to 
   const UploadImages = async () => {
-   
+    if (images.length === 0) {
+      alert("No photos to upload.")
+      throw new Error('No photos to upload.');
+    }
     var raw = JSON.stringify({
       project_id:session.project_id,
       gf_session_id:session.id,
@@ -203,7 +206,8 @@ const convertImage = (e) => {
   };
 
   const noteSubmitHandler = () => {
-    setShowNote(false);
+
+    
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
 
@@ -239,8 +243,8 @@ const convertImage = (e) => {
         console.log(error, 'failed');
       });
     console.log('submit');
-  };
 
+  }
   const getNoteHandler = () => {
     console.log('getNoteHandler');
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
@@ -356,12 +360,12 @@ const convertImage = (e) => {
         open={isOpenFilter}
         onClose={onCloseFilter}
         PaperProps={{
-          sx: { width: 380 },
+          sx: { width: 400 },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="body1" sx={{ ml: 1 }}>
-            {`${session?.type_name}`} 
+          {(session?.type_name=='Circle Metting')? "Circle Meeting" :(session?.type_name)}
            
           </Typography>
           {console.log(clcikData, '<------clcikDataclcikData')}
@@ -406,7 +410,7 @@ const convertImage = (e) => {
 
 
                   <Typography variant="body1" gutterBottom>
-                    Training&nbsp;Batch:&nbsp;{session?.training_batch_name}
+                    {(session?.type_name=='Circle Metting')? "Circle Meeting" :(session?.type_name)} : <br/>{session?.gf_session_name}
                   </Typography>
 
                   <Typography variant="body1" gutterBottom>
@@ -512,7 +516,7 @@ const convertImage = (e) => {
               {/* </Card>  */}
 
               {/* IMAGE UPLOAD  */}
-              <Card style={{marginTop:20}}>
+             {(userId==6 || userId==13 || userId==1 || userId==3)? <Card style={{marginTop:20}}>
 <div style={{ display: 'flex' }}>
                 {viewImage
                   ? images.map((i, index) => {
@@ -574,7 +578,7 @@ const convertImage = (e) => {
                 }
               </CardContent>
             </Card> */}
-</Card>
+</Card>:null}
 
               <Card style={{ marginTop: 20 }}>
                 <CardContent>
@@ -606,14 +610,15 @@ const convertImage = (e) => {
                       variant="outlined"
                       onChange={async (e) => {
                         let note = await e?.target?.value;
-                        if(note.length <= 0){
-                          alert("Text cannot be empty")
-                          setSaveBtn(false)
-                        }
-                        else{
-                          setGelatiNote(e?.target?.value);
-                          setSaveBtn(true)
-                        }
+                        // if(note.length <= 0){
+                        //   alert("Text cannot be empty")
+                        //   setSaveBtn(false)
+                        // }
+                        // else{
+                        //   setGelatiNote(e?.target?.value);
+                        //   setSaveBtn(true)
+                        // }
+                        setSaveBtn(true)
                         setGelatiNote(e?.target?.value);
                         console.log('note', gelatiNote);
                       }}
@@ -622,8 +627,9 @@ const convertImage = (e) => {
                     
                     <>
                      <Button
-                      style={{ backgroundColor: '#ff7424',color:"white", marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
                       onClick={noteSubmitHandler}
+                      disabled={gelatiNote.trim()===""}
                     >
                       Save
                     </Button> 

@@ -26,7 +26,8 @@ export default function AssignBatches(){
     const [villages, setVillages] = useState('');
     const [batch,setBatch] = useState('');
     const [tc, setTc] = useState('');
-    let [alloted,setAlloted]=useState(0)
+    var [alloted,setAlloted]=useState(0)
+    console.log("🚀 ~ file: AssignBatches.jsx:30 ~ AssignBatches ~ alloted:", alloted)
     const [item,setItem]=useState('')
    const [selected,setSelected]=useState([])
 
@@ -129,20 +130,34 @@ const villagelist= async(itm) =>{
     
 }
 
-const CreateBatch= async(itm) =>{
+
+
+
+const CreateBatch= async(itm,i) =>{
+  
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   selected.push(itm?.training_batch_id)
   setSelected(selected)
-  console.log(itm,"createbatchhhhhh")
+  // console.log(itm,"createbatchhhhhh")
   var data = JSON.stringify({
      
      "project_id":data1?.project_id, 
      "training_batch_id":itm?.training_batch_id,
       "emp_id":item?.emp_id
     });
-console.log(alloted,selected)
-      
-  setAlloted(alloted=>parseInt(alloted)+1)    
+    villages.list[i].flag = 1;
+    setVillages(villages)
+    // console.log(villages.list[i], "villagelist");
+    setAlloted(alloted?alloted+1:1)
+    // await new Promise((resolve) => {
+    //   setAlloted((alloted) => {
+    //     const newAlloted = parseInt(alloted) +1 || alloted.length > 0;
+    //     resolve(newAlloted);
+    //     return newAlloted;
+    //   }); 
+    // });
+    
+    
   {console.log(alloted,"countttttttt")}
     var config = {
       method: 'post',
@@ -163,14 +178,26 @@ console.log(alloted,selected)
     
 }
 
-const changeFlag=(itm,i)=>{
+// const removeFlag=(itm,i)=>{
 
-  console.log(itm,"villagessssssssss")
-  villages.list[i].flag=0;
-  console.log(villages.list[i],"villagelist")
-  setAlloted(alloted=>parseInt(alloted)-1) 
+//   console.log(itm,"villagessssssssss")
+//   villages.list[i].flag=0;
+//   console.log(villages.list[i],"villagelist")
+//   if(alloted.length==0){
+//     setAlloted(alloted=>parseInt(alloted)+1 ) 
+//   }else{
+
+//     setAlloted(alloted=>parseInt(alloted)-1 || alloted.length> 0 ) 
+//   }
      
-}
+// }
+const removeFlag = async (itm, i) => {
+  console.log(i, "villagessssssssss");
+  villages.list[i].flag = 0;
+  setVillages(villages)
+  // console.log(villages.list[i], "villagelist");
+  setAlloted(alloted?alloted-1:0)
+};
 
 console.log(alloted,"allottedddddddddddddddddd")
     return(
@@ -208,6 +235,8 @@ console.log(alloted,"allottedddddddddddddddddd")
                   </Stack>
                 </CardContent>
           </Card><br/>
+
+          
        
                      {(gl)?<Typography gutterBottom style={{textAlign:'center'}}>
                      Total Villages: {alloted}/{tc}
@@ -233,16 +262,21 @@ console.log(alloted,"allottedddddddddddddddddd")
                     <TableBody>
                       <TableRow >
                         <TableCell> <Iconify icon="mdi:car-sports-utility-vehicle" style={{float:'left',margin:5,display:'flex',fontSize:20, color:'black'}}/> 
-                        <Typography value={itm?.training_batch_id}>{itm?.name}
+                        <Typography value={itm?.training_batch_id}>{itm?.name} 
+                        {/* (selected.includes(itm?.training_batch_id)) ||  */}
                         
-                        
-                        {(selected.includes(itm?.training_batch_id)) || (itm?.flag=='1')?<IconButton  style={{float:'right'}} onClick={()=>changeFlag(itm,i)}>
-                         {/* {console.log(itm,"itemvalue")} */}
+                    {
+                    
+                    
+                    
+                    (['1',1].includes(villages?.list[i]?.flag))?<IconButton  style={{float:'right'}} onClick={()=>removeFlag(itm,i)}>
+                         {console.log(villages.list[i]?.flag,"flag value now")}
+
                           <Iconify icon="typcn:tick" style={{fontSize:20,color:"green"}}/>
                         </IconButton>:
-                        (itm?.flag=='0')?<IconButton onClick={()=>CreateBatch(itm)} style={{float:'right'}}>
+                        (['0',0].includes(villages.list[i]?.flag))?<IconButton onClick={()=>CreateBatch(itm,i)} style={{float:'right'}}>
                           <Iconify icon="material-symbols:add-circle-rounded" style={{fontSize:20,color:"	#0ad5ee"}}/>
-                        </IconButton>:null}
+                        </IconButton>:console.log(itm?.flag,"itemmmm flaaggg")}
                           
                         </Typography>
                        

@@ -36,7 +36,7 @@ const GalathiChart = (props) => {
             isAnimationActive={false}
             cursor={{fill: 'transparent', border: 'none',backgroundColor: 'none',}}
             contentStyle={{
-              backgroundColor: 'none',
+              backgroundColor: '#fff',
               boxShadow: 'none',
               border: '0px',
               borderRadius: '10px',
@@ -44,6 +44,7 @@ const GalathiChart = (props) => {
               color: '#fff'
             }}
             labelStyle={{ color: '#fff' }}
+            
           />
         </PieChart>
       </ResponsiveContainer>

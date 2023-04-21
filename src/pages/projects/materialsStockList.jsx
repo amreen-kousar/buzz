@@ -13,6 +13,7 @@ import Paper from '@mui/material/Paper';
 import Page from 'src/components/Page';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 import { AltRouteTwoTone } from '@mui/icons-material';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -189,14 +190,26 @@ console.log(materialStock , " chnaged data")
         axios(config)
         .then(function (response) {
          if(response.status == 200){
-          setClose(false)
-          
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: response.data.message,
+            confirmButtonText: 'Ok',
+            timer: 2000
+          });
          demoi()
           console.log("susscesfully added data material")
          }
          
         })
         .catch(function (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: response.data.message,
+            confirmButtonText: 'Ok',
+            timer: 2000
+          });
           console.log(error , "failed");
         });
         console.log("submit")
