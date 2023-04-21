@@ -226,40 +226,41 @@ function Project(props) {
         >
           <ExpandMoreIcon />
         </ExpandMore>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout="auto" unmountOnExit> 
                   {data1?.projectPeoplesList?.map((item, index) =>
                     <Card value={item?.emp_id} style={{ cursor: 'pointer', margin: 10, padding: 10 }} onClick={() => viewUser(item, index)}>
                       <span style={{ fontWeight: 700 }}>{item.emp_name}
                         <Iconify style={{ color: "black", float: 'right', width: 20, height: 20 }} icon="fluent:notebook-eye-20-filled" />
                       </span><br></br>{item?.role}&nbsp;</Card>
-                  )}</Collapse>
+                  )}
+                  </Collapse>
                 </CardContent>
 
               </Card>:null }
                 {(userDetails==12)?<>
 
-                  <Card  value={data1?.operations_manager_id} style={{ cursor: 'pointer', margin: 20, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.operations_manager_id)} >
+                  <Card  value={data1?.operations_manager_id} sx={{width:"95%"}}  style={{ cursor: 'pointer', marginLeft: 4, margin: 20, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.operations_manager_id)} >
                     <span  >
                       {data1?.operations_manager_name} <Iconify style={{ color: "black", float: 'right', width: 20, height: 20}} icon="material-symbols:add" />
                     </span></Card>
 
-                  <Card style={{ cursor: 'pointer', margin: 20, paddingTop: 16, paddingBottom: 15, borderRadius: 0,paddingLeft:6}} >
+                  <Card sx={{width:"95%"}} style={{ cursor: 'pointer', margin: 20,  marginLeft: 4, paddingTop: 16, paddingBottom: 15, borderRadius: 0,paddingLeft:6}} >
                     <span>   MY POA
                       <Iconify style={{ color: "black", float: 'right', width: 20, height: 20 }} icon="material-symbols:add" />
                     </span></Card>
 
-                  <Card style={{ cursor: 'pointer', margin: 20, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }}  >
-                    <span style={{ display: 'flex', position: 'relative' }}>   Trainers({data1?.trainers_count}) <Trainerslist />
-
+                  <Card sx={{width:"95%"}} style={{ cursor: 'pointer', margin: 20,  marginLeft: 4, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }}  >
+                    <span >   Trainers({data1?.trainers_count}) <Trainerslist />
+                    <Iconify style={{ color: "black", float: 'right', width: 20, height: 20 }} icon="material-symbols:add" />
                     </span></Card>
 
 
-                  <Card style={{ cursor: 'pointer', margin: 20, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} >
-                    <span style={{ display: 'flex', position: 'relative' }}> Gelathi Facilitators({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />
-
+                  <Card sx={{width:"95%"}} style={{ cursor: 'pointer', margin: 20,  marginLeft: 4, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6, paddingRight: 1 }} >
+                    <span> Gelathi Facilitators({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />
+                    <Iconify style={{ color: "black", float: 'right', width: 20, height: 20 }} icon="material-symbols:add" />
                     </span></Card>
 
-                  <Card style={{ cursor: 'pointer', margin: 20, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.driverId)} >
+                  <Card sx={{width:"95%"}} style={{ cursor: 'pointer', margin: 20,  marginLeft: 4, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.driverId)} >
                     <span>Driver: {data1?.driver_name}
                       <Iconify style={{ color: "black", float: 'right',right:10, width: 20, height: 20 }} icon="material-symbols:add" />
                     </span></Card>
