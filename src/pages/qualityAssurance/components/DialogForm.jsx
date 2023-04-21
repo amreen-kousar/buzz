@@ -93,7 +93,7 @@ export default function DialogForm({ shown, setShown, batch }) {
           <Card>
             <CardContent>
               <Stack>
-                <Typography mt={3} variant="h6" color="primary">% of Women With increased Self Esteem </Typography>
+                <Typography mt={3} variant="h6" color="primary">Percentage of Women With increased Self Esteem </Typography>
               </Stack>
               <Stack>
                 <Typography mt={2} variant="body2">1. Email</Typography>
@@ -129,7 +129,7 @@ export default function DialogForm({ shown, setShown, batch }) {
              
           &nbsp;
               <Stack>
-                <Typography style={{fontWeight:500}} color="primary">
+                <Typography mt={3} variant="h6" color="primary">
                   Number of Women Work Toward Their Goal and Continuosly Track It Using The Buzz Self Assessment Tools Women
                   Who Have Goal
                 </Typography>
