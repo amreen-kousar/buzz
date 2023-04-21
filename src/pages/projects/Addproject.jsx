@@ -290,7 +290,7 @@ function AddProject({ viewMessage }) {
                                 <MenuItem value="" default disabled>Select State </MenuItem>
                                 {states?.map(itm => {
                                     return (
-                                        <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                                        <MenuItem value={itm?.id} >{itm?.name}</MenuItem>
                                     )
                                 })
                                 }

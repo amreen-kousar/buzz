@@ -34,6 +34,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import moment from 'moment';
 import EditGelathiSession from './EditGelathisession';
+import AddEnrollGelathi from './AddEnrolledGelathi';
+import AddGreenMotivators from './AddGreenMotivators';
+import AddEnrollVyapar from './AddenrolleVyapar';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 
@@ -150,15 +153,16 @@ const convertImage = (e) => {
   }
   // sending image we need to 
   const UploadImages = async () => {
+    setISLoading(true)
     if (images.length === 0) {
       alert("No photos to upload.")
       throw new Error('No photos to upload.');
     }
     var raw = JSON.stringify({
-      project_id:session.project_id,
-      gf_session_id:session.id,
-      gelathi_id:session.user_id,
-        photos: images.toString().slice(22,)
+      "project_id":session.project_id,
+      "gf_session_id":session.id,
+      "gelathi_id":session.user_id,
+      "photos": [images.toString().slice(22,)]
     })
 
    
@@ -171,7 +175,6 @@ const convertImage = (e) => {
     let res = fetch('https://bdms.buzzwomen.org/appTest/uploadGFSessionPhotos.php', requestOptions)
       .then((itn) => {
         console.log(itn, '<--itemgh');
-        getGFSessionData()
         setImages([])
         alert("Image uploaded successfully..")
         setISLoading(false)
@@ -184,6 +187,7 @@ const convertImage = (e) => {
   const getGFSessionData = (async) => {
     var data = JSON.stringify({
       gf_session_id: clcikData?.name,
+      user_id:session?.user_id
     });
 
     var config = {
@@ -450,70 +454,8 @@ const convertImage = (e) => {
                 </CardContent>
               </Card>
 
-              {/* <Card style={{ marginTop: 20 }}>
-              <div style={{ display: "flex" }}>
-                  {
-                    viewImage ?
-                    images.map((i, index) => {
-                        return <div style={{ display: "flex", margin: "1rem" }}>
-                          <img src={i} style={{ height: "50px", width: "70px" }} alt="hello" />
-                          <Iconify
-                            onClick={() => { deleteImage(index) }}
-                            icon={'typcn:delete'}
-                            sx={{ width: 16, height: 16, ml: 1, color: "red" }}
-                          />
-                        </div>
-                      }) : null
-                  }
-                </div>
-                <div style={{ display: 'flex', marginTop: '20px' }}>
-                  <div>
-                    <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
-                      <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
-                      &nbsp; Photos
-                      <input
-                        style={{ display: 'none' }}
-                        accept="image/png, image/gif, image/jpeg"
-                        id="inputTag"
-                        type="file"
-                        onChange={(e) => {
-                          convertImage(e);
-                        }}
-                      />
-                    </label>
-                  </div>
-                  <div>
-                    {/* <Button onClick={postImages} style={{ color: 'black', marginLeft: '125px', marginTop: '-12px' }}>
-                      {' '}
-                      <IconButton>
-                        <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
-                      </IconButton>
-                    </Button> */}
-                     {/* <Button onClick={postImages} 
-                sx={{
-                  '&:hover': {
-                    backgroundColor: '#ffd796',
-                  },
-                  color: "#ff7424",
-                  backgroundColor:'#ffd796',
-                  marginLeft:'110px',
-                  marginBottom:"10px"
 
-                }}
-                >Upload</Button>
-                  </div>
-                </div> */}
-
-                {/* Image displaying div  */}
-                {/* <Card style={{ marginTop: 20 }}>
-              <CardContent>
-                <div>
-                  <img src={session?.photos? session?.photos[0].photo1 : ''} /> 
-                   {console.log(session?.photos[0].photo1  , "pathindata")}
-                </div>
-              </CardContent>
-            </Card> */}
-              {/* </Card>  */}
+              {console.log(session,"sessiosnssssssssssssssssssssssssssss")}
 
               {/* IMAGE UPLOAD  */}
              {(userId==6 || userId==13 || userId==1 || userId==3)? <Card style={{marginTop:20}}>
@@ -536,9 +478,9 @@ const convertImage = (e) => {
                   : null}
               </div>
               <br />
-<div style={{ display: 'flex' ,marginTop:"10px" , marginBottom:"10px"}}>
-                  <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
-                    <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
+              <div id="input-icon-camera" style={{ display: 'flex' }}>
+                  <label id="input-tag-event" for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
+                    <Iconify id="icon-camera-poa-event" icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
                     &nbsp;
                     <input
                       style={{ display: 'none' }}
@@ -550,10 +492,11 @@ const convertImage = (e) => {
                       }}
                     />
                   </label>
-                  Add Photos 
+                  Add Photos
                   <br />
          
            <Button
+           id="upload-btn"
            onClick={UploadImages}
            
            sx={{
@@ -565,9 +508,11 @@ const convertImage = (e) => {
              marginLeft: '10px',
            }}
          >
-           Upload 
+           Upload  
          </Button>
          </div>
+
+
          {/* <Card style={{ marginTop: 20 }}>
               <CardContent>
                
@@ -579,6 +524,45 @@ const convertImage = (e) => {
               </CardContent>
             </Card> */}
 </Card>:null}
+
+{console.log(session,"sessiosn")}
+
+<Card id="event-data-card" style={{ marginTop: 20 }}>
+              <CardContent id="card-content-poa-event-data">
+               {console.log(session,"sessiosn")}
+             {isLoading ? <CircularProgress /> : 
+                
+                session?.photos && <div>
+
+                 <div style={{display:'flex' , flexDirection:'row'}}> {(session?.photos[0].photo1)?<img id="img-event-data" src={session?.photos[0].photo1} style={{height:100,width:100}}/>:"No Photos Found"}
+                 &nbsp;&nbsp;{(session?.photos[0].photo2)?<img id="img-event-data" src={session?.photos[0].photo2} style={{height:100,width:100}}/>:null}</div>
+                </div>
+                
+                
+                
+                
+                }
+              </CardContent>
+            </Card>  
+
+<br/>
+{(session?.check_in!="0")?<Card>
+                <CardContent>
+                <AddEnrollGelathi session={session}/>
+                </CardContent>
+              </Card>:null}
+<br/>
+              {(session?.check_in!="0")?<Card>
+                <CardContent>
+                <AddGreenMotivators session={session}/>
+                </CardContent>
+              </Card>:null} <br/>
+              {(session?.check_in!="0")?<Card>
+                <CardContent>
+                <AddEnrollVyapar session={session}/>
+                </CardContent>
+              </Card>:null}
+                
 
               <Card style={{ marginTop: 20 }}>
                 <CardContent>
@@ -681,6 +665,7 @@ const convertImage = (e) => {
                 </div>
               ) : null}
 
+
               <CardContent>
                 <div>
                 <Card style={{ marginTop: 20, marginLeft: 10 }}>
@@ -715,8 +700,12 @@ const convertImage = (e) => {
                       );
                     })}
                      </Card>
+                   
                 </div>
               </CardContent>
+
+              
+              
             </div>
           </Stack>
         </Scrollbar>
