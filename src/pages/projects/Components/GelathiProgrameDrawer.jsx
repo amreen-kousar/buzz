@@ -34,6 +34,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import moment from 'moment';
 import EditGelathiSession from './EditGelathisession';
+import AddEnrollGelathi from './AddEnrolledGelathi';
+import AddGreenMotivators from './AddGreenMotivators';
+import AddEnrollVyapar from './AddenrolleVyapar';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 
@@ -580,6 +583,25 @@ const convertImage = (e) => {
             </Card> */}
 </Card>:null}
 
+<br/>
+{(session?.check_in!="0")?<Card>
+                <CardContent>
+                <AddEnrollGelathi session={session}/>
+                </CardContent>
+              </Card>:null}
+<br/>
+              {(session?.check_in!="0")?<Card>
+                <CardContent>
+                <AddGreenMotivators session={session}/>
+                </CardContent>
+              </Card>:null} <br/>
+              {(session?.check_in!="0")?<Card>
+                <CardContent>
+                <AddEnrollVyapar session={session}/>
+                </CardContent>
+              </Card>:null}
+                
+
               <Card style={{ marginTop: 20 }}>
                 <CardContent>
                   <Typography variant="h6">
@@ -681,6 +703,7 @@ const convertImage = (e) => {
                 </div>
               ) : null}
 
+
               <CardContent>
                 <div>
                 <Card style={{ marginTop: 20, marginLeft: 10 }}>
@@ -715,8 +738,12 @@ const convertImage = (e) => {
                       );
                     })}
                      </Card>
+                   
                 </div>
               </CardContent>
+
+              
+              
             </div>
           </Stack>
         </Scrollbar>

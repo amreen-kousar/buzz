@@ -411,7 +411,7 @@ const handleresources=(label,event)=>{
         </Snackbar>
       )} */}
     
-       <Stack sx={{position:'relative',right:0,float:'right'}}>
+       <Stack style={{ position:'absolute',right:0 ,float:'right',margin:2,padding:2 }}  mb={2}>
       
         <IconButton onClick={handleClickOpen}>
          <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />

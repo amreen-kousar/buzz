@@ -206,22 +206,22 @@ console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa",name)
   return (
     <Dialog onClose={handleClose} open={open}>
       <Stack direction={'row'}>
-        <Typography variant="subtitle2" style={{ color: '#ff7424' }} mt={2} ml={2} onClick={handleClose}>Back</Typography>
+        <Typography variant="subtitle2" style={{ color: '#ff7424' }} mt={2} ml={2} onClick={handleClose} id="backbutton">Back</Typography>
         <DialogTitle>Add Trainer From List</DialogTitle>
         <Typography mt={2} mr={2} variant="subtitle2" style={{ color: '#ff7424' }} onClick={() => {
           getData(arr),
             handleClose()
-        }}>Save</Typography>
+        }} id="savebutton">Save</Typography>
 
       </Stack>
 
 
       <List sx={{ pt: 0 }}>
-        {data?.list?.map((email) => (
+        {data?.list?.map((email,i) => (
 
           <ListItem disableGutters>
             {/* {console.log(email,'<------------nnnjnjnjnnii')} */}
-            <ListItemButton onClick={() => handleListItemClick(email)} key={email}>
+            <ListItemButton onClick={() => handleListItemClick(email)} key={email}  id={i}>
               <ListItemAvatar>
 
                 <Avatar>
