@@ -770,7 +770,7 @@ const mainShowBussHandler = ()=>{
             <Divider />
             {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}> */}
             {/* {console.log(sendData,"senddataaaaaaaaaaaa")} */}
-            {data?.operations_manager_id && <AddTrainerDrawer
+            {data?.operations_manager_id && <AddTrainerDrawer id="add_trainers"
               isOpenFilter={openFilter}
               getData={(e) => { setName(e) }}
               operations_manager_id={data.operations_manager_id}
@@ -780,7 +780,7 @@ const mainShowBussHandler = ()=>{
               onCloseFilter={handleCloseFilter}
             />}
             {console.log(name,"namessssssssssssss",sendData)}
-            {data?.operations_manager_id && <AddGelathifacilitators
+            {data?.operations_manager_id && <AddGelathifacilitators id="add_gelathifacilitators"
               sendData={sendData}
               isOpenFilter={opengelathiFilter}
               operations_manager_id={data.operations_manager_id}
