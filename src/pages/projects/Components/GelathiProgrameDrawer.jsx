@@ -534,8 +534,8 @@ const convertImage = (e) => {
                 
                 session?.photos && <div>
 
-                 <div style={{display:'flex' , flexDirection:'row'}}> {(session?.photos[0].photo1)?<><img id="img-event-data" src={session?.photos[0].photo1} style={{height:100,width:100}}/>
-                 &nbsp;&nbsp;<img id="img-event-data" src={session?.photos[0].photo2} style={{height:100,width:100}}/></>:"No Photos Found"}</div>
+                 <div style={{display:'flex' , flexDirection:'row'}}> {(session?.photos[0].photo1)?<img id="img-event-data" src={session?.photos[0].photo1} style={{height:100,width:100}}/>:"No Photos Found"}
+                 &nbsp;&nbsp;{(session?.photos[0].photo2)?<img id="img-event-data" src={session?.photos[0].photo2} style={{height:100,width:100}}/>:null}</div>
                 </div>
                 
                 
