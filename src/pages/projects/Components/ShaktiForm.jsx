@@ -13,9 +13,8 @@ import {
   FormControlLabel,
   Card,
   CardContent,Icon,RadioGroup
-  Icon,
-  RadioGroup,
-} from '@mui/material';
+  
+ } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import { useEffect } from 'react';
 import ListItemText from '@mui/material/ListItemText';
@@ -46,7 +45,7 @@ export default function ShaktiForm() {
   const [problemsdisheartened, setproblemsdisheartened] = React.useState(false);
   const [problemsolutions, setproblemsolutions] = React.useState(false);
   const [plan, setplan] = React.useState(false);
-  const [solution, setsolution] = React.useState(false);
+  
   const [expenditure, setexpenditure] = React.useState(false);
   const [moneysave, setmoneysave] = React.useState(false);
   const [savemoney, setsavemoney] = React.useState(false);
@@ -54,10 +53,7 @@ export default function ShaktiForm() {
   const [purchase, setpurchase] = React.useState(false);
   const [sharelearning, setsharelearning] = React.useState(false);
   const [shareproblems, setshareproblems] = React.useState(false);
-  const [livelihoodvalue, setlivelihoodvalue] = React.useState(false);
-  const [creditaccess, setcreditaccess] = React.useState(false);
-  const [healthcareaccess, sethealthcareaccess] = React.useState(false);
-  const [savingfrequency, setsavingfrequency] = React.useState(false);
+ 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [checked, setChecked] = React.useState({
     loanborrow: [],
