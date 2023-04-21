@@ -123,12 +123,12 @@ axios(config)
     });
   },[])
 
-  const checkinout = async(type) =>{
+  const checkinout = async(type,batchid) =>{
     var data = JSON.stringify({
         "location_name": location,
         "user_id": batch?.data?.user_id,
         "lon": lats?.lng,
-        "id": batch?.data?.id,
+        "id": batchid,
         "type": type,
         "lat": lats?.lat
       });
@@ -273,7 +273,7 @@ console.log(checkIn,"checkintime")
         <Typography mt={2}>
             Start :{batch?.data?.day1?.split(" ")[1]}&nbsp;{batch?.data?.day1?.split(" ")[2]}
         </Typography>
-        {(checkData?.data?.check_in_date_day1=='')?<Button style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)} sx={{
+        {(checkData?.data?.check_in_date_day1=='')?<Button style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1,batch?.data?.day1_id)} sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
              },
@@ -296,7 +296,7 @@ console.log(checkIn,"checkintime")
         <Typography mt={2}>
             End :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
         </Typography>
-        {(checkData?.data?.check_in_date_day1!='' && checkData?.data?.check_out_date_day1=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:500,marginBottom:2,color:'#ff7424'}} sx={{
+        {(checkData?.data?.check_in_date_day1!='' && checkData?.data?.check_out_date_day1=='' )?<Button onClick={()=>checkinout(2,batch?.data?.day1_id)} style={{float:'left',position:'absolute',left:20,top:500,marginBottom:2,color:'#ff7424'}} sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
              },
@@ -336,7 +336,7 @@ console.log(checkIn,"checkintime")
              color: '#ff7424',
              backgroundColor: '#ffd796',
              marginLeft: '10px',
-           }} style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)}>
+           }} style={{float:'left',position:'absolute',left:20,top:300,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1,batch?.data?.day2_id)}>
             CHECK IN</Button>
         :<Button disabled style={{float:'left',position:'absolute',left:20,top:300,marginTop:5,marginBottom:5}}>CheckIN</Button>
         
@@ -359,9 +359,9 @@ console.log(checkIn,"checkintime")
              color: '#ff7424',
              backgroundColor: '#ffd796',
              marginLeft: '10px',
-           }} onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:500,marginTop:5,marginBottom:5,color:'#ff7424'}}>
+           }} onClick={()=>checkinout(2,batch?.data?.day2_id)} style={{float:'left',position:'absolute',left:20,top:500,marginTop:5,marginBottom:5,color:'#ff7424'}}>
             CHECK OUT
-        </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:500,marginBottom:10}}>CHECKOUT</Button>}<br/><br/>
+        </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:480,marginBottom:10}}>CHECKOUT</Button>}<br/><br/>
        {(checkData?.data?.check_out_date_day2!='')?<><Typography>
             Checked Out  : {checkData?.data?.check_out_date_day2}
         </Typography>

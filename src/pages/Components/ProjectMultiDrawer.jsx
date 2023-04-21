@@ -73,6 +73,7 @@ const [gelatiNote, setGelatiNote] = useState('');
       setImages([])
     },[batchState?.training_batch_id])
     console.log(clcikData,"<---sads",batchState)
+
     const getTrainingBatch = async =>{
         
         
@@ -103,6 +104,7 @@ const [gelatiNote, setGelatiNote] = useState('');
           .catch(function (error) {
             console.log(error);
           });
+          GetStatus();
           
     }
 
@@ -283,6 +285,7 @@ const noteSubmitHandler = () => {
    //getting Notes\
    useEffect(() => {
     getNoteHandler();
+   
    // console.log(batchState)
     
 },[batch?.data?.id])
@@ -319,6 +322,33 @@ const noteSubmitHandler = () => {
     console.log('submit');
   };
 
+
+  const GetStatus = async=>{
+    var data = JSON.stringify({
+      "project_id": projectId,
+      "poa_type": 1,
+      "type": 2,
+      "tb_id": batchState?.training_batch_id?batchState?.training_batch_id:clcikData?.id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data),"dataaaaaaaaaaaa");
+      setCheckData(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
  
     return (
         <>
@@ -515,7 +545,7 @@ const noteSubmitHandler = () => {
                             {/* </Card> */}
                             <Programevaluationday1 onCloseFilter={onCloseFilter} />
                             <Evaluationday2  onCloseFilter={onCloseFilter}/>
-                           {batch && <CheckinOut
+                   {(batch && userId==5) && <CheckinOut
               photos={check}
               batch={batch}
               setCheck={(e) => {

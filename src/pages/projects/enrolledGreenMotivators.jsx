@@ -254,7 +254,9 @@ const getData = (itm, i) => {
                 console.log(itm,'<----------greengreengreen')
                 return (
                     <Card  style={styles.card1}>
-                   {(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)}><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey />     
+                   {/* {(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)}><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey />      */}
+              
+                   <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey /></div>
               <div onClick={() => {
                         setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
                         handleOpenFilter()

@@ -273,7 +273,7 @@ console.log(data,"data")
         </Stack>
         <Stack style={{ marginTop: 20 }}>
 
-          <DateTimePicker
+          <DateTimePicker popperPlacement="auto"
             renderInput={(props) => <TextField {...props} />}
             label="DateTimePicker"
             value={trainerData?.day2}
@@ -284,7 +284,7 @@ console.log(data,"data")
               //setValue(newValue);
             }}
           />
-        </Stack>
+        </Stack><br/><br/><br/>
       </Dialog>
     </div>
   );
