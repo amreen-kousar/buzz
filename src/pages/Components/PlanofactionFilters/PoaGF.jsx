@@ -612,9 +612,9 @@ const noteSubmitHandler = () => {
                         console.log('note', gelatiNote);
                       }}
                     ></TextField>
-                    {/* {SaveBtn? 
+                    {SaveBtn? 
                     
-                    <> */}
+                    <>
                      <Button
                       style={{ color: "#ff7424", marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:"#ffd796"}}
                       onClick={noteSubmitHandler}
@@ -634,16 +634,9 @@ const noteSubmitHandler = () => {
                   {/* <Cancel></Cancel> */}
                   </Button>
                   
-                
-                  Cancel
-         
-               
-                    {/* </> */}
-                    {/* :
-               
-                </Button> 
                     </>
-                    :
+                     :
+               
                     <>
                   
                       <Button
@@ -666,7 +659,7 @@ const noteSubmitHandler = () => {
                    </Button> 
                    </>
                    }
-                   */}
+                  
                   </Card>
                 </div>
               ) : null}

@@ -607,32 +607,32 @@ const convertImage = (e) => {
                       }}
                       
                     ></TextField>
-                                        {SaveBtn? 
+                                      {SaveBtn? 
                     
                     <div style={{display:'flex',flexDirection:'row'}}>
                      <Button
-                      style={{ color: '#ffd796', marginTop: 20 ,marginBottom:10 ,marginLeft:5}}
+                    style={{ color: '#ffd796', marginTop: 20 ,marginBottom:10 ,marginLeft:5}}
                       onClick={noteSubmitHandler}
                       disabled={gelatiNote.trim()===""}
                     >
                       Save
                     </Button> 
                     
-                   
-                  {/* <Cancel></Cancel> */}
-                  <Button
+                    <Button
                   
                   style={{ color: 'black' ,marginLeft: 20, marginTop:20 ,marginBottom:10}}
                   onClick={()=>{
                    setShowNote(false)
                   }}
                 >
-                  Cancel
-          
-                </Button> 
+                   Cancel
+                  {/* <Cancel></Cancel> */}
+                  </Button>
+                  
                     </div>
-                    :
-                    <div style={{display:'flex',flexDirection:'row'}}>
+                     :
+               
+                     <div style={{display:'flex',flexDirection:'row'}}>
                   
                       <Button
                       disabled
@@ -645,7 +645,7 @@ const convertImage = (e) => {
                     </Button>
                      <Button
                   
-                     style={{ color: 'black', marginLeft: 20, marginTop:20 ,marginBottom:10}}
+                  style={{ color: 'black', marginLeft: 20, marginTop:20 ,marginBottom:10}}
                      onClick={()=>{
                       setShowNote(false)
                      }}

@@ -607,31 +607,31 @@ const handlealert=()=>{
                       }}
                       
                     ></TextField>
-                                        {SaveBtn? 
+                                 {SaveBtn? 
                     
                     <>
                      <Button
-                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                      style={{ color: "#ff7424", marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:"#ffd796"}}
                       onClick={noteSubmitHandler}
                       disabled={gelatiNote.trim()===""}
                     >
                       Save
                     </Button> 
                     
-                   
-                  {/* <Cancel></Cancel> */}
-                  <Button
+                    <Button
                   
-                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:'#aec6c1'}}
                   onClick={()=>{
                    setShowNote(false)
                   }}
                 >
-                  Cancel
-          
-                </Button> 
+                   Cancel
+                  {/* <Cancel></Cancel> */}
+                  </Button>
+                  
                     </>
-                    :
+                     :
+               
                     <>
                   
                       <Button
