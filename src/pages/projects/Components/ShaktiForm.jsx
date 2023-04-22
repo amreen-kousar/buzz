@@ -55,7 +55,6 @@ export default function ShaktiForm() {
   const [purchase, setpurchase] = React.useState(false);
   const [sharelearning, setsharelearning] = React.useState(false);
   const [shareproblems, setshareproblems] = React.useState(false);
-
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [checked, setChecked] = React.useState({
     loanborrow: [],
