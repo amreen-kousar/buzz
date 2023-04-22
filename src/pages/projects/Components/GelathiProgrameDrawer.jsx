@@ -211,7 +211,6 @@ const convertImage = (e) => {
 
   const noteSubmitHandler = () => {
 
-    
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
 
@@ -392,10 +391,12 @@ const convertImage = (e) => {
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     Partner :&nbsp;{session?.partnerName}
-                    <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
+                   
+                 {(userId==6 || userId==13)?  <> <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
             <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
             {console.log(session,"sessionidddddddd")}
-            <IconButton onClick={()=>removesession(session)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton>
+            <IconButton onClick={()=>removesession(session)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton></>:null}
+
                   </Typography>
 {schedule && <Stack>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -446,10 +447,8 @@ const convertImage = (e) => {
               <Card style={{ marginTop: 20 }}>
                 <CardContent>
                   <Typography variant="body1" gutterBottom>
-                    Visit Participants :
-                    <Typography variant="body1" gutterBottom>
-                      {session?.total_participants}{' '}
-                    </Typography>
+                    Visit Participants :  {session?.total_participants}{' '}
+                  
                   </Typography>
                 </CardContent>
               </Card>
@@ -458,7 +457,7 @@ const convertImage = (e) => {
               {console.log(session,"sessiosnssssssssssssssssssssssssssss")}
 
               {/* IMAGE UPLOAD  */}
-             {(userId==6 || userId==13 || userId==1 || userId==3)? <Card style={{marginTop:20}}>
+             {(userId==6 || userId==13 )? <Card style={{marginTop:20}}>
 <div style={{ display: 'flex' }}>
                 {viewImage
                   ? images.map((i, index) => {
@@ -527,7 +526,7 @@ const convertImage = (e) => {
 
 {console.log(session,"sessiosn")}
 
-<Card id="event-data-card" style={{ marginTop: 20 }}>
+{(userId==6 || userId==13 )?<Card id="event-data-card" style={{ marginTop: 20 }}>
               <CardContent id="card-content-poa-event-data">
                {console.log(session,"sessiosn")}
              {isLoading ? <CircularProgress /> : 
@@ -543,21 +542,21 @@ const convertImage = (e) => {
                 
                 }
               </CardContent>
-            </Card>  
+            </Card> :null}
 
-<br/>
-{(session?.check_in!="0")?<Card>
+            {(session?.check_in!="0" && userId==6)?<br/>:null}
+{(session?.check_in!="0" && userId==6)?<Card>
                 <CardContent>
                 <AddEnrollGelathi session={session}/>
                 </CardContent>
               </Card>:null}
-<br/>
-              {(session?.check_in!="0")?<Card>
+{(session?.check_in!="0" && userId==6)?<br/>:null}
+              {(session?.check_in!="0" && userId==6)?<Card>
                 <CardContent>
                 <AddGreenMotivators session={session}/>
                 </CardContent>
-              </Card>:null} <br/>
-              {(session?.check_in!="0")?<Card>
+              </Card>:null} {(session?.check_in!="0" && userId==6)?<br/>:null}
+              {(session?.check_in!="0" && userId==6)?<Card>
                 <CardContent>
                 <AddEnrollVyapar session={session}/>
                 </CardContent>
@@ -606,43 +605,38 @@ const convertImage = (e) => {
                         setGelatiNote(e?.target?.value);
                         console.log('note', gelatiNote);
                       }}
+                      
                     ></TextField>
-                    {SaveBtn? 
+                                        {SaveBtn? 
                     
-                    <>
+                    <div style={{display:'flex',flexDirection:'row'}}>
                      <Button
-                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                      style={{ color: '#ffd796', marginTop: 20 ,marginBottom:10 ,marginLeft:5}}
                       onClick={noteSubmitHandler}
                       disabled={gelatiNote.trim()===""}
                     >
                       Save
                     </Button> 
                     
-                    <Button
-                  
-                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
-                  onClick={()=>{
-                   setShowNote(false)
-                  }}
-                >
+                   
                   {/* <Cancel></Cancel> */}
                   <Button
                   
-                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                  style={{ color: 'black' ,marginLeft: 20, marginTop:20 ,marginBottom:10}}
                   onClick={()=>{
                    setShowNote(false)
                   }}
                 >
                   Cancel
+          
                 </Button> 
-                </Button> 
-                    </>
+                    </div>
                     :
-                    <>
+                    <div style={{display:'flex',flexDirection:'row'}}>
                   
                       <Button
                       disabled
-                      style={{ color: '#ffd796', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                      style={{ color: '#ffd796', marginTop: 20 ,marginBottom:10,marginLeft:5}}
                       onClick={()=>{
                         alert("Text cannot be empty")
                       }}
@@ -651,16 +645,15 @@ const convertImage = (e) => {
                     </Button>
                      <Button
                   
-                     style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20 }}
+                     style={{ color: 'black', marginLeft: 20, marginTop:20 ,marginBottom:10}}
                      onClick={()=>{
                       setShowNote(false)
                      }}
                    >
                      Cancel
                    </Button> 
-                   </>
+                   </div>
                    }
-                  
                   </Card>
                 </div>
               ) : null}
@@ -687,7 +680,7 @@ const convertImage = (e) => {
                             >
                               <Typography variant="body1">
                                 {' '}
-                                {userName} {i?.date}
+                                {i?.name} {i?.date}
                               </Typography>
 
                               {console.log(i?.notes, '<----------------------i?.notesi?.notes')}

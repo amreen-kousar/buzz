@@ -551,7 +551,7 @@ export default function PlanofAction() {
                                       :(itm?.status=='2')
                                       ? <span style={{ color: 'red' }}>
                                       
-                                      (Cancelled)
+                                      (Canceled)
                                     </span>:null}
                                     </TableCell>
                                     {itm?.status !== '2' && (
@@ -714,7 +714,7 @@ export default function PlanofAction() {
                                           
                                         </>
                                       }
-                                       {(itm?.type=='2' && itm?.status=='1') ? 
+                                       {(itm?.type=='2' && itm?.status=='1' || itm?.type=='3' && itm?.status=='1') ? 
                                         <span style={{ color: 'green' }}>
                                            (Rescheduled)
                                           
@@ -722,7 +722,7 @@ export default function PlanofAction() {
                                       :(itm?.status=='2')
                                       ? <span style={{ color: 'red' }}>
                                       
-                                      (Cancelled)
+                                      (Canceled)
                                     </span>:null}
                                     </TableCell>
                                     {itm?.status !== '2' && (
@@ -888,7 +888,7 @@ export default function PlanofAction() {
                                       }
                                       {console.log(idvalue, 'hyyyyyyyyy')}
 
-                                     {(itm?.type=='2' && itm?.status=='1') ? 
+                                     {(itm?.type=='2' && itm?.status=='1' || itm?.type=='3' && itm?.status=='1') ? 
                                       <span style={{ color: 'green' }}>
                                          (Rescheduled)
                                         
@@ -896,7 +896,7 @@ export default function PlanofAction() {
                                     :(itm?.status=='2')
                                     ? <span style={{ color: 'red' }}>
                                     
-                                    (Cancelled)
+                                    (Canceled)
                                   </span>:null}
                                     </TableCell>
                                     {itm?.status !== '2' && (

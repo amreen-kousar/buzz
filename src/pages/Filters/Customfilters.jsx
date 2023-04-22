@@ -25,6 +25,7 @@ export default function Customfilter(props) {
   const [district, setDistrict] = useState([])
   const [taluk, setTaluk] = useState([])
   const [teamData, setTeamData] = useState([])
+  const userid = JSON.parse(localStorage?.getItem('userDetails'))?.role
   const [listData, setListData] = useState();
   const [gelathiData, setGelathiData] = useState();
   var [data, setData] = useState({
@@ -325,7 +326,7 @@ const trainerList = async => {
                       setData({ ...data, endDate: e?.target?.value })
                     }} /> <br/>
         </CardContent>
-        <CardContent>
+       {(userid!=2)? <CardContent>
         <FormControl fullWidth>
 
         <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
@@ -435,7 +436,7 @@ const trainerList = async => {
                   </Select></Typography>
                 </FormControl ></Stack >
              
-        </CardContent>
+        </CardContent>:null}
         <Button style={{ float: "right", color: 'white', marginRight: '160px', marginBottom: '10px', backgroundColor: '#ed6c02', }}
           onClick={() => props?.onDatasubmit(data)}>Submit</Button>
       </Card>

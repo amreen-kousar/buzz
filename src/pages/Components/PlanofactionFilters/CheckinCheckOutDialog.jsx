@@ -37,7 +37,7 @@ console.log("🚀 ~ file: CheckinCheckOutDialog.jsx:30 ~ FullScreenDialog ~ data
 
 
   const [open, setOpen] = React.useState(false);
-  console.log("🚀 ~ file: CheckinCheckOutDialog.jsx:78 ~ FullScreenDialog ~ open:", batch.plan_date.split(" "))
+  // console.log("🚀 ~ file: CheckinCheckOutDialog.jsx:78 ~ FullScreenDialog ~ open:", batch.plan_date.split(" "))
   React.useEffect(() => {
     //setShown(shown)
     

@@ -66,14 +66,20 @@ export default function FullScreenDialog({ photos, setPhotos, batch }) {
         <List>
           <>
 
-            {batch?.photos?.map(itm => {
+            {/* {batch?.photos?.map(itm => {
               return (
                 <>
                   <img src={itm?.photo1 ? itm?.photo1 : ""} />
                   <img src={itm?.photo2 ? itm?.photo2 : ""} />
                 </>
               )
-            })}
+            })} */}
+             {photos} && 
+             <div>
+
+<div style={{display:'flex' , flexDirection:'row'}}> {(batch?.photos[0].photo1)?<img id="img-event-data" src={batch?.photos[0].photo1} style={{height:100,width:100}}/>:"No Photos Found"}
+&nbsp;&nbsp;{(batch?.photos[0].photo2)?<img id="img-event-data" src={batch?.photos[0].photo2} style={{height:100,width:100}}/>:null}</div>
+</div>
           </>
         </List>
       </Dialog>

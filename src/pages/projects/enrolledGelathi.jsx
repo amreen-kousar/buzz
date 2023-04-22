@@ -43,7 +43,7 @@ export default function enrolledGelathiList() {
         setSelected({ name: e, type: "Search" })
         enrolledGelathi()
     }
-
+const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
     const enrolledGelathi = async(id,i,g) =>{
         var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
   var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
@@ -222,9 +222,9 @@ const getData = (itm, i) => {
                         <Typography variant="subtitle1" gutterBottom>
                                 {` Village Name : ${itm?.villagename}`}
                             </Typography>
-                            {/* <Typography variant="subtitle1" gutterBottom>
+                            {(roleid==1 || roleid==3 || roleid==4)?<Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled By : ${itm?.enrolled_by}`}
-                            </Typography> */}
+                            </Typography>:null}
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>

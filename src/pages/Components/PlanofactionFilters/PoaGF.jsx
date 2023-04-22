@@ -47,7 +47,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [showNote, setShowNote] = useState(false);
   const [schedule,setReschedule]=React.useState(false);
   const [date, setDate] = useState(new Date())
-
+  const [isLoading, setISLoading] = useState(false)
   const [editSession,setEditsession]=useState(false);
   const [check, setCheck] = useState(false);
   const [getAllNotes, setGetAllNotes] = useState([]);
@@ -238,29 +238,55 @@ const noteSubmitHandler = () => {
     });
   };
   const UploadImages = (e) => {
+
     if(images.length === 0 ){
       alert("No photos to upload.")
       throw new Error('No photos to upload.');
     }
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-    var raw = JSON.stringify({
-      project_id: batch?.project_id,
-      tb_id: batchState?.id,
-      trainer_id: idvalue,
-      day: 1,
-      photos: images,
-    });
+    // var raw = JSON.stringify({
+    //   project_id: batch?.project_id,
+    //   tb_id: batchState?.id,
+    //   trainer_id: idvalue,
+    //   day: 1,
+    //   photos: [images],
+    // });
 
+    // var requestOptions = {
+    //   method: 'POST',
+    //   body: raw,
+    //   redirect: 'follow',
+    // };
+
+    // fetch('https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php', requestOptions)
+    //   .then((response) => response.text())
+    //   .then((result) => console.log(result))
+    //   .catch((error) => console.log('error', error));
+      setISLoading(true)
+      var raw = JSON.stringify({
+      "project_id":batch.project_id,
+      "gf_session_id":batch.id,
+      "gelathi_id":batch.user_id,
+      "photos": [images.toString().slice(22,)]
+    })
+
+   
     var requestOptions = {
       method: 'POST',
       body: raw,
       redirect: 'follow',
     };
-
-    fetch('https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php', requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log('error', error));
+   
+    let res = fetch('https://bdms.buzzwomen.org/appTest/uploadGFSessionPhotos.php', requestOptions)
+      .then((itn) => {
+        console.log(itn, '<--itemgh');
+        setImages([])
+        alert("Image uploaded successfully..")
+        setISLoading(false)
+      })
+      .catch((err) => {
+        console.log(err, '<---wertyu');
+      });
   };
   
   const deleteImage = (index) => {
@@ -368,11 +394,11 @@ const noteSubmitHandler = () => {
               <Card>
                 <CardContent>
                   <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
-                    Project : &nbsp;{batch?.projectName}
-                    {console.log(batch?.projectName, '<--------gfgfgfgfgfgdrawer')}
+                    Project : &nbsp;{session?.projectName}
+                    {console.log(session?.projectName, '<--------gfgfgfgfgfgdrawer')}
                   </Typography>
                   <Typography variant="body1" gutterBottom>
-                    Partner : &nbsp;{batch?.partnerName}
+                    Partner : &nbsp;{session?.partnerName}
                       <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
             <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
             {console.log(session,"sessionidddddddd")}
@@ -394,17 +420,17 @@ const noteSubmitHandler = () => {
                   
 
                   <Typography variant="body1" gutterBottom>
-                    Plan Day:&nbsp;{batch?.plan_date}
+                    Plan Day:&nbsp;{session?.plan_date}
                   </Typography>
 
                   <Typography variant="body1" gutterBottom>
-                    Contact Person:&nbsp;{batch?.contact_person}
+                    Contact Person:&nbsp;{session?.contact_person}
                   </Typography>
                   <Typography variant="body1" gutterBottom>
-                    Contact Number:&nbsp;{batch?.contact_number}
+                    Contact Number:&nbsp;{session?.contact_number}
                   </Typography>
                   <Typography variant="body1" gutterBottom>
-                    GF Name:&nbsp;{batch?.gf_name}
+                    GF Name:&nbsp;{session?.gf_name}
                   </Typography>
                 </CardContent>
               </Card>
@@ -433,7 +459,7 @@ const noteSubmitHandler = () => {
                     <Iconify icon="material-symbols:add" width={30} height={30} />
                   </div>
                   <Typography>
-                    Visit Participants: {batch?.total_participants} 
+                    Visit Participants: {session?.total_participants} 
                     {/* <IconButton>
                       <Iconify style={{ color: "black",float:'right'}} icon="material-symbols:add" />
                     </IconButton> */}
@@ -441,14 +467,14 @@ const noteSubmitHandler = () => {
                   {/* <Typography>Target Participants: {batch?.data?.participants} </Typography> */}
                 </CardContent>
               </Card>
-              <Photos
+              {/* <Photos
                 batch={batch}
                 photos={photos}
                 setPhotos={(e) => {
                   setPhotos(e);
                 }}
-              />
-              <Card
+              /> */}
+              {/* <Card
                 onClick={() => {
                   setPhotos(true), console.log('ferfgreg');
                 }}
@@ -457,8 +483,13 @@ const noteSubmitHandler = () => {
                 <CardContent>
                   <Typography>View Photos</Typography>
                 </CardContent>
-              </Card>
-              <Card style={{ marginTop: 20 }}>
+              </Card> */}
+
+
+                
+
+
+              {(role==6 || role==13)?<Card style={{ marginTop: 20 }}>
               <CardContent>
                 {/* <input
                   
@@ -502,12 +533,27 @@ const noteSubmitHandler = () => {
                 {/* <CardContent>
                   <Typography>Upload Photos</Typography>
                 </CardContent> */}
+                  {isLoading ? <CircularProgress /> : 
+                
+                batch?.photos && <div>
+
+                 <div style={{display:'flex' , flexDirection:'row'}}> {(batch?.photos[0].photo1)?<img id="img-event-data" src={batch?.photos[0].photo1} style={{height:100,width:100}}/>:"No Photos Found"}
+                 &nbsp;&nbsp;{(batch?.photos[0].photo2)?<img id="img-event-data" src={batch?.photos[0].photo2} style={{height:100,width:100}}/>:null}</div>
+                </div>
+                
+                
+                
+                
+                }
                 </CardContent>
-              </Card>
+               
+              
+          
+              </Card>:null}
 
             
             
-              <Card
+              {(role==6 || role==13)?<Card
                 onClick={() => {
                   setCheck(true), console.log('ferfgreg');
                 }}
@@ -519,7 +565,9 @@ const noteSubmitHandler = () => {
                   </div>
                   <Typography>Check in/ Check Out</Typography>
                 </CardContent>
-              </Card>
+              </Card> :null}
+
+
 
               <Card style={{ marginTop: 20 }}>
                 <CardContent>
@@ -582,13 +630,20 @@ const noteSubmitHandler = () => {
                    setShowNote(false)
                   }}
                 >
+                   Cancel
+                  {/* <Cancel></Cancel> */}
+                  </Button>
                   
                 
                   Cancel
          
-                </Button> 
+               
                     {/* </> */}
                     {/* :
+               
+                </Button> 
+                    </>
+                    :
                     <>
                   
                       <Button
@@ -638,7 +693,7 @@ const noteSubmitHandler = () => {
                               <Typography variant="body1">
                                 {' '}
                                 {/* {userName} */}
-                                 {i?.date}
+                                {i?.name} {i?.date}
                               </Typography>
 
                               {console.log(i?.notes, '<----------------------i?.notesi?.notes')}

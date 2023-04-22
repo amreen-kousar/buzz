@@ -262,7 +262,7 @@ export default function Trainerdashboard() {
                     <TableBody>
                       <TableRow >
                         <TableCell><span style={{fontWeight:700,fontSize:15}}>Project<br/>Actual / Target<br/>Duration</span> </TableCell>
-                        <TableCell><span style={{fontWeight:700,fontSize:15}}>:&nbsp;{item?.name}<br/>:&nbsp; {item?.actual?item.actual:0} / {item?.target ?item?.target : 0 } <br/>:&nbsp;{moment(item?.startDate)?.format('DD-MM-YYYY')} / {moment(item?.endDate)?.format('DD-MM-YYYY')}</span>  </TableCell>
+                        <TableCell><span style={{fontWeight:700,fontSize:15}}>:&nbsp;{item?.name}<br/>:&nbsp; {item?.day2?item.day2:0} / {item?.target ?item?.target : 0 } <br/>:&nbsp;{moment(item?.startDate)?.format('DD-MM-YYYY')} to {moment(item?.endDate)?.format('DD-MM-YYYY')}</span>  </TableCell>
                       </TableRow>
                       
                      

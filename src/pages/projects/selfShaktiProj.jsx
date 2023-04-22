@@ -17,6 +17,7 @@ export default function selfShaktiProj() {
     var [selected, setSelected] = useState(null)
     var [search, setSearch] = useState('')
     const [trainerdata,setrainerdata]=useState('')
+    const userid = JSON.parse(localStorage.getItem('userDetails'))?.role
     // const [selfShakthi, setselfShakthi] = useState([{ stockname: "fist" }, { stockname: "second" }]);
     const searchFunction = (e) => {
         search = e
@@ -174,7 +175,7 @@ export default function selfShaktiProj() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    All Self Shakthi 
+                    Self Shakthi 
                     <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
           </Button>
@@ -243,17 +244,17 @@ export default function selfShaktiProj() {
                           
                         </Grid>
                         <Grid style={{ marginLeft: 15 }}>
-                            <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }} >
+                            <Typography  gutterBottom style={{ color: '#ff7518' }} >
                                Day 1 : {itm?.day1}</Typography>
                           
-                            <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                            Day 2 : {itm?.day2}</Typography> 
+                            {(userid==12)?<Typography gutterBottom style={{ color: '#ff7518' }}>
+                            Day 2 : {itm?.day2}</Typography>:null}
                             
                         </Grid>
                     </Card>)
             }):
             <>
-            <h4 style={{textAlign:'center'}}>No Self Shakthi Project  Found</h4>
+            <h4 style={{textAlign:'center'}}>No Training Batch</h4>
             </>}
 
         </Container>
