@@ -365,14 +365,14 @@ function Project(props) {
                     : null}
                   {(userDetails == 13 || userDetails == 4 || userDetails == 12) ? <br /> : null}
 
-                  {(userDetails == 12) ? <div><Link to="/dashboard/projects/assignbatches" state={{ id: data1?.project_id }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
+                  {/* {(userDetails == 12) ? <div><Link to="/dashboard/projects/assignbatches" state={{ id: data1?.project_id }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} endIcon={<IconButton>
                     <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                   </IconButton>} >
                     <span style={{ width: "240px" }}> New Gelathi Session</span>
                   </Button>
 
                   </Link></div> : null}
-                  {(userDetails == 12) ? <br /> : null}
+                  {(userDetails == 12) ? <br /> : null} */}
 
                   {(userDetails == 1 || userDetails == 6 || userDetails == 3 || userDetails == 4 || userDetails == 13 || userDetails == 6) ?
                     <Link to="/dashboard/projects/enrolledGelathi" state={{ id: data1?.project_id }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle} startIcon={

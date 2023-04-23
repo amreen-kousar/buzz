@@ -377,7 +377,8 @@ const noteSubmitHandler = () => {
         <Stack id="poa-gf-stack" direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography id="poa-gf-subtitle" variant="subtitle1" sx={{ ml: 1 }}>
             {/* {`${clcikData?.title}: ${clcikData?.name}`} */}
-            {clcikData?.name}
+           {/* {clcikData?.name} */}
+           {(session?.type_name=='Circle Metting')?'Circle Meeting':session?.type_name}
           </Typography>
           <IconButton id="poa-gf-close-icon-button" onClick={onCloseFilterGF}>
             <Iconify id="close-icon-poa-gf" icon="eva:close-fill" width={20} height={20} />
@@ -399,10 +400,11 @@ const noteSubmitHandler = () => {
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     Partner : &nbsp;{session?.partnerName}
-                      <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
+                      
+                      {(role!=12)?<><IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
             <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
             {console.log(session,"sessionidddddddd")}
-            <IconButton onClick={()=>removesession(session)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton></Typography>
+            <IconButton onClick={()=>removesession(session)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton></>:null}</Typography>
                     {schedule && <Stack>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
            <DateTimePicker

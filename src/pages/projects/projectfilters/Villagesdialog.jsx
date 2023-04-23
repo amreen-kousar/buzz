@@ -112,9 +112,9 @@ export default function VillageDialog({ shown, setShown, batchState,batch,isOpen
               }} style={{borderRadius:'0'}}>
                 <CardContent>
                  
-                     {console.log(itm?.participant_name==batch?.suggested?.participant_name,"hyyyyyyy",batch?.suggested[0]?.participant_name,"helloooooo",itm?.participant_name)}
+                     {/* {console.log(itm?.participant_name==batch?.suggested?.participant_name,"hyyyyyyy",batch?.suggested[0]?.participant_name,"helloooooo",itm?.participant_name)} */}
                       <Typography variant="subtitle2">{itm?.participant_name}
-                      {(batch?.suggested.findIndex(data=>data.participant_name === itm?.participant_name)!=-1)&& <IconButton sx={{float:'right',width:35,height:30,color:'green'}}><Iconify icon="mdi:tick-circle"></Iconify></IconButton>}
+                      {(itm?.gelathiRecomm=='1')&& <IconButton sx={{float:'right',width:35,height:30,color:'green'}}><Iconify icon="mdi:tick-circle"></Iconify></IconButton>}
                       </Typography>
                 
                 </CardContent>

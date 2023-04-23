@@ -222,7 +222,7 @@ const getData = (itm, i) => {
                         <Typography variant="subtitle1" gutterBottom>
                                 {` Village Name : ${itm?.villagename}`}
                             </Typography>
-                            {(roleid==1 || roleid==3 || roleid==4)?<Typography variant="subtitle1" gutterBottom>
+                            {(roleid==1 || roleid==3 || roleid== 4|| roleid==12)?<Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled By : ${itm?.enrolled_by}`}
                             </Typography>:null}
                             <Typography variant="subtitle1" gutterBottom>
