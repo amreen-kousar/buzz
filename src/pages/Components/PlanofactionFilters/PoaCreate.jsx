@@ -10,6 +10,8 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import Dialog from '@mui/material/Dialog';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
@@ -62,7 +64,6 @@ export default function PoaCreate(props) {
   //min date 
   const today = dayjs();
 const tomorrow = dayjs().add(1, 'day');
-
 
   const [newForm , setNewForm] = useState(false)
   const handleChange2 = (event) => {
@@ -132,12 +133,12 @@ const tomorrow = dayjs().add(1, 'day');
           handleClose()
           props?.changeState()
           setAddData({
-            date: dayjs(new Date()),
+            date: '',
             user_id: '',
             name: '',
             all_day: 0,
             description: '',
-            date2: dayjs(new Date()),
+            date2: '',
           })
         }
         else {
@@ -301,12 +302,12 @@ const tomorrow = dayjs().add(1, 'day');
   showDate? 
   <>
     <Stack direction={'row'}>
-
+{/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
 <DateTimePicker
-required
 id="date-time-picker" 
- defaultValue={today}
+//  defaultValue={today}
             minDate={today}
+ required
   label="From"
   value={addData?.date}
   onChange={(e) => { handleChange(e) }}
@@ -316,18 +317,19 @@ id="date-time-picker"
   }}
   renderInput={(params) => <TextField required {...params} color="common" />}
 />
+{/* </LocalizationProvider> */}
 
 </Stack><br/>
 
   </>:
   <>
    <Stack direction={'row'}>
-
+ {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
 <DateTimePicker
 id="from-date"
-defaultValue={today}
+// defaultValue={today}
 minDate={today}
-  required
+required
   label="From"
   value={addData?.date}
   onChange={(e) => { handleChange(e) }}
@@ -338,6 +340,7 @@ minDate={today}
   }}
 />
 
+{/* </LocalizationProvider> */}
 </Stack><br/>
 
 <Stack direction={'row'}>
@@ -346,7 +349,7 @@ minDate={today}
   id="to-date"
    required
     label="To"
-    minDate={addData?.date}
+    minDate={today}
     value={addData?.date2}
     onChange={(e) => { handleChange2(e) }}
     renderInput={(params) => <TextField {...params} color="common" />}

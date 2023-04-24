@@ -181,6 +181,7 @@ console.log(scheduleData,"------------------------------>scheduleDatascheduleDat
                                 <Card style={{marginTop:20}}>
                                     <CardContent>
                                     <DateTimePicker
+                                    required
                     label="Date&Time picker"
                     value={addData?.date}
                     onChange={(e) => { handleChange(e) }}

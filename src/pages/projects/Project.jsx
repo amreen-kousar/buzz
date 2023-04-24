@@ -43,6 +43,7 @@ function Project(props) {
   const userDetails = localStorage?.getItem('userId');
   console.log(userDetails, "userrrrrrrrrrrrr")
   const [data1, setData1] = useState('')
+  console.log("🚀 ~ file: Project.jsx:46 ~ Project ~ data1:", data1)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [circlemeeting, setCirclemeeting] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -239,30 +240,33 @@ function Project(props) {
               </Card>:null }
                 {(userDetails==12)?<>
 
-                  <Card  value={data1?.operations_manager_id} sx={{width:"95%"}}  style={{ cursor: 'pointer', marginLeft: 4, margin: 20, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.operations_manager_id)} >
+                  <Card  sx={{width:"95%"}}   value={data1?.operations_manager_id}   style={{ cursor: 'pointer', margin: 20, marginLeft: 1, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.operations_manager_id)} >
                     <span  >
-                      {data1?.operations_manager_name} <Iconify style={{ color: "black", float: 'right', width: 20, height: 20}} icon="material-symbols:add" />
+                      {data1?.operations_manager_name} 
+                      {/* <Iconify style={{ color: "black", float: 'right', width: 20, height: 20}} icon="material-symbols:add" /> */}
                     </span></Card>
 
-                  <Card sx={{width:"95%"}} style={{ cursor: 'pointer', margin: 20,  marginLeft: 4, paddingTop: 16, paddingBottom: 15, borderRadius: 0,paddingLeft:6}} >
+                  <Card  sx={{width:"95%"}}  style={{ cursor: 'pointer', margin: 20,  marginLeft: 1, paddingTop: 16, paddingBottom: 15, borderRadius: 0,paddingLeft:6}} >
                     <span>   MY POA
-                      <Iconify style={{ color: "black", float: 'right', width: 20, height: 20 }} icon="material-symbols:add" />
+                      {/* <Iconify style={{ color: "black", float: 'right', width: 20, height: 20 }} icon="material-symbols:add" /> */}
                     </span></Card>
 
-                  <Card sx={{width:"95%"}} style={{ cursor: 'pointer', margin: 20,  marginLeft: 4, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }}  >
-                    <span >   Trainers({data1?.trainers_count}) <Trainerslist />
-                    <Iconify style={{ color: "black", float: 'right', width: 20, height: 20 }} icon="material-symbols:add" />
-                    </span></Card>
+                  <Card sx={{width:"95%"}} style={{ cursor: 'pointer', margin: 20,  marginLeft: 1, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }}  >
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    Trainers({data1?.trainers_count}) <Trainerslist /> 
+                    {/* <Iconify style={{ color: "black", float: 'right', width: 20, height: 20 }} icon="material-symbols:add" /> */}
+                    </Box>  </Card>
 
 
-                  <Card sx={{width:"95%"}} style={{ cursor: 'pointer', margin: 20,  marginLeft: 4, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6, paddingRight: 1 }} >
-                    <span> Gelathi Facilitators({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />
-                    <Iconify style={{ color: "black", float: 'right', width: 20, height: 20 }} icon="material-symbols:add" />
-                    </span></Card>
+                  <Card sx={{width:"95%"}} style={{ cursor: 'pointer', margin: 20,  marginLeft: 1, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6, paddingRight: 1 }} >
+                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    Gelathi Facilitators({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />
+                    {/* <Iconify style={{ color: "black", float: 'right', width: 20, height: 20 }} icon="material-symbols:add" /> */}
+                  </Box></Card>
 
-                  <Card sx={{width:"95%"}} style={{ cursor: 'pointer', margin: 20,  marginLeft: 4, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.driverId)} >
+                  <Card sx={{width:"95%"}} style={{ cursor: 'pointer', margin: 20,  marginLeft: 1, paddingTop: 16, paddingBottom: 15, borderRadius: 0, paddingLeft: 6 }} onClick={() => viewPeople(data1?.driverId)} >
                     <span>Driver: {data1?.driver_name}
-                      <Iconify style={{ color: "black", float: 'right',right:10, width: 20, height: 20 }} icon="material-symbols:add" />
+                      {/* <Iconify style={{ color: "black", float: 'right',right:10, width: 20, height: 20 }} icon="material-symbols:add" /> */}
                     </span></Card>
 
 

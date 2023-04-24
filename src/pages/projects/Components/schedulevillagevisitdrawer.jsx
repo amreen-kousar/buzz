@@ -173,6 +173,7 @@ console.log(scheduleData,"scheduldataaaaaaaaa")
                                     <DateTimePicker
                     label="Date&Time picker"
                     value={addData?.date}
+                    required
                     onChange={(e) => { handleChange(e) }}
                     renderInput={(params) => <TextField {...params} color="common" />}
                     PopperProps={{

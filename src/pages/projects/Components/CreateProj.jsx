@@ -563,9 +563,10 @@ const mainShowBussHandler = ()=>{
                 <Typography style={{ marginLeft: 10 }} variant="h6">Project From / To Dates :</Typography>
               </CardContent>
               <Stack>
+
                 <CardContent>
                   <TextField id="start-date" type="date"
-                  required
+                    required
                    // defaultValue={dayjs(data?.start_date)}
                    defaultValue={data?.start_date}
                     style={{ width: '20vw' }}
