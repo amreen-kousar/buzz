@@ -378,13 +378,13 @@ console.log(userid,"userrrrrridddddddd")
                 {/* <AppBar > */}
                 <form onSubmit={(e)=>{e.preventDefault(); submitUser()}}>
                     <Toolbar sx={{ bgcolor: '#ff7424' }}>
-                        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close" id="close-user">
+                        <IconButton edge="start" onClick={handleClose} aria-label="close" id="close-user" style={{color:'white'}}>
                             <CloseIcon />
                         </IconButton>
-                        <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
+                        <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" style={{color:'white'}}>
                             Add Users
                         </Typography>
-                        <Button autoFocus color="inherit" type="submit" id="save_user">
+                        <Button  type="submit" id="save_user" style={{color:"white"}}>
                             save
                         </Button>
                     </Toolbar>
@@ -438,10 +438,10 @@ console.log(userid,"userrrrrridddddddd")
                                     </Select>
                                 </FormControl>
 
-                                <TextField fullWidth id="First_name" helperText='Name required*' label="Name" value={AddUser.first_name} required onChange={(e) => { setAddUser({ ...AddUser, first_name: e.target.value }) }} variant="outlined" color="common" />
+                               <br/><br/> <TextField fullWidth id="First_name" helperText='Name required*' label="Name" value={AddUser.first_name} required onChange={(e) => { setAddUser({ ...AddUser, first_name: e.target.value }) }} variant="outlined" color="common" />
                                 {
                                     ["Admin", "Program Manager", "Operations Manager", "Gelathi Facilitator Lead", 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <TextField fullWidth id="last_name" label="Last Name" variant="outlined" value={AddUser.last_name} onChange={(e) => { setAddUser({ ...AddUser, last_name: e.target.value }) }} />
-                                }
+                                }<br/>
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl style={{ marginLeft: "1rem" }}>
                                     <RadioGroup
                                         row
@@ -459,7 +459,7 @@ console.log(userid,"userrrrrridddddddd")
                                     <FormControlLabel label="Status" labelPlacement="start"
                                         control={<Switch defaultValue={AddUser.present_status} onClick={(e, value) => { setAddUser({ ...AddUser, present_status: !AddUser.present_status }); console.log(!AddUser.present_status) }} defaultChecked />} />
                                 </FormGroup> */}
-                                <br />
+                                <br /><br/>
                                  {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl fullWidth>
 
                                     <Autocomplete
@@ -492,8 +492,11 @@ console.log(userid,"userrrrrridddddddd")
                                         setAddUser({ ...AddUser, contactNum: e.target.value })
                                     }
                                     console.log(e,"<---wefewfwef")
-                                    }} variant="outlined" color="common" /><br/>
-                                <TextField fullWidth id="Work" label="Work" value={AddUser.workNum} onChange={(e) => {
+                                    }} variant="outlined" color="common" /><br/><br/>
+                                <TextField fullWidth id="Work" label="Work"  inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+          onInput = {(e) =>{
+            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+        }} value={AddUser.workNum} onChange={(e) => {
                                      setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' /><br/><br/>
 
                                 <TextField fullWidth required id="Email" label="Email" helperText='Email required' value={AddUser.office_email_id} 
@@ -516,7 +519,11 @@ console.log(userid,"userrrrrridddddddd")
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="Address1" label="Address 1" value={AddUser.address3} onChange={(e) => { setAddUser({ ...AddUser, address3: e.target.value }) }} variant="outlined" color="common"/>}<br/><br/>
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="Address2" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" color="common"/>}<br/><br/>
 
-                                <TextField fullWidth id="pincode"  label="Pincode" inputProps={{ maxLength: 6 }} type="number" required value={AddUser.pincode}  onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" color="common"/><br/><br/>
+                                <TextField fullWidth id="pincode"  label="Pincode" 
+                                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*'}}
+          onInput = {(e) =>{
+            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,6)
+          }} type="number" required value={AddUser.pincode}  onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" color="common"/><br/><br/>
                                 {
 
                                     ["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <FormControl fullWidth>

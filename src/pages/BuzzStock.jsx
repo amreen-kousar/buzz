@@ -130,10 +130,11 @@ export default function BuzzStock() {
   }
 
   const onSumbit = (e, i) => {
+    console.log("🚀 ~ file: BuzzStock.jsx:133 ~ onSumbit ~ e:", e)
     setSelected({ type: 'Location', name: ` ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
     console.log(e, i, "<---onSUbmittttt")
     handleclosebusfilter()
-    demoi(e?.district_id, e?.taluk_id, "country")
+    demoi(e?.district_id, e?.talaq_id, "country")
 
   }
 

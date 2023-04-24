@@ -157,7 +157,7 @@ console.log(data,"data")
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" style={{color:"white"}}>
               Create  New Training Batch 
             </Typography>
-            <Button autoFocus color="inherit" onClick={createTrainerBatch}>
+            <Button variant="standard" onClick={createTrainerBatch}>
               
               Save
             </Button>
@@ -180,7 +180,7 @@ console.log(data,"data")
      
         
        
-        <Stack mt={3} style={{ marginTop: 50 }}>
+        <Stack margin={2} style={{ marginTop: 50 }}>
           {console.log(trainerData, "><0khjhgbfd")}
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label" color="common">Select Village</InputLabel>
@@ -206,7 +206,7 @@ console.log(data,"data")
               }
             </Select>
           </FormControl></Stack>
-        <Stack style={{ marginTop: 20 }}>
+        <Stack margin={2} style={{ marginTop: 10 }}>
           <TextField
             fullWidth
             color="common"
@@ -215,7 +215,7 @@ console.log(data,"data")
             onChange={(e) => { setTrainerData({ ...trainerData, sub_village: e?.target?.value }) }}
             label="Sub Village" />
         </Stack>
-        <Stack style={{ marginTop: 20 }}>
+        <Stack  margin={2} style={{ marginTop: 10 }}>
           <TextField
             fullWidth
             color="common"
@@ -225,7 +225,7 @@ console.log(data,"data")
             onChange={(e) => { setTrainerData({ ...trainerData, number_of_participants: e?.target?.value }) }}
           />
         </Stack>
-        <Stack style={{ marginTop: 20 }}>
+        <Stack margin={2} style={{ marginTop: 10 }}>
           <TextField
             fullWidth
             color="common"
@@ -234,7 +234,7 @@ console.log(data,"data")
             id="outlined-error"
             label="Contact Person" />
         </Stack>
-        <Stack style={{ marginTop: 20 }}>
+        <Stack margin={2} style={{ marginTop: 10 }}>
           <TextField
             fullWidth
             color="common"
@@ -251,10 +251,10 @@ console.log(data,"data")
             inputProps={{ maxLength: 10 }}
             label="Contact Number " />
         </Stack>
-        <Stack style={{ marginTop: 40 }}>
-          <Typography>Day 1</Typography>
+        <Stack  style={{ marginTop: 10 }}>
+          <Typography margin={2}>Day 1</Typography>
         </Stack>
-        <Stack style={{ marginTop: 20 }} color="common" >
+        <Stack margin={2} style={{ marginTop: 20 }} color="common" >
 
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
@@ -268,10 +268,10 @@ console.log(data,"data")
           />
         </Stack>
 
-        <Stack style={{ marginTop: 40 }}>
-          <Typography>Day 2</Typography>
+        <Stack style={{ marginTop: 10 }}>
+          <Typography margin={2}>Day 2</Typography>
         </Stack>
-        <Stack style={{ marginTop: 20 }}>
+        <Stack margin={2} style={{ marginTop: 20 }}>
 
           <DateTimePicker popperPlacement="auto"
             renderInput={(props) => <TextField {...props} />}

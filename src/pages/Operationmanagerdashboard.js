@@ -254,7 +254,8 @@ export default function Operationmanagerdashboard() {
 
               <AppWidgetSummary
                 title="2nd day Turnout(%)"
-                total={summaryData?.summary_day2}
+                total={`${summaryData?.summary_day2} %`}
+                
                 color="warning"
 
               />

@@ -285,7 +285,7 @@ console.log(response.data.list , "busses data")
                 handleOpenFilter()
               }}>
 
-              <div style={{ float: 'left', paddingLeft: '20px', paddingTop: '20px', paddingRight: '20px',backgroundColor:'white' }}>
+              <div style={{ float: 'left', padding:'20px',backgroundColor:'white' }}>
                 <Iconify id="direction-bus-icon" icon="material-symbols:directions-bus" width={30} height={30} />
               </div>
               <Card sx={{ boxShadow: 0 }} >

@@ -29,7 +29,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   });
 export default function busTestList() {
   const {state} = useLocation()
-
+  const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
     const [clcikData, setClickData] = useState()
     const [date1, setDate1] = useState(null)
     const [open, setOpen] = React.useState(false);
@@ -116,8 +116,9 @@ export default function busTestList() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Bus Details  <Button variant="secondary" title="Choose date"  onClick={handleClickOpen}> <Iconify sx={{width:30,height:30}} icon="material-symbols:calendar-month"/>
-                  </Button>
+                    Bus Details  
+                    {(roleid!=2)?<Button variant="secondary" title="Choose date"  onClick={handleClickOpen}> <Iconify sx={{width:30,height:30}} icon="material-symbols:calendar-month"/>
+                  </Button>:null}
                 </Typography>
              
             </Stack> 

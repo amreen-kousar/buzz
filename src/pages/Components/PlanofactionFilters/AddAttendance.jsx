@@ -51,7 +51,6 @@ export default function AddAttendance({ shown, setShown, batch }) {
     
     var config = {
       method: 'post',
-    maxBodyLength: Infinity,
       url: 'https://bdms.buzzwomen.org/appTest/participantsAttendance.php',
       
       headers: { 

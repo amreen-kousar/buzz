@@ -11,6 +11,7 @@ import Filtersmain from './projectfilters/filtersmain';
 export default function enrolledVyaaparList() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
+    const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role
     const [filterData, setFilterData] = useState({})
      const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')
@@ -225,9 +226,9 @@ const id = sessionStorage?.getItem("proId")
                         <Typography variant="subtitle1" gutterBottom>
                                 {`  Village Name : ${itm?.villagename}`}
                             </Typography>
-                            {/* <Typography variant="subtitle1" gutterBottom>
+                           {(roleid==1 || roleid==3 || roleid==4 || roleid==12)?<Typography variant="subtitle1" gutterBottom>
                                 {`  Enrolled By : ${itm?.enrolled_by}`}
-                            </Typography> */}
+                            </Typography>:null}
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Enrolled Date : ${itm?.enroll_date}`}
                             </Typography>

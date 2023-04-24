@@ -215,9 +215,6 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
                             <Card style={{marginTop:20,}}>
                                 <CardContent >
                                     <Stack style={{ float:'right'}}  >
-                                        
-                                       
-                                      
 
                                        <IconButton style={{marginLeft:70,}} onClick={()=>removegelathicircle(itm)}>
                                         <Icon  icon="material-symbols:check-box-rounded" width={20} height={20} marginTop={20}  color="#ff7424"  />

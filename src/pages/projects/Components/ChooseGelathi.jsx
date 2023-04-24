@@ -220,7 +220,7 @@ const changeText = (e) => {
        </Stack>)
             }):
             <>
-            <Typography sx={{ ml: 2, flex: 55 }} variant="h6" component="div" color='inherit'>
+            <Typography sx={{ textAlign:'center',mt:2}} variant="h6" component="div" color='inherit'>
             No Enrolled Gelathi Found
             </Typography>
              

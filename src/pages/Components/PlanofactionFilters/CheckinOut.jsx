@@ -15,6 +15,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import moment from 'moment';
+import Iconify from 'src/components/Iconify';
 import { useGeolocated } from 'react-geolocated';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -197,9 +198,16 @@ console.log(checkIn,"checkintime")
   {console.log(checkData,"checkdataaaaaaaaaaaaa")}
   return (
     <div>
-     <Card><CardContent><Button variant="standard" onClick={handleClickOpen} >
-      Check IN / Check Out
-      </Button></CardContent> </Card>
+     <Card><CardContent><Typography variant="h6" onClick={handleClickOpen}>
+                 Check in/ Check Out
+                    <IconButton style={{ float: 'right' }}>
+                      <Iconify
+                        style={{ color: 'black' }}
+                        icon="material-symbols:add"
+                       
+                      />
+                    </IconButton>
+                  </Typography></CardContent> </Card>
       <Dialog
         fullScreen
         open={open}

@@ -129,7 +129,7 @@ console.log(checkData,"checkedta")
             <TableContainer component={Paper} sx={{width:'50vw'}}>
           <Table aria-label="customized table">
            
-           <ParticipentDetailsDailoge/>
+           
             <TableBody>
               
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Project </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.projectName}</TableCell></TableRow>
@@ -162,24 +162,23 @@ console.log(checkData,"checkedta")
           <ParticipentDetailsDailoge
             clcikData={clcikData}
             isOpenFilter={openFilter}
-            onOpenFilter={handleOpenFilter}
+            // onOpenFilter={handleOpenFilter}
             onCloseFilter={handleCloseFilter}
           />
         </Stack>
         {batch?.all_participants?.map(itm => {
           return (
             <Stack style={{ top: 100 }}>
-              <Card onClick={() => {
-                handleOpenFilter()
-                setClickData({ name: itm.gelathiname, title: "Enrolled  Name",id:itm?.participant_id})
-                console.log("🚀 ~ file: ShaktiDialog.jsx:139 ~ ShaktiDialog ~ itm?.id:", itm?.id)
-                
-              }}>
+              <Card >
                 <CardContent >
                   <CardActions sx={{borderRadius:0}}>
                     <div  style={{width:'90vw',display:'flex',position:'relative',padding:'8px'}} >
                      
-                      <Typography variant="subtitle2">{itm?.participant_name}</Typography>
+                      <Typography variant="subtitle2" onClick={()=>{handleOpenFilter();
+                      setClickData({ name: itm.gelathiname, title: "Enrolled  Name",id:itm?.participant_id})}
+                      }>
+                        {itm?.participant_name}
+                        </Typography>
                    <ShaktiForm/>
                     </div>
                   </CardActions>

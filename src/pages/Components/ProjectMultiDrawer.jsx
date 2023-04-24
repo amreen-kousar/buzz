@@ -43,6 +43,7 @@ projectMultiDrawer.propTypes = {
 };
 
 export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,batchState,projectId}) {
+console.log("🚀 ~ file: ProjectMultiDrawer.jsx:46 ~ projectMultiDrawer ~ clcikData:", clcikData)
 
      const [batch,setBatch] = useState('')
      const [schedule,setReschedule]=React.useState(false);
@@ -54,12 +55,13 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
 const [SaveBtn , setSaveBtn] = useState(false) 
 const [gelatiNote, setGelatiNote] = useState('');
  const [showNote, setShowNote] = useState(false);
-   
+   const [showalert,setShowalert]=useState(false);
   const [date, setDate] = useState(new Date())
   const [day2date,setday2date] = useState(new Date())
    const [session, setSession] = useState('');
    const [editSession,setEditsession]=useState(false);
    const [check,setCheck]=useState(false)
+   const [checkData,setCheckData]=React.useState('');
    const [viewImage, setViewImage] = React.useState(false);
    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
    const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
@@ -348,6 +350,10 @@ const noteSubmitHandler = () => {
       console.log(error);
     });
   }
+
+const handlealert=()=>{
+  alert('There is no training Batch')
+}
  
     return (
         <>
@@ -362,9 +368,7 @@ const noteSubmitHandler = () => {
             >
                 <Stack  id="pro-mutlidrawer-stack" direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                        {` ${clcikData?.name}`}
-                        {/* {clcikData?.title} */}
-                        {console.log(clcikData,"clicked data")}
+                      {clcikData?.title!=='Self Shakti'? clcikData?.name : clcikData?.title}
                     </Typography>
                     <IconButton id="project-close-icon-btn" onClick={onCloseFilter}>
                         <Iconify id="project-close-icon" icon="eva:close-fill" width={20} height={20} />
@@ -392,14 +396,15 @@ const noteSubmitHandler = () => {
                                     
 
                                     <Typography id="training" variant="body1" gutterBottom>
-                                        Training&nbsp;Batch:<br/>{batch?.data?.name} <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
+                                        Training&nbsp;Batch:<br/>{batch?.data?.name} 
+                                        {(userId==5)?<IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>:null}
                                     </Typography>
                                     <Typography id="day1" variant="body1" gutterBottom>
                                         Day1:&nbsp;{batch?.data?.day1_actual}
                                         
-            <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
+           {(userId==5)?<> <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
             {console.log(session,"sessionidddddddd")}
-            <IconButton onClick={()=>removesession(batch?.data?.day1_id)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton>
+            <IconButton onClick={()=>removesession(batch?.data?.day1_id)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton></>:null}
                                     </Typography>
                                     {schedule && <Stack>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -416,8 +421,8 @@ const noteSubmitHandler = () => {
       <EditTrainingBatch batch={batch} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}}/>
                                     <Typography id="day2" variant="body1" gutterBottom>
                                         Day2:&nbsp;{batch?.data?.day2_actual}
-                                        <IconButton onClick={day2Reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
-            <IconButton onClick={()=>removesession(batch?.data?.day2_id)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton>
+                                        {(userId==5)?<><IconButton onClick={day2Reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
+            <IconButton onClick={()=>removesession(batch?.data?.day2_id)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton></>:null}
                                         
                                     </Typography>
                                     {day2Schedule && <Stack>
@@ -457,13 +462,13 @@ const noteSubmitHandler = () => {
                                     <Typography id="target particpants">Target Participants:   {batch?.data?.participants}    </Typography>
                                 </CardContent>
                             </Card>
-                            <Photos id="photos-project-multidrawer" batch={batch} photos={photos} setPhotos={(e)=>{setPhotos(e)}}/>
+                            {/* <Photos id="photos-project-multidrawer" batch={batch} photos={photos} setPhotos={(e)=>{setPhotos(e)}}/> */}
 
 
 
                             {/* //photo upload button  */}
                
-{(userId==1 || userId==3 || userId==5)?<>
+{( userId==5)?<>
 <Card id="delete-card-project" style={{marginTop:20}}>
 <div id="project-multidrawwer-div" style={{ display: 'flex' }}>
                 {viewImage
@@ -526,7 +531,15 @@ const noteSubmitHandler = () => {
                                     
                                 </CardContent>
                                 </Card>
-                                <Card  style={{marginTop:20}}> </Card></>:null} <br/>
+                                </>:null} <br/>
+                                {(batch && userId==5) && <CheckinOut
+              photos={check}
+              batch={batch}
+              setCheck={(e) => {
+                setCheck(e);
+              }}
+               />}<br/>
+
                             {/* photo upload end  */}
                            
                                 {/* <input accept="image/png, image/gif, image/jpeg"
@@ -544,16 +557,12 @@ const noteSubmitHandler = () => {
                                     
                                 </CardContent> */}
                             {/* </Card> */}
-                            <Programevaluationday1 onCloseFilter={onCloseFilter} />
-                            <Evaluationday2  onCloseFilter={onCloseFilter}/>
-                           {batch && <CheckinOut
-              photos={check}
-              batch={batch}
-              setCheck={(e) => {
-                setCheck(e);
-              }}
-               />}
 
+
+                            {/* {batch?.evaluation_first==0? " there i sno training batch"} */}
+                       <Programevaluationday1 onCloseFilter={onCloseFilter} />
+                            <Evaluationday2  onCloseFilter={onCloseFilter}/>
+              
                   <Card style={{ marginTop: 20 }}>
                 <CardContent>
                   <Typography variant="h6">
@@ -570,8 +579,8 @@ const noteSubmitHandler = () => {
                   </Typography>
                 </CardContent>
               </Card>
-
-              {showNote ? (
+{/* batch?.batch_completed=='0' */}
+              {  showNote ? (
                 <div>
                   {/* <Dialog fullScreen open={open} onClose={handleClose}TransitionComponent={Transition}></Dialog> */}
                   <Card style={{ marginTop: 20, marginLeft: 10 }}>
@@ -596,10 +605,11 @@ const noteSubmitHandler = () => {
                         setGelatiNote(e?.target?.value);
                         console.log('note', gelatiNote);
                       }}
+                      
                     ></TextField>
-                    {/* {SaveBtn? 
+                                 {SaveBtn? 
                     
-                    <> */}
+                    <>
                      <Button
                       style={{ color: "#ff7424", marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:"#ffd796"}}
                       onClick={noteSubmitHandler}
@@ -615,13 +625,13 @@ const noteSubmitHandler = () => {
                    setShowNote(false)
                   }}
                 >
+                   Cancel
+                  {/* <Cancel></Cancel> */}
+                  </Button>
                   
-                
-                  Cancel
-         
-                </Button> 
-                    {/* </> */}
-                    {/* :
+                    </>
+                     :
+               
                     <>
                   
                       <Button
@@ -644,10 +654,9 @@ const noteSubmitHandler = () => {
                    </Button> 
                    </>
                    }
-                   */}
                   </Card>
                 </div>
-              ) : null}
+              ) :null}
 
               <CardContent>
                 <div>
@@ -671,7 +680,7 @@ const noteSubmitHandler = () => {
                               <Typography variant="body1">
                                 {' '}
                                 {/* {userName} */}
-                                 {i?.date}
+                               {i?.name} &nbsp; {i?.date}
                               </Typography>
 
                               {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
