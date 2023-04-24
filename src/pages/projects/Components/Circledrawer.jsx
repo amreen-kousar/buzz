@@ -24,6 +24,8 @@ import {
     TextField
 } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import moment from 'moment';
 import GelathiCircleForm from './GelathiCircleForm';
@@ -270,12 +272,14 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
                           
                                 <Card style={{marginTop:20}}>
                                     <CardContent>
+                                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DateTimePicker
-                    label="Date&Time picker"
-                    value={addData?.date}
+                    label="Date & Time picker"
+                   
                     onChange={(e) => { handleChange(e) }}
-                    renderInput={(params) => <TextField {...params} color="common" />}
-                  />
+                    renderInput={(params) => <TextField required {...params} color="common" />}
+                    value={addData?.date}
+                  /></LocalizationProvider>
                                     </CardContent>
                                 </Card>
                                 <Stack mt={5}>
