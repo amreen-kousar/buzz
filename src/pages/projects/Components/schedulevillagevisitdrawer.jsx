@@ -175,6 +175,10 @@ console.log(scheduleData,"scheduldataaaaaaaaa")
                     value={addData?.date}
                     onChange={(e) => { handleChange(e) }}
                     renderInput={(params) => <TextField {...params} color="common" />}
+                    PopperProps={{
+                      placement: "top"
+                  
+                    }}
                   />
                                     </CardContent>
                                 </Card>

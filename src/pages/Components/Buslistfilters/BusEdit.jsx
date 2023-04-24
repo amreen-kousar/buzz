@@ -37,12 +37,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function BusEdit({ clcikData,busesd,updatedata}) {
+export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHandler ,busDetails}) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [age, setAge] = React.useState('');
   const [editData, setEditData] = useState('')
   const [date, setDate] = useState(new Date())
+  const userDetails = localStorage?.getItem('userId')
   const [sendData, setSendData] = useState({
     lastUpdatedBy: "",
     chassis_number: "",
@@ -78,7 +79,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
   const enterData = () => {
     console.log(clcikData,"-----------------" ,sendData, "<---sendDataefewfs")
     setSendData({
-      chassis_number: clcikData?.chassis_number,
+      chassis_number: clcikData?.chassis_number || busDetails?.chassis_number,
       "lastUpdatedBy": "",
       "insurance_number": clcikData?.insurance_number,
       "register_date": moment(clcikData?.register_date).format('DD/MM/YYYY'),
@@ -92,16 +93,19 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
       "permit": moment(clcikData?.permit).format('DD/MM/YYYY'),
       "fitness_certificate": moment(clcikData?.fitness_certificate).format('DD/MM/YYYY'),
       "register_number": clcikData?.register_number,
-      "bus_id": clcikData?.bus_id,
+      "bus_id": clcikData?.bus_id || busDetails?.bus_id,
       "next_service_due_date":moment( clcikData?.next_service_due_date).format('DD/MM/YYYY')
 
     })
   }
+  
+  console.log(clcikData,"-----------------clicked data in edit ")
 
   useEffect(() => {
     enterData()
-  }, [clcikData]
+  }, [clcikData,busDetails]
   )
+  console.log(busDetails ,"busDetails in edit")
   const edit = async => {
   
     handleClose()
@@ -121,7 +125,8 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
       "permit": sendData?.permit,
       "fitness_certificate": sendData?.fitness_certificate,
       "register_number": sendData?.register_number,
-      "bus_id": sendData?.bus_id,
+      "bus_id": sendData?.bus_id || busDetails?.bus_id,
+      // "bus_id": "4",
       "next_service_due_date": sendData?.next_service_due_date
     });
    console.log(data,"-------------------->dataaaaaaaa")
@@ -138,6 +143,7 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
       .then(function (response) {
         setEditData(response.data)
         updatedata();
+        reloadHandler()
         console.log(response.data, '<----------njknjjkkjn');
       })
       .catch(function (error) {
@@ -162,7 +168,10 @@ export default function BusEdit({ clcikData,busesd,updatedata}) {
             backgroundColor: 'white',
           }
         }} >
-        <Iconify id="edit-bus-btn" icon="material-symbols:edit" style={{ width: '30px', height: '30px', color: '#e69138', marginLeft: "190px"  }} 
+        <Iconify id="edit-bus-btn" icon="material-symbols:edit" style={
+        admin?  { width: '30px', height: '30px', color: '#e69138' }: { width: '30px', height: '30px', color: '#e69138', marginLeft: "190px"}
+      
+        } 
         
         ></Iconify>
       </Button>

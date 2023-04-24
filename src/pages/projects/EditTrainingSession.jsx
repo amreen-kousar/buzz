@@ -274,6 +274,10 @@ console.log(data,"data")
               setTrainerData({ ...trainerData, day1: newValue })
               //setValue(newValue);
             }}
+            PopperProps={{
+              placement: "top"
+          
+            }}
           />
         </Stack>
 
@@ -287,7 +291,10 @@ console.log(data,"data")
             label="DateTimePicker"
             value={trainerData?.day2}
             // value={value}
-
+            PopperProps={{
+              placement: "top"
+          
+            }}
             onChange={(newValue) => {
               setTrainerData({ ...trainerData, day2: newValue })
               //setValue(newValue);

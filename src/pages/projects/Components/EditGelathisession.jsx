@@ -148,6 +148,10 @@ export default function EditGelathiSession({session,editSession, setEditsession}
     value={date}
     onChange={(e) => {setDate(e)}}
     renderInput={(params) => <TextField {...params} color="common" />}
+    PopperProps={{
+      placement: "top"
+  
+    }}
   />
         </LocalizationProvider>
        

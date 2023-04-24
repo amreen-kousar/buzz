@@ -413,6 +413,10 @@ const handlealert=()=>{
     value={date}
     onChange={(e) => {setDate(e)}}
     renderInput={(params) => <TextField {...params} color="common" />}
+    PopperProps={{
+      placement: "top"
+  
+    }}
   />
         </LocalizationProvider>
         {console.log(batch,"session?.id")}
@@ -432,6 +436,10 @@ const handlealert=()=>{
     value={date}
     onChange={(e) => {setDate(e)}}
     renderInput={(params) => <TextField {...params} color="common" />}
+    PopperProps={{
+      placement: "top"
+  
+    }}
   />
         </LocalizationProvider>
         {console.log(batch,"session?.id")}

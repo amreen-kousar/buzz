@@ -405,6 +405,10 @@ const convertImage = (e) => {
     value={date}
     onChange={(e) => {setDate(e)}}
     renderInput={(params) => <TextField {...params} color="common" />}
+    PopperProps={{
+      placement: "top"
+  
+    }}
   />
         </LocalizationProvider>
         {console.log(session,"session?.id")}

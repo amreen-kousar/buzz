@@ -310,7 +310,10 @@ id="date-time-picker"
   label="From"
   value={addData?.date}
   onChange={(e) => { handleChange(e) }}
-  
+  PopperProps={{
+    placement: "top"
+
+  }}
   renderInput={(params) => <TextField required {...params} color="common" />}
 />
 
@@ -329,7 +332,10 @@ minDate={today}
   value={addData?.date}
   onChange={(e) => { handleChange(e) }}
   renderInput={(params) => <TextField {...params} color="common" />}
- 
+  PopperProps={{
+    placement: "top"
+
+  }}
 />
 
 </Stack><br/>
@@ -344,6 +350,10 @@ minDate={today}
     value={addData?.date2}
     onChange={(e) => { handleChange2(e) }}
     renderInput={(params) => <TextField {...params} color="common" />}
+    PopperProps={{
+      placement: "top"
+  
+    }}
   />
   {/* </LocalizationProvider> */}
 </Stack>

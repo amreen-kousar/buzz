@@ -275,6 +275,10 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
                     value={addData?.date}
                     onChange={(e) => { handleChange(e) }}
                     renderInput={(params) => <TextField {...params} color="common" />}
+                    PopperProps={{
+                      placement: "top"
+                  
+                    }}
                   />
                                     </CardContent>
                                 </Card>
