@@ -221,10 +221,14 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
         console.log(error);
       });
   }
+  //hloooo
   console.log(profileData ,"<---345678i")
   return (
     <Page title="profile">
       <Container>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
             Profile 
@@ -243,7 +247,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
      
       <div style={{display:"flex",justifyContent:"center",width:"75vw"}}>
       <div>
-      <Card sx={{ width: 420 }}><br />
+      <Card sx={{ width: '100wh' }} ><br />
 
        
 <Stack spacing={1} sx={{ px: 1 }}>
@@ -499,6 +503,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
 </Card>
       </div>
       </div>
+      </Grid></Grid>
       </Container>
       </Page>
   );
