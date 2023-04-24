@@ -238,10 +238,10 @@ export default function Own(props) {
                                                 <Typography id="TA-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
                                             </Grid>
                                             <Grid item xs={4}>
-                                            {(itm?.status=='0')?<><Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
-                                               <Iconify id="icon-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify></>:
-                                               (itm?.status=='1')?<Iconify icon="mdi:tick" style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "green" }}></Iconify>
-                                               :<Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>}
+                                            {(itm?.status=='0')?<><Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", padding:2,marginTop:5,fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+                                               <Iconify id="icon-access-time" style={{ float: "right", padding:2,fontSize: 30,marginTop:5, color: "#303030" }} icon="ic:outline-access-time"></Iconify></>:
+                                               (itm?.status=='1')?<Iconify icon="mdi:tick" style={{ float: "right", padding:2,marginTop:5, fontSize: 30, color: "green" }}></Iconify>
+                                               :<Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 30, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>}
                                             </Grid>
 
 
