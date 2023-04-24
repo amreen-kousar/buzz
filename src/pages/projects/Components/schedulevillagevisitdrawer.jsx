@@ -174,7 +174,7 @@ console.log(scheduleData,"scheduldataaaaaaaaa")
                     label="Date&Time picker"
                     value={addData?.date}
                     onChange={(e) => { handleChange(e) }}
-                    renderInput={(params) => <TextField {...params} color="common" />}
+                    renderInput={(params) => <TextField required {...params} color="common" />}
                   />
                                     </CardContent>
                                 </Card>
