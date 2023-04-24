@@ -680,7 +680,7 @@ const convertImage = (e) => {
                             >
                               <Typography variant="body1">
                                 {' '}
-                                {i?.name} {i?.date}
+                                {i?.name} {i?.date} 
                               </Typography>
 
                               {console.log(i?.notes, '<----------------------i?.notesi?.notes')}

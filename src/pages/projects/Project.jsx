@@ -43,6 +43,7 @@ function Project(props) {
   const userDetails = localStorage?.getItem('userId');
   console.log(userDetails, "userrrrrrrrrrrrr")
   const [data1, setData1] = useState('')
+  console.log("🚀 ~ file: Project.jsx:46 ~ Project ~ data1:", data1)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [circlemeeting, setCirclemeeting] = React.useState(null);
   const open = Boolean(anchorEl);
