@@ -240,9 +240,10 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
                                 {console.log(itm,"itemsssssssss")}
                             </Grid>
                             <Grid id="grid-delete-ta" item xs={4}>
-                                <Iconify id="icon-delete-ta" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
-                                {(itm?.status==0)?<Iconify style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>:
-                                <Iconify id="icon-tick-circle" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "green" }} icon="mdi:tick-circle"></Iconify>}
+                                {/* <Iconify id="icon-delete-ta" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify> */}
+                                {(itm?.status==0)?<><Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 10, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+                                               <Iconify id="icon-access-time" style={{ float: "right", right:20,marginTop:10,fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify></>:
+                                <Iconify id="icon-tick-circle" style={{ float: "right", marginTop: 10, marginRight: 30, fontSize: 30, color: "green" }} icon="mdi:tick-circle"></Iconify>}
                             </Grid>
                         </Grid>
                     </Card>
