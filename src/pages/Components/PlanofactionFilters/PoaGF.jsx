@@ -152,7 +152,7 @@ const noteSubmitHandler = () => {
       notes: gelatiNote,
       type: session.type,
       tb_id: session.tb_id,
-      emp_id: session.user_id,
+      emp_id: userid,
     });
 
     console.log(data, 'material api');

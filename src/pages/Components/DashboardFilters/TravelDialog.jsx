@@ -66,7 +66,7 @@ export default function TravelDialog({ viewMessage }) {
     foodexpenses: "",
     telephonecharges: "",
     printing: "",
-    stationary: "",
+    stationery: "",
     otherExpenses: "",
     OtherAmount: "",
     endOdimeter: "",
@@ -154,7 +154,7 @@ console.log("submittedddddddd")
       "srpoa":sendData?.srpoa,
       "start_odometer": sendData?.odimeter,
       "rate_per_KM": sendData?.rateperkm,
-      "stationery": sendData?.stationary,
+      "stationery": sendData?.stationery,
       "klmtr": sendData?.rateperkm,
       "da": sendData?.foodexpenses,
       "others": sendData?.otherExpenses,
@@ -570,7 +570,7 @@ axios(config)
               
               </Stack>
               <Stack style={{ marginTop: 20 }}>  
-                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, stationary: e?.target?.value }) }} label="stationery" variant="outlined" color="common" 
+                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, stationery: e?.target?.value }) }} label="stationery" variant="outlined" color="common" 
                 InputProps={{
                      endAdornment: (
                        <InputAdornment position="start">
