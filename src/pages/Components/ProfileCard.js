@@ -230,14 +230,14 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
             Profile 
           </Typography>
 
-          <IconButton >
+          {/* <IconButton >
                    <Iconify sutofocus icon="material-symbols:exit-to-app"  sx={{ float: "right", marginLeft: 85 }}  onClick={handleClickOpen} />
                    <SimpleDialog
         // selectedValue={selectedValue}
         open={open}
         onClose={handleClose}
       />
-                    </IconButton>
+                    </IconButton> */}
          
         </Stack>
      

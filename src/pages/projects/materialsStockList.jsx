@@ -225,7 +225,7 @@ console.log(materialStock , " chnaged data")
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
                    Material Stock List 
-                  {Userrole == 2 || 4?
+                  {Userrole == 2 || Userrole==4?
                   <>
                   {close?
                     <IconButton  style={{ float: 'right',backgroundColor: '#ed6c02', color:"white", position: 'absolute', right: 0, marginRight: '125px' }} onClick={
@@ -305,7 +305,7 @@ console.log(materialStock , " chnaged data")
             </TableBody>
           </Table>
         </TableContainer>
-        {Userrole == 2 || 4?
+        {(Userrole == 2 || Userrole==4) && close?
                   
                   // <IconButton  style={{ float: 'right', color: '#ff7424', position: 'absolute', right: 0, marginRight: '125px' }} onClick={
                   //  onSubmit

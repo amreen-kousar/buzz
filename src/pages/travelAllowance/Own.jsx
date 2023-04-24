@@ -80,7 +80,22 @@ export default function Own(props) {
         // itm.klmtr = +klmtr;
         setEditData(itm)
         console.log(editData)
-        setOpenFilter(true);
+        if(itm?.status=='0')
+        {
+            setOpenFilter(true)
+        }
+        else
+        {
+            setOpenFilter(false)
+            if(itm?.status=='1'){
+                alert("already approved")
+            }
+            if(itm?.status=='4'){
+                alert("already Verified")
+            }
+
+        }
+  
     };
 
     const handleCloseFilter = () => {
@@ -223,8 +238,10 @@ export default function Own(props) {
                                                 <Typography id="TA-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
-                                                <Iconify id="icon-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
+                                            {(itm?.status=='0')?<><Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+                                               <Iconify id="icon-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify></>:
+                                               (itm?.status=='1')?<Iconify icon="mdi:tick" style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "green" }}></Iconify>
+                                               :<Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>}
                                             </Grid>
 
 

@@ -10,6 +10,7 @@ import Filtersmain from './projectfilters/filtersmain';
 export default function gelathiCirclesList() {
   const { state } = useLocation()
   const [clcikData, setClickData] = useState()
+  const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role
   const [gelathiCircles, setgelathiCircles] = useState('');
   const [filterData, setFilterData] = useState({})
   const [reload,setReload]=useState(false);
@@ -154,7 +155,7 @@ console.log("Ihdfgdjhc")
             {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
           </Button>:null}
-        <ChooseGelathi data1={data1} circle={circle}/>
+       {(roleid==6 || roleid==13)? <ChooseGelathi data1={data1} circle={circle}/>:null}
 
       </Stack>
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>

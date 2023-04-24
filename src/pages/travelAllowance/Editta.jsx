@@ -314,7 +314,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
             <CloseIcon />
           </IconButton>
           <Typography id="edit-travel-allowances" sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Edit Travel Allowances
+            Update Allowance
           </Typography>
 
 

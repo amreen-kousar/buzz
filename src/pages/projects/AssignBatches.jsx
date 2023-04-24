@@ -216,7 +216,7 @@ console.log(alloted,"allottedddddddddddddddddd")
             </Stack>
           
         
-        <Card style={{ marginTop: 20,  borderRadius: 20 }}>
+        {(data1?.gelathiFacilitator?.length>0)?<Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Select Gelathi Facilitator </Typography>
                   <Stack mt={2} mb={2}>
@@ -234,7 +234,7 @@ console.log(alloted,"allottedddddddddddddddddd")
                 </Select>
                   </Stack>
                 </CardContent>
-          </Card><br/>
+          </Card>:<h3 style={{textAlign:'center'}}>No Gelathi facilitators</h3>}<br/>
 
           
        
