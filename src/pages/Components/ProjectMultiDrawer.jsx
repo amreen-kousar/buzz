@@ -253,7 +253,7 @@ const noteSubmitHandler = () => {
       notes: gelatiNote,
       type: 1,
       tb_id: batch?.data?.id,
-      emp_id: batch?.data?.user_id,
+      emp_id: userid,
     });
 
     console.log(data, 'material api');
