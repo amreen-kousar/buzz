@@ -87,7 +87,8 @@ export default function Trainerslist(){
         <div style={{position:'absolute',right:'0px',float:'right'}}>
       
       <IconButton onClick={handleClickOpen}>
-       <Iconify icon="material-symbols:add" width={20} height={20}  color="black"  />
+   
+       <Iconify icon="material-symbols:add"  width={20} height={20}  color="black"  />
       </IconButton>
       </div> 
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>

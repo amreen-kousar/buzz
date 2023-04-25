@@ -33,8 +33,8 @@ export default function CreateTrainerBatch(props) {
     "project_id": "",
     "contact_person": "",
     "number_of_participants": "",
-    "day1": new Date(),
-    "day2": new Date(),
+    "day1": dayjs(new Date()),
+    "day2": dayjs(new Date()),
     "location_id": "",
     "contact_number": "",
     "trainer_id": "",
@@ -45,6 +45,16 @@ export default function CreateTrainerBatch(props) {
     talaq_id: '',
 
   })
+  const today = dayjs();
+  const dateChangeHandler =(e) =>{
+    setTrainerData({ ...trainerData, day1: e })
+  }
+  const endDateChnageHandler = (e)=>{
+    console.log(trainerData.day2,"date in state 1")
+    setTrainerData({ ...trainerData, day2: e })
+    console.log(trainerData.day2,"date in state 2")
+
+  }
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -82,19 +92,21 @@ console.log(data,"data")
         console.log(error);
       });
   }
+  console.log( moment(trainerData?.day2)?.format('YYYY/MM/DD  h:mm:ss a') , "date in state ")
   const createTrainerBatch = async => {
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     const datass = village?.list?.filter(it => { return it?.id === trainerData?.talaq_id })
-    console?.log(datass, village?.list, trainerData?.talaq_id, "<--kjughfd")
+    console?.log(  moment(trainerData?.day1)?.format('YYYY-MM-DD HH:mm:ss'), "<--kjughfd")
+    console?.log(  moment(trainerData?.day2)?.format('YYYY-MM-DD HH:mm:ss'), "<--kjughfd")
     var data = JSON.stringify({
       "batch_name": datass[0]?.name,
       "sub_village": trainerData?.sub_village,
       "project_id": props?.data1?.project_id,
       "contact_person": trainerData?.contact_person,
       "number_of_participants": trainerData?.number_of_participants,
-      "day1": moment(trainerData?.day1)?.format('YYYY/MM/DD  h:mm:ss a'),
-      "day2": moment(trainerData?.day2)?.format('YYYY/MM/DD  h:mm:ss a'),
+      "day1": moment(trainerData?.day1.$d)?.format('YYYY/MM/DD  h:mm:ss '),
+      "day2": moment(trainerData?.day2.$d)?.format('YYYY/MM/DD  h:mm:ss '),
       "location_id": props?.data1?.location_id,
       "contact_number": trainerData?.contact_number,
       "trainer_id": idvalue
@@ -258,13 +270,16 @@ console.log(data,"data")
 
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
+            // defaultValue={today}
+            minDate={today}
             label="DateTimePicker"
             color="common"
             value={trainerData?.day1}
-            onChange={(newValue) => {
-              setTrainerData({ ...trainerData, day1: newValue })
-              //setValue(newValue);
+            PopperProps={{
+              placement: "top"
+          
             }}
+            onChange={(e) => { dateChangeHandler(e) }}
           />
         </Stack>
 
@@ -273,17 +288,23 @@ console.log(data,"data")
         </Stack>
         <Stack margin={2} style={{ marginTop: 20 }}>
 
-          <DateTimePicker popperPlacement="auto"
-            renderInput={(props) => <TextField {...props} />}
+          <DateTimePicker 
+          id="date-time-picker" 
+          defaultValue={trainerData?.day1}
+                     minDate={trainerData?.day1}
+                     renderInput={(params) => <TextField required {...params} color="common" />}
             label="DateTimePicker"
+          
             value={trainerData?.day2}
-            // value={value}
-
-            onChange={(newValue) => {
-              setTrainerData({ ...trainerData, day2: newValue })
-              //setValue(newValue);
+          
+            onChange={(e) => { endDateChnageHandler(e) }}
+            PopperProps={{
+              placement: "top"
+          
             }}
           />
+        
+
         </Stack><br/><br/><br/>
       </Dialog>
     </div>

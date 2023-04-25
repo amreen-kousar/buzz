@@ -412,6 +412,10 @@ const noteSubmitHandler = () => {
     value={date}
     onChange={(e) => {setDate(e)}}
     renderInput={(params) => <TextField {...params} color="common" />}
+    PopperProps={{
+      placement: "top"
+  
+    }}
   />
         </LocalizationProvider>
         {console.log(session,"session?.id")}
@@ -437,7 +441,7 @@ const noteSubmitHandler = () => {
                 </CardContent>
               </Card>
               <AddAttendance
-                batch={batch}
+                batch={session}
                 shown={shown}
                 setShown={(e) => {
                   setShown(e);

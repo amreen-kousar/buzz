@@ -24,11 +24,14 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
+import BusEdit from '../Components/Buslistfilters/BusEdit';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 export default function busTestList() {
   const {state} = useLocation()
+  const userDetails = localStorage?.getItem('userId')
   const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
     const [clcikData, setClickData] = useState()
     const [date1, setDate1] = useState(null)
@@ -36,10 +39,26 @@ export default function busTestList() {
     const [date2, setDate2] = useState(null)
     var  [selected, setSelected] = useState(null)
     const [buses, setBuses] = useState();
+    const [userUpdate,setUserUpdate]=useState(false)
+    const [detailsData, setDetailsData] = useState();
+    const [deletebus, setDeleteBus] = useState();
+    const [reload , setReload] = useState(false)
+    const [admin , setAdmin] = useState(true)
     useEffect(() => {
         busesdata()
+        details()
     }, []
     )
+
+    useEffect(() => {
+      busesdata()
+      details()
+  }, [reload]
+  )
+
+  const reloadHandler = ()=>{
+    setReload(!reload)
+  }
 
     const [openFilter, setOpenFilter] = useState(false);
 
@@ -69,7 +88,31 @@ export default function busTestList() {
       setSelected(null)
         busesdata();
     }
+    const DeleteBus = async => {
+      var data = JSON.stringify({
+        "bus_id": buses?.bus_id || null
+      });
   
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/deleteBus.php',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: data
+      };
+  
+      axios(config)
+        .then(function (response) {
+          deletebuses()
+          setDeleteBus(response.data)
+          console.log(response.data, '<------deleteee');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  
+    }
    
     const busesdata = async (i, id, g) => {
         var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
@@ -106,7 +149,34 @@ export default function busTestList() {
       }
     
 {console.log(buses,"buesesssssssssss")}
+const details = async => {
+  console.log(clcikData, "<-----clcikDataclcikData")
+  var data = JSON.stringify({
+    "bus_id": buses?.bus_id 
+  });
 
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data
+  };
+
+  axios(config)
+    .then(function (response) {
+
+      setDetailsData(response.data)
+      updatedata()
+      console.log(JSON.stringify(response.data, '<njnjnjn'));
+      console.log(response.data , "busdetails ")
+    })
+    .catch(function (error) {
+      console.log(error, "<---error");
+    });
+
+}
     return (
 
         <Container>
@@ -116,10 +186,35 @@ export default function busTestList() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Bus Details  
+                        Bus Details  
+                        </Typography>
+                        <div style={{display:"flex"}}>
+                   
+                   
+                  
+                   
+                    
+                    {(userDetails==2)?<Button id="delete-icon" onClick={DeleteBus} style={{float:'right',textAlign:'left'}} sx={{
+          '&:hover': {
+            backgroundColor: 'white',
+          },
+        }} ><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138',float:'right'}}></Iconify> </Button>:null}
+           {(userDetails==2)?
+           <div style={{"width":"30px"}}>
+           <BusEdit clcikData={buses}
+            // busesd={busesd}
+             admin ={admin}
+             updatedata={()=>{setUserUpdate(!userUpdate)}}
+             reloadHandler={reloadHandler}
+             />
+          </div>
+             :null}
+                    </div>
+        
+          
                     {(roleid!=2)?<Button variant="secondary" title="Choose date"  onClick={handleClickOpen}> <Iconify sx={{width:30,height:30}} icon="material-symbols:calendar-month"/>
                   </Button>:null}
-                </Typography>
+               
              
             </Stack> 
              

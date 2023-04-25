@@ -181,10 +181,15 @@ console.log(scheduleData,"------------------------------>scheduleDatascheduleDat
                                 <Card style={{marginTop:20}}>
                                     <CardContent>
                                     <DateTimePicker
+                                    required
                     label="Date&Time picker"
                     value={addData?.date}
                     onChange={(e) => { handleChange(e) }}
                     renderInput={(params) => <TextField {...params} color="common" />}
+                    PopperProps={{
+                      placement: "top"
+                  
+                    }}
                   />
                                     </CardContent>
                                 </Card>

@@ -232,6 +232,10 @@ export default function PoaEdit({ setSucess, itm }) {
                     value={addData?.date}
                     onChange={(e) => { handleChange(e) }}
                     renderInput={(params) => <TextField {...params} color="common" />}
+                    PopperProps={{
+                      placement: "top"
+                  
+                    }}
                   />
 
                 </Stack>
@@ -244,6 +248,10 @@ export default function PoaEdit({ setSucess, itm }) {
                       value={addData?.date2}
                       onChange={(e) => { handleChange2(e) }}
                       renderInput={(params) => <TextField {...params} color="common" />}
+                      PopperProps={{
+                        placement: "top"
+                    
+                      }}
                     />
                     {/* </LocalizationProvider> */}
                   </Stack>
