@@ -45,6 +45,7 @@ projectMultiDrawer.propTypes = {
 export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,batchState,projectId}) {
 
      const [batch,setBatch] = useState('')
+     console.log("🚀 ~ file: ProjectMultiDrawer.jsx:49 ~ projectMultiDrawer ~ batch:", batch)
      const [schedule,setReschedule]=React.useState(false);
      const [day2Schedule,setday2Reschedule]=React.useState(false);
      const [photos,setPhotos] = React.useState(false)
@@ -435,6 +436,7 @@ const noteSubmitHandler = () => {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
            <DateTimePicker
    required
+   
     value={date}
     onChange={(e) => {setDate(e)}}
     renderInput={(params) => <TextField {...params} color="common" />}
@@ -492,8 +494,8 @@ const noteSubmitHandler = () => {
                 setCheck(e);
               }}
                />}
-                <Programevaluationday1 onCloseFilter={onCloseFilter} />
-                            <Evaluationday2  onCloseFilter={onCloseFilter}/>
+                <Programevaluationday1 batch={batch} onCloseFilter={onCloseFilter} />
+                            <Evaluationday2 batch={batch}  onCloseFilter={onCloseFilter}/>
 
       
               <Stack style={{ flexDirection: 'row'}}  mb={2}>

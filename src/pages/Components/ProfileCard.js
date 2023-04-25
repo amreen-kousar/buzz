@@ -224,10 +224,10 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
   //hloooo
   console.log(profileData ,"<---345678i")
   return (
-    <Page title="profile">
+    <Page title="profile" style={{margin:"1rem"}}>
       <Container>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
+      <Grid container spacing={2} justifyContent="space-around">
+        <Grid item xs={10} sm={6}>
           
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
