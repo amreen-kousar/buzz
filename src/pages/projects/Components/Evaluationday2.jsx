@@ -13,7 +13,7 @@ import Swal from 'sweetalert2'
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
-export default function Evaluationday2({onCloseFilter})
+export default function Evaluationday2({onCloseFilter,batch})
 {
     const [open, setOpen] = React.useState(false);
     const [formdata,setformdata] = React.useState(false);
@@ -34,7 +34,15 @@ export default function Evaluationday2({onCloseFilter})
       re_emphasize:[],
     })
     const handleClickOpen = () => {
-        setOpen(true);
+      {(batch?.evaluation_first !=0) ? setOpen(true):         
+        Swal.fire({
+        icon: 'info',
+        title: 'No Evaluation Form',
+        text: 'No Evaluation Form',
+        confirmButtonText: 'Ok',
+        timer: 2000
+      });}
+        
       };
 
       const handleClose=()=>{
