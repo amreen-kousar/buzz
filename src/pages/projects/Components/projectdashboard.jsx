@@ -25,8 +25,8 @@ import TableRow from '@mui/material/TableRow';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
-export default function Projectdashboard() {
-   console.log("called Projectdashboard()")
+export default function Projectdashboard({profileData}) {
+   console.log("called Projectdashboard()",profileData?.role_id)
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -106,9 +106,10 @@ export default function Projectdashboard() {
     setLoader(true)
     
     var userid = JSON.parse(localStorage.getItem('profiledetails'))?.emp_id
-    var role = JSON.parse(localStorage.getItem('profiledetails'))?.role
+    var role = JSON.parse(localStorage.getItem('profiledetails'))?.role_id
+    console.log("🚀 ~ file: projectdashboard.jsx:109 ~ apiHit ~ role:", role)
 
-    let roleid 
+    var roleid 
 
     if(role==="Trainer"){
       roleid="5"
@@ -130,10 +131,10 @@ export default function Projectdashboard() {
       localStorage.setItem('profilerole','13')
     }
 
-    console.log(roleid , userid , "profile details")
+    console.log(roleid , userid , "profile details vvvvvvvvvvvvvv")
     const data = {
       end_date: g === "date" ? i : '',
-      role_id: roleid,
+      role_id: profileData?.role_id,
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       trainerId: g ? "" : i === 5 ? id?.id : '',
@@ -147,6 +148,7 @@ export default function Projectdashboard() {
       project_id: g ? "" : i === 3 ? id?.id : '',
       opsManager: g ? "" : i === 4 ? id?.id : '',
     };
+    console.log("🚀 ~ file: projectdashboard.jsx:149 ~ apiHit ~ data:", data)
     {console.log(data.gflId, "hello data.gflId")}
     const config = {
       method: 'post',
@@ -234,8 +236,8 @@ export default function Projectdashboard() {
   const closefilter = () => {
     console.log("deleted")
   }
-const idvalue=JSON.parse(localStorage.getItem('profilerole'))
-console.log(idvalue,"idddddddddddddd")
+
+// console.log(idvalue,"idddddddddddddd")
   return (
 <>
 <IconButton onClick={handleClickOpen}><Iconify style={{ color: "black" ,right:0,float:'right'}} icon="fluent:notebook-eye-20-filled" /></IconButton>
@@ -276,7 +278,7 @@ console.log(idvalue,"idddddddddddddd")
           />
         </Stack>
 
-        {(idvalue==4 || idvalue==5)?<Grid container spacing={3} marginTop={1}>
+        {(profileData?.role_id==4 || profileData?.role_id==5)?<Grid container spacing={3} marginTop={1}>
             
           {
             summaryDataView.map(s => {
@@ -358,7 +360,7 @@ console.log(idvalue,"idddddddddddddd")
          </Grid>
        </Grid>}
 
-       {(idvalue==4 || idvalue==5)?<Grid item xs={12} sm={12} md={12} marginTop={3}>
+       {(profileData?.role_id==4 || profileData?.role_id==5)?<Grid item xs={12} sm={12} md={12} marginTop={3}>
           {summaryData?.data?.map((itm) => {
             return (
               <Card

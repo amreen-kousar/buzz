@@ -277,9 +277,14 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
                     label="Date & Time picker"
                    
                     onChange={(e) => { handleChange(e) }}
-                    renderInput={(params) => <TextField required {...params} color="common" />}
                     value={addData?.date}
-                  /></LocalizationProvider>
+                    renderInput={(params) => <TextField {...params} color="common" />}
+                    PopperProps={{
+                      placement: "top"
+                  
+                    }}
+                  />
+                   </LocalizationProvider>
                                     </CardContent>
                                 </Card>
                                 <Stack mt={5}>

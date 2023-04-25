@@ -16,8 +16,11 @@ export default function AssignTargets()
   const {state} =useLocation()
 const [trainersTargets,setTrainersTargets]=useState('');
 var [createTarget,setCreateTarget] = useState([]);
+const [data1, setData1]=useState()
+  console.log("🚀 ~ file: AssignTargets.jsx:20 ~ data1:", data1)
   useEffect(() => {
     targets();
+    projData();
 }, []
 )
 
@@ -86,6 +89,36 @@ axios(config)
 });
 
 }
+const projData = async => {
+  console.log(location, "location props")
+  var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
+  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  var data = JSON.stringify({
+    "project_id": state?.id,
+    "role_id": role,
+    "emp_id": idvalue
+  });
+
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+
+  axios(config)
+    .then(function (response) {
+      setData1({ ...response.data.list })
+      console.log(response.data.list, '<--------------setData1setData1');
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+}
   console.log(trainersTargets,"trainers")
     return(
         <Container>
@@ -104,20 +137,20 @@ axios(config)
                   <Table style={{textAlign:"left"}}aria-label="customized table">
                     <TableBody>
                       <TableRow >
-                        <TableCell style={{ borderBottom: "none"}}>Project &nbsp;:&nbsp;{trainersTargets?.project_name}</TableCell>
+                        <TableCell style={{ borderBottom: "none"}}>Project &nbsp;:&nbsp;{data1?.project_name}</TableCell>
                       </TableRow>
                       <TableRow >
-                        <TableCell style={{ borderBottom: "none"}}>Taluk &nbsp;:&nbsp;{trainersTargets?.location_name}</TableCell>
+                        <TableCell style={{ borderBottom: "none"}}>Taluk &nbsp;:&nbsp;{data1?.location_name}</TableCell>
                       </TableRow>
                       <TableRow >
-                        <TableCell style={{ borderBottom: "none"}}>Partner &nbsp;:&nbsp;{trainersTargets?.partnerName}</TableCell>
+                        <TableCell style={{ borderBottom: "none"}}>Partner &nbsp;:&nbsp;{data1?.partnerName}</TableCell>
                       </TableRow>
                      
                     </TableBody>
                   </Table>
                 </TableContainer><br/>
                 <Typography gutterBottom style={{textAlign:'center'}}>
-                     Total Targets : {trainersTargets?.training_target}
+                     Total Targets : {data1?.training_target}
                 </Typography>
                 
                  {trainersTargets?.target_list?.map((item,index)=>{

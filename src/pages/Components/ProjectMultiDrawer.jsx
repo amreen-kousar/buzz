@@ -251,7 +251,7 @@ const noteSubmitHandler = () => {
       notes: gelatiNote,
       type: 1,
       tb_id: batch?.data?.id,
-      emp_id: batch?.data?.user_id,
+      emp_id: userid,
     });
 
     console.log(data, 'material api');
@@ -408,6 +408,10 @@ const noteSubmitHandler = () => {
     value={date}
     onChange={(e) => {setDate(e)}}
     renderInput={(params) => <TextField {...params} color="common" />}
+    PopperProps={{
+      placement: "top"
+  
+    }}
   />
         </LocalizationProvider>
         {console.log(batch,"session?.id")}
@@ -427,6 +431,10 @@ const noteSubmitHandler = () => {
     value={date}
     onChange={(e) => {setDate(e)}}
     renderInput={(params) => <TextField {...params} color="common" />}
+    PopperProps={{
+      placement: "top"
+  
+    }}
   />
         </LocalizationProvider>
         {console.log(batch,"session?.id")}

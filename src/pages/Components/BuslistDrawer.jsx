@@ -50,7 +50,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
   const [detailsData, setDetailsData] = useState();
   const [deletebus, setDeleteBus] = useState();
   const [userUpdate,setUserUpdate]=useState(false)
-
+console.log(busesd, "busesd")
   useEffect(()=>{
     details()
     },[userUpdate]
@@ -84,6 +84,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
         setDetailsData(response.data)
         updatedata()
         console.log(JSON.stringify(response.data, '<njnjnjn'));
+        console.log(response.data , "busdetails ")
       })
       .catch(function (error) {
         console.log(error, "<---error");
@@ -141,7 +142,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
                         <Typography id="bus-details" variant="subtitle2" style={{color:'white'}}>
-                    Bus Details
+                    Bus Details  
           </Typography>
          
           </Toolbar>
@@ -158,7 +159,11 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           '&:hover': {
             backgroundColor: 'white',
           },
+
+          
         }} ><Iconify icon="ic:baseline-delete" style={{width:'30px',height:'30px',color:'#e69138',float:'right'}}></Iconify></Button>:null}
+
+
            {(userDetails==2)?<BusEdit clcikData={detailsData} busesd={busesd} updatedata={()=>{setUserUpdate(!userUpdate)}} />:null}
             <Card> 
                 <CardContent>

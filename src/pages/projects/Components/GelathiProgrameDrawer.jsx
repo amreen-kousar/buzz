@@ -215,10 +215,11 @@ const convertImage = (e) => {
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
 
     var data = JSON.stringify({
+      
       notes: gelatiNote,
       type: session.type,
       tb_id: session.tb_id,
-      emp_id: session.user_id,
+      emp_id: userid,
     });
 
     console.log(data, 'material api');
@@ -405,6 +406,10 @@ const convertImage = (e) => {
     value={date}
     onChange={(e) => {setDate(e)}}
     renderInput={(params) => <TextField {...params} color="common" />}
+    PopperProps={{
+      placement: "top"
+  
+    }}
   />
         </LocalizationProvider>
         {console.log(session,"session?.id")}
@@ -680,7 +685,7 @@ const convertImage = (e) => {
                             >
                               <Typography variant="body1">
                                 {' '}
-                                {i?.name} {i?.date}
+                                {i?.name} {i?.date} 
                               </Typography>
 
                               {console.log(i?.notes, '<----------------------i?.notesi?.notes')}

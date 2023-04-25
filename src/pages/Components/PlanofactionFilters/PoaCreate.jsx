@@ -307,10 +307,14 @@ const tomorrow = dayjs().add(1, 'day');
 id="date-time-picker" 
 //  defaultValue={today}
             minDate={today}
- 
+ required
   label="From"
   value={addData?.date}
   onChange={(e) => { handleChange(e) }}
+  PopperProps={{
+    placement: "top"
+
+  }}
   renderInput={(params) => <TextField required {...params} color="common" />}
 />
 {/* </LocalizationProvider> */}
@@ -325,11 +329,15 @@ id="date-time-picker"
 id="from-date"
 // defaultValue={today}
 minDate={today}
- 
+required
   label="From"
   value={addData?.date}
   onChange={(e) => { handleChange(e) }}
-  renderInput={(params) => <TextField required {...params} color="common" />}
+  renderInput={(params) => <TextField {...params} color="common" />}
+  PopperProps={{
+    placement: "top"
+
+  }}
 />
 
 {/* </LocalizationProvider> */}
@@ -344,7 +352,11 @@ minDate={today}
     minDate={today}
     value={addData?.date2}
     onChange={(e) => { handleChange2(e) }}
-    renderInput={(params) => <TextField required {...params} color="common" />}
+    renderInput={(params) => <TextField {...params} color="common" />}
+    PopperProps={{
+      placement: "top"
+  
+    }}
   />
   {/* </LocalizationProvider> */}
 </Stack>

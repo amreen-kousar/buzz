@@ -206,13 +206,13 @@ sx={{
 
         <br></br>
 
-        <Stack id="travel-dialog-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+  { (mainValue==0) &&     <Stack id="travel-dialog-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <TravelDialog id="travel-dialog" viewMessage={(text) => {
             setMessage(text)
             setOpenMessage(true)
             // list()
           }} />
-        </Stack>
+        </Stack>}
 
         
         {/* </Stack> */}
