@@ -441,7 +441,7 @@ const noteSubmitHandler = () => {
                 </CardContent>
               </Card>
               <AddAttendance
-                batch={batch}
+                batch={session}
                 shown={shown}
                 setShown={(e) => {
                   setShown(e);
