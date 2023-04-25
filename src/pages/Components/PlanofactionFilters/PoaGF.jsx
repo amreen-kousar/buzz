@@ -399,8 +399,8 @@ const noteSubmitHandler = () => {
                     {console.log(session?.projectName, '<--------gfgfgfgfgfgdrawer')}
                   </Typography>
                   <Typography variant="body1" gutterBottom>
-                    Partner : &nbsp;{session?.partnerName}
-                      
+                    Partner : &nbsp;{session?.partnerName}<br/>
+                     
                       {(role!=12)?<><IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
             <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
             {console.log(session,"sessionidddddddd")}
@@ -424,7 +424,9 @@ const noteSubmitHandler = () => {
  
  <EditGelathiSession session={session} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}}/>
                   
-
+ <Typography variant="body1" gutterBottom>
+                    {session?.type_name}:<br/>&nbsp;{session?.gf_session_name}
+                  </Typography>
                   <Typography variant="body1" gutterBottom>
                     Plan Day:&nbsp;{session?.plan_date}
                   </Typography>

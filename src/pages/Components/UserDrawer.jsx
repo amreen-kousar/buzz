@@ -118,6 +118,10 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
     });
   }
   }
+
+  var roleid = JSON.parse(localStorage?.getItem('people'))?.role_id;
+  var peopledetails =JSON.parse(localStorage?.getItem('people'))
+
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -165,6 +169,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
           </Stack>
         )}
         <Scrollbar>
+          {(roleid==1 || roleid==2 || roleid==3 || roleid==4 || roleid==5 || roleid==6 || roleid==13 || roleid==12)?
           <Stack spacing={1} sx={{ px: 1 }}>
             <div>
               <Card>
@@ -277,6 +282,119 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
               </Card>
             </div>
           </Stack>
+
+          :<Stack spacing={1} sx={{ px: 1 }}>
+            <div>
+              <Card>
+                <CardContent>
+                  <div style={{ float: 'left', paddingTop: 30, paddingRight: 5 }}>
+                    <Avatar src={peopledetails?.profile_pic ? peopledetails.profile_pic : defaultImage} alt="photoURL" />
+                  </div>
+                  <Card sx={{ px: 1, boxShadow: 0 }}>
+                    <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="subtitle1" gutterBottom>
+                      {peopledetails?.first_name}&nbsp;{peopledetails?.last_name}
+                    </Typography>
+                    <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
+                      Role : <span style={{ fontWeight: 100, color: '#444444' }}>{peopledetails?.role_name}</span>
+                    </Typography>
+                    {userDetails && userDetails == 2 && (
+                      <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                        Status :{' '}
+                        <span style={{ fontWeight: 100, color: '#444444' }}>
+                          {peopledetails?.status === '1' ? 'Active' : null}
+                        </span>
+                      </Typography>
+                    )}
+                    <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                      Reporting Manager :{' '}
+                      <span style={{ fontWeight: 100, color: '#444444' }}>{peopledetails?.supervisorName}</span>
+                    </Typography>
+
+                    <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
+                      Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{peopledetails?.doj}</span>{' '}
+                    </Typography>
+                  </Card>
+                </CardContent>
+              </Card>
+
+              {/* <FormGroup>
+                {FILTER_GENDER_OPTIONS.map((item) => (
+                  <FormControlLabel key={item} control={<Checkbox />} label={item} />
+                ))}
+              </FormGroup> */}
+            </div>
+
+            <div>
+              <Card style={{ width: 'auto' }}>
+                <CardContent>
+                  <Card
+                    variant="subtitle1"
+                    gutterBottom
+                    style={{
+                      padding: 10,
+                      color: 'white',
+                      textAlign: 'center',
+                      borderRadius: '0px',
+                      backgroundColor: '#999999',
+                    }}
+                  >
+                    Contact Information
+                  </Card>
+                  <br />
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    Mobile Number:<span style={{ fontWeight: 100, color: '#444444' }}>{peopledetails?.contactNum}</span>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    Work: <span style={{ fontWeight: 100, color: '#444444' }}>{peopledetails?.workNum} </span>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    Email:<span style={{ fontWeight: 100, color: '#444444' }}> {peopledetails?.officeMailId}</span>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    Address:<span style={{ fontWeight: 100, color: '#444444' }}>{peopledetails?.address}</span>
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                    PinCode:<span style={{ fontWeight: 100, color: '#444444' }}>{peopledetails?.pincode}</span>
+                  </Typography>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div>
+              <Card>
+                <CardContent>
+                  <Card
+                    variant="subtitle1"
+                    gutterBottom
+                    style={{
+                      padding: 10,
+                      color: 'white',
+                      textAlign: 'center',
+                      borderRadius: '0px',
+                      backgroundColor: '#999999',
+                    }}
+                  >
+                    Projects
+                  </Card>
+                  <br />
+                  {peopledetails?.project_list ? (
+                    <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
+                      {peopledetails?.project_list.map((project) => {
+                        return (
+                          <Typography variant="body1" gutterBottom>
+                            {' '}
+                            {project.projectName}
+                          </Typography>
+                        );
+                      })}
+                    </Typography>
+                  ) : (
+                    <div style={{ textAlign: 'center' }}>No projects found .</div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+          </Stack>}
         </Scrollbar>
 
         {/* <Box sx={{ p: 3 }}>
