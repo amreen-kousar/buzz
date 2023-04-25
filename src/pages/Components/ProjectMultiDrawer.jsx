@@ -54,7 +54,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
 const [SaveBtn , setSaveBtn] = useState(false) 
 const [gelatiNote, setGelatiNote] = useState('');
  const [showNote, setShowNote] = useState(false);
-   
+ const [checkData,setCheckData]=React.useState('');
   const [date, setDate] = useState(new Date())
   const [day2date,setday2date] = useState(new Date())
    const [session, setSession] = useState('');
@@ -129,7 +129,7 @@ const [gelatiNote, setGelatiNote] = useState('');
         });
       }
 
-      console.log("batch?.project_id", batch?.data?.project_id)
+    console.log("batch?.project_id", batch?.data?.project_id)
     const UploadImages = (e) =>{
       if (images.length === 0) {
         alert("No photos to upload.")
@@ -142,10 +142,10 @@ const [gelatiNote, setGelatiNote] = useState('');
         }else{
           var raw = JSON.stringify({
             "project_id":  batch?.data?.project_id,
-            "tb_id":batchState?.id,
+            "tb_id":batch?.data?.id,
             "trainer_id": idvalue,
             "day": 1,
-            "photos": images.toString().slice(22,)
+            "photos": [images.toString().slice(22,)]
         })
 
         var requestOptions = {
@@ -154,14 +154,15 @@ const [gelatiNote, setGelatiNote] = useState('');
             redirect: 'follow'
           };
 
-          fetch("https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php", requestOptions)
-  .then(response => {response.text()
-  alert("Photo Uploaded Successfully..")
+    let res =  fetch("https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php", requestOptions)
+  .then((response) => {
+  
   setImages([])
+  alert("Photo Uploaded Successfully..")
   })
 
-  .then(result => console.log(result, "result in"))
-  .catch(error => console.log('error', error));
+ 
+  .catch((error) => {console.log('error', error)});
     }
     
         }
@@ -348,6 +349,12 @@ const noteSubmitHandler = () => {
       console.log(error);
     });
   }
+
+  const styles = {
+    buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
+    tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
+    linkStyle: { textDecoration: 'none', color: "black" }
+  }
  
     return (
         <>
@@ -452,108 +459,32 @@ const noteSubmitHandler = () => {
                                 </CardContent>
                             </Card>
                             <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />
-                            <Card id="project-mutlidrawer-card" onClick={()=>{setShown(true),console.log("ferfgreg")}} style={{marginTop:20}}>
+                            <Card sx={{mt:2}} id="project-mutlidrawer-card" onClick={()=>{setShown(true),console.log("ferfgreg")}} style={styles.buttonStyle}>
                                 <CardContent id="project-card-content">
-                                <div id="material-pro-multi-drawer" style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px',backgroundColor:'white' }}>
-                <Iconify id="add-symbol-material" icon="material-symbols:add" width={30} height={30} />
-              </div>
-                                 <Typography id="actual-participants" >Actual Participants:   {batch?.total_participants}     
-                     {/* <IconButton>
-                      <Iconify style={{ color: "black",float:'right'}} icon="material-symbols:add" />
-                    </IconButton> */}
+                             
+                                 <Typography id="actual-participants" >Actual Participants:   {batch?.total_participants}    
+                                 <Iconify id="add-symbol-material" icon="material-symbols:add" width={30} height={30} style={{float:'right'}} /> 
+                  
                     </Typography>
                                     <Typography id="target particpants">Target Participants:   {batch?.data?.participants}    </Typography>
                                 </CardContent>
-                            </Card>
-                            <Photos id="photos-project-multidrawer" batch={batch} photos={photos} setPhotos={(e)=>{setPhotos(e)}}/>
+                            </Card><br/>
+                            {(batch?.photos)?<Photos id="photos-project-multidrawer" batch={batch} photos={photos} setPhotos={(e)=>{setPhotos(e)}}/>:null}
 
+                          
 
-
-                            {/* //photo upload button  */}
-               
-{(userId==1 || userId==3 || userId==5)?<>
-<Card id="delete-card-project" style={{marginTop:20}}>
-<div id="project-multidrawwer-div" style={{ display: 'flex' }}>
-                {viewImage
-                  ? images.map((i, index) => {
-                      return (
-                        <div style={{ display: 'flex', margin: '1rem' }}>
-                          <img id="img-delete-project-multidrawer" src={i} style={{ height: '50px', width: '70px' }} alt="hello" />
-                          <Iconify id="icon-delete-image"
-                            onClick={() => {
-                              deleteImage(index);
-                            }}
-                            icon={'typcn:delete'}
-                            sx={{ width: 16, height: 16, ml: 1, color: 'red' }}
-                          />
-                        </div>
-                      );
-                    })
-                  : null}
-              </div>
-              <br />
-<div id="project-input-tag-div" style={{ display: 'flex' ,marginTop:"10px" , marginBottom:"10px"}}>
-                  <label id="input-tag-project-multi-drawer" for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
-                    <Iconify id="camera-icon" icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
-                    &nbsp;
-                    <input
-                      style={{ display: 'none' }}
-                      accept="image/png, image/gif, image/jpeg"
-                      id="inputTag"
-                      type="file"
-                      onChange={(e) => {
-                        convertImage(e);
-                      }}
-                    />
-                  </label>
-                  Add Photos
-                  <br />
-         
-           <Button
-           id="upload-btn"
-           onClick={UploadImages}
-           
-           sx={{
-             '&:hover': {
-               backgroundColor: '#ffd796',
-             },
-             color: '#ff7424',
-             backgroundColor: '#ffd796',
-             marginLeft: '10px',
-           }}
-         >
-           Upload   
-         </Button>
-         </div>
-</Card>
-                         
-
-<Card onClick={()=>{setPhotos(true),console.log("ferfgreg")}} style={{marginTop:20}}>
-                                <CardContent>
-                                    <Typography>View Photos  </Typography>
-                                    
-                                </CardContent>
-                                </Card>
-                                <Card  style={{marginTop:20}}> </Card></>:null} <br/>
-                            {/* photo upload end  */}
+                                <Stack style={{ flexDirection: 'row'}}  mb={2}>
+      
+      <Button variant="secondary" style={styles.buttonStyle}  
+                  endIcon={<IconButton onClick={()=>{setPhotos(true);
+                  }}> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                  startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:photo-library-rounded" /></IconButton>}>
+                  <span style={{ width: "200px" }}>Photos</span>
+                </Button>
+      </Stack>
+                            
+                               
                            
-                                {/* <input accept="image/png, image/gif, image/jpeg"
-        type="file"
-        name="myImage"
-        onChange={(event) => {
-          console.log(event.target,"<------imageesssssssss");
-          convertImage(event);
-        }}
-      /> */}
-    
-                                {/* <CardContent>
-                                   
-                                    <Typography >Upload Photos</Typography>
-                                    
-                                </CardContent> */}
-                            {/* </Card> */}
-                            <Programevaluationday1 onCloseFilter={onCloseFilter} />
-                            <Evaluationday2  onCloseFilter={onCloseFilter}/>
                            {batch && <CheckinOut
               photos={check}
               batch={batch}
@@ -561,23 +492,20 @@ const noteSubmitHandler = () => {
                 setCheck(e);
               }}
                />}
+                <Programevaluationday1 onCloseFilter={onCloseFilter} />
+                            <Evaluationday2  onCloseFilter={onCloseFilter}/>
 
-                  <Card style={{ marginTop: 20 }}>
-                <CardContent>
-                  <Typography variant="h6">
-                    Notes
-                    <IconButton style={{ float: 'right' }}>
-                      <Iconify
-                        style={{ color: 'black' }}
-                        icon="material-symbols:add"
-                        onClick={() => {
-                          setShowNote(true);
-                        }}
-                      />
-                    </IconButton>
-                  </Typography>
-                </CardContent>
-              </Card>
+      
+              <Stack style={{ flexDirection: 'row'}}  mb={2}>
+      
+        <Button variant="secondary" style={styles.buttonStyle} 
+                    endIcon={<IconButton  onClick={() => {
+                      setShowNote(true);
+                    }}> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ph:note-pencil" /></IconButton>}>
+                    <span style={{ width: "200px" }}>Notes</span>
+                  </Button>
+        </Stack>
 
               {showNote ? (
                 <div>
@@ -606,9 +534,9 @@ const noteSubmitHandler = () => {
                         console.log('note', gelatiNote);
                       }}
                     ></TextField>
-                    {/* {SaveBtn? 
+                    {SaveBtn? 
                     
-                    <> */}
+                    <>
                      <Button
                       style={{ color: "#ff7424", marginTop: 20, marginLeft: 20, marginBottom: 20 ,backgroundColor:"#ffd796"}}
                       onClick={noteSubmitHandler}
@@ -629,8 +557,8 @@ const noteSubmitHandler = () => {
                   Cancel
          
                 </Button> 
-                    {/* </> */}
-                    {/* :
+                    </>
+                     :
                     <>
                   
                       <Button
@@ -653,7 +581,7 @@ const noteSubmitHandler = () => {
                    </Button> 
                    </>
                    }
-                   */}
+                  
                   </Card>
                 </div>
               ) : null}
@@ -680,7 +608,7 @@ const noteSubmitHandler = () => {
                               <Typography variant="body1">
                                 {' '}
                                 {/* {userName} */}
-                                 {i?.date}
+                                {i?.name} {i?.date}
                               </Typography>
 
                               {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
