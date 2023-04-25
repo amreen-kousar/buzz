@@ -21,8 +21,16 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
+
+
+
+
 function SimpleDialog(props) {
   const { onClose, selectedValue, open, teamData, setUserId } = props;
+  const [profileData, setProfileData] = useState();
+  const [user, setUser] = useState();
+  var account = localStorage?.getItem('userDetails')
+  account = JSON.parse(account)
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -34,7 +42,13 @@ function SimpleDialog(props) {
     console.log(value, "<--valuevalueee")
     onClose(value);
   };
-  console.log(teamData, "<----teamDatateamDatateamData")
+ 
+
+ 
+
+   console.log(teamData, "<----teamDatateamDatateamData")
+
+  
 
   return (
     <Dialog id="poa-team-dialog" onClose={handleClose} open={open}>
@@ -42,19 +56,25 @@ function SimpleDialog(props) {
         <CloseIcon />
       </IconButton>Select Buzz Team Members</DialogTitle>
       {(teamData?.length>0)?<List sx={{ pt: 0 }}>
-        {teamData?.map((email) => (
-
+        {teamData?.map((email, itm) => (
+          
           <ListItem id="poa-team-list-item" disableGutters>
             <ListItemButton id="list-item-btn" onClick={() => handleListItemClick(email)} >
               <ListItemAvatar id="list-item-avatar">
                 <Avatar id="poa-team-avatar" sx={{ bgcolor: blue[100], color: blue[600] }} src={email?.profile_pic} />
 
               </ListItemAvatar>
+    
               <ListItemText id="list-item-text" primary={email?.name} />
+              
+              <ListItemText> <Typography variant="subtitle2" color='orange' style={{ textAlign: "right" }}>
+             ({profileData?.role_name})
+             
+            </Typography> </ListItemText>
             </ListItemButton>
           </ListItem>
 
-        ))}
+          ))}
 
         {/* <ListItem disableGutters>
           <ListItemButton
@@ -80,7 +100,7 @@ SimpleDialog.propTypes = {
   //   selectedValue: PropTypes.string.isRequired,
 };
 
-export default function PoaTeam({ setUserId, setName }) {
+export default function PoaTeam({ setUserId, setName, users }) {
   const [open, setOpen] = React.useState(false);
   //   const [selectedValue, setSelectedValue] = React.useState();
   const [teamData, setTeamData] = useState([])
@@ -88,12 +108,15 @@ export default function PoaTeam({ setUserId, setName }) {
     team()
   }, []
   )
+  
   const team = async => {
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id
     var data = JSON.stringify({
       "emp_id": idvalue,
       "team": ""
     });
+    
+  
 console.log(idvalue,"iddddddddddd")
     var config = {
       method: 'post',
@@ -103,6 +126,7 @@ console.log(idvalue,"iddddddddddd")
       },
       data: data
     };
+    
 
     axios(config)
       .then(function (response) {

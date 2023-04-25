@@ -111,6 +111,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             </Typography>
             <Typography variant="body2" sx={{ color: '#ffffff' }} style={{ textAlign: 'center' }}>
             
+            
             </Typography>
           </Box>
         </Link>

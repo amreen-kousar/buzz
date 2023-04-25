@@ -134,7 +134,7 @@ export default function UserFilter({ isOpenFilter, onOpenFilter, onCloseFilter, 
         <Divider />
         <Scrollbar>
           <div>
-            <Card style={{ backgroundColor: '#F6F8FB', }}>
+            {/* <Card style={{ backgroundColor: '#F6F8FB', }}>
               <CardContent>
                 {
                   filtersHeaders.map(f => {
@@ -143,7 +143,7 @@ export default function UserFilter({ isOpenFilter, onOpenFilter, onCloseFilter, 
                   })
                 }
               </CardContent>
-            </Card>
+            </Card> */}
 
             {
               selectDATA == 2 && <Grid>
