@@ -56,19 +56,20 @@ function SimpleDialog(props) {
         <CloseIcon />
       </IconButton>Select Buzz Team Members</DialogTitle>
       {(teamData?.length>0)?<List sx={{ pt: 0 }}>
-        {teamData?.map((email, itm) => (
-          
+        {teamData?.map((email) => (
+         
           <ListItem id="poa-team-list-item" disableGutters>
             <ListItemButton id="list-item-btn" onClick={() => handleListItemClick(email)} >
+            {console.log(email?.empRole,"roleiddddddd")}
               <ListItemAvatar id="list-item-avatar">
                 <Avatar id="poa-team-avatar" sx={{ bgcolor: blue[100], color: blue[600] }} src={email?.profile_pic} />
 
               </ListItemAvatar>
-    
+             
               <ListItemText id="list-item-text" primary={email?.name} />
-              
+             
               <ListItemText> <Typography variant="subtitle2" color='orange' style={{ textAlign: "right" }}>
-             ({profileData?.role_name})
+              ({(email?.empRole=='5')?"Trainer":(email?.empRole=='6')?"Gelathi Facilitator":(email?.empRole=='1')?"CEO":(email?.empRole=='2')?"Admin":(email?.empRole=='3')?"Program Manager":(email?.empRole=='4')?"Operations Manager":(email?.empRole=='7')?"Driver":(email?.empRole=='8')?"Funder":(email?.empRole=='9')?"Partner":(email?.empRole=='10')?"Management Team":(email?.empRole=='11')?"FIN/HR/VIEWER":(email?.empRole=='12')?"Senior Operations Manager":(email?.empRole=='13')?"Gelathi Facilitator Lead ":null})
              
             </Typography> </ListItemText>
             </ListItemButton>
