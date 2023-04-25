@@ -46,6 +46,7 @@ export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onClose
 console.log("🚀 ~ file: ProjectMultiDrawer.jsx:46 ~ projectMultiDrawer ~ clcikData:", clcikData)
 
      const [batch,setBatch] = useState('')
+     console.log("🚀 ~ file: ProjectMultiDrawer.jsx:49 ~ projectMultiDrawer ~ batch:", batch)
      const [schedule,setReschedule]=React.useState(false);
      const [day2Schedule,setday2Reschedule]=React.useState(false);
      const [photos,setPhotos] = React.useState(false)
@@ -429,6 +430,7 @@ const handlealert=()=>{
         <LocalizationProvider dateAdapter={AdapterDayjs}>
            <DateTimePicker
    required
+   
     value={date}
     onChange={(e) => {setDate(e)}}
     renderInput={(params) => <TextField {...params} color="common" />}
@@ -559,9 +561,9 @@ const handlealert=()=>{
                             {/* </Card> */}
 
 
-                            {/* {batch?.evaluation_first==0? " there i sno training batch"} */}
-                       <Programevaluationday1 onCloseFilter={onCloseFilter} />
-                            <Evaluationday2  onCloseFilter={onCloseFilter}/>
+                            {/* {batch?.evaluation_first==0? " there is no training batch"} */}
+                       <Programevaluationday1  batch={batch} onCloseFilter={onCloseFilter} />
+                            <Evaluationday2 batch={batch} onCloseFilter={onCloseFilter}/>
               
                   <Card style={{ marginTop: 20 }}>
                 <CardContent>

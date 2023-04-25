@@ -13,8 +13,9 @@ import Swal from 'sweetalert2'
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
-export default function Programevaluationday1({onCloseFilter})
+export default function Programevaluationday1({onCloseFilter,batch})
 {
+  console.log("🚀 ~ file: Programevaluationday1.jsx:17 ~ batch:", batch.evaluation_first)
     const [open, setOpen] = React.useState(false);
     
     const [checked,setChecked] = React.useState({
@@ -28,7 +29,14 @@ export default function Programevaluationday1({onCloseFilter})
       pretraining:[]
     });
     const handleClickOpen = () => {
-        setOpen(true);
+      {(batch?.evaluation_first !=0) ? setOpen(true):  Swal.fire({
+        icon: 'info',
+        title: 'No Evaluation Form',
+        text: 'No Evaluation Form',
+        confirmButtonText: 'Ok',
+        timer: 2000
+      });}
+        // setOpen(true);
       };
 
       const handleClose=()=>{
@@ -165,7 +173,8 @@ export default function Programevaluationday1({onCloseFilter})
                     <span style={{ width: "200px" }}>Program Evaluation Day 1</span>
         </Button><br/>
         </Stack>
-        <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+  
+     <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
           <form onSubmit={(e) => {e .preventDefault(); evaluationday1form()}}>
       <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
@@ -487,6 +496,9 @@ export default function Programevaluationday1({onCloseFilter})
         </DialogContent>
         </form>
       </Dialog>
+  
+
+     
          </div>
         
     )
