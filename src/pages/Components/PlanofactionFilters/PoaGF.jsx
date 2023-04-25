@@ -362,7 +362,11 @@ const noteSubmitHandler = () => {
     });
     
   }
-
+ const styles = {
+    buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
+    tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
+    linkStyle: { textDecoration: 'none', color: "black" }
+  }
   return (
     <>
       <Drawer
@@ -449,66 +453,11 @@ const noteSubmitHandler = () => {
                   setShown(e);
                 }}
               />
-             {batch && <CheckinCheckOutDialog
-              photos={check}
-              batch={batch}
-              setCheck={(e) => {
-                setCheck(e);
-              }}
-               />}
-              <Card
-                onClick={() => {
-                  setShown(true), console.log('ferfgreg');
-                }}
-                style={{ marginTop: 20 }}
-              >
-                <CardContent>
-                  <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
-                    <Iconify icon="material-symbols:add" width={30} height={30} />
-                  </div>
-                  <Typography>
-                    Visit Participants: {session?.total_participants} 
-                    {/* <IconButton>
-                      <Iconify style={{ color: "black",float:'right'}} icon="material-symbols:add" />
-                    </IconButton> */}
-                  </Typography>
-                  {/* <Typography>Target Participants: {batch?.data?.participants} </Typography> */}
-                </CardContent>
-              </Card>
-              {/* <Photos
-                batch={batch}
-                photos={photos}
-                setPhotos={(e) => {
-                  setPhotos(e);
-                }}
-              /> */}
-              {/* <Card
-                onClick={() => {
-                  setPhotos(true), console.log('ferfgreg');
-                }}
-                style={{ marginTop: 20 }}
-              >
-                <CardContent>
-                  <Typography>View Photos</Typography>
-                </CardContent>
-              </Card> */}
 
-
-                
-
-
-              {(role==6 || role==13)?<Card style={{ marginTop: 20 }}>
+               {(role==6 || role==13)?<Card style={{ marginTop: 20 }}>
               <CardContent>
-                {/* <input
-                  
-                  accept="image/png, image/gif, image/jpeg"
-                  type="file"
-                  onChange={(event) => {
-                    console.log(event.target, '<------imageesssssssss');
-                    convertImage(event);
-                  }}
-                /> */}
-                 <label for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
+           
+                 <label sx={styles.buttonStyle} for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
                     <Iconify icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
                     &nbsp;
                     <input
@@ -559,42 +508,83 @@ const noteSubmitHandler = () => {
           
               </Card>:null}
 
-            
-            
-              {(role==6 || role==13)?<Card
+          <br/>
+
+             {batch && <CheckinCheckOutDialog
+              photos={check}
+              batch={batch}
+              setCheck={(e) => {
+                setCheck(e);
+              }}
+               />}
+              {/* <Card
                 onClick={() => {
-                  setCheck(true), console.log('ferfgreg');
+                  setShown(true), console.log('ferfgreg');
                 }}
                 style={{ marginTop: 20 }}
               >
                 <CardContent>
-                <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
+                  <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
                     <Iconify icon="material-symbols:add" width={30} height={30} />
                   </div>
-                  <Typography>Check in/ Check Out</Typography>
-                </CardContent>
-              </Card> :null}
-
-
-
-              <Card style={{ marginTop: 20 }}>
-                <CardContent>
-                  <Typography variant="h6">
-                    Notes
-                    <IconButton style={{ float: 'right' }}>
-                      <Iconify
-                        style={{ color: 'black' }}
-                        icon="material-symbols:add"
-                        onClick={() => {
-                          setShowNote(true);
-                        }}
-                      />
+                  <Typography>
+                    Visit Participants: {session?.total_participants} 
+                    <IconButton>
+                      <Iconify style={{ color: "black",float:'right'}} icon="material-symbols:add" />
                     </IconButton>
                   </Typography>
+                  <Typography>Target Participants: {batch?.data?.participants} </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
-       
+            <br/>  <Button variant="secondary" style={styles.buttonStyle} onClick={() => {
+                  setShown(true)
+                }}
+                    endIcon={<IconButton > <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:baseline-people" /></IconButton>}>
+                    <span style={{ width: "200px" }}>Visit participants : {session?.total_participants}</span>
+                  </Button><br/><br/>
+              {/* <Photos
+                batch={batch}
+                photos={photos}
+                setPhotos={(e) => {
+                  setPhotos(e);
+                }}
+              /> */}
+              {/* <Card
+                onClick={() => {
+                  setPhotos(true), console.log('ferfgreg');
+                }}
+                style={{ marginTop: 20 }}
+              >
+                <CardContent>
+                  <Typography>View Photos</Typography>
+                </CardContent>
+              </Card> */}
+
+
+                
+
+
+             
+{(role==6 || role==13)?<Button variant="secondary" style={styles.buttonStyle} onClick={() => {
+                      setCheck(true)
+                    }}
+                    endIcon={<IconButton   > <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="cil:clock" /></IconButton>}>
+                    <span style={{ width: "200px" }}>Check In/Check Out</span>
+                  </Button>:null}
+
+<br/>  <br/>
+               <Button variant="secondary" style={styles.buttonStyle} 
+                    endIcon={<IconButton  onClick={() => {
+                      setShowNote(true);
+                    }}> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ph:note-pencil" /></IconButton>}>
+                    <span style={{ width: "200px" }}>Notes</span>
+                  </Button>
+
+     
 
 {showNote ? (
                 <div>
