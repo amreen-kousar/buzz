@@ -33,7 +33,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PoaEdit({ setSucess, itm }) {
+export default function PoaEdit({ setSucess, itm ,changeState}) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState("");
@@ -73,6 +73,7 @@ export default function PoaEdit({ setSucess, itm }) {
 {console.log(itm,"itemmmm")}
   useEffect(() => {
     //AddPoa()
+   changeState();
     setAddData({
       date: itm?.date1,
       user_id:localStorage?.getItem('userId'),
@@ -114,6 +115,7 @@ export default function PoaEdit({ setSucess, itm }) {
       .then(function (response) {
         if (response?.data?.code === 200) {
           alert(response.data.message)
+          changeState()
           handleClose()
           setSucess("this is success create")
           alert(response.data.message)
