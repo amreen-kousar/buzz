@@ -32,7 +32,7 @@ import moment from 'moment';
 import CircularProgress from '@mui/material/CircularProgress';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import CircularProgress from '@mui/material/CircularProgress';
+
 // ----------------------------------------------------------------------
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
