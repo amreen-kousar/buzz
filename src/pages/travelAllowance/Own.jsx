@@ -231,21 +231,26 @@ export default function Own(props) {
                                 <>
                                     <Card id="own-main-card" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
 
-                                        <Grid id="own-grid" container spacing={2} >
-                                            <Grid id="open-filter" onClick={() => { handleOpenFilter(itm) }} item xs={8}>
-                                                <b cursor="pointer" style={{ color: "blue" }} >{itm?.Ta_Name}</b><br>
-                                                </br>
-                                                <Typography id="TA-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
-                                            </Grid>
-                                            <Grid item xs={4}>
-                                            {(itm?.status=='0')?<><Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", padding:2,marginTop:5,fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
-                                               <Iconify id="icon-access-time" style={{ float: "right", padding:2,fontSize: 30,marginTop:5, color: "#303030" }} icon="ic:outline-access-time"></Iconify></>:
-                                               (itm?.status=='1')?<Iconify icon="mdi:tick" style={{ float: "right", padding:2,marginTop:5, fontSize: 30, color: "green" }}></Iconify>
-                                               :<Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 30, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>}
-                                            </Grid>
-
-
-                                        </Grid>
+                                    <Grid id="own-grid" container spacing={2}>
+  <Grid id="open-filter" onClick={() => { handleOpenFilter(itm) }} item xs={12} sm={8} md={8}>
+    <b cursor="pointer" style={{ color: "blue" }}>{itm?.Ta_Name}</b><br></br>
+    <Typography id="TA-amount" variant="body" gutterBottom><b>TA Amount:{itm?.telephone}</b></Typography>
+  </Grid>
+  <Grid item xs={12} sm={4} md={4}>
+    {(itm?.status == '0') ? (
+      <>
+        <Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", padding: 2, marginTop: 5, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+        <Iconify id="icon-access-time" style={{ float: "right", padding: 2, fontSize: 30, marginTop: 5, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
+      </>
+    ) : (
+      (itm?.status == '1') ? (
+        <Iconify icon="mdi:tick" style={{ float: "right", padding: 2, marginTop: 5, fontSize: 30, color: "green" }}></Iconify>
+      ) : (
+        <Iconify id="icon-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 30, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
+      )
+    )}
+  </Grid>
+</Grid>
 
 
                                     </Card>
