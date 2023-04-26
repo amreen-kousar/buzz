@@ -18,6 +18,7 @@ import { Card,CardContent, Grid } from '@mui/material';
 import Iconify from 'src/components/Iconify';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -60,12 +61,24 @@ export default function FullScreenDialog({ photos, setPhotos, batch }) {
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   const [images,setImages] = useState([])
   const [viewImage, setViewImage] = React.useState(false);
+  const [reload,setReload]=React.useState(false);
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
+  const [trainingData,setTrainingData]=React.useState('');
   React.useEffect(() => {
     //setShown(shown)
     setOpen(photos)
   }, [photos])
+
+  React.useEffect(() => {
+    //setShown(shown)
+     getTrainingBatch()
+  }, [reload])
+
+  React.useEffect(() => {
+    //setShown(shown)
+     getTrainingBatch()
+  }, [])
 
   const handleClickOpen = () => {
     setPhotos(true)
@@ -127,9 +140,12 @@ const UploadImages = async(e) =>{
 
 let res =  fetch("https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php", requestOptions)
 .then((response) => {
+ 
 
 setImages([])
+setReload(!reload);
 alert("Photo Uploaded Successfully..")
+
 })
 
 
@@ -146,6 +162,39 @@ images.splice(index, 1);
 setImages([...images]);
 };
 
+
+const getTrainingBatch = async =>{
+        
+
+  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  var data = JSON.stringify({
+      "batch_id": batch?.data?.id,
+      "role_id": role
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setTrainingData(response.data)
+      console.log(batch , "response from ")
+    
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+ 
+    
+}
 
   return (
     <div>
@@ -277,8 +326,10 @@ setImages([...images]);
       <Card > <CardContent>  
         <Grid container spacing={2}>
   <Grid  xs={10} sm={6} style={{paddingRight:5}} >
-    {(batch?.photos[0]?.photo1)?<img id="img-event-data" src={batch?.photos[0]?.photo1} style={{height:"50%",width:"100%"}}/>:"No Photos"}</Grid>
-    <Grid  xs={10} sm={6} style={{paddingRight:5}} >{(batch?.photos[0].photo2)?<img id="img-event-data" src={batch?.photos[0].photo2} style={{height:"50%",width:"100%"}}/>:null}</Grid></Grid></CardContent></Card> 
+
+    
+    {(photos )?<img id="img-event-data" src={(trainingData?.photos[0].photo1)?(trainingData?.photos[0]?.photo1):batch?.photos[0].photo1} />:"No Photos"}</Grid>
+    <Grid  xs={10} sm={6} style={{paddingRight:5}} >{(photos)?<img id="img-event-data" src={(trainingData?.photos[0].photo2)?(trainingData?.photos[0]?.photo2):batch?.photos[0].photo2} />:null}</Grid></Grid></CardContent></Card> 
       </TabPanel>
 
 
@@ -337,13 +388,13 @@ setImages([...images]);
            Upload   
          </Button>
          </div></>:null}
-
+{console.log(trainingData,"hlooooo")}
  <Card><CardContent>
   <Grid container spacing={2} >
   <Grid  xs={10} sm={6} style={{paddingRight:5}} >
-  {(batch?.photos[1].photo1)?<img id="img-event-data" src={batch?.photos[1].photo1}/>:"No Photos"}</Grid>
+  {(photos)?<img id="img-event-data" src={(trainingData?.photos[1].photo1)?(trainingData?.photos[1]?.photo1):batch?.photos[1].photo1}/>:"No Photos"}</Grid>
   <Grid  xs={10} sm={6} style={{paddingLeft:5}} >
-{(batch?.photos[1].photo2)?<img id="img-event-data" src={batch?.photos[1].photo2} />:null}
+{(photos)?<img id="img-event-data" src={(trainingData?.photos[1].photo2)?(trainingData?.photos[1]?.photo2):batch?.photos[1].photo2} />:null}
 </Grid></Grid> </CardContent></Card>
       </TabPanel>
     

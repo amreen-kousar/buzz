@@ -559,7 +559,7 @@ export default function PlanofAction() {
                                       <TableCell id="table-cell-poa-edit" component="th" scope="row" width="10px">
                                        {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id) ? (
                                           <Stack direction={'row'} spacing={2}>
-                                            <PoaEdit itm={itm} />
+                                            <PoaEdit itm={itm} changeState={changeState}/>
                                             {itm?.check_out == 0 ? (
                                               <IconButton id="icon-button-cancel"
                                                 onClick={() => {
@@ -730,7 +730,7 @@ export default function PlanofAction() {
                                       <TableCell id="table-cell-edit-poa" component="th" scope="row" width="10px">
                                        {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id) ? (
                                           <Stack direction={'row'} spacing={2}>
-                                            <PoaEdit itm={itm} />
+                                            <PoaEdit itm={itm} changeState={changeState}/>
                                             {itm?.check_out == 0 ? (
                                               <IconButton id="cancel-iconbutton"
                                                 onClick={() => {
@@ -904,7 +904,7 @@ export default function PlanofAction() {
                                       <TableCell id="icon-button-table" component="th" scope="row" width="10px">
                                         {(itm?.type=='3') && (role == 13 || idvalue == itm?.user_id)  ? (
                                           <Stack direction={'row'} spacing={2}>
-                                            <PoaEdit itm={itm} />
+                                            <PoaEdit itm={itm} changeState={changeState}/>
                                             {itm?.check_out == 0 ? (
                                               <IconButton id="icon-button-cncl-btn"
                                                 onClick={() => {
