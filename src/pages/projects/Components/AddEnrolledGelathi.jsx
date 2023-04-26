@@ -92,23 +92,24 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       
   }
 
-
+  const styles = {
+    buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" }
+   
+    
+  }
 
     return(
-    <div>
-   
-    <Typography variant="h6" onClick={handleClickOpen}>
-                 Enrolled Gelathis 
-                    <IconButton style={{ float: 'right' }}>
-                      <Iconify
-                        style={{ color: 'black' }}
-                        icon="material-symbols:add"
-                       
-                      />
-                    </IconButton>
-                  </Typography>
+    <>
+  
      
-    
+     <Stack style={{ flexDirection: 'row'}}  mb={2}>
+      
+      <Button variant="secondary" style={styles.buttonStyle}  onClick={handleClickOpen}
+                  endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                  startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-people" /></IconButton>}>
+                  <span style={{ width: "200px" }}>Enrolled Gelathis</span>
+                </Button>
+      </Stack>
 
       <Dialog fullScreen open={open} onClose={handleClose}
         aria-labelledby="scroll-dialog-title"
@@ -190,6 +191,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
             </div>
             
           </DialogContentText></DialogContent>  </Dialog>
-      </div>
+          </>
     )
   }

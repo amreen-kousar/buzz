@@ -29,12 +29,25 @@ import Programevaluationday1 from '../projects/Components/Programevaluationday1'
 import Evaluationday2 from '../projects/Components/Evaluationday2';
 import CheckinOut from './PlanofactionFilters/CheckinOut';
 import moment from 'moment';
+import Collapse from '@mui/material/Collapse';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import EditGelathiSession from '../projects/Components/EditGelathisession';
 import EditTrainingBatch from '../projects/EditTrainingSession';
 // ----------------------------------------------------------------------
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { styled } from '@mui/material/styles';
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  //   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  // marginLeft: 'auto' ,
+  //   transition: theme.transitions.create('transform', {
+  //     duration: theme.transitions.duration.shortest,
+  //   }),
+}));
 
 projectMultiDrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
@@ -61,6 +74,11 @@ const [gelatiNote, setGelatiNote] = useState('');
    const [session, setSession] = useState('');
    const [editSession,setEditsession]=useState(false);
    const [check,setCheck]=useState(false)
+   const [expanded, setExpanded] = React.useState(false);
+
+const handleExpandClick = () => {
+  setExpanded(!expanded);
+};
    const [viewImage, setViewImage] = React.useState(false);
    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
    const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
@@ -588,7 +606,7 @@ const noteSubmitHandler = () => {
                 </div>
               ) : null}
 
-              <CardContent>
+              {/* <CardContent>
                 <div>
                 <Card style={{ marginTop: 20, marginLeft: 10 }}>
                   {getAllNotes &&
@@ -599,7 +617,7 @@ const noteSubmitHandler = () => {
                       return (
                         <>
                          
-                            {/* <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}> */}
+                            <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
                             <Grid
                               container
                               direction="column"
@@ -609,7 +627,7 @@ const noteSubmitHandler = () => {
                             >
                               <Typography variant="body1">
                                 {' '}
-                                {/* {userName} */}
+                                {userName}
                                 {i?.name} {i?.date}
                               </Typography>
 
@@ -624,7 +642,44 @@ const noteSubmitHandler = () => {
                     })}
                      </Card>
                 </div>
-              </CardContent>
+              </CardContent> */}
+              <Card>
+                <CardContent>
+                  View All Comments :
+                  <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
+        <Collapse in={expanded} timeout="auto" unmountOnExit> 
+                  {getAllNotes && getAllNotes.map((i, index) =>
+                 
+                       <> <Grid
+                          container
+                          direction="column"
+                          justifyContent="center"
+                          alignItems="center"
+                          style={{ marginTop: 10 }}
+                        >
+                          <Typography variant="body1">
+                            {' '}
+                            {i?.name} {i?.date} 
+                          </Typography>
+
+                         
+                        </Grid>
+                        <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
+                          {i?.notes}{' '}
+                        </Typography></>
+                  )}
+                     
+                  </Collapse>
+                </CardContent>
+
+              </Card>
                  
                         </div>
                         {/* <Button onClick={UploadImages}>upload image</Button> */}

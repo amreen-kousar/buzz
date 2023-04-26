@@ -37,8 +37,21 @@ import EditGelathiSession from './EditGelathisession';
 import AddEnrollGelathi from './AddEnrolledGelathi';
 import AddGreenMotivators from './AddGreenMotivators';
 import AddEnrollVyapar from './AddenrolleVyapar';
+import Collapse from '@mui/material/Collapse';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { styled } from '@mui/material/styles';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  //   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  // marginLeft: 'auto' ,
+  //   transition: theme.transitions.create('transform', {
+  //     duration: theme.transitions.duration.shortest,
+  //   }),
+}));
 
 GelathiProgrameDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
@@ -61,6 +74,11 @@ export default function GelathiProgrameDrawer({
 
 const [SaveBtn , setSaveBtn] = useState(false) 
 
+const [expanded, setExpanded] = React.useState(false);
+
+const handleExpandClick = () => {
+  setExpanded(!expanded);
+};
   const [date, setDate] = useState(new Date())
   //   image
   const [isLoading, setISLoading] = useState(false)
@@ -351,6 +369,9 @@ const convertImage = (e) => {
     setImages([...images]);
   };
 
+  const styles = {
+    buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" }
+  }
 
 
   return (
@@ -447,17 +468,18 @@ const convertImage = (e) => {
                     {session?.gf_name}
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card><br/>
               {/* <ShaktiDialog /> */}
-              <Card style={{ marginTop: 20 }}>
+              {/* <Card style={{ marginTop: 20 }}>
                 <CardContent>
                   <Typography variant="body1" gutterBottom>
                     Visit Participants :  {session?.total_participants}{' '}
                   
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
+            
 
               {console.log(session,"sessiosnssssssssssssssssssssssssssss")}
 
@@ -531,6 +553,7 @@ const convertImage = (e) => {
 
 {console.log(session,"sessiosn")}
 
+
 {(userId==6 || userId==13 )?<Card id="event-data-card" style={{ marginTop: 20 }}>
               <CardContent id="card-content-poa-event-data">
                {console.log(session,"sessiosn")}
@@ -548,26 +571,23 @@ const convertImage = (e) => {
                 }
               </CardContent>
             </Card> :null}
+            <br/><Stack style={{ flexDirection: 'row'}}  mb={2}>
+      
+      <Button variant="secondary" style={styles.buttonStyle}  
+                  endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="" /> </IconButton>}
+                  startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-people" /></IconButton>}>
+                  <span style={{ width: "200px" }}>Visit Participants : {session?.total_participants}</span>
+                </Button>
+      </Stack>
 
-            {(session?.check_in!="0" && userId==6)?<br/>:null}
-{(session?.check_in!="0" && userId==6)?<Card>
-                <CardContent>
-                <AddEnrollGelathi session={session}/>
-                </CardContent>
-              </Card>:null}
-{(session?.check_in!="0" && userId==6)?<br/>:null}
-              {(session?.check_in!="0" && userId==6)?<Card>
-                <CardContent>
-                <AddGreenMotivators session={session}/>
-                </CardContent>
-              </Card>:null} {(session?.check_in!="0" && userId==6)?<br/>:null}
-              {(session?.check_in!="0" && userId==6)?<Card>
-                <CardContent>
-                <AddEnrollVyapar session={session}/>
-                </CardContent>
-              </Card>:null}
+            {/* {(session?.check_in!="0" && userId==6)?<br/>:null} */}
+{(session?.check_in!="0" && userId==6)?<AddEnrollGelathi session={session}/>:null}
+{/* {(session?.check_in!="0" && userId==6)?<br/>:null} */}
+              {(session?.check_in!="0" && userId==6)?<AddGreenMotivators session={session}/>:null}
+                 {/* {(session?.check_in!="0" && userId==6)?<br/>:null} */}
+              {(session?.check_in!="0" && userId==6)?<AddEnrollVyapar session={session}/>:null}
                 
-
+{/* 
               <Card style={{ marginTop: 20 }}>
                 <CardContent>
                   <Typography variant="h6">
@@ -583,7 +603,16 @@ const convertImage = (e) => {
                     </IconButton>
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
+            <Stack style={{ flexDirection: 'row'}}  mb={2}>
+      
+      <Button variant="secondary" style={styles.buttonStyle}  onClick={()=>setShowNote(true)}
+                  endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                  startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ph:note-pencil" /></IconButton>}>
+                  <span style={{ width: "200px" }}>Notes</span>
+                </Button>
+      </Stack>
+
 
               {showNote ? (
                 <div>
@@ -616,7 +645,7 @@ const convertImage = (e) => {
                     
                     <div style={{display:'flex',flexDirection:'row'}}>
                      <Button
-                    style={{ color: '#ffd796', marginTop: 20 ,marginBottom:10 ,marginLeft:5}}
+                    style={{ color: '#ff7424', marginTop: 20 ,marginBottom:10 ,marginLeft:5,backgroundColor:"#ffd796"}}
                       onClick={noteSubmitHandler}
                       disabled={gelatiNote.trim()===""}
                     >
@@ -625,7 +654,7 @@ const convertImage = (e) => {
                     
                     <Button
                   
-                  style={{ color: 'black' ,marginLeft: 20, marginTop:20 ,marginBottom:10}}
+                  style={{ color: 'black' ,marginLeft: 20, marginTop:20 ,marginBottom:10,backgroundColor:'#aec6c1'}}
                   onClick={()=>{
                    setShowNote(false)
                   }}
@@ -664,7 +693,46 @@ const convertImage = (e) => {
               ) : null}
 
 
-              <CardContent>
+<Card>
+                <CardContent>
+                  View All Comments :
+                  <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
+        <Collapse in={expanded} timeout="auto" unmountOnExit> 
+                  {getAllNotes && getAllNotes.map((i, index) =>
+                 
+                       <> <Grid
+                          container
+                          direction="column"
+                          justifyContent="center"
+                          alignItems="center"
+                          style={{ marginTop: 10 }}
+                        >
+                          <Typography variant="body1">
+                            {' '}
+                            {i?.name} {i?.date} 
+                          </Typography>
+
+                         
+                        </Grid>
+                        <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
+                          {i?.notes}{' '}
+                        </Typography></>
+                  )}
+                     
+                  </Collapse>
+                </CardContent>
+
+              </Card>
+
+
+              {/* <CardContent>
                 <div>
                 <Card style={{ marginTop: 20, marginLeft: 10 }}>
                   {getAllNotes &&
@@ -675,7 +743,7 @@ const convertImage = (e) => {
                       return (
                         <>
                          
-                            {/* <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}> */}
+                            <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
                             <Grid
                               container
                               direction="column"
@@ -700,7 +768,7 @@ const convertImage = (e) => {
                      </Card>
                    
                 </div>
-              </CardContent>
+              </CardContent> */}
 
               
               
