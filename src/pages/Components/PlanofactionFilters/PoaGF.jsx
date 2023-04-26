@@ -31,6 +31,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import moment from 'moment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import CircularProgress from '@mui/material/CircularProgress';
 // ----------------------------------------------------------------------
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -506,6 +507,7 @@ const noteSubmitHandler = () => {
                 {/* <CardContent>
                   <Typography>Upload Photos</Typography>
                 </CardContent> */}
+                 
                   {isLoading ? <CircularProgress /> : 
                 
                 batch?.photos && <div>
