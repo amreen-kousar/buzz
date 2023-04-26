@@ -29,14 +29,14 @@ export default function Programevaluationday1({onCloseFilter,batch})
       pretraining:[]
     });
     const handleClickOpen = () => {
-      {(batch?.evaluation_first !=0) ? setOpen(true):  Swal.fire({
-        icon: 'info',
-        title: 'No Evaluation Form',
-        text: 'No Evaluation Form',
-        confirmButtonText: 'Ok',
-        timer: 2000
-      });}
-        // setOpen(true);
+      // {(batch?.evaluation_first !=0) ? setOpen(true):  Swal.fire({
+      //   icon: 'info',
+      //   title: 'No Evaluation Form',
+      //   text: 'No Evaluation Form',
+      //   confirmButtonText: 'Ok',
+      //   timer: 2000
+      // });}
+        setOpen(true);
       };
 
       const handleClose=()=>{

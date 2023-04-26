@@ -34,15 +34,15 @@ export default function Evaluationday2({onCloseFilter,batch})
       re_emphasize:[],
     })
     const handleClickOpen = () => {
-      {(batch?.evaluation_first !=0) ? setOpen(true):         
-        Swal.fire({
-        icon: 'info',
-        title: 'No Evaluation Form',
-        text: 'No Evaluation Form',
-        confirmButtonText: 'Ok',
-        timer: 2000
-      });}
-        
+      // {(batch?.evaluation_first !=0) ? setOpen(true):         
+      //   Swal.fire({
+      //   icon: 'info',
+      //   title: 'No Evaluation Form',
+      //   text: 'No Evaluation Form',
+      //   confirmButtonText: 'Ok',
+      //   timer: 2000
+      // });}
+        setOpen(true);
       };
 
       const handleClose=()=>{
