@@ -242,8 +242,8 @@ let formatdata = summaryData?.data
               onCloseFilter={handleCloseFilter}
             />
           </Stack>
-          <Grid container spacing={3} marginTop={4}>
-            <Grid item xs={4} sm={8} md={4}>
+          <Grid container spacing={2} marginTop={4}>
+            <Grid  item xs={12} sm={6} md={4}>
 
               <AppWidgetSummary
                 title="Total Circles"
@@ -252,7 +252,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={12} sm={6} md={4}>
 
               <AppWidgetSummary
                 title="Circle Meetings"
@@ -261,7 +261,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={12} sm={6} md={4}>
 
               <AppWidgetSummary
                 title="Village Visits"
