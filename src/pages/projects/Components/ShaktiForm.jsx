@@ -262,14 +262,14 @@ export default function ShaktiForm() {
 
   const shakthiformdata = async () => {
 
-    const form = this.formRef.current;
-    if (form.checkValidity()) {
-      // form is valid, submit it
-      form.submit();
-    } else {
-      // form is invalid, handle the error
-      console.log('Form is invalid');
-    }
+    // const form = this.formRef.current;
+    // if (form.checkValidity()) {
+    //   // form is valid, submit it
+    //   form.submit();
+    // } else {
+    //   // form is invalid, handle the error
+    //   console.log('Form is invalid');
+    // }
 
     console.log('call clos save button');
     console.log('surveyyyyform');

@@ -29,8 +29,10 @@ import EditGelathiSession from 'src/pages/projects/Components/EditGelathisession
 import CheckinCheckOutDialog from './CheckinCheckOutDialog';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import moment from 'moment';
+import CircularProgress from '@mui/material/CircularProgress';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+
 // ----------------------------------------------------------------------
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -67,13 +69,18 @@ const [SaveBtn , setSaveBtn] = useState(false)
 const [gelatiNote, setGelatiNote] = useState('');
   const [session, setSession] = useState('');
   const [expanded, setExpanded] = React.useState(false);
-
+  const [reload, setReload] = useState(false);
+  const changeState = () => {
+    setReload(!reload);
+    console.log('changeState is called ');
+  };
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
    const role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
   useEffect(() => {
     getTrainingBatch();
+    changeState();
     // console.log(batchState)
   }, [batchState, clcikData]);
 
@@ -260,24 +267,7 @@ const noteSubmitHandler = () => {
       throw new Error('No photos to upload.');
     }
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-    // var raw = JSON.stringify({
-    //   project_id: batch?.project_id,
-    //   tb_id: batchState?.id,
-    //   trainer_id: idvalue,
-    //   day: 1,
-    //   photos: [images],
-    // });
-
-    // var requestOptions = {
-    //   method: 'POST',
-    //   body: raw,
-    //   redirect: 'follow',
-    // };
-
-    // fetch('https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php', requestOptions)
-    //   .then((response) => response.text())
-    //   .then((result) => console.log(result))
-    //   .catch((error) => console.log('error', error));
+   
       setISLoading(true)
       var raw = JSON.stringify({
       "project_id":batch.project_id,
@@ -298,6 +288,7 @@ const noteSubmitHandler = () => {
         console.log(itn, '<--itemgh');
         setImages([])
         alert("Image uploaded successfully..")
+        getTrainingBatch()
         setISLoading(false)
       })
       .catch((err) => {
@@ -506,6 +497,7 @@ const noteSubmitHandler = () => {
                 {/* <CardContent>
                   <Typography>Upload Photos</Typography>
                 </CardContent> */}
+                 
                   {isLoading ? <CircularProgress /> : 
                 
                 batch?.photos && <div>

@@ -94,7 +94,6 @@ const handleExpandClick = () => {
 
     const getTrainingBatch = async =>{
         
-        
         console.log(batchState,"<---batchStatebatchState",batchState?.training_batch_id?batchState?.training_batch_id:clcikData?.id)
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
