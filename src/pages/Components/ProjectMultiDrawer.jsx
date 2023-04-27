@@ -58,6 +58,7 @@ projectMultiDrawer.propTypes = {
 };
 
 export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,batchState,projectId}) {
+console.log("🚀 ~ file: ProjectMultiDrawer.jsx:61 ~ projectMultiDrawer ~ clcikData:", clcikData)
 
      const [batch,setBatch] = useState('')
      console.log("🚀 ~ file: ProjectMultiDrawer.jsx:49 ~ projectMultiDrawer ~ batch:", batch)
@@ -390,7 +391,8 @@ const noteSubmitHandler = () => {
             >
                 <Stack  id="pro-mutlidrawer-stack" direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                        {` ${clcikData?.name}`}
+                       {(clcikData?.title=='Self Shakti')? "Self Shakti" :(clcikData?.name)}
+                        {/* {` ${clcikData?.name}`} */}
                         {/* {clcikData?.title} */}
                         {console.log(clcikData,"clicked data")}
                     </Typography>
@@ -407,7 +409,7 @@ const noteSubmitHandler = () => {
                             <Card id="project-card">
                                 <CardContent id="project-multidrawer-card-content">
                                     <Typography id="project" style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
-                                        Project  :
+                                        Project :
                                       &nbsp;{batch?.data?.projectName}
                                         {console.log(batch?.data?.projectName,'<--------njknnjnjn')}
                                     </Typography>
