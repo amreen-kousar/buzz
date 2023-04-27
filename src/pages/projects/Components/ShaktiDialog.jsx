@@ -179,7 +179,7 @@ console.log(checkData,"checkedta")
                       }>
                         {itm?.participant_name}
                         </Typography>
-                   <ShaktiForm/>
+                   <ShaktiForm itm={itm}/>
                     </div>
                   </CardActions>
 

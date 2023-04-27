@@ -159,7 +159,7 @@ const GetStatus = async=>{
   var data = JSON.stringify({
     "project_id": batch?.project_id,
     "poa_type": 2,
-    "type": 2,
+    "type": 3,
     "tb_id": batch?.id
   });
   

@@ -35,7 +35,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ShaktiForm() {
+export default function ShaktiForm({itm}) {
   const [open, setOpen] = React.useState(false);
   const [solution,setsolution]= React.useState(false);
   const [livelihoodvalue,setlivelihoodvalue] = React.useState(false);
@@ -193,7 +193,7 @@ export default function ShaktiForm() {
   // useEffect(()=>{
   //   setSendData([])
   // },[open])
-
+  console.log('call clos save button');
   const [sendData, setSendData] = React.useState({
     implementationPlan: '',
     medical: '',
@@ -271,10 +271,10 @@ export default function ShaktiForm() {
     //   console.log('Form is invalid');
     // }
 
-    console.log('call clos save button');
+   
     console.log('surveyyyyform');
     var data = JSON.stringify({
-      participantId: 557663,
+      participantId: itm?.participant_id,
       implementationPlan: plan,
       goodQuality: qualitiesgood,
       accessToHealtcare: healthcareaccess,
@@ -361,9 +361,11 @@ export default function ShaktiForm() {
       </Button> */}
 
       <div style={{ position: 'absolute', right: 0, float: 'right' }}>
-        <IconButton onClick={handleClickOpen}>
+        {(itm?.isSurveyDone=='0')?<IconButton onClick={handleClickOpen}>
           <Iconify icon="clarity:form-line" width={20} height={20} color="#ff7424" />
-        </IconButton>
+        </IconButton>:<IconButton >
+          <Iconify icon="charm:notes-tick" width={20} height={20} color="green" />
+        </IconButton>}
       </div>
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <form
