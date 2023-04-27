@@ -36,6 +36,7 @@ export default function ShaktiDialogday2({ shown, setShown, batch }) {
   console.log(batch, 'day2form is opening')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
+  const [reload,setReload]=useState(false);
   console.log("🚀 ~ file: ShaktiDialog.jsx:35 ~ ShaktiDialog ~ clcikData:", clcikData)
 
   const [checkData,setCheckData]=React.useState('');
@@ -64,9 +65,12 @@ const [Trainingdata,setTrainingData]=useState(false);
 getTrainingBatch();
     
    
-  }, [open])
+  }, [open,editSession])
 
-
+  const changeState = () => {
+    setReload(!reload);
+    console.log('changeState is called ');
+  };
   const handleClickOpen = () => {
     setShown(true)
     setOpen(true);
@@ -177,6 +181,10 @@ getTrainingBatch();
       
 }
 console.log(checkData,"checkedta")
+
+const handleedit =()=>{
+  alert('Participant Information Already Collected')
+}
   return (
     <div>
       <Dialog
@@ -297,6 +305,7 @@ console.log(checkData,"checkedta")
                         </Typography>
                  
                     </div>
+                    {(itm?.gelathiRecomm=='1')?<IconButton><Iconify icon="mdi:tick-circle" style={{color:'green'}}></Iconify></IconButton>:null}
                     {(itm?.day2=='0' )?<Checkbox onClick={()=>{
                       addParticipant(itm)
                       
@@ -304,8 +313,9 @@ console.log(checkData,"checkedta")
                     }} {...label} />:<><Checkbox defaultChecked onClick={()=>{
                         DeleteParticipant(itm)
                         console.log(itm,"<---sadasdasd")
-                      }} /> <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton></>}
-                 <EditParticipantdata Trainingdata={Trainingdata} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}}/>
+                      }} /> 
+                      {(itm?.final_save=='0')?<IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>:<IconButton style={{right:-20,color:'#ff7424'}} onClick={handleedit}><Iconify icon="material-symbols:edit"></Iconify></IconButton>}</>}
+                 <EditParticipantdata  changeState={changeState} Trainingdata={Trainingdata} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}} itm={itm}/>
                   </CardActions>
 
                   {console.log(itm, '<----------itm?.participant_name')}
