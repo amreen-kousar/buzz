@@ -161,7 +161,7 @@ export default function GreenSurvey(props) {
   const greensurveyformdata= async() =>{
      console.log("surveyyyyform")
     var data = JSON.stringify({
-    "partcipantId": 479204,
+    "partcipantId":props?.itm?.id ,
     "Email": sendData?.Email,
     "Name_of_the_surveyor": sendData?.Name_of_the_surveyor,
     "Name_of_the_respondent": sendData?.Name_of_the_respondent,
@@ -244,7 +244,7 @@ export default function GreenSurvey(props) {
       handleClose();
 
 }
-
+ {console.log(props?.itm,"iteemmmmm")}
 
 const wealthvalue=(event)=>{
        setwealth(event.target.value)
@@ -413,9 +413,11 @@ const handleresources=(label,event)=>{
     
        <Stack style={{ position:'absolute',right:0 ,float:'right',margin:2,padding:2 }}  mb={2}>
       
-        <IconButton onClick={handleClickOpen}>
+        {!(props?.itm?.is_survey)?<IconButton onClick={handleClickOpen}>
          <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
-        </IconButton>
+        </IconButton>:<IconButton>
+         <Icon  icon="charm:notes-tick" width={20} height={20} marginTop={20}  color="green" />
+        </IconButton>}
         
         </Stack> 
        

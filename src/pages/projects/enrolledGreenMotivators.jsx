@@ -28,6 +28,7 @@ export default function enrolledGreenMotivatorsList() {
     const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')
     const [count,setCount]= useState('');
+    const [reload, setReload] = useState(false);
     useEffect(() => {
         enrolledGreenMotivators();
     }, []
@@ -57,6 +58,10 @@ export default function enrolledGreenMotivatorsList() {
     const handleclose=()=>{
       setFilter(false)
     }
+    const changeState = () => {
+      setReload(!reload);
+      console.log('changeState is called ');
+    };
     const enrolledGreenMotivators = async(id,i,g) =>{
       console.log(id,'hy',i)
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
@@ -80,6 +85,7 @@ export default function enrolledGreenMotivatorsList() {
           axios(config)
           .then(function (response) {
             setGreen(response.data)
+            changeState();
             setCount(response?.data?.list.length)
             console.log(response.data);
           })
@@ -256,7 +262,7 @@ const getData = (itm, i) => {
                     <Card  style={styles.card1}>
                    {/* {(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)}><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey />      */}
               
-                   <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey /></div>
+                   <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey itm={itm} changeState={changeState}/></div>
               <div onClick={() => {
                         setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
                         handleOpenFilter()

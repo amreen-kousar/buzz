@@ -44,6 +44,14 @@ const [remove,setremove]=useState('');
 
     const [openFilter, setOpenFilter] = useState(false);
     const [filter,setFilter]=useState(false);
+    const [reload, setReload] = useState(false);
+    
+const changeState = () => {
+  setReload(!reload);
+  console.log('changeState is called ');
+};
+
+
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
@@ -80,6 +88,7 @@ const [remove,setremove]=useState('');
           axios(config)
           .then(function (response) {
             setVyaapar(response?.data)
+            changeState();
             setCount(response?.data?.list.length)
           })
           .catch(function (error) {
@@ -161,6 +170,7 @@ const id = sessionStorage?.getItem("proId")
       console.log(error);
     });
 }}
+
     return (
 
         <Container> <Searchbar getSearch={(e) => searchFunction(e)} />
@@ -214,7 +224,7 @@ const id = sessionStorage?.getItem("proId")
                console.log(itm,'<---------------vyaaparvyaaparvyaaparvyaapar')
                 return (
                     <Card style={styles.card1} >
-                      <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removevyapar(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}{(itm?.is_survey)?<GetVyaparProgram itm={itm}/>:<Vyaparprogram itm={itm}/>}</div>
+                      <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removevyapar(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}{(itm?.is_survey)?<GetVyaparProgram itm={itm}/>:<Vyaparprogram itm={itm} changeState={changeState}/>}</div>
                         <div onClick={() => {
                         setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
                         handleOpenFilter()
