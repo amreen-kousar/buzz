@@ -159,7 +159,7 @@ const GetStatus = async=>{
   var data = JSON.stringify({
     "project_id": batch?.project_id,
     "poa_type": 2,
-    "type": 3,
+    "type": 2,
     "tb_id": batch?.id
   });
   
@@ -241,14 +241,14 @@ const GetStatus = async=>{
         }<br/>
      
         {(checkData?.data?.check_in_date_day1!='')?<><Typography>
-            Checked In  : {checkData?.data?.check_in_date_day1}
+            Checked In  : {checkData?.data?.check_in_date_day1} &nbsp; {checkData?.data?.check_in_time_day1}
         </Typography>
         <Typography>
            Location  : {checkData?.data?.check_in_location_day1}
         </Typography></>:null}<br/> <Divider />
         {/* </>:null} */}
         <Typography mt={2}>
-            End :{batch?.day2?.split(" ")[1]}&nbsp;{batch?.day2?.split(" ")[2]}
+            End :
         </Typography>
         {(checkData?.data?.check_in_date_day1!='' && checkData?.data?.check_out_date_day1=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:350,marginBottom:2,color:'#ff7424'}} sx={{
              '&:hover': {
@@ -261,7 +261,7 @@ const GetStatus = async=>{
             CHECK OUT
         </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:350,marginBottom:2}}>CHECKOUT</Button>}<br/><br/>
        {(checkData?.data?.check_out_date_day1!="")?<><Typography>
-            Checked Out  : {checkData?.data?.check_out_date_day1}
+            Checked Out  : {checkData?.data?.check_out_date_day1} &nbsp; {checkData?.data?.check_out_time_day1}
         </Typography>
         <Typography>
            Location  :  {checkData?.data?.check_out_location_day1}
