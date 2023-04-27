@@ -27,7 +27,7 @@ import ParticipentDetailsDailoge from './ParticipentDetailsDailoge';
 import axios from 'axios';
 import { CheckBox } from '@mui/icons-material';
 import Iconify from 'src/components/Iconify';
-
+import EditParticipantdata from './Editparticipantdata';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -49,13 +49,23 @@ export default function ShaktiDialogday2({ shown, setShown, batch }) {
     setOpenFilter(false);
   };
 const [Add,setAdd]=React.useState(false);
+const [editSession,setEditsession]=useState(false);
 const [Trainingdata,setTrainingData]=useState(false);
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
     //setShown(shown)
     setOpen(shown);
+    
    
   }, [shown])
+
+  React.useEffect(() => {
+    //setShown(shown)
+getTrainingBatch();
+    
+   
+  }, [open])
+
 
   const handleClickOpen = () => {
     setShown(true)
@@ -90,6 +100,7 @@ const [Trainingdata,setTrainingData]=useState(false);
       .then((response) => {
         alert(response.data.message)
         getTrainingBatch()
+        setOpen(shown);
         console.log(JSON.stringify(response.data));
        
       })
@@ -122,6 +133,7 @@ const [Trainingdata,setTrainingData]=useState(false);
       axios.request(config)
       .then((response) => {
         alert(response.data.message)
+        setOpen(shown);
         console.log(JSON.stringify(response.data));
         getTrainingBatch()
       
@@ -237,7 +249,7 @@ console.log(checkData,"checkedta")
             onCloseFilter={handleCloseFilter}
           />
         </Stack>
-        {batch?.all_participants?.map(itm => {
+        {!Trainingdata && batch?.all_participants?.map(itm => {
           return (
             <Stack style={{ top: 100 }}>
               <Card >
@@ -260,6 +272,40 @@ console.log(checkData,"checkedta")
                         DeleteParticipant(itm)
                         console.log(itm,"<---sadasdasd")
                       }} /><Iconify icon="material-symbols:edit" width={20} height={20}></Iconify></>}
+                  </CardActions>
+
+                  {console.log(itm, '<----------itm?.participant_name')}
+                </CardContent>
+              </Card>
+            </Stack>
+
+          )
+        })}
+
+{Trainingdata && Trainingdata?.all_participants?.map(itm => {
+          return (
+            <Stack style={{ top: 100 }}>
+              <Card >
+                <CardContent >
+                  <CardActions sx={{borderRadius:0}}>
+                    <div  style={{width:'90vw',display:'flex',position:'relative',padding:'8px'}} >
+                     
+                      <Typography variant="subtitle2" onClick={()=>{handleOpenFilter();
+                      setClickData({ name: itm.gelathiname, title: "Enrolled  Name",id:itm?.participant_id})}
+                      }>
+                        {itm?.participant_name}
+                        </Typography>
+                 
+                    </div>
+                    {(itm?.day2=='0' )?<Checkbox onClick={()=>{
+                      addParticipant(itm)
+                      
+                      console.log(itm,"<---sadasdasd")
+                    }} {...label} />:<><Checkbox defaultChecked onClick={()=>{
+                        DeleteParticipant(itm)
+                        console.log(itm,"<---sadasdasd")
+                      }} /> <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton></>}
+                 <EditParticipantdata Trainingdata={Trainingdata} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}}/>
                   </CardActions>
 
                   {console.log(itm, '<----------itm?.participant_name')}
