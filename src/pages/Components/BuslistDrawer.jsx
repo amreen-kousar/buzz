@@ -37,6 +37,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useMediaQuery } from '@mui/material';
 // ----------------------------------------------------------------------
 
 
@@ -50,6 +51,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
   const [detailsData, setDetailsData] = useState();
   const [deletebus, setDeleteBus] = useState();
   const [userUpdate,setUserUpdate]=useState(false)
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
 console.log(busesd, "busesd")
   useEffect(()=>{
     details()
@@ -125,12 +127,13 @@ console.log(busesd, "busesd")
     <>
 
       <Drawer
+       width={isSmallScreen ? '100%' : 300}
         anchor="right"
         open={isOpenFilter}
         onClose={onCloseFilter}
-        PaperProps={{
-          sx: { width: 380, },
-        }}
+        // PaperProps={{
+        //   sx: { width: 380, },
+        // }}
         
       >
          <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
