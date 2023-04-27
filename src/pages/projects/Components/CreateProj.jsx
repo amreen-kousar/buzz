@@ -800,9 +800,9 @@ const mainShowBussHandler = ()=>{
                 <CardContent>
 
                  
-                  <Typography id="trainerslist" variant='h6'>Trainers  ({(name?.length?name?.length:0)})<IconButton style={{float:'right'}}>
+                  <div id="trainerslist" style={{fontWeight:700}} >Trainers  ({(name?.length?name?.length:0)})<IconButton id="trainerdrawer" style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
-                    </IconButton></Typography>
+                    </IconButton></div>
                  
                     {/* {sendData?.trainers_count} */}
                     {/* {sendData?.trainers.map((itm)=>{
@@ -844,13 +844,13 @@ const mainShowBussHandler = ()=>{
               }}>
                 <CardContent>
 
-                <Typography id="gelathi-facilators-list" variant='h6'>Gelathi Facilators  ({gelathiName?.length?gelathiName?.length:0})
-                  <IconButton style={{float:'right'}}>
+                <div id="gelathi-facilators-list" style={{fontWeight:700}}>Gelathi Facilators  ({gelathiName?.length?gelathiName?.length:0})
+                  <IconButton id="gelathidrawer" style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>
                   
                     
-                    </Typography>
+                    </div>
                   {gelathiName?.length !== 0 &&
                     <Card style={{ marginTop: 10 }}>
                       <CardContent>
