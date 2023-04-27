@@ -145,7 +145,7 @@ export default function GelathiCircleForm(circleData) {
   {console.log(selectedValue,"selectedValueeeeee")}
 
   const gelathicircleformdata= async() =>{
-
+  console.log("gelathi circle")
     var data = JSON.stringify({
       "partcipantId": 222954,
       "email_address": sendData?.email_address,
@@ -199,8 +199,12 @@ export default function GelathiCircleForm(circleData) {
          <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
         </IconButton>
         </Stack> 
+       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-    
+      <form onSubmit={(e) => {
+            e.preventDefault();
+            gelathicircleformdata()
+          }}>
               <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
         
 
@@ -213,7 +217,7 @@ export default function GelathiCircleForm(circleData) {
           </Typography>
 
 
-          <Button autoFocus edge="end" color="inherit" onClick={() => gelathicircleformdata()}>
+          <Button  edge="end" type="submit" onClick={()=>{console.log("save")}} color="inherit">
           <Iconify icon="material-symbols:save" width={30} height={30} />
           </Button>
         </Toolbar>
@@ -236,6 +240,7 @@ export default function GelathiCircleForm(circleData) {
                   </Typography>  
                   </CardContent>    
           </Card> */}
+
 
 
           <Card mt={1} style={{marginTop:10, borderRadius: 20 }}>
@@ -487,8 +492,8 @@ export default function GelathiCircleForm(circleData) {
         </Grid>
      </DialogContentText>
      </DialogContent>
+      </form>
       </Dialog>
-   
     </div>
   );
 }
