@@ -40,6 +40,7 @@ import AddEnrollVyapar from './AddenrolleVyapar';
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 const ExpandMore = styled((props) => {
@@ -67,9 +68,11 @@ export default function GelathiProgrameDrawer({
   gelathiFacikitatorLead,
 }) {
   const [session, setSession] = useState('');
+  console.log("🚀 ~ file: GelathiProgrameDrawer.jsx:71 ~ session:", session)
   const [showNote, setShowNote] = useState(false);
   const [gelatiNote, setGelatiNote] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
 //notes save button
 
 const [SaveBtn , setSaveBtn] = useState(false) 
@@ -381,11 +384,12 @@ const convertImage = (e) => {
       </Button> */}
 
       <Drawer
+      width={isSmallScreen ? '100%' : 300}
         anchor="right"
         open={isOpenFilter}
         onClose={onCloseFilter}
         PaperProps={{
-          sx: { width: 400 },
+          sx: { width: 350 },
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>

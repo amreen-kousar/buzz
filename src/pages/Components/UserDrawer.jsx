@@ -33,6 +33,7 @@ import defaultImage from '../../assets/images/default.png';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { useMediaQuery } from '@mui/material';
 // ----------------------------------------------------------------------
 UserDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
@@ -45,6 +46,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
   const [profileData, setProfileData] = useState();
   const [user, setUser] = useState();
   const userDetails = localStorage?.getItem('userId');
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
   {
     console.log(userDetails, 'userrrrrrrrrrrrrrrrrrr');
   }
@@ -129,12 +131,13 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
       </Button> */}
 
       <Drawer
+       width={isSmallScreen ? '100%' : 300}
         anchor="right"
         open={isOpenFilter}
         onClose={onCloseFilter}
-        PaperProps={{
-          sx: { width: 350 },
-        }}
+        // PaperProps={{
+        //   sx: { width: 350 },
+        // }}
       >
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>

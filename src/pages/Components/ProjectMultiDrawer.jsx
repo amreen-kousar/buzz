@@ -35,9 +35,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import EditGelathiSession from '../projects/Components/EditGelathisession';
 import EditTrainingBatch from '../projects/EditTrainingSession';
+import { useMediaQuery } from '@mui/material';
 // ----------------------------------------------------------------------
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
+import ShaktiDialogday2 from '../projects/Components/ShaktiDialogday2';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -75,7 +77,7 @@ const [gelatiNote, setGelatiNote] = useState('');
    const [editSession,setEditsession]=useState(false);
    const [check,setCheck]=useState(false)
    const [expanded, setExpanded] = React.useState(false);
-
+   const isSmallScreen = useMediaQuery('(max-width:600px)');
 const handleExpandClick = () => {
   setExpanded(!expanded);
 };
@@ -377,6 +379,7 @@ const noteSubmitHandler = () => {
     return (
         <>
             <Drawer
+            width={isSmallScreen ? '100%' : 300}
               id="project-mutidrawer-drwer"
                 anchor="right"
                 open={isOpenFilter}
@@ -404,7 +407,7 @@ const noteSubmitHandler = () => {
                             <Card id="project-card">
                                 <CardContent id="project-multidrawer-card-content">
                                     <Typography id="project" style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
-                                        Project :
+                                        Project  :
                                       &nbsp;{batch?.data?.projectName}
                                         {console.log(batch?.data?.projectName,'<--------njknnjnjn')}
                                     </Typography>
@@ -477,7 +480,8 @@ const noteSubmitHandler = () => {
                                     </Typography>
                                 </CardContent>
                             </Card>
-                            <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />
+                           
+                           {(batch?.data?.day1_completed=='1')?<ShaktiDialogday2 batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />: <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />}
                             <Card sx={{mt:2}} id="project-mutlidrawer-card" onClick={()=>{setShown(true),console.log("ferfgreg")}} style={styles.buttonStyle}>
                                 <CardContent id="project-card-content">
                              

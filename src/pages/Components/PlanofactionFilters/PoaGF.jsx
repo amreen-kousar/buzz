@@ -32,7 +32,7 @@ import moment from 'moment';
 import CircularProgress from '@mui/material/CircularProgress';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
+import { useMediaQuery } from '@mui/material';
 // ----------------------------------------------------------------------
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -70,6 +70,7 @@ const [gelatiNote, setGelatiNote] = useState('');
   const [session, setSession] = useState('');
   const [expanded, setExpanded] = React.useState(false);
   const [reload, setReload] = useState(false);
+   const isSmallScreen = useMediaQuery('(max-width:600px)');
   const changeState = () => {
     setReload(!reload);
     console.log('changeState is called ');
@@ -377,6 +378,7 @@ const noteSubmitHandler = () => {
   return (
     <>
       <Drawer
+       width={isSmallScreen ? '100%' : 300}
         id="poa-gf-drawer"
         anchor="right"
         open={isOpenFilterGF}
