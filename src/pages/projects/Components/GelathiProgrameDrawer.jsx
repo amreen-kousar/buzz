@@ -68,7 +68,7 @@ export default function GelathiProgrameDrawer({
   gelathiFacikitatorLead,
 }) {
   const [session, setSession] = useState('');
-  console.log("🚀 ~ file: GelathiProgrameDrawer.jsx:71 ~ session:", session)
+  console.log("🚀 ~ file: GelathiProgrameDrawer.jsx:71 ~ session:", session.tb_id)
   const [showNote, setShowNote] = useState(false);
   const [gelatiNote, setGelatiNote] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
