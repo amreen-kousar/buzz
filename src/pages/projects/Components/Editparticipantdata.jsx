@@ -34,7 +34,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
-export default function EditParticipantdata({editSession, setEditsession,Trainingdata, changeState,itm}) {
+export default function EditParticipantdata({editSession, setEditsession,Trainingdata, changeState,itm,cvalue}) {
  console.log(itm,"itemmmm")
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
@@ -139,6 +139,8 @@ const SendData = async => {
       });
 
   }
+
+
   return (
     <div>
         <Dialog fullScreen open={open} onClose={handleClose}
@@ -153,7 +155,7 @@ const SendData = async => {
            Update Participant Detail
           </Typography>
 
-
+        
           <Button autoFocus color="inherit" onClick={() => SendData()}>
             save
           </Button>
@@ -234,13 +236,13 @@ const SendData = async => {
                     </RadioGroup>
             </Stack>
 
-            <Stack id="create-poa-stack" direction={'row'}>
+            {(cvalue<1)?<Stack id="create-poa-stack" direction={'row'}>
                   <Typography id="all-day">Suggested Gelathi</Typography><br/>
                   <Switch id="switch-suggested-gelathi" value={sendData?.gelathiRecomm} 
                   onChange={(e) => {
                      setSendData({ ...sendData, gelathiRecomm: sendData?.gelathiRecomm === 1 ? 0 : 1 }) 
                   }}/>
-                </Stack>
+                </Stack>:null}
 
           </DialogContentText></DialogContent>  </Dialog>
     </div>
