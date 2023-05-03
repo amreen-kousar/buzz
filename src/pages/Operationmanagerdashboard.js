@@ -22,6 +22,14 @@ import CardHeader from '@mui/material/CardHeader';
 import { max } from 'lodash';
 import FiltersHome from './Filters/FiltersHome';
 import { styled } from '@mui/material/styles';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  customChip: {
+    backgroundColor: '#ffd796',
+    color: '#000',
+  },
+});
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -215,7 +223,7 @@ export default function Operationmanagerdashboard() {
         <Container maxWidth="xl">
 
           {
-            slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+            slected &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}className={classes.customChip}  label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
           }
 
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>

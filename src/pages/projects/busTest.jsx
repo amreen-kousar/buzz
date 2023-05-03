@@ -270,7 +270,7 @@ const details = async => {
  
       </Dialog>
       {
-                    selected && <><Chip label={` ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={` ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
       }
          <TableContainer component={Paper} sx={{width:'40vw',justifyContent:'center',alignItems:'center',ml:10}}>
           <Table aria-label="customized table">

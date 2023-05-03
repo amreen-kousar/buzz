@@ -198,14 +198,14 @@ export default function selfShaktiProj() {
           </Button> */}
             </Stack>
             {
-                    selected && (selected?.type=='Search') && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected && (selected?.type=='Search') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
               {
-                    selected && (selected?.type=='Trainers') && <><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected && (selected?.type=='Trainers') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
           
             {
-              selected && (selected?.type=='Rescheduled' || selected?.type=='Cancelled' )&& <><Chip label={`${selected?.type}`} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+              selected && (selected?.type=='Rescheduled' || selected?.type=='Cancelled' )&& <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type}`} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}> All Training Batch : ({count})</Typography> 
@@ -213,6 +213,7 @@ export default function selfShaktiProj() {
                            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ProjectMultiDrawer
                 batchState={batchState}
+                shakti={shakti}
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
                     onOpenFilter={handleOpenFilter}

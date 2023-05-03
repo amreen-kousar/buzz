@@ -201,7 +201,7 @@ export default function Demography() {
 
      
       {
-        selected?.type && <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
+        selected?.type &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
       }
 
    

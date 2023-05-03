@@ -313,11 +313,11 @@ console.log(data,"dataaaaaaaaaaa")
 
 
                 {console.log(selected,"selectedd")}
-                { selected &&  ( selected?.type=='Location' || selected?.type=='Date Range') && <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /> }
+                { selected &&  ( selected?.type=='Location' || selected?.type=='Date Range') &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /> }
                   
-                { selected  && ( selected?.type=='Funder' || selected?.type=='Operation Manager' || selected?.type=='Trainers' || selected?.type=='Gelathi Facilitator' ) && <Chip label={`${selected?.type} : ${selected?.first_name} `} onDelete={() => { handleDelete(selected) }} /> }
+                { selected  && ( selected?.type=='Funder' || selected?.type=='Operation Manager' || selected?.type=='Trainers' || selected?.type=='Gelathi Facilitator' ) &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.first_name} `} onDelete={() => { handleDelete(selected) }} /> }
          
-                {selected && (selected?.type=='Custom Filter') && <Chip label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/> }
+                {selected && (selected?.type=='Custom Filter') &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/> }
                
                 {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
@@ -412,7 +412,7 @@ console.log(data,"dataaaaaaaaaaa")
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                        {( p?.project_status_name=='Completed')?<Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')?<Chip label={p?.project_status_name} size="small" color="secondary" variant="outlined" />:<Chip label={p?.project_status_name} size="small" color="error" variant="outlined" />}
+                                                        {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>
@@ -437,7 +437,7 @@ console.log(data,"dataaaaaaaaaaa")
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                    {( p?.project_status_name=='Completed')?<Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')?<Chip label={p?.project_status_name} size="small" color="secondary" variant="outlined" />:<Chip label={p?.project_status_name} size="small" color="error" variant="outlined" />}
+                                                    {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>
@@ -463,7 +463,7 @@ console.log(data,"dataaaaaaaaaaa")
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                    {( p?.project_status_name=='Completed')?<Chip label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')?<Chip label={p?.project_status_name} size="small" color="secondary" variant="outlined" />:<Chip label={p?.project_status_name} size="small" color="error" variant="outlined" />}
+                                                    {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>

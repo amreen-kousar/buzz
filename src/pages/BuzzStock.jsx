@@ -174,7 +174,7 @@ export default function BuzzStock() {
         </Stack>
       {selected?.type &&
         <Stack direction="row" spacing={1}>
-          <Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
+           <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
         </Stack>
       }
       <Stack direction="row" spacing={1} flexShrink={0} >

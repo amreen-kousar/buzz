@@ -177,13 +177,13 @@ export default function gelathiProgram(props) {
             </Stack>
             
             {
-                    selected  && (selected?.type=='Search') && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected  && (selected?.type=='Search') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
              {
-                    selected  && (selected?.type=='Gelathi Facilitators') && <><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected  && (selected?.type=='Gelathi Facilitators') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             {
-                    selected  && (selected?.type=='Circle Meetings' || selected?.type=='Beehive Visits' || selected?.type=='Rescheduled'|| selected?.type=='Cancelled' || selected?.type=='Village Visits') && <><Chip label={`${selected?.type} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected  && (selected?.type=='Circle Meetings' || selected?.type=='Beehive Visits' || selected?.type=='Rescheduled'|| selected?.type=='Cancelled' || selected?.type=='Village Visits') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             
             

@@ -226,7 +226,7 @@ let formatdata = summaryData?.data
         </Stack>
         <Container maxWidth="xl">
           {
-            slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+            slected &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
           }
 
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>

@@ -57,8 +57,8 @@ projectMultiDrawer.propTypes = {
     onCloseFilter: PropTypes.func,
 };
 
-export default function projectMultiDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,batchState,projectId}) {
-console.log("🚀 ~ file: ProjectMultiDrawer.jsx:61 ~ projectMultiDrawer ~ clcikData:", clcikData)
+export default function projectMultiDrawer({ isOpenFilter,shakti, onOpenFilter, onCloseFilter, clcikData,batchState,projectId}) {
+console.log("🚀 ~ file: ProjectMultiDrawer.jsx:61 ~ projectMultiDrawer ~ clcikData:", shakti)
 
      const [batch,setBatch] = useState('')
      console.log("🚀 ~ file: ProjectMultiDrawer.jsx:49 ~ projectMultiDrawer ~ batch:", batch)
@@ -73,12 +73,14 @@ const [gelatiNote, setGelatiNote] = useState('');
  const [showNote, setShowNote] = useState(false);
  const [checkData,setCheckData]=React.useState('');
   const [date, setDate] = useState(new Date())
+  console.log("🚀 ~ file: ProjectMultiDrawer.jsx:76 ~ projectMultiDrawer ~ date:", date)
   const [day2date,setday2date] = useState(new Date())
    const [session, setSession] = useState('');
    const [editSession,setEditsession]=useState(false);
    const [check,setCheck]=useState(false)
    const [expanded, setExpanded] = React.useState(false);
    const isSmallScreen = useMediaQuery('(max-width:600px)');
+ 
 const handleExpandClick = () => {
   setExpanded(!expanded);
 };
@@ -255,6 +257,7 @@ const handleExpandClick = () => {
     .then(function (response) {
       setReschedule(false)
       onCloseFilter()
+      shakti()
       console.log(JSON.stringify(response.data));
     })
     .catch(function (error) {
@@ -343,7 +346,8 @@ const noteSubmitHandler = () => {
     console.log('submit');
   };
 
-
+  
+  console.log("🚀 ~ file: ProjectMultiDrawer.jsx:495 ~ projectMultiDrawer ~ batch?.data?.day1_actual >=  date:",( (batch?.data?.day1_actual )>=( moment(date).format("YYYY-MM-DD"))))
   const GetStatus = async=>{
     var data = JSON.stringify({
       "project_id": projectId,
@@ -370,12 +374,13 @@ const noteSubmitHandler = () => {
       console.log(error);
     });
   }
-
+  
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
     linkStyle: { textDecoration: 'none', color: "black" }
   }
+  console.log("🚀 ~ file: ProjectMultiDrawer.jsx:453 ~ projectMultiDrawer ~ batch?.data?.day2_actual:", batch?.data?.day2_actual)
  
     return (
         <>
@@ -464,7 +469,7 @@ const noteSubmitHandler = () => {
     renderInput={(params) => <TextField {...params} color="common" />}
     PopperProps={{
       placement: "top"
-  
+      
     }}
   />
         </LocalizationProvider>
@@ -488,7 +493,7 @@ const noteSubmitHandler = () => {
                                 <CardContent id="project-card-content">
                              
                                  <Typography id="actual-participants" >Actual Participants:   {batch?.total_participants}    
-                                 <Iconify id="add-symbol-material" icon="material-symbols:add" width={30} height={30} style={{float:'right'}} /> 
+                                {batch?.data?.day1_actual >=  moment(date).format("YYYY-MM-DD") && <Iconify id="add-symbol-material" icon="material-symbols:add" width={30} height={30} style={{float:'right'}} />} 
                   
                     </Typography>
                                     <Typography id="target particpants">Target Participants:   {batch?.data?.participants}    </Typography>

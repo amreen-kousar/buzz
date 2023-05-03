@@ -271,9 +271,9 @@ export default function DashboardApp() {
       <Container maxWidth="xl">
         <Grid item spacing={10}>
 
-
+        {/* moment(date1?.$d)?.format('YYYY-MM-DD'), */}
           {
-            slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+            slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${moment((slected?.name)?.$d)?.format('YYYY-MM-DD')} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
           }
 
         </Grid>

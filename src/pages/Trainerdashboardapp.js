@@ -176,7 +176,7 @@ export default function Trainerdashboard() {
         <Container maxWidth="xl">
           <Grid item spacing={10}> 
           {
-            slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+            slected &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
           }
           </Grid>
          

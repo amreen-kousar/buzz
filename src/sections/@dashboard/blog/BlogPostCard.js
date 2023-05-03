@@ -136,7 +136,7 @@ export default function BlogPostCard({ post, index }) {
           <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
            Date of Joining:  {fDate(createdAt)}
           </Typography>
-          <Chip label="ACTIVE" size="small" color="success" variant="outlined" />
+           <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label="ACTIVE" size="small" color="success" variant="outlined" />
           </Stack>
           
 
