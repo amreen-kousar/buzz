@@ -224,7 +224,7 @@ const id = sessionStorage?.getItem("proId")
                console.log(itm,'<---------------vyaaparvyaaparvyaaparvyaapar')
                 return (
                     <Card style={styles.card1} >
-                      <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removevyapar(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}{(itm?.is_survey)?<GetVyaparProgram itm={itm}/>:<Vyaparprogram itm={itm} changeState={changeState}/>}</div>
+                      <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removevyapar(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}{(itm?.is_survey)?<GetVyaparProgram itm={itm}/>:<Vyaparprogram itm={itm} enrolledVyaapar={enrolledVyaapar} changeState={changeState}/>}</div>
                         <div onClick={() => {
                         setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
                         handleOpenFilter()

@@ -41,7 +41,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Vyaparprogram({itm}) {
+export default function Vyaparprogram({itm,enrolledVyaapar}) {
   const [open, setOpen] = React.useState(false);
   // const [openMessage, setOpenMessage] = useState(false);
   const [successMessage,setsuccessMessage]=useState(false);
@@ -224,6 +224,8 @@ const [sendData,setSendData] = useState({
           setsuccessMessage(true)
           
           handleClose()
+          // enrolledVyaapar()
+          
           props?.changeState()
       })
       .catch(function (error) {
@@ -394,7 +396,7 @@ const [sendData,setSendData] = useState({
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div"   >
-          Buzz Vyapar Program Baseline
+          Buzz Vyapar Program Baseline  
           </Typography>
 
 

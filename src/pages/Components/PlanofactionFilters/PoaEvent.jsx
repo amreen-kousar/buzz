@@ -92,31 +92,32 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
 
   const [isLoading, setISLoading] = useState(false)
   const postImages = async () => {
-    setISLoading(true)
+    if (image.length === 0) {
+      alert("No image to upload");
+      return;
+    }
+    
+    setISLoading(true);
+  
     var dataImage = JSON.stringify({
-      "event_id":eventdetails.event_id , 
-     
-      "photos":image.toString().slice(22,)
+      "event_id": eventdetails.event_id, 
+      "photos": image.toString().slice(22,)
     });
-   
+  
     var requestOptions = {
       method: 'POST',
       body: dataImage,
       redirect: 'follow',
     };
-
+  
     let res = fetch('https://bdms.buzzwomen.org/appTest/uploadEventPhotos.php', requestOptions)
       .then((itn) => {
         console.log(itn, '<--itemgh');
         setImage([])
         alert("Image uploaded successfully..")
         setISLoading(false)
-      })
-      .catch((err) => {
-        console.log(err, '<---wertyu');
       });
-    //console.log(res,"<----2werdcfvghbj")
-  };
+  }
 
   const deleteImage = (index) => {
     image.splice(index, 1);

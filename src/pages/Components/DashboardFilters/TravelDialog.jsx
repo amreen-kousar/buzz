@@ -42,6 +42,7 @@ import LocalPrintshop from '@mui/icons-material/LocalPrintshop';
 import CurrencyRupee  from '@mui/icons-material/CurrencyRupee';
 import DiamondRounded  from '@mui/icons-material/DiamondRounded';
 import  Room  from '@mui/icons-material/Room';
+import { date } from 'yup';
 function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
@@ -109,6 +110,7 @@ export default function TravelDialog({ viewMessage }) {
   const [viewImage, setViewImage] = React.useState(false);
   const [locationS,setLocation] = useState()
   const hiddenFileInput = React.useRef(null);
+  const [dropDownValues, setDropDownValues] = useState([])
 
   const handleClick = event => {
     console.log("click", event.target)
@@ -287,6 +289,14 @@ axios(config)
       .then(function (response) {
         setDataDrop(response.data)
         console.log(JSON.stringify(response.data));
+        //filter by date, assign to another variable (dropdown values)
+        const date = moment(new Date()).format('YYYY-MM-DD')
+        console.log("🚀 ~ file: TravelDialog.jsx:294 ~ new:", date)
+        let dropDownValues = response.data.data.filter(x=> {
+          const date1 = moment(x.date)?.format('YYYY-MM-DD')
+          return  date1=== date;
+        })
+        setDropDownValues(dropDownValues);
       })
       .catch(function (error) {
         console.log(error);
@@ -377,14 +387,59 @@ axios(config)
             tabIndex={-1}
           > */}
             <div style={{ margin: "1rem" }}>
+            <Stack style={{ marginTop: 90 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.modeoftravel==""?"Select Mode of Travel":"Mode of Travel"}</InputLabel>
+                  <Select required variant="standard" color="common" sx={{ fontSize: '13px' }}
+                    labelId="Select Mode Of Travel"
+                    id="demo-simple-select"
+                    value={sendData?.modeoftravel}
+                    onChange={(e) => setSendData({ ...sendData, modeoftravel: e?.target?.value })}
+                    label="select Mode Of Travel"
 
+                  //onChange={handleChange}
+                  >
+                    {datadrop?.Mode_of_Travel?.map(itm => {
+                      return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
+                    })}
+                  </Select>
+                </FormControl>
+              </Stack><br></br>
+              {console.log(datadrop?.Mode_of_Travel,"modeeeeeeeeeeee",sendData?.modeoftravel)}
+              {(sendData?.modeoftravel&&sendData?.modeoftravel===1 | sendData?.modeoftravel===4 | sendData?.modeoftravel===5 | sendData?.modeoftravel===6)?<Stack style={{ marginTop: 20 }}>
+                <TextField required id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, fairamount: e?.target?.value }) }} label="Fair amount" variant="outlined" color="common" />
+              </Stack>:
+              <Stack style={{ marginTop: 20 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.rateperkm==""?"Select Rate per KM":"Rate per KM"}</InputLabel>
+                  <Select required variant="standard" color="common" sx={{ fontSize: '13px' }}
+                    labelId="Select Rate Per Km"
+                    id="demo-simple-select"
+                    value={sendData?.rateperkm}
+                    label="Select Rate Per Km"
+                    onChange={(e) => setSendData({ ...sendData, rateperkm: e?.target?.value })}
+                  >
+                    {datadrop?.Rate_per_KM?.map(itm => {
+                      return (<MenuItem value={itm?.amount}>{itm?.amount}</MenuItem>)
+                    })}
+                  </Select>
+                </FormControl>
+              </Stack> 
+              
+              }<br></br>
+                {   (sendData?.modeoftravel&&sendData?.modeoftravel===3 )?   <Stack style={{ marginTop: 20 }}>
+             <TextField id="outlined-basic" 
+              type="number"  
+inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading *" variant="outlined" color="common" 
+             />
+           </Stack>:null}
 
-              <Stack style={{ marginTop: 90 }}>
+              {/* <Stack style={{ marginTop: 20 }}>
                 <TextField id="outlined-basic" 
                  type="number"  
   inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading *" variant="outlined" color="common" 
                 />
-              </Stack>
+              </Stack> */}
               <Stack style={{ marginTop: 20 ,color:'black'}}>
                 <TextField id="outlined-basic" value={locationS} disabled={true} onChange={(e) => { setSendData({ ...sendData, location: e?.target?.value }) }} label="Start Location" variant="outlined" color="common" 
                 InputProps={{
@@ -395,6 +450,7 @@ axios(config)
                    ),
                }}  />
               </Stack><br></br>
+              
               {/* <Stack style={{ marginTop: 20 }}>
 
                      <ListItemButton
@@ -443,7 +499,7 @@ axios(config)
               <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.poa==""?"Select POA *":"POA *"}</InputLabel>
                 {(datadrop?.data.length>0)?<Select required labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                 
-                  {datadrop?.data?.map(itm => {
+                  {dropDownValues?.map(itm => {
                     return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                   })}
                 </Select>:<Typography variant="body2" style={{marginLeft:20,marginTop:40}}>No POA</Typography>}
@@ -481,44 +537,7 @@ axios(config)
                 </LocalizationProvider>
               </Stack>
               <br></br>
-              <Stack style={{ marginTop: 20 }}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.modeoftravel==""?"Select Mode of Travel":"Mode of Travel"}</InputLabel>
-                  <Select required variant="standard" color="common" sx={{ fontSize: '13px' }}
-                    labelId="Select Mode Of Travel"
-                    id="demo-simple-select"
-                    value={sendData?.modeoftravel}
-                    onChange={(e) => setSendData({ ...sendData, modeoftravel: e?.target?.value })}
-                    label="select Mode Of Travel"
-
-                  //onChange={handleChange}
-                  >
-                    {datadrop?.Mode_of_Travel?.map(itm => {
-                      return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
-                    })}
-                  </Select>
-                </FormControl>
-              </Stack><br></br>
-              {console.log(datadrop?.Mode_of_Travel,"modeeeeeeeeeeee",sendData?.modeoftravel)}
-              {(sendData?.modeoftravel&&sendData?.modeoftravel===1 | sendData?.modeoftravel===4 | sendData?.modeoftravel===5 | sendData?.modeoftravel===6)?<Stack style={{ marginTop: 20 }}>
-                <TextField required id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, fairamount: e?.target?.value }) }} label="Fair amount" variant="outlined" color="common" />
-              </Stack>:
-              <Stack style={{ marginTop: 20 }}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.rateperkm==""?"Select Rate per KM":"Rate per KM"}</InputLabel>
-                  <Select required variant="standard" color="common" sx={{ fontSize: '13px' }}
-                    labelId="Select Rate Per Km"
-                    id="demo-simple-select"
-                    value={sendData?.rateperkm}
-                    label="Select Rate Per Km"
-                    onChange={(e) => setSendData({ ...sendData, rateperkm: e?.target?.value })}
-                  >
-                    {datadrop?.Rate_per_KM?.map(itm => {
-                      return (<MenuItem value={itm?.amount}>{itm?.amount}</MenuItem>)
-                    })}
-                  </Select>
-                </FormControl>
-              </Stack>}<br></br>
+   
              
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
