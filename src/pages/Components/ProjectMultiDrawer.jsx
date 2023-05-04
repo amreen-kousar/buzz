@@ -36,6 +36,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import EditGelathiSession from '../projects/Components/EditGelathisession';
 import EditTrainingBatch from '../projects/EditTrainingSession';
 import { useMediaQuery } from '@mui/material';
+import Day2Completed from '../projects/Components/day2Completion';
 // ----------------------------------------------------------------------
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
@@ -481,7 +482,9 @@ const noteSubmitHandler = () => {
                                 </CardContent>
                             </Card>
                            
-                           {(batch?.data?.day1_completed=='1')?<ShaktiDialogday2 batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />: <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />}
+                           {(userId==5 && batch?.data?.day1_completed=='1')?<ShaktiDialogday2 batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:(userId==5 && batch?.data?.day1_completed!='1')? <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:<Day2Completed batch={batch} shown={shown} setShown={(e)=>{setShown(e)}}/>}
+                           
+                           
                             <Card sx={{mt:2}} id="project-mutlidrawer-card" onClick={()=>{setShown(true),console.log("ferfgreg")}} style={styles.buttonStyle}>
                                 <CardContent id="project-card-content">
                              
