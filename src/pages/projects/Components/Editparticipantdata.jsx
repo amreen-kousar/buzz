@@ -26,15 +26,16 @@ import axios from 'axios';
 import moment from 'moment';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
+import Switch from '@mui/material/Switch';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import RadioGroup from '@mui/material/RadioGroup';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-export default function EditParticipantdata({editSession, setEditsession,Trainingdata}) {
- 
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
+export default function EditParticipantdata({editSession, setEditsession,Trainingdata, changeState,itm,cvalue}) {
+ console.log(itm,"itemmmm")
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
 
@@ -45,13 +46,14 @@ export default function EditParticipantdata({editSession, setEditsession,Trainin
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
-
+ const [showDate , setShowDate] = useState(false)
   const [sendData, setSendData] = useState({
     occupation:"",
     husbandOccupation:"",
     wifeIncomeMonthly:"",
     typeOfEnterprise:"",
     saving_amt:"",
+    gelathiRecomm: 0,
     saving_goal:"",
     wifeSavingsMonthly:"",
     income:"",
@@ -75,6 +77,7 @@ export default function EditParticipantdata({editSession, setEditsession,Trainin
   const handleClose = () => {
     setEditsession(false)
     setOpen(false);
+    changeState();
   };
 
 const Occupation =()=>{
@@ -101,7 +104,7 @@ const SendData = async => {
         "income":sendData?.income, 
         "occupation":sendData?.occupation,
          "typeOfEnterprise":sendData?.typeOfEnterprise, 
-         "participant_id":573160, 
+         "participant_id":itm?.participant_id, 
          "final_save":1, 
          "husbandOccupation":sendData?.husbandOccupation,
          "wifeIncomeMonthly":sendData?.wifeIncomeMonthly, 
@@ -110,7 +113,7 @@ const SendData = async => {
          "wifeSavingsMonthly":sendData?.wifeSavingsMonthly,
          "saving_amt":sendData?.saving_amt, 
          "participant_day2":Trainingdata?.data?.day2, 
-         "gelathiRecomm":0, 
+         "gelathiRecomm":sendData?.gelathiRecomm, 
          "project_id":Trainingdata?.data?.project_id, 
          "tb_id":Trainingdata?.data?.id
     });
@@ -129,12 +132,15 @@ const SendData = async => {
         console.log(JSON.stringify(response.data));
       
         handleClose()
+        changeState();
       })
       .catch(function (error) {
         console.log(error);
       });
 
   }
+
+
   return (
     <div>
         <Dialog fullScreen open={open} onClose={handleClose}
@@ -149,7 +155,7 @@ const SendData = async => {
            Update Participant Detail
           </Typography>
 
-
+        
           <Button autoFocus color="inherit" onClick={() => SendData()}>
             save
           </Button>
@@ -224,11 +230,19 @@ const SendData = async => {
                   
                     >
                     <div style={{display:"flex"}}>
-                      <FormControlLabel value="0" control={<Radio style={{color:"#595959"}} />} label="No" />
-                      <FormControlLabel value="1" control={<Radio style={{color:"#595959"}}  />} label="Yes" />
+                      <FormControlLabel value={0} control={<Radio style={{color:"#595959"}} />} label="No" />
+                      <FormControlLabel value={1} control={<Radio style={{color:"#595959"}}  />} label="Yes" />
                       </div>
                     </RadioGroup>
             </Stack>
+
+            {(cvalue<1)?<Stack id="create-poa-stack" direction={'row'}>
+                  <Typography id="all-day">Suggested Gelathi</Typography><br/>
+                  <Switch id="switch-suggested-gelathi" value={sendData?.gelathiRecomm} 
+                  onChange={(e) => {
+                     setSendData({ ...sendData, gelathiRecomm: sendData?.gelathiRecomm === 1 ? 0 : 1 }) 
+                  }}/>
+                </Stack>:null}
 
           </DialogContentText></DialogContent>  </Dialog>
     </div>

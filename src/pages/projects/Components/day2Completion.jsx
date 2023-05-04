@@ -32,7 +32,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-export default function ShaktiDialogday2({ shown, setShown, batch }) {
+export default function Day2Completed({ shown, setShown, batch }) {
   console.log(batch, 'day2form is opening')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
@@ -66,7 +66,7 @@ const [Trainingdata,setTrainingData]=useState(false);
 getTrainingBatch();
     
    
-  }, [open,editSession])
+  }, [open])
 
   const changeState = () => {
     setReload(!reload);
@@ -82,72 +82,9 @@ getTrainingBatch();
     setOpen(false);
   };
 
-
-  const addParticipant=(itm)=>{
-    let data = JSON.stringify({
-        "participant_day2": batch?.data?.day2,
-        "participant_id": itm?.participant_id,
-        "tb_id": batch?.data?.id ,
-        "status": 1
-      });
-      
-      let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/updateParticipantDay.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      axios.request(config)
-      .then((response) => {
-        alert(response.data.message)
-        getTrainingBatch()
-        setOpen(shown);
-        console.log(JSON.stringify(response.data));
-       
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      
-  }
-
-  
-
-  const DeleteParticipant=(itm)=>{
-    let data = JSON.stringify({
-        "participant_day2": batch?.data?.day2,
-        "participant_id": itm?.participant_id,
-        "tb_id": batch?.data?.id ,
-        "status": 0
-      });
-      
-      let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/updateParticipantDay.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      axios.request(config)
-      .then((response) => {
-        alert(response.data.message)
-        setOpen(shown);
-        console.log(JSON.stringify(response.data));
-        getTrainingBatch()
-      
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      
-  }
+const handlesurvey =()=>{
+    alert('Survey was Done')
+}
 
   const getTrainingBatch = async =>{
         
@@ -229,11 +166,9 @@ console.log(c,"cvaluee")
             <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div">
               Self Shakti
             </Typography>
-            {/* <Button autoFocus color="inherit" onClick={handleClose}>
-              Add Participants
-            </Button> */}
+         
             {console.log(checkData,"addparticipants")}
-            {/* <AddParticipants batch={batch} checkData={checkData}/> */}
+        
 
           </Toolbar>
         </AppBar>
@@ -254,34 +189,25 @@ console.log(c,"cvaluee")
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Contact&nbsp;Number</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.contact_number}</TableCell></TableRow>  </TableBody>
           </Table>
         </TableContainer>
-              {/* <Typography variant="subtitle2" sx={{color:"black"}}> Project : {batch?.data?.projectName} </Typography>
-              {console.log(batch?.data?.projectName, '<----------batch?.data?.projectName')}
-              <Typography variant="subtitle2" sx={{color:"black"}}> Training Batch : {batch?.data?.name} </Typography>
-              <Typography variant="subtitle2" sx={{color:"black"}}> Day 1 : {batch?.data?.day1}</Typography>
-              <Typography variant="subtitle2" sx={{color:"black"}}> Day 2 : {batch?.data?.day2}</Typography>
-              <Typography variant="subtitle2" sx={{color:"black"}}> Contact Person : {batch?.data?.contact_number}</Typography>
-              <Typography variant="subtitle2" sx={{color:"black"}}> Contact Number : {batch?.data?.contact_person}</Typography> */}
+
           
           </Card>
         </Stack>
-        {/* <Typography variant="subtitle1"> ALl Participants</Typography> */}
+   
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          {/* <ParticipantDrawer
-        
-            clcikData={clcikData}
-            isOpenFilter={openFilter}
-            onOpenFilter={handleOpenFilter}
-            onCloseFilter={handleCloseFilter}
-          /> */}
+     
           <ParticipentDetailsDailoge
             clcikData={clcikData}
             isOpenFilter={openFilter}
-            // onOpenFilter={handleOpenFilter}
+        
             onCloseFilter={handleCloseFilter}
           />
         </Stack>
-        {!Trainingdata && batch?.all_participants?.map(itm => {
-          return (
+       {(Trainingdata?.data?.day2_completed=='1')?<> <Typography style={{textAlign:'center'}}>Day1 Participants : {Trainingdata?.total_participants}</Typography>
+        <Typography style={{textAlign:'center'}}>Day2 Participants : {Trainingdata?.dayGelathi}</Typography></>:<><Typography style={{textAlign:'center'}}>Day1  : Actual Vs Target : {Trainingdata?.total_participants}/{Trainingdata?.data?.participants}</Typography></>}
+{
+    Trainingdata?.all_participants?.map(itm=>{
+        return (
             <Stack style={{ top: 100 }}>
               <Card >
                 <CardContent >
@@ -295,59 +221,20 @@ console.log(c,"cvaluee")
                         </Typography>
                  
                     </div>
-                    {(itm?.day2=='0' )?<Checkbox onClick={()=>{
-                      addParticipant(itm)
-                      
-                      console.log(itm,"<---sadasdasd")
-                    }} {...label} />:<><Checkbox defaultChecked onClick={()=>{
-                        DeleteParticipant(itm)
-                        console.log(itm,"<---sadasdasd")
-                      }} /><Iconify icon="material-symbols:edit" width={20} height={20}></Iconify></>}
+ {(itm?.gelathiRecomm=='1')?<IconButton><Iconify icon="mdi:tick-circle" style={{color:'green'}}></Iconify></IconButton>:null}
+                {(itm?.final_save=='1')? <Checkbox defaultChecked disabled/> :null} 
+                 {(itm?.isSurveyDone=='1')?<IconButton >
+          <Iconify icon="charm:notes-tick" width={20} height={20} color="green" onClick={handlesurvey}/>
+        </IconButton>:null} 
                   </CardActions>
 
                   {console.log(itm, '<----------itm?.participant_name')}
                 </CardContent>
               </Card>
             </Stack>
-
-          )
-        })}
-
-{Trainingdata && Trainingdata?.all_participants?.map(itm => {
-          return (
-            <Stack style={{ top: 100 }}>
-            
-              <Card >
-                <CardContent >
-                  <CardActions sx={{borderRadius:0}}>
-                    <div  style={{width:'90vw',display:'flex',position:'relative',padding:'8px'}} >
-                     
-                      <Typography variant="subtitle2" onClick={()=>{handleOpenFilter();
-                      setClickData({ name: itm.gelathiname, title: "Enrolled  Name",id:itm?.participant_id})}
-                      }>
-                        {itm?.participant_name}
-                        </Typography>
-                    </div>
-                    {(itm?.gelathiRecomm=='1')?<IconButton><Iconify icon="mdi:tick-circle" style={{color:'green'}}></Iconify></IconButton>:null}
-                    {(itm?.day2=='0' )?<Checkbox onClick={()=>{
-                      addParticipant(itm)
-                      
-                      console.log(itm,"<---sadasdasd")
-                    }} {...label} />:<><Checkbox defaultChecked onClick={()=>{
-                        DeleteParticipant(itm)
-                        console.log(itm,"<---sadasdasd")
-                      }} /> 
-                      {(itm?.final_save=='0')?<IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>:<IconButton style={{right:-20,color:'#ff7424'}} onClick={handleedit}><Iconify icon="material-symbols:edit"></Iconify></IconButton>}</>}
-                 <EditParticipantdata  changeState={changeState} cvalue={c} Trainingdata={Trainingdata} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}} itm={itm}/>
-                  </CardActions>
-
-                  {console.log(itm, '<----------itm?.participant_name')}
-                </CardContent>
-              </Card>
-            </Stack>
-
-          )
-        })}
+        )
+    })
+}
 
       </Dialog>
     </div>

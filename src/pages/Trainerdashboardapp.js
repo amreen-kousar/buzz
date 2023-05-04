@@ -158,7 +158,7 @@ export default function Trainerdashboard() {
     console.log("deleted")
   }
 
-  console.log("sumarryyyyyyyyyyy", summaryData?.data[0]?.name)
+  // console.log("sumarryyyyyyyyyyy", summaryData?.data[0]?.name)
   return (
     <>
       <Page title="Dashboard">

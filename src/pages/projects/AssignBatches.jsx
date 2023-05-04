@@ -128,17 +128,18 @@ const villagelist= async(itm) =>{
       console.log(error);
     });
     
+    
 }
 
 
-
+console.log(item,"hyyyy")
 
 const CreateBatch= async(itm,i) =>{
   
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   selected.push(itm?.training_batch_id)
   setSelected(selected)
-  // console.log(itm,"createbatchhhhhh")
+  console.log(itm,"createbatchhhhhh")
   var data = JSON.stringify({
      
      "project_id":data1?.project_id, 
@@ -193,13 +194,44 @@ const CreateBatch= async(itm,i) =>{
 // }
 const removeFlag = async (itm, i) => {
   console.log(i, "villagessssssssss");
-  villages.list[i].flag = 0;
-  setVillages(villages)
+  // villages.list[i].flag = 0;
+  // setVillages(villages)
   // console.log(villages.list[i], "villagelist");
-  setAlloted(alloted?alloted-1:0)
+  // setAlloted(alloted?alloted-1:0)
+
+  var data = JSON.stringify({
+     
+    "project_id":data1?.project_id, 
+    "training_batch_id":itm?.training_batch_id,
+     "emp_id":item?.emp_id
+   });
+   villages.list[i].flag = 0;
+   setVillages(villages)
+   console.log(villages.list[i], "villagelist");
+   setAlloted(alloted?alloted-1:0)
+   
+   
+ {console.log(alloted,"countttttttt")}
+   var config = {
+     method: 'post',
+     url: 'https://bdms.buzzwomen.org/appTest/createGFBatch.php',
+     headers: {
+       'Content-Type': 'application/json'
+     },
+     data : data
+   };
+   axios(config)
+   .then(function (response) {
+     setBatch(response?.data)
+     
+   })
+   .catch(function (error) {
+     console.log(error);
+   });
+   
 };
 
-console.log(alloted,"allottedddddddddddddddddd")
+console.log(alloted,"allottedddddddddddddddddd",villages?.list)
     return(
        
      
