@@ -236,13 +236,15 @@ const SendData = async => {
                     </RadioGroup>
             </Stack>
 
-            {(cvalue<1)?<Stack id="create-poa-stack" direction={'row'}>
+            {/* {(cvalue<1)? */}
+            <Stack id="create-poa-stack" direction={'row'}>
                   <Typography id="all-day">Suggested Gelathi</Typography><br/>
                   <Switch id="switch-suggested-gelathi" value={sendData?.gelathiRecomm} 
                   onChange={(e) => {
                      setSendData({ ...sendData, gelathiRecomm: sendData?.gelathiRecomm === 1 ? 0 : 1 }) 
                   }}/>
-                </Stack>:null}
+                </Stack>
+                {/* :null} */}
 
           </DialogContentText></DialogContent>  </Dialog>
     </div>
