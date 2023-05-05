@@ -147,7 +147,7 @@ export default function PlanofAction() {
 
   useEffect(() => {
     todaypoa();
-  }, [season, date, userId, reload]);
+  }, [season, date, userId, reload,gfDrawer]);
 
   const todaypoa = (async) => {
     console.log(date, '<----ergregerger');

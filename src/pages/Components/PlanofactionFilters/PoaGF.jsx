@@ -92,7 +92,7 @@ const [gelatiNote, setGelatiNote] = useState('');
     getNoteHandler();
 
    
-  }, [clcikData]);
+  }, [clcikData,session]);
    // geting notes for each drawer 
    useEffect(() => {
     console.log('useEffect for getnotehandler');
