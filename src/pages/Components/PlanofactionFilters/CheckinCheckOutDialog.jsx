@@ -154,6 +154,8 @@ axios(config)
 // useEffect(()=>{
 //   GetStatus()
 // })
+//poa type=2, type="3" for GF 
+//"poa_type": 1,"type": 2, for Trainer 
 console.log(checkIn,"checkintime")
 const GetStatus = async=>{
   var data = JSON.stringify({
