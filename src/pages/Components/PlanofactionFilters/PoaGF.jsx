@@ -27,6 +27,7 @@ import AddAttendance from './AddAttendance';
 import Photos from '../../../pages/projects/Components/Photos';
 import EditGelathiSession from 'src/pages/projects/Components/EditGelathisession';
 import CheckinCheckOutDialog from './CheckinCheckOutDialog';
+import CheckinGFL from './GflcheckIncheckout';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import moment from 'moment';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -92,7 +93,7 @@ const [gelatiNote, setGelatiNote] = useState('');
     getNoteHandler();
 
    
-  }, [clcikData,session]);
+  }, [clcikData,editSession]);
    // geting notes for each drawer 
    useEffect(() => {
     console.log('useEffect for getnotehandler');
@@ -302,7 +303,7 @@ const noteSubmitHandler = () => {
     setImages([...images]);
   };
 
-
+  const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
 
    
   const removesession=(e)=>{
@@ -520,13 +521,22 @@ const noteSubmitHandler = () => {
 
           <br/>
 
-             {batch && <CheckinCheckOutDialog
+             {roleid==6 && batch && <CheckinCheckOutDialog
               photos={check}
               batch={batch}
               setCheck={(e) => {
                 setCheck(e);
               }}
                />}
+
+{roleid==13 && batch && <CheckinGFL
+              photos={check}
+              batch={batch}
+              setCheck={(e) => {
+                setCheck(e);
+              }}
+               />}
+
               {/* <Card
                 onClick={() => {
                   setShown(true), console.log('ferfgreg');
