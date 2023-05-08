@@ -17,7 +17,7 @@ import {
   FormControlLabel,
   Card,
   CardContent,
-  CardActionArea,DialogContent,DialogContentText
+  CardActionArea,DialogContent,DialogContentText, FormHelperText
 } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
@@ -44,7 +44,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 
-export default function GreenSurvey(props) {
+export default function GreenSurvey(props ) {
+  // console.log("🚀 ~ file: GreenSurvey.jsx:48 ~ GreenSurvey ~ enrolledGreenMotivators:", enrolledGreenMotivators)
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState('a');
@@ -141,6 +142,7 @@ export default function GreenSurvey(props) {
 
 
 
+
   const handleChangeSelect = (event) => {
     setAge(event.target.value);
   };
@@ -155,10 +157,179 @@ export default function GreenSurvey(props) {
     setOpen(false);
   };
   
-  
+  const [helperText, setHelperText] = React.useState('');
+  const [wealthError,setWealthError]=useState(false)
+  const [climateError,setClimateError]=useState(false)
+  const [weatherError,setWeatherError]=useState(false)
+  const [climatechangeratingError,setClimatechangeratingError]=useState(false)
+  const [tackleclimatechangeError,setTackleclimatechangeError]=useState(false)
+  const [somethingtackleError,setSomethingtackleError]=useState(false)
+  const [groundwaterstatementError,setGroundwaterstatementError]=useState(false)
+  const [waterqualityError,setWaterqualityError]=useState(false)
+  const [wateraffectError,setWateraffectError]=useState(false)
+  const [waterconservationError,setWaterconservationError]=useState(false)
+  const [landError,setLandError]=useState(false)
+  const [treesError,setTreesError]=useState(false)
+  const [foodconnectionError,setFoodconnectionError]=useState(false)
+  const [householdactivityError,setHouseholdactivityError]=useState(false)
+  const [pollutioncauseError,setPollutioncauseError]=useState(false)
+  const [paychemicalsError,setPaychemicalsError]=useState(false)
+  const [productsError,setProductsError]=useState(false)
+  const [climateffortError,setClimateffortError]=useState(false)
+  const [climateactionError,setClimateactionError]=useState(false)
+  const [initiativemeasuresError,setInitiativemeasuresError]=useState(false)
+  const [environmentError,setEnvironmentError]=useState(false)
+  const [communitytogetherError,setCommunitytogetherError]=useState(false)
+
 
 
   const greensurveyformdata= async() =>{
+
+    let validationSchema = [
+      {
+        field: wealth,
+        setField: setWealthError,
+        errorText: 'Please Select The Option'
+      }
+    ]
+    validationSchema.map(x=> {
+      if(x.key == ''){
+        const y = x.setField;
+        y(true)
+      }
+    });
+
+    if (wealth == '') {
+      setWealthError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (climate == '') {
+      setClimateError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (weather == '') {
+      setWeatherError(true);
+      setHelperText('Please Select The Option');
+   
+    }  if (climatechangerating == '') {
+      setClimatechangeratingError(true);
+      setHelperText('Please Select The Option');
+      
+    }  if (tackleclimatechange == '') {
+      setTackleclimatechangeError(true);
+      setHelperText('Please Select The Option');
+     
+    }  if (somethingtackle == '') {
+      setSomethingtackleError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (groundwaterstatement == '') {
+      setGroundwaterstatementError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (waterquality == '') {
+      setWaterqualityError(true); 
+      setHelperText('Please Select The Option');
+     
+    }  if (wateraffect == '') {
+      setWateraffectError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (waterconservation == '') {
+      setWaterconservationError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (land == '') {
+      setLandError(true);
+      setHelperText('Please Select The Option');
+     
+    }  if (trees == '') {
+      setTreesError(true);
+      setHelperText('Please Select The Option');
+     
+    }
+      
+     if (foodconnection == '') {
+      setFoodconnectionError(true);
+      setHelperText('Please Select The Option');
+   
+    }
+    
+    if (householdactivity == '') {
+      setHouseholdactivityError(true);
+      setHelperText('Please Select The Option');
+    
+    }
+    if (checked['natural_resources'].length == 0) {
+      console.log("hello", checked.natural_resources.length)
+      setHouseholdactivityError(true);
+      setHelperText('Please Select The Option');
+    
+    
+    }
+    if (checked['natural_resources_impacting_your_life'].length == 0) {
+      console.log("hello", checked.natural_resources.length)
+      setHouseholdactivityError(true);
+      setHelperText('Please Select The Option');
+    
+    
+    }
+    if (checked['changes_happened_to_the_climate'].length == 0) {
+      console.log("hello", checked.natural_resources.length)
+      setHouseholdactivityError(true);
+      setHelperText('Please Select The Option');
+    
+    
+    }
+    if (checked['main_source_of_water'].length == 0) {
+      console.log("hello", checked.natural_resources.length)
+      setHouseholdactivityError(true);
+      setHelperText('Please Select The Option');
+    
+    
+    }
+    if (pollutioncause == '') {
+      setPollutioncauseError(true);
+      setHelperText('Please Select The Option');
+    
+    }
+    if (paychemicals == '') {
+      setPaychemicalsError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (products == '') {
+      setProductsError(true);
+      setHelperText('Please Select The Option');
+     
+    }  if (climateffort == '') {
+      setClimateffortError(true);
+      setHelperText('Please Select The Option');
+      
+    }  if (climateaction == '') {
+      setClimateactionError(true);
+      setHelperText('Please Select The Option');
+     
+    }  if (initiativemeasures == '') {
+      setInitiativemeasuresError(true);
+      setHelperText('Please Select The Option');
+      
+    } 
+     if (environment == '') {
+      setEnvironmentError(true);
+      setHelperText('Please Select The Option');
+      
+    }  
+     if (communitytogether == '') {
+      setCommunitytogetherError(true);
+      setHelperText('Please Select The Option');
+      
+    }  
+    if( wealth != " " && climate != ''  && weather != '' && climatechangerating != '' && 
+    tackleclimatechange != '' && somethingtackle != '' && groundwaterstatement != '' && waterquality != '' && 
+    wateraffect != '' && waterconservation != '' && land != ''  &&
+    trees != '' && foodconnection != '' && householdactivity != '' && pollutioncause != '' &&
+    paychemicals != '' && products != '' && climateffort != '' &&  climateaction != ''  && initiativemeasures != '' && environment != '' && (checked['natural_resources'] != 0)&& (checked['natural_resources_impacting_your_life'] != 0)&& (checked['changes_happened_to_the_climate'] != 0)&& (checked['main_source_of_water'] != 0) && communitytogether != '')
+    {
      console.log("surveyyyyform")
     var data = JSON.stringify({
     "partcipantId":props?.itm?.id ,
@@ -204,6 +375,7 @@ export default function GreenSurvey(props) {
     "community_together_achieve_my_conservation_goal":communitytogether
 
       });
+      console.log("🚀 ~ file: GreenSurvey.jsx:355 ~ greensurveyformdata ~ data:", data)
       
       var config = {
         method: 'post',
@@ -224,9 +396,10 @@ export default function GreenSurvey(props) {
           title: 'Success',
           text: response.data.message,
           confirmButtonText: 'Ok',
-          timer: 2000
+          timer: 3000
         });
         handleClose()
+        props.enrolledGreenMotivators();
         props?.changeState()
 
       })
@@ -243,15 +416,21 @@ export default function GreenSurvey(props) {
       });
       handleClose();
 
+  }else{
+    alert("PLease Fill All The Field")
+  }
+
 }
  {console.log(props?.itm,"iteemmmmm")}
 
 const wealthvalue=(event)=>{
        setwealth(event.target.value)
+       setWealthError(false)
 }
 
 const climatechangevalue=(event)=>{
   setClimate(event.target.value)
+  setClimateError(false)
   if(event.target.value == "Yes"){
     setShowClimateDiscription(true)
   }else{
@@ -262,35 +441,43 @@ const climatechangevalue=(event)=>{
 
 const weathervalue=(event)=>{
   setweather(event.target.value)
+  setWeatherError(false)
 }
 
 const ratingvalue=(event)=>{
   setclimatechangerating(event.target.value)
+  setClimatechangeratingError(false)
 }
 
 const tacklevalue=(event)=>
 {
   settackleclimatechange(event.target.value)
+  setTackleclimatechangeError(false)
 }
 
 const handlesomethingtacklevalue=(event)=>{
   setsomethingtackle(event.target.value)
+  setSomethingtackleError(false)
 }
 
 const groundwatervalue=(event)=>{
   setgroundwaterstatement(event.target.value)
+  setGroundwaterstatementError(false)
 }
 
 const waterqualityvalue=(event)=>{
   setwaterquality(event.target.value)
+  setWaterqualityError(false)
 }
 
 const wateraffectvalue=(event)=>{
   setwateraffect(event.target.value)
+  setWateraffectError(false)
 }
 
 const conservationmeasures=(event)=>{
   setwaterconservation(event.target.value)
+  setWaterconservationError(false)
   if(event.target.value =="Yes"){
     setShowWaterConsuDiscription(true)
   }else{
@@ -300,18 +487,22 @@ const conservationmeasures=(event)=>{
 
 const handleland=(event)=>{
   setland(event.target.value)
+  setLandError(false)
 }
 
 const conservenvironment=(event)=>{
   setEnvironment(event.target.value)
+  setEnvironmentError(false)
 }
 
 const communityvalue=(event)=>{
   setcommunitytogether(event.target.value)
+  setCommunitytogetherError(false)
 }
 
 const handleinitiativemeasures=(event)=>{
   setinitiativemeasures(event.target.value)
+  setInitiativemeasuresError(false)
   if(event.target.value =="Yes"){
     setShowPark(true)
   }else{
@@ -321,6 +512,7 @@ const handleinitiativemeasures=(event)=>{
 
 const handleclimateaction=(event)=>{
   setclimateaction(event.target.value)
+  setClimateactionError(false)
   if(event.target.value =="Yes"){
     setShowClimateChangeDiscription(true)
   }else{
@@ -330,10 +522,12 @@ const handleclimateaction=(event)=>{
 
 const handleclimateffort=(event)=>{
   setclimateffort(event.target.value)
+  setClimateffortError(false)
 }
 
 const handlechemicals=(event)=>{
   setpaychemicals(event.target.value)
+  setPaychemicalsError(false)
   if(event.target.value =="Yes"){
     setShowEcoFriendlyDiscription(true)
   }else{
@@ -343,10 +537,12 @@ const handlechemicals=(event)=>{
 
 const handleproducts=(event)=>{
   setproducts(event.target.value)
+  setProductsError(false)
 }
 
 const handlepollutioncause=(event)=>{
   setpollutioncause(event.target.value)
+  setPollutioncauseError(false)
   if(event.target.value =="Yes"){
     setShowHouseHoldDiscription(true)
   }else{
@@ -356,14 +552,17 @@ const handlepollutioncause=(event)=>{
 
 const handlehouseholdactivity=(event)=>{
   sethouseholdactivity(event.target.value)
+  setHouseholdactivityError(false)
 }
 
 const handlefoodconnection=(event)=>{
   setfoodconnection(event.target.value)
+  setFoodconnectionError(false)
 }
 
 const handletrees=(event)=>{
   settrees(event.target.value)
+  setTreesError(false)
 }
 
 
@@ -498,7 +697,8 @@ const handleresources=(label,event)=>{
 
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
-          <Typography style={{color:"#ff7424"}}>Which of the following are natural resources? / ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವುದು ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲಗಳು? *</Typography>
+          <Typography style={{color:"#ff7424"}}>Which of the following are natural resources? / ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವುದು ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲಗಳು? *                     
+              </Typography>
           <Stack mt={2}>
             <FormGroup >
               <FormControlLabel value="Soil/ಮಣ್ಣು" control={<Checkbox style={{color:"#595959"}} />} label="Soil/ಮಣ್ಣು" onChange={(event)=>handleresources("natural_resources",event)}/>
@@ -560,7 +760,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Have you heard of "Climate Change" ?/ ನೀವು "ಹವಾಮಾನ ಬದಲಾವಣೆ" ಬಗ್ಗೆ ಕೇಳಿದ್ದೀರಾ? *</Typography>
+            <Typography style={{color:"#ff7424"}}>Have you heard of "Climate Change" ?/ ನೀವು "ಹವಾಮಾನ ಬದಲಾವಣೆ" ಬಗ್ಗೆ ಕೇಳಿದ್ದೀರಾ? *
+            {climateError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Yes"
@@ -590,7 +794,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Do you notice any change in the weather/climate in last 30 years? /ಕಳೆದ 30 ವರ್ಷಗಳಲ್ಲಿ ಹವಾಮಾನ/ಹವಾಮಾನದಲ್ಲಿ ಯಾವುದೇ ಬದಲಾವಣೆಯನ್ನು ನೀವು ಗಮನಿಸಿದ್ದೀರಾ? *</Typography>
+            <Typography style={{color:"#ff7424"}}>Do you notice any change in the weather/climate in last 30 years? /ಕಳೆದ 30 ವರ್ಷಗಳಲ್ಲಿ ಹವಾಮಾನ/ಹವಾಮಾನದಲ್ಲಿ ಯಾವುದೇ ಬದಲಾವಣೆಯನ್ನು ನೀವು ಗಮನಿಸಿದ್ದೀರಾ? * 
+            {weatherError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -628,7 +836,11 @@ const handleresources=(label,event)=>{
         <CardContent>
           <Typography style={{color:"#ff7424"}}>
             On a scale of 1 to 10 please rate,how much do you think climate change threatens your personal and family health and safety? / 
-1 ರಿಂದ 10 ರ ಪ್ರಮಾಣದಲ್ಲಿ ದಯವಿಟ್ಟು ರೇಟ್ ಮಾಡಿ, ಹವಾಮಾನ ಬದಲಾವಣೆಯು ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಮತ್ತು ಕುಟುಂಬದ ಆರೋಗ್ಯ ಮತ್ತು ಸುರಕ್ಷತೆಗೆ ಎಷ್ಟು ಅಪಾಯವನ್ನುಂಟುಮಾಡುತ್ತದೆ ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಿ *</Typography>
+1 ರಿಂದ 10 ರ ಪ್ರಮಾಣದಲ್ಲಿ ದಯವಿಟ್ಟು ರೇಟ್ ಮಾಡಿ, ಹವಾಮಾನ ಬದಲಾವಣೆಯು ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಮತ್ತು ಕುಟುಂಬದ ಆರೋಗ್ಯ ಮತ್ತು ಸುರಕ್ಷತೆಗೆ ಎಷ್ಟು ಅಪಾಯವನ್ನುಂಟುಮಾಡುತ್ತದೆ ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಿ * 
+{climatechangeratingError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+</Typography>
           <Stack mt={2}>
           <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
@@ -655,7 +867,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Do you think anything can be tackle climate change? / ಹವಾಮಾನ ಬದಲಾವಣೆಯನ್ನು ಏನಾದರೂ ನಿಭಾಯಿಸಬಹುದು ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಾ?*</Typography>
+            <Typography style={{color:"#ff7424"}}>Do you think anything can be tackle climate change? / ಹವಾಮಾನ ಬದಲಾವಣೆಯನ್ನು ಏನಾದರೂ ನಿಭಾಯಿಸಬಹುದು ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಾ?*
+            {tackleclimatechangeError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -674,7 +890,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Do you think you would do something to tackle climate change? / ಹವಾಮಾನ ಬದಲಾವಣೆಯನ್ನು ನಿಭಾಯಿಸಲು ನೀವು ಏನಾದರೂ ಮಾಡುತ್ತೀರಿ ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಾ *</Typography>
+            <Typography style={{color:"#ff7424"}}>Do you think you would do something to tackle climate change? / ಹವಾಮಾನ ಬದಲಾವಣೆಯನ್ನು ನಿಭಾಯಿಸಲು ನೀವು ಏನಾದರೂ ಮಾಡುತ್ತೀರಿ ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಾ * 
+            {somethingtackleError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -715,7 +935,10 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Which Statement shown below do you agree with? / ಕೆಳಗೆ ತೋರಿಸಿರುವ ಯಾವ ಹೇಳಿಕೆಯನ್ನು ನೀವು ಒಪ್ಪುತ್ತೀರಿ? *</Typography>
+            <Typography style={{color:"#ff7424"}}>Which Statement shown below do you agree with? / ಕೆಳಗೆ ತೋರಿಸಿರುವ ಯಾವ ಹೇಳಿಕೆಯನ್ನು ನೀವು ಒಪ್ಪುತ್ತೀರಿ? *                   
+                  {groundwaterstatementError? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}</Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -736,7 +959,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>How concerned are you about local water quality that you are consuming now in your village?/ ನಿಮ್ಮ ಗ್ರಾಮದಲ್ಲಿ ಈಗ ನೀವು ಸೇವಿಸುತ್ತಿರುವ ಸ್ಥಳೀಯ ನೀರಿನ ಗುಣಮಟ್ಟದ ಬಗ್ಗೆ ನಿಮಗೆ ಎಷ್ಟು ಕಾಳಜಿ ಇದೆ*</Typography>
+            <Typography style={{color:"#ff7424"}}>How concerned are you about local water quality that you are consuming now in your village?/ ನಿಮ್ಮ ಗ್ರಾಮದಲ್ಲಿ ಈಗ ನೀವು ಸೇವಿಸುತ್ತಿರುವ ಸ್ಥಳೀಯ ನೀರಿನ ಗುಣಮಟ್ಟದ ಬಗ್ಗೆ ನಿಮಗೆ ಎಷ್ಟು ಕಾಳಜಿ ಇದೆ* 
+            {waterqualityError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -759,7 +986,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>My personal actions can affect water quality in my village? / ನನ್ನ ವೈಯಕ್ತಿಕ ಕ್ರಿಯೆಗಳು ನನ್ನ ಹಳ್ಳಿಯಲ್ಲಿ ನೀರಿನ ಗುಣಮಟ್ಟದ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರಬಹುದೇ? *</Typography>
+            <Typography style={{color:"#ff7424"}}>My personal actions can affect water quality in my village? / ನನ್ನ ವೈಯಕ್ತಿಕ ಕ್ರಿಯೆಗಳು ನನ್ನ ಹಳ್ಳಿಯಲ್ಲಿ ನೀರಿನ ಗುಣಮಟ್ಟದ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರಬಹುದೇ? * 
+            {wateraffectError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -782,7 +1013,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Do you think you take water conservation measures in your everyday life? / ನಿಮ್ಮ ದೈನಂದಿನ ಜೀವನದಲ್ಲಿ ನೀವು ನೀರಿನ ಸಂರಕ್ಷಣೆ ಕ್ರಮಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳುತ್ತೀರಿ ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಾ *</Typography>
+            <Typography style={{color:"#ff7424"}}>Do you think you take water conservation measures in your everyday life? / ನಿಮ್ಮ ದೈನಂದಿನ ಜೀವನದಲ್ಲಿ ನೀವು ನೀರಿನ ಸಂರಕ್ಷಣೆ ಕ್ರಮಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳುತ್ತೀರಿ ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಾ * 
+            {waterconservationError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -827,7 +1062,11 @@ const handleresources=(label,event)=>{
             K.Halli and P.Halli is separated by a forest in between. Meena and Keshav plans to expand their land by clearing parts of the forest. 
             Meena wants to build a school and keshav wants to build a shopping complex in the forest land. what do you think should be done here? / ಭಾಸ್ಕರ್ ಅವರು ತಮ್ಮ 6 ಎಕರೆ ಜಮೀನನ್ನು ಮಕ್ಕಳಾದ ಮೀನಾ ಮತ್ತು ಕೇಶವ್ ಅವರಿಗೆ ಉಡುಗೊರೆಯಾಗಿ ನೀಡುತ್ತಿದ್ದಾರೆ. 6 ಎಕರೆಯಲ್ಲಿ 3 ಎಕರೆ ಪಿ.ಹಳ್ಳಿಯಲ್ಲಿ ಮತ್ತು ಇನ್ನೊಂದು 3 ಎಕರೆ ಹತ್ತಿರವಿರುವ ಕೆ.ಹಳ್ಳಿಯಲ್ಲಿದೆ. 2 ಪ್ಲಾಟ್‌ಗಳು ಕೆ.ಹಳ್ಳಿ ಮತ್ತು ಪಿ.ಹಳ್ಳಿಯ ಗಡಿಯಲ್ಲಿವೆ.
             ಕೆ.ಹಳ್ಳಿ ಮತ್ತು ಪಿ.ಹಳ್ಳಿ ನಡುವೆ ಕಾಡಿನಿಂದ ಬೇರ್ಪಟ್ಟಿದೆ. ಮೀನಾ ಮತ್ತು ಕೇಶವ್ ಕಾಡಿನ ಭಾಗಗಳನ್ನು ತೆರವುಗೊಳಿಸುವ ಮೂಲಕ ತಮ್ಮ ಭೂಮಿಯನ್ನು ವಿಸ್ತರಿಸಲು ಯೋಜಿಸಿದ್ದಾರೆ.
-            ಮೀನಾ ಅವರು ಶಾಲೆಯನ್ನು ನಿರ್ಮಿಸಲು ಬಯಸುತ್ತಾರೆ ಮತ್ತು ಕೇಶವ್ ಅವರು ಅರಣ್ಯ ಭೂಮಿಯಲ್ಲಿ ಶಾಪಿಂಗ್ ಕಾಂಪ್ಲೆಕ್ಸ್ ನಿರ್ಮಿಸಲು ಬಯಸುತ್ತಾರೆ. ಇಲ್ಲಿ ಏನು ಮಾಡಬೇಕು ಎಂದು ನೀವು ಯೋಚಿಸುತ್ತೀರಿ? *</Typography>
+            ಮೀನಾ ಅವರು ಶಾಲೆಯನ್ನು ನಿರ್ಮಿಸಲು ಬಯಸುತ್ತಾರೆ ಮತ್ತು ಕೇಶವ್ ಅವರು ಅರಣ್ಯ ಭೂಮಿಯಲ್ಲಿ ಶಾಪಿಂಗ್ ಕಾಂಪ್ಲೆಕ್ಸ್ ನಿರ್ಮಿಸಲು ಬಯಸುತ್ತಾರೆ. ಇಲ್ಲಿ ಏನು ಮಾಡಬೇಕು ಎಂದು ನೀವು ಯೋಚಿಸುತ್ತೀರಿ? *
+            {landError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -849,7 +1088,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Which one according to you is right? / ನಿಮ್ಮ ಪ್ರಕಾರ ಯಾವುದು ಸರಿ *</Typography>
+            <Typography style={{color:"#ff7424"}}>Which one according to you is right? / ನಿಮ್ಮ ಪ್ರಕಾರ ಯಾವುದು ಸರಿ *
+            {treesError? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -870,7 +1113,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Do you believe there is a connection between the food we eat,our health and climate change? / ನಾವು ತಿನ್ನುವ ಆಹಾರ, ನಮ್ಮ ಆರೋಗ್ಯ ಮತ್ತು ಹವಾಮಾನ ಬದಲಾವಣೆಯ ನಡುವೆ ಸಂಬಂಧವಿದೆ ಎಂದು ನೀವು ನಂಬುತ್ತೀರಾ? *</Typography>
+            <Typography style={{color:"#ff7424"}}>Do you believe there is a connection between the food we eat,our health and climate change? / ನಾವು ತಿನ್ನುವ ಆಹಾರ, ನಮ್ಮ ಆರೋಗ್ಯ ಮತ್ತು ಹವಾಮಾನ ಬದಲಾವಣೆಯ ನಡುವೆ ಸಂಬಂಧವಿದೆ ಎಂದು ನೀವು ನಂಬುತ್ತೀರಾ? *
+            {foodconnectionError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -899,7 +1146,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Which of the following household activity pollutes natural resources? /  ಕೆಳಗಿನ ಯಾವ ಮನೆಯ ಚಟುವಟಿಕೆಯು ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಕಲುಷಿತಗೊಳಿಸುತ್ತದೆ? *</Typography>
+            <Typography style={{color:"#ff7424"}}>Which of the following household activity pollutes natural resources? /  ಕೆಳಗಿನ ಯಾವ ಮನೆಯ ಚಟುವಟಿಕೆಯು ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಕಲುಷಿತಗೊಳಿಸುತ್ತದೆ? * 
+            {householdactivityError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -921,7 +1172,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Do you think there are alternatives in the household for materials that cause pollution? / ಮಾಲಿನ್ಯವನ್ನು ಉಂಟುಮಾಡುವ ವಸ್ತುಗಳಿಗೆ ಮನೆಯಲ್ಲಿ ಪರ್ಯಾಯಗಳಿವೆ ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಾ?*</Typography>
+            <Typography style={{color:"#ff7424"}}>Do you think there are alternatives in the household for materials that cause pollution? / ಮಾಲಿನ್ಯವನ್ನು ಉಂಟುಮಾಡುವ ವಸ್ತುಗಳಿಗೆ ಮನೆಯಲ್ಲಿ ಪರ್ಯಾಯಗಳಿವೆ ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಾ?*
+            {pollutioncauseError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup 
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -956,7 +1211,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Would you be willing to switch to these eco-friendly products and activities? / ಈ ಪರಿಸರ ಸ್ನೇಹಿ ಉತ್ಪನ್ನಗಳು ಮತ್ತು ಚಟುವಟಿಕೆಗಳಿಗೆ ಬದಲಾಯಿಸಲು ನೀವು ಸಿದ್ಧರಿದ್ದೀರಾ? *</Typography>
+            <Typography style={{color:"#ff7424"}}>Would you be willing to switch to these eco-friendly products and activities? / ಈ ಪರಿಸರ ಸ್ನೇಹಿ ಉತ್ಪನ್ನಗಳು ಮತ್ತು ಚಟುವಟಿಕೆಗಳಿಗೆ ಬದಲಾಯಿಸಲು ನೀವು ಸಿದ್ಧರಿದ್ದೀರಾ? *
+            {productsError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup 
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -977,7 +1236,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Would you be willing to make this switch to eco-friendly even if you have a pay a little more than what you pay for the chemicals? / ನೀವು ರಾಸಾಯನಿಕಗಳಿಗೆ ಪಾವತಿಸುವುದಕ್ಕಿಂತ ಸ್ವಲ್ಪ ಹೆಚ್ಚು ವೇತನವನ್ನು ಹೊಂದಿದ್ದರೂ ಸಹ ಪರಿಸರ ಸ್ನೇಹಿಯಾಗಿ ಈ ಬದಲಾವಣೆಯನ್ನು ಮಾಡಲು ನೀವು ಸಿದ್ಧರಿದ್ದೀರಾ *</Typography>
+            <Typography style={{color:"#ff7424"}}>Would you be willing to make this switch to eco-friendly even if you have a pay a little more than what you pay for the chemicals? / ನೀವು ರಾಸಾಯನಿಕಗಳಿಗೆ ಪಾವತಿಸುವುದಕ್ಕಿಂತ ಸ್ವಲ್ಪ ಹೆಚ್ಚು ವೇತನವನ್ನು ಹೊಂದಿದ್ದರೂ ಸಹ ಪರಿಸರ ಸ್ನೇಹಿಯಾಗಿ ಈ ಬದಲಾವಣೆಯನ್ನು ಮಾಡಲು ನೀವು ಸಿದ್ಧರಿದ್ದೀರಾ *
+            {paychemicalsError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup 
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -1008,7 +1271,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Do you think developing simple-at-home solutions to climate change is a lot of effort? / ಹವಾಮಾನ ಬದಲಾವಣೆಗೆ ಸರಳವಾದ ಮನೆಯಲ್ಲೇ ಪರಿಹಾರಗಳನ್ನು ಅಭಿವೃದ್ಧಿಪಡಿಸುವುದು ಬಹಳಷ್ಟು ಪ್ರಯತ್ನ ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಾ  *</Typography>
+            <Typography style={{color:"#ff7424"}}>Do you think developing simple-at-home solutions to climate change is a lot of effort? / ಹವಾಮಾನ ಬದಲಾವಣೆಗೆ ಸರಳವಾದ ಮನೆಯಲ್ಲೇ ಪರಿಹಾರಗಳನ್ನು ಅಭಿವೃದ್ಧಿಪಡಿಸುವುದು ಬಹಳಷ್ಟು ಪ್ರಯತ್ನ ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಾ  * 
+            {climateffortError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup 
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -1019,7 +1286,7 @@ const handleresources=(label,event)=>{
               <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}} />} label="Yes" />
               <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
               <FormControlLabel value="Maybe" control={<Radio style={{color:"#595959"}} />} label="Maybe" />
-           
+
             </RadioGroup>
           </Stack>
         </CardContent>
@@ -1029,12 +1296,17 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Have you ever taken, or do you regularly take,any action out of concern for climate change? / ಹವಾಮಾನ ಬದಲಾವಣೆಯ ಕಾಳಜಿಯಿಂದ ನೀವು ಎಂದಾದರೂ ತೆಗೆದುಕೊಂಡಿದ್ದೀರಾ ಅಥವಾ ನಿಯಮಿತವಾಗಿ ತೆಗೆದುಕೊಳ್ಳುತ್ತೀರಾ? *</Typography>
+            <Typography style={{color:"#ff7424"}}>Have you ever taken, or do you regularly take,any action out of concern for climate change? / ಹವಾಮಾನ ಬದಲಾವಣೆಯ ಕಾಳಜಿಯಿಂದ ನೀವು ಎಂದಾದರೂ ತೆಗೆದುಕೊಂಡಿದ್ದೀರಾ ಅಥವಾ ನಿಯಮಿತವಾಗಿ ತೆಗೆದುಕೊಳ್ಳುತ್ತೀರಾ? *
+            {climateactionError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup 
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
               name="radio-buttons-group"
               value={climateaction}
+              // onClick={}
               onChange={handleclimateaction}
             >
               <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}} />} label="Yes" />
@@ -1061,7 +1333,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Do you know what natural resource of your community needs immediate attention and measures of conservation (forest,lake,pond,park etc)? / ನಿಮ್ಮ ಸಮುದಾಯದ ಯಾವ ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲಕ್ಕೆ ತಕ್ಷಣದ ಗಮನ ಮತ್ತು ಸಂರಕ್ಷಣೆಯ ಕ್ರಮಗಳ ಅಗತ್ಯವಿದೆ ಎಂದು ನಿಮಗೆ ತಿಳಿದಿದೆಯೇ (ಅರಣ್ಯ, ಸರೋವರ, ಕೊಳ, ಉದ್ಯಾನವನ ಇತ್ಯಾದಿ) *</Typography>
+            <Typography style={{color:"#ff7424"}}>Do you know what natural resource of your community needs immediate attention and measures of conservation (forest,lake,pond,park etc)? / ನಿಮ್ಮ ಸಮುದಾಯದ ಯಾವ ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲಕ್ಕೆ ತಕ್ಷಣದ ಗಮನ ಮತ್ತು ಸಂರಕ್ಷಣೆಯ ಕ್ರಮಗಳ ಅಗತ್ಯವಿದೆ ಎಂದು ನಿಮಗೆ ತಿಳಿದಿದೆಯೇ (ಅರಣ್ಯ, ಸರೋವರ, ಕೊಳ, ಉದ್ಯಾನವನ ಇತ್ಯಾದಿ) *
+            {initiativemeasuresError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup 
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -1104,7 +1380,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Have you seen anyone in the village take a initiative to conserve the environment of your village? / ನಿಮ್ಮ ಗ್ರಾಮದ ಪರಿಸರವನ್ನು ಸಂರಕ್ಷಿಸಲು ಗ್ರಾಮದಲ್ಲಿ ಯಾರಾದರೂ ಮುಂದಾಗಿರುವುದನ್ನು ನೀವು ನೋಡಿದ್ದೀರಾ *</Typography>
+            <Typography style={{color:"#ff7424"}}>Have you seen anyone in the village take a initiative to conserve the environment of your village? / ನಿಮ್ಮ ಗ್ರಾಮದ ಪರಿಸರವನ್ನು ಸಂರಕ್ಷಿಸಲು ಗ್ರಾಮದಲ್ಲಿ ಯಾರಾದರೂ ಮುಂದಾಗಿರುವುದನ್ನು ನೀವು ನೋಡಿದ್ದೀರಾ *
+            {environmentError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup 
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"
@@ -1123,7 +1403,11 @@ const handleresources=(label,event)=>{
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
-            <Typography style={{color:"#ff7424"}}>Have you seen anyone in the village take a initiative to conserve the environment of your village? / ನಿಮ್ಮ ಗ್ರಾಮದ ಪರಿಸರವನ್ನು ಸಂರಕ್ಷಿಸಲು ಗ್ರಾಮದಲ್ಲಿ ಯಾರಾದರೂ ಮುಂದಾಗಿರುವುದನ್ನು ನೀವು ನೋಡಿದ್ದೀರಾ? *</Typography>
+            <Typography style={{color:"#ff7424"}}>Have you seen anyone in the village take a initiative to conserve the environment of your village? / ನಿಮ್ಮ ಗ್ರಾಮದ ಪರಿಸರವನ್ನು ಸಂರಕ್ಷಿಸಲು ಗ್ರಾಮದಲ್ಲಿ ಯಾರಾದರೂ ಮುಂದಾಗಿರುವುದನ್ನು ನೀವು ನೋಡಿದ್ದೀರಾ? *
+            {communitytogetherError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+            </Typography>
             <RadioGroup 
               aria-labelledby="demo-radio-buttons-group-label"
               // defaultValue="Natural Resource"

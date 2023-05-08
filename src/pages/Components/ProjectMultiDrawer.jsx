@@ -428,7 +428,8 @@ const noteSubmitHandler = () => {
                                     
 
                                     <Typography id="training" variant="body1" gutterBottom>
-                                        Training&nbsp;Batch:<br/>{batch?.data?.name} <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
+                                        Training&nbsp;Batch:<br/>{batch?.data?.name} 
+                                       { (userId==5 && batch?.data?.day1_completed!=='1')?<IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>: null ||(userId==3)&& null}
                                     </Typography>
                                     <Typography id="day1" variant="body1" gutterBottom>
                                         Day1:&nbsp;{batch?.data?.day1_actual}

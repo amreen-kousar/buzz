@@ -62,6 +62,7 @@ export default function enrolledGreenMotivatorsList() {
       setReload(!reload);
       console.log('changeState is called ');
     };
+
     const enrolledGreenMotivators = async(id,i,g) =>{
       console.log(id,'hy',i)
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
@@ -262,7 +263,7 @@ const getData = (itm, i) => {
                     <Card  style={styles.card1}>
                    {/* {(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)}><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey />      */}
               
-                   <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey itm={itm} changeState={changeState}/></div>
+                   <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey enrolledGreenMotivators={enrolledGreenMotivators} itm={itm}  changeState={changeState}/></div>
               <div onClick={() => {
                         setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
                         handleOpenFilter()
