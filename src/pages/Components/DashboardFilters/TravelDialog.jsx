@@ -291,16 +291,12 @@ axios(config)
         console.log(JSON.stringify(response.data));
         //filter by date, assign to another variable (dropdown values)
         const date = moment(new Date()).format('YYYY-MM-DD')
+        console.log("🚀 ~ file: TravelDialog.jsx:294 ~ new:", date)
         let dropDownValues = response.data.data.filter(x=> {
-          const date1 = moment(x.date)?.format('YYYY-MM-DD');
-          console.log("🚀 ~ file: TravelDialog.jsx:296 ~ dropDownValues ~ date1:", date1)
-          return  date1 === date;
-        }
-        // console.log("🚀 ~ file: TravelDialog.jsx:298 ~ dropDownValues ~ date1:", date1)
-        )
+          const date1 = moment(x.date)?.format('YYYY-MM-DD')
+          return  date1=== date;
+        })
         setDropDownValues(dropDownValues);
-        console.log("🚀 ~ file: TravelDialog.jsx:299 ~ dropDownValues ~ response.data.data.:", response.data.data)
-        console.log("🚀 ~ file: TravelDialog.jsx:294 ~ new:", date1)
       })
       .catch(function (error) {
         console.log(error);
