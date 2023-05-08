@@ -157,7 +157,7 @@ export default function GreenSurvey(props ) {
     setOpen(false);
   };
   
-  const [helperText, setHelperText] = React.useState('');
+  const [helperText, setHelperText] = useState('');
   const [wealthError,setWealthError]=useState(false)
   const [climateError,setClimateError]=useState(false)
   const [weatherError,setWeatherError]=useState(false)
@@ -417,7 +417,7 @@ export default function GreenSurvey(props ) {
       handleClose();
 
   }else{
-    alert("PLease Fill All The Field")
+    alert("Please Fill All The Fields")
   }
 
 }
@@ -891,6 +891,7 @@ const handleresources=(label,event)=>{
         <CardContent>
           <Stack mt={2}>
             <Typography style={{color:"#ff7424"}}>Do you think you would do something to tackle climate change? / ಹವಾಮಾನ ಬದಲಾವಣೆಯನ್ನು ನಿಭಾಯಿಸಲು ನೀವು ಏನಾದರೂ ಮಾಡುತ್ತೀರಿ ಎಂದು ನೀವು ಭಾವಿಸುತ್ತೀರಾ * 
+            
             {somethingtackleError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
