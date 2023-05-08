@@ -33,7 +33,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { Color } from '@mui/material';
 import { Link ,useLocation} from 'react-router-dom';
+import FormHelperText from '@mui/material/FormHelperText';
 import Iconify from '../../../components/Iconify';
+import { stubFalse } from 'lodash';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -74,33 +76,49 @@ export default function GelathiCircleForm(circleData) {
     conflict_matters_interest_mine:"" ,
     There_puja_at_my_house:"" 
   });
+  const [helperText, setHelperText] = React.useState('Please Select The Option.');
+  
+  const [sessionValueError , setSessionValueError] = useState(false)
+  const [skillError , setSkillError] = useState(false)
+const [listenparaError , setListenParaError] = useState(false)
+const [ communityError ,setcommunityError] = useState(false)
+const [communitymemError ,setcommunitymemError] = useState(false)
+const [bringtogetherError ,setbringtogetherError] =useState(false)
+const [ conflictsError, setconflictsError] = useState(false)
   const handleChangeSelect = (event) => {
     setAge(event.target.value);
   };
   const sessionValue = (event) => {
     setSelectedValue(event.target.value);
+    setSessionValueError(false)
   };
   const skillsoption = (event) =>{
      setSkillValue(event.target.value)
+     setSkillError(false)
   }
 
   const paravalue=(event)=>{
     setListenpara(event.target.value)
+    setListenParaError(false)
   }
 
   const communityvalue=(event)=>{
     setCommunity(event.target.value)
+    setcommunityError(false)
   }
 
   const communitymemvalue=(event)=>{
     setCommunitymem(event.target.value)
+    setcommunitymemError(false)
   }
   const bringtogethervalue=(event)=>{
     setbringTogether(event.target.value)
+    setbringtogetherError(false)
   }
 
   const Conflictvalue=(event)=>{
          setConflicts(event.target.value)
+         setconflictsError(false)
   }
   const handleClickOpen = () => {
     setOpen(true);
@@ -146,6 +164,33 @@ export default function GelathiCircleForm(circleData) {
 
   const gelathicircleformdata= async() =>{
   console.log("gelathi circle")
+
+
+  if(selectedValue == ""){
+    setSessionValueError(true)
+  }
+
+  if(skillValue== ''){
+setSkillError(true)
+  }
+  if(listenpara == ""){
+    setListenParaError(true)
+  }
+  if(community == ""){
+    setcommunityError(true)
+  }
+  if(communitymem == ""){
+    setcommunitymemError(true)
+  }
+  if(bringtogether == ""){
+    setbringtogetherError(true)
+  }
+  if(conflicts== ""){
+    setconflictsError(true)
+  }
+
+  if(conflicts != "" && bringtogether != "" && comminetymen != " " && comunnity!= "" && listnepara != "" 
+  && skillValue != "" && selectedValue != ""){
     var data = JSON.stringify({
       "partcipantId": 222954,
       "email_address": sendData?.email_address,
@@ -185,6 +230,11 @@ export default function GelathiCircleForm(circleData) {
         console.log(error);
       });
       handleClose();
+  }
+  else{
+    alert("Please Select The Option. ")
+  }
+  
 }
 
 
@@ -271,7 +321,11 @@ export default function GelathiCircleForm(circleData) {
     <Card style={{ marginTop: 10, borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography variant="subtitle2" style={{color:"#ff7424"}}>Spoorthi Session Number/ಸ್ಪೂರ್ತಿ ಸೆಷನ್ಸಂಖ್ಯೆ * (Tick the Spoorthi in which you are collecting the data)</Typography>
+                    <Typography variant="subtitle2" style={{color:"#ff7424"}}>Spoorthi Session Number/ಸ್ಪೂರ್ತಿ ಸೆಷನ್ಸಂಖ್ಯೆ * (Tick the Spoorthi in which you are collecting the data)
+                    {sessionValueError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                    </Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
@@ -295,7 +349,7 @@ export default function GelathiCircleForm(circleData) {
                   <Typography variant="subtitle2" style={{color:"#ff7424"}}>Can you list down three of your skills/
 ನಿಮ್ಮ ಮೂರು ಕೌಶಲ್ಯಗಳನ್ನು ನೀವು ಪಟ್ಟಿ ಮಾಡಬಹುದು?</Typography>
                   <Stack mt={2} mb={2}>
-                    <TextField id="skillslist" label="Your Answer" onChange={(e) => { setSendData({ ...sendData, list_down_your_skills: e?.target?.value }) }} variant="outlined" color="common"/>
+                    <TextField id="skillslist" label="Your Answer"  required onChange={(e) => { setSendData({ ...sendData, list_down_your_skills: e?.target?.value }) }} variant="outlined" color="common"/>
                   </Stack>
                 </CardContent>
           </Card>
@@ -304,7 +358,11 @@ export default function GelathiCircleForm(circleData) {
           <Card style={{ marginTop: 10, borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography variant="subtitle2" style={{color:"#ff7424"}}>I have used my skills to overcome my challenges/ನನ್ನ ಸವಾಲುಗಳನ್ನು ಜಯಿಸಲು ನಾನು ನನ್ನ ಕೌಶಲ್ಯವನ್ನು ಬಳಸಿದ್ದೇನೆ</Typography>
+                    <Typography variant="subtitle2" style={{color:"#ff7424"}}>I have used my skills to overcome my challenges/ನನ್ನ ಸವಾಲುಗಳನ್ನು ಜಯಿಸಲು ನಾನು ನನ್ನ ಕೌಶಲ್ಯವನ್ನು ಬಳಸಿದ್ದೇನೆ
+                     {skillError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                        </Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
@@ -338,7 +396,11 @@ export default function GelathiCircleForm(circleData) {
                     ಈ ಪ್ರದೇಶವು, ನಮ್ಮಿಂ ದಲೇ ತುಂಬಾ ಕೆಟ್ಟ ದಾಗಿ ದುರ್ವಾಸನೆ ಬೀರುತ್ತಿದೆ ಎಂದು ನನಗೆ ತಿಳಿದಿತ್ತು . 
                     ಆದರೆ, ಅದರ ಬಗ್ಗೆ ನನಗೆ ಏನುಮಾಡಬೇಕೆಂ ದು ತಿಳಿದಿರಲಿಲ್ಲ . ಕಸವು ಪರಿಸರಕ್ಕೆ ದೊಡ್ಡ ಅಪಾಯವಾಗಿದೆ. ಇವು ಬಳಸಿದ ಪೇಪರ್, ಟಿಫಿನ್ ಪ್ಯಾ ಕಿಂ ಗಳು, ಪ್ಲಾಸ್ಟಿ ಕ್ ಚೀಲಗಳು, ಐಸ್ ಕ್ರೀ ಮೊದಿಕೆಗಳು, ಬಾಟಲ್ ಕ್ಯಾ ನ್ಗಳು,ಮರಗಳಿಂದ ಬಿದ್ದ ಎಲೆಗಳು ಮತ್ತು ಇನ್ನೂ ವಿವಿಧಮೂಲಗಳಿಂದ ಬರುತ್ತದೆ.
                      ಕಸವು ಆವರಣವನ್ನು ಕೊಳಕು, ಅಶುದ್ಧ ಗೊಳಿಸುತ್ತದೆ ಮತ್ತು ರೋಗಗಳನ್ನು ಹುಟ್ಟು ಹಾಕುತ್ತದೆ ಎಂದು ನನಗೆ ತಿಳಿದಿದೆ. ಎಸೆಯಲ್ಪಟ್ಟ ಬಹಳಷ್ಟು ಕಸವು ನವೀಕರಿಸಬಹುದಾದ ಮತ್ತು ಮರುಬಳಕೆಮಾಡಬಹುದಾದ ಕಾಗದ,ಲೋಹಗಳು ಮತ್ತು ಗಾಜಿನಂತಹ ವಸ್ತುಗಳನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆ, ಅದನ್ನು ಹತ್ತಿರದ ಮರುಬಳಕೆ ಕೇಂದ್ರ ಕ್ಕೆ ಕಳುಹಿಸಬಹುದು ಅಥವಾ ಜಂಕೀಲರ್ಗೆ ವಿಲೇವಾರಿಮಾಡಬಹುದು. 
-                    ಇಂದಿನಿಂದ, ನಾನು ನನಗೆ ತಿಳಿದಿರುವ ವಸ್ತುಗಳನ್ನು ಮರುಬಳಕೆಮಾಡಲು ಪ್ರಯತ್ನಿ ಸುತ್ತೇ ನೆ.Did you listen to the paragraph</Typography>
+                    ಇಂದಿನಿಂದ, ನಾನು ನನಗೆ ತಿಳಿದಿರುವ ವಸ್ತುಗಳನ್ನು ಮರುಬಳಕೆಮಾಡಲು ಪ್ರಯತ್ನಿ ಸುತ್ತೇ ನೆ.Did you listen to the paragraph
+                    {listenparaError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                        </Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
@@ -383,7 +445,11 @@ export default function GelathiCircleForm(circleData) {
           <Card style={{ marginTop: 10, borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography variant="subtitle2" style={{color:"#ff7424"}}>I Know the need of my community/ನನ್ನ ಸಮುದಾಯದ ಅವಶ್ಯಕತೆ ನನಗೆ ತಿಳಿದಿದೆ</Typography>
+                    <Typography variant="subtitle2" style={{color:"#ff7424"}}>I Know the need of my community/ನನ್ನ ಸಮುದಾಯದ ಅವಶ್ಯಕತೆ ನನಗೆ ತಿಳಿದಿದೆ
+                    {communityError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                    </Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
@@ -403,7 +469,12 @@ export default function GelathiCircleForm(circleData) {
          <Card style={{ marginTop: 10, borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography variant="subtitle2" style={{color:"#ff7424"}}>I have come together with other community members to make a change in our community infrastructure/ನಮ್ಮ ಸಮುದಾಯದ ಮೂಲಸೌಕರ್ಯದಲ್ಲಿ ಬದಲಾವಣೆ ಮಾಡಲು ನಾನು ಇತರ ಸಮುದಾಯದ ಸದಸ್ಯರೊಂದಿಗೆ ಸೇರಿಕೊಂಡಿದ್ದೇನೆ</Typography>
+                    <Typography variant="subtitle2" style={{color:"#ff7424"}}>I have come together with other community members to make a change in our community infrastructure/ನಮ್ಮ ಸಮುದಾಯದ ಮೂಲಸೌಕರ್ಯದಲ್ಲಿ ಬದಲಾವಣೆ ಮಾಡಲು ನಾನು ಇತರ ಸಮುದಾಯದ ಸದಸ್ಯರೊಂದಿಗೆ ಸೇರಿಕೊಂಡಿದ್ದೇನೆ
+                    {communitymemError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                        
+                    </Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
@@ -433,7 +504,11 @@ export default function GelathiCircleForm(circleData) {
           <Card style={{ marginTop: 10, borderRadius: 20 }}>
                 <CardContent>
                   <Stack mt={2}>
-                    <Typography variant="subtitle2" style={{color:"#ff7424"}}>When you want to bring someone together and want to get an action done/ನೀವು ಯಾರನ್ನಾದರೂ ಒಟ್ಟಿಗೆ ಸೇರಿಸಲು ಬಯಸಿದಾಗ ಮತ್ತು ಕ್ರಿಯೆಯನ್ನು ಮಾಡಲು ಬಯಸಿದಾಗ</Typography>
+                    <Typography variant="subtitle2" style={{color:"#ff7424"}}>When you want to bring someone together and want to get an action done/ನೀವು ಯಾರನ್ನಾದರೂ ಒಟ್ಟಿಗೆ ಸೇರಿಸಲು ಬಯಸಿದಾಗ ಮತ್ತು ಕ್ರಿಯೆಯನ್ನು ಮಾಡಲು ಬಯಸಿದಾಗ
+                    {bringtogetherError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                    </Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
@@ -454,7 +529,11 @@ export default function GelathiCircleForm(circleData) {
                 <CardContent>
                   <Stack mt={2}>
                     <Typography variant="subtitle2" style={{color:"#ff7424"}}>At the end of a conflict it matters to me that the other person's interest/need has been met as well as mine
-                          / ಘರ್ಷಣೆಯ ಕೊನೆಯಲ್ಲಿ ಇನ್ನೊಬ್ಬರ ಆಸಕ್ತಿ/ಅವಶ್ಯಕತೆ ನನ್ನ ಜೊತೆಗೆ ಪೂರೈಸಲ್ಪಟ್ಟಿದೆ ಎಂಬುದು ನನಗೆ ಮುಖ್ಯವಾಗಿದೆ</Typography>
+                          / ಘರ್ಷಣೆಯ ಕೊನೆಯಲ್ಲಿ ಇನ್ನೊಬ್ಬರ ಆಸಕ್ತಿ/ಅವಶ್ಯಕತೆ ನನ್ನ ಜೊತೆಗೆ ಪೂರೈಸಲ್ಪಟ್ಟಿದೆ ಎಂಬುದು ನನಗೆ ಮುಖ್ಯವಾಗಿದೆ
+                          {conflictsError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                          </Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
