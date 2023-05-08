@@ -33,6 +33,7 @@ export default function Team(props) {
     const [filterData, setFilterData] = useState(null)
     const [teamTADataIDs, setteamTADataIDs] = useState(null)
     const [teamTAData, setTeamMembersTAData] = useState([])
+    console.log("🚀 ~ file: Team.jsx:36 ~ teamTAData:",  (teamTAData.filter(e=>e?.status=='0')).length>0)
     const [checkedData, setCheckedData] = useState([])
     var [selectedAll, setSelectedAll] = useState(false)
     const [comments, setComments] = useState('')
@@ -209,7 +210,7 @@ console.log(teamTAData,"responseeeeeeeeeeeeeeeeeeeeee")
             .catch(function (error) {
                 console.log(error);
             });
-
+            
     }
 
     
@@ -331,7 +332,7 @@ const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
                         {(userrole==3)&&( teamTAData.filter(e=>e?.status=='4')).length>0 &&
                         <div id="team-buttons" style={{display:'flex'}}><Button id="approve-button" fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(1)}>Approve</Button>&nbsp;&nbsp;
                         <Button id="reject-button" fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} onClick={()=>approveTA(2)}>Reject</Button></div>}
-                      {(userrole==4 || userrole==12 || userrole == 3 ) && ( teamTAData.filter(e=>e?.status=='0')).length>0 &&<Button id="verify-button" fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Verify</Button>}</form>
+                      {(userrole==4 || userrole==12 || userrole == 3 || userrole==13) && ( teamTAData.filter(e=>e?.status=='0')).length>0 &&<Button id="verify-button" fullWidth style={{ backgroundColor: "#ff7424", color: "white", marginTop: "2rem" }} type='submit'>Verify</Button>}</form>
 
                     {/* </DialogContentText>
                 </DialogContent> */}
