@@ -12,7 +12,7 @@ import {
   FormGroup,
   FormControlLabel,
   Card,
-  CardContent,Icon,RadioGroup,
+  CardContent,Icon,RadioGroup, FormHelperText,
 
 } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
@@ -31,6 +31,7 @@ import Iconify from 'src/components/Iconify';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import  { useRef } from 'react';
+import { useState } from 'react';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -122,64 +123,81 @@ export default function ShaktiForm({itm}) {
   };
   const handleworthperson = (event) => {
     setworthperson(event.target.value);
+    setworthpersonError(true);
   };
 
   const handlequalitiesgood = (event) => {
     setqualitiesgood(event.target.value);
+  setqualitiesgoodError(true)
   };
 
   const handlefailureperson = (event) => {
     setfailureperson(event.target.value);
+    setfailurepersonError(true)
   };
 
   const handleproblemsdisheartened = (event) => {
     setproblemsdisheartened(event.target.value);
+    setproblemsdisheartenedError(true)
   };
 
   const handleproblemsolutions = (event) => {
     setproblemsolutions(event.target.value);
+    setproblemsolutionsError(true);
   };
 
   const handleplan = (event) => {
     setplan(event.target.value);
+    setplanError(true)
   };
 
   const handlesolution = (event) => {
     setsolution(event.target.value);
+    setsolutionError(true)
   };
 
   const handlemoneysave = (event) => {
     setmoneysave(event.target.value);
+    setmoneysaveError
   };
 
   const handlesavingfrequency = (event) => {
     setsavingfrequency(event.target.value);
+    setsavingfrequencyError(true)
+    
   };
 
   const handleducation = (event) => {
     seteducation(event.target.value);
+    seteducationError
   };
   const handlehealthcareaccess = (event) => {
     sethealthcareaccess(event.target.value);
+    sethealthcareaccessError(true)
   };
 
   const handlecreditaccess = (event) => {
     setcreditaccess(event.target.value);
+    setcreditaccessError(true)
   };
 
   const handlesavemoney = (event) => {
     setsavemoney(event.target.value);
+    setsavemoneyError(true)
   };
 
   const handlepurchase = (event) => {
     setpurchase(event.target.value);
+    setpurchaseError(true)
   };
   const handlexpenditure = (event) => {
     setexpenditure(event.target.value);
+    setexpenditureError(true)
   };
 
   const handlelivelihood = (event) => {
     setlivelihoodvalue(event.target.value);
+    setlivelihoodvalueError(true)
   };
 
   const handleshareproblems = (event) => {
@@ -188,6 +206,7 @@ export default function ShaktiForm({itm}) {
 
   const handlesharelearning = (event) => {
     setsharelearning(event.target.value);
+    setshareproblemsError(true)
   };
 
   // useEffect(()=>{
@@ -260,6 +279,35 @@ export default function ShaktiForm({itm}) {
     moneyborrowed: '',
   });
 
+
+  const [helperText, setHelperText] = useState('');
+  const [planError, setplanError] = useState('');
+  const [qualitiesgoodError,setqualitiesgoodError]=useState(false)
+  const [healthcareaccessError,sethealthcareaccessError]=useState(false)
+  const [creditaccessError,setcreditaccessError]=useState(false)
+  const [problemsolutionsError,setproblemsolutionsError]=useState(false)
+  const [worthpersonError,setworthpersonError]=useState(false)
+  const [moneysaveError,setmoneysaveError]=useState(false)
+  const [educationError,seteducationError]=useState(false)
+  const [solutionError,setsolutionError]=useState(false)
+  const [livelihoodvalueError,setlivelihoodvalueError]=useState(false)
+  const [sharelearningError,setsharelearningError]=useState(false)
+  const [problemsdisheartenedError,setproblemsdisheartenedError]=useState(false)
+  const [failurepersonError,setfailurepersonError]=useState(false)
+  const [expenditureError,setexpenditureError]=useState(false)
+  const [savemoneyError,setsavemoneyError]=useState(false)
+  const [purchaseError,setpurchaseError]=useState(false)
+
+  const [shareproblemsError,setshareproblemsError]=useState(false)
+
+  const [savingfrequencyError,setsavingfrequencyError]=useState(false)
+  // const [climateffortError,setClimateffortError]=useState(false)
+  // const [climateactionError,setClimateactionError]=useState(false)
+  // const [initiativemeasuresError,setInitiativemeasuresError]=useState(false)
+  // const [environmentError,setEnvironmentError]=useState(false)
+  // const [communitytogetherError,setCommunitytogetherError]=useState(false)
+
+
   const shakthiformdata = async () => {
 
     // const form = this.formRef.current;
@@ -271,7 +319,109 @@ export default function ShaktiForm({itm}) {
     //   console.log('Form is invalid');
     // }
 
+    if (plan == '') {
+      setplanError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (qualitiesgood == '') {
+      setqualitiesgoodError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (healthcareaccess == '') {
+      sethealthcareaccessError(true);
+      setHelperText('Please Select The Option');
    
+    }  if (creditaccess == '') {
+      setcreditaccessError(true);
+      setHelperText('Please Select The Option');
+      
+    }  if (problemsolutions == '') {
+      setproblemsolutionsError(true);
+      setHelperText('Please Select The Option');
+     
+    }  if (worthperson == '') {
+      setworthpersonError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (moneysave == '') {
+      setmoneysaveError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (education == '') {
+      seteducationError(true); 
+      setHelperText('Please Select The Option');
+     
+    }  if (solution == '') {
+      setsolutionError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (livelihoodvalue == '') {
+      setlivelihoodvalueError(true);
+      setHelperText('Please Select The Option');
+    
+    }  if (sharelearning == '') {
+      setsharelearningError(true);
+      setHelperText('Please Select The Option');
+     
+    }  if (problemsdisheartened == '') {
+      setproblemsdisheartenedError(true);
+      setHelperText('Please Select The Option');
+     
+    }
+      
+     if (failureperson == '') {
+      setfailurepersonError(true);
+      setHelperText('Please Select The Option');
+   
+    }
+    
+    if (expenditure == '') {
+      setexpenditureError(true);
+      setHelperText('Please Select The Option');
+    
+    }
+
+  
+    if (checked['loanborrow'].length == 0) {
+      // setHouseholdactivityError(true);
+      setHelperText('Please Select The Option');
+    
+    
+    }
+    if (checked['borrowedmoney'].length == 0) {
+      // setHouseholdactivityError(true);
+      setHelperText('Please Select The Option');
+    
+    
+    }
+    if (savemoney == '') {
+      setsavemoneyError(true);
+      setHelperText('Please Select The Option');
+    
+    }
+    if (purchase == '') {
+      setpurchaseError(true);
+      setHelperText('Please Select The Option');
+    
+    }  
+    if (shareproblems == '') {
+      setshareproblemsError(true);
+      setHelperText('Please Select The Option');
+    
+    }  
+    if (savingfrequency == '') {
+      setsavingfrequencyError(true);
+      setHelperText('Please Select The Option');
+    
+    }  
+
+    if( plan != " " && qualitiesgood != ''  && healthcareaccess != '' && creditaccess != '' && 
+    problemsolutions != '' && worthperson != '' && moneysave != '' && education != '' && 
+    solution != '' && livelihoodvalue != '' && sharelearning != ''  &&
+    problemsdisheartened != '' && failureperson != '' && expenditure != '' && savemoney != '' &&
+    purchase != '' && (checked['loanborrow'] != 0)&& (checked['borrowedmoney'] != 0))
+    {
+
     console.log('surveyyyyform');
     var data = JSON.stringify({
       participantId: itm?.participant_id,
@@ -352,7 +502,9 @@ export default function ShaktiForm({itm}) {
         console.log(error);
       });
     handleClose();
-  };
+  }else{
+    alert("Please Fill All The Fields")
+  }}
 
   return (
     <>
@@ -399,6 +551,9 @@ export default function ShaktiForm({itm}) {
                 <Stack>
                   <Typography mt={2} variant="body2">
                     1. I feel That I am Person of worth
+                    {worthpersonError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label" required>
@@ -428,7 +583,11 @@ export default function ShaktiForm({itm}) {
                 </Stack>
                 <br />
                 <Stack>
-                  <Typography variant="body2">2. I feel That I have Several good Qualities</Typography>
+                  <Typography variant="body2">2. I feel That I have Several good Qualities
+                  {qualitiesgoodError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                  </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
                       Answer
@@ -454,7 +613,11 @@ export default function ShaktiForm({itm}) {
                 </Stack>
                 <br />
                 <Stack>
-                  <Typography variant="body2">3. Sometimes I feel I am a Failure Person</Typography>
+                  <Typography variant="body2">3. Sometimes I feel I am a Failure Person
+                  {failurepersonError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                  </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
                       Answer
@@ -532,7 +695,11 @@ export default function ShaktiForm({itm}) {
                   </Typography>
                 </Stack>
                 <Stack>
-                  <Typography variant="body2">1. I look at problems and get disheartened</Typography>
+                  <Typography variant="body2">1. I look at problems and get disheartened
+                  {problemsdisheartenedError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                  </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
                       Answer
@@ -560,6 +727,9 @@ export default function ShaktiForm({itm}) {
                   &nbsp;{' '}
                   <Typography variant="body2">
                     2. I take problem and attempt to think about solutions for it ?
+                    {problemsolutionsError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
@@ -588,6 +758,9 @@ export default function ShaktiForm({itm}) {
                   &nbsp;{' '}
                   <Typography variant="body2">
                     3. Once I Choose A Solution I Make An Implementation Plan For It ?
+                    {planError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                     <Stack mt={2}>
                       <InputLabel variant="standard" id="demo-simple-select-standard-label">
                         Answer
@@ -704,7 +877,11 @@ export default function ShaktiForm({itm}) {
                   </Stack>
                 </Stack>
                 <Stack>
-                  <Typography variant="body1">2. Where Do You Save Up Money ? </Typography>
+                  <Typography variant="body1">2. Where Do You Save Up Money ? 
+                  {moneysaveError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                  </Typography>
 
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
@@ -731,7 +908,11 @@ export default function ShaktiForm({itm}) {
                   </Stack>
                 </Stack>
                 <Stack mt={2}>
-                  <Typography variant="body1">3. What Is The Frequency Of Your Savings ? </Typography>
+                  <Typography variant="body1">3. What Is The Frequency Of Your Savings ? 
+                  {savingfrequencyError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                  </Typography>
 
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
@@ -1071,7 +1252,11 @@ export default function ShaktiForm({itm}) {
                   </Typography>
                 </Stack>
                 <Stack>
-                  <Typography mt={2}> Education</Typography>
+                  <Typography mt={2}> Education
+                  {educationError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                  </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
                       Answer
@@ -1115,7 +1300,11 @@ export default function ShaktiForm({itm}) {
                       <MenuItem value="Both">Both</MenuItem>
                     </Select>
                   </Stack>
-                  <Typography mt={2}> Access To Credit </Typography>
+                  <Typography mt={2}> Access To Credit 
+                  {creditaccessError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                  </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1137,7 +1326,11 @@ export default function ShaktiForm({itm}) {
                       <MenuItem value="Both">Both</MenuItem>
                     </Select>
                   </Stack>
-                  <Typography mt={2}> Saving Money </Typography>
+                  <Typography mt={2}> Saving Money 
+                  {savemoneyError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                  </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1159,7 +1352,11 @@ export default function ShaktiForm({itm}) {
                       <MenuItem value="Both">Both</MenuItem>
                     </Select>
                   </Stack>
-                  <Typography mt={2}> Asset Purchase </Typography>
+                  <Typography mt={2}> Asset Purchase 
+                  {purchaseError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                  </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1181,7 +1378,11 @@ export default function ShaktiForm({itm}) {
                       <MenuItem value="Both">Both</MenuItem>
                     </Select>
                   </Stack>
-                  <Typography mt={2}> Day To Day Expenditure </Typography>
+                  <Typography mt={2}> Day To Day Expenditure 
+                  {expenditureError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                  </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1204,7 +1405,11 @@ export default function ShaktiForm({itm}) {
                       <MenuItem value="Both">Both</MenuItem>
                     </Select>
                   </Stack>
-                  <Typography mt={2}> Livelihood </Typography>
+                  <Typography mt={2}> Livelihood 
+                  {livelihoodvalueError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+                  </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1256,6 +1461,9 @@ export default function ShaktiForm({itm}) {
                     <Typography>
                       {' '}
                       1. It Is Important For Woman To Come Together And Share Their Everyday Challenges And Problems{' '}
+                      {shareproblemsError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                     </Typography>
                     <Stack mt={2}>
                       <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
@@ -1282,6 +1490,9 @@ export default function ShaktiForm({itm}) {
                   </Stack>
                   <Typography mt={2}>
                     2. I Have A Woman In My Community Whom I Share My Learnings And Problems , Solution With{' '}
+                    {sharelearning ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   </Typography>
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
