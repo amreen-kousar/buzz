@@ -163,6 +163,9 @@ export default function Vyaparprogram({ itm, changeState }) {
   const [isSmartPhone, setIsSmartPhone] = useState(false);
   const [isAdditionalSkill ,setisAdditionalSkill] = useState(false)
 const [internet , setinternet] = useState("")
+const [loansError , setloansError] = useState(false)
+const [bisnessError , setbusinessError] = useState(false)
+const [entreprenur , setentrepreneurError] = useState(false)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -263,6 +266,18 @@ const [internet , setinternet] = useState("")
       setbussinessSkillError(true);
       setHelperText('Please Select The Option');
     }
+    if (checked['please_list_down_the_various_components_of_business'] == 0) {
+      setbusinessError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (checked['tell_us_three_things_about_you_as_an_entrepreneur'] == 0) {
+      setentrepreneurError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (checked['what_are_the_prerequisites_to_access_a_loan'] == 0) {
+      setloansError(true);
+      setHelperText('Please Select The Option');
+    }
     if (
       bussinesskills != ' ' &&
       currentloan != '' &&
@@ -284,7 +299,10 @@ const [internet , setinternet] = useState("")
       smartPhoneError != '' &&
       maritalstatus != '' &&
       survey != '' &&
-      education != ''
+      education != ''&&
+      (checked['please_list_down_the_various_components_of_business'] != 0)&&
+      (checked['tell_us_three_things_about_you_as_an_entrepreneur'] != 0)&&
+      (checked['what_are_the_prerequisites_to_access_a_loan'] != 0)
     ) {
       var data = JSON.stringify({
         partcipantId: itm?.id,

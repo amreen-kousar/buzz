@@ -189,7 +189,7 @@ setSkillError(true)
     setconflictsError(true)
   }
 
-  if(conflicts != "" && bringtogether != "" && comminetymen != " " && comunnity!= "" && listnepara != "" 
+  if(conflicts != "" && bringtogether != "" && communitymem != " " && community!= "" && listnepara != "" 
   && skillValue != "" && selectedValue != ""){
     var data = JSON.stringify({
       "partcipantId": 222954,
