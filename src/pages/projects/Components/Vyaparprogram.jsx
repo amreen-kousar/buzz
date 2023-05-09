@@ -699,7 +699,7 @@ const [entreprenur , setentrepreneurError] = useState(false)
                         type="text"
                         variant="outlined"
                         color="common"
-                        inputProps={{ pattern: '[a-z]' }}
+                      
                         onChange={(e) => setSendData({ ...sendData, name_of_the_vyapari: e?.target?.value })}
                         value={sendData?.name_of_the_vyapari}
                       />
