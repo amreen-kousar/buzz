@@ -73,6 +73,7 @@ export default function GelathiProgrameDrawer({
   const [gelatiNote, setGelatiNote] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
   const isSmallScreen = useMediaQuery('(max-width:600px)');
+  const [gf , setGf] = useState(false)
 //notes save button
 
 const [SaveBtn , setSaveBtn] = useState(false) 
@@ -376,6 +377,15 @@ const convertImage = (e) => {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" }
   }
 
+  console.log(session.gf_session_name, "session name")
+if( session?.gf_session_name?.indexOf("_VV")){
+  console.log("hi aswin ")
+  // setGf(true)
+
+}
+else{
+  // setGf(false)
+}
 
   return (
     <>
@@ -580,7 +590,7 @@ const convertImage = (e) => {
       <Button variant="secondary" style={styles.buttonStyle}  
                   endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="" /> </IconButton>}
                   startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-people" /></IconButton>}>
-                  <span style={{ width: "200px" }}>Visit Participants : {session?.total_participants}</span>
+                  <span style={{ width: "200px" }}>Visit Participants wokring  working: {session?.total_participants}</span>
                 </Button>
       </Stack>
 

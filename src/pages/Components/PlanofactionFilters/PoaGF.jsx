@@ -38,6 +38,7 @@ import { useMediaQuery } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
+import { EightK } from '@mui/icons-material';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -72,6 +73,8 @@ const [gelatiNote, setGelatiNote] = useState('');
   const [expanded, setExpanded] = React.useState(false);
   const [reload, setReload] = useState(false);
    const isSmallScreen = useMediaQuery('(max-width:600px)');
+
+   const [gf , setGf] = useState(fasle)
   const changeState = () => {
     setReload(!reload);
     console.log('changeState is called ');
@@ -371,11 +374,20 @@ const noteSubmitHandler = () => {
     });
     
   }
+console.log(session.gf_session_name, "session name")
+if( session?.gf_session_name?.indexOf("_VV")){
+  console.log("hi aswin ")
+
+}
+
+
  const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
     linkStyle: { textDecoration: 'none', color: "black" }
   }
+
+  console.log("batches Data ", batchState)
   return (
     <>
       <Drawer
@@ -562,7 +574,7 @@ const noteSubmitHandler = () => {
                 }}
                     endIcon={<IconButton > <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:baseline-people" /></IconButton>}>
-                    <span style={{ width: "200px" }}>Visit participants : {session?.total_participants}</span>
+                    <span style={{ width: "200px" }}>Visit participants working : {session?.total_participants}</span>
                   </Button><br/><br/>
               {/* <Photos
                 batch={batch}
