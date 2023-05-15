@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import React from "react";
-import {Button,CardContent,Stack,Card, DialogContent, DialogContentText,CardActions} from '@mui/material';
+import {Button,CardContent,Stack,Card, DialogContent, DialogContentText,CardActions, Radio, RadioGroup, FormControlLabel} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import PropTypes from 'prop-types';
 import Checkbox from '@mui/material/Checkbox';
@@ -17,12 +17,17 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import moment from 'moment';
 import Iconify from 'src/components/Iconify';
-import { CheckBox } from '@mui/icons-material';
+import { CheckBox , ScaleOutlined } from '@mui/icons-material';
+import { size, transform } from 'lodash';
+
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  console.log("🚀 ~ file: AddEnrolledGelathi.jsx:25 ~ label:", label)
   export default function AddEnrollGelathi ({session}){
+    console.log("🚀 ~ file: AddEnrolledGelathi.jsx:27 ~ session:", session)
     const [open, setOpen] = React.useState(false);
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState();
@@ -93,9 +98,23 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   }
 
   const styles = {
-    buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" }
+    buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
    
-    
+    label: {
+      cursor: 'pointer',
+      
+    },
+    input: {
+      accentColor: 'pink',   
+       width: '25px',
+      height: '25px',
+      borderRadius:'10%',
+      borderColor:'pink',
+    },
+    specifyColor : {
+      accentColor: 'pink',
+      
+  }
   }
 
     return(
@@ -172,18 +191,48 @@ const Transition = React.forwardRef(function Transition(props, ref) {
                       <Typography variant="subtitle2">{itm?.participant_name}</Typography> &nbsp;&nbsp; {(itm?.gelathi_status!="")?<div style={{color:'#f75f66'}}>{itm?.gelathi_status}</div >:null} 
                       
                       </div>
-                    {(itm?.enroll=='0')?<Checkbox 
+
+                    {/* {(itm?.enroll=='0')?                      
+                    <RadioGroup 
+                     
+                     aria-labelledby="demo-radio-buttons-group-label"
+                     
+                     name='def'
+                   >
+                     <FormControlLabel control={<Radio  name='b'
                     onClick={()=>{
                       addGelathi(itm)
                       console.log(itm,"<---sadasdasd")
                     }} 
                     {...label}
-                     />:<Checkbox defaultChecked={true} onClick={()=>{addGelathi(itm)}} style={{color:'pink'}}/>}
+                     />}/></RadioGroup>:        <RadioGroup 
                      
-                  </CardActions> 
+                     aria-labelledby="demo-radio-buttons-group-label"
+                     
+                     name='abc'
+                   ><FormControlLabel name='a' control={<Radio  onClick={()=>{addGelathi(itm)}} style={{color:'pink'}}/>}/>
+                     </RadioGroup>
+                     } */}
+                     {/* <RadioGroup aria-labelledby="demo-radio-buttons-group-label" name='abc'>
+                      <FormControlLabel value={{...label}} name='a' control={<Radio  onClick={()=>{addGelathi(itm)}} style={{color:'pink'}}/>}/>
+                     </RadioGroup> */}
+
+                     {/* <RadioGroup
+    aria-labelledby="demo-radio-buttons-group-label"
+    defaultValue="female"
+    name="radio-buttons-group"
+  >
+    <FormControlLabel value={{...label}} control={<Radio />}  />
+    {/* <FormControlLabel value="male" control={<Radio />} label="Male" />
+    <FormControlLabel value="other" control={<Radio />} label="Other" /> */}
+  {/* </RadioGroup> */} 
+  {(itm?.enroll=='0')?  <input type="radio" style={styles.input}  name="asd" onClick={() => {addGelathi(itm)}}  id="specifyColor"  value={{...label}}></input>: <input type="radio"  id="specifyColor"
+   style={styles.input} defaultChecked={true}  name="asd" onClick={() => {addGelathi(itm)}} value={{...label}}></input>}
+
+                  </CardActions>  
                   </CardContent>
                 );
-              }) }
+              })}
                     
                     </CardContent>
                 </Card>

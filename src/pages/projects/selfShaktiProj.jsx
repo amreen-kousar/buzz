@@ -248,8 +248,8 @@ export default function selfShaktiProj() {
                             <Typography  gutterBottom style={{ color: '#ff7518' }} >
                                Day 1 : {itm?.day1}</Typography>
                           
-                            {(userid==12 || userid==3)?<Typography gutterBottom style={{ color: '#ff7518' }}>
-                            Day 2 : {itm?.day2}</Typography>:null}
+                           <Typography gutterBottom style={{ color: '#ff7518' }}> 
+                            Day 2 : {itm?.day2}</Typography>
                             
                         </Grid>
                     </Card>)
