@@ -34,10 +34,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
-export default function EditParticipantdata({editSession, setEditsession,Trainingdata, changeState,itm,cvalue}) {
- console.log(itm,"itemmmm")
+export default function EditParticipantdata({editSession, setEditsession,Trainingdata, changeState,participantdata,cvalue}) {
+ console.log(participantdata,"itemmmm")
   const [openFilter, setOpenFilter] = useState(false);
-  const [clcikData, setClickData] = useState()
+ 
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -104,7 +104,7 @@ const SendData = async => {
         "income":sendData?.income, 
         "occupation":sendData?.occupation,
          "typeOfEnterprise":sendData?.typeOfEnterprise, 
-         "participant_id":itm?.participant_id, 
+         "participant_id":participantdata?.id, 
          "final_save":1, 
          "husbandOccupation":sendData?.husbandOccupation,
          "wifeIncomeMonthly":sendData?.wifeIncomeMonthly, 
