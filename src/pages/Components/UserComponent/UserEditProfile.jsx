@@ -339,7 +339,7 @@ export default function UserEditProfile({ updateSetUser }) {
                 /> */}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
-                    label="Date"
+                    label="Date Of Joining"
                     inputFormat="YYYY/MM/DD"
                     onChange={(newValue) => {
                       setEditData({ ...editData, doj: newValue });

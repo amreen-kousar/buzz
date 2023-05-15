@@ -214,7 +214,7 @@ const removeFlag = async (itm, i) => {
  {console.log(alloted,"countttttttt")}
    var config = {
      method: 'post',
-     url: 'https://bdms.buzzwomen.org/appTest/createGFBatch.php',
+     url: 'https://bdms.buzzwomen.org/appTest/deleteGFBatch.php',
      headers: {
        'Content-Type': 'application/json'
      },
