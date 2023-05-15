@@ -17,6 +17,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import moment from 'moment';
 import Iconify from 'src/components/Iconify';
+import AddParticipants from './AddParticipants';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -121,7 +122,7 @@ getEnrollVyapar();
             All Participants
           </Typography>
 
-
+          <AddParticipants type="vyapar" session={session}/>
           
         </Toolbar>
         {/* <Webcam

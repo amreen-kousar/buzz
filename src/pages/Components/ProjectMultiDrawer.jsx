@@ -59,6 +59,7 @@ projectMultiDrawer.propTypes = {
 };
 
 export default function projectMultiDrawer({ isOpenFilter,shakti, onOpenFilter, onCloseFilter, clcikData,batchState,projectId}) {
+console.log("🚀 ~ file: ProjectMultiDrawer.jsx:62 ~ projectMultiDrawer ~ projectId:", projectId)
 console.log("🚀 ~ file: ProjectMultiDrawer.jsx:61 ~ projectMultiDrawer ~ clcikData:", shakti)
 
      const [batch,setBatch] = useState('')
@@ -318,6 +319,7 @@ const noteSubmitHandler = () => {
     console.log('getNoteHandler');
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+    console.log("🚀 ~ file: ProjectMultiDrawer.jsx:322 ~ getNoteHandler ~ role:", role,userid)
     var data = JSON.stringify({
       type: 1,
       tb_id: batch?.data?.id,
@@ -382,7 +384,8 @@ const noteSubmitHandler = () => {
     linkStyle: { textDecoration: 'none', color: "black" }
   }
   console.log("🚀 ~ file: ProjectMultiDrawer.jsx:453 ~ projectMultiDrawer ~ batch?.data?.day2_actual:", batch?.data?.day2_actual)
- 
+  
+  console.log("🚀 ~ file: ProjectMultiDrawer.jsx:523 ~ projectMultiDrawer ~ clcikData:", isOpenFilter)
     return (
         <>
             <Drawer
@@ -518,13 +521,13 @@ const noteSubmitHandler = () => {
                             
                                
                            
-                           {batch && <CheckinOut
+                           {batch && ((userId ==5    && projectId==undefined )||(userId ==4    && projectId==undefined )||(userId ==3    && projectId==undefined ) )?<CheckinOut
               photos={check}
               batch={batch}
               setCheck={(e) => {
                 setCheck(e);
               }}
-               />}
+               />:null}
                 <Programevaluationday1 batch={batch} onCloseFilter={onCloseFilter} />
                             <Evaluationday2 batch={batch}  onCloseFilter={onCloseFilter}/>
 

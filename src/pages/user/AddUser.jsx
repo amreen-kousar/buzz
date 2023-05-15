@@ -499,7 +499,7 @@ console.log(userid,"userrrrrridddddddd")
         }} value={AddUser.workNum} onChange={(e) => {
                                      setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' /><br/><br/>
 
-                                <TextField fullWidth required id="Email" label="Email" helperText='Email required' value={AddUser.office_email_id} 
+                                <TextField fullWidth type="email" required id="Email" label="Email"  value={AddUser.office_email_id} 
                                 onChange={(e)=>{
                                     emailchangeHandler(e.target.value)
                                 }} 
@@ -510,7 +510,7 @@ console.log(userid,"userrrrrridddddddd")
                                          variant="outlined" color="common" /><br/><br/>
 
                                 <div style={{ marginLeft: "1rem", fontSize: "0.8rem", fontWeight: "700" }}>
-                                    {emailExists ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp; Email Id already exists !</span> : (errors.office_email_id) ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp;Invalid Email Id</span> : (AddUser.office_email_id != "") ? <span style={{ color: "green", display: "flex" }}><Iconify icon="mdi:tick-circle" width={20} height={20} /> &nbsp;Valid Email Id</span> : null}
+                                    {/* {emailExists ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp; Email Id already exists !</span> : (errors.office_email_id) ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp;Invalid Email Id</span> : (AddUser.office_email_id != "") ? <span style={{ color: "green", display: "flex" }}><Iconify icon="mdi:tick-circle" width={20} height={20} /> &nbsp;Valid Email Id</span> : null} */}
                                 </div>
 
 

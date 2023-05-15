@@ -1,3 +1,8 @@
+
+
+
+ 
+
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios'
@@ -144,60 +149,193 @@ const [sendData,setSendData] = useState({
   }, []
   )
 
+  const vyaparformdata = (async) => {
+    if (education == '') {
+      setEducationError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (survey == '') {
+      setwWenSurveyDoneError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (maritalstatus == '') {
+      setMAritalStatusError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (phone == '') {
+      setSmartPhoneError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (sector == '') {
+      setSectorError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (numberproficiency == '') {
+      setNumberproficiencyError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (writtenproficiency == '') {
+      setWrittenproficiencyError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinessyears == '') {
+      setBussinessyearsError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (licensevalue == '') {
+      setlicensevalueError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (homebased == '') {
+      setHounseBaseError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (challengesvalue == '') {
+      setchallengesvalueError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinesscurrentstate == '') {
+      setbussinesscurrentstateError(true);
+      setHelperText('Please Select The Option');
+    }
 
-  const vyaparformdata= async =>{
-    var data = JSON.stringify({
-      "partcipantId":itm?.id,
-      "gfId":sendData?.gfId,
-      "when_was_survey_done":survey,
-      "name_of_the_vyapari":sendData?.name_of_the_vyapari,
-      "age":sendData?.age,
-      "contact_number":sendData?.contact_number,
-      "village_id":sendData?.village_id,
-      "name_of_the_cohort":sendData?.name_of_the_cohort,
-      "highter_education":education,
-      "marital_status":maritalstatus,
-      "number_of_people_in_the_household":sendData?.number_of_people_in_the_household,
-      "do_you_own_a_smart_phone":phone,
-      "do_you_have_internet_connection_on_your_smart_phone":"3",
-      "sector_type_of_business":sector,
-      "are_you_proficient_with_numbers":numberproficiency,
-      "are_you_proficient_with_written_language":writtenproficiency,
-      "household_income_monthly":sendData?.household_income_monthly,
-      "over_the_last_month_your_average_income":sendData?.over_the_last_month_your_average_income,
-      "your_business_profit_last_month":sendData?.your_business_profit_last_month,
-      "how_much_monthly_income_would_you_like_to_ideally_earn":sendData?.how_much_monthly_income_would_you_like_to_ideally_earn,
-      "amount_invested_when_the_business_started":sendData?.amount_invested_when_the_business_started,
-      "number_of_years_the_business_has_been_operating":bussinessyears,
-      "you_stopped_hold_your_business":sendData?.you_stopped_hold_your_business,
-      "no_hours_engaged_business":sendData?.no_hours_engaged_business,
-      "license_for_existing_business":licensevalue,
-      "home_based_work_from_shop":homebased,
-      "why_do_you_do_business":sendData?.why_do_you_do_business,
-      "tell_us_three_things_about_you_as_an_entrepreneur":checked['tell_us_three_things_about_you_as_an_entrepreneur'],
-      "tell_us_three_things_about_your_role_as_a_woman_at_home":sendData?.tell_us_three_things_about_your_role_as_a_woman_at_home,
-      "what_are_your_challenges_in_running_and_growing_your_business":challengesvalue,
-      "what_is_your_plan_to_overcome_these_challenges":sendData?.what_is_your_plan_to_overcome_these_challenges,
-      "what_are_your_skills":sendData?.what_are_your_skills,
-      "what_are_the_resources_available_with_you_for_your_business":sendData?.what_are_the_resources_available_with_you_for_your_business,
-      "who_is_your_customer_Describe_them_to_us":sendData?.who_is_your_customer_Describe_them_to_us,
-      "please_list_down_the_various_components_of_business":checked['please_list_down_the_various_components_of_business'],
-      "I_know_the_current_state_of_my_business_in_profit_loss_revenue":bussinesscurrentstate,
-      "what_kind_of_books_of_accounts_do_you_maintain":accountbooks,
-      "i_can_generate_ideas_to_solve_my_business_problems":generateideas,
-      "tell_us_about_one_business_problem":sendData?.tell_us_about_one_business_problem,
-      "what_is_your_business_goal_Business_impurumenet_madodu":sendData?.what_is_your_business_goal_Business_impurumenet_madodu,
-      "do_you_have_a_business_plan_to_reach_that_goal":bussinessplan,
-      "can_you_submit_a_business_plan_for_your_goal_to_us_right_now":submitbussinessplan,
-      "what_are_the_strenghts_of_your_business":sendData?.what_are_the_strenghts_of_your_business,
-      "what_are_the_weaknesses_of_your_business":sendData?.what_are_the_weaknesses_of_your_business,
-      "what_are_the_oppourtunities_for_your_business":sendData?.what_are_the_oppourtunities_for_your_business,
-      "are_you_able_to_raise_the_required_finance":finance,
-      "i_have_taken_a_loan_from":loan,
-      "i_have_trouble_accessing_loan_for_my_business":accessingloan,
-      "what_are_the_prerequisites_to_access_a_loan":checked['what_are_the_prerequisites_to_access_a_loan'],
-      "loan_currently_availed":currentloan,
-      " need_additional_skills_business":bussinesskills
+    if (accountbooks == '') {
+      setaccountbooksError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (generateideas == '') {
+      setgenerateideasError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinessplan == '') {
+      setbussinessplanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (submitbussinessplan == '') {
+      setsubmitbussinessplanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (finance == '') {
+      setfinanceError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (loan == '') {
+      setloanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (accessingloan == '') {
+      setaccessingloanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (currentloan == '') {
+      setcurrentloanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinesskills == '') {
+      setbussinessSkillError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (checked['please_list_down_the_various_components_of_business'] == 0) {
+      setbusinessError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (checked['tell_us_three_things_about_you_as_an_entrepreneur'] == 0) {
+      setentrepreneurError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (checked['what_are_the_prerequisites_to_access_a_loan'] == 0) {
+      setloansError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (
+      bussinesskills != ' ' &&
+      currentloan != '' &&
+      accessingloan != '' &&
+      loan != '' &&
+      finance != '' &&
+      submitbussinessplan != '' &&
+      bussinessplan != '' &&
+      generateideas != '' &&
+      accountbooks != '' &&
+      bussinesscurrentstate != '' &&
+      challengesvalue != '' &&
+      homebased != '' &&
+      licensevalue != '' &&
+      bussinessyears != '' &&
+      writtenproficiency != '' &&
+      numberproficiency != '' &&
+      sector != '' &&
+      phone != '' &&
+      maritalstatus != '' &&
+      survey != '' &&
+      education != ''&&
+      (checked['please_list_down_the_various_components_of_business'] != 0)&&
+      (checked['tell_us_three_things_about_you_as_an_entrepreneur'] != 0)&&
+      (checked['what_are_the_prerequisites_to_access_a_loan'] != 0)
+    ) {
+      var data = JSON.stringify({
+        partcipantId: itm?.id,
+        gfId: sendData?.gfId,
+        when_was_survey_done: survey,
+        name_of_the_vyapari: sendData?.name_of_the_vyapari,
+        age: sendData?.age,
+        contact_number: sendData?.contact_number,
+        village_id: itm?.villagename  || sendData?.village_id,
+        name_of_the_cohort: sendData?.name_of_the_cohort,
+        highter_education: education,
+        marital_status: maritalstatus,
+        number_of_people_in_the_household: sendData?.number_of_people_in_the_household,
+        do_you_own_a_smart_phone: phone,
+        do_you_have_internet_connection_on_your_smart_phone: '3',
+        sector_type_of_business: sector,
+        are_you_proficient_with_numbers: numberproficiency,
+        are_you_proficient_with_written_language: writtenproficiency,
+        household_income_monthly: sendData?.household_income_monthly,
+        over_the_last_month_your_average_income: sendData?.over_the_last_month_your_average_income,
+        your_business_profit_last_month: sendData?.your_business_profit_last_month,
+        how_much_monthly_income_would_you_like_to_ideally_earn:
+          sendData?.how_much_monthly_income_would_you_like_to_ideally_earn,
+        amount_invested_when_the_business_started: sendData?.amount_invested_when_the_business_started,
+        number_of_years_the_business_has_been_operating: bussinessyears,
+        you_stopped_hold_your_business: sendData?.you_stopped_hold_your_business,
+        no_hours_engaged_business: sendData?.no_hours_engaged_business,
+        license_for_existing_business: licensevalue,
+        home_based_work_from_shop: homebased,
+        why_do_you_do_business: sendData?.why_do_you_do_business,
+        tell_us_three_things_about_you_as_an_entrepreneur: checked['tell_us_three_things_about_you_as_an_entrepreneur'],
+        tell_us_three_things_about_your_role_as_a_woman_at_home:
+          sendData?.tell_us_three_things_about_your_role_as_a_woman_at_home,
+        what_are_your_challenges_in_running_and_growing_your_business: challengesvalue,
+        what_is_your_plan_to_overcome_these_challenges: sendData?.what_is_your_plan_to_overcome_these_challenges,
+        what_are_your_skills: sendData?.what_are_your_skills,
+        what_are_the_resources_available_with_you_for_your_business:
+          sendData?.what_are_the_resources_available_with_you_for_your_business,
+        who_is_your_customer_Describe_them_to_us: sendData?.who_is_your_customer_Describe_them_to_us,
+        please_list_down_the_various_components_of_business:
+          checked['please_list_down_the_various_components_of_business'],
+        I_know_the_current_state_of_my_business_in_profit_loss_revenue: bussinesscurrentstate,
+        what_kind_of_books_of_accounts_do_you_maintain: accountbooks,
+        i_can_generate_ideas_to_solve_my_business_problems: generateideas,
+        tell_us_about_one_business_problem: sendData?.tell_us_about_one_business_problem,
+        what_is_your_business_goal_Business_impurumenet_madodu:
+          sendData?.what_is_your_business_goal_Business_impurumenet_madodu,
+        do_you_have_a_business_plan_to_reach_that_goal: bussinessplan,
+        can_you_submit_a_business_plan_for_your_goal_to_us_right_now: submitbussinessplan,
+        what_are_the_strenghts_of_your_business: sendData?.what_are_the_strenghts_of_your_business,
+        what_are_the_weaknesses_of_your_business: sendData?.what_are_the_weaknesses_of_your_business,
+        what_are_the_oppourtunities_for_your_business: sendData?.what_are_the_oppourtunities_for_your_business,
+        are_you_able_to_raise_the_required_finance: finance,
+        i_have_taken_a_loan_from: loan,
+        i_have_trouble_accessing_loan_for_my_business: accessingloan,
+        what_are_the_prerequisites_to_access_a_loan: checked['what_are_the_prerequisites_to_access_a_loan'],
+        loan_currently_availed: currentloan,
+        ' need_additional_skills_business': bussinesskills,
+        relation_who_borrowed: sendData?.relation_who_borrowed,
+        loan_total_amount: sendData?.loan_total_amount,
+        loan_source: sendData?.loan_source,
+        loan_repayment_till_date: sendData?.loan_repayment_till_date,
+        skils_what_are_those : sendData?.skils_what_are_those,
+        do_you_have_internet_connection_on_your_smart_phone : internet
       });
       
       var config = {
@@ -567,7 +705,7 @@ const [sendData,setSendData] = useState({
                         type="text"
                         variant="outlined"
                         color="common"
-                        inputProps={{ pattern: '[a-z]' }}
+                      
                         onChange={(e) => setSendData({ ...sendData, name_of_the_vyapari: e?.target?.value })}
                         value={sendData?.name_of_the_vyapari}
                       />
@@ -1204,4 +1342,5 @@ const [sendData,setSendData] = useState({
       </Dialog>
     </div>
   );
+}
 }
