@@ -492,7 +492,7 @@ const noteSubmitHandler = () => {
                                 </CardContent>
                             </Card>
                            
-                           {(userId==5 && batch?.data?.day2_checkIn=='1')?<ShaktiDialogday2 batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:(userId==5 && batch?.data?.day1_completed!='1')? <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:<Day2Completed batch={batch} shown={shown} setShown={(e)=>{setShown(e)}}/>}
+                           {(userId==5 && batch?.data?.day2_checkIn=='1' && batch?.data?.day2_completed!='1')?<ShaktiDialogday2 batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:(userId==5 && batch?.data?.day1_completed!='1')? <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:(batch?.data?.day2_completed=='1')?<Day2Completed batch={batch} shown={shown} setShown={(e)=>{setShown(e)}}/>:null}
                            
                            
                             <Card sx={{mt:2}} id="project-mutlidrawer-card" onClick={()=>{setShown(true),console.log("ferfgreg")}} style={styles.buttonStyle}>

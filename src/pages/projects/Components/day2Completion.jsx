@@ -39,7 +39,7 @@ export default function Day2Completed({ shown, setShown, batch }) {
   const [reload,setReload]=useState(false);
   const [gelathiCount,setGelathicount]=useState(0);
   console.log("🚀 ~ file: ShaktiDialog.jsx:35 ~ ShaktiDialog ~ clcikData:", clcikData)
-
+const userid = JSON.parse(localStorage.getItem('userDetails'))?.role
   const [checkData,setCheckData]=React.useState('');
   const handleOpenFilter = () => {
     setOpenFilter(true); 
@@ -83,7 +83,7 @@ getTrainingBatch();
   };
 
 const handlesurvey =()=>{
-    alert('Survey was Done')
+    alert('Survey was done')
 }
 
   const getTrainingBatch = async =>{
@@ -217,15 +217,17 @@ console.log(c,"cvaluee")
                       <Typography variant="subtitle2" onClick={()=>{handleOpenFilter();
                       setClickData({ name: itm.gelathiname, title: "Enrolled  Name",id:itm?.participant_id})}
                       }>
-                        {itm?.participant_name}
+                        {itm?.participant_name} 
+                        {(itm?.day2=='1')?<>(Day1 & Day2)</>:null}
                         </Typography>
                  
                     </div>
  {(itm?.gelathiRecomm=='1')?<IconButton><Iconify icon="mdi:tick-circle" style={{color:'green'}}></Iconify></IconButton>:null}
-                {(itm?.final_save=='1')? <Checkbox defaultChecked disabled/> :null} 
-                 {(itm?.isSurveyDone=='1')?<IconButton >
+                {(userid==5 &&  itm?.final_save=='1')? <><Checkbox defaultChecked disabled/><IconButton style={{color:'#ff7424'}} onClick={handlesurvey}><Iconify  icon="material-symbols:edit"></Iconify></IconButton></> :
+                null} 
+                 {(userid==4 && itm?.isSurveyDone=='1')?<><Checkbox defaultChecked disabled/><IconButton >
           <Iconify icon="charm:notes-tick" width={20} height={20} color="green" onClick={handlesurvey}/>
-        </IconButton>:null} 
+        </IconButton></>:null} 
                   </CardActions>
 
                   {console.log(itm, '<----------itm?.participant_name')}

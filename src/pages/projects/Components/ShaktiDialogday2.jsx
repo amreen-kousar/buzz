@@ -33,10 +33,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export default function ShaktiDialogday2({ shown, setShown, batch }) {
-  console.log(batch, 'day2form is opening')
+  console.log(batch, 'day2form is opShaktiDialogday2ening')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
   const [reload,setReload]=useState(false);
+  const [participantdata,setParticipant]=useState();
   const [gelathiCount,setGelathicount]=useState(0);
   console.log("🚀 ~ file: ShaktiDialog.jsx:35 ~ ShaktiDialog ~ clcikData:", clcikData)
 
@@ -291,10 +292,12 @@ console.log(c,"cvaluee")
                       <Typography variant="subtitle2" onClick={()=>{handleOpenFilter();
                       setClickData({ name: itm.gelathiname, title: "Enrolled  Name",id:itm?.participant_id})}
                       }>
+                        
                         {itm?.participant_name}
                         </Typography>
                  
                     </div>
+                    {console.log(clcikData,"clcikdataaaaaaaaaaaaa")}
                     {(itm?.day2=='0' )?<Checkbox onClick={()=>{
                       addParticipant(itm)
                       
@@ -327,6 +330,7 @@ console.log(c,"cvaluee")
                       }>
                         {itm?.participant_name}
                         </Typography>
+                       
                     </div>
                     {(itm?.gelathiRecomm=='1')?<IconButton><Iconify icon="mdi:tick-circle" style={{color:'green'}}></Iconify></IconButton>:null}
                     {(itm?.day2=='0' )?<Checkbox onClick={()=>{
@@ -337,8 +341,11 @@ console.log(c,"cvaluee")
                         DeleteParticipant(itm)
                         console.log(itm,"<---sadasdasd")
                       }} /> 
-                      {(itm?.final_save=='0')?<IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>:<IconButton style={{right:-20,color:'#ff7424'}} onClick={handleedit}><Iconify icon="material-symbols:edit"></Iconify></IconButton>}</>}
-                 <EditParticipantdata  changeState={changeState} cvalue={c} Trainingdata={Trainingdata} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}} itm={itm}/>
+                      {(itm?.final_save=='0')?<IconButton onClick={()=>{setEditsession(true);setParticipant({id:itm?.participant_id})}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>:<IconButton style={{right:-20,color:'#ff7424'}} onClick={handleedit}><Iconify icon="material-symbols:edit"></Iconify></IconButton>}</>}
+                 
+                     
+                        <EditParticipantdata participantdata={participantdata} changeState={changeState} cvalue={c} Trainingdata={Trainingdata} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}} />
+                  
                   </CardActions>
 
                   {console.log(itm, '<----------itm?.participant_name')}
