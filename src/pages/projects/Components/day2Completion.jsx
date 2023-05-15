@@ -223,7 +223,7 @@ console.log(c,"cvaluee")
                  
                     </div>
  {(itm?.gelathiRecomm=='1')?<IconButton><Iconify icon="mdi:tick-circle" style={{color:'green'}}></Iconify></IconButton>:null}
-                {(userid==5 &&  itm?.final_save=='1')? <><Checkbox defaultChecked disabled/><IconButton style={{color:'#ff7424'}} onClick={handlesurvey}><Iconify  icon="material-symbols:edit"></Iconify></IconButton></> :
+                {(userid==5 &&  itm?.final_save=='1')? <><Checkbox defaultChecked disabled/><IconButton style={{color:'#ff7424'}} onClick={handleedit}><Iconify  icon="material-symbols:edit"></Iconify></IconButton></> :
                 null} 
                  {(userid==4 && itm?.isSurveyDone=='1')?<><Checkbox defaultChecked disabled/><IconButton >
           <Iconify icon="charm:notes-tick" width={20} height={20} color="green" onClick={handlesurvey}/>
