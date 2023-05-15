@@ -20,8 +20,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddParticipants({batch,checkData}) {
-    console.log(batch,"<------batchbatchbatchbatchbatch",checkData)
+export default function AddParticipants({batch,checkData,type,session}) {
+    console.log(session,"<------batchbatchbatchbatchbatch",checkData,"hhhhhhhhhh",type)
   const intialState={
     "education":"",
      "husbandName":"",
@@ -101,6 +101,7 @@ export default function AddParticipants({batch,checkData}) {
   }
   const day = new Date()
   const hitApi = () =>{
+    const roleid = JSON.parse(localStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
         "education": enterData?.education,
         "husbandName": enterData?.husbandName,
@@ -109,16 +110,16 @@ export default function AddParticipants({batch,checkData}) {
         "firstName": enterData?.firstName,
         // "participant_day1": "02-03-2023 07:11 PM",
         "nameOfSHG": enterData?.nameOfSHG,
-        "project_id": batch?.data?.project_id,
+        "project_id": (batch)?batch?.data?.project_id:session?.project_id,
         "contact_no": enterData?.contact_no,
         "dob": "",
-         "tb_id":batch?.data?.primary_id,
+         "tb_id":(batch)?batch?.data?.primary_id:'',
         "age": enterData?.age,
        //tb_id:79124,
         // "trainer_id": batch?.data?.user_id
-        "trainer_id":144,
-        participant_day1:moment(day)?.format(),
-        type:moment(day)?.format()
+        "trainer_id":roleid,
+        participant_day1:(batch)?moment(day)?.format():'',
+        type:(type=='vyapar')? type:moment(day)?.format()
       });
       if(data.education =="" || data.husbandName == ""){
         console.log("error")
