@@ -18,6 +18,9 @@ export default function enrolledVyaaparList() {
     var [selected, setSelected] = useState(null)
     const [vyaapar, setVyaapar] = useState('');
     var [selected, setSelected] = useState(null)
+    const [openFilter, setOpenFilter] = useState(false);
+    const [filter,setFilter]=useState(false);
+    const [reload, setReload] = useState(false);
       const [count,setCount]= useState('');
 const [remove,setremove]=useState('');
  const searchFunction = (e) => {
@@ -37,14 +40,21 @@ const [remove,setremove]=useState('');
     }
 
     useEffect(() => {
+      let isApiSubscribed = true;
+
+      if (isApiSubscribed){
         enrolledVyaapar();
+      }
+      return () => {
+        // cancel the subscription
+        isApiSubscribed = false;
+    };
+
         // setenrolledVyaapar([{ stockname: "fist" }, { stockname: "second" }])
-    }, []
+    }, [reload]
     )
 
-    const [openFilter, setOpenFilter] = useState(false);
-    const [filter,setFilter]=useState(false);
-    const [reload, setReload] = useState(false);
+   
     
 const changeState = () => {
   setReload(!reload);
@@ -88,7 +98,7 @@ const changeState = () => {
           axios(config)
           .then(function (response) {
             setVyaapar(response?.data)
-            changeState();
+            // changeState();
             setCount(response?.data?.list.length)
           })
           .catch(function (error) {
@@ -98,7 +108,16 @@ const changeState = () => {
     }
 const id = sessionStorage?.getItem("proId")
   useEffect(() => {
+    let isApiSubscribed = true;
+
+    if (isApiSubscribed){
     projData();
+    }
+
+    return () => {
+      // cancel the subscription
+      isApiSubscribed = false;
+  };
 
   }, [])
   
@@ -180,7 +199,7 @@ const id = sessionStorage?.getItem("proId")
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                   Enrolled Vyaapar
+                   Enrolled Vyaapar 
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
@@ -202,10 +221,10 @@ const id = sessionStorage?.getItem("proId")
             </Stack>
             
                 {
-                    selected && (selected?.type=='Search') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected && (selected?.type=='Search') && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
                 }
                  {
-                    selected && (selected?.type=='Gelathi Facilitators') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected && (selected?.type=='Gelathi Facilitators') && <><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
                 }
                 <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
                 <Typography style={{fontWeight:500,marginLeft:2}}>Enrolled Vyapar : ({count})</Typography> 
@@ -224,7 +243,7 @@ const id = sessionStorage?.getItem("proId")
                console.log(itm,'<---------------vyaaparvyaaparvyaaparvyaapar')
                 return (
                     <Card style={styles.card1} >
-                      <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removevyapar(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}{(itm?.is_survey)?<GetVyaparProgram itm={itm}/>:<Vyaparprogram itm={itm} enrolledVyaapar={enrolledVyaapar} changeState={changeState}/>}</div>
+                      <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removevyapar(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}{(itm?.is_survey)?<GetVyaparProgram itm={itm}/>:<Vyaparprogram itm={itm} changeState={changeState}/>}</div>
                         <div onClick={() => {
                         setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
                         handleOpenFilter()
