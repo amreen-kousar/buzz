@@ -74,7 +74,7 @@ const [gelatiNote, setGelatiNote] = useState('');
   const [reload, setReload] = useState(false);
    const isSmallScreen = useMediaQuery('(max-width:600px)');
 
-   const [gf , setGf] = useState(fasle)
+  
   const changeState = () => {
     setReload(!reload);
     console.log('changeState is called ');
@@ -574,7 +574,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
                 }}
                     endIcon={<IconButton > <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:baseline-people" /></IconButton>}>
-                    <span style={{ width: "200px" }}>Visit participants working : {session?.total_participants}</span>
+                    <span style={{ width: "200px" }}>Visit participants  : {session?.total_participants}</span>
                   </Button><br/><br/>
               {/* <Photos
                 batch={batch}

@@ -168,7 +168,7 @@ export default function gelathiProgram(props) {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Gelathi Program
+                    Gelathi Program 
                 </Typography>
                 <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
@@ -203,7 +203,7 @@ export default function gelathiProgram(props) {
                <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
                <Typography style={{fontWeight:500,marginLeft:2}}> All Gelathi Sessions ({count})</Typography> 
          {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
-            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+            {clcikData && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <GelathiProgrameDrawer
                     clcikData={clcikData}
                     
@@ -212,14 +212,14 @@ export default function gelathiProgram(props) {
                     onCloseFilter={handleCloseFilter}
                     gelathiFacikitatorLead={data1}
                 />
-            </Stack>
+            </Stack>}
             {/* </Stack> */}
 
             {programe?.list?.length!==0?programe?.list?.map((itm) => {
                         // console.log(itm, "<---programeprogrameprograme")
                         return (
                             <Card style={styles.card1} onClick={() => {
-                                setClickData({ name: itm.gf_session_id, title: "Gelathi program Name" })
+                                setClickData({ name: itm?.gf_session_id, title: "Gelathi program Name" })
                                
                                 console.log(clcikData ,"clicked data called")
                                 handleOpenFilter()
