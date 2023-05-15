@@ -126,6 +126,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
@@ -206,12 +207,12 @@ console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa",name)
   return (
     <Dialog onClose={handleClose} open={open}>
       <Stack direction={'row'}>
-        <Typography variant="subtitle2" style={{ color: '#ff7424' }} mt={2} ml={2} onClick={handleClose} id="backbutton">Back</Typography>
+        <Button variant="subtitle2" style={{ color: '#ff7424' }} mt={2} ml={2} onClick={handleClose} id="backbutton">Back</Button>
         <DialogTitle>Add Trainer From List</DialogTitle>
-        <Typography mt={2} mr={2} variant="subtitle2" style={{ color: '#ff7424' }} onClick={() => {
+        <Button mt={2} mr={2} variant="subtitle2" style={{ color: '#ff7424' }} onClick={() => {
           getData(arr),
             handleClose()
-        }} id="savebutton">Save</Typography>
+        }} id="savebutton">Save</Button>
 
       </Stack>
 
@@ -223,15 +224,25 @@ console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa",name)
             {/* {console.log(email,'<------------nnnjnjnjnnii')} */}
             <ListItemButton onClick={() => handleListItemClick(email)} key={email}  id={i}>
               <ListItemAvatar>
-
+    
                 <Avatar>
-                  {!arr?.find(itm=>itm?.name===email?.first_name) ?
+                  {/* {!arr?.find(itm=>itm?.name===email?.first_name) ?
                     // <AddIcon />:<CheckCircleRoundedIcon sx={{ color: 'red' }}/>}
-                    <AddIcon /> : null}
+                    <AddIcon /> : null} */}
                 </Avatar>
 
               </ListItemAvatar>
               <ListItemText primary={email?.first_name} />
+              <ListItemAvatar>
+
+             { arr?.find(itm=>itm?.name===email?.first_name) ?
+             <Avatar style={{ color: 'green' }}>
+              < CheckCircleOutlineRoundedIcon />
+              </Avatar>
+              : null
+              }
+
+              </ListItemAvatar>
             </ListItemButton>
           </ListItem>
         ))}
