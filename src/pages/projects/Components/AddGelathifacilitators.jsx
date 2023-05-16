@@ -16,6 +16,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
@@ -114,13 +115,26 @@ function SimpleDialog(props) {
               <ListItemAvatar>
 
                 <Avatar>
-                  {!arr?.find(itm=>itm?.name===email?.first_name) ?
+                  {/* {!arr?.find(itm=>itm?.name===email?.first_name) ?
                     // <AddIcon />:<CheckCircleRoundedIcon sx={{ color: 'red' }}/>}
-                    <AddIcon /> : null}
+                    <AddIcon /> : null} */}
                 </Avatar>
+
+
+
 
               </ListItemAvatar>
               <ListItemText primary={email?.first_name} />
+              <ListItemAvatar>
+
+{ arr?.find(itm=>itm?.name===email?.first_name) ?
+<Avatar style={{ color: 'green' }}>
+ < CheckCircleOutlineRoundedIcon />
+ </Avatar>
+ : null
+ }
+
+ </ListItemAvatar>
             </ListItemButton>
           </ListItem>
         ))}
