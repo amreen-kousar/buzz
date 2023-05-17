@@ -91,7 +91,7 @@ const navConfig = {
     title: 'Quality Assurance Form',
     path: '/dashboard/qualityAssurance',
     icon: getIcon('material-symbols:demography'),
-    id: ['1', '2', '3', '4', '12', '13']
+    id: ['1', '2', '3', '4', '12', '13' ]
   },
   15: {
     title: 'Self Sakthi Program',

@@ -41,9 +41,19 @@ function Project(props) {
   const userDetails = localStorage?.getItem('userId');
   const [data1, setData1] = useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorE2, setAnchorE2] = React.useState(null);
+  const [anchorE3, setAnchorE3] = React.useState(null);
+  const [anchorE4, setAnchorE4] = React.useState(null);
+  const [anchorE5, setAnchorE5] = React.useState(null);
   const [circlemeeting, setCirclemeeting] = React.useState(null);
+  
   const open = Boolean(anchorEl);
   const cm = Boolean(circlemeeting);
+  const open2 = Boolean(anchorE2);
+  const open3 = Boolean(anchorE3);
+  const open4 = Boolean(anchorE4);
+  const open5 = Boolean(anchorE5);
+ ;
   const [expanded, setExpanded] = React.useState(false);
   const [edit, setEdit] = useState(false);
   const [projectDetails, setProjectDetails] = useState({
@@ -59,12 +69,41 @@ function Project(props) {
     setExpanded(!expanded);
   };
 
+ 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+  const spoorthiHandleClick= (event) => {
+    setAnchorE2(event.currentTarget);
+  };
+  const greenHandleClick= (event) => {
+    setAnchorE3(event.currentTarget);
+  };
+  const vyaparHandleClick= (event) => {
+    setAnchorE4(event.currentTarget);
+  };
+
+  const villageVisitHandleClick= (event) => {
+    setAnchorE5(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const spoorthiHandleClose = () => {
+    setAnchorE2(null);
+  };
+  const greenHandleClose = () => {
+    setAnchorE3(null);
+  };
+  const vyaparHandleClose = () => {
+    setAnchorE4(null);
+  };
+  const villageVisitHandleClose = () => {
+    setAnchorE5(null);
+  };
+
+
+ 
   const handleCircleClick = (event) => {
     setCirclemeeting(event.currentTarget);
   };
@@ -133,6 +172,7 @@ function Project(props) {
     },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
     linkStyle: { textDecoration: 'none', color: 'black' },
+    cirleMeetingbuttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left", marginBottom:"20px" },
   };
   const addIcon = (
     <IconButton>
@@ -785,6 +825,276 @@ function Project(props) {
                       </Button>
                     </Link>
                   ) : null}
+                     {/* gelethi menu */}
+                     {(userDetails == 6 || userDetails == 13) ? <><span style={styles.linkStyle}>
+                    <Button variant="secondary" style={styles.cirleMeetingbuttonStyle}
+                      id="basic-button"
+                      aria-controls={open ? 'basic-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                      onClick={handleClick}
+                      endIcon={<KeyboardArrowDownIcon />}
+                      startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="guidance:meeting-point" /></IconButton>}
+                    >
+                      <span style={{ width: "210px" }} > Circle Meeting</span>
+                    </Button>
+                  </span>
+                    <Menu
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+
+                      style={{ justifyContent: 'flex-end' }}
+                    >
+                      {/* spoorthi menu item  */}
+                      <MenuItem>
+                      <Button variant="secondary" style={styles.buttonStyle}
+                      id="basic-button"
+                      aria-controls={open2 ? 'basic-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open2 ? 'true' : undefined}
+                      onClick={spoorthiHandleClick}
+                      endIcon={<KeyboardArrowDownIcon />}
+                      startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="guidance:meeting-point" /></IconButton>}
+                    >
+                      <span style={{ width: "210px" }} > Spoorthi</span>
+                    </Button>
+                      </MenuItem>
+                      <Menu
+                      anchorEl={anchorE2}
+                      open={open2}
+                      onClose={spoorthiHandleClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+
+                      style={{ justifyContent: 'flex-end' }}
+                    >
+                      {/* spoorthi menu item  */}
+                     
+                      <IconButton onClick={spoorthiHandleClose} > <Iconify style={{ color: "black" ,margingLeft:"10px"}} icon="material-symbols:close-rounded"  /></IconButton>
+                      
+                      <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Sporthi Survey CM", head:"_SPS", data: data1 , type:1}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Survey</span>
+                        </Button>
+                        </Link></MenuItem>
+                     
+
+                      <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_SPM1" }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 1</span>
+                        </Button>
+                        </Link></MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 2 CM" , head:"_SPM2"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 2</span>
+                        </Button>
+                        </Link>
+                        </MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 3 CM" , head:"_SPM3"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 3</span>
+                        </Button>
+                        </Link>
+                        </MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 4 CM" , head:"_SPM4"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 4</span>
+                        </Button>
+                        </Link>
+                        </MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 5 CM" , head:"_SPM5"}}style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 5</span>
+                        </Button>
+                        </Link>
+                        </MenuItem>
+                     
+
+                    </Menu>
+ {/* spoorthi menu item end   */}
+ {/* green menu item  */}
+ <MenuItem>
+                      <Button variant="secondary" style={styles.buttonStyle}
+                      id="basic-button"
+                      aria-controls={open3 ? 'basic-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open3 ? 'true' : undefined}
+                      onClick={greenHandleClick}
+                      endIcon={<KeyboardArrowDownIcon />}
+                      startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="guidance:meeting-point" color="green" /></IconButton>}
+                    >
+                      <span style={{ width: "210px" }} > Green</span>
+                    </Button>
+                      </MenuItem>
+                      <Menu
+                      anchorEl={anchorE3}
+                      open={open3}
+                      onClose={greenHandleClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+
+                      style={{ justifyContent: 'flex-end' }}
+                    >
+                      {/* spoorthi menu item  */}
+                      <IconButton onClick={greenHandleClose} > <Iconify style={{ color: "black" ,margingLeft:"10px"}} icon="material-symbols:close-rounded"  /></IconButton>
+                      
+
+                    <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Green Survey CM" , head:"_GPS"}}style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Survey</span>
+                        </Button>
+                        </Link></MenuItem>
+                     
+
+                      <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_GPM1"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 1</span>
+                        </Button>
+                        </Link></MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 2 CM" , head:"_GPM2"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 2</span>
+                        </Button>
+                        </Link>
+                        </MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 3 CM", head:"_GPM3"}}style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 3</span>
+                        </Button>
+                        </Link>
+                        </MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 4 CM", head:"_GPM4"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 4</span>
+                        </Button>
+                        </Link>
+                        </MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 5 CM", head:"_GPM5"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 5</span>
+                        </Button>
+                        </Link>
+                        </MenuItem>
+                      
+
+                    </Menu>
+ {/* green menu item end  */}
+
+ {/* vyapar menu item start */}
+ <MenuItem>
+                      <Button variant="secondary" style={styles.buttonStyle}
+                      id="basic-button"
+                      aria-controls={open4 ? 'basic-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open4 ? 'true' : undefined}
+                      onClick={vyaparHandleClick}
+                      endIcon={<KeyboardArrowDownIcon />}
+                      startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="guidance:meeting-point" /></IconButton>}
+                    >
+                      <span style={{ width: "210px" }} > Vyapar</span>
+                    </Button>
+                      </MenuItem>
+                      <Menu
+                      anchorEl={anchorE4}
+                      open={open4}
+                      onClose={vyaparHandleClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+
+                      style={{ justifyContent: 'flex-end' }}
+                    >
+                   <IconButton onClick={vyaparHandleClose} > <Iconify style={{ color: "black" ,margingLeft:"10px"}} icon="material-symbols:close-rounded"  /></IconButton>
+                      
+                    
+                      <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Vyapar Survey CM", head:"_VPS"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Survey</span>
+                        </Button>
+                        </Link></MenuItem>
+                     
+
+                      <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_VPM1"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 1</span>
+                        </Button>
+                        </Link></MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 2 CM", head:"_VPM2"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 2</span>
+                        </Button>
+
+                        </Link>
+                        </MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 3 CM", head:"_VPM3"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 3</span>
+                        </Button>
+                        </Link>
+                        </MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 4 CM", head:"_VPM4"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 4</span>
+                        </Button>
+                        </Link>
+                        </MenuItem>
+                        <MenuItem>
+                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 5 CM", head:"_VPM5"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                          endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                          startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
+                          <span style={{ width: "200px" }}> Module 5</span>
+                        </Button>
+                        </Link>
+                        </MenuItem>
+                      
+
+                    </Menu>
+ {/* vyapar menu item end  */}
+                    
+
+                    </Menu></> : null}
+                      {/* gelati menu end */}
+
                   {userDetails == 6 || userDetails == 13 ? <br /> : null}
                   {userDetails == 6 || userDetails == 13 ? (
                     <Link
