@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-
+import { Link, useLocation } from 'react-router-dom';
 import {CardContent,Card, Stack,TextField} from '@mui/material';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
@@ -18,13 +18,14 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import moment from 'moment';
 import axios from 'axios';
+import baseURL from 'src/utils/api';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data1,circle,setGelathiDataToEmpty}) {
-  
+  const {state} = useLocation()
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(dayjs('2022-04-17'));
   const [sendData,setSendData] = React.useState({
@@ -109,6 +110,75 @@ axios(config)
   console.log(error);
 });
 }
+
+
+const createCircle = () =>{
+  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  var data = JSON.stringify({
+    // "project_id": data1?.project_id,
+    // "user_id":userid,
+    // "locationId":data1.location_id, 
+    // "circle_name":sendData?.circle_name,
+    // "circle_id":123,
+    // "tb_name":"Kuchangi_TB36936",
+    // "numOfParticipants":"7",
+    // "plan_date": moment(sendData?.circle_date)?.format('YYYY-MM-DD'),
+    // "tb_id":36936,
+    // "gf_session_type":"4",
+    // "gf_session_name":sendData?.circle_name,
+    // "gelathi_created_id": userid,
+    // "gelathi":gelathiData,
+     
+   
+    
+    "project_id": data1?.project_id,
+    "circle_name": sendData?.circle_name,
+    "circle_date":  moment(sendData?.circle_date)?.format('YYYY-MM-DD'),
+    "gelathi_created_id": userid,
+    "gelathi":gelathiData,
+    
+
+  });
+  // let data = JSON?.stringify(gelathiData)
+  // parse(data)
+  // {
+  //   "project_id":"234",
+  //   "user_id":50, 
+  //   "locationId":187, 
+  //   "circle_id":123,
+  //   "tb_name":"Kuchangi_TB36936",
+  //   "numOfParticipants":"7",
+  //   "tb_id":36936,
+  //   "gf_session_type":"21",
+  //   "plan_date":"2023-4-12 10:37AM",
+  //   "gf_session_name":null
+    
+  //   }
+
+ 
+  
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/createCircle.php',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(function (response) {
+    handleClose();
+    handleCloseGelathi();
+    // circle();
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+
   return (
     <div>
       {gelathiData.length<= 0 ?
