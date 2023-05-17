@@ -123,6 +123,12 @@ export default function gelathiCirclesList() {
     setFilterData(data);
     handleclose();
   };
+
+  const deleteDelete = (id) => {
+    setOpenFilter(false);
+    alert('Its Under PRoduction ');
+    setOpenFilter(false);
+  };
   const role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
   return (
     <Container>
