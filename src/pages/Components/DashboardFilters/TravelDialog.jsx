@@ -61,7 +61,7 @@ export default function TravelDialog({ viewMessage }) {
     location: "",
     poa: "",
     srpoa:"",
-    date: new Date(),
+    date: new Date(),          
     modeoftravel: "",
     rateperkm: "",
     foodexpenses: "",
@@ -144,11 +144,11 @@ export default function TravelDialog({ viewMessage }) {
 
 console.log("submittedddddddd")
     var data = JSON.stringify({
-      "date": sendData?.date,
+      "date": moment(sendData?.date)?.format('YYYY-MM-DD'),
       "insideBangalore": false,
       "end_odometer": sendData?.endOdimeter,
       "telephone": sendData?.telephonecharges,
-      "end_location_name": sendData?.endLocation,
+      "end_location_name":locationS,
       "fairamount":sendData?.fairamount,
       "printing": sendData?.printing,
       "start_location_name": locationS,
@@ -173,7 +173,7 @@ console.log("submittedddddddd")
       },
       data: data
     };
-console.log("successsssssssss")
+console.log("successsssssssss",data)
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
@@ -185,7 +185,7 @@ console.log("successsssssssss")
       });
 
   }
-
+console.log(sendData?.odimeter,"startodimeter")
   const postImages = async () => {
     if(image.length===0){
       alert("No photos to upload.")
