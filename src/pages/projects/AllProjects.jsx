@@ -412,7 +412,7 @@ console.log(data,"dataaaaaaaaaaa")
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                        {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
+                                                        {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: 'green', color: '#fff' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>
@@ -437,7 +437,7 @@ console.log(data,"dataaaaaaaaaaa")
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                    {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
+                                                    {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: 'green', color: '#fff' }} label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>
@@ -463,7 +463,7 @@ console.log(data,"dataaaaaaaaaaa")
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                    {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
+                                                    {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: 'green', color: '#fff' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>

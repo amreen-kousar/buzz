@@ -612,14 +612,14 @@ null :
 
 
 { (session?.check_in!="0" && userId==6)?
-( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))?
+( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' || session?.gf_session_name?.split('_')[1].slice(0,2) == 'CM' && (userId==13 || userId==6))?
 null:<AddEnrollGelathi session={session}/>
 :
 null}
 
               {(session?.check_in!="0" && userId==6)?
               <>
-             {  ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))?
+             {  ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' || session?.gf_session_name?.split('_')[1].slice(0,2) == 'CM'   && (userId==13 || userId==6))?
                null
               :<AddGreenMotivators session={session}/>}
               </>
@@ -629,7 +629,7 @@ null}
               {
            
               (session?.check_in!="0" && userId==6)?
-              ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))? null :
+              ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV'  || session?.gf_session_name?.split('_')[1].slice(0,2) == 'CM' && (userId==13 || userId==6))? null :
 
 
 <AddEnrollVyapar session={session}/>              :null}

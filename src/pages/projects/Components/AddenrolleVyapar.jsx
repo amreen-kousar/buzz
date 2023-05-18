@@ -154,7 +154,7 @@ getEnrollVyapar();
                     </CardContent>
                     
                     
-                </Card><br/><Typography style={{textAlign:'center'}} variant="h6"> All Participants dddddd : &nbsp; {session?.total_participants}</Typography>
+                </Card><br/><Typography style={{textAlign:'center'}} variant="h6"> All Participants : &nbsp; {session?.total_participants}</Typography>
                 <Card>
                     <CardContent>
                         

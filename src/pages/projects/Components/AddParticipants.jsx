@@ -21,7 +21,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function AddParticipants({batch,checkData,type,session}) {
-    console.log(session,"<------batchbatchbatchbatchbatch",checkData,"hhhhhhhhhh",type)
+    console.log(session,"<------batchbatchbatchbatchbatch",checkData,"hhhhhhhhhh",type,"ghfhgfgh",batch)
   const intialState={
     "education":"",
      "husbandName":"",
@@ -106,11 +106,9 @@ export default function AddParticipants({batch,checkData,type,session}) {
         "education": enterData?.education,
         "husbandName": enterData?.husbandName,
         "caste": enterData?.caste,
-        "type": "02-03-2023 07:11 PM",
         "firstName": enterData?.firstName,
-        // "participant_day1": "02-03-2023 07:11 PM",
         "nameOfSHG": enterData?.nameOfSHG,
-        "project_id": (batch)?batch?.data?.project_id:session?.project_id,
+        "project_id": (batch && type=="vyapar")?batch?.data?.project_id:(batch && type=="green")?batch?.project_id:session?.project_id,
         "contact_no": enterData?.contact_no,
         "dob": "",
          "tb_id":(batch)?batch?.data?.primary_id:'',
@@ -119,7 +117,7 @@ export default function AddParticipants({batch,checkData,type,session}) {
         // "trainer_id": batch?.data?.user_id
         "trainer_id":roleid,
         participant_day1:(batch)?moment(day)?.format():'',
-        type:(type=='vyapar')? type:moment(day)?.format()
+        type:(type=='vyapar' || type=="green")? type :moment(day)?.format()
       });
       if(data.education =="" || data.husbandName == ""){
         console.log("error")

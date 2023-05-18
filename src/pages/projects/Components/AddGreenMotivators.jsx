@@ -177,7 +177,7 @@ getGreenMotivators();
             All Participants
           </Typography>
 
-<AddParticipants />
+<AddParticipants type='green' session={session}/>
           
         </Toolbar>
         {/* <Webcam
