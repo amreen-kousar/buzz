@@ -105,7 +105,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       
     },
     input: {
-      accentColor: 'pink',   
+      accentColor: 'pink',  
+      backgroundColor:'red', 
        width: '25px',
       height: '25px',
       borderRadius:'10%',
