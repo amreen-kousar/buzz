@@ -122,7 +122,7 @@ getEnrollVyapar();
             All Participants
           </Typography>
 
-          <AddParticipants/>
+          <AddParticipants type="vyapar" session={session}/>
           
         </Toolbar>
         {/* <Webcam

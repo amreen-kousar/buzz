@@ -431,8 +431,7 @@ const noteSubmitHandler = () => {
                                     
 
                                     <Typography id="training" variant="body1" gutterBottom>
-                                        Training&nbsp;Batch:<br/>{batch?.data?.name} 
-                                       { (userId==5 && batch?.data?.day1_completed!=='1')?<IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>: null ||(userId==3)&& null}
+                                        Training&nbsp;Batch:<br/>{batch?.data?.name} <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
                                     </Typography>
                                     <Typography id="day1" variant="body1" gutterBottom>
                                         Day1:&nbsp;{batch?.data?.day1_actual}
@@ -493,7 +492,7 @@ const noteSubmitHandler = () => {
                                 </CardContent>
                             </Card>
                            
-                           {(userId==5 && batch?.data?.day2_checkIn=='1')?<ShaktiDialogday2 batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:(userId==5 && batch?.data?.day1_completed!='1')? <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:<Day2Completed batch={batch} shown={shown} setShown={(e)=>{setShown(e)}}/>}
+                           {(userId==5 && batch?.data?.day2_checkIn=='1' && batch?.data?.day2_completed!='1')?<ShaktiDialogday2 batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:(userId==5 && batch?.data?.day1_completed!='1')? <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:(batch?.data?.day2_completed=='1')?<Day2Completed batch={batch} shown={shown} setShown={(e)=>{setShown(e)}}/>:null}
                            
                            
                             <Card sx={{mt:2}} id="project-mutlidrawer-card" onClick={()=>{setShown(true),console.log("ferfgreg")}} style={styles.buttonStyle}>

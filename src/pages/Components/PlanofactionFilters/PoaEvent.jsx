@@ -383,7 +383,7 @@ const handlecheckin = () => {
           <div>
             <Card id="poa-event-card" style={{ backgroundColor: '#f6f8fb', marginTop: 20 }}>
               <CardContent id="poa-event-card-content">
-                <Typography id="event-title" variant="body1">Event Title :{eventData?.name}</Typography>
+                <Typography id="event-title" variant="body1">Event Title  :{eventData?.name}</Typography>
                 <Typography id="event-date" variant="body1">Event&nbsp;date&nbsp;and&nbsp;time :{eventData?.date1}</Typography>
 
                 <Typography id="description" variant="body1">Description :{eventData?.description}</Typography>

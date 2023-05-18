@@ -73,6 +73,7 @@ export default function GelathiProgrameDrawer({
   const [gelatiNote, setGelatiNote] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
   const isSmallScreen = useMediaQuery('(max-width:600px)');
+  const [gf , setGf] = useState(false)
 //notes save button
 
 const [SaveBtn , setSaveBtn] = useState(false) 
@@ -101,6 +102,7 @@ const [images,setImages] = useState([])
 const [viewImage, setViewImage] = React.useState(false);
 
   localStorage.setItem('clickData', clcikData);
+  console.log("clcikData",clcikData)
   const localstoragrClickData = localStorage.getItem('clcikData');
   const userName = JSON.parse(localStorage.getItem('userDetails'))?.first_name;
   console.log("userNAme in localstorage", userName)
@@ -376,6 +378,17 @@ const convertImage = (e) => {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" }
   }
 
+  console.log(session.gf_session_name, "session name")
+  console.log("a.splice(0,2)",session?.gf_session_name?.split('_')[1].slice(0,2))
+if( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV'){
+  console.log("ONly BV found " ,session?.gf_session_name)
+ 
+  //  setGf(true)
+
+}
+else{
+  // setGf(false)
+}
 
   return (
     <>
@@ -489,6 +502,10 @@ const convertImage = (e) => {
 
               {/* IMAGE UPLOAD  */}
              {(userId==6 || userId==13 )? <Card style={{marginTop:20}}>
+             {( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))?
+
+null :
+<>
 <div style={{ display: 'flex' }}>
                 {viewImage
                   ? images.map((i, index) => {
@@ -508,6 +525,9 @@ const convertImage = (e) => {
                   : null}
               </div>
               <br />
+
+
+
               <div id="input-icon-camera" style={{ display: 'flex' }}>
                   <label id="input-tag-event" for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
                     <Iconify id="icon-camera-poa-event" icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
@@ -540,7 +560,11 @@ const convertImage = (e) => {
          >
            Upload  
          </Button>
+       
+       
          </div>
+         </>
+         }
 
 
          {/* <Card style={{ marginTop: 20 }}>
@@ -580,18 +604,42 @@ const convertImage = (e) => {
       <Button variant="secondary" style={styles.buttonStyle}  
                   endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="" /> </IconButton>}
                   startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-people" /></IconButton>}>
-                  <span style={{ width: "200px" }}>Visit Participants : {session?.total_participants}</span>
+                  <span style={{ width: "200px" }}>Visit Participants  : {session?.total_participants}</span>
                 </Button>
       </Stack>
 
-            {/* {(session?.check_in!="0" && userId==6)?<br/>:null} */}
-{(session?.check_in!="0" && userId==6)?<AddEnrollGelathi session={session}/>:null}
-{/* {(session?.check_in!="0" && userId==6)?<br/>:null} */}
-              {(session?.check_in!="0" && userId==6)?<AddGreenMotivators session={session}/>:null}
-                 {/* {(session?.check_in!="0" && userId==6)?<br/>:null} */}
-              {(session?.check_in!="0" && userId==6)?<AddEnrollVyapar session={session}/>:null}
-                
+ 
+
+
+{ (session?.check_in!="0" && userId==6)?
+( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))?
+null:<AddEnrollGelathi session={session}/>
+:
+null}
+
+              {(session?.check_in!="0" && userId==6)?
+              <>
+             {  ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))?
+               null
+              :<AddGreenMotivators session={session}/>}
+              </>
+             
+              :null}
+              
+              {
+           
+              (session?.check_in!="0" && userId==6)?
+              ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))? null :
+
+
+<AddEnrollVyapar session={session}/>              :null}
+                          
+
+
+
+
 {/* 
+
               <Card style={{ marginTop: 20 }}>
                 <CardContent>
                   <Typography variant="h6">
