@@ -164,7 +164,7 @@ console.log(c,"cvaluee")
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div">
-              Self Shakti
+             Day2 Self Shakti
             </Typography>
          
             {console.log(checkData,"addparticipants")}
@@ -182,11 +182,15 @@ console.log(c,"cvaluee")
             <TableBody>
               
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Project </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.projectName}</TableCell></TableRow>
+          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Partner </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.partnerName}</TableCell></TableRow>
+
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Training&nbsp;Batch </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.name}</TableCell></TableRow>
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Day 1</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.day1}</TableCell></TableRow>
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Day 2</TableCell><TableCell>:&nbsp;&nbsp; {batch?.data?.day2}</TableCell></TableRow>
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Contact&nbsp;Person </TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.contact_person}</TableCell></TableRow>
-          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Contact&nbsp;Number</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.contact_number}</TableCell></TableRow>  </TableBody>
+          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Contact&nbsp;Number</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.contact_number}</TableCell></TableRow> 
+          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Trainer&nbsp;Name</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.trainer_name}</TableCell></TableRow>  </TableBody>
+
           </Table>
         </TableContainer>
 
