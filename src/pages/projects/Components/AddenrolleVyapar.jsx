@@ -26,6 +26,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     const [open, setOpen] = React.useState(false);
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState('');
+    const [participantData,setParticipantData]=useState('');
     const handleClickOpen = () => {
         setOpen(true);
         
@@ -64,8 +65,10 @@ const setEnrolledVyapar=(itm)=>{
       
 }
 
+console.log(session,"sessionnnnnnnnnnnnnnnnnnnn")
 useEffect(()=>{
 getEnrollVyapar();
+getAddPartcipants();
 },[open])
 
   const getEnrollVyapar=()=>{
@@ -91,6 +94,35 @@ getEnrollVyapar();
     });
     
   }
+
+const getAddPartcipants=()=>{
+  var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  var data = JSON.stringify({
+    "search": "",
+    "project_id": session?.project_id,
+    "emp_id": userid
+  });
+  
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollVyaparEnrollment.php',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    setParticipantData(response.data)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  
+}
+
 
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" }
