@@ -607,6 +607,13 @@ null :
                   <span style={{ width: "200px" }}>Visit Participants  : {session?.total_participants}</span>
                 </Button>
       </Stack>
+      {session?.all_participants?.map((itm) => 
+                    {
+                return (
+                <> {(itm?.gelathiRecomm=='1') ? <Card><CardContent>{itm?.participant_name}</CardContent></Card>:null}</>
+                )
+                    }
+      )}
 
  
 
