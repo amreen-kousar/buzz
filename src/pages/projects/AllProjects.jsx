@@ -514,7 +514,7 @@ console.log(data,"dataaaaaaaaaaa")
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                    {( p?.project_status_name=='In Progress')? <Chip style={{ backgroundColor: 'orange', color: '#fff' }} label={p?.project_status_name} size="small" color="success" variant="outlined" />:null}
+                                                    {( p?.project_status_name=='In Progress')? <Chip style={{ backgroundColor: 'orange', color: '#fff' }} label={p?.project_status_name} size="small" variant="outlined" />:null}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>
