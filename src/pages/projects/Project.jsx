@@ -718,10 +718,10 @@ function Project(props) {
                           variant="secondary"
                           style={styles.buttonStyle}
                           id="basic-button"
-                          aria-controls={open ? 'basic-menu' : undefined}
+                          aria-controls={open5 ? 'basic-menu' : undefined}
                           aria-haspopup="true"
-                          aria-expanded={open ? 'true' : undefined}
-                          onClick={handleClick}
+                          aria-expanded={open5 ? 'true' : undefined}
+                          onClick={villageVisitHandleClick}
                           endIcon={<KeyboardArrowDownIcon />}
                           startIcon={
                             <IconButton>
@@ -734,9 +734,9 @@ function Project(props) {
                         </Button>
                       </span>
                       <Menu
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
+                        anchorEl={anchorE5}
+                        open={open5}
+                        onClose={villageVisitHandleClose}
                         MenuListProps={{
                           'aria-labelledby': 'basic-button',
                         }}

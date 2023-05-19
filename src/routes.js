@@ -42,8 +42,17 @@ import DashboardHome from './pages/dashboard/DashboardHome';
 import AssignTargets from './pages/projects/AssignTargets';
 import QualityAssurance from './pages/qualityAssurance/QualityAssurance';
 import Addbus from './pages/buses/Addbus';
-import { element } from 'prop-types';
+import  SelfSakthiProgramDashboard  from './pages/projects/ProgramDashboard/SelfSakthiProgramDashboard';
+import VyaparProgramDashboard from './pages/projects/ProgramDashboard/VyaparProgramDashboard';
+import GreenProgramDashboard from './pages/projects/ProgramDashboard/GreenProgramDashboard';
+import GelathiProgramDashboard from './pages/projects/ProgramDashboard/GelathiProgramDashboard';
+import SelfSakthiQulityAssurance from './pages/qualityAssurance/SelfSakthiQulityAssurance';
+import GreenProgramQualityAssurance from './pages/qualityAssurance/GreenProgramQualityAssurance';
+import SelfSakthiByGelathi from './pages/qualityAssurance/SelfSakthiByGelathi';
+
 import ProjectWiseGelathiCircle from './pages/projects/ProjectWiseGelathiCircle';
+
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -61,13 +70,13 @@ export default function Router() {
         { path: "enrolledGreenMotivators", element: <EnrolledGreenMotivators /> },
         { path: "enrolledVyaapar", element: <EnrolledVyaapar /> },
         { path: "gelathiCirlces", element: <GelathiCirces /> },
-        {path: "ProjectWiseGelathiCircle", element: <ProjectWiseGelathiCircle/>},
         { path: "assignedVillages", element: <AssignedVillages /> },
         { path: "scheduleCircleMeet", element: <ScheduleCircleMeet /> },
         { path: "scheduleVillage", element: <ScheduleVillage /> },
         { path: "scheduleBeehiveVisit", element: <ScheduleBeehiveVisit /> },
         { path: "projectProfile", element: <ProjectProfile /> },
         { path: "addBuss", element: <Addbus /> },
+         {path: "ProjectWiseGelathiCircle", element: <ProjectWiseGelathiCircle/>},
 
     ]
 
@@ -111,7 +120,15 @@ export default function Router() {
             { path: 'travel', element: <TravelA />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,11] },
             { path: 'demogrphy', element: <Demography />, id: [0, 1, 2, 3, 12,11] },
             { path: 'logout', element: <Logout />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13] },
-             { path: 'qualityAssurance',element: <QualityAssurance/>, id:[1,2,3,4,12]},
+            { path: 'qualityAssurance',element: <QualityAssurance/>, id:[1,2,3,4,12,13]},
+            { path : 'selfsakthiprogramdashboard' , element: <SelfSakthiProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
+            { path : 'gelathiprogramdashboard' , element: <GelathiProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
+            { path : 'greenprogramdashboard' , element: <GreenProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
+            { path : 'vyaparprogramdashboard' , element: <VyaparProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
+            {path : 'qualityAssurance/selfsakthi' , element :<SelfSakthiQulityAssurance/> ,id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
+            {path : 'qualityAssurance/greenprogram' , element :<GreenProgramQualityAssurance/> ,id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
+            {path : 'qualityAssurance/selfsakthibygelathi' , element :<SelfSakthiByGelathi/> ,id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
+           
             {path:"addBus", element: <Addbus/>, id:[2]}
         ]
 
@@ -152,9 +169,32 @@ export default function Router() {
             element: <Gelathidashboard />,
         },
         {
-            path: '/dahsboard/operationmanager',
+            path: '/dashboard/operationmanager',
             element: <Operationmanagerdashboard />
         },
+        {
+            path : '/dashboard/selfsakthiprogramdashboard',
+            element : <selfSakthiProgramDashboard />
+        },
+        {
+            path : '/dashboard/gelathiprogramdashboard',
+            element : <gelathiProgramDashboard />
+        },
+        {
+            path : '/dashboard/qualityAssurance',
+            element : <QualityAssurance/>
+        },
+        
+        {
+            path : '/dashboard/greenprogramdashboard',
+            element : <greenProgramDashboard />
+        },
+        ,
+        {
+            path : '/dashboard/vyaparprogramdashboard',
+            element : <vyaparProgramDashboard />
+        },
+     
         {
             path: '*',
             element: <Navigate to="/404" replace />,

@@ -211,7 +211,7 @@ const createCircle = () =>{
               <CloseIcon sx={{color:'white'}}/>
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1,color:'white' }} variant="h6" component="div" >
-             New Gelathi Circle
+             New Gelathi Circle working
            
             <Button autoFocus color="inherit" sx={{float:'right',color:'white'}} type="submit">
               save

@@ -215,7 +215,7 @@ const getData = (itm, i) => {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Green Motivators
+                    Green Motivators working
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
@@ -262,7 +262,9 @@ const getData = (itm, i) => {
                     <Card  style={styles.card1}>
                    {/* {(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)}><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey />      */}
               
-                   <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey itm={itm} changeState={changeState}/></div>
+                   <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}
+                   <GreenSurvey itm={itm} changeState={changeState}/>
+                   </div>
               <div onClick={() => {
                         setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
                         handleOpenFilter()

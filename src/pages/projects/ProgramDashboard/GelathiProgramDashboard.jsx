@@ -19,7 +19,7 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
-import baseURL from 'src/utils/api';
+import {baseURL} from 'src/utils/api';
 const GelathiProgramDashboard = () => {
     const navigate = useNavigate();
     const data = localStorage?.getItem('userId')
@@ -781,10 +781,286 @@ const GelathiProgramDashboard = () => {
 </CardContent>
 </CardContent>
 </>
-:
+:(roleid == 6)?
 
 <>
+<CardContent>
+            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+              Funders List : 
+            </Typography>
+          
+            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            <Grid item xs={12} sm={12} md={12} marginTop={3}>
+          {summaryData?.data?.map((itm) => {
+            return (
+              <Card
+                style={{
+                  backgroundColor: '#f5f5f5',
+                  flexDirection: 'column',
+                  borderRadius: 12,
+                  border: '2px solid',
+                  borderColor: '#ffcc80',
+                  marginBottom: '40px',
+                }}
+                // onClick={() => {
+                //   navigate('/dashboard/app/chart', {
+                //     state: {
+                //       filterData: filterData
+                //     }
+                //   })
+                // }}
+                
+                >
+                <CardContent>
+              
+<Container style={{ display: 'flex', flexDirection: 'row' }}>
+  <Grid item xs={6}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
+      Funder<br />
+      {/* Actual / Target */}
+    </span></Grid>
+    <Grid item xs={6}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
+      &nbsp;:&nbsp;{itm?.name}<br />
+      {/* &nbsp;:&nbsp;{itm?.actual? itm?.actual : 0} / {itm?.target? itm?.target: 0}
+    */}
+    </span>
+  </Grid>
+</Container>
+                  <Divider mt={1} />
+                  <Grid container spacing={3} marginTop={4}>
+            {/* <Grid item xs={4} sm={8} md={4}>
 
+              <AppWidgetSummary
+                title="Target"
+                total={itm?.summary_target}
+                color="motivator"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Actual"
+                total={summaryData?.summary_actual}
+                color="motivator"
+
+              />
+            </Grid> */}
+            <Grid item xs={2} sm={4} md={4}>
+
+              <AppWidgetSummary
+                title="Number  of Vilages Visits"
+                total={itm?.villagevisit}
+                color="villages"
+                icon= "fontisto:holiday-village"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Number of Circle Meeting"
+                total={itm?.circle_meet}
+                color="motivator"
+                icon="twemoji:women-holding-hands"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Number of Circle"
+                total={itm?.circles}
+                color="motivator"
+                icon="twemoji:women-holding-hands"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+<AppWidgetSummary
+  title="Number of Enroll"
+  total={itm?.enroll}
+  color="info"
+  icon = "eos-icons:product-subscriptions-outlined"
+
+/>
+
+</Grid>
+
+<Grid item xs={4} sm={8} md={4}>
+
+<AppWidgetSummary
+  title="Number of Beehives"
+  total={itm?.beehive}
+  color="info"
+  icon = "twemoji:women-holding-hands"
+
+/>
+</Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Number of Green Motivators"
+                total={itm?.greenMotivators}
+                color="vyapar"
+                icon="eos-icons:product-subscriptions-outlined"
+
+              />
+            </Grid>
+         
+          
+          </Grid>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </Grid>
+</CardContent>
+</CardContent>
+
+</>
+:
+(roleid == 5)?
+<>
+<CardContent>
+            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+              Funders List : 
+            </Typography>
+          
+            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            <Grid item xs={12} sm={12} md={12} marginTop={3}>
+          {summaryData?.data?.map((itm) => {
+            return (
+              <Card
+                style={{
+                  backgroundColor: '#f5f5f5',
+                  flexDirection: 'column',
+                  borderRadius: 12,
+                  border: '2px solid',
+                  borderColor: '#ffcc80',
+                  marginBottom: '40px',
+                }}
+                // onClick={() => {
+                //   navigate('/dashboard/app/chart', {
+                //     state: {
+                //       filterData: filterData
+                //     }
+                //   })
+                // }}
+                
+                >
+                <CardContent>
+              
+<Container style={{ display: 'flex', flexDirection: 'row' }}>
+  <Grid item xs={6}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
+      Funder<br />
+      Actual / Target
+    </span></Grid>
+    <Grid item xs={6}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
+      &nbsp;:&nbsp;{itm?.name}<br />
+      &nbsp;:&nbsp;{itm?.actual? itm?.actual : 0} / {itm?.target? itm?.target: 0}
+    </span>
+  </Grid>
+</Container>
+                  <Divider mt={1} />
+                  <Grid container spacing={3} marginTop={4}>
+            {/* <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Target"
+                total={itm?.summary_target}
+                color="motivator"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Actual"
+                total={summaryData?.summary_actual}
+                color="motivator"
+
+              />
+            </Grid> */}
+            <Grid item xs={2} sm={4} md={4}>
+
+              <AppWidgetSummary
+                title="Number  of Vilages"
+                total={itm?.villagevisit}
+                color="villages"
+                icon= "fontisto:holiday-village"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Number of Circle Meeting"
+                total={itm?.circle_meet}
+                color="motivator"
+                icon="twemoji:women-holding-hands"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Number of Circle"
+                total={itm?.circles}
+                color="motivator"
+                icon="twemoji:women-holding-hands"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+<AppWidgetSummary
+  title="Number of Enroll"
+  total={itm?.enroll}
+  color="info"
+  icon = "eos-icons:product-subscriptions-outlined"
+
+/>
+
+</Grid>
+
+<Grid item xs={4} sm={8} md={4}>
+
+<AppWidgetSummary
+  title="Number of Beehives"
+  total={itm?.beehive}
+  color="info"
+  icon = "twemoji:women-holding-hands"
+
+/>
+</Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Number of Green Motivators"
+                total={itm?.greenMotivators}
+                color="vyapar"
+                icon="eos-icons:product-subscriptions-outlined"
+
+              />
+            </Grid>
+         
+          
+          </Grid>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </Grid>
+</CardContent>
+</CardContent>
+</>
+:
+<>
 
 </>
 }

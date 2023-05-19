@@ -335,7 +335,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import moment from 'moment';
 import GelathiCircleForm from './GelathiCircleForm';
-import oldbaseURL from 'src/utils/api';
+import {oldbaseURL} from 'src/utils/api';
 
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
@@ -462,7 +462,7 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
       circle_id: clcikData?.circleDI,
       locationId:data1?.location_id,
        tb_name: clcikData?.name,
-      tb_id: 646,
+      tb_id: 0,
       plan_date: moment(sendData?.circle_date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
       numOfParticipants: circleData?.gelathis?.length,
       gf_session_type: state?.head == '_SPS'

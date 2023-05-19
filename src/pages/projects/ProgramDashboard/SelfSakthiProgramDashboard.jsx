@@ -26,7 +26,7 @@ import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 //  import GalathiChart from './Components/Charts/GalathiChart';
  import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
-import baseURL from 'src/utils/api';
+import {baseURL} from 'src/utils/api';
 
 const SelfSakthiProgramDashboard = () => {
   const navigate = useNavigate();
@@ -627,7 +627,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid> */}
-            <Grid item xs={2} sm={4} md={3}>
+            <Grid item xs={4} sm={4} md={3}>
 
               <AppWidgetSummary
                 title="Number  of Vilages"
@@ -746,7 +746,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid> */}
-            <Grid item xs={2} sm={4} md={3}>
+            <Grid item xs={4} sm={4} md={3}>
 
               <AppWidgetSummary
                 title="Number  of Vilages Visits"
@@ -829,12 +829,285 @@ let formatdata = summaryData?.data
 </>:
  (roleid == 5)?
 <>
+<CardContent>
+            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+              Project List : 
+              {/* for gfl it should be showned as project not as funder */}
+            </Typography>
+          
+            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            <Grid item xs={12} sm={12} md={12} marginTop={3}>
+          {summaryData?.data?.map((itm) => {
+            return (
+              <Card
+                style={{
+                  backgroundColor: '#f5f5f5',
+                  flexDirection: 'column',
+                  borderRadius: 12,
+                  border: '2px solid',
+                  borderColor: '#ffcc80',
+                  marginBottom: '40px',
+                }}
+                // onClick={() => {
+                //   navigate('/dashboard/app/chart', {
+                //     state: {
+                //       filterData: filterData
+                //     }
+                //   })
+                // }}
+                
+                >
+                <CardContent>
+              
+<Container style={{ display: 'flex', flexDirection: 'row' }}>
+  <Grid item xs={6}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
+      Funder<br />
+      {/*  for role id 5 it should be project in 4 dahsbord  */}
+      Actual / Target
 
+      Start Date :
+
+      End Date : 
+      {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
+    </span></Grid>
+    <Grid item xs={6}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
+      &nbsp;:&nbsp;{itm?.name}<br />
+      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}<br />
+      &nbsp;:&nbsp;{itm?.startDate}<br />
+      &nbsp;:&nbsp;{itm?.endDate}
+            {/* start date and end date need in all dashborad we need as duration : fromDate to endDate for role id 5 */}
+    </span>
+  </Grid>
+</Container>
+                  <Divider mt={1} />
+                  <Grid container spacing={3} marginTop={4}>
+            {/* <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Target"
+                total={itm?.summary_target}
+                color="motivator"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Actual"
+                total={summaryData?.summary_actual}
+                color="motivator"
+
+              />
+            </Grid> */}
+
+<Grid item xs={4} sm={4} md={3}>
+
+<AppWidgetSummary
+  title="Number  of Vilages Visits"
+  total={itm?.villages}
+  color="villages"
+  icon= "fontisto:holiday-village"
+
+/>
+</Grid>
+             <Grid item xs={4} sm={8} md={3}>
+
+<AppWidgetSummary
+  title="Number of Batch"
+  total={itm?.Noofbatches}
+  color="info"
+  icon = "twemoji:women-holding-hands"
+
+/>
+</Grid>
+           
+            <Grid item xs={4} sm={8} md={3}>
+
+              <AppWidgetSummary
+                title="Number of Self Shakthi Survey"
+                total={itm?.noOfselfshakthisurvey}
+                color="vyapar"
+                icon="eos-icons:product-subscriptions-outlined"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={3}>
+
+<AppWidgetSummary
+  title="2nd Day Turnout  %"
+  total={itm?.day2}
+  color="info"
+  icon = "twemoji:women-holding-hands"
+
+/>
+</Grid>
+
+
+
+          
+          </Grid>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </Grid>
+</CardContent>
+</CardContent>
+</>
+:
+(roleid == 6)?
+<>
+<CardContent>
+            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+              Funders List : 
+              {/* for gfl it should be showned as project not as funder */}
+            </Typography>
+          
+            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            <Grid item xs={12} sm={12} md={12} marginTop={3}>
+          {summaryData?.data?.map((itm) => {
+            return (
+              <Card
+                style={{
+                  backgroundColor: '#f5f5f5',
+                  flexDirection: 'column',
+                  borderRadius: 12,
+                  border: '2px solid',
+                  borderColor: '#ffcc80',
+                  marginBottom: '40px',
+                }}
+                // onClick={() => {
+                //   navigate('/dashboard/app/chart', {
+                //     state: {
+                //       filterData: filterData
+                //     }
+                //   })
+                // }}
+                
+                >
+                <CardContent>
+              
+<Container style={{ display: 'flex', flexDirection: 'row' }}>
+  <Grid item xs={6}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
+      Funder <br />
+      {/*  for role id 5 it should be project in 4 dahsbord  */}
+      {/* Actual / Target */}
+      {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
+    </span></Grid>
+    <Grid item xs={6}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
+      &nbsp;:&nbsp;{itm?.name}<br />
+      {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
+            {/* start date and end date need in all dashborad we need as duration : fromDate to endDate for role id 5 */}
+    </span>
+  </Grid>
+</Container>
+                  <Divider mt={1} />
+                  <Grid container spacing={3} marginTop={4}>
+            {/* <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Target"
+                total={itm?.summary_target}
+                color="motivator"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="Actual"
+                total={summaryData?.summary_actual}
+                color="motivator"
+
+              />
+            </Grid> */}
+            <Grid item xs={4} sm={4} md={3}>
+
+              <AppWidgetSummary
+                title="Number  of Vilages Visits"
+                total={itm?.villagevisit}
+                color="villages"
+                icon= "fontisto:holiday-village"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={3}>
+
+              <AppWidgetSummary
+                title="Number of Beehive"
+                total={itm?.beehive}
+                color="motivator"
+                icon="twemoji:women-holding-hands"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={3}>
+
+              <AppWidgetSummary
+                title="Number of Circle Meet"
+                total={itm?.circle_meet}
+                color="vyapar"
+                icon="eos-icons:product-subscriptions-outlined"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={3}>
+
+              <AppWidgetSummary
+                title="Number of Circles"
+                total={itm?.circles}
+                color="info"
+                icon = "twemoji:women-holding-hands"
+
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={3}>
+
+<AppWidgetSummary
+  title="Number of Enroll"
+  total={itm?.enroll}
+  color="info"
+  icon = "twemoji:women-holding-hands"
+
+/>
+</Grid>
+<Grid item xs={4} sm={8} md={3}>
+
+<AppWidgetSummary
+  title="Number of Green Motivators"
+  total={itm?.greenMotivators}
+  color="info"
+  icon = "twemoji:women-holding-hands"
+
+/>
+</Grid>
+<Grid item xs={4} sm={8} md={3}>
+
+<AppWidgetSummary
+  title="Number of Vyapar"
+  total={itm?.vyapar}
+  color="info"
+  icon = "twemoji:women-holding-hands"
+
+/>
+</Grid>
+          
+          </Grid>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </Grid>
+</CardContent>
+</CardContent>
 </>
 :
 <>
 </>
-
 
 }
 
