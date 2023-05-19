@@ -222,7 +222,7 @@ console.log(data,"dataaaaaaaaaaa")
                 setCompletedProject(completed)
                 let inProgress = response.data.list.filter(r => r.project_status_name == 'In Progress')
 
-                setCountInprogress(completed?.length % 25 == 0 ? parseInt(completed?.length / 25) : parseInt(completed?.length / 25) + 1)
+                setCountInprogress(inprogress?.length % 25 == 0 ? parseInt(inprogress?.length / 25) : parseInt(inprogress?.length / 25) + 1)
 
                 setInprogress(inProgress)
 
@@ -514,7 +514,7 @@ console.log(data,"dataaaaaaaaaaa")
                                                 <Grid items direction={'row'} spacing={20}>
                                                     <Typography variant='body1'>{p?.location_name}</Typography>
                                                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                    {( p?.project_status_name=='In Progress')? <Chip style={{ backgroundColor: 'orange', color: '#fff' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
+                                                    {( p?.project_status_name=='In Progress')? <Chip style={{ backgroundColor: 'orange', color: '#fff' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small"  variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" variant="outlined" />}
                                                     </Stack>
                                                 </Grid>
                                             </CardContent>
