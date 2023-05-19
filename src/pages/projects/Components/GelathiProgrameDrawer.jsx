@@ -610,7 +610,7 @@ null :
       {session?.all_participants?.map((itm) => 
                     {
                 return (
-                <> {(itm?.gelathiRecomm=='1') ? <Card><CardContent>{itm?.participant_name}</CardContent></Card>:null}</>
+                <> {(itm?.enroll=='1') ? <Card><CardContent>{itm?.participant_name}</CardContent></Card>:null}</>
                 )
                     }
       )}

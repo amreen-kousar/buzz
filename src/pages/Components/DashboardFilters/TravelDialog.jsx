@@ -154,7 +154,7 @@ console.log("submittedddddddd")
       "start_location_name": locationS,
       "poa_id": sendData?.poa,
       "srpoa":sendData?.srpoa,
-      "start_odometer": sendData?.odimeter,
+      "start_odometer": (sendData?.odimeter)?sendData?.odimeter:'',
       "rate_per_KM": sendData?.rateperkm,
       "stationery": sendData?.stationery,
       "klmtr": sendData?.rateperkm,
