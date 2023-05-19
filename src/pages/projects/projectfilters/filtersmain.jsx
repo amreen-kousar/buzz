@@ -41,7 +41,18 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
   
     const data = localStorage?.getItem('userId')
   
-    const filtersHeaders = {   6: 'Gelathi Facilitators', 9: 'Date Range', 2:'Village Visits',1:'Circle Meetings',3:'Beehive Visits',4:'Rescheduled',5:'Cancelled',45:'All Gelathi Sessions'}
+    const filtersHeaders = {
+      6: 'Gelathi Facilitators',
+      9: 'Date Range',
+      2: 'Village Visits',
+      1: 'Circle Meetings',
+      3: 'Beehive Visits',
+      4: 'Rescheduled',
+      5: 'Cancelled',
+      45: 'All Gelathi Sessions',
+      8:"SPM4"
+
+    };
   
   
     const setData = (value) => {

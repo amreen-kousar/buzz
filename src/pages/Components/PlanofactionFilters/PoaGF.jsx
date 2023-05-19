@@ -153,7 +153,7 @@ const [gelatiNote, setGelatiNote] = useState('');
 
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData.php',
+      url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData1.php',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -388,6 +388,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
   }
 
   console.log("batches Data ", batchState)
+  console.log(session?.type , "sessionType")
   return (
     <>
       <Drawer
@@ -456,13 +457,18 @@ if( session?.gf_session_name?.indexOf("_VV")){
                   <Typography variant="body1" gutterBottom>
                     Plan Day:&nbsp;{session?.plan_date}
                   </Typography>
-
-                  <Typography variant="body1" gutterBottom>
+                  
+{(session?.type == 1|| 4 || 5||6||7||8||9||10||11||12||13||14||15||16||17||18||19||20||21)?  null :
+  
+  <>
+                 <Typography variant="body1" gutterBottom>
                     Contact Person:&nbsp;{session?.contact_person}
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     Contact Number:&nbsp;{session?.contact_number}
                   </Typography>
+                  </>
+                  }
                   <Typography variant="body1" gutterBottom>
                     GF Name:&nbsp;{session?.gf_name}
                   </Typography>
@@ -574,7 +580,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
                 }}
                     endIcon={<IconButton > <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:baseline-people" /></IconButton>}>
-                    <span style={{ width: "200px" }}>Visit participants  : {session?.total_participants}</span>
+                    <span style={{ width: "200px" }}>Visit participants working  : {session?.total_participants}</span>
                   </Button><br/><br/>
               {/* <Photos
                 batch={batch}

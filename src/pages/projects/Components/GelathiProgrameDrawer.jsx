@@ -41,6 +41,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
+import oldbaseURL from 'src/utils/api';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 const ExpandMore = styled((props) => {
@@ -195,7 +196,7 @@ const convertImage = (e) => {
       redirect: 'follow',
     };
    
-    let res = fetch('https://bdms.buzzwomen.org/appTest/uploadGFSessionPhotos.php', requestOptions)
+    let res = fetch(oldbaseURL +'uploadGFSessionPhotos.php', requestOptions)
       .then((itn) => {
         console.log(itn, '<--itemgh');
         setImages([])
@@ -215,7 +216,7 @@ const convertImage = (e) => {
 
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData.php',
+      url: oldbaseURL+'getGFSessionData1.php',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -248,7 +249,7 @@ const convertImage = (e) => {
     console.log(data, 'material api');
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createNotes.php',
+      url: oldbaseURL+'createNotes.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -285,7 +286,7 @@ const convertImage = (e) => {
     console.log(data, 'material api');
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getNotes.php',
+      url: oldbaseURL+'getNotes.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -316,7 +317,7 @@ const convertImage = (e) => {
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/updatePoaCancel.php',
+        url: oldbaseURL +'updatePoaCancel.php',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -350,7 +351,7 @@ const convertImage = (e) => {
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/updateReschedule.php',
+      url: oldbaseURL+'updateReschedule.php',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -461,19 +462,26 @@ else{
                     {(session?.type_name=='Circle Metting')? "Circle Meeting" :(session?.type_name)} : <br/>{session?.gf_session_name}
                   </Typography>
 
+            
+
                   <Typography variant="body1" gutterBottom>
                     Plan Date :{session?.plan_date}
                   </Typography>
 
-                  <Typography variant="body1" gutterBottom>
-                    Contact Person:
+              
+           {      (session?.type == 1|| 4 || 5||6||7||8||9||10||11||12||13||14||15||16||17||18||19||20||21)? null :
+                  <>
+                
+                <Typography variant="body1" gutterBottom>
+                    Contact Person: 
                     {session?.contact_person}
                   </Typography>
 
                   <Typography variant="body1" gutterBottom>
-                    Contact Number:
+                    Contact Number :
                     {session?.contact_number}
                   </Typography>
+                  </>}
 
                   <Typography variant="body1" gutterBottom>
                     Trainer Name:
@@ -604,7 +612,7 @@ null :
       <Button variant="secondary" style={styles.buttonStyle}  
                   endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="" /> </IconButton>}
                   startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-people" /></IconButton>}>
-                  <span style={{ width: "200px" }}>Visit Participants  : {session?.total_participants}</span>
+                  <span style={{ width: "200px" }}>Visit Participants   : {session?.total_participants}</span>
                 </Button>
       </Stack>
 

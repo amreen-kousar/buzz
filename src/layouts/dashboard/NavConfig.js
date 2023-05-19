@@ -96,25 +96,25 @@ const navConfig = {
   15: {
     title: 'Self Sakthi Program',
     path: '/dashboard/selfsakthiprogramdashboard',
-    icon: getIcon('material-symbols:exit-to-app'),
+    icon: getIcon("bx:female"),
     id: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '11', '12', '13']
   },
   16: {
     title: 'Gelathi Program',
     path: '/dashboard/gelathiprogramdashboard',
-    icon: getIcon('material-symbols:exit-to-app'),
+    icon: getIcon("foundation:torsos-all-female"),
     id: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '11', '12', '13']
   },
   17: {
     title: 'Green Program',
     path: '/dashboard/greenprogramdashboard',
-    icon: getIcon('material-symbols:exit-to-app'),
+    icon: getIcon("noto-v1:man-farmer-dark-skin-tone" ),
     id: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '11', '12', '13']
   },
   18: {
     title: 'Vyapar Program',
     path: '/dashboard/vyaparprogramdashboard',
-    icon: getIcon('material-symbols:exit-to-app'),
+    icon: getIcon("material-symbols:business-center-rounded"  ),
     id: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '11', '12', '13']
   },
 

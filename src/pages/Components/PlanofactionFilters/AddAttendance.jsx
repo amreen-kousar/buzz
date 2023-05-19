@@ -20,6 +20,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
+import baseUrl from 'src/utils/api'
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -37,21 +39,21 @@ export default function AddAttendance({ shown, setShown, batch }) {
     var data = 
     addValue?.includes(itm?.participant_id)?
     JSON.stringify({
-      "flag": 0,
-      "participant_id": itm?.participant_id,
-      "tbl_poa_id": batch?.tb_id,
-      "type": 2
+      
+      "PartcipantId": parseInt(itm?.participant_id),
+      
+      "Type": parseInt(batch.type)
     }):
     JSON.stringify({
-      "flag": 1,
-      "participant_id": itm?.participant_id,
-      "tbl_poa_id": batch?.tb_id,
-      "type": 2
+      
+      "PartcipantId": parseInt(itm?.participant_id),
+      
+      "Type": parseInt(batch.type)
     })
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/participantsAttendance.php',
+      url: 'https://bdms.buzzwomen.org/appGo/allAttendence',
       
       headers: { 
         'Content-Type': 'application/json'

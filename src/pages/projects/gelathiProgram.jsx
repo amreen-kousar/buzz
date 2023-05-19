@@ -23,7 +23,8 @@ export default function gelathiProgram(props) {
     const user = async (d, filter_type) => {
        if (filter_type) {
          setSelected(filter_type)
-         let ids = { "Circle Meetings": 1,"Village Visits":2,"Beehive Visits":3,"Rescheduled":4,"Cancelled":5,"Gelathi Facilitators":6}
+         let ids = { "Circle Meetings": 1,"Village Visits":2,"Beehive Visits":3,"Rescheduled":22,"Cancelled":23,"Gelathi Facilitators":6  ,"SPS":4, "SPM1":5 , "SPM2":6 , "SPM3":7, 
+         "SPM4":8,"SPM5":9 }
          filter_type.id = ids[filter_type.type]
        }
        gelathiPrograme(d,filter_type);
@@ -49,7 +50,7 @@ export default function gelathiProgram(props) {
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getGFSessions.php',
+            url: 'https://bdms.buzzwomen.org/appTest/getGFSessionsNew.php',
             headers: { 
               'Content-Type': 'application/json'
             },
@@ -201,7 +202,7 @@ export default function gelathiProgram(props) {
                 />
             </Stack>
                <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
-               <Typography style={{fontWeight:500,marginLeft:2}}> All Gelathi Sessions ({count})</Typography> 
+               <Typography style={{fontWeight:500,marginLeft:2}}> All Gelathi Sessions  ({count})</Typography> 
          {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             {clcikData && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <GelathiProgrameDrawer

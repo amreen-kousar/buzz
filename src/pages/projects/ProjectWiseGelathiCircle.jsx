@@ -7,7 +7,9 @@ import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import ChooseGelathi from './Components/ChooseGelathi';
 import Filtersmain from './projectfilters/filtersmain';
-export default function gelathiCirclesList() {
+import Circledrawer from './Components/Circledrawer';
+import CircularProgress from '@mui/material/CircularProgress';
+export default function ProjectWiseGelathiCircle() {
   const { state } = useLocation();
   const [clcikData, setClickData] = useState();
   const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
@@ -123,6 +125,12 @@ export default function gelathiCirclesList() {
     setFilterData(data);
     handleclose();
   };
+
+  const deleteDelete = (id) => {
+    setOpenFilter(false);
+    alert('Its Under PRoduction ');
+    setOpenFilter(false);
+  };
   const role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
   return (
     <Container>
@@ -135,7 +143,8 @@ export default function gelathiCirclesList() {
               <Iconify icon="material-symbols:arrow-back-rounded" />
             </IconButton>
           </Link>
-          Gelathi Circles
+          {state.title ? 
+           state.title :<>Gelathi Circles</> } 
         </Typography>
         {role == 1 || role == 3 || role == 5 || role == 4 || role == 12 ? (
           <Button
@@ -148,7 +157,7 @@ export default function gelathiCirclesList() {
             Filter
           </Button>
         ) : null}
-        {roleid == 6 || roleid == 13 ? <ChooseGelathi data1={data1} circle={circle} /> : null}
+        {roleid == 6 || roleid == 13 ? <ChooseGelathi data1={data1} circle={circle} title={state.title} api={state} /> : null}
       </Stack>
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <Filtersmain
@@ -188,12 +197,14 @@ export default function gelathiCirclesList() {
           &nbsp;
         </>
       )}
-      <Card>
-        <CardContent style={{ fontWeight: 700 }}>Project Name : {data1.project_name}</CardContent>{' '}
+     
+    <Card>
+        <CardContent style={{ fontWeight: 700 }}>Project Name working : {data1.project_name}</CardContent>{' '}
       </Card>
       <br />
       <Typography style={{ fontWeight: 500, marginLeft: 2 }}>Circles : ({count})</Typography>
-      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+     
+      {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <GelathiCircleDrawer
           clcikData={clcikData}
           isOpenFilter={openFilter}
@@ -202,17 +213,25 @@ export default function gelathiCirclesList() {
           data1={data1}
           reloadmethod={reloadFunction}
         />
+      </Stack> */}
+      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+       <Circledrawer
+          clcikData={clcikData}
+          isOpenFilter={openFilter}
+          onOpenFilter={handleOpenFilter}
+          onCloseFilter={handleCloseFilter}
+          id={state?.id}
+          data1={data1}
+         
+        />
       </Stack>
+
+{(state?.title)?
+     <>
       {gelathiCircles?.list?.length !== 0 ? (
         gelathiCircles?.list?.map((itm) => {
           return (
-            <Card
-              style={styles.card1}
-              onClick={() => {
-                setClickData({ name: itm.circle_name, title: ' Gelathi Cirlce Name', id: itm?.circle_id });
-                handleOpenFilter();
-              }}
-            >
+            <Card style={styles.card1}>
               <Grid
                 pt={1}
                 pb={1}
@@ -225,25 +244,175 @@ export default function gelathiCirclesList() {
                 style={{ marginLeft: 15 }}
               >
                 <Typography variant="subtitle1" gutterBottom>
-                  {`  ${itm?.circle_name}`}{' '}
-                  <IconButton style={{ float: 'right', position: 'absolute', right: 20, color: 'black' }}>
-                    <Iconify icon="mdi:clock-time-four-outline"></Iconify>
-                  </IconButton>
+                  { `    ${itm?.circle_name}`  }
                 </Typography>
+                <Grid style={{ display: 'flex' }} direction="row">
+                  <IconButton
+                    style={{ float: 'right', position: 'absolute', right: 20, color: 'black' }}
+                    onClick={() => {
+                      setClickData({ name: itm.circle_name, title: ' Gelathi Cirlce Name', id: itm?.circle_id , date : itm.circle_date, circleDI : itm?.circle_id , projectName: itm?.projectName });
+                      handleOpenFilter();
+                    }}
+                  >
+                    <Iconify icon="material-symbols:auto-schedule" color="#ff7424" width="40"  ></Iconify>
+                  </IconButton>
+                  <IconButton
+                    style={{ position: 'absolute', right: 60, color: 'black' }}
+                    onClick={(e) => {
+                      deleteDelete(e);
+                    }}
+                  >
+                    <Iconify icon="ic:baseline-remove-circle-outline" color="#ff7424"></Iconify>
+                  </IconButton>
+                </Grid>
               </Grid>
-              <Grid style={{ marginLeft: 15 }}>
+              <Grid
+                pt={1}
+                pb={1}
+                container
+                xs={12}
+                md={4}
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                style={{ marginLeft: 15 }}
+              >
                 <Typography variant="subtitle2" gutterBottom>
                   {`   ${itm?.circle_date}`}
                 </Typography>
+               
               </Grid>
             </Card>
           );
         })
       ) : (
         <>
-          <h4 style={{ textAlign: 'center' }}>No Gelathi Circle Found</h4>
+          <h4 style={{ textAlign: 'center' }}>No Gelathi Circle Found </h4>
         </>
       )}
+     
+     
+     </>
+     
+     :
+     //NEED TO CHECK WITH TH CHANGES DONE BY PRIYA ONCE 
+//  <>  incomming change 
+//       {gelathiCircles?.list?.length !== 0 ? (
+//         gelathiCircles?.list?.map((itm) => {
+//           return (
+//             <Card
+//               style={styles.card1}
+//               onClick={() => {
+//                 setClickData({ name: itm.circle_name, title: ' Gelathi Cirlce Name', id: itm?.circle_id });
+//                 handleOpenFilter();
+//               }}
+//             >
+//               <Grid
+//                 pt={1}
+//                 pb={1}
+//                 container
+//                 xs={12}
+//                 md={4}
+//                 direction="row"
+//                 alignItems="center"
+//                 justifyContent="space-between"
+//                 style={{ marginLeft: 15 }}
+//               >
+//                 <Typography variant="subtitle1" gutterBottom>
+//                   {`  ${itm?.circle_name}`}{' '}
+//                   <IconButton style={{ float: 'right', position: 'absolute', right: 20, color: 'black' }}>
+//                     <Iconify icon="mdi:clock-time-four-outline"></Iconify>
+//                   </IconButton>
+//                 </Typography>
+//               </Grid>
+//               <Grid style={{ marginLeft: 15 }}>
+//                 <Typography variant="subtitle2" gutterBottom>
+//                   {`   ${itm?.circle_date}`}
+//                 </Typography>
+//               </Grid>
+//             </Card>
+//           );
+//         })
+//       ) : (
+//         <>
+//           <h4 style={{ textAlign: 'center' }}>No Gelathi Circle Found</h4>
+//         </>
+//       )}
+//       </> 
+      
+
+      // my changes
+
+      <>
+      {gelathiCircles?.list?.length !== 0 ? (
+        gelathiCircles?.list?.map((itm) => {
+          return (
+            <Card style={styles.card1}>
+              <Grid
+                pt={1}
+                pb={1}
+                container
+                xs={12}
+                md={4}
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                style={{ marginLeft: 15 }}
+              >
+                <Typography variant="subtitle1" gutterBottom>
+                  { `    ${itm?.circle_name}`  }
+                </Typography>
+                <Grid style={{ display: 'flex' }} direction="row">
+                  <IconButton
+                    style={{ float: 'right', position: 'absolute', right: 20, color: 'black' }}
+                    onClick={() => {
+                      setClickData({ name: itm.circle_name, title: ' Gelathi Cirlce Name', id: itm?.circle_id , date : itm.circle_date, circleDI : itm?.circle_id , projectName: itm?.projectName });
+                      handleOpenFilter();
+                    }}
+                  >
+                    <Iconify icon="icon-park-outline:view-list" color="black" ></Iconify>
+                  </IconButton>
+                  <IconButton
+                    style={{ position: 'absolute', right: 60, color: 'black' }}
+                    onClick={(e) => {
+                      deleteDelete(e);
+                    }}
+                  >
+                    <Iconify icon="ic:baseline-remove-circle-outline" color="#ff7424"></Iconify>
+                  </IconButton>
+                </Grid>
+              </Grid>
+              <Grid
+                pt={1}
+                pb={1}
+                container
+                xs={12}
+                md={4}
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                style={{ marginLeft: 15 }}
+              >
+                <Typography variant="subtitle2" gutterBottom>
+                  {`   ${itm?.circle_date}`}
+                </Typography>
+               
+              </Grid>
+            </Card>
+          );
+        })
+      )
+       : (
+        <>
+          <h4 style={{ textAlign: 'center' }}>No Gelathi Circle Found </h4>
+        </>
+      )}
+     
+     
+     </>
+      }
+
+
     </Container>
   );
 }
@@ -255,3 +424,5 @@ const styles = {
     padding: '1rem',
   },
 };
+
+

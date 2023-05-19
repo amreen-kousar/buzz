@@ -172,7 +172,7 @@ function Project(props) {
     },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
     linkStyle: { textDecoration: 'none', color: 'black' },
-    cirleMeetingbuttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left", marginBottom:"20px" },
+    cirleMeetingbuttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left", marginTop:"20px" },
   };
   const addIcon = (
     <IconButton>
@@ -878,7 +878,7 @@ function Project(props) {
                       <IconButton onClick={spoorthiHandleClose} > <Iconify style={{ color: "black" ,margingLeft:"10px"}} icon="material-symbols:close-rounded"  /></IconButton>
                       
                       <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Sporthi Survey CM", head:"_SPS", data: data1 , type:1}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Sporthi Survey CM ", head:"_SPS", data: data1 , type:1}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Survey</span>
@@ -887,14 +887,14 @@ function Project(props) {
                      
 
                       <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_SPM1" }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_SPM1" }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 1</span>
                         </Button>
                         </Link></MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 2 CM" , head:"_SPM2"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 2 CM" , head:"_SPM2"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 2</span>
@@ -902,7 +902,7 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 3 CM" , head:"_SPM3"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 3 CM" , head:"_SPM3"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 3</span>
@@ -910,7 +910,7 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 4 CM" , head:"_SPM4"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 4 CM" , head:"_SPM4"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 4</span>
@@ -918,7 +918,7 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 5 CM" , head:"_SPM5"}}style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 5 CM" , head:"_SPM5"}}style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 5</span>
@@ -958,7 +958,7 @@ function Project(props) {
                       
 
                     <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Green Survey CM" , head:"_GPS"}}style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Green Survey CM" , head:"_GPS"}}style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Survey</span>
@@ -967,14 +967,14 @@ function Project(props) {
                      
 
                       <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_GPM1"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_GPM1"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 1</span>
                         </Button>
                         </Link></MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 2 CM" , head:"_GPM2"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 2 CM" , head:"_GPM2"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 2</span>
@@ -982,7 +982,7 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 3 CM", head:"_GPM3"}}style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 3 CM", head:"_GPM3"}}style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 3</span>
@@ -990,7 +990,7 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 4 CM", head:"_GPM4"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 4 CM", head:"_GPM4"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 4</span>
@@ -998,7 +998,7 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 5 CM", head:"_GPM5"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 5 CM", head:"_GPM5"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 5</span>
@@ -1038,7 +1038,7 @@ function Project(props) {
                       
                     
                       <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Vyapar Survey CM", head:"_VPS"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Vyapar Survey CM", head:"_VPS"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Survey</span>
@@ -1047,14 +1047,14 @@ function Project(props) {
                      
 
                       <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_VPM1"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_VPM1"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 1</span>
                         </Button>
                         </Link></MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 2 CM", head:"_VPM2"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 2 CM", head:"_VPM2"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 2</span>
@@ -1063,7 +1063,7 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 3 CM", head:"_VPM3"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 3 CM", head:"_VPM3"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 3</span>
@@ -1071,7 +1071,7 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 4 CM", head:"_VPM4"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 4 CM", head:"_VPM4"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 4</span>
@@ -1079,7 +1079,7 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to="/dashboard/projects/gelathiCirlces" state={{ id: data1?.project_id , title: "Module 5 CM", head:"_VPM5"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
+                        <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 5 CM", head:"_VPM5"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 5</span>

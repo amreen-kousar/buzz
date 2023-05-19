@@ -1,157 +1,89 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card, Stack, Chip, Container, CardContent, Typography, Grid, IconButton, Button } from '@mui/material';
-import GelathiCircleDrawer from '../projects/Components/GelathiCircleDrawer';
-import { Link, useLocation } from 'react-router-dom';
-import Iconify from 'src/components/Iconify';
-import Searchbar from 'src/layouts/dashboard/Searchbar';
-import ChooseGelathi from './Components/ChooseGelathi';
-import Filtersmain from './projectfilters/filtersmain';
-import Circledrawer from './Components/Circledrawer';
+import React from 'react';
+import { Icon } from '@iconify/react';
+import PropTypes from 'prop-types';
+import Iconify from '../../../components/Iconify';
+import Scrollbar from '../../../components/Scrollbar';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+// import { useLocation, useNavigate } from 'react-router-dom';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import {
+  Box,
+  Radio,
+  Stack,
+  Button,
+  Drawer,
+  Rating,
+  Divider,
+  Checkbox,
+  FormGroup,
+  IconButton,
+  Typography,
+  RadioGroup,
+  Card,
+  CardContent,
+  TextField,
+} from '@mui/material';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs from 'dayjs';
+import moment from 'moment';
+import GelathiCircleForm from './GelathiCircleForm';
 
-import baseURL from 'src/utils/api';
-export default function gelathiCirclesList() {
-  const { state } = useLocation();
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
+Circledrawer.propTypes = {
+  isOpenFilter: PropTypes.bool,
+  onOpenFilter: PropTypes.func,
+  onCloseFilter: PropTypes.func,
+};
 
-  const [clcikData, setClickData] = useState();
-  const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-  const [gelathiCircles, setgelathiCircles] = useState('');
-  const [filterData, setFilterData] = useState({});
-  const [reload, setReload] = useState(false);
-  const [data1, setData1] = useState('');
+export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, data1, id }) {
+  console.log('🚀 ~ file: Circledrawer.jsx:35 ~ Circledrawer ~ clcikData:', clcikData);
+  console.log('🚀 ~ file: Circledrawer.jsx:35 ~ Circledrawer ~ data1:', data1);
+  const [scheduleData, setScheduleData] = useState('');
+  var [searchData, setSearchData] = useState('');
   var [search, setSearch] = useState('');
   var [selected, setSelected] = useState(null);
-  const [count, setCount] = useState('');
-  const [openFilter, setOpenFilter] = useState(false);
-  const [filter, setFilter] = useState(false);
+  const { state } = useLocation();
+  const [sendData, setSendData] = React.useState({
+    project_id: '',
+    circle_name: '',
+    circle_date: '',
+    gelathi_created_id: '',
+  });
+
+  console.log(state.head, 'clicket data in ');
 
   const searchFunction = (e) => {
+    console.log('searchfunctioniscalled', e);
     search = e;
     setSearch(search);
-    setSelected({ name: e, type: 'Search' });
-    circle();
+    // setSelected({ name: e, type: "Search" })
+    enrolledGelathi();
   };
-console.log("state.head",state.title,  state.head)
-  const id = sessionStorage?.getItem('proId');
-  useEffect(() => {
-  
-   projData()
- 
-  }, []);
 
-
-  useEffect(() => {
-    // if(state.type == 1 ){
-    //   console.log("useEffect in my")
-    //   spoorthiApiHit()
-    // }
-    // if(state?.title == "Module 1 CM" && state?.head== " _SPM1" ){
-    //   console.log("Module 1 CM CM in use effect" )
-      
-    // }
-    // spoorthiApiHit()
-    // if(state.title== ""){
-      circle();
-    //  }
-  
-  }, []);
-
-  console.log("data from project " , state.data)
-// const spoorthiApiHit = ( )=>{
-//   console.log(location, 'location props');
-//   var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
-//   var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-//   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-//   var data = JSON.stringify({
-//     project_id: id,
-   
-//     emp_id: idvalue,
-//     search:"_SPS",
-//     filter:""
-//   });
-
-// console.log("my method is calling ")
- 
-//   var config = {
-//     method: 'post',
-//     url: 'https://bdms.buzzwomen.org/appTest/getGFSessionsNew.php',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     data: data,
-//   };
-
-//   axios(config)
-//     .then(function (response) {
-//       setgelathiCircles(response.data);
-//       setCount(response?.data?.list.length);
-//       console.log(JSON.stringify(response.data));
-//       console.log(gelathiCircles ," api data in my ")
-//       setReload(!reload);
-//     })
-//     .catch(function (error) {
-//       console.log(error);
-//     });
-// }
-
-  const projData = (async) => {
-    console.log(location, 'location props');
+  const changeText = (e) => {
+    setSearchData(e?.target?.value);
+    searchFunction(e?.target?.value);
+    console.log(e?.target?.value, 'evalueeeeeeee');
+  };
+  const enrolledGelathi = (async) => {
     var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-    var data = JSON.stringify({
-      project_id: id,
-      role_id: role,
-      emp_id: idvalue,
-    });
-
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        setData1(response.data.list);
-        console.log(response.data, '<--------------setData1setData1');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-
-  const handleOpenFilter = () => {
-    setOpenFilter(true);
-  };
-
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
-  const handleopen = () => {
-    setFilter(true);
-  };
-
-  const handleclose = () => {
-    setFilter(false);
-  };
-
-  const circle = async (id, i, g) => {
-    console.log(id, 'idvalue', i);
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       search: search,
       project_id: state?.id,
-      gelathi_id: idvalue,
+      emp_id: idvalue,
+      role_id: role,
     });
+
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircle.php',
+      url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -160,280 +92,382 @@ console.log("state.head",state.title,  state.head)
 
     axios(config)
       .then(function (response) {
-        setgelathiCircles(response.data);
-        setCount(response?.data?.list.length);
-        console.log(JSON.stringify(response.data));
-        setReload(!reload);
+        setenrolled(response.data);
+        console.log(response.data, '<---------------setenrolledsetenrolled');
       })
       .catch(function (error) {
         console.log(error);
       });
-    console.log('Ihdfgdjhc');
   };
-  const handleDelete = () => {
-    setSelected(null);
-    search = '';
-    setSearch(search);
+
+  const removegelathicircle = async (itm) => {
+    if (confirm('Are you sure want to remove')) {
+      var data = JSON.stringify({
+        circle_id: clcikData?.id,
+        flag: 0,
+        gelathi_id: itm?.gelathi_id,
+      });
+
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/updateEnrolledGelathi.php',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          circle();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
+  const navigate = useNavigate();
+  console.log(data1, '<------data', data1);
+  const [addData, setAddData] = useState({
+    date: dayjs(new Date()),
+    user_id: '',
+  });
+
+  const handleChange = (event) => {
+    setAddData({ ...addData, date: event });
+  };
+  // console.log(data,"clicked dataaaaaaaaa")
+  useEffect(() => {
+    VillageVisit();
     circle();
+    setSendData({
+      circle_date: clcikData?.date,
+    });
+
+    // console.log(clcikData)
+  }, [clcikData]);
+  const [circleData, setcircleData] = useState('');
+  const createGfSession = (async) => {
+    const userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+
+    var data = JSON.stringify({
+      // project_id: data1?.project_id,
+      // user_id: userid,
+      // tb_name: clcikData?.name,
+      // tb_id: scheduleData?.data?.id,
+      // gf_session_type: 1,
+      // plan_date: moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+      // gf_session_name: clcikData?.name,
+
+      circle_id: clcikData?.circleDI,
+      name: clcikData?.name,
+      user_id: userid,
+      project_id: data1?.project_id,
+      date: moment(sendData?.circle_date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+      gf_circle_type:
+        state?.head == '_SPS'
+          ? '2'
+          : state?.head == '_SPM1'
+          ? '3'
+          : state?.head == '_SPM2'
+          ? '4'
+          : state?.head == '_SPM3'
+          ? '5'
+          : state?.head == '_SPM4'
+          ? '6'
+          : state?.head == '_SPM5'
+          ? '7'
+          : state?.head == '_GPS'
+          ? '8'
+          : state?.head == '_GPM1'
+          ? '9'
+          : state?.head == '_GPM2'
+          ? '10'
+          : state?.head == '_GPM3'
+          ? '11'
+          : state?.head == '_GPM4'
+          ? '12'
+          : state?.head == '_GPM5'
+          ? '13'
+          : state?.head == '_VPS'
+          ? '14'
+          : state?.head == '_VPM1'
+          ? '15'
+          : state?.head == '_VPM2'
+          ? '16'
+          : state?.head == '_VPM3'
+          ? '17'
+          : state?.head == '_VPM4'
+          ? '18'
+          : state?.head == '_VPM5'
+          ? '19'
+          : null,
+    });
+    //   {
+    //     "circle_id":clcikData?.circleDI,
+    //     "name":clcikData?.name,
+    //     "user_id":userid,
+    //     "project_id":746,
+    //     "date":"2023-5-11 06:00:00",
+    //     "gf_circle_type":"1"
+    // }
+    var config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      // url: 'https://bdms.buzzwomen.org/appTest/createGFSessions.php',
+      url: 'https://bdms.buzzwomen.org/appTest/createCircleMeetingNew.php',
+
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        // onCloseFilter()
+        // history.push('/')
+        if (response?.data?.code === 200) {
+          navigate('/dashboard/projects/gelathiProgram', { state: { id: id } });
+          console.log(JSON.stringify(response.data));
+        } else {
+          alert(response?.data?.message);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
-  const getData = (itm, i) => {
-    console.log(itm, 'getdata');
-    setSelected({ itm, type: 'Gelathi Facilitators' });
-    const data = i === 6 ? { gelathi_id: itm?.id } : i === 1 ? { partner_id: itm?.id } : { project_id: itm?.id };
-    circle(itm, i);
-    console.log(data, i, itm, '<----sdfssreerfer');
-    setFilterData(data);
-    handleclose();
-    console.log('sdfgsdfdfssd', itm, i);
+
+  const VillageVisit = (async) => {
+    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var data = JSON.stringify({
+      batch_id: clcikData?.id,
+      role_id: role,
+    });
+
+    var config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        setScheduleData(response?.data);
+        console.log(response.data, '<--------------setScheduleData');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  console.log(scheduleData, 'Scheduleddataaaaaaaaaaaaa');
+  console.log('🚀 ~ file: Circledrawer.jsx:132 ~ circle ~ data1?.project_id:', data1?.project_id, clcikData?.id);
+  const circle = async () => {
+    const userid = await JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var data = JSON.stringify({
+      circle_id: clcikData?.id,
+      project_id: data1?.project_id,
+      emp_id: userid,
+    });
+    console.log('🚀 ~ file: Circledrawer.jsx:135 ~ circle ~ data:', data);
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircleData.php',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        setcircleData(response?.data);
+        console.log('🚀 ~ file: Circledrawer.jsx:145 ~ response?.data:', response?.data);
+        // console.log(response.data,"<----------setcircleDatasetcircleData");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
-  const role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-
-  const deleteDelete = (id) => {
-    setOpenFilter(false);
-    alert('Its Under PRoduction ');
-    setOpenFilter(false);
-  };
-  console.log(gelathiCircles,"<---------project_idproject_id")
-
-
-
+  // const searchFunction = (e) => {
+  //   search = e
+  //   setSearch(search)
+  //   setSelected({ name: e, type: "Search" })
+  //   circle()
+  // }
   return (
-    <Container>
-      {' '}
-      <Searchbar getSearch={(e) => searchFunction(e)} />
-      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h5" gutterBottom>
-          <Link to="/dashboard/projects/project">
-            <IconButton>
-              <Iconify icon="material-symbols:arrow-back-rounded" />
-            </IconButton>
-          </Link>
-          {state.title ? 
-           state.title :<>Gelathi Circles</> } 
-        </Typography>
-        {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
-        {role == 1 || role == 3 || role == 5 || role == 4 || role == 12 ? (
-          <Button
-            style={{ float: 'right', right: 30, position: 'absolute', color: '#ff7424' }}
-            sx={{ '&:hover': { backgroundColor: '#ffd796' } }}
-            onClick={() => {
-              handleopen();
-            }}
-          >
-            Filter
+    <>
+      <Drawer
+        anchor="right"
+        open={isOpenFilter}
+        onClose={onCloseFilter}
+        PaperProps={{
+          sx: { width: 350 },
+        }}
+      >
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
+          <Typography variant="subtitle1" sx={{ ml: 1 }}>
+            {/* {`${clcikData?.title}`}  */}
+            Scheddule a CM
+          </Typography>
+          {console.log(clcikData, '<------clcikDataclcikData')}
+          <IconButton onClick={onCloseFilter}>
+            <Iconify icon="eva:close-fill" width={20} height={20} />
+          </IconButton>
+        </Stack>
+        <Divider />
+        <Scrollbar>
+          <Stack spacing={3} sx={{ p: 3 }}>
+            <div>
+              {/* <Card>
+                                <CardContent>
+                                <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
+                              Project: &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{scheduleData?.data?.projectName}</span>
+                             </Typography>
+                                  
+                                    <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
+                                    Partner :&nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{scheduleData?.data?.partnerName}</span>
+                                    </Typography>
+                                
+                                    <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
+                                        Village  :
+                                        &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{scheduleData?.data?.name}</span>
+                                    </Typography>
+                                </CardContent>
+                            </Card> */}
+
+              {/* Date time picker  */}
+              {/* <Card style={{ marginTop: 20 }}>
+                <CardContent>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateTimePicker
+                      label="Date & Time picker"
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
+                      value={addData?.date}
+                      renderInput={(params) => <TextField {...params} color="common" />}
+                      PopperProps={{
+                        placement: 'top',
+                      }}
+                    />
+                  </LocalizationProvider>
+                </CardContent>
+              </Card> */}
+
+              <Typography
+                style={{ flexDirection: 'row', marginTop: 20, marginLeft: 5 }}
+                variant="subtitle1"
+                gutterBottom
+              >
+                Circle Name : {`${clcikData?.name}`}
+              </Typography>
+              <Typography
+                style={{ flexDirection: 'row', marginTop: 20, marginLeft: 5 }}
+                variant="subtitle1"
+                gutterBottom
+              >
+                Date And Time : from Api Date And Time :{`${clcikData?.date}`}
+              </Typography>
+              <DatePicker
+                required
+                label="Date"
+                defaultValue={sendData?.circle_date}
+                onChange={(newValue) => setSendData({ ...sendData, circle_date: newValue })}
+                renderInput={(params) => <TextField {...params} fullWidth />}
+                value={sendData?.circle_date}
+              />
+              <TextField
+                id="outlined-basic"
+                label="Search..."
+                sx={{ flex: 10 }}
+                onChange={(e) => {
+                  changeText(e);
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <Button>
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    </Button>
+                  ),
+                }}
+                variant="outlined"
+                style={{ marginTop: 40, marginLeft: 10, width: '100%' }}
+              />
+              <Typography
+                style={{ flexDirection: 'row', marginTop: 20, marginLeft: 5 }}
+                variant="subtitle1"
+                gutterBottom
+              >
+                Enrolled Gelathis (
+                {scheduleData?.all_participants?.length > 0
+                  ? scheduleData?.all_participants?.length
+                  : circleData?.gelathis?.length}
+                ):{' '}
+              </Typography>
+            </div>
+            {/* </Stack> */}
+            {/* </Scrollbar>
+        <Scrollbar> */}
+            {/* <Stack spacing={10} sx={{ p: 3 }}> */}
+            {circleData?.gelathis?.length > 0 ? (
+              <div>
+                {circleData?.gelathis?.map((itm) => {
+                  {
+                    console.log(itm, 'hyy');
+                  }
+                  return (
+                    <Card style={{ marginTop: 20 }}>
+                      <CardContent>
+                        <Stack style={{ float: 'right' }}>
+                          <IconButton style={{ marginLeft: 70 }} onClick={() => removegelathicircle(itm)}>
+                            <Icon
+                              icon="material-symbols:check-box-rounded"
+                              width={20}
+                              height={20}
+                              marginTop={20}
+                              color="#ff7424"
+                            />
+                          </IconButton>
+
+                          <GelathiCircleForm />
+                        </Stack>
+                        {console.log(circleData?.gelathis, '<-------circleData?.firstName')}
+
+                        {/* state={{ id: data1?.project_id }} */}
+                        <Typography variant="subtitle1">{itm?.firstName}</Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                          <Typography variant="body1" gutterBottom>
+                            {itm?.villagename}
+                          </Typography>
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            ) : (
+              <h5 style={{ textAlign: 'center', marginTop: '50%' }}>No Gelathi</h5>
+            )}
+          </Stack>
+        </Scrollbar>
+        <Stack mt={5} spacing={3} sx={{ p: 3 }}>
+          <Button fullWidth variant="contained" onClick={createGfSession} style={{ backgroundColor: '#FF7424' }}>
+            Save
           </Button>
-        ) : null}
-        {roleid == 6 || roleid == 13 ? <ChooseGelathi data1={data1} circle={circle} title={state.title} api={state}/> : null}
-      </Stack>
-      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-        <Filtersmain
-          type="Gelathicircles"
-          isOpenFilter={filter}
-          onOpenFilter={handleopen}
-          onCloseFilter={handleclose}
-          data1={data1}
-          getData={getData}
-        />
-      </Stack>
-      {selected && selected?.type == 'Search' && (
-        <>
-          <Chip
-            label={`${selected?.type} : ${selected?.name} `}
-            onDelete={() => {
-              handleDelete(selected);
-            }}
-          />
-          <br />
-          &nbsp;
-        </>
-      )}
-      {selected && selected?.type == 'Gelathi Facilitators' && (
-        <>
-          <Chip
-            label={`${selected?.type} : ${selected?.itm?.name} `}
-            onDelete={() => {
-              handleDelete(selected);
-            }}
-          />
-          <br />
-          &nbsp;
-        </>
-      )}
-      <Card>
-        <CardContent style={{ fontWeight: 700 }}>Project Name : {data1.project_name}</CardContent>{' '}
-      </Card>
-      <br />
-      <Typography style={{ fontWeight: 500, marginLeft: 2 }}>Circles : ({count})</Typography>
-      {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
-      {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-        <GelathiCircleDrawer
-          clcikData={clcikData}
-          isOpenFilter={openFilter}
-          onOpenFilter={handleOpenFilter}
-          onCloseFilter={handleCloseFilter}
-          data1={data1}
-        />
-      </Stack> */}
-      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-        {/* {console.log(clcikData,"cliked")}
-              {console.log(enrolled?.list,"enrolledlist")} */}
-        <Circledrawer
-          clcikData={clcikData}
-          isOpenFilter={openFilter}
-          onOpenFilter={handleOpenFilter}
-          onCloseFilter={handleCloseFilter}
-          id={state?.id}
-          data1={data1}
-          // enrolled={enrolled}
-        />
-      </Stack>
-      {/* </Stack> */}
-     {(state?.title)?
-     <>
-      {gelathiCircles?.list?.length !== 0 ? (
-        gelathiCircles?.list?.map((itm) => {
-          return (
-            <Card style={styles.card1}>
-              <Grid
-                pt={1}
-                pb={1}
-                container
-                xs={12}
-                md={4}
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                style={{ marginLeft: 15 }}
-              >
-                <Typography variant="subtitle1" gutterBottom>
-                  { `    ${itm?.circle_name}`  }
-                </Typography>
-                <Grid style={{ display: 'flex' }} direction="row">
-                  <IconButton
-                    style={{ float: 'right', position: 'absolute', right: 20, color: 'black' }}
-                    onClick={() => {
-                      setClickData({ name: itm.circle_name, title: ' Gelathi Cirlce Name', id: itm?.circle_id , date : itm.circle_date, circleDI : itm?.circle_id , projectName: itm?.projectName });
-                      handleOpenFilter();
-                    }}
-                  >
-                    <Iconify icon="icon-park-outline:view-list" color="black" ></Iconify>
-                  </IconButton>
-                  <IconButton
-                    style={{ position: 'absolute', right: 60, color: 'black' }}
-                    onClick={(e) => {
-                      deleteDelete(e);
-                    }}
-                  >
-                    <Iconify icon="ic:baseline-remove-circle-outline" color="#ff7424"></Iconify>
-                  </IconButton>
-                </Grid>
-              </Grid>
-              <Grid
-                pt={1}
-                pb={1}
-                container
-                xs={12}
-                md={4}
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                style={{ marginLeft: 15 }}
-              >
-                <Typography variant="subtitle2" gutterBottom>
-                  {`   ${itm?.circle_date}`}
-                </Typography>
-               
-              </Grid>
-            </Card>
-          );
-        })
-      ) : (
-        <>
-          <h4 style={{ textAlign: 'center' }}>No Gelathi Circle Found </h4>
-        </>
-      )}
-     
-     
-     </>
-     
-     :
-     <>
-   
-     {gelathiCircles?.list?.length !== 0 ? (
-        gelathiCircles?.list?.map((itm) => {
-          return (
-            <Card style={styles.card1}>
-              <Grid
-                pt={1}
-                pb={1}
-                container
-                xs={12}
-                md={4}
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                style={{ marginLeft: 15 }}
-              >
-                <Typography variant="subtitle1" gutterBottom>
-                  {`  ${itm?.circle_name}`}
-                </Typography>
-                <Grid style={{ display: 'flex' }} direction="row">
-                  <IconButton
-                    style={{ float: 'right', position: 'absolute', right: 20, color: 'black' }}
-                    onClick={() => {
-                      setClickData({ name: itm.circle_name, title: ' Gelathi Cirlce Name', id: itm?.circle_id });
-                      handleOpenFilter();
-                    }}
-                  >
-                    <Iconify icon="icon-park-outline:view-list" color="black" ></Iconify>
-                  </IconButton>
-                  <IconButton
-                    style={{ position: 'absolute', right: 60, color: 'black' }}
-                    onClick={(e) => {
-                      deleteDelete(e);
-                    }}
-                  >
-                    <Iconify icon="ic:baseline-remove-circle-outline" color="#ff7424"></Iconify>
-                  </IconButton>
-                </Grid>
-              </Grid>
-              <Grid
-                pt={1}
-                pb={1}
-                container
-                xs={12}
-                md={4}
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                style={{ marginLeft: 15 }}
-              >
-                <Typography variant="subtitle2" gutterBottom>
-                  {`   ${itm?.circle_date}`}
-                </Typography>
-               
-              </Grid>
-            </Card>
-          );
-        })
-      ) : (
-        <>
-          <h4 style={{ textAlign: 'center' }}>No Gelathi Circle Found</h4>
-        </>
-      )}
-      
-      </>}
-    </Container>
+        </Stack>
+      </Drawer>
+    </>
   );
 }
-const styles = {
-  card1: {
-    backgroundColor: '#f5f5f5',
-    opacity: 0.9,
-    marginTop: '20px',
-    padding: '1rem',
-  },
-};
