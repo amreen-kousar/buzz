@@ -105,6 +105,10 @@ const removegelathicircle = async (itm) => {
       id: id,
     });
   };
+
+  const handleform=()=>{
+    alert('survey was done')
+  }
 return (
     <>
       <Drawer
@@ -145,10 +149,11 @@ return (
                           {itm?.is_survey ? (
                             <IconButton
                               style={{ marginLeft: 70 }}
-                              onClick={() => {
+                              onClick={
                                 // callGelathiFormComponent(index , itm?.gelathi_id  )
                                 // if we want to see filed form means need to call another component so that time we can use this kind of methods to call instead of rendering inside the map
-                              }}
+                              handleform
+                              }
                             >
                               <Icon icon="clarity:form-line" width={20} height={20} marginTop={20} color="green" />
                             </IconButton>

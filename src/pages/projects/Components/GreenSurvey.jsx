@@ -565,6 +565,9 @@ const handletrees=(event)=>{
   setTreesError(false)
 }
 
+const handleform=()=>{
+  alert('Surevy was done')
+}
 
 const handleresources=(label,event)=>{
 
@@ -614,7 +617,7 @@ const handleresources=(label,event)=>{
       
         {!(props?.itm?.is_survey)?<IconButton onClick={handleClickOpen}>
          <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
-        </IconButton>:<IconButton>
+        </IconButton>:<IconButton onClick={handleform}>
          <Icon  icon="charm:notes-tick" width={20} height={20} marginTop={20}  color="green" />
         </IconButton>}
         

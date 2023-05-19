@@ -599,7 +599,7 @@ null :
                 }
               </CardContent>
             </Card> :null}
-{(userId==4 || userId==3) ?
+{(userId==4 || userId==3 || userId==11 || userId==1) ?
  
  session?.photos &&  <div style={{display:'flex' , flexDirection:'row'}}> {(session?.photos[0].photo1)?<img id="img-event-data" src={session?.photos[0].photo1} style={{height:100,width:100}}/>:"No Photos Found"}
                  &nbsp;&nbsp;{(session?.photos[0].photo2)?<img id="img-event-data" src={session?.photos[0].photo2} style={{height:100,width:100}}/>:null}
@@ -616,7 +616,7 @@ null :
       {session?.all_participants?.map((itm) => 
                     {
                 return (
-                <> {(itm?.enroll=='1') ? <Card><CardContent>{itm?.participant_name}</CardContent></Card>:null}</>
+                <> {(itm?.enroll=='1') ? <Card><CardContent>{itm?.participant_name}<br/>{session?.enroll_participant_villagename}</CardContent></Card>:null}</>
                 )
                     }
       )}
