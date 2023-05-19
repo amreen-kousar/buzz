@@ -215,7 +215,7 @@ const getData = (itm, i) => {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Green Motivators working
+                    Green Motivators 
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
