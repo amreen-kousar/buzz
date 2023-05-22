@@ -79,17 +79,17 @@ const VyaparProgramDashboard = () => {
     // };
 
     const data = {
-      "partner_id":"",
-      "start_date": "",
-      "end_date": "",
+      "partner_id":g ? '' : i === 1 ? id?.id : '',
+      "start_date": g === 'date' ? id : '',
+      "end_date": g === 'date' ? i : '',
       "funder_id":"",
-      "dist":"",
-      "taluk":"",
-      "project_id":"",
-      "trainer_id":"",
-      "opsmanager":"",
-      "somid":"",
-      "gflid":"",
+      "dist":g === 'country' ? id : '',
+      "taluk":g === 'country' ? i : '',
+      "project_id":g ? '' : i === 3 ? id?.id : '',
+      "trainer_id":g ? '' : i === 5 ? id?.id : '',
+      "opsmanager":g ? '' : i === 4 ? id?.id : '',
+      "somid":g ? '' : i === 12 ? id?.id : '',
+      "gflid":g ? '' : i === 13 ? id?.id : '',
       "roleid":role,
       "emp_id":userid
   }
@@ -212,14 +212,11 @@ const VyaparProgramDashboard = () => {
           </Button>
         </Stack>
         <Container maxWidth="xl">
-          {slected && (
-            <Chip
-              label={`${slected?.type} : ${slected?.name} `}
-              onDelete={() => {
-                handleDelete(slected);
-              }}
-            />
-          )}
+        <Grid item spacing={10}>
+          {
+            slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${moment((slected?.name)?.$d)?.format('YYYY-MM-DD')} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+          }
+        </Grid>
 
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <FiltersHome

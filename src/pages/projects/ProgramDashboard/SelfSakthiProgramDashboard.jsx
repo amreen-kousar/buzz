@@ -212,6 +212,8 @@ let formatdata = summaryData?.data
   }
 
   const handleDelete = () => {
+ 
+   
     setSelected(null)
     apiHit();
   }
@@ -285,9 +287,14 @@ let formatdata = summaryData?.data
           </Button>
         </Stack>
         <Container maxWidth="xl">
-          {
-            slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
-          }
+        <Grid item spacing={10}>
+
+
+  {
+    slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${moment((slected?.name)?.$d)?.format('YYYY-MM-DD')} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+  }
+
+</Grid>
 
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <FiltersHome
