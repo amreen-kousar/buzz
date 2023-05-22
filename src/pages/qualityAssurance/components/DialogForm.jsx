@@ -37,7 +37,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function DialogForm({ shown, setShown, batch }) {
     const [openFilter, setOpenFilter] = useState(false);
     const [clcikData, setClickData] = useState()
-  
+
     const handleOpenFilter = () => {
       setOpenFilter(true);
     };
@@ -46,7 +46,8 @@ export default function DialogForm({ shown, setShown, batch }) {
       setOpenFilter(false);
     };
   
-  
+    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+    console.log("🚀 ~ file: DialogForm.jsx:50 ~ DialogForm ~ role:", role)
     const [open, setOpen] = React.useState(false);
     React.useEffect(() => {
       //setShown(shown)
@@ -71,6 +72,8 @@ export default function DialogForm({ shown, setShown, batch }) {
   const [states, setStates] = useState([])
   const [district, setDistrict] = useState([])
   const [taluk, setTaluk] = useState([])
+  const [gfName,setGFName]=useState([])
+  console.log("🚀 ~ file: DialogForm.jsx:76 ~ DialogForm ~ gfName:", gfName)
   const [data, setData] = useState({
     country: 1,
     state: '',
@@ -92,8 +95,9 @@ export default function DialogForm({ shown, setShown, batch }) {
  
   useEffect(() => {
     // console.log("use effect-----");
+    getGFname()
     getDistrict()
-    apiFormHit()
+    
   }, []
   )
 
@@ -122,6 +126,34 @@ export default function DialogForm({ shown, setShown, batch }) {
     axios(config)
       .then(function (response) {
         setDistrict(response.data.list)
+        // console.log(response.data,"<------------------setTaluksetTaluk");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  const getGFname = async (id) => {
+    
+    var data = JSON.stringify({
+      // "country_id": "1",
+      // "state_id": 3,
+     // "district_id": id
+     "role_id":6,
+
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        setGFName(response.data.list)
         // console.log(response.data,"<------------------setTaluksetTaluk");
       })
       .catch(function (error) {
@@ -163,7 +195,7 @@ const [apiData, setApiData] = useState({})
     Program_assessment:"",
     Name_of_the_district:"",
    Name_of_the_village_and_the_venue_of_meeting_or_training: "",
-   Name_of_the_district: " ",
+  //  Name_of_the_district: " ",
 Name_of_the_taluk:" ",
 Name_of_the_village_and_the_venue_of_meeting_or_training:" ",
 Day1_or_day2: " ",
@@ -213,7 +245,7 @@ Deadline_to_collect_the_stories: " ",
 End_time_of_the_training: " ",
 No_of_participants_at_end_of_the_session: " ",
 Any_other_comments_about_the_gelathi_facilitator: " ",
-Check_which_ones_the_gelathi_did_not_do: " ",
+Check_which_ones_the_gelathi_did_not_do: " ",   
 During_the_debrief_did_the_gelathi: " ",
 During_the_debriefs_for_role_plays_the_gelathi_did_not_ask: " ",
 Check_which_instructions_the_gelathi_did_not_do: " ",
@@ -289,11 +321,12 @@ let data = JSON.stringify({
   "During_the_debrief_did_the_gelathi_not_ask":sendForm?.During_the_debrief_did_the_gelathi_not_ask,
   
   });
+console.log("🚀 ~ file: DialogForm.jsx:292 ~ apiFormHit ~ data:", data)
 
 let config = {
   method: 'post',
   maxBodyLength: Infinity,
-  url: 'https://bdms.buzzwomen.org/addQualityAssessmentForm',
+  url: 'https://bdms.buzzwomen.org/appGo/addQualityAssessmentForm ',
   headers: { 
     'Content-Type': 'application/json'
   },
@@ -353,7 +386,7 @@ axios.request(config)
             <Typography sx={{ ml: 2, flex: 1, color:"white"  }} variant="h6" component="div">
               Self Shakti Training program Form
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            <Button autoFocus color="inherit" onClick={apiFormHit}>
               save
             </Button>
           </Toolbar>
@@ -374,7 +407,7 @@ axios.request(config)
             <Typography>Email</Typography>
             <Stack mt={2} mb={2}>
                     {/* <TextField required label="Your Answer" variant="outlined" color="common" /> */}
-                   <TextField required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, Email:e.target.value})} value={sendForm?.Email}   
+                   <TextField type='email' required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, Email:e.target.value})} value={sendForm?.Email}   
 />
                 </Stack> 
                 </CardContent>
