@@ -108,7 +108,7 @@ export default function AddParticipants({batch,checkData,type,session}) {
         "caste": enterData?.caste,
         "firstName": enterData?.firstName,
         "nameOfSHG": enterData?.nameOfSHG,
-        "project_id": (batch && type=="vyapar")?batch?.data?.project_id:(batch && type=="green")?batch?.project_id:session?.project_id,
+        "project_id": (session && type=="vyapar")?session?.project_id:(session && type=="green")?session?.project_id:batch?.data?.project_id,
         "contact_no": enterData?.contact_no,
         "dob": "",
          "tb_id":(batch)?batch?.data?.primary_id:'',
