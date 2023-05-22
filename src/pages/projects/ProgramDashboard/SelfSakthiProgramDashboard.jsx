@@ -43,7 +43,7 @@ const SelfSakthiProgramDashboard = () => {
 
   const [filterData, setFilterData] = useState({})
   const [loader, setLoader] = useState(false)
-
+const [errorMsg,setErrormsg]=useState(false)
   const [slected, setSelected] = useState(null)
 
   const [summaryData, setSummaryData] = useState([]);
@@ -132,17 +132,17 @@ const SelfSakthiProgramDashboard = () => {
     // };
 
     const data  ={
-      "partner_id": "",
-    "start_date": "",
-    "end_date": "",
-    "funder_id":"",
-    "dist":"",
-    "taluk":"",
-    "project_id":"",
-    "trainer_id":"",
-    "opsmanager":"",
-    "somid":"",
-    "gflid":"",
+      "partner_id": g ? "" : i === 1 ? id?.id : '',
+    "start_date": (g === "date")? id: '',
+    "end_date":  (g === "date")? i: '',
+    "funder_id":g ? "" : i === 2 ? id?.id : '',
+    "dist":g === "country" ? id : "",
+    "taluk":g === "country" ? i : "",
+    "project_id":g ? "" : i === 3 ? id?.id : '',
+    "trainer_id":g ? "" : i === 5 ? id?.id : '',
+    "opsmanager":g ? "" : i === 4 ? id?.id : '',
+    "somid":g ? "" : i === 12 ? id?.id : '',
+    "gflid":g ? "" : i === 13 ? id?.id : '',
     "roleid":roleid,
     "emp_id":userid
   }
@@ -170,7 +170,9 @@ setSummaryData(response.data);
         console.log("<------------setSummaryDatasetSummaryData", response.data)
       })
       .catch((error) => {
+        setLoader(false)
         console.log(error);
+        setErrormsg(error);
       });
   };
 console.log(summaryData?.data,"resposeapi")
@@ -180,14 +182,15 @@ let formatdata = summaryData?.data
     apiHit();
   }, []);
 
+  
 
-  if (loader) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-        <CircularProgress />
-      </Box>
-    )
-  }
+  // if (loader) {
+  //   return (
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+  //       <CircularProgress />
+  //     </Box>
+  //   )
+  // }
 
 
  
@@ -214,7 +217,7 @@ let formatdata = summaryData?.data
   }
 
 
-  if (summaryData?.length === 0) {
+  if (summaryData?.length === 0 && loader) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
         <CircularProgress />
@@ -222,10 +225,19 @@ let formatdata = summaryData?.data
     )
   }
 
+  if(errorMsg!=''){
+    return(
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}}>
+        {errorMsg?.message}
+      </Box>
+    )
+  }
+
 
   const getData = (itm, i) => {
     setSelected(itm)
-    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
+    i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
     apiHit(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
     setFilterData(data)

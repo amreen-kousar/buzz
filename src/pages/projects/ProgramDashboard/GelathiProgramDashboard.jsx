@@ -34,7 +34,8 @@ const GelathiProgramDashboard = () => {
     const [openFilter, setOpenFilter] = useState(false);
    const [filterData, setFilterData] = useState({})
     const [loader, setLoader] = useState(false)
-  const [slected, setSelected] = useState(null)
+    const [errorMsg,setErrormsg]=useState(false)
+    const [slected, setSelected] = useState(null)
    const [summaryData, setSummaryData] = useState([]);
     const [graphData, setGraphData] = useState(null);
   
@@ -113,7 +114,9 @@ const GelathiProgramDashboard = () => {
           console.log("responseofapi", response.data)
         })
         .catch((error) => {
+          setLoader(false)
           console.log(error);
+          setErrormsg(error)
         });
     };
   console.log(summaryData?.data,"resposeapi")
@@ -124,13 +127,13 @@ const GelathiProgramDashboard = () => {
     }, []);
   
   
-    if (loader) {
-      return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-          <CircularProgress />
-        </Box>
-      )
-    }
+    // if (loader) {
+    //   return (
+    //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+    //       <CircularProgress />
+    //     </Box>
+    //   )
+    // }
   
   
    
@@ -157,7 +160,7 @@ const GelathiProgramDashboard = () => {
     }
   
   
-    if (summaryData?.length === 0) {
+    if (summaryData?.length === 0 && loader) {
       return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
           <CircularProgress />
@@ -165,7 +168,14 @@ const GelathiProgramDashboard = () => {
       )
     }
   
-  
+    if(errorMsg!=''){
+      return(
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}}  style={{fontSize:30}}>
+          {errorMsg?.message}
+        </Box>
+      )
+    } 
+
     const getData = (itm, i) => {
       setSelected(itm)
       const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }

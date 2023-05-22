@@ -34,6 +34,7 @@ const GreenProgramDashboard = () => {
   const [openFilter, setOpenFilter] = useState(false);
   const [filterData, setFilterData] = useState({});
   const [loader, setLoader] = useState(false);
+  const [errorMsg,setErrormsg]=useState(false)
   const [slected, setSelected] = useState(null);
   const [summaryData, setSummaryData] = useState([]);
   const [graphData, setGraphData] = useState(null);
@@ -113,6 +114,8 @@ const GreenProgramDashboard = () => {
         console.log('<--------------------setSummaryData', response.data);
       })
       .catch((error) => {
+        setLoader(false);
+        setErrormsg(error)
         console.log(error);
       });
   };
@@ -123,13 +126,13 @@ const GreenProgramDashboard = () => {
     apiHit();
   }, []);
 
-  if (loader) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
+  // if (loader) {
+  //   return (
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+  //       <CircularProgress />
+  //     </Box>
+  //   );
+  // }
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -153,12 +156,20 @@ const GreenProgramDashboard = () => {
     apiHit();
   };
 
-  if (summaryData?.length === 0) {
+  if (summaryData?.length === 0 && loader) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
         <CircularProgress />
       </Box>
     );
+  }
+
+  if(errorMsg!=''){
+    return(
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}}>
+        {errorMsg?.message}
+      </Box>
+    )
   }
 
   const getData = (itm, i) => {

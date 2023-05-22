@@ -403,7 +403,7 @@ console.log(data,"dataaaaaaaaaaa")
 
                         <TabPanel value={value} index={0}>
                             {
-                                projects.length > 0 ? <>
+                                projects?.length > 0 ? <>
                                     {projects.map(p => <Link to="/dashboard/projects/project"
                                         style={{ textDecoration: 'none' }}>
                                         <Card onClick={() => { callOpenFunction(p.id) }}>
@@ -429,7 +429,7 @@ console.log(data,"dataaaaaaaaaaa")
 
                         <TabPanel value={value} index={1}>
                             {
-                                publishedProject.length > 0 ? <>
+                                publishedProject?.length > 0 ? <>
                                     {publishedProject.map(p => <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }}>
                                         <Card onClick={() => { callOpenFunction(p.id) }}>
                                             <CardContent>
@@ -455,7 +455,7 @@ console.log(data,"dataaaaaaaaaaa")
 
                         <TabPanel value={value} index={2}>
                             {
-                                completedProject.length > 0 ? <>
+                                completedProject?.length > 0 ? <>
                                     {completedProject.map(p => <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }} >
                                         <Card onClick={() => { callOpenFunction(p.id) }}>
                                             <CardContent>

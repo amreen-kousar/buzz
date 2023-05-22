@@ -25,14 +25,14 @@ import { AppWidgetSummary } from '../../sections/@dashboard/app';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from '../Filters/FiltersHome';
 import DialogForm from './components/DialogForm'
-import baseURL from 'src/utils/api';
+import {baseURL} from 'src/utils/api';
 
 export default function QualityAssurance() {
   
   
   
   const [loader, setLoader] = useState(false)
-
+const [errorMsg,setErrormsg]=useState('');
   const [openFilter, setOpenFilter] = useState(false);
 
   const [filterData, setFilterData] = useState({});
@@ -106,6 +106,8 @@ setSummaryData(response.data);
         console.log("responseofapi", response.data)
       })
       .catch((error) => {
+        setLoader(false);
+        setErrormsg(error)
         console.log(error);
       });
   };
@@ -117,21 +119,30 @@ let formatdata = summaryData?.data
   }, []);
 
 
-  if (loader) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-        <CircularProgress />
+  // if (loader) {
+  //   return (
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+  //       <CircularProgress />
+  //     </Box>
+  //   )
+  // }
+  
+  if(errorMsg!=''){
+    return(
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}} >
+        {errorMsg?.message}
       </Box>
     )
   }
+
   return (
     <>
       <Page title="Dashboard">
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Typography variant="h5" gutterBottom sx={{ ml: 4 }}>
-           Quality Assurance Summary
+           Quality Assessment
           </Typography>
-          <Button
+          {/* <Button
             style={{ float: 'right', color: '#ff7424' }}
             sx={{ '&:hover': { backgroundColor: '#ffd796' } }}
             onClick={() => {
@@ -139,7 +150,7 @@ let formatdata = summaryData?.data
             }}
           >
             Filter
-          </Button>
+          </Button> */}
         </Stack>
         <Container maxWidth="xl">
           <Grid item spacing={10}></Grid>

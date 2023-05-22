@@ -189,7 +189,6 @@ let formatdata = summaryData?.data
     )
   }
 
-
   const getData = (itm, i) => {
     setSelected(itm)
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
@@ -199,6 +198,7 @@ let formatdata = summaryData?.data
     handleCloseFilter()
     console.log("sdfgsdfdfssd", itm, i)
   }
+
   const onSumbit = (e, i) => {
     handleCloseFilter()
     setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
