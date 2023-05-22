@@ -87,6 +87,7 @@ export default function AddParticipants({batch,checkData,type,session}) {
       })
       .catch(function (error) {
         console.log(error);
+        
       });
       
   }

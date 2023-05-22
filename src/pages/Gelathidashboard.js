@@ -36,7 +36,7 @@ export default function Gelathidashboard() {
 
   const [filterData, setFilterData] = useState({})
   const [loader, setLoader] = useState(false)
-
+const [errorMsg,setErrorMsg]=useState('');
   const [slected, setSelected] = useState(null)
 
   const [summaryData, setSummaryData] = useState([]);
@@ -138,6 +138,7 @@ GathathiGraphDataFormating(response.data);
       })
       .catch((error) => {
         console.log(error);
+        setErrorMsg(error?.response);
       });
   };
 console.log(summaryData?.data,"resposeapi")
@@ -148,7 +149,7 @@ let formatdata = summaryData?.data
   }, []);
 
 
-  if (loader) {
+  if (errorMsg==' ' && loader) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
         <CircularProgress />
@@ -181,11 +182,18 @@ let formatdata = summaryData?.data
   }
 
 
-  if (summaryData?.length === 0) {
+  if (errorMsg =='' && summaryData?.length === 0 ) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
         <CircularProgress />
       </Box>
+    )
+  }
+
+  if(errorMsg?.status==500){
+    return(
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' ,fontWeight:700}}>
+      {errorMsg?.statusText}</Box>
     )
   }
 
