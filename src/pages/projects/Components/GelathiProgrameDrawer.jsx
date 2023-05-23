@@ -640,7 +640,7 @@ null :
       <Button variant="secondary" style={styles.buttonStyle}  
                   endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="" /> </IconButton>}
                   startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-people" /></IconButton>}>
-                  <span style={{ width: "200px" }}>Visit Participants working  : {session?.total_participants}</span>
+                  <span style={{ width: "200px" }}>Visit Participants   : {session?.total_participants}</span>
                 </Button>
       </Stack>
       {session?.all_participants?.map((itm) => 
