@@ -80,16 +80,16 @@ console.log(todayPoa)
 
     return (
         <div>
-            {/* {
+            {
            todayPoa &&  todayPoa?.map(({full_name,name})=>{
                 return (
                     <div>{full_name}&nbsp;:&nbsp;{name}</div>
                 )
             })
-          }  */}
+          } 
        
-            
-             <Select fullWidth variant='standard' color="common"
+       /     
+             {/* <Select fullWidth variant='standard' color="common"
               labelId="Today POA"
               id="demo-simple-select"
               label="Today POA"
@@ -106,7 +106,7 @@ console.log(todayPoa)
             })
           }
              
-            </Select> 
+            </Select>  */}
 
         </div>
     );
