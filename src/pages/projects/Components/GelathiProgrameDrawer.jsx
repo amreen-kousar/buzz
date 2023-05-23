@@ -640,19 +640,20 @@ null :
       <Button variant="secondary" style={styles.buttonStyle}  
                   endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="" /> </IconButton>}
                   startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-people" /></IconButton>}>
-                  <span style={{ width: "200px" }}>Visit Participants   : {session?.total_participants}</span>
+                  <span style={{ width: "200px" }}>Visit Participants working  : {session?.total_participants}</span>
                 </Button>
       </Stack>
       {session?.all_participants?.map((itm) => 
                     {
                 return (
-                <> {(itm?.enroll=='1') ? <Card><CardContent>{itm?.participant_name}<br/>{session?.enroll_participant_villagename}</CardContent></Card>:null}</>
+                <> {(itm?.enroll=='1') ?<> <Card><CardContent>{itm?.participant_name}<br/>{session?.enroll_participant_villagename}</CardContent></Card> <br/></>:null}</>
                 )
                     }
       )}
 
      {(session?.type== 4 ||session?.type == 10 ||session?.type== 16)? 
      (userId==6 || userId==13 )?
+    
      <Stack style={{ flexDirection: 'row'}}  mb={2}>
       
       <Button variant="secondary" style={styles.buttonStyle}  onClick={()=> handleOpenFilter()}

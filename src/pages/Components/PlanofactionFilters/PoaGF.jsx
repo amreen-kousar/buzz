@@ -575,13 +575,13 @@ if( session?.gf_session_name?.indexOf("_VV")){
                 </CardContent>
               </Card> */}
 
-            <br/>  <Button variant="secondary" style={styles.buttonStyle} onClick={() => {
+            <br/><br/>  <Button variant="secondary" style={styles.buttonStyle} onClick={() => {
                   setShown(true)
                 }}
                     endIcon={<IconButton > <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:baseline-people" /></IconButton>}>
                     <span style={{ width: "200px" }}>Visit participants  : {session?.total_participants}</span>
-                  </Button><br/>
+                  </Button><br/><br/>
               {/* <Photos
                 batch={batch}
                 photos={photos}
@@ -613,7 +613,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
                     <span style={{ width: "200px" }}>Check In/Check Out</span>
                   </Button>:null}
 
-<br/>  
+<br/>  <br/>
                <Button variant="secondary" style={styles.buttonStyle} 
                     endIcon={<IconButton  onClick={() => {
                       setShowNote(true);

@@ -317,10 +317,10 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
             View Travel Allowance
           </Typography>
 
-
+{/* 
           <Button disabled id="save-button" autoFocus color="inherit" onClick={() => SendData()}>
             save
-          </Button>
+          </Button> */}
         </Toolbar>
         {/* <Webcam
     ref={webcamRef}
