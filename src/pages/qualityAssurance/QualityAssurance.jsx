@@ -194,19 +194,19 @@ let formatdata = summaryData?.data
           </Card> */}
           <div style={{display:'flex', flexDirection:'column', justifyContent:"center",alignItems:"center" ,width:"100%"}}>
           <div style={{marginTop:"20px" }}>
-          {/* <Link to="/dashboard/qualityAssurance/selfsakthi"
-        //    state={{ id: data1?.project_id }}
-            style={styles.linkStyle}> */}
+          <Link to="/dashboard/qualityAssurance/selfsakthi"
+          //  state={{ id: data1?.project_id }}
+            style={styles.linkStyle}>
                     <Button variant="secondary"
-                     onClick={()=>{
-                      alert("Work is in Progress")
-                     }}
+                    //  onClick={()=>{
+                    //   alert("Work is in Progress")
+                    //  }}
                      style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}>  Self Shakti Training Program</span>
                   </Button>
-                  {/* </Link> */}
+                  </Link>
 
                   </div>
                   <div style={{marginTop:"20px"}}>
