@@ -169,11 +169,11 @@ const SelfSakthiByGelathi = () => {
             </Tabs>
           </Box>
           <br />
-          <TextField id="outlined-basic" type="date" defaultValue={dateValue}
+          {/* <TextField id="outlined-basic" type="date" defaultValue={dateValue}
             fullWidth
             onChange={(e) => { getDateValue(e?.target?.value) }} label="Select Date" variant="outlined" InputLabelProps={{
               shrink: true,
-            }} />
+            }} /> */}
              {/* <Stack style={{ marginTop: 20 }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker

@@ -211,40 +211,34 @@ let formatdata = summaryData?.data
                   </div>
                   <div style={{marginTop:"20px"}}>
 
-{/*                  
-                   <Link to="/dashboard/qualityAssurance/greenprogram" */}
-        {/* //    state={{ id: data1?.project_id }} */}
-             {/* style={styles.linkStyle}> */}
+              <Link to="/dashboard/qualityAssurance/greenprogram" 
+  
+             style={styles.linkStyle}> 
                     <Button variant="secondary"
                      style={styles.buttonStyle}
-                     onClick={()=>{
-                      alert("Work is in Progress")
-                     }}
+                    
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}>Green Program</span>
                   </Button>
-                  {/* </Link> */}
-                  </div>
+                  </Link>
                   <div style={{marginTop:"20px"}}>
 
-{/*                  
+                
                   <Link to="/dashboard/qualityAssurance/selfsakthibygelathi"
         //    state={{ id: data1?.project_id }}
-            style={styles.linkStyle}> */}
+            style={styles.linkStyle}> 
                     <Button variant="secondary"
-                     onClick={()=>{
-                      alert("Work is in Progress")
-                     }}
+                  
                      style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}> Self Shakti by Gelathi</span>
                   </Button>
-                  {/* </Link> */}
+                  </Link> 
                   </div>
           </div>
-         
+         </div>
           {/* <Card
             onClick={() => {
               setShown(true), console.log('ferfgreg');
