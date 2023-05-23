@@ -529,7 +529,7 @@ const GreenProgramDashboard = () => {
 
               />
             </Grid> */}
-                          <Grid item xs={2} sm={4} md={3}>
+                         <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number  of Vilages"
                               total={itm?.villages}
@@ -537,7 +537,7 @@ const GreenProgramDashboard = () => {
                               icon="fontisto:holiday-village"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Coharts"
                               total={itm?.noofgreencoharts}
@@ -545,7 +545,7 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Enrolled"
                               total={itm?.greenenrolled}
@@ -553,7 +553,7 @@ const GreenProgramDashboard = () => {
                               icon="openmoji:leafy-green"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Modules Completed"
                               total={itm?.noofgreenmodulecompleted}
@@ -561,7 +561,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Survey"
                               total={itm?.nofgreensurvey}
@@ -570,7 +570,7 @@ const GreenProgramDashboard = () => {
                             />
                           </Grid>
 
-                          {/* <Grid item xs={4} sm={8} md={3}>
+                          {/* <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="2nd Day Turnout  %"
                               total={itm?.day2}
@@ -635,7 +635,7 @@ const GreenProgramDashboard = () => {
                         <Divider mt={1} />
                         <Grid container spacing={3} marginTop={4}>
           
-                          <Grid item xs={2} sm={4} md={4}>
+                         <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number  of Vilage Visits"
                               total={itm?.villagevisit}
@@ -643,7 +643,7 @@ const GreenProgramDashboard = () => {
                               icon="fontisto:holiday-village"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Batches"
                               total={itm?.beehive}
@@ -651,7 +651,7 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Circle Meet"
                               total={itm?.circle_meet}
@@ -659,7 +659,7 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Circle"
                               total={itm?.circles}
@@ -667,7 +667,7 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Motivators"
                               total={itm?.greenMotivators}
@@ -676,7 +676,7 @@ const GreenProgramDashboard = () => {
                             />
                           </Grid>
 
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Vyapar"
                               total={itm?.vyapar}
@@ -761,7 +761,7 @@ const GreenProgramDashboard = () => {
 
               />
             </Grid> */}
-                          <Grid item xs={2} sm={4} md={3}>
+                          <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number  of Vilage "
                               total={itm?.villages}
@@ -769,7 +769,7 @@ const GreenProgramDashboard = () => {
                               icon="fontisto:holiday-village"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Beehive"
                               total={itm?.beehive}
@@ -777,14 +777,14 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Motivators"
                               total={itm?.greenMotivators}
                               color="motivator"
                               icon="openmoji:leafy-green"
                             />
-                          </Grid><Grid item xs={4} sm={8} md={3}>
+                          </Grid><Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Cirle"
                               total={itm?.circles}
@@ -792,7 +792,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Circle Meet"
                               total={itm?.circle_meet}
@@ -800,7 +800,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Vyapar"
                               total={itm?.vyapar}
@@ -809,7 +809,7 @@ const GreenProgramDashboard = () => {
                             />
                           </Grid>
 
-                          {/* <Grid item xs={4} sm={8} md={3}>
+                          {/* <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="2nd Day Turnout  %"
                               total={itm?.day2}
@@ -892,7 +892,7 @@ const GreenProgramDashboard = () => {
 
               />
             </Grid> */}
-                          <Grid item xs={2} sm={4} md={3}>
+                          <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number  of Vilage Visit"
                               total={itm?.villagevisit}
@@ -900,7 +900,7 @@ const GreenProgramDashboard = () => {
                               icon="fontisto:holiday-village"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Beehive"
                               total={itm?.beehive}
@@ -908,14 +908,14 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Motivators"
                               total={itm?.greenMotivators}
                               color="motivator"
                               icon="openmoji:leafy-green"
                             />
-                          </Grid><Grid item xs={4} sm={8} md={3}>
+                          </Grid><Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Cirle"
                               total={itm?.circles}
@@ -923,7 +923,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Circle Meet"
                               total={itm?.circle_meet}
@@ -931,7 +931,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="Number of Vyapar"
                               total={itm?.vyapar}
@@ -940,7 +940,7 @@ const GreenProgramDashboard = () => {
                             />
                           </Grid>
 
-                          {/* <Grid item xs={4} sm={8} md={3}>
+                          {/* <Grid item xs={6} sm={4} md={6}>
                             <AppWidgetSummary
                               title="2nd Day Turnout  %"
                               total={itm?.day2}

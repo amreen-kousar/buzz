@@ -490,7 +490,7 @@ const VyaparProgramDashboard = () => {
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={4}>
           
-            <Grid item xs={2} sm={4} md={3}>
+         <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Vilages"
@@ -500,7 +500,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Batches"
@@ -510,7 +510,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Vyapar Survey "
@@ -520,7 +520,7 @@ const VyaparProgramDashboard = () => {
 
 />
 </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Module Completed"
@@ -530,7 +530,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Vyapar Enrolled "
@@ -597,7 +597,7 @@ const VyaparProgramDashboard = () => {
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={4}>
           
-            <Grid item xs={2} sm={4} md={3}>
+         <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Vilages Visit"
@@ -607,7 +607,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Beehive"
@@ -617,7 +617,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll "
@@ -627,7 +627,7 @@ const VyaparProgramDashboard = () => {
 
 />
 </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meet"
@@ -637,7 +637,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle "
@@ -647,7 +647,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Green Motivators "
@@ -657,7 +657,7 @@ const VyaparProgramDashboard = () => {
 
 />
 </Grid>
-<Grid item xs={4} sm={8} md={3}>
+<Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Vypar "
@@ -729,7 +729,7 @@ const VyaparProgramDashboard = () => {
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={4}>
           
-            <Grid item xs={2} sm={4} md={3}>
+         <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Vilages "
@@ -739,7 +739,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Beehive"
@@ -749,7 +749,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Vyapar Survey"
@@ -759,7 +759,7 @@ const VyaparProgramDashboard = () => {
 
 />
 </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Vyapar Module Completed "
@@ -771,7 +771,7 @@ const VyaparProgramDashboard = () => {
 </Grid>
 
            
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Vyapar Circle  "
@@ -782,7 +782,7 @@ const VyaparProgramDashboard = () => {
               />
             </Grid>
 
-<Grid item xs={4} sm={8} md={3}>
+<Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Vypar "
@@ -849,7 +849,7 @@ const VyaparProgramDashboard = () => {
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={4}>
           
-            <Grid item xs={2} sm={4} md={3}>
+         <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Vilages Visit"
@@ -859,7 +859,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Beehive"
@@ -869,7 +869,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll "
@@ -879,7 +879,7 @@ const VyaparProgramDashboard = () => {
 
 />
 </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meet"
@@ -889,7 +889,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle "
@@ -899,7 +899,7 @@ const VyaparProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Green Motivators "
@@ -909,7 +909,7 @@ const VyaparProgramDashboard = () => {
 
 />
 </Grid>
-<Grid item xs={4} sm={8} md={3}>
+<Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Vypar "
