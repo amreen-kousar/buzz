@@ -648,7 +648,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid> */}
-            <Grid item xs={4} sm={4} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Vilages"
@@ -658,7 +658,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Batches"
@@ -668,7 +668,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Self Sakthi Survey"
@@ -678,7 +678,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="2nd Day Turnout  %"
@@ -767,7 +767,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid> */}
-            <Grid item xs={4} sm={4} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Vilages Visits"
@@ -777,7 +777,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Beehive"
@@ -787,7 +787,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meet"
@@ -797,7 +797,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circles"
@@ -807,7 +807,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll"
@@ -817,7 +817,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 />
 </Grid>
-<Grid item xs={4} sm={8} md={3}>
+<Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Green Motivators"
@@ -827,7 +827,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 />
 </Grid>
-<Grid item xs={4} sm={8} md={3}>
+<Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Vyapar"
@@ -885,11 +885,11 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
       Funder<br />
       {/*  for role id 5 it should be project in 4 dahsbord  */}
-      Actual / Target
+      Actual / Target <br/>
 
-      Start Date :
+      Start Date : <br/>
 
-      End Date : 
+      End Date :  <br/>
       {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
     </span></Grid>
     <Grid item xs={6}>
@@ -923,7 +923,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
               />
             </Grid> */}
 
-<Grid item xs={4} sm={4} md={3}>
+<Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number  of Vilages Visits"
@@ -933,7 +933,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 />
 </Grid>
-             <Grid item xs={4} sm={8} md={3}>
+             <Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Batch"
@@ -944,7 +944,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 />
 </Grid>
            
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Self Shakthi Survey"
@@ -954,7 +954,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="2nd Day Turnout  %"
@@ -1046,7 +1046,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid> */}
-            <Grid item xs={4} sm={4} md={3}>
+           <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Vilages Visits"
@@ -1056,7 +1056,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Beehive"
@@ -1066,7 +1066,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meet"
@@ -1076,7 +1076,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circles"
@@ -1086,7 +1086,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll"
@@ -1096,7 +1096,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 />
 </Grid>
-<Grid item xs={4} sm={8} md={3}>
+<Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Green Motivators"
@@ -1106,7 +1106,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 />
 </Grid>
-<Grid item xs={4} sm={8} md={3}>
+<Grid item xs={6} sm={4} md={6}>
 
 <AppWidgetSummary
   title="Number of Vyapar"
