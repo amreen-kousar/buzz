@@ -34,6 +34,7 @@ const GreenProgramDashboard = () => {
   const [openFilter, setOpenFilter] = useState(false);
   const [filterData, setFilterData] = useState({});
   const [loader, setLoader] = useState(false);
+  const [errorMsg,setErrormsg]=useState(false)
   const [slected, setSelected] = useState(null);
   const [summaryData, setSummaryData] = useState([]);
   const [graphData, setGraphData] = useState(null);
@@ -80,17 +81,17 @@ const GreenProgramDashboard = () => {
     // };
 
     const data = {
-      partner_id: "",
-      start_date: '',
-      end_date: '',
-      funder_id: "",
-      dist: "",
-      taluk: "",
-      project_id: "",
-      trainer_id: "",
-      opsmanager: "",
-      somid: "",
-      gflid: "",
+      partner_id: g ? '' : i === 1 ? id?.id : '',
+      start_date: g === 'date' ? id : '',
+      end_date: g === 'date' ? i : '',
+      funder_id:g ? '' : i === 2 ? id?.id : '',
+      dist:  g === 'country' ? id : '',
+      taluk: g === 'country' ? i : '',
+      project_id: g ? '' : i === 3 ? id?.id :'',
+      trainer_id:g ? '' : i === 5 ? id?.id : '',
+      opsmanager: g ? '' : i === 4 ? id?.id : '',
+      somid: g ? '' : i === 12 ? id?.id : '',
+      gflid: g ? '' : i === 13 ? id?.id : '',
       roleid: roleid ,
       emp_id: userid ,
     };
@@ -113,6 +114,7 @@ const GreenProgramDashboard = () => {
         console.log('<--------------------setSummaryData', response.data);
       })
       .catch((error) => {
+         setErrormsg(error)
         console.log(error);
       });
   };
@@ -140,7 +142,7 @@ const GreenProgramDashboard = () => {
   };
 
   const onDateSubmit = (e) => {
-    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` });
+    setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` });
 
     apiHit(e?.startDate, e?.endDate, 'date');
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate });
@@ -153,13 +155,21 @@ const GreenProgramDashboard = () => {
     apiHit();
   };
 
-  if (summaryData?.length === 0) {
+  if (summaryData?.length === 0 && loader) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
         <CircularProgress />
       </Box>
     );
   }
+
+  // if(errorMsg!=''){
+  //   return(
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}}>
+  //       {errorMsg?.message}
+  //     </Box>
+  //   )
+  // }
 
   const getData = (itm, i) => {
     setSelected(itm);
@@ -200,14 +210,14 @@ const GreenProgramDashboard = () => {
           </Button>
         </Stack>
         <Container maxWidth="xl">
-          {slected && (
-            <Chip
-              label={`${slected?.type} : ${slected?.name} `}
-              onDelete={() => {
-                handleDelete(slected);
-              }}
-            />
-          )}
+        <Grid item spacing={10}>
+
+
+{
+  slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+}
+
+</Grid>
 
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <FiltersHome

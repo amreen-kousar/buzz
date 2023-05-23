@@ -149,7 +149,7 @@ let formatdata = summaryData?.data
   }, []);
 
 
-  if (errorMsg==' ' && loader) {
+  if ( loader) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
         <CircularProgress />
@@ -182,7 +182,7 @@ let formatdata = summaryData?.data
   }
 
 
-  if (errorMsg =='' && summaryData?.length === 0 ) {
+  if (summaryData?.length === 0 ) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
         <CircularProgress />
@@ -190,12 +190,12 @@ let formatdata = summaryData?.data
     )
   }
 
-  if(errorMsg?.status==500){
-    return(
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' ,fontWeight:700}}>
-      {errorMsg?.statusText}</Box>
-    )
-  }
+  // if(errorMsg?.status==500){
+  //   return(
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' ,fontWeight:700}}>
+  //     {errorMsg?.statusText}</Box>
+  //   )
+  // }
 
 
   const getData = (itm, i) => {
@@ -207,6 +207,7 @@ let formatdata = summaryData?.data
     handleCloseFilter()
     console.log("sdfgsdfdfssd", itm, i)
   }
+
   const onSumbit = (e, i) => {
     handleCloseFilter()
     setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })

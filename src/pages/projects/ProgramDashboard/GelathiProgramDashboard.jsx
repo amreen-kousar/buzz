@@ -34,7 +34,8 @@ const GelathiProgramDashboard = () => {
     const [openFilter, setOpenFilter] = useState(false);
    const [filterData, setFilterData] = useState({})
     const [loader, setLoader] = useState(false)
-  const [slected, setSelected] = useState(null)
+    const [errorMsg,setErrormsg]=useState(false)
+    const [slected, setSelected] = useState(null)
    const [summaryData, setSummaryData] = useState([]);
     const [graphData, setGraphData] = useState(null);
   
@@ -77,17 +78,17 @@ const GelathiProgramDashboard = () => {
       //   opsManager: '',
       // };
       const data = {
-        "partner_id": "",
-        "start_date": "",
-        "end_date": "",
-        "funder_id":"",
-        "dist":"",
-        "taluk":"",
-        "project_id":"",
-        "trainer_id":"",
-        "opsmanager":"",
-        "somid":"",
-        "gflid":"",
+        "partner_id": g ? "" : i === 1 ? id?.id : '',
+        "start_date": g === "date" ? id : '',
+        "end_date": g === "date" ? i : '',
+        "funder_id": g ? "" : i === 2 ? id?.id : '',
+        "dist":g === "country" ? id : "",
+        "taluk":g === "country" ? i : "",
+        "project_id":g ? "" : i === 3 ? id?.id : '',
+        "trainer_id":g ? "" : i === 5 ? id?.id : '',
+        "opsmanager":g ? "" : i === 4 ? id?.id : '',
+        "somid":g ? "" : i === 12 ? id?.id : '',
+        "gflid":g ? "" : i === 13 ? id?.id : '',
        "roleid":role,
         "emp_id":userid
     }
@@ -109,11 +110,13 @@ const GelathiProgramDashboard = () => {
           setLoader(false)
   console.log(response.data,"________>responsedata")
   setSummaryData(response.data);
-  GathathiGraphDataFormating(response.data);
+
           console.log("responseofapi", response.data)
         })
         .catch((error) => {
+         
           console.log(error);
+          setErrormsg(error)
         });
     };
   console.log(summaryData?.data,"resposeapi")
@@ -143,7 +146,7 @@ const GelathiProgramDashboard = () => {
     };
   
     const onDateSubmit = (e) => {
-      setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+      setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` })
   
       apiHit(e?.startDate, e?.endDate, "date")
       setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
@@ -157,7 +160,7 @@ const GelathiProgramDashboard = () => {
     }
   
   
-    if (summaryData?.length === 0) {
+    if (summaryData?.length === 0 ) {
       return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
           <CircularProgress />
@@ -165,7 +168,14 @@ const GelathiProgramDashboard = () => {
       )
     }
   
-  
+    // if(errorMsg!=''){
+    //   return(
+    //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}}  style={{fontSize:30}}>
+    //       {errorMsg?.message}
+    //     </Box>
+    //   )
+    // } 
+
     const getData = (itm, i) => {
       setSelected(itm)
       const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
@@ -201,9 +211,12 @@ const GelathiProgramDashboard = () => {
             </Button>
           </Stack>
           <Container maxWidth="xl">
-            {
-              slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
-            }
+          <Grid item spacing={10}>
+{
+  slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+}
+
+</Grid>
   
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
               <FiltersHome
