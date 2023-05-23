@@ -51,6 +51,10 @@ import GreenProgramQualityAssurance from './pages/qualityAssurance/GreenProgramQ
 import SelfSakthiByGelathi from './pages/qualityAssurance/SelfSakthiByGelathi';
 
 import ProjectWiseGelathiCircle from './pages/projects/ProjectWiseGelathiCircle';
+import FunderVyaparDashboard from './pages/projects/FunderDashBoard/FunderVyaparDashboard';
+import FUnderGreenDashboard from './pages/projects/FunderDashBoard/FUnderGreenDashboard';
+import FUnderSSDashboard from './pages/projects/FunderDashBoard/FUnderSSDashboard';
+import FunderGelathiDashboard from './pages/projects/FunderDashBoard/FunderGelathiDashboard';
 
 
 // ----------------------------------------------------------------------
@@ -128,7 +132,10 @@ export default function Router() {
             {path : 'qualityAssurance/selfsakthi' , element :<SelfSakthiQulityAssurance/> ,id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
             {path : 'qualityAssurance/greenprogram' , element :<GreenProgramQualityAssurance/> ,id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
             {path : 'qualityAssurance/selfsakthibygelathi' , element :<SelfSakthiByGelathi/> ,id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
-           
+            {path : "fundervyapardashboard" , element : <FunderVyaparDashboard/> , id : [8]},
+            {path:"fundergreendashboard", element:<FUnderGreenDashboard/> , id : [8]},
+            {path:"funderselshaktidashboard", element:<FUnderSSDashboard/> , id : [8]},
+            {path:"fundergelathidashboard", element:<FunderGelathiDashboard/> , id : [8]},
             {path:"addBus", element: <Addbus/>, id:[2]}
         ]
 
