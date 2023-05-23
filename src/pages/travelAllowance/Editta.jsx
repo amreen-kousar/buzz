@@ -314,11 +314,11 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
             <CloseIcon />
           </IconButton>
           <Typography id="edit-travel-allowances" sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Update Allowance
+            View Travel Allowance
           </Typography>
 
 
-          <Button id="save-button" autoFocus color="inherit" onClick={() => SendData()}>
+          <Button disabled id="save-button" autoFocus color="inherit" onClick={() => SendData()}>
             save
           </Button>
         </Toolbar>
@@ -337,15 +337,15 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
 
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField type="number" id="outlined-basic" defaultValue={editData?.start_odometer} onChange={(e) => { setSendData({ ...sendData, start_odometer: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
+                <TextField  disabled type="number" id="outlined-basic" defaultValue={editData?.start_odometer} onChange={(e) => { setSendData({ ...sendData, start_odometer: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
               </Stack>
               <Stack id="location" style={{ marginTop: 20 }}>
-                <TextField defaultValue={editData?.start_location_name} id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, start_location_name: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
+                <TextField disabled defaultValue={editData?.start_location_name} id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, start_location_name: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
               </Stack><br></br>
               <Stack id="form" style={{ marginTop: 20 }}>
                 <FormControl fullWidth >
-                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
-                  <Select labelId="Select Poa" id="demo-simple-select" defaultValue={editData?.poa_id} label="Poa" onChange={(e) => setSendData({ ...sendData, poa_id: e?.target?.value })} variant="standard" color="common">
+                  <InputLabel disabled id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Poa</InputLabel>
+                  <Select disabled labelId="Select Poa" id="demo-simple-select" defaultValue={editData?.poa_id} label="Poa" onChange={(e) => setSendData({ ...sendData, poa_id: e?.target?.value })} variant="standard" color="common">
                     {datadrop?.data?.map(itm => {
                       return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                     })}
@@ -360,20 +360,21 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
               <Stack id="date-pickers" style={{ marginTop: 20 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
+                  disabled
                     // label="Date"
                     id="edit-data-date"
                     defaultValue={editData?.date}
                     onChange={(newValue) => {
                       setSendData({ ...sendData, date: newValue })
                     }}
-                    renderInput={(params) => <TextField {...params} fullWidth />}
+                    renderInput={(params) => <TextField disabled {...params} fullWidth />}
                   />
                 </LocalizationProvider>
               </Stack><br></br>
               <Stack id="mode-of-travel" style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Mode Of Travel</InputLabel>
-                  <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
+                  <Select disabled variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Mode Of Travel"
                     id="demo-simple-select"
                     defaultValue={editData?.mode_of_travel}
@@ -391,7 +392,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
               <Stack id="rate-per-km" style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Rate Per Km</InputLabel>
-                  <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
+                  <Select disabled variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Rate Per Km"
                     id="demo-simple-select"
                     defaultValue={editData?.rate_per_KM}
@@ -408,7 +409,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Food Expenses </InputLabel>
-                  <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
+                  <Select disabled variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Food Expenses"
                     id="demo-simple-select"
                     defaultValue={editData?.da}
@@ -427,7 +428,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
               <Stack id="phone-charges" style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }} >Phone Charges</InputLabel>
-                  <Select variant="standard" color="common" sx={{ fontSize: '13px' }}
+                  <Select disabled variant="standard" color="common" sx={{ fontSize: '13px' }}
                     labelId="Select Phone Charges"
                     id="demo-simple-select"
                     defaultValue={editData?.telephone}
@@ -442,25 +443,25 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
               </Stack>
 
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" defaultValue={editData?.printing} onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="Printing" variant="outlined" color="common" />
+                <TextField disabled id="outlined-basic" defaultValue={editData?.printing} onChange={(e) => { setSendData({ ...sendData, printing: e?.target?.value }) }} label="Printing" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" defaultValue={editData?.stationery} onChange={(e) => { setSendData({ ...sendData, stationery: e?.target?.value }) }} label="Stationary" variant="outlined" color="common" />
+                <TextField disabled id="outlined-basic" defaultValue={editData?.stationery} onChange={(e) => { setSendData({ ...sendData, stationery: e?.target?.value }) }} label="Stationary" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField defaultValue={editData?.others} id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, others: e?.target?.value }) }} label="other expenses" variant="outlined" color="common" />
+                <TextField disabled defaultValue={editData?.others} id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, others: e?.target?.value }) }} label="other expenses" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" defaultValue={editData?.other_text} onChange={(e) => { setSendData({ ...sendData, other_text: e?.target?.value }) }} label="other expenses amounnt" variant="outlined" color="common" />
+                <TextField disabled id="outlined-basic" defaultValue={editData?.other_text} onChange={(e) => { setSendData({ ...sendData, other_text: e?.target?.value }) }} label="other expenses amounnt" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" defaultValue={editData?.end_odometer} onChange={(e) => { setSendData({ ...sendData, end_odometer: e?.target?.value }) }} label="end odometer reading" variant="outlined" color="common" />
+                <TextField disabled id="outlined-basic" defaultValue={editData?.end_odometer} onChange={(e) => { setSendData({ ...sendData, end_odometer: e?.target?.value }) }} label="end odometer reading" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" defaultValue={editData?.end_location_name} onChange={(e) => { setSendData({ ...sendData, end_location_name: e?.target?.value }) }} label="end location" variant="outlined" color="common" />
+                <TextField disabled id="outlined-basic" defaultValue={editData?.end_location_name} onChange={(e) => { setSendData({ ...sendData, end_location_name: e?.target?.value }) }} label="end location" variant="outlined" color="common" />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" defaultValue={editData?.location} onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common" />
+                <TextField disabled id="outlined-basic" defaultValue={editData?.location} onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common" />
               </Stack>
               <br /><br />
               {/* <div>
@@ -534,7 +535,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
                   Click here to Add images
                   <input style={{ display: "none" }} accept="image/png, image/gif, image/jpeg" id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
                 </label>
-                <Button id="post-images-button" onClick={postImages} 
+                <Button disabled id="post-images-button" onClick={postImages} 
                 sx={{
                   '&:hover': {
                     backgroundColor: '#ffd796',

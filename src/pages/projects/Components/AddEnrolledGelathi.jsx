@@ -31,6 +31,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     const [open, setOpen] = React.useState(false);
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState();
+    const [hover,setHover] = useState();
     const handleClickOpen = () => {
         setOpen(true);
         
@@ -105,16 +106,27 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       
     },
     input: {
-      accentColor: 'pink',   
-       width: '25px',
-      height: '25px',
-      borderRadius:'10%',
-      borderColor:'pink',
-    },
-    specifyColor : {
-      accentColor: 'pink',
+      accentColor: 'deeppink',  
+      cursor: 'pointer',
       
-  }
+      // backgroundColor:'deeppink', 
+      //  width: '25px',
+      // height: '25px',
+      // borderRadius:'10%',
+      // borderColor:'deeppink',
+      color:'deeppink',
+      width: '20px',
+      height: '20px',
+      borderRadius: '50%',
+      border: '2px solid deeppink',
+      backgroundColor: 'deeppink',
+      marginRight: '5px',
+      
+    },
+
+
+ 
+
   }
 
     return(
@@ -123,13 +135,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
      
      <Stack style={{ flexDirection: 'row'}}  mb={2}>
       
-      <Button variant="secondary" style={styles.buttonStyle}  onClick={handleClickOpen}
+      <Button variant="secondary" 
+      style={styles.buttonStyle}  onClick={handleClickOpen}
                   endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                   startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-people" /></IconButton>}>
                   <span style={{ width: "200px" }}>Enrolled Gelathis</span>
                 </Button>
-      </Stack>
+              
 
+      </Stack>
+      
       <Dialog fullScreen open={open} onClose={handleClose}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">
@@ -226,8 +241,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     {/* <FormControlLabel value="male" control={<Radio />} label="Male" />
     <FormControlLabel value="other" control={<Radio />} label="Other" /> */}
   {/* </RadioGroup> */} 
-  {(itm?.enroll=='0')?  <input type="radio" style={styles.input}  name="asd" onClick={() => {addGelathi(itm)}}  id="specifyColor"  value={{...label}}></input>: <input type="radio"  id="specifyColor"
-   style={styles.input} defaultChecked={true}  name="asd" onClick={() => {addGelathi(itm)}} value={{...label}}></input>}
+  {(itm?.enroll=='0')? 
+   <input type="radio" 
+  //  onMouseEnter={() => setHover(true)}
+  //  onMouseLeave={() => setHover(false)} 
+   style={styles.input}  
+   name="asd" onClick={() => {addGelathi(itm)}}  id="specifyColor"  value={{...label}}></input>: 
+   <input type="radio"  id="specifyColor"
+  //  onMouseEnter={() => setHover(true)}
+  //  onMouseLeave={() => setHover(false)}
+   style={styles.input} 
+   defaultChecked={true}  name="asd" onClick={() => {addGelathi(itm)}} value={{...label}}></input>}
 
                   </CardActions>  
                   </CardContent>

@@ -400,7 +400,8 @@ const noteSubmitHandler = () => {
             >
                 <Stack  id="pro-mutlidrawer-stack" direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                       {(clcikData?.title=='Self Shakti')? "Self Shakti" :(clcikData?.name)}
+                       
+                    {(clcikData?.title=='Self Shakti' || userId==4 )? "Self Shakti" :(clcikData?.name)}
                         {/* {` ${clcikData?.name}`} */}
                         {/* {clcikData?.title} */}
                         {console.log(clcikData,"clicked data")}
@@ -509,7 +510,7 @@ const noteSubmitHandler = () => {
 
                           
 
-                                <Stack style={{ flexDirection: 'row'}}  mb={2}>
+                               {(userId!=12)?<Stack style={{ flexDirection: 'row'}}  mb={2}>
       
       <Button variant="secondary" style={styles.buttonStyle}  
                   endIcon={<IconButton onClick={()=>{setPhotos(true);
@@ -517,7 +518,7 @@ const noteSubmitHandler = () => {
                   startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:photo-library-rounded" /></IconButton>}>
                   <span style={{ width: "200px" }}>Photos</span>
                 </Button>
-      </Stack>
+      </Stack>:null}
                             
                                
                            

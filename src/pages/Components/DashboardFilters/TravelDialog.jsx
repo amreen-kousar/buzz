@@ -61,7 +61,7 @@ export default function TravelDialog({ viewMessage }) {
     location: "",
     poa: "",
     srpoa:"",
-    date: new Date(),
+    date: new Date(),          
     modeoftravel: "",
     rateperkm: "",
     foodexpenses: "",
@@ -144,17 +144,17 @@ export default function TravelDialog({ viewMessage }) {
 
 console.log("submittedddddddd")
     var data = JSON.stringify({
-      "date": sendData?.date,
+      "date": moment(sendData?.date)?.format('YYYY-MM-DD'),
       "insideBangalore": false,
       "end_odometer": sendData?.endOdimeter,
       "telephone": sendData?.telephonecharges,
-      "end_location_name": sendData?.endLocation,
+      "end_location_name":locationS,
       "fairamount":sendData?.fairamount,
       "printing": sendData?.printing,
       "start_location_name": locationS,
       "poa_id": sendData?.poa,
       "srpoa":sendData?.srpoa,
-      "start_odometer": sendData?.odimeter,
+      "start_odometer": (sendData?.odimeter)?sendData?.odimeter:'',
       "rate_per_KM": sendData?.rateperkm,
       "stationery": sendData?.stationery,
       "klmtr": sendData?.rateperkm,
@@ -173,7 +173,7 @@ console.log("submittedddddddd")
       },
       data: data
     };
-console.log("successsssssssss")
+console.log("successsssssssss",data)
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
@@ -185,7 +185,7 @@ console.log("successsssssssss")
       });
 
   }
-
+console.log(sendData?.odimeter,"startodimeter")
   const postImages = async () => {
     if(image.length===0){
       alert("No photos to upload.")
@@ -496,10 +496,13 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
             {console.log(userDetails,"userdetailsssssssssssss")}
               {/* {(userDetails===12)?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />:null} */}
              
+
+             {/* you want to filter thr date map dropDownValues insted of dropdata.data */}
+             
               <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.poa==""?"Select POA *":"POA *"}</InputLabel>
                 {(datadrop?.data.length>0)?<Select required labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
-                
-                  {dropDownValues?.map(itm => {
+
+                  {datadrop?.data.map(itm => {
                     return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                   })}
                 </Select>:<Typography variant="body2" style={{marginLeft:20,marginTop:40}}>No POA</Typography>}

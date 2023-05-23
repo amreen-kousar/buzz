@@ -210,7 +210,7 @@ export default function gelathiCirclesList() {
             <Card
               style={styles.card1}
               onClick={() => {
-                setClickData({ name: itm.circle_name, title: ' Gelathi Cirlce Name', id: itm?.circle_id });
+                setClickData({ name: itm.circle_name, title: ' Gelathi Circle', id: itm?.circle_id });
                 handleOpenFilter();
               }}
             >

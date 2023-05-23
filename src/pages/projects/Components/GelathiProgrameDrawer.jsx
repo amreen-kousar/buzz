@@ -629,6 +629,12 @@ null :
                 }
               </CardContent>
             </Card> :null}
+{(userId==4 || userId==3 || userId==11 || userId==1) ?
+ 
+ session?.photos &&  <div style={{display:'flex' , flexDirection:'row'}}> {(session?.photos[0].photo1)?<img id="img-event-data" src={session?.photos[0].photo1} style={{height:100,width:100}}/>:"No Photos Found"}
+                 &nbsp;&nbsp;{(session?.photos[0].photo2)?<img id="img-event-data" src={session?.photos[0].photo2} style={{height:100,width:100}}/>:null}
+                </div>:null}
+
             <br/><Stack style={{ flexDirection: 'row'}}  mb={2}>
       
       <Button variant="secondary" style={styles.buttonStyle}  
@@ -637,6 +643,13 @@ null :
                   <span style={{ width: "200px" }}>Visit Participants   : {session?.total_participants}</span>
                 </Button>
       </Stack>
+      {session?.all_participants?.map((itm) => 
+                    {
+                return (
+                <> {(itm?.enroll=='1') ? <Card><CardContent>{itm?.participant_name}<br/>{session?.enroll_participant_villagename}</CardContent></Card>:null}</>
+                )
+                    }
+      )}
 
      {(session?.type== 4 ||session?.type == 10 ||session?.type== 16)? 
      (userId==6 || userId==13 )?
@@ -662,14 +675,14 @@ null :
       </Stack>
 
 { (session?.check_in!="0" && userId==6)?
-( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))?
+( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' || session?.gf_session_name?.split('_')[1].slice(0,2) == 'CM' && (userId==13 || userId==6))?
 null:<AddEnrollGelathi session={session}/>
 :
 null}
 
               {(session?.check_in!="0" && userId==6)?
               <>
-             {  ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))?
+             {  ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' || session?.gf_session_name?.split('_')[1].slice(0,2) == 'CM'   && (userId==13 || userId==6))?
                null
               :<AddGreenMotivators session={session}/>}
               </>
@@ -679,7 +692,7 @@ null}
               {
            
               (session?.check_in!="0" && userId==6)?
-              ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))? null :
+              ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV'  || session?.gf_session_name?.split('_')[1].slice(0,2) == 'CM' && (userId==13 || userId==6))? null :
 
 
 <AddEnrollVyapar session={session}/>              :null}
