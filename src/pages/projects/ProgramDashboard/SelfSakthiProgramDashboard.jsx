@@ -27,7 +27,7 @@ import FiltersHome from 'src/pages/Filters/FiltersHome';
 //  import GalathiChart from './Components/Charts/GalathiChart';
  import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
-
+import moment from 'moment';
 const SelfSakthiProgramDashboard = () => {
   const navigate = useNavigate();
   const data = localStorage?.getItem('userId')
@@ -170,7 +170,7 @@ setSummaryData(response.data);
         console.log("<------------setSummaryDatasetSummaryData", response.data)
       })
       .catch((error) => {
-        setLoader(false)
+       
         console.log(error);
         setErrormsg(error);
       });
@@ -184,13 +184,13 @@ let formatdata = summaryData?.data
 
   
 
-  // if (loader) {
-  //   return (
-  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-  //       <CircularProgress />
-  //     </Box>
-  //   )
-  // }
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
 
 
  
@@ -203,13 +203,15 @@ let formatdata = summaryData?.data
   };
 
   const onDateSubmit = (e) => {
-    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+    setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` })
 
     apiHit(e?.startDate, e?.endDate, "date")
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
     handleCloseFilter()
     console.log(e, "<----scasds")
   }
+
+  console.log(slected,"dateeeeeeeeeeeee")
 
   const handleDelete = () => {
  
@@ -219,7 +221,7 @@ let formatdata = summaryData?.data
   }
 
 
-  if (summaryData?.length === 0 && loader) {
+  if (summaryData?.length === 0 ) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
         <CircularProgress />
@@ -227,13 +229,13 @@ let formatdata = summaryData?.data
     )
   }
 
-  if(errorMsg!=''){
-    return(
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}}>
-        {errorMsg?.message}
-      </Box>
-    )
-  }
+  // if(errorMsg!=''){
+  //   return(
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}}>
+  //       {errorMsg?.message}
+  //     </Box>
+  //   )
+  // }
 
 
   const getData = (itm, i) => {
@@ -272,7 +274,7 @@ let formatdata = summaryData?.data
     { ...itemStyles[0], title: "Vyapar", total: 'vyapar', color: "vyapar", icon: 'eos-icons:product-subscriptions-outlined' },
 
   ]
-
+const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
   return (
     <>
 
@@ -291,7 +293,7 @@ let formatdata = summaryData?.data
 
 
   {
-    slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${moment((slected?.name)?.$d)?.format('YYYY-MM-DD')} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+    slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
   }
 
 </Grid>

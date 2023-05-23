@@ -110,11 +110,11 @@ const GelathiProgramDashboard = () => {
           setLoader(false)
   console.log(response.data,"________>responsedata")
   setSummaryData(response.data);
-  GathathiGraphDataFormating(response.data);
+
           console.log("responseofapi", response.data)
         })
         .catch((error) => {
-          setLoader(false)
+         
           console.log(error);
           setErrormsg(error)
         });
@@ -127,13 +127,13 @@ const GelathiProgramDashboard = () => {
     }, []);
   
   
-    // if (loader) {
-    //   return (
-    //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-    //       <CircularProgress />
-    //     </Box>
-    //   )
-    // }
+    if (loader) {
+      return (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+          <CircularProgress />
+        </Box>
+      )
+    }
   
   
    
@@ -146,7 +146,7 @@ const GelathiProgramDashboard = () => {
     };
   
     const onDateSubmit = (e) => {
-      setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+      setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` })
   
       apiHit(e?.startDate, e?.endDate, "date")
       setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
@@ -160,7 +160,7 @@ const GelathiProgramDashboard = () => {
     }
   
   
-    if (summaryData?.length === 0 && loader) {
+    if (summaryData?.length === 0 ) {
       return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
           <CircularProgress />
@@ -168,13 +168,13 @@ const GelathiProgramDashboard = () => {
       )
     }
   
-    if(errorMsg!=''){
-      return(
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}}  style={{fontSize:30}}>
-          {errorMsg?.message}
-        </Box>
-      )
-    } 
+    // if(errorMsg!=''){
+    //   return(
+    //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}}  style={{fontSize:30}}>
+    //       {errorMsg?.message}
+    //     </Box>
+    //   )
+    // } 
 
     const getData = (itm, i) => {
       setSelected(itm)
@@ -213,7 +213,7 @@ const GelathiProgramDashboard = () => {
           <Container maxWidth="xl">
           <Grid item spacing={10}>
 {
-  slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${moment((slected?.name)?.$d)?.format('YYYY-MM-DD')} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+  slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
 }
 
 </Grid>

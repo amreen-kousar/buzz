@@ -114,8 +114,7 @@ const GreenProgramDashboard = () => {
         console.log('<--------------------setSummaryData', response.data);
       })
       .catch((error) => {
-        setLoader(false);
-        setErrormsg(error)
+         setErrormsg(error)
         console.log(error);
       });
   };
@@ -126,13 +125,13 @@ const GreenProgramDashboard = () => {
     apiHit();
   }, []);
 
-  // if (loader) {
-  //   return (
-  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
-  //       <CircularProgress />
-  //     </Box>
-  //   );
-  // }
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -143,7 +142,7 @@ const GreenProgramDashboard = () => {
   };
 
   const onDateSubmit = (e) => {
-    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` });
+    setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` });
 
     apiHit(e?.startDate, e?.endDate, 'date');
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate });
@@ -164,13 +163,13 @@ const GreenProgramDashboard = () => {
     );
   }
 
-  if(errorMsg!=''){
-    return(
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}}>
-        {errorMsg?.message}
-      </Box>
-    )
-  }
+  // if(errorMsg!=''){
+  //   return(
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}}>
+  //       {errorMsg?.message}
+  //     </Box>
+  //   )
+  // }
 
   const getData = (itm, i) => {
     setSelected(itm);
@@ -215,7 +214,7 @@ const GreenProgramDashboard = () => {
 
 
 {
-  slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${moment((slected?.name)?.$d)?.format('YYYY-MM-DD')} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+  slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
 }
 
 </Grid>

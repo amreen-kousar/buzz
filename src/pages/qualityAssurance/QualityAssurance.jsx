@@ -106,7 +106,7 @@ setSummaryData(response.data);
         console.log("responseofapi", response.data)
       })
       .catch((error) => {
-        setLoader(false);
+     ``
         setErrormsg(error)
         console.log(error);
       });
@@ -119,21 +119,21 @@ let formatdata = summaryData?.data
   }, []);
 
 
-  // if (loader) {
-  //   return (
-  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-  //       <CircularProgress />
-  //     </Box>
-  //   )
-  // }
-  
-  if(errorMsg!=''){
-    return(
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}} >
-        {errorMsg?.message}
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
+        <CircularProgress />
       </Box>
     )
   }
+  
+  // if(errorMsg!=''){
+  //   return(
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}} >
+  //       {errorMsg?.message}
+  //     </Box>
+  //   )
+  // }
 
   return (
     <>
