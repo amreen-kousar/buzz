@@ -31,7 +31,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { Color } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
 import products from 'src/_mock/products';
@@ -45,6 +45,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 export default function GreenSurvey(props ) {
+
+  const {state} = useLocation()
   // console.log("🚀 ~ file: GreenSurvey.jsx:48 ~ GreenSurvey ~ enrolledGreenMotivators:", enrolledGreenMotivators)
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(false);
@@ -332,7 +334,7 @@ export default function GreenSurvey(props ) {
     {
      console.log("surveyyyyform")
     var data = JSON.stringify({
-    "partcipantId":props?.itm?.id ,
+    "partcipantId":props?.itm?.id || props?.itm.gelathi_id ,
     "Email": sendData?.Email,
     "Name_of_the_surveyor": sendData?.Name_of_the_surveyor,
     "Name_of_the_respondent": sendData?.Name_of_the_respondent,
@@ -578,7 +580,7 @@ const handleresources=(label,event)=>{
     tempData[label]=updatedList
     setChecked(tempData);
 }
-
+console.log(state.head, "state.head ingreen")
 
   return (
     <div>
@@ -612,9 +614,14 @@ const handleresources=(label,event)=>{
     
        <Stack style={{ position:'absolute',right:0 ,float:'right',margin:2,padding:2 }}  mb={2}>
       
-        {!(props?.itm?.is_survey)?<IconButton onClick={handleClickOpen}>
-         <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
-        </IconButton>:<IconButton>
+        {!(props?.itm?.is_survey)?<IconButton
+        
+        
+        onClick={handleClickOpen}>
+         <Icon  icon="clarity:form-line"
+           width={20} height={20} marginTop={20} 
+           color="#ff7424"   />
+        </IconButton >:<IconButton>
          <Icon  icon="charm:notes-tick" width={20} height={20} marginTop={20}  color="green" />
         </IconButton>}
         

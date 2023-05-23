@@ -199,7 +199,7 @@ const id = sessionStorage?.getItem("proId")
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                   Enrolled Vyaapar 
+                   Enrolled Vyaapar  
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User

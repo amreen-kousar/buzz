@@ -25,7 +25,7 @@ import { AppWidgetSummary } from '../../sections/@dashboard/app';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from '../Filters/FiltersHome';
 import DialogForm from './components/DialogForm'
-import baseURL from 'src/utils/api';
+import {baseURL} from 'src/utils/api';
 
 export default function QualityAssurance() {
   

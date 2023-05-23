@@ -42,6 +42,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
 import {oldbaseURL} from 'src/utils/api';
+import GelathiCircleDrawer from './GelathiCircleDrawer';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 const ExpandMore = styled((props) => {
@@ -68,13 +69,19 @@ export default function GelathiProgrameDrawer({
   clcikData,
   gelathiFacikitatorLead,
 }) {
-  const [session, setSession] = useState('');
+  var [session, setSession] = useState('');
   console.log("🚀 ~ file: GelathiProgrameDrawer.jsx:71 ~ session:", session.tb_id)
   const [showNote, setShowNote] = useState(false);
   const [gelatiNote, setGelatiNote] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
   const isSmallScreen = useMediaQuery('(max-width:600px)');
   const [gf , setGf] = useState(false)
+  const [reloadFromForm, setReloadFromForm] = useState(false);
+  const reloadFunction = () => {
+    setReloadFromForm(!reloadFromForm);
+  };
+
+  console.log("clickedDatawhat",clcikData )
 //notes save button
 
 const [SaveBtn , setSaveBtn] = useState(false) 
@@ -96,12 +103,14 @@ const handleExpandClick = () => {
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
 const [getImage , setGetImae] = useState([])
 
+const [circleDrawerData , setCircleDrawerData] = useState()
+
 // const [images,setImages] = useState([])
 const [photos,setPhotos] = React.useState(false)
 const [shown,setShown] = React.useState(false)
 const [images,setImages] = useState([])
 const [viewImage, setViewImage] = React.useState(false);
-
+const [openFilter, setOpenFilter] = useState(false);
   localStorage.setItem('clickData', clcikData);
   console.log("clcikData",clcikData)
   const localstoragrClickData = localStorage.getItem('clcikData');
@@ -152,6 +161,13 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
   }, [session.tb_id]);
   console.log(clcikData, '<---------gf_session_namegf_session_name');
 
+
+  const handleOpenFilter = () => {
+    setOpenFilter(true);
+  };
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
   //   image converting
   
   function getBase64(file, callback) {
@@ -225,7 +241,13 @@ const convertImage = (e) => {
 
     axios(config)
       .then(function (response) {
-        setSession(response.data);
+        session = response.data
+        setSession(session);
+        setCircleDrawerData({
+          "id": session?.circle_id,
+          "project_id":session?.project_id,
+          "title":session?.type_name
+        })
         console.log(response.data, '<---------setSessionsetSession');
       })
       .catch(function (error) {
@@ -465,7 +487,7 @@ else{
             
 
                   <Typography variant="body1" gutterBottom>
-                    Plan Date :{session?.plan_date}
+                    Plan Date  : {session?.plan_date}
                   </Typography>
 
               
@@ -473,8 +495,8 @@ else{
                   <>
                 
                 <Typography variant="body1" gutterBottom>
-                    Contact Person: 
-                    {session?.contact_person}
+                    Contact Person : 
+                     {session?.contact_person}
                   </Typography>
 
                   <Typography variant="body1" gutterBottom>
@@ -484,12 +506,12 @@ else{
                   </>}
 
                   <Typography variant="body1" gutterBottom>
-                    Trainer Name:
-                    {session?.trainer_name}
+                    Trainer Name &nbsp;:&nbsp;
+                     {session?.trainer_name}
                   </Typography>
 
                   <Typography variant="body1" gutterBottom>
-                    GF Name:
+                    GF Name &nbsp;:&nbsp;
                     {session?.gf_name}
                   </Typography>
                 </CardContent>
@@ -616,8 +638,28 @@ null :
                 </Button>
       </Stack>
 
- 
-
+     {(session?.type== 4 ||session?.type == 10 ||session?.type== 16)? 
+     (userId==6 || userId==13 )?
+     <Stack style={{ flexDirection: 'row'}}  mb={2}>
+      
+      <Button variant="secondary" style={styles.buttonStyle}  onClick={()=> handleOpenFilter()}
+                  endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                  startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="clarity:form-line" color="gray" /></IconButton>}>
+                  <span style={{ width: "200px" }}>Survey Form</span>
+                </Button>
+      </Stack>: null
+       : null}
+      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        <GelathiCircleDrawer
+          clcikData={circleDrawerData}
+          isOpenFilter={openFilter}
+          onOpenFilter={handleOpenFilter}
+          onCloseFilter={handleCloseFilter}
+          data1={gelathiFacikitatorLead}
+          reloadmethod={reloadFunction}
+          sessionData ={session}
+        />
+      </Stack>
 
 { (session?.check_in!="0" && userId==6)?
 ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))?

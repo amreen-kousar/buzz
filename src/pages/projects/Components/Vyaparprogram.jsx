@@ -50,6 +50,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function Vyaparprogram({ itm, changeState }) {
+  console.log("itmData", itm)
   const [open, setOpen] = React.useState(false);
   // const [openMessage, setOpenMessage] = useState(false);
   const [successMessage, setsuccessMessage] = useState(false);
@@ -310,7 +311,7 @@ const [entreprenur , setentrepreneurError] = useState(false)
       (checked['what_are_the_prerequisites_to_access_a_loan'] != 0)
     ) {
       var data = JSON.stringify({
-        partcipantId: itm?.id,
+        partcipantId: itm?.id || itm?.gelathi_id,
         gfId: sendData?.gfId,
         when_was_survey_done: survey,
         name_of_the_vyapari: sendData?.name_of_the_vyapari,

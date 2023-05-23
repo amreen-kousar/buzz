@@ -23,15 +23,19 @@ export default function ProjectWiseGelathiCircle() {
   const [reloadFromForm, setReloadFromForm] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
   const [filter, setFilter] = useState(false);
+  console.log("state,head", state.head)
   const reloadFunction = () => {
     setReloadFromForm(!reloadFromForm);
   };
   useEffect(() => {
     let isApiSubscribed = true;
+ 
     if (isApiSubscribed) {
       projData();
       circle();
     }
+
+
     return () => {
       isApiSubscribed = false;
     };
@@ -112,6 +116,8 @@ export default function ProjectWiseGelathiCircle() {
         console.log(error);
       });
   };
+
+ 
   const handleDelete = () => {
     setSelected(null);
     search = '';

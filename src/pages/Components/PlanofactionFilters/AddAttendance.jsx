@@ -35,19 +35,19 @@ export default function AddAttendance({ shown, setShown, batch }) {
   const [addValue,setAddValue]= useState([])
     console.log(batch,"<---asdsadasdasdasdasd")
 
-  const addAttendance = (itm) =>{
+  const addAttendance1 = (itm) =>{
     var data = 
     addValue?.includes(itm?.participant_id)?
     JSON.stringify({
       
       "PartcipantId": parseInt(itm?.participant_id),
-      
+      "circle_id":parseInt (batch?.circle_id),
       "Type": parseInt(batch.type)
     }):
     JSON.stringify({
       
       "PartcipantId": parseInt(itm?.participant_id),
-      
+      "circle_id": parseInt(batch?.circle_id),
       "Type": parseInt(batch.type)
     })
     
@@ -71,13 +71,53 @@ export default function AddAttendance({ shown, setShown, batch }) {
       else{
         setAddValue([...addValue,itm?.participant_id])
       }
+      
       console.log(JSON.stringify(response.message,'<-----------------response.message'));
-      alert(response.data.message)
+      alert(response?.Message)
+      console.log("after alert")
     })
     .catch(function (error) {
       console.log(error);
+      alert(error?.Message)
     });
     
+  }
+
+  const addAttendance  = async(itm)=>{
+    var data = 
+    addValue?.includes(itm?.participant_id)?
+    JSON.stringify({
+      
+      "PartcipantId": parseInt(itm?.participant_id),
+      "circle_id":parseInt (batch?.circle_id),
+      "Type": parseInt(batch.type)
+    }):
+    JSON.stringify({
+      
+      "PartcipantId": parseInt(itm?.participant_id),
+      "circle_id": parseInt(batch?.circle_id),
+      "Type": parseInt(batch.type)
+    })
+    const response = await axios.post('https://bdms.buzzwomen.org/appGo/allAttendence', data ,  {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+  }).then((res)=>{
+    if( addValue?.includes(itm?.participant_id)){
+      const filteredData = addValue?.filter(item=>item!==itm?.participant_id)
+      setAddValue(filteredData)
+    }
+    else{
+      setAddValue([...addValue,itm?.participant_id])
+    }
+    if(res?.Message){
+      alert("hi")
+      console.log("concole.loginside the then")
+    }
+  }).catch((error)=>{
+    alert(error.Message)
+  })
+
   }
 
   const handleOpenFilter = () => {

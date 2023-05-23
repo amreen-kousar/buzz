@@ -169,7 +169,7 @@
             
 //             var config = {
 //               method: 'post',
-//               url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircleData.php',
+//               url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircleDataNew.php',
 //               headers: { 
 //                 'Content-Type': 'application/json'
 //               },
@@ -597,7 +597,7 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
 
     var config = {
       method: 'post',
-      url: oldbaseURL+'getGelathiCircleData.php',
+      url: oldbaseURL+'getGelathiCircleDataNew.php',
       headers: {
         'Content-Type': 'application/json',
       },
