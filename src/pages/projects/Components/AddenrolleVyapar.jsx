@@ -27,6 +27,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState('');
     const [participantData,setParticipantData]=useState('');
+    const [reload , setReload] = useState(false)
+
+    const reloadFUnction =() =>{
+      setReload(!reload)
+    }
     const handleClickOpen = () => {
         setOpen(true);
         
@@ -69,7 +74,7 @@ console.log(session,"sessionnnnnnnnnnnnnnnnnnnn")
 useEffect(()=>{
 getEnrollVyapar();
 getAddPartcipants();
-},[open])
+},[open ,reload])
 
   const getEnrollVyapar=()=>{
     var data = JSON.stringify({
@@ -151,10 +156,10 @@ const getAddPartcipants=()=>{
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            All Participants
+            All Participants 
           </Typography>
 
-          <AddParticipants type="vyapar" session={session}/>
+          <AddParticipants type="vyapar" session={session}  reloadFUnction={reloadFUnction}/>
           
         </Toolbar>
         {/* <Webcam
@@ -186,7 +191,7 @@ const getAddPartcipants=()=>{
                     </CardContent>
                     
                     
-                </Card><br/><Typography style={{textAlign:'center'}} variant="h6"> All Participants : &nbsp; {session?.total_participants}</Typography>
+                </Card><br/><Typography style={{textAlign:'center'}} variant="h6"> All Participants : &nbsp; {sessiondata?.total_participants}</Typography>
                 <Card>
                     <CardContent>
                         

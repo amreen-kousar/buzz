@@ -48,6 +48,7 @@ const [formData , setFormData] = useState()
     circle();
   }, [clcikData]);
   const gelathiDrawerReloder = () => {
+    console.log("Ihadbeencalledfromprops")
     setReloadFromForm(!reloadFromForm);
   };
   useEffect(() => {
@@ -207,7 +208,7 @@ return (
                                 // if we want to see filed form means need to call another component so that time we can use this kind of methods to call instead of rendering inside the map
                               }}
                             >
-                              <GreenSurvey itm={itm } changeState={reloadmethod} />
+                              <GreenSurvey itm={itm } changeState={gelathiDrawerReloder} />
                                </IconButton>
                              
                           ):null
@@ -230,7 +231,7 @@ return (
                                 // if we want to see filed form means need to call another component so that time we can use this kind of methods to call instead of rendering inside the map
                               }}
                             >
-                              <Vyaparprogram itm={itm } changeState={reloadmethod} />
+                              <Vyaparprogram itm={itm } changeState={gelathiDrawerReloder} />
                            </IconButton>
                           ):<></>
                           ): <></>
@@ -242,7 +243,7 @@ return (
                         <Typography variant="subtitle1">{itm?.firstName}</Typography>
                         <Typography variant="subtitle1" gutterBottom>
                           <Typography variant="body1" gutterBottom>
-                            {itm?.villagename}
+                            {itm?.villagename} one two 3
                           </Typography>
                         </Typography>
                       </CardContent>

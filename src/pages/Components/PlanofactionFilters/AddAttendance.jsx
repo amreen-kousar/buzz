@@ -34,8 +34,15 @@ export default function AddAttendance({ shown, setShown, batch }) {
   const [clcikData, setClickData] = useState()
   const [addValue,setAddValue]= useState([])
     console.log(batch,"<---asdsadasdasdasdasd")
+const handleCheckBox= ()=>{
+ 
+  var checkbox = document.getElementById(itm.participant_id);
+  checkbox.checked = false;
+  alert("Please Check In First ")
+    console.log(itm,"<---sadasdasd")
 
-  const addAttendance1 = (itm) =>{
+}
+  const addAttendance = (itm) =>{
     var data = 
     addValue?.includes(itm?.participant_id)?
     JSON.stringify({
@@ -73,7 +80,7 @@ export default function AddAttendance({ shown, setShown, batch }) {
       }
       
       console.log(JSON.stringify(response.message,'<-----------------response.message'));
-      alert(response?.Message)
+      alert("Attendance Added Succesfully")
       console.log("after alert")
     })
     .catch(function (error) {
@@ -83,7 +90,7 @@ export default function AddAttendance({ shown, setShown, batch }) {
     
   }
 
-  const addAttendance  = async(itm)=>{
+  const addAttendance1  = async(itm)=>{
     var data = 
     addValue?.includes(itm?.participant_id)?
     JSON.stringify({
@@ -145,6 +152,7 @@ export default function AddAttendance({ shown, setShown, batch }) {
     setOpen(false);
   };
 
+  console.log("batchin attendance  " , batch)
   return (
     <div>
       <Dialog
@@ -185,6 +193,8 @@ export default function AddAttendance({ shown, setShown, batch }) {
             onCloseFilter={handleCloseFilter}
           /> */}
         </Stack>
+
+      {(batch?.check_in != 0)?  <>
         {batch?.all_participants?.map(itm => {
           return (
             <Stack style={{ top: 100 }}>
@@ -200,10 +210,13 @@ export default function AddAttendance({ shown, setShown, batch }) {
                       <Typography variant="subtitle2">{itm?.participant_name}</Typography>
                   
                     </div>
-                    <Checkbox onClick={()=>{
-                      addAttendance(itm)
-                      console.log(itm,"<---sadasdasd")
+                
+                <Checkbox onClick={()=>{
+
+                      addAttendance(itm) 
+                   
                     }} {...label} />
+                   
                   </CardActions>
 
                   {console.log(itm?.participant_name, '<----------itm?.participant_name')}
@@ -213,7 +226,15 @@ export default function AddAttendance({ shown, setShown, batch }) {
 
           )
         })}
+</>
+:
+<>
+<Typography sx={{ ml: 2, flex: 1,color:"black" }} variant="h4" component="div">
+           PLease Do Check IN First
+            </Typography>
+</>
 
+}
       </Dialog>
     </div>
   );

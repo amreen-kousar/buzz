@@ -29,7 +29,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ShaktiDialog({ shown, setShown, batch }) {
+export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,handleCloseDilog }) {
   console.log(batch, '<--------shownshownshown')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
@@ -113,13 +113,13 @@ console.log(checkData,"checkedta")
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div">
-              Self Shakti
+              Self Shakti 
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               Add Participants
             </Button> */}
             {console.log(checkData,"addparticipants")}
-            <AddParticipants batch={batch} checkData={checkData}/>
+            <AddParticipants batch={batch} checkData={checkData} reloadFUnction={reloadfuncton} handleCloseDilog={handleCloseDilog}/>
 
           </Toolbar>
         </AppBar>
@@ -179,7 +179,7 @@ console.log(checkData,"checkedta")
                       }>
                         {itm?.participant_name}
                         </Typography>
-                   <ShaktiForm itm={itm}/>
+                   <ShaktiForm itm={itm} reloadFUnction={reloadfuncton} />
                     </div>
                   </CardActions>
 

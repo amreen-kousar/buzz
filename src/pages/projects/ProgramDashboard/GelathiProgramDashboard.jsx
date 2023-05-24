@@ -582,7 +582,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid> */}
-            <Grid item xs={6} sm={4} md={6}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Vilages"
@@ -592,7 +592,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-           <Grid item xs={6} sm={4} md={6}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meeting"
@@ -602,7 +602,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={6} sm={4} md={6}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Gelathi Enrolled"
@@ -612,7 +612,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={6} sm={4} md={6}>
+            <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Sporthi Survey"
@@ -624,7 +624,7 @@ const GelathiProgramDashboard = () => {
 
 </Grid>
 
-<Grid item xs={6} sm={4} md={6}>
+<Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Beehives"
@@ -634,7 +634,7 @@ const GelathiProgramDashboard = () => {
 
 />
 </Grid>
-<Grid item xs={6} sm={4} md={6}>
+<Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Sporthi Modules Completed"
@@ -721,7 +721,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid> */}
-            <Grid item xs={6} sm={4} md={6}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Vilages"
@@ -731,7 +731,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={6} sm={4} md={6}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meeting"
@@ -741,7 +741,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={6} sm={4} md={6}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle"
@@ -751,7 +751,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={6} sm={4} md={6}>
+            <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll"
@@ -763,7 +763,7 @@ const GelathiProgramDashboard = () => {
 
 </Grid>
 
-<Grid item xs={6} sm={4} md={6}>
+<Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Beehives"
@@ -773,7 +773,7 @@ const GelathiProgramDashboard = () => {
 
 />
 </Grid>
-<Grid item xs={6} sm={4} md={6}>
+<Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Green Motivators"
@@ -860,7 +860,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid> */}
-           <Grid item xs={6} sm={4} md={6}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Vilages Visits"
@@ -870,7 +870,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={6} sm={4} md={6}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meeting"
@@ -880,7 +880,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-           <Grid item xs={6} sm={4} md={6}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle"
@@ -890,7 +890,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-           <Grid item xs={6} sm={4} md={6}>
+           <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll"
@@ -902,7 +902,7 @@ const GelathiProgramDashboard = () => {
 
 </Grid>
 
-<Grid item xs={4} sm={8} md={6}>
+<Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Beehives"
@@ -912,7 +912,7 @@ const GelathiProgramDashboard = () => {
 
 />
 </Grid>
-           <Grid item xs={6} sm={4} md={6}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Green Motivators"
@@ -999,7 +999,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid> */}
-            <Grid item xs={6} sm={4} md={6}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Vilages"
@@ -1009,7 +1009,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-           <Grid item xs={6} sm={4} md={6}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meeting"
@@ -1019,7 +1019,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-           <Grid item xs={6} sm={4} md={6}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle"
@@ -1029,7 +1029,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-           <Grid item xs={6} sm={4} md={6}>
+           <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll"
@@ -1051,7 +1051,7 @@ const GelathiProgramDashboard = () => {
 
 />
 </Grid>
-           <Grid item xs={6} sm={4} md={6}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Green Motivators"

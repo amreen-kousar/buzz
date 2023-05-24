@@ -377,7 +377,7 @@ const [entreprenur , setentrepreneurError] = useState(false)
 
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/addBuzzVyaparProgramBaseline.php',
+        url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
         headers: {
           'Content-Type': 'application/json',
         },

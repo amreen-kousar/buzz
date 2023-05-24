@@ -163,7 +163,14 @@ export default function ProjectWiseGelathiCircle() {
             Filter
           </Button>
         ) : null}
-        {roleid == 6 || roleid == 13 ? <ChooseGelathi data1={data1} circle={circle} title={state.title} api={state} /> : null}
+        {roleid == 6 || roleid == 13 ? 
+        <>
+{state.head =="_SPS" || state.head == '_VPS' || state.head == '_GPS' ?
+<ChooseGelathi data1={data1} circle={circle} title={state.title} api={state} />: null
+}
+        </>
+       
+         : null}
       </Stack>
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <Filtersmain
