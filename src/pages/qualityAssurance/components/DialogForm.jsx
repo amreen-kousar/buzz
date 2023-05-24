@@ -53,6 +53,7 @@ export default function DialogForm({ shown, setShown, batch }) {
       the_gf_comptetly_carried_out_following_funtions:[],
       the_gf_caried_followig_fuctions_bfore_traning_or_meting_started:[],
       check_which_ones_the_gf_did_not_do:[],
+      any_futher_training_and_understding_reqired_by_gf_traing_module:[],
       check_which_ones_the_gelathi_did_not_do:[],
       check_which_ones_the_gelathi_did_not_do_1:[],
       check_which_ones_the_gelathi_did_not_do_2:[],
@@ -61,6 +62,10 @@ export default function DialogForm({ shown, setShown, batch }) {
       check_which_ones_the_trainer_did_not_do_2:[],
       check_which_ones_the_trainer_did_not_do_3:[],
       check_which_ones_the_trainer_did_not_do_4:[],
+      during_the_debrief_the_trainer_did:[],
+      during_the_debriefs_for_role_plays_the_trainer_did_not_ask:[],
+      during_the_debrief_did_the_trainer_did_not_do_the_following:[],
+      
   });
   
 
@@ -103,6 +108,34 @@ export default function DialogForm({ shown, setShown, batch }) {
   const [trainers,setTrainers]=useState([]);
   console.log("🚀 ~ file: DialogForm.jsx:99 ~ DialogForm ~ trainers:", trainers)
   const [assessmentType,setassessmentType]=useState('');
+  const [intract,setIntract]=useState('');
+  const [module,setModule]=useState('');
+  const [module1,setModule1]=useState('');
+  const [module2,setModule2]=useState('');
+  const [attend,setAttend]=useState('');
+  const [rate1,setRate1]=useState('');
+  const [rate2,setRate2]=useState('');
+  const [rate3,setRate3]=useState('');
+  const [rate4,setRate4]=useState('');
+  const [rate5,setRate5]=useState('');
+  const [rate6,setRate6]=useState('');
+  const [rate7,setRate7]=useState('');
+  const [rate8,setRate8]=useState('');
+  const [rate9,setRate9]=useState('');
+  const [rate10,setRate10]=useState('');
+  const [leave,setLeave]=useState('');
+  const [leave1,setLeave1]=useState('');
+  const [leave2,setLeave2]=useState('');
+  const [leave3,setLeave3]=useState('');
+  const [leave4,setLeave4]=useState('');
+  const [engage,setEngage]=useState('');
+  const [participant,setParticipant]=useState('');
+  console.log("🚀 ~ file: DialogForm.jsx:130 ~ DialogForm ~ participant:", participant)
+  const [level1,setLevel1]=useState('');
+  const [level2,setLevel2]=useState('');
+  const [level3,setLevel3]=useState('');
+  const [level4,setLevel4]=useState('');
+  const [level5,setLevel5]=useState('');
   const [day1Day2,setDay1Day2]=useState('');
   console.log("🚀 ~ file: DialogForm.jsx:102 ~ DialogForm ~ day1Day2:", day1Day2)
 
@@ -150,6 +183,115 @@ export default function DialogForm({ shown, setShown, batch }) {
 }
   const handleassessmentType=(event)=>{
     setassessmentType(event.target.value)
+    
+}
+  const handleIntract=(event)=>{
+    setIntract(event.target.value)
+    
+}
+  const handleModule=(event)=>{
+    setModule(event.target.value)
+    
+}
+  const handleModule1=(event)=>{
+    setModule1(event.target.value)
+    
+}
+  const handleModule2=(event)=>{
+    setModule2(event.target.value)
+    
+}
+  const handleAttend=(event)=>{
+    setAttend(event.target.value)
+    
+}
+  const handleRate1=(event)=>{
+    setRate1(event.target.value)
+    
+}
+  const handleRate2=(event)=>{
+    setRate2(event.target.value)
+    
+}
+  const handleRate3=(event)=>{
+    setRate3(event.target.value)
+    
+}
+  const handleRate4=(event)=>{
+    setRate4(event.target.value)
+    
+}
+  const handleRate5=(event)=>{
+    setRate5(event.target.value)
+    
+}
+  const handleRate6=(event)=>{
+    setRate6(event.target.value)
+    
+}
+  const handleRate7=(event)=>{
+    setRate7(event.target.value)
+    
+}
+  const handleRate8=(event)=>{
+    setRate8(event.target.value)
+    
+}
+  const handleRate9=(event)=>{
+    setRate9(event.target.value)
+    
+}
+  const handleRate10=(event)=>{
+    setRate10(event.target.value)
+    
+}
+  const handleLeave=(event)=>{
+    setLeave(event.target.value)
+    
+}
+  const handleLeave1=(event)=>{
+    setLeave1(event.target.value)
+    
+}
+  const handleLeave2=(event)=>{
+    setLeave2(event.target.value)
+    
+}
+  const handleLeave3=(event)=>{
+    setLeave3(event.target.value)
+    
+}
+  const handleLeave4=(event)=>{
+    setLeave4(event.target.value)
+    
+}
+  const handleEngage=(event)=>{
+    setEngage(event.target.value)
+    
+}
+  const handleParticipant=(event)=>{
+    setParticipant(event.target.value)
+    
+}
+
+  const handlelevel1=(event)=>{
+    setLevel1(event.target.value)
+    
+}
+  const handlelevel2=(event)=>{
+    setLevel2(event.target.value)
+    
+}
+  const handlelevel3=(event)=>{
+    setLevel3(event.target.value)
+    
+}
+  const handlelevel4=(event)=>{
+    setLevel4(event.target.value)
+    
+}
+  const handlelevel5=(event)=>{
+    setLevel5(event.target.value)
     
 }
   const handleDay1daay2=(event)=>{
@@ -284,11 +426,12 @@ const [apiData, setApiData] = useState({})
     did_this_module_take_20_minutes_as_allotted: "",
     did_any_new_women_attend_the_training_session_during_module:"",
     if_so_how_many_1: "",
+    during_the_debrief_did_the_trainer_did_not_do_the_following:"",
     check_which_ones_the_trainer_did_not_do_2: "",
     during_the_debrief_the_trainer_did: "",
     did_any_women_leve_training_session_during_or_after_1st_module_1: "",
     if_so_how_many_2: "",
-    did_this_module_take_20_minutes_as_allotted_2: "",
+    did_this_module_take_20_minutes_as_allotted_1: "",
     did_any_new_women_attend_training_session_during_this_module_1: "",
     if_so_how_many_3: "",
     check_which_ones_the_trainer_did_not_do_3:"",
@@ -298,12 +441,12 @@ const [apiData, setApiData] = useState({})
     were_the_participants_responsive_during_the_debriefing: "",
     did_any_women_leave_tring_session_dring_or_after_1st_module_2: "",
     if_so_how_many_4: "",
-    did_this_module_take_30_minutes_as_allotted_4: "",
+    did_this_module_take_30_minutes_as_allotted: "",
     how_many_women_remained_by_the_end_of_this_training_session: "",
     how_many_are_likely_to_come_back: "",
     did_any_new_women_attend_training_session_during_this_module_2: "",
     if_so_how_many_5: "",
-    did_this_module_take_30_minutes_as_allotted_5: "",
+    did_this_module_take_30_minutes_as_allotted_1: "",
     check_which_ones_the_trainer_did_not_do_4: "",
     was_the_recap_done: "",
     did_the_recap_take_15_minutes_as_allotted: "",
@@ -345,6 +488,7 @@ const [apiData, setApiData] = useState({})
     name_of_the_gelathi_being_evaluated: "",
     days_modules: "",
     check_which_ones_the_gelathi_did_not_do: "",
+    how_many_women_attended_the_training_session_1:"",
     how_many_women_attended_the_training_session_5: "",
     check_which_ones_the_gelathi_did_not_do_1: "",
     was_the_recap_done_1: "",
@@ -375,40 +519,42 @@ let data = JSON.stringify({
   name_of_the_district:sendForm?.name_of_the_district,
   name_of_the_taluk: sendForm?.name_of_the_taluk,
   name_of_the_village_and_the_venue_of_meeting_or_training: sendForm?.name_of_the_village_and_the_venue_of_meeting_or_training,
-  day1_or_day2:"",
-  name_of_the_trainer_being_evaluated:"",
+  day1_or_day2:day1Day2,
+  name_of_the_trainer_being_evaluated:sendForm.name_of_the_trainer_being_evaluated,
   check_which_ones_the_trainer_did_not_do: checked['check_which_ones_the_trainer_did_not_do'],
   how_many_women_attended_the_training_session: sendForm?.how_many_women_attended_the_training_session,
   check_which_ones_the_trainer_did_not_do_1:checked['check_which_ones_the_trainer_did_not_do_1'],
-  were_the_women_interactive: "",
-  did_any_women_leave_tring_session_dring_or_after_1st_module: "",
+  were_the_women_interactive: intract,
+  did_any_women_leave_tring_session_dring_or_after_1st_module: leave,
   if_so_how_many: parseInt(sendForm.if_so_how_many),
-  did_this_module_take_20_minutes_as_allotted: "",
-  did_any_new_women_attend_the_training_session_during_module:"",
+  did_this_module_take_20_minutes_as_allotted: module,
+  did_any_new_women_attend_the_training_session_during_module:sendForm.did_any_new_women_attend_the_training_session_during_module,
   if_so_how_many_1:parseInt(sendForm.if_so_how_many_1),
   check_which_ones_the_trainer_did_not_do_2: checked['check_which_ones_the_trainer_did_not_do_2'],
-  during_the_debrief_the_trainer_did: "",
-  did_any_women_leve_training_session_during_or_after_1st_module_1: "",
+  during_the_debrief_did_the_trainer_did_not_do_the_following:checked['during_the_debrief_did_the_trainer_did_not_do_the_following'],
+  during_the_debrief_the_trainer_did: checked['during_the_debrief_the_trainer_did'],
+  did_any_women_leve_training_session_during_or_after_1st_module_1:leave1,
   if_so_how_many_2: parseInt(sendForm.if_so_how_many_2),
-  did_this_module_take_20_minutes_as_allotted_2: "",
-  did_any_new_women_attend_training_session_during_this_module_1: "",
+  did_this_module_take_20_minutes_as_allotted_1: module1,
+  did_any_new_women_attend_training_session_during_this_module_1: attend,
   if_so_how_many_3: parseInt(sendForm.if_so_how_many_3),
   check_which_ones_the_trainer_did_not_do_3:checked['check_which_ones_the_trainer_did_not_do_3'],
-  during_the_debriefs_for_role_plays_the_trainer_did_not_ask: "",
-  did_the_trainer_leave_women_to_read_role_play_card_themselves: "",
-  did_the_groups_engage_and_interact_among_themselves_well: "",
-  were_the_participants_responsive_during_the_debriefing: "",
-  did_any_women_leave_tring_session_dring_or_after_1st_module_2: "",
+  during_the_debriefs_for_role_plays_the_trainer_did_not_ask: checked['during_the_debriefs_for_role_plays_the_trainer_did_not_ask'],
+  did_the_trainer_leave_women_to_read_role_play_card_themselves: leave2,
+  did_the_groups_engage_and_interact_among_themselves_well: engage,
+  were_the_participants_responsive_during_the_debriefing:participant,
+  // did_any_women_leave_tring_session_dring_or_after_1st_module_2: leave3,
+  did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1: leave4,
   if_so_how_many_4: parseInt(sendForm.if_so_how_many_4),
-  did_this_module_take_30_minutes_as_allotted_4: "",
-  how_many_women_remained_by_the_end_of_this_training_session: "",
-  how_many_are_likely_to_come_back: "",
-  did_any_new_women_attend_training_session_during_this_module_2: "",
+  did_this_module_take_30_minutes_as_allotted: module2,
+  how_many_women_remained_by_the_end_of_this_training_session: sendForm.how_many_women_remained_by_the_end_of_this_training_session,
+  how_many_are_likely_to_come_back: sendForm.how_many_are_likely_to_come_back,
+  did_any_new_women_attend_training_session_during_this_module_2: sendForm.did_any_new_women_attend_training_session_during_this_module_2,
   if_so_how_many_5: parseInt(sendForm.if_so_how_many_5),
-  did_this_module_take_30_minutes_as_allotted_5: "",
+  did_this_module_take_30_minutes_as_allotted_1: sendForm.did_this_module_take_30_minutes_as_allotted_1,
   check_which_ones_the_trainer_did_not_do_4: checked['check_which_ones_the_trainer_did_not_do_4'],
-  was_the_recap_done: "",
-  did_the_recap_take_15_minutes_as_allotted: "",
+  was_the_recap_done: sendForm.was_the_recap_done,
+  did_the_recap_take_15_minutes_as_allotted: sendForm.did_the_recap_take_15_minutes_as_allotted,
   name_of_the_gf: sendForm?.name_of_the_gf,
   no_of_participants_at_the_start_of_the_session: parseInt(sendForm.no_of_participants_at_the_start_of_the_session),
   assessment_of: assessmentType,
@@ -419,25 +565,25 @@ let data = JSON.stringify({
   check_which_ones_the_gf_did_not_do: checked['check_which_ones_the_gf_did_not_do'],
   number_of_enrolled_gelathis_in_the_circle: parseInt(sendForm.number_of_enrolled_gelathis_in_the_circle),
   no_of_attended_gelathis: parseInt(sendForm.no_of_attended_gelathis),
-  level_of_participation_1: "",
-  level_of_participation_2: "",
-  level_of_participation_3: "",
-  level_of_participation_4: "",
-  level_of_participation_5: "",
+  level_of_participation_1: parseInt(level1),
+  level_of_participation_2: parseInt(level2),
+  level_of_participation_3: parseInt(level3),
+  level_of_participation_4: parseInt(level4),
+  level_of_participation_5: parseInt(level5),
   the_gf_competently_covered_folowing_things_in_training_delivered: "",
-  rate_the_gf_1: "",
-  rate_the_gf_2: "",
-  rate_the_gf_3: "",
-  rate_the_gf_4:"",
-  rate_the_gf_5: "",
-  rate_the_gf_6:"",
-  rate_the_gf_7: "",
-  rate_the_gf_8:"",
-  rate_the_gf_9: "",
-  rate_the_gf_10:"",
+  rate_the_gf_1: parseInt(rate1),
+  rate_the_gf_2:parseInt(rate2),
+  rate_the_gf_3: parseInt(rate3),
+  rate_the_gf_4:parseInt(rate4),
+  rate_the_gf_5: parseInt(rate5),
+  rate_the_gf_6:parseInt(rate6),
+  rate_the_gf_7: parseInt(rate7),
+  rate_the_gf_8:parseInt(rate8),
+  rate_the_gf_9: parseInt(rate9),
+  rate_the_gf_10:parseInt(rate10),
   what_worked_in_the_training: sendForm.what_worked_in_the_training,
   what_can_be_better_next_time: sendForm.what_can_be_better_next_time,
-  any_futher_training_and_understding_reqired_by_gf_traing_module: "",
+  any_futher_training_and_understding_reqired_by_gf_traing_module: checked['any_futher_training_and_understding_reqired_by_gf_traing_module'],
   did_you_find_anything_traiing_or_gf_that_neds_to_worked_priority: sendForm.did_you_find_anything_traiing_or_gf_that_neds_to_worked_priority,
   details_of_success_stories_to_be_collected_from_gelathis_by_gf: sendForm.details_of_success_stories_to_be_collected_from_gelathis_by_gf,
   deadline_to_collect_the_stories: sendData.deadline_to_collect_the_stories,
@@ -448,6 +594,7 @@ let data = JSON.stringify({
   days_modules: "",
   check_which_ones_the_gelathi_did_not_do: checked['check_which_ones_the_gelathi_did_not_do'],
   how_many_women_attended_the_training_session_5: "",
+  how_many_women_attended_the_training_session_1:sendForm.how_many_women_attended_the_training_session_1,
   check_which_ones_the_gelathi_did_not_do_1: checked['check_which_ones_the_gelathi_did_not_do_1'],
   was_the_recap_done_1: "",
   did_the_debrief_done_by_gelathi: "",
@@ -704,7 +851,7 @@ id="date-time-picker"
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
           <CardContent>
-          <Typography variant = 'h5'>Gelathi program</Typography>
+          <Typography variant = 'h5'>Gelathi Program</Typography>
           </CardContent>
         </Card>
         <CardContent>
@@ -1090,14 +1237,17 @@ id="date-time-picker"
                 <CardContent sx={{width:'30%'}}>Reached the venue on or before time</CardContent>
                 
                 <CardContent sx={{width:'70%' }}>
-                  <RadioGroup style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
+                  <RadioGroup 
+                      value={level1}
+                   onChange={handlelevel1}
+                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
 
                  
-                    <FormControlLabel value="very Poor" control={<Radio />}  />
-                    <FormControlLabel value="Low" control={<Radio />}  />
-                    <FormControlLabel value="Medium" control={<Radio />} />
-                    <FormControlLabel value="High" control={<Radio />} />
-                    <FormControlLabel value="option5" control={<Radio />} /> 
+                    <FormControlLabel value="1" control={<Radio />}  />
+                    <FormControlLabel value="2" control={<Radio />}  />
+                    <FormControlLabel value="3" control={<Radio />} />
+                    <FormControlLabel value="4" control={<Radio />} />
+                    <FormControlLabel value="5" control={<Radio />} /> 
                 </RadioGroup>
                   
                 </CardContent>
@@ -1106,13 +1256,16 @@ id="date-time-picker"
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Present for the entire session</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between',alignItems:'center' }}>
-                   {/* <RadioGroup sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}> */}
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  {/* </RadioGroup> */}
+                   <RadioGroup
+                   value={level2}
+                   onChange={handlelevel2}
+                    sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}>
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
             </CardContent>
 
@@ -1120,11 +1273,16 @@ id="date-time-picker"
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Leave in the meeting/ training in between?</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
+                <RadioGroup
+                   value={level3}
+                   onChange={handlelevel3}
+                    sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}>
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                </RadioGroup>
                   
                 </CardContent>
             </CardContent>
@@ -1132,24 +1290,32 @@ id="date-time-picker"
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Signed the ledger/meeting minute</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  
+                <RadioGroup
+                   value={level4}
+                   onChange={handlelevel4}
+                    sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}>
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
             </CardContent>
 
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Brought the books / pens to take down notes?</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  
+                <RadioGroup
+                   value={level5}
+                   onChange={handlelevel5}
+                    sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}>
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
               </CardContent>
               
@@ -1231,14 +1397,17 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 </CardContent>
                 
                 <CardContent sx={{width:'70%' }}>
-                  <RadioGroup style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
+                  <RadioGroup
+                  value={rate1}
+                  onChange={handleRate1}
+                   style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
 
                  
-                    <FormControlLabel value="option1" control={<Radio />}  />
-                    <FormControlLabel value="option2" control={<Radio />}  />
-                    <FormControlLabel value="option3" control={<Radio />} />
-                    <FormControlLabel value="option4" control={<Radio />} />
-                    <FormControlLabel value="option5" control={<Radio />} /> 
+                    <FormControlLabel value="1" control={<Radio />}  />
+                    <FormControlLabel value="2" control={<Radio />}  />
+                    <FormControlLabel value="3" control={<Radio />} />
+                    <FormControlLabel value="4" control={<Radio />} />
+                    <FormControlLabel value="5" control={<Radio />} /> 
                 </RadioGroup>
                   
                 </CardContent>
@@ -1247,13 +1416,16 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Venue</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between',alignItems:'center' }}>
-                   {/* <RadioGroup sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}> */}
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  {/* </RadioGroup> */}
+                   <RadioGroup
+                    value={rate2}
+                    onChange={handleRate2}
+                   sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}>
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
             </CardContent>
 
@@ -1261,96 +1433,128 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Rapport of GF with Gelathis</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  
+                <RadioGroup
+                  value={rate3}
+                  onChange={handleRate3}
+                   style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
             </CardContent>
 
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Body language during the training</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  
+                <RadioGroup
+                  value={rate4}
+                  onChange={handleRate4}
+                   style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
             </CardContent>
 
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Making session interactive and fun</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  
+                <RadioGroup
+                  value={rate5}
+                  onChange={handleRate5}
+                   style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
               </CardContent>
               
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Knowledge of the content of the training</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  
+                <RadioGroup
+                  value={rate6}
+                  onChange={handleRate6}
+                   style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
               </CardContent>
 
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Ability to clear doubts</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  
+                <RadioGroup
+                  value={rate7}
+                  onChange={handleRate7}
+                   style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
               </CardContent>
 
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Ability to inspire the Gelathi's</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  
+                <RadioGroup
+                  value={rate8}
+                  onChange={handleRate8}
+                   style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
               </CardContent>
 
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Ability to give clear link between the activity and the  content</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  
+                <RadioGroup
+                  value={rate9}
+                  onChange={handleRate9}
+                   style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
               </CardContent>
 
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Vulnerable and honest</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
-                <FormControlLabel value="option1" control={<Radio />}  />
-                <FormControlLabel value="option2" control={<Radio />}  />
-                <FormControlLabel value="option3" control={<Radio />} />
-                <FormControlLabel value="option4" control={<Radio />} />
-                <FormControlLabel value="option5" control={<Radio />} />
-                  
+                <RadioGroup
+                  value={rate10}
+                  onChange={handleRate10}
+                   style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
+                <FormControlLabel value="1" control={<Radio />}  />
+                <FormControlLabel value="2" control={<Radio />}  />
+                <FormControlLabel value="3" control={<Radio />} />
+                <FormControlLabel value="4" control={<Radio />} />
+                <FormControlLabel value="5" control={<Radio />} />
+                  </RadioGroup>
                 </CardContent>
               </CardContent>
               
@@ -1392,9 +1596,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           Any further training and understanding required by the Gelathi Facilitator of any of the training modules delivered
           </Typography>
           <FormGroup>
-            <FormControlLabel control={<Checkbox  />} label="Facilitation Skills" value="Facilitation Skills"/>
-            <FormControlLabel control={<Checkbox  />} label="Reorientation" value="Reorientation" />
-            <FormControlLabel control={<Checkbox  />} label="None" value="None"/>
+            <FormControlLabel control={<Checkbox  />} label="Facilitation Skills" value="Facilitation Skills" onChange={(event) =>handleprerequisites('any_futher_training_and_understding_reqired_by_gf_traing_module', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Reorientation" value="Reorientation"  onChange={(event) =>handleprerequisites('any_futher_training_and_understding_reqired_by_gf_traing_module', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="None" value="None" onChange={(event) =>handleprerequisites('any_futher_training_and_understding_reqired_by_gf_traing_module', event)}/>
    
     </FormGroup>
         </CardContent>
@@ -1649,11 +1853,15 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 Were the women interactive?
                 </Typography>
                 <Stack mt={2}>
+                  <RadioGroup
+                    value={intract}
+                    onChange={handleIntract}
+                  >
                   <FormGroup>
                     <FormControlLabel value="Yes"  control={<Radio />} label="Yes" />
                     <FormControlLabel value="No" control={<Radio />} label="No" />
-                    
                   </FormGroup>
+                    </RadioGroup>
                 </Stack>
               </Stack>
         </CardContent>
@@ -1666,9 +1874,13 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
+                    <RadioGroup
+                      value={leave}
+                      onChange={handleLeave}
+                    >
                     <FormControlLabel value="Yes"  control={<Radio />} label="Yes" />
                     <FormControlLabel value="No" control={<Radio />} label="No" />
-                    
+                    </RadioGroup>
                   </FormGroup>
                 </Stack>
               </Stack>
@@ -1692,11 +1904,15 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 Did this module take 20 minutes as allotted?
                 </Typography>
                 <Stack mt={2}>
+                  <RadioGroup
+                    value={module}
+                    onChange={handleModule}
+                  >
                   <FormGroup>
                     <FormControlLabel value="Yes"  control={<Radio />} label="Yes" />
                     <FormControlLabel value="No" control={<Radio />} label="No" />
-                    
                   </FormGroup>
+                    </RadioGroup>
                 </Stack>
               </Stack>
         </CardContent>
@@ -1739,7 +1955,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                      
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData,ownAsset : value }) }}
+                      onChange={(e) => setSendForm({ ...sendForm, did_any_new_women_attend_the_training_session_during_module:e.target.value})} value={sendForm?.did_any_new_women_attend_the_training_session_during_module}
                   
                     >
                     <div style={{display:"flex"}}>
@@ -1826,9 +2042,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
-                    <FormControlLabel value="Ask why is this important to learn?"  control={<Checkbox />} label="Ask why is this important to learn?" />
-                    <FormControlLabel value="Ask which are the places/situations where income, profit, savings could be asked?" control={<Checkbox />} label="Ask which are the places/situations where income, profit, savings could be asked?" />
-                    <FormControlLabel value="Clarify why this is important even if someone said that their business is already running well?" control={<Checkbox />} label="Clarify why this is important even if someone said that their business is already running well?" />
+                    <FormControlLabel value="Ask why is this important to learn?"  control={<Checkbox />} label="Ask why is this important to learn?" onChange={(event) =>handleprerequisites('during_the_debrief_the_trainer_did', event)}/>
+                    <FormControlLabel value="Ask which are the places/situations where income, profit, savings could be asked?" control={<Checkbox />} label="Ask which are the places/situations where income, profit, savings could be asked?" onChange={(event) =>handleprerequisites('during_the_debrief_the_trainer_did', event)}/>
+                    <FormControlLabel value="Clarify why this is important even if someone said that their business is already running well?" control={<Checkbox />} label="Clarify why this is important even if someone said that their business is already running well?" onChange={(event) =>handleprerequisites('during_the_debrief_the_trainer_did', event)}/>
                   </FormGroup>
                 </Stack>
               </Stack>
@@ -1844,7 +2060,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
+                      value={leave1}
+                      onChange={handleLeave1}
+                      // onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
                   
                     >
                     <div style={{display:"flex"}}>
@@ -1886,7 +2104,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
+                      value={module1}
+                      onChange={handleModule1}
+                      // onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
+
                   
                     >
                     <div style={{display:"flex"}}>
@@ -1961,7 +2182,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                      
                       name="radio-buttons-group"
                       
-                  
+                      value={attend}
+                      onChange={handleAttend}
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -2020,18 +2242,18 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
-                    <FormControlLabel value="What was the role play about?"  control={<Checkbox />} label="What was the role play about?" />
-                    <FormControlLabel value="How did the protagonists behave?" control={<Checkbox />} label="How did the protagonists behave?" />
-                    <FormControlLabel value="What was the impact on customers & business/ family member?" control={<Checkbox />} label="What was the impact on customers & business/ family member?" />
+                    <FormControlLabel value="What was the role play about?"  control={<Checkbox />} label="What was the role play about?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_trainer_did_not_ask', event)}/>
+                    <FormControlLabel value="How did the protagonists behave?" control={<Checkbox />} label="How did the protagonists behave?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_trainer_did_not_ask', event)}/>
+                    <FormControlLabel value="What was the impact on customers & business/ family member?" control={<Checkbox />} label="What was the impact on customers & business/ family member?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_trainer_did_not_ask', event)}/>
                   
-                    <FormControlLabel value="What was done well"  control={<Checkbox />} label="What was done well" />
-                    <FormControlLabel value="What do you feel after seeing all the role plays?"  control={<Checkbox />} label="What do you feel after seeing all the role plays?" />
-                    <FormControlLabel value="Do you notice that in all four role plays there are possibilities?"  control={<Checkbox />} label="Do you notice that in all four role plays there are possibilities?" />
-                    <FormControlLabel value="Where do you think change begins?"  control={<Checkbox />} label="Where do you think change begins?" />
-                    <FormControlLabel value="Reflect whether these communication and relationship building aspects can be effectively used in personal life as well. How? What situations in real life could they be useful in?"  control={<Checkbox />} label="Reflect whether these communication and relationship building aspects can be effectively used in personal life as well. How? What situations in real life could they be useful in?" />
-                    <FormControlLabel value="Can you share incidents where good and bad communication affected your relationships"  control={<Checkbox />} label="Can you share incidents where good and bad communication affected your relationships" />
-                    <FormControlLabel value="Do you believe effective communication or relationship building has an influence on your personal life and your business? How?"  control={<Checkbox />} label="Do you believe effective communication or relationship building has an influence on your personal life and your business? How?" />
-                    <FormControlLabel value="Record all answers"  control={<Checkbox />} label="Record all answers" />
+                    <FormControlLabel value="What was done well"  control={<Checkbox />} label="What was done well" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_trainer_did_not_ask', event)}/>
+                    <FormControlLabel value="What do you feel after seeing all the role plays?"  control={<Checkbox />} label="What do you feel after seeing all the role plays?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_trainer_did_not_ask', event)}/>
+                    <FormControlLabel value="Do you notice that in all four role plays there are possibilities?"  control={<Checkbox />} label="Do you notice that in all four role plays there are possibilities?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_trainer_did_not_ask', event)}/>
+                    <FormControlLabel value="Where do you think change begins?"  control={<Checkbox />} label="Where do you think change begins?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_trainer_did_not_ask', event)}/>
+                    <FormControlLabel value="Reflect whether these communication and relationship building aspects can be effectively used in personal life as well. How? What situations in real life could they be useful in?"  control={<Checkbox />} label="Reflect whether these communication and relationship building aspects can be effectively used in personal life as well. How? What situations in real life could they be useful in?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_trainer_did_not_ask', event)}/>
+                    <FormControlLabel value="Can you share incidents where good and bad communication affected your relationships"  control={<Checkbox />} label="Can you share incidents where good and bad communication affected your relationships" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_trainer_did_not_ask', event)}/>
+                    <FormControlLabel value="Do you believe effective communication or relationship building has an influence on your personal life and your business? How?"  control={<Checkbox />} label="Do you believe effective communication or relationship building has an influence on your personal life and your business? How?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_trainer_did_not_ask', event)}/>
+                    <FormControlLabel value="Record all answers"  control={<Checkbox />} label="Record all answers" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_trainer_did_not_ask', event)}/>
                   
                   
                   </FormGroup>
@@ -2050,6 +2272,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
+                      value={leave2}
+                      onChange={handleLeave2}
                   
                     >
                     <div style={{display:"flex"}}>
@@ -2075,6 +2299,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
+                      value={engage}
+                      onChange={handleEngage}
                     
                   
                     >
@@ -2103,6 +2329,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
+                      value={participant}
+                      onChange={handleParticipant}
                      
                   
                     >
@@ -2132,7 +2360,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       // defaultValue="Yes"
                       name="radio-buttons-group"
                      
-                  
+                      value={leave4}
+                      onChange={handleLeave4}
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -2169,7 +2398,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
+                      // onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
+                      value={module2}
+                      onChange={handleModule2}
                   
                     >
                     <div style={{display:"flex"}}>
@@ -2206,7 +2437,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </Card>
         <CardContent>
         <Stack mt={2}> 
-                <Typography>Did any women leave the training session during or after this module?
+                <Typography>Did any new women attend the training session during this this module?
 
                     </Typography>
                 <Stack mt={2}>
@@ -2215,7 +2446,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       // defaultValue="Yes"
                       name="radio-buttons-group"
                       // onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
-                  
+                      onChange={(e) => setSendForm({ ...sendForm, did_any_new_women_attend_training_session_during_this_module_2:e.target.value})} value={sendForm?.did_any_new_women_attend_training_session_during_this_module_2}
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -2304,7 +2535,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many women remained by the end of this training session?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, how_many_women_remained_by_the_end_of_this_training_session: e.target.value }) }} value={sendForm?.how_many_women_remained_by_the_end_of_this_training_session}/>
                 </Stack>
               </Stack>
        
@@ -2317,7 +2548,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many are likely to come back?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, how_many_are_likely_to_come_back: e.target.value }) }} value={sendForm?.how_many_are_likely_to_come_back}/>
                 </Stack>
               </Stack>
        
@@ -2332,7 +2563,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
+                      onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted_1:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted_1}
                   
                     >
                     <div style={{display:"flex"}}>
@@ -2490,7 +2721,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many women attended the training session? (number)
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined"  onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session}/>
                 </Stack>
               </Stack>
        
@@ -2509,11 +2740,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   <FormGroup>
                     
                     
-                    <FormControlLabel value="One day before the training, follow up with the Anganwadi teacher. Request her to remind the participants who did not furnish their Voter ID cards on Day 1 to bring them on Day 2." control={<Checkbox />} label="One day before the training, follow up with the Anganwadi teacher. Request her to remind the participants who did not furnish their Voter ID cards on Day 1 to bring them on Day 2." onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="As the women walk into the training space, check the completed book keeping activity in the financial book of the women and fill the register with answers required for the baseline data against each woman’s name" control={<Checkbox />} label="As the women walk into the training space, check the completed book keeping activity in the financial book of the women and fill the register with answers required for the baseline data against each woman’s name" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Ask the women to sign the register before beginning the training" control={<Checkbox />} label="Ask the women to sign the register before beginning the training" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="One day before the training, follow up with the Anganwadi teacher. Request her to remind the participants who did not furnish their Voter ID cards on Day 1 to bring them on Day 2." control={<Checkbox />} label="One day before the training, follow up with the Anganwadi teacher. Request her to remind the participants who did not furnish their Voter ID cards on Day 1 to bring them on Day 2." onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
+                    <FormControlLabel value="As the women walk into the training space, check the completed book keeping activity in the financial book of the women and fill the register with answers required for the baseline data against each woman’s name" control={<Checkbox />} label="As the women walk into the training space, check the completed book keeping activity in the financial book of the women and fill the register with answers required for the baseline data against each woman’s name" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
+                    <FormControlLabel value="Ask the women to sign the register before beginning the training" control={<Checkbox />} label="Ask the women to sign the register before beginning the training" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
                     
-                    <FormControlLabel value="Make sure all the required columns in the register are fully filled" control={<Checkbox />} label="Make sure all the required columns in the register are fully filled" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Make sure all the required columns in the register are fully filled" control={<Checkbox />} label="Make sure all the required columns in the register are fully filled" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
                     
                     
                     
@@ -2538,7 +2769,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
+                      onChange={(e) => setSendForm({ ...sendForm, was_the_recap_done:e.target.value})} value={sendForm?.was_the_recap_done}
                   
                     >
                     <div style={{display:"flex"}}>
@@ -2566,7 +2797,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
+                      onChange={(e) => setSendForm({ ...sendForm, did_the_recap_take_15_minutes_as_allotted:e.target.value})} value={sendForm?.did_the_recap_take_15_minutes_as_allotted}
+
                   
                     >
                     <div style={{display:"flex"}}>
@@ -2595,14 +2827,14 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                     
                     
                     
-                    <FormControlLabel value="Ask what did they learn last week?" control={<Checkbox />} label="Ask what did they learn last week?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Ask what did we do first? What did we do next?" control={<Checkbox />} label="Ask what did we do first? What did we do next?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Ask what did they learn from the story?" control={<Checkbox />} label="Ask what did they learn from the story?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Do you remember the drama/skit you all enacted?" control={<Checkbox />} label="Do you remember the drama/skit you all enacted?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Ask why is it important for them to plan their expenses and save?" control={<Checkbox />} label="Ask why is it important for them to plan their expenses and save?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Ask what challenges did they face in book-keeping?" control={<Checkbox />} label="Ask what challenges did they face in book-keeping?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Are there any success stories and challenges in implementing last week’s learning?" control={<Checkbox />} label="Are there any success stories and challenges in implementing last week’s learning?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Ask what did their children or family members say about this training when they shared?" control={<Checkbox />} label="Ask what did their children or family members say about this training when they shared?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Ask what did they learn last week?" control={<Checkbox />} label="Ask what did they learn last week?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_1', event)}/>
+                    <FormControlLabel value="Ask what did we do first? What did we do next?" control={<Checkbox />} label="Ask what did we do first? What did we do next?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_1', event)}/>
+                    <FormControlLabel value="Ask what did they learn from the story?" control={<Checkbox />} label="Ask what did they learn from the story?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_1', event)}/>
+                    <FormControlLabel value="Do you remember the drama/skit you all enacted?" control={<Checkbox />} label="Do you remember the drama/skit you all enacted?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_1', event)}/>
+                    <FormControlLabel value="Ask why is it important for them to plan their expenses and save?" control={<Checkbox />} label="Ask why is it important for them to plan their expenses and save?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_1', event)}/>
+                    <FormControlLabel value="Ask what challenges did they face in book-keeping?" control={<Checkbox />} label="Ask what challenges did they face in book-keeping?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_1', event)}/>
+                    <FormControlLabel value="Are there any success stories and challenges in implementing last week’s learning?" control={<Checkbox />} label="Are there any success stories and challenges in implementing last week’s learning?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_1', event)}/>
+                    <FormControlLabel value="Ask what did their children or family members say about this training when they shared?" control={<Checkbox />} label="Ask what did their children or family members say about this training when they shared?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_1', event)}/>
                     
                     
                     
@@ -2644,7 +2876,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many women attended the training session?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" 
+                      onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session_1:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session_1}
+                      />
                 </Stack>
               </Stack>
               </Stack>
@@ -2659,14 +2893,14 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-                <FormControlLabel control={<Checkbox  />} label="Ask what do you need to achieve your dreams and goals?" />
-            <FormControlLabel control={<Checkbox  />} label="Record the answer when asking - “My goal is to reach your village. If I want to come to your village, and I call and ask you how I can get here, what will you say?”" />
-            <FormControlLabel control={<Checkbox  />} label="Give out the correct answer if the women are not able to answer?" />
-            <FormControlLabel control={<Checkbox  />} label="Make the connection to their own financial status and how it shows their financial health?      " />
-            <FormControlLabel control={<Checkbox  />} label="Use the chart to give an example of assets and liabilities?" />
-            <FormControlLabel control={<Checkbox  />} label="Ask one of the women to come up to give the example of their own assets and liabilities?" />
-            <FormControlLabel control={<Checkbox  />} label="Talk about natural assets and liabilites" />
-            <FormControlLabel control={<Checkbox  />} label="Was the debrief done? " />
+                <FormControlLabel control={<Checkbox  />}value='Ask what do you need to achieve your dreams and goals' label="Ask what do you need to achieve your dreams and goals?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)}/>
+            <FormControlLabel control={<Checkbox  />} value='Record the answer when asking - “My goal is to reach your village. If I want to come to your village, and I call and ask you how I can get here, what will you say'label="Record the answer when asking - “My goal is to reach your village. If I want to come to your village, and I call and ask you how I can get here, what will you say?”" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Give out the correct answer if the women are not able to answer' label="Give out the correct answer if the women are not able to answer?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Make the connection to their own financial status and how it shows their financial health' label="Make the connection to their own financial status and how it shows their financial health?      " onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Use the chart to give an example of assets and liabilities' label="Use the chart to give an example of assets and liabilities?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)}/>
+            <FormControlLabel control={<Checkbox  />} value='Ask one of the women to come up to give the example of their own assets and liabilities'label="Ask one of the women to come up to give the example of their own assets and liabilities?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Talk about natural assets and liabilites' label="Talk about natural assets and liabilites" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Was the debrief done' label="Was the debrief done? " onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)} />
     </FormGroup>
                 </Stack>
               </Stack>
@@ -2681,15 +2915,15 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-                <FormControlLabel control={<Checkbox  />} label="Ask one of the women to come and volunteer to explain her own assets and liabilities?" />
-            <FormControlLabel control={<Checkbox  />} label="If no woman volunteers, use an imaginary example of Lakshmi" />
-            <FormControlLabel control={<Checkbox  />} label="Ask the women what they feel looking at their assets and liabilities" />
-            <FormControlLabel control={<Checkbox  />} label="Clarified doubts of the women on the topic? " />
-            <FormControlLabel control={<Checkbox  />} label="Reassured women (if distressed)" />
-            <FormControlLabel control={<Checkbox  />} label="Congratulate those in a good position?" />
-            <FormControlLabel control={<Checkbox  />} label="Make them aware of different interest rates from different lenders" />
-            <FormControlLabel control={<Checkbox  />} label="Ask the women if they feel they are using assets now to the fullest or are they remaining dormant? (More of a reflection question and need not be answered by the women)" />
-            <FormControlLabel control={<Checkbox  />} label="Re-emphasize why it is necessary to know this: in order to set realistic and achievable goals." />
+                <FormControlLabel control={<Checkbox  />} value='Ask one of the women to come and volunteer to explain her own assets and liabilities' label="Ask one of the women to come and volunteer to explain her own assets and liabilities?" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
+            <FormControlLabel control={<Checkbox  />} value='If no woman volunteers, use an imaginary example of Lakshmi' label="If no woman volunteers, use an imaginary example of Lakshmi" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
+            <FormControlLabel control={<Checkbox  />} value='Ask the women what they feel looking at their assets and liabilities' label="Ask the women what they feel looking at their assets and liabilities" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
+            <FormControlLabel control={<Checkbox  />} value='Clarified doubts of the women on the topic'label="Clarified doubts of the women on the topic? " onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
+            <FormControlLabel control={<Checkbox  />} value='Reassured women (if distressed)' label="Reassured women (if distressed)" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
+            <FormControlLabel control={<Checkbox  />} value='Congratulate those in a good position' label="Congratulate those in a good position?" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
+            <FormControlLabel control={<Checkbox  />} value='Make them aware of different interest rates from different lenders' label="Make them aware of different interest rates from different lenders" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
+            <FormControlLabel control={<Checkbox  />} value='Ask the women if they feel they are using assets now to the fullest or are they remaining dormant' label="Ask the women if they feel they are using assets now to the fullest or are they remaining dormant? (More of a reflection question and need not be answered by the women)" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
+            <FormControlLabel control={<Checkbox  />} value='Re-emphasize why it is necessary to know this: in order to set realistic and achievable goals' label="Re-emphasize why it is necessary to know this: in order to set realistic and achievable goals." onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
 
     </FormGroup>
                 </Stack>
@@ -2706,8 +2940,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                  
+                      value={participant}
+                      onChange={handleParticipant}
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -2727,8 +2961,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                  
+                      // onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
+                      value={leave}
+                      onChange={handleLeave}
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -3376,7 +3611,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-            <FormControlLabel control={<Checkbox  />} label="Session-1 _ Introduction" />
+            <FormControlLabel control={<Checkbox  />} label="Session-1 _ Introduction" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
             <FormControlLabel control={<Checkbox  />} label="Session-2 _ Financial Management" />
             <FormControlLabel control={<Checkbox  />} label="Session-3 _Basics of an enterprise" />
             <FormControlLabel control={<Checkbox  />} label="Session-4 _Building Relationships" />
