@@ -585,7 +585,7 @@ const GelathiProgramDashboard = () => {
             <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number  of Vilages"
+                title="Number  of Villages"
                 total={itm?.villages}
                 color="villages"
                 icon= "fontisto:holiday-village"
@@ -724,7 +724,7 @@ const GelathiProgramDashboard = () => {
             <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number  of Vilages"
+                title="Number  of Villages"
                 total={itm?.villagevisit}
                 color="villages"
                 icon= "fontisto:holiday-village"
@@ -863,7 +863,7 @@ const GelathiProgramDashboard = () => {
            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number  of Vilages Visits"
+                title="Number  of Villages Visits"
                 total={itm?.villagevisit}
                 color="villages"
                 icon= "fontisto:holiday-village"
@@ -1002,7 +1002,7 @@ const GelathiProgramDashboard = () => {
             <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number  of Vilages"
+                title="Number  of Villages"
                 total={itm?.villagevisit}
                 color="villages"
                 icon= "fontisto:holiday-village"

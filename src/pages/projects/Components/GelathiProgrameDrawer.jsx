@@ -41,7 +41,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
-import {oldbaseURL} from 'src/utils/api';
+import { oldbaseURL } from 'src/utils/api';
 import GelathiCircleDrawer from './GelathiCircleDrawer';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
@@ -70,64 +70,60 @@ export default function GelathiProgrameDrawer({
   gelathiFacikitatorLead,
 }) {
   var [session, setSession] = useState('');
-  console.log("🚀 ~ file: GelathiProgrameDrawer.jsx:71 ~ session:", session.tb_id)
+  console.log('🚀 ~ file: GelathiProgrameDrawer.jsx:71 ~ session:', session.tb_id);
   const [showNote, setShowNote] = useState(false);
   const [gelatiNote, setGelatiNote] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
   const isSmallScreen = useMediaQuery('(max-width:600px)');
-  const [gf , setGf] = useState(false)
+  const [gf, setGf] = useState(false);
   const [reloadFromForm, setReloadFromForm] = useState(false);
   const reloadFunction = () => {
     setReloadFromForm(!reloadFromForm);
   };
 
-  console.log("clickedDatawhat",clcikData )
-//notes save button
+  console.log('clickedDatawhat', clcikData);
+  //notes save button
 
-const [SaveBtn , setSaveBtn] = useState(false) 
+  const [SaveBtn, setSaveBtn] = useState(false);
 
-const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false);
 
-const handleExpandClick = () => {
-  setExpanded(!expanded);
-};
-  const [date, setDate] = useState(new Date())
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+  const [date, setDate] = useState(new Date());
   //   image
-  const [isLoading, setISLoading] = useState(false)
+  const [isLoading, setISLoading] = useState(false);
   // const [dataImage, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
   // const [viewImage, setViewImage] = React.useState(false);
-  const [schedule,setReschedule]=React.useState(false);
+  const [schedule, setReschedule] = React.useState(false);
   const [locationS, setLocation] = useState();
-  const [editSession,setEditsession]=useState(false);
+  const [editSession, setEditsession] = useState(false);
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-const [getImage , setGetImae] = useState([])
+  const [getImage, setGetImae] = useState([]);
 
-const [circleDrawerData , setCircleDrawerData] = useState()
+  const [circleDrawerData, setCircleDrawerData] = useState();
 
-// const [images,setImages] = useState([])
-const [photos,setPhotos] = React.useState(false)
-const [shown,setShown] = React.useState(false)
-const [images,setImages] = useState([])
-const [viewImage, setViewImage] = React.useState(false);
-const [openFilter, setOpenFilter] = useState(false);
+  // const [images,setImages] = useState([])
+  const [photos, setPhotos] = React.useState(false);
+  const [shown, setShown] = React.useState(false);
+  const [images, setImages] = useState([]);
+  const [viewImage, setViewImage] = React.useState(false);
+  const [openFilter, setOpenFilter] = useState(false);
   localStorage.setItem('clickData', clcikData);
-  console.log("clcikData",clcikData)
+  console.log('clcikData', clcikData);
   const localstoragrClickData = localStorage.getItem('clcikData');
   const userName = JSON.parse(localStorage.getItem('userDetails'))?.first_name;
-  console.log("userNAme in localstorage", userName)
-const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
-  useEffect(()=>{
-    setImages([])
-    // setGetAllNotes([])
-  },[session.tb_id])
+  console.log('userNAme in localstorage', userName);
+  const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
   useEffect(() => {
-   
-
+    setImages([]);
+    // setGetAllNotes([])
+  }, [session.tb_id]);
+  useEffect(() => {
     getGFSessionData();
     getNoteHandler();
-
-   
   }, [clcikData]);
   useEffect(() => {
     console.log('useEffect for getnotehandler');
@@ -144,7 +140,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
     };
   }, []);
 
-  // geting notes for each drawer 
+  // geting notes for each drawer
   useEffect(() => {
     console.log('useEffect for getnotehandler');
 
@@ -161,7 +157,6 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
   }, [session.tb_id]);
   console.log(clcikData, '<---------gf_session_namegf_session_name');
 
-
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -169,70 +164,67 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
     setOpenFilter(false);
   };
   //   image converting
-  
-  function getBase64(file, callback) {
 
+  function getBase64(file, callback) {
     const reader = new FileReader();
 
     reader.addEventListener('load', () => callback(reader.result));
 
     reader.readAsDataURL(file);
   }
-const convertImage = (e) => {
-    console.log("this is calleddddfdsfs")
+  const convertImage = (e) => {
+    console.log('this is calleddddfdsfs');
     // data.append('emp_id', userid);
     // data.append('file', e.target.files[0]);
     // setImagePath([...imagePath, e.target.files[0]])
     const imageData = URL.createObjectURL(e.target.files[0]);
-    console.log(imageData, "files")
+    console.log(imageData, 'files');
     getBase64(e.target.files[0], function (base64Data) {
-      setImages([...images, base64Data])
-    //   setViewImage(true)
-    setViewImage(true);
+      setImages([...images, base64Data]);
+      //   setViewImage(true)
+      setViewImage(true);
     });
-  }
-  // sending image we need to 
+  };
+  // sending image we need to
   const UploadImages = async () => {
-    setISLoading(true)
+    setISLoading(true);
     if (images.length === 0) {
-      alert("No photos to upload.")
+      alert('No photos to upload.');
       throw new Error('No photos to upload.');
     }
     var raw = JSON.stringify({
-      "project_id":session.project_id,
-      "gf_session_id":session.id,
-      "gelathi_id":session.user_id,
-      "photos": [images.toString().slice(22,)]
-    })
+      project_id: session.project_id,
+      gf_session_id: session.id,
+      gelathi_id: session.user_id,
+      photos: [images.toString().slice(22)],
+    });
 
-   
     var requestOptions = {
       method: 'POST',
       body: raw,
       redirect: 'follow',
     };
-   
-    let res = fetch(oldbaseURL +'uploadGFSessionPhotos.php', requestOptions)
+
+    let res = fetch(oldbaseURL + 'uploadGFSessionPhotos.php', requestOptions)
       .then((itn) => {
         console.log(itn, '<--itemgh');
-        setImages([])
-        alert("Image uploaded successfully..")
-        setISLoading(false)
+        setImages([]);
+        alert('Image uploaded successfully..');
+        setISLoading(false);
       })
       .catch((err) => {
         console.log(err, '<---wertyu');
       });
-   
   };
   const getGFSessionData = (async) => {
     var data = JSON.stringify({
       gf_session_id: clcikData?.name,
-      user_id:session?.user_id
+      user_id: session?.user_id,
     });
 
     var config = {
       method: 'post',
-      url: oldbaseURL+'getGFSessionData1.php',
+      url: oldbaseURL + 'getGFSessionData1.php',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -241,13 +233,13 @@ const convertImage = (e) => {
 
     axios(config)
       .then(function (response) {
-        session = response.data
+        session = response.data;
         setSession(session);
         setCircleDrawerData({
-          "id": session?.circle_id,
-          "project_id":session?.project_id,
-          "title":session?.type_name
-        })
+          id: session?.circle_id,
+          project_id: session?.project_id,
+          title: session?.type_name,
+        });
         console.log(response.data, '<---------setSessionsetSession');
       })
       .catch(function (error) {
@@ -256,12 +248,10 @@ const convertImage = (e) => {
   };
 
   const noteSubmitHandler = () => {
-
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
 
     var data = JSON.stringify({
-      
       notes: gelatiNote,
       type: session.type,
       tb_id: session.tb_id,
@@ -271,7 +261,7 @@ const convertImage = (e) => {
     console.log(data, 'material api');
     const config = {
       method: 'post',
-      url: oldbaseURL+'createNotes.php',
+      url: oldbaseURL + 'createNotes.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -284,8 +274,8 @@ const convertImage = (e) => {
           // viewMessage('Project added sucessfully');
           setShowNote(false);
           getNoteHandler();
-          setSaveBtn(false)
-          alert("Note Added Successfully...")
+          setSaveBtn(false);
+          alert('Note Added Successfully...');
           console.log('susscesfully added data material');
         }
       })
@@ -293,8 +283,7 @@ const convertImage = (e) => {
         console.log(error, 'failed');
       });
     console.log('submit');
-
-  }
+  };
   const getNoteHandler = () => {
     console.log('getNoteHandler');
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
@@ -308,7 +297,7 @@ const convertImage = (e) => {
     console.log(data, 'material api');
     const config = {
       method: 'post',
-      url: oldbaseURL+'getNotes.php',
+      url: oldbaseURL + 'getNotes.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -329,89 +318,88 @@ const convertImage = (e) => {
   };
   console.log(getAllNotes, 'getallnotes');
 
-
-  const removesession=(e)=>{
-    if(confirm("Do You want to Cancel?")){
+  const removesession = (e) => {
+    if (confirm('Do You want to Cancel?')) {
       var data = JSON.stringify({
-        "poa_id": e?.id,
-        "day": ""
+        poa_id: e?.id,
+        day: '',
       });
-      
+
       var config = {
         method: 'post',
-        url: oldbaseURL +'updatePoaCancel.php',
-        headers: { 
-          'Content-Type': 'application/json'
+        url: oldbaseURL + 'updatePoaCancel.php',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        data : data
+        data: data,
       };
-      
-      axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        onCloseFilter();
-        getGFSessionData();
 
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          onCloseFilter();
+          getGFSessionData();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
+
+  const reschedudlehandler = () => {
+    setReschedule(true);
+  };
+
+  const Reschedule = (e) => {
+    var data = JSON.stringify({
+      poa_id: e,
+      date_time: moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+    });
+
+    var config = {
+      method: 'post',
+      url: oldbaseURL + 'updateReschedule.php',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        setReschedule(false);
+        onCloseFilter();
+        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
       });
-      
-    }
-  }
-
-  const reschedudlehandler=()=>{
-   setReschedule(true)
-  }
-
-  const Reschedule=(e)=>{
-    
-    var data = JSON.stringify({
-      "poa_id": e,
-      "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss')
-    });
-    
-    var config = {
-      method: 'post',
-      url: oldbaseURL+'updateReschedule.php',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
-    
-    axios(config)
-    .then(function (response) {
-      setReschedule(false)
-      onCloseFilter()
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    
-  }
-  //Method to delete the images that is selected 
+  };
+  //Method to delete the images that is selected
   const deleteImage = (index) => {
     images.splice(index, 1);
     setImages([...images]);
   };
 
   const styles = {
-    buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" }
+    buttonStyle: {
+      boxShadow: 'none',
+      borderRadius: '7px',
+      backgroundColor: '#edeff1',
+      fontWeight: 500,
+      textAlign: 'left',
+    },
+  };
+
+  console.log(session.gf_session_name, 'session name');
+  console.log('a.splice(0,2)', session?.gf_session_name?.split('_')[1].slice(0, 2));
+  if (session?.gf_session_name?.split('_')[1].slice(0, 2) == 'BV') {
+    console.log('ONly BV found ', session?.gf_session_name);
+
+    //  setGf(true)
+  } else {
+    // setGf(false)
   }
-
-  console.log(session.gf_session_name, "session name")
-  console.log("a.splice(0,2)",session?.gf_session_name?.split('_')[1].slice(0,2))
-if( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV'){
-  console.log("ONly BV found " ,session?.gf_session_name)
- 
-  //  setGf(true)
-
-}
-else{
-  // setGf(false)
-}
 
   return (
     <>
@@ -420,7 +408,7 @@ else{
       </Button> */}
 
       <Drawer
-      width={isSmallScreen ? '100%' : 300}
+        width={isSmallScreen ? '100%' : 300}
         anchor="right"
         open={isOpenFilter}
         onClose={onCloseFilter}
@@ -430,11 +418,10 @@ else{
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="body1" sx={{ ml: 1 }}>
-          {(session?.type_name=='Circle Metting')? "Circle Meeting" :(session?.type_name)}
-           
+            {session?.type_name == 'Circle Metting' ? 'Circle Meeting' : session?.type_name}
           </Typography>
           {console.log(clcikData, '<------clcikDataclcikData')}
-          
+
           <IconButton onClick={onCloseFilter}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
@@ -453,61 +440,85 @@ else{
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     Partner :&nbsp;{session?.partnerName}
-                   
-                 {(userId==6 || userId==13)?  <> <IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
-            <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
-            {console.log(session,"sessionidddddddd")}
-            <IconButton onClick={()=>removesession(session)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton></>:null}
-
+                    {userId == 6 || userId == 13 ? (
+                      <>
+                        {' '}
+                        <IconButton
+                          onClick={() => {
+                            setEditsession(true);
+                          }}
+                          style={{ right: -20 }}
+                        >
+                          <Iconify icon="material-symbols:edit"></Iconify>
+                        </IconButton>
+                        <IconButton onClick={reschedudlehandler} style={{ right: -20 }}>
+                          <Iconify icon="mdi:clock-time-four-outline"></Iconify>
+                        </IconButton>
+                        {console.log(session, 'sessionidddddddd')}
+                        <IconButton onClick={() => removesession(session)} style={{ right: -20 }}>
+                          <Iconify icon="mdi:cancel-circle"></Iconify>
+                        </IconButton>
+                      </>
+                    ) : null}
                   </Typography>
-{schedule && <Stack>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-           <DateTimePicker
-   required
-    value={date}
-    onChange={(e) => {setDate(e)}}
-    renderInput={(params) => <TextField {...params} color="common" />}
-    PopperProps={{
-      placement: "top"
-  
-    }}
-  />
-        </LocalizationProvider>
-        {console.log(session,"session?.id")}
-        <Button onClick={()=>Reschedule(session?.id)}>Save</Button>
-      </Stack>}
- 
- <EditGelathiSession session={session} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}}/>
+                  {schedule && (
+                    <Stack>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DateTimePicker
+                          required
+                          value={date}
+                          onChange={(e) => {
+                            setDate(e);
+                          }}
+                          renderInput={(params) => <TextField {...params} color="common" />}
+                          PopperProps={{
+                            placement: 'top',
+                          }}
+                        />
+                      </LocalizationProvider>
+                      {console.log(session, 'session?.id')}
+                      <Button onClick={() => Reschedule(session?.id)}>Save</Button>
+                    </Stack>
+                  )}
 
+                  <EditGelathiSession
+                    session={session}
+                    editSession={editSession}
+                    setEditsession={(e) => {
+                      setEditsession(e);
+                    }}
+                  />
 
                   <Typography variant="body1" gutterBottom>
-                    {(session?.type_name=='Circle Metting')? "Circle Meeting" :(session?.type_name)} : <br/>{session?.gf_session_name}
-                  </Typography>
-
-            
-
-                  <Typography variant="body1" gutterBottom>
-                    Plan Date  : {session?.plan_date}
-                  </Typography>
-
-              
-           {      (session?.type == 1|| 4 || 5||6||7||8||9||10||11||12||13||14||15||16||17||18||19||20||21)? null :
-                  <>
-                
-                <Typography variant="body1" gutterBottom>
-                    Contact Person : 
-                     {session?.contact_person}
+                    {session?.type_name == 'Circle Metting' ? 'Circle Meeting' : session?.type_name} : <br />
+                    {session?.gf_session_name}
                   </Typography>
 
                   <Typography variant="body1" gutterBottom>
-                    Contact Number :
-                    {session?.contact_number}
+                    Plan Date : {session?.plan_date}
                   </Typography>
-                  </>}
+
+                  {(session?.type == 2||3) ? (
+                    <>
+
+                     {(session?.contact_number && session.contact_person)?
+                     <>
+                      <Typography variant="body1" gutterBottom>
+                        Contact Person :{session?.contact_person}
+                      </Typography>
+
+
+                      <Typography variant="body1" gutterBottom>
+                        Contact Number  :{session?.contact_number}
+                      </Typography>
+                      </>: null
+                      }
+                      </>
+                  ) : null}
 
                   <Typography variant="body1" gutterBottom>
                     Trainer Name &nbsp;:&nbsp;
-                     {session?.trainer_name}
+                    {session?.trainer_name}
                   </Typography>
 
                   <Typography variant="body1" gutterBottom>
@@ -515,7 +526,8 @@ else{
                     {session?.gf_name}
                   </Typography>
                 </CardContent>
-              </Card><br/>
+              </Card>
+              <br />
               {/* <ShaktiDialog /> */}
               {/* <Card style={{ marginTop: 20 }}>
                 <CardContent>
@@ -526,78 +538,73 @@ else{
                 </CardContent>
               </Card> */}
 
-            
-
-              {console.log(session,"sessiosnssssssssssssssssssssssssssss")}
+              {console.log(session, 'sessiosnssssssssssssssssssssssssssss')}
 
               {/* IMAGE UPLOAD  */}
-             {(userId==6 || userId==13 )? <Card style={{marginTop:20}}>
-             {( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' && (userId==13 || userId==6))?
+              {userId == 6 || userId == 13 ? (
+                <Card style={{ marginTop: 20 }}>
+                  {session?.gf_session_name?.split('_')[1].slice(0, 2) == 'BV' &&
+                  (userId == 13 || userId == 6) ? null : (
+                    <>
+                      <div style={{ display: 'flex' }}>
+                        {viewImage
+                          ? images.map((i, index) => {
+                              return (
+                                <div style={{ display: 'flex', margin: '1rem' }}>
+                                  <img src={i} style={{ height: '50px', width: '70px' }} alt="hello" />
+                                  <Iconify
+                                    onClick={() => {
+                                      deleteImage(index);
+                                    }}
+                                    icon={'typcn:delete'}
+                                    sx={{ width: 16, height: 16, ml: 1, color: 'red' }}
+                                  />
+                                </div>
+                              );
+                            })
+                          : null}
+                      </div>
+                      <br />
 
-null :
-<>
-<div style={{ display: 'flex' }}>
-                {viewImage
-                  ? images.map((i, index) => {
-                      return (
-                        <div style={{ display: 'flex', margin: '1rem' }}>
-                          <img src={i} style={{ height: '50px', width: '70px' }} alt="hello" />
+                      <div id="input-icon-camera" style={{ display: 'flex' }}>
+                        <label id="input-tag-event" for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
                           <Iconify
-                            onClick={() => {
-                              deleteImage(index);
-                            }}
-                            icon={'typcn:delete'}
-                            sx={{ width: 16, height: 16, ml: 1, color: 'red' }}
+                            id="icon-camera-poa-event"
+                            icon={'mdi:camera'}
+                            sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }}
                           />
-                        </div>
-                      );
-                    })
-                  : null}
-              </div>
-              <br />
+                          &nbsp;
+                          <input
+                            style={{ display: 'none' }}
+                            accept="image/png, image/gif, image/jpeg"
+                            id="inputTag"
+                            type="file"
+                            onChange={(e) => {
+                              convertImage(e);
+                            }}
+                          />
+                        </label>
+                        Add Photos
+                        <br />
+                        <Button
+                          id="upload-btn"
+                          onClick={UploadImages}
+                          sx={{
+                            '&:hover': {
+                              backgroundColor: '#ffd796',
+                            },
+                            color: '#ff7424',
+                            backgroundColor: '#ffd796',
+                            marginLeft: '10px',
+                          }}
+                        >
+                          Upload
+                        </Button>
+                      </div>
+                    </>
+                  )}
 
-
-
-              <div id="input-icon-camera" style={{ display: 'flex' }}>
-                  <label id="input-tag-event" for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
-                    <Iconify id="icon-camera-poa-event" icon={'mdi:camera'} sx={{ width: 25, height: 25, ml: 2, color: '#ff7424' }} />
-                    &nbsp;
-                    <input
-                      style={{ display: 'none' }}
-                      accept="image/png, image/gif, image/jpeg"
-                      id="inputTag"
-                      type="file"
-                      onChange={(e) => {
-                        convertImage(e);
-                      }}
-                    />
-                  </label>
-                  Add Photos
-                  <br />
-         
-           <Button
-           id="upload-btn"
-           onClick={UploadImages}
-           
-           sx={{
-             '&:hover': {
-               backgroundColor: '#ffd796',
-             },
-             color: '#ff7424',
-             backgroundColor: '#ffd796',
-             marginLeft: '10px',
-           }}
-         >
-           Upload  
-         </Button>
-       
-       
-         </div>
-         </>
-         }
-
-
-         {/* <Card style={{ marginTop: 20 }}>
+                  {/* <Card style={{ marginTop: 20 }}>
               <CardContent>
                
              {isLoading? <CircularProgress /> : 
@@ -607,102 +614,175 @@ null :
                 }
               </CardContent>
             </Card> */}
-</Card>:null}
+                </Card>
+              ) : null}
 
-{console.log(session,"sessiosn")}
+              {console.log(session, 'sessiosn')}
 
+              {userId == 6 || userId == 13 ? (
+                <Card id="event-data-card" style={{ marginTop: 20 }}>
+                  <CardContent id="card-content-poa-event-data">
+                    {console.log(session, 'sessiosn')}
+                    {isLoading ? (
+                      <CircularProgress />
+                    ) : (
+                      session?.photos && (
+                        <div>
+                          <div style={{ display: 'flex', flexDirection: 'row' }}>
+                            {' '}
+                            {session?.photos[0].photo1 ? (
+                              <img
+                                id="img-event-data"
+                                src={session?.photos[0].photo1}
+                                style={{ height: 100, width: 100 }}
+                              />
+                            ) : (
+                              'No Photos Found'
+                            )}
+                            &nbsp;&nbsp;
+                            {session?.photos[0].photo2 ? (
+                              <img
+                                id="img-event-data"
+                                src={session?.photos[0].photo2}
+                                style={{ height: 100, width: 100 }}
+                              />
+                            ) : null}
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </CardContent>
+                </Card>
+              ) : null}
+              {userId == 4 || userId == 3 || userId == 11 
+                ? session?.photos && (
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      {' '}
+                      {session?.photos[0].photo1 ? (
+                        <img id="img-event-data" src={session?.photos[0].photo1} style={{ height: 100, width: 100 }} />
+                      ) : (
+                        'No Photos Found '
+                      )}
+                      &nbsp;&nbsp;
+                      {session?.photos[0].photo2 ? (
+                        <img id="img-event-data" src={session?.photos[0].photo2} style={{ height: 100, width: 100 }} />
+                      ) : null}
+                    </div>
+                  )
+                : null}
 
-{(userId==6 || userId==13 )?<Card id="event-data-card" style={{ marginTop: 20 }}>
-              <CardContent id="card-content-poa-event-data">
-               {console.log(session,"sessiosn")}
-             {isLoading ? <CircularProgress /> : 
-                
-                session?.photos && <div>
-
-                 <div style={{display:'flex' , flexDirection:'row'}}> {(session?.photos[0].photo1)?<img id="img-event-data" src={session?.photos[0].photo1} style={{height:100,width:100}}/>:"No Photos Found"}
-                 &nbsp;&nbsp;{(session?.photos[0].photo2)?<img id="img-event-data" src={session?.photos[0].photo2} style={{height:100,width:100}}/>:null}</div>
-                </div>
-                
-                
-                
-                
-                }
-              </CardContent>
-            </Card> :null}
-{(userId==4 || userId==3 || userId==11 || userId==1) ?
- 
- session?.photos &&  <div style={{display:'flex' , flexDirection:'row'}}> {(session?.photos[0].photo1)?<img id="img-event-data" src={session?.photos[0].photo1} style={{height:100,width:100}}/>:"No Photos Found"}
-                 &nbsp;&nbsp;{(session?.photos[0].photo2)?<img id="img-event-data" src={session?.photos[0].photo2} style={{height:100,width:100}}/>:null}
-                </div>:null}
-
-            <br/><Stack style={{ flexDirection: 'row'}}  mb={2}>
-      
-      <Button variant="secondary" style={styles.buttonStyle}  
-                  endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="" /> </IconButton>}
-                  startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-people" /></IconButton>}>
-                  <span style={{ width: "200px" }}>Visit Participants   : {session?.total_participants}</span>
+              <br />
+              <Stack style={{ flexDirection: 'row' }} mb={2}>
+                <Button
+                  variant="secondary"
+                  style={styles.buttonStyle}
+                  endIcon={
+                    <IconButton>
+                      {' '}
+                      <Iconify style={{ color: '#6d7c89' }} icon="" />{' '}
+                    </IconButton>
+                  }
+                  startIcon={
+                    <IconButton>
+                      {' '}
+                      <Iconify style={{ color: '#6d7c89' }} icon="ic:sharp-people" />
+                    </IconButton>
+                  }
+                >
+                  <span style={{ width: '200px' }}>Visit Participants : {session?.total_participants}</span>
                 </Button>
-      </Stack>
-      {session?.all_participants?.map((itm) => 
-                    {
+              </Stack>
+              {session?.all_participants?.map((itm) => {
                 return (
-                <> {(itm?.enroll=='1') ?<> <Card><CardContent>{itm?.participant_name}<br/>{session?.enroll_participant_villagename}</CardContent></Card> <br/></>:null}</>
+                  <>
+                    {' '}
+                    {itm?.enroll == '1' ? (
+                      <>
+                        {' '}
+                        <Card>
+                          <CardContent>
+                            {itm?.participant_name}
+                            <br />
+                            {session?.enroll_participant_villagename}
+                          </CardContent>
+                        </Card>{' '}
+                        <br />
+                      </>
+                    ) : null}
+                  </>
+                );
+              })}
+
+              {session?.type == 4 || session?.type == 10 || session?.type == 16 ? (
+                userId == 6 || userId == 13 ? (
+                  <Stack style={{ flexDirection: 'row' }} mb={2}>
+                    <Button
+                      variant="secondary"
+                      style={styles.buttonStyle}
+                      onClick={() => handleOpenFilter()}
+                      endIcon={
+                        <IconButton>
+                          {' '}
+                          <Iconify style={{ color: '#6d7c89' }} icon="material-symbols:add" />{' '}
+                        </IconButton>
+                      }
+                      startIcon={
+                        <IconButton>
+                          {' '}
+                          <Iconify style={{ color: '#6d7c89' }} icon="clarity:form-line" color="gray" />
+                        </IconButton>
+                      }
+                    >
+                      <span style={{ width: '200px' }}>Survey Form</span>
+                    </Button>
+                  </Stack>
+                ) : null
+              ) : null}
+              <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <GelathiCircleDrawer
+                  clcikData={circleDrawerData}
+                  isOpenFilter={openFilter}
+                  onOpenFilter={handleOpenFilter}
+                  onCloseFilter={handleCloseFilter}
+                  data1={gelathiFacikitatorLead}
+                  reloadmethod={reloadFunction}
+                  sessionData={session}
+                />
+              </Stack>
+
+              {session?.check_in != '0' && userId == 6  && session?.type==2  ? (
+                session?.gf_session_name?.split('_')[1].slice(0, 2) == 'BV' ||
+                (session?.gf_session_name?.split('_')[1].slice(0, 2) == 'CM' &&
+                  (userId == 13 || userId == 6)) ? null : (
+                  <AddEnrollGelathi session={session} reloadmethod={reloadFunction} />
                 )
-                    }
-      )}
+              ) : null}
 
-     {(session?.type== 4 ||session?.type == 10 ||session?.type== 16)? 
-     (userId==6 || userId==13 )?
-    
-     <Stack style={{ flexDirection: 'row'}}  mb={2}>
-      
-      <Button variant="secondary" style={styles.buttonStyle}  onClick={()=> handleOpenFilter()}
-                  endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
-                  startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="clarity:form-line" color="gray" /></IconButton>}>
-                  <span style={{ width: "200px" }}>Survey Form</span>
-                </Button>
-      </Stack>: null
-       : null}
-      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-        <GelathiCircleDrawer
-          clcikData={circleDrawerData}
-          isOpenFilter={openFilter}
-          onOpenFilter={handleOpenFilter}
-          onCloseFilter={handleCloseFilter}
-          data1={gelathiFacikitatorLead}
-          reloadmethod={reloadFunction}
-          sessionData ={session}
-        />
-      </Stack>
+              {session?.check_in != '0' && userId == 6 && session?.type==2  ? (
+                <>
+                  {session?.gf_session_name?.split('_')[1].slice(0, 2) == 'BV' ||
+                  (session?.gf_session_name?.split('_')[1].slice(0, 2) == 'CM' &&
+                    (userId == 13 || userId == 6)) ? null : (
+                    <AddGreenMotivators session={session} reloadmethod={reloadFunction} />
+                  )}
+                </>
+              ) : null}
 
-{ (session?.check_in!="0" && userId==6)?
-( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' || session?.gf_session_name?.split('_')[1].slice(0,2) == 'CM' && (userId==13 || userId==6))?
-null:<AddEnrollGelathi session={session } reloadmethod={reloadFunction}/>
-:
-null}
-
-              {(session?.check_in!="0" && userId==6)?
-              <>
-             {  ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV' || session?.gf_session_name?.split('_')[1].slice(0,2) == 'CM'   && (userId==13 || userId==6))?
-               null
-              :<AddGreenMotivators session={session} reloadmethod={reloadFunction}/> }
-              </>
+              {(session?.check_in != '0' && userId == 6 && session?.type==2 ) ?
              
-              :null}
-              
-              {
-           
-              (session?.check_in!="0" && userId==6)?
-              ( session?.gf_session_name?.split('_')[1].slice(0,2) == 'BV'  || session?.gf_session_name?.split('_')[1].slice(0,2) == 'CM' && (userId==13 || userId==6))? null :
+             
+              (
+                session?.gf_session_name?.split('_')[1].slice(0, 2) == 'BV' ||
+                (session?.gf_session_name?.split('_')[1].slice(0, 2) == 'CM' &&
+                  (userId == 13 || userId == 6)) ? null : (
+                  <AddEnrollVyapar session={session} reloadmethod={reloadFunction} />
+                )
+                
+              ) 
+            
+              : null}
 
-
-<AddEnrollVyapar session={session} reloadmethod={reloadFunction}/>              :null}
-                          
-
-
-
-
-{/* 
+              {/* 
 
               <Card style={{ marginTop: 20 }}>
                 <CardContent>
@@ -720,15 +800,27 @@ null}
                   </Typography>
                 </CardContent>
               </Card> */}
-            <Stack style={{ flexDirection: 'row'}}  mb={2}>
-      
-      <Button variant="secondary" style={styles.buttonStyle}  onClick={()=>setShowNote(true)}
-                  endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
-                  startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ph:note-pencil" /></IconButton>}>
-                  <span style={{ width: "200px" }}>Notes</span>
+              <Stack style={{ flexDirection: 'row' }} mb={2}>
+                <Button
+                  variant="secondary"
+                  style={styles.buttonStyle}
+                  onClick={() => setShowNote(true)}
+                  endIcon={
+                    <IconButton>
+                      {' '}
+                      <Iconify style={{ color: '#6d7c89' }} icon="material-symbols:add" />{' '}
+                    </IconButton>
+                  }
+                  startIcon={
+                    <IconButton>
+                      {' '}
+                      <Iconify style={{ color: '#6d7c89' }} icon="ph:note-pencil" />
+                    </IconButton>
+                  }
+                >
+                  <span style={{ width: '200px' }}>Notes</span>
                 </Button>
-      </Stack>
-
+              </Stack>
 
               {showNote ? (
                 <div>
@@ -751,143 +843,104 @@ null}
                         //   setGelatiNote(e?.target?.value);
                         //   setSaveBtn(true)
                         // }
-                        setSaveBtn(true)
+                        setSaveBtn(true);
                         setGelatiNote(e?.target?.value);
                         console.log('note', gelatiNote);
                       }}
-                      
                     ></TextField>
-                                      {SaveBtn? 
-                    
-                    <div style={{display:'flex',flexDirection:'row'}}>
-                     <Button
-                    style={{ color: '#ff7424', marginTop: 20 ,marginBottom:10 ,marginLeft:5,backgroundColor:"#ffd796"}}
-                      onClick={noteSubmitHandler}
-                      disabled={gelatiNote.trim()===""}
-                    >
-                      Save
-                    </Button> 
-                    
-                    <Button
-                  
-                  style={{ color: 'black' ,marginLeft: 20, marginTop:20 ,marginBottom:10,backgroundColor:'#aec6c1'}}
-                  onClick={()=>{
-                   setShowNote(false)
-                  }}
-                >
-                   Cancel
-                  {/* <Cancel></Cancel> */}
-                  </Button>
-                  
-                    </div>
-                     :
-               
-                     <div style={{display:'flex',flexDirection:'row'}}>
-                  
-                      <Button
-                      disabled
-                      style={{ color: '#ffd796', marginTop: 20 ,marginBottom:10,marginLeft:5}}
-                      onClick={()=>{
-                        alert("Text cannot be empty")
-                      }}
-                    >
-                      Save
-                    </Button>
-                     <Button
-                  
-                  style={{ color: 'black', marginLeft: 20, marginTop:20 ,marginBottom:10}}
-                     onClick={()=>{
-                      setShowNote(false)
-                     }}
-                   >
-                     Cancel
-                   </Button> 
-                   </div>
-                   }
+                    {SaveBtn ? (
+                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <Button
+                          style={{
+                            color: '#ff7424',
+                            marginTop: 20,
+                            marginBottom: 10,
+                            marginLeft: 5,
+                            backgroundColor: '#ffd796',
+                          }}
+                          onClick={noteSubmitHandler}
+                          disabled={gelatiNote.trim() === ''}
+                        >
+                          Save
+                        </Button>
+
+                        <Button
+                          style={{
+                            color: 'black',
+                            marginLeft: 20,
+                            marginTop: 20,
+                            marginBottom: 10,
+                            backgroundColor: '#aec6c1',
+                          }}
+                          onClick={() => {
+                            setShowNote(false);
+                          }}
+                        >
+                          Cancel
+                          {/* <Cancel></Cancel> */}
+                        </Button>
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <Button
+                          disabled
+                          style={{ color: '#ffd796', marginTop: 20, marginBottom: 10, marginLeft: 5 }}
+                          onClick={() => {
+                            alert('Text cannot be empty');
+                          }}
+                        >
+                          Save
+                        </Button>
+                        <Button
+                          style={{ color: 'black', marginLeft: 20, marginTop: 20, marginBottom: 10 }}
+                          onClick={() => {
+                            setShowNote(false);
+                          }}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    )}
                   </Card>
                 </div>
               ) : null}
 
-
-<Card>
+              <Card>
                 <CardContent>
                   View All Comments :
                   <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-        <Collapse in={expanded} timeout="auto" unmountOnExit> 
-                  {getAllNotes && getAllNotes.map((i, index) =>
-                 
-                       <> <Grid
-                          container
-                          direction="column"
-                          justifyContent="center"
-                          alignItems="center"
-                          style={{ marginTop: 10 }}
-                        >
-                          <Typography variant="body1">
-                            {' '}
-                            {i?.name} {i?.date} 
+                    expand={expanded}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                  >
+                    <ExpandMoreIcon />
+                  </ExpandMore>
+                  <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    {getAllNotes &&
+                      getAllNotes.map((i, index) => (
+                        <>
+                          {' '}
+                          <Grid
+                            container
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="center"
+                            style={{ marginTop: 10 }}
+                          >
+                            <Typography variant="body1">
+                              {' '}
+                              {i?.name} {i?.date}
+                            </Typography>
+                          </Grid>
+                          <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
+                            {i?.notes}{' '}
                           </Typography>
-
-                         
-                        </Grid>
-                        <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
-                          {i?.notes}{' '}
-                        </Typography></>
-                  )}
-                     
+                        </>
+                      ))}
                   </Collapse>
                 </CardContent>
-
               </Card>
-
-
-              {/* <CardContent>
-                <div>
-                <Card style={{ marginTop: 20, marginLeft: 10 }}>
-                  {getAllNotes &&
-                    getAllNotes.map((i, index) => {
-                      {
-                        console.log(i, 'ivalue');
-                      }
-                      return (
-                        <>
-                         
-                            <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
-                            <Grid
-                              container
-                              direction="column"
-                              justifyContent="center"
-                              alignItems="center"
-                              style={{ marginTop: 10 }}
-                            >
-                              <Typography variant="body1">
-                                {' '}
-                                {i?.name} {i?.date} 
-                              </Typography>
-
-                              {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
-                            </Grid>
-                            <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
-                              {i?.notes}{' '}
-                            </Typography>
-                         
-                        </>
-                      );
-                    })}
-                     </Card>
-                   
-                </div>
-              </CardContent> */}
-
-              
-              
             </div>
           </Stack>
         </Scrollbar>

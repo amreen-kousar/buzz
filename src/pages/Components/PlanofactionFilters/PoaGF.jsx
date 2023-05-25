@@ -470,7 +470,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
                   </>
                   }
                   <Typography variant="body1" gutterBottom>
-                    GF Name:&nbsp;{session?.gf_name}
+                    GF Name :&nbsp;{session?.gf_name}
                   </Typography>
                 </CardContent>
               </Card>

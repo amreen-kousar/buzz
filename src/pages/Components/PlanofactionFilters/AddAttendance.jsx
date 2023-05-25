@@ -43,6 +43,7 @@ const handleCheckBox= ()=>{
 
 }
   const addAttendance = (itm) =>{
+    console.log("attendace old api ")
     var data = 
     addValue?.includes(itm?.participant_id)?
     JSON.stringify({
@@ -91,21 +92,23 @@ const handleCheckBox= ()=>{
   }
 
   const addAttendance1  = async(itm)=>{
+    console.log("attendace 1 api ")
     var data = 
     addValue?.includes(itm?.participant_id)?
     JSON.stringify({
       
-      "PartcipantId": parseInt(itm?.participant_id),
-      "circle_id":parseInt (batch?.circle_id),
-      "Type": parseInt(batch.type)
+      "flag":1, 
+      "participant_id": parseInt(itm?.participant_id),
+      "tbl_poa_id": parseInt(batch?.tb_id),
+      "type": parseInt(batch.type)
     }):
     JSON.stringify({
-      
-      "PartcipantId": parseInt(itm?.participant_id),
-      "circle_id": parseInt(batch?.circle_id),
-      "Type": parseInt(batch.type)
+      "flag":1, 
+      "participant_id": parseInt(itm?.participant_id),
+      "tbl_poa_id": parseInt(batch?.tb_id),
+      "type": parseInt(batch.type)
     })
-    const response = await axios.post('https://bdms.buzzwomen.org/appGo/allAttendence', data ,  {
+    const response = await axios.post('https://bdms.buzzwomen.org/appTest/participantsAttendance.php', data ,  {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -153,6 +156,19 @@ const handleCheckBox= ()=>{
   };
 
   console.log("batchin attendance  " , batch)
+
+
+  const choseAddAttendanceApi = (itm) =>{
+
+    if(batch?.type == 2 || batch?.type == 3){
+      console.log("inside functionn if")
+      addAttendance1(itm)
+    }else{
+      console.log("inside functionn else")
+      addAttendance(itm)
+    }
+
+  }
   return (
     <div>
       <Dialog
@@ -172,7 +188,7 @@ const handleCheckBox= ()=>{
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div">
-            Participants List
+            Participants List 
             </Typography>
             {/* <Button sx={{ color:"white" }}>Save</Button> */}
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
@@ -207,19 +223,23 @@ const handleCheckBox= ()=>{
                   <CardActions sx={{borderRadius:0}}>
                     <div  style={{width:'90vw',display:'flex',position:'relative',padding:'8px'}} >
                      
-                      <Typography variant="subtitle2">{itm?.participant_name}</Typography>
+                      <Typography variant="subtitle2">{itm?.participant_name} </Typography>
                   
                     </div>
                 
-                <Checkbox onClick={()=>{
-
-                      addAttendance(itm) 
-                   
-                    }} {...label} />
+              { 
+              batch?.type != 4 && batch?.type != 10 && batch?.type != 16  && batch?.type != 2 && batch?.type != 3 &&
+              
+                    <Checkbox onClick={()=>{
+    
+                          choseAddAttendanceApi(itm) 
+                       
+                        }} {...label} /> 
+                    }
                    
                   </CardActions>
 
-                  {console.log(itm?.participant_name, '<----------itm?.participant_name')}
+                  {console.log(batch?.type, '<----------itm?.participant_name')}
                 </CardContent>
               </Card>
             </Stack>

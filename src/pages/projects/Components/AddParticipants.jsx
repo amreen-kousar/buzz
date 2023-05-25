@@ -140,7 +140,7 @@ alert("error!!!!!!")
         axios(config)
         .then(function (response) {
           reloadFUnction()
-          
+          handleClose()
           handleCloseDilog()
           console.log(response , "responseresponse")
           if(response?.data?.code ==200){

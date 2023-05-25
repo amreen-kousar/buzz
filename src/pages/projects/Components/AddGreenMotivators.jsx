@@ -23,7 +23,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-  export default function AddGreenMotivators ({session}){
+  export default function AddGreenMotivators ({session ,reloadmethod}){
     const [open, setOpen] = React.useState(false);
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState('');
@@ -154,6 +154,9 @@ getGreenMotivators();
   const reloadFUnction =() =>{
     setReload(!reload)
   }
+  useEffect(()=>{
+    getGreenMotivators();
+    },[reload])
 
     return(
     <>
@@ -177,7 +180,7 @@ getGreenMotivators();
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            All Participants  
+            All Participants   
           </Typography>
 
 <AddParticipants type='green' session={session} reloadFUnction={reloadFUnction}/>

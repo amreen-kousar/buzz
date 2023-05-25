@@ -269,14 +269,14 @@ export default function ProjectWiseGelathiCircle() {
                   >
                     <Iconify icon="material-symbols:auto-schedule" color="#ff7424" width="40"  ></Iconify>
                   </IconButton>
-                  <IconButton
+                  {/* <IconButton
                     style={{ position: 'absolute', right: 60, color: 'black' }}
                     onClick={(e) => {
                       deleteDelete(e);
                     }}
                   >
                     <Iconify icon="ic:baseline-remove-circle-outline" color="#ff7424"></Iconify>
-                  </IconButton>
+                  </IconButton> */}
                 </Grid>
               </Grid>
               <Grid

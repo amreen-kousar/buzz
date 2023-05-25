@@ -243,7 +243,7 @@ return (
                         <Typography variant="subtitle1">{itm?.firstName}</Typography>
                         <Typography variant="subtitle1" gutterBottom>
                           <Typography variant="body1" gutterBottom>
-                            {itm?.villagename} one two 3
+                            {itm?.villagename} 
                           </Typography>
                         </Typography>
                       </CardContent>
