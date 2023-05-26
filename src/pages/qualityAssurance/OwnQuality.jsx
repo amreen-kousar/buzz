@@ -52,8 +52,8 @@ console.log(props?.componentname,"componenttttttttt")
         
 const getPOA =()=>{
     var data = JSON.stringify({
-        "Emp_id":15,
-        "Role_id":12
+        "Emp_id":1,
+        "Role_id":1
     });
       
       var config = {

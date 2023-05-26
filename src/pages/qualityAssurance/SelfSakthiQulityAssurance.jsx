@@ -66,9 +66,8 @@ const SelfSakthiQulityAssurance = () => {
 
     const [shown,setShown] = React.useState(false);
 
-    const userOwnPermissions=['9','5','12','4','13','6','3']
+    const userOwnPermissions=['2','1','9','5','12','4','13','6','3']
     const userTeamPermissions=['2','1','12','4','13','3','11']
-  
   
     const Alert = forwardRef(function Alert(props, ref) {
       return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

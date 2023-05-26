@@ -69,7 +69,7 @@ const GetSingleQualityForm = ({item ,open ,handleClose }) => {
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-           Individual Quality Assurance 
+           Individual Quality Assurance  working in progress
           </Typography>
  </Toolbar>
               </AppBar>
