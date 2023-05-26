@@ -1979,10 +1979,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
 
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
-                <CardContent sx={{width:'30%'}}>Rapport of GF with Gelathis</CardContent>
+                <CardContent sx={{width:'30%'}}>Report of GF with Gelathis</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
                   value={rate3}
+                  sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   onChange={handleRate3}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
                 <FormControlLabel value="1" control={<Radio />}  />
@@ -1998,6 +1999,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Body language during the training</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
+                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate4}
                   onChange={handleRate4}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2014,6 +2016,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Making session interactive and fun</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
+                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate5}
                   onChange={handleRate5}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2030,6 +2033,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Knowledge of the content of the training</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
+                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate6}
                   onChange={handleRate6}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2046,6 +2050,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Ability to clear doubts</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
+                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate7}
                   onChange={handleRate7}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2062,6 +2067,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Ability to inspire the Gelathi's</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
+                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate8}
                   onChange={handleRate8}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2078,6 +2084,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Ability to give clear link between the activity and the  content</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
+                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate9}
                   onChange={handleRate9}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2094,6 +2101,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Vulnerable and honest</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
+                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate10}
                   onChange={handleRate10}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2191,7 +2199,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <Typography>End time of the training
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextFieldrequired inputProps={{ required: true }}type="time" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, end_time_of_the_training:e.target.value})} value={sendForm?.end_time_of_the_training}/>
+                        <TextField  inputProps={{ required: true }}type="time" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, end_time_of_the_training:e.target.value})} value={sendForm?.end_time_of_the_training}/>
                     </Stack> 
         </CardContent>
           </Card>
