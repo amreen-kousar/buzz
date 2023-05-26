@@ -34,6 +34,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
+import { setISODay } from 'date-fns/esm';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -156,12 +157,15 @@ export default function DialogForm({ shown, setShown, batch }) {
   const [level4,setLevel4]=useState('');
   const [level5,setLevel5]=useState('');
   const [day1Day2,setDay1Day2]=useState('');
+  var [Id,setID]=useState();
+  console.log("🚀 ~ file: DialogForm.jsx:161 ~ DialogForm ~ Id:", Id)
   console.log("🚀 ~ file: DialogForm.jsx:102 ~ DialogForm ~ day1Day2:", day1Day2)
 
   console.log("🚀 ~ file: DialogForm.jsx:101 ~ DialogForm ~ assessmentType:", assessmentType)
   const [programAssessment,setProgramAssessment]=useState('')
   console.log("🚀 ~ file: DialogForm.jsx:103 ~ DialogForm ~ programAssessment:", programAssessment)
   const [district, setDistrict] = useState([])
+  console.log("🚀 ~ file: DialogForm.jsx:165 ~ DialogForm ~ district:", district)
   const [poa, setPoa] = useState([])
   const [taluk, setTaluk] = useState([])
   // console.log("🚀 ~ file: DialogForm.jsx:103 ~ DialogForm ~ taluk:", taluk)
@@ -368,7 +372,7 @@ console.log(programAssessment,"program assesment")
       .then(function (response) {
         setDistrict(response.data)
         console.log(response.data,"<------------------setTaluksetTaluk");
-        getTaluk();
+        
       })
       .catch(function (error) {
         console.log(error);
@@ -406,7 +410,7 @@ console.log(programAssessment,"program assesment")
   const getTaluk = async (id) => {
     
     var data = JSON.stringify({
-      "dist_id":"5"
+      "dist_id":Id,
 
     });
 
@@ -459,7 +463,7 @@ console.log(programAssessment,"program assesment")
 const [apiData, setApiData] = useState({})
   const [sendForm, setSendForm]  = useState ({
    emp_id:"",
-   
+    district:'',
     role_id:"",
     email_address: "",
     name_of_the_assessor: "",
@@ -549,7 +553,7 @@ const [apiData, setApiData] = useState({})
     how_many_women_attended_the_training_session_4:'',
     check_which_ones_the_gelathi_did_not_do_1: "",
     was_the_recap_done_1: "",
-    did_the_debrief_done_by_gelathi: [""],
+    did_the_debrief_done_by_gelathi: " ",
     during_the_debriefs_for_role_plays_the_gelathi_did_not_ask: "",
     repeat_the_activity_with_the_second_volunteer: "",
     during_the_debrief_did_the_gelathi_not_ask:"",
@@ -576,6 +580,15 @@ const [apiData, setApiData] = useState({})
   })
   console.log("🚀 ~ file: DialogForm.jsx:344 ~ DialogForm ~ sendForm:", sendForm.days_modules)
 
+  const setFormDistrictName = (value)=>{
+    let {id,name}=value
+    console.log(value,"districtttttt",id,name)
+    setSendForm({ ...sendForm, name_of_the_district:name,district:value})
+    Id = id;
+    setID(id)
+    
+    getTaluk();
+  }
   const apiFormHit = async => {
     // const axios = require('axios');
 let data = JSON.stringify({
@@ -918,15 +931,18 @@ id="date-time-picker"
         <Select
           labelId="Name of the District"
           id="Name of the District"
-          value={sendForm?.name_of_the_district}
+          value={sendForm?.district}
           label="Name of the District"
           onChange={(e =>{
-            setSendForm({ ...sendForm, name_of_the_district:e?.target?.value})
+            console.log(e,"distruct target value")
+            setFormDistrictName(e?.target?.value)
+            
+
           })}
         >
           {district?.map(itm =>{
             return (
-              <MenuItem value={itm?.name}>{itm?.name}</MenuItem>
+              <MenuItem value={itm}>{itm?.name}</MenuItem>
             )
           })}
 
