@@ -208,7 +208,8 @@ export default function gelathiProgram(props) {
                     onCloseFilter={handleclose}
                 />
             </Stack>
-               <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
+               <Card>
+                <CardContent style={{fontWeight:700}}>Project Name : {data1?.project_name}</CardContent> </Card><br/>
                <Typography style={{fontWeight:500,marginLeft:2}}> All Gelathi Sessions  ({count})</Typography> 
          {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             {clcikData && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>

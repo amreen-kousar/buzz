@@ -147,8 +147,10 @@ const [gelatiNote, setGelatiNote] = useState('');
   };
  
   const getGFSessionData = (async) => {
+    var userid = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       gf_session_id: clcikData?.id,
+      user_id : userid
     });
 
     var config = {
@@ -415,7 +417,13 @@ if( session?.gf_session_name?.indexOf("_VV")){
         <Divider />
 
        
-
+{
+  session == "" ?
+  <>
+  <div style={{display:"flex", marginTop:"50%", marginLeft:"40%" }}>
+      <CircularProgress />
+      </div>
+  </>:
 <Scrollbar>
           <Stack spacing={3} sx={{ p: 2 }}>
             <div>
@@ -827,7 +835,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
       : null}  
          */}
         </Scrollbar>
-
+}
        
 
 

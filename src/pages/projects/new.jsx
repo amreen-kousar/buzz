@@ -1,473 +1,231 @@
-import { useEffect, useState } from 'react';
+
+
+import { useEffect, useState, forwardRef } from 'react';
+import { useForm } from "react-hook-form";
+import React from "react";
 import axios from 'axios';
-import React from 'react';
-import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
-import Iconify from '../../../components/Iconify';
-import Scrollbar from '../../../components/Scrollbar';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import { useLocation, useNavigate } from 'react-router-dom';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import {
-  Box,
-  Radio,
-  Stack,
-  Button,
-  Drawer,
-  Rating,
-  Divider,
-  Checkbox,
-  FormGroup,
-  IconButton,
-  Typography,
-  RadioGroup,
-  Card,
-  CardContent,
-  TextField,
-} from '@mui/material';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import dayjs from 'dayjs';
+import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, Card, CardActionArea ,IconButton} from '@mui/material';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Page from '../../components/Page';
+import TravelDialog from '../Components/DashboardFilters/TravelDialog'
 import moment from 'moment';
-import GelathiCircleForm from './GelathiCircleForm';
+// import Edittraveldialog from './Editta';
+import Iconify from 'src/components/Iconify';
+import Team from '../travelAllowance/Team';
+import Own from '../travelAllowance/Own';
+import DialogForm from './components/DialogForm';
+import { Link } from 'react-router-dom';
+// components
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-import InputAdornment from '@mui/material/InputAdornment';
-import SearchIcon from '@mui/icons-material/Search';
-Circledrawer.propTypes = {
-  isOpenFilter: PropTypes.bool,
-  onOpenFilter: PropTypes.func,
-  onCloseFilter: PropTypes.func,
-};
-
-export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, data1, id }) {
-  console.log('🚀 ~ file: Circledrawer.jsx:35 ~ Circledrawer ~ clcikData:', clcikData);
-  console.log('🚀 ~ file: Circledrawer.jsx:35 ~ Circledrawer ~ data1:', data1);
-  const [scheduleData, setScheduleData] = useState('');
-  var [searchData, setSearchData] = useState('');
-  var [search, setSearch] = useState('');
-  var [selected, setSelected] = useState(null);
-  const { state } = useLocation();
-  const [sendData, setSendData] = React.useState({
-    project_id: '',
-    circle_name: '',
-    circle_date: '',
-    gelathi_created_id: '',
-  });
-
-  console.log(state.head, 'clicket data in ');
-
-  const searchFunction = (e) => {
-    console.log('searchfunctioniscalled', e);
-    search = e;
-    setSearch(search);
-    // setSelected({ name: e, type: "Search" })
-    enrolledGelathi();
-  };
-
-  const changeText = (e) => {
-    setSearchData(e?.target?.value);
-    searchFunction(e?.target?.value);
-    console.log(e?.target?.value, 'evalueeeeeeee');
-  };
-  const enrolledGelathi = (async) => {
-    var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-    var data = JSON.stringify({
-      search: search,
-      project_id: state?.id,
-      emp_id: idvalue,
-      role_id: role,
-    });
-
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        setenrolled(response.data);
-        console.log(response.data, '<---------------setenrolledsetenrolled');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const removegelathicircle = async (itm) => {
-    if (confirm('Are you sure want to remove')) {
-      var data = JSON.stringify({
-        circle_id: clcikData?.id,
-        flag: 0,
-        gelathi_id: itm?.gelathi_id,
-      });
-
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/updateEnrolledGelathi.php',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: data,
-      };
-
-      axios(config)
-        .then(function (response) {
-          console.log(JSON.stringify(response.data));
-          circle();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-  };
-  const navigate = useNavigate();
-  console.log(data1, '<------data', data1);
-  const [addData, setAddData] = useState({
-    date: dayjs(new Date()),
-    user_id: '',
-  });
-
-  const handleChange = (event) => {
-    setAddData({ ...addData, date: event });
-  };
-  // console.log(data,"clicked dataaaaaaaaa")
-  useEffect(() => {
-    VillageVisit();
-    circle();
-    setSendData({
-      circle_date: clcikData?.date,
-    });
-
-    // console.log(clcikData)
-  }, [clcikData]);
-  const [circleData, setcircleData] = useState('');
-  const createGfSession = (async) => {
-    const userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-
-    var data = JSON.stringify({
-      // project_id: data1?.project_id,
-      // user_id: userid,
-      // tb_name: clcikData?.name,
-      // tb_id: scheduleData?.data?.id,
-      // gf_session_type: 1,
-      // plan_date: moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
-      // gf_session_name: clcikData?.name,
-
-      circle_id: clcikData?.circleDI,
-      name: clcikData?.name,
-      user_id: userid,
-      project_id: data1?.project_id,
-      date: moment(sendData?.circle_date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
-      gf_circle_type:
-        state?.head == '_SPS'
-          ? '2'
-          : state?.head == '_SPM1'
-          ? '3'
-          : state?.head == '_SPM2'
-          ? '4'
-          : state?.head == '_SPM3'
-          ? '5'
-          : state?.head == '_SPM4'
-          ? '6'
-          : state?.head == '_SPM5'
-          ? '7'
-          : state?.head == '_GPS'
-          ? '8'
-          : state?.head == '_GPM1'
-          ? '9'
-          : state?.head == '_GPM2'
-          ? '10'
-          : state?.head == '_GPM3'
-          ? '11'
-          : state?.head == '_GPM4'
-          ? '12'
-          : state?.head == '_GPM5'
-          ? '13'
-          : state?.head == '_VPS'
-          ? '14'
-          : state?.head == '_VPM1'
-          ? '15'
-          : state?.head == '_VPM2'
-          ? '16'
-          : state?.head == '_VPM3'
-          ? '17'
-          : state?.head == '_VPM4'
-          ? '18'
-          : state?.head == '_VPM5'
-          ? '19'
-          : null,
-    });
-    //   {
-    //     "circle_id":clcikData?.circleDI,
-    //     "name":clcikData?.name,
-    //     "user_id":userid,
-    //     "project_id":746,
-    //     "date":"2023-5-11 06:00:00",
-    //     "gf_circle_type":"1"
-    // }
-    var config = {
-      method: 'post',
-      maxBodyLength: Infinity,
-      // url: 'https://bdms.buzzwomen.org/appTest/createGFSessions.php',
-      url: 'https://bdms.buzzwomen.org/appTest/createCircleMeetingNew.php',
-
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        // onCloseFilter()
-        // history.push('/')
-        if (response?.data?.code === 200) {
-          navigate('/dashboard/projects/gelathiProgram', { state: { id: id } });
-          console.log(JSON.stringify(response.data));
-        } else {
-          alert(response?.data?.message);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const VillageVisit = (async) => {
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-    var data = JSON.stringify({
-      batch_id: clcikData?.id,
-      role_id: role,
-    });
-
-    var config = {
-      method: 'post',
-      maxBodyLength: Infinity,
-      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        setScheduleData(response?.data);
-        console.log(response.data, '<--------------setScheduleData');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-  console.log(scheduleData, 'Scheduleddataaaaaaaaaaaaa');
-  console.log('🚀 ~ file: Circledrawer.jsx:132 ~ circle ~ data1?.project_id:', data1?.project_id, clcikData?.id);
-  const circle = async () => {
-    const userid = await JSON.parse(localStorage.getItem('userDetails'))?.id;
-    var data = JSON.stringify({
-      circle_id: clcikData?.id,
-      project_id: data1?.project_id,
-      emp_id: userid,
-    });
-    console.log('🚀 ~ file: Circledrawer.jsx:135 ~ circle ~ data:', data);
-
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircleData.php',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        setcircleData(response?.data);
-        console.log('🚀 ~ file: Circledrawer.jsx:145 ~ response?.data:', response?.data);
-        // console.log(response.data,"<----------setcircleDatasetcircleData");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  // const searchFunction = (e) => {
-  //   search = e
-  //   setSearch(search)
-  //   setSelected({ name: e, type: "Search" })
-  //   circle()
-  // }
   return (
-    <>
-      <Drawer
-        anchor="right"
-        open={isOpenFilter}
-        onClose={onCloseFilter}
-        PaperProps={{
-          sx: { width: 350 },
-        }}
-      >
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-          <Typography variant="subtitle1" sx={{ ml: 1 }}>
-            {/* {`${clcikData?.title}`}  */}
-            Scheddule a CM
-          </Typography>
-          {console.log(clcikData, '<------clcikDataclcikData')}
-          <IconButton onClick={onCloseFilter}>
-            <Iconify icon="eva:close-fill" width={20} height={20} />
-          </IconButton>
-        </Stack>
-        <Divider />
-        <Scrollbar>
-          <Stack spacing={3} sx={{ p: 3 }}>
-            <div>
-              {/* <Card>
-                                <CardContent>
-                                <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
-                              Project: &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{scheduleData?.data?.projectName}</span>
-                             </Typography>
-                                  
-                                    <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
-                                    Partner :&nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{scheduleData?.data?.partnerName}</span>
-                                    </Typography>
-                                
-                                    <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
-                                        Village  :
-                                        &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{scheduleData?.data?.name}</span>
-                                    </Typography>
-                                </CardContent>
-                            </Card> */}
-
-              {/* Date time picker  */}
-              {/* <Card style={{ marginTop: 20 }}>
-                <CardContent>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateTimePicker
-                      label="Date & Time picker"
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                      value={addData?.date}
-                      renderInput={(params) => <TextField {...params} color="common" />}
-                      PopperProps={{
-                        placement: 'top',
-                      }}
-                    />
-                  </LocalizationProvider>
-                </CardContent>
-              </Card> */}
-
-              <Typography
-                style={{ flexDirection: 'row', marginTop: 20, marginLeft: 5 }}
-                variant="subtitle1"
-                gutterBottom
-              >
-                Circle Name : {`${clcikData?.name}`}
-              </Typography>
-              <Typography
-                style={{ flexDirection: 'row', marginTop: 20, marginLeft: 5 }}
-                variant="subtitle1"
-                gutterBottom
-              >
-                Date And Time : from Api Date And Time :{`${clcikData?.date}`}
-              </Typography>
-              <DatePicker
-                required
-                label="Date"
-                defaultValue={sendData?.circle_date}
-                onChange={(newValue) => setSendData({ ...sendData, circle_date: newValue })}
-                renderInput={(params) => <TextField {...params} fullWidth />}
-                value={sendData?.circle_date}
-              />
-              <TextField
-                id="outlined-basic"
-                label="Search..."
-                sx={{ flex: 10 }}
-                onChange={(e) => {
-                  changeText(e);
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <Button>
-                      <InputAdornment position="start">
-                        <SearchIcon />
-                      </InputAdornment>
-                    </Button>
-                  ),
-                }}
-                variant="outlined"
-                style={{ marginTop: 40, marginLeft: 10, width: '100%' }}
-              />
-              <Typography
-                style={{ flexDirection: 'row', marginTop: 20, marginLeft: 5 }}
-                variant="subtitle1"
-                gutterBottom
-              >
-                Enrolled Gelathis (
-                {scheduleData?.all_participants?.length > 0
-                  ? scheduleData?.all_participants?.length
-                  : circleData?.gelathis?.length}
-                ):{' '}
-              </Typography>
-            </div>
-            {/* </Stack> */}
-            {/* </Scrollbar>
-        <Scrollbar> */}
-            {/* <Stack spacing={10} sx={{ p: 3 }}> */}
-            {circleData?.gelathis?.length > 0 ? (
-              <div>
-                {circleData?.gelathis?.map((itm) => {
-                  {
-                    console.log(itm, 'hyy');
-                  }
-                  return (
-                    <Card style={{ marginTop: 20 }}>
-                      <CardContent>
-                        <Stack style={{ float: 'right' }}>
-                          <IconButton style={{ marginLeft: 70 }} onClick={() => removegelathicircle(itm)}>
-                            <Icon
-                              icon="material-symbols:check-box-rounded"
-                              width={20}
-                              height={20}
-                              marginTop={20}
-                              color="#ff7424"
-                            />
-                          </IconButton>
-
-                          <GelathiCircleForm />
-                        </Stack>
-                        {console.log(circleData?.gelathis, '<-------circleData?.firstName')}
-
-                        {/* state={{ id: data1?.project_id }} */}
-                        <Typography variant="subtitle1">{itm?.firstName}</Typography>
-                        <Typography variant="subtitle1" gutterBottom>
-                          <Typography variant="body1" gutterBottom>
-                            {itm?.villagename}
-                          </Typography>
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            ) : (
-              <h5 style={{ textAlign: 'center', marginTop: '50%' }}>No Gelathi</h5>
-            )}
-          </Stack>
-        </Scrollbar>
-        <Stack mt={5} spacing={3} sx={{ p: 3 }}>
-          <Button fullWidth variant="contained" onClick={createGfSession} style={{ backgroundColor: '#FF7424' }}>
-            Save
-          </Button>
-        </Stack>
-      </Drawer>
-    </>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography id="children">{children}</Typography>
+        </Box>
+      )}
+    </div>
   );
 }
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+
+const SelfSakthiQulityAssurance = () => {
+    const [value, setValue] = React.useState(0);
+    const data = localStorage?.getItem('userId')
+    var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
+    const image = ["tykml", "exrdcftvbgyhnuj"]
+    const [drawerEvent, SetDrawerEvent] = useState(false);
+    //const [image, setImage] = React.useState(['data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==']);
+    const [viewImage, setViewImage] = React.useState(false);
+    const [listdata, setListData] = React.useState()
+    const [openMessage, setOpenMessage] = React.useState(false);
+    const [message, setMessage] = useState(false)
+    const [editData, setEditData] = useState(null)
+    const [openFilter, setOpenFilter] = useState(false);
+    const [clcikData, setClickData] = useState()
+    const [teamMembersData, setTeamMembersData] = useState([])
+    const [mainValue, setMainValue] = useState(0)
+    const [batch,setBatch] = useState('')
+
+    const [shown,setShown] = React.useState(false);
+
+    const userOwnPermissions=['1','9','5','12','4','13','6','3']
+    const userTeamPermissions=['2','1','12','4','13','3','11']
+  
+  
+    const Alert = forwardRef(function Alert(props, ref) {
+      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+  
+  
+    
+    useEffect(()=>{
+      if(!userOwnPermissions.includes(data)){
+      setMainValue(1)
+      }
+        },[])
+      
+  
+    const handleOpenFilter = (itm) => {
+      // itm.klmtr = +klmtr;
+      setEditData(itm)
+      console.log(editData)
+      setOpenFilter(true);
+    };
+  
+    const handleCloseFilter = () => {
+      setOpenFilter(false);
+    };
+  
+    const getDateValue = (e) => {
+      setDatevalue(e)
+    }
+  
+    const returnDateValue = () => {
+      return dateValue
+    }
+  
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
+  
+  
+  
+    return (
+      <Page id="dashboard-products" title="Dashboard: Products">
+        <Container id="container-travel-allowance">
+  
+  
+          <Typography id="travel-allowance" variant="h4" sx={{ mb: 5 }}>
+          <Link to="/dashboard/qualityAssurance">
+                  <IconButton>
+                    <Iconify icon="material-symbols:arrow-back-rounded" />
+                  </IconButton></Link>
+            Self Sakthi By Gelathi Program
+            {/* <Button style={{ float: "right" }}>Filters</Button> */}
+          </Typography>
+          <Snackbar id="ta-snackbar" open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
+            <Alert id="ta-message-alert" onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
+              {message}
+            </Alert>
+          </Snackbar>
+      <Box id="warning-box" sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs id="warning" variant="fullWidth" indicatorColor='warning'>
+  
+             {
+              userOwnPermissions.includes(data) &&  
+              <Tab
+              id="own"
+              onClick={() => { setMainValue(0) }}
+              sx={{
+                ':hover': {
+                  bgcolor: '#ffd796', // theme.palette.primary.main
+                  color: '#ff7424',
+                },
+  
+                color: 'black',
+              }} label="OWN" style={mainValue == 0 ? {
+                borderBottom: '3px solid #ff7424',
+                color: "#ff7424",
+              } : null} />
+             }
+  
+  
+  {
+  userTeamPermissions.includes(data) &&
+  <Tab
+  id="team"
+  onClick={() => { setMainValue(1) }}
+  sx={{
+    ':hover': {
+      bgcolor: '#ffd796', // theme.palette.primary.main
+      color: '#ff7424',
+    },
+  
+    color: 'black',
+  }} label="TEAM" style={mainValue == 1 ? {
+    borderBottom: '3px solid #ff7424',
+    color: "#ff7424",
+  } : null} />
+  
+  
+  }
+             
+  
+            </Tabs>
+          </Box>
+          <br />
+          <TextField id="outlined-basic" type="date" defaultValue={dateValue}
+            fullWidth
+            onChange={(e) => { getDateValue(e?.target?.value) }} label="Select Date" variant="outlined" InputLabelProps={{
+              shrink: true,
+            }} />
+             {/* <Stack style={{ marginTop: 20 }}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      
+                      inputFormat="YYYY-MM-DD"
+                      views={["year", "month", "day"]}
+                      // label="Date"
+                      value={getDateValue?.date}
+                      onChange={(newValue) => {
+                        setSendData({ ...sendData, date: newValue })
+                      }}
+                      renderInput={(params) => <TextField {...params} fullWidth />}
+                    />
+                  </LocalizationProvider>
+                </Stack> */}
+        {
+          userTeamPermissions.includes(data) &&   <TabPanel id="return-date-tab" value={mainValue} index={1}>
+          <Stack id="return-date-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+            <Box id="team-box" sx={{ width: '100%' }}>
+              <Team id="return-date" returnDateValue={returnDateValue} />
+            </Box>
+          </Stack>
+        </TabPanel>
+  
+        }
+         {
+          userOwnPermissions.includes(data) &&  <TabPanel value={mainValue} index={0}>
+          <Own returnDateValue={returnDateValue} />
+        </TabPanel>
+         }
+  
+  
+          <br></br>
+  
+    { (mainValue==0) &&     <Stack id="travel-dialog-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+            <DialogForm id="travel-dialog"  batch={batch} shown={shown} setShown={(e)=>{setShown(e)}}
+            // viewMessage={(text) => {
+            //   setMessage(text)
+            //   setOpenMessage(true)
+            //   // list()
+            // }} 
+            />
+          </Stack>}
+  
+          
+          {/* </Stack> */}
+  
+        </Container ></Page >
+    );
+  }
+
+export default SelfSakthiQulityAssurance

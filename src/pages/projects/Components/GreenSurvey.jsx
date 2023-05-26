@@ -45,7 +45,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 export default function GreenSurvey(props ) {
-
+console.log(props ,"props in greenservey")
   const {state} = useLocation()
   // console.log("🚀 ~ file: GreenSurvey.jsx:48 ~ GreenSurvey ~ enrolledGreenMotivators:", enrolledGreenMotivators)
   const [open, setOpen] = React.useState(false);
@@ -390,6 +390,8 @@ export default function GreenSurvey(props ) {
       
       axios(config)
       .then(function (response) {
+        props?.changeState()
+        props?.mainDrawerReload()
         setgreensurveyform(response?.data)
         setMessage('Form saved successfully')
         setsuccessMessage(true)

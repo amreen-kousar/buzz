@@ -71,7 +71,7 @@ const handleCheckBox= ()=>{
     
     axios(config)
     .then(function (response) {
-
+      console.log(response,'responseinattendance');
       if( addValue?.includes(itm?.participant_id)){
         const filteredData = addValue?.filter(item=>item!==itm?.participant_id)
         setAddValue(filteredData)
@@ -80,13 +80,16 @@ const handleCheckBox= ()=>{
         setAddValue([...addValue,itm?.participant_id])
       }
       
-      console.log(JSON.stringify(response.message,'<-----------------response.message'));
-      alert("Attendance Added Succesfully")
-      console.log("after alert")
+     
+        alert(response?.data?.Message)
+    
+    
+     
+    
     })
     .catch(function (error) {
       console.log(error);
-      alert(error?.Message)
+      alert(error?.data?.Message)
     });
     
   }
@@ -108,25 +111,38 @@ const handleCheckBox= ()=>{
       "tbl_poa_id": parseInt(batch?.tb_id),
       "type": parseInt(batch.type)
     })
-    const response = await axios.post('https://bdms.buzzwomen.org/appTest/participantsAttendance.php', data ,  {
-      headers: {
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/participantsAttendance.php',
+      
+      headers: { 
         'Content-Type': 'application/json'
+      },
+      data : data
+    };
+
+   
+    
+ os(config)
+    .then(function (response) {
+
+      if( addValue?.includes(itm?.participant_id)){
+        const filteredData = addValue?.filter(item=>item!==itm?.participant_id)
+        setAddValue(filteredData)
       }
-  }).then((res)=>{
-    if( addValue?.includes(itm?.participant_id)){
-      const filteredData = addValue?.filter(item=>item!==itm?.participant_id)
-      setAddValue(filteredData)
-    }
-    else{
-      setAddValue([...addValue,itm?.participant_id])
-    }
-    if(res?.Message){
-      alert("hi")
-      console.log("concole.loginside the then")
-    }
-  }).catch((error)=>{
-    alert(error.Message)
-  })
+      else{
+        setAddValue([...addValue,itm?.participant_id])
+      }
+      
+      console.log(JSON.stringify(response.message,'<-----------------response.message'));
+      alert(response.Message)
+    
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert(error?.Message)
+    });
+    
 
   }
 
@@ -230,11 +246,13 @@ const handleCheckBox= ()=>{
               { 
               batch?.type != 4 && batch?.type != 10 && batch?.type != 16  && batch?.type != 2 && batch?.type != 3 &&
               
-                    <Checkbox onClick={()=>{
+             (  itm?.module1 == 1?   <Checkbox disabled checked onClick={()=>{
+              alert(" Attendance  Is Already Marked.  ")
+             }} /> :     <Checkbox onClick={()=>{
     
                           choseAddAttendanceApi(itm) 
                        
-                        }} {...label} /> 
+                        }} {...label} /> )
                     }
                    
                   </CardActions>

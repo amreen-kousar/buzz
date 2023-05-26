@@ -29,7 +29,8 @@ export default function GelathiCircleDrawer({
   onCloseFilter,
   clcikData,
   data1,
-  sessionData
+  sessionData,
+  mainDrawerReload
 }) {
   const [selectedFromIndex, setSelectedFormIndex] = useState({
     index: '',
@@ -208,7 +209,7 @@ return (
                                 // if we want to see filed form means need to call another component so that time we can use this kind of methods to call instead of rendering inside the map
                               }}
                             >
-                              <GreenSurvey itm={itm } changeState={gelathiDrawerReloder} />
+                              <GreenSurvey itm={itm } changeState={gelathiDrawerReloder} mainDrawerReload={mainDrawerReload} />
                                </IconButton>
                              
                           ):null

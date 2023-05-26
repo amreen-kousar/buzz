@@ -24,6 +24,7 @@ import {
   Grid,
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
+
 // components
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
@@ -43,6 +44,7 @@ import { styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
 import { oldbaseURL } from 'src/utils/api';
 import GelathiCircleDrawer from './GelathiCircleDrawer';
+import { isError } from 'lodash';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 const ExpandMore = styled((props) => {
@@ -80,6 +82,9 @@ export default function GelathiProgrameDrawer({
   const reloadFunction = () => {
     setReloadFromForm(!reloadFromForm);
   };
+const [iserror, setIsError] = useState(false)
+  var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 
   console.log('clickedDatawhat', clcikData);
   //notes save button
@@ -100,7 +105,7 @@ export default function GelathiProgrameDrawer({
   const [schedule, setReschedule] = React.useState(false);
   const [locationS, setLocation] = useState();
   const [editSession, setEditsession] = useState(false);
-  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+ 
   const [getImage, setGetImae] = useState([]);
 
   const [circleDrawerData, setCircleDrawerData] = useState();
@@ -117,22 +122,38 @@ export default function GelathiProgrameDrawer({
   const userName = JSON.parse(localStorage.getItem('userDetails'))?.first_name;
   console.log('userNAme in localstorage', userName);
   const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
+
+  useEffect(()=>{
+    let isSubscribe = true;
+    setIsError(false)
+    if (isSubscribe) {
+     
+      getGFSessionData();
+    }
+
+    return () => {
+      isSubscribe = false;
+    };
+  }, [reloadFromForm])
   useEffect(() => {
     setImages([]);
+    setIsError(false)
     // setGetAllNotes([])
   }, [session.tb_id]);
   useEffect(() => {
+    setIsError(false)
     getGFSessionData();
     getNoteHandler();
   }, [clcikData]);
   useEffect(() => {
     console.log('useEffect for getnotehandler');
-
+    setIsError(false)
     let isSubscribe = true;
-
+    setIsError(false)
     if (isSubscribe) {
       getNoteHandler();
       getGFSessionData();
+
     }
 
     return () => {
@@ -145,7 +166,7 @@ export default function GelathiProgrameDrawer({
     console.log('useEffect for getnotehandler');
 
     let isSubscribe = true;
-
+    setIsError(false)
     if (isSubscribe) {
       getNoteHandler();
       getGFSessionData();
@@ -219,7 +240,7 @@ export default function GelathiProgrameDrawer({
   const getGFSessionData = (async) => {
     var data = JSON.stringify({
       gf_session_id: clcikData?.name,
-      user_id: session?.user_id,
+      user_id: userid,
     });
 
     var config = {
@@ -281,6 +302,7 @@ export default function GelathiProgrameDrawer({
       })
       .catch(function (error) {
         console.log(error, 'failed');
+        setIsError(true)
       });
     console.log('submit');
   };
@@ -428,6 +450,17 @@ export default function GelathiProgrameDrawer({
         </Stack>
 
         <Divider />
+{
+
+
+session.length <=0 ?
+<>
+
+<div style={{display:"flex", marginTop:"50%", marginLeft:"40%" }}>
+      <CircularProgress />
+      </div>
+</>
+:
 
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
@@ -747,6 +780,7 @@ export default function GelathiProgrameDrawer({
                   data1={gelathiFacikitatorLead}
                   reloadmethod={reloadFunction}
                   sessionData={session}
+                  mainDrawerReload = {reloadFunction}
                 />
               </Stack>
 
@@ -943,7 +977,7 @@ export default function GelathiProgrameDrawer({
               </Card>
             </div>
           </Stack>
-        </Scrollbar>
+        </Scrollbar>}
       </Drawer>
     </>
   );
