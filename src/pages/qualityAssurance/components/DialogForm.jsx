@@ -144,10 +144,12 @@ export default function DialogForm({ shown, setShown, batch }) {
   const [rate9,setRate9]=useState('');
   const [rate10,setRate10]=useState('');
   const [leave,setLeave]=useState('');
+
   const [leave1,setLeave1]=useState('');
   const [leave2,setLeave2]=useState('');
   const [leave3,setLeave3]=useState('');
   const [leave4,setLeave4]=useState('');
+
   const [engage,setEngage]=useState('');
   const [participant,setParticipant]=useState('');
   console.log("🚀 ~ file: DialogForm.jsx:130 ~ DialogForm ~ participant:", participant)
@@ -611,7 +613,7 @@ let data = JSON.stringify({
   how_many_women_attended_the_training_session: parseInt (sendForm?.how_many_women_attended_the_training_session),
   check_which_ones_the_trainer_did_not_do_1:checked['check_which_ones_the_trainer_did_not_do_1'],
   were_the_women_interactive: intract,
-  did_any_women_leave_tring_session_dring_or_after_1st_module: leave,
+  did_any_women_leave_tring_session_dring_or_after_1st_module: sendForm.did_any_women_leave_tring_session_dring_or_after_1st_module,
   if_so_how_many: parseInt(sendForm.if_so_how_many),
   did_this_module_take_20_minutes_as_allotted: module,
   did_any_new_women_attend_the_training_session_during_module:sendForm.did_any_new_women_attend_the_training_session_during_module,
@@ -619,7 +621,7 @@ let data = JSON.stringify({
   check_which_ones_the_trainer_did_not_do_2: checked['check_which_ones_the_trainer_did_not_do_2'],
   during_the_debrief_did_the_trainer_did_not_do_the_following:checked['during_the_debrief_did_the_trainer_did_not_do_the_following'],
   during_the_debrief_the_trainer_did: checked['during_the_debrief_the_trainer_did'],
-  did_any_women_leve_training_session_during_or_after_1st_module_1:leave1,
+  did_any_women_leve_training_session_during_or_after_1st_module_1:sendForm.did_any_women_leve_training_session_during_or_after_1st_module_1,
   if_so_how_many_2: parseInt(sendForm.if_so_how_many_2),
   did_this_module_take_20_minutes_as_allotted_1: module1,
   did_any_new_women_attend_training_session_during_this_module_1: attend,
@@ -630,9 +632,9 @@ let data = JSON.stringify({
   did_the_groups_engage_and_interact_among_themselves_well: engage,
   were_the_participants_responsive_during_the_debriefing:participant,
   // did_any_women_leave_tring_session_dring_or_after_1st_module_2: leave3,
-  did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1: leave4,
+  did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1: sendForm.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1,
   if_so_how_many_4: parseInt(sendForm.if_so_how_many_4),
-  did_this_module_take_30_minutes_as_allotted: module2,
+  did_this_module_take_30_minutes_as_allotted: sendForm.did_this_module_take_30_minutes_as_allotted,
   how_many_women_remained_by_the_end_of_this_training_session: parseInt( sendForm.how_many_women_remained_by_the_end_of_this_training_session),
   how_many_are_likely_to_come_back:parseInt( sendForm.how_many_are_likely_to_come_back),
   did_any_new_women_attend_training_session_during_this_module_2: sendForm.did_any_new_women_attend_training_session_during_this_module_2,
@@ -2445,8 +2447,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <Stack mt={2}>
                   <FormGroup>
                     <RadioGroup
-                      value={leave}
-                      onChange={handleLeave}
+                      onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted}   
+
                     >
                     <FormControlLabel value="Yes"  control={<Radio />} label="Yes" />
                     <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -2462,7 +2464,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   <Typography>If so, how many?
             </Typography>
                   <Stack mt={2} mb={2}>
-                          <TextField type='number' required inputProps={{ required: true }} type='number' label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, if_so_how_many:e.target.value})} value={sendForm?.if_so_how_many}/>
+                          <TextField type='number' required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, if_so_how_many:e.target.value})} value={sendForm?.if_so_how_many}/>
                       </Stack> 
               </CardContent>
         </Card>
@@ -2630,8 +2632,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      value={leave1}
-                      onChange={handleLeave1}
+                      onChange={(e) => setSendForm({ ...sendForm, did_any_women_leve_training_session_during_or_after_1st_module_1:e.target.value})} value={sendForm?.did_any_women_leve_training_session_during_or_after_1st_module_1}   
+
                       // onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
                   
                     >
@@ -2930,8 +2932,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       // defaultValue="Yes"
                       name="radio-buttons-group"
                      
-                      value={leave4}
-                      onChange={handleLeave4}
+                      onChange={(e) => setSendForm({ ...sendForm, did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1:e.target.value})} value={sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1}   
+
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -2969,8 +2971,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       // defaultValue="Yes"
                       name="radio-buttons-group"
                       // onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                      value={module2}
-                      onChange={handleModule2}
+                      onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted}   
+
                   
                     >
                     <div style={{display:"flex"}}>
@@ -3534,8 +3536,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       // defaultValue="Yes"
                       name="radio-buttons-group"
                       // onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                      value={leave}
-                      onChange={handleLeave}
+                      onChange={(e) => setSendForm({ ...sendForm, did_any_women_leave_tring_session_dring_or_after_1st_module:e.target.value})} value={sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module}   
+
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
