@@ -461,7 +461,8 @@ console.log(programAssessment,"program assesment")
  
 
 const [apiData, setApiData] = useState({})
-  const [sendForm, setSendForm]  = useState ({
+  const [sendForm, setSendForm]  = useState (
+    {
    emp_id:"",
     district:'',
     role_id:"",
@@ -734,6 +735,7 @@ axios.request(config)
   timer: 3000
 });
 handleClose()
+setSendForm([{}])
   console.log(JSON.stringify(response.data),'<-----------------------question tag------------------>')
 })
 .catch((error) => {
@@ -792,7 +794,7 @@ handleClose()
         TransitionComponent={Transition}
       >
           <form onSubmit={(e)=>{e.preventDefault();apiFormHit()}}>
-        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+        <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton
               edge="start"
@@ -816,11 +818,23 @@ handleClose()
 
 
     {/* 1 */}
-    <Grid style={{backgroundColor:"#FFD580", marginTop: "60px"}}>
+    <Grid style={{backgroundColor:"#FFD580", marginTop: "30px"}}>
             <Typography>PAGE 1</Typography>
 
        
         
+        <Card sx={{mt:4, margin:"20px"}}>
+        <CardContent>
+            <Typography>
+            The purpose of this 'Buzz training quality evaluation' form is -<br/>
+            1. To evaluate if the standard pedagogical practices are being followed in Buzz Meeting/Training<br/>
+            2. To evaluate the effectiveness of training<br/>
+            3. To record and reflect on the trainers / facilitator's competency and facilitation<br/>
+            4. to record/Identify stories from community
+            </Typography>
+ 
+                </CardContent>
+        </Card>
         <Card sx={{mt:4, margin:"20px"}}>
         <CardContent>
             <Typography>Email</Typography>
