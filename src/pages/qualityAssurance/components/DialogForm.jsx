@@ -553,7 +553,7 @@ const [apiData, setApiData] = useState({})
     how_many_women_attended_the_training_session_4:'',
     check_which_ones_the_gelathi_did_not_do_1: "",
     was_the_recap_done_1: "",
-    did_the_debrief_done_by_gelathi: " ",
+    did_the_debrief_done_by_gelathi: "",
     during_the_debriefs_for_role_plays_the_gelathi_did_not_ask: "",
     repeat_the_activity_with_the_second_volunteer: "",
     during_the_debrief_did_the_gelathi_not_ask:"",
