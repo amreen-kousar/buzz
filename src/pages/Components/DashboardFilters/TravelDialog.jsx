@@ -60,7 +60,7 @@ export default function TravelDialog({ viewMessage }) {
     odimeter: "",
     location: "",
     poa: "",
-    srpoa:"",
+    // srpoa:"",
     date: new Date(),          
     modeoftravel: "",
     rateperkm: "",
@@ -153,7 +153,7 @@ console.log("submittedddddddd")
       "printing": sendData?.printing,
       "start_location_name": locationS,
       "poa_id": sendData?.poa,
-      "srpoa":sendData?.srpoa,
+      // "srpoa":sendData?.srpoa, pooja said to remove
       "start_odometer": (sendData?.odimeter)?sendData?.odimeter:'',
       "rate_per_KM": sendData?.rateperkm,
       "stationery": sendData?.stationery,
@@ -367,7 +367,7 @@ axios(config)
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Create Allowance
+            Create Allowance 
           </Typography>
 
           <Button autoFocus color="inherit" type="submit">
@@ -508,12 +508,12 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                 </Select>:<Typography variant="body2" style={{marginLeft:20,marginTop:40}}>No POA</Typography>}
                 </FormControl>
               </Stack>
-
-              <Stack style={{ marginTop: 20 }}>       
-             <FormControl fullWidth >
-            {console.log(userDetails,"userdetailsssssssssssss")}
+{/* pooja said to remove create poa  */}
+              {/* <Stack style={{ marginTop: 20 }}>       
+             <FormControl fullWidth > */}
+            {/* {console.log(userDetails,"userdetailsssssssssssss")}
               {userDetails==12?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, srpoa: e?.target?.value }) }} label="Create poa" color="common" />:null}
-             
+              */}
               {/* <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>Poa</InputLabel>
                 <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                 
@@ -521,8 +521,8 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                     return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                   })}
                 </Select> */}
-                </FormControl>
-              </Stack>
+                {/* </FormControl>
+              </Stack> */}
 
               <Stack style={{ marginTop: 20 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
