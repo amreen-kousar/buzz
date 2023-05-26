@@ -17,6 +17,8 @@ import {
     FormControl,
     CardContent,Icon,RadioGroup
   } from '@mui/material';
+  import Swal from 'sweetalert2'
+
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
@@ -65,6 +67,21 @@ export default function DialogForm({ shown, setShown, batch }) {
       during_the_debrief_the_trainer_did:[],
       during_the_debriefs_for_role_plays_the_trainer_did_not_ask:[],
       during_the_debrief_did_the_trainer_did_not_do_the_following:[],
+      days_modules:[],
+      during_the_debrief_did_the_gelathi:[],
+      during_the_debriefs_for_role_plays_the_gelathi_did_not_ask:[],
+      during_the_debrief_did_the_gelathi_not_ask:[],
+      the_gelathi_did_not_ask_1:[],
+      the_gf_competently_covered_folowing_things_in_training_delivered:[],
+      check_which_instructions_the_trainer_did_not_do:[],
+      During_the_debrief_did_the_trainer_not_ask:[],
+      the_trainer_did_not_ask:[],
+      what_did_the_trainer_not_do:[],
+      during_the_debrief_did_the_trainer_not_ask_1:[],
+      check_which_ones_the_trainer_did_not_do_5:[],
+      during_the_debrief_did_the_trainer_not_ask_2:[],
+      check_which_instructions_the_gelathi_did_not_do:[],
+      
       
   });
   
@@ -82,7 +99,9 @@ export default function DialogForm({ shown, setShown, batch }) {
   };
 
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role
-    console.log("🚀 ~ file: DialogForm.jsx:50 ~ DialogForm ~ role:", role)
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    // console.log("🚀 ~ file: DialogForm.jsx:92 ~ DialogForm ~ userid:", userid)
+    // console.log("🚀 ~ file: DialogForm.jsx:50 ~ DialogForm ~ role:", role)
     const [open, setOpen] = React.useState(false);
     React.useEffect(() => {
       //setShown(shown)
@@ -143,6 +162,7 @@ export default function DialogForm({ shown, setShown, batch }) {
   const [programAssessment,setProgramAssessment]=useState('')
   console.log("🚀 ~ file: DialogForm.jsx:103 ~ DialogForm ~ programAssessment:", programAssessment)
   const [district, setDistrict] = useState([])
+  const [poa, setPoa] = useState([])
   const [taluk, setTaluk] = useState([])
   // console.log("🚀 ~ file: DialogForm.jsx:103 ~ DialogForm ~ taluk:", taluk)
   const [gfName,setGFName]=useState([])
@@ -179,7 +199,8 @@ export default function DialogForm({ shown, setShown, batch }) {
 
   const handleprogramassessment=(event)=>{
     setProgramAssessment(event.target.value)
-    
+    getPoa(event.target.value)
+    console.log(programAssessment,"programmmmmmmmmmmmmmmmmmmmmmmmmm")
 }
   const handleassessmentType=(event)=>{
     setassessmentType(event.target.value)
@@ -299,6 +320,38 @@ export default function DialogForm({ shown, setShown, batch }) {
     
 }
  
+// const type = programAssessment
+  const getPoa = (type) => {
+console.log(programAssessment,"program assesment")
+
+    var data = JSON.stringify({
+      // "country_id": "1",
+      // "state_id": 3,
+     // "district_id": id
+     "type":  type==3 ? '' : type,
+     "session_type":'',
+
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appGo/getPoa ',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        setPoa(response.data)
+        console.log(response.data,"<------------------setTaluksetTaluk");
+        // getTaluk();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   const getDistrict = () => {
   
 
@@ -406,6 +459,7 @@ export default function DialogForm({ shown, setShown, batch }) {
 const [apiData, setApiData] = useState({})
   const [sendForm, setSendForm]  = useState ({
    emp_id:"",
+   
     role_id:"",
     email_address: "",
     name_of_the_assessor: "",
@@ -481,48 +535,66 @@ const [apiData, setApiData] = useState({})
     any_futher_training_and_understding_reqired_by_gf_traing_module: "",
     did_you_find_anything_traiing_or_gf_that_neds_to_worked_priority: "",
     details_of_success_stories_to_be_collected_from_gelathis_by_gf: "",
-    deadline_to_collect_the_stories: "",
+    deadline_to_collect_the_stories: dayjs(new Date()),
     end_time_of_the_training:"",
     no_of_participants_at_end_of_the_session: "",
     any_other_comments_about_the_gelathi_facilitator: "",
     name_of_the_gelathi_being_evaluated: "",
+    name_of_the_gelathi_being_evaluated_1:'',
     days_modules: "",
     check_which_ones_the_gelathi_did_not_do: "",
     how_many_women_attended_the_training_session_1:"",
-    how_many_women_attended_the_training_session_5: "",
+    how_many_women_attended_the_training_session_2: "",
+    how_many_women_attended_the_training_session_3:'',
+    how_many_women_attended_the_training_session_4:'',
     check_which_ones_the_gelathi_did_not_do_1: "",
     was_the_recap_done_1: "",
-    did_the_debrief_done_by_gelathi: "",
+    did_the_debrief_done_by_gelathi: [""],
     during_the_debriefs_for_role_plays_the_gelathi_did_not_ask: "",
     repeat_the_activity_with_the_second_volunteer: "",
     during_the_debrief_did_the_gelathi_not_ask:"",
     the_gelathi_did_not_ask_1:"",
     check_which_ones_the_gelathi_did_not_do_2:"",
     check_which_ones_the_gelathi_did_not_do_3:"",
-    check_which_ones_the_gelathi_did_not_do_4:""
-   
-    
-    
+    check_which_ones_the_gelathi_did_not_do_4:"",
+    during_the_debrief_did_the_gelathi:"",
+    did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2:"",
+    check_which_instructions_the_trainer_did_not_do:'',
+    During_the_debrief_did_the_trainer_not_ask:"",
+    were_the_participants_responsive_during_the_debriefing_1:'',
+    the_trainer_did_not_ask:'',
+    what_did_the_trainer_not_do:"",
+    during_the_debrief_did_the_trainer_not_ask_1:'',
+    were_the_participants_responsive_during_the_debriefing_2:"",
+    did_this_module_take_30_minutes_as_allotted_2:'',
+    check_which_ones_the_trainer_did_not_do_5:'',
+    during_the_debrief_did_the_trainer_not_ask_2:'',
+    were_the_participants_responsive_during_the_debriefing_3:'',
+    did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3:'',
+    check_which_instructions_the_gelathi_did_not_do:'',
+    did_this_module_take_30_minutes_as_allotted_3:"",
   })
-  console.log("🚀 ~ file: DialogForm.jsx:344 ~ DialogForm ~ sendForm:", sendForm)
+  console.log("🚀 ~ file: DialogForm.jsx:344 ~ DialogForm ~ sendForm:", sendForm.days_modules)
 
   const apiFormHit = async => {
     // const axios = require('axios');
 let data = JSON.stringify({
-  emp_id:"",
-  role_id:"",
+  emp_id:parseInt(userid) ,
+  role_id: parseInt(role) ,
   email_address: sendForm?.email_address,
   name_of_the_assessor: sendForm?.name_of_the_assessor,
-  entry_date: moment(sendForm?.entry_date.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+  // "entry_date": "2023-05-18"+"T00:00:00Z",
+
+ entry_date: moment(sendForm?.entry_date.$d)?.format('YYYY-MM-DD HH:mm:ss').replace(" ","T") + "Z",
   program_assessment: parseInt(programAssessment),
-  today_poa: "",
+  today_poa: sendForm.today_poa,
   name_of_the_district:sendForm?.name_of_the_district,
   name_of_the_taluk: sendForm?.name_of_the_taluk,
   name_of_the_village_and_the_venue_of_meeting_or_training: sendForm?.name_of_the_village_and_the_venue_of_meeting_or_training,
   day1_or_day2:day1Day2,
   name_of_the_trainer_being_evaluated:sendForm.name_of_the_trainer_being_evaluated,
   check_which_ones_the_trainer_did_not_do: checked['check_which_ones_the_trainer_did_not_do'],
-  how_many_women_attended_the_training_session: sendForm?.how_many_women_attended_the_training_session,
+  how_many_women_attended_the_training_session: parseInt (sendForm?.how_many_women_attended_the_training_session),
   check_which_ones_the_trainer_did_not_do_1:checked['check_which_ones_the_trainer_did_not_do_1'],
   were_the_women_interactive: intract,
   did_any_women_leave_tring_session_dring_or_after_1st_module: leave,
@@ -547,8 +619,8 @@ let data = JSON.stringify({
   did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1: leave4,
   if_so_how_many_4: parseInt(sendForm.if_so_how_many_4),
   did_this_module_take_30_minutes_as_allotted: module2,
-  how_many_women_remained_by_the_end_of_this_training_session: sendForm.how_many_women_remained_by_the_end_of_this_training_session,
-  how_many_are_likely_to_come_back: sendForm.how_many_are_likely_to_come_back,
+  how_many_women_remained_by_the_end_of_this_training_session: parseInt( sendForm.how_many_women_remained_by_the_end_of_this_training_session),
+  how_many_are_likely_to_come_back:parseInt( sendForm.how_many_are_likely_to_come_back),
   did_any_new_women_attend_training_session_during_this_module_2: sendForm.did_any_new_women_attend_training_session_during_this_module_2,
   if_so_how_many_5: parseInt(sendForm.if_so_how_many_5),
   did_this_module_take_30_minutes_as_allotted_1: sendForm.did_this_module_take_30_minutes_as_allotted_1,
@@ -570,7 +642,7 @@ let data = JSON.stringify({
   level_of_participation_3: parseInt(level3),
   level_of_participation_4: parseInt(level4),
   level_of_participation_5: parseInt(level5),
-  the_gf_competently_covered_folowing_things_in_training_delivered: "",
+  the_gf_competently_covered_folowing_things_in_training_delivered: checked['the_gf_competently_covered_folowing_things_in_training_delivered'],
   rate_the_gf_1: parseInt(rate1),
   rate_the_gf_2:parseInt(rate2),
   rate_the_gf_3: parseInt(rate3),
@@ -586,26 +658,45 @@ let data = JSON.stringify({
   any_futher_training_and_understding_reqired_by_gf_traing_module: checked['any_futher_training_and_understding_reqired_by_gf_traing_module'],
   did_you_find_anything_traiing_or_gf_that_neds_to_worked_priority: sendForm.did_you_find_anything_traiing_or_gf_that_neds_to_worked_priority,
   details_of_success_stories_to_be_collected_from_gelathis_by_gf: sendForm.details_of_success_stories_to_be_collected_from_gelathis_by_gf,
-  deadline_to_collect_the_stories: sendData.deadline_to_collect_the_stories,
+  deadline_to_collect_the_stories: moment(sendForm?.deadline_to_collect_the_stories.$d)?.format('YYYY-MM-DD HH:mm:ss').replace(" ","T") + "Z",
   end_time_of_the_training:sendForm.end_time_of_the_training,
   no_of_participants_at_end_of_the_session: parseInt(sendForm.no_of_participants_at_end_of_the_session),
   any_other_comments_about_the_gelathi_facilitator: sendForm.any_other_comments_about_the_gelathi_facilitator,
-  name_of_the_gelathi_being_evaluated: "",
-  days_modules: "",
+  name_of_the_gelathi_being_evaluated: sendForm.name_of_the_gelathi_being_evaluated,
+  name_of_the_gelathi_being_evaluated_1: sendForm.name_of_the_gelathi_being_evaluated_1,
+
+  days_modules: sendForm.days_modules,
   check_which_ones_the_gelathi_did_not_do: checked['check_which_ones_the_gelathi_did_not_do'],
-  how_many_women_attended_the_training_session_5: "",
-  how_many_women_attended_the_training_session_1:sendForm.how_many_women_attended_the_training_session_1,
+  how_many_women_attended_the_training_session_2:parseInt (sendForm.how_many_women_attended_the_training_session_2),
+  how_many_women_attended_the_training_session_3:parseInt( sendForm.how_many_women_attended_the_training_session_3),
+  how_many_women_attended_the_training_session_4:parseInt (sendForm.how_many_women_attended_the_training_session_4),
+  how_many_women_attended_the_training_session_1:parseInt (sendForm.how_many_women_attended_the_training_session_1),
   check_which_ones_the_gelathi_did_not_do_1: checked['check_which_ones_the_gelathi_did_not_do_1'],
-  was_the_recap_done_1: "",
-  did_the_debrief_done_by_gelathi: "",
-  during_the_debriefs_for_role_plays_the_gelathi_did_not_ask: "",
-  repeat_the_activity_with_the_second_volunteer: "",
-  during_the_debrief_did_the_gelathi_not_ask:"",
-  the_gelathi_did_not_ask_1:"",
+  was_the_recap_done_1:sendForm.was_the_recap_done_1,
+  did_the_debrief_done_by_gelathi: sendForm.did_the_debrief_done_by_gelathi,
+  during_the_debriefs_for_role_plays_the_gelathi_did_not_ask: checked['check_which_ones_the_gelathi_did_not_do_1'],
+  repeat_the_activity_with_the_second_volunteer: sendForm.repeat_the_activity_with_the_second_volunteer,
+  during_the_debrief_did_the_gelathi_not_ask:checked['during_the_debrief_did_the_gelathi_not_ask'],
+  the_gelathi_did_not_ask_1:checked['the_gelathi_did_not_ask_1'],
   check_which_ones_the_gelathi_did_not_do_2:checked['check_which_ones_the_gelathi_did_not_do_2'],
   check_which_ones_the_gelathi_did_not_do_3:checked['check_which_ones_the_gelathi_did_not_do_3'],
   check_which_ones_the_gelathi_did_not_do_4:checked['check_which_ones_the_gelathi_did_not_do_4'],
-  
+  during_the_debrief_did_the_gelathi:checked['during_the_debrief_did_the_gelathi'],
+  check_which_instructions_the_trainer_did_not_do:checked['check_which_instructions_the_trainer_did_not_do'],
+  During_the_debrief_did_the_trainer_not_ask:checked['During_the_debrief_did_the_trainer_not_ask'],
+  the_trainer_did_not_ask:checked['the_trainer_did_not_ask'],
+  what_did_the_trainer_not_do:checked['what_did_the_trainer_not_do'],
+  during_the_debrief_did_the_trainer_not_ask_1:checked['during_the_debrief_did_the_trainer_not_ask_1'],
+  check_which_ones_the_trainer_did_not_do_5:checked['check_which_ones_the_trainer_did_not_do_5'],
+  during_the_debrief_did_the_trainer_not_ask_2:checked['during_the_debrief_did_the_trainer_not_ask_2'],
+  check_which_instructions_the_gelathi_did_not_do:checked['check_which_instructions_the_gelathi_did_not_do'],
+  did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2:sendForm.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2,
+  were_the_participants_responsive_during_the_debriefing_1:sendForm.were_the_participants_responsive_during_the_debriefing_1,
+  were_the_participants_responsive_during_the_debriefing_2:sendForm.were_the_participants_responsive_during_the_debriefing_2,
+  did_this_module_take_30_minutes_as_allotted_2:sendForm.did_this_module_take_30_minutes_as_allotted_2,
+  were_the_participants_responsive_during_the_debriefing_3:sendForm.were_the_participants_responsive_during_the_debriefing_3,
+  did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3:sendForm.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3,
+  did_this_module_take_30_minutes_as_allotted_3:sendForm.did_this_module_take_30_minutes_as_allotted_3,
   });
 console.log("🚀 ~ file: DialogForm.jsx:292 ~ apiFormHit ~ data:", data)
 
@@ -622,10 +713,25 @@ let config = {
 axios.request(config)
 .then((response) => {
  setApiData(response.data)
- 
+ Swal.fire({
+  icon: 'success',
+  title: 'Success',
+  text: response.data.message,
+  confirmButtonText: 'Ok',
+  timer: 3000
+});
+handleClose()
   console.log(JSON.stringify(response.data),'<-----------------------question tag------------------>')
 })
 .catch((error) => {
+  Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: response.data.message,
+    confirmButtonText: 'Ok',
+    timer: 2000
+  });
+  handleClose();
   console.log(error);
 });
   }
@@ -665,12 +771,14 @@ axios.request(config)
       <Button  onClick={handleClickOpen}>
        
       </Button>
+    
       <Dialog
         fullScreen
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
       >
+          <form onSubmit={(e)=>{e.preventDefault();apiFormHit()}}>
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton
@@ -684,7 +792,7 @@ axios.request(config)
             <Typography sx={{ ml: 2, flex: 1, color:"white"  }} variant="h6" component="div">
               Self Shakti Training program Form
             </Typography>
-            <Button autoFocus color="inherit" onClick={apiFormHit}>
+            <Button autoFocus color="inherit" type='submit'>
               save
             </Button>
           </Toolbar>
@@ -705,7 +813,7 @@ axios.request(config)
             <Typography>Email</Typography>
             <Stack mt={2} mb={2}>
                     {/* <TextField required label="Your Answer" variant="outlined" color="common" /> */}
-                   <TextField type='email' required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, email_address:e.target.value})} value={sendForm?.email_address}   
+                   <TextField  type='email' required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, email_address:e.target.value})} value={sendForm?.email_address}   
 />
                 </Stack> 
                 </CardContent>
@@ -717,7 +825,7 @@ axios.request(config)
             <Typography>Name of the Assessor
        </Typography>
             <Stack mt={2} mb={2}>
-                    <TextField required label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor:e.target.value})} value={sendForm?.name_of_the_assessor}/>
+                    <TextField  required inputProps={{ required: true }} label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor:e.target.value})} value={sendForm?.name_of_the_assessor}/>
                 </Stack> 
         </CardContent>
      </Card>
@@ -738,7 +846,7 @@ id="date-time-picker"
     placement: "top"
 
   }}
-  renderInput={(params) => <TextField required {...params} color="common" />}
+  renderInput={(params) => <TextField  required inputProps={{ required: true }} {...params} color="common" />}
 />
                 </Stack> 
               </Stack>
@@ -768,6 +876,36 @@ id="date-time-picker"
               
               </Stack>
         </CardContent>
+       {poa?.length !=0?  <CardContent>
+        <Stack mt={2}>
+                <Typography>
+                Select Poa
+                </Typography>
+                <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="Name of the Poa">Poa</InputLabel>
+        <Select
+          labelId="Name of the Poa"
+          id="Name of the Poa"
+          value={sendForm?.today_poa}
+          label="Poa"
+          onChange={(e =>{
+            setSendForm({ ...sendForm, today_poa:e?.target?.value})
+          })}
+        >
+          {poa?.map(itm =>{
+            return (
+              <MenuItem value={itm?.name}>{itm?.name}</MenuItem>
+            )
+          })}
+
+        </Select>
+      </FormControl>
+    </Box>
+
+
+              </Stack>
+        </CardContent>: null}
      </Card>
      <Card sx={{ margin:"20px"}}>
         <CardContent>
@@ -832,7 +970,7 @@ id="date-time-picker"
         <Stack>
                 <Typography variant="body2">Name of the village and the venue of meeting/training/ಗ್ರಾಮದ ಹೆಸರು ಮತ್ತು ಸಭೆ / ತರಬೇತಿಯ ಸ್ಥಳ</Typography>
                 <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, name_of_the_village_and_the_venue_of_meeting_or_training:e.target.value})} value={sendForm?.name_of_the_village_and_the_venue_of_meeting_or_training}/>
+                    <TextField required inputProps={{ required: true }} label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, name_of_the_village_and_the_venue_of_meeting_or_training:e.target.value})} value={sendForm?.name_of_the_village_and_the_venue_of_meeting_or_training}/>
                 </Stack>  
               </Stack>
        
@@ -845,7 +983,7 @@ id="date-time-picker"
         <br/>
         
          {/* 2 */}
-       <Grid  backgroundColor={"#FFD580"}>
+      {( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"}>
           page-2
         <CardContent>
           <Card>
@@ -886,7 +1024,7 @@ id="date-time-picker"
                   <Typography>No of participants at the start of the session
             </Typography>
                   <Stack mt={2} mb={2}>
-                          <TextField type="number"  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, no_of_participants_at_the_start_of_the_session:e.target.value})} value={sendForm?.no_of_participants_at_the_start_of_the_session}/>
+                          <TextField required inputProps={{ required: true }} type="number"  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, no_of_participants_at_the_start_of_the_session:e.target.value})} value={sendForm?.no_of_participants_at_the_start_of_the_session}/>
                       </Stack> 
               </CardContent>
           </Card>
@@ -965,7 +1103,7 @@ id="date-time-picker"
                     <Typography>How many stories of success or change emerged from the recap
               </Typography>
                     <Stack mt={2} mb={2}>
-                            <TextField type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, how_many_stories_of_success_or_change_emerged_from_the_recap:e.target.value})} value={sendForm?.how_many_stories_of_success_or_change_emerged_from_the_recap}/>
+                            <TextField required inputProps={{ required: true }} type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, how_many_stories_of_success_or_change_emerged_from_the_recap:e.target.value})} value={sendForm?.how_many_stories_of_success_or_change_emerged_from_the_recap}/>
                         </Stack> 
                 </CardContent>
         </Card>
@@ -974,19 +1112,18 @@ id="date-time-picker"
                     <Typography>Mention name of the Gelathis with success stories and a story in couple of lines
               </Typography>
                     <Stack mt={2} mb={2}>
-                            <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, ment_name_of_gelathis_success_stories_and_story_couple_of_lines:e.target.value})} value={sendForm?.ment_name_of_gelathis_success_stories_and_story_couple_of_lines}/>
+                            <TextField required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, ment_name_of_gelathis_success_stories_and_story_couple_of_lines:e.target.value})} value={sendForm?.ment_name_of_gelathis_success_stories_and_story_couple_of_lines}/>
                         </Stack> 
                 </CardContent>
         </Card>
 
         </CardContent>
-        </Grid>
+        </Grid> :null}
 
-        <br/>
-
+      
 
          {/* 3 */}
-         <Grid  backgroundColor={"#FFD580"}>
+     {  ( assessmentType=='Circle Meeting' )?    <Grid  backgroundColor={"#FFD580"}>
           page-3
         <CardContent>
           <Card>
@@ -1023,12 +1160,12 @@ id="date-time-picker"
           </Card>
       
         </CardContent>
-        </Grid>
+        </Grid>:null}
 
-          <br/>
+        
 
               {/* 4 */}
-        <Grid  backgroundColor={"#FFD580"}>
+     { ( assessmentType=='Spoorthi Module 1' )?   <Grid  backgroundColor={"#FFD580"}>
           page-4
         <CardContent>
           <Card>
@@ -1060,11 +1197,11 @@ id="date-time-picker"
           </Card>
       
         </CardContent>
-        </Grid>
-        <br/>
+        </Grid>:null}
+       
 
        {/* 5 */}
-        <Grid  backgroundColor={"#FFD580"}>
+      { ( assessmentType=='Spoorthi Module 2' )?  <Grid  backgroundColor={"#FFD580"}>
           page-5
         <CardContent>
           <Card>
@@ -1078,18 +1215,18 @@ id="date-time-picker"
           Check which ones the Gelathi Facilitator did NOT do
           </Typography>
           <FormGroup>
-            <FormControlLabel control={<Checkbox  />} label="Spoorthi Song"  value="Spoorthi Song" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Recap Of Spoorthi-1"  value="Recap Of Spoorthi-1" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Paper cutting activity with instructions" value="Paper cutting activity with instruction"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Debrief on the paper cutting activity" value="Debrief on the paper cutting activity"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Magic stick activity about the active listening" value="Magic stick activity about the active listening"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Debrief the magic stick activity" value="Debrief the magic stick activity"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="List down points about active listening" value="List down points about active listening"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Debrief the active listening activity" value="Debrief the active listening activity"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Discuss about the Gelathi tool kit" value="Discuss about the Gelathi tool kit"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-            {/* <FormControlLabel control={<Checkbox  />} label=" Discussion about the borewell activity" value="Discussion about the borewell activity"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/> */}
-            <FormControlLabel control={<Checkbox  />} label="Given name for Spoorthi-2" value="Given name for Spoorthi-2"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Feedback done" value="Feedback done" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Spoorthi Song"  value="Spoorthi Song" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Recap Of Spoorthi-1"  value="Recap Of Spoorthi-1" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Paper cutting activity with instructions" value="Paper cutting activity with instruction"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Debrief on the paper cutting activity" value="Debrief on the paper cutting activity"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Magic stick activity about the active listening" value="Magic stick activity about the active listening"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Debrief the magic stick activity" value="Debrief the magic stick activity"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="List down points about active listening" value="List down points about active listening"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Debrief the active listening activity" value="Debrief the active listening activity"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Discuss about the Gelathi tool kit" value="Discuss about the Gelathi tool kit"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+            {/* <FormControlLabel control={<Checkbox  />} label=" Discussion about the borewell activity" value="Discussion about the borewell activity"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/> */}
+            <FormControlLabel control={<Checkbox  />} label="Given name for Spoorthi-2" value="Given name for Spoorthi-2"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Feedback done" value="Feedback done" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
             
 
             
@@ -1099,12 +1236,12 @@ id="date-time-picker"
           </Card>
       
         </CardContent>
-        </Grid>        
+        </Grid>:null  }      
         <br/>
 
 
           {/* 6 */}
-          <Grid  backgroundColor={"#FFD580"}>
+         {( assessmentType=='Spoorthi Module 3' )?  <Grid  backgroundColor={"#FFD580"}>
           page-6
         <CardContent>
           <Card>
@@ -1137,12 +1274,11 @@ id="date-time-picker"
           </Card>
       
         </CardContent>
-          </Grid>
+          </Grid>:null}
 
-        <br/>
 
            {/* 7 */}
-           <Grid  backgroundColor={"#FFD580"}>
+         { ( assessmentType=='Spoorthi Module 4' )?  <Grid  backgroundColor={"#FFD580"}>
           page-7
         <CardContent>
           <Card>
@@ -1174,12 +1310,408 @@ id="date-time-picker"
           </Card>
       
         </CardContent>
-        </Grid>
-        <br/>
+        </Grid>:null}
+        
 
+        {   ( assessmentType=='Green Module 1' )?  <Grid backgroundColor={"#FFD580"}> 
+        <CardContent>
+          page-40
+          <Card>
+          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+          <CardContent>
+          <Typography variant = 'h5'>Green Module 1:</Typography>
+          </CardContent>
+        </Card>
+        <CardContent>
+          <Typography >
+          Check which ones the Gelathi Facilitator did not do
+          </Typography>
+          <FormGroup>
+      <FormControlLabel control={<Checkbox  />} label="Introduction of GF and Green Motivators" value={'Introduction of GF and Green Motivators'}  onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="Welcome the participants" value={'Welcome the participants'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="List down the natural resources found in the visualization" value={'List down the natural resources found in the visualization'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="Ask how is Climate now?" value={'Ask how  Climate now'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="Duration of Green Training" value={'Duration of Green Training'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="List down the points from the video" value={'List down the points from the video'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="Present that weather severity table" value={'Present that weather severity table'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="Gave feedback to GF and GM" value={'Gave feedback to GF and GM'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="Discuss with three questions after weather severity table" value={'Discuss with three questions after weather severity table'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label=" Set the ground rules" value={'Set the ground rules'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="Visualization about the natural resources" value={'Visualization about the natural resources'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="Explain the objectives of the Green Training" value={'Explain the objectives of the Green Training'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="Play the climate change video" value={'Play the climate change video'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label="Provided and discussed homework" value={'Provided and discussed homework'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label=" Green Song" value={'Green Song'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+      <FormControlLabel control={<Checkbox  />} label=" Survey of 3 green motivators" value={'Survey of 3 green motivatorsGreen Song'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
 
-           {/* 10 */}
-       <Grid  backgroundColor={"#FFD580"}>
+    </FormGroup>
+        </CardContent>
+          </Card>
+      
+        </CardContent>
+        </Grid>:null}
+        {    ( assessmentType=='Green Module 2' )?     <Grid  backgroundColor={'#FFD580'}>
+          page-41
+        <CardContent>
+          <Card>
+          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+          <CardContent>
+          <Typography variant = 'h5'>Green Module 2:</Typography>
+          </CardContent>
+        </Card>
+        <CardContent>
+          <Typography >
+          Check which ones the Gelati Facilitator  did not do
+          </Typography>
+          <FormGroup>
+         
+            <FormControlLabel control={<Checkbox  />} label="Welcome the participants" value={'Welcome the participants'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Sang the green Song" value={'Sang the green Song'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Recap of Day 1" value={'Recap of Day 1'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Homework check" value={'Homework check'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label=" Discuss about water" value={'Discuss about water'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="List down the points about source and usage of water" value={'List down the points about source and usage of water'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Provided feedback to GF and GM" value={'Provided feedback to GF and GM'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Completed and discussed homework" value={'Completed and discussed homework'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Explain the water cycle activity" value={'Explain the water cycle activity'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Borewell activity in 2 groups" value={'Borewell activity in 2 groups'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label=" Discussion about the borewell activity" value={'Discussion about the borewell activity'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Play the two videos regarding water"value={'Play the two videos regarding water'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label=" Discuss about the videos" value={'Discuss about the videos'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Explain the 3 principals of save water" value={'Explain the 3 principals of save water'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+    </FormGroup>
+        </CardContent>
+          </Card>
+      
+        </CardContent>
+        </Grid>:null}
+
+       {( assessmentType=='Green Module 3' )?  <Grid  backgroundColor={"#FFD580"}>
+          page-42
+        <CardContent>
+          <Card>
+          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+          <CardContent>
+          <Typography variant = 'h5'>Green Module 3:</Typography>
+          </CardContent>
+        </Card>
+        <CardContent>
+          <Typography >
+          Check which ones Gelati facilitator did not do
+    </Typography>
+          <FormGroup>
+            <FormControlLabel control={<Checkbox  />} label="Welcome the participants" value={'Welcome the participants'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Sing the green Song" value={'Sing the green Song'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Recap of Day 2" value={'Recap of Day 2'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Checking the homework" value={'Checking the homework'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label=" Discuss about the Earth" value={'Discuss about the Earth'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label=" Tree picture drawing" value={'Tree picture drawing'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label=" Tree picture presentation by participants" value={'Tree picture presentation by participants'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Explain the importance of Honeybee" value={'Explain the importance of Honeybee'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Explain the importance of Birds" value={'Explain the importance of Birds'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Explain about seed propagation" value={'Explain about seed propagation'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label=" Discuss the difference between present and past food" value={'Discuss the difference between present and past food'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Explain the importance of kitchen garden" value={'Explain the importance of kitchen garden'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label=" Read and explain the case study" value={'Read and explain the case study'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Discuss about the case study" value={'Discuss about the case study'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Discuss about the solution to protect earth" value={'Discuss about the solution to protect earth'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Provide feedback GF and GM" value={'Provide feedback GF and GM'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Homework" value={'Homework'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            
+
+            
+
+    </FormGroup>
+        </CardContent>
+          </Card>
+      
+        </CardContent>
+        </Grid>:null}
+      { ( assessmentType=='Green Module 4' )? <Grid  backgroundColor={"#FFD580"}>
+          page-43
+        <CardContent>
+          <Card>
+          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+          <CardContent>
+          <Typography variant = 'h5'>Green Module 4</Typography>
+          </CardContent>
+        </Card>
+        <CardContent>
+          <Typography >
+          Check which ones Gelati Facilitator did not do
+          </Typography>
+          <FormGroup>
+           
+        <FormControlLabel control={<Checkbox  />} label="Welcome" value={'Welcome'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Green Song" value={'Green Song'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Recap of Day-3" value={'Recap of Day-3'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Checking the Homework" value={'Checking the Homework'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Explain the pollution and it types" value={'Explain the pollution and it types'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Discuss about pollution and nonpollution activity in groups" value={'Discuss about pollution and nonpollution activity in groups'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="List down the day to day usage things" value={'List down the day to day usage things'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="List down which are the natural resources polluting, reasons & impact"value={'List down which are the natural resources polluting, reasons & impact'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Debrief about pollution and usage" value={'Debrief about pollution and usage'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Feedback GF and GM" value={'Feedback GF and GM'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Homework" value={'Homework'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            
+    </FormGroup>
+        </CardContent>
+          </Card>
+      
+        </CardContent>
+        </Grid>:null}
+       { ( assessmentType=='Green Module 5' )?<Grid  backgroundColor={"#FFD580"}>
+          page-44
+        <CardContent>
+          <Card>
+          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+          <CardContent>
+          <Typography variant = 'h5'>Green Module 5</Typography>
+          </CardContent>
+        </Card>
+        <CardContent>
+          <Typography >
+          Check which one Gelati Facilitator Did NOT do
+          </Typography>
+          <FormGroup>
+           
+          <FormControlLabel control={<Checkbox  />} label="Welcome" value={'Welcome'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+        <FormControlLabel control={<Checkbox  />} label="Green song" value={'Green song'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Recap of Day 4" value={'Recap of Day 4'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Discussion about 3 principles of pollution and usage" value={'Discussion about 3 principles of pollution and usage'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="List out of which things are polluting the environment" value={'List out of which things are polluting the environment'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Discussion about 3 principles of prevention of environmental damage" value={'Discussion about 3 principles of prevention of environmental damage'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="List the steps that can be taken to conserve water, By 1 week,1 month, 1 year" value={'List the steps that can be taken to conserve water, By 1 week,1 month, 1 year'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="List the steps that can be taken to conserve earth, By 1 week, 1 Month, 1 Year" value={'List the steps that can be taken to conserve earth, By 1 week, 1 Month, 1 Year'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Green village was discussed" value={'Green village was discussed'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+        <FormControlLabel control={<Checkbox  />} label="My contacts activity" value={'My contacts activity'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="List/draw the natural resources in their village" value={'List/draw the natural resources in their village'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Discuss the importance of forest, Lake, & Gomalas" value={'Discuss the importance of forest, Lake, & Gomalas'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Discuss the elements required for restoration of natural resources" value={'Discuss the elements required for restoration of natural resources'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Feedback GF and GM" value={'Feedback GF and GM'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+        <FormControlLabel control={<Checkbox  />} label="Distribution of Certificates" value={'Distribution of Certificates'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+            
+    </FormGroup>
+        </CardContent>
+          </Card>
+      
+        </CardContent>
+        </Grid>:null}
+       {( assessmentType=='Vyapar Module 1' )? <Grid  backgroundColor={"#FFD580"}>
+         
+         <CardContent>
+           <Card>
+           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+           <CardContent>
+           <Typography variant = 'h5'>Vyapar Training  1</Typography>
+           </CardContent>
+         </Card>
+         <CardContent>
+         <Stack mt={2}>
+         <Stack>
+                 <Typography variant="body1">
+                 Check which ones the Gelathi Facilitator did not do
+                 </Typography>
+                 <Stack mt={2}>
+                 <FormGroup>
+             <FormControlLabel control={<Checkbox  />} label="Welcome"value={'Welcome'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Set the Ground rules" value={'Set the Ground rules'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Explain the objectives of Vyapar training" value={'WelcExplain the objectives of Vyapar trainingome'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Duration of the Training" value={'Duration of the Training'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Self Shakthi Training discussion" value={'Self Shakthi Training discussion'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="List the different aspects of business" value={'List the different aspects of business'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="what was the reason for starting this business" value={'what was the reason for starting this business'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Geetha Story-balance of vyapar and life" value={'Geetha Story-balance of vyapar and life'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Debrief about the Geetha Story" value={'Debrief about the Geetha Story'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="What effects did Geetha’s life on business and vice versa" value={'What effects did Geetha’s life on business and vice versa'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="What effects did your life on business and vice versa" value={'What effects did your life on business and vice versa'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Form groups of  three Business women"value={'Form groups of  three Business women'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Listed Skills by Vyaparis" value={'Listed Skills by Vyaparis'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Listed Resource by Vyaparis" value={'Listed Resource by Vyaparis'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Repeated challenges by Vyaparis" value={'Repeated challenges by Vyaparis'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Group discussion - how to deal with the challenges" value={'Group discussion - how to deal with the challenges'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Given name for Vyapar-1" value={'Given name for Vyapar-1'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Feedback" value={'Feedback'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Homework" value={'Homework'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Was the pledge made?" value={'Was the pledge made'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>           
+     </FormGroup>
+                 </Stack>
+               </Stack>
+               </Stack>
+         </CardContent>   </Card>
+
+        
+     </CardContent>
+         </Grid>:null}
+        {( assessmentType=='Vyapar Module 2' )? <Grid  backgroundColor={"#FFD580"}>
+         
+         <CardContent>
+           <Card>
+           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+           <CardContent>
+           <Typography variant = 'h5'>Vyapar Training  2</Typography>
+           </CardContent>
+         </Card>
+         <CardContent>
+         <Stack mt={2}>
+         <Stack>
+                 <Typography variant="body1">
+                 Check which ones the Facilitators did not do
+                 </Typography>
+                 <Stack mt={2}>
+                 <FormGroup>
+             <FormControlLabel control={<Checkbox  />} label="Welcome" value={'Welcome'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Recap of the 1st Vyapar training" value={'Recap of the 1st Vyapar training'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Ask the question why you are joining here?"value={'Ask the question why you are joining here'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Ask about the Self Shakthi day-2 phone question" value={'Ask about the Self Shakthi day-2 phone question'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Business improvement / growth factors listed" value={'Business improvement / growth factors listed'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="What type of business are you doing?"value={'What type of business are you doing'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="What is the Income & formula of income"value={'What is the Income & formula of income'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Income and Expenses chart"value={'Income and Expenses chart'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Who is your customer?"value={'Who is your customer'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Types of Sales" value={'Types of Sales'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Types of Expenses" value={'Types of Expenses'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Formula of Profit" value={'Formula of Profit'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="List of the daily expenses and Income chart in the book" value={'List of the daily expenses and Income chart in the book'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Given name for Vyapar-2" value={'Given name for Vyapar-2'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Feedback" value={'Feedback'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Homework" value={'Homework'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Was the pledge made?" value={'Was the pledge made'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>           
+     </FormGroup>
+                 </Stack>
+               </Stack>
+               </Stack>
+         </CardContent>   </Card>
+
+        
+     </CardContent>
+         </Grid>:null}
+        { ( assessmentType=='Vyapar Module 3' )? <Grid  backgroundColor={"#FFD580"}>
+         
+         <CardContent>
+           <Card>
+           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+           <CardContent>
+           <Typography variant = 'h5'>Vyapar Training 3</Typography>
+           </CardContent>
+         </Card>
+         <CardContent>
+         <Stack mt={2}>
+         <Stack>
+                 <Typography variant="body1">
+                 Check which ones the Gelathi Facilitators did not do
+                 </Typography>
+                 <Stack mt={2}>
+                 <FormGroup>
+             <FormControlLabel control={<Checkbox  />} label="Welcome"  value={'Welcome'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Recap of the 2nd Vyapar training" value={'Recap of the 2nd Vyapar training'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Definition of the problem"value={'Definition of the problem'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Temporary solution and permanent solution" value={'Temporary solution and permanent solution'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Explanation of business problem"value={'Explanation of business problem'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Temporary solution and permanent solution regarding the business  problem"value={'Temporary solution and permanent solution regarding the business  problem'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="List down their own business problems" value={'List down their own business problems'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Discuss about the solution in the group"value={'Discuss about the solution in the group'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Activity as a tool for coping with risk"value={'Activity as a tool for coping with risk'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Debrief about the activity by GF"value={'Debrief about the activity by GF'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Given name for Vyapar-3"value={'Given name for Vyapar-3'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Feedback" value={'Feedback'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Homework" value={'Homework'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Was the pledge made?" value={'Was the pledge made'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>           
+     </FormGroup>
+                 </Stack>
+               </Stack>
+               </Stack>
+         </CardContent>   </Card>
+
+        
+     </CardContent>
+         </Grid>:null}
+        { ( assessmentType=='Vyapar Module 4' )? <Grid  backgroundColor={"#FFD580"}>
+         
+         <CardContent>
+           <Card>
+           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+           <CardContent>
+           <Typography variant = 'h5'>Vyapar Training 4</Typography>
+           </CardContent>
+         </Card>
+         <CardContent>
+         <Stack mt={2}>
+         <Stack>
+                 <Typography variant="body1">
+                 Check which ones the Gelathi Facilitators did not do
+                 </Typography>
+                 <Stack mt={2}>
+                 <FormGroup>
+             <FormControlLabel control={<Checkbox  />} label="Welcome" value={'Welcome'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Recap of the 3rd Vyapar training" value={'Recap of the 3rd Vyapar training'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Visualization their business and sharing the experience" value={'Visualization their business and sharing the experience'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="What is goal?" value={'What is goal'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="How should be the goal?"value={'How should be the goal'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="SMART  Explanation"value={'SMART  Explanation'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Writing their business goals based on SMART"value={'Writing their business goals based on SMART'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="List of steps to achieve the goals" value={'List of steps to achieve the goals'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Types of loans"value={'Types of loans'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Formula of the Profit"value={'Formula of the Profit'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Debrief from the GF" value={'Debrief from the GF'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Given name for Vyapar-4" value={'Given name for Vyapar-4'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Feedback"value={'Feedback'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Homework"value={'Homework'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />} label="Was the pledge made?" value={'Was the pledge made'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>           
+     </FormGroup>
+                 </Stack>
+               </Stack>
+               </Stack>
+         </CardContent>   </Card>
+
+        
+     </CardContent>
+         </Grid>:null}
+       { ( assessmentType=='Vyapar Module 5' )?  <Grid  backgroundColor={"#FFD580"}>
+         
+         <CardContent>
+           <Card>
+           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+           <CardContent>
+           <Typography variant = 'h5'>Vyapar Training 5</Typography>
+           </CardContent>
+         </Card>
+         <CardContent>
+         <Stack mt={2}>
+         <Stack>
+                 <Typography variant="body1">
+                 Check which ones the Gelathi Facilitators did not do
+                 </Typography>
+                 <Stack mt={2}>
+                 <FormGroup>
+             <FormControlLabel control={<Checkbox  />} label="Welcome" value={'Welcome'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Recap of the 4th Vyapar training" value={'Recap of the 4th Vyapar training'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="List out the different aspects of business" value={'List out the different aspects of business'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Explanation about the SWOT" value={'Explanation about the SWOT'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="List down their business strengths" value={'List down their business strengths'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="List down their business weakness" value={'List down their business weakness'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="List down their business opportunity" value={'List down their business opportunity'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="List down their business threats" value={'List down their business threats'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Evaluation of their business skills" value={'Evaluation of their business skills'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Given the grade for their skills" value={'Given the grade for their skills'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Sharing their grade in the pair" value={'Sharing their grade in the pair'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Debrief from the GF" value={'Debrief from the GF'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Given name for Vyapar-5" value={'Given name for Vyapar-5'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Feedback" value={'Feedback'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Homework" value={'Homework'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} label="Was the pledge made?" value={'Was the pledge made'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>           
+     </FormGroup>
+                 </Stack>
+               </Stack>
+               </Stack>
+         </CardContent>   </Card>
+
+        
+     </CardContent>
+         </Grid>:null}
+
+           {/* 10  common*/}
+    {  ( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"}>
           page-10
         <CardContent>
           <Card>
@@ -1195,19 +1727,19 @@ id="date-time-picker"
  
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, number_of_enrolled_gelathis_in_the_circle:e.target.value})} value={sendForm?.number_of_enrolled_gelathis_in_the_circle}/>
+                        <TextField  required inputProps={{ required: true }} type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, number_of_enrolled_gelathis_in_the_circle:e.target.value})} value={sendForm?.number_of_enrolled_gelathis_in_the_circle}/>
                     </Stack> 
             <Typography>Number of attended Gelathis?
  
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, no_of_attended_gelathis:e.target.value})} value={sendForm?.no_of_attended_gelathis}/>
+                        <TextField required inputProps={{ required: true }}  type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, no_of_attended_gelathis:e.target.value})} value={sendForm?.no_of_attended_gelathis}/>
                     </Stack> 
             {/* <Typography>How many women attended the training session?
  
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session}/>
+                        <TextField   label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session}/>
                     </Stack>  */}
         </CardContent>
           </Card>
@@ -1325,10 +1857,10 @@ id="date-time-picker"
           </Card>
       
         </CardContent>
-        </Grid>
+        </Grid>:null}
 
-           {/* 12 */}
-     <Grid  backgroundColor={"#FFD580"}>
+           {/* 12 common */}
+    { ( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"}>
           page-50
         <CardContent>
           <Card>
@@ -1361,11 +1893,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
       <CardContent>
         <FormGroup>
         The Gelathi Facilitator competently covered the following things in the training delivered
-          <FormControlLabel control={<Checkbox  />} label="           Covered all the contents" />
-          <FormControlLabel control={<Checkbox  />} label="Conducted all activities specified in the guideline/ module" />
-          <FormControlLabel control={<Checkbox  />} label="Good Communication Skills" />
-          <FormControlLabel control={<Checkbox  />} label="Dressing Sense (Appearance)" />
-          <FormControlLabel control={<Checkbox  />} label="Facilitation Skills (Concept Delivery, Voice, Involving participants)" />
+          <FormControlLabel control={<Checkbox  />} label="           Covered all the contents" value={'Covered all the contents'} onChange={(event) =>handleprerequisites('the_gf_competently_covered_folowing_things_in_training_delivered', event)}/>
+          <FormControlLabel control={<Checkbox  />} label="Conducted all activities specified in the guideline/ module"value={'Conducted all activities specified in the guideline/ module'}onChange={(event) =>handleprerequisites('the_gf_competently_covered_folowing_things_in_training_delivered', event)} />
+          <FormControlLabel control={<Checkbox  />} label="Good Communication Skills" value={'Good Communication Skills'}onChange={(event) =>handleprerequisites('the_gf_competently_covered_folowing_things_in_training_delivered', event)}/>
+          <FormControlLabel control={<Checkbox  />} label="Dressing Sense (Appearance)"value={'Dressing Sense (Appearance)'} onChange={(event) =>handleprerequisites('the_gf_competently_covered_folowing_things_in_training_delivered', event)}/>
+          <FormControlLabel control={<Checkbox  />} label="Facilitation Skills (Concept Delivery, Voice, Involving participants)"value={'Facilitation Skills (Concept Delivery, Voice, Involving participants)'} onChange={(event) =>handleprerequisites('the_gf_competently_covered_folowing_things_in_training_delivered', event)}/>
 
 
 
@@ -1572,7 +2104,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
  
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, what_worked_in_the_training:e.target.value})} value={sendForm?.what_worked_in_the_training}/>
+                        <TextField required inputProps={{ required: true }}  type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, what_worked_in_the_training:e.target.value})} value={sendForm?.what_worked_in_the_training}/>
                     </Stack> 
   
         </CardContent>
@@ -1584,7 +2116,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
  
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, what_can_be_better_next_time:e.target.value})} value={sendForm?.what_can_be_better_next_time}/>
+                        <TextField required inputProps={{ required: true }}  type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, what_can_be_better_next_time:e.target.value})} value={sendForm?.what_can_be_better_next_time}/>
                     </Stack> 
   
         </CardContent>
@@ -1610,7 +2142,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
  
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, did_you_find_anything_traiing_or_gf_that_neds_to_worked_priority:e.target.value})} value={sendForm?.did_you_find_anything_traiing_or_gf_that_neds_to_worked_priority}/>
+                        <TextField  required inputProps={{ required: true }}  type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, did_you_find_anything_traiing_or_gf_that_neds_to_worked_priority:e.target.value})} value={sendForm?.did_you_find_anything_traiing_or_gf_that_neds_to_worked_priority}/>
                     </Stack> 
   
         </CardContent>
@@ -1623,7 +2155,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
  
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, details_of_success_stories_to_be_collected_from_gelathis_by_gf:e.target.value})} value={sendForm?.details_of_success_stories_to_be_collected_from_gelathis_by_gf}/>
+                        <TextField required inputProps={{ required: true }}  type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, details_of_success_stories_to_be_collected_from_gelathis_by_gf:e.target.value})} value={sendForm?.details_of_success_stories_to_be_collected_from_gelathis_by_gf}/>
                     </Stack> 
   
         </CardContent>
@@ -1634,7 +2166,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <Typography>Deadline to collect the stories
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  type="date" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, deadline_to_collect_the_stories:e.target.value})} value={sendForm?.deadline_to_collect_the_stories}/>
+                        <TextField   type="date" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, deadline_to_collect_the_stories:e.target.value})} value={sendForm?.deadline_to_collect_the_stories}/>
                     </Stack> 
         </CardContent>
           </Card>
@@ -1643,7 +2175,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <Typography>End time of the training
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  type="time" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, end_time_of_the_training:e.target.value})} value={sendForm?.end_time_of_the_training}/>
+                        <TextFieldrequired inputProps={{ required: true }}type="time" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, end_time_of_the_training:e.target.value})} value={sendForm?.end_time_of_the_training}/>
                     </Stack> 
         </CardContent>
           </Card>
@@ -1653,7 +2185,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <Typography>No of participants at end of the session
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, no_of_participants_at_end_of_the_session:e.target.value})} value={sendForm?.no_of_participants_at_end_of_the_session}/>
+                        <TextField   type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, no_of_participants_at_end_of_the_session:e.target.value})} value={sendForm?.no_of_participants_at_end_of_the_session}/>
                     </Stack> 
         </CardContent>
           </Card>
@@ -1663,14 +2195,14 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <Typography>Any other comments about the Gelathi Facilitator
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, any_other_comments_about_the_gelathi_facilitator:e.target.value})} value={sendForm?.any_other_comments_about_the_gelathi_facilitator}/>
+                        <TextField required inputProps={{ required: true }}  type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, any_other_comments_about_the_gelathi_facilitator:e.target.value})} value={sendForm?.any_other_comments_about_the_gelathi_facilitator}/>
                     </Stack> 
         </CardContent>
           </Card>
         </CardContent>
-        </Grid>
+        </Grid>:null}
         <br/>
-    {/* { programAssessment && ( programAssessment==1 )? */}
+   {  ( programAssessment==1 )? 
      <Grid  backgroundColor={"#FFD580"}>
           page-12
         <CardContent>
@@ -1710,11 +2242,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
       
         </CardContent>
         </Grid>
-        {/* :null}  */}
-        <br/>
+         :null}  
+       
          
          {/* 13 */}
-{/* {  programAssessment &&( programAssessment==1)? */}
+ {  ( day1Day2== 'Day 1')? 
       <Grid  backgroundColor={"#FFD580"}>
           page-13
         <CardContent>
@@ -1759,11 +2291,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           
         </CardContent>
         </Grid>
-       {/* :null } */}
+     :null }
           <br/>
 
           {/* 14 */}
-     {/* {programAssessment &&( programAssessment==1)? */}
+      {( day1Day2=='Day 1')? 
         <Grid  backgroundColor={"#FFD580"}>
           page-14
         <CardContent>
@@ -1793,11 +2325,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
       
         </CardContent>
         </Grid>
-        {/* :null} */}
+        :null} 
         <br/>
 
         {/* 15 */}
-      {/* {programAssessment &&( programAssessment==1)? */}
+        {( day1Day2=='Day 1')? 
         <Grid  backgroundColor={"#FFD580"}>
           page-15
         <CardContent>
@@ -1812,7 +2344,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <Typography> How many women attended the training session?
        </Typography>
             <Stack mt={2} mb={2}>
-                    <TextField  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session} />
+                    <TextField  required inputProps={{ required: true }} label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session} />
                 </Stack> 
         </CardContent>
      </Card>
@@ -1892,7 +2424,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   <Typography>If so, how many?
             </Typography>
                   <Stack mt={2} mb={2}>
-                          <TextField type='number' label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, if_so_how_many:e.target.value})} value={sendForm?.if_so_how_many}/>
+                          <TextField type='number' required inputProps={{ required: true }} type='number' label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, if_so_how_many:e.target.value})} value={sendForm?.if_so_how_many}/>
                       </Stack> 
               </CardContent>
         </Card>
@@ -1927,12 +2459,12 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
 
         </Grid>
-        {/* :null} */}
+        :null} 
 
         
 
      <br/>
-   {/* {programAssessment &&( programAssessment==1)? */}
+     {( day1Day2=='Day 1')? 
      <Grid style={{backgroundColor:"#FFD580"}}>
             <Typography>PAGE 16 </Typography>
 
@@ -2003,7 +2535,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   If so, How many?/ಹಾಗಿದ್ದರೆ ಎಷ್ಟು?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_1: e.target.value }) }} value={sendForm?.if_so_how_many_1}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_1: e.target.value }) }} value={sendForm?.if_so_how_many_1}/>
                 </Stack>
               </Stack>
         
@@ -2085,7 +2617,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   If so, How many?/ಹಾಗಿದ್ದರೆ ಎಷ್ಟು?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_2: e.target.value }) }} value={sendForm?.if_so_how_many_2}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_2: e.target.value }) }} value={sendForm?.if_so_how_many_2}/>
                 </Stack>
               </Stack>
        
@@ -2127,9 +2659,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
 
      </Grid>
-     {/* :null} */}
+     :null}
      <br/>
-   {/* {programAssessment &&( programAssessment==1)? */}
+     {( day1Day2=='Day 1')? 
      <Grid style={{backgroundColor:"#FFD580"}}>
             <Typography>PAGE 17 buzz m3</Typography>
    <CardContent>
@@ -2204,7 +2736,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   If so, How many?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_3: e.target.value }) }} value={sendForm?.if_so_how_many_3}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_3: e.target.value }) }} value={sendForm?.if_so_how_many_3}/>
                 </Stack>
               </Stack>
         
@@ -2383,7 +2915,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                    If so, How many?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_4: e.target.value }) }} value={sendForm?.if_so_how_many_4}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_4: e.target.value }) }} value={sendForm?.if_so_how_many_4}/>
                 </Stack>
               </Stack>
        
@@ -2423,9 +2955,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
 
      </Grid>
-     {/* :null} */}
+     :null}
 
-    {/* { programAssessment &&( programAssessment==1)? */}
+     {( day1Day2=='Day 1')? 
        <Grid  backgroundColor={"#FFD580"}>
           page-18
         <CardContent>
@@ -2470,7 +3002,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                    If so, How many?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_5: e.target.value }) }} value={sendForm?.if_so_how_many_5}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_5: e.target.value }) }} value={sendForm?.if_so_how_many_5}/>
                 </Stack>
               </Stack>
        
@@ -2535,7 +3067,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many women remained by the end of this training session?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, how_many_women_remained_by_the_end_of_this_training_session: e.target.value }) }} value={sendForm?.how_many_women_remained_by_the_end_of_this_training_session}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, how_many_women_remained_by_the_end_of_this_training_session: e.target.value }) }} value={sendForm?.how_many_women_remained_by_the_end_of_this_training_session}/>
                 </Stack>
               </Stack>
        
@@ -2548,7 +3080,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many are likely to come back?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, how_many_are_likely_to_come_back: e.target.value }) }} value={sendForm?.how_many_are_likely_to_come_back}/>
+                  <TextField required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, how_many_are_likely_to_come_back: e.target.value }) }} value={sendForm?.how_many_are_likely_to_come_back}/>
                 </Stack>
               </Stack>
        
@@ -2581,8 +3113,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
          
         </CardContent>
         </Grid>
-        {/* :null} */}
+           :null}
 
+{( day1Day2=='Day 1')? 
         <Grid  backgroundColor={"#FFD580"}>
           page-19
         <CardContent>
@@ -2667,8 +3200,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
          
         </CardContent>
         </Grid>
-        <br/>
-        <Grid  backgroundColor={"#FFD580"}>
+        :null}
+      
+        {day1Day2 &&(day1Day2=='Day 2')? <Grid  backgroundColor={"#FFD580"}>
           page-20
         <CardContent>
           <Card>
@@ -2721,7 +3255,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many women attended the training session? (number)
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined"  onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined"  onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session}/>
                 </Stack>
               </Stack>
        
@@ -2857,10 +3391,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
          
         </CardContent>
-        </Grid>
+        </Grid>:null}
   
 
-        <Grid  backgroundColor={"#FFD580"}>
+       { (day1Day2=='Day 2')?<Grid  backgroundColor={"#FFD580"}>
          
         <CardContent>
           <Card>
@@ -2876,7 +3410,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many women attended the training session?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" 
+                  <TextField required inputProps={{ required: true }}  id="Correct Answer" label="Correct Answer" variant="outlined" 
                       onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session_1:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session_1}
                       />
                 </Stack>
@@ -2983,7 +3517,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 If so, how many?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField type='number'required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" 
+   onChange={(e) => setSendForm({ ...sendForm, if_so_how_many:e.target.value})} value={sendForm?.if_so_how_many}                  />
                 </Stack>
               </Stack>
               </Stack>
@@ -2999,7 +3534,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
+                      onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted}   
                   
                     >
                     <div style={{display:"flex"}}>
@@ -3014,8 +3549,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
      </Card>
         </CardContent>
         </Grid>
-
-        <Grid  backgroundColor={"#FFD580"}>
+                :null}
+       {(day1Day2=='Day 2')? <Grid  backgroundColor={"#FFD580"}>
          
         <CardContent>
           <Card>
@@ -3031,7 +3566,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many women attended the training session?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined"
+                      onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session_2:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session_2}
+                      />
                 </Stack>
               </Stack>
               </Stack>
@@ -3046,9 +3583,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-                <FormControlLabel control={<Checkbox  />} label="Ask two or three participants to volunteer to play the game." />
-            <FormControlLabel control={<Checkbox  />} label="Ensure the volunteer who is not playing the game, is out of earshot when relaying instructions to the volunteer who is playing first." />
-            <FormControlLabel control={<Checkbox  />} label="Give instructions step by step with all constraints added, to the first volunteer, records her goal (for the blocks) and blindfolds her before she begins." />
+                <FormControlLabel control={<Checkbox  />} label="Ask two or three participants to volunteer to play the game." value={'Ask two or three participants to volunteer to play the game'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Ensure the volunteer who is not playing the game, is out of earshot when relaying instructions to the volunteer who is playing first."value={'Ensure the volunteer who is not playing the game, is out of earshot when relaying instructions to the volunteer who is playing first'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Give instructions step by step with all constraints added, to the first volunteer, records her goal (for the blocks) and blindfolds her before she begins." value={'Give instructions step by step with all constraints added, to the first volunteer, records her goal (for the blocks) and blindfolds her before she begins'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)}/>
     </FormGroup>
                 </Stack>
               </Stack>
@@ -3063,12 +3600,12 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-                <FormControlLabel control={<Checkbox  />} label="Make the women understand how to arrange the wooden blocks" />
-            <FormControlLabel control={<Checkbox  />} label="Instruct the women on which hand can they usei" />
-            <FormControlLabel control={<Checkbox  />} label="Introduce them to a constraint – of them not being able to use the hand they said they will" />
-            <FormControlLabel control={<Checkbox  />} label="Introduce them to  another constraint – blindfold" />
-            <FormControlLabel control={<Checkbox  />} label="Introduce to the idea - If you pick one block you have place it on top of what you have already arranged, you cannot put it back in the bowl" />
-            <FormControlLabel control={<Checkbox  />} label="Ask the woman to state the number of blocks they will arrange and record it" />
+                <FormControlLabel control={<Checkbox  />} label="Make the women understand how to arrange the wooden blocks" value={'Make the women understand how to arrange the wooden blocks'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Instruct the women on which hand can they usei" value={'Instruct the women on which hand can they usei'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Introduce them to a constraint – of them not being able to use the hand they said they will" value={'Introduce them to a constraint – of them not being able to use the hand they said they will'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Introduce them to  another constraint – blindfold" value={'Introduce them to  another constraint – blindfold'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Introduce to the idea - If you pick one block you have place it on top of what you have already arranged, you cannot put it back in the bowl" value={'Introduce to the idea - If you pick one block you have place it on top of what you have already arranged, you cannot put it back in the bowl'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Ask the woman to state the number of blocks they will arrange and record it" value={'Ask the woman to state the number of blocks they will arrange and record it'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
     </FormGroup>
                 </Stack>
               </Stack>
@@ -3084,7 +3621,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
+                      onChange={(e) => setSendForm({ ...sendForm, repeat_the_activity_with_the_second_volunteer:e.target.value})} value={sendForm?.repeat_the_activity_with_the_second_volunteer}
                   
                     >
                     <div style={{display:"flex"}}>
@@ -3102,21 +3639,21 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <CardContent>
         <Stack mt={2}>
                 <Typography>
-                During the debrief did the trainer not do the following:
+                During the debrief did the trainer not ask:
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-                <FormControlLabel control={<Checkbox  />} label="What did you see here?" />
-            <FormControlLabel control={<Checkbox  />} label="Why was it important for A/B to set a goal (to arrange blocks)?" />
-            <FormControlLabel control={<Checkbox  />} label="Why do you think A/B reached her goal/did not reach her goal?" />
-            <FormControlLabel control={<Checkbox  />} label="What external challenges did A/B face while playing the game?" />
-            <FormControlLabel control={<Checkbox  />} label="What kind of external challenges will you face in real life while setting goals??" />
-            <FormControlLabel control={<Checkbox  />} label="Isn’t life like this game? There are constraints in life as well. What will you do?" />
-            <FormControlLabel control={<Checkbox  />} label="What qualities and skills do you need to reach your goals?" />
-            <FormControlLabel control={<Checkbox  />} label="Confidence (overconfidence, under confidence), decision making, planning (Always give a number to the goal)" />
-            <FormControlLabel control={<Checkbox  />} label="Creating self-awareness about your own thinking/behavioural patterns" />
-            <FormControlLabel control={<Checkbox  />} label="Did you see how goals shift with different constraints in life" />
-            <FormControlLabel control={<Checkbox  />} label="There is support even if you have constraints, are you aware of that? Can you seek it?" /> 
+                <FormControlLabel control={<Checkbox  />} label="What did you see here?" value={'What did you see here'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Why was it important for A/B to set a goal (to arrange blocks)?" value={'Why was it important for A/B to set a goal (to arrange blocks'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Why do you think A/B reached her goal/did not reach her goal?"value={'Why do you think A/B reached her goal/did not reach her goal'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="What external challenges did A/B face while playing the game?" value={'What external challenges did A/B face while playing the game'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="What kind of external challenges will you face in real life while setting goals?" value={'What kind of external challenges will you face in real life while setting goals'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Isn’t life like this game? There are constraints in life as well. What will you do?"value={'Isn’t life like this game? There are constraints in life as well. What will you do'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="What qualities and skills do you need to reach your goals?" value={'What qualities and skills do you need to reach your goals'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Confidence (overconfidence, under confidence), decision making, planning (Always give a number to the goal)"value={'Confidence (overconfidence, under confidence), decision making, planning (Always give a number to the goal)'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Creating self-awareness about your own thinking/behavioural patterns"value={'Creating self-awareness about your own thinking/behavioural patterns'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Did you see how goals shift with different constraints in life"value={'Did you see how goals shift with different constraints in life'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="There is support even if you have constraints, are you aware of that? Can you seek it?" value={'There is support even if you have constraints, are you aware of that? Can you seek it'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)}/> 
     </FormGroup>
                 </Stack>
               </Stack>
@@ -3132,7 +3669,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
+                      onChange={(e) => setSendForm({ ...sendForm, were_the_participants_responsive_during_the_debriefing_1:e.target.value})} value={sendForm?.were_the_participants_responsive_during_the_debriefing_1}   
                   
                     >
                     <div style={{display:"flex"}}>
@@ -3153,7 +3690,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
+                      onChange={(e) => setSendForm({ ...sendForm, did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1:e.target.value})} value={sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1}
                   
                     >
                     <div style={{display:"flex"}}>
@@ -3174,7 +3711,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 If so, how many?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField type='number'required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined"
+   onChange={(e) => setSendForm({ ...sendForm, if_so_how_many_1:e.target.value})} value={sendForm?.if_so_how_many_1}                 
+   />
                 </Stack>
               </Stack>
               </Stack>
@@ -3190,8 +3729,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                  
+                      onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted_1:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted_1}                  
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -3204,10 +3742,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </CardContent>
      </Card>
         </CardContent>
-        </Grid>
+        </Grid>:null}
 
         
-        <Grid  backgroundColor={"#FFD580"}>
+       {(day1Day2=='Day 2')? <Grid  backgroundColor={"#FFD580"}>
          
         <CardContent>
           <Card>
@@ -3223,7 +3761,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many women attended the training session?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined"
+                      onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session_3:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session_3}
+                      />
                 </Stack>
               </Stack>
               </Stack>
@@ -3238,14 +3778,14 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-                <FormControlLabel control={<Checkbox  />} label="Ask what the difference between a dream and a goal is?" />
-            <FormControlLabel control={<Checkbox  />} label="Record the answer" />
-            <FormControlLabel control={<Checkbox  />} label="Give an example" />
-            <FormControlLabel control={<Checkbox  />} label="Tell the participants the difference between dream and goal" />
-            <FormControlLabel control={<Checkbox  />} label="Ask how a dream can be converted into a goal?" />
-            <FormControlLabel control={<Checkbox  />} label="Ask for one volunteer who is willing to come forward and ask them to chart their financial goal on the board?" />
-            <FormControlLabel control={<Checkbox  />} label="If no volunteer comes up use Lakshmi’s goal of buying a push cart for her vegetable business as an example?" />
-            <FormControlLabel control={<Checkbox  />} label="Use the chart given to explain" />    </FormGroup>
+                <FormControlLabel control={<Checkbox  />} label="Ask what the difference between a dream and a goal is?" value={'Ask what the difference between a dream and a goal is'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_3', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Record the answer" value={'Record the answer'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_3', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Give an example" value={'Give an example'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_3', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Tell the participants the difference between dream and goal"value={'Tell the participants the difference between dream and goal'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_3', event)}  />
+            <FormControlLabel control={<Checkbox  />} label="Ask how a dream can be converted into a goal?" value={'Ask how a dream can be converted into a goal'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_3', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Ask for one volunteer who is willing to come forward and ask them to chart their financial goal on the board?" value={'Ask for one volunteer who is willing to come forward and ask them to chart their financial goal on the board'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_3', event)} />
+            <FormControlLabel control={<Checkbox  />} label="If no volunteer comes up use Lakshmi’s goal of buying a push cart for her vegetable business as an example?" value={'If no volunteer comes up use Lakshmi’s goal of buying a push cart for her vegetable business as an example'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_3', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Use the chart given to explain"value={'Use the chart given to explain'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_3', event)}  />    </FormGroup>
                 </Stack>
               </Stack>
         </CardContent>
@@ -3259,12 +3799,12 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-                <FormControlLabel control={<Checkbox  />} label="How much will it cost?" />
-            <FormControlLabel control={<Checkbox  />} label="In how many years do you want to achieve this goal?" />
-            <FormControlLabel control={<Checkbox  />} label="How much loan do you want to take for it?" />
-            <FormControlLabel control={<Checkbox  />} label="Do you know where you will take a loan from?" />
-            <FormControlLabel control={<Checkbox  />} label="What is your goal??" />
-            <FormControlLabel control={<Checkbox  />} label="How much will you save for the goal?" />    </FormGroup>
+                <FormControlLabel control={<Checkbox  />} label="How much will it cost?"value={'How much will it cost'}onChange={(event) =>handleprerequisites('the_trainer_did_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="In how many years do you want to achieve this goal?" value={'In how many years do you want to achieve this goal'}onChange={(event) =>handleprerequisites('the_trainer_did_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="How much loan do you want to take for it?" value={'How much loan do you want to take for it'}onChange={(event) =>handleprerequisites('the_trainer_did_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Do you know where you will take a loan from?" value={'Do you know where you will take a loan from'}onChange={(event) =>handleprerequisites('the_trainer_did_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="What is your goal?" value={'What is your goal'}onChange={(event) =>handleprerequisites('the_trainer_did_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="How much will you save for the goal?" value={'How much will you save for the goal'}onChange={(event) =>handleprerequisites('the_trainer_did_not_ask', event)}/>    </FormGroup>
                 </Stack>
               </Stack>
         </CardContent>
@@ -3278,12 +3818,12 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-                <FormControlLabel control={<Checkbox  />} label="Made sure that this was done in the books given to the participants and they write it in the book themselves or with the help of someone else " />
-            <FormControlLabel control={<Checkbox  />} label="Break down financial goal into yearly, monthly, weekly, daily money-saving goals?" />
-            <FormControlLabel control={<Checkbox  />} label="Ask do you think you will be able to save this much for this particular goal apart from your daily expenses and other obligations?" />
-            <FormControlLabel control={<Checkbox  />} label="If women respond yes to above, congratulate the women for setting their goals and motivate her to start the process?" />
-            <FormControlLabel control={<Checkbox  />} label="If no, ask can you increase the number of years in which you want to achieve this goal or can you increase your income to be able to save more or can you take more of the loan for the goal?" />
-            <FormControlLabel control={<Checkbox  />} label="Go around the group and help all participants set a financial goal. Goal = time + money + financial plan?" />
+                <FormControlLabel control={<Checkbox  />} label="Made sure that this was done in the books given to the participants and they write it in the book themselves or with the help of someone else " value={'Made sure that this was done in the books given to the participants and they write it in the book themselves or with the help of someone else'}onChange={(event) =>handleprerequisites('what_did_the_trainer_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Break down financial goal into yearly, monthly, weekly, daily money-saving goals?" value={'Break down financial goal into yearly, monthly, weekly, daily money-saving goals'}onChange={(event) =>handleprerequisites('what_did_the_trainer_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Ask do you think you will be able to save this much for this particular goal apart from your daily expenses and other obligations?" value={'Ask do you think you will be able to save this much for this particular goal apart from your daily expenses and other obligations'}onChange={(event) =>handleprerequisites('what_did_the_trainer_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="If women respond yes to above, congratulate the women for setting their goals and motivate her to start the process?" value={'If women respond yes to above, congratulate the women for setting their goals and motivate her to start the process'}onChange={(event) =>handleprerequisites('what_did_the_trainer_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="If no, ask can you increase the number of years in which you want to achieve this goal or can you increase your income to be able to save more or can you take more of the loan for the goal?" value={'If no, ask can you increase the number of years in which you want to achieve this goal or can you increase your income to be able to save more or can you take more of the loan for the goal'}onChange={(event) =>handleprerequisites('what_did_the_trainer_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Go around the group and help all participants set a financial goal. Goal = time + money + financial plan?" value={'Go around the group and help all participants set a financial goal. Goal = time + money + financial plan'}onChange={(event) =>handleprerequisites('what_did_the_trainer_not_do', event)}/>
     </FormGroup>
                 </Stack>
               </Stack>
@@ -3300,11 +3840,12 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-                <FormControlLabel control={<Checkbox  />} label="Does your goal look realistic to you?" />
-            <FormControlLabel control={<Checkbox  />} label="Do you have more than one goal to achieve? Are they of equal priority or can you postpone one to achieve the other?" />
-            <FormControlLabel control={<Checkbox  />} label="What can you do if both goals are priority for you??" />
-            <FormControlLabel control={<Checkbox  />} label="Can you increase your savings or your income??" />
-            <FormControlLabel control={<Checkbox  />} label="Can you increase the time frame to reach the goal?" />
+                <FormControlLabel control={<Checkbox  />} label="Does your goal look realistic to you?" value={'Does your goal look realistic to you'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_1', event)}/>
+                <FormControlLabel control={<Checkbox  />} label="Does your goal look realistic to you?" value={'Does your goal look realistic to you'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_1', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Do you have more than one goal to achieve? Are they of equal priority or can you postpone one to achieve the other?" value={'Do you have more than one goal to achieve? Are they of equal priority or can you postpone one to achieve the other'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_1', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="What can you do if both goals are priority for you?" value={'What can you do if both goals are priority for you'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_1', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Can you increase your savings or your income??"value={''}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_1', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Can you increase the time frame to reach the goal?" value={'Can you increase the time frame to reach the goal'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_1', event)}/>
     </FormGroup>
                 </Stack>
               </Stack>
@@ -3320,8 +3861,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                  
+                      onChange={(e) => setSendForm({ ...sendForm, were_the_participants_responsive_during_the_debriefing_2:e.target.value})} value={sendForm?.were_the_participants_responsive_during_the_debriefing_2}                  
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -3341,8 +3881,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                  
+                      onChange={(e) => setSendForm({ ...sendForm, did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2:e.target.value})} value={sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2}                  
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -3362,7 +3901,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 If so, how many?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" 
+                  onChange={(e) => setSendForm({ ...sendForm, if_so_how_many_2:e.target.value})} value={sendForm?.if_so_how_many_2} 
+                  />
                 </Stack>
               </Stack>
               </Stack>
@@ -3378,8 +3919,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                  
+                      onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted_3:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted_3}                  
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -3392,13 +3932,13 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </CardContent>
      </Card>
         </CardContent>
-        </Grid>
+        </Grid> :null}
 
       
 
      
 
-        <Grid  backgroundColor={"#FFD580"}>
+       { (day1Day2=='Day 2')?<Grid  backgroundColor={"#FFD580"}>
          
         <CardContent>
           <Card>
@@ -3414,7 +3954,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many women attended the training session?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined"
+                      onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session_4:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session_4}
+                      />
                 </Stack>
               </Stack>
               </Stack>
@@ -3429,10 +3971,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-            <FormControlLabel control={<Checkbox  />} label="Make 4 groups from the entire cohort of participants " />
-            <FormControlLabel control={<Checkbox  />} label="Give a case study to each group" />
-            <FormControlLabel control={<Checkbox  />} label="Instruct groups to read the case study among themselves and come up with solutions in 3-5 minutes." />
-            <FormControlLabel control={<Checkbox  />} label="Made sure that the impression given was not of that loans are not necessary. They are important but to know the source of the loan, own credibility, credit worthiness, credit utilization and repayment strategy." />
+            <FormControlLabel control={<Checkbox  />} label="Make 4 groups from the entire cohort of participants "value={'Make 4 groups from the entire cohort of participants'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_4', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Give a case study to each group" value={'Give a case study to each group'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_4', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Instruct groups to read the case study among themselves and come up with solutions in 3-5 minutes." value={'Instruct groups to read the case study among themselves and come up with solutions in 3-5 minutes'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_4', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Made sure that the impression given was not of that loans are not necessary. They are important but to know the source of the loan, own credibility, credit worthiness, credit utilization and repayment strategy." value={'Made sure that the impression given was not of that loans are not necessary. They are important but to know the source of the loan, own credibility, credit worthiness, credit utilization and repayment strategy'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_4', event)}/>
     </FormGroup>
                 </Stack>
               </Stack>
@@ -3447,13 +3989,13 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-            <FormControlLabel control={<Checkbox  />} label="What was your group’s story or case study about?" />
-            <FormControlLabel control={<Checkbox  />} label="How much does that person need?" />
-            <FormControlLabel control={<Checkbox  />} label="How much do they have in their hand as saving or earning?" />
-            <FormControlLabel control={<Checkbox  />} label="What advice would you give that person?" />
-            <FormControlLabel control={<Checkbox  />} label="When can you save and reach a goal? When will you need to take a loan to reach it?" />
-            <FormControlLabel control={<Checkbox  />} label="Where can you get loans with minimum or no interest?" />
-            <FormControlLabel control={<Checkbox  />} label="What are productive loans? What are consumption loans?" />
+            <FormControlLabel control={<Checkbox  />} label="What was your group’s story or case study about?" value={'What was your group’s story or case study about'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_2', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="How much does that person need?" value={'How much does that person need'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_2', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="How much do they have in their hand as saving or earning?" value={'How much do they have in their hand as saving or earning'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_2', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="What advice would you give that person?" value={'What advice would you give that person'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_2', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="When can you save and reach a goal? When will you need to take a loan to reach it?" value={'When can you save and reach a goal? When will you need to take a loan to reach it'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_2', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Where can you get loans with minimum or no interest?" value={'Where can you get loans with minimum or no interest'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_2', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="What are productive loans? What are consumption loans?" value={'What are productive loans? What are consumption loans'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_2', event)}/>
 
     </FormGroup>
                 </Stack>
@@ -3470,8 +4012,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                  
+                      onChange={(e) => setSendForm({ ...sendForm, were_the_participants_responsive_during_the_debriefing_3:e.target.value})} value={sendForm?.were_the_participants_responsive_during_the_debriefing_3}                  
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -3491,8 +4032,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                  
+                      onChange={(e) => setSendForm({ ...sendForm, did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3:e.target.value})} value={sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3}                  
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -3512,7 +4052,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 If so, how many?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" 
+ onChange={(e) => setSendForm({ ...sendForm, if_so_how_many_3:e.target.value})} value={sendForm?.if_so_how_many_3}                   />
                 </Stack>
               </Stack>
               </Stack>
@@ -3528,8 +4069,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                  
+                      onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted_2:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted_2}                  
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -3542,9 +4082,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </CardContent>
      </Card>
         </CardContent>
-        </Grid>
+        </Grid>:null}
 
-        <Grid  backgroundColor={"#FFD580"}>
+       { (day1Day2=='Day 2')?<Grid  backgroundColor={"#FFD580"}>
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -3559,12 +4099,12 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                 <FormGroup>
-            <FormControlLabel control={<Checkbox  />} label="Tell Buzz India wants to keep in touch with the community through the Buzz Gelathi for a continuous learning process and sustainable change" />
-            <FormControlLabel control={<Checkbox  />} label="Ask for nomination of the Buzz Gelathi amongst the group." />
-            <FormControlLabel control={<Checkbox  />} label="Made clear that a woman can nominate herself too" />
-            <FormControlLabel control={<Checkbox  />} label="Respect a woman’s decision to not be a Gelathi" />
-            <FormControlLabel control={<Checkbox  />} label="Thank the group for being a wonderful audience." />
-            <FormControlLabel control={<Checkbox  />} label="Trainer celebrate the certificate distribution." />
+            <FormControlLabel control={<Checkbox  />} label="Tell Buzz India wants to keep in touch with the community through the Buzz Gelathi for a continuous learning process and sustainable change" value={'Tell Buzz India wants to keep in touch with the community through the Buzz Gelathi for a continuous learning process and sustainable change'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_5', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Ask for nomination of the Buzz Gelathi amongst the group." value={'Ask for nomination of the Buzz Gelathi amongst the group.'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_5', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Made clear that a woman can nominate herself too" value={'Made clear that a woman can nominate herself too'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_5', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Respect a woman’s decision to not be a Gelathi"value={'Respect a woman’s decision to not be a Gelathi'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_5', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Thank the group for being a wonderful audience." value={'Thank the group for being a wonderful audience.'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_5', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Trainer celebrate the certificate distribution." value={'Trainer celebrate the certificate distribution.'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_5', event)}/>
 
     </FormGroup>
                 </Stack>
@@ -3573,9 +4113,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
           </Card>
         </CardContent>
-        </Grid>
+        </Grid> :null}
 
-        <Grid  backgroundColor={"#FFD580"}>
+       {( programAssessment==3 )?  <Grid  backgroundColor={"#FFD580"}>
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -3596,7 +4136,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 Name of the Gelathi being evaluated
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" 
+                                        onChange={(e) => setSendForm({ ...sendForm, name_of_the_gelathi_being_evaluated:e.target.value})} value={sendForm?.name_of_the_gelathi_being_evaluated}
+
+                  // onChange={(e) => { setSendForm({ ...setSendForm, name_of_the_gelathi_being_evaluated: e.target.value }) }}
+                  />
                 </Stack>
               </Stack></Stack></CardContent>
         </Card>
@@ -3610,26 +4154,43 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                Days/ Modules
                 </Typography>
                 <Stack mt={2}>
-                <FormGroup>
-            <FormControlLabel control={<Checkbox  />} label="Session-1 _ Introduction" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Session-2 _ Financial Management" />
-            <FormControlLabel control={<Checkbox  />} label="Session-3 _Basics of an enterprise" />
-            <FormControlLabel control={<Checkbox  />} label="Session-4 _Building Relationships" />
-            <FormControlLabel control={<Checkbox  />} label="Session-5 _Assets and Liabilities" />
-            <FormControlLabel control={<Checkbox  />} label="Session-6 _Goal setting game" />
-            <FormControlLabel control={<Checkbox  />} label="Session-7 _Financial Goals" />
-            <FormControlLabel control={<Checkbox  />} label="Session-8 _Loans-Group discussion of Case Studies" />
+                {/* <FormGroup>
+            <FormControlLabel control={<Checkbox  />}value='Session-1 _ Introduction' label="Session-1 _ Introduction" onChange={(event) =>handleprerequisites('days_modules', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Session-2 _ Financial Management' label="Session-2 _ Financial Management" onChange={(event) =>handleprerequisites('days_modules', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Session-3 _Basics of an enterprise' label="Session-3 _Basics of an enterprise" onChange={(event) =>handleprerequisites('days_modules', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Session-4 _Building Relationship' label="Session-4 _Building Relationships" onChange={(event) =>handleprerequisites('days_modules', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Session-5 _Assets and Liabilities' label="Session-5 _Assets and Liabilities" onChange={(event) =>handleprerequisites('days_modules', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Session-6 _Goal setting game' label="Session-6 _Goal setting game" onChange={(event) =>handleprerequisites('days_modules', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Session-7 _Financial Goals' label="Session-7 _Financial Goals" onChange={(event) =>handleprerequisites('days_modules', event)}/>
+            <FormControlLabel control={<Checkbox  />}value='Session-8 _Loans-Group discussion of Case Studies' label="Session-8 _Loans-Group discussion of Case Studies" onChange={(event) =>handleprerequisites('days_modules', event)}/>
 
 
-    </FormGroup>
+    </FormGroup> */}
+    <RadioGroup 
+                     name="radio-buttons-group"
+                     onChange={(e) => setSendForm({ ...sendForm, days_modules:e.target.value})} value={sendForm?.days_modules}
+                   >
+                    
+                    <FormControlLabel control={<Radio  />} label="Session-1 _ Introduction" value="Session-1 _ Introduction"/>
+                    <FormControlLabel control={<Radio  />} label="Session-2 _ Financial Management" value="Session-2 _ Financial Management" />
+                        <FormControlLabel control={<Radio  />} label="Session-3 _Basics of an enterprise" value="Session-3 _Basics of an enterprise"/>
+                        <FormControlLabel control={<Radio  />} label="Session-4 _Building Relationship" value="Session-4 _Building Relationship"/>
+                        <FormControlLabel control={<Radio  />} label="Session-5 _Assets and Liabilities" value="Session-5 _Assets and Liabilities"/>
+                        <FormControlLabel control={<Radio  />} label="Session-6 _Goal setting game" value="Session-6 _Goal setting game"/>
+                        <FormControlLabel control={<Radio  />} label="Session-7 _Financial Goals" value="Session-7 _Financial Goals"/>
+                        <FormControlLabel control={<Radio  />} label="Session-8 _Loans-Group discussion of Case Studies" value="Session-8 _Loans-Group discussion of Case Studies"/>
+                   
+
+                  </RadioGroup>
                 </Stack>
               </Stack>
         </CardContent></Card></Stack>
 
          
         </CardContent>
-        </Grid>
-        <Grid  backgroundColor={"#FFD580"}>
+        </Grid>:null}
+
+        {( sendForm?.days_modules=='Session-1 _ Introduction' )? <Grid  backgroundColor={"#FFD580"}>
          
          <CardContent>
            <Card>
@@ -3663,7 +4224,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                  How many women attended the training session? 
                  </Typography>
                  <Stack mt={3}>
-                   <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, how_many_women_attended_the_training_session_5: e.target.value }) }}/>
+                   <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, how_many_women_attended_the_training_session: e.target.value }) }}/>
                  </Stack>
                </Stack>
                </Stack>
@@ -3696,11 +4257,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           
         
      </CardContent>
-         </Grid>
+         </Grid>:null}
 
          
 
-         <Grid  backgroundColor={"#FFD580"}>
+         {( sendForm?.days_modules=='Session-1 _ Introduction' )? <Grid  backgroundColor={"#FFD580"}>
          
          <CardContent>
            <Card>
@@ -3729,9 +4290,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
         
      </CardContent>
-         </Grid>
+         </Grid>:null}
  
-         <Grid  backgroundColor={"#FFD580"}>
+       {  ( sendForm?.days_modules=='Session-2 _ Financial Management' )?<Grid  backgroundColor={"#FFD580"}>
          
          <CardContent>
            <Card>
@@ -3748,20 +4309,20 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                  </Typography>
                  <Stack mt={2}>
                  <FormGroup>
-             <FormControlLabel control={<Checkbox  />} label="Show the participants the video about Saraswathi and Lakshmi?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-             <FormControlLabel control={<Checkbox  />} label="Ask why is saving necessary?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-             <FormControlLabel control={<Checkbox  />} label="Ask what’s wrong with celebrating festivals with joy and vigour, dressing well, eating well?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-             <FormControlLabel control={<Checkbox  />} label="Ask under what circumstances would Saraswathi not get a loan?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-             <FormControlLabel control={<Checkbox  />} label="Ask what did Lakshmi take a loan for and what did Saraswathi take it for?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-             <FormControlLabel control={<Checkbox  />} label="Ask Is it bad to take loan? Lakshmi also took a loan, isn’t it?"onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)} />
-             <FormControlLabel control={<Checkbox  />} label="Ask why should we save in formal financial institutions?"onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)} />
-             <FormControlLabel control={<Checkbox  />} label="Ask why do we need to plan/track expenses?"onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)} />onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-             <FormControlLabel control={<Checkbox  />} label="Ask how is the story relevant to you? Why was it narrated?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-             <FormControlLabel control={<Checkbox  />} label="Ask how many women had bank accounts in their name and active?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-             <FormControlLabel control={<Checkbox  />} label="Ask the women whose life seems better and why?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-             <FormControlLabel control={<Checkbox  />} label="Use the family budgeting receipts charts to explain?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-             <FormControlLabel control={<Checkbox  />} label="Encourage women to fill this chart in their books before the next week’s training?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-             <FormControlLabel control={<Checkbox  />} label="Ask - Don’t you think the increasing heat and varying rainfall has contributed to these changes?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />}value={'Show the participants the video about Saraswathi and Lakshmi?'} label="Show the participants the video about Saraswathi and Lakshmi?"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />}value={'Ask why is saving necessary?'} label="Ask why is saving necessary?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />}value={'Ask what’s wrong with celebrating festivals with joy and vigour, dressing well, eating well?'} label="Ask what’s wrong with celebrating festivals with joy and vigour, dressing well, eating well?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} value={'Ask under what circumstances would Saraswathi not get a loan?'}label="Ask under what circumstances would Saraswathi not get a loan?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />}value={'Ask what did Lakshmi take a loan for and what did Saraswathi take it for?'} label="Ask what did Lakshmi take a loan for and what did Saraswathi take it for?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} value={'Ask Is it bad to take loan? Lakshmi also took a loan, isn’t it?'}label="Ask Is it bad to take loan? Lakshmi also took a loan, isn’t it?"onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />}value={'Ask why should we save in formal financial institutions?'} label="Ask why should we save in formal financial institutions?"onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)} />
+             <FormControlLabel control={<Checkbox  />}value={'Ask why do we need to plan/track expenses?'} label="Ask why do we need to plan/track expenses?"onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)} />onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
+             <FormControlLabel control={<Checkbox  />}value={'Ask how is the story relevant to you? Why was it narrated?'} label="Ask how is the story relevant to you? Why was it narrated?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />}value={'Ask how many women had bank accounts in their name and active?'} label="Ask how many women had bank accounts in their name and active?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />}value={'Ask the women whose life seems better and why?'} label="Ask the women whose life seems better and why?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />} value={'Use the family budgeting receipts charts to explain?'}label="Use the family budgeting receipts charts to explain?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />}value={'Encourage women to fill this chart in their books before the next week’s training?'} label="Encourage women to fill this chart in their books before the next week’s training?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+             <FormControlLabel control={<Checkbox  />}value={'Ask - Don’t you think the increasing heat and varying rainfall has contributed to these changes?'} label="Ask - Don’t you think the increasing heat and varying rainfall has contributed to these changes?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
            
      </FormGroup>
                  </Stack>
@@ -3777,7 +4338,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                  How many women attended the training session?
                  </Typography>
                  <Stack mt={3}>
-                   <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                   <TextField type='number'required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined"
+ onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session}                     />
                  </Stack>
                </Stack>
                </Stack>
@@ -3800,8 +4362,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                  
+                      onChange={(e) => setSendForm({ ...sendForm, was_the_recap_done:e.target.value})} value={sendForm?.was_the_recap_done}                  
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -3816,9 +4377,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           
         
      </CardContent>
-         </Grid>
+         </Grid>:null}
 
-         <Grid  backgroundColor={"#FFD580"}>
+        { ( sendForm?.days_modules=='Session-2 _ Financial Management' )?<Grid  backgroundColor={"#FFD580"}>
          
          <CardContent>
            <Card>
@@ -3838,7 +4399,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
              <FormControlLabel control={<Checkbox  />} label="Did express Gelathi's opinion and participants feedback about the training" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
              <FormControlLabel control={<Checkbox  />} label="Tell the women what will be covered in the next training session?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
              <FormControlLabel control={<Checkbox  />} label="Ask them to share with their family what they have learnt?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
-           <div style={{display:'flex'}}>  <FormControlLabel control={<Checkbox  />} label="Others"  /><TextField id="standard-basic" onChange={handlother}/></div>
+           <div style={{display:'flex'}}>  <FormControlLabel control={<Checkbox  />} label="Others" value={others}onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}  /><TextField required inputProps={{ required: true }} id="standard-basic" onChange={handlother}/></div>
            
      </FormGroup>
                  </Stack>
@@ -3848,9 +4409,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
         
      </CardContent>
-         </Grid>
+         </Grid>:null}
 
-         <Grid  backgroundColor={"#FFD580"}>
+       { ( sendForm?.days_modules=='Session-3 _Basics of an enterprise' )? <Grid  backgroundColor={"#FFD580"}>
           page-31
         <CardContent>
           <Card>
@@ -3907,8 +4468,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                     
                     
                     
-                    <FormControlLabel value="Ask why is this important to maintain account?" control={<Checkbox />} label="Ask why is this important to maintain account?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Ask which are the places/situations where income, profit, savings could be asked?" control={<Checkbox />} label="Ask which are the places/situations where income, profit, savings could be asked?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Ask why is this important to maintain account?" control={<Checkbox />} label="Ask why is this important to maintain account?" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi', event)}/>
+                    <FormControlLabel value="Ask which are the places/situations where income, profit, savings could be asked?" control={<Checkbox />} label="Ask which are the places/situations where income, profit, savings could be asked?" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi', event)}/>
                     
                     
                     
@@ -3928,11 +4489,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
          
         </CardContent>
-        </Grid>
+        </Grid>:null}
 
-        <br/>
+       
 
-        <Grid  backgroundColor={"#FFD580"}>
+   {  ( sendForm?.days_modules=='Session-3 _Basics of an enterprise' )?    <Grid  backgroundColor={"#FFD580"}>
           page-32
         <CardContent>
           <Card>
@@ -3982,11 +4543,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
          
         </CardContent>
-        </Grid>
+        </Grid> :null}
 
-        <br/>
+        
 
-     <Grid  backgroundColor={"#FFD580"}>
+  {  ( sendForm?.days_modules=='Session-4 _Building Relationship' )?  <Grid  backgroundColor={"#FFD580"}>
           page-33
         <CardContent>
           <Card>
@@ -4041,14 +4602,14 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                     
                     
                     
-                    <FormControlLabel value="What was the role play about?" control={<Checkbox />} label="What was the role play about?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="How did the protagonists behave?" control={<Checkbox />} label="How did the protagonists behave?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="What was the impact on customers & business/ family member?" control={<Checkbox />} label="What was the impact on customers & business/ family member?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="What was done well?" control={<Checkbox />} label="What was done well?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="What do you feel after seeing all the role plays?" control={<Checkbox />} label="What do you feel after seeing all the role plays?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Do you notice that in all four role plays there are possibilities?" control={<Checkbox />} label="Do you notice that in all four role plays there are possibilities?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Where do you think change begins?" control={<Checkbox />} label="Where do you think change begins?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Reflect whether these communication and relationship building aspects can be effectively used in personal life as well. How? What situations in real life could they be useful in?" control={<Checkbox />} label="Reflect whether these communication and relationship building aspects can be effectively used in personal life as well. How? What situations in real life could they be useful in?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="What was the role play about?" control={<Checkbox />} label="What was the role play about?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_gelathi_did_not_ask', event)}/>
+                    <FormControlLabel value="How did the protagonists behave?" control={<Checkbox />} label="How did the protagonists behave?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_gelathi_did_not_ask', event)}/>
+                    <FormControlLabel value="What was the impact on customers & business/ family member?" control={<Checkbox />} label="What was the impact on customers & business/ family member?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_gelathi_did_not_ask', event)}/>
+                    <FormControlLabel value="What was done well?" control={<Checkbox />} label="What was done well?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_gelathi_did_not_ask', event)}/>
+                    <FormControlLabel value="What do you feel after seeing all the role plays?" control={<Checkbox />} label="What do you feel after seeing all the role plays?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_gelathi_did_not_ask', event)}/>
+                    <FormControlLabel value="Do you notice that in all four role plays there are possibilities?" control={<Checkbox />} label="Do you notice that in all four role plays there are possibilities?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_gelathi_did_not_ask', event)}/>
+                    <FormControlLabel value="Where do you think change begins?" control={<Checkbox />} label="Where do you think change begins?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_gelathi_did_not_ask', event)}/>
+                    <FormControlLabel value="Reflect whether these communication and relationship building aspects can be effectively used in personal life as well. How? What situations in real life could they be useful in?" control={<Checkbox />} label="Reflect whether these communication and relationship building aspects can be effectively used in personal life as well. How? What situations in real life could they be useful in?" onChange={(event) =>handleprerequisites('during_the_debriefs_for_role_plays_the_gelathi_did_not_ask', event)}/>
                     
                     
                     
@@ -4069,9 +4630,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
          
         </CardContent>
-        </Grid>
-      <br/>
-      <Grid  backgroundColor={"#FFD580"}>
+        </Grid>:null}
+      
+   {  ( sendForm?.days_modules=='Session-4 _Building Relationship' )?  <Grid  backgroundColor={"#FFD580"}>
           page-34
         <CardContent>
           <Card>
@@ -4129,10 +4690,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
          
         </CardContent>
-        </Grid>
+        </Grid>:null}
 
-        <br/>
-      <Grid  backgroundColor={"#FFD580"}>
+       
+     { ( sendForm?.days_modules=='Session-5 _Assets and Liabilities' )? <Grid  backgroundColor={"#FFD580"}>
           page-35
         <CardContent>
           <Card>
@@ -4149,7 +4710,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 Name of the Gelathi being evaluated
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" 
+                                        onChange={(e) => setSendForm({ ...sendForm, name_of_the_gelathi_being_evaluated_1:e.target.value})} value={sendForm?.name_of_the_gelathi_being_evaluated_1}
+
+                  // onChange={(e) => { setSendForm({ ...setSendForm, name_of_the_gelathi_being_evaluated_1: e.target.value }) }}
+                  />
                 </Stack>
               </Stack>
        
@@ -4162,20 +4727,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
           </Card>
 
-          {/* <Card sx={{marginTop:2}}>
-        <CardContent>
-        <Stack>
-                <Typography variant="body1">
-                Name of the Gelathi being evaluated
-                </Typography>
-                <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
-                </Stack>
-              </Stack>
-       
-        </CardContent>
-     </Card> */}
-
      <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack>
@@ -4183,7 +4734,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many women attended the training session?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField type='number' required inputProps={{ required: true }}id="Correct Answer" label="Correct Answer" variant="outlined"
+ onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session}                    />
                 </Stack>
               </Stack>
        
@@ -4200,7 +4752,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
+                      onChange={(e) => setSendForm({ ...sendForm, was_the_recap_done_1:e.target.value})} value={sendForm?.was_the_recap_done_1}                  
                   
                     >
                     <div style={{display:"flex"}}>
@@ -4259,10 +4811,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
          
         </CardContent>
-        </Grid>
+        </Grid>:null}
 
-        <br/>
-      <Grid  backgroundColor={"#FFD580"}>
+       
+     { ( sendForm?.days_modules=='Session-6 _Goal setting game' )? <Grid  backgroundColor={"#FFD580"}>
           page-36
         <CardContent>
           <Card>
@@ -4278,7 +4830,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 How many women attended the training session?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" 
+ onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session }                   />
                 </Stack>
               </Stack>
        
@@ -4312,7 +4865,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <CardContent>
         <Stack mt={2}>
                 <Typography>
-                Check which ones the trainer did not do
+                Check which ones the Galati did not do
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
@@ -4322,9 +4875,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                     
                     
                     
-                    <FormControlLabel value="Ask two or three participants to volunteer to play the game." control={<Checkbox />} label="Ask two or three participants to volunteer to play the game." onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
-                    <FormControlLabel value="Ensure the volunteer who is not playing the game, is out of earshot when relaying instructions to the volunteer who is playing first." control={<Checkbox />} label="Ensure the volunteer who is not playing the game, is out of earshot when relaying instructions to the volunteer who is playing first." onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
-                    <FormControlLabel value="Give instructions step by step with all constraints added, to the first volunteer, records her goal (for the blocks) and blindfolds her before she begins." control={<Checkbox />} label="Give instructions step by step with all constraints added, to the first volunteer, records her goal (for the blocks) and blindfolds her before she begins." onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
+                    <FormControlLabel value="Ask two or three participants to volunteer to play the game." control={<Checkbox />} label="Ask two or three participants to volunteer to play the game." onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+                    <FormControlLabel value="Ensure the volunteer who is not playing the game, is out of earshot when relaying instructions to the volunteer who is playing first." control={<Checkbox />} label="Ensure the volunteer who is not playing the game, is out of earshot when relaying instructions to the volunteer who is playing first." onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
+                    <FormControlLabel value="Give instructions step by step with all constraints added, to the first volunteer, records her goal (for the blocks) and blindfolds her before she begins." control={<Checkbox />} label="Give instructions step by step with all constraints added, to the first volunteer, records her goal (for the blocks) and blindfolds her before she begins." onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     
                     
                     
@@ -4356,10 +4909,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                     
                     
                     
-                    <FormControlLabel value="Here are wooden blocks. You have to arrange them on top of each other" control={<Checkbox />} label="Here are wooden blocks. You have to arrange them on top of each other" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="How many blocks will you arrange? You have to give a specific number. [they have to specify a number - record this]" control={<Checkbox />} label="How many blocks will you arrange? You have to give a specific number. [they have to specify a number - record this]" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Which hand will you use?" control={<Checkbox />} label="Which hand will you use?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="ALL THE STEPS OF INSTRUCTIONS GIVEN" control={<Checkbox />} label="ALL THE STEPS OF INSTRUCTIONS GIVEN" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Here are wooden blocks. You have to arrange them on top of each other" control={<Checkbox />} label="Here are wooden blocks. You have to arrange them on top of each other"onChange={(event) =>handleprerequisites('check_which_instructions_the_gelathi_did_not_do', event)}/>
+                    <FormControlLabel value="How many blocks will you arrange? You have to give a specific number. [they have to specify a number - record this]" control={<Checkbox />} label="How many blocks will you arrange? You have to give a specific number. [they have to specify a number - record this]"onChange={(event) =>handleprerequisites('check_which_instructions_the_gelathi_did_not_do', event)}/>
+                    <FormControlLabel value="Which hand will you use?" control={<Checkbox />} label="Which hand will you use?"onChange={(event) =>handleprerequisites('check_which_instructions_the_gelathi_did_not_do', event)}/>
+                    <FormControlLabel value="ALL THE STEPS OF INSTRUCTIONS GIVEN" control={<Checkbox />} label="ALL THE STEPS OF INSTRUCTIONS GIVEN"onChange={(event) =>handleprerequisites('check_which_instructions_the_gelathi_did_not_do', event)}/>
                     
                     
 
@@ -4388,7 +4941,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
+                      // onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
+                      onChange={(e) => setSendForm({ ...sendForm, repeat_the_activity_with_the_second_volunteer:e.target.value})} value={sendForm?.repeat_the_activity_with_the_second_volunteer}
+
                   
                     >
                     <div style={{display:"flex"}}>
@@ -4416,8 +4971,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
-                  
+                      onChange={(e) => setSendForm({ ...sendForm, did_the_debrief_done_by_gelathi:e.target.value})} value={sendForm?.did_the_debrief_done_by_gelathi}
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -4440,10 +4994,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
          
         </CardContent>
-        </Grid>
+        </Grid>:null}
 
          {/* 37 */}
-         <Grid  backgroundColor={"#FFD580"}>
+       { ( sendForm?.days_modules=='Session-7 _Financial Goals' )?  <Grid  backgroundColor={"#FFD580"}>
           page-37
         <CardContent>
           <Card>
@@ -4458,10 +5012,12 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
  
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  label="Your Answer" variant="outlined" color="common" />
+                        <TextField type='number' required inputProps={{ required: true }} label="Your Answer" variant="outlined" color="common"
+                        onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session}                  
+                         />
                     </Stack> 
         </CardContent>
-          </Card>onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
+          </Card>
 
           </Card>
           <Card sx={{marginTop:2}}>
@@ -4486,12 +5042,12 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           </Typography>
           <FormGroup>
 
-          <FormControlLabel control={<Checkbox  />} label="What is your goal?" />
-          <FormControlLabel control={<Checkbox  />} label="How much will it cost?" />
-          <FormControlLabel control={<Checkbox  />} label="In how many years do you want to achieve this goal?" />
-          <FormControlLabel control={<Checkbox  />} label="How much loan do you want to take for it?" />
-          <FormControlLabel control={<Checkbox  />} label="Do you know where you will take a loan from?" />
-          <FormControlLabel control={<Checkbox  />} label="How much will you save for the goal?" />
+          <FormControlLabel control={<Checkbox  />} label="What is your goal?"value={'What is your goal'}onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask', event)} />
+          <FormControlLabel control={<Checkbox  />} label="How much will it cost?" value={'How much will it cost'} onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask', event)}/>
+          <FormControlLabel control={<Checkbox  />} label="In how many years do you want to achieve this goal?"value={'In how many years do you want to achieve this goal'} onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask', event)} />
+          <FormControlLabel control={<Checkbox  />} label="How much loan do you want to take for it?" value={'How much loan do you want to take for it'}onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask', event)} />
+          <FormControlLabel control={<Checkbox  />} label="Do you know where you will take a loan from?" value={'Do you know where you will take a loan from'} onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask', event)}/>
+          <FormControlLabel control={<Checkbox  />} label="How much will you save for the goal?" value={'How much will you save for the goa'}onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask', event)} />
 
     </FormGroup>
  </CardContent>
@@ -4503,9 +5059,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           During the debrief did the Gelathi not ask:
           </Typography>
           <FormGroup>
-          <FormControlLabel control={<Checkbox  />} label="Does your goal look realistic to you?" />
-          <FormControlLabel control={<Checkbox  />} label="Can you increase your savings or your income?" />
-          <FormControlLabel control={<Checkbox  />} label="Can you increase the time frame to reach the goal?" />
+          <FormControlLabel control={<Checkbox  />} label="Does your goal look realistic to you?" value={'Does your goal look realistic to you'} onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
+          <FormControlLabel control={<Checkbox  />} label="Can you increase your savings or your income?"  value={'Can you increase your savings or your income'} onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
+          <FormControlLabel control={<Checkbox  />} label="Can you increase the time frame to reach the goal?"  value={'Can you increase the time frame to reach the goal'} onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
           {/* <FormControlLabel control={<Checkbox  />} label="Do you know where you will take a loan from?" />
           <FormControlLabel control={<Checkbox  />} label="How much will you save for the goal?" /> */}
 
@@ -4514,10 +5070,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           </Card>
 
         </CardContent>
-        </Grid>
-        <br/>
+        </Grid>:null}
+        
         {/* 38 */}
-        <Grid  backgroundColor={"#FFD580"}>
+    { ( sendForm?.days_modules=='Session-8 _Loans-Group discussion of Case Studies' )?    <Grid  backgroundColor={"#FFD580"}>
           page-38
         <CardContent>
           <Card>
@@ -4532,7 +5088,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
  
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  label="Your Answer" variant="outlined" color="common" />
+                        <TextField type='number' required inputProps={{ required: true }} label="Your Answer" variant="outlined" color="common"
+                                                onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session}                  
+
+                         />
                     </Stack> 
         </CardContent>
           </Card>
@@ -4559,13 +5118,13 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           </Typography>
           <FormGroup>
 
-          <FormControlLabel control={<Checkbox  />} label="What was your group’s story or case study about?" />
-          <FormControlLabel control={<Checkbox  />} label="How much does that person need?" />
-            <FormControlLabel control={<Checkbox  />} label="How much do they have in their hand as saving or earning?" />
-            <FormControlLabel control={<Checkbox  />} label="What advice would you give that person?" />
-            <FormControlLabel control={<Checkbox  />} label="When can you save and reach a goal? When will you need to take a loan to reach it?" />
-            <FormControlLabel control={<Checkbox  />} label="Where can you get loans with minimum or no interest?" />
-            <FormControlLabel control={<Checkbox  />} label="What are productive loans? What are consumption loans?" />
+          <FormControlLabel control={<Checkbox  />} label="What was your group’s story or case study about?" value={'What was your group’s story or case study about'} onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
+          <FormControlLabel control={<Checkbox  />} label="How much does that person need?" value={'How much does that person need'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="How much do they have in their hand as saving or earning?" value={'How much do they have in their hand as saving or earning'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="What advice would you give that person?" value={'What advice would you give that person'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="When can you save and reach a goal? When will you need to take a loan to reach it?" value={'When can you save and reach a goal? When will you need to take a loan to reach it'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Where can you get loans with minimum or no interest?" value={'Where can you get loans with minimum or no interest'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="What are productive loans? What are consumption loans?" value={'What are productive loans? What are consumption loans'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
     </FormGroup>
  </CardContent>
           </Card>
@@ -4573,11 +5132,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           
 
         </CardContent>
-        </Grid>
-          <br/>
+        </Grid>:null}
+         
 
           {/* 39 */}
-        <Grid  backgroundColor={"#FFD580"}>
+    { ( sendForm?.days_modules=='Session-8 _Loans-Group discussion of Case Studies' )?    <Grid  backgroundColor={"#FFD580"}>
           page-39
         <CardContent>
           <Card>
@@ -4600,481 +5159,22 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           </Card>
       
         </CardContent>
-        </Grid>
-        <br/>
-      
-
-
-        
-      
-      {/* 40 */}
-        <Grid backgroundColor={"#FFD580"}> 
-        <CardContent>
-          page-40
-          <Card>
-          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-          <CardContent>
-          <Typography variant = 'h5'>Green Module 1:</Typography>
-          </CardContent>
-        </Card>
-        <CardContent>
-          <Typography >
-          Check which ones the trainer did not do
-          </Typography>
-          <FormGroup>
-      <FormControlLabel control={<Checkbox  />} label="Introduction of GF and Green Motivators" />
-      <FormControlLabel control={<Checkbox  />} label="Welcome the participants" />
-      <FormControlLabel control={<Checkbox  />} label="List down the natural resources found in the visualization" />
-      <FormControlLabel control={<Checkbox  />} label="Ask how was it for you?" />
-      <FormControlLabel control={<Checkbox  />} label="Duration of Green Training" />
-      <FormControlLabel control={<Checkbox  />} label="List down the points from the video" />
-      <FormControlLabel control={<Checkbox  />} label="Present that weather severity table" />
-      <FormControlLabel control={<Checkbox  />} label="Gave feedback to GF and GM" />
-      <FormControlLabel control={<Checkbox  />} label="Discuss with three questions after weather severity table" />
-      <FormControlLabel control={<Checkbox  />} label=" Set the ground rules" />
-      <FormControlLabel control={<Checkbox  />} label="Visualization about the natural resources" />
-      <FormControlLabel control={<Checkbox  />} label="Explain the objectives of the Green Training" />
-      <FormControlLabel control={<Checkbox  />} label="Play the climate change video" />
-      <FormControlLabel control={<Checkbox  />} label="Provided and discussed homework" />
-      <FormControlLabel control={<Checkbox  />} label=" Green Song" />
-
-    </FormGroup>
-        </CardContent>
-          </Card>
-      
-        </CardContent>
-        </Grid>
-        <br/>
-        {/* 41 */}
-        <Grid  backgroundColor={'#FFD580'}>
-          page-41
-        <CardContent>
-          <Card>
-          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-          <CardContent>
-          <Typography variant = 'h5'>Green Module 2:</Typography>
-          </CardContent>
-        </Card>
-        <CardContent>
-          <Typography >
-          Check which ones the Gelati Facilitator  did not do
-          </Typography>
-          <FormGroup>
-         
-            <FormControlLabel control={<Checkbox  />} label="Welcome the participants" />
-            <FormControlLabel control={<Checkbox  />} label="Welcome the participants" />
-            <FormControlLabel control={<Checkbox  />} label="Sang the green Song" />
-            <FormControlLabel control={<Checkbox  />} label="Recap of Day 1" />
-            <FormControlLabel control={<Checkbox  />} label="Homework check" />
-            <FormControlLabel control={<Checkbox  />} label=" Discuss about water" />
-            <FormControlLabel control={<Checkbox  />} label="List down the points about source and usage of water" />
-            <FormControlLabel control={<Checkbox  />} label="Provided feedback to GF and GM" />
-            <FormControlLabel control={<Checkbox  />} label="Completed and discussed homework" />
-            <FormControlLabel control={<Checkbox  />} label="Explain the water cycle activity" />
-            <FormControlLabel control={<Checkbox  />} label="Borewell activity in 2 groups" />
-            <FormControlLabel control={<Checkbox  />} label=" Discussion about the borewell activity" />
-            <FormControlLabel control={<Checkbox  />} label="Play the two videos regarding water" />
-            <FormControlLabel control={<Checkbox  />} label=" Discuss about the videos" />
-            <FormControlLabel control={<Checkbox  />} label="Explain the 3 principals of save water" />
-    </FormGroup>
-        </CardContent>
-          </Card>
-      
-        </CardContent>
-        </Grid>
-        <br/>
-          {/* 42 */}
-        <Grid  backgroundColor={"#FFD580"}>
-          page-42
-        <CardContent>
-          <Card>
-          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-          <CardContent>
-          <Typography variant = 'h5'>Green Module 3:</Typography>
-          </CardContent>
-        </Card>
-        <CardContent>
-          <Typography >
-          Check which ones Gelati facilitator did not do
-    </Typography>
-          <FormGroup>
-            <FormControlLabel control={<Checkbox  />} label="Welcome the participants" />
-            <FormControlLabel control={<Checkbox  />} label="Sang the green Song" />
-            <FormControlLabel control={<Checkbox  />} label="Recap of Day 2" />
-            <FormControlLabel control={<Checkbox  />} label="Checking the homework" />
-            <FormControlLabel control={<Checkbox  />} label=" Discuss about the Earth" />
-            <FormControlLabel control={<Checkbox  />} label=" Tree picture drawing" />
-            <FormControlLabel control={<Checkbox  />} label=" Tree picture presentation by participants" />
-            <FormControlLabel control={<Checkbox  />} label="Explain the importance of Honeybee" />
-            <FormControlLabel control={<Checkbox  />} label="Explain the importance of Birds" />
-            <FormControlLabel control={<Checkbox  />} label="Explain about seed propagation" />
-            <FormControlLabel control={<Checkbox  />} label=" Discuss the difference between present and past food" />
-            <FormControlLabel control={<Checkbox  />} label="Explain the importance of kitchen garden" />
-            <FormControlLabel control={<Checkbox  />} label=" Read and explain the case study" />
-            <FormControlLabel control={<Checkbox  />} label="Discuss about the case study" />
-            <FormControlLabel control={<Checkbox  />} label="Discuss about the solution to protect earth" />
-            <FormControlLabel control={<Checkbox  />} label="Provide feedback GF and GM" />
-            <FormControlLabel control={<Checkbox  />} label="Homework" />
-            
-
-            
-
-    </FormGroup>
-        </CardContent>
-          </Card>
-      
-        </CardContent>
-        </Grid>
-        <br/>
-       
-          
-
-       
-
-       
-       
-
-   
-         
-       
-
+        </Grid>:null}
      
-       
-
-       {/* 43 */}
-        <Grid  backgroundColor={"#FFD580"}>
-          page-43
-        <CardContent>
-          <Card>
-          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-          <CardContent>
-          <Typography variant = 'h5'>Green Module 4</Typography>
-          </CardContent>
-        </Card>
-        <CardContent>
-          <Typography >
-          Check which ones Gelati Facilitator did not do
-          </Typography>
-          <FormGroup>
-           
-        <FormControlLabel control={<Checkbox  />} label="Welcome" />
-        <FormControlLabel control={<Checkbox  />} label="Green Song" />
-        <FormControlLabel control={<Checkbox  />} label="Recap of Day-3" />
-        <FormControlLabel control={<Checkbox  />} label="Checking the Homework" />
-        <FormControlLabel control={<Checkbox  />} label="Explain the pollution and it types" />
-        <FormControlLabel control={<Checkbox  />} label="Discuss about pollution and nonpollution activity in groups" />
-        <FormControlLabel control={<Checkbox  />} label="List down the day to day usage things" />
-        <FormControlLabel control={<Checkbox  />} label="List down which are the natural resources polluting, reasons & impact" />
-        <FormControlLabel control={<Checkbox  />} label="Debrief about pollution and usage" />
-        <FormControlLabel control={<Checkbox  />} label="Feedback GF and GM" />
-        <FormControlLabel control={<Checkbox  />} label="Homework" />
-            
-    </FormGroup>
-        </CardContent>
-          </Card>
-      
-        </CardContent>
-        </Grid>
-        <br/>
-
-        {/* 44 */}
-        <Grid  backgroundColor={"#FFD580"}>
-          page-44
-        <CardContent>
-          <Card>
-          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-          <CardContent>
-          <Typography variant = 'h5'>Green Module 5</Typography>
-          </CardContent>
-        </Card>
-        <CardContent>
-          <Typography >
-          Check which one Gelati Facilitator Did NOT do
-          </Typography>
-          <FormGroup>
-           
-          <FormControlLabel control={<Checkbox  />} label="Welcome" />
-        <FormControlLabel control={<Checkbox  />} label="Green song" />
-        <FormControlLabel control={<Checkbox  />} label="Recap of Day 4" />
-        <FormControlLabel control={<Checkbox  />} label="Discussion about 3 principles of pollution and usage" />
-        <FormControlLabel control={<Checkbox  />} label="List out of which things are polluting the environment" />
-        <FormControlLabel control={<Checkbox  />} label="Discussion about 3 principles of prevention of environmental damage" />
-        <FormControlLabel control={<Checkbox  />} label="List the steps that can be taken to conserve water, By 1 week,1 month, 1 year" />
-        <FormControlLabel control={<Checkbox  />} label="List the steps that can be taken to conserve earth, By 1 week, 1 Month, 1 Year" />
-        <FormControlLabel control={<Checkbox  />} label="Green village was discussed" />
-        <FormControlLabel control={<Checkbox  />} label="My contacts activity" />
-        <FormControlLabel control={<Checkbox  />} label="List/draw the natural resources in their village" />
-        <FormControlLabel control={<Checkbox  />} label="Discuss the importance of forest, Lake, & Gomalas" />
-        <FormControlLabel control={<Checkbox  />} label="Discuss the elements required for restoration of natural resources" />
-        <FormControlLabel control={<Checkbox  />} label="Feedback GF and GM" />
-        <FormControlLabel control={<Checkbox  />} label="Distribution of Certificates" />
-            
-    </FormGroup>
-        </CardContent>
-          </Card>
-      
-        </CardContent>
-        </Grid>
-        <br/>
-
-        {/* 45 */}
-       
-
-         <Grid  backgroundColor={"#FFD580"}>
-         
-         <CardContent>
-           <Card>
-           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-           <CardContent>
-           <Typography variant = 'h5'>Vyapar Training  1</Typography>
-           </CardContent>
-         </Card>
-         <CardContent>
-         <Stack mt={2}>
-         <Stack>
-                 <Typography variant="body1">
-                 Check which ones the Gelathi Facilitator did not do
-                 </Typography>
-                 <Stack mt={2}>
-                 <FormGroup>
-             <FormControlLabel control={<Checkbox  />} label="Welcome" />
-             <FormControlLabel control={<Checkbox  />} label="Set the Ground rules" />
-             <FormControlLabel control={<Checkbox  />} label="Explain the objectives of Vyapar training" />
-             <FormControlLabel control={<Checkbox  />} label="Duration of the Training" />
-             <FormControlLabel control={<Checkbox  />} label="Self Shakthi Training discussion" />
-             <FormControlLabel control={<Checkbox  />} label="List the different aspects of business" />
-             <FormControlLabel control={<Checkbox  />} label="what was the reason for starting this business" />
-             <FormControlLabel control={<Checkbox  />} label="Geetha Story-balance of vyapar and life" />
-             <FormControlLabel control={<Checkbox  />} label="Debrief about the Geetha Story" />
-             <FormControlLabel control={<Checkbox  />} label="What effects did Geetha’s life on business and vice versa" />
-             <FormControlLabel control={<Checkbox  />} label="What effects did your life on business and vice versa" />
-             <FormControlLabel control={<Checkbox  />} label="Form groups of  three Business women" />
-             <FormControlLabel control={<Checkbox  />} label="Listed Skills by Vyaparis" />
-             <FormControlLabel control={<Checkbox  />} label="Listed Resource by Vyaparis" />
-             <FormControlLabel control={<Checkbox  />} label="Repeated challenges by Vyaparis" />
-             <FormControlLabel control={<Checkbox  />} label="Group discussion - how to deal with the challenges" />
-             <FormControlLabel control={<Checkbox  />} label="Given name for Vyapar-1" />
-             <FormControlLabel control={<Checkbox  />} label="Feedback" />
-             <FormControlLabel control={<Checkbox  />} label="Homework" />
-             <FormControlLabel control={<Checkbox  />} label="Was the pledge made?" />           
-     </FormGroup>
-                 </Stack>
-               </Stack>
-               </Stack>
-         </CardContent>   </Card>
-
-        
-     </CardContent>
-         </Grid>
-
-         <Grid  backgroundColor={"#FFD580"}>
-         
-         <CardContent>
-           <Card>
-           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-           <CardContent>
-           <Typography variant = 'h5'>Vyapar Training  2</Typography>
-           </CardContent>
-         </Card>
-         <CardContent>
-         <Stack mt={2}>
-         <Stack>
-                 <Typography variant="body1">
-                 Check which ones the Facilitators did not do
-                 </Typography>
-                 <Stack mt={2}>
-                 <FormGroup>
-             <FormControlLabel control={<Checkbox  />} label="Welcome" />
-             <FormControlLabel control={<Checkbox  />} label="Recap of the 1st Vyapar training" />
-             <FormControlLabel control={<Checkbox  />} label="Ask the question why you are joining here?" />
-             <FormControlLabel control={<Checkbox  />} label="Ask about the Self Shakthi day-2 phone question" />
-             <FormControlLabel control={<Checkbox  />} label="Business improvement / growth factors listed" />
-             <FormControlLabel control={<Checkbox  />} label="What type of business are you doing?" />
-             <FormControlLabel control={<Checkbox  />} label="What is the Income & formula of income" />
-             <FormControlLabel control={<Checkbox  />} label="Income and Expenses chart" />
-             <FormControlLabel control={<Checkbox  />} label="Who is your customer?" />
-             <FormControlLabel control={<Checkbox  />} label="Types of Sales" />
-             <FormControlLabel control={<Checkbox  />} label="Types of Expenses" />
-             <FormControlLabel control={<Checkbox  />} label="Formula of Profit" />
-             <FormControlLabel control={<Checkbox  />} label="List of the daily expenses and Income chart in the book" />
-             <FormControlLabel control={<Checkbox  />} label="Given name for Vyapar-2" />
-             <FormControlLabel control={<Checkbox  />} label="Feedback" />
-             <FormControlLabel control={<Checkbox  />} label="Homework" />
-             <FormControlLabel control={<Checkbox  />} label="Was the pledge made?" />           
-     </FormGroup>
-                 </Stack>
-               </Stack>
-               </Stack>
-         </CardContent>   </Card>
-
-        
-     </CardContent>
-         </Grid>
-
-         <Grid  backgroundColor={"#FFD580"}>
-         
-         <CardContent>
-           <Card>
-           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-           <CardContent>
-           <Typography variant = 'h5'>Vyapar Training 3</Typography>
-           </CardContent>
-         </Card>
-         <CardContent>
-         <Stack mt={2}>
-         <Stack>
-                 <Typography variant="body1">
-                 Check which ones the Gelathi Facilitators did not do
-                 </Typography>
-                 <Stack mt={2}>
-                 <FormGroup>
-             <FormControlLabel control={<Checkbox  />} label="Welcome" />
-             <FormControlLabel control={<Checkbox  />} label="Recap of the 2nd Vyapar training" />
-             <FormControlLabel control={<Checkbox  />} label="Definition of the problem" />
-             <FormControlLabel control={<Checkbox  />} label="Temporary solution and permanent solution" />
-             <FormControlLabel control={<Checkbox  />} label="Explanation of business problem" />
-             <FormControlLabel control={<Checkbox  />} label="Temporary solution and permanent solution regarding the business  problem" />
-             <FormControlLabel control={<Checkbox  />} label="List down their own business problems" />
-             <FormControlLabel control={<Checkbox  />} label="Discuss about the solution in the group" />
-             <FormControlLabel control={<Checkbox  />} label="Activity as a tool for coping with risk" />
-             <FormControlLabel control={<Checkbox  />} label="Debrief about the activity by GF" />
-             <FormControlLabel control={<Checkbox  />} label="Given name for Vyapar-3" />
-             <FormControlLabel control={<Checkbox  />} label="Feedback" />
-             <FormControlLabel control={<Checkbox  />} label="Homework" />
-             <FormControlLabel control={<Checkbox  />} label="Was the pledge made?" />           
-     </FormGroup>
-                 </Stack>
-               </Stack>
-               </Stack>
-         </CardContent>   </Card>
-
-        
-     </CardContent>
-         </Grid>
-
-         <Grid  backgroundColor={"#FFD580"}>
-         
-         <CardContent>
-           <Card>
-           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-           <CardContent>
-           <Typography variant = 'h5'>Vyapar Training 4</Typography>
-           </CardContent>
-         </Card>
-         <CardContent>
-         <Stack mt={2}>
-         <Stack>
-                 <Typography variant="body1">
-                 Check which ones the Gelathi Facilitators did not do
-                 </Typography>
-                 <Stack mt={2}>
-                 <FormGroup>
-             <FormControlLabel control={<Checkbox  />} label="Welcome" />
-             <FormControlLabel control={<Checkbox  />} label="Recap of the 3rd Vyapar training" />
-             <FormControlLabel control={<Checkbox  />} label="Visualization their business and sharing the experience" />
-             <FormControlLabel control={<Checkbox  />} label="What is goal?" />
-             <FormControlLabel control={<Checkbox  />} label="How should be the goal?" />
-             <FormControlLabel control={<Checkbox  />} label="SMART  Explanation" />
-             <FormControlLabel control={<Checkbox  />} label="Writing their business goals based on SMART" />
-             <FormControlLabel control={<Checkbox  />} label="List of steps to achieve the goals" />
-             <FormControlLabel control={<Checkbox  />} label="Types of loans" />
-             <FormControlLabel control={<Checkbox  />} label="Formula of the Profit" />
-             <FormControlLabel control={<Checkbox  />} label="Debrief from the GF" />
-             <FormControlLabel control={<Checkbox  />} label="Given name for Vyapar-4" />
-             <FormControlLabel control={<Checkbox  />} label="Feedback" />
-             <FormControlLabel control={<Checkbox  />} label="Homework" />
-             <FormControlLabel control={<Checkbox  />} label="Was the pledge made?" />           
-     </FormGroup>
-                 </Stack>
-               </Stack>
-               </Stack>
-         </CardContent>   </Card>
-
-        
-     </CardContent>
-         </Grid>
-         <Grid  backgroundColor={"#FFD580"}>
-         
-         <CardContent>
-           <Card>
-           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-           <CardContent>
-           <Typography variant = 'h5'>Vyapar Training 5</Typography>
-           </CardContent>
-         </Card>
-         <CardContent>
-         <Stack mt={2}>
-         <Stack>
-                 <Typography variant="body1">
-                 Check which ones the Gelathi Facilitators did not do
-                 </Typography>
-                 <Stack mt={2}>
-                 <FormGroup>
-             <FormControlLabel control={<Checkbox  />} label="Welcome" />
-             <FormControlLabel control={<Checkbox  />} label="Recap of the 4th Vyapar training" />
-             <FormControlLabel control={<Checkbox  />} label="List out the different aspects of business" />
-             <FormControlLabel control={<Checkbox  />} label="Explanation about the SWOT" />
-             <FormControlLabel control={<Checkbox  />} label="List down their business strengths" />
-             <FormControlLabel control={<Checkbox  />} label="List down their business weakness" />
-             <FormControlLabel control={<Checkbox  />} label="List down their business opportunity" />
-             <FormControlLabel control={<Checkbox  />} label="List down their business threats" />
-             <FormControlLabel control={<Checkbox  />} label="Evaluation of their business skills" />
-             <FormControlLabel control={<Checkbox  />} label="Given the grade for their skills" />
-             <FormControlLabel control={<Checkbox  />} label="Sharing their grade in the pair" />
-             <FormControlLabel control={<Checkbox  />} label="Debrief from the GF" />
-             <FormControlLabel control={<Checkbox  />} label="Given name for Vyapar-5" />
-             <FormControlLabel control={<Checkbox  />} label="Feedback" />
-             <FormControlLabel control={<Checkbox  />} label="Homework" />
-             <FormControlLabel control={<Checkbox  />} label="Was the pledge made?" />           
-     </FormGroup>
-                 </Stack>
-               </Stack>
-               </Stack>
-         </CardContent>   </Card>
-
-        
-     </CardContent>
-         </Grid>
-
-            {/* 49 */}
-        <Grid backgroundColor={"#FFD580"}>
-        <CardContent>
-          page -49 
-          <Card>
-          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-          <CardContent>
-          <Typography variant = 'h5'>Post - training on Day 1:</Typography>
-          </CardContent>
-        </Card>
-        <CardContent>
-          <Typography >
-          Check which ones the trainer did not do
-          </Typography>
-          <FormGroup>
-      <FormControlLabel control={<Checkbox  />} label="Ask how was it for you?" />
-      <FormControlLabel control={<Checkbox  />} label="Ask what did you learn new today?" />
-        <FormControlLabel control={<Checkbox  />} label="Ask do you have any feedback for me as a trainer or for our organisation so that we can deliver the best experience for you?" />
-        <FormControlLabel control={<Checkbox  />} label="Ask the women that if they have any doubts/questions they can ask right now in the group or ask in person?"/>
-        <FormControlLabel control={<Checkbox  />} label="Tell the women what will be covered in the next training session" />
-        <FormControlLabel control={<Checkbox  />} label="Ask them to share with their family what they have learnt?" />
-        <FormControlLabel control={<Checkbox  />} label="Create excitement/curiosity among the participants about the next training session" />
-        <FormControlLabel control={<Checkbox  />} label="Tell them that Buzz India will be following up on them for the next three years through a Buzz Gelathi" />
-        <FormControlLabel control={<Checkbox  />} label="Explain the concept and functions of the Buzz Gelathi" />
-        <FormControlLabel control={<Checkbox  />} label="Appreciate the Anganwadi teacher" />
-     
-
-
-
-    </FormGroup>
-        </CardContent>
-          </Card>
-      
-        </CardContent>
-        </Grid>
+        </form>
     
+
+    
+
+     
+
+
+
+ 
 
 
       </Dialog>
+    
     </>
   );
 }
