@@ -54,7 +54,7 @@ function SimpleDialog(props) {
         return searchInFilter
     }
 
-    useEffect(()=>searchData(''),[teamData])
+    useEffect(()=>searchData(''),[teamData,open])
 
     const searchData =(searchValue) => {
       tempData = teamData?.filter(e=>e?.name?.toLowerCase().includes(searchValue.toLowerCase()));
