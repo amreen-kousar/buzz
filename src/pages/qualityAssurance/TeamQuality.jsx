@@ -151,8 +151,8 @@ export default function TeamQuality(props) {
                   <Grid
                     id="grid-own-open-filter"
                     onClick={() => {
-                      // singleItemHandler( itm )
-                      alert('work in Progress');
+                     
+                      // alert('work in Progress');
                     }}
                     item
                     xs={8}
@@ -169,7 +169,8 @@ export default function TeamQuality(props) {
                       id="uiicons-cross"
                       onClick={() => {
                         // handleDeleteTA(itm);
-                        alert("work in progress")
+                        // alert("work in progress")
+                        singleItemHandler( itm )
                       }}
                       style={{ float: 'right', marginTop: 5, marginRight: 10, fontSize: 30, color: 'gray' }}
                       icon="mdi:form-outline"

@@ -241,25 +241,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
               </Stack>
         </CardContent>: null}
      </Card> */}
-          <Card sx={{ margin: '20px' }}>
-            <CardContent>
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-                  <InputLabel id="Name of the District">Name of the District</InputLabel>
-                  <Select
-                    labelId="Name of the District"
-                    id="Name of the District"
-                    value={sendForm?.name_of_the_district}
-                    label="Name of the District"
-                    onChange={(e) => {
-                      console.log(e, 'distruct target value');
-                      setFormDistrictName(e?.target?.value);
-                    }}
-                  ></Select>
-                </FormControl>
-              </Box>
-            </CardContent>
-          </Card>
+        
           <Card sx={{ margin: '20px' }}>
             <CardContent>
               <Stack>
@@ -271,12 +253,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     label="Your Answer"
                     variant="outlined"
                     color="common"
-                    onChange={(e) =>
-                      setSendForm({
-                        ...sendForm,
-                        name_of_the_village_and_the_venue_of_meeting_or_training: e.target.value,
-                      })
-                    }
+                  
                     value={sendForm?.name_of_the_district}
                   />
                 </Stack>
@@ -286,7 +263,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           <Card sx={{ margin: '20px' }}>
             <CardContent>
               <Stack>
-                <Typography variant="body2">Name of the village </Typography>
+                <Typography variant="body2">Name of the village and the venue of meeting/training</Typography>
                 <Stack mt={2} mb={2}>
                   <TextField
                     required
@@ -294,12 +271,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     label="Your Answer"
                     variant="outlined"
                     color="common"
-                    onChange={(e) =>
-                      setSendForm({
-                        ...sendForm,
-                        name_of_the_village_and_the_venue_of_meeting_or_training: e.target.value,
-                      })
-                    }
+                  
                     value={sendForm?.name_of_the_village_and_the_venue_of_meeting_or_training}
                   />
                 </Stack>

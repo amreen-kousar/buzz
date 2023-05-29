@@ -109,8 +109,8 @@ const handleClose = ()=>{
                 return (
                     <>
                     <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} onClick={() => {
-                                            // singleformHandler(itm)
-                                            alert("Work in Progress")
+                                            
+                                            // alert("Work in Progress")
                                                  }} >
                     <Grid id="grid-own-ta-amount" container spacing={2} >
                                             <Grid id="grid-own-open-filter"  item xs={8}>
@@ -122,7 +122,8 @@ const handleClose = ()=>{
                                             <Grid item xs={4}>
                                                 <Iconify id="uiicons-cross" onClick={() => {
                                                     //  handleDeleteTA(itm) 
-                                                    alert("Work in progress")
+                                                    singleformHandler(itm)
+                                                    // alert("Work in progress")
                                                      }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="mdi:form-outline"></Iconify>
                                                 {/* <Iconify id="icon-outline-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
                                            */}
