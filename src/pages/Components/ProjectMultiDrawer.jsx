@@ -82,7 +82,15 @@ const [gelatiNote, setGelatiNote] = useState('');
    const [check,setCheck]=useState(false)
    const [expanded, setExpanded] = React.useState(false);
    const isSmallScreen = useMediaQuery('(max-width:600px)');
- 
+
+   const [reload ,setRealod] = useState(false)
+ const handleCloseDilog = ( ) =>{
+  setShown(false)
+ }
+const reloadfuncton = ()=>{
+  setRealod(!reload)
+}
+
 const handleExpandClick = () => {
   setExpanded(!expanded);
 };
@@ -94,6 +102,10 @@ const handleExpandClick = () => {
        // console.log(batchState)
         
     }, [batchState,clcikData])
+
+    useEffect(()=>{
+      getTrainingBatch();
+    },[reload])
     useEffect(()=>{
       setImages([])
     },[batchState?.training_batch_id])
@@ -493,7 +505,11 @@ const noteSubmitHandler = () => {
                                 </CardContent>
                             </Card>
                            
-                           {(userId==5 && batch?.data?.day2_checkIn=='1' && batch?.data?.day2_completed!='1')?<ShaktiDialogday2 batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:(userId==5 && batch?.data?.day1_completed!='1')? <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:(batch?.data?.day2_completed=='1')?<Day2Completed batch={batch} shown={shown} setShown={(e)=>{setShown(e)}}/>:null}
+                           {(userId==5 && batch?.data?.day2_checkIn=='1' && batch?.data?.day2_completed!='1')?
+                           <ShaktiDialogday2 batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} />:
+                           (userId==5 && batch?.data?.day1_completed!='1')? 
+                           <ShaktiDialog id="shakti-dialog-project-multidrawer" batch={batch} shown={shown} reloadfuncton={reloadfuncton} handleCloseDilog={handleCloseDilog} setShown={(e)=>{setShown(e) }} />
+                           :(batch?.data?.day2_completed=='1')?<Day2Completed batch={batch} shown={shown} setShown={(e)=>{setShown(e)}}/>:null}
                            
                            
                             <Card sx={{mt:2}} id="project-mutlidrawer-card" onClick={()=>{setShown(true),console.log("ferfgreg")}} style={styles.buttonStyle}>
@@ -503,7 +519,7 @@ const noteSubmitHandler = () => {
                                 {batch?.data?.day1_actual >=  moment(date).format("YYYY-MM-DD") && <Iconify id="add-symbol-material" icon="material-symbols:add" width={30} height={30} style={{float:'right'}} />} 
                   
                     </Typography>
-                                    <Typography id="target particpants">Target Participants:   {batch?.data?.participants}    </Typography>
+                                    <Typography id="target particpants">Target Participants :   {batch?.data?.participants}    </Typography>
                                 </CardContent>
                             </Card><br/>
                             {(batch?.photos)?<Photos id="photos-project-multidrawer" batch={batch} photos={photos} setPhotos={(e)=>{setPhotos(e)}}/>:null}

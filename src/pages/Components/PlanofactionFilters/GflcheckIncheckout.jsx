@@ -25,7 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CheckinGFL({ photos, setCheck, batch }) {
+export default function CheckinGFL({ photos, setCheck, batch,getTrainingBatch ,getGFSessionData}) {
 console.log("🚀 ~ file: CheckinCheckOutDialog.jsx:27 ~ FullScreenDialog ~ batch:", batch)
 //   console.log(batch, '<--------shownshownshown')
 const [data ,setData]= useState()
@@ -133,6 +133,8 @@ axios(config)
       axios(config)
       .then(function (response) {
         GetStatus();
+        getTrainingBatch()
+        getGFSessionData()
         if(type ===1){
             setCheckIn({
                 location:location,

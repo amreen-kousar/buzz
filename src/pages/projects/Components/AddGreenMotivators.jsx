@@ -27,6 +27,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     const [open, setOpen] = React.useState(false);
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState('');
+    const [reload , setReload] = useState(false)
   
     console.log("🚀 ~ file: AddGreenMotivators.jsx:29 ~ AddGreenMotivators ~ sessiondata:", sessiondata)
     const handleClickOpen = () => {
@@ -150,7 +151,9 @@ getGreenMotivators();
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" }
   }
-
+  const reloadFUnction =() =>{
+    setReload(!reload)
+  }
 
     return(
     <>
@@ -174,10 +177,10 @@ getGreenMotivators();
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            All Participants
+            All Participants  
           </Typography>
 
-<AddParticipants type='green' session={session}/>
+<AddParticipants type='green' session={session} reloadFUnction={reloadFUnction}/>
           
         </Toolbar>
         {/* <Webcam
@@ -209,7 +212,7 @@ getGreenMotivators();
                     </CardContent>
                     
                     
-                </Card><br/><Typography style={{textAlign:'center'}} variant="h6"> All Participants : &nbsp; {session?.total_participants}</Typography>
+                </Card><br/><Typography style={{textAlign:'center'}} variant="h6"> All Participants  : &nbsp; {sessiondata?.total_participants}</Typography>
                 <Card>
                     <CardContent>
                         

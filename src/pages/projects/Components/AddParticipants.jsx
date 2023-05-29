@@ -20,7 +20,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddParticipants({batch,checkData,type,session}) {
+export default function AddParticipants({batch,checkData,type,session ,reloadFUnction ,handleCloseDilog}) {
     console.log(session,"<------batchbatchbatchbatchbatch",checkData,"hhhhhhhhhh",type,"ghfhgfgh",batch)
   const intialState={
     "education":"",
@@ -91,12 +91,15 @@ export default function AddParticipants({batch,checkData,type,session}) {
       });
       
   }
+
+  console.log(session, " batchData")
   const handleCloseSaveBtn = ()=>{
     console.log(enterData, "entered data")
     if(enterData.age==""|| enterData.firstName==""|| enterData.caste =="" ||enterData.contact_no==""
     || enterData.husbandName==""|| enterData.nameOfSHG==""){
       alert("Please fil all the required data ")
     }else{
+      handleClose()
       setOpen(false);
     }
   }
@@ -112,7 +115,7 @@ export default function AddParticipants({batch,checkData,type,session}) {
         "project_id": (session && type=="vyapar")?session?.project_id:(session && type=="green")?session?.project_id:batch?.data?.project_id,
         "contact_no": enterData?.contact_no,
         "dob": "",
-         "tb_id":(batch)?batch?.data?.primary_id:'',
+         "tb_id":(batch)?batch?.data?.primary_id:session?.tb_id,
         "age": enterData?.age,
        //tb_id:79124,
         // "trainer_id": batch?.data?.user_id
@@ -136,8 +139,21 @@ alert("error!!!!!!")
         
         axios(config)
         .then(function (response) {
+          reloadFUnction()
+          
+          handleCloseDilog()
+          console.log(response , "responseresponse")
           if(response?.data?.code ==200){
+            handleClose()
+            handleCloseDilog()
+             console.log("insideresponse")
               handleCloseSaveBtn()
+          }
+          if(response?.code ==200){
+            handleClose()
+             console.log("insideresponse")
+              handleCloseSaveBtn()
+              handleCloseDilog()
           }
           console.log(JSON.stringify(response.data));
         })
@@ -170,7 +186,7 @@ alert("error!!!!!!")
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, color:'white'}} variant="h6" component="div">
-              Add Participants 
+              Add Participants  
             </Typography>
             <Button autoFocus color="inherit" onClick={hitApi}>
               save

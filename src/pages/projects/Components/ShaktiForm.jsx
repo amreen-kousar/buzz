@@ -35,7 +35,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ShaktiForm({itm}) {
+export default function ShaktiForm({itm ,reloadFUnction}) {
   const [open, setOpen] = React.useState(false);
   const [solution,setsolution]= React.useState(false);
   const [livelihoodvalue,setlivelihoodvalue] = React.useState(false);
@@ -328,6 +328,7 @@ export default function ShaktiForm({itm}) {
 
     axios(config)
       .then(function (response) {
+        reloadFUnction()
         alert(response.data.message);
         Swal.fire({
           icon: 'error',

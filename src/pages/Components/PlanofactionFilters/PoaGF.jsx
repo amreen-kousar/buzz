@@ -109,9 +109,9 @@ const [gelatiNote, setGelatiNote] = useState('');
     }
 
     return () => {
-      isSubscribe = false;
+      isSubscribe = false
     };
-  }, [session.tb_id]);
+  }, [session.tb_id , session.check_in ,batch.check_1]);
   console.log(clcikData, '<---clcikDataPoaGF',batchState);
   const getTrainingBatch = (async) => {
     console.log(
@@ -544,7 +544,10 @@ if( session?.gf_session_name?.indexOf("_VV")){
               batch={batch}
               setCheck={(e) => {
                 setCheck(e);
+              
               }}
+              getTrainingBatch={getTrainingBatch}
+              getGFSessionData={getGFSessionData}
                />}
 
 {roleid==13 && batch && <CheckinGFL
@@ -553,6 +556,8 @@ if( session?.gf_session_name?.indexOf("_VV")){
               setCheck={(e) => {
                 setCheck(e);
               }}
+              getTrainingBatch={getTrainingBatch}
+              getGFSessionData={getGFSessionData}
                />}
 
               {/* <Card
