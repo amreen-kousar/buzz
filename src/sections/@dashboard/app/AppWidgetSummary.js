@@ -46,16 +46,16 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         color: (theme) => theme.palette[color].darker,
         bgcolor: (theme) => theme.palette[color].lighter,
         ...sx,
-        height: "210px"
-        // {
-        //   xs: 100,
-        //   sm: 200,
-        //   md: 210,
-        //   lg: 210,
-        //   xl: 210,
+        height: 
+        {
+          xs: 135,
+          sm: 200,
+          md: 210,
+          lg: 210,
+          xl: 210,
         
         
-        // }
+        }
         ,
         display: "flex",
         justifyContent: "center",
@@ -67,19 +67,41 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
       <div>
         {(icon) ? <IconWrapperStyle
           sx={{
+            width: {
+              xs: 50,
+              sm: 100,
+          
+              lg: 100,
+              xl: 100,
+            },
+            height:{
+              xs: 50,
+              sm: 100,
+            
+              lg: 100,
+              xl: 100,
+            },
             color: (theme) => theme.palette[color].dark,
             backgroundImage: (theme) =>
               `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
                 theme.palette[color].dark,
                 0.24
               )} 100%)`,
+              marginTop:{xs:3},marginBottom:0,
           }}
         >
           <Iconify icon={icon} width={24} height={24} />
         </IconWrapperStyle> : null}
-        <span style={{ opacity: 0.72, fontSize: '1.5vw', color: '#103996' }}><strong>{title}</strong></span><br />
+        <span style={{ opacity: 0.72,  color: '#103996' ,marginTop:'0px',
+      fontSize:{
+        xs: '12px',sm:'14px',md:'16px',lg:'16px',xl:'16px'
+        
+      }}}><strong>{title}</strong></span><br />
         {console.log(total, "total")}
-        <span style={{ fontSize: '2.5vw', color: "#103996" }}><strong>
+        <span style={{  color: "#103996" ,marginBottom:10, fontSize:{
+        xs: '12px',sm:'14px',md:'16px',lg:'16px',xl:'16px'
+        
+      }}}><strong>
           {total}
         </strong></span>
 
