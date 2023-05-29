@@ -634,7 +634,7 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }}>
             {/* {`${clcikData?.title}`}  */}
-            Schedule a CM
+            Schedule a CM wokring
           </Typography>
           {console.log(clcikData, '<------clcikDataclcikData')}
           <IconButton onClick={onCloseFilter}>
@@ -661,15 +661,26 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
               >
                 Date And Time :{`${clcikData?.date}`}
               </Typography>
-              <DatePicker
+              {/* <DatePicker
                 required
                 label="Date"
                 defaultValue={sendData?.circle_date}
                 onChange={(newValue) => setSendData({ ...sendData, circle_date: newValue })}
                 renderInput={(params) => <TextField {...params} fullWidth />}
                 value={sendData?.circle_date}
-              />
-              <TextField
+              /> */}
+                          <DateTimePicker
+                    label="Date&Time picker"
+                    value={sendData?.circle_date}
+                    required
+                    onChange={(newValue) => setSendData({ ...sendData, circle_date: newValue })}
+                    renderInput={(params) => <TextField {...params} color="common" />}
+                    PopperProps={{
+                      placement: "top"
+                  
+                    }}
+                  />
+              {/* <TextField
                 id="outlined-basic"
                 label="Search..."
                 sx={{ flex: 10 }}
@@ -687,7 +698,7 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
                 }}
                 variant="outlined"
                 style={{ marginTop: 40, marginLeft: 10, width: '100%' }}
-              />
+              /> */}
               <Typography
                 style={{ flexDirection: 'row', marginTop: 20, marginLeft: 5 }}
                 variant="subtitle1"

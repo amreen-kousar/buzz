@@ -50,7 +50,48 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const GetSingleQualityForm = ({item ,open ,handleClose }) => {
+  useEffect(()=>{
+    if(item === undefined){
+        console.log("gettting as undefined")
 
+    }else{
+        // Formrender(item) 
+        console.log("  Formrender(item) ")
+    }
+console.log("mounting is working")
+
+  },[item])
+console.log(item , "heckitem")
+const myJSON = JSON.stringify(item);
+console.log(item , "heck")
+
+const Formrender = () =>{
+console.log(item ,"Formrender")
+    return(
+<>
+{Object?.entries(item).map(([key ,value]) =>(
+                    <div key={key}>
+                      
+                  
+            { key == "id" || key =="emp_id" || key=="role_id" ||key =="email_address" ?
+            null :      
+            
+            <Card style={{ marginTop: 20,  borderRadius: 20 }}>
+                <CardContent>
+                  <Typography style={{color:"#ff7424"}}>{key.charAt(0).toUpperCase() + key.slice(1).replaceAll('_',"  ")} </Typography>
+                  <Stack mt={2} >
+                  <Typography>Answer: {value}</Typography>
+                  </Stack>
+                </CardContent>
+
+              </Card>}
+                    </div>
+                ))}
+
+</>
+
+    )
+}
 
   return (
     <div>
@@ -61,45 +102,33 @@ const GetSingleQualityForm = ({item ,open ,handleClose }) => {
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         
       
-      <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
-          <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
+     
+              <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
+          <Toolbar sx={{ bgcolor: '#ff7424' }}>
           
-       
                         <IconButton style={{color:"white"}} onClick={handleClose}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
-                        <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-           Individual Quality Assurance  working in progress
+                        <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div"   >
+                        Individual Quality Assurance
           </Typography>
- </Toolbar>
-              </AppBar>
-              <Card>
-     
-     <CardContent>
        
-              <div  style={{marginTop:"50px"}}>
-            {
-           item &&  item?.map((itm)=>{
-                return (
-                    <>
-                    <Card style={{ marginTop: 20,  borderRadius: 20 }}>
-                <CardContent>
-                  <Typography style={{color:"#ff7424"}}>Name of vyapari / ವ್ಯಾಪಾರಿಯ ಹೆಸರು *</Typography>
-                  <Stack mt={2} >
-                  <Typography>Answer: {surveyData?.name_of_the_vyapari}</Typography>
-                  </Stack>
-                </CardContent>
-              </Card>
-                </>
-                )
-            })
-          } 
-       
-          
          
-        </div>
-</CardContent>
-</Card>
+          </Toolbar>
+          </AppBar>
+      
+<div style={{marginTop:"60px"}}>
+      <Formrender/>
+      </div>
+        <Grid>
+      
+      <Card>
+     
+            <CardContent>
+      
+             </CardContent>
+             </Card>
+        </Grid>
       </Dialog>
      
     </div>

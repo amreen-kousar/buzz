@@ -138,6 +138,8 @@ export default function ProjectWiseGelathiCircle() {
     setOpenFilter(false);
   };
   const role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
+
+ 
   return (
     <Container>
       {' '}
@@ -241,7 +243,14 @@ export default function ProjectWiseGelathiCircle() {
 
 {(state?.title)?
      <>
-      {gelathiCircles?.list?.length !== 0 ? (
+      {gelathiCircles == ""?
+
+<div style={{marginTop:"20%" , marginLeft:"40%"}}>
+<CircularProgress />
+</div>
+:
+      
+      gelathiCircles?.list?.length !== 0 ? (
         gelathiCircles?.list?.map((itm) => {
           return (
             <Card style={styles.card1}>

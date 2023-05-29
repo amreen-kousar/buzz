@@ -1,7 +1,7 @@
 import { useState, useEffect, forwardRef } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Grid, Container, Stack, Typography, Box, CardContent, Card, Chip, Icon, IconButton, Button, Snackbar } from '@mui/material';
+import { Grid, Container, Stack, Typography, Box, CardContent, Card, Chip, Icon, IconButton, Button, Snackbar, CircularProgress } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Pagination from '@mui/material/Pagination';
 import Tab from '@mui/material/Tab';
@@ -425,8 +425,14 @@ console.log(data,"dataaaaaaaaaaa")
 
 
                         <TabPanel value={value} index={0}>
-                            {
-                                projects?.length > 0 ? <>
+                            {projects == []?
+                            <div >
+
+<CircularProgress />
+                            </div>
+
+                            :   projects?.length > 0 ? 
+                                <>
                                     {projects.map(p => <Link to="/dashboard/projects/project"
                                         style={{ textDecoration: 'none' }}>
                                         <Card onClick={() => { callOpenFunction(p.id) }}>

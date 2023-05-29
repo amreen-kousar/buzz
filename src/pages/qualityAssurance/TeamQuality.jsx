@@ -68,6 +68,7 @@ export default function TeamQuality(props) {
     const [verifylist,setverifylist]=useState('');
 
     const [open ,setOpen] = useState(false)
+    var [singlePersonFormDetail ,setSinglePersonFormDetail] = useState('')
 
     var [todayPoa,setTodayPoa]=useState([]);
     console.log(props?.componentname,"componenttttttttt")
@@ -106,7 +107,12 @@ export default function TeamQuality(props) {
 const handleClose = ()=>{
   setOpen(false)
 }
-
+const singleItemHandler = (itm) =>{
+    console.log(itm , "itm in method")
+    singlePersonFormDetail =itm
+    setSinglePersonFormDetail(singlePersonFormDetail)
+    setOpen(true)
+}
 
     return (
         <div>
@@ -119,8 +125,9 @@ const handleClose = ()=>{
                 <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
                 <Grid id="grid-own-ta-amount" container spacing={2} >
                                         <Grid id="grid-own-open-filter" onClick={() => {
-                                            //  handleOpenFilter(itm) 
-setOpen(true)
+                                            singleItemHandler( itm )
+                                           
+
                                              }} item xs={8}>
                                             <b cursor="pointer" style={{ color: "blue" }} >{itm?.name}</b><br>
                                             </br>
@@ -163,7 +170,7 @@ setOpen(true)
       }
          
         </Select>  */}
-        <SingleQulityDashboard open={open} handleClose={handleClose} />
+        <SingleQulityDashboard openSingleQulityDashboard={open} handleClose={handleClose}  item={singlePersonFormDetail}/>
 
     </div>
     );

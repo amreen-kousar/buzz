@@ -42,14 +42,16 @@ function a11yProps(index) {
 }
 
 export default function OwnQuality(props) {
-const [singleFormData , setSingleFormData] = useState('')
+var [singleFormData , setSingleFormData] = useState('')
 const [ open ,setOpen] = useState(false)
     const [todayPoa,setTodayPoa]=useState('');
+    const [showSingleform ,setShowSingleForm] = useState(false)
 console.log(props?.componentname,"componenttttttttt")
     useEffect(()=>{
        getPOA();
           },[])
-        
+          var [itmForForm, setItemForForm ] = useState()
+          const [openGetSingleQualityForm ,setOpenGetSingleQualityForm] = useState(false)       
 const getPOA =()=>{
     var data = JSON.stringify({
         "Emp_id":1,
@@ -83,6 +85,16 @@ console.log(todayPoa)
 const handleClose = ()=>{
     setOpen(false)
   }
+  const handleCloseGetSingleQualityForm = ()=>{
+    setOpenGetSingleQualityForm(false)
+  }
+  const singleformHandler = (itm) =>{
+    console.log("imworkingfinre")
+    setShowSingleForm(true)
+    itmForForm = itm
+    setItemForForm(itm)
+    setOpenGetSingleQualityForm(true)
+   }
   
     return (
         <div>
@@ -90,13 +102,11 @@ const handleClose = ()=>{
            todayPoa &&  todayPoa?.map((itm)=>{
                 return (
                     <>
-                    <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
+                    <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} onClick={() => {
+                                            singleformHandler(itm)
+                                                 }} >
                     <Grid id="grid-own-ta-amount" container spacing={2} >
-                                            <Grid id="grid-own-open-filter" onClick={() => {
-                                                singleFormData = itm
-                                                setSingleFormData(singleFormData)
-                                                setOpen(true)
-                                                 }} item xs={8}>
+                                            <Grid id="grid-own-open-filter"  item xs={8}>
                                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.name_of_the_assessor}</b><br>
                                                 </br>
                                                 {/* <Typography id="typography-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
@@ -138,7 +148,7 @@ const handleClose = ()=>{
              
             </Select>  */}
 
-            <GetSingleQualityForm item={singleFormData}  open={open}  handleClose = {handleClose}   />
+itmForForm &&   <GetSingleQualityForm item ={itmForForm}  open={openGetSingleQualityForm} handleClose={handleCloseGetSingleQualityForm}/>
 
         </div>
     );

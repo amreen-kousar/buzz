@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton, CircularProgress, } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
@@ -177,11 +177,19 @@ export default function scheduleCircleMeet() {
             </Stack>
             {/* </Stack> */}
 
-            {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
+            {
+            enrolled == ""?
+            <div style={{marginTop:"20%" , marginLeft:"40%"}}>
+            <CircularProgress />
+            </div>
+            :
+           
+            
+            enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
               {console.log(itm,"itemeeeeeee")}
                 return (
                     <Card style={styles.card1} onClick={() => {
-                        setClickData({ name: itm?.circle_name, title: "Schedule A Circle Meeting",id:itm?.circle_id })
+                        setClickData({ name: itm?.circle_name, title: "Schedule A Circle Meeting",id:itm?.circle_id  , date: itm?.circle_date})
                         handleOpenFilter()
                     }}>
 

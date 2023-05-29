@@ -46,7 +46,17 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         color: (theme) => theme.palette[color].darker,
         bgcolor: (theme) => theme.palette[color].lighter,
         ...sx,
-        height: "210px",
+        height: "210px"
+        // {
+        //   xs: 100,
+        //   sm: 200,
+        //   md: 210,
+        //   lg: 210,
+        //   xl: 210,
+        
+        
+        // }
+        ,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

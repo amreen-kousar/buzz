@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container, Typography, Grid, IconButton,CardContent,Button } from '@mui/material';
+import { Card, Stack, Chip, Container,Box , Typography, Grid, IconButton,CardContent,Button, CircularProgress } from '@mui/material';
 import GelathiProgrameDrawer from '../projects/Components/GelathiProgrameDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
@@ -224,7 +224,14 @@ export default function gelathiProgram(props) {
             </Stack>}
             {/* </Stack> */}
 
-            {programe?.list?.length!==0?programe?.list?.map((itm) => {
+            { programe == "" ? 
+
+<div style={{marginTop:"20%" , marginLeft:"40%"}}>
+  <CircularProgress />
+  </div>
+:
+            
+            programe?.list?.length!==0?programe?.list?.map((itm) => {
                         // console.log(itm, "<---programeprogrameprograme")
                         return (
                             <Card style={styles.card1} onClick={() => {

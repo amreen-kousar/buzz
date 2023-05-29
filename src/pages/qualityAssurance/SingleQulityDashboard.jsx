@@ -44,6 +44,7 @@ import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
 import { ReplayCircleFilled } from '@mui/icons-material';
 import { baseURL } from 'src/utils/api';
+import GetSingleQualityForm from './GetSingleQualityForm';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -51,12 +52,12 @@ function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
 }
-const SingleQulityDashboard = ({open , handleClose} )=> {
+const SingleQulityDashboard = ({openSingleQulityDashboard , handleClose ,item} )=> {
 
 //   const {state} = useLocation()
 //   // console.log("🚀 ~ file: GreenSurvey.jsx:48 ~ GreenSurvey ~ enrolledGreenMotivators:", enrolledGreenMotivators)
 //   const [open, setOpen] = React.useState(false);
-
+console.log("itemtypeof")
 const [value, setValue] = React.useState(0);
 const data = localStorage?.getItem('userId')
 var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
@@ -73,24 +74,23 @@ const [clcikData, setClickData] = useState()
 const [teamMembersData, setTeamMembersData] = useState([])
 const [mainValue, setMainValue] = useState(0)
 const [batch,setBatch] = useState('')
-
+const [showSingleform ,setShowSingleForm] = useState(false)
 const [shown,setShown] = React.useState(false);
-
+var [itmForForm, setItemForForm ] = useState()
+const [openGetSingleQualityForm ,setOpenGetSingleQualityForm] = useState(false)
 const userOwnPermissions=['9','5','12','4','13','6','3']
 const userTeamPermissions=['2','1','12','4','13','3','11']
 
 
+console.log(item , "iteminsingledashboard")
+var [todayPoa,setTodayPoa]=useState('');
 
-const [todayPoa,setTodayPoa]=useState('');
-
-    useEffect(()=>{
-       getPOA();
-          },[])
+ 
 
 const getPOA =()=>{
     var data = JSON.stringify({
-        "Emp_id":15,
-        "Role_id":12
+        "Emp_id":1,
+        "Role_id":1
     });
       
       var config = {
@@ -106,7 +106,8 @@ const getPOA =()=>{
       axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        setTodayPoa(response.data)
+        todayPoa = response.data
+        setTodayPoa(todayPoa)
       })
       .catch(function (error) {
         console.log(error);
@@ -160,13 +161,27 @@ const handleChange = (event, newValue) => {
 //     setOpen(false);
 //   };
   
+useEffect(()=>{
+    getPOA();
+    console.log("mounting")
+       },[item])
+       const handleCloseGetSingleQualityForm = ()=>{
+        setOpenGetSingleQualityForm(false)
+      }
+       const singleformHandler = (itm) =>{
+        console.log("imworkingfinre")
+        setShowSingleForm(true)
+        itmForForm = itm
+        setItemForForm(itm)
+        setOpenGetSingleQualityForm(true)
+       }
   return (
     <div>
      
        
        
        
-      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+      <Dialog fullScreen open={openSingleQulityDashboard} onClose={handleClose} TransitionComponent={Transition}>
         
       
       <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
@@ -188,11 +203,11 @@ const handleChange = (event, newValue) => {
            todayPoa &&  todayPoa?.map((itm)=>{
                 return (
                     <>
-                    <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} >
-                    <Grid id="grid-own-ta-amount" container spacing={2} >
-                                            <Grid id="grid-own-open-filter" onClick={() => {
-                                                //  handleOpenFilter(itm) 
-                                                 }} item xs={8}>
+                    <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} onClick={() => {
+                                            singleformHandler(itm)
+                                                 }} >
+                    <Grid id="grid-own-ta-amount" container spacing={2}  >
+                                            <Grid id="grid-own-open-filter"  item xs={8}>
                                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.name_of_the_assessor}</b><br>
                                                 </br>
                                                 {/* <Typography id="typography-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
@@ -217,6 +232,7 @@ const handleChange = (event, newValue) => {
           
          
         </div>
+        itmForForm &&   <GetSingleQualityForm item ={itmForForm}  open={openGetSingleQualityForm} handleClose={handleCloseGetSingleQualityForm}/>
 
       </Dialog>
      

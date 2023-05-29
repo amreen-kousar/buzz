@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton,Button } from '@mui/material';
+import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton,Button, CircularProgress } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
@@ -166,7 +166,7 @@ const getData = (itm, i) => {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                   Gelathis
+                   Gelathis 
                 </Typography>
                 {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
@@ -205,7 +205,14 @@ const getData = (itm, i) => {
             </Stack>
             {/* </Stack> */}
          
-            {enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
+            {
+              enrolled == ""?
+              <div style={{marginTop:"20%" , marginLeft:"40%"}}>
+  <CircularProgress />
+  </div>
+  :
+            
+            enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} >
                      {(role==13 || role==6)?<IconButton style={{float:'right'}} onClick={()=>removeGelathi(itm)}><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}

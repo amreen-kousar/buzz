@@ -1,6 +1,6 @@
 import { useState, useEffect, forwardRef } from 'react';
 import axios from 'axios';
-import { Card, Stack, Chip, Container, Typography,CardContent, Grid, IconButton, Button} from '@mui/material';
+import { Card, Stack, Chip, Container, Typography,CardContent, Grid, IconButton, Button, CircularProgress} from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
@@ -215,7 +215,7 @@ const getData = (itm, i) => {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Green Motivators  
+                    Green Motivators   
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
@@ -256,7 +256,14 @@ const getData = (itm, i) => {
             </Stack>
             {/* </Stack> */}
 
-            {green?.list?.length!==0?green?.list?.map((itm) => {
+            {
+              green==""?
+              <div style={{marginTop:"20%" , marginLeft:"40%"}}>
+              <CircularProgress />
+              </div>
+              :
+            
+            green?.list?.length!==0?green?.list?.map((itm) => {
                 console.log(itm,'<----------greengreengreen')
                 return (
                     <Card  style={styles.card1}>
