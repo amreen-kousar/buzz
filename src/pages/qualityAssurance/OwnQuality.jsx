@@ -4,9 +4,10 @@ import React from "react";
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Select from '@mui/material/Select';
-import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, Card, CardActionArea, MenuItem } from '@mui/material';
+import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, Card, CardActionArea, MenuItem, CircularProgress } from '@mui/material';
 import { baseURL } from 'src/utils/api';
 import GetSingleQualityForm from './GetSingleQualityForm';
+import Iconify from 'src/components/Iconify';
 // components
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -97,13 +98,19 @@ const handleClose = ()=>{
    }
   
     return (
+        todayPoa == "" ?
+        <div style={{marginTop:"20%" , marginLeft:"40%"}}>
+  <CircularProgress />
+  </div>
+:
         <div>
             {
            todayPoa &&  todayPoa?.map((itm)=>{
                 return (
                     <>
                     <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} onClick={() => {
-                                            singleformHandler(itm)
+                                            // singleformHandler(itm)
+                                            alert("Work in Progress")
                                                  }} >
                     <Grid id="grid-own-ta-amount" container spacing={2} >
                                             <Grid id="grid-own-open-filter"  item xs={8}>
@@ -113,8 +120,11 @@ const handleClose = ()=>{
                                             */}
                                             </Grid>
                                             <Grid item xs={4}>
-                                                {/* <Iconify id="uiicons-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
-                                                <Iconify id="icon-outline-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
+                                                <Iconify id="uiicons-cross" onClick={() => {
+                                                    //  handleDeleteTA(itm) 
+                                                    alert("Work in progress")
+                                                     }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="mdi:form-outline"></Iconify>
+                                                {/* <Iconify id="icon-outline-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
                                            */}
                                             </Grid>
 
@@ -148,8 +158,9 @@ const handleClose = ()=>{
              
             </Select>  */}
 
-itmForForm &&   <GetSingleQualityForm item ={itmForForm}  open={openGetSingleQualityForm} handleClose={handleCloseGetSingleQualityForm}/>
+{itmForForm &&   <GetSingleQualityForm item ={itmForForm}  open={openGetSingleQualityForm} handleClose={handleCloseGetSingleQualityForm}/>
 
-        </div>
+     } 
+       </div>
     );
 }

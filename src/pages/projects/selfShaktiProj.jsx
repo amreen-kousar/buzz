@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from "react"
-import { Card, Stack, Chip,CardContent, Container, Typography, Grid, IconButton,Button } from '@mui/material';
+import { Card, Stack, Chip,CardContent, Container, Typography, Grid, IconButton,Button, CircularProgress } from '@mui/material';
 import ProjectMultiDrawer from '../Components/ProjectMultiDrawer';
 import Iconify from 'src/components/Iconify';
 import { Link, useLocation } from 'react-router-dom';
@@ -224,7 +224,17 @@ export default function selfShaktiProj() {
             {/* </Stack> */}
             {/* {selfShakti?.map((itm) => {
                 return ( */}
-                    {selfShakti?.list?.length!==0?selfShakti?.list?.map((itm) => {
+
+                    {selfShakti == " "?
+                    <>
+
+                    <div style={{display:"flex", marginTop:"50%", marginLeft:"40%" }}>
+                          <CircularProgress />
+                          </div>
+                    </>
+                     :
+                    
+                    selfShakti?.list?.length!==0?selfShakti?.list?.map((itm) => {
                         // console.log(itm, "<---asdasdasdsadas")
                         return (
                           

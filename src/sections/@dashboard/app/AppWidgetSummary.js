@@ -48,7 +48,7 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         ...sx,
         height: 
         {
-          xs: 135,
+          xs: 140,
           sm: 200,
           md: 210,
           lg: 210,

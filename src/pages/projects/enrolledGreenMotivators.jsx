@@ -215,7 +215,7 @@ const getData = (itm, i) => {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Green Motivators   
+                    Green Motivators    
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
@@ -287,8 +287,10 @@ const getData = (itm, i) => {
               {` Enrolled By : ${itm?.enrolled_by}`}
                 </div>:null}
                 <div variant="body2"  gutterBottom >
-                {` Enrolled Date : ${itm?.enroll_date}`}
-                 
+                {` Enrolled Date  : ${itm?.enroll_date}`}
+{/* 
+               { (role == 1 ||role == 2 || role == 3 ||role == 4 ||role == 12  )?( itm?.is_survey? <Iconify icon="ic:sharp-remove-circle"/> : ) : null}
+                  */}
                 </div>
               
 

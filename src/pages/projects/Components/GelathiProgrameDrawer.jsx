@@ -238,10 +238,21 @@ const [iserror, setIsError] = useState(false)
       });
   };
   const getGFSessionData = (async) => {
-    var data = JSON.stringify({
+    var data 
+{  (userId == 6 ) ? 
+  data =   JSON.stringify({
       gf_session_id: clcikData?.name,
-      user_id: userid,
-    });
+      user_id: userid
+      
+      ,
+    }):
+  data  = JSON.stringify({
+      gf_session_id: clcikData?.name,
+     
+      
+      
+    })
+  }
 
     var config = {
       method: 'post',
