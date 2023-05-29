@@ -34,7 +34,6 @@ import axios from 'axios';
 import moment from 'moment';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
-import { setISODay } from 'date-fns/esm';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -144,12 +143,10 @@ export default function DialogForm({ shown, setShown, batch }) {
   const [rate9,setRate9]=useState('');
   const [rate10,setRate10]=useState('');
   const [leave,setLeave]=useState('');
-
   const [leave1,setLeave1]=useState('');
   const [leave2,setLeave2]=useState('');
   const [leave3,setLeave3]=useState('');
   const [leave4,setLeave4]=useState('');
-
   const [engage,setEngage]=useState('');
   const [participant,setParticipant]=useState('');
   console.log("🚀 ~ file: DialogForm.jsx:130 ~ DialogForm ~ participant:", participant)
@@ -159,15 +156,12 @@ export default function DialogForm({ shown, setShown, batch }) {
   const [level4,setLevel4]=useState('');
   const [level5,setLevel5]=useState('');
   const [day1Day2,setDay1Day2]=useState('');
-  var [Id,setID]=useState();
-  console.log("🚀 ~ file: DialogForm.jsx:161 ~ DialogForm ~ Id:", Id)
   console.log("🚀 ~ file: DialogForm.jsx:102 ~ DialogForm ~ day1Day2:", day1Day2)
 
   console.log("🚀 ~ file: DialogForm.jsx:101 ~ DialogForm ~ assessmentType:", assessmentType)
   const [programAssessment,setProgramAssessment]=useState('')
   console.log("🚀 ~ file: DialogForm.jsx:103 ~ DialogForm ~ programAssessment:", programAssessment)
   const [district, setDistrict] = useState([])
-  console.log("🚀 ~ file: DialogForm.jsx:165 ~ DialogForm ~ district:", district)
   const [poa, setPoa] = useState([])
   const [taluk, setTaluk] = useState([])
   // console.log("🚀 ~ file: DialogForm.jsx:103 ~ DialogForm ~ taluk:", taluk)
@@ -374,7 +368,7 @@ console.log(programAssessment,"program assesment")
       .then(function (response) {
         setDistrict(response.data)
         console.log(response.data,"<------------------setTaluksetTaluk");
-        
+        getTaluk();
       })
       .catch(function (error) {
         console.log(error);
@@ -412,7 +406,7 @@ console.log(programAssessment,"program assesment")
   const getTaluk = async (id) => {
     
     var data = JSON.stringify({
-      "dist_id":Id,
+      "dist_id":"5"
 
     });
 
@@ -463,10 +457,9 @@ console.log(programAssessment,"program assesment")
  
 
 const [apiData, setApiData] = useState({})
-  const [sendForm, setSendForm]  = useState (
-    {
+  const [sendForm, setSendForm]  = useState ({
    emp_id:"",
-    district:'',
+   
     role_id:"",
     email_address: "",
     name_of_the_assessor: "",
@@ -556,7 +549,7 @@ const [apiData, setApiData] = useState({})
     how_many_women_attended_the_training_session_4:'',
     check_which_ones_the_gelathi_did_not_do_1: "",
     was_the_recap_done_1: "",
-    did_the_debrief_done_by_gelathi: "",
+    did_the_debrief_done_by_gelathi: [""],
     during_the_debriefs_for_role_plays_the_gelathi_did_not_ask: "",
     repeat_the_activity_with_the_second_volunteer: "",
     during_the_debrief_did_the_gelathi_not_ask:"",
@@ -583,15 +576,6 @@ const [apiData, setApiData] = useState({})
   })
   console.log("🚀 ~ file: DialogForm.jsx:344 ~ DialogForm ~ sendForm:", sendForm.days_modules)
 
-  const setFormDistrictName = (value)=>{
-    let {id,name}=value
-    console.log(value,"districtttttt",id,name)
-    setSendForm({ ...sendForm, name_of_the_district:name,district:value})
-    Id = id;
-    setID(id)
-    
-    getTaluk();
-  }
   const apiFormHit = async => {
     // const axios = require('axios');
 let data = JSON.stringify({
@@ -613,7 +597,7 @@ let data = JSON.stringify({
   how_many_women_attended_the_training_session: parseInt (sendForm?.how_many_women_attended_the_training_session),
   check_which_ones_the_trainer_did_not_do_1:checked['check_which_ones_the_trainer_did_not_do_1'],
   were_the_women_interactive: intract,
-  did_any_women_leave_tring_session_dring_or_after_1st_module: sendForm.did_any_women_leave_tring_session_dring_or_after_1st_module,
+  did_any_women_leave_tring_session_dring_or_after_1st_module: leave,
   if_so_how_many: parseInt(sendForm.if_so_how_many),
   did_this_module_take_20_minutes_as_allotted: module,
   did_any_new_women_attend_the_training_session_during_module:sendForm.did_any_new_women_attend_the_training_session_during_module,
@@ -621,7 +605,7 @@ let data = JSON.stringify({
   check_which_ones_the_trainer_did_not_do_2: checked['check_which_ones_the_trainer_did_not_do_2'],
   during_the_debrief_did_the_trainer_did_not_do_the_following:checked['during_the_debrief_did_the_trainer_did_not_do_the_following'],
   during_the_debrief_the_trainer_did: checked['during_the_debrief_the_trainer_did'],
-  did_any_women_leve_training_session_during_or_after_1st_module_1:sendForm.did_any_women_leve_training_session_during_or_after_1st_module_1,
+  did_any_women_leve_training_session_during_or_after_1st_module_1:leave1,
   if_so_how_many_2: parseInt(sendForm.if_so_how_many_2),
   did_this_module_take_20_minutes_as_allotted_1: module1,
   did_any_new_women_attend_training_session_during_this_module_1: attend,
@@ -632,9 +616,9 @@ let data = JSON.stringify({
   did_the_groups_engage_and_interact_among_themselves_well: engage,
   were_the_participants_responsive_during_the_debriefing:participant,
   // did_any_women_leave_tring_session_dring_or_after_1st_module_2: leave3,
-  did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1: sendForm.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1,
+  did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1: leave4,
   if_so_how_many_4: parseInt(sendForm.if_so_how_many_4),
-  did_this_module_take_30_minutes_as_allotted: sendForm.did_this_module_take_30_minutes_as_allotted,
+  did_this_module_take_30_minutes_as_allotted: module2,
   how_many_women_remained_by_the_end_of_this_training_session: parseInt( sendForm.how_many_women_remained_by_the_end_of_this_training_session),
   how_many_are_likely_to_come_back:parseInt( sendForm.how_many_are_likely_to_come_back),
   did_any_new_women_attend_training_session_during_this_module_2: sendForm.did_any_new_women_attend_training_session_during_this_module_2,
@@ -737,7 +721,6 @@ axios.request(config)
   timer: 3000
 });
 handleClose()
-setSendForm([{}])
   console.log(JSON.stringify(response.data),'<-----------------------question tag------------------>')
 })
 .catch((error) => {
@@ -796,7 +779,7 @@ setSendForm([{}])
         TransitionComponent={Transition}
       >
           <form onSubmit={(e)=>{e.preventDefault();apiFormHit()}}>
-        <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
+        <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton
               edge="start"
@@ -820,23 +803,11 @@ setSendForm([{}])
 
 
     {/* 1 */}
-    <Grid style={{backgroundColor:"#FFD580", marginTop: "30px"}}>
+    <Grid style={{backgroundColor:"#FFD580", marginTop: "60px"}}>
             <Typography>PAGE 1</Typography>
 
        
         
-        <Card sx={{mt:4, margin:"20px"}}>
-        <CardContent>
-            <Typography>
-            The purpose of this 'Buzz training quality evaluation' form is -<br/>
-            1. To evaluate if the standard pedagogical practices are being followed in Buzz Meeting/Training<br/>
-            2. To evaluate the effectiveness of training<br/>
-            3. To record and reflect on the trainers / facilitator's competency and facilitation<br/>
-            4. to record/Identify stories from community
-            </Typography>
- 
-                </CardContent>
-        </Card>
         <Card sx={{mt:4, margin:"20px"}}>
         <CardContent>
             <Typography>Email</Typography>
@@ -947,18 +918,15 @@ id="date-time-picker"
         <Select
           labelId="Name of the District"
           id="Name of the District"
-          value={sendForm?.district}
+          value={sendForm?.name_of_the_district}
           label="Name of the District"
           onChange={(e =>{
-            console.log(e,"distruct target value")
-            setFormDistrictName(e?.target?.value)
-            
-
+            setSendForm({ ...sendForm, name_of_the_district:e?.target?.value})
           })}
         >
           {district?.map(itm =>{
             return (
-              <MenuItem value={itm}>{itm?.name}</MenuItem>
+              <MenuItem value={itm?.name}>{itm?.name}</MenuItem>
             )
           })}
 
@@ -1995,11 +1963,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
 
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
-                <CardContent sx={{width:'30%'}}>Report of GF with Gelathis</CardContent>
+                <CardContent sx={{width:'30%'}}>Rapport of GF with Gelathis</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
                   value={rate3}
-                  sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   onChange={handleRate3}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
                 <FormControlLabel value="1" control={<Radio />}  />
@@ -2015,7 +1982,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Body language during the training</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
-                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate4}
                   onChange={handleRate4}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2032,7 +1998,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Making session interactive and fun</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
-                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate5}
                   onChange={handleRate5}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2049,7 +2014,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Knowledge of the content of the training</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
-                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate6}
                   onChange={handleRate6}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2066,7 +2030,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Ability to clear doubts</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
-                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate7}
                   onChange={handleRate7}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2083,7 +2046,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Ability to inspire the Gelathi's</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
-                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate8}
                   onChange={handleRate8}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2100,7 +2062,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Ability to give clear link between the activity and the  content</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
-                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate9}
                   onChange={handleRate9}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2117,7 +2078,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <CardContent sx={{width:'30%'}}>Vulnerable and honest</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
                 <RadioGroup
-                 sx={{width:'100%',display:'flex',flexDirection:'row',justifyContent: 'space-between'}}
                   value={rate10}
                   onChange={handleRate10}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
@@ -2215,7 +2175,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <Typography>End time of the training
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  inputProps={{ required: true }}type="time" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, end_time_of_the_training:e.target.value})} value={sendForm?.end_time_of_the_training}/>
+                        <TextFieldrequired inputProps={{ required: true }}type="time" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, end_time_of_the_training:e.target.value})} value={sendForm?.end_time_of_the_training}/>
                     </Stack> 
         </CardContent>
           </Card>
@@ -2447,8 +2407,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <Stack mt={2}>
                   <FormGroup>
                     <RadioGroup
-                      onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted}   
-
+                      value={leave}
+                      onChange={handleLeave}
                     >
                     <FormControlLabel value="Yes"  control={<Radio />} label="Yes" />
                     <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -2632,8 +2592,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       aria-labelledby="demo-radio-buttons-group-label"
                       // defaultValue="Yes"
                       name="radio-buttons-group"
-                      onChange={(e) => setSendForm({ ...sendForm, did_any_women_leve_training_session_during_or_after_1st_module_1:e.target.value})} value={sendForm?.did_any_women_leve_training_session_during_or_after_1st_module_1}   
-
+                      value={leave1}
+                      onChange={handleLeave1}
                       // onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
                   
                     >
@@ -2932,8 +2892,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       // defaultValue="Yes"
                       name="radio-buttons-group"
                      
-                      onChange={(e) => setSendForm({ ...sendForm, did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1:e.target.value})} value={sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1}   
-
+                      value={leave4}
+                      onChange={handleLeave4}
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -2971,8 +2931,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       // defaultValue="Yes"
                       name="radio-buttons-group"
                       // onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                      onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted}   
-
+                      value={module2}
+                      onChange={handleModule2}
                   
                     >
                     <div style={{display:"flex"}}>
@@ -3536,8 +3496,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                       // defaultValue="Yes"
                       name="radio-buttons-group"
                       // onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-                      onChange={(e) => setSendForm({ ...sendForm, did_any_women_leave_tring_session_dring_or_after_1st_module:e.target.value})} value={sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module}   
-
+                      value={leave}
+                      onChange={handleLeave}
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />

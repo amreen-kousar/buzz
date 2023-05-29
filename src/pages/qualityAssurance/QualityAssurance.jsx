@@ -204,18 +204,18 @@ let formatdata = summaryData?.data
                      style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
-                    <span style={{ width: "200px" }}>  Self Shakti Training Program</span>
+                    <span style={{ width: "200px" }}>  Quality Assurance Form</span>
                   </Button>
                   </Link>
 
                   </div>
-                  <div style={{marginTop:"20px"}}>
+                  {/* <div style={{marginTop:"20px"}}> */}
 
 {/*                  
                    <Link to="/dashboard/qualityAssurance/greenprogram" */}
         {/* //    state={{ id: data1?.project_id }} */}
              {/* style={styles.linkStyle}> */}
-                    <Button variant="secondary"
+                    {/* <Button variant="secondary"
                      style={styles.buttonStyle}
                      onClick={()=>{
                       alert("Work is in Progress")
@@ -223,16 +223,16 @@ let formatdata = summaryData?.data
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}>Green Program</span>
-                  </Button>
+                  </Button> */}
                   {/* </Link> */}
-                  </div>
-                  <div style={{marginTop:"20px"}}>
+                  {/* </div> */}
+                  {/* <div style={{marginTop:"20px"}}>
 
-                 
+                  */}
                   {/* <Link to="/dashboard/qualityAssurance/selfsakthibygelathi"
         //    state={{ id: data1?.project_id }}
             style={styles.linkStyle}> */}
-                    <Button variant="secondary"
+                    {/* <Button variant="secondary"
                      onClick={()=>{
                       alert("Work is in Progress")
                      }}
@@ -240,9 +240,9 @@ let formatdata = summaryData?.data
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}> Self Shakti by Gelathi</span>
-                  </Button>
+                  </Button> */}
                   {/* </Link> */}
-                  </div>
+                  {/* </div> */}
           </div>
          
           {/* <Card
