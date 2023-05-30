@@ -254,6 +254,12 @@ const id = sessionStorage?.getItem("proId")
                       {/* {(itm?.is_survey)?<GetVyaparProgram itm={itm}/>:
                       <Vyaparprogram itm={itm} changeState={changeState}/>} */}
                       </div>
+                      <div>
+                        {(role==4)?
+                      (itm?.is_survey)?<GetVyaparProgram itm={itm}/>:
+                      <Vyaparprogram itm={itm} changeState={changeState}/> :null}
+                      
+                      </div>
                         <div onClick={() => {
                         setClickData({ name: itm.gelathiname, title: "Enrolled Vyaapar Name" ,id:itm?.id})
                         handleOpenFilter()

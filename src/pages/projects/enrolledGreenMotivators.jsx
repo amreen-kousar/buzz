@@ -278,6 +278,15 @@ const getData = (itm, i) => {
                     }} pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
              <div variant="subtitle1" gutterBottom>
                                 {` Gelathi Name : ${itm?.gelathiname}`}
+
+                                <div>{(role==4)?
+
+(itm?.is_survey)?
+  <IconButton style={{float:'right',right:30}} >  
+  <Iconify icon="clarity:form-line" color="green" />
+  </IconButton>:<GreenSurvey itm={itm} changeState={changeState}/> :null}
+     {/* <GreenSurvey itm={itm} changeState={changeState}/> */}
+     </div>
                             </div>
               
               <div variant="subtitle2" gutterBottom  >
@@ -292,7 +301,7 @@ const getData = (itm, i) => {
                { (role == 1 ||role == 2 || role == 3 ||role == 4 ||role == 12  )?( itm?.is_survey? <Iconify icon="ic:sharp-remove-circle"/> : ) : null}
                   */}
                 </div>
-              
+               
 
               </div>
                       

@@ -113,7 +113,7 @@ const SelfSakthiQulityAssurance = () => {
   
   
           <Typography  variant="h4" sx={{ mb: 5 }}>
-          <Link to="/dashboard/qualityAssurance">
+          <Link to="/dashboard/qualityAssessment">
                   <IconButton>
                     <Iconify icon="material-symbols:arrow-back-rounded" />
                   </IconButton></Link>
