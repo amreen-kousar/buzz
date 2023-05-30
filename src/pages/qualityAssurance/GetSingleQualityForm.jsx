@@ -2337,7 +2337,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <Card sx={{ marginTop: '20px' }}>
                     <CardContent>
                       <Stack>
-                        <Typography>Day1 or Day 2 working</Typography>
+                        <Typography>Day1 or Day 2 </Typography>
                         <Stack mt={2} mb={2}>
                         <TextField
                           disabled
