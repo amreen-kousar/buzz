@@ -171,6 +171,7 @@ export default function scheduleCircleMeet() {
                     onCloseFilter={handleCloseFilter}
                     id={state?.id}
                     data1={data1}
+                    head={'CM'}
                     // enrolled={enrolled}
                     
                 />

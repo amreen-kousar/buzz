@@ -16,7 +16,7 @@ import {
   IconButton,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-
+import LocationQuality from './QualityAssuranceFilters/Location';
 import CircularProgress from '@mui/material/CircularProgress';
 import Iconify from '../../components/Iconify';
 import Page from '../../components/Page';
@@ -26,6 +26,7 @@ import { useNavigate } from 'react-router-dom';
 import FiltersHome from '../Filters/FiltersHome';
 import DialogForm from './components/DialogForm'
 import {baseURL} from 'src/utils/api';
+import QualityAssuranceFilter from './QualityAssuranceFilters/QualityAssurancefilter';
 
 export default function QualityAssurance() {
   
@@ -80,8 +81,14 @@ const [errorMsg,setErrormsg]=useState('');
     console.log( role , userid , " role user id ")
    
     const data = {
-      "Emp_id":parseInt(userid),
-    "Role_id":parseInt(role)
+      "Emp_id":JSON.parse(userid),
+      "Role_id":JSON.parse(role),
+      "Filter":g ? g:"",
+      "Filter_District":g ==="Location" ? id :"",
+      "Filter_Taluk":g==="Location" ? i :"",
+      "Filter_Id":g === "Role" ? JSON.stringify(id):"",
+      "Filter_StartDate":g === "Date" ? id :"",
+      "Filter_EndDate":g === "Date" ? i :""
      
   }
   
@@ -134,7 +141,28 @@ let formatdata = summaryData?.data
   //     </Box>
   //   )
   // }
+  const onSumbit = (e, i) => {
+    setSelected({ type: 'Location', name: ` ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talaq}` })
+    console.log(e,"evaluesssssssssssss",e?.district?.name)
+    handleCloseFilter()
+    apiHit(e?.district?.name,e?.talaq,"Location")
+  }
 
+  const onDateSubmit = (e) => {
+    setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` })
+    apiHit(e?.startDate, e?.endDate, "Date")
+    setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
+    handleCloseFilter()
+  }
+
+  const getData = (itm,i) => {
+   
+    setSelected(itm)
+    handleCloseFilter()
+    apiHit(itm?.id,i,"Role")
+    console.log(filterData,"hyyyyyyyyyyy")
+   
+  }
   return (
     <>
       <Page title="Dashboard">
@@ -142,7 +170,7 @@ let formatdata = summaryData?.data
           <Typography variant="h5" gutterBottom sx={{ ml: 4 }}>
            Quality Assessment
           </Typography>
-          {/* <Button
+          <Button
             style={{ float: 'right', color: '#ff7424' }}
             sx={{ '&:hover': { backgroundColor: '#ffd796' } }}
             onClick={() => {
@@ -150,22 +178,11 @@ let formatdata = summaryData?.data
             }}
           >
             Filter
-          </Button> */}
+          </Button>
+          <QualityAssuranceFilter isOpenFilter={openFilter} onCloseFilter={handleCloseFilter}  onSumbit={onSumbit} onDateSubmit={onDateSubmit} getData={getData}/>
         </Stack>
         <Container maxWidth="xl">
-          <Grid item spacing={10}></Grid>
-
-          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <FiltersHome
-              type="Dashboard"
-              // onDateSubmit={onDateSubmit}
-              // onSumbit={onSumbit}
-              // getData={getData}
-              isOpenFilter={openFilter}
-              onOpenFilter={handleOpenFilter}
-              onCloseFilter={handleCloseFilter}
-            />
-          </Stack>
+         
 
           <Grid justifyContent="center" container spacing={3} marginTop={1}>
             <Grid onClick={handleClickOpen} item xs={4} sm={8} md={4}>
@@ -179,19 +196,7 @@ let formatdata = summaryData?.data
               <AppWidgetSummary title="Self Shakti by Gelathi" total={summaryData.SSbyGelathi} color="gelathis" />
             </Grid>
           </Grid>
-          {/* <DialogForm batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} /> */}
-          {/* <Card onClick={()=>{setShown(true),console.log("ferfgreg")}}
-            style={{ marginTop: 20 }}>
-          
-           
-            <CardContent>
-            
-              <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
-                <Iconify icon="material-symbols:add" width={30} height={30} />
-              </div>
-              <Typography>Self Shakti Training Program</Typography>
-            </CardContent>
-          </Card> */}
+     
           <div style={{display:'flex', flexDirection:'column', justifyContent:"center",alignItems:"center" ,width:"100%"}}>
           <div style={{marginTop:"20px" }}>
           <Link to="/dashboard/qualityAssurance/selfsakthi"
@@ -217,9 +222,7 @@ let formatdata = summaryData?.data
              {/* style={styles.linkStyle}> */}
                     {/* <Button variant="secondary"
                      style={styles.buttonStyle}
-                     onClick={()=>{
-                      alert("Work is in Progress")
-                     }}
+                    
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}>Green Program</span>
@@ -244,33 +247,8 @@ let formatdata = summaryData?.data
                   {/* </Link> */}
                   {/* </div> */}
           </div>
+      
          
-          {/* <Card
-            onClick={() => {
-              setShown(true), console.log('ferfgreg');
-            }}
-            style={{ marginTop: 20 }}
-          > */}
-            {/* <CardContent>
-              <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
-                <Iconify icon="material-symbols:add" width={30} height={30} />
-              </div>
-              <Typography>Gelathi Program</Typography>
-            </CardContent>
-          </Card> */}
-          {/* <Card
-            onClick={() => {
-              setShown(true), console.log('ferfgreg');
-            }}
-            style={{ marginTop: 20 }}
-          >
-            <CardContent>
-              <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
-                <Iconify icon="material-symbols:add" width={30} height={30} />
-              </div>
-              <Typography>Self Shakti by Gelathi</Typography>
-            </CardContent>
-          </Card> */}
         </Container>
       </Page>
     </>

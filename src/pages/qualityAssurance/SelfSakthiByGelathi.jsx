@@ -9,14 +9,12 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../../components/Page';
-import TravelDialog from '../Components/DashboardFilters/TravelDialog'
-import moment from 'moment';
-// import Edittraveldialog from './Editta';
+
 import Iconify from 'src/components/Iconify';
-import Team from '../travelAllowance/Team';
-import Own from '../travelAllowance/Own';
 import DialogForm from './components/DialogForm';
 import { Link } from 'react-router-dom';
+import OwnQuality from './OwnQuality';
+import TeamQuality from './TeamQuality';
 // components
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -171,11 +169,11 @@ const SelfSakthiByGelathi = () => {
             </Tabs>
           </Box>
           <br />
-          <TextField id="outlined-basic" type="date" defaultValue={dateValue}
+          {/* <TextField id="outlined-basic" type="date" defaultValue={dateValue}
             fullWidth
             onChange={(e) => { getDateValue(e?.target?.value) }} label="Select Date" variant="outlined" InputLabelProps={{
               shrink: true,
-            }} />
+            }} /> */}
              {/* <Stack style={{ marginTop: 20 }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
@@ -195,7 +193,7 @@ const SelfSakthiByGelathi = () => {
           userTeamPermissions.includes(data) &&   <TabPanel id="return-date-tab" value={mainValue} index={1}>
           <Stack id="return-date-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <Box id="team-box" sx={{ width: '100%' }}>
-              <Team id="return-date" returnDateValue={returnDateValue} />
+              <TeamQuality componentname="selfshakthibygelathi" />
             </Box>
           </Stack>
         </TabPanel>
@@ -203,7 +201,7 @@ const SelfSakthiByGelathi = () => {
         }
          {
           userOwnPermissions.includes(data) &&  <TabPanel value={mainValue} index={0}>
-          <Own returnDateValue={returnDateValue} />
+          <OwnQuality  componentname="selfshakthibygelathi"/>
         </TabPanel>
          }
   

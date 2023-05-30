@@ -333,6 +333,9 @@ console.log(data,"dataaaaaaaaaaa")
                 {selected && (selected?.type=='Custom Filter') &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/> }
                 {selected && (selected?.type=='Search') && <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/>}
                
+                {selected && (selected?.type=='Search') && <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/>}
+             
+             
                 {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
         <h1>jnjn</h1>
         </Stack> */}
