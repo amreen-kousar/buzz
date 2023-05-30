@@ -89,7 +89,7 @@ const navConfig = {
   },
   14: {
     title: 'Quality Assessment Form',
-    path: '/dashboard/qualityAssurance',
+    path: '/dashboard/qualityAssessment',
     icon: getIcon('material-symbols:demography'),
     id: ['1', '2', '3', '4', '12', '13' ]
   },

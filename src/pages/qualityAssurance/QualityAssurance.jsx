@@ -28,7 +28,7 @@ import DialogForm from './components/DialogForm'
 import {baseURL} from 'src/utils/api';
 import QualityAssuranceFilter from './QualityAssuranceFilters/QualityAssurancefilter';
 
-export default function QualityAssurance() {
+export default function QualityAssessment() {
   
   
   
@@ -199,7 +199,7 @@ let formatdata = summaryData?.data
      
           <div style={{display:'flex', flexDirection:'column', justifyContent:"center",alignItems:"center" ,width:"100%"}}>
           <div style={{marginTop:"20px" }}>
-          <Link to="/dashboard/qualityAssurance/selfsakthi"
+          <Link to="/dashboard/qualityAssessment/selfsakthi"
         //    state={{ id: data1?.project_id }}
             style={styles.linkStyle}>
                     <Button variant="secondary"
@@ -209,7 +209,7 @@ let formatdata = summaryData?.data
                      style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
-                    <span style={{ width: "200px" }}>  Quality Assurance Form</span>
+                    <span style={{ width: "200px" }}>  Quality Assessment Form</span>
                   </Button>
                   </Link>
 
@@ -217,7 +217,7 @@ let formatdata = summaryData?.data
                   {/* <div style={{marginTop:"20px"}}> */}
 
 {/*                  
-                   <Link to="/dashboard/qualityAssurance/greenprogram" */}
+                   <Link to="/dashboard/qualityAssessment/greenprogram" */}
         {/* //    state={{ id: data1?.project_id }} */}
              {/* style={styles.linkStyle}> */}
                     {/* <Button variant="secondary"
@@ -232,7 +232,7 @@ let formatdata = summaryData?.data
                   {/* <div style={{marginTop:"20px"}}>
 
                   */}
-                  {/* <Link to="/dashboard/qualityAssurance/selfsakthibygelathi"
+                  {/* <Link to="/dashboard/qualityAssessment/selfsakthibygelathi"
         //    state={{ id: data1?.project_id }}
             style={styles.linkStyle}> */}
                     {/* <Button variant="secondary"

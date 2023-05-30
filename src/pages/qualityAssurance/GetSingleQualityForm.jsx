@@ -150,7 +150,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
               <Iconify icon="material-symbols:arrow-back-rounded" />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, color: 'white' }} variant="h6" component="div">
-              Individual Quality Assurance working
+               Quality Assessment Form
             </Typography>
           </Toolbar>
         </AppBar>
@@ -161,20 +161,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
         {/* 1 */}
         <Grid style={{ backgroundColor: '#FFD580', marginTop: '30px' }}>
           <Typography>PAGE 1</Typography>
-          <Card sx={{ mt: 4, margin: '20px' }}>
-            <CardContent>
-              <Typography>
-                The purpose of this 'Buzz training quality evaluation' form is -<br />
-                1. To evaluate if the standard pedagogical practices are being followed in Buzz Meeting/Training
-                <br />
-                2. To evaluate the effectiveness of training
-                <br />
-                3. To record and reflect on the trainers / facilitator's competency and facilitation
-                <br />
-                4. to record/Identify stories from community
-              </Typography>
-            </CardContent>
-          </Card>
+        
           <Card sx={{ mt: 4, margin: '20px' }}>
             <CardContent>
               <Typography>Email</Typography>
@@ -256,23 +243,6 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           <Card sx={{ margin: '20px' }}>
             <CardContent>
               <Stack>
-                <Typography variant="body2">Name of the village and the venue of meeting/training</Typography>
-                <Stack mt={2} mb={2}>
-                  <TextField
-                    disabled
-                    inputProps={{ disabled: true }}
-                    label="Your Answer"
-                    variant="outlined"
-                    color="common"
-                    value={sendForm?.name_of_the_village_and_the_venue_of_meeting_or_training}
-                  />
-                </Stack>
-              </Stack>
-            </CardContent>
-          </Card>
-          <Card sx={{ margin: '20px' }}>
-            <CardContent>
-              <Stack>
                 <Typography variant="body2">Name of the Taluk</Typography>
                 <Stack mt={2} mb={2}>
                         <TextField
@@ -290,6 +260,24 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
               </Stack>
             </CardContent>
           </Card>
+          <Card sx={{ margin: '20px' }}>
+            <CardContent>
+              <Stack>
+                <Typography variant="body2">Name of the village and the venue of meeting/training</Typography>
+                <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    value={sendForm?.name_of_the_village_and_the_venue_of_meeting_or_training}
+                  />
+                </Stack>
+              </Stack>
+            </CardContent>
+          </Card>
+         
           <Card sx={{ margin: '20px' }}>
             <CardContent>
               <Stack>
@@ -473,7 +461,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
-                    check_which_ones_the_gf_did_not_do
+                   
                     <Stack mt={2} mb={2}>
                         <TextField
                           disabled
@@ -2918,7 +2906,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           variant="outlined"
                           color="common"
                         
-                          value={sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2}
+                          value={sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1}
                         />
                       </Stack>
                     </Stack>
@@ -3327,7 +3315,12 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do:</Typography>
                     
-                      
+                    {/* { 
+                    ( sendForm?.check_which_ones_the_trainer_did_not_do_2)?
+                    sendForm?.check_which_ones_the_trainer_did_not_do_2.split(",").map((index , item)=>{
+                        <Typography key={index}>{ item}</Typography>
+                      }) : null
+                    } */}
                       <Stack mt={2} mb={2}>
                         <TextField
                           disabled
@@ -3336,7 +3329,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           variant="outlined"
                           color="common"
                      
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do_2}
+                          value={  sendForm?.check_which_ones_the_trainer_did_not_do_2}
                         />
                       </Stack>
                     </Stack>
@@ -3385,7 +3378,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Did any women leave the training session during or after this module?</Typography>
-        "": "",
+        
         <Stack mt={2} mb={2}>
                         <TextField
                           disabled
