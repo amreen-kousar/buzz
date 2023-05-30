@@ -325,7 +325,7 @@ function Project(props) {
                       paddingLeft: 6,
                     }}
                   >
-                    <span> MY POA</span>
+                    <span> My Poa</span>
                   </Card>
 
                   <Card
@@ -359,7 +359,7 @@ function Project(props) {
                     }}
                   >
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      Gelathi Facilitators({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />\{' '}
+                      Gelathi Facilitators({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />{' '}
                     </Box>
                   </Card>
 

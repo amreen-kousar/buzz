@@ -859,7 +859,7 @@ const GreenProgramDashboard = () => {
                         <Container style={{ display: 'flex', flexDirection: 'row' }}>
                           <Grid item xs={6}>
                             <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-                              Funder
+                            {(itm?.startDate)?"Project Name":"Funder"}<br />
                               <br />
                             
                             </span>

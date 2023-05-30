@@ -93,6 +93,9 @@ export default function Own(props) {
             if(itm?.status=='4'){
                 alert("already Verified")
             }
+            if(itm?.status=='2'){
+                alert("Rejected")
+            }
 
         }
   

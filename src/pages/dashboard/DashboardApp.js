@@ -664,8 +664,8 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
       <Page title="Dashboard">
       <Stack direction="row" alignItems="center" justifyContent="space-between" >
           <Typography variant="h5" gutterBottom sx={{ml:4}}>
-          Self Sakthi Program Summary
-
+          Self Sakthi Program Summary  
+ 
           </Typography>
           <Button style={{ float: "right", color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleOpenFilter() }}>
             Filter
@@ -998,7 +998,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 <Container style={{ display: 'flex', flexDirection: 'row' }}>
   <Grid item xs={6}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-      Funder<br />
+      {(itm?.noofbatches)?"Funder Name":"Project Name"} <br />
       {/*  for role id 5 it should be project in 4 dahsbord  */}
       Actual / Target
       {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
@@ -1007,6 +1007,8 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
       &nbsp;:&nbsp;{itm?.name}<br />
       &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
+
+      {console.log(itm,"itemmmmmmmmmm")}
             {/* start date and end date need in all dashborad we need as duration : fromDate to endDate for role id 5 */}
     </span>
   </Grid>
@@ -1045,7 +1047,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Batches"
-                total={itm?.noofbatches}
+                total={(itm?.NoOfBatches)?itm?.NoOfBatches:itm?.noofbatches}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
 
@@ -1055,7 +1057,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Self Sakthi Survey"
-                total={itm?.noofselfshakthisurvey}
+                total={(itm?.noOfselfshakthisurvey)?itm?.noOfselfshakthisurvey:itm?.noofselfshakthisurvey}
                 color="vyapar"
                 icon="eos-icons:product-subscriptions-outlined"
 

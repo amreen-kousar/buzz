@@ -52,6 +52,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
   const [startTime, setStartTime] = useState('');
   const [images, setImages] = useState();
   const [upload, setUpload] = useState();
+  const [taData,setTaData]=useState();
 
   const [sendData, setSendData] = useState(editData);
 
@@ -303,6 +304,45 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
   //     </>
   //     )
   //   }
+
+  useEffect(() => {
+getTadata()
+  
+  }, [editData]
+  )
+  const getTadata=()=>{
+    var data = JSON.stringify({
+      "ta_id": editData?.id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/new/getTa.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setTaData(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
+  
+
+
+console.log(editData,"editabledtaaaaaaaaaa",taData)
+
+
+
+
+
   return (
     <div>
       <Dialog id="edit-ta-dialog" fullScreen open={isOpenFilter} onClose={onCloseFilter}

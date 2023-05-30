@@ -68,7 +68,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     const [projects, setProjects] = useState([])
     const [publishedProject, setPublishedProject] = useState([])
     const [completedProject, setCompletedProject] = useState([])
-    const [inProgress,setInprogress] = useState([])
+    const [inProgressProjects,setInProgressProjects]=useState([])
     const [openFilter, setOpenFilter] = useState(false);
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
@@ -209,26 +209,28 @@ var data ={}
 console.log(data,"dataaaaaaaaaaa")
         axios(config)
             .then((response) => {
+                console.log(response, "projects responseeeeeeeeeeeeee", projects)
                 setCount(response.data.count % 25 == 0 ? parseInt(response.data.count / 25) : parseInt(response.data.count / 25) + 1)
                 setProjects(response.data.list)
                 let published = response.data.list.filter(r => r.project_status_name == 'Published')
                 setCountPublished(published?.length % 25 == 0 ? parseInt(published?.length / 25) : parseInt(published?.length / 25) + 1)
 
                 setPublishedProject(published)
+               
                 let completed = response.data.list.filter(r => r.project_status_name == 'Completed')
 
                 setCountCompleted(completed?.length % 25 == 0 ? parseInt(completed?.length / 25) : parseInt(completed?.length / 25) + 1)
 
                 setCompletedProject(completed)
-                let inProgress = response.data.list.filter(r => r.project_status_name == 'In Progress')
 
-                setCountInprogress(inProgress?.length % 25 == 0 ? parseInt(inProgress?.length / 25) : parseInt(inProgress?.length / 25) + 1)
+                let inprogress = response.data.list.filter(r=>r.project_status_name == 'In Progress')
+                setCountInprogress(inprogress?.length % 25 ==0 ? parseInt(inprogress?.length / 25): parseInt(inprogress?.length / 25 ) + 1)
+                setInProgressProjects(inprogress)
 
-                setInprogress(inProgress)
 
 
-                // console.log(response, "projects responseeeeeeeeeeeeee", projects)
-                // console.log(JSON.stringify(response.data, 'get All projectrs'));
+               
+                console.log(JSON.stringify(response.data, 'get All projectrs'));
             })
             .catch((error) => {
                 console.log(error);
@@ -454,9 +456,10 @@ console.log(data,"dataaaaaaaaaaa")
                                             </CardContent>
                                         </Card><br />
                                     </Link>)}
-                                    {
+                                    {/* {
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
-                                    }</> :
+                                    } */}
+                                    </> :
                                     <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
                             }
                         </TabPanel>
@@ -479,9 +482,10 @@ console.log(data,"dataaaaaaaaaaa")
                                             </CardContent>
                                         </Card><br />
                                     </Link>)}
-                                    {
+                                    {/* {
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countPublished} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
-                                    }</> :
+                                    } */}
+                                    </> :
                                     <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
                             }
                         </TabPanel>
@@ -505,15 +509,49 @@ console.log(data,"dataaaaaaaaaaa")
                                             </CardContent>
                                         </Card><br />
                                     </Link>)}
-                                    {
+                                    {/* {
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countCompleted} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
-                                    }
+                                    } */}
                                 </> :
                                     <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
 
                             }
                         </TabPanel>
+
                         <TabPanel value={value} index={3}>
+                            {
+                                inProgressProjects?.length > 0 ? <>
+                                    {inProgressProjects.map(p => <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }} >
+                                        <Card onClick={() => { callOpenFunction(p.id) }}>
+                                            <CardContent>
+                                                <Typography variant='h6'>{p?.name}</Typography>
+                                                <Grid items direction={'row'} spacing={20}>
+                                                    <Typography variant='body1'>{p?.location_name}</Typography>
+                                                    <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
+                                                    {( p?.project_status_name=='In Progress')? <Chip style={{ backgroundColor: 'orange', color: '#fff' }} label={p?.project_status_name} size="small" variant="outlined" />:null}
+                                                    </Stack>
+                                                </Grid>
+                                            </CardContent>
+                                        </Card><br />
+                                    </Link>)}
+                                    {/* {
+                                        <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countInprogress} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
+                                    } */}
+                                </> :
+                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
+
+                            }
+                        </TabPanel>
+
+
+
+
+
+
+
+
+
+                        {/* <TabPanel value={value} index={3}>
                             {
                                 inProgress.length > 0 ? <>
                                     {inProgress.map(p => <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }} >
@@ -536,7 +574,7 @@ console.log(data,"dataaaaaaaaaaa")
                                     <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
 
                             }
-                        </TabPanel>
+                        </TabPanel> */}
                     </Box>
                 </Stack>
 
