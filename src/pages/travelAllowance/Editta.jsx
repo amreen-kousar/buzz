@@ -565,9 +565,9 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
                       }) : null
                   }
                 </div>
-                <div style={{display:'flex'}}>
-                <label id="input-tag" for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
-                  <Iconify
+                {/* <div style={{display:'flex'}}>
+                <label id="input-tag" for="inputTag" style={{ cursor: "pointer", display: "flex" }} disabled>
+                  <Iconify disabled
                     id="icon-camera"
                     icon={'mdi:camera'}
                     sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
@@ -583,7 +583,12 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
                   color: "#ff7424",
                   backgroundColor:'#ffd796',
                   marginLeft:'10px'
-                }}>Upload</Button></div>
+                }}>Upload</Button></div> */}
+
+<div><Typography variant="h6">Uploaded Images</Typography> <br/>
+  {(taData?.files?.length>0)?<img src={taData?.files[0]}/>:"No Images Found"}
+</div>
+
               </div>
 
  </div>

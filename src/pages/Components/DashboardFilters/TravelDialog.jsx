@@ -43,6 +43,7 @@ import CurrencyRupee  from '@mui/icons-material/CurrencyRupee';
 import DiamondRounded  from '@mui/icons-material/DiamondRounded';
 import  Room  from '@mui/icons-material/Room';
 import { date } from 'yup';
+import { result } from 'lodash';
 function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
@@ -54,6 +55,9 @@ export default function TravelDialog({ viewMessage }) {
   const [startTime, setStartTime] = useState('');
   const [images, setImages] = useState();
   const [upload, setUpload] = useState();
+
+  const [imageId,setImageId]=useState('');
+
 
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   const [sendData, setSendData] = useState({
@@ -102,7 +106,7 @@ export default function TravelDialog({ viewMessage }) {
     //imageUpload()
     location()
     setSendData([])
-    
+   
   }, [coords,open]
   )
   const [image, setImage] = React.useState([]);
@@ -140,6 +144,47 @@ export default function TravelDialog({ viewMessage }) {
     });
   }
 
+  const uiphoto = async =>{
+    if(image.length===0){
+      alert("No photos to upload.")
+      throw new Error('No photos to upload.');
+    }
+    var dataImage = []
+    const form = new FormData()
+    form?.append("emp_id", userid)
+    //form?.append("file[]",imagePath[0])
+
+    const data = imagePath?.map(itm => {
+      form?.append("file[]", itm)
+      console.log(itm ,"<-------------------njnjnjnjnjnjnjnj8888")
+    })
+
+   
+
+var requestOptions = {
+  method: 'POST',
+  body: form,
+  redirect: 'follow'
+};
+
+fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions)
+  .then(response => response.text())
+  .then(result => setImageId(JSON.parse(result)))
+  .catch(error => console.log('error', error));
+
+
+
+  }
+
+console.log(imageId?.data?.length,"imagesssssssssssss")
+var Uimagelength = imageId?.data?.slice(-1)
+var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
+
+
+
+
+
+
   const SendData = async => {
 
 console.log("submittedddddddd")
@@ -162,7 +207,9 @@ console.log("submittedddddddd")
       "others": sendData?.otherExpenses,
       "emp_id":userid,
       "mode_of_travel": sendData?.modeoftravel,
-      "other_text": sendData?.OtherAmount
+      "other_text": sendData?.OtherAmount,
+      "files": [parseInt(Imagevalue)]
+    
     });
 
     var config = {
@@ -202,7 +249,7 @@ console.log(sendData?.odimeter,"startodimeter")
     var requestOptions = {
       method: 'POST',
       body: form,
-      redirect: 'follow'
+     
     };
     // var config = {
     //   method: 'post',
@@ -214,8 +261,11 @@ console.log(sendData?.odimeter,"startodimeter")
     // };
     //console.log(config)
     let res = fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn => {
+
       console.log(itn, "<--itemgh")
+
       alert("added succesfully ")
+
     })
       .catch(err => {
         console.log(err, "<---wertyu")
@@ -224,6 +274,9 @@ console.log(sendData?.odimeter,"startodimeter")
 
 
   }
+
+
+
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(function(position) {
       console.log("Latitude is :", position.coords.latitude);
@@ -666,7 +719,7 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                   Click here to Add images
                   <input style={{ display: "none" }} accept="image/png, image/gif, image/jpeg" id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
                 </label>
-                <Button onClick={postImages} 
+                <Button onClick={uiphoto} 
                 sx={{
                   '&:hover': {
                     backgroundColor: '#ffd796',
