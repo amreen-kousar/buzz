@@ -237,7 +237,7 @@ export default function Own(props) {
                                     <Grid id="own-grid" container spacing={2}>
   <Grid id="open-filter" onClick={() => { handleOpenFilter(itm) }} item xs={12} sm={8} md={8}>
     <b cursor="pointer" style={{ color: "blue" }}>{itm?.Ta_Name}</b><br></br>
-    <Typography id="TA-amount" variant="body" gutterBottom><b>TA Amount:{itm?.telephone}</b></Typography>
+    <Typography id="TA-amount" variant="body" gutterBottom><b>TA Amount:{itm?.total_ta}</b></Typography>
   </Grid>
   <Grid item xs={12} sm={4} md={4}>
     {(itm?.status == '0') ? (
@@ -298,7 +298,7 @@ export default function Own(props) {
                                             <Grid id="own-open-filter" onClick={() => { handleOpenFilter(itm) }} item xs={8}>
                                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.Ta_Name}</b><br>
                                                 </br>
-                                                <Typography id="own-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
+                                                <Typography id="own-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.total_ta}</b></Typography>
                                             </Grid>
                                             <Grid item xs={4}>
                                                 <Iconify id="icon-delete" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
