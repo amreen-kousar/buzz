@@ -55,8 +55,8 @@ console.log(props?.componentname,"componenttttttttt")
           const [openGetSingleQualityForm ,setOpenGetSingleQualityForm] = useState(false)       
 const getPOA =()=>{
     var data = JSON.stringify({
-        "Emp_id":1,
-        "Role_id":1
+        "Emp_id":891,
+        "Role_id":4
     });
       
       var config = {
