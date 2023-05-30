@@ -272,7 +272,7 @@ export default function Own(props) {
                                             <Grid id="grid-own-open-filter" onClick={() => { handleOpenFilter(itm) }} item xs={8}>
                                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.Ta_Name}</b><br>
                                                 </br>
-                                                <Typography id="typography-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
+                                                <Typography id="typography-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.total_ta}</b></Typography>
                                             </Grid>
                                             <Grid item xs={4}>
                                                 <Iconify id="uiicons-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
