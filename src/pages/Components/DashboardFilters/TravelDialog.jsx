@@ -500,7 +500,7 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
              {/* you want to filter thr date map dropDownValues insted of dropdata.data */}
              
               <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.poa==""?"Select POA *":"POA *"}</InputLabel>
-                {(datadrop?.data.length>0)?<Select required labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
+                {(datadrop?.data?.length>0)?<Select required labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
 
                   {datadrop?.data.map(itm => {
                     return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
