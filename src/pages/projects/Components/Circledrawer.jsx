@@ -345,7 +345,7 @@ Circledrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, data1, id }) {
+export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onCloseFilter, clcikData, data1, id }) {
   console.log('🚀 ~ file: Circledrawer.jsx:35 ~ Circledrawer ~ clcikData:', clcikData);
   console.log('🚀 ~ file: Circledrawer.jsx:35 ~ Circledrawer ~ data1:', data1);
   const [scheduleData, setScheduleData] = useState('');
@@ -501,7 +501,7 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
       ? '20'
       : state?.head == '_VPM5'
       ? '21'
-      : null,
+      : head == "CM" ? "1": null ,
       // plan_date: moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
       // gf_session_name: clcikData?.name,
 
@@ -634,7 +634,7 @@ export default function Circledrawer({ isOpenFilter, onOpenFilter, onCloseFilter
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }}>
             {/* {`${clcikData?.title}`}  */}
-            Schedule a CM wokring
+            Schedule a CM 
           </Typography>
           {console.log(clcikData, '<------clcikDataclcikData')}
           <IconButton onClick={onCloseFilter}>

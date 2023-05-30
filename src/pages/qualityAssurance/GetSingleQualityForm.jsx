@@ -182,7 +182,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                 {/* <TextField disabled label="Your Answer" variant="outlined" color="common" /> */}
                 <TextField
                   type="email"
-                  
+                  disabled
                   inputProps={{ disabled: true }}
                   label="Your Answer"
                   variant="outlined"
