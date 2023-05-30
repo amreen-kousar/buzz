@@ -488,9 +488,9 @@ const mainShowBussHandler = ()=>{
               <IconButton id="material-symbol-save" edge="end"  autoFocus color="inherit" type="submit" sx={{right:40,float:'right',position:'absolute'}}>
                  <Iconify icon="material-symbols:save"/>
               </IconButton>
-              {(edit)? <Button id="publish" autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
+               <Button id="publish" autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
                 publish
-              </Button>:null}
+              </Button>
             </Toolbar>
           </AppBar>
           <Grid>

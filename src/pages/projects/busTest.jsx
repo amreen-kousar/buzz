@@ -104,8 +104,10 @@ export default function busTestList() {
   
       axios(config)
         .then(function (response) {
-          deletebuses()
+          // deletebuses()
           setDeleteBus(response.data)
+          alert(response.data.message)
+          reloadHandler()
           console.log(response.data, '<------deleteee');
         })
         .catch(function (error) {

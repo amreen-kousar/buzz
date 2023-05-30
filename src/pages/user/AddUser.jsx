@@ -22,7 +22,7 @@ function AddUser(props) {
     let [emailExists, setEmailExists] = useState(false)
 
     var [AddUser, setAddUser] = useState({
-        role:'', first_name: '', last_name: "", contactNum: '', workNum: '', office_email_id: '', address: '', address3: "", address2: "",
+        role:'', first_name: '', last_name: "", contactNum: '', workNum: '', officeMailId: '', address: '', address3: "", address2: "",
         pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project: "",
         emp_id: ""
     })
@@ -36,12 +36,12 @@ function AddUser(props) {
         getEmpId(2)
     }, [])
 
-    console.log(AddUser.office_email_id, "outside")
+    console.log(AddUser.officeMailId, "outside")
 
     //to check email exit are not 
 useEffect(()=>{
     let subscribe =true 
-    if(AddUser.office_email_id.length > 0){
+    if(AddUser.officeMailId.length > 0){
         if(subscribe){
             setTimeout(checkEmailExists() , 5000)
           console.log( " calling inside useEffect")
@@ -54,19 +54,19 @@ useEffect(()=>{
         subscribe =false
     }
        
-},[AddUser.office_email_id])
+},[AddUser.officeMailId])
 
 const emailchangeHandler=(e) => { 
 
     
-        setAddUser({ ...AddUser, office_email_id: e });
+        setAddUser({ ...AddUser, officeMailId: e });
        checkEmailValidation()
        setTimeout(checkEmailExists() , 5000)
-        console.log(AddUser.office_email_id , "changes")
+        console.log(AddUser.officeMailId , "changes")
     }
       
     
-    console.log(AddUser.office_email_id , " out side changes")
+    console.log(AddUser.officeMailId , " out side changes")
 
     
 
@@ -81,7 +81,7 @@ const emailchangeHandler=(e) => {
     };
     const checkEmailExists = () => {
       const data = JSON.stringify({
-          office_email_id: AddUser.office_email_id
+          office_email_id: AddUser.officeMailId
       });
 
       const config = {
@@ -117,10 +117,10 @@ const emailchangeHandler=(e) => {
         // if (emailExists) {
         //     setEmailExists(false)
         // }
-        console.log(AddUser.office_email_id, "office email id")
-        if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(AddUser.office_email_id))) {
+        console.log(AddUser.officeMailId, "office email id")
+        if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(AddUser.officeMailId))) {
            
-            console.log((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(AddUser.office_email_id)) ,"validating part")
+            console.log((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(AddUser.officeMailId)) ,"validating part")
             setErrors({ ...errors, office_email_id: false })
         }
         else {
@@ -262,7 +262,7 @@ let userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 console.log(userid,"userrrrrridddddddd")
     const submitUser = () => {
         AddUser.project = inputProject.map(i => parseInt(i.id))
-        AddUser.office_email_id = AddUser?.office_email_id
+        AddUser.officeMailId = AddUser?.officeMailId
         AddUser.empRole = AddUser?.role.id
         AddUser.supervisorId = AddUser?.reportingManager.id
         AddUser.profile_pic = ''
@@ -297,7 +297,7 @@ console.log(userid,"userrrrrridddddddd")
                                 "partnername": AddUser.first_name,
                                 "workPhone": AddUser.workNum,
                                 "mobilePhone": AddUser.contactNum,
-                                "emailID": AddUser.office_email_id,
+                                "emailID": AddUser.officeMailId,
                                 "address": AddUser.address,
                                 "status": AddUser.present_status ? '1' : '0',
                                 "city": "banglore",
@@ -312,7 +312,7 @@ console.log(userid,"userrrrrridddddddd")
                                 "partnername": AddUser.first_name,
                                 "workPhone": AddUser.workNum,
                                 "mobilePhone": AddUser.contactNum,
-                                "emailID": AddUser.office_email_id,
+                                "emailID": AddUser.officeMailId,
                                 "address": AddUser.address,
                                 "status": AddUser.present_status ? '1' : '0',
                                 "city": "banglore",
@@ -382,7 +382,7 @@ console.log(userid,"userrrrrridddddddd")
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" style={{color:'white'}}>
-                            Add Users
+                            Add Users 
                         </Typography>
                         <Button  type="submit" id="save_user" style={{color:"white"}}>
                             save

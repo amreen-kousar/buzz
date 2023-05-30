@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container, Typography, Grid, IconButton,CardContent,Button } from '@mui/material';
+import { Card, Stack, Chip, Container,Box , Typography, Grid, IconButton,CardContent,Button, CircularProgress } from '@mui/material';
 import GelathiProgrameDrawer from '../projects/Components/GelathiProgrameDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
@@ -176,7 +176,7 @@ export default function gelathiProgram(props) {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Gelathi Program 
+                    Gelathi Program  
                 </Typography>
                 <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
@@ -208,7 +208,8 @@ export default function gelathiProgram(props) {
                     onCloseFilter={handleclose}
                 />
             </Stack>
-               <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
+               <Card>
+                <CardContent style={{fontWeight:700}}>Project Name : {data1?.project_name}</CardContent> </Card><br/>
                <Typography style={{fontWeight:500,marginLeft:2}}> All Gelathi Sessions  ({count})</Typography> 
          {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             {clcikData && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -223,7 +224,14 @@ export default function gelathiProgram(props) {
             </Stack>}
             {/* </Stack> */}
 
-            {programe?.list?.length!==0?programe?.list?.map((itm) => {
+            { programe == "" ? 
+
+<div style={{marginTop:"20%" , marginLeft:"40%"}}>
+  <CircularProgress />
+  </div>
+:
+            
+            programe?.list?.length!==0?programe?.list?.map((itm) => {
                         // console.log(itm, "<---programeprogrameprograme")
                         return (
                             <Card style={styles.card1} onClick={() => {

@@ -107,7 +107,7 @@ const GetVyaparformData=()=>{
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div"   >
-          Buzz Vyapar Program Baseline fgd
+          Buzz Vyapar Program Baseline 
           </Typography>
        
          

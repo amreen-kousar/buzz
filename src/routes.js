@@ -55,6 +55,7 @@ import FunderVyaparDashboard from './pages/projects/FunderDashBoard/FunderVyapar
 import FUnderGreenDashboard from './pages/projects/FunderDashBoard/FUnderGreenDashboard';
 import FUnderSSDashboard from './pages/projects/FunderDashBoard/FUnderSSDashboard';
 import FunderGelathiDashboard from './pages/projects/FunderDashBoard/FunderGelathiDashboard';
+import Page404 from './pages/Page404';
 
 
 // ----------------------------------------------------------------------
@@ -201,10 +202,16 @@ export default function Router() {
             path : '/dashboard/vyaparprogramdashboard',
             element : <vyaparProgramDashboard />
         },
+        {
+            path: '/404',
+            element:<Page404 /> ,
+            // element : 
+        },
      
         {
             path: '*',
-            element: <Navigate to="/404" replace />,
+            element: <Navigate to="/404" replace  />,
+            // element : <Page404 />
         },
       
     ]);

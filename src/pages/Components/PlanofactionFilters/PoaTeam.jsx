@@ -19,6 +19,7 @@ import Iconify from 'src/components/Iconify';
 import Tooltip from 'src/theme/overrides/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import SearchCommon from 'src/pages/Filters/components/SearchCommon';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 
@@ -27,8 +28,10 @@ const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open, teamData, setUserId } = props;
+  var [tempData,setTempData]=useState([...teamData]);
   const [profileData, setProfileData] = useState();
   const [user, setUser] = useState();
+  
   var account = localStorage?.getItem('userDetails')
   account = JSON.parse(account)
 
@@ -42,25 +45,37 @@ function SimpleDialog(props) {
     console.log(value, "<--valuevalueee")
     onClose(value);
   };
+  const [searchInFilter, setSearchInFilter] = useState(null)
+  const getSearchFilter = (e) => {
+        setSearchInFilter(e)
+    }
+
+    const returnSearchFilter = () => {
+        return searchInFilter
+    }
+
+    useEffect(()=>searchData(''),[teamData,open])
+
+    const searchData =(searchValue) => {
+      tempData = teamData?.filter(e=>e?.name?.toLowerCase().includes(searchValue.toLowerCase()));
+      setTempData(tempData);
+    }
  
 
- 
 
-   console.log(teamData, "<----teamDatateamDatateamData")
-
-  
 
   return (
     <Dialog id="poa-team-dialog" onClose={handleClose} open={open}>
       <DialogTitle id="poa-team-dialog-content"> <IconButton id="poa-team-icon-button" edge="start" color="inherit" onClick={handleClose} aria-label="close">
         <CloseIcon />
       </IconButton>Select Buzz Team Members</DialogTitle>
-      {(teamData?.length>0)?<List sx={{ pt: 0 }}>
-        {teamData?.map((email) => (
+       <SearchCommon getSearchFilter={(e) => { searchData(e) }} />
+       {/* <Button onClick={searchData}>Search</Button> */}
+      {(tempData?.length>0)?<List sx={{ pt: 0 }}>
+        {tempData?.map((email) => (
          
-          <ListItem id="poa-team-list-item" disableGutters>
+          <ListItem id="poa-team-list-item" disableGutters >
             <ListItemButton id="list-item-btn" onClick={() => handleListItemClick(email)} >
-            {console.log(email?.empRole,"roleiddddddd")}
               <ListItemAvatar id="list-item-avatar">
                 <Avatar id="poa-team-avatar" sx={{ bgcolor: blue[100], color: blue[600] }} src={email?.profile_pic} />
 
@@ -167,6 +182,7 @@ console.log(idvalue,"iddddddddddd")
       <SimpleDialog
         id="poa-team-simple-dialog"
         teamData={teamData}
+       
         setUserId={setUserId}
         setName={setName}
         open={open}

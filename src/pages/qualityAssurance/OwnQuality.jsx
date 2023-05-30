@@ -4,8 +4,10 @@ import React from "react";
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Select from '@mui/material/Select';
-import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, Card, CardActionArea, MenuItem } from '@mui/material';
-
+import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, Card, CardActionArea, MenuItem, CircularProgress } from '@mui/material';
+import { baseURL } from 'src/utils/api';
+import GetSingleQualityForm from './GetSingleQualityForm';
+import Iconify from 'src/components/Iconify';
 // components
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -41,23 +43,27 @@ function a11yProps(index) {
 }
 
 export default function OwnQuality(props) {
-
+var [singleFormData , setSingleFormData] = useState('')
+const [ open ,setOpen] = useState(false)
     const [todayPoa,setTodayPoa]=useState('');
+    const [showSingleform ,setShowSingleForm] = useState(false)
 console.log(props?.componentname,"componenttttttttt")
     useEffect(()=>{
        getPOA();
           },[])
-
+          var [itmForForm, setItemForForm ] = useState()
+          const [openGetSingleQualityForm ,setOpenGetSingleQualityForm] = useState(false)       
 const getPOA =()=>{
     var data = JSON.stringify({
-        "type": "2",
-        "session_type": ""
-      });
+        "Emp_id":891,
+        "Role_id":4
+    });
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appGo/getPoa',
+        url: baseURL + 'listQualityAssessmentForm',
         headers: { 
+
           'Content-Type': 'application/json'
         },
         data : data
@@ -77,13 +83,58 @@ const getPOA =()=>{
 
 console.log(todayPoa)
 
-
+const handleClose = ()=>{
+    setOpen(false)
+  }
+  const handleCloseGetSingleQualityForm = ()=>{
+    setOpenGetSingleQualityForm(false)
+  }
+  const singleformHandler = (itm) =>{
+    console.log("imworkingfinre")
+    setShowSingleForm(true)
+    itmForForm = itm
+    setItemForForm(itm)
+    setOpenGetSingleQualityForm(true)
+   }
+  
     return (
+        todayPoa == "" ?
+        <div style={{marginTop:"20%" , marginLeft:"40%"}}>
+  <CircularProgress />
+  </div>
+:
         <div>
             {
-           todayPoa &&  todayPoa?.map(({full_name,name})=>{
+           todayPoa &&  todayPoa?.map((itm)=>{
                 return (
-                    <div>{full_name}&nbsp;:&nbsp;{name}</div>
+                    <>
+                    <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} onClick={() => {
+                                            
+                                            // alert("Work in Progress")
+                                                 }} >
+                    <Grid id="grid-own-ta-amount" container spacing={2} >
+                                            <Grid id="grid-own-open-filter"  item xs={8}>
+                                                <b cursor="pointer" style={{ color: "blue" }} >{itm?.name_of_the_assessor}</b><br>
+                                                </br>
+                                                {/* <Typography id="typography-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
+                                            */}
+                                            </Grid>
+                                            <Grid item xs={4}>
+                                                <Iconify id="uiicons-cross" onClick={() => {
+                                                    //  handleDeleteTA(itm) 
+                                                    singleformHandler(itm)
+                                                    // alert("Work in progress")
+                                                     }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="mdi:form-outline"></Iconify>
+                                                {/* <Iconify id="icon-outline-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
+                                           */}
+                                            </Grid>
+
+
+                                        </Grid>
+                    
+
+                    </Card>
+                </>
                 )
             })
           } 
@@ -108,6 +159,9 @@ console.log(todayPoa)
              
             </Select>  */}
 
-        </div>
+{itmForForm &&   <GetSingleQualityForm item ={itmForForm}  open={openGetSingleQualityForm} handleClose={handleCloseGetSingleQualityForm}/>
+
+     } 
+       </div>
     );
 }
