@@ -28,7 +28,7 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
     const filterPermissions = {
   
       GelathiProgram: [{id:45,roles:['1','3','4','6','12','13']},{id:2,roles:['1','3','4','6','12','13']},{id:1,roles:['1','3','4','6','12','13']},{id:3,roles:['1','3','4','6','12','13']},
-      { id: 22, roles: ['1','3','4','6','12','13']}, { id: 23, roles: ['1','3','4','6','12','13']},
+      { id: 22, roles: ['1','3','4','6','12','13']}, { id: 23, roles: ['1','3','4','6','12','13']},{id:46,roles:['13','4','3','1','12']},
       {id:4,roles:['1','12','13','6','3']},{id:5,roles:['1','3','4','6','12','13']},{id:6,roles:['13','4','3','1','12','6']}, 
       { id: 7, roles: ['1','3','4','6','12','13']}, { id: 8, roles: ['1','3','4','6','12','13']}, { id: 9, roles: ['1','3','4','6','12','13']},
       { id: 10, roles: ['1','3','4','6','12','13']}, { id: 11, roles: ['1','3','4','6','12','13']}, { id: 12, roles: ['1','3','4','6','12','13']},
@@ -52,7 +52,7 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
     const data = localStorage?.getItem('userId')
   
     const filtersHeaders = {
-      6: 'Gelathi Facilitators',
+      46: 'Gelathi Facilitators',
       9: 'Date Range',
       2: 'Village Visits',
       1: 'Circle Meetings',
@@ -190,7 +190,7 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
             type != 'people' && <div>
          
               {
-                selectDATA == 6 && <Grid>
+                selectDATA == 46 && <Grid>
                   <GelathiFacilitators type={type} getData={getData} selectDATA={selectDATA} data1={data1} />
                 </Grid>
               } 
