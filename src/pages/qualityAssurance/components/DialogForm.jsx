@@ -663,7 +663,43 @@ const [apiData, setApiData] = useState({})
   const [the_gf_comptetly_carried_out_following_funtionsError,setthe_gf_comptetly_carried_out_following_funtionsError]=useState(false)
   const [the_gf_caried_followig_fuctions_bfore_traning_or_meting_started,setthe_gf_caried_followig_fuctions_bfore_traning_or_meting_started]=useState(false)
   const [days_modules2Error,setdays_modules2Error]=useState(false)
+  const [check_which_ones_the_gelathi_did_not_do_1Error,setcheck_which_ones_the_gelathi_did_not_do_1Error]=useState(false)
+  const [check_which_ones_the_gelathi_did_not_do_2Error,setcheck_which_ones_the_gelathi_did_not_do_2Error]=useState(false)
+  const [during_the_debrief_did_the_gelathiError,setduring_the_debrief_did_the_gelathiError]=useState(false)
+  const [during_the_debriefs_for_role_plays_the_gelathi_did_not_askError,setduring_the_debriefs_for_role_plays_the_gelathi_did_not_askError]=useState(false)
+  const [was_the_recap_done_1Errorr,setwas_the_recap_done_1Errorr]=useState(false)
+  const [check_which_instructions_the_gelathi_did_not_doError,setcheck_which_instructions_the_gelathi_did_not_doError]=useState(false)
+  const [did_the_debrief_done_by_gelathiError,setdid_the_debrief_done_by_gelathiError]=useState(false)
+  const [the_gelathi_did_not_ask_1,setthe_gelathi_did_not_ask_1]=useState(false)
+  const [during_the_debrief_did_the_gelathi_not_askError,setduring_the_debrief_did_the_gelathi_not_askError]=useState(false)
+  const [today_poaError,settoday_poaError]=useState(false)
+  const [districtError,setdistrictError]=useState(false)
+  const [name_of_the_talukError,setname_of_the_talukError]=useState(false)
+  const [the_gf_caried_followig_fuctions_bfore_traning_or_meting_startedError,setthe_gf_caried_followig_fuctions_bfore_traning_or_meting_startedError]=useState(false)
 const validation =()=>{
+  if(programAssessment==0){
+    // alert('please Fill all the field')
+    setprogramAssessmentError(true);
+    setHelperText('Please Select The Option');
+  }
+  
+  if(sendForm.today_poa==''){
+    // alert('please Fill all the field')
+    settoday_poaError(true);
+    setHelperText('Please Select The Option');
+  }
+
+  if(sendForm.district==''){
+    alert('please Fill all the field')
+    setdistrictError(true);
+    setHelperText('Please Select The Option');
+  }
+  if(sendForm.name_of_the_taluk==''){
+    alert('please Fill all the field')
+    setname_of_the_talukError(true);
+    setHelperText('Please Select The Option');
+  }
+
   if(programAssessment ==1 ){
     if(day1Day2==''){
       alert('please Fill all the field')
@@ -1079,7 +1115,7 @@ const validation =()=>{
 
     else if (checked['the_gf_caried_followig_fuctions_bfore_traning_or_meting_started'] == 0){
       alert('please Fill all the field')
-      setthe_gf_caried_followig_fuctions_bfore_traning_or_meting_started(true);
+      setthe_gf_caried_followig_fuctions_bfore_traning_or_meting_startedError(true);
       setHelperText('Please Select The Option');
     }
 
@@ -1197,34 +1233,200 @@ const validation =()=>{
         setcheck_which_ones_the_gelathi_did_not_doError(true);
         setHelperText('Please Select The Option');
       }
+      else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
+        setHelperText('Please Select The Option');
+      }
+
+      else if(checked['check_which_ones_the_gelathi_did_not_do_2'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_do_2Error(true);
+        setHelperText('Please Select The Option');
+      }
       else {
         apiFormHit()
       }
     }
+
+    else if(sendForm.days_modules=='Session-2 _ Financial Management'){
+      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_doError(true);
+        setHelperText('Please Select The Option');
+      }
+
+      else if (sendForm.was_the_recap_done=='')
+      {
+        setwas_the_recap_doneError(true)
+        setHelperText('Please Select The Option');
+        alert("Please Select The Option")
+      }
+      else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
+        setHelperText('Please Select The Option');
+      }
+      else {
+        apiFormHit()
+      }
+    }
+
+    else if(sendForm.days_modules=='Session-3 _Basics of an enterprise'){
+      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_doError(true);
+        setHelperText('Please Select The Option');
+      }
+
+    
+      else if(checked['during_the_debrief_did_the_gelathi'] == 0){
+        alert('please Fill all the field')
+        setduring_the_debrief_did_the_gelathiError(true);
+        setHelperText('Please Select The Option');
+      }
+
+      else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
+        setHelperText('Please Select The Option');
+      }
+      else {
+        apiFormHit()
+      }
+    }
+
+    else if(sendForm.days_modules=='Session-4 _Building Relationship'){
+      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_doError(true);
+        setHelperText('Please Select The Option');
+      }
+
+    
+      else if(checked['during_the_debriefs_for_role_plays_the_gelathi_did_not_ask'] == 0){
+        alert('please Fill all the field')
+        setduring_the_debriefs_for_role_plays_the_gelathi_did_not_askError(true);
+        setHelperText('Please Select The Option');
+      }
+
+      else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
+        setHelperText('Please Select The Option');
+      }
+      else {
+        apiFormHit()
+      }
+    }
+
+    else if(sendForm.days_modules=='Session-5 _Assets and Liabilities'){
+      if (checked['check_which_ones_the_trainer_did_not_do'] == 0)
+      {
+        setcheck_which_ones_the_trainer_did_not_doError(true)
+        setHelperText('Please Select The Option');
+        alert("please fill ")
+      }
+      else if (sendForm.was_the_recap_done_1=='')
+      {
+        setwas_the_recap_done_1Errorr(true)
+        setHelperText('Please Select The Option');
+        alert("Please Select The Option")
+      }
+      else {
+        apiFormHit()
+      }
+    }
+
+
+    else if(sendForm.days_modules=='Session-6 _Goal setting game'){
+      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_doError(true);
+        setHelperText('Please Select The Option');
+      }
+
+      else if(checked['check_which_instructions_the_gelathi_did_not_do'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_instructions_the_gelathi_did_not_doError(true);
+        setHelperText('Please Select The Option');
+      }
+
+      else if  (sendForm.repeat_the_activity_with_the_second_volunteer=='')
+      {
+        setrepeat_the_activity_with_the_second_volunteerError(true)
+        setHelperText('Please Select The Option');
+        alert("please fill ")
+      }
+
+      else if  (sendForm.did_the_debrief_done_by_gelathi=='')
+      {
+        setdid_the_debrief_done_by_gelathiError(true)
+        setHelperText('Please Select The Option');
+        alert("please fill ")
+      }
+
+      else {
+        apiFormHit()
+      }
+    }
+
+    else if(sendForm.days_modules=='Session-7 _Financial Goals'){
+      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_doError(true);
+        setHelperText('Please Select The Option');
+      }
+
+      else if(checked['the_gelathi_did_not_ask_1'] == 0){
+        alert('please Fill all the field')
+        setthe_gelathi_did_not_ask_1Error(true);
+        setHelperText('Please Select The Option');
+      }
+
+      else if(checked['during_the_debrief_did_the_gelathi_not_ask'] == 0){
+        alert('please Fill all the field')
+        setduring_the_debrief_did_the_gelathi_not_askError(true);
+        setHelperText('Please Select The Option');
+      }
+      else {
+        apiFormHit()
+      }
+    }
+
+    else if(sendForm.days_modules=='Session-8 _Loans-Group discussion of Case Studies'){
+      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_doError(true);
+        setHelperText('Please Select The Option');
+      }
+
+
+
+      else if(checked['during_the_debrief_did_the_gelathi_not_ask'] == 0){
+        alert('please Fill all the field')
+        setduring_the_debrief_did_the_gelathi_not_askError(true);
+        setHelperText('Please Select The Option');
+      }
+
+      else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
+        alert('please Fill all the field')
+        setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
+        setHelperText('Please Select The Option');
+      }
+      else {
+        apiFormHit()
+      }
+    }
+
     else{
       apiFormHit()
     }
   }
 }
   const apiFormHit = async => {
-    // const axios = require('axios');
-  //   if(programAssessment ==1  ){
-  //     if(day1Day2==""){
-  //       setday1_or_day2Error(true);
-  //       setHelperText('Please Select The Option');
-  //       if (checked['name_of_the_trainer_being_evaluated'] == 0) {
-  //         setname_of_the_trainer_being_evaluatedError(true);
-  //         setHelperText('Please Select The Option');
-  //       }
-  //     }
-      
-  // }
 
-  // validationData.programAssessment
-  
-  // if((programAssessment== 1 && day1Day2!= "") || programAssessment==2 && day1Day2=="" || programAssessment==3 && day1Day2=="")  
-
-  // {
+// }else{
 let data = JSON.stringify({
   emp_id:parseInt(userid) ,
   role_id: parseInt(role) ,
@@ -1383,7 +1585,7 @@ setSendForm([{}])
   handleClose();
   console.log(error);
 });
-
+// }
   }
 //   else{
 //     alert('Please Fill All the Fields')
@@ -1536,6 +1738,9 @@ id="date-time-picker"
         <Stack mt={2}>
                 <Typography>
                    Program Assessment
+                   {programAssessmentError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                 </Typography>
                 <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
@@ -1558,6 +1763,9 @@ id="date-time-picker"
         <Stack mt={2}>
                 <Typography>
                 Select Poa
+                {today_poaError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                 </Typography>
                 <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -1592,7 +1800,11 @@ id="date-time-picker"
 
 <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="Name of the District">Name of the District</InputLabel>
+        <InputLabel id="Name of the District">Name of the District
+        {districtError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+        </InputLabel>
         <Select
           labelId="Name of the District"
           id="Name of the District"
@@ -1624,7 +1836,10 @@ id="date-time-picker"
         <CardContent>
         <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="Name of the taluk">Name of the Taluk</InputLabel>
+        <InputLabel id="Name of the taluk">Name of the Taluk
+        {name_of_the_talukError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}</InputLabel>
         <Select
           labelId="Name of the taluk"
           id="Name of the taluk"
@@ -2926,7 +3141,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <Typography>Deadline to collect the stories
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField   type="date" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, deadline_to_collect_the_stories:e.target.value})} value={sendForm?.deadline_to_collect_the_stories}/>
+                        <TextField  required inputProps={{ required: true }} type="date" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, deadline_to_collect_the_stories:e.target.value})} value={sendForm?.deadline_to_collect_the_stories}/>
                     </Stack> 
         </CardContent>
           </Card>
@@ -2945,7 +3160,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <Typography>No of participants at end of the session
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField   type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, no_of_participants_at_end_of_the_session:e.target.value})} value={sendForm?.no_of_participants_at_end_of_the_session}/>
+                        <TextField inputProps={{ required: true }} required  type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, no_of_participants_at_end_of_the_session:e.target.value})} value={sendForm?.no_of_participants_at_end_of_the_session}/>
                     </Stack> 
         </CardContent>
           </Card>
@@ -5181,6 +5396,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
          <Stack mt={2}>
                  <Typography>
                  Check which ones the Gelathi did not do
+                 {check_which_ones_the_gelathi_did_not_do_1Error ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                  </Typography>
                
                  <FormGroup>
@@ -5217,6 +5435,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
          <Stack>
                  <Typography variant="body1">
                  Check which ones the Gelathi did not do
+                 {check_which_ones_the_gelathi_did_not_do_2Error ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                  </Typography>
                  <Stack mt={2}>
                  <FormGroup>
@@ -5248,6 +5469,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
          <Stack>
                  <Typography variant="body1">
                  Check which ones the Gelathi did not do
+                 {check_which_ones_the_gelathi_did_not_doError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                  </Typography>
                  <Stack mt={2}>
                  <FormGroup>
@@ -5296,6 +5520,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
          <Stack mt={2}>
                  <Typography>
                  Was the recap done?
+                 {was_the_recap_doneError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                  </Typography>
 
                  <Stack mt={3}>
@@ -5335,6 +5562,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
          <Stack>
                  <Typography variant="body1">
                  Check which ones the Gelathi did not do
+                 {check_which_ones_the_gelathi_did_not_do_1Error ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                  </Typography>
                  <Stack mt={2}>
                  <FormGroup>
@@ -5367,6 +5597,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <Stack mt={2}>
                 <Typography>
                 Check which ones the Gelathi did not do
+                {check_which_ones_the_gelathi_did_not_doError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
@@ -5403,6 +5636,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <Stack mt={2}>
                 <Typography>
                 During the debrief did the Gelathi:
+                {during_the_debrief_did_the_gelathiError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
@@ -5450,6 +5686,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <Stack mt={2}>
                 <Typography>
                 Check which ones the Gelathi did not do
+                {check_which_ones_the_gelathi_did_not_do_1Error ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
@@ -5503,6 +5742,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <Stack mt={2}>
                 <Typography>
                 Check which ones the Gelathi did not do
+                {check_which_ones_the_gelathi_did_not_doError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
+
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
@@ -5510,7 +5753,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                     
                     
                     
-                    <FormControlLabel value="Ask what are some of the elements needed, apart from money, to either become more profitable at business or to become more adept at saving or to increase your income?" control={<Checkbox />} label="Ask what are some of the elements needed, apart from money, to either become more profitable at business or to become more adept at saving or to increase your income?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
+                    <FormControlLabel value="Ask what are some of the elements needed, apart from money, to either become more profitable at business or to become more adept at saving or to increase your income?" control={<Checkbox />} label="Ask what are some of the elements needed, apart from money, to either become more profitable at business or to become more adept at saving or to increase your income?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     <FormControlLabel value="Ask what needs to be done to run a business more successfully or even run your life successfully?" control={<Checkbox />} label="Ask what needs to be done to run a business more successfully or even run your life successfully?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     <FormControlLabel value="Ask why is it necessary to communicate clearly, politely and effectively?" control={<Checkbox />} label="Ask why is it necessary to communicate clearly, politely and effectively?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     
@@ -5537,6 +5780,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <Stack mt={2}>
                 <Typography>
                 During the debriefs for role plays the Gelathi did not ask:
+                {during_the_debriefs_for_role_plays_the_gelathi_did_not_askError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
@@ -5588,6 +5834,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <Stack mt={2}>
                 <Typography>
                 Check which ones the Gelathi did not do
+                {check_which_ones_the_gelathi_did_not_do_1Error ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
@@ -5688,6 +5937,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <Stack mt={2}> 
                 <Typography>Was the recap done?
 
+        {was_the_recap_done_1Error ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                     </Typography>
                 <Stack mt={2}>
                 <RadioGroup
@@ -5716,6 +5968,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <Stack mt={2}>
                 <Typography>
                 Check which ones the trainer did not do
+                {check_which_ones_the_trainer_did_not_doError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
@@ -5808,6 +6063,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <Stack mt={2}>
                 <Typography>
                 Check which ones the Galati did not do
+                {check_which_ones_the_gelathi_did_not_doError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
@@ -5842,6 +6100,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <Stack mt={2}>
                 <Typography>
                 Check which instructions the Gelathi did not do
+                {check_which_instructions_the_gelathi_did_not_doError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
@@ -5876,6 +6137,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <CardContent>
         <Stack mt={2}> 
                 <Typography>Repeat the activity with the second volunteer?
+                {repeat_the_activity_with_the_second_volunteerError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
 
                     </Typography>
                 <Stack mt={2}>
@@ -5906,7 +6170,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <CardContent>
         <Stack mt={2}> 
                 <Typography>Did the debrief done by Gelathi?
-
+                {did_the_debrief_done_by_gelathiError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                     </Typography>
                 <Stack mt={2}>
                 <RadioGroup
@@ -5966,6 +6232,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           <CardContent>
           <Typography >
           Check which ones the Gelathi did not do
+          {check_which_ones_the_gelathi_did_not_doError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
           </Typography>
           <FormGroup>
 
@@ -5981,6 +6250,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           <CardContent>
           <Typography >
           The Gelathi did not ask
+          {the_gelathi_did_not_ask_1Error ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
           </Typography>
           <FormGroup>
 
@@ -5999,6 +6271,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           <CardContent>
           <Typography >
           During the debrief did the Gelathi not ask:
+          {during_the_debrief_did_the_gelathi_not_askError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
           </Typography>
           <FormGroup>
           <FormControlLabel control={<Checkbox  />} label="Does your goal look realistic to you?" value={'Does your goal look realistic to you'} onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
@@ -6043,6 +6318,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           <CardContent>
           <Typography >
           Check which ones the Gelathi did not do:
+          {check_which_ones_the_gelathi_did_not_doError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
           </Typography>
           <FormGroup>
 
@@ -6057,6 +6335,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           <CardContent>
           <Typography >
           During the debrief did the Gelathi not ask:
+          {during_the_debrief_did_the_gelathi_not_askError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
           </Typography>
           <FormGroup>
 
@@ -6090,6 +6371,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <CardContent>
           <Typography >
           Check which one Gelati Did NOT do
+          {check_which_ones_the_gelathi_did_not_do_1Error ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
           </Typography>
           <FormGroup>
            
