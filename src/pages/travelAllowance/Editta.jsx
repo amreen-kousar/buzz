@@ -376,9 +376,11 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
             <div style={{ margin: "1rem" }}>
 
 
-              <Stack style={{ marginTop: 20 }}>
+              {(editData?.modeoftravel && editData?.modeoftravel===3 )? <Stack style={{ marginTop: 20 }}>
                 <TextField  disabled type="number" id="outlined-basic" defaultValue={editData?.start_odometer} onChange={(e) => { setSendData({ ...sendData, start_odometer: e?.target?.value }) }} label="Start Odometer Reading" variant="outlined" color="common" />
-              </Stack>
+              </Stack>:null}
+
+
               <Stack id="location" style={{ marginTop: 20 }}>
                 <TextField disabled defaultValue={editData?.start_location_name} id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, start_location_name: e?.target?.value }) }} label="Location" variant="outlined" color="common" />
               </Stack><br></br>
@@ -429,6 +431,7 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
                   </Select>
                 </FormControl>
               </Stack><br></br>
+              {(editData?.modeoftravel&&editData?.modeoftravel===1 | editData?.modeoftravel===4 | editData?.modeoftravel===5 | editData?.modeoftravel===6)?
               <Stack id="rate-per-km" style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Rate Per Km</InputLabel>
@@ -445,7 +448,7 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
                     })}
                   </Select>
                 </FormControl>
-              </Stack><br></br>
+              </Stack>:null}<br></br>
               <Stack style={{ marginTop: 20 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424', fontWeight: 700 }}>Food Expenses </InputLabel>
@@ -500,9 +503,9 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
               <Stack style={{ marginTop: 20 }}>
                 <TextField disabled id="outlined-basic" defaultValue={editData?.end_location_name} onChange={(e) => { setSendData({ ...sendData, end_location_name: e?.target?.value }) }} label="end location" variant="outlined" color="common" />
               </Stack>
-              <Stack style={{ marginTop: 20 }}>
+              {/* <Stack style={{ marginTop: 20 }}>
                 <TextField disabled id="outlined-basic" defaultValue={editData?.location} onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common" />
-              </Stack>
+              </Stack> */}
               <br /><br />
               {/* <div>
                 <div style={{ display: "flex" }}>
@@ -586,7 +589,7 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
                 }}>Upload</Button></div> */}
 
 <div><Typography variant="h6">Uploaded Images</Typography> <br/>
-  {(taData?.files?.length>0)?<img src={taData?.files[0]}/>:"No Images Found"}
+  {(taData?.files?.length>0)?<img src={taData?.files[0]?.image_name}/>:"No Images Found"}
 </div>
 
               </div>

@@ -31,7 +31,7 @@ export default function gelathiProgram(props) {
        if (filter_type) {
          setSelected(filter_type)
          let ids = { "Circle Meetings": 1,"Village Visits":2,"Beehive Visits":3,"Rescheduled":22,"Cancelled":23,"Gelathi Facilitators":6  ,"SPS":4, "SPM1":5 , "SPM2":6 , "SPM3":7, 
-         "SPM4":8,"SPM5":9 }
+         "SPM4":8,"SPM5":9,"GPS":10,"GPM1":11,"GPM2":12,"GPM3":13,"GPM4":14,"GPM5":15,"VPS":16,"VPM1":17,"VPM2":18,"VPM3":19,"VPM4":20,"VPM5":21 }
          filter_type.id = ids[filter_type.type]
        }
        gelathiPrograme(d,filter_type);
@@ -191,7 +191,11 @@ export default function gelathiProgram(props) {
                     selected  && (selected?.type=='Gelathi Facilitators') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             {
-                    selected  && (selected?.type=='Circle Meetings' || selected?.type=='Beehive Visits' || selected?.type=='Rescheduled'|| selected?.type=='Cancelled' || selected?.type=='Village Visits') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected  && (selected?.type=='Circle Meetings' || selected?.type=='Beehive Visits' || selected?.type=='Rescheduled'|| selected?.type=='Cancelled' || selected?.type=='Village Visits' 
+                    || selected?.type=='SPS'|| selected?.type=='SPM1'|| selected?.type=='SPM2'|| selected?.type=='SPM3'|| selected?.type=='SPM4'|| selected?.type=='SPM5'
+                    || selected?.type=='GPS'|| selected?.type=='GPM1'|| selected?.type=='GPM2'|| selected?.type=='GPM3'|| selected?.type=='GPM4'|| selected?.type=='GPM5'
+                    || selected?.type=='VPS'|| selected?.type=='VPM1'|| selected?.type=='VPM2'|| selected?.type=='VPM3'|| selected?.type=='VPM4'|| selected?.type=='VPM5')
+                     && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             
             
