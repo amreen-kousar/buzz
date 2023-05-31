@@ -159,32 +159,60 @@ axios(config)
 //poa type=2, type="3" for GF 
 //"poa_type": 1,"type": 2, for Trainer 
 console.log(checkIn,"checkintime")
-const GetStatus = async=>{
-  var data = JSON.stringify({
-    "project_id": batch?.project_id,
-    "poa_type": 2,
-    "type": 3,
-    "tb_id": batch?.id
-  });
+// const GetStatus = async=>{
+//   var data = JSON.stringify({
+//     "project_id": batch?.project_id,
+//     "poa_type": 2,
+//     "type": 3,
+//     "tb_id": batch?.id
+//   });
   
+//   var config = {
+//     method: 'post',
+//     url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
+//     headers: { 
+//       'Content-Type': 'application/json'
+//     },
+//     data : data
+//   };
+  
+//   axios(config)
+//   .then(function (response) {
+//     console.log(JSON.stringify(response.data),"dataaaaaaaaaaaa");
+//     setCheckData(response.data)
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
+// }
+
+const GetStatus = async=>{
+  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  var data = JSON.stringify({
+    event_id: batch?.id,
+    user_id: idvalue,
+    
+  });
+
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
-    headers: { 
-      'Content-Type': 'application/json'
+    url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
+    headers: {
+      'Content-Type': 'application/json',
     },
-    data : data
+    data: data,
   };
-  
+
   axios(config)
-  .then(function (response) {
-    console.log(JSON.stringify(response.data),"dataaaaaaaaaaaa");
-    setCheckData(response.data)
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+    .then(function (response) {
+      setCheckData(response.data);
+      console.log(response.data, '<------------setEventDatasetEventDatasetEventDatadetails');
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }
+
   {console.log(checkData,"checkdataaaaaaaaaaaaa")}
   return (
     <div>
@@ -219,7 +247,7 @@ const GetStatus = async=>{
 <CardContent>
 <Stack>
         <Typography>
-     Gelathi Session
+     Gelathi Session 
         </Typography>
         <Typography mt={3} mb={2}>
         {batch?.data?.name}
@@ -231,7 +259,8 @@ const GetStatus = async=>{
         <Typography mt={2}>
             Start :{batch?.plan_date?.split(" ")[0]}
         </Typography><br/>
-        {(checkData?.data?.check_in_date_day1=='')?<Button style={{float:'left',position:'absolute',left:20,top:170,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)} sx={{
+        {(checkData?.check_in=='')?
+        <Button style={{float:'left',position:'absolute',left:20,top:170,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1)} sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
              },
@@ -240,21 +269,21 @@ const GetStatus = async=>{
              marginLeft: '10px',
            }}>
             CHECK IN</Button>
-        :<Button disabled style={{float:'left',position:'absolute',left:20,top:160,marginTop:5,marginBottom:5}}>CheckIN</Button>
+        :<Button disabled style={{float:'left',position:'absolute',left:20,top:160,marginTop:5,marginBottom:5}}>CHECK IN</Button>
         
         }<br/>
      
-        {(checkData?.data?.check_in_date_day1!='')?<><Typography>
-            Checked In  : {checkData?.data?.check_in_date_day1} &nbsp; {checkData?.data?.check_in_time_day1}
+        {(checkData?.check_in!='')?<><Typography>
+            Checked In  : {checkData?.check_in} 
         </Typography>
         <Typography>
-           Location  : {checkData?.data?.check_in_location_day1}
+           Location  : {checkData?.check_in_location}
         </Typography></>:null}<br/> <Divider />
         {/* </>:null} */}
         <Typography mt={2}>
             End :
         </Typography>
-        {(checkData?.data?.check_in_date_day1!='' && checkData?.data?.check_out_date_day1=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:350,marginBottom:2,color:'#ff7424'}} sx={{
+        {(checkData?.check_in!='' && checkData?.check_out=='' )?<Button onClick={()=>checkinout(2)} style={{float:'left',position:'absolute',left:20,top:350,marginBottom:2,color:'#ff7424'}} sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
              },
@@ -263,14 +292,15 @@ const GetStatus = async=>{
              marginLeft: '10px',
            }}>
             CHECK OUT
-        </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:350,marginBottom:2}}>CHECKOUT</Button>}<br/><br/>
-       {(checkData?.data?.check_out_date_day1!="")?<><Typography>
-            Checked Out  : {checkData?.data?.check_out_date_day1} &nbsp; {checkData?.data?.check_out_time_day1}
+        </Button>:<Button disabled style={{float:'left',position:'absolute',left:20,top:350,marginBottom:2}}>CHECK OUT</Button>}<br/><br/>
+       {(checkData?.check_out!="")?<><Typography>
+            Checked Out  :{checkData?.check_out}
         </Typography>
         <Typography>
-           Location  :  {checkData?.data?.check_out_location_day1}
+           Location  :  {checkData?.check_out_location}
         </Typography></>:null}
        </Stack>
+      
 </CardContent>
 </Card>
         {/* <List>
