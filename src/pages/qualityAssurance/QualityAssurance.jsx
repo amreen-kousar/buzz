@@ -64,6 +64,13 @@ const [errorMsg,setErrormsg]=useState('');
     setOpen(false);
   };
 
+  const handleDelete = () => {
+ 
+   
+    setSelected(null)
+    apiHit();
+  }
+
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -142,7 +149,7 @@ let formatdata = summaryData?.data
   //   )
   // }
   const onSumbit = (e, i) => {
-    setSelected({ type: 'Location', name: ` ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talaq}` })
+    setSelected({ type: 'Location', name: `  State : Karnataka ; District : ${e?.district?.name} ; Taluk : ${e?.talaq}` })
     console.log(e,"evaluesssssssssssss",e?.district?.name)
     handleCloseFilter()
     apiHit(e?.district?.name,e?.talaq,"Location")
@@ -156,13 +163,15 @@ let formatdata = summaryData?.data
   }
 
   const getData = (itm,i) => {
-   
-    setSelected(itm)
+  //  var itemrole = (itm?.empRole==13)?"Gelathi Facilitator Lead":(itm?.empRole==2)?"Admin":(itm?.empRole==6)?"Gelathi Facilitators":"Role"
+    setSelected({type:"Role",itm})
     handleCloseFilter()
     apiHit(itm?.id,i,"Role")
     console.log(filterData,"hyyyyyyyyyyy")
    
   }
+  
+  console.log(slected,"selectedvalueeeeeeeeee")
   return (
     <>
       <Page title="Dashboard">
@@ -183,6 +192,18 @@ let formatdata = summaryData?.data
         </Stack>
         <Container maxWidth="xl">
          
+        {
+    slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }}  />
+  }
+
+{
+    slected && (slected.type =='Location')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }}  />
+}
+{
+  slected && (slected?.type=='Role') && <Chip label={` ${slected?.itm?.name} `} onDelete={() => { handleDelete(slected) }}  />
+}
+
+
 
           <Grid justifyContent="center" container spacing={3} marginTop={1}>
             <Grid onClick={handleClickOpen} item xs={4} sm={8} md={4}>
