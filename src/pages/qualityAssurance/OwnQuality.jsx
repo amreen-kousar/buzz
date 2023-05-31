@@ -42,21 +42,27 @@ function a11yProps(index) {
     };
 }
 
-export default function OwnQuality(props) {
+export default function OwnQuality({reload}) {
 var [singleFormData , setSingleFormData] = useState('')
 const [ open ,setOpen] = useState(false)
     const [todayPoa,setTodayPoa]=useState('');
     const [showSingleform ,setShowSingleForm] = useState(false)
-console.log(props?.componentname,"componenttttttttt")
+// console.log(props?.componentname,"componenttttttttt")
     useEffect(()=>{
        getPOA();
-          },[])
+          },[reload])
+          useEffect(()=>{
+            getPOA();
+               },[])
           var [itmForForm, setItemForForm ] = useState()
-          const [openGetSingleQualityForm ,setOpenGetSingleQualityForm] = useState(false)       
+          const [openGetSingleQualityForm ,setOpenGetSingleQualityForm] = useState(false)     
+          
+          var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+          var role =JSON.parse(localStorage.getItem('userDetails'))?.role
 const getPOA =()=>{
     var data = JSON.stringify({
-        "Emp_id":891,
-        "Role_id":4
+        "Emp_id":parseInt(userid),
+        "Role_id":parseInt(role)
     });
       
       var config = {

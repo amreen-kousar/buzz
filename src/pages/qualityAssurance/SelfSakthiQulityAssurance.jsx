@@ -105,7 +105,11 @@ const SelfSakthiQulityAssurance = () => {
       setValue(newValue);
     };
   
+    const [reload ,setReload] = useState(false)
   
+    const reloadfunction = ()=>{
+      setReload(!reload)
+    }
   
     return (
       <Page id="dashboard-products" title="Dashboard: Products">
@@ -177,7 +181,7 @@ const SelfSakthiQulityAssurance = () => {
           userTeamPermissions.includes(data) &&   <TabPanel id="return-date-tab" value={mainValue} index={1}>
           <Stack id="return-date-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <Box id="team-box" sx={{ width: '100%' }}>
-              <TeamQuality id="return-date" returnDateValue={returnDateValue} />
+              <TeamQuality id="return-date" returnDateValue={returnDateValue} reload={reload} />
             </Box>
           </Stack>
         </TabPanel>
@@ -185,7 +189,7 @@ const SelfSakthiQulityAssurance = () => {
         }
          {
           userOwnPermissions.includes(data) &&  <TabPanel value={mainValue} index={0}>
-          <OwnQuality componentname="selfShakthi" />
+          <OwnQuality componentname="selfShakthi"  reload={reload}/>
         </TabPanel>
          }
   
@@ -194,7 +198,7 @@ const SelfSakthiQulityAssurance = () => {
   
     { (mainValue==0) &&     <Stack id="travel-dialog-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <DialogForm id="travel-dialog"  batch={batch} shown={shown} setShown={(e)=>{setShown(e)}}
-            
+            reloadfunction={reloadfunction}
             />
           </Stack>}
   

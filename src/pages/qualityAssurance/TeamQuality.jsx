@@ -61,7 +61,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function TeamQuality(props) {
+export default function TeamQuality({reload}) {
   const [value, setValue] = React.useState(0);
   const data = localStorage?.getItem('userId');
   var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0]);
@@ -87,14 +87,19 @@ export default function TeamQuality(props) {
   var [singlePersonFormDetail, setSinglePersonFormDetail] = useState('');
 
   var [todayPoa, setTodayPoa] = useState([]);
-  console.log(props?.componentname, 'componenttttttttt');
+  // console.log(props?.componentname, 'componenttttttttt');
   useEffect(() => {
     getPOA();
-  }, []);
+  }, [reload]);
 
+  useEffect(() => {
+    getPOA();
+  }, [])
+  var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  var role =JSON.parse(localStorage.getItem('userDetails'))?.role
   const getPOA = () => {
     var data = JSON.stringify({
-      emp_id: 1,
+      emp_id: userid,
       team: '',
     });
 
@@ -161,7 +166,7 @@ export default function TeamQuality(props) {
                       {itm?.name}
                     </b>
                     <br></br>
-                    {/* <Typography id="typography-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
+                    {/* <Typography id="typography-ta-amount" variant="body" gutterBottom > <b>{itm?.telephone}</b></Typography>
                      */}
                   </Grid>
                   <Grid item xs={4}>

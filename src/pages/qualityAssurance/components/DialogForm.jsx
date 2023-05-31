@@ -42,7 +42,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DialogForm({ shown, setShown, batch }) {
+export default function DialogForm({ shown, setShown, batch  ,reloadfunction}) {
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState();
 
@@ -554,10 +554,10 @@ export default function DialogForm({ shown, setShown, batch }) {
   const apiFormHit = (async) => {
     // const axios = require('axios');
     let data = JSON.stringify({
-      // emp_id:parseInt(userid) ,
-      // role_id: parseInt(role) ,
-      emp_id: 891,
-      role_id: 4,
+      emp_id:parseInt(userid) ,
+      role_id: parseInt(role) ,
+      // emp_id: 891,
+      // role_id: 4,
       email_address: sendForm?.email_address,
       name_of_the_assessor: sendForm?.name_of_the_assessor,
       // "entry_date": "2023-05-18"+"T00:00:00Z",
@@ -725,6 +725,7 @@ export default function DialogForm({ shown, setShown, batch }) {
         });
         handleClose();
         setSendForm([{}]);
+        reloadfunction()
         console.log(JSON.stringify(response.data), '<-----------------------question tag------------------>');
       })
       .catch((error) => {
