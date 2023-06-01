@@ -476,7 +476,7 @@ const [errorMsg,setErrormsg]=useState(false)
   var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 
 
-  const apiHit = async (id, i, g) => {
+  const apiHit = async (id, i, g,date1,date2) => {
     console.log("🚀 ~ file: Gelathidashboard.js:45 ~ apiHit ~ id, i, g:", id, i, g)
     setLoader(true)
     var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
@@ -515,17 +515,17 @@ const [errorMsg,setErrormsg]=useState(false)
     // };
 
     const data  ={
-      "partner_id": g ? "" : i === 1 ? id?.id : '',
-    "start_date": (g === "date")? id: '',
-    "end_date":  (g === "date")? i: '',
-    "funder_id":g ? "" : i === 2 ? id?.id : '',
-    "dist":g === "country" ? id : "",
-    "taluk":g === "country" ? i : "",
-    "project_id":g ? "" : i === 3 ? id?.id : '',
-    "trainer_id":g ? "" : i === 5 ? id?.id : '',
-    "opsmanager":g ? "" : i === 4 ? id?.id : '',
-    "somid":g ? "" : i === 12 ? id?.id : '',
-    "gflid":g ? "" : i === 13 ? id?.id : '',
+      "partner_id": i === 1 ? id?.id : '',
+    "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
+    "end_date":  (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):'',
+    "funder_id":i === 2 ? id?.id : '',
+    "dist":(g === "country" || g==="countryCalendar")? id : "",
+    "taluk":(g === "country" || g==="countryCalendar") ? i : "",
+    "project_id":i===3? id?.id : '',
+    "trainer_id":i === 5 ? id?.id : '',
+    "opsmanager":i === 4 ? id?.id : '',
+    "somid": i === 12 ? id?.id : '',
+    "gflid":i === 13 ? id?.id : '',
     "roleid":roleid,
     "emp_id":userid
   }
@@ -621,22 +621,68 @@ let formatdata = summaryData?.data
   // }
 
 
-  const getData = (itm, i) => {
+  const getData = (itm, i,date1,date2,dateValue,endDateValue,g) => {
+    console.log("🚀 ~ file: DashboardApp.js:162 ~ getData ~ itm, i, g, date1,date2,dateValue,endDateValue:", itm, i, g, date1,date2,dateValue,endDateValue)
     setSelected(itm)
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
     i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
-    apiHit(itm, i)
+    // apiHit(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
+    if(dateValue || endDateValue)
+        {
+          console.log(i,"dateapihitttttt",date1.$d||date2.$d)
+          apiHit(itm, i,"Calendar",date1,date2)
+          
+        }
+        else{
+          console.log("apihit")
+          apiHit(itm,i)
+        }
     setFilterData(data)
     handleCloseFilter()
     console.log("sdfgsdfdfssd", itm, i)
   }
+
+  // const getData = (itm, i, date1,date2,dateValue,endDateValue,g) => {
+    //     console.log("🚀 ~ file: DashboardApp.js:162 ~ getData ~ itm, i, g, date1,date2,dateValue,endDateValue:", itm, i, g, date1,date2,dateValue,endDateValue)
+    //     console.log(date1?.$d,"datevaluinfunder",date2?.$d,itm)
+    //     console.log(i,"ivalueeeeeeeeeee",g)
+    //     {console.log('startingvalues',dateValue,"endingvalues",endDateValue)}
+    //     setSelected(itm)
+    //     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
+    //     i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
+    //     if(dateValue || endDateValue)
+    //     {
+    //       console.log("dateapihitttttt",date1.$d||date2.$d)
+    //       Dateapihit(itm, i,g,date1,date2)
+          
+    //     }
+    //     else{
+    //       console.log("apihit")
+    //       apiHit(itm,i)
+    //     }
+    //     setFilterData(data)
+    //     console.log(filterData,"hyyyyyyyyyyy")
+    //     handleCloseFilter()
+    //   }
+    
+
+
+
+
+
   const onSumbit = (e, i) => {
     handleCloseFilter()
     setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
 
-    apiHit(e?.district_id, e?.talaq_id, "country")
-    console.log(e, i, "<----datssdasdsa")
+    if(e?.dateValue || e?.endDateValue)
+    {
+      apiHit(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
+      console.log(e, i, "<----datssdasdsa")
+    }
+    else{
+      apiHit(e?.district_id,e?.talaq_id,"country")
+    }
   }
 
   const closefilter = () => {

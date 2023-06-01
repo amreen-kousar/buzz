@@ -209,7 +209,7 @@ sx={{margin:5}}
       {/* {console.log(session,"session?.id")} */}
       {/* <Button onClick={()=>Reschedule(session?.id)}>Save</Button> */}
     </Stack><br/>
-    {console.log('valuesstartend',dateValue,"hdhsydueyjdtu",endDateValue)}
+    {console.log(date,'valuesstartend',dateValue,"hdhsydueyjdtu",endDateValue,"sdhwe",endDate)}
     <Button onClick={handlecloseCalendar} style={styles.highlightStyle} sx={{width:20,textAlign:'center',left:30}}>OK</Button></>}
 <br/>
         <Divider />
