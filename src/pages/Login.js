@@ -64,15 +64,15 @@ export default function Login() {
             ) {
               navigate('/dashboard/projects')
             }
-            else if (response.data.role == 5) {
-              navigate('/dashboard/trainer')
-            }
-            else if (response.data.role == 6 | response.data.role == 13) {
-              navigate('/dashboard/gelathi')
-            }
-            else if (response.data.role == 4) {
-              navigate('/dashboard/operationmanager')
-            }
+            // else if (response.data.role == 5) {
+            //   navigate('/dashboard/trainer')
+            // }
+            // else if (response.data.role == 6 | response.data.role == 13) {
+            //   navigate('/dashboard/gelathi')
+            // }
+            // else if (response.data.role == 4) {
+            //   navigate('/dashboard/operationmanager')
+            // }
             else {
               navigate('/dashboard/app')
             }

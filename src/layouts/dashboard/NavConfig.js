@@ -11,24 +11,24 @@ const navConfig = {
     title: 'Main',
     path: '/dashboard/app',
     icon: getIcon("ic:baseline-home"),
-    id: ['0', '1', '3', '7', '8', '9', '11','12']
+    id: ['0', '1', '3', '7', '8', '9', '11','12','4','6']
   },
   2: {
 
     title: 'Main',
-    path: '/dashboard/trainer',
+    path: '/dashboard/app',
     icon: getIcon('ic:baseline-home'),
     id: ['5','11']
   },
   3: {
     title: 'Main',
-    path: '/dashboard/gelathi',
+    path: '/dashboard/app',
     icon: getIcon('ic:baseline-home'),
     id: ['6', '13']
   },
   4: {
     title: 'Main',
-    path: '/dashboard/operationmanager',
+    path: '/dashboard/app',
     icon: getIcon('ic:baseline-home'),
     id: ['4']
   },

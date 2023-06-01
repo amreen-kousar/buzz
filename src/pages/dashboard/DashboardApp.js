@@ -1314,7 +1314,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 <Container style={{ display: 'flex', flexDirection: 'row' }}>
   <Grid item xs={6}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-      Funder<br />
+      Project Name<br />
       {/*  for role id 5 it should be project in 4 dahsbord  */}
       Actual / Target <br/>
 

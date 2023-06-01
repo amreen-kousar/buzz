@@ -102,15 +102,15 @@ export default function Router() {
 
         [
             {
-                path: 'app', element: <DashboardHome />, id: [0, 1, 3, 7, 8, 9, 12,11],
+                path: 'app', element: <DashboardHome />, id: [0, 1, 3, 7, 8, 9, 12,11,4,5,6],
                 children: [
                     { path: '', element: <DashboardApp />, exact: true },
                     { path: 'chart', element: <Chart /> },
                 ]
             },
-            { path: 'trainer', element: <Trainerdashboard />, id: [5] },
+            // { path: 'trainer', element: <Trainerdashboard />, id: [5] },
             { path: 'gelathi', element: <Gelathidashboard />, id: [6, 13] },
-            { path: 'operationmanager', element: <Operationmanagerdashboard />, id: [4]},
+            // { path: 'operationmanager', element: <Operationmanagerdashboard />, id: [4]},
             { path: 'operationmanager/chart', element: <Chart />, id: [4]},
             { path: 'buslist', element: <BusList />, id: [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 12,11] },
             { path: 'planofaction', element: <PlanofAction />, id: [0, 1, 3, 4, 5, 9, 6, 7, 8, 12, 13,11] },
@@ -168,18 +168,18 @@ export default function Router() {
             path: '/dashboard/logout',
             element: <Logout />,
         },
-        {
-            path: '/dashboard/trainer',
-            element: <Trainerdashboard />,
-        },
-        {
-            path: '/dashboard/gelathi',
-            element: <Gelathidashboard />,
-        },
-        {
-            path: '/dashboard/operationmanager',
-            element: <Operationmanagerdashboard />
-        },
+        // {
+        //     path: '/dashboard/trainer',
+        //     element: <Trainerdashboard />,
+        // },
+        // {
+        //     path: '/dashboard/gelathi',
+        //     element: <Gelathidashboard />,
+        // },
+        // {
+        //     path: '/dashboard/operationmanager',
+        //     element: <Operationmanagerdashboard />
+        // },
         {
             path : '/dashboard/selfsakthiprogramdashboard',
             element : <selfSakthiProgramDashboard />
