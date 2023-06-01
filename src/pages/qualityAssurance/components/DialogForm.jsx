@@ -667,7 +667,7 @@ const [apiData, setApiData] = useState({})
   const [check_which_ones_the_gelathi_did_not_do_2Error,setcheck_which_ones_the_gelathi_did_not_do_2Error]=useState(false)
   const [during_the_debrief_did_the_gelathiError,setduring_the_debrief_did_the_gelathiError]=useState(false)
   const [during_the_debriefs_for_role_plays_the_gelathi_did_not_askError,setduring_the_debriefs_for_role_plays_the_gelathi_did_not_askError]=useState(false)
-  const [was_the_recap_done_1Errorr,setwas_the_recap_done_1Errorr]=useState(false)
+  const [was_the_recap_done_1Error,setwas_the_recap_done_1Error]=useState(false)
   const [check_which_instructions_the_gelathi_did_not_doError,setcheck_which_instructions_the_gelathi_did_not_doError]=useState(false)
   const [did_the_debrief_done_by_gelathiError,setdid_the_debrief_done_by_gelathiError]=useState(false)
   const [the_gelathi_did_not_ask_1,setthe_gelathi_did_not_ask_1]=useState(false)
@@ -1329,7 +1329,7 @@ const validation =()=>{
       }
       else if (sendForm.was_the_recap_done_1=='')
       {
-        setwas_the_recap_done_1Errorr(true)
+        setwas_the_recap_done_1Error(true)
         setHelperText('Please Select The Option');
         alert("Please Select The Option")
       }
@@ -2671,12 +2671,21 @@ id="date-time-picker"
           page-10
         <CardContent>
           <Card>
-          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
-          <CardContent>
-          <Typography variant = 'h5'>Attendance</Typography>
-          <Typography variant = 'h5'>The purpose of the section is to collect quantitative data around participation, excitement, preparedness and the maintenance of interest level of the participants during the training.</Typography>
-          </CardContent>
-        </Card>
+          <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
+                    <CardContent>
+                      <Typography variant="h5">Attendance</Typography>
+                     
+                    </CardContent>
+                  </Card>
+                   <Card sx={{ marginTop: '20px' }}>
+                   <CardContent>
+                   <Typography >
+                        The purpose of the section is to collect quantitative data around participation, excitement,
+                        preparedness and the maintenance of interest level of the participants during the training.
+                      </Typography>
+
+                   </CardContent>
+                  </Card>
         <Card  sx={{ marginTop:"20px"}}>
         <CardContent>
             <Typography>Number Of Enrolled Galathis in the circle ?

@@ -431,7 +431,7 @@ console.log(userid,"userrrrrridddddddd")
                                         onChange={(e) => { getEmpId(e.target.value) }}
                                     >
                                         {console.log(roles,"role")}
-                                        {roles.map(role => {
+                                        {roles?.map(role => {
                                             return <MenuItem value={role ?? ''}>{role?.roleName}</MenuItem>
                                         })}
 
@@ -499,12 +499,12 @@ console.log(userid,"userrrrrridddddddd")
         }} value={AddUser.workNum} onChange={(e) => {
                                      setAddUser({ ...AddUser, workNum: e.target.value }) }} type="number" variant="outlined" color='common' /><br/><br/>
 
-                                <TextField fullWidth type="email" required id="Email" label="Email"  value={AddUser.office_email_id} 
+                                <TextField fullWidth type="email" required id="Email" label="Email"  value={AddUser?.officeMailId} 
                                 onChange={(e)=>{
                                     emailchangeHandler(e.target.value)
                                 }} 
                                      onPaste={(e) => { 
-                                        setAddUser({ ...AddUser, office_email_id: e.target.value }); 
+                                        setAddUser({ ...AddUser, officeMailId: e.target.value }); 
                                         checkEmailValidation()
                                      }}
                                          variant="outlined" color="common" /><br/><br/>

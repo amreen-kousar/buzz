@@ -49,6 +49,12 @@ export default function UserEditProfile({ updateSetUser }) {
   const [rolesData, setRolesData] = useState([]);
   const [reportingManager, setReportingManager] = useState([]);
   const [reportingManagerProject, setReportingManagerProject] = useState([]);
+  var roleID = JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+
+useEffect(()=>{
+console.log("mountubg")
+},[user])
   const [editData, setEditData] = useState({
     id: user.id,
     countryID: user.countryID,
@@ -56,7 +62,7 @@ export default function UserEditProfile({ updateSetUser }) {
     last_name: user.last_name,
     gender: user.gender,
     doj: new Date(user.doj),
-    role: user.role,
+    role: user.role_id,
     pincode: user.pincode,
     officeMailId: user.officeMailId,
     personalMailId: user.personalMailId,
@@ -65,7 +71,7 @@ export default function UserEditProfile({ updateSetUser }) {
     address: user.address,
     address1: user.address1,
     address2: user.address2,
-    empRole: user.empRole,
+    empRole: user.role_name,
     supervisorId: user.supervisorId,
     supervisorName: user.supervisorName,
     profile_pic: user.profile_pic,
@@ -78,7 +84,7 @@ export default function UserEditProfile({ updateSetUser }) {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-  console.log(user?.role?.roleName, 'roleeeeeeeeeeeee');
+  console.log(editData?.empRole, 'roleeeeeeeeeeeee');
   const handleClickOpen = () => {
     setOpen(true);
     setScroll(scrollType);
@@ -172,7 +178,7 @@ export default function UserEditProfile({ updateSetUser }) {
       last_name: editData?.last_name,
       gender: editData?.gender,
       doj: moment(editData?.doj?.$d)?.format('YYYY-MM-DD'),
-      role: editData?.role?.roleName,
+      role: editData?.role,
       pincode: editData?.pincode,
       officeMailId: editData?.officeMailId,
       personalMailId: editData?.personalMailId,
@@ -190,8 +196,18 @@ export default function UserEditProfile({ updateSetUser }) {
       project_list: editData?.project_list,
       license_number: editData?.license_number,
       role_name: editData?.role_name,
+      empRole: editData?.empRole == "Admin" ? 2 :
+      editData?.empRole == "Program Manager" ? 3 :
+      editData?.empRole == "Operations Manager" ? 4 :  
+      editData?.empRole == "Trainer" ? 5 :
+      editData?.empRole == "Gelathi Facilitator" ? "6" :
+      editData?.empRole == "Driver" ? 7:
+      editData?.empRole == "Funder" ?8 :
+      editData?.empRole == "Partner" ? 9 :
+      editData?.empRole == "FIN/HR/VIEWER" ? 11 :
+      editData?.empRole == "Senior Operations Manager" ? 12 :editData?.empRole == "Gelathi Facilitator Lead" ? 13 : editData?.empRole == "Senior Trainer" ? 14 : null,
     });
-
+   
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/editUser.php',
@@ -213,6 +229,8 @@ export default function UserEditProfile({ updateSetUser }) {
       });
     handleClose();
   };
+
+  console.log("edituserdaa" , editData)
   return (
     <div>
       <Button
@@ -292,8 +310,8 @@ export default function UserEditProfile({ updateSetUser }) {
                 <br></br>
                 <br></br>
                 <FormControl fullWidth style={{ marginLeft: '0.5rem', marginBottom: '0.5rem' }}>
-                  <InputLabel id="demo-simple-select-label" fullWidth color="common">
-                    Role
+                  <InputLabel id="demo-simple-select-label" fullWidth color="common"  >
+                    Role  {editData?.empRole}
                   </InputLabel>
 
                   <Select
@@ -305,17 +323,17 @@ export default function UserEditProfile({ updateSetUser }) {
                     // defaultValue={AddUser.role}
                     label="Role"
                     onChange={(e) => {
-                      setEditData({ ...editData, role: e?.target?.value });
+                      setEditData({ ...editData, empRole: e?.target?.value?.roleName });
                     }}
                     // onChange={(e) => { getEmpId(e.target.value) }}
-                    value={editData?.role?.roleName}
+                    defaultValue={editData?.empRole}
                   >
                     {rolesData.map((role) => {
                       return <MenuItem value={role ?? ''}>{role?.roleName}</MenuItem>;
                     })}
                   </Select>
                 </FormControl>
-                {!['Funder', 'Partner'].includes(editData.role?.roleName) && (
+                {!['Funder', 'Partner'].includes(editData?.empRole) && (
                   <FormControl fullWidth>
                     <Autocomplete
                       disablePortal
@@ -433,8 +451,39 @@ export default function UserEditProfile({ updateSetUser }) {
                   />
                 </Stack>
                 <Stack>
+
                   {/* <TextField id="outlined-basic" label="Project" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, project_list: e?.target?.value }) }} value={editData?.project_list}/> */}
-                  <Typography>Choose Projects</Typography>
+                  {
+
+["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(editData?.empRole) && <FormControl fullWidth>
+
+    <Autocomplete                
+        // disablePortal
+        // id="combo-box-demo"
+        // options={reportingManagerProject}
+        // defaultValue={inputProject[-1]}
+        // label="project"
+        // onChange={(e, value) => changeProject(value)}
+        // renderInput={(params) => <TextField {...params} label="Choose project" />}
+
+        multiple
+        limitTags={2}
+        id="Projects"
+        options={reportingManagerProject}
+        onChange={(e, value) => changeProject(value)}
+        getOptionLabel={(option) => option.label}
+        renderInput={(params) => (
+            <TextField {...params} id="choose_project" label="Choose project" placeholder="Choose project" color="common"/>
+        )}
+    />
+
+</FormControl>
+
+}
+{["Driver"].includes(editData?.empRole) && <TextField fullWidth id="license_number" label="License Number" value={editData.license_number} onChange={(e) => { setAddUser({ ...editData, license_number: e.target.value }) }} variant="outlined" />
+}
+               
+                {/* <Typography>Choose Projects </Typography>
                   <Select
                     color="common"
                     label="Choose Project"
@@ -445,7 +494,9 @@ export default function UserEditProfile({ updateSetUser }) {
                     {user?.project_list.map((itm) => {
                       return <MenuItem value={itm?.id}>{itm?.projectName}</MenuItem>;
                     })}
-                  </Select>
+                  </Select> */}
+                  
+                 
                 </Stack>
               </div>
 

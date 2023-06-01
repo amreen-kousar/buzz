@@ -307,7 +307,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     <CardContent>
                     
                       <Typography variant="h5">Gelathi Program</Typography>
-                      <Typography variant="h5">{sendForm?.name_of_the_gf}</Typography>
+                      <Typography variant="h5">Name of the Gelathi Facilitator</Typography>
                       <Stack mt={1} mb={1}>
                   <TextField
                     disabled
@@ -354,7 +354,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           variant="outlined"
                           color="common"
                         
-                          value={sendForm?.program_assessment}
+                          value={sendForm?.assessment_of}
                         />
                       </Stack>
                     </Stack>
@@ -493,86 +493,20 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Spoorthi Song"
-                        value="Spoorthi Song"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Set the ground rules"
-                        value="Set the ground rules"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Introduction of GF and Gelathi"
-                        value="Introduction of GF and Gelathi"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Explain the objective of the Spoorthi Training"
-                        value="Explain the objective of the Spoorthi Training"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Explain the duration of Spoorthi Fellowship"
-                        value="Explain the duration of Spoorthi Fellowship"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Visualization of Tree activity"
-                        value="Visualization of Tree activity"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Debrief of Visualization of Tree activity"
-                        value="Debrief of Visualization of Tree activity"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List down about the Gelathi's skills and shared in pair"
-                        value="List down about the Gelathi's skills and shared in pair"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List down about the Gelathi's challenges and shared in pair"
-                        value="List down about the Gelathi's challenges and shared in pair"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List down about the Gelathi's resources and shared in pair"
-                        value="List down about the Gelathi's resources and shared in pair"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Share in pair how they resolve the challenges by using their own skills and resources"
-                        value="Share in pair how they resolve the challenges by using their own skills and resources"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Given name for Spoorthi-1"
-                        value="Given name for Spoorthi-1"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Feedback done"
-                        value="Feedback done"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                    </FormGroup>
+                    <Stack mt={2} mb={2}>
+                        <TextField
+                          disabled
+                          inputProps={{ disabled: true }}
+                          label="Your Answer"
+                          variant="outlined"
+                          color="common"
+                          onChange={(e) =>
+                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
+                          }
+                          value={sendForm?.check_which_ones_the_gelathi_did_not_do}
+                        />
+                      </Stack>
+                  
                   </CardContent>
                 </Card>
               </CardContent>
@@ -591,75 +525,20 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Spoorthi Song"
-                        value="Spoorthi Song"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Recap Of Spoorthi-1"
-                        value="Recap Of Spoorthi-1"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Paper cutting activity with instructions"
-                        value="Paper cutting activity with instruction"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Debrief on the paper cutting activity"
-                        value="Debrief on the paper cutting activity"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Magic stick activity about the active listening"
-                        value="Magic stick activity about the active listening"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Debrief the magic stick activity"
-                        value="Debrief the magic stick activity"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List down points about active listening"
-                        value="List down points about active listening"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Debrief the active listening activity"
-                        value="Debrief the active listening activity"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Discuss about the Gelathi tool kit"
-                        value="Discuss about the Gelathi tool kit"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      {/* <FormControlLabel control={<Checkbox  />} label=" Discussion about the borewell activity" value="Discussion about the borewell activity"  onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/> */}
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Given name for Spoorthi-2"
-                        value="Given name for Spoorthi-2"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Feedback done"
-                        value="Feedback done"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}
-                      />
-                    </FormGroup>
+                    <Stack mt={2} mb={2}>
+                        <TextField
+                          disabled
+                          inputProps={{ disabled: true }}
+                          label="Your Answer"
+                          variant="outlined"
+                          color="common"
+                          onChange={(e) =>
+                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
+                          }
+                          value={sendForm?.check_which_ones_the_gelathi_did_not_do}
+                        />
+                      </Stack>
+                 
                   </CardContent>
                 </Card>
               </CardContent>
@@ -679,86 +558,21 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Spoorthi song"
-                        value="Spoorthi song"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Recap of Spoorthi-2"
-                        value="Recap of Spoorthi-2"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="The hand drawing activity"
-                        value="The hand drawing activity"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Presentation of the hand drawing activity"
-                        value="Presentation of the hand drawing activity"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Debrief on the hand drawing activity"
-                        value="Debrief on the hand drawing activity"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List down elements of human growth"
-                        value="List down elements of human growth"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Model village drawing done by Gelathis"
-                        value="Model village drawing done by Gelathis"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Presentation done by 2 Gelathis of model village drawing"
-                        value="Presentation done by 2 Gelathis of model village drawing"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Discuss what elements do they want to make their village become model village"
-                        value="Discuss what elements do they want to make their village become model village"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Discuss as a  pair what they should do first to make their village as a model village?"
-                        value="Discuss as a  pair what they should do first to make their village as a model village?"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Debrief about the model village"
-                        value="Debrief about the model village"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Given name for spoorthi-3"
-                        value="Given name for spoorthi-3"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Feedback"
-                        value="Feedback"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_2', event)}
-                      />
-                    </FormGroup>
+                  
+                    <Stack mt={2} mb={2}>
+                        <TextField
+                          disabled
+                          inputProps={{ disabled: true }}
+                          label="Your Answer"
+                          variant="outlined"
+                          color="common"
+                          onChange={(e) =>
+                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
+                          }
+                          value={sendForm?.check_which_ones_the_gelathi_did_not_do_2}
+                        />
+                      </Stack>
+                  
                   </CardContent>
                 </Card>
               </CardContent>
@@ -777,85 +591,21 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Spoorthi Song"
-                        value="Spoorthi Song"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Recap of Spoorthi-3"
-                        value="Recap of Spoorthi-3"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Ask if any interesting things that have happened in your village or there any challenges"
-                        value="Ask if any interesting things that have happened in your village or there any challenges"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Did role play-1 with pair?"
-                        value="Did role play-1 with pair?"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Did debrief for role play-1?"
-                        value="Did debrief for role play-1?"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Did role play-2 with pair?"
-                        value="Did role play-2 with pair?"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Did debrief for role play-2?"
-                        value="Did debrief for role play-2?"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Did role play-3 with pair?"
-                        value="Did role play-3 with pair?"
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Did debrief for role play-3?"
-                        value="Did debrief for role play-3?"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List down the dos and don'ts when reaching the community"
-                        value="List down the dos and don'ts when reaching the community"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Debrief about the do's and don'ts"
-                        value="Debrief about the do's and don'ts"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Given name for spoorthi-4"
-                        value="Given name for spoorthi-4"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Feedback"
-                        value="Feedback"
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
-                      />
-                    </FormGroup>
+                    <Stack mt={2} mb={2}>
+                        <TextField
+                          disabled
+                          inputProps={{ disabled: true }}
+                          label="Your Answer"
+                          variant="outlined"
+                          color="common"
+                          onChange={(e) =>
+                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
+                          }
+                          value={sendForm?.check_which_ones_the_gelathi_did_not_do_1}
+                        />
+                      </Stack>
+                  
+                    
                   </CardContent>
                 </Card>
               </CardContent>
@@ -873,104 +623,21 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did not do</Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Introduction of GF and Green Motivators"
-                        value={'Introduction of GF and Green Motivators'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Welcome the participants"
-                        value={'Welcome the participants'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List down the natural resources found in the visualization"
-                        value={'List down the natural resources found in the visualization'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Ask how is Climate now?"
-                        value={'Ask how  Climate now'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Duration of Green Training"
-                        value={'Duration of Green Training'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List down the points from the video"
-                        value={'List down the points from the video'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Present that weather severity table"
-                        value={'Present that weather severity table'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Gave feedback to GF and GM"
-                        value={'Gave feedback to GF and GM'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Discuss with three questions after weather severity table"
-                        value={'Discuss with three questions after weather severity table'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label=" Set the ground rules"
-                        value={'Set the ground rules'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Visualization about the natural resources"
-                        value={'Visualization about the natural resources'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Explain the objectives of the Green Training"
-                        value={'Explain the objectives of the Green Training'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Play the climate change video"
-                        value={'Play the climate change video'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Provided and discussed homework"
-                        value={'Provided and discussed homework'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label=" Green Song"
-                        value={'Green Song'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label=" Survey of 3 green motivators"
-                        value={'Survey of 3 green motivatorsGreen Song'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                    </FormGroup>
+                    <Stack mt={2} mb={2}>
+                        <TextField
+                          disabled
+                          inputProps={{ disabled: true }}
+                          label="Your Answer"
+                          variant="outlined"
+                          color="common"
+                          onChange={(e) =>
+                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
+                          }
+                          value={sendForm?.check_which_ones_the_gf_did_not_do}
+                        />
+                      </Stack>
+                  
+                  
                   </CardContent>
                 </Card>
               </CardContent>
@@ -988,92 +655,22 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelati Facilitator did not do</Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Welcome the participants"
-                        value={'Welcome the participants'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Sang the green Song"
-                        value={'Sang the green Song'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Recap of Day 1"
-                        value={'Recap of Day 1'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Homework check"
-                        value={'Homework check'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label=" Discuss about water"
-                        value={'Discuss about water'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List down the points about source and usage of water"
-                        value={'List down the points about source and usage of water'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Provided feedback to GF and GM"
-                        value={'Provided feedback to GF and GM'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Completed and discussed homework"
-                        value={'Completed and discussed homework'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Explain the water cycle activity"
-                        value={'Explain the water cycle activity'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Borewell activity in 2 groups"
-                        value={'Borewell activity in 2 groups'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label=" Discussion about the borewell activity"
-                        value={'Discussion about the borewell activity'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Play the two videos regarding water"
-                        value={'Play the two videos regarding water'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label=" Discuss about the videos"
-                        value={'Discuss about the videos'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Explain the 3 principals of save water"
-                        value={'Explain the 3 principals of save water'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                    </FormGroup>
+                  
+                    <Stack mt={2} mb={2}>
+                        <TextField
+                          disabled
+                          inputProps={{ disabled: true }}
+                          label="Your Answer"
+                          variant="outlined"
+                          color="common"
+                          onChange={(e) =>
+                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
+                          }
+                          value={sendForm?.check_which_ones_the_gf_did_not_do}
+                        />
+                      </Stack>
+                  
+                 
                   </CardContent>
                 </Card>
               </CardContent>
@@ -1091,110 +688,23 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones Gelati facilitator did not do</Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Welcome the participants"
-                        value={'Welcome the participants'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Sing the green Song"
-                        value={'Sing the green Song'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Recap of Day 2"
-                        value={'Recap of Day 2'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Checking the homework"
-                        value={'Checking the homework'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label=" Discuss about the Earth"
-                        value={'Discuss about the Earth'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label=" Tree picture drawing"
-                        value={'Tree picture drawing'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label=" Tree picture presentation by participants"
-                        value={'Tree picture presentation by participants'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Explain the importance of Honeybee"
-                        value={'Explain the importance of Honeybee'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Explain the importance of Birds"
-                        value={'Explain the importance of Birds'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Explain about seed propagation"
-                        value={'Explain about seed propagation'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label=" Discuss the difference between present and past food"
-                        value={'Discuss the difference between present and past food'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Explain the importance of kitchen garden"
-                        value={'Explain the importance of kitchen garden'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label=" Read and explain the case study"
-                        value={'Read and explain the case study'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Discuss about the case study"
-                        value={'Discuss about the case study'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Discuss about the solution to protect earth"
-                        value={'Discuss about the solution to protect earth'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Provide feedback GF and GM"
-                        value={'Provide feedback GF and GM'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Homework"
-                        value={'Homework'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                    </FormGroup>
+                   
+                   
+                    <Stack mt={2} mb={2}>
+                        <TextField
+                          disabled
+                          inputProps={{ disabled: true }}
+                          label="Your Answer"
+                          variant="outlined"
+                          color="common"
+                          onChange={(e) =>
+                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
+                          }
+                          value={sendForm?.check_which_ones_the_gf_did_not_do}
+                        />
+                      </Stack>
+                  
+                 
                   </CardContent>
                 </Card>
               </CardContent>
@@ -1212,74 +722,22 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones Gelati Facilitator did not do</Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Welcome"
-                        value={'Welcome'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Green Song"
-                        value={'Green Song'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Recap of Day-3"
-                        value={'Recap of Day-3'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Checking the Homework"
-                        value={'Checking the Homework'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Explain the pollution and it types"
-                        value={'Explain the pollution and it types'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Discuss about pollution and nonpollution activity in groups"
-                        value={'Discuss about pollution and nonpollution activity in groups'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List down the day to day usage things"
-                        value={'List down the day to day usage things'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List down which are the natural resources polluting, reasons & impact"
-                        value={'List down which are the natural resources polluting, reasons & impact'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Debrief about pollution and usage"
-                        value={'Debrief about pollution and usage'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Feedback GF and GM"
-                        value={'Feedback GF and GM'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Homework"
-                        value={'Homework'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                    </FormGroup>
+                
+                    <Stack mt={2} mb={2}>
+                        <TextField
+                          disabled
+                          inputProps={{ disabled: true }}
+                          label="Your Answer"
+                          variant="outlined"
+                          color="common"
+                          onChange={(e) =>
+                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
+                          }
+                          value={sendForm?.check_which_ones_the_gf_did_not_do}
+                        />
+                      </Stack>
+                  
+                
                   </CardContent>
                 </Card>
               </CardContent>
@@ -1297,98 +755,22 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which one Gelati Facilitator Did NOT do</Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Welcome"
-                        value={'Welcome'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Green song"
-                        value={'Green song'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Recap of Day 4"
-                        value={'Recap of Day 4'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Discussion about 3 principles of pollution and usage"
-                        value={'Discussion about 3 principles of pollution and usage'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List out of which things are polluting the environment"
-                        value={'List out of which things are polluting the environment'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Discussion about 3 principles of prevention of environmental damage"
-                        value={'Discussion about 3 principles of prevention of environmental damage'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List the steps that can be taken to conserve water, By 1 week,1 month, 1 year"
-                        value={'List the steps that can be taken to conserve water, By 1 week,1 month, 1 year'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List the steps that can be taken to conserve earth, By 1 week, 1 Month, 1 Year"
-                        value={'List the steps that can be taken to conserve earth, By 1 week, 1 Month, 1 Year'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Green village was discussed"
-                        value={'Green village was discussed'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="My contacts activity"
-                        value={'My contacts activity'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="List/draw the natural resources in their village"
-                        value={'List/draw the natural resources in their village'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Discuss the importance of forest, Lake, & Gomalas"
-                        value={'Discuss the importance of forest, Lake, & Gomalas'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Discuss the elements disabled for restoration of natural resources"
-                        value={'Discuss the elements disabled for restoration of natural resources'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Feedback GF and GM"
-                        value={'Feedback GF and GM'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Distribution of Certificates"
-                        value={'Distribution of Certificates'}
-                        onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                      />
-                    </FormGroup>
+             
+             
+                    <Stack mt={2} mb={2}>
+                        <TextField
+                          disabled
+                          inputProps={{ disabled: true }}
+                          label="Your Answer"
+                          variant="outlined"
+                          color="common"
+                          onChange={(e) =>
+                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
+                          }
+                          value={sendForm?.check_which_ones_the_gf_did_not_do}
+                        />
+                      </Stack>
+                     
                   </CardContent>
                 </Card>
               </CardContent>
@@ -2015,11 +1397,17 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
                     <CardContent>
                       <Typography variant="h5">Attendance</Typography>
-                      <Typography variant="h5">
+                     
+                    </CardContent>
+                  </Card>
+                   <Card sx={{ marginTop: '20px' }}>
+                   <CardContent>
+                   <Typography >
                         The purpose of the section is to collect quantitative data around participation, excitement,
                         preparedness and the maintenance of interest level of the participants during the training.
                       </Typography>
-                    </CardContent>
+
+                   </CardContent>
                   </Card>
                   <Card sx={{ marginTop: '20px' }}>
                     <CardContent>
@@ -2064,6 +1452,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Typography mb={2}>Level of participation (1 is poor and 5 is excellent)</Typography>
+                    <Typography mb={2}>Reached the venue on or before time</Typography>
                     
                     <Stack mt={2} mb={2}>
                   <TextField
@@ -2074,6 +1463,45 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     color="common"
                     onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
                     value={sendForm?.level_of_participation_1}
+                  />
+                </Stack>
+                <Typography mb={2}>Present for the entire session</Typography>
+                    
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.level_of_participation_3}
+                  />
+                </Stack>
+                <Typography mb={2}>Leave in the meeting/ training in between?</Typography>
+                    
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.level_of_participation_4}
+                  />
+                </Stack>
+                <Typography mb={2}>Signed the ledger/meeting minute</Typography>
+                    
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.level_of_participation_5}
                   />
                 </Stack>
                   </CardContent>
@@ -2135,7 +1563,10 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                 </Card>
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
-                    <Typography mb={2}>Rate The Gelathi Facilitator</Typography>
+                    <Typography mb={2}>Rate The Gelathi Facilitator(Out of 5)</Typography>
+                  
+                    <Typography mb={2}>Prior preparedness and planning for the session
+</Typography>
                     <Stack mt={2} mb={2}>
                   <TextField
                     disabled
@@ -2145,6 +1576,132 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     color="common"
                     onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
                     value={sendForm?.rate_the_gf_1}
+                  />
+                </Stack>
+                <Typography mb={2}>Venue
+
+</Typography>
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.rate_the_gf_2}
+                  />
+                </Stack>
+                <Typography mb={2}>Report of GF with Gelathis
+
+</Typography>
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.rate_the_gf_3}
+                  />
+                </Stack>
+                <Typography mb={2}>Body language during the training
+
+</Typography>
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.rate_the_gf_4}
+                  />
+                </Stack>
+                <Typography mb={2}>Making session interactive and fun
+
+</Typography>
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.rate_the_gf_5}
+                  />
+                </Stack>
+                <Typography mb={2}>Knowledge of the content of the training
+
+</Typography>
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.rate_the_gf_6}
+                  />
+                </Stack>
+                <Typography mb={2}>Ability to clear doubts
+
+</Typography>
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.rate_the_gf_7}
+                  />
+                </Stack>
+                <Typography mb={2}>Ability to inspire the Gelathi's
+
+</Typography>
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.rate_the_gf_8}
+                  />
+                </Stack>
+                <Typography mb={2}>Ability to give clear link between the activity and the content
+
+</Typography>
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.rate_the_gf_9}
+                  />
+                </Stack>
+                <Typography mb={2}>Vulnerable and honest
+
+</Typography>
+                    <Stack mt={2} mb={2}>
+                  <TextField
+                    disabled
+                    inputProps={{ disabled: true }}
+                    label="Your Answer"
+                    variant="outlined"
+                    color="common"
+                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
+                    value={sendForm?.rate_the_gf_10}
                   />
                 </Stack>
                   </CardContent>
@@ -2255,7 +1812,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     <Typography>Deadline to collect the stories</Typography>
                     <Stack mt={2} mb={2}>
                       <TextField
-                        type="date"
+                        disabled
                         label="Your Answer"
                         variant="outlined"
                         color="common"
@@ -2270,6 +1827,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     <Typography>End time of the training</Typography>
                     <Stack mt={2} mb={2}>
                       <TextField
+                      disabled
                         inputProps={{ disabled: true }}
                         type="time"
                         label="Your Answer"
@@ -2287,6 +1845,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     <Typography>No of participants at end of the session</Typography>
                     <Stack mt={2} mb={2}>
                       <TextField
+                      disabled
                         type="number"
                         label="Your Answer"
                         variant="outlined"
@@ -4168,6 +3727,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             id="Correct Answer"
                             label="Correct Answer"
                             variant="outlined"
+                            defaultValue={sendDat?.how_many_women_attended_the_training_session}
                             onChange={(e) => {
                               setSendData({
                                 ...sendData,
@@ -4362,7 +3922,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <Card sx={{ marginTop: 2 }}>
                     <CardContent>
-                    
+                    <Typography variant="body1">Check which ones the Gelathi did not do</Typography>
+                        
                     <Stack mt={2} mb={2}>
                         <TextField
                           disabled

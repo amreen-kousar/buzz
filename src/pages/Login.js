@@ -64,9 +64,9 @@ export default function Login() {
             ) {
               navigate('/dashboard/projects')
             }
-            // else if (response.data.role == 5) {
-            //   navigate('/dashboard/trainer')
-            // }
+            else if (response.data.role == 8) {
+              navigate('/dashboard/funderselshaktidashboard')
+            }
             // else if (response.data.role == 6 | response.data.role == 13) {
             //   navigate('/dashboard/gelathi')
             // }
