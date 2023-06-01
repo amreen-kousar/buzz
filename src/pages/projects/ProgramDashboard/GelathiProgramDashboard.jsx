@@ -8,7 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Page from 'src/components/Page';
 import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
-
+import moment from 'moment';
 import { AppWidgetSummary } from 'src/sections/@dashboard/app';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -42,7 +42,7 @@ const GelathiProgramDashboard = () => {
     var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   
-    const apiHit = async (id, i, g) => {
+    const apiHit = async (id, i, g,date1,date2) => {
       console.log("🚀 ~ file: Gelathidashboard.js:45 ~ apiHit ~ id, i, g:", id, i, g)
       setLoader(true)
       var role = JSON.parse(localStorage.getItem('userDetails'))?.role
@@ -78,17 +78,17 @@ const GelathiProgramDashboard = () => {
       //   opsManager: '',
       // };
       const data = {
-        "partner_id": g ? "" : i === 1 ? id?.id : '',
-        "start_date": g === "date" ? id : '',
-        "end_date": g === "date" ? i : '',
-        "funder_id": g ? "" : i === 2 ? id?.id : '',
-        "dist":g === "country" ? id : "",
-        "taluk":g === "country" ? i : "",
-        "project_id":g ? "" : i === 3 ? id?.id : '',
-        "trainer_id":g ? "" : i === 5 ? id?.id : '',
-        "opsmanager":g ? "" : i === 4 ? id?.id : '',
-        "somid":g ? "" : i === 12 ? id?.id : '',
-        "gflid":g ? "" : i === 13 ? id?.id : '',
+        "partner_id": i === 1 ? id?.id : '',
+        "start_date": (g === "date")? id:(g==="Calendar" || g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
+        "end_date": (g === "date")? i:(g==="Calendar" || g==="countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):'',
+        "funder_id": i === 2 ? id?.id : '',
+        "dist":(g === "country" || g==="countryCalendar") ? id : "",
+        "taluk":(g === "country" || g==="countryCalendar") ? i : "",
+        "project_id":i === 3 ? id?.id : '',
+        "trainer_id":i === 5 ? id?.id : '',
+        "opsmanager":i === 4 ? id?.id : '',
+        "somid":i === 12 ? id?.id : '',
+        "gflid":i === 13 ? id?.id : '',
        "roleid":role,
         "emp_id":userid
     }
@@ -176,23 +176,42 @@ const GelathiProgramDashboard = () => {
     //   )
     // } 
 
-    const getData = (itm, i) => {
+    const getData = (itm, i,date1,date2,dateValue,endDateValue,g) => {
       setSelected(itm)
-      const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
-      apiHit(itm, i)
+      const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
+      i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
+      // apiHit(itm, i)
       console.log(data, i, itm, "<----sdfssreerfer")
+      if(dateValue || endDateValue)
+      {
+        console.log(i,"dateapihitttttt",date1.$d||date2.$d)
+        apiHit(itm, i,"Calendar",date1,date2)
+        
+      }
+      else{
+        console.log("apihit")
+        apiHit(itm,i)
+      }
+      
       setFilterData(data)
       handleCloseFilter()
       console.log("sdfgsdfdfssd", itm, i)
     }
+
+
     const onSumbit = (e, i) => {
+      console.log(e,"evaluessssssss")
       handleCloseFilter()
       setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
-  
-      apiHit(e?.district_id, e?.talaq_id, "country")
+    if(e?.dateValue || e?.endDateValue)
+    {
+      apiHit(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
       console.log(e, i, "<----datssdasdsa")
     }
-  
+    else{
+      apiHit(e?.district_id,e?.talaq_id,"country")
+    }
+    }
     const closefilter = () => {
       console.log("deleted")
     }
@@ -1085,4 +1104,4 @@ const GelathiProgramDashboard = () => {
   
   }
 
-export default GelathiProgramDashboard
+export default GelathiProgramDashboard;

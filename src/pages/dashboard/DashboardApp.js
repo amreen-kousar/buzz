@@ -516,11 +516,11 @@ const [errorMsg,setErrormsg]=useState(false)
 
     const data  ={
       "partner_id": i === 1 ? id?.id : '',
-    "start_date": (g === "date")? id:(g==="Calendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
-    "end_date":  (g === "date")? i:(g==="Calendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):'',
+    "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
+    "end_date":  (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):'',
     "funder_id":i === 2 ? id?.id : '',
-    "dist":g === "country" ? id : "",
-    "taluk":g === "country" ? i : "",
+    "dist":(g === "country" || g==="countryCalendar")? id : "",
+    "taluk":(g === "country" || g==="countryCalendar") ? i : "",
     "project_id":i===3? id?.id : '',
     "trainer_id":i === 5 ? id?.id : '',
     "opsmanager":i === 4 ? id?.id : '',
@@ -675,8 +675,14 @@ let formatdata = summaryData?.data
     handleCloseFilter()
     setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
 
-    apiHit(e?.district_id, e?.talaq_id, "country")
-    console.log(e, i, "<----datssdasdsa")
+    if(e?.dateValue || e?.endDateValue)
+    {
+      apiHit(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
+      console.log(e, i, "<----datssdasdsa")
+    }
+    else{
+      apiHit(e?.district_id,e?.talaq_id,"country")
+    }
   }
 
   const closefilter = () => {
