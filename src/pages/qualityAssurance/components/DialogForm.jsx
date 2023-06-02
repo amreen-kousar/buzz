@@ -1578,7 +1578,7 @@ axios.request(config)
   timer: 3000
 });
 handleClose()
-setSendForm([{}])
+sendForm = formData;
   console.log(JSON.stringify(response.data),'<-----------------------question tag------------------>')
 })
 .catch((error) => {
