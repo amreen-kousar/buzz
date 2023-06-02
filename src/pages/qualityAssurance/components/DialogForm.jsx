@@ -52,7 +52,7 @@ export default function DialogForm({ shown, setShown, batch }) {
       setOpenFilter(false);
     };
 
-    const [checked, setChecked] = React.useState({
+    var checkData = {
       the_gf_comptetly_carried_out_following_funtions:[],
       the_gf_caried_followig_fuctions_bfore_traning_or_meting_started:[],
       check_which_ones_the_gf_did_not_do:[],
@@ -85,7 +85,7 @@ export default function DialogForm({ shown, setShown, batch }) {
       check_which_instructions_the_gelathi_did_not_do:[],
       
       
-  });
+  };
   
 
   const handleprerequisites = (label, event) => {
@@ -111,8 +111,12 @@ export default function DialogForm({ shown, setShown, batch }) {
     }, [shown])
   
     const handleClickOpen = () => {
-      sendForm = formData;
+      sendForm = {...formData};
+      setProgramAssessment('')
+      setDay1Day2('')
       setSendForm(sendForm);
+      checked = {...checkData}
+      setChecked(checked)
       setShown(true)
       setOpen(true);
     };
@@ -596,8 +600,9 @@ console.log(programAssessment,"program assesment")
    }
 
 const [apiData, setApiData] = useState({})
-  var [sendForm, setSendForm]  = useState (formData)
-  console.log("🚀 ~ file: DialogForm.jsx:344 ~ DialogForm ~ sendForm:", sendForm.days_modules)
+  var [sendForm, setSendForm]  = useState ({...formData})
+  var [checked, setChecked]  = useState ({...checkData})
+  console.log("🚀 ~ file: DialogForm.jsx:344 ~ DialogForm ~ sendForm:", sendForm.deadline_to_collect_the_stories)
 
   const setFormDistrictName = (value)=>{
     let {id,name}=value
@@ -1441,7 +1446,7 @@ let data = JSON.stringify({
   name_of_the_assessor: sendForm?.name_of_the_assessor,
   // "entry_date": "2023-05-18"+"T00:00:00Z",
 
- entry_date: moment(sendForm?.entry_date)?.format('YYYY-MM-DD HH:mm:ss').replace(" ","T") + "Z",
+ entry_date: moment(sendForm?.entry_date?.$d)?.format('YYYY-MM-DDTHH:mm:ss') + "Z",
   program_assessment: parseInt(programAssessment),
   today_poa: sendForm.today_poa,
   name_of_the_district:sendForm?.name_of_the_district,
@@ -1514,7 +1519,7 @@ let data = JSON.stringify({
   any_futher_training_and_understding_reqired_by_gf_traing_module: checked['any_futher_training_and_understding_reqired_by_gf_traing_module'],
   did_you_find_anything_traiing_or_gf_that_neds_to_worked_priority: sendForm.did_you_find_anything_traiing_or_gf_that_neds_to_worked_priority,
   details_of_success_stories_to_be_collected_from_gelathis_by_gf: sendForm.details_of_success_stories_to_be_collected_from_gelathis_by_gf,
-  deadline_to_collect_the_stories: moment(sendForm?.deadline_to_collect_the_stories)?.format('YYYY-MM-DD HH:mm:ss').replace(" ","T") + "Z",
+  deadline_to_collect_the_stories: moment(sendForm?.deadline_to_collect_the_stories?.$d)?.format('YYYY-MM-DDTHH:mm:ss') + "Z",
   end_time_of_the_training:sendForm.end_time_of_the_training,
   no_of_participants_at_end_of_the_session: parseInt(sendForm.no_of_participants_at_end_of_the_session),
   any_other_comments_about_the_gelathi_facilitator: sendForm.any_other_comments_about_the_gelathi_facilitator,
@@ -1555,7 +1560,7 @@ let data = JSON.stringify({
   did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3:sendForm.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3,
   did_this_module_take_30_minutes_as_allotted_3:sendForm.did_this_module_take_30_minutes_as_allotted_3,
   });
-console.log("🚀 ~ file: DialogForm.jsx:292 ~ apiFormHit ~ data:", data)
+console.log("🚀 ~ file: DialogForm.jsx:292 ~ apiFormHit ~ data:", data.deadline_to_collect_the_stories)
 
 let config = {
   method: 'post',
@@ -1578,7 +1583,15 @@ axios.request(config)
   timer: 3000
 });
 handleClose()
-sendForm = formData;
+sendForm = {...formData};
+setSendForm(sendForm);
+checked = {...checkData}
+setProgramAssessment('')
+setLeave2('')
+setParticipant('')
+setEngage('')
+setDay1Day2('')
+setChecked(checked)
   console.log(JSON.stringify(response.data),'<-----------------------question tag------------------>')
 })
 .catch((error) => {
@@ -1682,7 +1695,7 @@ sendForm = formData;
 
        
         
-        <Card sx={{mt:4, margin:"20px"}}>
+        <Card sx={{mt:5, margin:"20px"}}>
         <CardContent>
             <Typography>
             The purpose of this 'Buzz training quality evaluation' form is -<br/>
