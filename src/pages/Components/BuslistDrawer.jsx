@@ -128,15 +128,21 @@ console.log(busesd, "busesd")
     <>
 
       <Drawer
-       width={isSmallScreen ? '100%' : 300}
+      //  width={isSmallScreen ? '100%' : 300}
+      //   anchor="right"
+      //   open={isOpenFilter}
+      //   onClose={onCloseFilter}
+      //   // PaperProps={{
+      //   //   sx: { width: 380, },
+      //   // }}
         anchor="right"
         open={isOpenFilter}
         onClose={onCloseFilter}
-        // PaperProps={{
-        //   sx: { width: 380, },
-        // }}
-        
+        PaperProps={{
+          sx: { width: 350 },
+        }}
       >
+        
          <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
             
@@ -146,7 +152,7 @@ console.log(busesd, "busesd")
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
                         <Typography id="bus-details" variant="subtitle2" style={{color:'white'}}>
-                    Bus Details  
+                    Bus Details   
           </Typography>
          
           </Toolbar>
@@ -171,68 +177,19 @@ console.log(busesd, "busesd")
            {(userDetails==2)?<BusEdit clcikData={detailsData} busesd={busesd} updatedata={()=>{setUserUpdate(!userUpdate)}} />:null}
             <Card> 
                 <CardContent>
-                {/* <Typography variant="subtitle1" style={{color:"#494646"}}>
-                   {`Bus Number : ${detailsData?.register_number}`}
-                    </Typography> */}
-                {/* <Typography style={{ flexDirection: 'row',color:'#494646' }} variant="subtitle1" gutterBottom>
-                    Register Date:&nbsp;
-                    {detailsData?.register_date}</Typography>
-                  
-                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
-                    Engine Number:&nbsp;
-                    {detailsData?.engine_number}</Typography>
-                  
-                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
-                    Chassis Number:&nbsp;
-                    {detailsData?.chassis_number}</Typography>
-                  
-                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
-                    Insurance Number:&nbsp;
-                    {detailsData?.insurance_number}</Typography>
-                 
-                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
-                    Insurance Company:&nbsp;
-                    {detailsData?.insurance_company}</Typography>
-                 
-                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
-                    Insurance Start Date:&nbsp;
-                   {detailsData?.insurance_start_date}</Typography>
-                  
-                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
-                    Insurance End Date:&nbsp;
-                    {detailsData?.insurance_end_date}</Typography>
-                 
-                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
-                    Last Service Date:&nbsp;
-                   {detailsData?.last_service_date}</Typography>
-                  
-                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
-                    Next Service Date:&nbsp;
-                    {detailsData?.next_service_due_date}</Typography>
-                
-                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
-                    Permit Details:&nbsp;
-                    {detailsData?.permit}</Typography>
-                  
-                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
-                    Fitness Certificate:&nbsp;
-                    {detailsData?.fitness_certificate}</Typography>
-                 
-                  <Typography variant="subtitle1" style={{ flexDirection: 'row',color:'#494646' }} gutterBottom>
-                    Emission Date:&nbsp;
-                    {detailsData?.emission_date}</Typography> */}
+              
 
                     <TableContainer >
                   <Table aria-label="customized table"  >
                     {/* <TableHead maxWidth>Contact Information</TableHead> */}
                     <TableBody >
                       <TableRow  >
-                        <TableCell>Bus Number</TableCell>
-                        <TableCell>:&nbsp;{detailsData?.register_number}</TableCell>
+                        <TableCell >Bus Number </TableCell>
+                        <TableCell  >:&nbsp;{detailsData?.register_number}</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell>Register Date</TableCell>
-                        <TableCell>:&nbsp;{detailsData?.register_date}</TableCell>
+                        <TableCell >:&nbsp;{detailsData?.register_date}</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell>Engine Number</TableCell>

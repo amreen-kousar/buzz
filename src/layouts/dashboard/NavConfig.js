@@ -11,24 +11,24 @@ const navConfig = {
     title: 'Main',
     path: '/dashboard/app',
     icon: getIcon("ic:baseline-home"),
-    id: ['0', '1', '3', '7', '8', '9', '11','12']
+    id: ['0', '1', '3', '7', '9', '11','12']
   },
   2: {
 
     title: 'Main',
-    path: '/dashboard/trainer',
+    path: '/dashboard/app',
     icon: getIcon('ic:baseline-home'),
-    id: ['5','11']
+    id: ['5']
   },
   3: {
     title: 'Main',
-    path: '/dashboard/gelathi',
+    path: '/dashboard/app',
     icon: getIcon('ic:baseline-home'),
     id: ['6', '13']
   },
   4: {
     title: 'Main',
-    path: '/dashboard/operationmanager',
+    path: '/dashboard/app',
     icon: getIcon('ic:baseline-home'),
     id: ['4']
   },
@@ -88,8 +88,8 @@ const navConfig = {
     id: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '11', '12', '13']
   },
   14: {
-    title: 'Quality Assurance Form',
-    path: '/dashboard/qualityAssurance',
+    title: 'Quality Assessment Form',
+    path: '/dashboard/qualityAssessment',
     icon: getIcon('material-symbols:demography'),
     id: ['1', '2', '3', '4', '12', '13' ]
   },
@@ -97,27 +97,50 @@ const navConfig = {
     title: 'Self Sakthi Program',
     path: '/dashboard/selfsakthiprogramdashboard',
     icon: getIcon("bx:female"),
-    id: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '11', '12', '13']
+    id: ['0', '1', '2', '3', '4',  '6', '7', '8', '9', '11', '12', '13']
   },
   16: {
     title: 'Gelathi Program',
     path: '/dashboard/gelathiprogramdashboard',
     icon: getIcon("foundation:torsos-all-female"),
-    id: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '11', '12', '13']
+    id: ['0', '1', '2', '3', '4',  '6', '7', '8', '9', '11', '12', '13']
   },
   17: {
     title: 'Green Program',
     path: '/dashboard/greenprogramdashboard',
     icon: getIcon("noto-v1:man-farmer-dark-skin-tone" ),
-    id: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '11', '12', '13']
+    id: ['0', '1', '2', '3', '4', , '6', '7', '8', '9', '11', '12', '13']
   },
   18: {
     title: 'Vyapar Program',
     path: '/dashboard/vyaparprogramdashboard',
     icon: getIcon("material-symbols:business-center-rounded"  ),
-    id: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '11', '12', '13']
+    id: ['0', '1', '2', '3', '4', '6', '7', '8', '9', '11', '12', '13']
   },
-
+  19: {
+    title: ' Funder Vyapar Program',
+    path: '/dashboard/fundervyapardashboard',
+    icon: getIcon("material-symbols:business-center-rounded" ),
+    id: [ '8' ]
+  },
+  20: {
+    title: ' Funder Green Program',
+    path: '/dashboard/fundergreendashboard',
+    icon: getIcon("noto-v1:man-farmer-dark-skin-tone" ),
+    id: [ '8' ]
+  },
+  21: {
+    title: ' Funder Self Shakthi Program',
+    path: '/dashboard/funderselshaktidashboard',
+    icon: getIcon("bx:female" ),
+    id: [ '8' ]
+  },
+  22: {
+    title: ' Funder Gelathi Program',
+    path: '/dashboard/fundergelathidashboard',
+    icon: getIcon("foundation:torsos-all-female"  ),
+    id: [ '8' ]
+  },
   // 1:
   // {
   //   title: 'Main',

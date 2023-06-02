@@ -27,7 +27,7 @@ import FiltersHome from 'src/pages/Filters/FiltersHome';
 //  import GalathiChart from './Components/Charts/GalathiChart';
  import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
-
+import moment from 'moment';
 const SelfSakthiProgramDashboard = () => {
   const navigate = useNavigate();
   const data = localStorage?.getItem('userId')
@@ -43,7 +43,7 @@ const SelfSakthiProgramDashboard = () => {
 
   const [filterData, setFilterData] = useState({})
   const [loader, setLoader] = useState(false)
-
+const [errorMsg,setErrormsg]=useState(false)
   const [slected, setSelected] = useState(null)
 
   const [summaryData, setSummaryData] = useState([]);
@@ -132,17 +132,17 @@ const SelfSakthiProgramDashboard = () => {
     // };
 
     const data  ={
-      "partner_id": "",
-    "start_date": "",
-    "end_date": "",
-    "funder_id":"",
-    "dist":"",
-    "taluk":"",
-    "project_id":"",
-    "trainer_id":"",
-    "opsmanager":"",
-    "somid":"",
-    "gflid":"",
+      "partner_id": g ? "" : i === 1 ? id?.id : '',
+    "start_date": (g === "date")? id: '',
+    "end_date":  (g === "date")? i: '',
+    "funder_id":g ? "" : i === 2 ? id?.id : '',
+    "dist":g === "country" ? id : "",
+    "taluk":g === "country" ? i : "",
+    "project_id":g ? "" : i === 3 ? id?.id : '',
+    "trainer_id":g ? "" : i === 5 ? id?.id : '',
+    "opsmanager":g ? "" : i === 4 ? id?.id : '',
+    "somid":g ? "" : i === 12 ? id?.id : '',
+    "gflid":g ? "" : i === 13 ? id?.id : '',
     "roleid":roleid,
     "emp_id":userid
   }
@@ -170,7 +170,9 @@ setSummaryData(response.data);
         console.log("<------------setSummaryDatasetSummaryData", response.data)
       })
       .catch((error) => {
+       
         console.log(error);
+        setErrormsg(error);
       });
   };
 console.log(summaryData?.data,"resposeapi")
@@ -180,6 +182,7 @@ let formatdata = summaryData?.data
     apiHit();
   }, []);
 
+  
 
   if (loader) {
     return (
@@ -200,7 +203,7 @@ let formatdata = summaryData?.data
   };
 
   const onDateSubmit = (e) => {
-    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+    setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` })
 
     apiHit(e?.startDate, e?.endDate, "date")
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
@@ -208,13 +211,17 @@ let formatdata = summaryData?.data
     console.log(e, "<----scasds")
   }
 
+  console.log(slected,"dateeeeeeeeeeeee")
+
   const handleDelete = () => {
+ 
+   
     setSelected(null)
     apiHit();
   }
 
 
-  if (summaryData?.length === 0) {
+  if (summaryData?.length === 0 ) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
         <CircularProgress />
@@ -222,10 +229,19 @@ let formatdata = summaryData?.data
     )
   }
 
+  // if(errorMsg!=''){
+  //   return(
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}}>
+  //       {errorMsg?.message}
+  //     </Box>
+  //   )
+  // }
+
 
   const getData = (itm, i) => {
     setSelected(itm)
-    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
+    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
+    i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
     apiHit(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
     setFilterData(data)
@@ -258,7 +274,7 @@ let formatdata = summaryData?.data
     { ...itemStyles[0], title: "Vyapar", total: 'vyapar', color: "vyapar", icon: 'eos-icons:product-subscriptions-outlined' },
 
   ]
-
+const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
   return (
     <>
 
@@ -273,9 +289,14 @@ let formatdata = summaryData?.data
           </Button>
         </Stack>
         <Container maxWidth="xl">
-          {
-            slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
-          }
+        <Grid item spacing={10}>
+
+
+  {
+    slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+  }
+
+</Grid>
 
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <FiltersHome
@@ -314,7 +335,7 @@ let formatdata = summaryData?.data
             <Grid item xs={4} sm={8} md={4}>
 
               <AppWidgetSummary
-                title="Number  of Vilages"
+                title="Number  of Villages"
                 total={summaryData?.summary_villages}
                 color="motivator"
 
@@ -444,7 +465,7 @@ let formatdata = summaryData?.data
             <Grid item xs={4} sm={8} md={4}>
 
               <AppWidgetSummary
-                title="Number  of Vilages"
+                title="Number  of Villages"
                 total={summaryData?.summary_villages}
                 color="motivator"
 
@@ -627,17 +648,17 @@ let formatdata = summaryData?.data
 
               />
             </Grid> */}
-            <Grid item xs={4} sm={4} md={3}>
+         <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number  of Vilages"
+                title="Number  of Villages"
                 total={itm?.villages}
                 color="villages"
                 icon= "fontisto:holiday-village"
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Batches"
@@ -647,7 +668,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Self Sakthi Survey"
@@ -657,7 +678,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="2nd Day Turnout  %"
@@ -746,17 +767,17 @@ let formatdata = summaryData?.data
 
               />
             </Grid> */}
-            <Grid item xs={4} sm={4} md={3}>
+         <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number  of Vilages Visits"
+                title="Number  of Villages Visits"
                 total={itm?.villagevisit}
                 color="villages"
                 icon= "fontisto:holiday-village"
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Beehive"
@@ -766,7 +787,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+        <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meet"
@@ -776,7 +797,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circles"
@@ -786,7 +807,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll"
@@ -796,7 +817,7 @@ let formatdata = summaryData?.data
 
 />
 </Grid>
-<Grid item xs={4} sm={8} md={3}>
+<Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Green Motivators"
@@ -806,7 +827,7 @@ let formatdata = summaryData?.data
 
 />
 </Grid>
-<Grid item xs={4} sm={8} md={3}>
+<Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Vyapar"
@@ -864,11 +885,11 @@ let formatdata = summaryData?.data
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
       Funder<br />
       {/*  for role id 5 it should be project in 4 dahsbord  */}
-      Actual / Target
+      Actual / Target <br/>
 
-      Start Date :
+      Start Date : <br/>
 
-      End Date : 
+      End Date :  <br/>
       {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
     </span></Grid>
     <Grid item xs={6}>
@@ -902,17 +923,17 @@ let formatdata = summaryData?.data
               />
             </Grid> */}
 
-<Grid item xs={4} sm={4} md={3}>
+<Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
-  title="Number  of Vilages Visits"
+  title="Number  of Villages Visits"
   total={itm?.villages}
   color="villages"
   icon= "fontisto:holiday-village"
 
 />
 </Grid>
-             <Grid item xs={4} sm={8} md={3}>
+           <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Batch"
@@ -923,7 +944,7 @@ let formatdata = summaryData?.data
 />
 </Grid>
            
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Self Shakthi Survey"
@@ -933,7 +954,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="2nd Day Turnout  %"
@@ -1025,17 +1046,17 @@ let formatdata = summaryData?.data
 
               />
             </Grid> */}
-            <Grid item xs={4} sm={4} md={3}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number  of Vilages Visits"
+                title="Number  of Villages Visits"
                 total={itm?.villagevisit}
                 color="villages"
                 icon= "fontisto:holiday-village"
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Beehive"
@@ -1045,7 +1066,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meet"
@@ -1055,7 +1076,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circles"
@@ -1065,7 +1086,7 @@ let formatdata = summaryData?.data
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll"
@@ -1075,7 +1096,7 @@ let formatdata = summaryData?.data
 
 />
 </Grid>
-<Grid item xs={4} sm={8} md={3}>
+<Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Green Motivators"
@@ -1085,7 +1106,7 @@ let formatdata = summaryData?.data
 
 />
 </Grid>
-<Grid item xs={4} sm={8} md={3}>
+<Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Vyapar"

@@ -278,7 +278,7 @@ export default function PlanofAction() {
         )}
       </Typography>
 
-      {name == '' && <PoaCreate changeState={changeState} />}
+    {(userId)?<PoaCreate changeState={changeState} userId={userId}/>:<PoaCreate changeState={changeState}/>}
       <br />
       <br />
 

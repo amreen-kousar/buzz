@@ -26,6 +26,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     const [open, setOpen] = React.useState(false);
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState('');
+    const [participantData,setParticipantData]=useState('');
+    const [reload , setReload] = useState(false)
+
+    const reloadFUnction =() =>{
+      setReload(!reload)
+    }
     const handleClickOpen = () => {
         setOpen(true);
         
@@ -64,9 +70,11 @@ const setEnrolledVyapar=(itm)=>{
       
 }
 
+console.log(session,"sessionnnnnnnnnnnnnnnnnnnn")
 useEffect(()=>{
 getEnrollVyapar();
-},[open])
+getAddPartcipants();
+},[open ,reload])
 
   const getEnrollVyapar=()=>{
     var data = JSON.stringify({
@@ -91,6 +99,35 @@ getEnrollVyapar();
     });
     
   }
+
+const getAddPartcipants=()=>{
+  var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  var data = JSON.stringify({
+    "search": "",
+    "project_id": session?.project_id,
+    "emp_id": userid
+  });
+  
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollVyaparEnrollment.php',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    setParticipantData(response.data)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  
+}
+
 
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" }
@@ -119,10 +156,10 @@ getEnrollVyapar();
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            All Participants
+            All Participants 
           </Typography>
 
-          <AddParticipants type="vyapar" session={session}/>
+          <AddParticipants type="vyapar" session={session}  reloadFUnction={reloadFUnction}/>
           
         </Toolbar>
         {/* <Webcam
@@ -154,7 +191,7 @@ getEnrollVyapar();
                     </CardContent>
                     
                     
-                </Card><br/><Typography style={{textAlign:'center'}} variant="h6"> All Participants : &nbsp; {session?.total_participants}</Typography>
+                </Card><br/><Typography style={{textAlign:'center'}} variant="h6"> All Participants : &nbsp; {sessiondata?.total_participants}</Typography>
                 <Card>
                     <CardContent>
                         

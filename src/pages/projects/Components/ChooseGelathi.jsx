@@ -70,9 +70,98 @@ console.log(data1,"state")
     setOpen(false);
   };
   useEffect(() => {
-    enrolledGelathi();
+    
+    let isApiSubscribed = true;
+    if(state.head == "_SPS")
+    { 
+     if (isApiSubscribed) {
+      enrolledGelathi();
+     }
+   }
+   if(state.head == "_GPS"){
+     if (isApiSubscribed) {
+     
+       enrolledGreenMotivators()
+      
+     }
+   }
+   if(state.head == "_VPS"){
+    if (isApiSubscribed) {
+    
+      enrolledVyaapar()
+     
+    }
+  }
+     return () => {
+       isApiSubscribed = false;
+     };
 }, []
 )
+
+const enrolledVyaapar= async(id,i,g) =>{
+  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  var data = JSON.stringify({
+      "search": search,
+      "project_id": state?.id,
+      "emp_id": idvalue,
+      "gelathi_id":id?.emp_id?id?.emp_id:'',
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollVyaparEnrollment.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setenrolled(response?.data)
+      // changeState();
+      setCount(response?.data?.list.length)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+}
+const enrolledGreenMotivators = async(id,i,g) =>{
+  console.log(id,'hy',i)
+    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var data = JSON.stringify({
+        "search": search,
+        "project_id": state?.id,
+        "emp_id": idvalue,
+        "gelathi_id":id?.emp_id?id?.emp_id:""
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollGreenMotivators.php',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        setenrolled(response.data)
+        // changeState();
+        setCount(response?.data?.list.length)
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+}
+
+
   const enrolledGelathi = async =>{
     var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
 var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
@@ -151,7 +240,7 @@ const changeText = (e) => {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" color='inherit'>
-             Gelathis 
+             Gelathis  
             </Typography>
              
             {/* <Button autoFocus color="inherit" onClick={handleClose}>

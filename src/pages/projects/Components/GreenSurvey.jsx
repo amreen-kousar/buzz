@@ -31,7 +31,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { Color } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
 import products from 'src/_mock/products';
@@ -45,6 +45,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 export default function GreenSurvey(props ) {
+console.log(props ,"props in greenservey")
+  const {state} = useLocation()
   // console.log("🚀 ~ file: GreenSurvey.jsx:48 ~ GreenSurvey ~ enrolledGreenMotivators:", enrolledGreenMotivators)
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(false);
@@ -332,7 +334,7 @@ export default function GreenSurvey(props ) {
     {
      console.log("surveyyyyform")
     var data = JSON.stringify({
-    "partcipantId":props?.itm?.id ,
+    "partcipantId":props?.itm?.id || props?.itm.gelathi_id ,
     "Email": sendData?.Email,
     "Name_of_the_surveyor": sendData?.Name_of_the_surveyor,
     "Name_of_the_respondent": sendData?.Name_of_the_respondent,
@@ -388,6 +390,8 @@ export default function GreenSurvey(props ) {
       
       axios(config)
       .then(function (response) {
+        props?.changeState()
+        props?.mainDrawerReload()
         setgreensurveyform(response?.data)
         setMessage('Form saved successfully')
         setsuccessMessage(true)
@@ -565,6 +569,9 @@ const handletrees=(event)=>{
   setTreesError(false)
 }
 
+const handleform=()=>{
+  alert('Surevy was done')
+}
 
 const handleresources=(label,event)=>{
 
@@ -578,7 +585,7 @@ const handleresources=(label,event)=>{
     tempData[label]=updatedList
     setChecked(tempData);
 }
-
+console.log(state.head, "state.head ingreen")
 
   return (
     <div>
@@ -614,7 +621,7 @@ const handleresources=(label,event)=>{
       
         {!(props?.itm?.is_survey)?<IconButton onClick={handleClickOpen}>
          <Icon  icon="clarity:form-line" width={20} height={20} marginTop={20}  color="#ff7424"  />
-        </IconButton>:<IconButton>
+        </IconButton>:<IconButton onClick={handleform}>
          <Icon  icon="charm:notes-tick" width={20} height={20} marginTop={20}  color="green" />
         </IconButton>}
         

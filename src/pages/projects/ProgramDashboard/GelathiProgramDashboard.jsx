@@ -8,7 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Page from 'src/components/Page';
 import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
-
+import moment from 'moment';
 import { AppWidgetSummary } from 'src/sections/@dashboard/app';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -34,14 +34,15 @@ const GelathiProgramDashboard = () => {
     const [openFilter, setOpenFilter] = useState(false);
    const [filterData, setFilterData] = useState({})
     const [loader, setLoader] = useState(false)
-  const [slected, setSelected] = useState(null)
+    const [errorMsg,setErrormsg]=useState(false)
+    const [slected, setSelected] = useState(null)
    const [summaryData, setSummaryData] = useState([]);
     const [graphData, setGraphData] = useState(null);
   
     var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   
-    const apiHit = async (id, i, g) => {
+    const apiHit = async (id, i, g,date1,date2) => {
       console.log("🚀 ~ file: Gelathidashboard.js:45 ~ apiHit ~ id, i, g:", id, i, g)
       setLoader(true)
       var role = JSON.parse(localStorage.getItem('userDetails'))?.role
@@ -77,17 +78,17 @@ const GelathiProgramDashboard = () => {
       //   opsManager: '',
       // };
       const data = {
-        "partner_id": "",
-        "start_date": "",
-        "end_date": "",
-        "funder_id":"",
-        "dist":"",
-        "taluk":"",
-        "project_id":"",
-        "trainer_id":"",
-        "opsmanager":"",
-        "somid":"",
-        "gflid":"",
+        "partner_id": i === 1 ? id?.id : '',
+        "start_date": (g === "date")? id:(g==="Calendar" || g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
+        "end_date": (g === "date")? i:(g==="Calendar" || g==="countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):'',
+        "funder_id": i === 2 ? id?.id : '',
+        "dist":(g === "country" || g==="countryCalendar") ? id : "",
+        "taluk":(g === "country" || g==="countryCalendar") ? i : "",
+        "project_id":i === 3 ? id?.id : '',
+        "trainer_id":i === 5 ? id?.id : '',
+        "opsmanager":i === 4 ? id?.id : '',
+        "somid":i === 12 ? id?.id : '',
+        "gflid":i === 13 ? id?.id : '',
        "roleid":role,
         "emp_id":userid
     }
@@ -109,11 +110,13 @@ const GelathiProgramDashboard = () => {
           setLoader(false)
   console.log(response.data,"________>responsedata")
   setSummaryData(response.data);
-  GathathiGraphDataFormating(response.data);
+
           console.log("responseofapi", response.data)
         })
         .catch((error) => {
+         
           console.log(error);
+          setErrormsg(error)
         });
     };
   console.log(summaryData?.data,"resposeapi")
@@ -143,7 +146,7 @@ const GelathiProgramDashboard = () => {
     };
   
     const onDateSubmit = (e) => {
-      setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
+      setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` })
   
       apiHit(e?.startDate, e?.endDate, "date")
       setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
@@ -157,7 +160,7 @@ const GelathiProgramDashboard = () => {
     }
   
   
-    if (summaryData?.length === 0) {
+    if (summaryData?.length === 0 ) {
       return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
           <CircularProgress />
@@ -165,24 +168,50 @@ const GelathiProgramDashboard = () => {
       )
     }
   
-  
-    const getData = (itm, i) => {
+    // if(errorMsg!=''){
+    //   return(
+    //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}}  style={{fontSize:30}}>
+    //       {errorMsg?.message}
+    //     </Box>
+    //   )
+    // } 
+
+    const getData = (itm, i,date1,date2,dateValue,endDateValue,g) => {
       setSelected(itm)
-      const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
-      apiHit(itm, i)
+      const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
+      i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
+      // apiHit(itm, i)
       console.log(data, i, itm, "<----sdfssreerfer")
+      if(dateValue || endDateValue)
+      {
+        console.log(i,"dateapihitttttt",date1.$d||date2.$d)
+        apiHit(itm, i,"Calendar",date1,date2)
+        
+      }
+      else{
+        console.log("apihit")
+        apiHit(itm,i)
+      }
+      
       setFilterData(data)
       handleCloseFilter()
       console.log("sdfgsdfdfssd", itm, i)
     }
+
+
     const onSumbit = (e, i) => {
+      console.log(e,"evaluessssssss")
       handleCloseFilter()
       setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
-  
-      apiHit(e?.district_id, e?.talaq_id, "country")
+    if(e?.dateValue || e?.endDateValue)
+    {
+      apiHit(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
       console.log(e, i, "<----datssdasdsa")
     }
-  
+    else{
+      apiHit(e?.district_id,e?.talaq_id,"country")
+    }
+    }
     const closefilter = () => {
       console.log("deleted")
     }
@@ -201,9 +230,12 @@ const GelathiProgramDashboard = () => {
             </Button>
           </Stack>
           <Container maxWidth="xl">
-            {
-              slected && <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
-            }
+          <Grid item spacing={10}>
+{
+  slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+}
+
+</Grid>
   
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
               <FiltersHome
@@ -539,7 +571,7 @@ const GelathiProgramDashboard = () => {
 <Container style={{ display: 'flex', flexDirection: 'row' }}>
   <Grid item xs={6}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-      Funder<br />
+      {(itm?.startDate)?"Project Name":"Funder"}<br />
       Actual / Target
     </span></Grid>
     <Grid item xs={6}>
@@ -569,17 +601,17 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid> */}
-            <Grid item xs={2} sm={4} md={4}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number  of Vilages"
+                title="Number  of Villages"
                 total={itm?.villages}
                 color="villages"
                 icon= "fontisto:holiday-village"
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meeting"
@@ -589,7 +621,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Gelathi Enrolled"
@@ -599,7 +631,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Sporthi Survey"
@@ -611,7 +643,7 @@ const GelathiProgramDashboard = () => {
 
 </Grid>
 
-<Grid item xs={4} sm={8} md={4}>
+<Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Beehives"
@@ -621,7 +653,7 @@ const GelathiProgramDashboard = () => {
 
 />
 </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+<Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Sporthi Modules Completed"
@@ -708,17 +740,17 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid> */}
-            <Grid item xs={2} sm={4} md={4}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number  of Vilages"
+                title="Number  of Villages"
                 total={itm?.villagevisit}
                 color="villages"
                 icon= "fontisto:holiday-village"
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meeting"
@@ -728,7 +760,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle"
@@ -738,7 +770,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll"
@@ -750,7 +782,7 @@ const GelathiProgramDashboard = () => {
 
 </Grid>
 
-<Grid item xs={4} sm={8} md={4}>
+<Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Beehives"
@@ -760,7 +792,7 @@ const GelathiProgramDashboard = () => {
 
 />
 </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+<Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Green Motivators"
@@ -847,17 +879,17 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid> */}
-            <Grid item xs={2} sm={4} md={4}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number  of Vilages Visits"
+                title="Number  of Villages Visits"
                 total={itm?.villagevisit}
                 color="villages"
                 icon= "fontisto:holiday-village"
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meeting"
@@ -867,7 +899,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle"
@@ -877,7 +909,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+           <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll"
@@ -889,7 +921,7 @@ const GelathiProgramDashboard = () => {
 
 </Grid>
 
-<Grid item xs={4} sm={8} md={4}>
+<Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Beehives"
@@ -899,7 +931,7 @@ const GelathiProgramDashboard = () => {
 
 />
 </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Green Motivators"
@@ -986,17 +1018,17 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid> */}
-            <Grid item xs={2} sm={4} md={4}>
+            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number  of Vilages"
+                title="Number  of Villages"
                 total={itm?.villagevisit}
                 color="villages"
                 icon= "fontisto:holiday-village"
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle Meeting"
@@ -1006,7 +1038,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Circle"
@@ -1016,7 +1048,7 @@ const GelathiProgramDashboard = () => {
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+           <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Enroll"
@@ -1028,7 +1060,7 @@ const GelathiProgramDashboard = () => {
 
 </Grid>
 
-<Grid item xs={4} sm={8} md={4}>
+<Grid item xs={6} sm={8} md={6}>
 
 <AppWidgetSummary
   title="Number of Beehives"
@@ -1038,7 +1070,7 @@ const GelathiProgramDashboard = () => {
 
 />
 </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+           <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Green Motivators"
@@ -1072,4 +1104,4 @@ const GelathiProgramDashboard = () => {
   
   }
 
-export default GelathiProgramDashboard
+export default GelathiProgramDashboard;

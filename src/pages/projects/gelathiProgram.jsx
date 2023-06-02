@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container, Typography, Grid, IconButton,CardContent,Button } from '@mui/material';
+import { Card, Stack, Chip, Container,Box , Typography, Grid, IconButton,CardContent,Button, CircularProgress } from '@mui/material';
 import GelathiProgrameDrawer from '../projects/Components/GelathiProgrameDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
@@ -16,6 +16,13 @@ export default function gelathiProgram(props) {
     const [count,setCount]= useState('');
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
+    // const [openFilter, setOpenFilter] = useState(false);
+    // const handleOpenFilter = () => {
+    //   setOpenFilter(true);
+    // };
+    // const handleCloseFilter = () => {
+    //   setOpenFilter(false);
+    // };
 
   // useEffect(() => {
   //     user()
@@ -24,7 +31,7 @@ export default function gelathiProgram(props) {
        if (filter_type) {
          setSelected(filter_type)
          let ids = { "Circle Meetings": 1,"Village Visits":2,"Beehive Visits":3,"Rescheduled":22,"Cancelled":23,"Gelathi Facilitators":6  ,"SPS":4, "SPM1":5 , "SPM2":6 , "SPM3":7, 
-         "SPM4":8,"SPM5":9 }
+         "SPM4":8,"SPM5":9,"GPS":10,"GPM1":11,"GPM2":12,"GPM3":13,"GPM4":14,"GPM5":15,"VPS":16,"VPM1":17,"VPM2":18,"VPM3":19,"VPM4":20,"VPM5":21 }
          filter_type.id = ids[filter_type.type]
        }
        gelathiPrograme(d,filter_type);
@@ -169,7 +176,7 @@ export default function gelathiProgram(props) {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Gelathi Program 
+                    Gelathi Program  
                 </Typography>
                 <Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
@@ -184,7 +191,11 @@ export default function gelathiProgram(props) {
                     selected  && (selected?.type=='Gelathi Facilitators') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             {
-                    selected  && (selected?.type=='Circle Meetings' || selected?.type=='Beehive Visits' || selected?.type=='Rescheduled'|| selected?.type=='Cancelled' || selected?.type=='Village Visits') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected  && (selected?.type=='Circle Meetings' || selected?.type=='Beehive Visits' || selected?.type=='Rescheduled'|| selected?.type=='Cancelled' || selected?.type=='Village Visits' 
+                    || selected?.type=='SPS'|| selected?.type=='SPM1'|| selected?.type=='SPM2'|| selected?.type=='SPM3'|| selected?.type=='SPM4'|| selected?.type=='SPM5'
+                    || selected?.type=='GPS'|| selected?.type=='GPM1'|| selected?.type=='GPM2'|| selected?.type=='GPM3'|| selected?.type=='GPM4'|| selected?.type=='GPM5'
+                    || selected?.type=='VPS'|| selected?.type=='VPM1'|| selected?.type=='VPM2'|| selected?.type=='VPM3'|| selected?.type=='VPM4'|| selected?.type=='VPM5')
+                     && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             
             
@@ -201,7 +212,8 @@ export default function gelathiProgram(props) {
                     onCloseFilter={handleclose}
                 />
             </Stack>
-               <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
+               <Card>
+                <CardContent style={{fontWeight:700}}>Project Name : {data1?.project_name}</CardContent> </Card><br/>
                <Typography style={{fontWeight:500,marginLeft:2}}> All Gelathi Sessions  ({count})</Typography> 
          {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             {clcikData && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -216,7 +228,14 @@ export default function gelathiProgram(props) {
             </Stack>}
             {/* </Stack> */}
 
-            {programe?.list?.length!==0?programe?.list?.map((itm) => {
+            { programe == "" ? 
+
+<div style={{marginTop:"20%" , marginLeft:"40%"}}>
+  <CircularProgress />
+  </div>
+:
+            
+            programe?.list?.length!==0?programe?.list?.map((itm) => {
                         // console.log(itm, "<---programeprogrameprograme")
                         return (
                             <Card style={styles.card1} onClick={() => {

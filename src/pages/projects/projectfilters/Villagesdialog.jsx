@@ -89,7 +89,7 @@ export default function VillageDialog({ shown, setShown, batchState,batch,isOpen
           
              <CardContent> <Typography variant="subtitle2" sx={{color:"black"}}> Partner: {batch?.data?.partnerName} </Typography>
               {console.log(batch?.data?.projectName, '<----------batch?.data?.projectName')}
-              <Typography variant="subtitle2" sx={{color:"black"}}> Training Batch : {batch?.data?.name} </Typography>
+              <Typography variant="subtitle2" sx={{color:"black"}}> Training Batch  : {batch?.data?.name} </Typography>
             
               <Typography variant="subtitle2" sx={{color:"black"}}> Contact Person : {batch?.data?.contact_number}</Typography>
               <Typography variant="subtitle2" sx={{color:"black"}}> Contact Number : {batch?.data?.contact_person}</Typography> 

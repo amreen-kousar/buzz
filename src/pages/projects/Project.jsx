@@ -325,7 +325,7 @@ function Project(props) {
                       paddingLeft: 6,
                     }}
                   >
-                    <span> MY POA</span>
+                    <span> My Poa</span>
                   </Card>
 
                   <Card
@@ -359,7 +359,7 @@ function Project(props) {
                     }}
                   >
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      Gelathi Facilitators({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />\{' '}
+                      Gelathi Facilitators({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />{' '}
                     </Box>
                   </Card>
 
@@ -672,7 +672,7 @@ function Project(props) {
                   userDetails == 12 ? (
                     <br />
                   ) : null}
-                  {userDetails == 1 ||
+                  {/* {userDetails == 1 ||
                   userDetails == 6 ||
                   userDetails == 3 ||
                   userDetails == 4 ||
@@ -702,15 +702,10 @@ function Project(props) {
                         <span style={{ width: '200px' }}> Gelathi Circles</span>
                       </Button>
                     </Link>
-                  ) : null}
-                  {userDetails == 1 ||
-                  userDetails == 6 ||
-                  userDetails == 3 ||
-                  userDetails == 4 ||
-                  userDetails == 13 ||
-                  userDetails == 6 ? (
-                    <br />
-                  ) : null}
+                  ) : null
+                  
+                  } */}
+                
                   {userDetails == 6 || userDetails == 13 ? (
                     <>
                       <span style={styles.linkStyle}>

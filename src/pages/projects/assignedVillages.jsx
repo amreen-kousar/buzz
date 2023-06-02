@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip, Container,CardContent, Typography, Grid, IconButton, CircularProgress, } from '@mui/material';
 // import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
@@ -178,7 +178,14 @@ const getTrainingBatch = async =>{
                 />
             </Stack>
             {/* </Stack> */}
-            {villageData?.list?.map((itm) => {
+            {
+             villageData == ""?
+             <div style={{marginTop:"20%" , marginLeft:"40%"}}>
+             <CircularProgress />
+             </div>
+             :
+            
+            villageData?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} onClick={() => {
                       setBatchState(itm)

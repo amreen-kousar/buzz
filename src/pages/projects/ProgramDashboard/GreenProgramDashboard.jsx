@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography, Stack, Divider, Card, CardContent, Button, Box } from '@mui/material';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import moment from 'moment';
 import Page from 'src/components/Page';
 import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
@@ -34,12 +34,13 @@ const GreenProgramDashboard = () => {
   const [openFilter, setOpenFilter] = useState(false);
   const [filterData, setFilterData] = useState({});
   const [loader, setLoader] = useState(false);
+  const [errorMsg,setErrormsg]=useState(false)
   const [slected, setSelected] = useState(null);
   const [summaryData, setSummaryData] = useState([]);
   const [graphData, setGraphData] = useState(null);
   var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
   var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-  const apiHit = async (id, i, g) => {
+  const apiHit = async (id, i, g,date1,date2) => {
     console.log('🚀 ~ file: Gelathidashboard.js:45 ~ apiHit ~ id, i, g:', id, i, g);
     setLoader(true);
     var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
@@ -80,19 +81,19 @@ const GreenProgramDashboard = () => {
     // };
 
     const data = {
-      partner_id: "",
-      start_date: '',
-      end_date: '',
-      funder_id: "",
-      dist: "",
-      taluk: "",
-      project_id: "",
-      trainer_id: "",
-      opsmanager: "",
-      somid: "",
-      gflid: "",
-      roleid: roleid ,
-      emp_id: userid ,
+      "partner_id": i === 1 ? id?.id : '',
+      "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
+      "end_date": (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):'',
+      "funder_id": i === 2 ? id?.id : '',
+      "dist":  (g === "country" || g==="countryCalendar") ? id : '',
+      "taluk": (g === "country" || g==="countryCalendar") ? i : '',
+      "project_id":  i === 3 ? id?.id :'',
+      "trainer_id":i === 5 ? id?.id : '',
+      "opsmanager":  i === 4 ? id?.id : '',
+      "somid": i === 12 ? id?.id : '',
+      "gflid": i === 13 ? id?.id : '',
+      "roleid": roleid ,
+      "emp_id": userid ,
     };
     console.log(data, '<------bbbbbbb');
     const config = {
@@ -113,6 +114,7 @@ const GreenProgramDashboard = () => {
         console.log('<--------------------setSummaryData', response.data);
       })
       .catch((error) => {
+         setErrormsg(error)
         console.log(error);
       });
   };
@@ -140,7 +142,7 @@ const GreenProgramDashboard = () => {
   };
 
   const onDateSubmit = (e) => {
-    setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` });
+    setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` });
 
     apiHit(e?.startDate, e?.endDate, 'date');
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate });
@@ -153,7 +155,7 @@ const GreenProgramDashboard = () => {
     apiHit();
   };
 
-  if (summaryData?.length === 0) {
+  if (summaryData?.length === 0 && loader) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
         <CircularProgress />
@@ -161,21 +163,49 @@ const GreenProgramDashboard = () => {
     );
   }
 
-  const getData = (itm, i) => {
+  // if(errorMsg!=''){
+  //   return(
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}}>
+  //       {errorMsg?.message}
+  //     </Box>
+  //   )
+  // }
+
+  const getData = (itm, i,date1,date2,dateValue,endDateValue,g) => {
+    console.log("🚀 ~ file: DashboardApp.js:162 ~ getData ~ itm, i, g, date1,date2,dateValue,endDateValue:", itm, i, g, date1,date2,dateValue,endDateValue)
     setSelected(itm);
-    const data = i === 2 ? { funder_id: itm?.id } : i === 1 ? { partner_id: itm?.id } : { project_id: itm?.id };
-    apiHit(itm, i);
+    const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
+    i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
+    // apiHit(itm, i);
     console.log(data, i, itm, '<----sdfssreerfer');
+    if(dateValue || endDateValue)
+        {
+          console.log(i,"dateapihitttttt",date1.$d||date2.$d)
+          apiHit(itm, i,"Calendar",date1,date2)
+          
+        }
+        else{
+          console.log("apihit")
+          apiHit(itm,i)
+        }
     setFilterData(data);
     handleCloseFilter();
     console.log('sdfgsdfdfssd', itm, i);
   };
+
+
+
   const onSumbit = (e, i) => {
     handleCloseFilter();
     setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` });
-
-    apiHit(e?.district_id, e?.talaq_id, 'country');
-    console.log(e, i, '<----datssdasdsa');
+    if(e?.dateValue || e?.endDateValue)
+    {
+      apiHit(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
+      console.log(e, i, "<----datssdasdsa")
+    }
+    else{
+      apiHit(e?.district_id,e?.talaq_id,"country")
+    }
   };
 
   const closefilter = () => {
@@ -200,14 +230,14 @@ const GreenProgramDashboard = () => {
           </Button>
         </Stack>
         <Container maxWidth="xl">
-          {slected && (
-            <Chip
-              label={`${slected?.type} : ${slected?.name} `}
-              onDelete={() => {
-                handleDelete(slected);
-              }}
-            />
-          )}
+        <Grid item spacing={10}>
+
+
+{
+  slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} /> || slected &&<Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }} />
+}
+
+</Grid>
 
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <FiltersHome
@@ -519,15 +549,15 @@ const GreenProgramDashboard = () => {
 
               />
             </Grid> */}
-                          <Grid item xs={2} sm={4} md={3}>
+                         <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
-                              title="Number  of Vilages"
+                              title="Number  of Villages"
                               total={itm?.villages}
                               color="villages"
                               icon="fontisto:holiday-village"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Coharts"
                               total={itm?.noofgreencoharts}
@@ -535,7 +565,7 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Enrolled"
                               total={itm?.greenenrolled}
@@ -543,7 +573,7 @@ const GreenProgramDashboard = () => {
                               icon="openmoji:leafy-green"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Modules Completed"
                               total={itm?.noofgreenmodulecompleted}
@@ -551,7 +581,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Survey"
                               total={itm?.nofgreensurvey}
@@ -560,7 +590,7 @@ const GreenProgramDashboard = () => {
                             />
                           </Grid>
 
-                          {/* <Grid item xs={4} sm={8} md={3}>
+                          {/* <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="2nd Day Turnout  %"
                               total={itm?.day2}
@@ -625,7 +655,7 @@ const GreenProgramDashboard = () => {
                         <Divider mt={1} />
                         <Grid container spacing={3} marginTop={4}>
           
-                          <Grid item xs={2} sm={4} md={4}>
+                         <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number  of Vilage Visits"
                               total={itm?.villagevisit}
@@ -633,7 +663,7 @@ const GreenProgramDashboard = () => {
                               icon="fontisto:holiday-village"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Batches"
                               total={itm?.beehive}
@@ -641,7 +671,7 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Circle Meet"
                               total={itm?.circle_meet}
@@ -649,7 +679,7 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Circle"
                               total={itm?.circles}
@@ -657,7 +687,7 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Motivators"
                               total={itm?.greenMotivators}
@@ -666,7 +696,7 @@ const GreenProgramDashboard = () => {
                             />
                           </Grid>
 
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Vyapar"
                               total={itm?.vyapar}
@@ -751,7 +781,7 @@ const GreenProgramDashboard = () => {
 
               />
             </Grid> */}
-                          <Grid item xs={2} sm={4} md={3}>
+                          <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number  of Vilage "
                               total={itm?.villages}
@@ -759,7 +789,7 @@ const GreenProgramDashboard = () => {
                               icon="fontisto:holiday-village"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Beehive"
                               total={itm?.beehive}
@@ -767,14 +797,14 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Motivators"
                               total={itm?.greenMotivators}
                               color="motivator"
                               icon="openmoji:leafy-green"
                             />
-                          </Grid><Grid item xs={4} sm={8} md={3}>
+                          </Grid><Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Cirle"
                               total={itm?.circles}
@@ -782,7 +812,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Circle Meet"
                               total={itm?.circle_meet}
@@ -790,7 +820,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Vyapar"
                               total={itm?.vyapar}
@@ -799,7 +829,7 @@ const GreenProgramDashboard = () => {
                             />
                           </Grid>
 
-                          {/* <Grid item xs={4} sm={8} md={3}>
+                          {/* <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="2nd Day Turnout  %"
                               total={itm?.day2}
@@ -849,7 +879,7 @@ const GreenProgramDashboard = () => {
                         <Container style={{ display: 'flex', flexDirection: 'row' }}>
                           <Grid item xs={6}>
                             <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-                              Funder
+                            {(itm?.startDate)?"Project Name":"Funder"}<br />
                               <br />
                             
                             </span>
@@ -882,7 +912,7 @@ const GreenProgramDashboard = () => {
 
               />
             </Grid> */}
-                          <Grid item xs={2} sm={4} md={3}>
+                          <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number  of Vilage Visit"
                               total={itm?.villagevisit}
@@ -890,7 +920,7 @@ const GreenProgramDashboard = () => {
                               icon="fontisto:holiday-village"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Beehive"
                               total={itm?.beehive}
@@ -898,14 +928,14 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={4}>
+                         <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Motivators"
                               total={itm?.greenMotivators}
                               color="motivator"
                               icon="openmoji:leafy-green"
                             />
-                          </Grid><Grid item xs={4} sm={8} md={3}>
+                          </Grid><Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Cirle"
                               total={itm?.circles}
@@ -913,7 +943,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Circle Meet"
                               total={itm?.circle_meet}
@@ -921,7 +951,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={4} sm={8} md={3}>
+                          <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Vyapar"
                               total={itm?.vyapar}
@@ -930,7 +960,7 @@ const GreenProgramDashboard = () => {
                             />
                           </Grid>
 
-                          {/* <Grid item xs={4} sm={8} md={3}>
+                          {/* <Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="2nd Day Turnout  %"
                               total={itm?.day2}

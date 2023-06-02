@@ -16,7 +16,7 @@ import {
   IconButton,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-
+import LocationQuality from './QualityAssuranceFilters/Location';
 import CircularProgress from '@mui/material/CircularProgress';
 import Iconify from '../../components/Iconify';
 import Page from '../../components/Page';
@@ -27,12 +27,12 @@ import FiltersHome from '../Filters/FiltersHome';
 import DialogForm from './components/DialogForm'
 import {baseURL} from 'src/utils/api';
 
-export default function QualityAssurance() {
+export default function QualityAssessment() {
   
   
   
   const [loader, setLoader] = useState(false)
-
+const [errorMsg,setErrormsg]=useState('');
   const [openFilter, setOpenFilter] = useState(false);
 
   const [filterData, setFilterData] = useState({});
@@ -63,6 +63,13 @@ export default function QualityAssurance() {
     setOpen(false);
   };
 
+  const handleDelete = () => {
+ 
+   
+    setSelected(null)
+    apiHit();
+  }
+
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -80,8 +87,14 @@ export default function QualityAssurance() {
     console.log( role , userid , " role user id ")
    
     const data = {
-      "Emp_id":parseInt(userid),
-    "Role_id":parseInt(role)
+      "Emp_id":JSON.parse(userid),
+      "Role_id":JSON.parse(role),
+      "Filter":g ? g:"",
+      "Filter_District":g ==="Location" ? id :"",
+      "Filter_Taluk":g==="Location" ? i :"",
+      "Filter_Id":g === "Role" ? JSON.stringify(id):"",
+      "Filter_StartDate":g === "Date" ? id :"",
+      "Filter_EndDate":g === "Date" ? i :""
      
   }
   
@@ -106,6 +119,8 @@ setSummaryData(response.data);
         console.log("responseofapi", response.data)
       })
       .catch((error) => {
+     ``
+        setErrormsg(error)
         console.log(error);
       });
   };
@@ -124,12 +139,44 @@ let formatdata = summaryData?.data
       </Box>
     )
   }
+  
+  // if(errorMsg!=''){
+  //   return(
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}} >
+  //       {errorMsg?.message}
+  //     </Box>
+  //   )
+  // }
+  const onSumbit = (e, i) => {
+    setSelected({ type: 'Location', name: `  State : Karnataka ; District : ${e?.district?.name} ; Taluk : ${e?.talaq}` })
+    console.log(e,"evaluesssssssssssss",e?.district?.name)
+    handleCloseFilter()
+    apiHit(e?.district?.name,e?.talaq,"Location")
+  }
+
+  const onDateSubmit = (e) => {
+    setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` })
+    apiHit(e?.startDate, e?.endDate, "Date")
+    setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
+    handleCloseFilter()
+  }
+
+  const getData = (itm,i) => {
+  //  var itemrole = (itm?.empRole==13)?"Gelathi Facilitator Lead":(itm?.empRole==2)?"Admin":(itm?.empRole==6)?"Gelathi Facilitators":"Role"
+    setSelected({type:"Role",itm})
+    handleCloseFilter()
+    apiHit(itm?.id,i,"Role")
+    console.log(filterData,"hyyyyyyyyyyy")
+   
+  }
+  
+  console.log(slected,"selectedvalueeeeeeeeee")
   return (
     <>
       <Page title="Dashboard">
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Typography variant="h5" gutterBottom sx={{ ml: 4 }}>
-           Quality Assurance Summary
+           Quality Assessment
           </Typography>
           <Button
             style={{ float: 'right', color: '#ff7424' }}
@@ -140,21 +187,22 @@ let formatdata = summaryData?.data
           >
             Filter
           </Button>
+          <QualityAssuranceFilter isOpenFilter={openFilter} onCloseFilter={handleCloseFilter}  onSumbit={onSumbit} onDateSubmit={onDateSubmit} getData={getData}/>
         </Stack>
         <Container maxWidth="xl">
-          <Grid item spacing={10}></Grid>
+         
+        {
+    slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }}  />
+  }
 
-          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <FiltersHome
-              type="Dashboard"
-              // onDateSubmit={onDateSubmit}
-              // onSumbit={onSumbit}
-              // getData={getData}
-              isOpenFilter={openFilter}
-              onOpenFilter={handleOpenFilter}
-              onCloseFilter={handleCloseFilter}
-            />
-          </Stack>
+{
+    slected && (slected.type =='Location')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }}  />
+}
+{
+  slected && (slected?.type=='Role') && <Chip label={` ${slected?.itm?.name} `} onDelete={() => { handleDelete(slected) }}  />
+}
+
+
 
           <Grid justifyContent="center" container spacing={3} marginTop={1}>
             <Grid onClick={handleClickOpen} item xs={4} sm={8} md={4}>
@@ -168,89 +216,59 @@ let formatdata = summaryData?.data
               <AppWidgetSummary title="Self Shakti by Gelathi" total={summaryData.SSbyGelathi} color="gelathis" />
             </Grid>
           </Grid>
-          {/* <DialogForm batch={batch} shown={shown} setShown={(e)=>{setShown(e)}} /> */}
-          {/* <Card onClick={()=>{setShown(true),console.log("ferfgreg")}}
-            style={{ marginTop: 20 }}>
-          
-           
-            <CardContent>
-            
-              <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
-                <Iconify icon="material-symbols:add" width={30} height={30} />
-              </div>
-              <Typography>Self Shakti Training Program</Typography>
-            </CardContent>
-          </Card> */}
+     
           <div style={{display:'flex', flexDirection:'column', justifyContent:"center",alignItems:"center" ,width:"100%"}}>
           <div style={{marginTop:"20px" }}>
-          <Link to="/dashboard/qualityAssurance/selfsakthi"
+          <Link to="/dashboard/qualityAssessment/selfsakthi"
         //    state={{ id: data1?.project_id }}
             style={styles.linkStyle}>
                     <Button variant="secondary"
+                     onClick={()=>{
+                   
+                     }}
                      style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
-                    <span style={{ width: "200px" }}>  Self Shakti Training Program</span>
+                    <span style={{ width: "200px" }}>  Quality Assessment Form</span>
                   </Button>
                   </Link>
 
                   </div>
-                  <div style={{marginTop:"20px"}}>
+                  {/* <div style={{marginTop:"20px"}}> */}
 
-                 
-                   <Link to="/dashboard/qualityAssurance/greenprogram"
-        //    state={{ id: data1?.project_id }}
-            style={styles.linkStyle}>
-                    <Button variant="secondary"
+{/*                  
+                   <Link to="/dashboard/qualityAssessment/greenprogram" */}
+        {/* //    state={{ id: data1?.project_id }} */}
+             {/* style={styles.linkStyle}> */}
+                    {/* <Button variant="secondary"
                      style={styles.buttonStyle}
+                    
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}>Green Program</span>
-                  </Button>
-                  </Link>
-                  </div>
-                  <div style={{marginTop:"20px"}}>
+                  </Button> */}
+                  {/* </Link> */}
+                  {/* </div> */}
+                  {/* <div style={{marginTop:"20px"}}>
 
-                 
-                  <Link to="/dashboard/qualityAssurance/selfsakthibygelathi"
+                  */}
+                  {/* <Link to="/dashboard/qualityAssessment/selfsakthibygelathi"
         //    state={{ id: data1?.project_id }}
-            style={styles.linkStyle}>
-                    <Button variant="secondary"
+            style={styles.linkStyle}> */}
+                    {/* <Button variant="secondary"
+                     onClick={()=>{
+                      alert("Work is in Progress")
+                     }}
                      style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
                     <span style={{ width: "200px" }}> Self Shakti by Gelathi</span>
-                  </Button>
-                  </Link>
-                  </div>
+                  </Button> */}
+                  {/* </Link> */}
+                  {/* </div> */}
           </div>
+      
          
-          {/* <Card
-            onClick={() => {
-              setShown(true), console.log('ferfgreg');
-            }}
-            style={{ marginTop: 20 }}
-          > */}
-            {/* <CardContent>
-              <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
-                <Iconify icon="material-symbols:add" width={30} height={30} />
-              </div>
-              <Typography>Gelathi Program</Typography>
-            </CardContent>
-          </Card> */}
-          {/* <Card
-            onClick={() => {
-              setShown(true), console.log('ferfgreg');
-            }}
-            style={{ marginTop: 20 }}
-          >
-            <CardContent>
-              <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
-                <Iconify icon="material-symbols:add" width={30} height={30} />
-              </div>
-              <Typography>Self Shakti by Gelathi</Typography>
-            </CardContent>
-          </Card> */}
         </Container>
       </Page>
     </>

@@ -228,7 +228,7 @@ console.log(c,"cvaluee")
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div">
-              Self Shakti
+              Self Shakti 
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               Add Participants
@@ -341,7 +341,12 @@ console.log(c,"cvaluee")
                         DeleteParticipant(itm)
                         console.log(itm,"<---sadasdasd")
                       }} /> 
-                      {(itm?.final_save=='0')?<IconButton onClick={()=>{setEditsession(true);setParticipant({id:itm?.participant_id})}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>:<IconButton style={{right:-20,color:'#ff7424'}} onClick={handleedit}><Iconify icon="material-symbols:edit"></Iconify></IconButton>}</>}
+                      {(itm?.final_save=='0')?<IconButton onClick={()=>{setEditsession(true);
+                        setParticipant({id:itm?.participant_id})}} 
+                        style={{right:-20}}><Iconify 
+                         icon="material-symbols:edit"></Iconify></IconButton>:
+                         <IconButton style={{right:-20,color:'#ff7424'}} onClick={handleedit}>
+                          <Iconify icon="material-symbols:edit"></Iconify></IconButton>}</>}
                  
                      
                         <EditParticipantdata participantdata={participantdata} changeState={changeState} cvalue={c} Trainingdata={Trainingdata} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}} />

@@ -51,6 +51,11 @@ import GreenProgramQualityAssurance from './pages/qualityAssurance/GreenProgramQ
 import SelfSakthiByGelathi from './pages/qualityAssurance/SelfSakthiByGelathi';
 
 import ProjectWiseGelathiCircle from './pages/projects/ProjectWiseGelathiCircle';
+import FunderVyaparDashboard from './pages/projects/FunderDashBoard/FunderVyaparDashboard';
+import FUnderGreenDashboard from './pages/projects/FunderDashBoard/FUnderGreenDashboard';
+import FUnderSSDashboard from './pages/projects/FunderDashBoard/FUnderSSDashboard';
+import FunderGelathiDashboard from './pages/projects/FunderDashBoard/FunderGelathiDashboard';
+import Page404 from './pages/Page404';
 
 
 // ----------------------------------------------------------------------
@@ -97,15 +102,15 @@ export default function Router() {
 
         [
             {
-                path: 'app', element: <DashboardHome />, id: [0, 1, 3, 7, 8, 9, 12,11],
+                path: 'app', element: <DashboardHome />, id: [0, 1, 3, 7, 8, 9, 12,11,4,5,6],
                 children: [
                     { path: '', element: <DashboardApp />, exact: true },
                     { path: 'chart', element: <Chart /> },
                 ]
             },
-            { path: 'trainer', element: <Trainerdashboard />, id: [5] },
+            // { path: 'trainer', element: <Trainerdashboard />, id: [5] },
             { path: 'gelathi', element: <Gelathidashboard />, id: [6, 13] },
-            { path: 'operationmanager', element: <Operationmanagerdashboard />, id: [4]},
+            // { path: 'operationmanager', element: <Operationmanagerdashboard />, id: [4]},
             { path: 'operationmanager/chart', element: <Chart />, id: [4]},
             { path: 'buslist', element: <BusList />, id: [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 12,11] },
             { path: 'planofaction', element: <PlanofAction />, id: [0, 1, 3, 4, 5, 9, 6, 7, 8, 12, 13,11] },
@@ -120,15 +125,18 @@ export default function Router() {
             { path: 'travel', element: <TravelA />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,11] },
             { path: 'demogrphy', element: <Demography />, id: [0, 1, 2, 3, 12,11] },
             { path: 'logout', element: <Logout />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13] },
-            { path: 'qualityAssurance',element: <QualityAssurance/>, id:[1,2,3,4,12,13]},
+            { path: 'qualityAssessment',element: <QualityAssurance/>, id:[1,2,3,4,12,13]},
             { path : 'selfsakthiprogramdashboard' , element: <SelfSakthiProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
             { path : 'gelathiprogramdashboard' , element: <GelathiProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
             { path : 'greenprogramdashboard' , element: <GreenProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
             { path : 'vyaparprogramdashboard' , element: <VyaparProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
-            {path : 'qualityAssurance/selfsakthi' , element :<SelfSakthiQulityAssurance/> ,id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
+            {path : 'qualityAssessment/selfsakthi' , element :<SelfSakthiQulityAssurance/> ,id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
             {path : 'qualityAssurance/greenprogram' , element :<GreenProgramQualityAssurance/> ,id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
             {path : 'qualityAssurance/selfsakthibygelathi' , element :<SelfSakthiByGelathi/> ,id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
-           
+            {path : "fundervyapardashboard" , element : <FunderVyaparDashboard/> , id : [8]},
+            {path:"fundergreendashboard", element:<FUnderGreenDashboard/> , id : [8]},
+            {path:"funderselshaktidashboard", element:<FUnderSSDashboard/> , id : [8]},
+            {path:"fundergelathidashboard", element:<FunderGelathiDashboard/> , id : [8]},
             {path:"addBus", element: <Addbus/>, id:[2]}
         ]
 
@@ -160,18 +168,18 @@ export default function Router() {
             path: '/dashboard/logout',
             element: <Logout />,
         },
-        {
-            path: '/dashboard/trainer',
-            element: <Trainerdashboard />,
-        },
-        {
-            path: '/dashboard/gelathi',
-            element: <Gelathidashboard />,
-        },
-        {
-            path: '/dashboard/operationmanager',
-            element: <Operationmanagerdashboard />
-        },
+        // {
+        //     path: '/dashboard/trainer',
+        //     element: <Trainerdashboard />,
+        // },
+        // {
+        //     path: '/dashboard/gelathi',
+        //     element: <Gelathidashboard />,
+        // },
+        // {
+        //     path: '/dashboard/operationmanager',
+        //     element: <Operationmanagerdashboard />
+        // },
         {
             path : '/dashboard/selfsakthiprogramdashboard',
             element : <selfSakthiProgramDashboard />
@@ -194,10 +202,16 @@ export default function Router() {
             path : '/dashboard/vyaparprogramdashboard',
             element : <vyaparProgramDashboard />
         },
+        {
+            path: '/404',
+            element:<Page404 /> ,
+            // element : 
+        },
      
         {
             path: '*',
-            element: <Navigate to="/404" replace />,
+            element: <Navigate to="/404" replace  />,
+            // element : <Page404 />
         },
       
     ]);

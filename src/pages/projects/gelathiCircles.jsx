@@ -18,9 +18,10 @@ export default function gelathiCirclesList() {
   var [search, setSearch] = useState('');
   var [selected, setSelected] = useState(null);
   const [count, setCount] = useState('');
-  const [reloadFromForm, setReloadFromForm] = useState(false);
+
   const [openFilter, setOpenFilter] = useState(false);
   const [filter, setFilter] = useState(false);
+  const [reloadFromForm, setReloadFromForm] = useState(false);
   const reloadFunction = () => {
     setReloadFromForm(!reloadFromForm);
   };
@@ -135,7 +136,7 @@ export default function gelathiCirclesList() {
               <Iconify icon="material-symbols:arrow-back-rounded" />
             </IconButton>
           </Link>
-          Gelathi Circles
+          Gelathi Circles 
         </Typography>
         {role == 1 || role == 3 || role == 5 || role == 4 || role == 12 ? (
           <Button
@@ -209,7 +210,7 @@ export default function gelathiCirclesList() {
             <Card
               style={styles.card1}
               onClick={() => {
-                setClickData({ name: itm.circle_name, title: ' Gelathi Cirlce Name', id: itm?.circle_id });
+                setClickData({ name: itm.circle_name, title: ' Gelathi Circle', id: itm?.circle_id });
                 handleOpenFilter();
               }}
             >

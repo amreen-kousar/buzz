@@ -130,7 +130,19 @@ const SendData = async => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        setSendData({
+          occupation:"",
+          husbandOccupation:"",
+          wifeIncomeMonthly:"",
+          typeOfEnterprise:"",
+          saving_amt:"",
+          gelathiRecomm: 0,
+          saving_goal:"",
+          wifeSavingsMonthly:"",
+          income:"",
+          bank_acc:""
       
+        })
         handleClose()
         changeState();
       })
@@ -152,7 +164,7 @@ const SendData = async => {
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-           Update Participant Detail
+           Update Participant Detail 
           </Typography>
 
         

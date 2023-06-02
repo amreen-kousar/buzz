@@ -300,7 +300,7 @@ export default function GelathiCircleForm({
                 <Card mt={1} style={{ marginTop: 10, borderRadius: 20 }}>
                   <CardContent>
                     <Typography variant="subtitle2" style={{ color: '#ff7424' }}>
-                      Name of the Gelathi / ಗೆಳತಿಯ ಹೆಸರು*
+                      Name of the Gelathi Facilitator/  /ಗೆಳತಿ ಆಯೋಜಕನ ಹೆಸರು*
                     </Typography>
                     <Stack mt={2} mb={2}>
                       <Select

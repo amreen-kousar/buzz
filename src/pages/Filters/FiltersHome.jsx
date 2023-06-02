@@ -90,7 +90,7 @@ const [endDate, setEndDate] = useState(new Date())
   const data = localStorage?.getItem('userId')
 
   // partner = 1, funder = 2, project = 3, opm = 4, trainer = 5, gelathi = 6 SOM=12 GFl=13
-  const filtersHeaders = { 1: 'Partner', 2: 'Funders', 3: 'Project', 4: 'Operation Managers', 5: 'Trainers', 6: 'Gelathi Facilitators', 12: 'Sr. Operations Manager', 13: 'Gelathi Facilitator Leads', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Drivers',35:'Custom Filters' }
+  const filtersHeaders = { 1: 'Partner', 2: 'Funders', 3: 'Project', 4: 'Operations Manager', 5: 'Trainers', 6: 'Gelathi Facilitators', 12: 'Sr. Operations Manager', 13: 'Gelathi Facilitator Leads', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Drivers',35:'Custom Filters' }
 
 
   const setData = (value) => {
@@ -209,7 +209,7 @@ sx={{margin:5}}
       {/* {console.log(session,"session?.id")} */}
       {/* <Button onClick={()=>Reschedule(session?.id)}>Save</Button> */}
     </Stack><br/>
-    {console.log('valuesstartend',dateValue,"hdhsydueyjdtu",endDateValue)}
+    {console.log(date,'valuesstartend',dateValue,"hdhsydueyjdtu",endDateValue,"sdhwe",endDate)}
     <Button onClick={handlecloseCalendar} style={styles.highlightStyle} sx={{width:20,textAlign:'center',left:30}}>OK</Button></>}
 <br/>
         <Divider />

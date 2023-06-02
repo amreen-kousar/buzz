@@ -43,6 +43,7 @@ import CurrencyRupee  from '@mui/icons-material/CurrencyRupee';
 import DiamondRounded  from '@mui/icons-material/DiamondRounded';
 import  Room  from '@mui/icons-material/Room';
 import { date } from 'yup';
+import { result } from 'lodash';
 function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
@@ -55,13 +56,16 @@ export default function TravelDialog({ viewMessage }) {
   const [images, setImages] = useState();
   const [upload, setUpload] = useState();
 
+  const [imageId,setImageId]=useState('');
+
+
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   const [sendData, setSendData] = useState({
     odimeter: "",
     location: "",
     poa: "",
-    srpoa:"",
-    date: new Date(),
+    // srpoa:"",
+    date: new Date(),          
     modeoftravel: "",
     rateperkm: "",
     foodexpenses: "",
@@ -102,7 +106,7 @@ export default function TravelDialog({ viewMessage }) {
     //imageUpload()
     location()
     setSendData([])
-    
+   
   }, [coords,open]
   )
   const [image, setImage] = React.useState([]);
@@ -140,21 +144,62 @@ export default function TravelDialog({ viewMessage }) {
     });
   }
 
+  const uiphoto = async =>{
+    if(image.length===0){
+      alert("No photos to upload.")
+      throw new Error('No photos to upload.');
+    }
+    var dataImage = []
+    const form = new FormData()
+    form?.append("emp_id", userid)
+    //form?.append("file[]",imagePath[0])
+
+    const data = imagePath?.map(itm => {
+      form?.append("file[]", itm)
+      console.log(itm ,"<-------------------njnjnjnjnjnjnjnj8888")
+    })
+
+   
+
+var requestOptions = {
+  method: 'POST',
+  body: form,
+  redirect: 'follow'
+};
+
+fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions)
+  .then(response => response.text())
+  .then(result => setImageId(JSON.parse(result)))
+  .catch(error => console.log('error', error));
+
+
+
+  }
+
+console.log(imageId?.data?.length,"imagesssssssssssss")
+var Uimagelength = imageId?.data?.slice(-1)
+var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
+
+
+
+
+
+
   const SendData = async => {
 
 console.log("submittedddddddd")
     var data = JSON.stringify({
-      "date": sendData?.date,
+      "date": moment(sendData?.date)?.format('YYYY-MM-DD'),
       "insideBangalore": false,
       "end_odometer": sendData?.endOdimeter,
       "telephone": sendData?.telephonecharges,
-      "end_location_name": sendData?.endLocation,
+      "end_location_name":locationS,
       "fairamount":sendData?.fairamount,
       "printing": sendData?.printing,
       "start_location_name": locationS,
       "poa_id": sendData?.poa,
-      "srpoa":sendData?.srpoa,
-      "start_odometer": sendData?.odimeter,
+      // "srpoa":sendData?.srpoa, pooja said to remove
+      "start_odometer": (sendData?.odimeter)?sendData?.odimeter:'',
       "rate_per_KM": sendData?.rateperkm,
       "stationery": sendData?.stationery,
       "klmtr": sendData?.rateperkm,
@@ -162,7 +207,9 @@ console.log("submittedddddddd")
       "others": sendData?.otherExpenses,
       "emp_id":userid,
       "mode_of_travel": sendData?.modeoftravel,
-      "other_text": sendData?.OtherAmount
+      "other_text": sendData?.OtherAmount,
+      "files": [parseInt(Imagevalue)]
+    
     });
 
     var config = {
@@ -173,7 +220,7 @@ console.log("submittedddddddd")
       },
       data: data
     };
-console.log("successsssssssss")
+console.log("successsssssssss",data)
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
@@ -185,7 +232,7 @@ console.log("successsssssssss")
       });
 
   }
-
+console.log(sendData?.odimeter,"startodimeter")
   const postImages = async () => {
     if(image.length===0){
       alert("No photos to upload.")
@@ -202,7 +249,7 @@ console.log("successsssssssss")
     var requestOptions = {
       method: 'POST',
       body: form,
-      redirect: 'follow'
+     
     };
     // var config = {
     //   method: 'post',
@@ -214,8 +261,11 @@ console.log("successsssssssss")
     // };
     //console.log(config)
     let res = fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn => {
+
       console.log(itn, "<--itemgh")
+
       alert("added succesfully ")
+
     })
       .catch(err => {
         console.log(err, "<---wertyu")
@@ -224,6 +274,9 @@ console.log("successsssssssss")
 
 
   }
+
+
+
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(function(position) {
       console.log("Latitude is :", position.coords.latitude);
@@ -367,7 +420,7 @@ axios(config)
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Create Allowance
+            Create Allowance 
           </Typography>
 
           <Button autoFocus color="inherit" type="submit">
@@ -496,21 +549,24 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
             {console.log(userDetails,"userdetailsssssssssssss")}
               {/* {(userDetails===12)?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, poa: e?.target?.value }) }} label="poa" color="common" />:null} */}
              
+
+             {/* you want to filter thr date map dropDownValues insted of dropdata.data */}
+             
               <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>{sendData?.poa==""?"Select POA *":"POA *"}</InputLabel>
-                {(datadrop?.data.length>0)?<Select required labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
-                
-                  {dropDownValues?.map(itm => {
+                {(datadrop?.data?.length>0)?<Select required labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Select Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
+
+                  {datadrop?.data.map(itm => {
                     return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                   })}
                 </Select>:<Typography variant="body2" style={{marginLeft:20,marginTop:40}}>No POA</Typography>}
                 </FormControl>
               </Stack>
-
-              <Stack style={{ marginTop: 20 }}>       
-             <FormControl fullWidth >
-            {console.log(userDetails,"userdetailsssssssssssss")}
+{/* pooja said to remove create poa  */}
+              {/* <Stack style={{ marginTop: 20 }}>       
+             <FormControl fullWidth > */}
+            {/* {console.log(userDetails,"userdetailsssssssssssss")}
               {userDetails==12?<TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, srpoa: e?.target?.value }) }} label="Create poa" color="common" />:null}
-             
+              */}
               {/* <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ff7424'}}>Poa</InputLabel>
                 <Select labelId="Select Poa" id="demo-simple-select" value={sendData?.poa} label="Poa" onChange={(e) => setSendData({ ...sendData, poa: e?.target?.value })} variant="standard" color="common">
                 
@@ -518,8 +574,8 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                     return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                   })}
                 </Select> */}
-                </FormControl>
-              </Stack>
+                {/* </FormControl>
+              </Stack> */}
 
               <Stack style={{ marginTop: 20 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -663,7 +719,7 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                   Click here to Add images
                   <input style={{ display: "none" }} accept="image/png, image/gif, image/jpeg" id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
                 </label>
-                <Button onClick={postImages} 
+                <Button onClick={uiphoto} 
                 sx={{
                   '&:hover': {
                     backgroundColor: '#ffd796',

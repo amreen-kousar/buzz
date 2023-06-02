@@ -66,9 +66,11 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
     
             axios(config)
                 .then(function (response) {
-                    console.log(response.data)
+                    console.log(response.data,"ghadhsd")
+                    alert(response.data.message)
                     if (response.data.code == 200) {
                         setOpenAddBus(false)
+
                         showAddBuss? 
                         showBussHandler() 
                         

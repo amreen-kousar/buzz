@@ -170,7 +170,7 @@ export default function Programevaluationday1({onCloseFilter,batch})
         <Button variant="secondary" style={styles.buttonStyle} onClick={handleClickOpen}
                     endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
-                    <span style={{ width: "200px" }}>Program Evaluation Day 1</span>
+                    <span style={{ width: "200px" }}>Program Evaluation Day 1 </span>
         </Button><br/>
         </Stack>
   
@@ -184,7 +184,7 @@ export default function Programevaluationday1({onCloseFilter,batch})
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-          Program Evaluation Day 1
+          Program Evaluation Day 1 
           </Typography>
 
 

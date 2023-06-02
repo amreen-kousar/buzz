@@ -26,12 +26,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data1,circle,setGelathiDataToEmpty}) {
   const {state} = useLocation()
+  var todayDate = dayjs()
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(dayjs('2022-04-17'));
   const [sendData,setSendData] = React.useState({
     "project_id":"",
     "circle_name": "",
-    "circle_date": "",
+    "circle_date": moment(todayDate)?.format('YYYY-MM-DD'),
     "gelathi_created_id": ""
   })
 
@@ -115,21 +116,7 @@ axios(config)
 const createCircle = () =>{
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   var data = JSON.stringify({
-    // "project_id": data1?.project_id,
-    // "user_id":userid,
-    // "locationId":data1.location_id, 
-    // "circle_name":sendData?.circle_name,
-    // "circle_id":123,
-    // "tb_name":"Kuchangi_TB36936",
-    // "numOfParticipants":"7",
-    // "plan_date": moment(sendData?.circle_date)?.format('YYYY-MM-DD'),
-    // "tb_id":36936,
-    // "gf_session_type":"4",
-    // "gf_session_name":sendData?.circle_name,
-    // "gelathi_created_id": userid,
-    // "gelathi":gelathiData,
-     
-   
+
     
     "project_id": data1?.project_id,
     "circle_name": sendData?.circle_name,
@@ -139,21 +126,7 @@ const createCircle = () =>{
     
 
   });
-  // let data = JSON?.stringify(gelathiData)
-  // parse(data)
-  // {
-  //   "project_id":"234",
-  //   "user_id":50, 
-  //   "locationId":187, 
-  //   "circle_id":123,
-  //   "tb_name":"Kuchangi_TB36936",
-  //   "numOfParticipants":"7",
-  //   "tb_id":36936,
-  //   "gf_session_type":"21",
-  //   "plan_date":"2023-4-12 10:37AM",
-  //   "gf_session_name":null
-    
-  //   }
+ 
 
  
   

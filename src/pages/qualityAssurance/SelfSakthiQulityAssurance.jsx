@@ -16,6 +16,8 @@ import Team from '../travelAllowance/Team';
 import Own from '../travelAllowance/Own';
 import DialogForm from './components/DialogForm';
 import { Link } from 'react-router-dom';
+import OwnQuality from './OwnQuality';
+import TeamQuality from './TeamQuality';
 // components
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -67,7 +69,6 @@ const SelfSakthiQulityAssurance = () => {
     const userOwnPermissions=['1','9','5','12','4','13','6','3']
     const userTeamPermissions=['2','1','12','4','13','3','11']
   
-  
     const Alert = forwardRef(function Alert(props, ref) {
       return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
@@ -104,19 +105,23 @@ const SelfSakthiQulityAssurance = () => {
       setValue(newValue);
     };
   
+    const [reload ,setReload] = useState(false)
   
+    const reloadfunction = ()=>{
+      setReload(!reload)
+    }
   
     return (
       <Page id="dashboard-products" title="Dashboard: Products">
         <Container id="container-travel-allowance">
   
   
-          <Typography id="travel-allowance" variant="h4" sx={{ mb: 5 }}>
-          <Link to="/dashboard/qualityAssurance">
+          <Typography  variant="h4" sx={{ mb: 5 }}>
+          <Link to="/dashboard/qualityAssessment">
                   <IconButton>
                     <Iconify icon="material-symbols:arrow-back-rounded" />
                   </IconButton></Link>
-            Self Sakthi By Gelathi Program
+            Self Shakthi By Gelathi Program
             {/* <Button style={{ float: "right" }}>Filters</Button> */}
           </Typography>
           <Snackbar id="ta-snackbar" open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
@@ -130,7 +135,7 @@ const SelfSakthiQulityAssurance = () => {
              {
               userOwnPermissions.includes(data) &&  
               <Tab
-              id="own"
+              id="OwnQuality"
               onClick={() => { setMainValue(0) }}
               sx={{
                 ':hover': {
@@ -149,7 +154,7 @@ const SelfSakthiQulityAssurance = () => {
   {
   userTeamPermissions.includes(data) &&
   <Tab
-  id="team"
+  id="TeamQuality"
   onClick={() => { setMainValue(1) }}
   sx={{
     ':hover': {
@@ -170,31 +175,13 @@ const SelfSakthiQulityAssurance = () => {
             </Tabs>
           </Box>
           <br />
-          <TextField id="outlined-basic" type="date" defaultValue={dateValue}
-            fullWidth
-            onChange={(e) => { getDateValue(e?.target?.value) }} label="Select Date" variant="outlined" InputLabelProps={{
-              shrink: true,
-            }} />
-             {/* <Stack style={{ marginTop: 20 }}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      
-                      inputFormat="YYYY-MM-DD"
-                      views={["year", "month", "day"]}
-                      // label="Date"
-                      value={getDateValue?.date}
-                      onChange={(newValue) => {
-                        setSendData({ ...sendData, date: newValue })
-                      }}
-                      renderInput={(params) => <TextField {...params} fullWidth />}
-                    />
-                  </LocalizationProvider>
-                </Stack> */}
+         
+       
         {
           userTeamPermissions.includes(data) &&   <TabPanel id="return-date-tab" value={mainValue} index={1}>
           <Stack id="return-date-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <Box id="team-box" sx={{ width: '100%' }}>
-              <Team id="return-date" returnDateValue={returnDateValue} />
+              <TeamQuality id="return-date" returnDateValue={returnDateValue} reload={reload} />
             </Box>
           </Stack>
         </TabPanel>
@@ -202,7 +189,7 @@ const SelfSakthiQulityAssurance = () => {
         }
          {
           userOwnPermissions.includes(data) &&  <TabPanel value={mainValue} index={0}>
-          <Own returnDateValue={returnDateValue} />
+          <OwnQuality componentname="selfShakthi"  reload={reload}/>
         </TabPanel>
          }
   
@@ -211,16 +198,12 @@ const SelfSakthiQulityAssurance = () => {
   
     { (mainValue==0) &&     <Stack id="travel-dialog-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <DialogForm id="travel-dialog"  batch={batch} shown={shown} setShown={(e)=>{setShown(e)}}
-            // viewMessage={(text) => {
-            //   setMessage(text)
-            //   setOpenMessage(true)
-            //   // list()
-            // }} 
+            reloadfunction={reloadfunction}
             />
           </Stack>}
   
           
-          {/* </Stack> */}
+        
   
         </Container ></Page >
     );

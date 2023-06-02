@@ -27,7 +27,17 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
   
     const filterPermissions = {
   
-      GelathiProgram: [{id:45,roles:['1','3','4','6','12','13']},{id:2,roles:['1','3','4','6','12','13']},{id:1,roles:['1','3','4','6','12','13']},{id:3,roles:['1','3','4','6','12','13']},{ id: 9, roles: ['1','3','4','6','12','13']},{id:6,roles:['13','4','3','1','12']},{id:4,roles:['1','12','13','6','3']},{id:5,roles:['1','3','4','6','12','13']},],
+      GelathiProgram: [{id:45,roles:['1','3','4','6','12','13']},{id:2,roles:['1','3','4','6','12','13']},{id:1,roles:['1','3','4','6','12','13']},{id:3,roles:['1','3','4','6','12','13']},
+      { id: 22, roles: ['1','3','4','6','12','13']}, { id: 23, roles: ['1','3','4','6','12','13']},{id:46,roles:['13','4','3','1','12']},
+      {id:4,roles:['1','12','13','6','3']},{id:5,roles:['1','3','4','6','12','13']},{id:6,roles:['13','4','3','1','12','6']}, 
+      { id: 7, roles: ['1','3','4','6','12','13']}, { id: 8, roles: ['1','3','4','6','12','13']}, { id: 9, roles: ['1','3','4','6','12','13']},
+      { id: 10, roles: ['1','3','4','6','12','13']}, { id: 11, roles: ['1','3','4','6','12','13']}, { id: 12, roles: ['1','3','4','6','12','13']},
+      { id: 13, roles: ['1','3','4','6','12','13']}, { id: 14, roles: ['1','3','4','6','12','13']}, { id: 15, roles: ['1','3','4','6','12','13']},
+      { id: 16, roles: ['1','3','4','6','12','13']}, { id: 17, roles: ['1','3','4','6','12','13']}, { id: 18, roles: ['1','3','4','6','12','13']},
+      { id: 19, roles: ['1','3','4','6','12','13']}, { id: 20, roles: ['1','3','4','6','12','13']}, { id: 21, roles: ['1','3','4','6','12','13']},
+   
+   
+    ],
   
       GreenMotivators: [{ id: 6, roles: ['1','3','12','4','6','13'] }],
   
@@ -42,15 +52,33 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
     const data = localStorage?.getItem('userId')
   
     const filtersHeaders = {
-      6: 'Gelathi Facilitators',
+      46: 'Gelathi Facilitators',
       9: 'Date Range',
       2: 'Village Visits',
       1: 'Circle Meetings',
       3: 'Beehive Visits',
-      4: 'Rescheduled',
-      5: 'Cancelled',
+      4: 'SPS',
+      5: 'SPM1',
+      6: 'SPM2',
+      7: 'SPM3',
+      8: 'SPM4',
+      9: 'SPM5',
+      10: 'GPS',
+      11: 'GPM1',
+      12:'GPM2',
+      13:'GPM3',
+      14:'GPM4',
+      15:'GPM5',
+      16: 'VPS',
+      17: 'VPM1',
+      18:'VPM2',
+      19:'VPM3',
+      20:'VPM4',
+      21:'VPM5',
+      22:'Rescheduled',
+      23:'Cancelled',
       45: 'All Gelathi Sessions',
-      8:"SPM4"
+     
 
     };
   
@@ -67,7 +95,12 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
         onCloseFilter();
       }
      
-      if (filtersHeaders[value] == 'Circle Meetings' || filtersHeaders[value] == 'Beehive Visits' || filtersHeaders[value]=='Rescheduled' || filtersHeaders[value]=='Cancelled' || filtersHeaders[value]=='Village Visits') {
+      if (filtersHeaders[value] == 'Circle Meetings' || filtersHeaders[value] == 'Beehive Visits' || filtersHeaders[value]=='Rescheduled'
+       || filtersHeaders[value]=='Cancelled' || filtersHeaders[value]=='Village Visits' || filtersHeaders[value]=="SPS" || filtersHeaders[value]=='SPM1' 
+       || filtersHeaders[value]=='SPM2' || filtersHeaders[value]=='SPM3' ||filtersHeaders[value]=='SPM3'|| filtersHeaders[value]=='SPM4' || filtersHeaders[value]=='SPM5' 
+       || filtersHeaders[value]=='GPS' || filtersHeaders[value]=='GPM1' || filtersHeaders[value]=='GPM2' || filtersHeaders[value]=='GPM3' || filtersHeaders[value]=='GPM4'
+       || filtersHeaders[value]=='GPM5' || filtersHeaders[value]=='VPS' || filtersHeaders[value]=='VPM1'|| filtersHeaders[value]=='VPM2' || filtersHeaders[value]=='VPM3'
+       || filtersHeaders[value]=='VPM4' || filtersHeaders[value]=='VPM5') {
         user(1, { id: value, type: filtersHeaders[value] });
        console.log(filtersHeaders[value],"value")
         onCloseFilter()
@@ -157,7 +190,7 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
             type != 'people' && <div>
          
               {
-                selectDATA == 6 && <Grid>
+                selectDATA == 46 && <Grid>
                   <GelathiFacilitators type={type} getData={getData} selectDATA={selectDATA} data1={data1} />
                 </Grid>
               } 

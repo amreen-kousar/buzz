@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Card, Stack, Chip,CardContent, Container, Typography, Grid, IconButton, } from '@mui/material';
+import { Card, Stack, Chip,CardContent, Container, Typography, Grid, IconButton, CircularProgress, } from '@mui/material';
 import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
@@ -119,7 +119,7 @@ export default function scheduleVillage() {
                         <IconButton>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton></Link>
-                    Schedule Village Visit
+                    Schedule Village Visit 
                 </Typography>
                 {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
@@ -142,7 +142,14 @@ export default function scheduleVillage() {
             </Stack>
             {/* </Stack> */}
 
-            {villageData?.list?.length!==0?villageData?.list?.map((itm) => {
+            {
+            
+            villageData == ""?
+            <div style={{marginTop:"20%" , marginLeft:"40%"}}>
+            <CircularProgress />
+            </div>
+            :
+            villageData?.list?.length!==0?villageData?.list?.map((itm) => {
 
                 return (
                     <Card style={styles.card1} onClick={() => {

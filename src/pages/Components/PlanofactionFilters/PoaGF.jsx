@@ -109,9 +109,9 @@ const [gelatiNote, setGelatiNote] = useState('');
     }
 
     return () => {
-      isSubscribe = false;
+      isSubscribe = false
     };
-  }, [session.tb_id]);
+  }, [session.tb_id , session.check_in ,batch.check_1]);
   console.log(clcikData, '<---clcikDataPoaGF',batchState);
   const getTrainingBatch = (async) => {
     console.log(
@@ -147,8 +147,10 @@ const [gelatiNote, setGelatiNote] = useState('');
   };
  
   const getGFSessionData = (async) => {
+    var userid = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       gf_session_id: clcikData?.id,
+      user_id : userid
     });
 
     var config = {
@@ -415,7 +417,13 @@ if( session?.gf_session_name?.indexOf("_VV")){
         <Divider />
 
        
-
+{
+  session == "" ?
+  <>
+  <div style={{display:"flex", marginTop:"50%", marginLeft:"40%" }}>
+      <CircularProgress />
+      </div>
+  </>:
 <Scrollbar>
           <Stack spacing={3} sx={{ p: 2 }}>
             <div>
@@ -470,7 +478,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
                   </>
                   }
                   <Typography variant="body1" gutterBottom>
-                    GF Name:&nbsp;{session?.gf_name}
+                    GF Name :&nbsp;{session?.gf_name}
                   </Typography>
                 </CardContent>
               </Card>
@@ -544,7 +552,10 @@ if( session?.gf_session_name?.indexOf("_VV")){
               batch={batch}
               setCheck={(e) => {
                 setCheck(e);
+              
               }}
+              getTrainingBatch={getTrainingBatch}
+              getGFSessionData={getGFSessionData}
                />}
 
 {roleid==13 && batch && <CheckinGFL
@@ -553,6 +564,8 @@ if( session?.gf_session_name?.indexOf("_VV")){
               setCheck={(e) => {
                 setCheck(e);
               }}
+              getTrainingBatch={getTrainingBatch}
+              getGFSessionData={getGFSessionData}
                />}
 
               {/* <Card
@@ -575,12 +588,12 @@ if( session?.gf_session_name?.indexOf("_VV")){
                 </CardContent>
               </Card> */}
 
-            <br/>  <Button variant="secondary" style={styles.buttonStyle} onClick={() => {
+            <br/><br/>  <Button variant="secondary" style={styles.buttonStyle} onClick={() => {
                   setShown(true)
                 }}
                     endIcon={<IconButton > <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:baseline-people" /></IconButton>}>
-                    <span style={{ width: "200px" }}>Visit participants   : {session?.total_participants}</span>
+                    <span style={{ width: "200px" }}>Visit participants  : {session?.total_participants}</span>
                   </Button><br/><br/>
               {/* <Photos
                 batch={batch}
@@ -822,7 +835,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
       : null}  
          */}
         </Scrollbar>
-
+}
        
 
 

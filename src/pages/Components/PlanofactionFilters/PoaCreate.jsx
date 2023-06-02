@@ -48,6 +48,8 @@ export default function PoaCreate(props) {
  const [successMessage,setsuccessMessage]=useState(false);
  const [message, setMessage] = useState('')
  const [showDate , setShowDate] = useState(false)
+
+ console.log(props?.userId,"createedidddddddddd")
   const handleChangeTime = (newValue) => {
     console.log(newValue, '<----1234567u8');
     // setValue(newValue);
@@ -107,7 +109,7 @@ const tomorrow = dayjs().add(1, 'day');
     console.log(addData, '<0hgdfvfdbgdf');
     var data = JSON.stringify({
       date: moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
-      user_id: userDetails?.id,
+      user_id: (props?.userId)?props?.userId:userDetails?.id,
       name: addData?.name,
       all_day: addData?.all_day,
       description: addData?.description,
