@@ -54,17 +54,18 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
   const isSmallScreen = useMediaQuery('(max-width:600px)');
 console.log(busesd, "busesd")
   useEffect(()=>{
-    details()
-    },[userUpdate]
+    if(clcikData !== undefined || userUpdate!= false)
+      details()
+    },[clcikData,userUpdate]
     )
   var userAccess = ['2']
 
   var userIdCheck = localStorage?.getItem('userId')
 
-  useEffect(() => {
-    details()
-  }, [clcikData]
-  )
+  // useEffect(() => {
+  //   // details()
+  // }, [clcikData]
+  // )
   const details = async => {
     console.log(clcikData, "<-----clcikDataclcikData")
     var data = JSON.stringify({

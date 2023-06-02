@@ -75,7 +75,7 @@ export default function DialogForm({ shown, setShown, batch }) {
       the_gelathi_did_not_ask_1:[],
       the_gf_competently_covered_folowing_things_in_training_delivered:[],
       check_which_instructions_the_trainer_did_not_do:[],
-      During_the_debrief_did_the_trainer_not_ask:[],
+      during_the_debrief_did_the_trainer_not_ask:[],
       the_trainer_did_not_ask:[],
       what_did_the_trainer_not_do:[],
       during_the_debrief_did_the_trainer_not_ask_1:[],
@@ -579,7 +579,7 @@ console.log(programAssessment,"program assesment")
      during_the_debrief_did_the_gelathi:"",
      did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2:"",
      check_which_instructions_the_trainer_did_not_do:'',
-     During_the_debrief_did_the_trainer_not_ask:"",
+     during_the_debrief_did_the_trainer_not_ask:"",
      were_the_participants_responsive_during_the_debriefing_1:'',
      the_trainer_did_not_ask:'',
      what_did_the_trainer_not_do:"",
@@ -667,7 +667,7 @@ const [apiData, setApiData] = useState({})
   const [check_which_ones_the_gelathi_did_not_do_2Error,setcheck_which_ones_the_gelathi_did_not_do_2Error]=useState(false)
   const [during_the_debrief_did_the_gelathiError,setduring_the_debrief_did_the_gelathiError]=useState(false)
   const [during_the_debriefs_for_role_plays_the_gelathi_did_not_askError,setduring_the_debriefs_for_role_plays_the_gelathi_did_not_askError]=useState(false)
-  const [was_the_recap_done_1Errorr,setwas_the_recap_done_1Errorr]=useState(false)
+  const [was_the_recap_done_1Error,setwas_the_recap_done_1Error]=useState(false)
   const [check_which_instructions_the_gelathi_did_not_doError,setcheck_which_instructions_the_gelathi_did_not_doError]=useState(false)
   const [did_the_debrief_done_by_gelathiError,setdid_the_debrief_done_by_gelathiError]=useState(false)
   const [the_gelathi_did_not_ask_1,setthe_gelathi_did_not_ask_1]=useState(false)
@@ -676,6 +676,7 @@ const [apiData, setApiData] = useState({})
   const [districtError,setdistrictError]=useState(false)
   const [name_of_the_talukError,setname_of_the_talukError]=useState(false)
   const [the_gf_caried_followig_fuctions_bfore_traning_or_meting_startedError,setthe_gf_caried_followig_fuctions_bfore_traning_or_meting_startedError]=useState(false)
+  const [the_gelathi_did_not_ask_1Error,setthe_gelathi_did_not_ask_1Error]=useState(false)
 const validation =()=>{
   if(programAssessment==0){
     // alert('please Fill all the field')
@@ -698,8 +699,14 @@ const validation =()=>{
     alert('please Fill all the field')
     setname_of_the_talukError(true);
     setHelperText('Please Select The Option');
+    //commonValidation(setname_of_the_talukError);
   }
 
+  // function commonValidation(variable){
+  //   alert('please Fill all the field')
+  //   variable(true);
+  //   setHelperText('Please Select The Option');
+  // }
   if(programAssessment ==1 ){
     if(day1Day2==''){
       alert('please Fill all the field')
@@ -1329,7 +1336,7 @@ const validation =()=>{
       }
       else if (sendForm.was_the_recap_done_1=='')
       {
-        setwas_the_recap_done_1Errorr(true)
+        setwas_the_recap_done_1Error(true)
         setHelperText('Please Select The Option');
         alert("Please Select The Option")
       }
@@ -1532,7 +1539,7 @@ let data = JSON.stringify({
   check_which_ones_the_gelathi_did_not_do_4:checked['check_which_ones_the_gelathi_did_not_do_4'],
   during_the_debrief_did_the_gelathi:checked['during_the_debrief_did_the_gelathi'],
   check_which_instructions_the_trainer_did_not_do:checked['check_which_instructions_the_trainer_did_not_do'],
-  During_the_debrief_did_the_trainer_not_ask:checked['During_the_debrief_did_the_trainer_not_ask'],
+  during_the_debrief_did_the_trainer_not_ask:checked['during_the_debrief_did_the_trainer_not_ask'],
   the_trainer_did_not_ask:checked['the_trainer_did_not_ask'],
   what_did_the_trainer_not_do:checked['what_did_the_trainer_not_do'],
   during_the_debrief_did_the_trainer_not_ask_1:checked['during_the_debrief_did_the_trainer_not_ask_1'],
@@ -1671,7 +1678,7 @@ setSendForm([{}])
 
     {/* 1 */}
     <Grid style={{backgroundColor:"#FFD580", marginTop: "30px"}}>
-            <Typography>PAGE 1</Typography>
+            <Typography></Typography>
 
        
         
@@ -1880,7 +1887,7 @@ id="date-time-picker"
         
          {/* 2 */}
       {( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"}>
-          page-2
+          
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -2033,7 +2040,7 @@ id="date-time-picker"
 
          {/* 3 */}
      {  ( assessmentType=='Circle Meeting' )?    <Grid  backgroundColor={"#FFD580"}>
-          page-3
+          
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -2078,7 +2085,7 @@ id="date-time-picker"
 
               {/* 4 */}
      { ( assessmentType=='Spoorthi Module 1' )?   <Grid  backgroundColor={"#FFD580"}>
-          page-4
+          
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -2117,7 +2124,7 @@ id="date-time-picker"
 
        {/* 5 */}
       { ( assessmentType=='Spoorthi Module 2' )?  <Grid  backgroundColor={"#FFD580"}>
-          page-5
+          {/* page-5 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -2160,7 +2167,7 @@ id="date-time-picker"
 
           {/* 6 */}
          {( assessmentType=='Spoorthi Module 3' )?  <Grid  backgroundColor={"#FFD580"}>
-          page-6
+          {/* page-6 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -2200,7 +2207,7 @@ id="date-time-picker"
 
            {/* 7 */}
          { ( assessmentType=='Spoorthi Module 4' )?  <Grid  backgroundColor={"#FFD580"}>
-          page-7
+          {/* page-7 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -2239,7 +2246,7 @@ id="date-time-picker"
 
         {   ( assessmentType=='Green Module 1' )?  <Grid backgroundColor={"#FFD580"}> 
         <CardContent>
-          page-40
+          {/* page-40 */}
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
           <CardContent>
@@ -2278,7 +2285,7 @@ id="date-time-picker"
         </CardContent>
         </Grid>:null}
         {    ( assessmentType=='Green Module 2' )?     <Grid  backgroundColor={'#FFD580'}>
-          page-41
+          {/* page-41 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -2317,7 +2324,7 @@ id="date-time-picker"
         </Grid>:null}
 
        {( assessmentType=='Green Module 3' )?  <Grid  backgroundColor={"#FFD580"}>
-          page-42
+          {/* page-42 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -2361,7 +2368,7 @@ id="date-time-picker"
         </CardContent>
         </Grid>:null}
       { ( assessmentType=='Green Module 4' )? <Grid  backgroundColor={"#FFD580"}>
-          page-43
+          {/* page-43 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -2397,7 +2404,7 @@ id="date-time-picker"
         </CardContent>
         </Grid>:null}
        { ( assessmentType=='Green Module 5' )?<Grid  backgroundColor={"#FFD580"}>
-          page-44
+          {/* page-44 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -2667,15 +2674,31 @@ id="date-time-picker"
 
            {/* 10  common*/}
     {  ( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"}>
-          page-10
+          {/* page-10 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
           <CardContent>
           <Typography variant = 'h5'>Attendance</Typography>
-          <Typography variant = 'h5'>The purpose of the section is to collect quantitative data around participation, excitement, preparedness and the maintenance of interest level of the participants during the training.</Typography>
           </CardContent>
         </Card>
+        <Card sx={{ marginTop:"20px"}}>
+        <CardContent>
+        <Stack >
+                <Typography>
+                
+                <Typography >The purpose of the section is to collect quantitative data around participation, excitement, preparedness and the maintenance of interest level of the participants during the training.</Typography>
+
+                </Typography>
+                
+                <Stack>
+ 
+                </Stack>
+              </Stack>
+        </CardContent>
+
+ </Card>
+ </Card>
         <Card  sx={{ marginTop:"20px"}}>
         <CardContent>
             <Typography>Number Of Enrolled Galathis in the circle ?
@@ -2698,7 +2721,7 @@ id="date-time-picker"
                     </Stack>  */}
         </CardContent>
           </Card>
-          </Card>
+         
 
           
  <Card sx={{marginTop:2}}>
@@ -2819,7 +2842,7 @@ id="date-time-picker"
 
            {/* 12 common */}
     { ( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"}>
-          page-50
+          {/* page-50 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -3179,7 +3202,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <br/>
    {  ( programAssessment==1 )? 
      <Grid  backgroundColor={"#FFD580"}>
-          page-12
+          {/* page-12 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -3226,7 +3249,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
          {/* 13 */}
  {  ( day1Day2== 'Day 1')? 
       <Grid  backgroundColor={"#FFD580"}>
-          page-13
+          {/* page-13 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -3282,7 +3305,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           {/* 14 */}
       {( day1Day2=='Day 1')? 
         <Grid  backgroundColor={"#FFD580"}>
-          page-14
+          {/* page-14 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -3319,7 +3342,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         {/* 15 */}
         {( day1Day2=='Day 1')? 
         <Grid  backgroundColor={"#FFD580"}>
-          page-15
+          {/* page-15 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -3469,7 +3492,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
      <br/>
      {( day1Day2=='Day 1')? 
      <Grid style={{backgroundColor:"#FFD580"}}>
-            <Typography>PAGE 16 </Typography>
+            <Typography>
+              {/* PAGE 16  */}
+              </Typography>
 
        
         
@@ -3686,7 +3711,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
      <br/>
      {( day1Day2=='Day 1')? 
      <Grid style={{backgroundColor:"#FFD580"}}>
-            <Typography>PAGE 17 buzz m3</Typography>
+            <Typography>
+              {/* PAGE 17 buzz m3 */}
+              </Typography>
    <CardContent>
     
 
@@ -3989,7 +4016,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
      {( day1Day2=='Day 1')? 
        <Grid  backgroundColor={"#FFD580"}>
-          page-18
+          {/* page-18 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -4158,7 +4185,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
 {( day1Day2=='Day 1')? 
         <Grid  backgroundColor={"#FFD580"}>
-          page-19
+          {/* page-19 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -4247,7 +4274,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         :null}
       
         {day1Day2 &&(day1Day2=='Day 2')? <Grid  backgroundColor={"#FFD580"}>
-          page-20
+          {/* page-20 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -4299,7 +4326,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <CardContent>
         <Stack>
                 <Typography variant="body1">
-                How many women attended the training session? (number)
+                How many women attended the training session?
                 </Typography>
                 <Stack mt={3}>
                   <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined"  onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session}/>
@@ -4685,7 +4712,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <Stack mt={2}>
                 <FormGroup>
                 <FormControlLabel control={<Checkbox  />} label="Make the women understand how to arrange the wooden blocks" value={'Make the women understand how to arrange the wooden blocks'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Instruct the women on which hand can they usei" value={'Instruct the women on which hand can they usei'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Instruct the women on which hand can they use" value={'Instruct the women on which hand can they use'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
             <FormControlLabel control={<Checkbox  />} label="Introduce them to a constraint – of them not being able to use the hand they said they will" value={'Introduce them to a constraint – of them not being able to use the hand they said they will'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
             <FormControlLabel control={<Checkbox  />} label="Introduce them to  another constraint – blindfold" value={'Introduce them to  another constraint – blindfold'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
             <FormControlLabel control={<Checkbox  />} label="Introduce to the idea - If you pick one block you have place it on top of what you have already arranged, you cannot put it back in the bowl" value={'Introduce to the idea - If you pick one block you have place it on top of what you have already arranged, you cannot put it back in the bowl'}onChange={(event) =>handleprerequisites('check_which_instructions_the_trainer_did_not_do', event)}/>
@@ -4735,16 +4762,16 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <Stack mt={2}>
                 <FormGroup>
                 <FormControlLabel control={<Checkbox  />} label="What did you see here?" value={'What did you see here'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_2', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Why was it important for A/B to set a goal (to arrange blocks)?" value={'Why was it important for A/B to set a goal (to arrange blocks'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Why do you think A/B reached her goal/did not reach her goal?"value={'Why do you think A/B reached her goal/did not reach her goal'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)} />
-            <FormControlLabel control={<Checkbox  />} label="What external challenges did A/B face while playing the game?" value={'What external challenges did A/B face while playing the game'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="What kind of external challenges will you face in real life while setting goals?" value={'What kind of external challenges will you face in real life while setting goals'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Isn’t life like this game? There are constraints in life as well. What will you do?"value={'Isn’t life like this game? There are constraints in life as well. What will you do'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)} />
-            <FormControlLabel control={<Checkbox  />} label="What qualities and skills do you need to reach your goals?" value={'What qualities and skills do you need to reach your goals'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)}/>
-            <FormControlLabel control={<Checkbox  />} label="Confidence (overconfidence, under confidence), decision making, planning (Always give a number to the goal)"value={'Confidence (overconfidence, under confidence), decision making, planning (Always give a number to the goal)'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)} />
-            <FormControlLabel control={<Checkbox  />} label="Creating self-awareness about your own thinking/behavioural patterns"value={'Creating self-awareness about your own thinking/behavioural patterns'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)} />
-            <FormControlLabel control={<Checkbox  />} label="Did you see how goals shift with different constraints in life"value={'Did you see how goals shift with different constraints in life'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)} />
-            <FormControlLabel control={<Checkbox  />} label="There is support even if you have constraints, are you aware of that? Can you seek it?" value={'There is support even if you have constraints, are you aware of that? Can you seek it'}onChange={(event) =>handleprerequisites('During_the_debrief_did_the_trainer_not_ask', event)}/> 
+            <FormControlLabel control={<Checkbox  />} label="Why was it important for A/B to set a goal (to arrange blocks)?" value={'Why was it important for A/B to set a goal (to arrange blocks)?'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Why do you think A/B reached her goal/did not reach her goal?"value={'Why do you think A/B reached her goal/did not reach her goal?'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="What external challenges did A/B face while playing the game?" value={'What external challenges did A/B face while playing the game?'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="What kind of external challenges will you face in real life while setting goals?" value={'What kind of external challenges will you face in real life while setting goals?'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Isn’t life like this game? There are constraints in life as well. What will you do?"value={'Isn’t life like this game? There are constraints in life as well. What will you do?'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="What qualities and skills do you need to reach your goals?" value={'What qualities and skills do you need to reach your goals'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask', event)}/>
+            <FormControlLabel control={<Checkbox  />} label="Confidence (overconfidence, under confidence), decision making, planning (Always give a number to the goal)"value={'Confidence (overconfidence, under confidence), decision making, planning (Always give a number to the goal)'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Creating self-awareness about your own thinking/behavioural patterns"value={'Creating self-awareness about your own thinking/behavioural patterns'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="Did you see how goals shift with different constraints in life"value={'Did you see how goals shift with different constraints in life'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask', event)} />
+            <FormControlLabel control={<Checkbox  />} label="There is support even if you have constraints, are you aware of that? Can you seek it?" value={'There is support even if you have constraints, are you aware of that? Can you seek it?'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask', event)}/> 
     </FormGroup>
                 </Stack>
               </Stack>
@@ -5322,14 +5349,14 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                      onChange={(e) => setSendForm({ ...sendForm, days_modules:e.target.value})} value={sendForm?.days_modules}
                    >
                     
-                    <FormControlLabel control={<Radio  />} label="Session-1 _ Introduction" value="Session-1 _ Introduction"/>
-                    <FormControlLabel control={<Radio  />} label="Session-2 _ Financial Management" value="Session-2 _ Financial Management" />
-                        <FormControlLabel control={<Radio  />} label="Session-3 _Basics of an enterprise" value="Session-3 _Basics of an enterprise"/>
-                        <FormControlLabel control={<Radio  />} label="Session-4 _Building Relationship" value="Session-4 _Building Relationship"/>
-                        <FormControlLabel control={<Radio  />} label="Session-5 _Assets and Liabilities" value="Session-5 _Assets and Liabilities"/>
-                        <FormControlLabel control={<Radio  />} label="Session-6 _Goal setting game" value="Session-6 _Goal setting game"/>
-                        <FormControlLabel control={<Radio  />} label="Session-7 _Financial Goals" value="Session-7 _Financial Goals"/>
-                        <FormControlLabel control={<Radio  />} label="Session-8 _Loans-Group discussion of Case Studies" value="Session-8 _Loans-Group discussion of Case Studies"/>
+                    <FormControlLabel control={<Radio  />} label="Session-1  Introduction" value="Session-1 _ Introduction"/>
+                    <FormControlLabel control={<Radio  />} label="Session-2  Financial Management" value="Session-2 _ Financial Management" />
+                        <FormControlLabel control={<Radio  />} label="Session-3 Basics of an enterprise" value="Session-3 _Basics of an enterprise"/>
+                        <FormControlLabel control={<Radio  />} label="Session-4 Building Relationship" value="Session-4 _Building Relationship"/>
+                        <FormControlLabel control={<Radio  />} label="Session-5 Assets and Liabilities" value="Session-5 _Assets and Liabilities"/>
+                        <FormControlLabel control={<Radio  />} label="Session-6 Goal setting game" value="Session-6 _Goal setting game"/>
+                        <FormControlLabel control={<Radio  />} label="Session-7 Financial Goals" value="Session-7 _Financial Goals"/>
+                        <FormControlLabel control={<Radio  />} label="Session-8 Loans-Group discussion of Case Studies" value="Session-8 _Loans-Group discussion of Case Studies"/>
                    
 
                   </RadioGroup>
@@ -5482,7 +5509,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
              <FormControlLabel control={<Checkbox  />}value={'Ask what did Lakshmi take a loan for and what did Saraswathi take it for?'} label="Ask what did Lakshmi take a loan for and what did Saraswathi take it for?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
              <FormControlLabel control={<Checkbox  />} value={'Ask Is it bad to take loan? Lakshmi also took a loan, isn’t it?'}label="Ask Is it bad to take loan? Lakshmi also took a loan, isn’t it?"onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)} />
              <FormControlLabel control={<Checkbox  />}value={'Ask why should we save in formal financial institutions?'} label="Ask why should we save in formal financial institutions?"onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)} />
-             <FormControlLabel control={<Checkbox  />}value={'Ask why do we need to plan/track expenses?'} label="Ask why do we need to plan/track expenses?"onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)} />onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}
+             <FormControlLabel control={<Checkbox  />}value={'Ask why do we need to plan/track expenses?'} label="Ask why do we need to plan/track expenses?"onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)} />
              <FormControlLabel control={<Checkbox  />}value={'Ask how is the story relevant to you? Why was it narrated?'} label="Ask how is the story relevant to you? Why was it narrated?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
              <FormControlLabel control={<Checkbox  />}value={'Ask how many women had bank accounts in their name and active?'} label="Ask how many women had bank accounts in their name and active?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
              <FormControlLabel control={<Checkbox  />}value={'Ask the women whose life seems better and why?'} label="Ask the women whose life seems better and why?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
@@ -5511,10 +5538,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                </Stack>
          </CardContent>
          </Card> 
- 
-        
-
-          
            <Card sx={{ marginTop:"20px"}}>
          <CardContent>
          <Stack mt={2}>
@@ -5584,7 +5607,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
          </Grid>:null}
 
        { ( sendForm?.days_modules=='Session-3 _Basics of an enterprise' )? <Grid  backgroundColor={"#FFD580"}>
-          page-31
+          {/* page-31 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -5603,21 +5626,14 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
-                    
-                    
-                    
-                    
+
                     <FormControlLabel value="Ask how many businesswomen and how many housewives there were among the participants?" control={<Checkbox />} label="Ask how many businesswomen and how many housewives there were among the participants?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     <FormControlLabel value="Ask business women what constitutes business income capital, profit, and  expenditure?" control={<Checkbox />} label="Ask business women what constitutes business income capital, profit, and  expenditure?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     <FormControlLabel value="Ask housewives what constitutes household income, savings, and expenditure" control={<Checkbox />} label="Ask housewives what constitutes household income, savings, and expenditure" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     <FormControlLabel value="Give the formula for calculating income" control={<Checkbox />} label="Give the formula for calculating income" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     <FormControlLabel value="Use the chart to explain the receipts of an enterprise?" control={<Checkbox />} label="Use the chart to explain the receipts of an enterprise?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     <FormControlLabel value="Use the chart that was relevant for the business women in the group (if milk business is more then use milk chart if other business then use that)" control={<Checkbox />} label="Use the chart that was relevant for the business women in the group (if milk business is more then use milk chart if other business then use that)" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-                    
-                    
-                   
-                   
-                    
+   
                   </FormGroup>
                 </Stack>
               </Stack>
@@ -5642,18 +5658,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
-                    
-                    
-                    
-                    
+ 
                     <FormControlLabel value="Ask why is this important to maintain account?" control={<Checkbox />} label="Ask why is this important to maintain account?" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi', event)}/>
                     <FormControlLabel value="Ask which are the places/situations where income, profit, savings could be asked?" control={<Checkbox />} label="Ask which are the places/situations where income, profit, savings could be asked?" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi', event)}/>
-                    
-                    
-                    
-                   
-                   
-                    
+
                   </FormGroup>
                 </Stack>
               </Stack>
@@ -5672,7 +5680,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
        
 
    {  ( sendForm?.days_modules=='Session-3 _Basics of an enterprise' )?    <Grid  backgroundColor={"#FFD580"}>
-          page-32
+          {/* page-32 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -5729,7 +5737,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         
 
   {  ( sendForm?.days_modules=='Session-4 _Building Relationship' )?  <Grid  backgroundColor={"#FFD580"}>
-          page-33
+          {/* page-33 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -5821,7 +5829,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </Grid>:null}
       
    {  ( sendForm?.days_modules=='Session-4 _Building Relationship' )?  <Grid  backgroundColor={"#FFD580"}>
-          page-34
+          {/* page-34 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -5885,7 +5893,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
        
      { ( sendForm?.days_modules=='Session-5 _Assets and Liabilities' )? <Grid  backgroundColor={"#FFD580"}>
-          page-35
+          {/* page-35 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -6012,7 +6020,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
        
      { ( sendForm?.days_modules=='Session-6 _Goal setting game' )? <Grid  backgroundColor={"#FFD580"}>
-          page-36
+          {/* page-36 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -6113,9 +6121,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                     
                     
                     <FormControlLabel value="Here are wooden blocks. You have to arrange them on top of each other" control={<Checkbox />} label="Here are wooden blocks. You have to arrange them on top of each other"onChange={(event) =>handleprerequisites('check_which_instructions_the_gelathi_did_not_do', event)}/>
-                    <FormControlLabel value="How many blocks will you arrange? You have to give a specific number. [they have to specify a number - record this]" control={<Checkbox />} label="How many blocks will you arrange? You have to give a specific number. [they have to specify a number - record this]"onChange={(event) =>handleprerequisites('check_which_instructions_the_gelathi_did_not_do', event)}/>
+                    <FormControlLabel value="How many blocks will you arrange? You have to give a specific number. " control={<Checkbox />} label="How many blocks will you arrange? You have to give a specific number."onChange={(event) =>handleprerequisites('check_which_instructions_the_gelathi_did_not_do', event)}/>
                     <FormControlLabel value="Which hand will you use?" control={<Checkbox />} label="Which hand will you use?"onChange={(event) =>handleprerequisites('check_which_instructions_the_gelathi_did_not_do', event)}/>
-                    <FormControlLabel value="ALL THE STEPS OF INSTRUCTIONS GIVEN" control={<Checkbox />} label="ALL THE STEPS OF INSTRUCTIONS GIVEN"onChange={(event) =>handleprerequisites('check_which_instructions_the_gelathi_did_not_do', event)}/>
+                    <FormControlLabel value="All the steps of instructions given" control={<Checkbox />} label="All the steps of instructions given"onChange={(event) =>handleprerequisites('check_which_instructions_the_gelathi_did_not_do', event)}/>
                     
                     
 
@@ -6206,7 +6214,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
          {/* 37 */}
        { ( sendForm?.days_modules=='Session-7 _Financial Goals' )?  <Grid  backgroundColor={"#FFD580"}>
-          page-37
+          {/* page-37 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -6291,7 +6299,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         
         {/* 38 */}
     { ( sendForm?.days_modules=='Session-8 _Loans-Group discussion of Case Studies' )?    <Grid  backgroundColor={"#FFD580"}>
-          page-38
+          {/* page-38 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
@@ -6360,7 +6368,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
           {/* 39 */}
     { ( sendForm?.days_modules=='Session-8 _Loans-Group discussion of Case Studies' )?    <Grid  backgroundColor={"#FFD580"}>
-          page-39
+          {/* page-39 */}
         <CardContent>
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
