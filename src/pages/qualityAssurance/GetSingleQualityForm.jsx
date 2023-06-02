@@ -4399,7 +4399,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           onChange={(e) =>
                             setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
                           }
-                          value={sendForm?.the_gelathi_did_not_ask}
+                          value={sendForm?.the_gelathi_did_not_ask_1}
                         />
                       </Stack>
                   </CardContent>

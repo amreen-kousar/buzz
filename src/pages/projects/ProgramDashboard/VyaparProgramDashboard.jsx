@@ -290,110 +290,115 @@ const VyaparProgramDashboard = () => {
           </Grid>
           
           :
-          (roleid == 13)?
-          <>
-  <Grid container spacing={3} marginTop={4}>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title="Number of Beehive"
-               total={summaryData?.summary_beehive} 
-               color="motivator" />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number of Villages Visit"
-                total={summaryData?.summary_villagevisit}
-                color="motivator"
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number  of  Enrolled"
-                total={summaryData?.summary_enroll}
-                color="motivator"
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number of Circle Meet"
-                total={summaryData?.summary_circle_meet}
-                color="motivator"
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number of Circle"
-                total={summaryData?.summary_circles}
-                color="motivator"
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number of Circle"
-                total={summaryData?.summary_green}
-                color="motivator"
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number of Vyapar"
-                total={summaryData?.summary_vyapar}
-                color="motivator"
-              />
-            </Grid>
-            {/* <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title="Number of Beehives" total={summaryData?.summary_green} color="motivator" />
-            </Grid> */}
-          </Grid>
+  //         (roleid == 13)?
+  //         <>
+  // <Grid container spacing={3} marginTop={4}>
+  //           <Grid item xs={4} sm={8} md={4}>
+  //             <AppWidgetSummary title="Number of Beehive"
+  //              total={summaryData?.summary_beehive} 
+  //              color="motivator" />
+  //           </Grid>
+  //           <Grid item xs={4} sm={8} md={4}>
+  //             <AppWidgetSummary
+  //               title="Number of Villages Visit"
+  //               total={summaryData?.summary_villagevisit}
+  //               color="motivator"
+  //             />
+  //           </Grid>
+  //           <Grid item xs={4} sm={8} md={4}>
+  //             <AppWidgetSummary
+  //               title="Number  of  Enrolled"
+  //               total={summaryData?.summary_enroll}
+  //               color="motivator"
+  //             />
+  //           </Grid>
+  //           <Grid item xs={4} sm={8} md={4}>
+  //             <AppWidgetSummary
+  //               title="Number of Circle Meet"
+  //               total={summaryData?.summary_circle_meet}
+  //               color="motivator"
+  //             />
+  //           </Grid>
+  //           <Grid item xs={4} sm={8} md={4}>
+  //             <AppWidgetSummary
+  //               title="Number of Circle"
+  //               total={summaryData?.summary_circles}
+  //               color="motivator"
+  //             />
+  //           </Grid>
+  //           <Grid item xs={4} sm={8} md={4}>
+  //             <AppWidgetSummary
+  //               title="Number of Circle"
+  //               total={summaryData?.summary_green}
+  //               color="motivator"
+  //             />
+  //           </Grid>
+  //           <Grid item xs={4} sm={8} md={4}>
+  //             <AppWidgetSummary
+  //               title="Number of Vyapar"
+  //               total={summaryData?.summary_vyapar}
+  //               color="motivator"
+  //             />
+  //           </Grid>
+  //           {/* <Grid item xs={4} sm={8} md={4}>
+  //             <AppWidgetSummary title="Number of Beehives" total={summaryData?.summary_green} color="motivator" />
+  //           </Grid> */}
+  //         </Grid>
           
 
-          </>:
-           (roleid == 5)?
+  //         </>:
+           (roleid == 5 || roleid == 6 ||roleid == 13)?
           <>
           <Grid container spacing={3} marginTop={4}>
             <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title="Number of Beehive"
-               total={summaryData?.summary_beehive} 
+              <AppWidgetSummary title="Actual"
+               total={summaryData?.summary_actual} 
+               color="motivator" />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+              <AppWidgetSummary title="Target"
+               total={summaryData?.summary_Target} 
                color="motivator" />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
-                title="Number of Villages Visit"
-                total={summaryData?.summary_villagevisit}
+                title="Number of Villages "
+                total={summaryData?.summary_villages}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
-                title="Number  of  Enrolled"
-                total={summaryData?.summary_enroll}
+                title="Number  of Vyapar Enrolled"
+                total={summaryData?.summary_vyparenrolled}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
-                title="Number of Circle Meet"
-                total={summaryData?.summary_circle_meet}
+                title="Number of Vyapar Cohorts"
+                total={summaryData?.summary_vyaparcoharts}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
-                title="Number of Circle"
-                total={summaryData?.summary_circles}
+                title="Number of Vyapar Survey"
+                total={summaryData?.summary_vyaparsurvey}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
-                title="Number of Green"
-                total={summaryData?.summary_green}
+                title="Number of Vyapar Enrolled"
+                total={summaryData?.summary_vyparenrolled}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
-                title="Number of Vyapar"
-                total={summaryData?.summary_vyapar}
+                title="Number of Module Completed "
+                total={summaryData?.summary_noofmodulecompleted}
                 color="motivator"
               />
             </Grid>
@@ -402,61 +407,61 @@ const VyaparProgramDashboard = () => {
             </Grid> */}
           </Grid>
           </>:
-           (roleid == 6)?
-          <>
-          <Grid container spacing={3} marginTop={4}>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title="Number of Beehive"
-               total={summaryData?.summary_beehive} 
-               color="motivator" />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number of Villages Visit"
-                total={summaryData?.summary_villagevisit}
-                color="motivator"
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number  of  Enrolled"
-                total={summaryData?.summary_enroll}
-                color="motivator"
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number of Circle Meet"
-                total={summaryData?.summary_circle_meet}
-                color="motivator"
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number of Circle"
-                total={summaryData?.summary_circles}
-                color="motivator"
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number of Green"
-                total={summaryData?.summary_green}
-                color="motivator"
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary
-                title="Number of Vyapar"
-                total={summaryData?.summary_vyapar}
-                color="motivator"
-              />
-            </Grid>
-            {/* <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title="Number of Beehives" total={summaryData?.summary_green} color="motivator" />
-            </Grid> */}
-          </Grid>
-          </>:
+          //  (roleid == 6)?
+          // <>
+          // <Grid container spacing={3} marginTop={4}>
+          //   <Grid item xs={4} sm={8} md={4}>
+          //     <AppWidgetSummary title="Number of Beehive"
+          //      total={summaryData?.summary_beehive} 
+          //      color="motivator" />
+          //   </Grid>
+          //   <Grid item xs={4} sm={8} md={4}>
+          //     <AppWidgetSummary
+          //       title="Number of Villages Visit"
+          //       total={summaryData?.summary_villagevisit}
+          //       color="motivator"
+          //     />
+          //   </Grid>
+          //   <Grid item xs={4} sm={8} md={4}>
+          //     <AppWidgetSummary
+          //       title="Number  of  Enrolled"
+          //       total={summaryData?.summary_enroll}
+          //       color="motivator"
+          //     />
+          //   </Grid>
+          //   <Grid item xs={4} sm={8} md={4}>
+          //     <AppWidgetSummary
+          //       title="Number of Circle Meet"
+          //       total={summaryData?.summary_circle_meet}
+          //       color="motivator"
+          //     />
+          //   </Grid>
+          //   <Grid item xs={4} sm={8} md={4}>
+          //     <AppWidgetSummary
+          //       title="Number of Circle"
+          //       total={summaryData?.summary_circles}
+          //       color="motivator"
+          //     />
+          //   </Grid>
+          //   <Grid item xs={4} sm={8} md={4}>
+          //     <AppWidgetSummary
+          //       title="Number of Green"
+          //       total={summaryData?.summary_green}
+          //       color="motivator"
+          //     />
+          //   </Grid>
+          //   <Grid item xs={4} sm={8} md={4}>
+          //     <AppWidgetSummary
+          //       title="Number of Vyapar"
+          //       total={summaryData?.summary_vyapar}
+          //       color="motivator"
+          //     />
+          //   </Grid>
+          //   {/* <Grid item xs={4} sm={8} md={4}>
+          //     <AppWidgetSummary title="Number of Beehives" total={summaryData?.summary_green} color="motivator" />
+          //   </Grid> */}
+          // </Grid>
+          // </>:
           <>
           </>
 }
@@ -697,7 +702,7 @@ const VyaparProgramDashboard = () => {
 </CardContent>
 </CardContent>
 </>:
-(roleid == 5)?
+(roleid == 5 ||roleid == 6 ||roleid == 13)?
 <>
 <CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
@@ -761,8 +766,8 @@ const VyaparProgramDashboard = () => {
            <Grid item xs={12} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number of Beehive"
-                total={itm?.beehive}
+                title="Number of Vyapar Cohorts"
+                total={itm?.noofVyaparCohorts}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
 
@@ -790,16 +795,7 @@ const VyaparProgramDashboard = () => {
 </Grid>
 
            
-           <Grid item xs={12} sm={6} md={6}>
-
-              <AppWidgetSummary
-                title="Number of Vyapar Circle  "
-                total={itm?.noofVyaparCohorts}
-                color="info"
-                icon = "twemoji:women-holding-hands"
-
-              />
-            </Grid>
+          
 
 <Grid item xs={12} sm={6} md={6}>
 
