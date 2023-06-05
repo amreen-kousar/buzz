@@ -70,6 +70,21 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
   const myJSON = JSON.stringify(item);
   console.log(item, 'heck');
 
+  var value = "hi, hello, bye bye"
+
+  console.log(value.split(",") ,"valueplited")
+
+  const RenderStringToArray = ( {string}) =>{
+    // var string = "hi, hello, bye bye"
+var value =string?.split(",")
+    console.log(value,"valueplited")
+  return value?.map((val) =><li style={{color:"gray"}}>{val}</li> )
+    
+    
+    
+  
+  }
+
   const Formrender = () => {
     console.log(item, 'Formrender');
     return (
@@ -161,10 +176,11 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
         {/* 1 */}
         <Grid style={{ backgroundColor: '#FFD580', marginTop: '30px' }}>
          
-        
+       
           <Card sx={{ mt: 4, margin: '20px' }}>
             <CardContent>
               <Typography>Email</Typography>
+              {/* <RenderStringToArray string={} /> */}
               <Stack mt={2} mb={2}>
                 {/* <TextField disabled label="Your Answer" variant="outlined" color="common" /> */}
                 <TextField
@@ -373,7 +389,10 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Typography>The Gelathi Facilitator competently carried out the following functions</Typography>
                     
-
+                    <RenderStringToArray string={sendForm?.the_gf_comptetly_carried_out_following_funtions} />
+                      
+                
+                  
                     <Stack mt={2} mb={2}>
                   <TextField
                     disabled
@@ -393,18 +412,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     <Typography>
                       The Gelathi Facilitator carried out the following functions before the training/meeting started
                     </Typography>
-                    
-                    <Stack mt={2} mb={2}>
-                  <TextField
-                    disabled
-                    inputProps={{ disabled: true }}
-                    label="Your Answer"
-                    variant="outlined"
-                    color="common"
-                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
-                    value={sendForm?.the_gf_caried_followig_fuctions_bfore_traning_or_meting_started}
-                  />
-                </Stack>
+                    <RenderStringToArray string={sendForm?.the_gf_caried_followig_fuctions_bfore_traning_or_meting_started} />
+                      
+               
                   </CardContent>
                 </Card>
 
@@ -469,20 +479,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
-                   
-                    <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_ones_the_gf_did_not_do}
-                        />
-                      </Stack>
+                    <RenderStringToArray string={sendForm?.check_which_ones_the_gf_did_not_do} />
+                    
+                
                   </CardContent>
                 </Card>
               </CardContent>
@@ -501,20 +500,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
-                    <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_ones_the_gelathi_did_not_do}
-                        />
-                      </Stack>
-                  
+                    <RenderStringToArray string={sendForm?.check_which_ones_the_gelathi_did_not_do} />
+                    
+                   
                   </CardContent>
                 </Card>
               </CardContent>
@@ -533,19 +521,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
-                    <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_ones_the_gelathi_did_not_do}
-                        />
-                      </Stack>
+                    <RenderStringToArray string={sendForm?.check_which_ones_the_gelathi_did_not_do} />
+                    
                  
                   </CardContent>
                 </Card>
@@ -566,20 +543,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
+                    <RenderStringToArray string={sendForm?.check_which_ones_the_gelathi_did_not_do_2} />
+                    
                   
-                    <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_ones_the_gelathi_did_not_do_2}
-                        />
-                      </Stack>
                   
                   </CardContent>
                 </Card>
@@ -599,19 +565,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
-                    <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_ones_the_gelathi_did_not_do_1}
-                        />
-                      </Stack>
+                    <RenderStringToArray string={sendForm?.check_which_ones_the_gelathi_did_not_do_1} />
+                    
+                 
                   
                     
                   </CardContent>
@@ -631,19 +587,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Gelathi Facilitator did not do</Typography>
-                    <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_ones_the_gf_did_not_do}
-                        />
-                      </Stack>
+                    <RenderStringToArray string={sendForm?.check_which_ones_the_gf_did_not_do} />
+                    
+                   
                   
                   
                   </CardContent>
@@ -797,130 +743,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     <Stack mt={2}>
                       <Stack>
                         <Typography variant="body1">Check which ones the Gelathi Facilitator did not do</Typography>
-                        <Stack mt={2}>
-                          <FormGroup>
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Welcome"
-                              value={'Welcome'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Set the Ground rules"
-                              value={'Set the Ground rules'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Explain the objectives of Vyapar training"
-                              value={'WelcExplain the objectives of Vyapar trainingome'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Duration of the Training"
-                              value={'Duration of the Training'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Self Shakthi Training discussion"
-                              value={'Self Shakthi Training discussion'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="List the different aspects of business"
-                              value={'List the different aspects of business'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="what was the reason for starting this business"
-                              value={'what was the reason for starting this business'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Geetha Story-balance of vyapar and life"
-                              value={'Geetha Story-balance of vyapar and life'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Debrief about the Geetha Story"
-                              value={'Debrief about the Geetha Story'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="What effects did Geetha’s life on business and vice versa"
-                              value={'What effects did Geetha’s life on business and vice versa'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="What effects did your life on business and vice versa"
-                              value={'What effects did your life on business and vice versa'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Form groups of  three Business women"
-                              value={'Form groups of  three Business women'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Listed Skills by Vyaparis"
-                              value={'Listed Skills by Vyaparis'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Listed Resource by Vyaparis"
-                              value={'Listed Resource by Vyaparis'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Repeated challenges by Vyaparis"
-                              value={'Repeated challenges by Vyaparis'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Group discussion - how to deal with the challenges"
-                              value={'Group discussion - how to deal with the challenges'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Given name for Vyapar-1"
-                              value={'Given name for Vyapar-1'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Feedback"
-                              value={'Feedback'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Homework"
-                              value={'Homework'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox />}
-                              label="Was the pledge made?"
-                              value={'Was the pledge made'}
-                              onChange={(event) => handleprerequisites('check_which_ones_the_gf_did_not_do', event)}
-                            />
-                          </FormGroup>
-                        </Stack>
+                        <RenderStringToArray string={sendForm?.check_which_ones_the_gf_did_not_do} />
+                    
+                      
                       </Stack>
                     </Stack>
                   </CardContent>{' '}
@@ -1552,20 +1377,11 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                         The Gelathi Facilitator competently covered the following things in the training delivered
                  
                         </Typography>
-                        
+                        <RenderStringToArray string={sendForm?.the_gf_competently_covered_folowing_things_in_training_delivered} />
+                    
+                      
                        
-                        <Stack mt={2} mb={2}>
-                  <TextField
-                    disabled
-                    inputProps={{ disabled: true }}
-                    label="Your Answer"
-                    variant="outlined"
-                    color="common"
-                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
-                    value={sendForm?.the_gf_competently_covered_folowing_things_in_training_delivered}
-                  />
-                </Stack>
-                       
+                     
                   
                   </CardContent>
                 </Card>
@@ -1756,17 +1572,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
 
                       
                     </Typography>
-                    <Stack mt={2} mb={2}>
-                  <TextField
-                    disabled
-                    inputProps={{ disabled: true }}
-                    label="Your Answer"
-                    variant="outlined"
-                    color="common"
-                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
-                    value={sendForm?.any_futher_training_and_understding_reqired_by_gf_traing_module}
-                  />
-                </Stack>
+                    <RenderStringToArray string={sendForm?.any_futher_training_and_understding_reqired_by_gf_traing_module} />
+                    
+                 
                   </CardContent>
                 </Card>
                 <Card sx={{ marginTop: '20px' }}>
@@ -1970,17 +1778,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   </Card>
                   <CardContent>
                     <Typography>Check which ones the Trainer did NOT do</Typography>
-                    <Stack mt={2} mb={2}>
-                      <TextField
-                        disabled
-                        inputProps={{ disabled: true }}
-                        label="Your Answer"
-                        variant="outlined"
-                        color="common"
-                       
-                        value={sendForm?.check_which_ones_the_trainer_did_not_do}
-                      />
-                    </Stack>
+                    <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do} />
+
+                 
                   </CardContent>
                 </Card>
               </CardContent>
@@ -2019,11 +1819,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Typography>Check which ones the trainer did not do</Typography>
+                    <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_1} />
                     
-                    <Stack mt={2} mb={2}>
-                    <TextField  disabled inputProps={{ disabled: true }} label="Your Answer" variant="outlined" color="common"
-                     value={sendForm?.check_which_ones_the_trainer_did_not_do_1} />
-                </Stack> 
+                   
                   </CardContent>
                 </Card>
 
@@ -2183,18 +1981,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     <Typography>
                       Check which ones the trainer did not do/ತರಬೇತುದಾರನು ಯಾವುದನ್ನು ಮಾಡಲಿಲ್ಲ ಎಂಬುದನ್ನು ಪರಿಶೀಲಿಸಿ
                     </Typography>
-                    
-                    <Stack mt={2} mb={2}>
-                        <TextField
-                          
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                        disabled
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do_2}
-                        />
-                      </Stack>
+                    <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_2} />
+                      
+                
                   </Stack>
                 </CardContent>
               </Card>
@@ -2205,18 +1994,11 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                       During the debrief the trainer did: /ಡಿಬ್ರೀಫ್ ಸಮಯದಲ್ಲಿ ತರಬೇತುದಾರನು ಹೀಗೆ ಮಾಡಿದನು( check the ones
                       he/she did)
                     </Typography>
-                    during_the_debrief_the_trainer_did
-                    <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                       
-                          value={sendForm?.during_the_debrief_the_trainer_did }
-                        />
-                      </Stack>
+                    <RenderStringToArray string={sendForm?.during_the_debrief_the_trainer_did} />
+                      
+                
+                  
+                  
                   </Stack>
                 </CardContent>
               </Card>
@@ -2228,7 +2010,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                       Did any women leave the training session during or after the first module?/ಮೊದಲ ಮಾಡ್ಯೂಲ್ ಸಮಯದಲ್ಲಿ
                       ಅಥವಾ ನಂತರ ಯಾವುದೇ ಮಹಿಳೆಯರು ಸೆಷನ್ ಅನ್ನು ತೊರೆದಿದ್ದಾರೆಯೇ?
                     </Typography>
-                    did_any_women_leve_training_session_during_or_after_1st_module_1
+                  
                     <Stack mt={2} mb={2}>
                         <TextField
                           disabled
@@ -2246,7 +2028,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
 
               <Card sx={{ margin: '20px' }}>
                 <CardContent>
-                  <Stack>
+                
                     <Typography variant="body1">If so, How many?/ಹಾಗಿದ್ದರೆ ಎಷ್ಟು?</Typography>
                     <Stack mt={3}>
                       <TextField
@@ -2260,7 +2042,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                         value={sendForm?.if_so_how_many_2}
                       />
                     </Stack>
-                  </Stack>
+                
                 </CardContent>
               </Card>
 
@@ -2346,7 +2128,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
 
                 <Card sx={{ margin: '20px' }}>
                   <CardContent>
-                    <Stack>
+                 
                       <Typography variant="body1">If so, How many?</Typography>
                       <Stack mt={3}>
                         <TextField
@@ -2360,25 +2142,16 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           value={sendForm?.if_so_how_many_3}
                         />
                       </Stack>
-                    </Stack>
+                   
                   </CardContent>
                 </Card>
                 <Card sx={{ margin: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do</Typography>
-                      
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                         
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do_3}
-                        />
-                      </Stack>
+                      <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_3} />
+                    
+                   
                     </Stack>
                   </CardContent>
                 </Card>
@@ -2388,18 +2161,10 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                       <Typography>
                         During the debriefs for role plays the trainer did not ask: ( check the ones he/she did)
                       </Typography>
-                      
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                       
-                          value={sendForm?.during_the_debriefs_for_role_plays_the_trainer_did_not_ask}
-                        />
-                      </Stack>
+                      <RenderStringToArray string={sendForm?.during_the_debriefs_for_role_plays_the_trainer_did_not_ask} />
+                    
+                   
+                 
                     </Stack>
                   </CardContent>
                 </Card>
@@ -2481,7 +2246,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                 </Card>
                 <Card sx={{ margin: '20px' }}>
                   <CardContent>
-                    <Stack>
+                 
                       <Typography variant="body1">If so, How many?</Typography>
                       <Stack mt={3}>
                         <TextField
@@ -2495,7 +2260,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           value={sendForm?.if_so_how_many_4}
                         />
                       </Stack>
-                    </Stack>
+                
                   </CardContent>
                 </Card>
                 <Card sx={{ margin: '20px' }}>
@@ -2570,18 +2335,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do</Typography>
-                      
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
+                      <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_4} />
+                    
                    
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do_4}
-                        />
-                      </Stack>
                     </Stack>
                   </CardContent>
                 </Card>
@@ -2661,18 +2417,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     <CardContent>
                       <Stack mt={2}>
                         <Typography>Check which ones the trainer did not do</Typography>
-                        
-                        <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do_5}
-                        />
-                      </Stack>
+                        <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_5} />
+                    
+                      
                       </Stack>
                     </CardContent>
                   </Card>
@@ -2770,18 +2517,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do</Typography>
-                      
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                      
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do}
-                        />
-                      </Stack>
+                      <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do} />
+                    
+                  
                     </Stack>
                   </CardContent>
                 </Card>
@@ -2831,18 +2569,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do</Typography>
                     
-                       
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                      
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do_1}
-                        />
-                      </Stack>
+                      <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_1} />
+                    
+                     
                     </Stack>
                   </CardContent>
                 </Card>
@@ -2881,6 +2610,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do:</Typography>
+                      <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_2} />
                     
                     {/* { 
                     ( sendForm?.check_which_ones_the_trainer_did_not_do_2)?
@@ -2888,17 +2618,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                         <Typography key={index}>{ item}</Typography>
                       }) : null
                     } */}
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                     
-                          value={  sendForm?.check_which_ones_the_trainer_did_not_do_2}
-                        />
-                      </Stack>
+                  
                     </Stack>
                   </CardContent>
                 </Card>
@@ -3047,20 +2767,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do:</Typography>
-                      
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do_2}
-                        />
-                      </Stack>
+                      <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_2} />
+                    
+                    
                     </Stack>
                   </CardContent>
                 </Card>
@@ -3068,20 +2777,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which instructions the trainer did not do</Typography>
-                      
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_instructions_the_trainer_did_not_do}
-                        />
-                      </Stack>
+                      <RenderStringToArray string={sendForm?.check_which_instructions_the_trainer_did_not_do} />
+                    
+                 
                     </Stack>
                   </CardContent>
                 </Card>
@@ -3254,19 +2952,10 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do:</Typography>
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do_3}
-                        />
-                      </Stack>
+
+                      <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_3} />
+                    
+                   
                     </Stack>
                   </CardContent>
                 </Card>
@@ -3461,20 +3150,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do:</Typography>
-                      
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do_4}
-                        />
-                      </Stack>
+                      <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_4} />
+                    
                     </Stack>
                   </CardContent>
                 </Card>
@@ -3600,20 +3277,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do:</Typography>
-                      
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do_5}
-                        />
-                      </Stack>
+                      <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_5} />
+                    
+                   
                     </Stack>
                   </CardContent>
                 </Card>
@@ -3735,7 +3401,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             id="Your Answer"
                             label="Your Answer"
                             variant="outlined"
-                            defaultValue={sendDat?.how_many_women_attended_the_training_session}
+                            defaultValue={sendData?.how_many_women_attended_the_training_session}
                             onChange={(e) => {
                               setSendData({
                                 ...sendData,
@@ -4183,20 +3849,9 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do</Typography>
-                      
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_ones_the_trainer_did_not_do}
-                        />
-                      </Stack>
+                      <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do} />
+                    
+                     
                     </Stack>
                   </CardContent>
                 </Card>
@@ -4275,20 +3930,10 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which instructions the Gelathi did not do</Typography>
-                      
-                      <Stack mt={2} mb={2}>
-                        <TextField
-                          disabled
-                          inputProps={{ disabled: true }}
-                          label="Your Answer"
-                          variant="outlined"
-                          color="common"
-                          onChange={(e) =>
-                            setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
-                          }
-                          value={sendForm?.check_which_instructions_the_gelathi_did_not_do}
-                        />
-                      </Stack>
+                      <RenderStringToArray string={sendForm?.check_which_instructions_the_gelathi_did_not_do} />
+                    
+                 
+                    
                     </Stack>
                   </CardContent>
                 </Card>

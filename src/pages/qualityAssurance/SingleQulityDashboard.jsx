@@ -231,10 +231,10 @@ useEffect(()=>{
            
           } 
            
-         { todayPoa== ""? 
+         { todayPoa== null? 
           
        <>
-              <h4 style={{textAlign:'center'}}>No Enrolled Gelathi Found</h4>
+              <h4 style={{textAlign:'center' ,marginTop:"40px"}}>No Data Found</h4>
               </>:null
        }
           

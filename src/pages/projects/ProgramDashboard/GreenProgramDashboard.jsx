@@ -396,7 +396,7 @@ const GreenProgramDashboard = () => {
                       // }}
                     >
                       <CardContent>
-                        <Container style={{ display: 'flex', flexDirection: 'row' }}>
+                        {/* <Container style={{ display: 'flex', flexDirection: 'row' }}>
                           <Grid item xs={6}>
                             <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
                               Funder
@@ -411,7 +411,36 @@ const GreenProgramDashboard = () => {
                               &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
                             </span>
                           </Grid>
-                        </Container>
+                        </Container> */}
+
+                        <Container style={{ display: 'flex', flexDirection: 'column' }}>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+      {(itm?.startDate)?"Project Name":"Funder"}<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
+      &nbsp;:&nbsp;{itm?.name}<br />
+      {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
+    </span>
+    
+    
+    </Grid>
+    <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Actual / Target  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+    &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
+    </span>
+  </Grid>
+ 
+ 
+</Container>
+
+
                         <Divider mt={1} />
                         <Grid container spacing={3} marginTop={4}>
                           {/* <Grid item xs={4} sm={8} md={4}>
@@ -432,7 +461,7 @@ const GreenProgramDashboard = () => {
 
               />
             </Grid> */}
-                         <Grid item xs={12} sm={6} md={6}>
+                        <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number  of Villages"
                               total={itm?.villages}
@@ -440,7 +469,7 @@ const GreenProgramDashboard = () => {
                               icon="fontisto:holiday-village"
                             />
                           </Grid>
-                          <Grid item xs={12} sm={6} md={6}>
+                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Coharts"
                               total={itm?.noofgreencoharts}
@@ -448,7 +477,7 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                         <Grid item xs={12} sm={6} md={6}>
+                        <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Enrolled"
                               total={itm?.greenenrolled}
@@ -456,7 +485,7 @@ const GreenProgramDashboard = () => {
                               icon="openmoji:leafy-green"
                             />
                           </Grid>
-                          <Grid item xs={12} sm={6} md={6}>
+                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Modules Completed"
                               total={itm?.noofgreenmodulecompleted}
@@ -464,7 +493,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={12} sm={6} md={6}>
+                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Survey"
                               total={itm?.nofgreensurvey}
@@ -473,7 +502,7 @@ const GreenProgramDashboard = () => {
                             />
                           </Grid>
 
-                          {/* <Grid item xs={12} sm={6} md={6}>
+                          {/*<Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="2nd Day Turnout  %"
                               total={itm?.day2}
@@ -538,7 +567,7 @@ const GreenProgramDashboard = () => {
             //             <Divider mt={1} />
             //             <Grid container spacing={3} marginTop={4}>
           
-            //              <Grid item xs={12} sm={6} md={6}>
+            //             <Grid item xs={6} sm={6} md={6}>
             //                 <AppWidgetSummary
             //                   title="Number  of Vilage Visits"
             //                   total={itm?.villagevisit}
@@ -546,7 +575,7 @@ const GreenProgramDashboard = () => {
             //                   icon="fontisto:holiday-village"
             //                 />
             //               </Grid>
-            //              <Grid item xs={12} sm={6} md={6}>
+            //             <Grid item xs={6} sm={6} md={6}>
             //                 <AppWidgetSummary
             //                   title="Number of Batches"
             //                   total={itm?.beehive}
@@ -554,7 +583,7 @@ const GreenProgramDashboard = () => {
             //                   icon="twemoji:women-holding-hands"
             //                 />
             //               </Grid>
-            //              <Grid item xs={12} sm={6} md={6}>
+            //             <Grid item xs={6} sm={6} md={6}>
             //                 <AppWidgetSummary
             //                   title="Number of Circle Meet"
             //                   total={itm?.circle_meet}
@@ -562,7 +591,7 @@ const GreenProgramDashboard = () => {
             //                   icon="twemoji:women-holding-hands"
             //                 />
             //               </Grid>
-            //              <Grid item xs={12} sm={6} md={6}>
+            //             <Grid item xs={6} sm={6} md={6}>
             //                 <AppWidgetSummary
             //                   title="Number of Circle"
             //                   total={itm?.circles}
@@ -570,7 +599,7 @@ const GreenProgramDashboard = () => {
             //                   icon="twemoji:women-holding-hands"
             //                 />
             //               </Grid>
-            //              <Grid item xs={12} sm={6} md={6}>
+            //             <Grid item xs={6} sm={6} md={6}>
             //                 <AppWidgetSummary
             //                   title="Number of Green Motivators"
             //                   total={itm?.greenMotivators}
@@ -579,7 +608,7 @@ const GreenProgramDashboard = () => {
             //                 />
             //               </Grid>
 
-            //              <Grid item xs={12} sm={6} md={6}>
+            //             <Grid item xs={6} sm={6} md={6}>
             //                 <AppWidgetSummary
             //                   title="Number of Vyapar"
             //                   total={itm?.vyapar}
@@ -624,26 +653,52 @@ const GreenProgramDashboard = () => {
                       // }}
                     >
                       <CardContent>
-                        <Container style={{ display: 'flex', flexDirection: 'row' }}>
-                          <Grid item xs={6}>
-                            <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-                              Project
-                              <br />
-                              Actual / Target<br/>
-                              Start Date <br/>
-                              End Date <br/>
-                            </span>
-                          </Grid>
-                          <Grid item xs={6}>
-                            <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
-                              &nbsp;:&nbsp;{itm?.name}
-                              <br />
-                              &nbsp;:&nbsp;{itm?.actual} / {itm?.target}<br/>
-                              &nbsp;:&nbsp;{itm?.startDate}<br/>
-                              &nbsp;:&nbsp;{itm?.endDate}<br/>
-                            </span>
-                          </Grid>
-                        </Container>
+                      
+
+                        <Container style={{ display: 'flex', flexDirection: 'column' }}>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+      {(itm?.startDate)?"Project Name":"Funder"}<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
+      &nbsp;:&nbsp;{itm?.name}<br />
+      {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
+    </span>
+    
+    
+    </Grid>
+    <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Actual / Target  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
+    </span>
+  </Grid>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Start Date  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.startDate} 
+    </span>
+  </Grid>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    End Date  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.endDate} 
+    </span>
+  </Grid>
+</Container>
                         <Divider mt={1} />
                         <Grid container spacing={3} marginTop={4}>
                           {/* <Grid item xs={4} sm={8} md={4}>
@@ -664,7 +719,7 @@ const GreenProgramDashboard = () => {
 
               />
             </Grid> */}
-                          <Grid item xs={12} sm={6} md={6}>
+                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number  of Vilage "
                               total={itm?.villages}
@@ -672,7 +727,7 @@ const GreenProgramDashboard = () => {
                               icon="fontisto:holiday-village"
                             />
                           </Grid>
-                          <Grid item xs={12} sm={6} md={6}>
+                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Vyapar Cohorts"
                               total={itm?.noofVyaparCohorts}
@@ -680,7 +735,7 @@ const GreenProgramDashboard = () => {
                               icon="twemoji:women-holding-hands"
                             />
                           </Grid>
-                         <Grid item xs={12} sm={6} md={6}>
+                        <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Enrolle"
                               total={itm?.Greenenrolled}
@@ -695,7 +750,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={12} sm={6} md={6}>
+                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Vyapar Module Completed"
                               total={itm?.noofvyaparmodulcompleted}
@@ -703,7 +758,7 @@ const GreenProgramDashboard = () => {
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
-                          <Grid item xs={12} sm={6} md={6}>
+                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Vyapar Cohorts"
                               total={itm?.noofVyaparCohorts}
@@ -712,7 +767,7 @@ const GreenProgramDashboard = () => {
                             />
                           </Grid>
 
-                          {/* <Grid item xs={12} sm={6} md={6}>
+                          {/*<Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="2nd Day Turnout  %"
                               total={itm?.day2}
@@ -731,136 +786,7 @@ const GreenProgramDashboard = () => {
             
             </>
             :
-            (roleid == 6)?
-            <>
-            <CardContent>
-            <Typography variant="h4" gutterBottom style={{ marginLeft: '20px' }}>
-              Funders List :
-            </Typography>
-          <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
-              <Grid item xs={12} sm={12} md={12} marginTop={3}>
-                {summaryData?.data?.map((itm) => {
-                  return (
-                    <Card
-                      style={{
-                        backgroundColor: '#f5f5f5',
-                        flexDirection: 'column',
-                        borderRadius: 12,
-                        border: '2px solid',
-                        borderColor: '#ffcc80',
-                        marginBottom: '40px',
-                      }}
-                      // onClick={() => {
-                      //   navigate('/dashboard/app/chart', {
-                      //     state: {
-                      //       filterData: filterData
-                      //     }
-                      //   })
-                      // }}
-                    >
-                      <CardContent>
-                        <Container style={{ display: 'flex', flexDirection: 'row' }}>
-                          <Grid item xs={6}>
-                            <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-                            {(itm?.startDate)?"Project Name":"Funder"}<br />
-                              <br />
-                            
-                            </span>
-                          </Grid>
-                          <Grid item xs={6}>
-                            <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
-                              &nbsp;:&nbsp;{itm?.name}
-                              <br />
-                              {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
-                            </span>
-                          </Grid>
-                        </Container>
-                        <Divider mt={1} />
-                        <Grid container spacing={3} marginTop={4}>
-                          {/* <Grid item xs={4} sm={8} md={4}>
-
-              <AppWidgetSummary
-                title="Target"
-                total={itm?.summary_target}
-                color="motivator"
-
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-
-              <AppWidgetSummary
-                title="Actual"
-                total={summaryData?.summary_actual}
-                color="motivator"
-
-              />
-            </Grid> */}
-                          <Grid item xs={12} sm={6} md={6}>
-                            <AppWidgetSummary
-                              title="Number  of Vilage Visit"
-                              total={itm?.villagevisit}
-                              color="villages"
-                              icon="fontisto:holiday-village"
-                            />
-                          </Grid>
-                          <Grid item xs={12} sm={6} md={6}>
-                            <AppWidgetSummary
-                              title="Number of Beehive"
-                              total={itm?.beehive}
-                              color="motivator"
-                              icon="twemoji:women-holding-hands"
-                            />
-                          </Grid>
-                         <Grid item xs={12} sm={6} md={6}>
-                            <AppWidgetSummary
-                              title="Number of Green Motivators"
-                              total={itm?.greenMotivators}
-                              color="motivator"
-                              icon="openmoji:leafy-green"
-                            />
-                          </Grid><Grid item xs={12} sm={6} md={6}>
-                            <AppWidgetSummary
-                              title="Number of Cirle"
-                              total={itm?.circles}
-                              color="vyapar"
-                              icon="eos-icons:product-subscriptions-outlined"
-                            />
-                          </Grid>
-                          <Grid item xs={12} sm={6} md={6}>
-                            <AppWidgetSummary
-                              title="Number of Circle Meet"
-                              total={itm?.circle_meet}
-                              color="info"
-                              icon="eos-icons:product-subscriptions-outlined"
-                            />
-                          </Grid>
-                          <Grid item xs={12} sm={6} md={6}>
-                            <AppWidgetSummary
-                              title="Number of Vyapar"
-                              total={itm?.vyapar}
-                              color="vyapar"
-                              icon="eos-icons:product-subscriptions-outlined"
-                            />
-                          </Grid>
-
-                          {/* <Grid item xs={12} sm={6} md={6}>
-                            <AppWidgetSummary
-                              title="2nd Day Turnout  %"
-                              total={itm?.day2}
-                              color="info"
-                              icon="twemoji:women-holding-hands"
-                            />
-                          </Grid> */}
-                        </Grid>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </Grid>
-            </CardContent>
-            </CardContent>
-            
-            </>:<></>
+           <></>
             }
 
           
