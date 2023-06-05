@@ -160,7 +160,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
       </div> */}
         {/* 1 */}
         <Grid style={{ backgroundColor: '#FFD580', marginTop: '30px' }}>
-          <Typography>PAGE 1</Typography>
+         
         
           <Card sx={{ mt: 4, margin: '20px' }}>
             <CardContent>
@@ -300,25 +300,33 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 2 */}
           {sendForm?.program_assessment == 2 ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-2
+            
               <CardContent>
                
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
                     <CardContent>
                     
                       <Typography variant="h5">Gelathi Program</Typography>
-                      <Typography variant="h5">Name of the Gelathi Facilitator</Typography>
-                      <Stack mt={1} mb={1}>
-                  <TextField
-                    disabled
-                    inputProps={{ disabled: true }}
-                    label="Your Answer"
-                    variant="outlined"
-                    color="common"
-                    onChange={(e) => setSendForm({ ...sendForm, name_of_the_assessor: e.target.value })}
-                    value={sendForm?.name_of_the_gf}
-                  />
-                </Stack>
+                 
+                  </CardContent>
+                </Card>
+                <Card sx={{ marginTop: '20px' }}>
+                  <CardContent>
+                    <Typography>Name of the Gelathi Facilitator</Typography>
+                    <Stack mt={2} mb={2}>
+                      <TextField
+                        disabled
+                        inputProps={{ disabled: true }}
+                        type="number"
+                        label="Your Answer"
+                        variant="outlined"
+                        color="common"
+                        onChange={(e) =>
+                          setSendForm({ ...sendForm, no_of_participants_at_the_start_of_the_session: e.target.value })
+                        }
+                        value={sendForm?.name_of_the_gf}
+                      />
+                    </Stack>
                   </CardContent>
                 </Card>
 
@@ -451,7 +459,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 3 */}
           {sendForm?.assessment_of == 'Circle Meeting' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-3
+             
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -483,7 +491,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 4 */}
           {sendForm?.assessment_of == 'Spoorthi Module 1' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-4
+       
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -515,7 +523,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 5 */}
           {sendForm?.assessment_of == 'Spoorthi Module 2' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-5
+            
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -548,7 +556,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 6 */}
           {sendForm?.assessment_of == 'Spoorthi Module 3' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-6
+          
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -581,7 +589,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 7 */}
           {sendForm?.assessment_of == 'Spoorthi Module 4' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-7
+             
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -614,7 +622,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {sendForm?.assessment_of == 'Green Module 1' ? (
             <Grid backgroundColor={'#FFD580'}>
               <CardContent>
-                page-40
+               
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
                     <CardContent>
@@ -645,7 +653,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.assessment_of == 'Green Module 2' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-41
+             
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -678,7 +686,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.assessment_of == 'Green Module 3' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-42
+           
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -712,7 +720,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.assessment_of == 'Green Module 4' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-43
+          
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -745,7 +753,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.assessment_of == 'Green Module 5' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-44
+            
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -1391,7 +1399,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 10  common*/}
           {sendForm?.program_assessment == 2 ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-10
+          
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -1512,7 +1520,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 12 common */}
           {sendForm?.program_assessment == 2 ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-50
+             
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -1884,7 +1892,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           <br />
           {sendForm?.program_assessment == 1 ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-12
+           
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -1920,7 +1928,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 13 */}
           {sendForm?.day1_or_day2 == 'Day 1' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-13
+            
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -1952,7 +1960,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 14 */}
           {sendForm?.day1_or_day2 == 'Day 1' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-14
+            
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -1982,7 +1990,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 15 */}
           {sendForm?.day1_or_day2 == 'Day 1' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-15
+             
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -2093,7 +2101,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           <br />
           {sendForm?.day1_or_day2 == 'Day 1' ? (
             <Grid style={{ backgroundColor: '#FFD580' }}>
-              <Typography>PAGE 16 </Typography>
+            
 
               <Card sx={{ mt: 4, margin: '20px', backgroundColor: '#ff7424' }}>
                 <CardContent>
@@ -2159,8 +2167,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                         type="number"
                         disabled
                         inputProps={{ disabled: true }}
-                        id="Correct Answer"
-                        label="Correct Answer"
+                        id="Your Answer"
+                        label="Your Answer"
                         variant="outlined"
                        
                         value={sendForm?.if_so_how_many_1}
@@ -2245,8 +2253,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                         type="number"
                         disabled
                         inputProps={{ disabled: true }}
-                        id="Correct Answer"
-                        label="Correct Answer"
+                        id="Your Answer"
+                        label="Your Answer"
                         variant="outlined"
                     
                         value={sendForm?.if_so_how_many_2}
@@ -2282,7 +2290,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           <br />
           {sendForm?.day1_or_day2 == 'Day 1' ? (
             <Grid style={{ backgroundColor: '#FFD580' }}>
-              <Typography>PAGE 17 buzz m3</Typography>
+             
               <CardContent>
                 <Card sx={{ mt: 4, margin: '20px', backgroundColor: '#ff7424' }}>
                   <CardContent>
@@ -2345,8 +2353,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           type="number"
                           disabled
                           inputProps={{ disabled: true }}
-                          id="Correct Answer"
-                          label="Correct Answer"
+                          id="Your Answer"
+                          label="Your Answer"
                           variant="outlined"
                         
                           value={sendForm?.if_so_how_many_3}
@@ -2480,8 +2488,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           type="number"
                           disabled
                           inputProps={{ disabled: true }}
-                          id="Correct Answer"
-                          label="Correct Answer"
+                          id="Your Answer"
+                          label="Your Answer"
                           variant="outlined"
                        
                           value={sendForm?.if_so_how_many_4}
@@ -2513,7 +2521,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.day1_or_day2 == 'Day 1' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-18
+          
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -2548,8 +2556,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           type="number"
                           disabled
                           inputProps={{ disabled: true }}
-                          id="Correct Answer"
-                          label="Correct Answer"
+                          id="Your Answer"
+                          label="Your Answer"
                           variant="outlined"
                         
                           value={sendForm?.if_so_how_many_5}
@@ -2589,8 +2597,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           type="number"
                           disabled
                           inputProps={{ disabled: true }}
-                          id="Correct Answer"
-                          label="Correct Answer"
+                          id="Your Answer"
+                          label="Your Answer"
                           variant="outlined"
                       
                           value={sendForm?.how_many_women_remained_by_the_end_of_this_training_session}
@@ -2607,8 +2615,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                         <TextField
                           disabled
                           inputProps={{ disabled: true }}
-                          id="Correct Answer"
-                          label="Correct Answer"
+                          id="Your Answer"
+                          label="Your Answer"
                           variant="outlined"
                   
                           value={sendForm?.how_many_are_likely_to_come_back}
@@ -2641,7 +2649,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.day1_or_day2 == 'Day 1' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-19
+             
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -2709,7 +2717,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.day1_or_day2 == 'Day 2' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-20
+             
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -2747,8 +2755,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           type="number"
                           disabled
                           inputProps={{ disabled: true }}
-                          id="Correct Answer"
-                          label="Correct Answer"
+                          id="Your Answer"
+                          label="Your Answer"
                           variant="outlined"
                         
                           value={sendForm?.how_many_women_attended_the_training_session}
@@ -2858,8 +2866,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           <TextField
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                         
                             value={sendForm?.how_many_women_attended_the_training_session_1}
@@ -2965,8 +2973,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             type="number"
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             onChange={(e) => setSendForm({ ...sendForm, if_so_how_many: e.target.value })}
                             value={sendForm?.if_so_how_many}
@@ -3019,8 +3027,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             type="number"
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             onChange={(e) =>
                               setSendForm({
@@ -3173,8 +3181,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             type="number"
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             onChange={(e) => setSendForm({ ...sendForm, if_so_how_many_1: e.target.value })}
                             value={sendForm?.if_so_how_many_1}
@@ -3226,8 +3234,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             type="number"
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             onChange={(e) =>
                               setSendForm({
@@ -3379,8 +3387,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             type="number"
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             onChange={(e) => setSendForm({ ...sendForm, if_so_how_many_2: e.target.value })}
                             value={sendForm?.if_so_how_many_2}
@@ -3433,8 +3441,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             type="number"
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             onChange={(e) =>
                               setSendForm({
@@ -3545,8 +3553,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             type="number"
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             onChange={(e) => setSendForm({ ...sendForm, if_so_how_many_3: e.target.value })}
                             value={sendForm?.if_so_how_many_3}
@@ -3640,8 +3648,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           <TextField
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             onChange={(e) =>
                               setSendForm({ ...sendForm, name_of_the_gelathi_being_evaluated: e.target.value })
@@ -3724,8 +3732,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             type="number"
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             defaultValue={sendDat?.how_many_women_attended_the_training_session}
                             onChange={(e) => {
@@ -3836,8 +3844,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             type="number"
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             onChange={(e) =>
                               setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
@@ -3912,7 +3920,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.days_modules == 'Session-3 _Basics of an enterprise' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-31
+             
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -3968,8 +3976,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.days_modules == 'Session-3 _Basics of an enterprise' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-32
-              <CardContent>
+                <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
                     <CardContent>
@@ -4004,7 +4011,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.days_modules == 'Session-4 _Building Relationship' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-33
+           
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -4061,7 +4068,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.days_modules == 'Session-4 _Building Relationship' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-34
+            
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -4095,7 +4102,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.days_modules == 'Session-5 _Assets and Liabilities' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-35
+          
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -4112,8 +4119,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           <TextField
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             onChange={(e) =>
                               setSendForm({ ...sendForm, name_of_the_gelathi_being_evaluated_1: e.target.value })
@@ -4137,8 +4144,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                           type="number"
                           disabled
                           inputProps={{ disabled: true }}
-                          id="Correct Answer"
-                          label="Correct Answer"
+                          id="Your Answer"
+                          label="Your Answer"
                           variant="outlined"
                           onChange={(e) =>
                             setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
@@ -4198,7 +4205,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           ) : null}
           {sendForm?.days_modules == 'Session-6 _Goal setting game' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-36
+           
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -4215,8 +4222,8 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                             type="number"
                             disabled
                             inputProps={{ disabled: true }}
-                            id="Correct Answer"
-                            label="Correct Answer"
+                            id="Your Answer"
+                            label="Your Answer"
                             variant="outlined"
                             onChange={(e) =>
                               setSendForm({ ...sendForm, how_many_women_attended_the_training_session: e.target.value })
@@ -4236,7 +4243,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
                 How many women attended the training session?
                 </Typography>
                 <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
+                  <TextField id="Your Answer" label="Your Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
                 </Stack>
               </Stack>
        
@@ -4335,7 +4342,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 37 */}
           {sendForm?.days_modules == 'Session-7 _Financial Goals' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-37
+           
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -4431,7 +4438,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 38 */}
           {sendForm?.days_modules == 'Session-8 _Loans-Group discussion of Case Studies' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-38
+             
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
@@ -4505,7 +4512,7 @@ const GetSingleQualityForm = ({ item, open, handleClose }) => {
           {/* 39 */}
           {sendForm?.days_modules == 'Session-8 _Loans-Group discussion of Case Studies' ? (
             <Grid backgroundColor={'#FFD580'}>
-              page-39
+             
               <CardContent>
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>

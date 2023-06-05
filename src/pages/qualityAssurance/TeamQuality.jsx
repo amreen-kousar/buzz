@@ -98,6 +98,8 @@ export default function TeamQuality({reload}) {
   }, [])
   var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   var role =JSON.parse(localStorage.getItem('userDetails'))?.role
+
+  console.log(userid , "useridinteam")
   const getPOA = () => {
     var data = JSON.stringify({
       emp_id: userid,
