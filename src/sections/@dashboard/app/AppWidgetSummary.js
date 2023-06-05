@@ -48,7 +48,7 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         ...sx,
         height: 
         {
-          xs: 140
+          xs: 180
           ,
           sm: 200,
           md: 210,
@@ -69,14 +69,14 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         {(icon) ? <IconWrapperStyle
           sx={{
             width: {
-              xs: 50,
+              xs: 40,
               sm: 100,
           
               lg: 100,
               xl: 100,
             },
             height:{
-              xs: 50,
+              xs: 40,
               sm: 100,
             
               lg: 100,
@@ -93,9 +93,11 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         >
           <Iconify icon={icon} width={24} height={24} />
         </IconWrapperStyle> : null}
-        <span style={{ opacity: 0.72,  color: '#103996' ,marginTop:'0px',
+        <span style={{ opacity: 0.72,  color: '#103996' ,marginTop:'0px', marginBottom:{
+xs:"10px"
+        },
       fontSize:{
-        xs: '12px',sm:'14px',md:'16px',lg:'16px',xl:'16px'
+        xs: '0.5rem',sm:'14px',md:'16px',lg:'16px',xl:'16px'
         
       }}}><strong>{title}</strong></span><br />
         {console.log(total, "total")}

@@ -89,8 +89,8 @@ var [todayPoa,setTodayPoa]=useState('');
 
 const getPOA =()=>{
     var data = JSON.stringify({
-        "Emp_id":1,
-        "Role_id":1
+        "Emp_id":parseInt(item?.id),
+        "Role_id":parseInt(item?.empRole)
     });
       
       var config = {
@@ -160,6 +160,7 @@ const handleChange = (event, newValue) => {
 //   const handleClose = () => {
 //     setOpen(false);
 //   };
+console.log(item , "itm.itm")
   
 useEffect(()=>{
     getPOA();
@@ -227,13 +228,20 @@ useEffect(()=>{
                 </>
                 )
             })
+           
           } 
-       
+           
+         { todayPoa== ""? 
+          
+       <>
+              <h4 style={{textAlign:'center'}}>No Enrolled Gelathi Found</h4>
+              </>:null
+       }
           
          
         </div>
-        itmForForm &&   <GetSingleQualityForm item ={itmForForm}  open={openGetSingleQualityForm} handleClose={handleCloseGetSingleQualityForm}/>
-
+      {  (itmForForm) &&   <GetSingleQualityForm item ={itmForForm}  open={openGetSingleQualityForm} handleClose={handleCloseGetSingleQualityForm}/>
+}
       </Dialog>
      
     </div>

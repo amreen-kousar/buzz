@@ -52,11 +52,11 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
       <Grid container spacing={3} {...other}>
         {/* {users.map((product) => ( */}
         {users.map((itm, index) => (
-          <Grid key={index} item xs={4} sm={4} md={4} >
+          <Grid key={index} item xs={6} sm={6} md={4} >
             {/* <Button> */}
 
             <Card onClick={() => { viewUser(itm) }}>
-              <CardContent>
+              <CardContent style={{padding:"20px"}}>
                 {console.log("profilesssss--->",itm.profile_pic,itm?.first_name)}
                 <Grid direction={'column'} spacing={2} height="180px">
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -66,7 +66,7 @@ export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter,
                   {/* <Avatar sx={{ bgcolor: red[500], width: 50, height: '16vh', bgcolor: '#ff7424' }} src={itm?.profile_pic} aria-label="recipe">
                   {itm?.first_name.substring(0, 1)}
                 </Avatar> */}
-                  <Typography sx={{ fontSize: 20, fontWeight: 'medium' }} mt={3} textAlign={'center'} >
+                  <Typography  sx={{ fontSize: 20, fontWeight: 'medium' }} mt={3} textAlign={'center'} >
                     {/* {users?.first_name} */}
                     {`${itm?.first_name} ${itm?.last_name}`}
                   </Typography>

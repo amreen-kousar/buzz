@@ -869,7 +869,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
      
      </>
      :
-     (roleid == 5)?
+     (roleid == 5 || roleid == 6 ||roleid == 13)?
     
      <>
      <Grid container spacing={3} marginTop={4}>
@@ -1128,158 +1128,159 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
         </Grid>
 </CardContent>
 </CardContent>
-: (roleid == 13)?
+: 
+// (roleid == 13)?
 
 
-<>
-<CardContent>
-            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Funders List : 
-              {/* for gfl it should be showned as project not as funder */}
-            </Typography>
+// <>
+// <CardContent>
+//             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+//               Funders List : 
+//               {/* for gfl it should be showned as project not as funder */}
+//             </Typography>
           
-            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
-            <Grid item xs={12} sm={12} md={12} marginTop={3}>
-          {summaryData?.data?.map((itm) => {
-            return (
-              <Card
-                style={{
-                  backgroundColor: '#f5f5f5',
-                  flexDirection: 'column',
-                  borderRadius: 12,
-                  border: '2px solid',
-                  borderColor: '#ffcc80',
-                  marginBottom: '40px',
-                }}
-                // onClick={() => {
-                //   navigate('/dashboard/app/chart', {
-                //     state: {
-                //       filterData: filterData
-                //     }
-                //   })
-                // }}
+//             <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+//             <Grid item xs={12} sm={12} md={12} marginTop={3}>
+//           {summaryData?.data?.map((itm) => {
+//             return (
+//               <Card
+//                 style={{
+//                   backgroundColor: '#f5f5f5',
+//                   flexDirection: 'column',
+//                   borderRadius: 12,
+//                   border: '2px solid',
+//                   borderColor: '#ffcc80',
+//                   marginBottom: '40px',
+//                 }}
+//                 // onClick={() => {
+//                 //   navigate('/dashboard/app/chart', {
+//                 //     state: {
+//                 //       filterData: filterData
+//                 //     }
+//                 //   })
+//                 // }}
                 
-                >
-                <CardContent>
+//                 >
+//                 <CardContent>
               
-<Container style={{ display: 'flex', flexDirection: 'row' }}>
-  <Grid item xs={6}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-      Funder<br />
-      {/*  for role id 5 it should be project in 4 dahsbord  */}
-      Actual / Target
-      {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
-    </span></Grid>
-    <Grid item xs={6}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
-      &nbsp;:&nbsp;{itm?.name}<br />
-      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
-            {/* start date and end date need in all dashborad we need as duration : fromDate to endDate for role id 5 */}
-    </span>
-  </Grid>
-</Container>
-                  <Divider mt={1} />
-                  <Grid container spacing={3} marginTop={4}>
-            {/* <Grid item xs={4} sm={8} md={4}>
+// <Container style={{ display: 'flex', flexDirection: 'row' }}>
+//   <Grid item xs={6}>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
+//       Funder<br />
+//       {/*  for role id 5 it should be project in 4 dahsbord  */}
+//       Actual / Target
+//       {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
+//     </span></Grid>
+//     <Grid item xs={6}>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
+//       &nbsp;:&nbsp;{itm?.name}<br />
+//       &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
+//             {/* start date and end date need in all dashborad we need as duration : fromDate to endDate for role id 5 */}
+//     </span>
+//   </Grid>
+// </Container>
+//                   <Divider mt={1} />
+//                   <Grid container spacing={3} marginTop={4}>
+//             {/* <Grid item xs={4} sm={8} md={4}>
 
-              <AppWidgetSummary
-                title="Target"
-                total={itm?.summary_target}
-                color="motivator"
+//               <AppWidgetSummary
+//                 title="Target"
+//                 total={itm?.summary_target}
+//                 color="motivator"
 
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+//               />
+//             </Grid>
+//             <Grid item xs={4} sm={8} md={4}>
 
-              <AppWidgetSummary
-                title="Actual"
-                total={summaryData?.summary_actual}
-                color="motivator"
+//               <AppWidgetSummary
+//                 title="Actual"
+//                 total={summaryData?.summary_actual}
+//                 color="motivator"
 
-              />
-            </Grid> */}
-         <Grid item xs={12} sm={6} md={6}>
+//               />
+//             </Grid> */}
+//          <Grid item xs={12} sm={6} md={6}>
 
-              <AppWidgetSummary
-                title="Number  of Villages Visits"
-                total={itm?.villagevisit}
-                color="villages"
-                icon= "fontisto:holiday-village"
+//               <AppWidgetSummary
+//                 title="Number  of Villages Visits"
+//                 total={itm?.villagevisit}
+//                 color="villages"
+//                 icon= "fontisto:holiday-village"
 
-              />
-            </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+//               />
+//             </Grid>
+//           <Grid item xs={12} sm={6} md={6}>
 
-              <AppWidgetSummary
-                title="Number of Beehive"
-                total={itm?.beehive}
-                color="motivator"
-                icon="twemoji:women-holding-hands"
+//               <AppWidgetSummary
+//                 title="Number of Beehive"
+//                 total={itm?.beehive}
+//                 color="motivator"
+//                 icon="twemoji:women-holding-hands"
 
-              />
-            </Grid>
-        <Grid item xs={12} sm={6} md={6}>
+//               />
+//             </Grid>
+//         <Grid item xs={12} sm={6} md={6}>
 
-              <AppWidgetSummary
-                title="Number of Circle Meet"
-                total={itm?.circle_meet}
-                color="vyapar"
-                icon="eos-icons:product-subscriptions-outlined"
+//               <AppWidgetSummary
+//                 title="Number of Circle Meet"
+//                 total={itm?.circle_meet}
+//                 color="vyapar"
+//                 icon="eos-icons:product-subscriptions-outlined"
 
-              />
-            </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+//               />
+//             </Grid>
+//           <Grid item xs={12} sm={6} md={6}>
 
-              <AppWidgetSummary
-                title="Number of Circles"
-                total={itm?.circles}
-                color="info"
-                icon = "twemoji:women-holding-hands"
+//               <AppWidgetSummary
+//                 title="Number of Circles"
+//                 total={itm?.circles}
+//                 color="info"
+//                 icon = "twemoji:women-holding-hands"
 
-              />
-            </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+//               />
+//             </Grid>
+//           <Grid item xs={12} sm={6} md={6}>
 
-<AppWidgetSummary
-  title="Number of Enroll"
-  total={itm?.enroll}
-  color="info"
-  icon = "twemoji:women-holding-hands"
+// <AppWidgetSummary
+//   title="Number of Enroll"
+//   total={itm?.enroll}
+//   color="info"
+//   icon = "twemoji:women-holding-hands"
 
-/>
-</Grid>
-<Grid item xs={12} sm={6} md={6}>
+// />
+// </Grid>
+// <Grid item xs={12} sm={6} md={6}>
 
-<AppWidgetSummary
-  title="Number of Green Motivators"
-  total={itm?.greenMotivators}
-  color="info"
-  icon = "twemoji:women-holding-hands"
+// <AppWidgetSummary
+//   title="Number of Green Motivators"
+//   total={itm?.greenMotivators}
+//   color="info"
+//   icon = "twemoji:women-holding-hands"
 
-/>
-</Grid>
-<Grid item xs={12} sm={6} md={6}>
+// />
+// </Grid>
+// <Grid item xs={12} sm={6} md={6}>
 
-<AppWidgetSummary
-  title="Number of Vyapar"
-  total={itm?.vyapar}
-  color="info"
-  icon = "twemoji:women-holding-hands"
+// <AppWidgetSummary
+//   title="Number of Vyapar"
+//   total={itm?.vyapar}
+//   color="info"
+//   icon = "twemoji:women-holding-hands"
 
-/>
-</Grid>
+// />
+// </Grid>
           
-          </Grid>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </Grid>
-</CardContent>
-</CardContent>
+//           </Grid>
+//                 </CardContent>
+//               </Card>
+//             );
+//           })}
+//         </Grid>
+// </CardContent>
+// </CardContent>
 
-</>:
- (roleid == 5)?
+// </>:
+ (roleid == 5 || roleid == 6||roleid == 13)?
 <>
 <CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
@@ -1409,155 +1410,155 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 </CardContent>
 </>
 :
-(roleid == 6)?
-<>
-<CardContent>
-            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Funders List : 
-              {/* for gfl it should be showned as project not as funder */}
-            </Typography>
+// (roleid == 6)?
+// <>
+// <CardContent>
+//             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+//               Funders List : 
+//               {/* for gfl it should be showned as project not as funder */}
+//             </Typography>
           
-            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
-            <Grid item xs={12} sm={12} md={12} marginTop={3}>
-          {summaryData?.data?.map((itm) => {
-            return (
-              <Card
-                style={{
-                  backgroundColor: '#f5f5f5',
-                  flexDirection: 'column',
-                  borderRadius: 12,
-                  border: '2px solid',
-                  borderColor: '#ffcc80',
-                  marginBottom: '40px',
-                }}
-                // onClick={() => {
-                //   navigate('/dashboard/app/chart', {
-                //     state: {
-                //       filterData: filterData
-                //     }
-                //   })
-                // }}
+//             <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+//             <Grid item xs={12} sm={12} md={12} marginTop={3}>
+//           {summaryData?.data?.map((itm) => {
+//             return (
+//               <Card
+//                 style={{
+//                   backgroundColor: '#f5f5f5',
+//                   flexDirection: 'column',
+//                   borderRadius: 12,
+//                   border: '2px solid',
+//                   borderColor: '#ffcc80',
+//                   marginBottom: '40px',
+//                 }}
+//                 // onClick={() => {
+//                 //   navigate('/dashboard/app/chart', {
+//                 //     state: {
+//                 //       filterData: filterData
+//                 //     }
+//                 //   })
+//                 // }}
                 
-                >
-                <CardContent>
+//                 >
+//                 <CardContent>
               
-<Container style={{ display: 'flex', flexDirection: 'row' }}>
-  <Grid item xs={6}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-      Funder <br />
-      {/*  for role id 5 it should be project in 4 dahsbord  */}
-      {/* Actual / Target */}
-      {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
-    </span></Grid>
-    <Grid item xs={6}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
-      &nbsp;:&nbsp;{itm?.name}<br />
-      {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
-            {/* start date and end date need in all dashborad we need as duration : fromDate to endDate for role id 5 */}
-    </span>
-  </Grid>
-</Container>
-                  <Divider mt={1} />
-                  <Grid container spacing={3} marginTop={4}>
-            {/* <Grid item xs={4} sm={8} md={4}>
+// <Container style={{ display: 'flex', flexDirection: 'row' }}>
+//   <Grid item xs={6}>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
+//       Funder <br />
+//       {/*  for role id 5 it should be project in 4 dahsbord  */}
+//       {/* Actual / Target */}
+//       {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
+//     </span></Grid>
+//     <Grid item xs={6}>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
+//       &nbsp;:&nbsp;{itm?.name}<br />
+//       {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
+//             {/* start date and end date need in all dashborad we need as duration : fromDate to endDate for role id 5 */}
+//     </span>
+//   </Grid>
+// </Container>
+//                   <Divider mt={1} />
+//                   <Grid container spacing={3} marginTop={4}>
+//             {/* <Grid item xs={4} sm={8} md={4}>
 
-              <AppWidgetSummary
-                title="Target"
-                total={itm?.summary_target}
-                color="motivator"
+//               <AppWidgetSummary
+//                 title="Target"
+//                 total={itm?.summary_target}
+//                 color="motivator"
 
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+//               />
+//             </Grid>
+//             <Grid item xs={4} sm={8} md={4}>
 
-              <AppWidgetSummary
-                title="Actual"
-                total={summaryData?.summary_actual}
-                color="motivator"
+//               <AppWidgetSummary
+//                 title="Actual"
+//                 total={summaryData?.summary_actual}
+//                 color="motivator"
 
-              />
-            </Grid> */}
-           <Grid item xs={12} sm={6} md={6}>
+//               />
+//             </Grid> */}
+//            <Grid item xs={12} sm={6} md={6}>
 
-              <AppWidgetSummary
-                title="Number  of Villages Visits"
-                total={itm?.villagevisit}
-                color="villages"
-                icon= "fontisto:holiday-village"
+//               <AppWidgetSummary
+//                 title="Number  of Villages Visits"
+//                 total={itm?.villagevisit}
+//                 color="villages"
+//                 icon= "fontisto:holiday-village"
 
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={6}>
+//               />
+//             </Grid>
+//             <Grid item xs={12} sm={6} md={6}>
 
-              <AppWidgetSummary
-                title="Number of Beehive"
-                total={itm?.beehive}
-                color="motivator"
-                icon="twemoji:women-holding-hands"
+//               <AppWidgetSummary
+//                 title="Number of Beehive"
+//                 total={itm?.beehive}
+//                 color="motivator"
+//                 icon="twemoji:women-holding-hands"
 
-              />
-            </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+//               />
+//             </Grid>
+//           <Grid item xs={12} sm={6} md={6}>
 
-              <AppWidgetSummary
-                title="Number of Circle Meet"
-                total={itm?.circle_meet}
-                color="vyapar"
-                icon="eos-icons:product-subscriptions-outlined"
+//               <AppWidgetSummary
+//                 title="Number of Circle Meet"
+//                 total={itm?.circle_meet}
+//                 color="vyapar"
+//                 icon="eos-icons:product-subscriptions-outlined"
 
-              />
-            </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+//               />
+//             </Grid>
+//           <Grid item xs={12} sm={6} md={6}>
 
-              <AppWidgetSummary
-                title="Number of Circles"
-                total={itm?.circles}
-                color="info"
-                icon = "twemoji:women-holding-hands"
+//               <AppWidgetSummary
+//                 title="Number of Circles"
+//                 total={itm?.circles}
+//                 color="info"
+//                 icon = "twemoji:women-holding-hands"
 
-              />
-            </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+//               />
+//             </Grid>
+//           <Grid item xs={12} sm={6} md={6}>
 
-<AppWidgetSummary
-  title="Number of Enroll"
-  total={itm?.enroll}
-  color="info"
-  icon = "twemoji:women-holding-hands"
+// <AppWidgetSummary
+//   title="Number of Enroll"
+//   total={itm?.enroll}
+//   color="info"
+//   icon = "twemoji:women-holding-hands"
 
-/>
-</Grid>
-<Grid item xs={12} sm={6} md={6}>
+// />
+// </Grid>
+// <Grid item xs={12} sm={6} md={6}>
 
-<AppWidgetSummary
-  title="Number of Green Motivators"
-  total={itm?.greenMotivators}
-  color="info"
-  icon = "twemoji:women-holding-hands"
+// <AppWidgetSummary
+//   title="Number of Green Motivators"
+//   total={itm?.greenMotivators}
+//   color="info"
+//   icon = "twemoji:women-holding-hands"
 
-/>
-</Grid>
-<Grid item xs={12} sm={6} md={6}>
+// />
+// </Grid>
+// <Grid item xs={12} sm={6} md={6}>
 
-<AppWidgetSummary
-  title="Number of Vyapar"
-  total={itm?.vyapar}
-  color="info"
-  icon = "twemoji:women-holding-hands"
+// <AppWidgetSummary
+//   title="Number of Vyapar"
+//   total={itm?.vyapar}
+//   color="info"
+//   icon = "twemoji:women-holding-hands"
 
-/>
-</Grid>
+// />
+// </Grid>
           
-          </Grid>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </Grid>
-</CardContent>
-</CardContent>
-</>
-:
+//           </Grid>
+//                 </CardContent>
+//               </Card>
+//             );
+//           })}
+//         </Grid>
+// </CardContent>
+// </CardContent>
+// </>
+// :
 <>
 </>
 
