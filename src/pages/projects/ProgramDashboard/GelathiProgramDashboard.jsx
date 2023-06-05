@@ -571,7 +571,7 @@ const GelathiProgramDashboard = () => {
 <Container style={{ display: 'flex', flexDirection: 'column' }}>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-      {(itm?.startDate)?"Project Name":"Funder"}<br />
+      {(itm?.startDate)?"Project ":"Funder"}<br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>

@@ -97,7 +97,7 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
 xs:"10px"
         },
       fontSize:{
-        xs: '10px',sm:'14px',md:'16px',lg:'16px',xl:'16px'
+        xs: '0.5rem',sm:'14px',md:'16px',lg:'16px',xl:'16px'
         
       }}}><strong>{title}</strong></span><br />
         {console.log(total, "total")}
