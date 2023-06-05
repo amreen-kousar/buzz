@@ -20,6 +20,7 @@ import {
   Toolbar,
   IconButton,
   DialogContent,
+  CircularProgress,
 } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -97,6 +98,8 @@ export default function TeamQuality({reload}) {
   }, [])
   var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   var role =JSON.parse(localStorage.getItem('userDetails'))?.role
+
+  console.log(userid , "useridinteam")
   const getPOA = () => {
     var data = JSON.stringify({
       emp_id: userid,
@@ -134,6 +137,12 @@ export default function TeamQuality({reload}) {
   };
 
   return (
+
+    todayPoa == "" ?
+    <div style={{marginTop:"20%" , marginLeft:"40%"}}>
+<CircularProgress />
+</div>
+:
     <div>
       {todayPoa &&
         todayPoa?.map((itm) => {

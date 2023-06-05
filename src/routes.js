@@ -102,7 +102,7 @@ export default function Router() {
 
         [
             {
-                path: 'app', element: <DashboardHome />, id: [0, 1, 3, 7, 8, 9, 12,11,4,5,6],
+                path: 'app', element: <DashboardHome />, id: [0, 1, 3, 7, 8, 9, 12,11,4,5,6,13],
                 children: [
                     { path: '', element: <DashboardApp />, exact: true },
                     { path: 'chart', element: <Chart /> },
