@@ -1781,7 +1781,7 @@ id="date-time-picker"
               
               </Stack>
         </CardContent>
-       {poa?.length !=0?  <CardContent>
+       { (programAssessment!=3) && poa?.length !=0?   <CardContent>
         <Stack mt={2}>
                 <Typography>
                 Select Poa
