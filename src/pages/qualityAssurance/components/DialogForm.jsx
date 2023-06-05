@@ -2136,7 +2136,9 @@ id="date-time-picker"
        
 
        {/* 5 */}
-      { ( assessmentType=='Spoorthi Module 2' )?  <Grid  backgroundColor={"#FFD580"}>
+      { ( assessmentType=='Spoorthi Module 2' )? 
+          <div>
+                  <Grid  backgroundColor={"#FFD580"}>
           {/* page-5 */}
         <CardContent>
           <Card>
@@ -2174,8 +2176,11 @@ id="date-time-picker"
           </Card>
       
         </CardContent>
-        </Grid>:null  }      
+        </Grid>
         <br/>
+          </div>
+        :null  }      
+        
 
 
           {/* 6 */}
@@ -2854,7 +2859,9 @@ id="date-time-picker"
         </Grid>:null}
 
            {/* 12 common */}
-    { ( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"}>
+    { ( programAssessment==2 )? 
+  <div>
+       <Grid  backgroundColor={"#FFD580"}>
           {/* page-50 */}
         <CardContent>
           <Card>
@@ -3211,8 +3218,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </CardContent>
           </Card>
         </CardContent>
-        </Grid>:null}
-        <br/>
+        </Grid>
+          <br/>
+  </div>
+        :null}
+      
    {  ( programAssessment==1 )? 
      <Grid  backgroundColor={"#FFD580"}>
           {/* page-12 */}
@@ -3261,7 +3271,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
          
          {/* 13 */}
  {  ( day1Day2== 'Day 1')? 
-      <Grid  backgroundColor={"#FFD580"}>
+     <div>
+       <Grid  backgroundColor={"#FFD580"}>
           {/* page-13 */}
         <CardContent>
           <Card>
@@ -3312,45 +3323,50 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           
         </CardContent>
         </Grid>
-     :null }
           <br/>
+     </div>
+     :null }
+        
 
           {/* 14 */}
       {( day1Day2=='Day 1')? 
-        <Grid  backgroundColor={"#FFD580"}>
-          {/* page-14 */}
-        <CardContent>
-          <Card>
-          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+        <div>
+          <Grid  backgroundColor={"#FFD580"}>
+            {/* page-14 */}
           <CardContent>
-          <Typography variant = 'h5'>Before the training starts on Day 1</Typography>
-          </CardContent>
-        </Card>
-        <CardContent>
-          <Typography >
-          Check which ones the Trainer did NOT do
-          {check_which_ones_the_trainer_did_not_doError ? (
-                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-                        ) : null}{' '}
-          </Typography>
-          <FormGroup>
-          
-          <FormControlLabel control={<Checkbox  />} value={'Arrange the tent and the chairs in ‘u’ form'} label=" Arrange the tent and the chairs in ‘u’ form" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)} />
-          <FormControlLabel control={<Checkbox  />}value={'Play the video while the participants were entering'} label="Play the video while the participants were entering" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
-          <FormControlLabel control={<Checkbox  />}value={'Take the signature needed for the consent'} label="Take the signature needed for the consent" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
-          <FormControlLabel control={<Checkbox  />}value={'Collect information for the primary Baseline Data Ledger'} label="Collect information for the primary Baseline Data Ledger" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
-          <FormControlLabel control={<Checkbox  />}value={'Read the consent form loudly'} label="Read the consent form loudly" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
-          <FormControlLabel control={<Checkbox  />}value={'Distribute the books and pencils to the participants with respect'} label="Distribute the books and pencils to the participants with respect" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
-          <FormControlLabel control={<Checkbox  />}value={'Express gratitude towards the Anganwadi teacher for her efforts'} label="Express gratitude towards the Anganwadi teacher for her efforts" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
-          <FormControlLabel control={<Checkbox  />}value={'Explain the training schedule and intended outcomes of the training to them'} label="Explain the training schedule and intended outcomes of the training to them" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
-    </FormGroup>
-        </CardContent>
+            <Card>
+            <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+            <CardContent>
+            <Typography variant = 'h5'>Before the training starts on Day 1</Typography>
+            </CardContent>
           </Card>
-      
-        </CardContent>
-        </Grid>
+          <CardContent>
+            <Typography >
+            Check which ones the Trainer did NOT do
+            {check_which_ones_the_trainer_did_not_doError ? (
+                            <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                          ) : null}{' '}
+            </Typography>
+            <FormGroup>
+            
+            <FormControlLabel control={<Checkbox  />} value={'Arrange the tent and the chairs in ‘u’ form'} label=" Arrange the tent and the chairs in ‘u’ form" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)} />
+            <FormControlLabel control={<Checkbox  />}value={'Play the video while the participants were entering'} label="Play the video while the participants were entering" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />}value={'Take the signature needed for the consent'} label="Take the signature needed for the consent" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />}value={'Collect information for the primary Baseline Data Ledger'} label="Collect information for the primary Baseline Data Ledger" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />}value={'Read the consent form loudly'} label="Read the consent form loudly" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />}value={'Distribute the books and pencils to the participants with respect'} label="Distribute the books and pencils to the participants with respect" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />}value={'Express gratitude towards the Anganwadi teacher for her efforts'} label="Express gratitude towards the Anganwadi teacher for her efforts" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
+            <FormControlLabel control={<Checkbox  />}value={'Explain the training schedule and intended outcomes of the training to them'} label="Explain the training schedule and intended outcomes of the training to them" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
+      </FormGroup>
+          </CardContent>
+            </Card>
+        
+          </CardContent>
+          </Grid>
+          <br/>
+        </div>
         :null} 
-        <br/>
+        
 
         {/* 15 */}
         {( day1Day2=='Day 1')? 
