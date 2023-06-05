@@ -847,7 +847,7 @@ const validation =()=>{
       {
         setdid_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1Error(true)
         setHelperText('Please Select The Option');
-        alert("please fill ")
+        alert("please fill ")   
       }
 
       else if  (sendForm.did_this_module_take_30_minutes_as_allotted=='')
@@ -1695,9 +1695,9 @@ setChecked(checked)
 
        
         
-        <Card sx={{mt:5, margin:"20px"}}>
+        <Card sx={{marginTop:'60px', margin:"20px"}}>
         <CardContent>
-            <Typography>
+            <Typography style={{marginTop:'10px'}}>
             The purpose of this 'Buzz training quality evaluation' form is -<br/>
             1. To evaluate if the standard pedagogical practices are being followed in Buzz Meeting/Training<br/>
             2. To evaluate the effectiveness of training<br/>
@@ -3370,7 +3370,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
         {/* 15 */}
         {( day1Day2=='Day 1')? 
-        <Grid  backgroundColor={"#FFD580"}>
+        <div>
+          <Grid  backgroundColor={"#FFD580"}>
           {/* page-15 */}
         <CardContent>
           <Card>
@@ -3514,13 +3515,16 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
 
         </Grid>
+        <br/>
+        </div>
         :null} 
 
         
 
-     <br/>
+     
      {( day1Day2=='Day 1')? 
-     <Grid style={{backgroundColor:"#FFD580"}}>
+    <div>
+       <Grid style={{backgroundColor:"#FFD580"}}>
             <Typography>
               {/* PAGE 16  */}
               </Typography>
@@ -3736,8 +3740,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
 
      </Grid>
-     :null}
      <br/>
+    </div>
+     :null}
+     
      {( day1Day2=='Day 1')? 
      <Grid style={{backgroundColor:"#FFD580"}}>
             <Typography>
