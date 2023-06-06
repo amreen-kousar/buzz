@@ -4092,13 +4092,13 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
        
 
           </Card>
-          <Card sx={{ margin:"20px"}}>
+          <Card sx={{ margin:'20px 0 0 0' }}>
         <CardContent>
         <Stack>
                 <Typography variant="body1">
                    If so, How many?
                 </Typography>
-                <Stack mt={3}>
+                <Stack  mt={2}>
                   <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_5: e.target.value }) }} value={sendForm?.if_so_how_many_5}/>
                 </Stack>
               </Stack>
