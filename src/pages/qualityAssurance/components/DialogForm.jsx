@@ -3232,7 +3232,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           <Card>
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
           <CardContent>
-          <Typography>
+          <Typography variant = 'h5'>
                   Self-Shakti 
                 </Typography>
                 <Typography>
@@ -3474,7 +3474,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </CardContent>
            </Card>
 
-           <Card  sx={{ marginTop:"20px"}}>
+       { (sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module=='Yes' )?  <Card  sx={{ marginTop:"20px"}}>
               <CardContent>
                   <Typography>If so, how many?
             </Typography>
@@ -3482,7 +3482,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                           <TextField type='number' required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, if_so_how_many:e.target.value})} value={sendForm?.if_so_how_many}/>
                       </Stack> 
               </CardContent>
-        </Card>
+        </Card> : null}
 
         <Card sx={{ marginTop:"20px"}}>
         <CardContent>
@@ -3569,33 +3569,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </CardContent>
      </Card>
         </Card>
-        
-     
-     {/* <Card sx={{mt:2,}} >
-        <CardContent>
-        <Stack mt={2}>
-                <Typography variant="body2">Did any new women attend the training session during this module?/ಈ ಮಾಡ್ಯೂಲ್ ನಲ್ಲಿ ಯಾವುದೇ ಹೊಸ ಮಹಿಳೆಯರು ತರಬೇತಿ ಸೆಷನ್ ಗೆ ಹಾಜರಾಗಿದ್ದಾರೆಯೇ?</Typography>
-                <Stack mt={2}>
-                <RadioGroup
-                      aria-labelledby="demo-radio-buttons-group-label"
-                     
-                      name="radio-buttons-group"
-                      onChange={(e, value) => { setSendData({ ...sendData,ownAsset : value }) }}
-                  
-                    >
-                    <div style={{display:"flex"}}>
-                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
-                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}}  />} label="Yes" />
-                      </div>
-                    </RadioGroup>
-                </Stack>
-              </Stack>
-       
-             
-        </CardContent>
-     </Card> */}
 
-     <Card sx={{ margin:"20px"}}>
+  { (sendForm?.did_any_new_women_attend_the_training_session_during_module=='Yes')?  <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Stack>
                 <Typography variant="body1">
@@ -3609,7 +3584,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         
         
         </CardContent>
-     </Card>
+     </Card>: null}
+
      <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -3689,7 +3665,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </CardContent>
      </Card>
 
-     <Card sx={{ margin:"20px"}}>
+   { (sendForm?.did_any_women_leve_training_session_during_or_after_1st_module_1=="Yes")?  <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Stack>
                 <Typography variant="body1">
@@ -3704,7 +3680,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             
        
         </CardContent>
-     </Card>
+     </Card>: null}
      
      <Card sx={{ margin:"20px"}}>
         <CardContent>
@@ -3757,11 +3733,12 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
    
        
         
-        <Card sx={{mt:4, margin:"20px", backgroundColor:'#ff7424'}}>
+        <Card sx={{mt:2, margin:"20px 0px 0px", backgroundColor:'#ff7424'}}>
         <CardContent>
         <Stack >
           
-                <Typography   style={{fontWeight:700}} color="primary">Module 3 (M3) Building Relationships
+                <Typography   style={{fontWeight:700}} color="primary">
+                  Module 3 (M3) Building Relationships
                 </Typography>
                
               </Stack>
@@ -3771,8 +3748,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 <Card sx={{mt:2}} >
         <CardContent>
         <Stack mt={2}>
-                <Typography variant="body2">Did any new women attend the training session during this module
-                
+                <Typography variant="body2">
+                  Did any new women attend the training session during this module  
                 {attendError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}</Typography>
@@ -3799,39 +3776,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </Card>
         </Card>
         
-     
-     <Card sx={{mt:2, margin:"20px"}} >
-        <CardContent>
-        <Stack mt={2}>
-                <Typography variant="body2">Did any new women attend the training session during this module
-                
-                {attendError ? (
-                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-                        ) : null}{' '}</Typography>
-                <Stack mt={2}>
-                <RadioGroup
-                      aria-labelledby="demo-radio-buttons-group-label"
-                     
-                      name="radio-buttons-group"
-                      
-                      value={attend}
-                      onChange={handleAttend}
-                    >
-                    <div style={{display:"flex"}}>
-                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
-                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}}  />} label="Yes" />
-                      </div>
-                    </RadioGroup>
-                </Stack>
-              </Stack>
-        
-             
-        </CardContent>
-    
-        </Card>
+
 
         
-     <Card sx={{ margin:"20px"}}>
+    { (attend=="Yes")? <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack>
                 <Typography variant="body1">
@@ -3844,12 +3792,12 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         
         
         </CardContent>
-         </Card>
+         </Card>: null}
      
 
 
 
-     <Card sx={{ margin:"20px"}}>
+     <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}>
                 <Typography>
@@ -3874,7 +3822,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
        
         </CardContent>
      </Card>
-     <Card sx={{ margin:"20px"}}>
+     <Card sx={{margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}>
                 <Typography>
@@ -3906,7 +3854,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         
         </CardContent>
      </Card>
-     <Card sx={{ margin:"20px"}}>
+     <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}> 
                 <Typography> Did the trainer leave the women to read the role play card themselves?
@@ -3936,7 +3884,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </CardContent>
      </Card>
 
-     <Card sx={{ margin:"20px"}}>
+     <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}> 
                 <Typography> Did the groups engage and interact among themselves well?
@@ -3968,7 +3916,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </CardContent>
      </Card>
 
-     <Card sx={{ margin:"20px"}}>
+     <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}> 
                 <Typography>Were the participants responsive during the debriefing?
@@ -4001,7 +3949,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </CardContent>
      </Card>
 
-     <Card sx={{ margin:"20px"}}>
+     <Card sx={{margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}> 
                 <Typography>Did any women leave the training session during or after this module?
@@ -4032,7 +3980,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
        
         </CardContent>
      </Card>
-     <Card sx={{ margin:"20px"}}>
+
+     {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1=='Yes')? <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack>
                 <Typography variant="body1">
@@ -4044,8 +3993,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
               </Stack>
        
         </CardContent>
-     </Card>
-     <Card sx={{ margin:"20px"}}>
+     </Card>: null}
+
+     <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}>
                 <Typography> Did this module take 30 minutes as allotted?
@@ -4127,7 +4077,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
        
 
           </Card>
-          <Card sx={{ margin:'20px 0 0 0' }}>
+
+    {  (sendForm?.did_any_new_women_attend_training_session_during_this_module_2=='Yes')?    <Card sx={{ margin:'20px 0 0 0' }}>
         <CardContent>
         <Stack>
                 <Typography variant="body1">
@@ -4139,7 +4090,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
               </Stack>
        
         </CardContent>
-     </Card>
+     </Card>: null}
+
      <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack mt={2}>
@@ -4682,7 +4634,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
        
         </CardContent>
      </Card>
-     <Card sx={{ marginTop:"20px"}}>
+
+     {(sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module=="Yes")? <Card sx={{ marginTop:"20px"}}>
      <CardContent>
         <Stack mt={2}>
         <Stack>
@@ -4696,7 +4649,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
               </Stack>
               </Stack>
         </CardContent>
-        </Card>
+        </Card>: null}
 
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
@@ -4901,7 +4854,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
        
         </CardContent>
      </Card>
-     <Card sx={{ marginTop:"20px"}}>
+     
+     {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1=='Yes')? <Card sx={{ marginTop:"20px"}}>
      <CardContent>
         <Stack mt={2}>
         <Stack>
@@ -4916,7 +4870,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
               </Stack>
               </Stack>
         </CardContent>
-        </Card>
+        </Card>: null}
 
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
@@ -5115,7 +5069,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
        
         </CardContent>
      </Card>
-     <Card sx={{ marginTop:"20px"}}>
+
+    {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2=='Yes')? <Card sx={{ marginTop:"20px"}}>
      <CardContent>
         <Stack mt={2}>
         <Stack>
@@ -5130,7 +5085,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
               </Stack>
               </Stack>
         </CardContent>
-        </Card>
+        </Card>: null}
 
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
@@ -5284,7 +5239,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
        
         </CardContent>
      </Card>
-     <Card sx={{ marginTop:"20px"}}>
+
+    {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3=='Yes')? <Card sx={{ marginTop:"20px"}}>
      <CardContent>
         <Stack mt={2}>
         <Stack>
@@ -5298,7 +5254,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
               </Stack>
               </Stack>
         </CardContent>
-        </Card>
+        </Card>: null}
 
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>

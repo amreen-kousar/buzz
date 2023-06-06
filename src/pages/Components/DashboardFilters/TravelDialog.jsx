@@ -420,7 +420,7 @@ axios(config)
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Create Allowance 
+            Create Allowance aswin 
           </Typography>
 
           <Button autoFocus color="inherit" type="submit">
@@ -480,7 +480,7 @@ axios(config)
               </Stack> 
               
               }<br></br>
-                {   (sendData?.modeoftravel&&sendData?.modeoftravel===3 )?   <Stack style={{ marginTop: 20 }}>
+                {   (sendData?.modeoftravel&&sendData?.modeoftravel===3 || sendData?.modeoftravel&&sendData?.modeoftravel===2 )?   <Stack style={{ marginTop: 20 }}>
              <TextField id="outlined-basic" 
               type="number"  
 inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSendData({ ...sendData, odimeter: e?.target?.value }) }} label="Start Odometer Reading *" variant="outlined" color="common" 
@@ -676,9 +676,11 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                    ),
                }} />
               </Stack>
-              <Stack style={{ marginTop: 20 }}>
+
+           { (sendData?.modeoftravel&&sendData?.modeoftravel===3 || sendData?.modeoftravel&&sendData?.modeoftravel===2 )?   <Stack style={{ marginTop: 20 }}>
                 <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, endOdimeter: e?.target?.value }) }} label="End Odometer Reading" variant="outlined" color="common" />
-              </Stack>
+              </Stack>: null}
+
               <Stack style={{ marginTop: 20 }}>
                 <TextField id="outlined-basic" disabled={true} value={locationS} onChange={(e) => { setSendData({ ...sendData, endLocation: e?.target?.value }) }} label="End Location" variant="outlined" 
                 InputProps={{

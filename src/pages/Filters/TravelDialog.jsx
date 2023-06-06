@@ -320,7 +320,7 @@ export default function TravelDialog({ viewMessage }) {
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Create Allowances
+            Create Allowances 
           </Typography>
 
 
