@@ -3401,13 +3401,8 @@ var value =string?.split(",")
                             id="Your Answer"
                             label="Your Answer"
                             variant="outlined"
-                            defaultValue={sendData?.how_many_women_attended_the_training_session}
-                            onChange={(e) => {
-                              setSendData({
-                                ...sendData,
-                                how_many_women_attended_the_training_session: e.target.value,
-                              });
-                            }}
+                            defaultValue={sendForm?.how_many_women_attended_the_training_session}
+                           
                           />
                         </Stack>
                       </Stack>
