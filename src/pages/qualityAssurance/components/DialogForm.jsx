@@ -1781,7 +1781,7 @@ id="date-time-picker"
               
               </Stack>
         </CardContent>
-       {poa?.length !=0?  <CardContent>
+       { (programAssessment!=3) && poa?.length !=0?   <CardContent>
         <Stack mt={2}>
                 <Typography>
                 Select Poa
@@ -1790,7 +1790,7 @@ id="date-time-picker"
                         ) : null}{' '}
                 </Typography>
                 <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl style={{marginTop:"5px"}} fullWidth>
         <InputLabel id="Name of the Poa">Poa</InputLabel>
         <Select
           labelId="Name of the Poa"
@@ -1821,7 +1821,7 @@ id="date-time-picker"
 
 
 <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl style={{marginTop:"5px"}} fullWidth>
         <InputLabel id="Name of the District">Name of the District
         {districtError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
@@ -1857,7 +1857,7 @@ id="date-time-picker"
      <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl style={{marginTop:"5px"}} fullWidth>
         <InputLabel id="Name of the taluk">Name of the Taluk
         {name_of_the_talukError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
@@ -1917,7 +1917,7 @@ id="date-time-picker"
         <CardContent>
          
           <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl style={{marginTop:"5px"}} fullWidth>
         <InputLabel id="Name of the Gelathi Facilitator">Name of the Gelathi Facilitator</InputLabel>
         <Select
           labelId="Name of the Gelathi Facilitator"
@@ -3195,7 +3195,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
             <Typography>End time of the training
           </Typography>
                 <Stack mt={2} mb={2}>
-                        <TextField  inputProps={{ required: true }}type="time" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, end_time_of_the_training:e.target.value})} value={sendForm?.end_time_of_the_training}/>
+                        <TextField  inputProps={{ required: true }}type="time" placeholder="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, end_time_of_the_training:e.target.value})} value={sendForm?.end_time_of_the_training}/>
                     </Stack> 
         </CardContent>
           </Card>
@@ -3292,7 +3292,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                         ) : null}{' '}
                 </Typography>
                 <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl style={{marginTop:"5px"}} fullWidth>
         <InputLabel id="Name of the trainer">Trainer
         {name_of_the_trainer_being_evaluatedError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
@@ -3761,13 +3761,42 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         <CardContent>
         <Stack >
           
-                <Typography  style={{fontWeight:700}} color="primary">Module 3 (M3) Building Relationships</Typography>
+                <Typography   style={{fontWeight:700}} color="primary">Module 3 (M3) Building Relationships
+                </Typography>
                
               </Stack>
               
                 </CardContent>
           
+                <Card sx={{mt:2}} >
+        <CardContent>
+        <Stack mt={2}>
+                <Typography variant="body2">Did any new women attend the training session during this module
                 
+                {attendError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}</Typography>
+                <Stack mt={2}>
+                <RadioGroup
+                      aria-labelledby="demo-radio-buttons-group-label"
+                     
+                      name="radio-buttons-group"
+                      
+                      value={attend}
+                      onChange={handleAttend}
+                    >
+                    <div style={{display:"flex"}}>
+                      <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
+                      <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}}  />} label="Yes" />
+                      </div>
+                    </RadioGroup>
+                </Stack>
+              </Stack>
+        
+             
+        </CardContent>
+    
+        </Card>
         </Card>
         
      
@@ -3798,8 +3827,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         
              
         </CardContent>
-     </Card>
+    
+        </Card>
 
+        
      <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Stack>
@@ -3813,7 +3844,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         
         
         </CardContent>
-     </Card>
+         </Card>
+     
+
+
+
      <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -4092,13 +4127,13 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
        
 
           </Card>
-          <Card sx={{ margin:"20px"}}>
+          <Card sx={{ margin:'20px 0 0 0' }}>
         <CardContent>
         <Stack>
                 <Typography variant="body1">
                    If so, How many?
                 </Typography>
-                <Stack mt={3}>
+                <Stack  mt={2}>
                   <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_5: e.target.value }) }} value={sendForm?.if_so_how_many_5}/>
                 </Stack>
               </Stack>
@@ -4330,7 +4365,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                         ) : null}{' '}
                 </Typography>
                 <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl style={{marginTop:"5px"}} fullWidth>
         <InputLabel id="Name of the trainer">Trainer</InputLabel>
         <Select
           labelId="Name of the trainer"
