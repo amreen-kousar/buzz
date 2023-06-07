@@ -108,7 +108,7 @@ export default function TeamQuality({reload}) {
 
     var config = {
       method: 'post',
-      url: oldbaseURL + 'getMyTeam.php',
+      url: oldbaseURL + 'getMyTeamQAF.php',
       headers: {
         'Content-Type': 'application/json',
       },

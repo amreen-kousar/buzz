@@ -122,8 +122,21 @@ const handleClose = ()=>{
                                             <Grid id="grid-own-open-filter"  item xs={8}>
                                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.name_of_the_assessor}</b><br>
                                                 </br>
-                                                {/* <Typography id="typography-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
-                                            */}
+                                                <Typography style={{fontSize:"0.7rem"}} > <b>{itm?.program_assessment == 1? 
+                                                <>
+                                                Trainer : {itm?.name_of_the_trainer_being_evaluated } 
+                                                </> :
+                                                itm?.program_assessment == 2? 
+                                                <>
+                                                Gelathi Facilitator : {itm?.name_of_the_gf}
+                                                </>
+                                                : itm?.program_assessment == 2? 
+                                                <>
+                                                   Gelathi : {itm?.name_of_the_gelathi_being_evaluated}
+                                                </>
+                                              : null
+                                              }</b></Typography>
+                                           
                                             </Grid>
                                             <Grid item xs={4}>
                                                 <Iconify id="uiicons-cross" onClick={() => {

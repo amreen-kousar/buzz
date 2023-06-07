@@ -1040,24 +1040,32 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
                 
                 >
                 <CardContent>
-              
-<Container style={{ display: 'flex', flexDirection: 'row' }}>
-  <Grid item xs={6}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-      {(itm?.noofbatches)?"Funder Name":"Project Name"} <br />
-      {/*  for role id 5 it should be project in 4 dahsbord  */}
-      Actual / Target
-      {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
-    </span></Grid>
-    <Grid item xs={6}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
-      &nbsp;:&nbsp;{itm?.name}<br />
-      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
 
-      {console.log(itm,"itemmmmmmmmmm")}
-            {/* start date and end date need in all dashborad we need as duration : fromDate to endDate for role id 5 */}
+
+<Container style={{ display: 'flex', flexDirection: 'column' }}>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+      {(itm?.startDate)?"Project Name":"Funder"}<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
+      &nbsp;:&nbsp;{itm?.name}<br />
+      {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
+    </span>
+    
+    
+    </Grid>
+    <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Actual / Target  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
     </span>
   </Grid>
+  
 </Container>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={4}>
@@ -1079,7 +1087,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid> */}
-         <Grid item xs={12} sm={6} md={6}>
+<Grid item xs={6} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Villages"
@@ -1089,7 +1097,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+ <Grid item xs={6} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Batches"
@@ -1099,7 +1107,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+ <Grid item xs={6} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Self Sakthi Survey"
@@ -1109,7 +1117,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+ <Grid item xs={6} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="2nd Day Turnout  %"
@@ -1199,7 +1207,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 //               />
 //             </Grid> */}
-//          <Grid item xs={12} sm={6} md={6}>
+// <Grid item xs={6} sm={6} md={6}>
 
 //               <AppWidgetSummary
 //                 title="Number  of Villages Visits"
@@ -1209,7 +1217,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 //               />
 //             </Grid>
-//           <Grid item xs={12} sm={6} md={6}>
+//  <Grid item xs={6} sm={6} md={6}>
 
 //               <AppWidgetSummary
 //                 title="Number of Beehive"
@@ -1219,7 +1227,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 //               />
 //             </Grid>
-//         <Grid item xs={12} sm={6} md={6}>
+//<Grid item xs={6} sm={6} md={6}>
 
 //               <AppWidgetSummary
 //                 title="Number of Circle Meet"
@@ -1229,7 +1237,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 //               />
 //             </Grid>
-//           <Grid item xs={12} sm={6} md={6}>
+//  <Grid item xs={6} sm={6} md={6}>
 
 //               <AppWidgetSummary
 //                 title="Number of Circles"
@@ -1239,7 +1247,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 //               />
 //             </Grid>
-//           <Grid item xs={12} sm={6} md={6}>
+//  <Grid item xs={6} sm={6} md={6}>
 
 // <AppWidgetSummary
 //   title="Number of Enroll"
@@ -1311,26 +1319,48 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
                 
                 >
                 <CardContent>
-              
-<Container style={{ display: 'flex', flexDirection: 'row' }}>
-  <Grid item xs={6}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-      Project Name<br />
-      {/*  for role id 5 it should be project in 4 dahsbord  */}
-      Actual / Target <br/>
 
-      Start Date : <br/>
-
-      End Date :  <br/>
-      {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
-    </span></Grid>
-    <Grid item xs={6}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
+                <Container style={{ display: 'flex', flexDirection: 'column' }}>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+      {(itm?.startDate)?"Project Name":"Funder"}<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
       &nbsp;:&nbsp;{itm?.name}<br />
-      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}<br />
-      &nbsp;:&nbsp;{itm?.startDate}<br />
-      &nbsp;:&nbsp;{itm?.endDate}
-            {/* start date and end date need in all dashborad we need as duration : fromDate to endDate for role id 5 */}
+      {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
+    </span>
+    
+    
+    </Grid>
+    <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Actual / Target  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
+    </span>
+  </Grid>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Start Date  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.startDate} 
+    </span>
+  </Grid>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    End Date  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.endDate} 
     </span>
   </Grid>
 </Container>
@@ -1365,7 +1395,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 />
 </Grid>
-           <Grid item xs={12} sm={6} md={6}>
+  <Grid item xs={6} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number of Batch"
@@ -1376,7 +1406,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 />
 </Grid>
            
-          <Grid item xs={12} sm={6} md={6}>
+ <Grid item xs={6} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number of Self Shakthi Survey"
@@ -1386,7 +1416,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+ <Grid item xs={6} sm={6} md={6}>
 
 <AppWidgetSummary
   title="2nd Day Turnout  %"
@@ -1478,7 +1508,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 //               />
 //             </Grid> */}
-//            <Grid item xs={12} sm={6} md={6}>
+//   <Grid item xs={6} sm={6} md={6}>
 
 //               <AppWidgetSummary
 //                 title="Number  of Villages Visits"
@@ -1488,7 +1518,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 //               />
 //             </Grid>
-//             <Grid item xs={12} sm={6} md={6}>
+//    <Grid item xs={6} sm={6} md={6}>
 
 //               <AppWidgetSummary
 //                 title="Number of Beehive"
@@ -1498,7 +1528,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 //               />
 //             </Grid>
-//           <Grid item xs={12} sm={6} md={6}>
+//  <Grid item xs={6} sm={6} md={6}>
 
 //               <AppWidgetSummary
 //                 title="Number of Circle Meet"
@@ -1508,7 +1538,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 //               />
 //             </Grid>
-//           <Grid item xs={12} sm={6} md={6}>
+//  <Grid item xs={6} sm={6} md={6}>
 
 //               <AppWidgetSummary
 //                 title="Number of Circles"
@@ -1518,7 +1548,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 //               />
 //             </Grid>
-//           <Grid item xs={12} sm={6} md={6}>
+//  <Grid item xs={6} sm={6} md={6}>
 
 // <AppWidgetSummary
 //   title="Number of Enroll"

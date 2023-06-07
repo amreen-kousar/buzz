@@ -193,7 +193,7 @@ useEffect(()=>{
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Quality Assessment  Form
+            Quality Assessment  Form 
           </Typography>
  </Toolbar>
               </AppBar>
@@ -211,8 +211,20 @@ useEffect(()=>{
                                             <Grid id="grid-own-open-filter"  item xs={8}>
                                                 <b cursor="pointer" style={{ color: "blue" }} >{itm?.name_of_the_assessor}</b><br>
                                                 </br>
-                                                {/* <Typography id="typography-ta-amount" variant="body" gutterBottom > <b>TA Amount:{itm?.telephone}</b></Typography>
-                                            */}
+                                                <Typography style={{fontSize:"0.7rem"}} > <b>{itm?.program_assessment == 1? 
+                                                <>
+                                                Trainer : {itm?.name_of_the_trainer_being_evaluated } 
+                                                </> :
+                                                itm?.program_assessment == 2? 
+                                                <>
+                                                Gelathi Facilitator : {itm?.name_of_the_gf}
+                                                </>
+                                                : itm?.program_assessment == 2? 
+                                                <>
+                                                   Gelathi : {itm?.name_of_the_gelathi_being_evaluated}
+                                                </>
+                                              : null
+                                              }</b></Typography>
                                             </Grid>
                                             <Grid item xs={4}>
                                                 {/* <Iconify id="uiicons-cross" onClick={() => { handleDeleteTA(itm) }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="system-uicons:cross"></Iconify>
@@ -231,10 +243,10 @@ useEffect(()=>{
            
           } 
            
-         { todayPoa== ""? 
+         { todayPoa== null? 
           
        <>
-              <h4 style={{textAlign:'center'}}>No Enrolled Gelathi Found</h4>
+              <h4 style={{textAlign:'center' ,marginTop:"40px"}}>No Data Found</h4>
               </>:null
        }
           

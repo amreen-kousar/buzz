@@ -61,7 +61,7 @@ QualityAssuranceFilter.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, resetBus,onDateSubmit }) {
+export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, resetBus, onDateSubmit }) {
 
   const [selectDATA, setSelectData] = useState()
   const data = localStorage?.getItem('userId')
@@ -110,15 +110,11 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
           <div>
             <Card style={{ backgroundColor: '#f6f8fb' }}>
               <CardContent>
-                {/* <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom> */}
-                <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>
-                  Categories
-                </Typography>
-             
 
-               {(data==1)? <Button  onClick={() => {
-                    setSelectData(2);
-                  }}
+
+                {(data == 1) ? <Button onClick={() => {
+                  setSelectData(2);
+                }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -131,13 +127,13 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                     color: 'black',
                   }}
                 >
-                  
-                     Admins 
-               </Button>:null}
 
-               {(data==1 || data==2)?<Button  onClick={() => {
-                    setSelectData(3);
-                  }}
+                  Admins
+                </Button> : null}
+
+                {(data == 1 || data == 2) ? <Button onClick={() => {
+                  setSelectData(3);
+                }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -148,14 +144,15 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                       color: '#ff7424',
                     },
                     color: 'black',
+                    marginTop: 1,
                   }}
                 >
                   Program Managers
-               </Button>:null}
+                </Button> : null}
 
-               {(data==1 || data==2 || data==3 )?<Button  onClick={() => {
-                    setSelectData(12);
-                  }}
+                {(data == 1 || data == 2 || data == 3) ? <Button onClick={() => {
+                  setSelectData(12);
+                }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -166,14 +163,15 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                       color: '#ff7424',
                     },
                     color: 'black',
+                    marginTop: 1,
                   }}
                 >
                   Senior Operation Managers
-               </Button>:null}
+                </Button> : null}
 
-               {(data==1 || data==2 || data==3 || data==12)?<Button  onClick={() => {
-                    setSelectData(4);
-                  }}
+                {(data == 1 || data == 2 || data == 3 || data == 12) ? <Button onClick={() => {
+                  setSelectData(4);
+                }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -183,15 +181,16 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                       bgcolor: '#ffd796',
                       color: '#ff7424',
                     },
+                    marginTop: 1,
                     color: 'black',
                   }}
                 >
-                Operation Managers
-               </Button>:null}
+                  Operation Managers
+                </Button> : null}
 
-               {(data==1 || data==2 || data==3 || data==12 || data==4)?<Button  onClick={() => {
-                    setSelectData(13);
-                  }}
+                {(data == 1 || data == 2 || data == 3 || data == 12 || data == 4) ? <Button onClick={() => {
+                  setSelectData(13);
+                }}
                   sx={{
                     ':hover': {
                       bgcolor: '#ffd796', // theme.palette.primary.main
@@ -201,15 +200,16 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                       bgcolor: '#ffd796',
                       color: '#ff7424',
                     },
+                    marginTop: 1,
                     color: 'black',
                   }}
                 >
                   Gelathi Facilitator Leads
-               </Button>:null}
+                </Button> : null}
 
 
 
-            <Button
+                <Button
                   onClick={() => {
                     setSelectData(7);
                   }}
@@ -222,6 +222,7 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                       bgcolor: '#ffd796',
                       color: '#ff7424',
                     },
+                    marginTop: 1,
                     color: 'black',
                   }}
                 >
@@ -240,6 +241,7 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                       bgcolor: '#ffd796',
                       color: '#ff7424',
                     },
+                    marginTop: 1,
                     color: 'black',
                   }}
                 >
@@ -247,19 +249,13 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                 </Button>
               </CardContent>
             </Card>
-           
-            {/* {selectDATA == 2 && <Grid style={{ marginTop: 30 }}>
-              <Funders getData={getData} selectDATA={selectDATA} />
-            </Grid>
-            }
+
+
             {selectDATA && selectDATA == 7 && <Grid style={{ marginTop: 30 }}>
-              <Location selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
-            </Grid>} */}
-{selectDATA && selectDATA == 7 && <Grid style={{ marginTop: 30 }}>
               <LocationQuality selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
             </Grid>}
             {selectDATA && selectDATA == 9 && <Grid style={{ marginTop: 30 }}>
-              <DateRangeQuality selectDATA={selectDATA} onDateSubmit={(e)=>{onDateSubmit(e)}} />
+              <DateRangeQuality selectDATA={selectDATA} onDateSubmit={(e) => { onDateSubmit(e) }} />
             </Grid>}
 
             {selectDATA && selectDATA == 2 && <Grid style={{ marginTop: 30 }}>
