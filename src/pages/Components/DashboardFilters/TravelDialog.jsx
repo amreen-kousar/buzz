@@ -192,7 +192,7 @@ console.log("submittedddddddd")
       "date": moment(sendData?.date)?.format('YYYY-MM-DD'),
       "insideBangalore": false,
       "end_odometer": sendData?.endOdimeter,
-      "telephone": sendData?.telephonecharges,
+      "telephone": (sendData?.telephonecharges==1)?249:0,
       "end_location_name":locationS,
       "fairamount":sendData?.fairamount,
       "printing": sendData?.printing,
@@ -223,12 +223,16 @@ console.log("submittedddddddd")
 console.log("successsssssssss",data)
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        viewMessage('Travel allowance added sucessfully')
+        // console.log(JSON.stringify(response.data));
+       {(response.data.message=="Added Successfully") ?viewMessage(response.data.message):alert(response.data.message)}
+        
         handleClose()
+        // alert(response.data.message)  
       })
       .catch(function (error) {
         console.log(error);
+        
+        alert(response.message)
       });
 
   }
@@ -472,9 +476,10 @@ axios(config)
                     label="Select Rate Per Km"
                     onChange={(e) => setSendData({ ...sendData, rateperkm: e?.target?.value })}
                   >
-                    {datadrop?.Rate_per_KM?.map(itm => {
+                    {/* {datadrop?.Rate_per_KM?.map(itm => {
                       return (<MenuItem value={itm?.amount}>{itm?.amount}</MenuItem>)
-                    })}
+                    })} */}
+                    {(sendData?.modeoftravel&&sendData?.modeoftravel===2)?<MenuItem value="3.5">Rs 3.50/Km</MenuItem>:<MenuItem value="10">Rs 10/km</MenuItem>}
                   </Select>
                 </FormControl>
               </Stack> 
@@ -625,7 +630,7 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                     onChange={(e) => setSendData({ ...sendData, telephonecharges: e?.target?.value })}
                   >
                     {datadrop?.telephone?.map(itm => {
-                      return (<MenuItem value={itm}>{itm}</MenuItem>)
+                      return (<MenuItem value={itm.id}>{itm.name}</MenuItem>)
                     })}
                   </Select>
                 </FormControl>
