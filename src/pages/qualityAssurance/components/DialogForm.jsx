@@ -113,11 +113,20 @@ export default function DialogForm({ shown, setShown, batch,reloadfunction }) {
   
     const handleClickOpen = () => {
       sendForm = {...formData};
-      setProgramAssessment('')
-      setDay1Day2('')
+      // setProgramAssessment('')
+      // setDay1Day2('')
       setSendForm(sendForm);
-      checked = {...checkData}
-      setChecked(checked)
+      // checked = {...checkData}
+      // setChecked(checked)
+      // setSendForm(sendForm);
+checked = {...checkData}
+setProgramAssessment('')
+setLeave2('')
+setParticipant('')
+setEngage('')
+setDay1Day2('')
+setChecked(checked)
+reloadfunction()
       setShown(true)
       setOpen(true);
     };
@@ -726,12 +735,12 @@ const validation =()=>{
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-      else if (checked['check_which_ones_the_trainer_did_not_do'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_doError(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if (checked['check_which_ones_the_trainer_did_not_do'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_doError(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
       else if (sendForm.how_many_women_attended_the_training_session == '')
       {
         sethow_many_women_attended_the_training_sessionError(true)
@@ -739,12 +748,12 @@ const validation =()=>{
         alert("please fill ")
       }
 
-      else if  (checked['check_which_ones_the_trainer_did_not_do_1'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_1Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if  (checked['check_which_ones_the_trainer_did_not_do_1'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_do_1Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
      else if  (intract == '')
       {
@@ -774,12 +783,12 @@ const validation =()=>{
         alert("please fill ")
       }
 
-     else if  (checked['check_which_ones_the_trainer_did_not_do_2'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_2Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+    //  else if  (checked['check_which_ones_the_trainer_did_not_do_2'] == 0)
+    //   {
+    //     setcheck_which_ones_the_trainer_did_not_do_2Error(true)
+    //     setHelperText('Please Select The Option');
+    //     alert("please fill ")
+    //   }
 
      else if  (checked['during_the_debrief_the_trainer_did'] == 0)
       {
@@ -809,19 +818,19 @@ const validation =()=>{
         alert("please fill ")
       }
 
-      else if  (checked['check_which_ones_the_trainer_did_not_do_3'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_3Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if  (checked['check_which_ones_the_trainer_did_not_do_3'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_do_3Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
-      else if  (checked['during_the_debriefs_for_role_plays_the_trainer_did_not_ask'] == 0)
-      {
-        setduring_the_debriefs_for_role_plays_the_trainer_did_not_askError(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if  (checked['during_the_debriefs_for_role_plays_the_trainer_did_not_ask'] == 0)
+      // {
+      //   setduring_the_debriefs_for_role_plays_the_trainer_did_not_askError(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
       else if  (leave2=='')
       {
@@ -865,12 +874,12 @@ const validation =()=>{
         alert("please fill ")
       }
 
-      else if (checked['check_which_ones_the_trainer_did_not_do_4'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_4Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if (checked['check_which_ones_the_trainer_did_not_do_4'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_do_4Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
       else if  (sendForm.did_this_module_take_30_minutes_as_allotted_1=='')
       {
@@ -879,12 +888,12 @@ const validation =()=>{
         alert("please fill ")
       }
 
-      else if (checked['check_which_ones_the_trainer_did_not_do_5'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_5Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if (checked['check_which_ones_the_trainer_did_not_do_5'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_do_5Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
       else{
         apiFormHit()
@@ -897,12 +906,12 @@ const validation =()=>{
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-      else if (checked['check_which_ones_the_trainer_did_not_do'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_doError(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if (checked['check_which_ones_the_trainer_did_not_do'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_doError(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
       else if (sendForm.was_the_recap_done=='')
       {
@@ -918,26 +927,26 @@ const validation =()=>{
         alert("please fill ")
       }
 
-      else if  (checked['check_which_ones_the_trainer_did_not_do_1'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_1Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if  (checked['check_which_ones_the_trainer_did_not_do_1'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_do_1Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
-      else if  (checked['check_which_ones_the_trainer_did_not_do_2'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_2Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if  (checked['check_which_ones_the_trainer_did_not_do_2'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_do_2Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
-      else if  (checked['during_the_debrief_did_the_trainer_did_not_do_the_following'] == 0)
-      {
-        setduring_the_debrief_did_the_trainer_did_not_do_the_followingError(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if  (checked['during_the_debrief_did_the_trainer_did_not_do_the_following'] == 0)
+      // {
+      //   setduring_the_debrief_did_the_trainer_did_not_do_the_followingError(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
       else if  (participant=='')
       {
@@ -960,18 +969,18 @@ const validation =()=>{
         alert("please fill ")
       }
 
-      else if  (checked['check_which_ones_the_trainer_did_not_do_3'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_3Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
-      else if  (checked['check_which_instructions_the_trainer_did_not_do'] == 0)
-      {
-        secheck_which_instructions_the_trainer_did_not_doError(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if  (checked['check_which_ones_the_trainer_did_not_do_3'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_do_3Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
+      // else if  (checked['check_which_instructions_the_trainer_did_not_do'] == 0)
+      // {
+      //   secheck_which_instructions_the_trainer_did_not_doError(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // 
 
       else if  (sendForm.repeat_the_activity_with_the_second_volunteer=='')
       {
@@ -980,12 +989,12 @@ const validation =()=>{
         alert("please fill ")
       }
 
-      else if  (checked['check_which_ones_the_trainer_did_not_do_2'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_2Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if  (checked['check_which_ones_the_trainer_did_not_do_2'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_do_2Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
       
       else if  (sendForm.were_the_participants_responsive_during_the_debriefing_1=='')
       {
@@ -1008,32 +1017,32 @@ const validation =()=>{
         alert("please fill ")
       }
 
-      else if (checked['check_which_ones_the_trainer_did_not_do_4'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_4Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if (checked['check_which_ones_the_trainer_did_not_do_4'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_do_4Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
-      else if (checked['the_trainer_did_not_ask'] == 0)
-      {
-        setthe_trainer_did_not_askError(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if (checked['the_trainer_did_not_ask'] == 0)
+      // {
+      //   setthe_trainer_did_not_askError(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
-      else if (checked['what_did_the_trainer_not_do'] == 0)
-      {
-        setwhat_did_the_trainer_not_doError(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
-      else if (checked['during_the_debrief_did_the_trainer_not_ask_1'] == 0)
-      {
-        setduring_the_debrief_did_the_trainer_not_ask_1Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if (checked['what_did_the_trainer_not_do'] == 0)
+      // {
+      //   setwhat_did_the_trainer_not_doError(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
+      // else if (checked['during_the_debrief_did_the_trainer_not_ask_1'] == 0)
+      // {
+      //   setduring_the_debrief_did_the_trainer_not_ask_1Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
       
       else if  (sendForm.were_the_participants_responsive_during_the_debriefing_2=='')
       {
@@ -1056,19 +1065,19 @@ const validation =()=>{
         alert("please fill ")
       }
 
-      else if (checked['check_which_ones_the_trainer_did_not_do_5'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_5Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if (checked['check_which_ones_the_trainer_did_not_do_5'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_do_5Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
-      else if (checked['check_which_ones_the_trainer_did_not_do_5'] == 0)
-      {
-        setduring_the_debrief_did_the_trainer_not_ask_2Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if (checked['check_which_ones_the_trainer_did_not_do_5'] == 0)
+      // {
+      //   setduring_the_debrief_did_the_trainer_not_ask_2Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
       else if  (sendForm.were_the_participants_responsive_during_the_debriefing_3=='')
       {
@@ -1091,12 +1100,12 @@ const validation =()=>{
         alert("please fill ")
       }
 
-      else if (checked['check_which_ones_the_trainer_did_not_do_6'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_do_6Error(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
+      // else if (checked['check_which_ones_the_trainer_did_not_do_6'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_do_6Error(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
 
       else{
         apiFormHit()
@@ -1132,11 +1141,11 @@ const validation =()=>{
       setHelperText('Please Select The Option');
     }
 
-    else if (checked['check_which_ones_the_gf_did_not_do'] == 0){
-      alert('please Fill all the field')
-      setcheck_which_ones_the_gf_did_not_doError(true);
-      setHelperText('Please Select The Option');
-    }
+    // else if (checked['check_which_ones_the_gf_did_not_do'] == 0){
+    //   alert('please Fill all the field')
+    //   setcheck_which_ones_the_gf_did_not_doError(true);
+    //   setHelperText('Please Select The Option');
+    // }
 
     else if (level1=='' || level2=='' || level3==''  || level4==''  || level5=='' ){
       alert('please Fill all the field')
@@ -1241,106 +1250,107 @@ const validation =()=>{
  
     }
     else if(sendForm.days_modules=='Session-1 _ Introduction'){
-      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_doError(true);
-        setHelperText('Please Select The Option');
-      }
-      else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
-        setHelperText('Please Select The Option');
-      }
 
-      else if(checked['check_which_ones_the_gelathi_did_not_do_2'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_do_2Error(true);
-        setHelperText('Please Select The Option');
-      }
-      else {
+      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
+      //   setHelperText('Please Select The Option');
+      // }
+      // else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
+      //   setHelperText('Please Select The Option');
+      // }
+
+      // else if(checked['check_which_ones_the_gelathi_did_not_do_2'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_do_2Error(true);
+      //   setHelperText('Please Select The Option');
+      // }
+      // else {
         apiFormHit()
-      }
+      // }
     }
 
     else if(sendForm.days_modules=='Session-2 _ Financial Management'){
-      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_doError(true);
-        setHelperText('Please Select The Option');
-      }
+      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
+      //   setHelperText('Please Select The Option');
+      // }
 
-      else if (sendForm.was_the_recap_done=='')
+      if (sendForm.was_the_recap_done=='')
       {
         setwas_the_recap_doneError(true)
         setHelperText('Please Select The Option');
         alert("Please Select The Option")
       }
-      else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
-        setHelperText('Please Select The Option');
-      }
+      // else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
+      //   setHelperText('Please Select The Option');
+      // }
       else {
         apiFormHit()
       }
     }
 
     else if(sendForm.days_modules=='Session-3 _Basics of an enterprise'){
-      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_doError(true);
-        setHelperText('Please Select The Option');
-      }
+      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
+      //   setHelperText('Please Select The Option');
+      // }
 
     
-      else if(checked['during_the_debrief_did_the_gelathi'] == 0){
+       if(checked['during_the_debrief_did_the_gelathi'] == 0){
         alert('please Fill all the field')
         setduring_the_debrief_did_the_gelathiError(true);
         setHelperText('Please Select The Option');
       }
 
-      else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
-        setHelperText('Please Select The Option');
-      }
+      // else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
+      //   setHelperText('Please Select The Option');
+      // }
       else {
         apiFormHit()
       }
     }
 
     else if(sendForm.days_modules=='Session-4 _Building Relationship'){
-      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_doError(true);
-        setHelperText('Please Select The Option');
-      }
+      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
+      //   setHelperText('Please Select The Option');
+      // }
 
     
-      else if(checked['during_the_debriefs_for_role_plays_the_gelathi_did_not_ask'] == 0){
-        alert('please Fill all the field')
-        setduring_the_debriefs_for_role_plays_the_gelathi_did_not_askError(true);
-        setHelperText('Please Select The Option');
-      }
+      // else if(checked['during_the_debriefs_for_role_plays_the_gelathi_did_not_ask'] == 0){
+      //   alert('please Fill all the field')
+      //   setduring_the_debriefs_for_role_plays_the_gelathi_did_not_askError(true);
+      //   setHelperText('Please Select The Option');
+      // }
 
-      else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
-        setHelperText('Please Select The Option');
-      }
-      else {
+      // else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
+      //   setHelperText('Please Select The Option');
+      // }
+      // else {
         apiFormHit()
-      }
+      // }
     }
 
     else if(sendForm.days_modules=='Session-5 _Assets and Liabilities'){
-      if (checked['check_which_ones_the_trainer_did_not_do'] == 0)
-      {
-        setcheck_which_ones_the_trainer_did_not_doError(true)
-        setHelperText('Please Select The Option');
-        alert("please fill ")
-      }
-      else if (sendForm.was_the_recap_done_1=='')
+      // if (checked['check_which_ones_the_trainer_did_not_do'] == 0)
+      // {
+      //   setcheck_which_ones_the_trainer_did_not_doError(true)
+      //   setHelperText('Please Select The Option');
+      //   alert("please fill ")
+      // }
+      if (sendForm.was_the_recap_done_1=='')
       {
         setwas_the_recap_done_1Error(true)
         setHelperText('Please Select The Option');
@@ -1353,19 +1363,10 @@ const validation =()=>{
 
 
     else if(sendForm.days_modules=='Session-6 _Goal setting game'){
-      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_doError(true);
-        setHelperText('Please Select The Option');
-      }
+      
+      
 
-      else if(checked['check_which_instructions_the_gelathi_did_not_do'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_instructions_the_gelathi_did_not_doError(true);
-        setHelperText('Please Select The Option');
-      }
-
-      else if  (sendForm.repeat_the_activity_with_the_second_volunteer=='')
+       if  (sendForm.repeat_the_activity_with_the_second_volunteer=='')
       {
         setrepeat_the_activity_with_the_second_volunteerError(true)
         setHelperText('Please Select The Option');
@@ -1385,51 +1386,51 @@ const validation =()=>{
     }
 
     else if(sendForm.days_modules=='Session-7 _Financial Goals'){
-      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_doError(true);
-        setHelperText('Please Select The Option');
-      }
+      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
+      //   setHelperText('Please Select The Option');
+      // }
 
-      else if(checked['the_gelathi_did_not_ask_1'] == 0){
-        alert('please Fill all the field')
-        setthe_gelathi_did_not_ask_1Error(true);
-        setHelperText('Please Select The Option');
-      }
+      // else if(checked['the_gelathi_did_not_ask_1'] == 0){
+      //   alert('please Fill all the field')
+      //   setthe_gelathi_did_not_ask_1Error(true);
+      //   setHelperText('Please Select The Option');
+      // }
 
-      else if(checked['during_the_debrief_did_the_gelathi_not_ask'] == 0){
-        alert('please Fill all the field')
-        setduring_the_debrief_did_the_gelathi_not_askError(true);
-        setHelperText('Please Select The Option');
-      }
-      else {
+      // else if(checked['during_the_debrief_did_the_gelathi_not_ask'] == 0){
+      //   alert('please Fill all the field')
+      //   setduring_the_debrief_did_the_gelathi_not_askError(true);
+      //   setHelperText('Please Select The Option');
+      // }
+      // else {
         apiFormHit()
-      }
+      // }
     }
 
     else if(sendForm.days_modules=='Session-8 _Loans-Group discussion of Case Studies'){
-      if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_doError(true);
-        setHelperText('Please Select The Option');
-      }
+      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
+      //   setHelperText('Please Select The Option');
+      // }
 
 
 
-      else if(checked['during_the_debrief_did_the_gelathi_not_ask'] == 0){
-        alert('please Fill all the field')
-        setduring_the_debrief_did_the_gelathi_not_askError(true);
-        setHelperText('Please Select The Option');
-      }
+      // else if(checked['during_the_debrief_did_the_gelathi_not_ask'] == 0){
+      //   alert('please Fill all the field')
+      //   setduring_the_debrief_did_the_gelathi_not_askError(true);
+      //   setHelperText('Please Select The Option');
+      // }
 
-      else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
-        alert('please Fill all the field')
-        setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
-        setHelperText('Please Select The Option');
-      }
-      else {
+      // else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
+      //   alert('please Fill all the field')
+      //   setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
+      //   setHelperText('Please Select The Option');
+      // }
+      // else {
         apiFormHit()
-      }
+      // }
     }
 
     else{
