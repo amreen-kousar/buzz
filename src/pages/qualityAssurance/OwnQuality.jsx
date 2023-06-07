@@ -124,15 +124,15 @@ const handleClose = ()=>{
                                                 </br>
                                                 <Typography style={{fontSize:"0.7rem"}} > <b>{itm?.program_assessment == 1? 
                                                 <>
-                                                Trainer : {itm?.name_of_the_trainer_being_evaluated } 
+                                                Trainer Evaluated: {itm?.name_of_the_trainer_being_evaluated } 
                                                 </> :
                                                 itm?.program_assessment == 2? 
                                                 <>
-                                                Gelathi Facilitator : {itm?.name_of_the_gf}
+                                                Gelathi Facilitator Evaluated: {itm?.name_of_the_gf}
                                                 </>
                                                 : itm?.program_assessment == 2? 
                                                 <>
-                                                   Gelathi : {itm?.name_of_the_gelathi_being_evaluated}
+                                                   Gelathi Evaluated: {itm?.name_of_the_gelathi_being_evaluated}
                                                 </>
                                               : null
                                               }</b></Typography>

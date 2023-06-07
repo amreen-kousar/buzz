@@ -1858,7 +1858,7 @@ var value =string?.split(",")
                   </CardContent>
                 </Card>
 
-                <Card sx={{ marginTop: '20px' }}>
+             {  (sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module=='Yes')? <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Typography>If so, how many?</Typography>
                     <Stack mt={2} mb={2}>
@@ -1873,7 +1873,7 @@ var value =string?.split(",")
                       />
                     </Stack>
                   </CardContent>
-                </Card>
+                </Card>:null}
 
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
@@ -1956,7 +1956,7 @@ var value =string?.split(",")
         </CardContent>
      </Card> */}
 
-              <Card sx={{ margin: '20px' }}>
+             {(sendForm?.did_any_new_women_attend_the_training_session_during_module=="Yes")? <Card sx={{ margin: '20px' }}>
                 <CardContent>
                   <Stack>
                     <Typography variant="body1">If so, How many?/ಹಾಗಿದ್ದರೆ ಎಷ್ಟು?</Typography>
@@ -1974,7 +1974,8 @@ var value =string?.split(",")
                     </Stack>
                   </Stack>
                 </CardContent>
-              </Card>
+              </Card>: null}
+
               <Card sx={{ margin: '20px' }}>
                 <CardContent>
                   <Stack mt={2}>
@@ -2026,7 +2027,7 @@ var value =string?.split(",")
                 </CardContent>
               </Card>
 
-              <Card sx={{ margin: '20px' }}>
+            { (sendForm?.did_any_women_leve_training_session_during_or_after_1st_module_1=='Yes')? <Card sx={{ margin: '20px' }}>
                 <CardContent>
                 
                     <Typography variant="body1">If so, How many?/ಹಾಗಿದ್ದರೆ ಎಷ್ಟು?</Typography>
@@ -2044,7 +2045,7 @@ var value =string?.split(",")
                     </Stack>
                 
                 </CardContent>
-              </Card>
+              </Card>: null}
 
               <Card sx={{ margin: '20px' }}>
                 <CardContent>
@@ -2126,7 +2127,7 @@ var value =string?.split(",")
                   </CardContent>
                 </Card>
 
-                <Card sx={{ margin: '20px' }}>
+                {(sendForm?.did_any_new_women_attend_training_session_during_this_module_1=='Yes')? <Card sx={{ margin: '20px' }}>
                   <CardContent>
                  
                       <Typography variant="body1">If so, How many?</Typography>
@@ -2144,7 +2145,8 @@ var value =string?.split(",")
                       </Stack>
                    
                   </CardContent>
-                </Card>
+                </Card>: null}
+
                 <Card sx={{ margin: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2244,7 +2246,8 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-                <Card sx={{ margin: '20px' }}>
+
+               {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1=='Yes')? <Card sx={{ margin: '20px' }}>
                   <CardContent>
                  
                       <Typography variant="body1">If so, How many?</Typography>
@@ -2262,7 +2265,8 @@ var value =string?.split(",")
                       </Stack>
                 
                   </CardContent>
-                </Card>
+                </Card>: null}
+
                 <Card sx={{ margin: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2312,7 +2316,8 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-                <Card sx={{ margin: '20px' }}>
+
+               {(sendForm?.did_any_new_women_attend_training_session_during_this_module_2=='Yes')? <Card sx={{ margin: '20px' }}>
                   <CardContent>
                     <Stack>
                       <Typography variant="body1">If so, How many?</Typography>
@@ -2330,7 +2335,8 @@ var value =string?.split(",")
                       </Stack>
                     </Stack>
                   </CardContent>
-                </Card>
+                </Card>: null}
+
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2683,7 +2689,8 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-                <Card sx={{ marginTop: '20px' }}>
+
+               {(sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module=='Yes')? <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
                       <Stack>
@@ -2703,7 +2710,8 @@ var value =string?.split(",")
                       </Stack>
                     </Stack>
                   </CardContent>
-                </Card>
+                </Card>:null}
+
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2869,7 +2877,8 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-                <Card sx={{ marginTop: '20px' }}>
+
+              {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1=='Yes')?  <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
                       <Stack>
@@ -2889,7 +2898,8 @@ var value =string?.split(",")
                       </Stack>
                     </Stack>
                   </CardContent>
-                </Card>
+                </Card>: null}
+
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3066,7 +3076,8 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-                <Card sx={{ marginTop: '20px' }}>
+
+               {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2=='Yes')? <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
                       <Stack>
@@ -3086,7 +3097,8 @@ var value =string?.split(",")
                       </Stack>
                     </Stack>
                   </CardContent>
-                </Card>
+                </Card>:null}
+
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3220,7 +3232,8 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-                <Card sx={{ marginTop: '20px' }}>
+
+               {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3=='Yes')? <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
                       <Stack>
@@ -3240,7 +3253,8 @@ var value =string?.split(",")
                       </Stack>
                     </Stack>
                   </CardContent>
-                </Card>
+                </Card>:null}
+
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
