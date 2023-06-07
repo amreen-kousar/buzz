@@ -420,7 +420,7 @@ axios(config)
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
-            Create Allowance aswin 
+            Create Allowance
           </Typography>
 
           <Button autoFocus color="inherit" type="submit">
