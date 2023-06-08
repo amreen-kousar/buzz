@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 // import Dialog from '@mui/material/Dialog';
 import { Input } from '@mui/material';
 
+import dayjs from 'dayjs';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
@@ -84,6 +85,7 @@ export default function TravelDialog({ viewMessage }) {
   const [imgSrc, setImgSrc] = React.useState(null);
   const [datadrop, setDataDrop] = useState();
   const handleClickOpen = () => {
+    setImage([]);
     setOpen(true);
   };
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
@@ -116,6 +118,7 @@ export default function TravelDialog({ viewMessage }) {
   const hiddenFileInput = React.useRef(null);
   const [dropDownValues, setDropDownValues] = useState([])
 
+  const today = dayjs();
   const handleClick = event => {
     console.log("click", event.target)
     hiddenFileInput.current.click();
@@ -170,6 +173,7 @@ var requestOptions = {
 fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions)
   .then(response => response.text())
   .then(result => setImageId(JSON.parse(result)))
+  alert("Uploaded Successfully")
   .catch(error => console.log('error', error));
 
 
@@ -225,8 +229,9 @@ console.log("successsssssssss",data)
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
        {(response.data.message=="Added Successfully") ?viewMessage(response.data.message):alert(response.data.message)}
-        
-        handleClose()
+       handleClose()
+       setImageId('')
+
         // alert(response.data.message)  
       })
       .catch(function (error) {
@@ -479,7 +484,7 @@ axios(config)
                     {/* {datadrop?.Rate_per_KM?.map(itm => {
                       return (<MenuItem value={itm?.amount}>{itm?.amount}</MenuItem>)
                     })} */}
-                    {(sendData?.modeoftravel&&sendData?.modeoftravel===2)?<MenuItem value="3.5">Rs 3.50/Km</MenuItem>:<MenuItem value="10">Rs 10/km</MenuItem>}
+                    {(sendData?.modeoftravel&&sendData?.modeoftravel===3)?<MenuItem value="3.5">Rs 3.50/Km</MenuItem>:<MenuItem value="10">Rs 10/km</MenuItem>}
                   </Select>
                 </FormControl>
               </Stack> 
@@ -587,6 +592,7 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                   <DatePicker
                     required
                     inputFormat="YYYY-MM-DD"
+                    minDate={today}
                     views={["year", "month", "day"]}
                     // label="Date"
                     value={sendData?.date}
@@ -660,7 +666,7 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                   }} />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="outlined-basic" type="number" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="Other Expenses" variant="outlined" color="common"
+                <TextField id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, otherExpenses: e?.target?.value }) }} label="Other Expenses" variant="outlined" color="common"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="start">
