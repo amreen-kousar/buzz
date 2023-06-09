@@ -23,7 +23,7 @@ function AddUser(props) {
 
     var [AddUser, setAddUser] = useState({
         role:'', first_name: '', last_name: "", contactNum: '', workNum: '', officeMailId: '', address: '', address3: "", address2: "",
-        pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project: "",
+        pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project_list: "",
         emp_id: ""
     })
 
@@ -261,7 +261,7 @@ const emailchangeHandler=(e) => {
 let userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 console.log(userid,"userrrrrridddddddd")
     const submitUser = () => {
-        AddUser.project = inputProject.map(i => parseInt(i.id))
+        AddUser.project_list = inputProject.map(i => parseInt(i.id))
         AddUser.officeMailId = AddUser?.officeMailId
         AddUser.empRole = AddUser?.role.id
         AddUser.supervisorId = AddUser?.reportingManager.id
