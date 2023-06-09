@@ -32,6 +32,7 @@ import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import Iconify from 'src/components/Iconify';
 import moment from 'moment';
+import { Icon } from '@iconify/react';
 import Autocomplete from '@mui/material/Autocomplete';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -43,7 +44,9 @@ export default function UserEditProfile({ updateSetUser }) {
   console.log(user, '<-----uyuyuuuhuhuuhu');
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
+   let [inputProject, setInputProject] = React.useState(user?.project_list)
   const [age, setAge] = React.useState('');
+  const [updatedProjectlist,setUpdatedProjectList]=React.useState(user?.project_list)
   const [ceoUser, setCeoUser] = useState([]);
   const [usersDataEdit, setUsersDataEdit] = useState('');
   const [rolesData, setRolesData] = useState([]);
@@ -52,9 +55,14 @@ export default function UserEditProfile({ updateSetUser }) {
   var roleID = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 
+console.log(updatedProjectlist,"updatedprojectssssssss")
 useEffect(()=>{
 console.log("mountubg")
 },[user])
+
+useEffect(()=>{
+  getProjectOfManager()
+},[])
   const [editData, setEditData] = useState({
     id: user.id,
     countryID: user.countryID,
@@ -87,6 +95,7 @@ console.log("mountubg")
   console.log(editData?.empRole, 'roleeeeeeeeeeeee');
   const handleClickOpen = () => {
     setOpen(true);
+    setUpdatedProjectList(user?.project_list)
     setScroll(scrollType);
   };
 
@@ -96,6 +105,7 @@ console.log("mountubg")
 
   useEffect(() => {
     //   editUser()
+    console.log("useeffect calling ")
     getRoles();
   }, []);
 
@@ -121,9 +131,10 @@ console.log("mountubg")
   };
 
   const getEmpId = async (value) => {
+    console.log(value,"rolidddddddddd")
     setEditData({ ...editData, role: value });
     let formData = new FormData();
-    formData.append('role_id', value);
+    formData.append('role_id', (value?.id)?value?.id:user?.role_id);
     formData.append('name', '');
 
     let res = await fetch('https://bdms.buzzwomen.org/appTest/getAllBuzzTeam.php', {
@@ -137,7 +148,7 @@ console.log("mountubg")
     console.log(temprepoManager, '<---------------temprepoManagertemprepoManager');
   };
   const getProjectOfManager = async (value) => {
-    setAddUser({ ...AddUser, reportingManager: value });
+    setEditData({ ...editData, reportingManager: value });
     let formData = new FormData();
     formData.append('manager_id', value.id);
     formData.append('first_name', '');
@@ -157,19 +168,21 @@ console.log("mountubg")
     axios(config)
       .then((response) => {
         console.log(response.data.list, 'project');
-        let temprepoManagerProject = response.data.list.map((repo) => {
-          return { label: repo?.projectName, id: repo.id };
-        });
-        setReportingManagerProject([
-          ...temprepoManagerProject,
-          // { id: '210', label: 'testme' }
-        ]);
+        let temprepoManagerProject = response.data.list.map(repo => { return { label: repo?.projectName, id: repo.id } })
+        setReportingManagerProject([...temprepoManagerProject,
+            // { id: '210', label: 'testme' }
+        ])
+        console.log(response.data.list, 'project')
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
+  let projectvariable = user?.project_list.map((e)=>e.project_id);
+let inputprojectvalues = inputProject.map((e)=>e.id)
+let overallprojects = [...projectvariable,...inputprojectvalues]
+  console.log(projectvariable,"projectslist")
+  console.log(overallprojects,"projectslist")
   const editUser = (async) => {
     var data = JSON.stringify({
       id: editData?.id,
@@ -193,7 +206,7 @@ console.log("mountubg")
       status: editData?.status,
       createdBy: editData?.createdBy,
       lastUpdatedBy: '',
-      project_list: editData?.project_list,
+      project_list: overallprojects,
       license_number: editData?.license_number,
       role_name: editData?.role_name,
       empRole: editData?.empRole == "Admin" ? 2 :
@@ -229,6 +242,22 @@ console.log("mountubg")
       });
     handleClose();
   };
+
+
+  const deleteProject = (id,index)=>{
+let updatedlist = updatedProjectlist.filter((e)=> e.id != id)
+console.log(updatedlist,"delete")
+setUpdatedProjectList([...updatedlist]);
+console.log(updatedProjectlist , "delete_id")
+  }
+
+     const changeProject = (value) => {
+        console.log(value)
+        // console.log(value, "changeProject")
+        // inputProject[inputProject.length - 1] = value.id
+        setInputProject([...value])
+        console.log(inputProject)
+    }
 
   console.log("edituserdaa" , editData)
   return (
@@ -320,13 +349,16 @@ console.log("mountubg")
                     variant="standard"
                     labelId="demo-simple-select-label"
                     id="role"
+                    defaultValue={editData?.empRole}
                     // defaultValue={AddUser.role}
                     label="Role"
+                    
                     onChange={(e) => {
-                      setEditData({ ...editData, empRole: e?.target?.value?.roleName });
+                      setEditData({ ...editData, empRole: e?.target?.value?.roleName }),getEmpId(e.target.value)
                     }}
-                    // onChange={(e) => { getEmpId(e.target.value) }}
-                    defaultValue={editData?.empRole}
+                    
+                    //  onChange={(e) => { getEmpId(e.target.value) }}
+                   
                   >
                     {rolesData.map((role) => {
                       return <MenuItem value={role ?? ''}>{role?.roleName}</MenuItem>;
@@ -483,6 +515,8 @@ console.log("mountubg")
 {["Driver"].includes(editData?.empRole) && <TextField fullWidth id="license_number" label="License Number" value={editData.license_number} onChange={(e) => { setAddUser({ ...editData, license_number: e.target.value }) }} variant="outlined" />
 }
                
+                
+                
                 {/* <Typography>Choose Projects </Typography>
                   <Select
                     color="common"
@@ -490,11 +524,12 @@ console.log("mountubg")
                     variant="standard"
                     onChange={(e) => setEditData({ ...editData, project_list: e?.target?.value })}
                     value={editData?.project_list}
-                  >
-                    {user?.project_list.map((itm) => {
-                      return <MenuItem value={itm?.id}>{itm?.projectName}</MenuItem>;
+                  > */}
+                    {inputProject.map((itm,index) => {
+                      return <Typography value={itm?.id}>{itm?.projectName} <Icon icon="ic:baseline-delete" color="darkorange"
+                       onClick={()=>{deleteProject(itm?.id,index)}} /></Typography>;
                     })}
-                  </Select> */}
+                  {/* </Select>  */}
                   
                  
                 </Stack>
