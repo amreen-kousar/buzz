@@ -478,7 +478,7 @@ const mainShowBussHandler = ()=>{
         TransitionComponent={Transition}
       >
         <form onSubmit={(e) => { e.preventDefault(); createProjectpublish() }}>
-          <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}>
+          <AppBar sx={{ position: 'fixed', bgcolor: '#ed6c02' }}>
             <Toolbar id="create-proj-toolbar">
              <IconButton id="start-icon-button" edge="start" color="inherit" onClick={()=>{setCreatePro(false)}}> <CloseIcon/></IconButton>
             
@@ -488,12 +488,13 @@ const mainShowBussHandler = ()=>{
               <IconButton id="material-symbol-save" edge="end"  autoFocus color="inherit" type="submit" sx={{right:40,float:'right',position:'absolute'}}>
                  <Iconify icon="material-symbols:save"/>
               </IconButton>
-               <Button id="publish" autoFocus color="inherit" sx={{float:'right'}} onClick={createProject2}>
+               <Button id="publish" autoFocus color="inherit" sx={{float:'right',color: "inherit" }} variant="h6" onClick={createProject2}>
                 publish
               </Button>
             </Toolbar>
           </AppBar>
-          <Grid>
+
+          <Grid sx={{marginTop:5}}>
             <CardContent>
             <Snackbar id="alert-message" open={warn} autoHideDuration={3000} onClose={() => { setWarn(false) }}>
                 <Alert onClose={() => { setWarn(false) }} severity="warning" sx={{ width: '100%' }}>
