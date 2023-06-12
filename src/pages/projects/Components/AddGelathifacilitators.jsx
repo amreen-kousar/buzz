@@ -106,7 +106,7 @@ function SimpleDialog(props) {
 
           
 
-<List sx={{ pt: 0 }}>
+      {(data?.total_count!=0)? <List sx={{ pt: 0 }}>
         {data?.list?.map((email) => (
 
           <ListItem disableGutters>
@@ -138,7 +138,7 @@ function SimpleDialog(props) {
             </ListItemButton>
           </ListItem>
         ))}
-            </List>
+            </List>:<List><ListItemText><h3 style={{textAlign:'center'}}>No Gelathi Facilitators</h3></ListItemText></List>}
         </Dialog>
     );
 }
