@@ -216,8 +216,8 @@ console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa",name)
 
       </Stack>
 
-
-      <List sx={{ pt: 0 }}>
+{console.log(data,"trainerdataaaaaaa")}
+      {(data?.total_count!=0)?<List sx={{ pt: 0 }}>
         {data?.list?.map((email,i) => (
 
           <ListItem disableGutters>
@@ -247,20 +247,7 @@ console.log(sendData,"dataaaaaaaaaaaaaaaaaaaa",name)
           </ListItem>
         ))}
 
-        {/* <ListItem disableGutters>
-          <ListItemButton
-            autoFocus
-            onClick={() => handleListItemClick('addAccount')}
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <AddIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Add account" />
-          </ListItemButton>
-        </ListItem> */}
-      </List>
+      </List>:<List><ListItemText><h3 style={{textAlign:'center'}}>No Trainers</h3></ListItemText></List>}
     </Dialog>
   );
 }
@@ -316,8 +303,10 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
     axios(config)
       .then(function (response) {
         setListData(response.data)
+        
         console.log(response.data, '<----------setListDatasetListData');
       })
+      
       .catch(function (error) {
         console.log(error);
       });
@@ -327,6 +316,7 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
     <div>
 
 
+      {/* {(listData?.total_count!=0)? */}
       <SimpleDialog
         sendData={sendData}
         data={listData}
@@ -336,6 +326,7 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
         open={isOpenFilter}
         onClose={handleClose}
       />
+      {/* :"No Trainers for selected OM"} */}
     </div>
   );
 }
