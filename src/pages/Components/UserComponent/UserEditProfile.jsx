@@ -51,18 +51,30 @@ export default function UserEditProfile({ updateSetUser }) {
   const [usersDataEdit, setUsersDataEdit] = useState('');
   const [rolesData, setRolesData] = useState([]);
   const [reportingManager, setReportingManager] = useState([]);
+
   const [reportingManagerProject, setReportingManagerProject] = useState([]);
   var roleID = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 
 console.log(updatedProjectlist,"updatedprojectssssssss")
+console.log(reportingManager,'reportingmanagers')
 useEffect(()=>{
 console.log("mountubg")
+let isApiSubscribed = true;
+if(isApiSubscribed)
+{}
+return () => {
+  // cancel the subscription
+  isApiSubscribed = false;
+};
 },[user])
 
 useEffect(()=>{
-  getProjectOfManager()
+  getEmpId()
+  console.log("empty useEffect called")
 },[])
+
+
   const [editData, setEditData] = useState({
     id: user.id,
     countryID: user.countryID,
@@ -108,6 +120,12 @@ useEffect(()=>{
     console.log("useeffect calling ")
     getRoles();
   }, []);
+  useEffect(() => {
+    //   editUser()
+    console.log("useeffect calling ")
+    getProjectOfManager()
+  }, []);
+
 
   const getRoles = () => {
     const data = JSON.stringify({});
@@ -140,20 +158,27 @@ useEffect(()=>{
     let res = await fetch('https://bdms.buzzwomen.org/appTest/getAllBuzzTeam.php', {
       body: formData,
       method: 'post',
-    }).then((res) => res.json());
+    }).then((res) => res.json()
+   
+    );
+ 
     let temprepoManager = res.list.map((repo) => {
       return { label: repo?.name, id: repo.id, role: repo.role };
     });
     setReportingManager([...temprepoManager]);
     console.log(temprepoManager, '<---------------temprepoManagertemprepoManager');
   };
+
+
   const getProjectOfManager = async (value) => {
-    setEditData({ ...editData, reportingManager: value });
-    let formData = new FormData();
-    formData.append('manager_id', value.id);
-    formData.append('first_name', '');
+    console.log(user,"userssssss")
+    setEditData({ ...editData, reportingManager: value?.id });
+    // let formData = new FormData();
+    // formData.append('manager_id', value.id);
+    // formData.append('first_name', '');
+    console.log(user?.supervisorId,)
     const data = JSON.stringify({
-      manager_id: value.id,
+      manager_id: (value)? value?.id : user?.supervisorId,
     });
 
     const config = {
@@ -164,7 +189,7 @@ useEffect(()=>{
       },
       data,
     };
-
+console.log(data,"payloaddata",user?.supervisorId)
     axios(config)
       .then((response) => {
         console.log(response.data.list, 'project');
