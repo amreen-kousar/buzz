@@ -38,15 +38,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function UserEditProfile({ updateSetUser }) {
+export default function UserEditProfile({ updateSetUser ,closeUserDrawer  ,profileData}) {
   let user = JSON.parse(localStorage?.getItem('people'));
 
-  console.log(user, '<-----uyuyuuuhuhuuhu');
+  console.log(user, '<-----uyuyuuuhuhuuhu',);
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
-   let [inputProject, setInputProject] = React.useState(user?.project_list)
+   var [inputProject, setInputProject] = React.useState([])
   const [age, setAge] = React.useState('');
-  const [updatedProjectlist,setUpdatedProjectList]=React.useState(user?.project_list)
+  var [showProjectListData, sethowProjectListData] = React.useState(profileData?.project_list)
+  var [updatedProjectlist,setUpdatedProjectList]=React.useState(user?.project_list)
   const [ceoUser, setCeoUser] = useState([]);
   const [usersDataEdit, setUsersDataEdit] = useState('');
   const [rolesData, setRolesData] = useState([]);
@@ -56,8 +57,8 @@ export default function UserEditProfile({ updateSetUser }) {
   var roleID = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 
-console.log(updatedProjectlist,"updatedprojectssssssss")
-console.log(reportingManager,'reportingmanagers')
+console.log(showProjectListData,"updatedprojectssssssss")
+console.log(profileData,'reportingmanagers')
 useEffect(()=>{
 console.log("mountubg")
 let isApiSubscribed = true;
@@ -98,7 +99,7 @@ useEffect(()=>{
     status: user.status,
     createdBy: user.createdBy,
     lastUpdatedBy: user.lastUpdatedBy,
-    project_list: user.project_list,
+    project_list: showProjectListData,
     license_number: user.license_number,
   });
   const handleChange = (event) => {
@@ -203,11 +204,7 @@ console.log(data,"payloaddata",user?.supervisorId)
         console.log(error);
       });
   };
-  let projectvariable = user?.project_list.map((e)=>e.project_id);
-let inputprojectvalues = inputProject.map((e)=>e.id)
-let overallprojects = [...projectvariable,...inputprojectvalues]
-  console.log(projectvariable,"projectslist")
-  console.log(overallprojects,"projectslist")
+
   const editUser = (async) => {
     var data = JSON.stringify({
       id: editData?.id,
@@ -260,6 +257,7 @@ let overallprojects = [...projectvariable,...inputprojectvalues]
         localStorage.setItem('people', data);
         setUsersDataEdit(response.data);
         updateSetUser();
+        closeUserDrawer()
         console.log(response.data, '<------------------setUsers');
       })
       .catch(function (error) {
@@ -271,9 +269,11 @@ let overallprojects = [...projectvariable,...inputprojectvalues]
 
   const deleteProject = (id,index)=>{
 let updatedlist = updatedProjectlist.filter((e)=> e.id != id)
-console.log(updatedlist,"delete")
-setUpdatedProjectList([...updatedProjectlist]);
-console.log(updatedProjectlist , "delete_id")
+
+// console.log(updatedlist,"delete")
+setUpdatedProjectList([...updatedlist]);
+sethowProjectListData([...updatedlist]);
+console.log(updatedProjectlist , "delete_id",showProjectListData)
   }
 
      const changeProject = (value) => {
@@ -283,6 +283,13 @@ console.log(updatedProjectlist , "delete_id")
         setInputProject([...value])
         console.log(inputProject)
     }
+
+    let projectvariable = updatedProjectlist.map((e)=>e.project_id);
+    let inputprojectvalues = inputProject.map((e)=>e.id)
+    let overallprojects = [...projectvariable,...inputprojectvalues]
+      console.log(projectvariable,"projectslist")
+      console.log(inputprojectvalues,"projectslist")
+      console.log(overallprojects,"projectslist")
 
   console.log("edituserdaa" , editData)
   return (
@@ -550,7 +557,7 @@ console.log(updatedProjectlist , "delete_id")
                     onChange={(e) => setEditData({ ...editData, project_list: e?.target?.value })}
                     value={editData?.project_list}
                   > */}
-                    {inputProject.map((itm,index) => {
+                    {showProjectListData?.map((itm,index) => {
                       return <Typography value={itm?.id}>{itm?.projectName} <Icon icon="ic:baseline-delete" color="darkorange"
                        onClick={()=>{deleteProject(itm?.id,index)}} /></Typography>;
                     })}

@@ -62,7 +62,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
 
   useEffect(() => {
     profile();
-  }, [isOpenFilter]);
+  }, [isOpenFilter,onCloseFilter]);
   const profile = (async) => {
     const userData = JSON.parse(localStorage?.getItem('people'))?.id;
     var data = JSON.stringify({
@@ -123,7 +123,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
 
   var roleid = JSON.parse(localStorage?.getItem('people'))?.role_id;
   var peopledetails =JSON.parse(localStorage?.getItem('people'))
-
+console.log(profileData ,"profileDataprofileData")
   return (
     <>
       {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -155,7 +155,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
 
         {userDetails && userDetails == 2 && (
           <Stack direction={'row'} justifyContent="flex-end">
-            <UserEditProfile updateSetUser={updateSetUser} />
+            <UserEditProfile updateSetUser={updateSetUser} profileData={profileData} closeUserDrawer={onCloseFilter}  />
             <Button onClick={()=>deleteprofile()}
               style={{ float: 'right' }}
               sx={{
@@ -380,9 +380,9 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
                     Projects
                   </Card>
                   <br />
-                  {peopledetails?.project_list ? (
+                  {profileData?.project_list ? (
                     <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                      {peopledetails?.project_list.map((project) => {
+                      {profileData?.project_list.map((project) => {
                         return (
                           <Typography variant="body1" gutterBottom>
                             {' '}
