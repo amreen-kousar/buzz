@@ -247,7 +247,7 @@ let overallprojects = [...projectvariable,...inputprojectvalues]
   const deleteProject = (id,index)=>{
 let updatedlist = updatedProjectlist.filter((e)=> e.id != id)
 console.log(updatedlist,"delete")
-setUpdatedProjectList([...updatedlist]);
+setUpdatedProjectList([...updatedProjectlist]);
 console.log(updatedProjectlist , "delete_id")
   }
 
