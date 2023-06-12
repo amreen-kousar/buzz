@@ -386,7 +386,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
                         return (
                           <Typography variant="body1" gutterBottom>
                             {' '}
-                            {project.projectName}
+                            {project?.projectName}
                           </Typography>
                         );
                       })}
