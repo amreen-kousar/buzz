@@ -108,10 +108,10 @@ const handleClose = ()=>{
         <div style={{marginTop:"20%" , marginLeft:"40%"}}>
   <CircularProgress />
   </div>
-:
+:  
         <div>
             {
-           todayPoa &&  todayPoa?.data.map((itm)=>{
+           todayPoa &&  todayPoa?.data?.map((itm)=>{
                 return (
                     <>
                     <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} onClick={() => {
