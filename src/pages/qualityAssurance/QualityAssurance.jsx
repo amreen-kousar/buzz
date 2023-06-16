@@ -115,17 +115,20 @@ const [errorMsg,setErrormsg]=useState('');
       .then((response) => { 
         setLoader(false)
 console.log(response.data,"________>responsedata")
-setSummaryData(response.data);
+
+setSummaryData(response?.data);
 
         console.log("responseofapi", response.data)
       })
       .catch((error) => {
-     ``
+    
         setErrormsg(error)
         console.log(error);
       });
   };
-console.log(summaryData?.data,"resposeapi")
+
+
+console.log(summaryData?.data?.GelathiProgram,"resposeapi")
 let formatdata = summaryData?.data
   console.log("🚀 ~ file: Gelathidashboard.js:105 ~ Gelathidashboard ~ formatdata:", formatdata)
   useEffect(() => {
@@ -173,11 +176,12 @@ let formatdata = summaryData?.data
   
   console.log(slected,"selectedvalueeeeeeeeee")
   return (
+    
     <>
       <Page title="Dashboard">
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Typography variant="h5" gutterBottom sx={{ ml: 4 }}>
-           Quality Assessment
+           Quality Assessment  
           </Typography>
           <Button
             style={{ float: 'right', color: '#ff7424' }}
@@ -207,14 +211,15 @@ let formatdata = summaryData?.data
 
           <Grid justifyContent="center" container spacing={3} marginTop={1}>
             <Grid onClick={handleClickOpen} item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title="Self Shakti Training Program" total={summaryData.SStraining} color="primary" />
+           
+              <AppWidgetSummary title="Self Shakti Training Program" total={summaryData?.data?.SStraining} color="primary" />
             </Grid>
 
             <Grid onClick={handleClickOpen} item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title="Gelathi Program" total={summaryData.GelathiProgram} color="secondary" />
+              <AppWidgetSummary title="Gelathi Program" total={summaryData?.data?.GelathiProgram} color="secondary" />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title="Self Shakti by Gelathi" total={summaryData.SSbyGelathi} color="gelathis" />
+              <AppWidgetSummary title="Self Shakti by Gelathi" total={summaryData?.data?.SSbyGelathi} color="gelathis" />
             </Grid>
           </Grid>
      
@@ -235,40 +240,9 @@ let formatdata = summaryData?.data
                   </Link>
 
                   </div>
-                  {/* <div style={{marginTop:"20px"}}> */}
-
-{/*                  
-                   <Link to="/dashboard/qualityAssessment/greenprogram" */}
-        {/* //    state={{ id: data1?.project_id }} */}
-             {/* style={styles.linkStyle}> */}
-                    {/* <Button variant="secondary"
-                     style={styles.buttonStyle}
-                    
-                    endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
-                    startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
-                    <span style={{ width: "200px" }}>Green Program</span>
-                  </Button> */}
-                  {/* </Link> */}
-                  {/* </div> */}
-                  {/* <div style={{marginTop:"20px"}}>
-
-                  */}
-                  {/* <Link to="/dashboard/qualityAssessment/selfsakthibygelathi"
-        //    state={{ id: data1?.project_id }}
-            style={styles.linkStyle}> */}
-                    {/* <Button variant="secondary"
-                     onClick={()=>{
-                      alert("Work is in Progress")
-                     }}
-                     style={styles.buttonStyle}
-                    endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
-                    startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
-                    <span style={{ width: "200px" }}> Self Shakti by Gelathi</span>
-                  </Button> */}
-                  {/* </Link> */}
-                  {/* </div> */}
+              
           </div>
-      
+          {console.log(summaryData?.SSbyGelathi , " insidereturn")}
          
         </Container>
       </Page>
