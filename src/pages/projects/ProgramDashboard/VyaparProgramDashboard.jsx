@@ -731,7 +731,7 @@ const VyaparProgramDashboard = () => {
 <>
 <CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Funders List : 
+              Project List : 
             </Typography>
           
             <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
