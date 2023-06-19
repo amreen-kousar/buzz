@@ -119,7 +119,7 @@ export default function Day1SelfShakti({ isOpenDay1, onOpenDay1, onCloseDay1, cl
                            <Card>
                                <CardContent>
                                    <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
-                                       Project working:
+                                       Project :
                                      &nbsp;{batch?.data?.projectName}
                                        {console.log(batch?.data?.projectName,'<--------njknnjnjn')}
                                    </Typography>

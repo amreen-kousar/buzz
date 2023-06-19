@@ -201,7 +201,7 @@ useEffect(()=>{
        
               <div  style={{marginTop:"50px"}}>
             {
-           todayPoa &&  todayPoa?.map((itm)=>{
+           todayPoa &&  todayPoa?.data?.map((itm)=>{
                 return (
                     <>
                     <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} onClick={() => {
@@ -213,15 +213,19 @@ useEffect(()=>{
                                                 </br>
                                                 <Typography style={{fontSize:"0.7rem"}} > <b>{itm?.program_assessment == 1? 
                                                 <>
-                                                Trainer : {itm?.name_of_the_trainer_being_evaluated } 
+                                                Trainer : {itm?.name_of_the_trainer_being_evaluated } <br/>
+                                                Program Name: Self Shakti Training Program
                                                 </> :
                                                 itm?.program_assessment == 2? 
+                                                
                                                 <>
-                                                Gelathi Facilitator : {itm?.name_of_the_gf}
+                                                Gelathi Facilitator : {itm?.name_of_the_gf}<br/>
+                                                Program Name: Gelathi Program
                                                 </>
-                                                : itm?.program_assessment == 2? 
+                                                : itm?.program_assessment == 3? 
                                                 <>
-                                                   Gelathi : {itm?.name_of_the_gelathi_being_evaluated}
+                                                   Gelathi : {itm?.name_of_the_gelathi_being_evaluated}<br/>
+                                                   Program Name: Self Shakti by Gelathi
                                                 </>
                                               : null
                                               }</b></Typography>

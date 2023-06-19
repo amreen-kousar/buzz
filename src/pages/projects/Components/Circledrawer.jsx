@@ -459,7 +459,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     var data = JSON.stringify({
        project_id: data1?.project_id,
       user_id: userid,
-      circle_id: clcikData?.circleDI,
+      circle_id: head=="CM"?   clcikData?.id : clcikData?.circleDI,
       locationId:data1?.location_id,
        tb_name: clcikData?.name,
       tb_id: 0,
@@ -502,6 +502,8 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
       : state?.head == '_VPM5'
       ? '21'
       : head == "CM" ? "1": null ,
+
+    //  ( head== "CM") ? 
       // plan_date: moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
       // gf_session_name: clcikData?.name,
 

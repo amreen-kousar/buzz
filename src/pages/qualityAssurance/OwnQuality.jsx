@@ -124,15 +124,18 @@ const handleClose = ()=>{
                                                 </br>
                                                 <Typography style={{fontSize:"0.7rem"}} > <b>{itm?.program_assessment == 1? 
                                                 <>
-                                                Trainer Evaluated: {itm?.name_of_the_trainer_being_evaluated } 
+                                                Trainer Evaluated: {itm?.name_of_the_trainer_being_evaluated } <br/>
+                                                Program Name: Self Shakti Training Program
                                                 </> :
                                                 itm?.program_assessment == 2? 
                                                 <>
-                                                Gelathi Facilitator Evaluated: {itm?.name_of_the_gf}
+                                                Gelathi Facilitator Evaluated: {itm?.name_of_the_gf}<br/>
+                                                Program Name: Gelathi Program
                                                 </>
-                                                : itm?.program_assessment == 2? 
+                                                : itm?.program_assessment == 3? 
                                                 <>
-                                                   Gelathi Evaluated: {itm?.name_of_the_gelathi_being_evaluated}
+                                                   Gelathi Evaluated: {itm?.name_of_the_gelathi_being_evaluated}<br/>
+                                                   Program Name: Self Shakti by Gelathi
                                                 </>
                                               : null
                                               }</b></Typography>

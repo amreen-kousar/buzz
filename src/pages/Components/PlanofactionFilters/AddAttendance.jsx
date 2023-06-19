@@ -191,7 +191,15 @@ export default function AddAttendance({ shown, setShown, batch }) {
 
         {batch?.check_in != 0 ? (
           <>
-            {batch?.all_participants?.map((itm) => {
+            {
+            batch?.all_participants?.length <= 0 ?
+<Typography sx={{ ml: 2, flex: 1, color: 'black' }} variant="h4" component="div">
+            No Participants Found
+            </Typography>
+
+            :
+            
+            batch?.all_participants?.map((itm) => {
               return (
                 <Stack style={{ top: 100 }}>
                   <Card
@@ -331,7 +339,11 @@ export default function AddAttendance({ shown, setShown, batch }) {
                                 alert(' Attendance  Is Already Marked.  ');
                               }}
                             />
-                          ) : (
+                          ) :
+                          batch?.type ==  1 ? (
+                            null
+                          ):
+                          (
                             <Checkbox
                               onClick={() => {
                                 choseAddAttendanceApi(itm);
@@ -351,10 +363,11 @@ export default function AddAttendance({ shown, setShown, batch }) {
         ) : (
           <>
             <Typography sx={{ ml: 2, flex: 1, color: 'black' }} variant="h4" component="div">
-              PLease Do Check IN First
+              Please Do Check IN First
             </Typography>
           </>
         )}
+        {}
       </Dialog>
     </div>
   );
