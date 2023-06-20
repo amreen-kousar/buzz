@@ -15,7 +15,7 @@ import {
     Card,
     Box,
     FormControl,
-    CardContent,Icon,RadioGroup, FormHelperText
+    CardContent,Icon,RadioGroup, FormHelperText, Autocomplete, Popper
   } from '@mui/material';
   import Swal from 'sweetalert2'
 
@@ -612,7 +612,7 @@ console.log(programAssessment,"program assesment")
 const [apiData, setApiData] = useState({})
   var [sendForm, setSendForm]  = useState ({...formData})
   var [checked, setChecked]  = useState ({...checkData})
-  console.log("🚀 ~ file: DialogForm.jsx:344 ~ DialogForm ~ sendForm:", sendForm.deadline_to_collect_the_stories)
+  console.log("🚀 ~ file: DialogForm.jsx:344 ~ DialogForm ~ sendForm:", sendForm.name_of_the_trainer_being_evaluated)
 
   const setFormDistrictName = (value)=>{
     let {id,name}=value
@@ -1902,11 +1902,11 @@ id="date-time-picker"
         <br/>
         
          {/* 2 */}
-      {( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"}>
+      {( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"} >
           
         <CardContent>
           <Card>
-          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+          <Card sx = {{backgroundColor:'#ff7424', }} mt={2}>
           <CardContent>
           <Typography variant = 'h5'>Gelathi Program
           {name_of_the_gfError ? (
@@ -1917,8 +1917,8 @@ id="date-time-picker"
         </Card>
         <CardContent>
          
-          <Box sx={{ minWidth: 120 }}>
-      <FormControl style={{marginTop:"5px"}} fullWidth>
+          <Box sx={{ minWidth: 120, }}>
+      {/* <FormControl style={{marginTop:"5px"}} fullWidth>
         <InputLabel id="Name of the Gelathi Facilitator">Name of the Gelathi Facilitator</InputLabel>
         <Select
           labelId="Name of the Gelathi Facilitator"
@@ -1937,7 +1937,47 @@ id="date-time-picker"
           })}
 
         </Select>
-      </FormControl>
+      </FormControl> */}
+      <Autocomplete
+      disablePortal
+      
+      id="combo-box-demo"
+      options={gfName}
+      getOptionLabel={(option) => option.first_name}
+      sx={{ width: '100%'}}
+      
+      PopperComponent={(props) => <Popper {...props} sx={{
+         position: "absolute",
+      // top: 'auto',
+      // left: 'auto',
+      width: '100%',
+      zIndex: 1,
+      // height: 200
+     }}
+       placement='top-start' 
+       />}
+
+      componentsProps={{
+        paper: {
+          sx: {
+            height: 100,
+            position: 'relative',
+            zIndex: 9999,
+            
+          }
+        }
+      }}
+      // onChange={(e =>{
+      //   setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated:e?.target?.value})
+      // })}
+     onChange={(event, value) => {
+  setSendForm({ ...sendForm, name_of_the_gf: value.first_name });
+}}
+      renderInput={(params) => <TextField  fullWidth {...params} label="Name of the Gelathi Facilitator"       
+    
+      
+       />}
+    />
     </Box>
         </CardContent>
           </Card>
@@ -3278,26 +3318,24 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
        <Grid  backgroundColor={"#FFD580"}>
           {/* page-13 */}
         <CardContent>
-          <Card>
-          <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
+          <Card zindex={1}>
+          <Card sx = {{backgroundColor:'#ff7424'}}  mt={2}>
           <CardContent>
           <Typography variant = 'h5'>Day-1</Typography>
           </CardContent>
         </Card>
         <CardContent>
-        <Stack mt={2}>
+        <Stack mt={2}  >
                 <Typography>
                 Name of the trainer being evaluated
                 {name_of_the_trainer_being_evaluatedError ? (
-                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                          <FormHelperText style={{ color: 'red' }} >{helperText}</FormHelperText>
                         ) : null}{' '}
                 </Typography>
-                <Box sx={{ minWidth: 120 }}>
+                {/* <Box sx={{ minWidth: 120 }}>
       <FormControl style={{marginTop:"5px"}} fullWidth>
         <InputLabel id="Name of the trainer">Trainer
-        {name_of_the_trainer_being_evaluatedError ? (
-                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-                        ) : null}{' '}
+      
         </InputLabel>
         <Select
           labelId="Name of the trainer"
@@ -3316,6 +3354,44 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
         </Select>
       </FormControl>
+    </Box> */}
+<Box>
+<Autocomplete
+      disablePortal
+      
+      id="combo-box-demo"
+      options={trainers}
+      getOptionLabel={(option) => option.first_name}
+      sx={{ width: '100%'}}
+      
+      PopperComponent={(props) => <Popper {...props} sx={{
+      //    position: "fixed",
+      // top: 'auto',
+      // left: 'auto',
+      width: '100%'
+     }}
+       placement='top-start' 
+       />}
+
+      componentsProps={{
+        paper: {
+          sx: {
+            height: 130
+          }
+        }
+      }}
+      // onChange={(e =>{
+      //   setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated:e?.target?.value})
+      // })}
+     onChange={(event, value) => {
+  setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated: value.first_name });
+}}
+      renderInput={(params) => <TextField  fullWidth {...params} label="Trainer"       
+    
+      
+       />}
+    />
+
     </Box>
 
 
@@ -3330,7 +3406,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
      </div>
      :null }
         
-
+      
           {/* 14 */}
       {( day1Day2=='Day 1')? 
         <div>
