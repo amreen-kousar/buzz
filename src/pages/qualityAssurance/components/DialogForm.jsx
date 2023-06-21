@@ -100,6 +100,19 @@ export default function DialogForm({ shown, setShown, batch,reloadfunction }) {
     tempData[label] = updatedList;
     setChecked(tempData);
   };
+////////////
+  const filterOptions = (options, { inputValue }) => {
+    // Implement your custom filtering logic here
+    const values = options.filter(option =>
+      {
+        console.log("hi")
+        return option.first_name.toLowerCase().includes(inputValue.toLowerCase());
+        
+    }
+    );
+    return values;
+  };
+
 
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
@@ -189,6 +202,7 @@ reloadfunction()
   const [taluk, setTaluk] = useState([])
   // console.log("🚀 ~ file: DialogForm.jsx:103 ~ DialogForm ~ taluk:", taluk)
   const [gfName,setGFName]=useState([])
+  console.log("🚀 ~ file: DialogForm.jsx:192 ~ DialogForm ~ gfName:", gfName)
   const today = dayjs();
   console.log("🚀 ~ file: DialogForm.jsx:76 ~ DialogForm ~ gfName:", gfName)
   const [data, setData] = useState({
@@ -418,7 +432,13 @@ console.log(programAssessment,"program assesment")
 
     axios(config)
       .then(function (response) {
-        setGFName(response.data.list)
+        setGFName(response.data.list
+        //   .sort((x,y)=>{
+        //   if (x.first_name > y.first_name ) return 1
+        //   if (y.first_name > x.first_name)  return -1
+        //   return 0
+        // })
+        )
         // console.log(response.data,"<------------------setTaluksetTaluk");
       })
       .catch(function (error) {
@@ -1943,26 +1963,32 @@ id="date-time-picker"
       
       id="combo-box-demo"
       options={gfName}
-      getOptionLabel={(option) => option.first_name}
+      filterOptions={filterOptions}
+      getOptionLabel={(option) => ( option.first_name  ) }
       sx={{ width: '100%'}}
       
-      PopperComponent={(props) => <Popper {...props} sx={{
-         position: "absolute",
-      // top: 'auto',
-      // left: 'auto',
-      width: '100%',
-      zIndex: 1,
-      // height: 200
-     }}
-       placement='top-start' 
-       />}
-
+//       PopperComponent={(props) => <Popper {...props} sx={{
+//          position: "absolute",
+//       // top: 'auto',
+//       // left: 'auto',
+//       width: '100%',
+//       zIndex: 1,
+//       // height: 200
+//      }}
+//        placement='top-start' 
+//        />}
+//  PaperProps={{
+//     style: {
+//       zIndex: 9999,
+//       position: 'relative',
+//     },
+//   }}
       componentsProps={{
         paper: {
           sx: {
             height: 100,
-            position: 'relative',
             zIndex: 9999,
+            position: 'relative',
             
           }
         }
@@ -1973,10 +1999,15 @@ id="date-time-picker"
      onChange={(event, value) => {
   setSendForm({ ...sendForm, name_of_the_gf: value.first_name });
 }}
+
+renderOption={(props, option) => (
+  <Box  component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props} key={option.id}>
+
+    {option.first_name}
+  </Box>
+)}
       renderInput={(params) => <TextField  fullWidth {...params} label="Name of the Gelathi Facilitator"       
-    
-      
-       />}
+       />}     
     />
     </Box>
         </CardContent>
@@ -3355,8 +3386,8 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </Select>
       </FormControl>
     </Box> */}
-<Box>
-<Autocomplete
+
+{/* <Autocomplete
       disablePortal
       
       id="combo-box-demo"
@@ -3390,8 +3421,59 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
     
       
        />}
-    />
+    /> */}
+    <Box>
+      <Autocomplete
+      disablePortal
+      
+      id="combo-box-demo"
+      options={trainers}
+      filterOptions={filterOptions}
+      getOptionLabel={(option) =>  option.first_name }
+      sx={{ width: '100%'}}
+      
+//       PopperComponent={(props) => <Popper {...props} sx={{
+//          position: "absolute",
+//       // top: 'auto',
+//       // left: 'auto',
+//       width: '100%',
+//       zIndex: 1,
+//       // height: 200
+//      }}
+//        placement='top-start' 
+//        />}
+//  PaperProps={{
+//     style: {
+//       zIndex: 9999,
+//       position: 'relative',
+//     },
+//   }}
+      componentsProps={{
+        paper: {
+          sx: {
+            height: 100,
+            zIndex: 9999,
+            position: 'relative',
+            
+          }
+        }
+      }}
+      // onChange={(e =>{
+      //   setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated:e?.target?.value})
+      // })}
+     onChange={(event, value) => {
+  setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated: value.first_name });
+}}
 
+renderOption={(props, option) => (
+  <Box  component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props} key={option.id}>
+
+    {option.first_name}
+  </Box>
+)}
+      renderInput={(params) => <TextField  fullWidth {...params} label="Trainer"       
+       />}     
+    />
     </Box>
 
 
@@ -4393,7 +4475,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
                 </Typography>
-                <Box sx={{ minWidth: 120 }}>
+                {/* <Box sx={{ minWidth: 120 }}>
       <FormControl style={{marginTop:"5px"}} fullWidth>
         <InputLabel id="Name of the trainer">Trainer</InputLabel>
         <Select
@@ -4413,6 +4495,59 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
 
         </Select>
       </FormControl>
+    </Box> */}
+      <Box>
+      <Autocomplete
+      disablePortal
+      
+      id="combo-box-demo"
+      options={trainers}
+      filterOptions={filterOptions}
+      getOptionLabel={(option) => option.first_name }
+      sx={{ width: '100%'}}
+      
+//       PopperComponent={(props) => <Popper {...props} sx={{
+//          position: "absolute",
+//       // top: 'auto',
+//       // left: 'auto',
+//       width: '100%',
+//       zIndex: 1,
+//       // height: 200
+//      }}
+//        placement='top-start' 
+//        />}
+//  PaperProps={{
+//     style: {
+//       zIndex: 9999,
+//       position: 'relative',
+//     },
+//   }}
+      componentsProps={{
+        paper: {
+          sx: {
+            height: 100,
+            zIndex: 9999,
+            position: 'relative',
+            
+          }
+        }
+      }}
+      // onChange={(e =>{
+      //   setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated:e?.target?.value})
+      // })}
+     onChange={(event, value) => {
+  setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated: value.first_name });
+}}
+
+renderOption={(props, option) => (
+  <Box  component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props} key={option.id}>
+
+    {option.first_name}
+  </Box>
+)}
+      renderInput={(params) => <TextField  fullWidth {...params} label="Trainer"       
+       />}     
+    />
     </Box>
 
 

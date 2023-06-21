@@ -78,6 +78,7 @@ export default function selfShaktiProj() {
             "trainer_id":id?.emp_id,
             "emp_id": idvalue
           });
+          console.log("🚀 ~ file: selfShaktiProj.jsx:81 ~ shakti ~ data:", data)
           
           var config = {
             method: 'post',

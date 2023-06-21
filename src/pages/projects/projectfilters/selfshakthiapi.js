@@ -18,6 +18,7 @@ export default async function shakthiapirequest(props) {
         "trainer_id":"", 
         "start_date":"", 
     });
+    console.log("🚀 ~ file: selfshakthiapi.js:21 ~ shakthiapirequest ~ data:", data)
     const config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatch.php',
