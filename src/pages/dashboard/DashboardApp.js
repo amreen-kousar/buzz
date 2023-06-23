@@ -433,44 +433,6 @@ const [errorMsg,setErrormsg]=useState(false)
   const [graphData, setGraphData] = useState(null);
   const itemStyles = [{ itemXs: 4, itemSm: 8, itemMd: 4 }, { itemXs: 6, itemSm: 8, itemMd: 6 }]
 
-  // const GathathiGraphDataFormating=(formatdata) => {
-  //   console.log("🚀 ~ file: Gelathidashboard.js:171 ~ GathathiGraphDataFormatibg ~ data:",formatdata.data)
-  //   let data = formatdata.data 
-   
-  //   console.log("🚀 ~ file: Gelathidashboard.js:47 ~ GathathiGraphDataFormating ~ data:", data)
-    
-  //   const filteredArr = data.map(({villagevisit, circle_meet, circles,beehive,enroll}) => ({Villagevisit:villagevisit, Circlemeetings:circle_meet, TotalCircles:circles,BeehiveVisits:beehive,EnrolledGelathis:enroll}));
-  //   console.log("🚀 ~ file: Gelathidashboard.js:52 ~ GathathiGraphDataFormating ~ filteredArr:", filteredArr)
-  //   let dataKeys = Object.keys(filteredArr[0]);
-  //   let tempData=[]
-  //   for(let i=0;i<dataKeys.length;i++){
-  //     let data = dataKeys[i]
-  //     // for(let i=0; i<fil)
-  //     tempData.push({
-  //       name:data,
-  //       value:parseInt(filteredArr[0][data])
-  //     })
-  //   }
-    
-  //   console.log("🚀 ~ file: Gelathidashboard.js:55 ~ GathathiGraphDataFormating ~ tempData:", tempData)
-  //   setGraphData(tempData)
-  //   console.log("🚀 ~ file: Gelathidashboard.js:50 ~ GathathiGraphDataFormating ~ keys:", name,value)
-    
-   
-  // //   console.log("🚀 ~ file: Gelathidashboard.js:47 ~ GathathiGraphDataFormating ~ data:", data)
-  // //   let tempData =[]
-    
-  // //  let testData= Object.values(data)
-  // //  let a={}
-  // //   console.log("🚀 ~ file: Gelathidashboard.js:51 ~ GathathiGraphDataFormating ~ testData:", testData)
-  // //   for(let i=0;i<testData.length;i++){
-  // //     tempData.push({
-  // //       x:testData[i]
-  // //     })
-  // //     console.log("🚀 ~ file: Gelathidashboard.js:57 ~ GathathiGraphDataFormating ~ tempData:", tempData)
-     
-  // //   }
-  // }
 
   var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
   var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
@@ -481,39 +443,6 @@ const [errorMsg,setErrormsg]=useState(false)
     setLoader(true)
     var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-
-    
-    // const data = {
-    //   end_date: g === "date" ? i : '',
-    //   role_id:role ,
-    //   taluk_id: g === "country" ? i : "",
-    //   district_id: g === "country" ? id : "",
-    //   trainerId: g ? "" : i === 5 ? id?.id : '',
-    //   emp_id: userid,
-    //   start_date: g === "date" ? id : '',
-    //   somId: g ? "" : i === 12 ? id?.id : '',
-    //   gflId: g ? "" : i === 13 ? id?.id : '',
-    //   funder_id: g ? "" : i === 2 ? id?.id : '',
-    //   partner_id: g ? "" : i === 1 ? id?.id : '',
-    //   project_id: g ? "" : i === 3 ? id?.id : '',
-    //   opsManager: g ? "" : i === 4 ? id?.id : '',
-    // };
-    // const datas = {
-    //   end_date: i,
-    //   role_id: role,
-    //   taluk_id: "",
-    //   district_id: "",
-    //   trainerId: '',
-    //   emp_id: userid,
-    //   start_date: id,
-    //   somId: '',
-    //   gflId: '',
-    //   funder_id: "",
-    //   partner_id: "",
-    //   project_id: '',
-    //   opsManager: '',
-    // };
-
     const data  ={
       "partner_id": i === 1 ? id?.id : '',
     "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
@@ -529,14 +458,9 @@ const [errorMsg,setErrormsg]=useState(false)
     "roleid":roleid,
     "emp_id":userid
   }
-  
-    console.log(data, '<------bbbbbbb');
     const config = {
       method: 'post',
-      // url: "https://cors-anywhere.herokuapp.com/{http://3.7.7.138/appTest/Scripts/getDashboardData.php}",
-      // url: 'https://bdms.buzzwomen.org/appTest/Scripts/getDashboardData.php',
-
-      url :baseURL +"selfSakthiDashboard",
+      url :baseURL +"ssDashboard",
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -547,10 +471,7 @@ const [errorMsg,setErrormsg]=useState(false)
     axios(config)
       .then((response) => { 
         setLoader(false)
-console.log(response.data,"________>responsedata")
-setSummaryData(response.data);
-// GathathiGraphDataFormating(response.data);
-        console.log("<------------setSummaryDatasetSummaryData", response.data)
+        setSummaryData(response.data);
       })
       .catch((error) => {
        
@@ -558,9 +479,39 @@ setSummaryData(response.data);
         setErrormsg(error);
       });
   };
-console.log(summaryData?.data,"resposeapi")
-let formatdata = summaryData?.data
-  console.log("🚀 ~ file: Gelathidashboard.js:105 ~ Gelathidashboard ~ formatdata:", formatdata)
+  
+  const filterApi = async(id,i,g,date1,date2)=>{
+    var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var data = JSON.stringify({
+      "end_date":(g === "date")?i:(g=== "countryCalendar" || g==="Calendar")?moment(date2?.$d)?.format('YYYY-MM-DD'): '',
+      "role_id": parseInt(roleid),
+      "taluk_id":(g === "country" || g==="countryCalendar") ? i : "",
+      "trainerId": (i==5)?id?.id:'',
+      "emp_id": parseInt(userid),
+      "start_date":(g === "date")?id:(g=== "countryCalendar" || g==="Calendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
+    });
+    
+    var config = {
+      method: 'post',
+      url: baseURL + 'ssfilter',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+  
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setSummaryData(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
+
   useEffect(() => {
     apiHit();
   }, []);
@@ -588,13 +539,13 @@ let formatdata = summaryData?.data
   const onDateSubmit = (e) => {
     setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` })
 
-    apiHit(e?.startDate, e?.endDate, "date")
+    filterApi(e?.startDate, e?.endDate, "date")
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
     handleCloseFilter()
-    console.log(e, "<----scasds")
+   
   }
 
-  console.log(slected,"dateeeeeeeeeeeee")
+
 
   const handleDelete = () => {
  
@@ -612,76 +563,48 @@ let formatdata = summaryData?.data
     )
   }
 
-  // if(errorMsg!=''){
-  //   return(
-  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}}>
-  //       {errorMsg?.message}
-  //     </Box>
-  //   )
-  // }
-
-
   const getData = (itm, i,date1,date2,dateValue,endDateValue,g) => {
-    console.log("🚀 ~ file: DashboardApp.js:162 ~ getData ~ itm, i, g, date1,date2,dateValue,endDateValue:", itm, i, g, date1,date2,dateValue,endDateValue)
     setSelected(itm)
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
     i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
-    // apiHit(itm, i)
-    console.log(data, i, itm, "<----sdfssreerfer")
-    if(dateValue || endDateValue)
+   
+    if(i==5 )
+    {
+      
+      if( (dateValue || endDateValue))
+      {
+        filterApi(itm,i,"Calendar",date1,date2)
+      }
+      else{
+        filterApi(itm,i)
+      }
+
+    }
+
+    if( (dateValue || endDateValue))
         {
-          console.log(i,"dateapihitttttt",date1.$d||date2.$d)
           apiHit(itm, i,"Calendar",date1,date2)
           
         }
-        else{
-          console.log("apihit")
+      else if(i!=5){
           apiHit(itm,i)
         }
     setFilterData(data)
     handleCloseFilter()
-    console.log("sdfgsdfdfssd", itm, i)
   }
 
-  // const getData = (itm, i, date1,date2,dateValue,endDateValue,g) => {
-    //     console.log("🚀 ~ file: DashboardApp.js:162 ~ getData ~ itm, i, g, date1,date2,dateValue,endDateValue:", itm, i, g, date1,date2,dateValue,endDateValue)
-    //     console.log(date1?.$d,"datevaluinfunder",date2?.$d,itm)
-    //     console.log(i,"ivalueeeeeeeeeee",g)
-    //     {console.log('startingvalues',dateValue,"endingvalues",endDateValue)}
-    //     setSelected(itm)
-    //     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
-    //     i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
-    //     if(dateValue || endDateValue)
-    //     {
-    //       console.log("dateapihitttttt",date1.$d||date2.$d)
-    //       Dateapihit(itm, i,g,date1,date2)
-          
-    //     }
-    //     else{
-    //       console.log("apihit")
-    //       apiHit(itm,i)
-    //     }
-    //     setFilterData(data)
-    //     console.log(filterData,"hyyyyyyyyyyy")
-    //     handleCloseFilter()
-    //   }
-    
-
-
-
-
+ 
 
   const onSumbit = (e, i) => {
     handleCloseFilter()
     setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
 
-    if(e?.dateValue || e?.endDateValue)
+    if(e?.dateValue && e?.endDateValue)
     {
-      apiHit(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
-      console.log(e, i, "<----datssdasdsa")
+      filterApi(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
     }
     else{
-      apiHit(e?.district_id,e?.talaq_id,"country")
+      filterApi(e?.district_id,e?.talaq_id,"country")
     }
   }
 
@@ -747,7 +670,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Target"
-                total={summaryData?.summary_target}
+                total={(summaryData?.summary_target>=0)?summaryData?.summary_target:null}
                 color="motivator"
 
               />
@@ -756,7 +679,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Actual"
-                total={summaryData?.summary_actual}
+                total={(summaryData?.summary_actual>=0)?summaryData?.summary_actual:null}
                 color="motivator"
 
               />
@@ -765,7 +688,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number  of Villages"
-                total={summaryData?.summary_villages}
+                total={(summaryData?.summary_villages>=0)?summaryData?.summary_villages:null}
                 color="motivator"
 
               />
@@ -774,7 +697,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Batches"
-                total={summaryData?.summary_NoofBatches}
+                total={(summaryData?.summary_NoofBatches>=0)?summaryData?.summary_NoofBatches:summaryData?.summary_nobatches}
                 color="motivator"
 
               />
@@ -782,9 +705,13 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
             <Grid item xs={4} sm={8} md={4}>
 
               <AppWidgetSummary
-                title="Number of Self Sakthi Survey"
-                total={summaryData?.summary_Noofselfshakthisurvey}
-                color="motivator"
+                title="Number of Self Shakthi Survey"
+                total={(summaryData?.summary_Noofselfshakthisurvey>=0)?summaryData?.summary_Noofselfshakthisurvey:summaryData?.summary_nosurvey}
+                color="motivator"ata
+
+
+//summary_Noofselfshakthisurvey
+
 
               />
             </Grid>
@@ -792,7 +719,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="2nd Day Turnout  %"
-                total={summaryData?.summary_day2}
+                total={(summaryData?.summary_day2>=0)?summaryData?.summary_day2:null}
                 color="motivator"
 
               />
@@ -806,7 +733,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Beehive"
-                total={summaryData?.summary_beehive}
+                total={(summaryData?.summary_beehive>=0)?summaryData?.summary_beehive:null}
                 color="motivator"
 
               />
@@ -815,7 +742,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Circle Meet"
-                total={summaryData?.summary_circle_meet}
+                total={(summaryData?.summary_circle_meet>=0)?summaryData?.summary_circle_meet:null}
                 color="motivator"
 
               />
@@ -824,7 +751,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number  of Circles"
-                total={summaryData?.summary_circles}
+                total={(summaryData?.summary_circles>=0)?summaryData?.summary_circles:null}
                 color="motivator"
 
               />
@@ -833,7 +760,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Enroll"
-                total={summaryData?.summary_enroll}
+                total={(summaryData?.summary_enroll>=0)?summaryData?.summary_enroll:null}
                 color="motivator"
 
               />
@@ -842,7 +769,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Green"
-                total={summaryData?.summary_green}
+                total={(summaryData?.summary_green>=0)?summaryData?.summary_green:null}
                 color="motivator"
 
               />
@@ -851,7 +778,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Vyapar"
-                total={summaryData?.summary_vyapar}
+                total={(summaryData?.summary_vyapar>=0)?summaryData?.summary_vyapar:null}
                 color="motivator"
 
               />
@@ -860,7 +787,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of VIllage Visits"
-                total={summaryData?.summary_villagevisit}
+                total={(summaryData?.summary_villagevisit>=0)?summaryData?.summary_villagevisit:null}
                 color="motivator"
 
               />
@@ -877,7 +804,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Target"
-                total={summaryData?.summary_Target}
+                total={(summaryData?.summary_Target>=0)?summaryData?.summary_Target:null}
                 color="motivator"
 
               />
@@ -886,7 +813,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Actual"
-                total={summaryData?.summary_actual}
+                total={(summaryData?.summary_actual>=0)?summaryData?.summary_actual:null}
                 color="motivator"
 
               />
@@ -895,7 +822,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number  of Villages"
-                total={summaryData?.summary_villages}
+                total={(summaryData?.summary_villages>=0)?summaryData?.summary_villages:null}
                 color="motivator"
 
               />
@@ -904,7 +831,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Batches"
-                total={summaryData?.summary_batches}
+                total={(summaryData?.summary_NoofBatches>=0)?summaryData?.summary_NoofBatches:summaryData?.summary_nobatches}
                 color="motivator"
 
               />
@@ -913,7 +840,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Self Sakthi Survey"
-                total={summaryData?.summay_selfShakthiSurvey}
+                total={(summaryData?.summary_Noofselfshakthisurvey>=0)?summaryData?.summary_Noofselfshakthisurvey:summaryData?.summary_nosurvey}
                 color="motivator"
 
               />
@@ -922,7 +849,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="2nd Day Turnout  %"
-                total={summaryData?.summary_day2}
+                total={(summaryData?.summary_day2>=0)?summaryData?.summary_day2:null}
                 color="motivator"
 
               />
@@ -938,7 +865,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Beehive"
-                total={summaryData?.summary_beehive}
+                total={(summaryData?.summary_beehive>=0)?summaryData?.summary_beehive:null}
                 color="motivator"
 
               />
@@ -947,7 +874,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Circle Meet"
-                total={summaryData?.summary_circle_meet}
+                total={(summaryData?.summary_circle_meet>=0)?summaryData?.summary_circle_meet:null}
                 color="motivator"
 
               />
@@ -956,7 +883,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number  of Circles"
-                total={summaryData?.summary_circles}
+                total={(summaryData?.summary_circles>=0)?summaryData?.summary_circles:null}
                 color="motivator"
 
               />
@@ -965,7 +892,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Enroll"
-                total={summaryData?.summary_enroll}
+                total={(summaryData?.summary_enroll>=0)?summaryData?.summary_enroll:null}
                 color="motivator"
 
               />
@@ -974,7 +901,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Green"
-                total={summaryData?.summary_green}
+                total={(summaryData?.summary_green>=0)?summaryData?.summary_green:null}
                 color="motivator"
 
               />
@@ -983,7 +910,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Vyapar"
-                total={summaryData?.summary_vyapar}
+                total={(summaryData?.summary_vyapar>=0)?summaryData?.summary_vyapar:null}
                 color="motivator"
 
               />
@@ -992,7 +919,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of VIllage Visits"
-                total={summaryData?.summary_villagevisit}
+                total={(summaryData?.summary_villagevisit>=0)?summaryData?.summary_villagevisit:null}
                 color="motivator"
 
               />
@@ -1013,12 +940,12 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
   
   <CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Funders List : 
-              {/* for gfl it should be showned as project not as funder */}
+           {(summaryData?.data[0]?.select_type==1)? "Projects List:":"Funders List"} 
+             
             </Typography>
           
-            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
-            <Grid item xs={12} sm={12} md={12} marginTop={3}>
+           {(summaryData?.data.length>0) ?<CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            <Grid item xs={12} sm={12} md={12} >
           {summaryData?.data?.map((itm) => {
             return (
               <Card
@@ -1030,14 +957,6 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
                   borderColor: '#ffcc80',
                   marginBottom: '40px',
                 }}
-                // onClick={() => {
-                //   navigate('/dashboard/app/chart', {
-                //     state: {
-                //       filterData: filterData
-                //     }
-                //   })
-                // }}
-                
                 >
                 <CardContent>
 
@@ -1045,7 +964,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 <Container style={{ display: 'flex', flexDirection: 'column' }}>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-      {(itm?.startDate)?"Project Name":"Funder"}<br />
+      {(itm?.select_type=='1')?"Project Name":"Funder Name"}<br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
@@ -1065,33 +984,36 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
       &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
     </span>
   </Grid>
+  {(itm?.select_type=='1')?<Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Start Date<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.start_date}
+    </span>
+  </Grid>:null}
+  {(itm?.select_type=='1')?<Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    End Date<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.end_date}
+    </span>
+  </Grid>:null}
   
 </Container>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={4}>
-            {/* <Grid item xs={4} sm={8} md={4}>
 
-              <AppWidgetSummary
-                title="Target"
-                total={itm?.summary_target}
-                color="motivator"
-
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-
-              <AppWidgetSummary
-                title="Actual"
-                total={summaryData?.summary_actual}
-                color="motivator"
-
-              />
-            </Grid> */}
 <Grid item xs={6} sm={6} md={6}>
 
               <AppWidgetSummary
                 title="Number  of Villages"
-                total={itm?.villages}
+                total={(itm?.villages>=0)?itm?.villages:null}
                 color="villages"
                 icon= "fontisto:holiday-village"
 
@@ -1101,7 +1023,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Batches"
-                total={(itm?.NoOfBatches)?itm?.NoOfBatches:itm?.noofbatches}
+                total={(itm?.noofbatches>=0)?itm?.noofbatches:itm?.nobatches}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
 
@@ -1110,8 +1032,8 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
  <Grid item xs={6} sm={6} md={6}>
 
               <AppWidgetSummary
-                title="Number of Self Sakthi Survey"
-                total={(itm?.noOfselfshakthisurvey)?itm?.noOfselfshakthisurvey:itm?.noofselfshakthisurvey}
+                title="Number of Self Shakthi Survey"
+                total={(itm?.noofselfshakthisurvey>=0)?itm?.noofselfshakthisurvey:itm?.noofsurvey}
                 color="vyapar"
                 icon="eos-icons:product-subscriptions-outlined"
 
@@ -1121,7 +1043,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="2nd Day Turnout  %"
-                total={itm?.day2}
+                total={(itm?.day2>=0)?itm?.day2:null}
                 color="info"
                 icon = "twemoji:women-holding-hands"
 
@@ -1134,170 +1056,19 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
             );
           })}
         </Grid>
-</CardContent>
+</CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
 </CardContent>
 : 
-// (roleid == 13)?
-
-
-// <>
-// <CardContent>
-//             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-//               Funders List : 
-//               {/* for gfl it should be showned as project not as funder */}
-//             </Typography>
-          
-//             <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
-//             <Grid item xs={12} sm={12} md={12} marginTop={3}>
-//           {summaryData?.data?.map((itm) => {
-//             return (
-//               <Card
-//                 style={{
-//                   backgroundColor: '#f5f5f5',
-//                   flexDirection: 'column',
-//                   borderRadius: 12,
-//                   border: '2px solid',
-//                   borderColor: '#ffcc80',
-//                   marginBottom: '40px',
-//                 }}
-//                 // onClick={() => {
-//                 //   navigate('/dashboard/app/chart', {
-//                 //     state: {
-//                 //       filterData: filterData
-//                 //     }
-//                 //   })
-//                 // }}
-                
-//                 >
-//                 <CardContent>
-              
-// <Container style={{ display: 'flex', flexDirection: 'row' }}>
-//   <Grid item xs={6}>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-//       Funder<br />
-//       {/*  for role id 5 it should be project in 4 dahsbord  */}
-//       Actual / Target
-//       {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
-//     </span></Grid>
-//     <Grid item xs={6}>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
-//       &nbsp;:&nbsp;{itm?.name}<br />
-//       &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
-//             {/* start date and end date need in all dashborad we need as duration : fromDate to endDate for role id 5 */}
-//     </span>
-//   </Grid>
-// </Container>
-//                   <Divider mt={1} />
-//                   <Grid container spacing={3} marginTop={4}>
-//             {/* <Grid item xs={4} sm={8} md={4}>
-
-//               <AppWidgetSummary
-//                 title="Target"
-//                 total={itm?.summary_target}
-//                 color="motivator"
-
-//               />
-//             </Grid>
-//             <Grid item xs={4} sm={8} md={4}>
-
-//               <AppWidgetSummary
-//                 title="Actual"
-//                 total={summaryData?.summary_actual}
-//                 color="motivator"
-
-//               />
-//             </Grid> */}
-// <Grid item xs={6} sm={6} md={6}>
-
-//               <AppWidgetSummary
-//                 title="Number  of Villages Visits"
-//                 total={itm?.villagevisit}
-//                 color="villages"
-//                 icon= "fontisto:holiday-village"
-
-//               />
-//             </Grid>
-//  <Grid item xs={6} sm={6} md={6}>
-
-//               <AppWidgetSummary
-//                 title="Number of Beehive"
-//                 total={itm?.beehive}
-//                 color="motivator"
-//                 icon="twemoji:women-holding-hands"
-
-//               />
-//             </Grid>
-//<Grid item xs={6} sm={6} md={6}>
-
-//               <AppWidgetSummary
-//                 title="Number of Circle Meet"
-//                 total={itm?.circle_meet}
-//                 color="vyapar"
-//                 icon="eos-icons:product-subscriptions-outlined"
-
-//               />
-//             </Grid>
-//  <Grid item xs={6} sm={6} md={6}>
-
-//               <AppWidgetSummary
-//                 title="Number of Circles"
-//                 total={itm?.circles}
-//                 color="info"
-//                 icon = "twemoji:women-holding-hands"
-
-//               />
-//             </Grid>
-//  <Grid item xs={6} sm={6} md={6}>
-
-// <AppWidgetSummary
-//   title="Number of Enroll"
-//   total={itm?.enroll}
-//   color="info"
-//   icon = "twemoji:women-holding-hands"
-
-// />
-// </Grid>
-// <Grid item xs={12} sm={6} md={6}>
-
-// <AppWidgetSummary
-//   title="Number of Green Motivators"
-//   total={itm?.greenMotivators}
-//   color="info"
-//   icon = "twemoji:women-holding-hands"
-
-// />
-// </Grid>
-// <Grid item xs={12} sm={6} md={6}>
-
-// <AppWidgetSummary
-//   title="Number of Vyapar"
-//   total={itm?.vyapar}
-//   color="info"
-//   icon = "twemoji:women-holding-hands"
-
-// />
-// </Grid>
-          
-//           </Grid>
-//                 </CardContent>
-//               </Card>
-//             );
-//           })}
-//         </Grid>
-// </CardContent>
-// </CardContent>
-
-// </>:
  (roleid == 5 || roleid == 6||roleid == 13)?
 <>
-<CardContent>
+{(summaryData?.data.length>0) ?<CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Project List : 
+            {(summaryData?.data[0]?.select_type==1)? "Projects List":"Funders List"} 
               {/* for gfl it should be showned as project not as funder */}
             </Typography>
           
             <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
-            <Grid item xs={12} sm={12} md={12} marginTop={3}>
+            <Grid item xs={12} sm={12} md={12} >
           {summaryData?.data?.map((itm) => {
             return (
               <Card
@@ -1309,21 +1080,13 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
                   borderColor: '#ffcc80',
                   marginBottom: '40px',
                 }}
-                // onClick={() => {
-                //   navigate('/dashboard/app/chart', {
-                //     state: {
-                //       filterData: filterData
-                //     }
-                //   })
-                // }}
-                
-                >
+               >
                 <CardContent>
 
                 <Container style={{ display: 'flex', flexDirection: 'column' }}>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-      {(itm?.startDate)?"Project Name":"Funder"}<br />
+      {(itm?.select_type=='1')?"Project Name":"Funder"}<br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
@@ -1366,30 +1129,13 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 </Container>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={4}>
-            {/* <Grid item xs={4} sm={8} md={4}>
-
-              <AppWidgetSummary
-                title="Target"
-                total={itm?.summary_target}
-                color="motivator"
-
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-
-              <AppWidgetSummary
-                title="Actual"
-                total={summaryData?.summary_actual}
-                color="motivator"
-
-              />
-            </Grid> */}
+      
 
 <Grid item xs={12} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number  of Villages Visits"
-  total={itm?.villages}
+  total={(itm?.villages>=0)?itm?.villages:null}
   color="villages"
   icon= "fontisto:holiday-village"
 
@@ -1399,7 +1145,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
 <AppWidgetSummary
   title="Number of Batch"
-  total={itm?.Noofbatches}
+  total={(itm?.noofbatches>=0)?itm?.noofbatches:itm?.nobatches}
   color="info"
   icon = "twemoji:women-holding-hands"
 
@@ -1410,7 +1156,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Number of Self Shakthi Survey"
-                total={itm?.noOfselfshakthisurvey}
+                total={(itm?.noofselfshakthisurvey>=0)?itm?.noofselfshakthisurvey:itm?.noofsurvey}
                 color="vyapar"
                 icon="eos-icons:product-subscriptions-outlined"
 
@@ -1437,158 +1183,10 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
           })}
         </Grid>
 </CardContent>
-</CardContent>
+</CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
 </>
 :
-// (roleid == 6)?
-// <>
-// <CardContent>
-//             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-//               Funders List : 
-//               {/* for gfl it should be showned as project not as funder */}
-//             </Typography>
-          
-//             <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
-//             <Grid item xs={12} sm={12} md={12} marginTop={3}>
-//           {summaryData?.data?.map((itm) => {
-//             return (
-//               <Card
-//                 style={{
-//                   backgroundColor: '#f5f5f5',
-//                   flexDirection: 'column',
-//                   borderRadius: 12,
-//                   border: '2px solid',
-//                   borderColor: '#ffcc80',
-//                   marginBottom: '40px',
-//                 }}
-//                 // onClick={() => {
-//                 //   navigate('/dashboard/app/chart', {
-//                 //     state: {
-//                 //       filterData: filterData
-//                 //     }
-//                 //   })
-//                 // }}
-                
-//                 >
-//                 <CardContent>
-              
-// <Container style={{ display: 'flex', flexDirection: 'row' }}>
-//   <Grid item xs={6}>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'center' }}>
-//       Funder <br />
-//       {/*  for role id 5 it should be project in 4 dahsbord  */}
-//       {/* Actual / Target */}
-//       {/* start date and end date  we need as duration : fromDate to endDate for role id 5 */}
-//     </span></Grid>
-//     <Grid item xs={6}>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1', textAlign: 'start' }}>
-//       &nbsp;:&nbsp;{itm?.name}<br />
-//       {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
-//             {/* start date and end date need in all dashborad we need as duration : fromDate to endDate for role id 5 */}
-//     </span>
-//   </Grid>
-// </Container>
-//                   <Divider mt={1} />
-//                   <Grid container spacing={3} marginTop={4}>
-//             {/* <Grid item xs={4} sm={8} md={4}>
 
-//               <AppWidgetSummary
-//                 title="Target"
-//                 total={itm?.summary_target}
-//                 color="motivator"
-
-//               />
-//             </Grid>
-//             <Grid item xs={4} sm={8} md={4}>
-
-//               <AppWidgetSummary
-//                 title="Actual"
-//                 total={summaryData?.summary_actual}
-//                 color="motivator"
-
-//               />
-//             </Grid> */}
-//   <Grid item xs={6} sm={6} md={6}>
-
-//               <AppWidgetSummary
-//                 title="Number  of Villages Visits"
-//                 total={itm?.villagevisit}
-//                 color="villages"
-//                 icon= "fontisto:holiday-village"
-
-//               />
-//             </Grid>
-//    <Grid item xs={6} sm={6} md={6}>
-
-//               <AppWidgetSummary
-//                 title="Number of Beehive"
-//                 total={itm?.beehive}
-//                 color="motivator"
-//                 icon="twemoji:women-holding-hands"
-
-//               />
-//             </Grid>
-//  <Grid item xs={6} sm={6} md={6}>
-
-//               <AppWidgetSummary
-//                 title="Number of Circle Meet"
-//                 total={itm?.circle_meet}
-//                 color="vyapar"
-//                 icon="eos-icons:product-subscriptions-outlined"
-
-//               />
-//             </Grid>
-//  <Grid item xs={6} sm={6} md={6}>
-
-//               <AppWidgetSummary
-//                 title="Number of Circles"
-//                 total={itm?.circles}
-//                 color="info"
-//                 icon = "twemoji:women-holding-hands"
-
-//               />
-//             </Grid>
-//  <Grid item xs={6} sm={6} md={6}>
-
-// <AppWidgetSummary
-//   title="Number of Enroll"
-//   total={itm?.enroll}
-//   color="info"
-//   icon = "twemoji:women-holding-hands"
-
-// />
-// </Grid>
-// <Grid item xs={12} sm={6} md={6}>
-
-// <AppWidgetSummary
-//   title="Number of Green Motivators"
-//   total={itm?.greenMotivators}
-//   color="info"
-//   icon = "twemoji:women-holding-hands"
-
-// />
-// </Grid>
-// <Grid item xs={12} sm={6} md={6}>
-
-// <AppWidgetSummary
-//   title="Number of Vyapar"
-//   total={itm?.vyapar}
-//   color="info"
-//   icon = "twemoji:women-holding-hands"
-
-// />
-// </Grid>
-          
-//           </Grid>
-//                 </CardContent>
-//               </Card>
-//             );
-//           })}
-//         </Grid>
-// </CardContent>
-// </CardContent>
-// </>
-// :
 <>
 </>
 
