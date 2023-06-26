@@ -5,7 +5,7 @@ import ReactApexChart from 'react-apexcharts';
 import { styled } from '@mui/material/styles';
 import { Card, CardHeader } from '@mui/material';
 // components
-import { BaseOptionChart } from '../../../components/chart';
+import { BaseOptionChartStyle } from '../../../components/chart/BaseOptionChart';
 
 // ----------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ AppCurrentSubject.propTypes = {
 };
 
 export default function AppCurrentSubject({ title, subheader, chartData, chartColors, chartLabels, ...other }) {
-  const chartOptions = merge(BaseOptionChart(), {
+  const chartOptions = merge(BaseOptionChartStyle(), {
     stroke: { width: 2 },
     fill: { opacity: 0.48 },
     legend: { floating: true, horizontalAlign: 'center' },

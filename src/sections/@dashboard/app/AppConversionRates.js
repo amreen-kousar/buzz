@@ -6,7 +6,7 @@ import { Box, Card, CardHeader } from '@mui/material';
 // utils
 import { fNumber } from '../../../utils/formatNumber';
 // components
-import { BaseOptionChart } from '../../../components/chart';
+import { BaseOptionChartStyle } from '../../../components/chart/BaseOptionChart';
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ export default function AppConversionRates({ title, subheader, chartData, ...oth
 
   const chartSeries = chartData.map((i) => i.value);
 
-  const chartOptions = merge(BaseOptionChart(), {
+  const chartOptions = merge(BaseOptionChartStyle(), {
     tooltip: {
       marker: { show: false },
       y: {

@@ -51,14 +51,14 @@ export default function AdminQuality({selectDATA,getData}) {
             console.log(error);
           });
     }
-
+console.log(partner,"partnerss")
     
   return (
     <div>
 
     
 <Card style={{marginTop:20}}>
-        {partner?.length!==0?partner?.map(itm=>{
+        {partner?.length!==0?partner?.Data?.map(itm=>{
  return(
        
             <CardContent>
