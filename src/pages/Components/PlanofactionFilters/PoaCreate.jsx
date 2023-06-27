@@ -183,7 +183,7 @@ const tomorrow = dayjs().add(1, 'day');
         </Snackbar>
       )}
       {console.log(role, 'userrrrrrrrdetailssssss')}
-      {role == 3 || role == 4 || role == 5 || role == 6 || role == 12 || role == 13 ? (
+      {role == 3 || role == 4 || role == 5 || role == 6 || role == 12 || role == 13 || props?.userId? (
         <Button
           id="create-poa-button"
           variant="contained"
