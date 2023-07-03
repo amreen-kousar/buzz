@@ -3,24 +3,18 @@ import ApiRequest from './components/ApiRequest';
 import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
 import Projectapi from './components/Projectsapi';
-
 export default function OperationManager({ selectDATA, getData,type,date,endDate,dateValue,endDateValue}) {
   const [omdata, setOmData] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
-
   useEffect(() => {
     OperationManage()
   }, [])
-
   const getSearchFilter = (e) => {
     setSearchInFilter(e)
   }
-
   const returnSearchFilter = () => {
     return searchInFilter
   }
-
-
   const OperationManage = async () => {
     if(type=="Projects")
     {
@@ -28,7 +22,6 @@ export default function OperationManager({ selectDATA, getData,type,date,endDate
     }
     else{
       ApiRequest({ selectDATA: 4 }).then(res => setOmData(res))
-
     }
    
   }

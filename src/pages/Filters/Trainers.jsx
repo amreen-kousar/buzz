@@ -3,11 +3,9 @@ import ApiRequest from './components/ApiRequest';
 import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
 import Projectapi from './components/Projectsapi';
-
 export default function Trainers({ selectDATA, getData,type,date,endDate,dateValue,endDateValue}) {
   const [train, setTrain] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
-
   useEffect(() => {
     trainer()
   }, []
@@ -24,14 +22,12 @@ export default function Trainers({ selectDATA, getData,type,date,endDate,dateVal
   const getSearchFilter = (e) => {
     setSearchInFilter(e)
   }
-
   const returnSearchFilter = () => {
     return searchInFilter
   }
   return (
     <div>
       <SearchCommon getSearchFilter={(e) => { getSearchFilter(e) }} />
-
       <ListTabledata data={train} getData={getData} date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} selectDATA={5} type="Trainers" returnSearchFilter={returnSearchFilter} />
     </div>);
 }

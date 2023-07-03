@@ -1,20 +1,14 @@
 import { useState, useEffect, forwardRef, useRef } from 'react';
-// material
 import { Card, Stack, Chip, Button, Container, Typography, Grid, Snackbar } from '@mui/material';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
-// Axios
+import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
-// components
 import Page from '../../components/Page';
 import BuslistDrawer from '../Components/BuslistDrawer';
-import BusListFilter from '../Components/Buslistfilters/BusListFilter';
 import Addbus from './Addbus';
-import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
 import Iconify from '../../components/Iconify';
 export default function User() {
-
   var userAccess = ['2']
   var userIdCheck = localStorage?.getItem('userId')
   const [openMessage, setOpenMessage] = useState(false);
@@ -22,35 +16,24 @@ export default function User() {
   const [clcikData, setClickData] = useState()
   var [search, setSearch] = useState('')
   const [dw, setDw] = useState(false)
-  const [open, setOpen] = useState(false)
   const descriptionElementRef = useRef(null);
   const [buses, setBuses] = useState();
-  const [respBuses, setRespbuses] = useState()
   const [count, setCount] = useState()
   const [cc, setCc] = useState()
   var [totalCount, settotalCount] = useState(0)
 
   useEffect(() => {
-    console.log("entered in byss")
-  }, [])
-
-  useEffect(() => {
-
     setDw(false)
     busesd()
   }, [dw])
-
   useEffect(() => {
-
     if (open) {
       const { current: descriptionElement } = descriptionElementRef;
       if (descriptionElement !== null) {
         descriptionElement.focus();
       }
     }
-
   }, [open]);
-
   const busesd = async (i, id, g) => {
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role
@@ -65,9 +48,7 @@ export default function User() {
       "emp_id": userid,
       "search": search
     });
-
     console.log(data, "checking for search")
-
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getBuses.php',
@@ -76,137 +57,58 @@ export default function User() {
       },
       data
     };
-
     axios(config)
-      .then((response) => {
-        console.log("respoonse in Bus List", response.data, id, i)
+      .then((response) => {    
         settotalCount(response?.data?.total_count)
-        console.log(response.data.list.length, "responseeeeeeeeeeeeeeeeeeeeee")
-        // if (filterBusItem) {
-        //   if (selected.length == 0) {
-        //     setBuses(respBuses?.list)
-        //   }
-        //   else if (response?.data?.list?.length > 0) {
-        //     console.log(buses)
-        //     let filteredBuses = buses?.filter(({ id }) => response?.data?.list.some(x => x.id !== id))
-        //     setBuses([...filteredBuses])
-        //   }
-        // }
-        // else {
-        //   if (selected.length == 1) {
-        //     setBuses(response?.data?.list)
-        //   }
-        //   else if (selected.length > 0) {
-        //     buses.push(...response?.data?.list)
-        //     setBuses([...buses])
-        //   }
-        //   else if (selected.length == 0) {
-        //     setRespbuses(response?.data)
-        //     setBuses(response?.data?.list)
-        //   }
-        //   else {
-        //     setBuses(respBuses?.list)
-        //   }
-        // }
-
-console.log(response.data.list , "busses data")
         setBuses(response?.data?.list)
         setCount(response?.data?.list.length)
-        setCc(response?.data?.checked_count)
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }
-
   const onSumbit = (e, i) => {
     setSelected({ type: 'Location', name: ` ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
     handleclosebusfilter()
     busesd(e?.district_id, e?.talaq_id, "country")
   }
-
-
   const [openFilter, setOpenFilter] = useState(false);
   const [openbusfilter, setopenbusfilter] = useState(false);
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
-
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
-
   const handleopenbusfilter = () => {
     setopenbusfilter(true);
   };
-
   const handleclosebusfilter = () => {
     setopenbusfilter(false);
   };
   const getData = (itm, i) => {
-    console.log(itm, "get Data in Bus List")
     setopenbusfilter(false);
-    console.log(selected, "Selected ")
     setSelected(itm)
     busesd(itm, i)
-    // if (search != "") {
-    //   selected = []
-    //   setSelected(selected)
-    //   setSearch([])
-    //   console.log("empty select")
-    // }
-    // let filterSelect = selected.length == 0 ? [] : selected.filter(s => s?.id == itm?.id)
-    // console.log(filterSelect)
-    // if (filterSelect.length == 0) {
-    //   selected.push(itm)
-    //   setSelected(selected);
-    //   busesd(itm, i)
-    // }
-
   }
-
-
   const searchFunction = (e) => {
     search = e
     setSearch(search)
     setSelected([{ name: e, type: "Search" }])
     busesd()
   }
-
-
   const resetBus = () => {
     setSelected([])
     setSearch([])
     busesd()
   }
-
-
-
   const handleDelete = (itmTodelete) => {
     setSelected(null)
     busesd()
-    // let empty = false
-    // if (selected.length == 1) {
-    //   empty = true
-    //   if (selected.type == "Search") {
-    //     setSearch("")
-    //   }
-    //   setBuses([...respBuses?.list])
-    // }
-    // let deleteSelected = selected.filter(s => s?.id != itmTodelete?.id)
-    // setSelected(deleteSelected)
-    // // delete funder of bus
-    // if (!empty) {
-    //   busesd(itmTodelete, 2, "filter")
-    // }
-    // console.info('You clicked the delete icon.');
   };
-
-
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-
   return (
     <Page title="User">
       <Searchbar id="search-bar" getSearch={(e) => searchFunction(e)} />
@@ -219,7 +121,6 @@ console.log(response.data.list , "busses data")
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
             {selected?.type ? " Bus List" : "All Bus List "}&nbsp;({count})
-
           </Typography>
           <Button id="bus-list" style={{ float: "right", color: '#ff7424' }}
             sx={{
@@ -248,14 +149,11 @@ console.log(response.data.list , "busses data")
             onCloseFilter={handleCloseFilter}
           />
         </Stack>
-
-
         {selected?.type &&
           <Stack direction="row" spacing={1}>
              <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} />
           </Stack>
         }
-
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <FiltersHome
             id="list-bus"
@@ -269,14 +167,11 @@ console.log(response.data.list , "busses data")
             onCloseFilter={handleclosebusfilter}
           />
         </Stack>
-
-
         {buses?.length == 0 && (
           <div>
             <h1 id="bus-no-data-fnd" style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
           </div>
         )}
-
         {buses?.map((itm,index) => {
           return (
             <Card id={index} style={styles.card1}
@@ -284,7 +179,6 @@ console.log(response.data.list , "busses data")
                 setClickData(itm)
                 handleOpenFilter()
               }}>
-
               <div style={{ float: 'left', padding:'20px',backgroundColor:'white' }}>
                 <Iconify id="direction-bus-icon" icon="material-symbols:directions-bus" width={30} height={30} />
               </div>
@@ -299,29 +193,17 @@ console.log(response.data.list , "busses data")
               <Typography id="project-name" gutterBottom  >
                   {`Project Name : ${itm?.project_name}`}
                 </Typography>
-                {/* <Typography variant="body2" gutterBottom style={{ color: '#FF337A' }}>
-                  Today Checklist Status :
-                
-
-                </Typography>
-                <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                  Checked / Total : {itm?.checked_count}/{count}
-                  {console.log(buses?.total_count, "total counttttttttttt")}
-                </Typography> */}
-
               </Grid></Card>
             </Card>
           )
         })}
       </Container>
-
       {userAccess.includes(userIdCheck) &&
        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <Addbus />
      
       </Stack>
       }
-
     </Page>
   );
 }

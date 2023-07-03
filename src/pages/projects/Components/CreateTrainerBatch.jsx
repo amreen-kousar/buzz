@@ -20,11 +20,8 @@ import Iconify from 'src/components/Iconify';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function CreateTrainerBatch(props) {
-  console.log(props?.data1,"<------qwewqeqweqweqw")
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(dayjs('2022-04-07'));
   const [village, setVillage] = useState([]);
   const [date, setDate] = useState("")
   const [trainerData, setTrainerData] = useState({
@@ -41,39 +38,29 @@ export default function CreateTrainerBatch(props) {
     "talaq_id": ""
   })
   const [data, setData] = useState({
-
     talaq_id: '',
-
   })
   const today = dayjs();
   const dateChangeHandler =(e) =>{
     setTrainerData({ ...trainerData, day1: e })
   }
   const endDateChnageHandler = (e)=>{
-    console.log(trainerData.day2,"date in state 1")
     setTrainerData({ ...trainerData, day2: e })
-    console.log(trainerData.day2,"date in state 2")
-
   }
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
   useEffect(() => {
     villageList(props?.data1);
-
   }, [props?.data1])
   
-  console.log(props?.data1?.location_id,"location")
   const villageList = async(i) => {
-    
     var data = JSON.stringify({
       "taluk_id":i?.location_id
     });
-console.log(props?.data1.location_id,"<----------------------props?.data1?.location_idprops?.data1?.location_id")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getVillageList.php',
@@ -82,23 +69,18 @@ console.log(props?.data1.location_id,"<----------------------props?.data1?.locat
       },
       data: data
     };
-console.log(data,"data")
     axios(config)
       .then(function (response) {
         setVillage(response.data)
-        console.log(JSON.stringify(response.data),"<-----reponsievdevsvs");
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
-  console.log( moment(trainerData?.day2)?.format('YYYY/MM/DD  h:mm:ss a') , "date in state ")
   const createTrainerBatch = async => {
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     const datass = village?.list?.filter(it => { return it?.id === trainerData?.talaq_id })
-    console?.log(  moment(trainerData?.day1)?.format('YYYY-MM-DD HH:mm:ss'), "<--kjughfd")
-    console?.log(  moment(trainerData?.day2)?.format('YYYY-MM-DD HH:mm:ss'), "<--kjughfd")
     var data = JSON.stringify({
       "batch_name": datass[0]?.name,
       "sub_village": trainerData?.sub_village,
@@ -111,7 +93,6 @@ console.log(data,"data")
       "contact_number": trainerData?.contact_number,
       "trainer_id": idvalue
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createTrainingBatch.php',
@@ -120,7 +101,6 @@ console.log(data,"data")
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         if (response?.data?.code) {
@@ -130,11 +110,9 @@ console.log(data,"data")
           alert("added succesfully")
           handleClose()
         }
-        /// setTrainerData(response.data)
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const styles = {
@@ -144,7 +122,6 @@ console.log(data,"data")
   }
   return (
     <div>
-
       <Button variant="secondary" style={styles.buttonStyle} onClick={handleClickOpen}
                     endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:sharp-supervised-user-circle" /></IconButton>}>
@@ -193,20 +170,14 @@ console.log(data,"data")
         
        
         <Stack margin={2} style={{ marginTop: 50 }}>
-          {console.log(trainerData, "><0khjhgbfd")}
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label" color="common">Select Village</InputLabel>
             <Select color="common"
-              // labelId="demo-simple-select-label"
-              //id="demo-simple-select"
               value={trainerData?.talaq_id}
               label="Select Village"
               
               onChange={(e => {
-                console.log(e?.target)
                 setTrainerData({ ...trainerData, talaq_id: e?.target?.value })
-                //setData({ ...data, taluk_id: e?.target?.value })
-
               })}
             >
               <MenuItem value="" default disabled>Choose Village</MenuItem>
@@ -253,7 +224,6 @@ console.log(data,"data")
             onChange={(e) => { 
               const limitChar = 10
               if (e.target.value.toString().length <= limitChar) {
-                console.log("number change", e.target.value)
                 setTrainerData({ ...trainerData, contact_number: e?.target?.value }) 
               }
             }}
@@ -267,7 +237,6 @@ console.log(data,"data")
           <Typography margin={2}>Day 1</Typography>
         </Stack>
         <Stack margin={2} style={{ marginTop: 20 }} color="common" >
-
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
             // defaultValue={today}
@@ -282,12 +251,10 @@ console.log(data,"data")
             onChange={(e) => { dateChangeHandler(e) }}
           />
         </Stack>
-
         <Stack style={{ marginTop: 10 }}>
           <Typography margin={2}>Day 2</Typography>
         </Stack>
         <Stack margin={2} style={{ marginTop: 20 }}>
-
           <DateTimePicker 
           id="date-time-picker" 
           defaultValue={trainerData?.day1}
@@ -304,7 +271,6 @@ console.log(data,"data")
             }}
           />
         
-
         </Stack><br/><br/><br/>
       </Dialog>
     </div>

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from 'react';
 import PropTypes from 'prop-types';
-// material
 import {
   Box,TextField,
   Radio,
@@ -19,7 +18,6 @@ import {
   Card,Grid,
   CardContent,
 } from '@mui/material';
-// components
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
@@ -34,7 +32,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { useMediaQuery } from '@mui/material';
-// ----------------------------------------------------------------------
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
@@ -43,18 +40,12 @@ const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  //   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  // marginLeft: 'auto' ,
-  //   transition: theme.transitions.create('transform', {
-  //     duration: theme.transitions.duration.shortest,
-  //   }),
 }));
 PoaGF.propTypes = {
   isOpenFilterGF: PropTypes.bool,
   onOpenFilterGF: PropTypes.func,
   onCloseFilterGF: PropTypes.func,
 };
-
 export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF, clcikData, batchState }) {
   const [batch, setBatch] = useState('');
   const [photos, setPhotos] = React.useState(false);
@@ -73,11 +64,9 @@ const [gelatiNote, setGelatiNote] = useState('');
   const [expanded, setExpanded] = React.useState(false);
   const [reload, setReload] = useState(false);
    const isSmallScreen = useMediaQuery('(max-width:600px)');
-
   
   const changeState = () => {
     setReload(!reload);
-    console.log('changeState is called ');
   };
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -86,39 +75,24 @@ const [gelatiNote, setGelatiNote] = useState('');
   useEffect(() => {
     getTrainingBatch();
     changeState();
-    // console.log(batchState)
   }, [batchState, clcikData]);
-
   useEffect(() => {
    
-
     getGFSessionData();
     getNoteHandler();
-
    
   }, [clcikData,editSession]);
-   // geting notes for each drawer 
    useEffect(() => {
-    console.log('useEffect for getnotehandler');
-
     let isSubscribe = true;
-
     if (isSubscribe) {
       getNoteHandler();
       getGFSessionData();
     }
-
     return () => {
       isSubscribe = false
     };
   }, [session.tb_id , session.check_in ,batch.check_1]);
-  console.log(clcikData, '<---clcikDataPoaGF',batchState);
   const getTrainingBatch = (async) => {
-    console.log(
-      batchState,
-      '<---batchStatebatchState',
-      batchState?.training_batch_id ? batchState?.training_batch_id : clcikData?.id
-    );
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
@@ -126,7 +100,6 @@ const [gelatiNote, setGelatiNote] = useState('');
       role_id: role,
       user_id: idvalue,
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData.php',
@@ -135,14 +108,12 @@ const [gelatiNote, setGelatiNote] = useState('');
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
         setBatch(response.data);
-        console.log(response.data,'<----------------setBatchsetBatch')
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
  
@@ -152,7 +123,6 @@ const [gelatiNote, setGelatiNote] = useState('');
       gf_session_id: clcikData?.id,
       user_id : userid
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData1.php',
@@ -161,31 +131,24 @@ const [gelatiNote, setGelatiNote] = useState('');
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
         setSession(response.data);
-        console.log(response.data, '<---------setSessionsetSession');
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
-
-  //createnotes
 const noteSubmitHandler = () => {
     
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
-
     var data = JSON.stringify({
       notes: gelatiNote,
       type: session.type,
       tb_id: session.tb_id,
       emp_id: userid,
     });
-
-    console.log(data, 'material api');
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createNotes.php',
@@ -198,33 +161,25 @@ const noteSubmitHandler = () => {
     axios(config)
       .then(function (response) {
         if (response.status == 200) {
-          // viewMessage('Project added sucessfully');
           setShowNote(false);
           getNoteHandler();
           setSaveBtn(false)
           alert("Note Added Successfully...")
-          console.log('susscesfully added data material');
+       
         }
       })
       .catch(function (error) {
-        console.log(error, 'failed');
+        // console.log(error, 'failed');
       });
-    console.log('submit');
-
   }
-   //getting Notes\
-
    const getNoteHandler = () => {
-    console.log('getNoteHandler');
+   
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       type: session.type,
       tb_id: session.tb_id,
-      // "type":2, "tb_id":21407
     });
-
-    console.log(data, 'material api');
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getNotes.php',
@@ -238,37 +193,25 @@ const noteSubmitHandler = () => {
       .then(function (response) {
         if (response.status == 200) {
           setGetAllNotes(response?.data?.notes);
-          console.log(response, 'notesData');
         }
       })
       .catch(function (error) {
-        console.log(error, 'failed');
+        // console.log(error, 'failed');
       });
-    console.log('submit');
   };
-
-
   function getBase64(file, callback) {
     const reader = new FileReader();
-
     reader.addEventListener('load', () => callback(reader.result));
-
     reader.readAsDataURL(file);
   }
   const convertImage = (e) => {
-    console.log('this is calleddddfdsfs');
-    // data.append('emp_id', userid);
-    // data.append('file', e.target.files[0]);
-    // setImagePath([...imagePath, e.target.files[0]])
+  
     const imageData = URL.createObjectURL(e.target.files[0]);
-    console.log(imageData, 'files');
     getBase64(e.target.files[0], function (base64Data) {
       setImages([...images, base64Data]);
-      //   setViewImage(true)
     });
   };
   const UploadImages = (e) => {
-
     if(images.length === 0 ){
       alert("No photos to upload.")
       throw new Error('No photos to upload.');
@@ -282,7 +225,6 @@ const noteSubmitHandler = () => {
       "gelathi_id":batch.user_id,
       "photos": [images.toString().slice(22,)]
     })
-
    
     var requestOptions = {
       method: 'POST',
@@ -292,14 +234,13 @@ const noteSubmitHandler = () => {
    
     let res = fetch('https://bdms.buzzwomen.org/appTest/uploadGFSessionPhotos.php', requestOptions)
       .then((itn) => {
-        console.log(itn, '<--itemgh');
         setImages([])
         alert("Image uploaded successfully..")
         getTrainingBatch()
         setISLoading(false)
       })
       .catch((err) => {
-        console.log(err, '<---wertyu');
+        // console.log(err, '<---wertyu');
       });
   };
   
@@ -307,9 +248,7 @@ const noteSubmitHandler = () => {
     images.splice(index, 1);
     setImages([...images]);
   };
-
   const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
-
    
   const removesession=(e)=>{
     if(confirm("Do You want to Cancel?")){
@@ -329,24 +268,19 @@ const noteSubmitHandler = () => {
       
       axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        
         onCloseFilterGF();
         getTrainingBatch()
         getGFSessionData();
-
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
       
     }
   }
-
   const reschedudlehandler=()=>{
    setReschedule(true)
   }
-
   const Reschedule=(e)=>{
     
     var data = JSON.stringify({
@@ -365,32 +299,20 @@ const noteSubmitHandler = () => {
     
     axios(config)
     .then(function (response) {
-
       setReschedule(false)
       onCloseFilterGF()
       getTrainingBatch()
-      console.log(JSON.stringify(response.data));
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
     
   }
-console.log(session.gf_session_name, "session name")
-if( session?.gf_session_name?.indexOf("_VV")){
-  console.log("hi aswin ")
-
-}
-
-
  const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
     linkStyle: { textDecoration: 'none', color: "black" }
   }
-
-  console.log("batches Data ", batchState)
-  console.log(session?.type , "sessionType")
   return (
     <>
       <Drawer
@@ -413,9 +335,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
             <Iconify id="close-icon-poa-gf" icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
-
         <Divider />
-
        
 {
   session == "" ?
@@ -431,14 +351,13 @@ if( session?.gf_session_name?.indexOf("_VV")){
                 <CardContent>
                   <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
                     Project : &nbsp;{session?.projectName}
-                    {console.log(session?.projectName, '<--------gfgfgfgfgfgdrawer')}
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     Partner : &nbsp;{session?.partnerName}<br/>
                      
                       {(role!=12)?<><IconButton onClick={()=>{setEditsession(true)}} style={{right:-20}}><Iconify  icon="material-symbols:edit"></Iconify></IconButton>
             <IconButton onClick={reschedudlehandler} style={{right:-20}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
-            {console.log(session,"sessionidddddddd")}
+          
             <IconButton onClick={()=>removesession(session)} style={{right:-20}}><Iconify icon="mdi:cancel-circle"></Iconify></IconButton></>:null}</Typography>
                     {schedule && <Stack>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -453,7 +372,6 @@ if( session?.gf_session_name?.indexOf("_VV")){
     }}
   />
         </LocalizationProvider>
-        {console.log(session,"session?.id")}
         <Button onClick={()=>Reschedule(session?.id)}>Save</Button>
       </Stack>}
  
@@ -489,7 +407,6 @@ if( session?.gf_session_name?.indexOf("_VV")){
                   setShown(e);
                 }}
               />
-
                {(role==6 || role==13)?<Card style={{ marginTop: 20 }}>
               <CardContent>
            
@@ -530,7 +447,6 @@ if( session?.gf_session_name?.indexOf("_VV")){
                   {isLoading ? <CircularProgress /> : 
                 
                 batch?.photos && <div>
-
                  <div style={{display:'flex' , flexDirection:'row'}}> {(batch?.photos[0].photo1)?<img id="img-event-data" src={batch?.photos[0].photo1} style={{height:100,width:100}}/>:"No Photos Found"}
                  &nbsp;&nbsp;{(batch?.photos[0].photo2)?<img id="img-event-data" src={batch?.photos[0].photo2} style={{height:100,width:100}}/>:null}</div>
                 </div>
@@ -544,9 +460,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
               
           
               </Card>:null}
-
           <br/>
-
              {roleid==6 && batch && <CheckinCheckOutDialog
               photos={check}
               batch={batch}
@@ -557,7 +471,6 @@ if( session?.gf_session_name?.indexOf("_VV")){
               getTrainingBatch={getTrainingBatch}
               getGFSessionData={getGFSessionData}
                />}
-
 {roleid==13 && batch && <CheckinGFL
               photos={check}
               batch={batch}
@@ -567,27 +480,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
               getTrainingBatch={getTrainingBatch}
               getGFSessionData={getGFSessionData}
                />}
-
-              {/* <Card
-                onClick={() => {
-                  setShown(true), console.log('ferfgreg');
-                }}
-                style={{ marginTop: 20 }}
-              >
-                <CardContent>
-                  <div style={{ float: 'right', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'white' }}>
-                    <Iconify icon="material-symbols:add" width={30} height={30} />
-                  </div>
-                  <Typography>
-                    Visit Participants: {session?.total_participants} 
-                    <IconButton>
-                      <Iconify style={{ color: "black",float:'right'}} icon="material-symbols:add" />
-                    </IconButton>
-                  </Typography>
-                  <Typography>Target Participants: {batch?.data?.participants} </Typography>
-                </CardContent>
-              </Card> */}
-
+            
             <br/><br/>  <Button variant="secondary" style={styles.buttonStyle} onClick={() => {
                   setShown(true)
                 }}
@@ -595,29 +488,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ic:baseline-people" /></IconButton>}>
                     <span style={{ width: "200px" }}>Visit participants  : {session?.total_participants}</span>
                   </Button><br/><br/>
-              {/* <Photos
-                batch={batch}
-                photos={photos}
-                setPhotos={(e) => {
-                  setPhotos(e);
-                }}
-              /> */}
-              {/* <Card
-                onClick={() => {
-                  setPhotos(true), console.log('ferfgreg');
-                }}
-                style={{ marginTop: 20 }}
-              >
-                <CardContent>
-                  <Typography>View Photos</Typography>
-                </CardContent>
-              </Card> */}
-
-
-                
-
-
-             
+           
 {(role==6 || role==13)?<Button variant="secondary" style={styles.buttonStyle} onClick={() => {
                       setCheck(true)
                     }}
@@ -625,7 +496,6 @@ if( session?.gf_session_name?.indexOf("_VV")){
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="cil:clock" /></IconButton>}>
                     <span style={{ width: "200px" }}>Check In/Check Out</span>
                   </Button>:null}
-
 <br/>  <br/>
                <Button variant="secondary" style={styles.buttonStyle} 
                     endIcon={<IconButton  onClick={() => {
@@ -634,9 +504,7 @@ if( session?.gf_session_name?.indexOf("_VV")){
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ph:note-pencil" /></IconButton>}>
                     <span style={{ width: "200px" }}>Notes</span>
                   </Button>
-
      
-
 {showNote ? (
                 <div>
                   {/* <Dialog fullScreen open={open} onClose={handleClose}TransitionComponent={Transition}></Dialog> */}
@@ -649,18 +517,9 @@ if( session?.gf_session_name?.indexOf("_VV")){
                       rows={5}
                       variant="outlined"
                       onChange={async (e) => {
-                        let note = await e?.target?.value;
-                        // if(note.length <= 0){
-                        //   alert("Text cannot be empty")
-                        //   setSaveBtn(false)
-                        // }
-                        // else{
-                        //   setGelatiNote(e?.target?.value);
-                        //   setSaveBtn(true)
-                        // }
+                        let note = await e?.target?.value
                         setSaveBtn(true)
                         setGelatiNote(e?.target?.value);
-                        console.log('note', gelatiNote);
                       }}
                       
                     ></TextField>
@@ -715,45 +574,6 @@ if( session?.gf_session_name?.indexOf("_VV")){
                   </Card>
                 </div>
               ) : null}
-
-              {/* <CardContent>
-                <div>
-                <Card style={{ marginTop: 20, marginLeft: 10 }}>
-                  {getAllNotes &&
-                    getAllNotes.map((i, index) => {
-                      {
-                        console.log(i, 'ivalue');
-                      }
-                      return (
-                        <>
-                         
-                            <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
-                            <Grid
-                              container
-                              direction="column"
-                              justifyContent="center"
-                              alignItems="center"
-                              style={{ marginTop: 10 }}
-                            >
-                              <Typography variant="body1">
-                                {' '}
-                                {userName}
-                                {i?.name} {i?.date}
-                              </Typography>
-
-                              {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
-                            </Grid>
-                            <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
-                              {i?.notes}{' '}
-                            </Typography>
-                         
-                        </>
-                      );
-                    })}
-                     </Card>
-                </div>
-              </CardContent> */}
-
 <Card>
                 <CardContent>
                   View All Comments :
@@ -779,7 +599,6 @@ if( session?.gf_session_name?.indexOf("_VV")){
                             {' '}
                             {i?.name} {i?.date} 
                           </Typography>
-
                          
                         </Grid>
                         <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
@@ -789,58 +608,13 @@ if( session?.gf_session_name?.indexOf("_VV")){
                      
                   </Collapse>
                 </CardContent>
-
               </Card>
             </div>
             
           </Stack>
-
-      
-      {/* {getAllNotes?.length>0? 
-      <CardContent>
-      <div>
-      <Card style={{ marginTop: 20, marginLeft: 10 }}>
-        {getAllNotes &&
-          getAllNotes.map((i, index) => {
-            {
-              console.log(i, 'ivalue');
-            }
-            return (
-              <>
-               
-                  <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}> 
-                  <Grid
-                    container
-                    direction="column"
-                    justifyContent="center"
-                    alignItems="center"
-                    style={{ marginTop: 10 }}
-                  >
-                    <Typography variant="body1">
-                      {i?.date}
-                    </Typography>
-
-                    {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
-                  </Grid>
-                  <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
-                    {i?.notes}{' '}
-                  </Typography>
-               
-              </>
-            );
-          })}
-           </Card>
-      </div>
-    </CardContent>
-      : null}  
-         */}
         </Scrollbar>
 }
-       
-
-
-        
-      </Drawer>
+   </Drawer>
     </>
   );
 }

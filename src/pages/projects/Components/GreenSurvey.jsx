@@ -38,16 +38,11 @@ import products from 'src/_mock/products';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-
 export default function GreenSurvey(props ) {
-console.log(props ,"props in greenservey")
   const {state} = useLocation()
-  // console.log("🚀 ~ file: GreenSurvey.jsx:48 ~ GreenSurvey ~ enrolledGreenMotivators:", enrolledGreenMotivators)
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState('a');
@@ -84,12 +79,9 @@ console.log(props ,"props in greenservey")
   const [initiativemeasures,setinitiativemeasures]=React.useState('');
   const [communitytogether,setcommunitytogether]=React.useState('');
   const [waterconservation,setwaterconservation]=React.useState('');
-
   const [naturalresourcesstate, setnaturalresourcesstate] = React.useState([]);
  
-
   const [climatechanges, setclimatechanges] = React.useState([]);
-
   const [sourceofwater, setsourceofwater] = React.useState([]);
   const [showClimateDiscription , setShowClimateDiscription]= React.useState(false)
   const [showWaterConsuDiscription , setShowWaterConsuDiscription]= React.useState(false)
@@ -138,13 +130,7 @@ console.log(props ,"props in greenservey")
     achieve_with_regard_to_natural_resource_conservation:"" ,
     initiative_to_conserve_the_environment:"",
     community_together_achieve_my_conservation_goal:"",
-
   });
-
-
-
-
-
   const handleChangeSelect = (event) => {
     setAge(event.target.value);
   };
@@ -154,7 +140,6 @@ console.log(props ,"props in greenservey")
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -182,11 +167,7 @@ console.log(props ,"props in greenservey")
   const [initiativemeasuresError,setInitiativemeasuresError]=useState(false)
   const [environmentError,setEnvironmentError]=useState(false)
   const [communitytogetherError,setCommunitytogetherError]=useState(false)
-
-
-
   const greensurveyformdata= async() =>{
-
     let validationSchema = [
       {
         field: wealth,
@@ -200,7 +181,6 @@ console.log(props ,"props in greenservey")
         y(true)
       }
     });
-
     if (wealth == '') {
       setWealthError(true);
       setHelperText('Please Select The Option');
@@ -263,28 +243,20 @@ console.log(props ,"props in greenservey")
     
     }
     if (checked['natural_resources'].length == 0) {
-      console.log("hello", checked.natural_resources.length)
       setHouseholdactivityError(true);
       setHelperText('Please Select The Option');
-    
-    
     }
     if (checked['natural_resources_impacting_your_life'].length == 0) {
-      console.log("hello", checked.natural_resources.length)
       setHouseholdactivityError(true);
       setHelperText('Please Select The Option');
-    
-    
     }
     if (checked['changes_happened_to_the_climate'].length == 0) {
-      console.log("hello", checked.natural_resources.length)
       setHouseholdactivityError(true);
       setHelperText('Please Select The Option');
     
     
     }
     if (checked['main_source_of_water'].length == 0) {
-      console.log("hello", checked.natural_resources.length)
       setHouseholdactivityError(true);
       setHelperText('Please Select The Option');
     
@@ -332,7 +304,6 @@ console.log(props ,"props in greenservey")
     trees != '' && foodconnection != '' && householdactivity != '' && pollutioncause != '' &&
     paychemicals != '' && products != '' && climateffort != '' &&  climateaction != ''  && initiativemeasures != '' && environment != '' && (checked['natural_resources'] != 0)&& (checked['natural_resources_impacting_your_life'] != 0)&& (checked['changes_happened_to_the_climate'] != 0)&& (checked['main_source_of_water'] != 0) && communitytogether != '')
     {
-     console.log("surveyyyyform")
     var data = JSON.stringify({
     "partcipantId":props?.itm?.id || props?.itm.gelathi_id ,
     "Email": sendData?.Email,
@@ -375,10 +346,8 @@ console.log(props ,"props in greenservey")
     "achieve_with_regard_to_natural_resource_conservation": sendData?.achieve_with_regard_to_natural_resource_conservation,
     "initiative_to_conserve_the_environment": environment,
     "community_together_achieve_my_conservation_goal":communitytogether
-
       });
-      console.log("🚀 ~ file: GreenSurvey.jsx:355 ~ greensurveyformdata ~ data:", data)
-      
+    
       var config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/new/addGreenBaselineSurvey.php',
@@ -405,11 +374,10 @@ console.log(props ,"props in greenservey")
         handleClose()
         props.enrolledGreenMotivators();
         props?.changeState()
-
       })
       
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
       Swal.fire({
         icon: 'error',
@@ -419,19 +387,14 @@ console.log(props ,"props in greenservey")
         timer: 2000
       });
       handleClose();
-
   }else{
     alert("Please Fill All The Fields")
   }
-
 }
- {console.log(props?.itm,"iteemmmmm")}
-
 const wealthvalue=(event)=>{
        setwealth(event.target.value)
        setWealthError(false)
 }
-
 const climatechangevalue=(event)=>{
   setClimate(event.target.value)
   setClimateError(false)
@@ -440,45 +403,37 @@ const climatechangevalue=(event)=>{
   }else{
     setShowClimateDiscription(false)
   }
-  console.log(climate," value is climate")
+  // console.log(climate," value is climate")
 }
-
 const weathervalue=(event)=>{
   setweather(event.target.value)
   setWeatherError(false)
 }
-
 const ratingvalue=(event)=>{
   setclimatechangerating(event.target.value)
   setClimatechangeratingError(false)
 }
-
 const tacklevalue=(event)=>
 {
   settackleclimatechange(event.target.value)
   setTackleclimatechangeError(false)
 }
-
 const handlesomethingtacklevalue=(event)=>{
   setsomethingtackle(event.target.value)
   setSomethingtackleError(false)
 }
-
 const groundwatervalue=(event)=>{
   setgroundwaterstatement(event.target.value)
   setGroundwaterstatementError(false)
 }
-
 const waterqualityvalue=(event)=>{
   setwaterquality(event.target.value)
   setWaterqualityError(false)
 }
-
 const wateraffectvalue=(event)=>{
   setwateraffect(event.target.value)
   setWateraffectError(false)
 }
-
 const conservationmeasures=(event)=>{
   setwaterconservation(event.target.value)
   setWaterconservationError(false)
@@ -488,22 +443,18 @@ const conservationmeasures=(event)=>{
     setShowWaterConsuDiscription(false)
   }
 }
-
 const handleland=(event)=>{
   setland(event.target.value)
   setLandError(false)
 }
-
 const conservenvironment=(event)=>{
   setEnvironment(event.target.value)
   setEnvironmentError(false)
 }
-
 const communityvalue=(event)=>{
   setcommunitytogether(event.target.value)
   setCommunitytogetherError(false)
 }
-
 const handleinitiativemeasures=(event)=>{
   setinitiativemeasures(event.target.value)
   setInitiativemeasuresError(false)
@@ -513,7 +464,6 @@ const handleinitiativemeasures=(event)=>{
     setShowPark(false)
   }
 }
-
 const handleclimateaction=(event)=>{
   setclimateaction(event.target.value)
   setClimateactionError(false)
@@ -523,12 +473,10 @@ const handleclimateaction=(event)=>{
     setShowClimateChangeDiscription(false)
   }
 }
-
 const handleclimateffort=(event)=>{
   setclimateffort(event.target.value)
   setClimateffortError(false)
 }
-
 const handlechemicals=(event)=>{
   setpaychemicals(event.target.value)
   setPaychemicalsError(false)
@@ -538,12 +486,10 @@ const handlechemicals=(event)=>{
     setShowEcoFriendlyDiscription(false)
   }
 }
-
 const handleproducts=(event)=>{
   setproducts(event.target.value)
   setProductsError(false)
 }
-
 const handlepollutioncause=(event)=>{
   setpollutioncause(event.target.value)
   setPollutioncauseError(false)
@@ -553,28 +499,22 @@ const handlepollutioncause=(event)=>{
     setShowHouseHoldDiscription(false)
   }
 }
-
 const handlehouseholdactivity=(event)=>{
   sethouseholdactivity(event.target.value)
   setHouseholdactivityError(false)
 }
-
 const handlefoodconnection=(event)=>{
   setfoodconnection(event.target.value)
   setFoodconnectionError(false)
 }
-
 const handletrees=(event)=>{
   settrees(event.target.value)
   setTreesError(false)
 }
-
 const handleform=()=>{
   alert('Surevy was done')
 }
-
 const handleresources=(label,event)=>{
-
   var updatedList = [...checked[label]];
     if (event.target.checked) {
       updatedList = [...checked[label], event.target.value];
@@ -585,38 +525,9 @@ const handleresources=(label,event)=>{
     tempData[label]=updatedList
     setChecked(tempData);
 }
-console.log(state.head, "state.head ingreen")
-
   return (
     <div>
-       {/* {successMessage && (
-        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)}>
-          <Alert
-            onClose={() => {
-              setsuccessMessage(false);
-            }}
-            severity="success"
-            sx={{ width: '100%', backgroundColor: 'green', color: 'white' }}
-          >
-            {message}
-          </Alert>
-        </Snackbar>
-      )} */}
-    
-      {/* {successMessage && (
-        <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)}>
-          <Alert
-            onClose={() => {
-              setsuccessMessage(false);
-            }}
-            severity="success"
-            sx={{ width: '100%', backgroundColor: 'green', color: 'white' }}
-          >
-            {message}
-          </Alert>
-        </Snackbar>
-      )} */}
-    
+     
        <Stack style={{ position:'absolute',right:0 ,float:'right',margin:2,padding:2 }}  mb={2}>
       
         {!(props?.itm?.is_survey)?<IconButton onClick={handleClickOpen}>
@@ -641,7 +552,6 @@ console.log(state.head, "state.head ingreen")
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
             Green Baseline Survey
           </Typography>
-
           <Button autoFocus edge="end" color="inherit" type="submit">
           <Iconify icon="material-symbols:save" width={30} height={30} />
           </Button>
@@ -651,7 +561,6 @@ console.log(state.head, "state.head ingreen")
      
        
         <Grid>
-
 {/* <Card mt={1} style={{ borderRadius: 20}} >
         <CardContent>
        
@@ -663,9 +572,7 @@ console.log(state.head, "state.head ingreen")
           </Typography>  
           </CardContent>    
   </Card> */}
-
   <Card>
-
     <CardContent>
       <Card mt={1} style={{backgroundColor: '#F6F8FB',  marginTop: 50 }}>
         <CardContent>
@@ -701,7 +608,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Typography style={{color:"#ff7424"}}>Which of the following are natural resources? / ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವುದು ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲಗಳು? *                     
@@ -736,7 +642,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
@@ -763,7 +668,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
@@ -797,7 +701,6 @@ console.log(state.head, "state.head ingreen")
       </Card>: null
 }
       
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
@@ -820,7 +723,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Typography style={{color:"#ff7424"}}>
@@ -838,7 +740,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Typography style={{color:"#ff7424"}}>
@@ -917,7 +818,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Typography style={{color:"#ff7424"}}>
@@ -939,7 +839,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
@@ -963,7 +862,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
@@ -988,9 +886,7 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
@@ -1015,7 +911,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       
        
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
@@ -1086,12 +981,10 @@ console.log(state.head, "state.head ingreen")
               <FormControlLabel value="I support Keshav as he is opening shopping opportunities for villagers/ನಾನು ಕೇಶವ್ ಅವರನ್ನು ಬೆಂಬಲಿಸುತ್ತೇನೆ ಏಕೆಂದರೆ ಅವರು ಹಳ್ಳಿಗರಿಗೆ ಶಾಪಿಂಗ್ ಅವಕಾಶಗಳನ್ನು ತೆರೆಯುತ್ತಾರೆ" control={<Radio style={{color:"#595959"}} />} label="I support Keshav as he is opening shopping opportunities for villagers/ನಾನು ಕೇಶವ್ ಅವರನ್ನು ಬೆಂಬಲಿಸುತ್ತೇನೆ ಏಕೆಂದರೆ ಅವರು ಹಳ್ಳಿಗರಿಗೆ ಶಾಪಿಂಗ್ ಅವಕಾಶಗಳನ್ನು ತೆರೆಯುತ್ತಾರೆ" />
               <FormControlLabel value="I won't support both,as forest land does'nt belong to them,it belongs to people of both villages, animals and the trees/ ನಾನು ಎರಡನ್ನೂ ಬೆಂಬಲಿಸುವುದಿಲ್ಲ, ಏಕೆಂದರೆ ಅರಣ್ಯ ಭೂಮಿ ಅವರಿಗೆ ಸೇರಿಲ್ಲ, ಅದು ಎರಡೂ ಹಳ್ಳಿಗಳ ಜನರಿಗೆ, ಪ್ರಾಣಿಗಳು ಮತ್ತು ಮರಗಳಿಗೆ ಸೇರಿದೆ"control={<Radio style={{color:"#595959"}} />} label="I won't support both,as forest land does'nt belong to them,it belongs to people of both villages, animals and the trees/ ನಾನು ಎರಡನ್ನೂ ಬೆಂಬಲಿಸುವುದಿಲ್ಲ, ಏಕೆಂದರೆ ಅರಣ್ಯ ಭೂಮಿ ಅವರಿಗೆ ಸೇರಿಲ್ಲ, ಅದು ಎರಡೂ ಹಳ್ಳಿಗಳ ಜನರಿಗೆ, ಪ್ರಾಣಿಗಳು ಮತ್ತು ಮರಗಳಿಗೆ ಸೇರಿದೆ." />
               <FormControlLabel value="I don't know what to decide / ಏನು ನಿರ್ಧರಿಸಬೇಕೆಂದು ನನಗೆ ತಿಳಿದಿಲ್ಲ" control={<Radio style={{color:"#595959"}} />} label="I don't know what to decide / ಏನು ನಿರ್ಧರಿಸಬೇಕೆಂದು ನನಗೆ ತಿಳಿದಿಲ್ಲ." />
-
             </RadioGroup>
           </Stack>
         </CardContent>
       </Card>
-
           
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
@@ -1116,7 +1009,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
                         
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
@@ -1141,7 +1033,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Typography style={{color:"#ff7424"}}>Are there any native food you believe is environmentally friendly to plant and is good for health?Name any two / ಸಸ್ಯಗಳಿಗೆ ಪರಿಸರ ಸ್ನೇಹಿ ಮತ್ತು ಆರೋಗ್ಯಕ್ಕೆ ಒಳ್ಳೆಯದು ಎಂದು ನೀವು ನಂಬುವ ಯಾವುದೇ ಸ್ಥಳೀಯ ಆಹಾರವಿದೆಯೇ? ಯಾವುದಾದರೂ ಎರಡನ್ನು ಹೆಸರಿಸಿ *</Typography>
@@ -1176,7 +1067,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
@@ -1200,7 +1090,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       {showHouseHoldDiscription?
        <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
        <CardContent>
@@ -1212,9 +1101,7 @@ console.log(state.head, "state.head ingreen")
      </Card>
     
     : null
-
       }
-
      
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
@@ -1239,7 +1126,6 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
           
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
@@ -1275,7 +1161,6 @@ console.log(state.head, "state.head ingreen")
       </Card>
 : null}
       
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
@@ -1294,7 +1179,6 @@ console.log(state.head, "state.head ingreen")
               <FormControlLabel value="Yes" control={<Radio style={{color:"#595959"}} />} label="Yes" />
               <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
               <FormControlLabel value="Maybe" control={<Radio style={{color:"#595959"}} />} label="Maybe" />
-
             </RadioGroup>
           </Stack>
         </CardContent>
@@ -1337,7 +1221,6 @@ console.log(state.head, "state.head ingreen")
   :null}
      
       
-
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
           <Stack mt={2}>
@@ -1373,7 +1256,6 @@ console.log(state.head, "state.head ingreen")
     :
     null}
      
-
               
       <Card style={{ marginTop: 40, backgroundColor: '#F6F8FB', borderRadius: 20 }}>
         <CardContent>
@@ -1433,16 +1315,13 @@ console.log(state.head, "state.head ingreen")
           </Stack>
         </CardContent>
       </Card>
-
       
-
       {/* -------------------------------- */}
     </CardContent>
   </Card>
   
 </Grid>
 </form>
-
       </Dialog>
      
     </div>

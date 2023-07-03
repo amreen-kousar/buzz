@@ -21,37 +21,24 @@ import {
     Dialog,
     Toolbar,
 } from '@mui/material';
-// components
 import CloseIcon from '@mui/icons-material/Close';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
-import { ColorManyPicker } from '../../../components/color-utils';
-// import ShaktiDialog from '../projects/Components/ShaktiDialog'
-// ----------------------------------------------------------------------
-
 ParticipentDetailsDailoge.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
 };
-
 export default function ParticipentDetailsDailoge({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
-console.log("🚀 ~ file: ParticipentDetailsDailoge.jsx:37 ~ ParticipentDetailsDailoge ~ onOpenFilter:", clcikData)
-// console.log(batch,'<------clcikDataclcikData')
      const [session,setSession] = useState('')
      const [partiData,setpartiData] = useState('')
-     console.log("🚀 ~ file: ParticipentDetailsDailoge.jsx:43 ~ ParticipentDetailsDailoge ~ partiData:", partiData)
     useEffect(() => {
         Participant();
-        // console.log(clcikData)
     }, [clcikData])
-
     const Participant = async =>{
         var data = JSON.stringify({
             "participant_id": clcikData?.id
           });
-
-
           
           
           var config = {
@@ -66,26 +53,21 @@ console.log("🚀 ~ file: ParticipentDetailsDailoge.jsx:37 ~ ParticipentDetailsD
           axios(config)
           .then(function (response) {
             setpartiData(response.data)
-            console.log(response.data,">-gbdfgh");
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
          
     }
-console.log(partiData,"------------------------------>dataaaaa")
     return (
         <>
             <Dialog
-                //   maxWidth={false}
-                //   fullWidth={true}
+              
                 anchor="right"
                 fullScreen
                 open={isOpenFilter}
                 onClose={onCloseFilter}
-                // PaperProps={{
-                //     sx: { width: '100%', },
-                // }}
+   
             >
                                 <Toolbar sx={{ color: "#ffffff", backgroundColor: "#ff7424" }}>
                     <IconButton edge="start" color="inherit" onClick={onCloseFilter}aria-label="close">
@@ -96,12 +78,9 @@ console.log(partiData,"------------------------------>dataaaaa")
                     </Typography>
                 </Toolbar>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
-
     
                 </Stack>
-
                 <Divider />
-
                 <Scrollbar>
                     <Stack spacing={3} sx={{ p: 3 }}>
                         <div>
@@ -152,14 +131,7 @@ console.log(partiData,"------------------------------>dataaaaa")
                                     Monthly wife Savings:
                                     &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.wifeSavingsMonthly}</span>
                                     </Typography>
-                                    {/* <Typography style={{ flexDirection: 'row' }}  variant="subtitle1" gutterBottom>
-                                       Saving Amount:
-                                       &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.saving_amt}</span>
-                                    </Typography> */}
-                                 
-                                   
                               
-                                 
                                     <Typography style={{ flexDirection: 'row' }} variant="subtitle1" gutterBottom>
                                     Goal :
                                     &nbsp;&nbsp;<span style={{ fontWeight: 100 }}>{partiData?.saving_goal}</span>
@@ -182,19 +154,8 @@ console.log(partiData,"------------------------------>dataaaaa")
                                     </Typography>
                                 </CardContent>
                             </Card>
-                            {/* <ShaktiDialog /> */}
-                            {/* <Card style={{marginTop:20}}>
-                                <CardContent>
-                                   
-                                   <Typography  variant="subtitle1" gutterBottom>Visit Participants :   
-                                    <Typography variant="body1" gutterBottom>{partiData?.total_participants} </Typography>
-                                    </Typography>
-                                   
-                                </CardContent>
-                            </Card> */}
+                      
                         </div>
-
-
                     </Stack>
                 </Scrollbar>
             </Dialog>

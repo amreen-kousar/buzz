@@ -37,11 +37,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function UserEditProfile({ updateSetUser ,closeUserDrawer  ,profileData}) {
   let user = JSON.parse(localStorage?.getItem('people'));
-
-  console.log(user, '<-----uyuyuuuhuhuuhu',);
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
    var [inputProject, setInputProject] = React.useState([])
@@ -52,15 +49,10 @@ export default function UserEditProfile({ updateSetUser ,closeUserDrawer  ,profi
   const [usersDataEdit, setUsersDataEdit] = useState('');
   const [rolesData, setRolesData] = useState([]);
   const [reportingManager, setReportingManager] = useState([]);
-
   const [reportingManagerProject, setReportingManagerProject] = useState([]);
   var roleID = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-
-console.log(showProjectListData,"updatedprojectssssssss")
-console.log(profileData,'reportingmanagers')
 useEffect(()=>{
-console.log("mountubg")
 let isApiSubscribed = true;
 if(isApiSubscribed)
 {}
@@ -69,13 +61,9 @@ return () => {
   isApiSubscribed = false;
 };
 },[user])
-
 useEffect(()=>{
   getEmpId()
-  console.log("empty useEffect called")
 },[])
-
-
   const [editData, setEditData] = useState({
     id: user.id,
     countryID: user.countryID,
@@ -102,35 +90,24 @@ useEffect(()=>{
     project_list: showProjectListData,
     license_number: user.license_number,
   });
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-  console.log(editData?.empRole, 'roleeeeeeeeeeeee');
   const handleClickOpen = () => {
     setOpen(true);
     setUpdatedProjectList(user?.project_list)
     setScroll(scrollType);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-
   useEffect(() => {
-    //   editUser()
-    console.log("useeffect calling ")
+    
     getRoles();
   }, []);
   useEffect(() => {
-    //   editUser()
-    console.log("useeffect calling ")
+  
     getProjectOfManager()
   }, []);
-
-
   const getRoles = () => {
     const data = JSON.stringify({});
-
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/roles_list.php',
@@ -139,23 +116,19 @@ useEffect(()=>{
       },
       data,
     };
-
     axios(config)
       .then((response) => {
         setRolesData(response.data.list);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
-
   const getEmpId = async (value) => {
-    console.log(value,"rolidddddddddd")
     setEditData({ ...editData, role: value });
     let formData = new FormData();
     formData.append('role_id', (value?.id)?value?.id:user?.role_id);
     formData.append('name', '');
-
     let res = await fetch('https://bdms.buzzwomen.org/appTest/getAllBuzzTeam.php', {
       body: formData,
       method: 'post',
@@ -167,21 +140,12 @@ useEffect(()=>{
       return { label: repo?.name, id: repo.id, role: repo.role };
     });
     setReportingManager([...temprepoManager]);
-    console.log(temprepoManager, '<---------------temprepoManagertemprepoManager');
   };
-
-
   const getProjectOfManager = async (value) => {
-    console.log(user,"userssssss")
     setEditData({ ...editData, reportingManager: value?.id });
-    // let formData = new FormData();
-    // formData.append('manager_id', value.id);
-    // formData.append('first_name', '');
-    console.log(user?.supervisorId,)
     const data = JSON.stringify({
       manager_id: (value)? value?.id : user?.supervisorId,
     });
-
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getProjectList.php',
@@ -190,21 +154,16 @@ useEffect(()=>{
       },
       data,
     };
-console.log(data,"payloaddata",user?.supervisorId)
     axios(config)
       .then((response) => {
-        console.log(response.data.list, 'project');
         let temprepoManagerProject = response.data.list.map(repo => { return { label: repo?.projectName, id: repo.id } })
         setReportingManagerProject([...temprepoManagerProject,
-            // { id: '210', label: 'testme' }
         ])
-        console.log(response.data.list, 'project')
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
-
   const editUser = (async) => {
     var data = JSON.stringify({
       id: editData?.id,
@@ -251,47 +210,29 @@ console.log(data,"payloaddata",user?.supervisorId)
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
         localStorage.setItem('people', data);
         setUsersDataEdit(response.data);
         updateSetUser();
         closeUserDrawer()
-        console.log(response.data, '<------------------setUsers');
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
     handleClose();
   };
-
-
   const deleteProject = (id,index)=>{
 let updatedlist = updatedProjectlist.filter((e)=> e.id != id)
-
-// console.log(updatedlist,"delete")
 setUpdatedProjectList([...updatedlist]);
 sethowProjectListData([...updatedlist]);
-console.log(updatedProjectlist , "delete_id",showProjectListData)
   }
-
      const changeProject = (value) => {
-        console.log(value)
-        // console.log(value, "changeProject")
-        // inputProject[inputProject.length - 1] = value.id
         setInputProject([...value])
-        console.log(inputProject)
     }
-
     let projectvariable = updatedProjectlist.map((e)=>e.project_id);
     let inputprojectvalues = inputProject.map((e)=>e.id)
     let overallprojects = [...projectvariable,...inputprojectvalues]
-      console.log(projectvariable,"projectslist")
-      console.log(inputprojectvalues,"projectslist")
-      console.log(overallprojects,"projectslist")
-
-  console.log("edituserdaa" , editData)
   return (
     <div>
       <Button
@@ -323,18 +264,14 @@ console.log(updatedProjectlist , "delete_id",showProjectListData)
             <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
               Edit Users
             </Typography>
-
             <Button autoFocus color="inherit" onClick={() => editUser()}>
               save
             </Button>
           </Toolbar>
         </AppBar>
-
-        {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
         <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
           <DialogContentText
             id="scroll-dialog-description"
-            //   ref={descriptionElementRef}
             tabIndex={-1}
           >
             <Box
@@ -374,7 +311,6 @@ console.log(updatedProjectlist , "delete_id",showProjectListData)
                   <InputLabel id="demo-simple-select-label" fullWidth color="common"  >
                     Role  {editData?.empRole}
                   </InputLabel>
-
                   <Select
                     fullWidth
                     color="common"
@@ -382,14 +318,11 @@ console.log(updatedProjectlist , "delete_id",showProjectListData)
                     labelId="demo-simple-select-label"
                     id="role"
                     defaultValue={editData?.empRole}
-                    // defaultValue={AddUser.role}
                     label="Role"
                     
                     onChange={(e) => {
                       setEditData({ ...editData, empRole: e?.target?.value?.roleName }),getEmpId(e.target.value)
                     }}
-                    
-                    //  onChange={(e) => { getEmpId(e.target.value) }}
                    
                   >
                     {rolesData.map((role) => {
@@ -410,15 +343,7 @@ console.log(updatedProjectlist , "delete_id",showProjectListData)
                     />
                   </FormControl>
                 )}
-                {/* <Autocomplete
-                  disablePortal
-                  id="combo-box-demo"
-                  // options={ceoUser}
-                  // defaultValue={AddUser.reportingManager}
-                  label="reportingManager"
-                  onChange={(event, value) => setAddUser({ ...AddUser, reportingManager: value })}
-                  renderInput={(params) => <TextField {...params} label="ReportingManger" />}
-                /> */}
+
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     label="Date Of Joining"
@@ -515,21 +440,10 @@ console.log(updatedProjectlist , "delete_id",showProjectListData)
                   />
                 </Stack>
                 <Stack>
-
-                  {/* <TextField id="outlined-basic" label="Project" variant="outlined" color="common" onChange={(e) => { setEditData({ ...editData, project_list: e?.target?.value }) }} value={editData?.project_list}/> */}
+                 
                   {
-
 ["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(editData?.empRole) && <FormControl fullWidth>
-
     <Autocomplete                
-        // disablePortal
-        // id="combo-box-demo"
-        // options={reportingManagerProject}
-        // defaultValue={inputProject[-1]}
-        // label="project"
-        // onChange={(e, value) => changeProject(value)}
-        // renderInput={(params) => <TextField {...params} label="Choose project" />}
-
         multiple
         limitTags={2}
         id="Projects"
@@ -540,36 +454,22 @@ console.log(updatedProjectlist , "delete_id",showProjectListData)
             <TextField {...params} id="choose_project" label="Choose project" placeholder="Choose project" color="common"/>
         )}
     />
-
 </FormControl>
-
 }
 {["Driver"].includes(editData?.empRole) && <TextField fullWidth id="license_number" label="License Number" value={editData.license_number} onChange={(e) => { setAddUser({ ...editData, license_number: e.target.value }) }} variant="outlined" />
 }
                
                 
-                
-                {/* <Typography>Choose Projects </Typography>
-                  <Select
-                    color="common"
-                    label="Choose Project"
-                    variant="standard"
-                    onChange={(e) => setEditData({ ...editData, project_list: e?.target?.value })}
-                    value={editData?.project_list}
-                  > */}
+             
                     {showProjectListData?.map((itm,index) => {
                       return <Typography value={itm?.id}>{itm?.projectName} <Icon icon="ic:baseline-delete" color="darkorange"
                        onClick={()=>{deleteProject(itm?.id,index)}} /></Typography>;
                     })}
-                  {/* </Select>  */}
-                  
+            
                  
                 </Stack>
               </div>
-
-              {/* <br />
-                <h3>Contact Information</h3>
-                <br /> */}
+       
             </Box>
           </DialogContentText>
         </DialogContent>

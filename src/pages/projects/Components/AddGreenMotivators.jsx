@@ -29,7 +29,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     const [sessiondata,setSessiondata]=useState('');
     const [reload , setReload] = useState(false)
   
-    console.log("🚀 ~ file: AddGreenMotivators.jsx:29 ~ AddGreenMotivators ~ sessiondata:", sessiondata)
     const handleClickOpen = () => {
         setOpen(true);
         
@@ -40,8 +39,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       };
 var [checkboxOption, setCheboxOPtion]=useState([])
 const setGreenmotivators=(itm)=>{
-  // console.log("🚀 ~ file: AddGreenMotivators.jsx:47 ~ setGreenmotivators ~ checkboxOption.participant_id:", itm.participant_id == checkboxOption[1].participant_id ||itm.participant_id == checkboxOption[0].participant_id )
-  console.log("🚀 ~ file: AddGreenMotivators.jsx:47 ~ setGreenmotivators ~ checkboxOption.participant_id:", itm.participant_id ,checkboxOption?.participant_id)
+ 
   if  (itm.participant_id == checkboxOption[1]?.participant_id ||itm.participant_id == checkboxOption[0]?.participant_id  ){
     var data = JSON.stringify({
       "id": itm?.participant_id,
@@ -62,25 +60,20 @@ const setGreenmotivators=(itm)=>{
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
       alert(response.data.message);
       getGreenMotivators();
       setCheboxOPtion(checkboxOption = checkboxOption.filter(item => item[participant_id] !== item.participant_id))
-      console.log("🚀 ~ file: AddGreenMotivators.jsx:68 ~ setCheboxOPtion:", checkboxOption)
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
-
   }
   
   else if (checkboxOption.length>=2){
-    console.log("🚀 ~ file: AddGreenMotivators.jsx:43 ~ setGreenmotivators ~ checkboxOption.length:", checkboxOption.length)
     alert("max Selection is Two DisSelect one ")
     const checkbox = document.getElementById(itm.participant_id);
     checkbox.checked = false;
   }
-
 else{
     var data = JSON.stringify({
         "id": itm?.participant_id,
@@ -101,16 +94,14 @@ else{
       
       axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         alert(response.data.message);
         getGreenMotivators();
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
       
 }}
-
 useEffect(()=>{
 getGreenMotivators();
 },[open])
@@ -129,7 +120,6 @@ getGreenMotivators();
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
       setSessiondata(response.data);
       if(response.data && response.data.all_participants && response.data.all_participants.length > 0){
         const all_participants = response.data.all_participants;
@@ -137,17 +127,15 @@ getGreenMotivators();
           return (x.GreenMotivators == 1)
         });
         setCheboxOPtion(checkedOptions)
-        console.log(checkedOptions,'hloooo');
       }
       
  
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
     
   }
-
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" }
   }
@@ -157,7 +145,6 @@ getGreenMotivators();
   useEffect(()=>{
     getGreenMotivators();
     },[reload])
-
     return(
     <>
  <Stack style={{ flexDirection: 'row'}}  mb={2}>
@@ -170,7 +157,6 @@ getGreenMotivators();
       </Stack>
      
     
-
       <Dialog fullScreen open={open} onClose={handleClose}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">
@@ -182,14 +168,12 @@ getGreenMotivators();
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
             All Participants   
           </Typography>
-
 <AddParticipants type='green' session={session} reloadFUnction={reloadFUnction}/>
           
         </Toolbar>
         {/* <Webcam
     ref={webcamRef}
     screenshotFormat="image/jpeg"odimeter:"",
-
     /> */}
         {/* </AppBar> */}
         <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
@@ -203,11 +187,9 @@ getGreenMotivators();
                     <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
                                        Project :
                                      &nbsp; {sessiondata?.projectName}
-                                       {/* {console.log(batch?.data?.projectName,'<--------njknnjnjn')} */}
                                    </Typography>
                                    <Typography variant="body1" gutterBottom>
                                        Partner : &nbsp;{sessiondata?.partnerName}
-                                       {/* &nbsp;{batch?.data?.partnerName} */}
                                    </Typography>
                                    <Typography variant="body1" gutterBottom>
                                     Gelathi Session : &nbsp; {sessiondata?.gf_session_name}
@@ -221,7 +203,6 @@ getGreenMotivators();
                         
                     {sessiondata?.all_participants?.map((itm) => 
                     {
-
                 return (
                 
                 //   <div>
@@ -236,14 +217,11 @@ getGreenMotivators();
                       </div>
                     {(itm?.GreenMotivators=='0')?<Checkbox 
                     id={itm.participant_id}
-                    //  ref={itm.participant_id}
                     onClick={()=>{
                       setGreenmotivators(itm)
-                      console.log(itm,"<---sadasdasd")
                     }} 
                     {...label}
                      />:<Checkbox id={itm.participant_id} 
-                    //  ref={itm.participant_id} 
                      defaultChecked={true} onClick={()=>{setGreenmotivators(itm)}} style={{color:'pink'}}/>}
                      
                   </CardActions> 

@@ -4,15 +4,11 @@ import ApiRequest from './components/ApiRequest';
 import SearchCommon from './components/SearchCommon';
 import Projectapi from './components/Projectsapi';
 export default function Gelathis({ selectDATA, getData,type ,date,endDate,dateValue,endDateValue}) {
-
   const [glead, setGlead] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
-
-
   useEffect(() => {
     lead()
   }, [])
-
   const lead = async () => { 
     if(type=="Projects")
   {
@@ -25,11 +21,9 @@ export default function Gelathis({ selectDATA, getData,type ,date,endDate,dateVa
   const getSearchFilter = (e) => {
     setSearchInFilter(e)
   }
-
   const returnSearchFilter = () => {
     return searchInFilter
   }
-
   return (
     <div>
       <SearchCommon getSearchFilter={(e) => { getSearchFilter(e) }} />

@@ -47,14 +47,12 @@ export default function Gelathifacilitatorprofile({isOpenFilter,onOpenFilter,onC
     const updateSetUser=()=>{
       setUser(JSON.parse(localStorage?.getItem('people')))
     }  
-
     useEffect(() => {
         profile()
       },
       [isOpenFilter])
       const profile = async => {
         const userData = JSON.parse(localStorage?.getItem('profiledetails'))?.emp_id
-    console.log(userData,"userdetailssssssssss")
         var data = JSON.stringify({
           "id": userData
         });
@@ -71,19 +69,14 @@ export default function Gelathifacilitatorprofile({isOpenFilter,onOpenFilter,onC
         axios(config)
           .then(function (response) {
             setProfileData(response.data)
-            console.log(response.data);
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
     
       }
-    
-console.log(profileData,"infoooooooo")
     return(
         <>
-
-
       <Dialog 
         fullScreen
         open={isOpenFilter}
@@ -93,21 +86,15 @@ console.log(profileData,"infoooooooo")
       >
         <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar>
-
-
             <IconButton style={{ color: "white", float: 'left' }} onClick={onCloseFilter}>
               <Iconify icon="material-symbols:arrow-back-rounded" />
             </IconButton>
             <Typography variant="subtitle2" style={{ color: 'white' }}>
               Profile
             </Typography>
-
           </Toolbar>
         </AppBar>
-
-
         <Divider /><br />
-
         <Scrollbar>
           <Stack spacing={1} sx={{ px: 1 }}>
             <div>
@@ -122,7 +109,6 @@ console.log(profileData,"infoooooooo")
                     </Typography> 
                     <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
                       Role : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.role_name}</span>
-
                     </Typography>
                    <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
                       Status : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.status === '1' ? "Active" : null}</span>
@@ -136,10 +122,7 @@ console.log(profileData,"infoooooooo")
                   </Card>
                 </CardContent>
               </Card>
-
-
             </div>
-
             <div>
               <Card style={{ width: "auto" }}>
                 <CardContent>
@@ -149,7 +132,6 @@ console.log(profileData,"infoooooooo")
                   <br />
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
                     Mobile Number:<span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.contactNum}</span>
-
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
                     Work: <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.workNum} </span>
@@ -165,11 +147,7 @@ console.log(profileData,"infoooooooo")
                   </Typography>
                 </CardContent>
               </Card>
-
             </div>
-
-
-
             <div>
               <Card>
                 <CardContent>
@@ -190,13 +168,9 @@ console.log(profileData,"infoooooooo")
                   }
                 </CardContent>
               </Card>
-
             </div>
-
-
           </Stack>
         </Scrollbar>
-
     
       </Dialog>
     </>

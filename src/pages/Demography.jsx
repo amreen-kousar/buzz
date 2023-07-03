@@ -9,7 +9,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Grid, Button, Stack, CardContent, Chip , Typography,Container} from '@mui/material';
 import axios from 'axios';
-import DemographyFilter from './Components/DemographyFilters/DemographyFilter';
 import { assertTSAnyKeyword } from '@babel/types';
 import FiltersHome from './Filters/FiltersHome';
 import Page from 'src/components/Page';

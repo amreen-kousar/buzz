@@ -15,8 +15,6 @@ import Gelathifacilitatorprofile from './Gelathifacilitatorprofile';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
-
-
 export default function Trainerslist(){
     const [data1, setData1] = useState('')
     const [open, setOpen] = React.useState(false);
@@ -24,18 +22,15 @@ export default function Trainerslist(){
     const handleClickOpen = () => {
         setOpen(true);
       };
-
       const handleClose=()=>{
         setOpen(false)
       } 
-
       const handleOpenFilter = () => {
         setOpenFilter(true);
       };
       const handleCloseFilter = () => {
         setOpenFilter(false);
       };
-
       const id = sessionStorage?.getItem("proId")
       useEffect(() => {
         projData();
@@ -43,7 +38,6 @@ export default function Trainerslist(){
       }, [])
       const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
       const projData = async => {
-        console.log(location, "location props")
         var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -65,22 +59,18 @@ export default function Trainerslist(){
         axios(config)
           .then(function (response) {
             setData1({...response.data.list})
-            console.log(response.data.list, '<--------------setData1setData1');
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
     
       }
     
-
       const viewUser = (item) => {
         localStorage.setItem('profiledetails', JSON.stringify(item))
-       console.log(item,"itemeeeeeeeeeee") 
        handleOpenFilter()
       }
      
-
     return(
         <>
       
@@ -100,7 +90,6 @@ export default function Trainerslist(){
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
           People
           </Typography>
-
           </Toolbar>
         </AppBar>
         <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
@@ -131,7 +120,6 @@ export default function Trainerslist(){
                 onCloseFilter={handleCloseFilter}
               />
             </Stack>
-            {console.log(openFilter,"hyyyyyy")}
             </>)
         }
            

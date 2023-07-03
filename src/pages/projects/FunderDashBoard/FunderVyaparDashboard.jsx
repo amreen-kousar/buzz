@@ -4,11 +4,9 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography, Stack, Divider, Card, CardContent, Button, Box } from '@mui/material';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
-
 import Page from 'src/components/Page';
 import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
-
 import { AppWidgetSummary } from 'src/sections/@dashboard/app';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -19,8 +17,6 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import {baseURL} from 'src/utils/api';
-
-
 const FunderVyaparDashboard = () => {
   const navigate = useNavigate();
  
@@ -31,22 +27,17 @@ const FunderVyaparDashboard = () => {
   const [slected, setSelected] = useState(null);
   const [summaryData, setSummaryData] = useState([]);
   const [graphData, setGraphData] = useState(null);
-
   const apiHit = async (id, i, g) => {
     
     setLoader(true);
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-    console.log(role , "role id ")
+  
    
-
     const data = {
-
       "roleid":role,
       "emp_id":userid
   }
-  
-    console.log(data, '<------bbbbbbb');
     const config = {
       method: 'post',
      url: baseURL +'funderVyaparDashboard',
@@ -56,7 +47,6 @@ const FunderVyaparDashboard = () => {
       },
       data,
     };
-
     axios(config)
       .then((response) => {
         setLoader(false);
@@ -69,13 +59,9 @@ const FunderVyaparDashboard = () => {
        
       });
   };
-  console.log(summaryData?.data, 'resposeapi');
-  let formatdata = summaryData?.data;
-  console.log('🚀 ~ file: Gelathidashboard.js:105 ~ Gelathidashboard ~ formatdata:', formatdata);
   useEffect(() => {
     apiHit();
   }, []);
-
   if (loader) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
@@ -83,19 +69,14 @@ const FunderVyaparDashboard = () => {
       </Box>
     );
   }
-
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
-
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
-
  
-
   
-
   if (summaryData?.length === 0) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
@@ -103,13 +84,9 @@ const FunderVyaparDashboard = () => {
       </Box>
     );
   }
-
  
-
   
-
   
-
   return (
     <>
       <Page title="Dashboard">
@@ -121,25 +98,20 @@ const FunderVyaparDashboard = () => {
         </Stack>
         <Container maxWidth="xl">
         
-
          
    <Grid container spacing={3} marginTop={4}>
    <Grid item xs={4} sm={8} md={4}>
-
 <AppWidgetSummary
   title="Target"
   total={summaryData?.target}
   color="motivator"
-
 />
 </Grid>
 <Grid item xs={4} sm={8} md={4}>
-
 <AppWidgetSummary
   title="Actual"
   total={summaryData?.actual}
   color="motivator"
-
 />
 </Grid>
             <Grid item xs={4} sm={8} md={4}>
@@ -181,13 +153,9 @@ const FunderVyaparDashboard = () => {
           </Grid>
           
      
-
         </Container>
       </Page>
     </>
   );
 };
-
-
-
 export default FunderVyaparDashboard

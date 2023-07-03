@@ -13,7 +13,6 @@ import {
   FormControlLabel,
   Card,
   CardContent,Icon,RadioGroup,
-
 } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import { useEffect } from 'react';
@@ -34,7 +33,6 @@ import  { useRef } from 'react';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function ShaktiForm({itm ,reloadFUnction}) {
   const [open, setOpen] = React.useState(false);
   const [solution,setsolution]= React.useState(false);
@@ -71,35 +69,14 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
     tempData[label] = updatedList;
     setChecked(tempData);
   };
-
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
-    console.log('call clos symbol');
     setOpen(false);
-    // setworthperson(false)
-    // setqualitiesgood(false)
-    // setfailureperson(false)
-    // setproblemsdisheartened(false)
-    // setproblemsolutions(false)
-    // setplan(false)
-    // setsolution(false)
-    // setmoneysave(false)
-    // setsavingfrequency(false)
-    // seteducation(false)
-    // sethealthcareaccess(false)
-    // setcreditaccess(false)
-    // setsavemoney(false)
-    // setpurchase(false)
-    // setexpenditure(false)
-    // setlivelihoodvalue(false)
-    // setshareproblems(false)
-    // setsharelearning(false)
+   
   };
   const handledClose = () => {
-    console.log('call clos symbol');
     setOpen(false);
     setworthperson(false);
     setqualitiesgood(false);
@@ -123,77 +100,57 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
   const handleworthperson = (event) => {
     setworthperson(event.target.value);
   };
-
   const handlequalitiesgood = (event) => {
     setqualitiesgood(event.target.value);
   };
-
   const handlefailureperson = (event) => {
     setfailureperson(event.target.value);
   };
-
   const handleproblemsdisheartened = (event) => {
     setproblemsdisheartened(event.target.value);
   };
-
   const handleproblemsolutions = (event) => {
     setproblemsolutions(event.target.value);
   };
-
   const handleplan = (event) => {
     setplan(event.target.value);
   };
-
   const handlesolution = (event) => {
     setsolution(event.target.value);
   };
-
   const handlemoneysave = (event) => {
     setmoneysave(event.target.value);
   };
-
   const handlesavingfrequency = (event) => {
     setsavingfrequency(event.target.value);
   };
-
   const handleducation = (event) => {
     seteducation(event.target.value);
   };
   const handlehealthcareaccess = (event) => {
     sethealthcareaccess(event.target.value);
   };
-
   const handlecreditaccess = (event) => {
     setcreditaccess(event.target.value);
   };
-
   const handlesavemoney = (event) => {
     setsavemoney(event.target.value);
   };
-
   const handlepurchase = (event) => {
     setpurchase(event.target.value);
   };
   const handlexpenditure = (event) => {
     setexpenditure(event.target.value);
   };
-
   const handlelivelihood = (event) => {
     setlivelihoodvalue(event.target.value);
   };
-
   const handleshareproblems = (event) => {
     setshareproblems(event.target.value);
   };
-
   const handlesharelearning = (event) => {
     setsharelearning(event.target.value);
   };
-
-  // useEffect(()=>{
-  //   setSendData([])
-  // },[open])
-  console.log('call clos save button');
   const [sendData, setSendData] = React.useState({
     implementationPlan: '',
     medical: '',
@@ -259,20 +216,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
     assetPurchase: '',
     moneyborrowed: '',
   });
-
   const shakthiformdata = async () => {
-
-    // const form = this.formRef.current;
-    // if (form.checkValidity()) {
-    //   // form is valid, submit it
-    //   form.submit();
-    // } else {
-    //   // form is invalid, handle the error
-    //   console.log('Form is invalid');
-    // }
-
-   
-    console.log('surveyyyyform');
     var data = JSON.stringify({
       participantId: itm?.participant_id,
       implementationPlan: plan,
@@ -316,7 +260,6 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
       savingMoney: savemoney,
       assetPurchase: purchase,
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/addSurveyData.php',
@@ -325,7 +268,6 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
         reloadFUnction()
@@ -338,8 +280,6 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
           timer: 2000,
         });
         setshaktidata(response?.data);
-
-        console.log('survey form data ', response);
       })
       .catch(function (error) {
         Swal.fire({
@@ -349,18 +289,14 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
           confirmButtonText: 'Ok',
           timer: 2000,
         });
-
-        console.log(error);
       });
     handleClose();
   };
-
   return (
     <>
       {/* <Button variant="outlined" onClick={handleClickOpen}>
      Survey form
       </Button> */}
-
       <div style={{ position: 'absolute', right: 0, float: 'right' }}>
         {(itm?.isSurveyDone=='0')?<IconButton onClick={handleClickOpen}>
           <Iconify icon="clarity:form-line" width={20} height={20} color="#ff7424" />
@@ -706,7 +642,6 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
                 </Stack>
                 <Stack>
                   <Typography variant="body1">2. Where Do You Save Up Money ? </Typography>
-
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
                       Answer
@@ -733,7 +668,6 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
                 </Stack>
                 <Stack mt={2}>
                   <Typography variant="body1">3. What Is The Frequency Of Your Savings ? </Typography>
-
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Age
@@ -1030,7 +964,6 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
                     Number Of Women With A Financial Plan For Next 1 Year
                   </Typography>
                   <Typography variant="body2">1. Do You Have A Specific Goal That You Are Saving Up For ?</Typography>
-
                   <Stack mt={2}>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -1187,7 +1120,6 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
                     </InputLabel>
-
                     <Select
                       variant="standard"
                       color="common"

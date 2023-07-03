@@ -25,28 +25,21 @@ import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
-
 ParticipantDrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
 };
-
 export default function ParticipantDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
-// console.log(batch,'<------clcikDataclcikData')
      const [session,setSession] = useState('')
      const [partiData,setpartiData] = useState('')
     useEffect(() => {
         Participant();
-        // console.log(clcikData)
     }, [clcikData])
-
     const Participant = async =>{
         var data = JSON.stringify({
             "participant_id": clcikData?.id
           });
-
-
           
           
           var config = {
@@ -61,14 +54,12 @@ export default function ParticipantDrawer({ isOpenFilter, onOpenFilter, onCloseF
           axios(config)
           .then(function (response) {
             setpartiData(response.data)
-            console.log(response.data,">-gbdfgh");
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
          
     }
-console.log(partiData,"------------------------------>dataaaaa")
     return (
         <>
             <Drawer
@@ -83,14 +74,11 @@ console.log(partiData,"------------------------------>dataaaaa")
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
                         {`${clcikData?.title}`}
                     </Typography>
-                    {console.log(clcikData,'<------clcikDataclcikData')}
                     <IconButton onClick={onCloseFilter}>
                         <Iconify icon="eva:close-fill" width={20} height={20} />
                     </IconButton>
                 </Stack>
-
                 <Divider />
-
                 <Scrollbar>
                     <Stack spacing={3} sx={{ p: 3 }}>
                         <div>
@@ -182,8 +170,6 @@ console.log(partiData,"------------------------------>dataaaaa")
                                 </CardContent>
                             </Card> */}
                         </div>
-
-
                     </Stack>
                 </Scrollbar>
             </Drawer>

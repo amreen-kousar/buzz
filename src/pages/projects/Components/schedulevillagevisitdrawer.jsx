@@ -30,30 +30,22 @@ Villagevisitdrawer.propTypes = {
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
 }; 
-
 export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,data,id }){
     const [scheduleData,setScheduleData] = useState('')
       const navigate = useNavigate();
-      console.log(data,'<------data',data)
     const [addData, setAddData] = useState({
         date: dayjs(new Date()),
         user_id: "",
       })
-
  const handleChange = (event) => {
         setAddData({ ...addData, date: event })
       }
-
     useEffect(() => {
         VillageVisit();
-        // console.log(clcikData)
     }, [clcikData])
-console.log(scheduleData,"scheduldataaaaaaaaa")
     const createGfSession = async =>{
       const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-
         var data = JSON.stringify({
-
             "project_id": scheduleData?.data?.project_id,
             "user_id": userid,
             "locationId":scheduleData?.data?.location_id ,
@@ -77,22 +69,18 @@ console.log(scheduleData,"scheduldataaaaaaaaa")
           
           axios(config)
           .then(function (response) {
-            // onCloseFilter()
-            // history.push('/')
             if(response?.data?.code ===200){
             navigate('/dashboard/projects/gelathiProgram',{state:{id:id}})
-            console.log(JSON.stringify(response.data));
             }
             else{
   alert(response?.data?.message)
             }
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
           
     }
-
     const VillageVisit = async =>{
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -114,15 +102,13 @@ console.log(scheduleData,"scheduldataaaaaaaaa")
             axios(config)
             .then(function (response) {
               setScheduleData(response?.data)
-              console.log(response.data,"<--------------setScheduleData");
             })
             .catch(function (error) {
-              console.log(error);
+              // console.log(error);
             });
             
            
       }
-      console.log(scheduleData,"------------------------------>dataaaaascheduleDatascheduleData")
     return(
         <>
           <Drawer
@@ -137,7 +123,6 @@ console.log(scheduleData,"scheduldataaaaaaaaa")
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
                         {`${clcikData?.title}`}
                     </Typography>
-                    {console.log(clcikData,'<------clcikDataclcikData')}
                     <IconButton onClick={onCloseFilter}>
                         <Iconify icon="eva:close-fill" width={20} height={20} />
                     </IconButton>
@@ -162,11 +147,9 @@ console.log(scheduleData,"scheduldataaaaaaaaa")
                                     </Typography>
                                 </CardContent>
                             </Card>
-
                             <Typography style={{ flexDirection: 'row',marginTop:20,marginLeft:5 }} variant="subtitle1" gutterBottom>
                                        All Participants :  {scheduleData?.all_participants?.length}
                                     </Typography>
-
                           
                                 <Card style={{marginTop:20}}>
                                     <CardContent>
@@ -185,10 +168,8 @@ console.log(scheduleData,"scheduldataaaaaaaaa")
                                 </Card>
                                 <Stack mt={5}>
                                 <Button fullWidth variant="contained" onClick={createGfSession} >Save</Button>
-
                                 </Stack>
                 </div>
-
                     </Stack>
                 </Scrollbar>
                 </Drawer>

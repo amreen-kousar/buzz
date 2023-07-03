@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
 import { Stack,IconButton,Button, DialogContent,DialogContentText,TextField ,Grid,Typography , Radio,FormControlLabel,Card,CardContent,FormGroup,Checkbox} from '@mui/material';
@@ -15,7 +14,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   });
 export default function Programevaluationday1({onCloseFilter,batch})
 {
-  console.log("🚀 ~ file: Programevaluationday1.jsx:17 ~ batch:", batch.evaluation_first)
     const [open, setOpen] = React.useState(false);
     
     const [checked,setChecked] = React.useState({
@@ -38,7 +36,6 @@ export default function Programevaluationday1({onCloseFilter,batch})
       // });}
         setOpen(true);
       };
-
       const handleClose=()=>{
         setOpen(false)
       }
@@ -47,7 +44,6 @@ export default function Programevaluationday1({onCloseFilter,batch})
         tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
         linkStyle: { textDecoration: 'none', color: "black" }
       }
-
    const [sendData,setSendData]= React.useState({
     
   interactive_m1:"", 
@@ -72,11 +68,8 @@ export default function Programevaluationday1({onCloseFilter,batch})
   allotted_m3:"",
   trainingday1:"",  
   training:"",     
-
   });
-
       const evaluationday1form= async() =>{
-        console.log("surveyyyyform")
        var data = JSON.stringify({
         "training_batch_id":81803,
         "interactive_m1":sendData?.interactive_m1, 
@@ -145,7 +138,6 @@ export default function Programevaluationday1({onCloseFilter,batch})
             confirmButtonText: 'Ok',
             timer: 2000
           });
-           console.log(error);
          });
          handleClose();
    }
@@ -186,8 +178,6 @@ export default function Programevaluationday1({onCloseFilter,batch})
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
           Program Evaluation Day 1 
           </Typography>
-
-
           <Button type="submit" autoFocus edge="end" color="inherit" >
           <Iconify icon="material-symbols:save" width={30} height={30} />
           </Button>
@@ -216,7 +206,6 @@ export default function Programevaluationday1({onCloseFilter,batch})
                     </FormGroup>
                   </Stack>
                &nbsp;<hr color="#ff7424"/><br/>
-
                 <Typography variant="h6" color="primary">Before the training starts on Day 1</Typography><br/>
                   <Typography style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack mt={2}>
@@ -230,7 +219,6 @@ export default function Programevaluationday1({onCloseFilter,batch})
                       <FormControlLabel value="Express gratitude towards the Anganwadi teacher for her efforts" control={<Checkbox style={{color:"#595959"}} />} label="Express gratitude towards the Anganwadi teacher for her efforts" onChange={(event)=>handlecheckedata('daytraining',event)}/>
                     </FormGroup>
                   </Stack><br/>
-
                 <Typography variant='h6' color="primary">Module 1 (M1) Introduction to Buzz:</Typography>
                 <Typography>How many women attended the training session *</Typography>
                 <Stack mt={2} mb={2}>
@@ -272,7 +260,6 @@ export default function Programevaluationday1({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
                   </Stack>
-
                   <Stack mt={2}>
                     <Typography style={{fontWeight:700}}>Did any women leave the training session during or after the first module? *</Typography>
                     <RadioGroup
@@ -315,8 +302,6 @@ export default function Programevaluationday1({onCloseFilter,batch})
                       // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e, value) => { setSendData({ ...sendData, new_women_m2: value }) }}
-
-
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -414,7 +399,6 @@ export default function Programevaluationday1({onCloseFilter,batch})
                       <FormControlLabel value="Ask why is it necessary to communicate clearly,politely and effectively?" control={<Checkbox style={{color:"#595959"}} />} label="Ask why is it necessary to communicate clearly,politely and effectively?"  onChange={(event)=>handlecheckedata('communicate_m3',event)}/>           
                     </FormGroup>
                   </Stack><br/>
-
                   <Typography style={{fontWeight:700}}>During the debriefs for role plays did the trainer not ask:</Typography>
                   <Stack mt={2}>
                     <FormGroup >
@@ -487,7 +471,6 @@ export default function Programevaluationday1({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
                   </Stack>
-
                 </CardContent>
         </Card>
         
@@ -497,7 +480,6 @@ export default function Programevaluationday1({onCloseFilter,batch})
         </form>
       </Dialog>
   
-
      
          </div>
         

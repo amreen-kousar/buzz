@@ -6,10 +6,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Iconify from '../../components/Iconify';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import Select, { SelectChangeEvent, } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { date } from 'yup';
 const bull = (
@@ -17,14 +14,11 @@ const bull = (
     •
   </Box>
 );
-
 export default function Location(props) {
-  console.log(props, "<---dadsad")
   const [country, setCountry] = useState([])
   const [states, setStates] = useState([])
   const [district, setDistrict] = useState([])
   const [taluk, setTaluk] = useState([])
-
     var [data, setData] = useState({
     country: 1,
     state: '',
@@ -34,9 +28,7 @@ export default function Location(props) {
     end_date:props.endDate,
     dateValue:props.dateValue,
     endDateValue : props.endDateValue
-
   })
-  console.log(data,"locationdata")
   useEffect(() => {
     location()
   }, []
@@ -45,7 +37,6 @@ export default function Location(props) {
     var data = JSON.stringify({
       "country_id": "1",
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
@@ -54,23 +45,19 @@ export default function Location(props) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         setStates(response?.data?.list)
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const getState = async (id) => {
     var data = JSON.stringify({
       "country_id": "1",
       "state_id": id
-
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
@@ -79,14 +66,12 @@ export default function Location(props) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setDistrict(response.data.list)
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const getDistrict = async (id) => {
@@ -94,9 +79,7 @@ export default function Location(props) {
       "country_id": "1",
       "state_id": data?.state,
       "district_id": id
-
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
@@ -105,20 +88,15 @@ export default function Location(props) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setTaluk(response.data.list)
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
-  const getTalaq = async (id) => {
-    console.log(id, data, "<---somethimnfff")
-  }
-
+  
   const addData = () => {
     if (data.district_id && data.talaq_id) {
       let districtName = district.filter(d => d.id == data.district_id)
@@ -127,17 +105,13 @@ export default function Location(props) {
       talukName = talukName[0]?.name
       data = { ...data, districtName: districtName, talukName: talukName, stateName: "Karnataka" ,start_date:props.date,end_date:props.endDate,dateValue:props.dateValue,endDateValue:props.endDateValue}
       props?.onSumbit(data)
-      console.log(data,"submitteddataaaaaaaaaa")
     }
   }
  
   return (
     <div>
       <Card>
-
-
         <CardContent>
-
           <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
             Country
             <Select fullWidth variant='standard' color="common"
@@ -148,7 +122,6 @@ export default function Location(props) {
             >
               <MenuItem value="0">India</MenuItem>
             </Select> </Typography><br></br>
-
           <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
             {data.state == "" && "Select "}State
             <Select fullWidth variant='standard' color="common"
@@ -207,7 +180,6 @@ export default function Location(props) {
               })
               }
             </Select></Typography>
-
         </CardContent>
         <Button style={{ float: "right", color: 'white', marginRight: '160px', marginBottom: '10px', backgroundColor: '#ed6c02', }}
           onClick={() => addData()}>Submit</Button>
@@ -215,7 +187,6 @@ export default function Location(props) {
     </div>
   );
 }
-
 // From https://bitbucket.org/atlassian/atlaskit-mk-2/raw/4ad0e56649c3e6c973e226b7efaeb28cb240ccb0/packages/core/select/src/data/countries.js
 const countries = [
   { code: 'AD', label: 'Andorra', phone: '376' },

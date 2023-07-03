@@ -33,20 +33,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export default function Day2Completed({ shown, setShown, batch }) {
-  console.log(batch, 'day2form is opening')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
   const [reload,setReload]=useState(false);
   const [gelathiCount,setGelathicount]=useState(0);
-  console.log("🚀 ~ file: ShaktiDialog.jsx:35 ~ ShaktiDialog ~ clcikData:", clcikData)
 const userid = JSON.parse(localStorage.getItem('userDetails'))?.role
   const [checkData,setCheckData]=React.useState('');
   const handleOpenFilter = () => {
     setOpenFilter(true); 
    
-
   };
-
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
@@ -60,32 +56,26 @@ const [Trainingdata,setTrainingData]=useState(false);
     
    
   }, [shown])
-
   React.useEffect(() => {
     //setShown(shown)
 getTrainingBatch();
     
    
   }, [open])
-
   const changeState = () => {
     setReload(!reload);
-    console.log('changeState is called ');
   };
   const handleClickOpen = () => {
     setShown(true)
     setOpen(true);
   };
-
   const handleClose = () => {
     setShown(false)
     setOpen(false);
   };
-
 const handlesurvey =()=>{
     alert('Survey was done')
 }
-
   const getTrainingBatch = async =>{
         
    
@@ -108,43 +98,28 @@ const handlesurvey =()=>{
       axios(config)
       .then(function (response) {
         setTrainingData(response.data)
-        console.log(batch , "response from ")
-      
-        
       })
       .catch(function (error) {
-        console.log(error);
-      });
-   
-      
+        // console.log(error);
+      }); 
 }
-console.log(checkData,"checkedta")
-
 const handleedit =()=>{
   alert('Participant Information Already Collected')
 }
-
 let c=0;
-
 const countsuggestedgelathi=()=>{
   
   for (let i = 0; i < Trainingdata?.all_participants?.length; i++) {
    
    if(Trainingdata?.all_participants[i]?.gelathiRecomm==1)
    {
-    console.log(Trainingdata?.all_participants[i],"iiiiii")
     c=c+1;
    }
    
   } 
   
 }
-
-
-
 countsuggestedgelathi();
-console.log(c,"cvaluee")
-
   return (
     <div>
       <Dialog
@@ -167,9 +142,6 @@ console.log(c,"cvaluee")
              Day2 Self Shakti
             </Typography>
          
-            {console.log(checkData,"addparticipants")}
-        
-
           </Toolbar>
         </AppBar>
         <Stack style={{ top: 40 }}>
@@ -183,17 +155,14 @@ console.log(c,"cvaluee")
               
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Project </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.projectName}</TableCell></TableRow>
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Partner </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.partnerName}</TableCell></TableRow>
-
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Training&nbsp;Batch </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.name}</TableCell></TableRow>
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Day 1</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.day1}</TableCell></TableRow>
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Day 2</TableCell><TableCell>:&nbsp;&nbsp; {batch?.data?.day2}</TableCell></TableRow>
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Contact&nbsp;Person </TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.contact_person}</TableCell></TableRow>
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Contact&nbsp;Number</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.contact_number}</TableCell></TableRow> 
           <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Trainer&nbsp;Name</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.trainer_name}</TableCell></TableRow>  </TableBody>
-
           </Table>
         </TableContainer>
-
           
           </Card>
         </Stack>
@@ -233,15 +202,12 @@ console.log(c,"cvaluee")
           <Iconify icon="charm:notes-tick" width={20} height={20} color="green" onClick={handlesurvey}/>
         </IconButton></>:null} 
                   </CardActions>
-
-                  {console.log(itm, '<----------itm?.participant_name')}
                 </CardContent>
               </Card>
             </Stack>
         )
     })
 }
-
       </Dialog>
     </div>
   );

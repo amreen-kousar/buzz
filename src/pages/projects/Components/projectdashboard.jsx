@@ -26,13 +26,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 export default function Projectdashboard({profileData}) {
-   console.log("called Projectdashboard()",profileData?.role_id)
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
       setOpen(true);
     };
-
     const handleClose=()=>{
       setOpen(false)
     }
@@ -41,15 +39,10 @@ export default function Projectdashboard({profileData}) {
     apiHit();
   }, []);
   const itemStyles = [{ itemXs: 4, itemSm: 8, itemMd: 4 }, { itemXs: 6, itemSm: 8, itemMd: 6 }]
-
   const summaryDataView = [
-
     { ...itemStyles[0], title: "Target", total: 'summary_target', color: "actual" },
-
     { ...itemStyles[0], title: "Actual", total: 'summary_actual', color: "primary" },
-
     { ...itemStyles[0], title: "2nd Day TurnOut(%)", total: 'summary_day2', color: "warning", ext: ' % ', },
-
     {
       ...itemStyles[0], title: "Villages", total: 'summary_villages', color: "villages", styles: {
         backgroundImage: (theme) =>
@@ -59,58 +52,33 @@ export default function Projectdashboard({profileData}) {
           )} 100%)`,
       }, icon: 'fontisto:holiday-village'
     },
-
     { ...itemStyles[0], title: "Women", total: 'summary_women', color: "info", icon: 'twemoji:women-holding-hands' },
-
     { ...itemStyles[0], title: "Gelathis", total: 'summary_enrolled', color: "gelathis", icon: 'fluent:people-team-16-regular' },
-
     { ...itemStyles[1], title: "Green Motivator", total: 'summary_green', color: "motivator" },
-
     { ...itemStyles[1], title: "Enrolled Vyapar", total: 'summary_vyapar', color: "vyapar" }
-
   ]
-
   const summarySubDataView = [
     { ...itemStyles[0], title: "Villages", total: 'villages', color: "villages", icon: 'fontisto:holiday-village' },
-
     { ...itemStyles[0], title: "Women", total: 'women', color: "info", icon: 'twemoji:women-holding-hands' },
-
     { ...itemStyles[0], title: "2nd Day TurnOut(%)", total: 'day2', ext: ' % ', color: "warning", icon: 'twemoji:women-holding-hands' },
-
     { ...itemStyles[0], title: "Gelathis", total: 'enrolled', color: "gelathis", icon: 'fluent:people-team-16-regular' },
-
     { ...itemStyles[0], title: "Green Motivator", total: 'greenMotivators', color: "motivator", icon: 'openmoji:leafy-green' },
-
     { ...itemStyles[0], title: "Vyapar", total: 'vyapar', color: "vyapar", icon: 'eos-icons:product-subscriptions-outlined' },
-
   ]
-
   const [loader, setLoader] = useState(false)
-
   const [openFilter, setOpenFilter] = useState(false);
-
   const [filterData, setFilterData] = useState({})
-
   const [slected, setSelected] = useState(null)
-
   const [summaryData, setSummaryData] = useState([]);
-
   const theme = useTheme();
-
   
   
-
   const apiHit = async (id, i, g) => {
-    console.log(i , "i data")
-    console.log(g , "g data")
     setLoader(true)
     
     var userid = JSON.parse(localStorage.getItem('profiledetails'))?.emp_id
     var role = JSON.parse(localStorage.getItem('profiledetails'))?.role_id
-    console.log("🚀 ~ file: projectdashboard.jsx:109 ~ apiHit ~ role:", role)
-
     var roleid 
-
     if(role==="Trainer"){
       roleid="5"
       localStorage.setItem('profilerole','5')
@@ -130,8 +98,6 @@ export default function Projectdashboard({profileData}) {
       roleid="13"
       localStorage.setItem('profilerole','13')
     }
-
-    console.log(roleid , userid , "profile details vvvvvvvvvvvvvv")
     const data = {
       end_date: g === "date" ? i : '',
       role_id: profileData?.role_id,
@@ -148,8 +114,6 @@ export default function Projectdashboard({profileData}) {
       project_id: g ? "" : i === 3 ? id?.id : '',
       opsManager: g ? "" : i === 4 ? id?.id : '',
     };
-    console.log("🚀 ~ file: projectdashboard.jsx:149 ~ apiHit ~ data:", data)
-    {console.log(data.gflId, "hello data.gflId")}
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/Scripts/getDashboardData.php',
@@ -161,16 +125,14 @@ export default function Projectdashboard({profileData}) {
     };
     axios(config)
       .then((response) => {
-        console.log(response ,"api response in dashboard")
         setLoader(false)
         
         setSummaryData(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
-
   const getData = (itm, i) => {
     setSelected(itm)
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
@@ -178,33 +140,27 @@ export default function Projectdashboard({profileData}) {
     setFilterData(data)
     handleCloseFilter()
   }
-
   const onSumbit = (e, i) => {
     setSelected({ type: 'Location', name: `State : ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
     handleCloseFilter()
     apiHit(e?.district_id, e?.talaq_id, "country")
   }
-
   const onDateSubmit = (e) => {
     setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
     apiHit(e?.startDate, e?.endDate, "date")
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
     handleCloseFilter()
   }
-
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
-
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
-
   const handleDelete = () => {
     setSelected(null)
     apiHit();
   }
-
   if (loader) {
     return (
       <Grid sx={{ display: 'flex',float:'right' }}>
@@ -212,32 +168,6 @@ export default function Projectdashboard({profileData}) {
       </Grid>
     )
   }
-
-
-  //  const getData = (itm, i) => {
-  //   setSelected({
-  //     id: i,
-  //     name: itm?.name
-  //   })
-  //   const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
-  //   apiHit(itm, i)
-  //   console.log(data, i, itm, "<----sdfssreerfer")
-  //   setFilterData(data)
-  //   handleCloseFilter()
-  //   console.log("sdfgsdfdfssd", itm, i)
-  // }
-  // const onSumbit = (e, i) => {
-  //   handleCloseFilter()
-
-  //   apiHit(e?.district_id, e?.talaq_id, "country")
-  //   console.log(e, i, "<----datssdasdsa")
-  // }
-
-  const closefilter = () => {
-    console.log("deleted")
-  }
-
-// console.log(idvalue,"idddddddddddddd")
   return (
 <>
 <IconButton onClick={handleClickOpen}><Iconify style={{ color: "black" ,right:0,float:'right'}} icon="fluent:notebook-eye-20-filled" /></IconButton>
@@ -253,7 +183,6 @@ export default function Projectdashboard({profileData}) {
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
          Dashboard
           </Typography>
-
           </Toolbar>
         </AppBar>
         <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
@@ -261,7 +190,6 @@ export default function Projectdashboard({profileData}) {
             id="scroll-dialog-description"
             tabIndex={-1}
           >
-
     <Page title="Dashboard">
  
       <Container maxWidth="xl">
@@ -277,13 +205,11 @@ export default function Projectdashboard({profileData}) {
             onCloseFilter={handleCloseFilter}
           />
         </Stack>
-
         {(profileData?.role_id==4 || profileData?.role_id==5)?<Grid container spacing={3} marginTop={1}>
             
           {
             summaryDataView.map(s => {
               return <Grid item xs={s.itemXs} sm={s.itemSm} md={s.itemMd}>
-
                 <AppWidgetSummary
                   title={s.title }
                   total={`${summaryData[s.total]} ${s.ext ? s.ext : ''}`|| 0 }
@@ -293,61 +219,48 @@ export default function Projectdashboard({profileData}) {
               </Grid>
             })
           }
-
         </Grid>:
          <Grid container spacing={3} marginTop={4}>
          <Grid item xs={4} sm={8} md={4}>
-
            <AppWidgetSummary
              title="Total Circles"
              total={summaryData?.summary_circles}
              color="motivator"
-
            />
          </Grid>
          <Grid item xs={4} sm={8} md={4}>
-
            <AppWidgetSummary
              title="Circle Meetings"
              total={summaryData?.summary_circle_meet}
              color="motivator"
-
            />
          </Grid>
          <Grid item xs={4} sm={8} md={4}>
-
            <AppWidgetSummary
              title="Village Visits"
              total={summaryData?.summary_villagevisit}
              color="villages"
-
            />
          </Grid>
          <Grid item xs={6} sm={6} md={6}>
-
            <AppWidgetSummary
              title="Beehive Visits"
              total={summaryData?.summary_beehive}
              color="motivator"
-
            />
          </Grid>
          <Grid item xs={6} sm={6} md={6}>
-
            <AppWidgetSummary
              title="Enrolled Gelathis"
              total={summaryData?.summary_enroll}
              color="gelathis"
-
            />
          </Grid>
          <Grid item xs={6} sm={6} md={6}>
-
            <AppWidgetSummary
              title="Green Motivators"
              total={summaryData?.summary_green}
              color="motivator"
-
            />
          </Grid>
          <Grid item xs={6} sm={6} md={6}>
@@ -355,11 +268,9 @@ export default function Projectdashboard({profileData}) {
              title="Enrolled Vyapar"
              total={summaryData?.summary_vyapar}
              color="vyapar"
-
            />
          </Grid>
        </Grid>}
-
        {(profileData?.role_id==4 || profileData?.role_id==5)?<Grid item xs={12} sm={12} md={12} marginTop={3}>
           {summaryData?.data?.map((itm) => {
             return (
@@ -394,7 +305,6 @@ export default function Projectdashboard({profileData}) {
                     {
                       summarySubDataView.map(s => {
                         return <Grid item xs={s.itemXs} sm={s.itemSm} md={s.itemMd}>
-
                           <AppWidgetSummary
                             title={s.title || null}
                             total={`${itm[s.total]} ${s.ext ? s.ext : ''}`|| null }
@@ -415,7 +325,6 @@ export default function Projectdashboard({profileData}) {
               <>
               {summaryData?.data?
                <Card sx={{ marginTop: 5, marginLeft: 4, height: '400px' }}>
-
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
               Project : {item?.name}
             </Typography>
@@ -430,27 +339,20 @@ export default function Projectdashboard({profileData}) {
                     <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
                       <TableCell>Circle Meetings</TableCell>  <TableCell>:&nbsp;{item?.circle_meet}</TableCell>
                     </TableRow>
-
                     <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
                       <TableCell>Village Visits</TableCell>  <TableCell>:&nbsp;{item?.villagevisit}</TableCell>
                     </TableRow>
-
                     <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
                       <TableCell>Beehive Visits</TableCell>  <TableCell>:&nbsp;{item?.beehive}</TableCell>
                     </TableRow>
-
                     <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
                       <TableCell>Enrolled Gelathis</TableCell>  <TableCell>:&nbsp;{item?.enroll}</TableCell>
                     </TableRow>
-
                   </TableHead>
                   <TableBody>
-
                   </TableBody>
                 </Table>
               </TableContainer>
-
-
             </CardContent>
           </Card> 
           :  <h1 style={{ fontWeight: 900, textAlign: 'center' }}><br />No Projects</h1>}
@@ -458,8 +360,6 @@ export default function Projectdashboard({profileData}) {
             )
           })
           }</>}
-
-
       </Container>
     </Page> 
     </DialogContentText>

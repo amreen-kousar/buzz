@@ -2,10 +2,6 @@ import { useState, useEffect } from 'react';
 import React from 'react'
 import { Button, Card, CardActions, CardContent, Stack,TextField } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -27,33 +23,17 @@ import moment from 'moment';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function EditGelathiSession({session,editSession, setEditsession}) {
-  console.log(session, '<--------shownshownshown')
   const [openFilter, setOpenFilter] = useState(false);
-  const [clcikData, setClickData] = useState()
-
-  const handleOpenFilter = () => {
-    setOpenFilter(true);
-  };
-
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
-
-
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = useState(new Date())
   React.useEffect(() => {
-    //setShown(shown)
     setOpen(editSession)
   }, [editSession])
-
   const handleClickOpen = () => {
     setEditsession(true)
     setOpen(true);
   };
-
   const handleClose = () => {
     setEditsession(false)
     setOpen(false);
@@ -79,14 +59,12 @@ export default function EditGelathiSession({session,editSession, setEditsession}
       axios(config)
       .then(function (response) {
         handleClose()
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
       
   }
-
   return (
     <div>
       <Dialog
@@ -128,7 +106,6 @@ export default function EditGelathiSession({session,editSession, setEditsession}
           </TableBody>
           </Table>
         </TableContainer>
-
           
           </Card>
         </Stack>
@@ -156,7 +133,6 @@ export default function EditGelathiSession({session,editSession, setEditsession}
         </LocalizationProvider>
        
       </Stack>
-
       </Dialog>
     </div>
   );

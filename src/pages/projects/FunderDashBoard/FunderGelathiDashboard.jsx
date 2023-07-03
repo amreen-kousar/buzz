@@ -1,17 +1,13 @@
 
-
-
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography, Stack, Divider, Card, CardContent, Button, Box } from '@mui/material';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
-
 import Page from 'src/components/Page';
 import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
-
 import { AppWidgetSummary } from 'src/sections/@dashboard/app';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -46,7 +42,6 @@ const FunderGelathiDashboard = () => {
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   
     const apiHit = async (id, i, g) => {
-      console.log("🚀 ~ file: Gelathidashboard.js:45 ~ apiHit ~ id, i, g:", id, i, g)
       setLoader(true)
       var role = JSON.parse(localStorage.getItem('userDetails'))?.role
       var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
@@ -57,7 +52,6 @@ const FunderGelathiDashboard = () => {
         "emp_id":userid
     }
     
-      console.log(data, '<------bbbbbbb');
       const config = {
         method: 'post',
         // url: "https://cors-anywhere.herokuapp.com/{http://3.7.7.138/appTest/Scripts/getDashboardData.php}",
@@ -72,20 +66,14 @@ const FunderGelathiDashboard = () => {
       axios(config)
         .then((response) => { 
           setLoader(false)
-  console.log(response.data,"________>responsedata")
-  setSummaryData(response.data);
-
-          console.log("responseofapi", response.data)
+  setSummaryData(response.data)
         })
         .catch((error) => {
          
-          console.log(error);
-          setErrormsg(error)
+          // console.log(error);
         });
     };
-  console.log(summaryData?.data,"resposeapi")
-  let formatdata = summaryData?.data
-    console.log("🚀 ~ file: Gelathidashboard.js:105 ~ Gelathidashboard ~ formatdata:", formatdata)
+  
     useEffect(() => {
       apiHit();
     }, []);
@@ -115,7 +103,6 @@ const FunderGelathiDashboard = () => {
       apiHit(e?.startDate, e?.endDate, "date")
       setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
       handleCloseFilter()
-      console.log(e, "<----scasds")
     }
   
     const handleDelete = () => {
@@ -133,7 +120,6 @@ const FunderGelathiDashboard = () => {
     }
   
     
-
     return (
       <>
   
@@ -147,28 +133,23 @@ const FunderGelathiDashboard = () => {
           </Stack>
           <Container maxWidth="xl">
           <Grid item spacing={10}>
-
 </Grid>
   
          
       
           <Grid container spacing={3} marginTop={4}>
           <Grid item xs={4} sm={8} md={4}>
-
 <AppWidgetSummary
   title="Target"
   total={summaryData?.target}
   color="motivator"
-
 />
 </Grid>
 <Grid item xs={4} sm={8} md={4}>
-
 <AppWidgetSummary
   title="Actual"
   total={summaryData?.actual}
   color="motivator"
-
 />
 </Grid>
               <Grid item xs={4} sm={8} md={4}>
@@ -236,5 +217,4 @@ const FunderGelathiDashboard = () => {
     )
   
   }
-
 export default FunderGelathiDashboard

@@ -1,16 +1,9 @@
 import { useState, useEffect } from 'react';
-// material
 import { styled, alpha } from '@mui/material/styles';
 import { Input, Slide, Button, IconButton, InputAdornment, ClickAwayListener,TextField } from '@mui/material';
 import { Box, Stack, AppBar, Toolbar, } from '@mui/material';
-// component
 import Iconify from '../../components/Iconify';
 import useResponsive from '../../hooks/useResponsive';
-
-// ----------------------------------------------------------------------
-
-
-
 export default function Searchbar({ getSearch }) {
   const [isOpen, setOpen] = useState(false);
   var searchData = ''
@@ -19,20 +12,12 @@ export default function Searchbar({ getSearch }) {
     console.log("handle open fuunction")
   };
   const isDesktop = useResponsive('up', 'lg');
-
   const handleClose = () => {
     setOpen(false);
     console.log("handle close fuunction")
-
   };
-
-
-
-
-
   const APPBAR_MOBILE = 64;
   const APPBAR_DESKTOP = 92;
-
   const SearchbarStyle = styled('div')(({ theme }) => ({
     top: 0,
     left: isDesktop == false ? -70 : -0,
@@ -52,10 +37,7 @@ export default function Searchbar({ getSearch }) {
       padding: theme.spacing(0, 5),
     },
   }));
-
   const DRAWER_WIDTH = 280;
-
-
   const RootStyle = styled(AppBar)(({ theme }) => ({
     boxShadow: 'none',
     backdropFilter: 'blur(6px)',
@@ -66,7 +48,6 @@ export default function Searchbar({ getSearch }) {
     },
     left: isDesktop == false ? 70 : null
   }));
-
   const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
     minHeight: APPBAR_MOBILE,
     [theme.breakpoints.up('lg')]: {
@@ -74,13 +55,10 @@ export default function Searchbar({ getSearch }) {
       padding: theme.spacing(0, 5),
     },
   }));
-
   const changeText = (e) => {
     searchData = e?.target?.value
   }
-
   
-  // ----------------------------------------------------------------------
   return (
     <RootStyle>
       <ToolbarStyle>
@@ -101,7 +79,6 @@ export default function Searchbar({ getSearch }) {
                  }
              />
             )}
-
             <Slide direction="down" in={isOpen} mountOnEnter unmountOnExit>
               <SearchbarStyle>
                 <Input
@@ -124,7 +101,6 @@ export default function Searchbar({ getSearch }) {
                   '&:hover': {
                     backgroundColor: '#ffd796',
                     color: '#ff7424'
-
                   },
                   color: 'white', backgroundColor: '#ff7424'
                 }}>

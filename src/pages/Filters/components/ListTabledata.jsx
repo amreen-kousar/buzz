@@ -9,12 +9,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import { useState } from 'react';
 function ListTabledata(props) {
-
     const [filterData, setFilterData] = useState(null)
     useEffect(() => {
         setFilterData(props.returnSearchFilter)
     }, [props.returnSearchFilter])
-
     return (
         <Card>
             {props.data?.length !== 0 && props.data?.map(itm => {
@@ -23,7 +21,6 @@ function ListTabledata(props) {
                         <TableContainer sx={{ paddingLeft: "1rem" }} ><br />
                             <Table aria-label="customized table"  >
                                 <TableBody style={{ marginTop: "10px",cursor:'pointer' }} >
-                                    {console.log(props.endDateValue,"endDateeeeee",props.dateValue)}
                                     <TableRow onClick={() => { props.getData({ ...itm, type: props.type }, props.selectDATA,props.date,props.endDate,props.dateValue,props.endDateValue) }} >
                                         <TableCell sx={{ width: "10px" }}> <Iconify icon="mdi:user-circle" width={25} height={25} /> </TableCell>
                                         <TableCell >  {itm?.name} {itm?.first_name} {itm?.last_name}</TableCell>
@@ -36,5 +33,4 @@ function ListTabledata(props) {
         </Card>
     )
 }
-
 export default ListTabledata

@@ -40,30 +40,29 @@ const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-
 }));
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
   const navigate = useNavigate();
   const logoutuser = (path) => {
-    //  localStorage.removeItem('userId')
-    // localStorage.removeItem('userDetails')
+
+
+
+
     localStorage.clear()
     navigate('/')
-
   }
   const loginuser = (path) => {
-    // navigate('/dashboard/app')
+
+
     navigate(-1)
   }
   const handleClose = () => {
     onClose(selectedValue);
   };
-
   const handleListItemClick = (value) => {
     onClose(value);
   };
@@ -88,13 +87,12 @@ function SimpleDialog(props) {
     </Dialog>
   );
 }
-
 SimpleDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  //   selectedValue: PropTypes.string.isRequired,
-};
 
+
+};
 export default function RecipeReviewCard({ profileData, changeUser }) {
   const [expanded, setExpanded] = React.useState(false);
   const userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -146,29 +144,22 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       lastUpdatedBy: profileData?.id
     })
   }, [profileData])
-
   const handleExpandClick = () => {
     setExpanded(true);
   };
-
   const handleCloseClick = () => {
     setExpanded(false);
-  };
-  const handleClick = () => {
-    console.info('You clicked the Chip.');
   };
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = (value) => {
     setOpen(false);
   };
-
-  console.log(profileData?.address3, "addresssssssss")
   const editProfile = async => {
-    // console.log(editData,"<----editProfileeditProfile")
+
+
     handleCloseClick();
     const userDetails = localStorage?.getItem("userDetails")
     var data = JSON.stringify({
@@ -195,7 +186,6 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "project_list": editData?.project_list,
       "license_number": editData?.license_number
     });
-    console.log("ediuyjyhtgrfde", data)
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/editUser.php',
@@ -204,56 +194,37 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setEditData(response.data)
-        changeUser()
-        console.log(JSON.stringify(response.data, '<------ghjhgjghjhg'));
+        changeUser();
         <Alert severity="success">Updated Data!</Alert>
-
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
-  //hloooo
-  console.log(profileData, "<---345678i")
+
   return (
     <Page title="profile" style={{ margin: "1rem" }}>
       <Container>
         <Grid container spacing={2} justifyContent="space-around">
           <Grid item xs={10} sm={6}>
-
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
               <Typography variant="h5" gutterBottom>
                 Profile
               </Typography>
-
-              {/* <IconButton >
-                   <Iconify sutofocus icon="material-symbols:exit-to-app"  sx={{ float: "right", marginLeft: 85 }}  onClick={handleClickOpen} />
-                   <SimpleDialog
-        // selectedValue={selectedValue}
-        open={open}
-        onClose={handleClose}
-      />
-                    </IconButton> */}
-
+      
             </Stack>
-
             <div style={{ display: "flex", justifyContent: "center", width: "60vw" }}>
               <div>
                 <Card sx={{ width: '100wh' }} ><br />
-
-
                   <Stack spacing={1} sx={{ px: 1 }}>
-
                     <Card >
                       <CardContent>
                         <div style={{ float: 'left', paddingTop: 40, paddingRight: 5, paddingBottom: 40 }}>
                           <Avatar src={(profileData?.profile_pic) ? profileData.profile_pic : defaultImage} alt="photoURL" style={{ height: 50, width: 50 }} />
                         </div>
-
                         <Card sx={{ boxShadow: 0 }}>
                           <CardContent >
                             <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name}</Typography>
@@ -272,23 +243,18 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                         </Card>
                       </CardContent>
                     </Card>
-
-
                     <div>
                       <Card style={{ width: "auto" }}>
                         <CardContent>
                           {(!expanded) ?
                             <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#ff7424' }}>
                               Contact Information
-
                             </Card> : null}
                           <TableContainer >
                             <Table aria-label="customized table"  >
-                              {/* <TableHead maxWidth>Contact Information</TableHead> */}
                               <TableBody >
                                 <TableRow style={{ height: "8px !important" }} >
                                   <TableCell > Mobile </TableCell>
-
                                   <TableCell>: &nbsp;{profileData?.contactNum}</TableCell>
                                 </TableRow>
                                 <TableRow style={{ height: "8px !important" }} >
@@ -310,16 +276,13 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                               </TableBody>
                             </Table>
                           </TableContainer>
-
                         </CardContent>
                       </Card>
-
                     </div>
                     <br></br>
                     <div>
                       <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#ff7424' }}>
                         Projects
-
                       </Card>
                       {(profileData?.project_list.length > 0) ? <Card>
                         <CardContent>
@@ -332,11 +295,8 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                         </CardContent>
                       </Card> : <span style={{ textAlign: 'center' }}>No data</span>}
                     </div>
-
-
                   </Stack>
                   <CardActions disableSpacing>
-
                     {(!expanded) ? <ExpandMore disableRipple style={{ backgroundColor: 'transparent' }} expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
                       <Button variant="warning" style={{ textAlign: 'right' }} id="edit_user"
                         sx={{
@@ -353,35 +313,24 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                         }} component={RouterLink} to="#" startIcon={<Iconify icon="material-symbols:edit" />}>
                         Edit User
                       </Button>
-
                     </ExpandMore> :
                       <IconButton title="close" onClick={handleCloseClick} color="inherit" aria-label="close" style={{ float: 'right' }} id="close">
                         <CloseIcon />
                       </IconButton>}
                   </CardActions>
-                  {/* <Button onClick={handleExpandClick}  aria-label="show more" aria-expanded={expanded} style={{float:'right',color:'#ed6c07'}}>Edit</Button> */}
-                  {/* <IconButton edge="start" title="Edit User Information" > </IconButton> */}
+              
                   <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
                       <Stack mb={3} style={{ backgroundColor: '#ffd796', borderRadius: 9 }}>
                         <Typography style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#ff7424' }}
-                          variant="h6"
-                        // sx={{
-                        //   p: 2,
-                        //   margin: 'auto',
-                        //   maxWidth: 500,
-                        //   flexGrow: 1,
-                        //   color: '#ff7424'
-                        // }}
-                        >
+                          variant="h6">
+
                           User Information
                         </Typography>
                       </Stack>
                       <Card>
-
                         <TableContainer >
                           <Table aria-label="customized table"  >
-
                             <TableBody >
                               <TableRow style={{ height: "8px !important" }} >
                                 <TableCell>UserName :</TableCell>
@@ -391,23 +340,16 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                                 <TableCell> Role :</TableCell>
                                 <TableCell>{userDetails?.role_name}</TableCell>
                               </TableRow>
-
                             </TableBody>
                           </Table>
                         </TableContainer>
-
                       </Card>
                       <Stack mb={1.5}>
                         <Divider variant="middle" />
                       </Stack>
                       <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#ff7424' }}>
                         Contact Information
-
-                        {/* <IconButton edge="start" onClick={handleCloseClick} color="inherit" aria-label="close" >
-    <CloseIcon />
-  </IconButton> */}
-
-
+                       
                       </Card><br />
                       <Grid direction={'column'} spacing={1.8} alignItems="center" justifyContent="space-between">
                         <Typography fullWidth>Email :&nbsp;{profileData?.officeMailId}</Typography><br />
@@ -430,7 +372,6 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                         </Grid>
                         <Grid item mb={2}>
                           <TextField fullWidth size="small" id="Work" margin="dense"
-
                             type="number"
                             value={editData?.workNum}
                             onChange={(e) => { setEditData({ ...editData, workNum: e?.target?.value }) }}
@@ -439,7 +380,6 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                               e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 10)
                             }}
                             label="Work" variant="outlined" color="common" />
-
                         </Grid>
                         <Grid item mb={2}>
                           <TextField
@@ -474,7 +414,6 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                             onInput={(e) => {
                               e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 6)
                             }} />
-
                         </Grid>
                       </Grid>
                       <Box display="flex" justifyContent="flex-end">

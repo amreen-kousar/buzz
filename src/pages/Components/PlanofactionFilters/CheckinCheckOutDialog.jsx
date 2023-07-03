@@ -1,18 +1,6 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
-import { Card, CardContent, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
-import { Stack } from '@mui/system';
+import { Card, CardContent,Button,Dialog,Divider,AppBar,Toolbar,IconButton,Typography,Slide,Stack} from '@mui/material';
 import Paper from '@mui/material/Paper';
 import moment from 'moment';
 import axios from 'axios';
@@ -24,38 +12,21 @@ import { useEffect } from 'react';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function CheckinCheckOutDialog({ photos, setCheck, batch ,getGFSessionData  ,getTrainingBatch}) {
-console.log("🚀 ~ file: CheckinCheckOutDialog.jsx:27 ~ FullScreenDialog ~ batch:", batch)
-//   console.log(batch, '<--------shownshownshown')
-const [data ,setData]= useState()
-
-
-
-
-console.log("🚀 ~ file: CheckinCheckOutDialog.jsx:30 ~ FullScreenDialog ~ data:", data)
-
-
   const [open, setOpen] = React.useState(false);
-  // console.log("🚀 ~ file: CheckinCheckOutDialog.jsx:78 ~ FullScreenDialog ~ open:", batch.plan_date.split(" "))
   React.useEffect(() => {
-    //setShown(shown)
-    
     setOpen(photos)
     GetStatus()
   }, [photos])
-
   const handleClickOpen = () => {
     setCheck(true)
     setOpen(true);
     GetStatus();
   };
-
   const handleClose = () => {
     setCheck(false)
     setOpen(false);
   };
-
   const newTime = new Date()
 //   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
@@ -76,17 +47,13 @@ console.log("🚀 ~ file: CheckinCheckOutDialog.jsx:30 ~ FullScreenDialog ~ data
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(function(position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
       setLats({lat:position.coords.latitude,lng:position.coords.longitude})
 var data = JSON.stringify({
   "latitude": position.coords.latitude,
   "longitude": position.coords.longitude
 });
-
 var config = {
   method: 'post',
   url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
@@ -95,21 +62,16 @@ var config = {
   },
   data : data
 };
-
-
 axios(config)
 .then(function (response) {
-  console.log(response?.data,",----ewrwerwer")
   setLocation(response?.data)
-//  console.log(JSON.stringify(response.data));
 })
 .catch(function (error) {
-  console.log(error,",----ewrwerwer");
+  // console.log(error,",----ewrwerwer");
 });
       
     });
   },[])
-
   const checkinout = async(type) =>{
     var data = JSON.stringify({
         "location_name": location,
@@ -150,42 +112,9 @@ axios(config)
      
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
-// useEffect(()=>{
-//   GetStatus()
-// })
-//poa type=2, type="3" for GF 
-//"poa_type": 1,"type": 2, for Trainer 
-console.log(checkIn,"checkintime")
-// const GetStatus = async=>{
-//   var data = JSON.stringify({
-//     "project_id": batch?.project_id,
-//     "poa_type": 2,
-//     "type": 3,
-//     "tb_id": batch?.id
-//   });
-  
-//   var config = {
-//     method: 'post',
-//     url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
-//     headers: { 
-//       'Content-Type': 'application/json'
-//     },
-//     data : data
-//   };
-  
-//   axios(config)
-//   .then(function (response) {
-//     console.log(JSON.stringify(response.data),"dataaaaaaaaaaaa");
-//     setCheckData(response.data)
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
-// }
-
 const GetStatus = async=>{
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   var data = JSON.stringify({
@@ -193,7 +122,6 @@ const GetStatus = async=>{
     user_id: idvalue,
     
   });
-
   var config = {
     method: 'post',
     url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
@@ -202,18 +130,15 @@ const GetStatus = async=>{
     },
     data: data,
   };
-
   axios(config)
     .then(function (response) {
       setCheckData(response.data);
-      console.log(response.data, '<------------setEventDatasetEventDatasetEventDatadetails');
+    
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
 }
-
-  {console.log(checkData,"checkdataaaaaaaaaaaaa")}
   return (
     <div>
       <Dialog
@@ -236,11 +161,6 @@ const GetStatus = async=>{
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" style={{color:'white'}}>
               Check in / CheckOut 
             </Typography>
-            {/* <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button> */}
-
-
           </Toolbar>
         </AppBar>
 <Card >
@@ -279,7 +199,6 @@ const GetStatus = async=>{
         <Typography>
            Location  : {checkData?.check_in_location}
         </Typography></>:null}<br/> <Divider />
-        {/* </>:null} */}
         <Typography mt={2}>
             End :
         </Typography>
@@ -303,39 +222,7 @@ const GetStatus = async=>{
       
 </CardContent>
 </Card>
-        {/* <List>
-          <>
-
-            {batch?.photos?.map(itm => {
-              return (
-                <>
-                  <img src={itm?.photo1 ? itm?.photo1 : ""} />
-                  <img src={itm?.photo2 ? itm?.photo2 : ""} />
-                </>
-              )
-            })}
-          </>
-        </List> */}
-                {/* <Stack style={{ top: 40 }}>
-          <Card sx={{mt:2,ml:2}}>
-           
-            <TableContainer component={Paper} sx={{width:'50vw'}}>
-          <Table aria-label="customized table">
-           
-            <TableBody>
-              
-          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Project </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.projectName}</TableCell></TableRow>
-          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Training&nbsp;Batch </TableCell><TableCell>:&nbsp;&nbsp;{batch?.data?.name}</TableCell></TableRow>
-          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Day 1</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.day1}</TableCell></TableRow>
-          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Day 2</TableCell><TableCell>:&nbsp;&nbsp; {batch?.data?.day2}</TableCell></TableRow>
-          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Contact&nbsp;Person </TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.contact_person}</TableCell></TableRow>
-          <TableRow><TableCell component="th" scope="row" sx={{fontWeight:700}}>Contact&nbsp;Number</TableCell><TableCell>: &nbsp;&nbsp;{batch?.data?.contact_number}</TableCell></TableRow>  </TableBody>
-          </Table>
-        </TableContainer>
-
-          
-          </Card>
-        </Stack> */}
+       
       </Dialog>
     </div>
   );

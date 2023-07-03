@@ -24,7 +24,6 @@ import {
   Grid,
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
-
 // components
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
@@ -57,13 +56,11 @@ const ExpandMore = styled((props) => {
   //     duration: theme.transitions.duration.shortest,
   //   }),
 }));
-
 GelathiProgrameDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
-
 export default function GelathiProgrameDrawer({
   isOpenFilter,
   onOpenFilter,
@@ -72,7 +69,6 @@ export default function GelathiProgrameDrawer({
   gelathiFacikitatorLead,
 }) {
   var [session, setSession] = useState('');
-  console.log('🚀 ~ file: GelathiProgrameDrawer.jsx:71 ~ session:', session.tb_id);
   const [showNote, setShowNote] = useState(false);
   const [gelatiNote, setGelatiNote] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
@@ -85,14 +81,8 @@ export default function GelathiProgrameDrawer({
 const [iserror, setIsError] = useState(false)
   var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-
-  console.log('clickedDatawhat', clcikData);
-  //notes save button
-
   const [SaveBtn, setSaveBtn] = useState(false);
-
   const [expanded, setExpanded] = React.useState(false);
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -107,9 +97,7 @@ const [iserror, setIsError] = useState(false)
   const [editSession, setEditsession] = useState(false);
  
   const [getImage, setGetImae] = useState([]);
-
   const [circleDrawerData, setCircleDrawerData] = useState();
-
   // const [images,setImages] = useState([])
   const [photos, setPhotos] = React.useState(false);
   const [shown, setShown] = React.useState(false);
@@ -117,12 +105,9 @@ const [iserror, setIsError] = useState(false)
   const [viewImage, setViewImage] = React.useState(false);
   const [openFilter, setOpenFilter] = useState(false);
   localStorage.setItem('clickData', clcikData);
-  console.log('clcikData', clcikData);
   const localstoragrClickData = localStorage.getItem('clcikData');
   const userName = JSON.parse(localStorage.getItem('userDetails'))?.first_name;
-  console.log('userNAme in localstorage', userName);
   const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
-
   useEffect(()=>{
     let isSubscribe = true;
     setIsError(false)
@@ -130,7 +115,6 @@ const [iserror, setIsError] = useState(false)
      
       getGFSessionData();
     }
-
     return () => {
       isSubscribe = false;
     };
@@ -146,38 +130,29 @@ const [iserror, setIsError] = useState(false)
     getNoteHandler();
   }, [clcikData]);
   useEffect(() => {
-    console.log('useEffect for getnotehandler');
     setIsError(false)
     let isSubscribe = true;
     setIsError(false)
     if (isSubscribe) {
       getNoteHandler();
       getGFSessionData();
-
     }
-
     return () => {
       isSubscribe = false;
     };
   }, []);
-
   // geting notes for each drawer
   useEffect(() => {
-    console.log('useEffect for getnotehandler');
-
     let isSubscribe = true;
     setIsError(false)
     if (isSubscribe) {
       getNoteHandler();
       getGFSessionData();
     }
-
     return () => {
       isSubscribe = false;
     };
   }, [session.tb_id]);
-  console.log(clcikData, '<---------gf_session_namegf_session_name');
-
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -185,24 +160,15 @@ const [iserror, setIsError] = useState(false)
     setOpenFilter(false);
   };
   //   image converting
-
   function getBase64(file, callback) {
     const reader = new FileReader();
-
     reader.addEventListener('load', () => callback(reader.result));
-
     reader.readAsDataURL(file);
   }
   const convertImage = (e) => {
-    console.log('this is calleddddfdsfs');
-    // data.append('emp_id', userid);
-    // data.append('file', e.target.files[0]);
-    // setImagePath([...imagePath, e.target.files[0]])
     const imageData = URL.createObjectURL(e.target.files[0]);
-    console.log(imageData, 'files');
     getBase64(e.target.files[0], function (base64Data) {
       setImages([...images, base64Data]);
-      //   setViewImage(true)
       setViewImage(true);
     });
   };
@@ -219,22 +185,19 @@ const [iserror, setIsError] = useState(false)
       gelathi_id: session.user_id,
       photos: [images.toString().slice(22)],
     });
-
     var requestOptions = {
       method: 'POST',
       body: raw,
       redirect: 'follow',
     };
-
     let res = fetch(oldbaseURL + 'uploadGFSessionPhotos.php', requestOptions)
       .then((itn) => {
-        console.log(itn, '<--itemgh');
         setImages([]);
         alert('Image uploaded successfully..');
         setISLoading(false);
       })
       .catch((err) => {
-        console.log(err, '<---wertyu');
+        // console.log(err, '<---wertyu');
       });
   };
   const getGFSessionData = (async) => {
@@ -253,7 +216,6 @@ const [iserror, setIsError] = useState(false)
       
     })
   }
-
     var config = {
       method: 'post',
       url: oldbaseURL + 'getGFSessionData1.php',
@@ -262,7 +224,6 @@ const [iserror, setIsError] = useState(false)
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
         session = response.data;
@@ -272,25 +233,20 @@ const [iserror, setIsError] = useState(false)
           project_id: session?.project_id,
           title: session?.type_name,
         });
-        console.log(response.data, '<---------setSessionsetSession');
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
-
   const noteSubmitHandler = () => {
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
-
     var data = JSON.stringify({
       notes: gelatiNote,
       type: session.type,
       tb_id: session.tb_id,
       emp_id: userid,
     });
-
-    console.log(data, 'material api');
     const config = {
       method: 'post',
       url: oldbaseURL + 'createNotes.php',
@@ -308,17 +264,13 @@ const [iserror, setIsError] = useState(false)
           getNoteHandler();
           setSaveBtn(false);
           alert('Note Added Successfully...');
-          console.log('susscesfully added data material');
         }
       })
       .catch(function (error) {
-        console.log(error, 'failed');
         setIsError(true)
       });
-    console.log('submit');
   };
   const getNoteHandler = () => {
-    console.log('getNoteHandler');
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
@@ -326,8 +278,6 @@ const [iserror, setIsError] = useState(false)
       tb_id: session.tb_id,
       // "type":2, "tb_id":21407
     });
-
-    console.log(data, 'material api');
     const config = {
       method: 'post',
       url: oldbaseURL + 'getNotes.php',
@@ -341,23 +291,19 @@ const [iserror, setIsError] = useState(false)
       .then(function (response) {
         if (response.status == 200) {
           setGetAllNotes(response?.data?.notes);
-          console.log(response, 'notesData');
         }
       })
       .catch(function (error) {
-        console.log(error, 'failed');
+        // console.log(error, 'failed');
       });
-    console.log('submit');
   };
-  console.log(getAllNotes, 'getallnotes');
-
+  
   const removesession = (e) => {
     if (confirm('Do You want to Cancel?')) {
       var data = JSON.stringify({
         poa_id: e?.id,
         day: '',
       });
-
       var config = {
         method: 'post',
         url: oldbaseURL + 'updatePoaCancel.php',
@@ -366,29 +312,24 @@ const [iserror, setIsError] = useState(false)
         },
         data: data,
       };
-
       axios(config)
         .then(function (response) {
-          console.log(JSON.stringify(response.data));
           onCloseFilter();
           getGFSessionData();
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
     }
   };
-
   const reschedudlehandler = () => {
     setReschedule(true);
   };
-
   const Reschedule = (e) => {
     var data = JSON.stringify({
       poa_id: e,
       date_time: moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
     });
-
     var config = {
       method: 'post',
       url: oldbaseURL + 'updateReschedule.php',
@@ -397,15 +338,13 @@ const [iserror, setIsError] = useState(false)
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
         setReschedule(false);
         onCloseFilter();
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
   //Method to delete the images that is selected
@@ -413,7 +352,6 @@ const [iserror, setIsError] = useState(false)
     images.splice(index, 1);
     setImages([...images]);
   };
-
   const styles = {
     buttonStyle: {
       boxShadow: 'none',
@@ -423,23 +361,9 @@ const [iserror, setIsError] = useState(false)
       textAlign: 'left',
     },
   };
-
-  console.log(session.gf_session_name, 'session name');
-  console.log('a.splice(0,2)', session?.gf_session_name?.split('_')[1].slice(0, 2));
-  if (session?.gf_session_name?.split('_')[1].slice(0, 2) == 'BV') {
-    console.log('ONly BV found ', session?.gf_session_name);
-
-    //  setGf(true)
-  } else {
-    // setGf(false)
-  }
-
+ 
   return (
     <>
-      {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
-
       <Drawer
         width={isSmallScreen ? '100%' : 300}
         anchor="right"
@@ -453,26 +377,19 @@ const [iserror, setIsError] = useState(false)
           <Typography variant="body1" sx={{ ml: 1 }}>
             {session?.type_name == 'Circle Metting' ? 'Circle Meeting' : session?.type_name}
           </Typography>
-          {console.log(clcikData, '<------clcikDataclcikData')}
-
           <IconButton onClick={onCloseFilter}>
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
-
         <Divider />
 {
-
-
 session.length <=0 ?
 <>
-
 <div style={{display:"flex", marginTop:"50%", marginLeft:"40%" }}>
       <CircularProgress />
       </div>
 </>
 :
-
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>
@@ -480,7 +397,6 @@ session.length <=0 ?
                 <CardContent>
                   <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
                     Project:&nbsp;{session?.projectName}
-                    {console.log(session?.gf_session_name, '<--------gf_session_namegf_session_name')}
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     Partner :&nbsp;{session?.partnerName}
@@ -498,7 +414,6 @@ session.length <=0 ?
                         <IconButton onClick={reschedudlehandler} style={{ right: -20 }}>
                           <Iconify icon="mdi:clock-time-four-outline"></Iconify>
                         </IconButton>
-                        {console.log(session, 'sessionidddddddd')}
                         <IconButton onClick={() => removesession(session)} style={{ right: -20 }}>
                           <Iconify icon="mdi:cancel-circle"></Iconify>
                         </IconButton>
@@ -520,11 +435,9 @@ session.length <=0 ?
                           }}
                         />
                       </LocalizationProvider>
-                      {console.log(session, 'session?.id')}
                       <Button onClick={() => Reschedule(session?.id)}>Save</Button>
                     </Stack>
                   )}
-
                   <EditGelathiSession
                     session={session}
                     editSession={editSession}
@@ -532,26 +445,20 @@ session.length <=0 ?
                       setEditsession(e);
                     }}
                   />
-
                   <Typography variant="body1" gutterBottom>
                     {session?.type_name == 'Circle Metting' ? 'Circle Meeting' : session?.type_name} : <br />
                     {session?.gf_session_name}
                   </Typography>
-
                   <Typography variant="body1" gutterBottom>
                     Plan Date : {session?.plan_date}
                   </Typography>
-
                   {(session?.type == 2||3) ? (
                     <>
-
                      {(session?.contact_number && session.contact_person)?
                      <>
                       <Typography variant="body1" gutterBottom>
                         Contact Person :{session?.contact_person}
                       </Typography>
-
-
                       <Typography variant="body1" gutterBottom>
                         Contact Number  :{session?.contact_number}
                       </Typography>
@@ -559,12 +466,10 @@ session.length <=0 ?
                       }
                       </>
                   ) : null}
-
                   <Typography variant="body1" gutterBottom>
                     Trainer Name &nbsp;:&nbsp;
                     {session?.trainer_name}
                   </Typography>
-
                   <Typography variant="body1" gutterBottom>
                     GF Name &nbsp;:&nbsp;
                     {session?.gf_name}
@@ -572,19 +477,7 @@ session.length <=0 ?
                 </CardContent>
               </Card>
               <br />
-              {/* <ShaktiDialog /> */}
-              {/* <Card style={{ marginTop: 20 }}>
-                <CardContent>
-                  <Typography variant="body1" gutterBottom>
-                    Visit Participants :  {session?.total_participants}{' '}
-                  
-                  </Typography>
-                </CardContent>
-              </Card> */}
-
-              {console.log(session, 'sessiosnssssssssssssssssssssssssssss')}
-
-              {/* IMAGE UPLOAD  */}
+            
               {userId == 6 || userId == 13 ? (
                 <Card style={{ marginTop: 20 }}>
                   {session?.gf_session_name?.split('_')[1].slice(0, 2) == 'BV' &&
@@ -609,7 +502,6 @@ session.length <=0 ?
                           : null}
                       </div>
                       <br />
-
                       <div id="input-icon-camera" style={{ display: 'flex' }}>
                         <label id="input-tag-event" for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
                           <Iconify
@@ -647,7 +539,6 @@ session.length <=0 ?
                       </div>
                     </>
                   )}
-
                   {/* <Card style={{ marginTop: 20 }}>
               <CardContent>
                
@@ -660,13 +551,9 @@ session.length <=0 ?
             </Card> */}
                 </Card>
               ) : null}
-
-              {console.log(session, 'sessiosn')}
-
               {userId == 6 || userId == 13 ? (
                 <Card id="event-data-card" style={{ marginTop: 20 }}>
                   <CardContent id="card-content-poa-event-data">
-                    {console.log(session, 'sessiosn')}
                     {isLoading ? (
                       <CircularProgress />
                     ) : (
@@ -714,7 +601,6 @@ session.length <=0 ?
                     </div>
                   )
                 : null}
-
               <br />
               <Stack style={{ flexDirection: 'row' }} mb={2}>
                 <Button
@@ -756,7 +642,6 @@ session.length <=0 ?
                   </>
                 );
               })}
-
               {session?.type == 4 || session?.type == 10 || session?.type == 16 ? (
                 userId == 6 || userId == 13 ? (
                   <Stack style={{ flexDirection: 'row' }} mb={2}>
@@ -794,7 +679,6 @@ session.length <=0 ?
                   mainDrawerReload = {reloadFunction}
                 />
               </Stack>
-
               {session?.check_in != '0' && userId == 6  && session?.type==2  ? (
                 session?.gf_session_name?.split('_')[1].slice(0, 2) == 'BV' ||
                 (session?.gf_session_name?.split('_')[1].slice(0, 2) == 'CM' &&
@@ -802,7 +686,6 @@ session.length <=0 ?
                   <AddEnrollGelathi session={session} reloadmethod={reloadFunction} />
                 )
               ) : null}
-
               {session?.check_in != '0' && userId == 6 && session?.type==2  ? (
                 <>
                   {session?.gf_session_name?.split('_')[1].slice(0, 2) == 'BV' ||
@@ -812,7 +695,6 @@ session.length <=0 ?
                   )}
                 </>
               ) : null}
-
               {(session?.check_in != '0' && userId == 6 && session?.type==2 ) ?
              
              
@@ -826,25 +708,7 @@ session.length <=0 ?
               ) 
             
               : null}
-
-              {/* 
-
-              <Card style={{ marginTop: 20 }}>
-                <CardContent>
-                  <Typography variant="h6">
-                    Notes
-                    <IconButton style={{ float: 'right' }}>
-                      <Iconify
-                        style={{ color: 'black' }}
-                        icon="material-symbols:add"
-                        onClick={() => {
-                          setShowNote(true);
-                        }}
-                      />
-                    </IconButton>
-                  </Typography>
-                </CardContent>
-              </Card> */}
+           
               <Stack style={{ flexDirection: 'row' }} mb={2}>
                 <Button
                   variant="secondary"
@@ -866,10 +730,9 @@ session.length <=0 ?
                   <span style={{ width: '200px' }}>Notes</span>
                 </Button>
               </Stack>
-
               {showNote ? (
                 <div>
-                  {/* <Dialog fullScreen open={open} onClose={handleClose}TransitionComponent={Transition}></Dialog> */}
+                
                   <Card style={{ marginTop: 20, marginLeft: 10 }}>
                     <TextField
                       style={{ marginTop: 20, marginLeft: 20 }}
@@ -880,17 +743,8 @@ session.length <=0 ?
                       variant="outlined"
                       onChange={async (e) => {
                         let note = await e?.target?.value;
-                        // if(note.length <= 0){
-                        //   alert("Text cannot be empty")
-                        //   setSaveBtn(false)
-                        // }
-                        // else{
-                        //   setGelatiNote(e?.target?.value);
-                        //   setSaveBtn(true)
-                        // }
                         setSaveBtn(true);
                         setGelatiNote(e?.target?.value);
-                        console.log('note', gelatiNote);
                       }}
                     ></TextField>
                     {SaveBtn ? (
@@ -908,7 +762,6 @@ session.length <=0 ?
                         >
                           Save
                         </Button>
-
                         <Button
                           style={{
                             color: 'black',
@@ -949,7 +802,6 @@ session.length <=0 ?
                   </Card>
                 </div>
               ) : null}
-
               <Card>
                 <CardContent>
                   View All Comments :

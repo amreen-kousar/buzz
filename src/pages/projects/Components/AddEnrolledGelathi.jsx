@@ -4,7 +4,6 @@ import React from "react";
 import {Button,CardContent,Stack,Card, DialogContent, DialogContentText,CardActions, Radio, RadioGroup, FormControlLabel} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import PropTypes from 'prop-types';
-import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,15 +18,11 @@ import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import { CheckBox , ScaleOutlined } from '@mui/icons-material';
 import { size, transform } from 'lodash';
-
-
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-  console.log("🚀 ~ file: AddEnrolledGelathi.jsx:25 ~ label:", label)
   export default function AddEnrollGelathi ({session}){
-    console.log("🚀 ~ file: AddEnrolledGelathi.jsx:27 ~ session:", session)
     const [open, setOpen] = React.useState(false);
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState();
@@ -40,7 +35,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       const handleClose = () => {
         setOpen(false);
       };
-
   const addGelathi=(itm)=>{
     var data = JSON.stringify({
         "id": itm?.participant_id,
@@ -62,18 +56,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       axios(config)
       .then(function (response) {
           setSessiondata(response.data)
-          console.log(JSON.stringify(response.message,'<-----------------response.message'));
           getGfsessiondata();
           alert(response.data.message)
           
         
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
         alert(response.data.message)
       });
   }
-
   const getGfsessiondata=()=>{
     var data = JSON.stringify({
         "gf_session_id": session?.id
@@ -90,14 +82,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       
       axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
       });
       
   }
-
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
    
@@ -123,12 +114,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       marginRight: '5px',
       
     },
-
-
  
-
   }
-
     return(
     <>
   
@@ -142,13 +129,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
                   <span style={{ width: "200px" }}>Enrolled Gelathis</span>
                 </Button>
               
-
       </Stack>
       
       <Dialog fullScreen open={open} onClose={handleClose}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">
-        {/* <AppBar sx={{ position: 'relative', bgcolor: '#ed6c02' }}> */}
         <Toolbar sx={{ bgcolor: '#ed6c02', color: 'white' }} >
           <IconButton edge="start" sx={{ color: "inherit" }} onClick={handleClose} aria-label="close">
             <CloseIcon />
@@ -156,16 +141,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
             Enrolled Gelathis
           </Typography>
-
-
-          
         </Toolbar>
-        {/* <Webcam
-    ref={webcamRef}
-    screenshotFormat="image/jpeg"odimeter:"",
-
-    /> */}
-        {/* </AppBar> */}
+ 
         <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
           <DialogContentText
             id="scroll-dialog-description"
@@ -177,11 +154,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
                     <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
                                        Project :
                                      &nbsp; {session?.projectName}
-                                       {/* {console.log(batch?.data?.projectName,'<--------njknnjnjn')} */}
                                    </Typography>
                                    <Typography variant="body1" gutterBottom>
                                        Partner : &nbsp;{session?.partnerName}
-                                       {/* &nbsp;{batch?.data?.partnerName} */}
                                    </Typography>
                                    <Typography variant="body1" gutterBottom>
                                     Gelathi Session : &nbsp; {session?.gf_session_name}
@@ -196,9 +171,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
                     {session?.all_participants?.map((itm) => 
                     {
                 return (
-                //   <div>
-                //   <Typography value={item?.participant_id}>{item?.participant_name}</Typography>
-                //   </div>
+               
                   <CardContent >
                   <CardActions sx={{borderRadius:0}}>
                     <div  style={{width:'90vw',display:'flex',position:'relative',padding:'8px'}} >
@@ -206,53 +179,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
                       <Typography variant="subtitle2">{itm?.participant_name}</Typography> &nbsp;&nbsp; {(itm?.gelathi_status!="")?<div style={{color:'#f75f66'}}>{itm?.gelathi_status}</div >:null} 
                       
                       </div>
-
-                    {/* {(itm?.enroll=='0')?                      
-                    <RadioGroup 
-                     
-                     aria-labelledby="demo-radio-buttons-group-label"
-                     
-                     name='def'
-                   >
-                     <FormControlLabel control={<Radio  name='b'
-                    onClick={()=>{
-                      addGelathi(itm)
-                      console.log(itm,"<---sadasdasd")
-                    }} 
-                    {...label}
-                     />}/></RadioGroup>:        <RadioGroup 
-                     
-                     aria-labelledby="demo-radio-buttons-group-label"
-                     
-                     name='abc'
-                   ><FormControlLabel name='a' control={<Radio  onClick={()=>{addGelathi(itm)}} style={{color:'pink'}}/>}/>
-                     </RadioGroup>
-                     } */}
-                     {/* <RadioGroup aria-labelledby="demo-radio-buttons-group-label" name='abc'>
-                      <FormControlLabel value={{...label}} name='a' control={<Radio  onClick={()=>{addGelathi(itm)}} style={{color:'pink'}}/>}/>
-                     </RadioGroup> */}
-
-                     {/* <RadioGroup
-    aria-labelledby="demo-radio-buttons-group-label"
-    defaultValue="female"
-    name="radio-buttons-group"
-  >
-    <FormControlLabel value={{...label}} control={<Radio />}  />
-    {/* <FormControlLabel value="male" control={<Radio />} label="Male" />
-    <FormControlLabel value="other" control={<Radio />} label="Other" /> */}
-  {/* </RadioGroup> */} 
   {(itm?.enroll=='0')? 
    <input type="radio" 
-  //  onMouseEnter={() => setHover(true)}
-  //  onMouseLeave={() => setHover(false)} 
    style={styles.input}  
    name="asd" onClick={() => {addGelathi(itm)}}  id="specifyColor"  value={{...label}}></input>: 
    <input type="radio"  id="specifyColor"
-  //  onMouseEnter={() => setHover(true)}
-  //  onMouseLeave={() => setHover(false)}
    style={styles.input} 
    defaultChecked={true}  name="asd" onClick={() => {addGelathi(itm)}} value={{...label}}></input>}
-
                   </CardActions>  
                   </CardContent>
                 );

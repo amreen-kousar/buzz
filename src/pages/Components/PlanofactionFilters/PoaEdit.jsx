@@ -3,17 +3,14 @@ import axios from 'axios';
 import React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import Iconify from 'src/components/Iconify';
@@ -32,18 +29,11 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function PoaEdit({ setSucess, itm ,changeState}) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState("");
-
   const [value, setValue] = React.useState(false);
-
-  const handleChangeTime = (newValue) => {
-    // setValue(newValue);
-  };
-
   const [addData, setAddData] = useState({
     date: dayjs(new Date()),
     user_id: "",
@@ -54,25 +44,19 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
     poa_id: ""
   })
   const handleChange2 = (event) => {
-
     setAddData({ ...addData, date2: event })
   }
   const handleChange = (event) => {
     setAddData({ ...addData, date: event })
   }
-
   const handleClickOpen = () => {
     setOpen(true);
     setScroll(scrollType);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-
-{console.log(itm,"itemmmm")}
   useEffect(() => {
-    //AddPoa()
    changeState();
     setAddData({
       date: itm?.date1,
@@ -85,13 +69,9 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
     })
   }, []
   )
-
   const detailsAdded = () => {
-
   }
-
   const AddPoa = async => {
-
     var data = JSON.stringify({
       "poa_id": addData?.poa_id,
       "date": moment(addData?.date?.$d)?.format('DD-MM-YYYY HH:mm:ss'),
@@ -101,7 +81,6 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
       "description": addData?.description,
       "date2": moment(addData?.date?.$d)?.format('DD-MM-YYYY HH:mm:ss')
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/updateRescheduleEvent.php',
@@ -110,7 +89,6 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         if (response?.data?.code === 200) {
@@ -120,11 +98,9 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
           setSucess("this is success create")
           alert(response.data.message)
        
-
           handleClose()
         }
         else {
-
           setValue(true)
           alert(response.data.message)
           Swal.fire({
@@ -134,10 +110,10 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
             confirmButtonText: 'Ok',
             timer: 2000
           });
-          console?.log(response?.data?.message, "<---response?.data?.message")
+        
           setAddPoa(response?.data?.message)
         }
-        // console.log(response.data);
+      
       })
       .catch(function (error) {
              Swal.fire({
@@ -147,7 +123,6 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
             confirmButtonText: 'Ok',
             timer: 2000
           });
-        console.log(error);
       });
   }
   return (
@@ -171,7 +146,6 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-
         <Snackbar id="poa-edit-snackbar" open={value} autoHideDuration={6000} onClose={() => {
           setAddPoa(''),
             setValue(false)
@@ -183,7 +157,6 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
             {/* {addPoa} */}
           </Alert>
         </Snackbar>
-
         <AppBar id="edit-poa-appbar" sx={{ position: 'relative', bgcolor: '#ff7424' }}>
           <Toolbar id="edit-poa-toolbar">
             <IconButton id="close-icon" edge="start" color="inherit" onClick={handleClose} aria-label="close">
@@ -192,20 +165,15 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
             <Typography id="edit-your-poa" sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div"  >
               Edit Your POA
             </Typography>
-
-
             <Button id="edit-poa-save-btn" autoFocus color="inherit" onClick={AddPoa}>
               save
             </Button>
           </Toolbar>
-
         </AppBar>
-
-        {/* <DialogTitle id="scroll-dialog-title">Add User</DialogTitle> */}
+    
         <DialogContent id="edit-poa-dialog-content" dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
           <DialogContentText 
             id="scroll-dialog-description"
-            //   ref={descriptionElementRef}
             tabIndex={-1}
           >
             <Box
@@ -225,9 +193,7 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
                   <Typography id="all-day">All Day</Typography>
                   <Switch id="swithc-edit-poa"value={addData?.all_day} onChange={(e) => { setAddData({ ...addData, all_day: addData?.all_day === 1 ? 0 : 1 }) }} {...label} />
                 </Stack>
-
                 <Stack id="date-time-edit-poa-stack" direction={'row'}>
-
                   <DateTimePicker
                   id="date-time-picker"
                     label="Date&Time picker"
@@ -239,11 +205,9 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
                   
                     }}
                   />
-
                 </Stack>
                 {addData?.all_day === 0 &&
                   <Stack direction={'row'}>
-                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
                     <DateTimePicker
                       id="date&time-picker"
                       label="Date&Time picker"
@@ -255,22 +219,16 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
                     
                       }}
                     />
-                    {/* </LocalizationProvider> */}
                   </Stack>
-
                 }
-
                 <br />
-
                 <Stack>
                   <Typography id="description" variant="body1">Description</Typography>
                 </Stack>
-
                 <Stack>
                   <TextField id="outlined-basic" value={addData?.description} onChange={(e) => { setAddData({ ...addData, description: e?.target?.value }) }} label="Add Description For Creating Poa" variant="outlined" color="common" />
                 </Stack>
                 <Stack>
-
                 </Stack>
               </div>
             </Box>

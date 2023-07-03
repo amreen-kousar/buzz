@@ -3,7 +3,6 @@ import { set, sub } from 'date-fns';
 import { noCase } from 'change-case';
 import { faker } from '@faker-js/faker';
 import { useState, useRef } from 'react';
-// @mui
 import {
   Box,
   List,
@@ -19,15 +18,10 @@ import {
   ListItemAvatar,
   ListItemButton,
 } from '@mui/material';
-// utils
 import { fToNow } from '../../utils/formatTime';
-// components
 import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import MenuPopover from '../../components/MenuPopover';
-
-// ----------------------------------------------------------------------
-
 const NOTIFICATIONS = [
   {
     id: faker.datatype.uuid(),
@@ -75,24 +69,17 @@ const NOTIFICATIONS = [
     isUnRead: false,
   },
 ];
-
 export default function NotificationsPopover() {
   const anchorRef = useRef(null);
-
   const [notifications, setNotifications] = useState(NOTIFICATIONS);
-
   const totalUnRead = notifications.filter((item) => item.isUnRead === true).length;
-
   const [open, setOpen] = useState(null);
-
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
-
   const handleClose = () => {
     setOpen(null);
   };
-
   const handleMarkAllAsRead = () => {
     setNotifications(
       notifications.map((notification) => ({
@@ -101,7 +88,6 @@ export default function NotificationsPopover() {
       }))
     );
   };
-
   return (
     <>
       <IconButton
@@ -110,11 +96,7 @@ export default function NotificationsPopover() {
         onClick={handleOpen}
         sx={{ width: 40, height: 40 }}
       >
-        {/* <Badge badgeContent={totalUnRead} color="error">
-          <Iconify icon="eva:bell-fill" width={20} height={20} />
-        </Badge> */}
       </IconButton>
-
       <MenuPopover
         open={Boolean(open)}
         anchorEl={open}
@@ -128,7 +110,6 @@ export default function NotificationsPopover() {
               You have {totalUnRead} unread messages
             </Typography>
           </Box>
-
           {totalUnRead > 0 && (
             <Tooltip title=" Mark all as read">
               <IconButton color="primary" onClick={handleMarkAllAsRead}>
@@ -137,9 +118,7 @@ export default function NotificationsPopover() {
             </Tooltip>
           )}
         </Box>
-
         <Divider sx={{ borderStyle: 'dashed' }} />
-
         <Scrollbar sx={{ height: { xs: 340, sm: 'auto' } }}>
           <List
             disablePadding
@@ -153,7 +132,6 @@ export default function NotificationsPopover() {
               <NotificationItem key={notification.id} notification={notification} />
             ))}
           </List>
-
           <List
             disablePadding
             subheader={
@@ -167,9 +145,7 @@ export default function NotificationsPopover() {
             ))}
           </List>
         </Scrollbar>
-
         <Divider sx={{ borderStyle: 'dashed' }} />
-
         <Box sx={{ p: 1 }}>
           <Button fullWidth disableRipple>
             View All
@@ -179,9 +155,6 @@ export default function NotificationsPopover() {
     </>
   );
 }
-
-// ----------------------------------------------------------------------
-
 NotificationItem.propTypes = {
   notification: PropTypes.shape({
     createdAt: PropTypes.instanceOf(Date),
@@ -193,10 +166,8 @@ NotificationItem.propTypes = {
     avatar: PropTypes.any,
   }),
 };
-
 function NotificationItem({ notification }) {
   const { avatar, title } = renderContent(notification);
-
   return (
     <ListItemButton
       sx={{
@@ -231,9 +202,6 @@ function NotificationItem({ notification }) {
     </ListItemButton>
   );
 }
-
-// ----------------------------------------------------------------------
-
 function renderContent(notification) {
   const title = (
     <Typography variant="subtitle2">
@@ -243,7 +211,6 @@ function renderContent(notification) {
       </Typography>
     </Typography>
   );
-
   if (notification.type === 'order_placed') {
     return {
       avatar: <img alt={notification.title} src="/static/icons/ic_notification_package.svg" />,

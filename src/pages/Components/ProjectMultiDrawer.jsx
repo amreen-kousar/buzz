@@ -40,7 +40,6 @@ import EditGelathiSession from '../projects/Components/EditGelathisession';
 import EditTrainingBatch from '../projects/EditTrainingSession';
 import { useMediaQuery } from '@mui/material';
 import Day2Completed from '../projects/Components/day2Completion';
-// ----------------------------------------------------------------------
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import ShaktiDialogday2 from '../projects/Components/ShaktiDialogday2';
@@ -48,11 +47,6 @@ const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  //   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  // marginLeft: 'auto' ,
-  //   transition: theme.transitions.create('transform', {
-  //     duration: theme.transitions.duration.shortest,
-  //   }),
 }));
 
 projectMultiDrawer.propTypes = {
@@ -70,11 +64,8 @@ export default function projectMultiDrawer({
   batchState,
   projectId,
 }) {
-  console.log('🚀 ~ file: ProjectMultiDrawer.jsx:62 ~ projectMultiDrawer ~ projectId:', projectId);
-  console.log('🚀 ~ file: ProjectMultiDrawer.jsx:61 ~ projectMultiDrawer ~ clcikData:', shakti);
 
   const [batch, setBatch] = useState('');
-  console.log('🚀 ~ file: ProjectMultiDrawer.jsx:49 ~ projectMultiDrawer ~ batch:', batch);
   const [schedule, setReschedule] = React.useState(false);
   const [day2Schedule, setday2Reschedule] = React.useState(false);
   const [photos, setPhotos] = React.useState(false);
@@ -86,7 +77,6 @@ export default function projectMultiDrawer({
   const [showNote, setShowNote] = useState(false);
   const [checkData, setCheckData] = React.useState('');
   const [date, setDate] = useState(new Date());
-  console.log('🚀 ~ file: ProjectMultiDrawer.jsx:76 ~ projectMultiDrawer ~ date:', date);
   const [day2date, setday2date] = useState(new Date());
   const [session, setSession] = useState('');
   const [editSession, setEditsession] = useState(false);
@@ -111,7 +101,6 @@ export default function projectMultiDrawer({
   const roleID = JSON.parse(localStorage.getItem('userDetails'))?.role;
   useEffect(() => {
     getTrainingBatch();
-    // console.log(batchState)
   }, [batchState, clcikData]);
 
   useEffect(() => {
@@ -120,14 +109,8 @@ export default function projectMultiDrawer({
   useEffect(() => {
     setImages([]);
   }, [batchState?.training_batch_id]);
-  console.log(clcikData, '<---sads', batchState);
 
   const getTrainingBatch = (async) => {
-    console.log(
-      batchState,
-      '<---batchStatebatchState',
-      batchState?.training_batch_id ? batchState?.training_batch_id : clcikData?.id
-    );
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
@@ -147,10 +130,9 @@ export default function projectMultiDrawer({
     axios(config)
       .then(function (response) {
         setBatch(response.data);
-        console.log(batch, 'response from ');
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
     GetStatus();
   };
@@ -163,26 +145,18 @@ export default function projectMultiDrawer({
     reader.readAsDataURL(file);
   }
   const convertImage = (e) => {
-    console.log('this is calleddddfdsfs');
-    // data.append('emp_id', userid);
-    // data.append('file', e.target.files[0]);
-    // setImagePath([...imagePath, e.target.files[0]])
     const imageData = URL.createObjectURL(e.target.files[0]);
-    console.log(imageData, 'files');
     getBase64(e.target.files[0], function (base64Data) {
       setImages([...images, base64Data]);
-      //   setViewImage(true)
       setViewImage(true);
     });
   };
 
-  console.log('batch?.project_id', batch?.data?.project_id);
   const UploadImages = (e) => {
     if (images.length === 0) {
       alert('No photos to upload.');
       throw new Error('No photos to upload.');
     }
-    console.log('upload method is calling ');
 
     if (images.length <= 0) {
       alert('No Image is Selected!');
@@ -208,7 +182,7 @@ export default function projectMultiDrawer({
         })
 
         .catch((error) => {
-          console.log('error', error);
+          // console.log('error', error);
         });
     }
   };
@@ -237,12 +211,11 @@ export default function projectMultiDrawer({
 
       axios(config)
         .then(function (response) {
-          console.log(JSON.stringify(response.data));
           onCloseFilter();
           getTrainingBatch();
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
     }
   };
@@ -275,10 +248,9 @@ export default function projectMultiDrawer({
         setReschedule(false);
         onCloseFilter();
         shakti();
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -293,8 +265,6 @@ export default function projectMultiDrawer({
       tb_id: batch?.data?.id,
       emp_id: userid,
     });
-
-    console.log(data, 'material api');
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createNotes.php',
@@ -312,31 +282,23 @@ export default function projectMultiDrawer({
           getNoteHandler();
           setSaveBtn(false);
           alert('Note Added Successfully...');
-          console.log('susscesfully added data material');
         }
       })
       .catch(function (error) {
-        console.log(error, 'failed');
+        // console.log(error, 'failed');
       });
-    console.log('submit');
   };
-  //getting Notes\
+  //getting Notes
   useEffect(() => {
     getNoteHandler();
-
-    // console.log(batchState)
   }, [batch?.data?.id]);
   const getNoteHandler = () => {
-    console.log('getNoteHandler');
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
-    console.log('🚀 ~ file: ProjectMultiDrawer.jsx:322 ~ getNoteHandler ~ role:', role, userid);
     var data = JSON.stringify({
       type: 1,
       tb_id: batch?.data?.id,
     });
-
-    console.log(data, 'material api');
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getNotes.php',
@@ -350,19 +312,13 @@ export default function projectMultiDrawer({
       .then(function (response) {
         if (response.status == 200) {
           setGetAllNotes(response?.data?.notes);
-          console.log(response, 'notesData');
         }
       })
       .catch(function (error) {
-        console.log(error, 'failed');
+        // console.log(error, 'failed');
       });
-    console.log('submit');
   };
 
-  console.log(
-    '🚀 ~ file: ProjectMultiDrawer.jsx:495 ~ projectMultiDrawer ~ batch?.data?.day1_actual >=  date:',
-    batch?.data?.day1_actual >= moment(date).format('YYYY-MM-DD')
-  );
   const GetStatus = (async) => {
     var data = JSON.stringify({
       project_id: projectId,
@@ -382,11 +338,10 @@ export default function projectMultiDrawer({
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data), 'dataaaaaaaaaaaa');
         setCheckData(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -401,12 +356,7 @@ export default function projectMultiDrawer({
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
     linkStyle: { textDecoration: 'none', color: 'black' },
   };
-  console.log(
-    '🚀 ~ file: ProjectMultiDrawer.jsx:453 ~ projectMultiDrawer ~ batch?.data?.day2_actual:',
-    batch?.data?.day2_actual
-  );
 
-  console.log('🚀 ~ file: ProjectMultiDrawer.jsx:523 ~ projectMultiDrawer ~ clcikData:', isOpenFilter);
   return (
     <>
       <Drawer
@@ -428,9 +378,7 @@ export default function projectMultiDrawer({
         >
           <Typography variant="subtitle1" sx={{ ml: 1 }}>
             {clcikData?.title == 'Self Shakti' || userId == 4 ? 'Self Shakti' : clcikData?.name}
-            {/* {` ${clcikData?.name}`} */}
-            {/* {clcikData?.title} */}
-            {console.log(clcikData, 'clicked data')}
+        
           </Typography>
           <IconButton id="project-close-icon-btn" onClick={onCloseFilter}>
             <Iconify id="project-close-icon" icon="eva:close-fill" width={20} height={20} />
@@ -455,7 +403,6 @@ export default function projectMultiDrawer({
                 <CardContent id="project-multidrawer-card-content">
                   <Typography id="project" style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
                     Project : &nbsp;{batch?.data?.projectName}
-                    {console.log(batch?.data?.projectName, '<--------njknnjnjn')}
                   </Typography>
                   <Typography id="partner" variant="body1" gutterBottom>
                     Partner : &nbsp;{batch?.data?.partnerName}
@@ -508,7 +455,6 @@ export default function projectMultiDrawer({
                           }}
                         />
                       </LocalizationProvider>
-                      {console.log(batch, 'session?.id')}
                       <Button onClick={() => Reschedule(batch?.data?.day1_id)}>Save</Button>
                     </Stack>
                   )}
@@ -547,7 +493,6 @@ export default function projectMultiDrawer({
                           }}
                         />
                       </LocalizationProvider>
-                      {console.log(batch, 'session?.id')}
                       <Button onClick={() => Reschedule(batch?.data?.day2_id)}>Save</Button>
                     </Stack>
                   )}
@@ -596,7 +541,7 @@ export default function projectMultiDrawer({
                 sx={{ mt: 2 }}
                 id="project-mutlidrawer-card"
                 onClick={() => {
-                  setShown(true), console.log('ferfgreg');
+                  setShown(true);
                 }}
                 style={styles.buttonStyle}
               >
@@ -715,18 +660,8 @@ export default function projectMultiDrawer({
                       variant="outlined"
                       onChange={async (e) => {
                         let note = await e?.target?.value;
-                        // if(note.length <= 0){
-                        //   alert("Text cannot be empty")
-                        //   setSaveBtn(false)
-                        // }
-                        // else{
-                        //   setGelatiNote(e?.target?.value);
-                        //   setSaveBtn(true)
-                        // }
-
                         setSaveBtn(true);
                         setGelatiNote(e?.target?.value);
-                        console.log('note', gelatiNote);
                       }}
                     ></TextField>
                     {SaveBtn ? (
@@ -785,43 +720,7 @@ export default function projectMultiDrawer({
                 </div>
               ) : null}
 
-              {/* <CardContent>
-                <div>
-                <Card style={{ marginTop: 20, marginLeft: 10 }}>
-                  {getAllNotes &&
-                    getAllNotes.map((i, index) => {
-                      {
-                        console.log(i, 'ivalue');
-                      }
-                      return (
-                        <>
-                         
-                            <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
-                            <Grid
-                              container
-                              direction="column"
-                              justifyContent="center"
-                              alignItems="center"
-                              style={{ marginTop: 10 }}
-                            >
-                              <Typography variant="body1">
-                                {' '}
-                                {userName}
-                                {i?.name} {i?.date}
-                              </Typography>
-
-                              {console.log(i?.notes, '<----------------------i?.notesi?.notes')}
-                            </Grid>
-                            <Typography variant="body1" gutterBottom style={{ marginTop: 10, marginLeft: 30 }}>
-                              {i?.notes}{' '}
-                            </Typography>
-                         
-                        </>
-                      );
-                    })}
-                     </Card>
-                </div>
-              </CardContent> */}
+             
               <Card>
                 <CardContent>
                   View All Comments :

@@ -1,16 +1,11 @@
 import axios from 'axios';
 
 export default async function Projectapi(props) {
-
-    console.log("ptojrcyyyyy")
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var response = []
-    
-    // console.log(idvalue,"hyyyyyyyyyyy",roleid);
     const data = JSON.stringify({
         "role_id": role,
-        // "filter_type": props.selectDATA,
         "pageNum": 1,
         "user_id": idvalue,
         "filter_id": props.selectDATA,
@@ -29,7 +24,6 @@ export default async function Projectapi(props) {
     response = await axios(config)
 
         .then((response) => {
-            console.log(response,"responsefilters")
             return response?.data?.list
         })
         .catch((error) => {

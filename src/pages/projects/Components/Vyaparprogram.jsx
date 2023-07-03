@@ -1,8 +1,5 @@
 
-
-
  
-
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -48,11 +45,8 @@ import Swal from 'sweetalert2';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function Vyaparprogram({ itm, changeState }) {
-  console.log("itmData", itm)
   const [open, setOpen] = React.useState(false);
-  // const [openMessage, setOpenMessage] = useState(false);
   const [successMessage, setsuccessMessage] = useState(false);
   const [message, setMessage] = useState('');
   const [selectedValue, setSelectedValue] = React.useState('a');
@@ -172,20 +166,16 @@ const [internet , setinternet] = useState("")
 const [loansError , setloansError] = useState(false)
 const [bisnessError , setbusinessError] = useState(false)
 const [entreprenur , setentrepreneurError] = useState(false)
-
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-
   useEffect(() => {
     gelathinamelist();
     // setenrolledVyaapar([{ stockname: "fist" }, { stockname: "second" }])
   }, []);
-
   const vyaparformdata = (async) => {
     if (education == '') {
       setEducationError(true);
@@ -235,7 +225,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
       setbussinesscurrentstateError(true);
       setHelperText('Please Select The Option');
     }
-
     if (accountbooks == '') {
       setaccountbooksError(true);
       setHelperText('Please Select The Option');
@@ -374,7 +363,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
         skils_what_are_those : sendData?.skils_what_are_those,
         do_you_have_internet_connection_on_your_smart_phone : internet
       });
-
       var config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
@@ -383,7 +371,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
         },
         data: data,
       };
-      console.log(data, 'dataaaaaaaaaaaaaaaaaaaaaaaaaaa');
       axios(config)
         .then(function (response) {
           setvyaparform(response?.data);
@@ -409,18 +396,15 @@ const [entreprenur , setentrepreneurError] = useState(false)
             confirmButtonText: 'Ok',
             timer: 2000,
           });
-          console.log(error);
         });
     } else {
       alert('PLease Fill All The Field ');
     }
   };
-
   const gelathinamelist = (async) => {
     var data = JSON.stringify({
       partcipantId: 457065,
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
@@ -429,31 +413,26 @@ const [entreprenur , setentrepreneurError] = useState(false)
       },
       data: data,
     };
-    // Console.log(data,"dataaaaaaaaaaaaaaaaaaaaaaaaaaa")
     axios(config)
       .then(function (response) {
         setVyaapar(response?.data);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
-
   const surveydone = (event) => {
     setsurvey(event.target.value);
     setwWenSurveyDoneError(false);
   };
-
   const educationlevel = (event) => {
     seteducation(event.target.value);
     setEducationError(false);
   };
-
   const marital = (event) => {
     setmaritalstatus(event.target.value);
     setMAritalStatusError(false);
   };
-
   const phonestatus = (event) => {
     setphone(event.target.value);
     setSmartPhoneError(false);
@@ -463,82 +442,66 @@ const [entreprenur , setentrepreneurError] = useState(false)
       setIsSmartPhone(false);
     }
   };
-
   const sectortype = (event) => {
     setSector(event.target.value);
     setSectorError(false);
   };
-
   const numberproficiencyvalue = (event) => {
     setnumberproficiency(event.target.value);
     setNumberproficiencyError(false);
   };
-
   const writtenproficiencyvalue = (event) => {
     setwrittenproficiency(event.target.value);
     setWrittenproficiencyError(false);
   };
-
   const bussinessyearsvalue = (event) => {
     setBussinessyears(event.target.value);
     setBussinessyearsError(false);
   };
-
   const handlelicensevalue = (event) => {
     setlicensevalue(event.target.value);
     setlicensevalueError(false);
   };
-
   const homebasedvalue = (event) => {
     sethomebased(event.target.value);
     setHounseBaseError(false);
   };
-
   const challengesbussiness = (event) => {
     setChallengesvalue(event.target.value);
     setchallengesvalueError(false);
   };
-
   const bussinesscurrentstatevalue = (event) => {
     setbussinesscurrentstate(event.target.value);
     setbussinesscurrentstateError(false);
   };
-
   const handleaccountbooks = (event) => {
     setaccountbooks(event.target.value);
     setaccountbooksError(false);
   };
-
   const generateideasvalue = (event) => {
     setgenerateideas(event.target.value);
     setgenerateideasError(false);
   };
-
   const bussinessplanvalue = (event) => {
     setbussinessplan(event.target.value);
     setbussinessplanError(false);
   };
-
   const submitbussinessplanvalue = (event) => {
     setsubmitbussinessplan(event.target.value);
     setsubmitbussinessplanError(false);
   };
-
   const financevalue = (event) => {
     setfinance(event.target.value);
     setfinanceError(false);
   };
-
   const loanvalue = (event) => {
     setloan(event.target.value);
     setloanError(false);
   };
-
   const accessingloanvalue = (event) => {
     setaccessingloan(event.target.value);
     setaccessingloanError(false);
   };
-
   const currentloanvalue = (event) => {
     setcurrentloan(event.target.value);
     setcurrentloanError(false);
@@ -548,7 +511,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
       setIsCurrentLoan(false);
     }
   };
-
   const bussinesskillsvalue = (event) => {
     setbussinesskills(event.target.value);
     setbussinessSkillError(false);
@@ -561,7 +523,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
   const internetHandler = (event) =>{
     setinternet(event.target.value)
   }
-
   const handleprerequisites = (label, event) => {
     var updatedList = [...checked[label]];
     if (event.target.checked) {
@@ -573,9 +534,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
     tempData[label] = updatedList;
     setChecked(tempData);
   };
-
-  console.log(itm.villagename ," village name from itm")
-
   return (
     <div>
       {successMessage && (
@@ -611,26 +569,13 @@ const [entreprenur , setentrepreneurError] = useState(false)
               <Typography sx={{ ml: 2, flex: 1, color: 'white' }} variant="h6" component="div">
                 Buzz Vyapar Program Baseline
               </Typography>
-
               <Button autoFocus edge="end" color="inherit" type="submit" style={{ color: 'white' }}>
                 <Iconify icon="material-symbols:save" width={30} height={30} />
               </Button>
             </Toolbar>
           </AppBar>
-
           <Grid>
-            {/* <Card mt={1} style={{ borderRadius: 20}} >
-                <CardContent>
-               
-                    <Typography variant="subtitle2" style={{color:'white',backgroundColor:"#ff7424",padding:10,borderRadius:5}}>
-                    Buzz Vyapar Program Baseline
-                  </Typography>  
-                  <Typography variant="subtitle2" style={{color:'#ff7424',backgroundColor:"white",paddingTop:10}}>
-                    * Required
-                  </Typography>  
-                  </CardContent>    
-          </Card> */}
-
+      
             <Card>
               <CardContent>
                 <Card style={{ marginTop: 50, borderRadius: 20 }}>
@@ -664,7 +609,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                       <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
                         // defaultValue="Yes"
-
                         name="radio-buttons-group"
                         value={survey}
                         onChange={surveydone}
@@ -688,7 +632,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>Name of vyapari / ವ್ಯಾಪಾರಿಯ ಹೆಸರು *</Typography>
@@ -707,7 +650,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>Age / ವಯಸ್ಸು *</Typography>
@@ -732,7 +674,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>Contact Number /ಸಂಪರ್ಕ ಸಂಖ್ಯೆ *</Typography>
@@ -755,7 +696,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>Village Name *</Typography>
@@ -773,7 +713,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>Name of the Cohort / ಸ್ಥಳ/ವೃತ್ತ *</Typography>
@@ -791,7 +730,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -843,7 +781,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -889,7 +826,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -963,7 +899,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </CardContent>
                   </Card>
                 ) : null}
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1025,7 +960,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </RadioGroup>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1061,7 +995,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1097,7 +1030,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>Household income (Monthly) ಮನೆಯಆದಾಯ (ಮಾಸಿಕ)</Typography>
@@ -1115,7 +1047,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1137,7 +1068,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1157,7 +1087,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1182,7 +1111,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1205,7 +1133,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1256,7 +1183,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1276,7 +1202,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1297,7 +1222,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1321,7 +1245,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1356,7 +1279,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1376,7 +1298,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1454,7 +1375,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1478,13 +1398,11 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, backgroundColor: '#ff7424', borderRadius: 0, height: '60px' }}>
                   <CardContent>
                     <Typography style={{ color: '#ffffff' }}>Business Challenges</Typography>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1536,7 +1454,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1557,7 +1474,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>What are your skills?</Typography>
@@ -1574,7 +1490,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1599,13 +1514,11 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, backgroundColor: '#ff7424', borderRadius: 0, height: '60px' }}>
                   <CardContent>
                     <Typography style={{ color: '#ffffff' }}>Business Components</Typography>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1626,7 +1539,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1702,7 +1614,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1748,7 +1659,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1784,7 +1694,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1830,7 +1739,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1851,13 +1759,11 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, backgroundColor: '#ff7424', borderRadius: 0, height: '60px' }}>
                   <CardContent>
                     <Typography style={{ color: '#ffffff' }}>Business Goal</Typography>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -1881,7 +1787,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1909,7 +1814,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1937,13 +1841,11 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, backgroundColor: '#ff7424', borderRadius: 0, height: '60px' }}>
                   <CardContent>
                     <Typography style={{ color: '#ffffff' }}>SWOT Analysis</Typography>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>What are strengths of your business?</Typography>
@@ -1962,7 +1864,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>What are weaknesses of your business?</Typography>
@@ -1981,7 +1882,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>What are opportunities of your business?</Typography>
@@ -2000,13 +1900,11 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, backgroundColor: '#ff7424', borderRadius: 0, height: '60px' }}>
                   <CardContent>
                     <Typography style={{ color: '#ffffff' }}>Access to finance</Typography>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2028,7 +1926,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2103,7 +2000,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2149,7 +2045,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Typography style={{ color: '#ff7424' }}>
@@ -2218,7 +2113,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 20, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2316,7 +2210,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
                       </RadioGroup>
                     </Stack>
                   </CardContent>
-
                   {isAdditionalSkill?
                     <Card style={{ marginTop: 20, borderRadius: 20 }}>
                     <CardContent>

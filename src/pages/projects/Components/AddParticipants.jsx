@@ -15,13 +15,10 @@ import { Stack } from '@mui/system';
 import axios from 'axios';
 import moment from 'moment';
 import { number } from 'prop-types';
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function AddParticipants({batch,checkData,type,session ,reloadFUnction ,handleCloseDilog}) {
-    console.log(session,"<------batchbatchbatchbatchbatch",checkData,"hhhhhhhhhh",type,"ghfhgfgh",batch)
   const intialState={
     "education":"",
      "husbandName":"",
@@ -40,13 +37,11 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
   setOpen(false)
     
   };
   const [age, setAge] = React.useState('');
-
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -66,10 +61,9 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
       axios(config)
       .then(function (response) {
         setCaste(response.data?.data)
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const educationd = async =>{
@@ -83,18 +77,14 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
       axios(config)
       .then(function (response) {
         setEducation(response.data?.list)
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
         
       });
       
   }
-
-  console.log(session, " batchData")
   const handleCloseSaveBtn = ()=>{
-    console.log(enterData, "entered data")
     if(enterData.age==""|| enterData.firstName==""|| enterData.caste =="" ||enterData.contact_no==""
     || enterData.husbandName==""|| enterData.nameOfSHG==""){
       alert("Please fil all the required data ")
@@ -124,7 +114,6 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
         type:(type=='vyapar' || type=="green")? type :moment(day)?.format()
       });
       if(data.education =="" || data.husbandName == ""){
-        console.log("error")
 alert("error!!!!!!")
       }else{
         var config = {
@@ -142,23 +131,20 @@ alert("error!!!!!!")
           reloadFUnction()
           handleClose()
           handleCloseDilog()
-          console.log(response , "responseresponse")
           if(response?.data?.code ==200){
             handleClose()
             handleCloseDilog()
-             console.log("insideresponse")
               handleCloseSaveBtn()
           }
           if(response?.code ==200){
             handleClose()
-             console.log("insideresponse")
               handleCloseSaveBtn()
               handleCloseDilog()
           }
-          console.log(JSON.stringify(response.data));
+         
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
       }
     
@@ -211,7 +197,6 @@ alert("error!!!!!!")
     <Stack mt={1}>
         <CardContent>
         <TextField fullWidth id="Number" onChange={(e)=>{
-          console.log(e.target.value.toString().length)
           if(e.target.value.toString().length<= 10){
             setEnterData({...enterData,contact_no:e?.target?.value})
           }
@@ -236,10 +221,8 @@ alert("error!!!!!!")
     label="Age"
     onChange={(e)=>{
         setEnterData({...enterData,caste:e?.target?.value})
-        console.log(e,"<-----qweqweqweqweq")
     }}>
     {caste?.map(itm=>{
-        console.log(itm,"<-----sadadasdasfasfasf")
         return(
             <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
         )
@@ -259,7 +242,6 @@ alert("error!!!!!!")
     }}
   >
    {education?.map(itm=>{
-        console.log(itm,"<-----sadadasdasfasfasf")
         return(
             <MenuItem value={itm?.name}>{itm?.name}</MenuItem>
         )

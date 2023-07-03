@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
 import { Stack,IconButton,Button, DialogContent,DialogContentText,TextField ,Grid,Typography , Radio,FormControlLabel,Card,CardContent,FormGroup,Checkbox} from '@mui/material';
@@ -44,7 +43,6 @@ export default function Evaluationday2({onCloseFilter,batch})
       // });}
         setOpen(true);
       };
-
       const handleClose=()=>{
         setOpen(false)
       }
@@ -53,7 +51,6 @@ export default function Evaluationday2({onCloseFilter,batch})
         tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
         linkStyle: { textDecoration: 'none', color: "black" }
       }
-
       const handlecheckedata = (label,event) => {
         var updatedList = [...checked[label]];
         if (event.target.checked) {
@@ -66,7 +63,6 @@ export default function Evaluationday2({onCloseFilter,batch})
         setChecked(tempData);
       
       }; 
-
       const [sendData,setSendData]= React.useState({
     
     re_emphasize:"",
@@ -112,9 +108,7 @@ export default function Evaluationday2({onCloseFilter,batch})
        
     
     });
-
     const evaluationday2data= async() =>{
-        console.log("surveyyyyform")
        var data = JSON.stringify({
     "training_batch_id": 81803,
     "re_emphasize":checked['re_emphasize'],
@@ -176,7 +170,6 @@ export default function Evaluationday2({onCloseFilter,batch})
            
             handleClose()
             onCloseFilter();
-
           }
            setformdata(response?.data)
            Swal.fire({
@@ -195,13 +188,9 @@ export default function Evaluationday2({onCloseFilter,batch})
             confirmButtonText: 'Ok',
             timer: 2000
           });
-           console.log(error);
          });
          handleClose();
     }
-
-
-
     return(
         <div>
         <Stack style={{ flexDirection: 'row'}}  mb={2}>
@@ -215,7 +204,6 @@ export default function Evaluationday2({onCloseFilter,batch})
         <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <form onSubmit={(e)=>{e.preventDefault(); evaluationday2data()}}>
       <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
-
         
           <Toolbar>
           
@@ -229,12 +217,7 @@ export default function Evaluationday2({onCloseFilter,batch})
           <Button type="submit" color="inherit" >
               save
             </Button>
-
-          {/* <Button autoFocus edge="end" color="inherit" onClick={() => vyaparformdata()}>
-          <Iconify icon="material-symbols:save" width={30} height={30} />
-          </Button>
-        */}
-         
+  
           </Toolbar>
         </AppBar>
         <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
@@ -252,7 +235,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                 <Stack mt={2} mb={2}>
                     <TextField required inputProps={{ required: true }} type="number" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attended:e.target.value})} value={sendData?.women_attended}/>
                 </Stack> 
-
                 <Typography  mt={2} style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   &nbsp;<Stack>
                     <FormGroup >
@@ -296,7 +278,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
             </Stack>
-
             <Typography  mt={2} style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack >
                     <FormGroup >
@@ -311,13 +292,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                       <FormControlLabel value="Did you share the details of the training with anyone?WHat did they say?WHat did the children, family members say about this training when you shared it with them?" control={<Checkbox style={{color:"#595959"}} />} label="Did you share the details of the training with anyone?WHat did they say?WHat did the children, family members say about this training when you shared it with them?" onChange={(event)=>handlecheckedata('learn_story',event)}/>
                     </FormGroup>
                   </Stack>
-
-
-
-
-
-
-
                   &nbsp;  <hr color="#ff7424"/><br/>
                   <Typography color="primary" style={{fontWeight:700}}>Module 5 (M5) Assets and Liabilities</Typography>&nbsp;
                   <Typography>How many women attended the training session? *</Typography>
@@ -355,7 +329,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                      
                     </FormGroup>
                   </Stack>
-
                   <Stack mt={1}>
                 <Typography style={{fontWeight:500}} >Were the participants responsive during the debriefing? *</Typography>
                 <RadioGroup
@@ -371,8 +344,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
             </Stack>
-
-
             <Stack mt={1}>
                 <Typography style={{fontWeight:500}}>Did any women leave the training session during or after this module? *</Typography>
                 <RadioGroup
@@ -388,12 +359,10 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
             </Stack>
-
             <Typography>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
                     <TextField required inputProps={{ required: true }} type="number"  label="Your Answer" variant="outlined" color="common"  onChange={(e) => setSendData({ ...sendData, many_m5:e.target.value})} value={sendData?.many_m5}/>
                 </Stack>
-
                 <Stack mt={2}>
                     <Typography style={{fontWeight:500}}>Did this module take 30 minutes as allotted? *</Typography>
                     <RadioGroup
@@ -409,18 +378,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
                   </Stack>
-
-
-
-
-
-
-
-
-
-
-
-
                   &nbsp;  <hr color="#ff7424"/><br/>
                   <Typography color="primary" style={{fontWeight:700}}>Module 6 (M6): Goal setting game</Typography>&nbsp;
                   <Typography>How many women attended the training session? *</Typography>
@@ -436,8 +393,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                   
                     </FormGroup>
                   </Stack>
-
-
                   <Typography  mt={2} style={{fontWeight:700}}>Check which instructions the trainer did not give:</Typography>
                   <Stack >
                     <FormGroup >
@@ -451,8 +406,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                      
                     </FormGroup>
                   </Stack>
-
-
                   <Stack mt={1}>
                 <Typography style={{fontWeight:500}} >Repeat the activity with the second voluneer? *</Typography>
                 <RadioGroup
@@ -468,8 +421,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
             </Stack>
-
-
                   <Typography  mt={2} style={{fontWeight:700}}>During the debrief did the trainer not ask:</Typography>
                   <Stack >
                     <FormGroup >
@@ -487,9 +438,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                      
                     </FormGroup>
                   </Stack>
-
-
-
                   <Stack mt={1}>
                 <Typography style={{fontWeight:500}} >Were the participants responsive during the debriefing? *</Typography>
                 <RadioGroup
@@ -505,8 +453,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
             </Stack>
-
-
                   <Stack mt={1}>
                 <Typography style={{fontWeight:500}}>Did any women leave the training session during or after this module? *</Typography>
                 <RadioGroup
@@ -522,12 +468,10 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
             </Stack>
-
                 <Typography>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
                     <TextField required inputProps={{ required: true }} type="number"  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m6:e.target.value})} value={sendData?.many_m6}/>
                 </Stack>
-
                 <Stack mt={2}>
                     <Typography style={{fontWeight:500}}>Did this module take 30 minutes as allotted? *</Typography>
                     <RadioGroup
@@ -543,27 +487,12 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
                   </Stack>
-
-
-
-
-
-
-
-
                   &nbsp;  <hr color="#ff7424"/><br/>
-
-
-
-
-
-
                   <Typography color="primary" style={{fontWeight:700}}>Module 7 (M7): Financial goals</Typography>&nbsp;
                   <Typography>How many women attended the training session? *</Typography>
                 <Stack mt={2} mb={2}>
                     <TextField required inputProps={{ required: true }} type="number"  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attended_m7:e.target.value})} value={sendData?.women_attended_m7}/>
                 </Stack> 
-
                   <Typography  mt={2} style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack>
                     <FormGroup >
@@ -579,8 +508,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                     <FormControlLabel value="Use the chart given to explain?" control={<Checkbox style={{color:"#595959"}} />} label="Use the chart given to explain?" onChange={(event)=>handlecheckedata('chart_given_m7',event)}/>
                       </FormGroup>
                   </Stack>
-
-
                   <Typography  mt={2} style={{fontWeight:700}}>Did the trainer not ask?</Typography>
                   <Stack >
                     <FormGroup >
@@ -593,8 +520,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                      
                     </FormGroup>
                   </Stack>
-
-
                   <Typography  mt={2} style={{fontWeight:700}}>Did the trainer not do:</Typography>
                   <Stack >
                     <FormGroup >
@@ -608,8 +533,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                       <FormControlLabel value="Go around the group and help all participants set a financial goal. Goal = time + money + financial plan?" control={<Checkbox style={{color:"#595959"}} />} label="Go around the group and help all participants set a financial goal. Goal = time + money + financial plan?" onChange={(event)=>handlecheckedata('financial_goal_m7',event)}/>
                     </FormGroup>
                   </Stack>
-
-
                   <Typography  mt={2} style={{fontWeight:700}}>During the debrief did the trainer not ask:</Typography>
                   <Stack >
                     <FormGroup >
@@ -620,7 +543,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                       <FormControlLabel value="Can you increase the time frame to reach the goal?" control={<Checkbox style={{color:"#595959"}} />} label="Can you increase the time frame to reach the goal?" onChange={(event)=>handlecheckedata('increase_income',event)}/>
                     </FormGroup>
                   </Stack>
-
              <Stack mt={1}>
                 <Typography style={{fontWeight:500}} >Were the participants responsive during the debriefing? *</Typography>
                 <RadioGroup
@@ -636,7 +558,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
             </Stack>
-
             <Stack mt={1}>
                 <Typography style={{fontWeight:500}}>Did any women leave the training session during or after this module? *</Typography>
                 <RadioGroup
@@ -652,12 +573,10 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
             </Stack>
-
                 <Typography>If so, how many? </Typography>
                 <Stack mt={2} mb={2}>
                     <TextField required inputProps={{ required: true }} type="number"  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, many_m7:e.target.value})} value={sendData?.many_m7}/>
                 </Stack>
-
                 <Stack mt={2}>
                     <Typography style={{fontWeight:500}}>Did this module take 30 minutes as allotted? *</Typography>
                     <RadioGroup
@@ -673,29 +592,12 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
                   </Stack>
-
-
-
-
-
-
-
-
-
-
 &nbsp;  <hr color="#ff7424"/><br/>
-
-
-
-
-
   <Typography color="primary" style={{fontWeight:700}}>Module 8 (M8): Loans - group discussion of case studies</Typography>&nbsp;
   <Typography>How many women attended the training session? *</Typography>
                 <Stack mt={2} mb={2}>
                     <TextField required inputProps={{ required: true }}  label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendData({ ...sendData, women_attended_m8:e.target.value})} value={sendData?.women_attended_m8}/>
                 </Stack>
-
-
                   <Typography  mt={2} style={{fontWeight:700}}>Check which ones the trainer did not do:</Typography>
                   <Stack>
                     <FormGroup >
@@ -708,7 +610,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                     
                     </FormGroup>
                   </Stack>
-
                   <Typography  mt={2} style={{fontWeight:700}}>During the debrief did the trainer not ask:</Typography>
                   <Stack>
                     <FormGroup >
@@ -722,7 +623,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                    
                    </FormGroup>
                   </Stack>
-
                   <Stack mt={2}>
                     <Typography style={{fontWeight:500}}>Were the participants responsive during the debriefing? *</Typography>
                     <RadioGroup
@@ -738,7 +638,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                       </div>
                     </RadioGroup>
                   </Stack>
-
                   <Stack mt={2}>
                     <Typography style={{fontWeight:500}}>Did any women leave the training session during or after this module? *</Typography>
                     <RadioGroup
@@ -786,7 +685,6 @@ export default function Evaluationday2({onCloseFilter,batch})
                    
                    </FormGroup>
                   </Stack>
-
                 </CardContent>
         </Card>
         

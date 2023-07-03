@@ -16,7 +16,6 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent, } from '@mui/material/Select';
 export default function Customfilter(props) {
-  console.log(props, "<---dadsad")
   const [country, setCountry] = useState([])
   const [fund, setFund] = useState()
   const [endDate, setEndDate] = useState(new Date());
@@ -43,13 +42,10 @@ export default function Customfilter(props) {
     gelathiList()
   }, []
   )
-
-  console.log(data,"reponssssssss")
   const location = async => {
     var data = JSON.stringify({
       "country_id": "1",
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
@@ -58,23 +54,19 @@ export default function Customfilter(props) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         setStates(response?.data?.list)
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const getState = async (id) => {
     var data = JSON.stringify({
       "country_id": "1",
       "state_id": id
-
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
@@ -83,14 +75,12 @@ export default function Customfilter(props) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setDistrict(response.data.list)
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const getDistrict = async (district) => {
@@ -99,9 +89,7 @@ export default function Customfilter(props) {
       "state_id": data?.state,
       "district_id": district.id,
       "district_name":district.name
-
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
@@ -110,20 +98,14 @@ export default function Customfilter(props) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setTaluk(response.data.list)
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+      //  console.log(error);
       });
   }
-  const getTalaq = async (id) => {
-    console.log(id, data, "<---somethimnfff")
-  }
-
   const getFunder = () => {
     const data = JSON.stringify({
         "role_id": 1,
@@ -131,7 +113,6 @@ export default function Customfilter(props) {
         "pageNum": 1,
         "emp_id": 206
     });
-
     const config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
@@ -140,35 +121,28 @@ export default function Customfilter(props) {
         },
         data
     };
-
     axios(config)
         .then((response) => {
             setFund(response?.data?.data)
-            console.log(JSON.stringify(response.data));
         })
         .catch((error) => {
-            console.log(error);
+            // console.log(error);
         });
 }
-
 const teamList = async => {
   var config = {
     method: 'post',
     url: 'https://bdms.buzzwomen.org/appTest/getOperationsManagerList.php',
     headers: {}
   };
-
   axios(config)
     .then(function (response) {
-      console.log(response.data, "teamlist opers")
       setTeamData(response.data)
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
-
 }
-
 const trainerList = async => {
   var data = JSON.stringify({
     "role_id": 5,
@@ -176,7 +150,6 @@ const trainerList = async => {
     "operation_manager_id": 122,
     "pageNum": 1
   });
-
   var config = {
     method: 'post',
     url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
@@ -185,19 +158,14 @@ const trainerList = async => {
     },
     data: data
   };
-
   axios(config)
     .then(function (response) {
-      console.log(response,"hyyyyyyyy")
       setListData(response.data)
-      console.log(response.data,listData, '<----------setListDatasetListData');
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
-
   }
-
   const gelathiList = () => {
     var data = JSON.stringify({
         "role_id": 6,
@@ -205,7 +173,6 @@ const trainerList = async => {
         "operation_manager_id": 35,
         "pageNum": 1
     });
-
     var config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
@@ -214,24 +181,17 @@ const trainerList = async => {
         },
         data: data
     };
-
     axios(config)
         .then(function (response) {
             setGelathiData(response.data)
-            console.log(response.data, '<----------setListDatasetListData');
         })
         .catch(function (error) {
-            console.log(error);
+            // console.log(error);
         });
-
 }
-
-
-
   return (
     <div>
       <Card>
-
         <CardContent>
 <Typography style={{textAlign:'center'}}>View Projects By</Typography>
           <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
@@ -244,7 +204,6 @@ const trainerList = async => {
             >
               <MenuItem value="0">India</MenuItem>
             </Select> </Typography><br></br>
-
           <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
             {data.state == "" && "Select "}State
             <Select fullWidth variant='standard' color="common"
@@ -293,7 +252,6 @@ const trainerList = async => {
               label="Age"
               onChange={(e => {
                 setData({ ...data, talaq: e?.target?.value })
-                // getTaluk(e?.target?.value)
               })}
             >
               {taluk?.map(itm => {
@@ -303,11 +261,9 @@ const trainerList = async => {
               })
               }
             </Select></Typography><br/>
-
         <Typography style={{textAlign:'center'}}>Date Range</Typography><br/>
    
              <TextField type="date"
-                   // defaultValue={dayjs(data?.start_date)}
                    defaultValue={dayjs( moment(data?.startDate)?.format('YYYY-MM-DD'))}
                     style={{ margin:2 }}
                     value={data.startDate}
@@ -315,20 +271,17 @@ const trainerList = async => {
                     onChange={(e) => {
                       setData({ ...data, startDate: e?.target?.value })
                     }} /> <br/>
-
                   <TextField type="date"
                 defaultValue={data?.endDate?dayjs( moment(data?.endDate)?.format('YYYY-MM-DD')):dayjs( moment(data?.endDate)?.format('YYYY-MM-DD'))}
                     style={{ margin:2}}
                     value={data.endDate}
                     fullWidth
-                    // defaultValue={data.endDate}
                     onChange={(e) => {
                       setData({ ...data, endDate: e?.target?.value })
                     }} /> <br/>
         </CardContent>
        {(userid!=2)? <CardContent>
         <FormControl fullWidth>
-
         <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
             {data.funder_id == "" && "Select "}Funder
 <Select fullWidth variant='standard' color="common"
@@ -358,9 +311,6 @@ const trainerList = async => {
             {data.opsManager == "" && "Select "}Operation Manager
 <Select fullWidth variant='standard' color="common"
         
-
-                    // labelId="demo-simple-select-label"
-                    //id="demo-simple-select"
                     defaultValue={data.opsManager}
                 
                     value={data.opsManager}
@@ -379,7 +329,6 @@ const trainerList = async => {
                     }
                   </Select></Typography>
                 </FormControl ></Stack >
-
                 <Stack mt={3}>
                 <FormControl fullWidth>
                  
@@ -407,14 +356,12 @@ const trainerList = async => {
                     }
                   </Select></Typography>
                 </FormControl ></Stack >
-
                 <Stack mt={3}>
                 <FormControl fullWidth>
                  
         <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
             {data.funder_id == "" && "Select "}Gelathi Facilitator
 <Select fullWidth variant='standard' color="common"
-
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     defaultValue={data.gelathiId}

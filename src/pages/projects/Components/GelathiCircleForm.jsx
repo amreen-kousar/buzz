@@ -25,11 +25,9 @@ import Slide from '@mui/material/Slide';
 import { useLocation } from 'react-router-dom';
 import FormHelperText from '@mui/material/FormHelperText';
 import Iconify from '../../../components/Iconify';
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function GelathiCircleForm({
   gelathiDrawerReloder,
   setShowForm,
@@ -41,7 +39,6 @@ export default function GelathiCircleForm({
   id,
 }) {
   const { state } = useLocation();
-
   const [open, setOpen] = React.useState(true);
   const [vyaapar, setVyaapar] = useState('');
   const [circleform, setcircleform] = useState('');
@@ -93,17 +90,14 @@ export default function GelathiCircleForm({
     setSkillValue(event.target.value);
     setSkillError(false);
   };
-
   const paravalue = (event) => {
     setListenpara(event.target.value);
     setListenParaError(false);
   };
-
   const communityvalue = (event) => {
     setCommunity(event.target.value);
     setcommunityError(false);
   };
-
   const communitymemvalue = (event) => {
     setCommunitymem(event.target.value);
     setcommunitymemError(false);
@@ -112,7 +106,6 @@ export default function GelathiCircleForm({
     setbringTogether(event.target.value);
     setbringtogetherError(false);
   };
-
   const Conflictvalue = (event) => {
     setConflicts(event.target.value);
     setconflictsError(false);
@@ -121,23 +114,18 @@ export default function GelathiCircleForm({
     setOpen(true);
     setShowForm(true);
   };
-
   const handleClose = () => {
     setOpen(false);
     setShowForm(false);
   };
-
   useEffect(() => {
     gelathinamelist();
-
    
   }, []);
-
   const gelathinamelist = (async) => {
     var data = JSON.stringify({
       partcipantId: id,
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
@@ -146,21 +134,18 @@ export default function GelathiCircleForm({
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
         setVyaapar(response?.data);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
-
   const gelathicircleformdata = async () => {
     if (selectedValue == '') {
       setSessionValueError(true);
     }
-
     if (skillValue == '') {
       setSkillError(true);
     }
@@ -179,7 +164,6 @@ export default function GelathiCircleForm({
     if (conflicts == '') {
       setconflictsError(true);
     }
-
     if (
       conflicts != '' &&
       bringtogether != '' &&
@@ -210,7 +194,6 @@ export default function GelathiCircleForm({
         conflict_matters_interest_mine: conflicts,
         There_puja_at_my_house: sendData?.There_puja_at_my_house,
       });
-
       var config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/new/addSpoorthiBaselineQuestionnaire.php',
@@ -219,26 +202,23 @@ export default function GelathiCircleForm({
         },
         data: data,
       };
-
       axios(config)
         .then(function (response) {
           if (response.data.success) {
             setcircleform(response?.data);
             alert('Spoorthi Form Submitted Successfully.');
-
             reloadmethod();
             gelathiDrawerReloder();
           }
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
       handleClose();
     } else {
       alert('Please Select The Option. ');
     }
   };
-
   return (
     <div>
       <Stack style={{ flexDirection: 'row', float: 'right' }} mb={2}>
@@ -247,7 +227,6 @@ export default function GelathiCircleForm({
           <Icon icon="clarity:form-line" width={20} height={20} marginTop={20} color="#ff7424" />
         </IconButton>
       </Stack>
-
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <form
           onSubmit={(e) => {
@@ -259,16 +238,14 @@ export default function GelathiCircleForm({
             <IconButton style={{ float: 'right', color: 'white' }} onClick={handleClose}>
               <Iconify icon="material-symbols:arrow-back-rounded" />
             </IconButton>
-
             <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
               Spoorthi Baseline Questionnaire
             </Typography>
-
             <Button
               edge="end"
               type="submit"
               onClick={() => {
-                console.log('save');
+                // console.log('save');
               }}
               color="inherit"
             >
@@ -480,7 +457,6 @@ export default function GelathiCircleForm({
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 10, borderRadius: 20 }}>
                   <CardContent>
                     <Typography variant="subtitle2" style={{ color: '#ff7424' }}>
@@ -500,7 +476,6 @@ export default function GelathiCircleForm({
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 10, borderRadius: 20 }}>
                   <CardContent>
                     <Typography variant="subtitle2" style={{ color: '#ff7424' }}>
@@ -520,7 +495,6 @@ export default function GelathiCircleForm({
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 10, borderRadius: 20 }}>
                   <CardContent>
                     <Typography variant="subtitle2" style={{ color: '#ff7424' }}>
@@ -539,7 +513,6 @@ export default function GelathiCircleForm({
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 10, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -584,7 +557,6 @@ export default function GelathiCircleForm({
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 10, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -631,7 +603,6 @@ export default function GelathiCircleForm({
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 10, borderRadius: 20 }}>
                   <CardContent>
                     <Typography variant="subtitle2" style={{ color: '#ff7424' }}>
@@ -652,7 +623,6 @@ export default function GelathiCircleForm({
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 10, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -693,7 +663,6 @@ export default function GelathiCircleForm({
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 10, borderRadius: 20 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -740,7 +709,6 @@ export default function GelathiCircleForm({
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card style={{ marginTop: 10, borderRadius: 20 }}>
                   <CardContent>
                     <Typography variant="subtitle2" style={{ color: '#ff7424' }}>

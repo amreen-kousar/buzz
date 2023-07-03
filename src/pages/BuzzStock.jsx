@@ -13,7 +13,6 @@ import Button from '@mui/material/Button';
 import Page from 'src/components/Page';
 
 import axios from 'axios';
-import TotalFilter from './Components/BuzzStockFilter/TotalFilter';
 import FiltersHome from './Filters/FiltersHome';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

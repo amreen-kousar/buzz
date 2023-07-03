@@ -22,37 +22,27 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 // import SearchBar from '@mkyy/mui-search-bar';
 import Box from '@mui/material/Box';
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
 export default function ChooseGelathi( {data1,circle}) {
   var [searchData,setSearchData]=useState('')
     const {state} = useLocation()
-console.log(data1,"state")
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
    const [gelathiData,setGelathiData] = useState([])
-//  const [selected,setSelected]=useState([])
   const [open, setOpen] = React.useState(false);
   var [search, setSearch] = useState('')
   const searchFunction = (e) => {
-    console.log("searchfunctioniscalled",e)
     search = e
     setSearch(search)
-    // setSelected({ name: e, type: "Search" })
     enrolledGelathi()
   }
-  console.log(search,"serachapi")
-
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const setGelathiDataToEmpty = ()=>{
-    console.log("data clearing ")
     setGelathiData([])
   }
   const checkBoxData = (itm) =>{
@@ -63,9 +53,7 @@ console.log(data1,"state")
     }else{
         setGelathiData([...gelathiData,itm])
     }
-  console.log(itm,"<----dsadasdasdad")
   }
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -97,7 +85,6 @@ console.log(data1,"state")
      };
 }, []
 )
-
 const enrolledVyaapar= async(id,i,g) =>{
   var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -120,16 +107,14 @@ const enrolledVyaapar= async(id,i,g) =>{
     axios(config)
     .then(function (response) {
       setenrolled(response?.data)
-      // changeState();
       setCount(response?.data?.list.length)
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
     
 }
 const enrolledGreenMotivators = async(id,i,g) =>{
-  console.log(id,'hy',i)
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
@@ -151,17 +136,13 @@ const enrolledGreenMotivators = async(id,i,g) =>{
       axios(config)
       .then(function (response) {
         setenrolled(response.data)
-        // changeState();
         setCount(response?.data?.list.length)
-        console.log(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
       
 }
-
-
   const enrolledGelathi = async =>{
     var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
 var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
@@ -172,7 +153,6 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         "emp_id": idvalue,
         "role_id": role
       });
-
       var config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
@@ -181,26 +161,20 @@ var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         },
         data : data
       };
-
       axios(config)
       .then(function (response) {
         setenrolled(response.data)
-        console.log(response.data,'<---------------setenrolledsetenrolled');
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
 }
 const changeText = (e) => {
   setSearchData(e?.target?.value)
   searchFunction(e?.target?.value)
-  console.log(e?.target?.value,"evalueeeeeeee")
 }
-
-
   return (
     <div>
-
         
      <Button variant="contained" onClick={handleClickOpen} style={{
         float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
@@ -217,11 +191,9 @@ const changeText = (e) => {
       }} title="Create POA">
       <span style={{ fontSize: "2rem" }}>+</span>
       </Button>
-
       <Dialog
         fullScreen
         open={open}
-
         onClose={handleClose}
         TransitionComponent={Transition}
       >
@@ -243,16 +215,12 @@ const changeText = (e) => {
              Gelathis  
             </Typography>
              
-            {/* <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button> */}
+            
             <CreateGelathiCircle handleCloseGelathi={handleClose} gelathiData={gelathiData} circle={circle} data1={data1} setGelathidataemptyInChild={setGelathiDataToEmpty}/>
           </Toolbar>
          
-
         </AppBar>
         </Stack>
-        {/* <Card><CardContent>Project : {props.data1?.props.data1?.project_name}</CardContent></Card> */}
        <br/><br/> 
        <DialogContent dividers={scroll === 'paper'}>
                     <DialogContentText
@@ -263,9 +231,7 @@ const changeText = (e) => {
                             component="form"
                             sx={{
                                 '& .MuiTextField-root': { m: 1 },
-
                             }}
-
                         >
                           <TextField id="outlined-basic" label="Search..." sx={{flex: 10}}  onChange={(e) => { changeText(e) } } InputProps={{
           startAdornment: (
@@ -289,40 +255,23 @@ const changeText = (e) => {
         {` ${itm?.gelathiname}`} ; {` ${itm?.villagename}`}</Typography>
                            
         </Stack>
-        {/* <Grid container spacing={2} columns={16}>
-  <Grid item xs={4}>
-  <Checkbox style={{marginRight: 10}} {...label} onChange={()=>{checkBoxData(itm)}} />    {` ${itm?.gelathiname}`} 
- 
-  </Grid>
-  <Grid item xs={4}>
-  Village Name: {itm?.villagename}
-  </Grid>
-</Grid> */}
+        
        
         </CardContent>
         </Card>
-        
-       
-       
-
-
        </Stack>)
             }):
             <>
             <Typography sx={{ textAlign:'center',mt:2}} variant="h6" component="div" color='inherit'>
             No Enrolled Gelathi Found
             </Typography>
-             
-            {/* <h1>No Enrolled Gelathi Found</h1> */}
+       
             </>}
            
 </Box>
 </DialogContentText>
-
 </DialogContent>
       </Dialog>
-
-
     </div>
   );
 }

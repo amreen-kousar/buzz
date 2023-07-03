@@ -37,25 +37,18 @@ BeehiveDrawer.propTypes = {
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
 };
-
 export default function BeehiveDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,data,id }) {
-    // const history = useHistory();
     const {data3} = useLocation()
     const navigate = useNavigate();
-console.log(data,'<------clcikDataclcikData',data)
      const [session,setSession] = useState('')
      const [scheduleData,setScheduleData] = useState('')
-
      const [addData, setAddData] = useState({
         date: dayjs(new Date()),
         user_id: "",
       })
-console.log(addData?.date)
     useEffect(() => {
         beehiveVillageVisit();
-        // console.log(clcikData)
     }, [clcikData])
-console.log(scheduleData,"scheduledata")
     const createGfSession = async =>{
       const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
@@ -83,22 +76,18 @@ console.log(scheduleData,"scheduledata")
           
           axios(config)
           .then(function (response) {
-            // onCloseFilter()
-            // history.push('/')
             if(response?.data?.code ===200){
             navigate('/dashboard/projects/gelathiProgram',{state:{id:id}})
-            console.log(JSON.stringify(response.data));
             }
             else{
   alert(response?.data?.message)
             }
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
           
     }
-
     const beehiveVillageVisit = async =>{
       var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
       var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -120,10 +109,9 @@ console.log(scheduleData,"scheduledata")
           axios(config)
           .then(function (response) {
             setScheduleData(response?.data)
-            console.log(response.data,"<--------------setScheduleData");
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
           
          
@@ -131,7 +119,6 @@ console.log(scheduleData,"scheduledata")
     const handleChange = (event) => {
         setAddData({ ...addData, date: event })
       }
-console.log(scheduleData,"------------------------------>scheduleDatascheduleData")
     return (
         <>
             <Drawer
@@ -146,13 +133,11 @@ console.log(scheduleData,"------------------------------>scheduleDatascheduleDat
                     <Typography variant="subtitle1" sx={{ ml: 1 }}>
                         {`${clcikData?.title}`}
                     </Typography>
-                    {console.log(clcikData,'<------clcikDataclcikData')}
                     <IconButton onClick={onCloseFilter}>
                         <Iconify icon="eva:close-fill" width={20} height={20} />
                     </IconButton>
                 </Stack>
                 <Divider />
-
                 <Scrollbar>
                     <Stack spacing={3} sx={{ p: 3 }}>
                         <div>
@@ -172,11 +157,9 @@ console.log(scheduleData,"------------------------------>scheduleDatascheduleDat
                                     </Typography>
                                 </CardContent>
                             </Card>
-
                             <Typography style={{ flexDirection: 'row',marginTop:20,marginLeft:5 }} variant="subtitle1" gutterBottom>
                                        All Participants :  {scheduleData?.all_participants?.length}
                                     </Typography>
-
                           
                                 <Card style={{marginTop:20}}>
                                     <CardContent>
@@ -195,13 +178,9 @@ console.log(scheduleData,"------------------------------>scheduleDatascheduleDat
                                 </Card>
                                 <Stack mt={5}>
                                 <Button fullWidth variant="contained" onClick={createGfSession} >Save</Button>
-
                                 </Stack>
-
                          
                         </div>
-
-
                     </Stack>
                 </Scrollbar>
             </Drawer>

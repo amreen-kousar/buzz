@@ -44,12 +44,10 @@ export default function GelathiCircleDrawer({
   const [singleCircleData, setSingleCircleData] = useState();
 const [showGreenFrom ,setShowGreenForm] = useState(false)
 const [formData , setFormData] = useState()
-  console.log(clcikData ," circleDatta")
   useEffect(() => {
     circle();
   }, [clcikData]);
   const gelathiDrawerReloder = () => {
-    console.log("Ihadbeencalledfromprops")
     setReloadFromForm(!reloadFromForm);
   };
   useEffect(() => {
@@ -82,7 +80,7 @@ axios(config)
         
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
 const removegelathicircle = async (itm) => {
@@ -105,13 +103,10 @@ const removegelathicircle = async (itm) => {
           circle();
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
     }
   };
-
-
-
   
   const callGelathiFormComponent = (index, id) => {
     setShowForm(true);
@@ -120,7 +115,6 @@ const removegelathicircle = async (itm) => {
       id: id,
     });
   };
-
   const handleform=()=>{
     alert('survey was done')
   }
@@ -267,7 +261,6 @@ return (
                 gelathiDrawerReloder={gelathiDrawerReloder}
               />
             )}
-
             {showGreenFrom && <GreenSurvey itm={formData } />}
           </Stack>
         </Scrollbar>

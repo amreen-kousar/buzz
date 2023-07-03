@@ -21,20 +21,13 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchCommon from 'src/pages/Filters/components/SearchCommon';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
-
-
-
-
-
 function SimpleDialog(props) {
   const { onClose, selectedValue, open, teamData, setUserId } = props;
   var [tempData,setTempData]=useState([...teamData]);
-  const [profileData, setProfileData] = useState();
   const [user, setUser] = useState();
   
   var account = localStorage?.getItem('userDetails')
   account = JSON.parse(account)
-
   const handleClose = () => {
     onClose(selectedValue);
   };
@@ -42,35 +35,27 @@ function SimpleDialog(props) {
   const handleListItemClick = (value) => {
     props?.setUserId(value?.id)
     props?.setName(value?.name)
-    console.log(value, "<--valuevalueee")
     onClose(value);
   };
   const [searchInFilter, setSearchInFilter] = useState(null)
   const getSearchFilter = (e) => {
         setSearchInFilter(e)
     }
-
     const returnSearchFilter = () => {
         return searchInFilter
     }
-
     useEffect(()=>searchData(''),[teamData,open])
-
     const searchData =(searchValue) => {
       tempData = teamData?.filter(e=>e?.name?.toLowerCase().includes(searchValue.toLowerCase()));
       setTempData(tempData);
     }
  
-
-
-
   return (
     <Dialog id="poa-team-dialog" onClose={handleClose} open={open}>
       <DialogTitle id="poa-team-dialog-content"> <IconButton id="poa-team-icon-button" edge="start" color="inherit" onClick={handleClose} aria-label="close">
         <CloseIcon />
       </IconButton>Select Buzz Team Members</DialogTitle>
        <SearchCommon getSearchFilter={(e) => { searchData(e) }} />
-       {/* <Button onClick={searchData}>Search</Button> */}
       {(tempData?.length>0)?<List sx={{ pt: 0 }}>
         {tempData?.map((email) => (
          
@@ -78,7 +63,6 @@ function SimpleDialog(props) {
             <ListItemButton id="list-item-btn" onClick={() => handleListItemClick(email)} >
               <ListItemAvatar id="list-item-avatar">
                 <Avatar id="poa-team-avatar" sx={{ bgcolor: blue[100], color: blue[600] }} src={email?.profile_pic} />
-
               </ListItemAvatar>
              
               <ListItemText id="list-item-text" primary={email?.name} />
@@ -89,36 +73,17 @@ function SimpleDialog(props) {
             </Typography> </ListItemText>
             </ListItemButton>
           </ListItem>
-
           ))}
-
-        {/* <ListItem disableGutters>
-          <ListItemButton
-            autoFocus
-          //  onClick={() => handleListItemClick('addAccount')}
-          >
-          <ListItemAvatar>
-              <Avatar>
-                <AddIcon />
-              </Avatar>
-            </ListItemAvatar> 
-            <ListItemText primary="Add account" />
-          </ListItemButton> 
-        </ListItem> */}
       </List>:<h4 id="no-team-members-found" style={{textAlign:'center'}}>No Team Members Found</h4>}
     </Dialog>
   );
 }
-
 SimpleDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  //   selectedValue: PropTypes.string.isRequired,
 };
-
 export default function PoaTeam({ setUserId, setName, users }) {
   const [open, setOpen] = React.useState(false);
-  //   const [selectedValue, setSelectedValue] = React.useState();
   const [teamData, setTeamData] = useState([])
   useEffect(() => {
     team()
@@ -132,8 +97,6 @@ export default function PoaTeam({ setUserId, setName, users }) {
       "team": ""
     });
     
-  
-console.log(idvalue,"iddddddddddd")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getMyTeam.php',
@@ -143,35 +106,26 @@ console.log(idvalue,"iddddddddddd")
       data: data
     };
     
-
     axios(config)
       .then(function (response) {
-        console.log(response.data?.data, "<--response.dataresponse.data")
         setTeamData(response.data?.data)
-        console.log(response.data);
-        console.log(response.data?.data[0]?.profile_pic, "---------------->")
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = (value) => {
     setOpen(false);
-    // setSelectedValue(value);
   };
-
   return (
     <div>
-
       <Button id="poa-team-button-people" onClick={handleClickOpen} style={{ float: "right", color: "#ff7424", margin: 10, marginTop: 0 }} sx={{
         '&:hover': {
           backgroundColor: '#ffd796',
           borderColor: "#ff7424",
-
         },
         borderColor: "#ff7424",
         color: "#ff7424",

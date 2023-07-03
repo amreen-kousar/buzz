@@ -34,7 +34,6 @@ import AssignedVillages from './pages/projects/assignedVillages';
 import ScheduleBeehiveVisit from './pages/projects/scheduleBeehiveVisit';
 import ScheduleCircleMeet from './pages/projects/scheduleCircleMeet';
 import ScheduleVillage from './pages/projects/scheduleVillage';
-import Trainers from './pages/Components/DashboardFilters/Trainers';
 import AssignBatches from './pages/projects/AssignBatches';
 import Operationmanagerdashboard from './pages/Operationmanagerdashboard';
 import Test from './pages/Test';

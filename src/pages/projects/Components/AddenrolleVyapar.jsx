@@ -1,20 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import React from "react";
-import {Button,CardContent,Stack,Card, DialogContent, DialogContentText,CardActions} from '@mui/material';
+import {Button,CardContent,Stack,Card, DialogContent, DialogContentText,CardActions,Checkbox,Toolbar,IconButton,Typography,Slide} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import PropTypes from 'prop-types';
-import Checkbox from '@mui/material/Checkbox';
-import Divider from '@mui/material/Divider';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
 import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import AddParticipants from './AddParticipants';
@@ -24,11 +14,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   export default function AddEnrollVyapar({session}){
     const [open, setOpen] = React.useState(false);
-    const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState('');
     const [participantData,setParticipantData]=useState('');
     const [reload , setReload] = useState(false)
-
     const reloadFUnction =() =>{
       setReload(!reload)
     }
@@ -40,7 +28,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       const handleClose = () => {
         setOpen(false);
       };
-
 const setEnrolledVyapar=(itm)=>{
     var data = JSON.stringify({
         "id": itm?.participant_id,
@@ -60,22 +47,18 @@ const setEnrolledVyapar=(itm)=>{
       
       axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         alert(response.data.message);
         
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
       
 }
-
-console.log(session,"sessionnnnnnnnnnnnnnnnnnnn")
 useEffect(()=>{
 getEnrollVyapar();
 getAddPartcipants();
 },[open ,reload])
-
   const getEnrollVyapar=()=>{
     var data = JSON.stringify({
     "gf_session_id":session?.id
@@ -91,15 +74,13 @@ getAddPartcipants();
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
       setSessiondata(response.data);
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
     
   }
-
 const getAddPartcipants=()=>{
   var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   var data = JSON.stringify({
@@ -119,21 +100,16 @@ const getAddPartcipants=()=>{
   
   axios(config)
   .then(function (response) {
-    console.log(JSON.stringify(response.data));
     setParticipantData(response.data)
   })
   .catch(function (error) {
-    console.log(error);
+    // console.log(error);
   });
   
 }
-
-
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" }
   }
-
-
     return(
     <>
  <Stack style={{ flexDirection: 'row'}}  mb={2}>
@@ -146,7 +122,6 @@ const getAddPartcipants=()=>{
       </Stack>
      
     
-
       <Dialog fullScreen open={open} onClose={handleClose}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">
@@ -158,14 +133,12 @@ const getAddPartcipants=()=>{
           <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
             All Participants 
           </Typography>
-
           <AddParticipants type="vyapar" session={session}  reloadFUnction={reloadFUnction}/>
           
         </Toolbar>
         {/* <Webcam
     ref={webcamRef}
     screenshotFormat="image/jpeg"odimeter:"",
-
     /> */}
         {/* </AppBar> */}
         <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
@@ -179,11 +152,9 @@ const getAddPartcipants=()=>{
                     <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
                                        Project :
                                      &nbsp; {sessiondata?.projectName}
-                                       {/* {console.log(batch?.data?.projectName,'<--------njknnjnjn')} */}
                                    </Typography>
                                    <Typography variant="body1" gutterBottom>
                                        Partner : &nbsp;{sessiondata?.partnerName}
-                                       {/* &nbsp;{batch?.data?.partnerName} */}
                                    </Typography>
                                    <Typography variant="body1" gutterBottom>
                                     Gelathi Session : &nbsp; {sessiondata?.gf_session_name}
@@ -211,7 +182,6 @@ const getAddPartcipants=()=>{
                     {(itm?.VyaparEnrollment=='0')?<Checkbox 
                     onClick={()=>{
                       setEnrolledVyapar(itm)
-                      console.log(itm,"<---sadasdasd")
                     }} 
                     {...label}
                      />:<Checkbox defaultChecked={true} onClick={()=>{setEnrolledVyapar(itm)}} style={{color:'pink'}}/>}

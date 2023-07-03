@@ -24,7 +24,6 @@ import {
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../components/Page';
-import POA from './Components/PlanofactionFilters/POA';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -44,7 +43,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { SecurityUpdate } from '@mui/icons-material';
 import moment from 'moment';
-import Day1SelfShakti from './Components/PlanofactionFilters/Day1SelfShakti';
+
 import ProjectMultiDrawer from '../pages/Components/ProjectMultiDrawer';
 import PoaGF from './Components/PlanofactionFilters/PoaGF';
 function TabPanel(props) {
@@ -340,14 +339,7 @@ export default function PlanofAction() {
           />
         </LocalizationProvider>
       </Stack>
-      {/* <Stack>
-                <Day1SelfShakti 
-                batchState={batchState}
-                 isOpenDay1={day1}
-                 onOpenDay1={handleOpenDay1}
-                 onCloseDay1={handleCloseDay1} 
-                 />
-              </Stack> */}
+      
       <Stack id="project-multi-drawer-stack">
         <ProjectMultiDrawer
           id="poa-project-multi-drawer"

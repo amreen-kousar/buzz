@@ -19,11 +19,9 @@ import Alert from '@mui/material/Alert';
 import moment from 'moment';
 import axios from 'axios';
 import baseURL from 'src/utils/api';
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data1,circle,setGelathiDataToEmpty}) {
   const {state} = useLocation()
   var todayDate = dayjs()
@@ -35,50 +33,18 @@ export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data
     "circle_date": moment(todayDate)?.format('YYYY-MM-DD'),
     "gelathi_created_id": ""
   })
-
-  console.log(gelathiData ,"clicket data")
   const handleClickOpen = () => {
     setOpen(true);
     
   };
-
   const handleClose = () => {
     setOpen(false);
     
     
   };
-console.log(data1?.project_id,"projectid")
 gelathiData.forEach((itm) => {
   itm.isSelected="true"
 });
-//   const apiHit = () =>{
-//     handleClose();
-    
-//     const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-//     var raw = JSON.stringify({
-//         "project_id": data1?.data1?.project_id,
-//         "circle_name": sendData?.circle_name,
-//         "circle_date":moment(sendData?.circle_date)?.format('YYYY-MM-DD'),
-//         "gelathi_created_id": userid,
-//         "gelathi":JSON?.stringify(gelathiData),
-       
-//       })
-
-
-//         var requestOptions = {
-//             method: 'POST',
-//             body: raw,
-    
-//           };
-//           fetch("https://bdms.buzzwomen.org/appTest/createCircle.php", requestOptions)
-//           .then(response => response.text())
-//           .then(result =>{ handleClose();handleCloseGelathi();circle();})
-//           .catch(error => console.log('error', error));
-
-// console.log(circle,"rawdata")
-//   }
-// let gelathiinfo = JSON?.stringify(gelathiData)
-console.log("🚀 ~ file: CreateGelathiCircle.jsx:28 ~ CreateGelathiCircle ~ data1:", data1)
 const apiHit = () =>{
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 var data = JSON.stringify({
@@ -88,9 +54,6 @@ var data = JSON.stringify({
   "gelathi_created_id": userid,
   "gelathi":gelathiData
 });
-// let data = JSON?.stringify(gelathiData)
-// parse(data)
-
 var config = {
   method: 'post',
   url: 'https://bdms.buzzwomen.org/appTest/createCircle.php',
@@ -99,24 +62,19 @@ var config = {
   },
   data : data
 };
-
 axios(config)
 .then(function (response) {
   handleClose();
   handleCloseGelathi();
   circle();
-  console.log(JSON.stringify(response.data));
 })
 .catch(function (error) {
-  console.log(error);
+  // console.log(error);
 });
 }
-
-
 const createCircle = () =>{
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   var data = JSON.stringify({
-
     
     "project_id": data1?.project_id,
     "circle_name": sendData?.circle_name,
@@ -124,10 +82,8 @@ const createCircle = () =>{
     "gelathi_created_id": userid,
     "gelathi":gelathiData,
     
-
   });
  
-
  
   
   var config = {
@@ -143,15 +99,11 @@ const createCircle = () =>{
   .then(function (response) {
     handleClose();
     handleCloseGelathi();
-    // circle();
-    console.log(JSON.stringify(response.data));
   })
   .catch(function (error) {
-    console.log(error);
+    // console.log(error);
   });
 }
-
-
   return (
     <div>
       {gelathiData.length<= 0 ?
@@ -190,9 +142,7 @@ const createCircle = () =>{
               save
             </Button> </Typography>
           </Toolbar>
-        {/* </AppBar> */}
         <Card style={{marginTop:30}}>
-          {console.log(data1?.data1,"projectname")}
             <CardContent>
             <Typography variant="subtitle1">Project: &nbsp;{data1?.project_name} </Typography>
             </CardContent>
@@ -209,11 +159,9 @@ const createCircle = () =>{
         }
           renderInput={(params) => <TextField {...params} fullWidth />}
           value={sendData?.circle_date}
-
           />
 </Stack>
 <Stack mt={2}>
-  {console.log(gelathiData,"gelathidataaaaaaaa")}
 <Typography variant="subtitle1">Enrolled Gelathis:</Typography>
 <Card mt={2}>
     <CardContent>
@@ -223,10 +171,6 @@ const createCircle = () =>{
                 <Typography variant="subtitle1">{itm?.villagename}</Typography></CardContent></Card>
             )
         })}
-
-    
-    {/* <Typography variant="subtitle1">Kalshettahalli 2</Typography> */}
-
     </CardContent>
 </Card>
 </Stack>
@@ -234,7 +178,6 @@ const createCircle = () =>{
        
         </CardContent>
         </form>
-
       </Dialog>
     </div>
   );

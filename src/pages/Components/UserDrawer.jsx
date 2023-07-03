@@ -42,14 +42,10 @@ UserDrawer.propTypes = {
 };
 
 export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users }) {
-  console.log(users,"userlist")
   const [profileData, setProfileData] = useState();
   const [user, setUser] = useState();
   const userDetails = localStorage?.getItem('userId');
   const isSmallScreen = useMediaQuery('(max-width:600px)');
-  {
-    console.log(userDetails, 'userrrrrrrrrrrrrrrrrrr');
-  }
 
   useEffect(() => {
     //   editUser()
@@ -81,10 +77,9 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
     axios(config)
       .then(function (response) {
         setProfileData(response.data);
-        console.log(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -111,27 +106,20 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
       updateSetUser()
       onCloseFilter()
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
   }
   }
 
   var roleid = JSON.parse(localStorage?.getItem('people'))?.role_id;
   var peopledetails =JSON.parse(localStorage?.getItem('people'))
-console.log(profileData ,"profileDataprofileData")
   return (
     <>
-      {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
-
       <Drawer
-      //  width={isSmallScreen ? '100%' : 300}
         anchor="right"
         open={isOpenFilter}
         onClose={onCloseFilter}
@@ -207,11 +195,6 @@ console.log(profileData ,"profileDataprofileData")
                 </CardContent>
               </Card>
 
-              {/* <FormGroup>
-                {FILTER_GENDER_OPTIONS.map((item) => (
-                  <FormControlLabel key={item} control={<Checkbox />} label={item} />
-                ))}
-              </FormGroup> */}
             </div>
 
             <div>
@@ -320,11 +303,7 @@ console.log(profileData ,"profileDataprofileData")
                 </CardContent>
               </Card>
 
-              {/* <FormGroup>
-                {FILTER_GENDER_OPTIONS.map((item) => (
-                  <FormControlLabel key={item} control={<Checkbox />} label={item} />
-                ))}
-              </FormGroup> */}
+       
             </div>
 
             <div>
@@ -400,18 +379,6 @@ console.log(profileData ,"profileDataprofileData")
           </Stack>}
         </Scrollbar>
 
-        {/* <Box sx={{ p: 3 }}>
-          <Button
-            fullWidth
-            size="large"
-            type="submit"
-            color="inherit"
-            variant="outlined"
-            startIcon={<Iconify icon="ic:round-clear-all" />}
-          >
-            RAJ KUMAR
-          </Button>
-        </Box> */}
       </Drawer>
     </>
   );

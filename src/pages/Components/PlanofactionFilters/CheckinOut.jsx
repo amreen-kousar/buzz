@@ -52,9 +52,7 @@ function TabPanel(props) {
       'aria-controls': `simple-tabpanel-${index}`,
     };
   }
-
 export default function CheckinOut({photos,batch,setCheck}) {
-  {console.log(batch,"batchhhhhhhhhh",setCheck)}
     const newTime = new Date()
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
@@ -87,20 +85,16 @@ export default function CheckinOut({photos,batch,setCheck}) {
     setOpen(true);
     GetStatus();
   };
-
   const handleClose = () => {
     setOpen(false);
   };
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(function(position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
       setLats({lat:position.coords.latitude,lng:position.coords.longitude})
 var data = JSON.stringify({
   "latitude": position.coords.latitude,
   "longitude": position.coords.longitude
 });
-
 var config = {
   method: 'post',
   url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
@@ -109,21 +103,16 @@ var config = {
   },
   data : data
 };
-
-
 axios(config)
 .then(function (response) {
-  console.log(response?.data,",----ewrwerwer")
   setLocation(response?.data)
-//  console.log(JSON.stringify(response.data));
 })
 .catch(function (error) {
-  console.log(error,",----ewrwerwer");
+  // console.log(error,",----ewrwerwer");
 });
       
     });
   },[])
-
   const checkinout = async(type,batchid) =>{
     var data = JSON.stringify({
         "location_name": location,
@@ -162,13 +151,9 @@ axios(config)
       GetStatus();
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
-// useEffect(()=>{
-//   GetStatus()
-// })
-console.log(checkIn,"checkintime")
   const GetStatus = async=>{
     var data = JSON.stringify({
       "project_id": batch?.data?.project_id,
@@ -188,16 +173,13 @@ console.log(checkIn,"checkintime")
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data),"dataaaaaaaaaaaa");
       setCheckData(response.data)
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
   }
-  {console.log(checkData,"checkdataaaaaaaaaaaaa")}
   var todaydate = moment(new Date()).format('YYYY-MM-DD');
-
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
@@ -252,7 +234,6 @@ console.log(checkIn,"checkintime")
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   },
-
                   color: 'black',
                 }} style={
                   value == 0
@@ -267,7 +248,6 @@ console.log(checkIn,"checkintime")
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   },
-
                   color: 'black',
                 }} 
                  style={
@@ -296,8 +276,7 @@ console.log(checkIn,"checkintime")
         <Typography mt={2}>
             Start :{batch?.data?.day1?.split(" ")[1]}&nbsp;{batch?.data?.day1?.split(" ")[2]}
         </Typography>
-        {console.log(batch?.data?.day1_actual==todaydate,"checkedinnnnn")}
-      
+   
         {(checkData?.data?.check_in_date_day1=='' && batch?.data?.day1_actual==todaydate)?<Button style={{float:'left',position:'absolute',left:20,top:320,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1,batch?.data?.day1_id)} sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
@@ -354,7 +333,6 @@ console.log(checkIn,"checkintime")
         <Typography mt={2}>
             Start :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
         </Typography>
-        {console.log(checkData?.data?.day2_actual==new Date(),"checkedinnnnnday2")}
         {(checkData?.data?.check_in_date_day2=='' && batch?.data?.day2_actual==todaydate)?<Button sx={{
              '&:hover': {
                backgroundColor: '#ffd796',

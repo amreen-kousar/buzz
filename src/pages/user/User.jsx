@@ -12,26 +12,7 @@ import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } fro
 // mock
 import PRODUCTS from '../../_mock/products';
 import UserDrawer from '../Components/UserDrawer';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import InputLabel from '@mui/material/InputLabel';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import Switch from '@mui/material/Switch';
-import Autocomplete from '@mui/material/Autocomplete';
-import UserFilter from '../Components/Peoplefilters/Userfilters';
-// ----------------------------------------------------------------------
-import Scrollbar from '../../components/Scrollbar';
-import DashboardNavbar from 'src/layouts/dashboard/DashboardNavbar';
-// ----------------------------------------------------------------------
+
 import AddUser from './AddUser';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';

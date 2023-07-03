@@ -22,10 +22,8 @@ import axios from 'axios';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -42,13 +40,11 @@ function TabPanel(props) {
     </div>
   );
 }
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -56,7 +52,6 @@ function a11yProps(index) {
   };
 }
 export default function FullScreenDialog({ photos, setPhotos, batch }) {
-  console.log(batch, '<--------shownshownshown',photos)
   const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   const [images,setImages] = useState([])
@@ -69,17 +64,14 @@ export default function FullScreenDialog({ photos, setPhotos, batch }) {
     //setShown(shown)
     setOpen(photos)
   }, [photos])
-
   React.useEffect(() => {
     //setShown(shown)
      getTrainingBatch()
   }, [reload])
-
   React.useEffect(() => {
     //setShown(shown)
      getTrainingBatch()
   }, [])
-
   const handleClickOpen = () => {
     setPhotos(true)
     setOpen(true);
@@ -92,35 +84,22 @@ export default function FullScreenDialog({ photos, setPhotos, batch }) {
     setOpen(false);
   };
   function getBase64(file, callback) {
-
     const reader = new FileReader();
-
     reader.addEventListener('load', () => callback(reader.result));
-
     reader.readAsDataURL(file);
   }
 const convertImage = (e) => {
-    console.log("this is calleddddfdsfs")
-    // data.append('emp_id', userid);
-    // data.append('file', e.target.files[0]);
-    // setImagePath([...imagePath, e.target.files[0]])
     const imageData = URL.createObjectURL(e.target.files[0]);
-    console.log(imageData, "files")
     getBase64(e.target.files[0], function (base64Data) {
       setImages([...images, base64Data])
-    //   setViewImage(true)
     setViewImage(true);
     });
   }
-
-console.log("batch?.project_id", batch?.data?.project_id)
 const UploadImages = async(e) =>{
   if (images.length === 0) {
     alert("No photos to upload.")
     throw new Error('No photos to upload.');
   }
-    console.log("upload method is calling ")
-
     if(images.length<=0){
       alert("No Image is Selected!")
     }else{
@@ -131,41 +110,30 @@ const UploadImages = async(e) =>{
         "day": e,
         "photos": [images.toString().slice(22,)]
     })
-
     var requestOptions = {
         method: 'POST',
         body: raw,
         redirect: 'follow'
       };
-
 let res =  fetch("https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php", requestOptions)
 .then((response) => {
  
-
 setImages([])
 setReload(!reload);
 alert("Photo Uploaded Successfully..")
-
 })
-
-
-.catch((error) => {console.log('error', error)});
+.catch((error) => {
+  // console.log('error', error)
+});
 }
-
-
     }
-
-
 //Method to delete the images that is selected 
 const deleteImage = (index) => {
 images.splice(index, 1);
 setImages([...images]);
 };
-
-
 const getTrainingBatch = async =>{
         
-
   var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
   var data = JSON.stringify({
@@ -185,17 +153,14 @@ const getTrainingBatch = async =>{
     axios(config)
     .then(function (response) {
       setTrainingData(response.data)
-      console.log(batch , "response from ")
-    
-      
+
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
  
     
 }
-
   return (
     <div>
       <Dialog
@@ -220,15 +185,11 @@ const getTrainingBatch = async =>{
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button> */}
-
           </Toolbar>
         </AppBar>
-
         <List>
           <>
-
         
-
                          
   <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -238,7 +199,6 @@ const getTrainingBatch = async =>{
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   },
-
                   color: 'black',
                 }} style={
                   value == 0
@@ -253,7 +213,6 @@ const getTrainingBatch = async =>{
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   },
-
                   color: 'black',
                 }} 
                  style={
@@ -267,7 +226,6 @@ const getTrainingBatch = async =>{
                 />
         </Tabs>
       </Box>
-
       <TabPanel value={value} index={0}>
       {/* <Card id="delete-card-project" style={{marginTop:20}}> */}
 {(userId==5)?<><div id="project-multidrawwer-div" style={{ display: 'flex' }}>
@@ -326,13 +284,10 @@ const getTrainingBatch = async =>{
       <Card > <CardContent>  
         <Grid container spacing={2}>
   <Grid  xs={10} sm={6} style={{paddingRight:5}} >
-
     
     {(photos )?<img id="img-event-data" src={(trainingData?.photos[0].photo1)?(trainingData?.photos[0]?.photo1):batch?.photos[0].photo1} />:"No Photos"}</Grid>
     <Grid  xs={10} sm={6} style={{paddingRight:5}} >{(photos)?<img id="img-event-data" src={(trainingData?.photos[0].photo2)?(trainingData?.photos[0]?.photo2):batch?.photos[0].photo2} />:null}</Grid></Grid></CardContent></Card> 
       </TabPanel>
-
-
       <TabPanel value={value} index={1}>
     
 {(userId==5)?<>
@@ -388,7 +343,6 @@ const getTrainingBatch = async =>{
            Upload   
          </Button>
          </div></>:null}
-{console.log(trainingData,"hlooooo")}
  <Card><CardContent>
   <Grid container spacing={2} >
   <Grid  xs={10} sm={6} style={{paddingRight:5}} >
@@ -399,7 +353,6 @@ const getTrainingBatch = async =>{
       </TabPanel>
     
     </Box>
-
   
           </>
         </List>

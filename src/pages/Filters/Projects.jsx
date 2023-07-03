@@ -2,12 +2,9 @@ import { useState, useEffect } from 'react';
 import ApiRequest from './components/ApiRequest';
 import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
-
 export default function Projects({ selectDATA, getData,date,endDate,dateValue,endDateValue}) {
   const [projects, setProjects] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
-
-
   useEffect(() => {
     project()
   }, []
@@ -15,16 +12,12 @@ export default function Projects({ selectDATA, getData,date,endDate,dateValue,en
   const project = async () => {
     ApiRequest({ selectDATA: 3 }).then(res => setProjects(res))
   }
-
   const getSearchFilter = (e) => {
     setSearchInFilter(e)
   }
-
   const returnSearchFilter = () => {
     return searchInFilter
   }
-
-
   return (
     <div>
       <SearchCommon getSearchFilter={(e) => { getSearchFilter(e) }} />

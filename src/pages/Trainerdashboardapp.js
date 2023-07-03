@@ -7,7 +7,6 @@ import Iconify from '../components/Iconify';
 import Page from '../components/Page';
 import Chip from '@mui/material/Chip';
 import { AppWidgetSummary } from '../sections/@dashboard/app';
-import DashboardFilter from './Components/DashboardFilters/DashboardFilter';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';

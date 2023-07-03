@@ -3,12 +3,10 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
-import Poafunders from './Poafunders';
 import Avatar from '@mui/material/Avatar';
 import { useGeolocated } from 'react-geolocated';
 import Geocode from 'react-geocode';
 import React from 'react';
-// material
 import {
   Grid,
   Box,
@@ -28,16 +26,11 @@ import {
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress'
 import is from 'date-fns/locale/is';
-// components
-
-// ----------------------------------------------------------------------
-
 PoaFilter.propTypes = {
   isOpenEvent: PropTypes.bool,
   onOpenEvent: PropTypes.func,
   onCloseEvent: PropTypes.func,
 };
-
 export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridvalue , changeState ,clickedItemData}) {
   const [locationS, setLocation] = useState();
   const [checkin, setCheckIn] = useState('');
@@ -55,41 +48,23 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   const [eventData, setEventData] = useState('');
   const [addImage, setAddImage] = useState('');
   const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-
   const [showCheckoutBtn , setCheckoutBtn] = useState(true)
-  const handleClick = (event) => {
-    console.log('click', event.target);
-    hiddenFileInput.current.click();
-  };
-
   function getBase64(file, callback) {
     const reader = new FileReader();
-
     reader.addEventListener('load', () => callback(reader.result));
-
     reader.readAsDataURL(file);
   }
   const data = new FormData();
-
   const convertImage = (e) => {
-    console.log('this is calleddddfdsfs');
     data.append('emp_id', userid);
     data.append('file', e.target.files[0]);
     setImagePath([...imagePath, e.target.files[0]]);
     const imageData = URL.createObjectURL(e.target.files[0]);
-    console.log(imageData, 'files');
     getBase64(e.target.files[0], function (base64Data) {
       setImage( [base64Data]);
-      console.log(base64Data, "base")
       setViewImage(true);
     });
-  }; 
-
-  console.log(image.toString().slice(22,), "slice")
-
-  console.log(" event id in ", eventdetails.event_id)
-  console.log(clickedItemData , "event data ")
-
+  };
   const [isLoading, setISLoading] = useState(false)
   const postImages = async () => {
     if (image.length === 0) {
@@ -112,25 +87,21 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   
     let res = fetch('https://bdms.buzzwomen.org/appTest/uploadEventPhotos.php', requestOptions)
       .then((itn) => {
-        console.log(itn, '<--itemgh');
         setImage([])
         alert("Image uploaded successfully..")
         setISLoading(false)
       });
   }
-
   const deleteImage = (index) => {
     image.splice(index, 1);
     setImage([...image]);
   };
-
   const { coords, isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
     positionOptions: {
       enableHighAccuracy: false,
     },
     userDecisionTimeout: 5000,
   });
-
   useEffect(() => {
     let isSubscribe = true
     if(isSubscribe)
@@ -140,15 +111,10 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   }
   return ()=>{
     isSubscribe = false
-
-    
-    console.log("unsubscribe location()")
   }
   }, [coords ,locationdata]);
-//eventdetails
   useEffect(()=>{
     let isSubscribe = true
-
     if(isSubscribe)
     {
       event()
@@ -156,20 +122,15 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
     }
     return ()=>{
       isSubscribe = false
-      console.log("unsubscribe event()")
     }
     
   },[locationdata ,image])
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
-      console.log('Latitude is :', position.coords.latitude);
-      console.log('Longitude is :', position.coords.longitude);
       var data = JSON.stringify({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
-
       var config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
@@ -178,18 +139,15 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
         },
         data: data,
       };
-
       axios(config)
         .then(function (response) {
-          console.log(response, ',----ewrwerwer');
           setLocation(response?.data);
         })
         .catch(function (error) {
-          console.log(error, ',----ewrwerwer');
+          // console.log(error, ',----ewrwerwer');
         });
     });
   }, []);
-//checkin ,checkout removed from dependency eventdetails?.check_in
   const postlocation = (async) => {
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -201,7 +159,6 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
         type: type,
         lat: position.coords.latitude,
       });
-      console.log(select?.id, 'selectedddddd');
       var config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/checkInOut.php',
@@ -210,21 +167,17 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
         },
         data: data,
       };
-
       axios(config)
         .then(function (response) {
 if (response.message === "Check Out Successfully"){
   setCheckout("change")
-
 }else if(response.message === "Check In Successfully"){
   setCheckIn("changes")
 }
-
           setlocationdata(response.data);
-          console.log(response.data, '<------------locationdataaaaaaaaaaa');
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
     });
   };
@@ -232,15 +185,12 @@ if (response.message === "Check Out Successfully"){
     Geocode.fromLatLng(coords?.latitude, coords?.longitude).then(
       (response) => {
         const address = response.results[0].formatted_address;
-        console.log(address, '<----addressss');
       },
       (error) => {
-        console.error(error);
+        // console.error(error);
       }
     );
   };
-
-
   const [idEvent, setIdEvent] = [
     {
       event_id: '',
@@ -249,10 +199,8 @@ if (response.message === "Check Out Successfully"){
   ];
   useEffect(() => {
     let isSubscribe = true
-
     if(isSubscribe)
     {
-
       event();
       getlocationdata()
     }
@@ -261,7 +209,6 @@ if (response.message === "Check Out Successfully"){
     }
    
   }, [select ,locationdata,checkout, image]);
-//  ,eventData?.check_in
  
 const handlecheckin = () => {
     setCheckIn(locationS);
@@ -271,7 +218,6 @@ const handlecheckin = () => {
     setCheckoutBtn(true)
  event()
   };
-
   const handlecheckout = () => {
     setCheckout(locationS);
     setCheckvisible(true);
@@ -280,7 +226,6 @@ const handlecheckin = () => {
     setCheckoutBtn(false)
     event()
   };
-
   const event = (async) => {
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
@@ -288,7 +233,6 @@ const handlecheckin = () => {
       user_id: idvalue,
       check_in_location: 'RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India',
     });
-    console.log(select?.id, 'selectedddddd');
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
@@ -297,27 +241,23 @@ const handlecheckin = () => {
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
         setEventData(response.data);
-        console.log(response.data, '<------------setEventDatasetEventDatasetEventDatadetails');
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
   useEffect(() => {
     getlocationdata();
   }, [select ]);
-// ,checkin,checkout removed 
   const getlocationdata = (async) => {
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       event_id: select?.id,
       user_id: idvalue,
     });
-    console.log(select?.id, 'selectedddddd');
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
@@ -326,36 +266,25 @@ const handlecheckin = () => {
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
-        console.log(response, 'responseeeeeeeeeeee');
         if (response.data.check_in) {
           setType(2);
-
         }
         seteventdetails(response.data);
        
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
-
-  console.log(eventdetails, 'eventdetailssssssssssssss');
-
   return (
     <>
-      {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
-
       <Drawer
         id="poa-event-drawer"
         anchor="right"
         open={isOpenEvent}
         onClose={() => {
-          //setSelect(),
           setEventData('');
           onCloseEvent();
         }}
@@ -375,9 +304,7 @@ const handlecheckin = () => {
             <Iconify id="close-fill-icon" icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
-
         <Divider />
-        {console.log(eventData, '<--hgdsgdsgfdgfdgfd')}
         <Scrollbar id="poa-event-scrollbar">
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
           <div>
@@ -385,12 +312,9 @@ const handlecheckin = () => {
               <CardContent id="poa-event-card-content">
                 <Typography id="event-title" variant="body1">Event Title  :{eventData?.name}</Typography>
                 <Typography id="event-date" variant="body1">Event&nbsp;date&nbsp;and&nbsp;time :{eventData?.date1}</Typography>
-
                 <Typography id="description" variant="body1">Description :{eventData?.description}</Typography>
               </CardContent>
             </Card>
-
-            {console.log(select?.status, 'status')}
             {(eventdetails?.check_in == '' || eventdetails?.check_out == '') &&
             useridvalue == idvalue &&
             select?.status == 0 ? (
@@ -429,12 +353,10 @@ const handlecheckin = () => {
                       CHECK OUT
                     </Button>
                   )}
-                  {console.log(eventdetails, 'locationnnnnnnnn')}
                   <Typography id="check-in-time" variant="body1"><span>Checkin Time</span><span style={{marginLeft:"2.8rem"}}>:</span>{eventData?.check_in} </Typography>
                   <Typography id="checkin-location"> <span>Checkin Location</span><span style={{marginLeft:"1.1rem"}}>:</span>{eventData?.check_in_location} </Typography>
                   <Typography id="checkout-time">  <span>Checkout Time</span><span style={{marginLeft:"2.2rem"}}>:</span> {eventData?.check_out}</Typography>
-                  {console.log(eventdetails.check_in , eventdetails.check_in ,"eventdetails data check out ")}
-                  {console.log(eventData.check_in , eventData.check_in ,"event datacheck out ")}
+               
                   <Typography id="checkout-location"> <span>Checkout Location</span><span style={{marginLeft:".5rem"}}>:</span> {eventData?.check_out_location}</Typography>
                 </CardContent>
               </Card>
@@ -445,7 +367,6 @@ const handlecheckin = () => {
                     <u >CheckIn/Out Status</u>
                   </Typography>
                   <br />
-
                   <Typography id="checkin-time-event" variant="body1">Checkin Time:{eventdetails?.check_in} </Typography>
                   <Typography id="checkin-location-event">Checkin Location: {eventdetails?.check_in_location} </Typography>
                   <Typography id="checkout-time-event">Checkout Time : {eventdetails?.check_out}</Typography>
@@ -453,7 +374,6 @@ const handlecheckin = () => {
                 </CardContent>
               </Card>
             )}
-
             <div>
               <div style={{ display: 'flex' }}>
                 {viewImage
@@ -521,13 +441,10 @@ const handlecheckin = () => {
         null
         }  
         </>
-
         }
               </div> 
-
                  
              
-
             <Card id="event-data-card" style={{ marginTop: 20 }}>
               <CardContent id="card-content-poa-event-data">
                
