@@ -127,7 +127,6 @@ export default function TravelDialog({ viewMessage }) {
   function getBase64(file, callback) {
 
     const reader = new FileReader();
-
     reader.addEventListener('load', () => callback(reader.result));
 
     reader.readAsDataURL(file);
@@ -353,7 +352,6 @@ axios(config)
         console.log(JSON.stringify(response.data));
         //filter by date, assign to another variable (dropdown values)
         const date = moment(new Date()).format('YYYY-MM-DD')
-        console.log("🚀 ~ file: TravelDialog.jsx:294 ~ new:", date)
         let dropDownValues = response.data.data.filter(x=> {
           const date1 = moment(x.date)?.format('YYYY-MM-DD')
           return  date1=== date;
