@@ -100,7 +100,6 @@ xs:"10px"
         xs: '0.5rem',sm:'14px',md:'16px',lg:'16px',xl:'16px'
         
       }}}><strong>{title}</strong></span><br />
-        {console.log(total, "total")}
         <span style={{  color: "#103996" ,marginBottom:10, fontSize:{
         xs: '12px',sm:'14px',md:'16px',lg:'16px',xl:'16px'
         

@@ -23,10 +23,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,handleCloseDilog }) {
-  console.log(batch, '<--------shownshownshown')
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
-  console.log("🚀 ~ file: ShaktiDialog.jsx:35 ~ ShaktiDialog ~ clcikData:", clcikData)
   const [checkData,setCheckData]=React.useState('');
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -36,7 +34,6 @@ export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,ha
   };
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
-    //setShown(shown)
     setOpen(shown);
    
   }, [shown])
@@ -72,14 +69,12 @@ export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,ha
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data),"dataaaaaaaaaaaa");
       setCheckData(response.data)
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
   }
-console.log(checkData,"checkedta")
   return (
     <div>
       <Dialog
@@ -101,7 +96,6 @@ console.log(checkData,"checkedta")
             <Typography sx={{ ml: 2, flex: 1,color:"white" }} variant="h6" component="div">
               Self Shakti 
             </Typography>
-            {console.log(checkData,"addparticipants")}
             <AddParticipants batch={batch} checkData={checkData} reloadFUnction={reloadfuncton} handleCloseDilog={handleCloseDilog}/>
           </Toolbar>
         </AppBar>

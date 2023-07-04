@@ -67,7 +67,6 @@ const SelfSakthiQulityAssurance = () => {
   
     const handleOpenFilter = (itm) => {
       setEditData(itm)
-      console.log(editData)
       setOpenFilter(true);
     };
   

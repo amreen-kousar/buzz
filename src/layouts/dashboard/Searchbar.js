@@ -9,12 +9,10 @@ export default function Searchbar({ getSearch }) {
   var searchData = ''
   const handleOpen = () => {
     setOpen((prev) => !prev);
-    console.log("handle open fuunction")
   };
   const isDesktop = useResponsive('up', 'lg');
   const handleClose = () => {
     setOpen(false);
-    console.log("handle close fuunction")
   };
   const APPBAR_MOBILE = 64;
   const APPBAR_DESKTOP = 92;
