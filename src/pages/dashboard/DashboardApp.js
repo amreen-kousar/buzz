@@ -944,7 +944,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
              
             </Typography>
           
-           {(summaryData?.data.length>0) ?<CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+           {(summaryData?.data?.length>0) ?<CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
             <Grid item xs={12} sm={12} md={12} >
           {summaryData?.data?.map((itm) => {
             return (
@@ -1061,7 +1061,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 : 
  (roleid == 5 || roleid == 6||roleid == 13)?
 <>
-{(summaryData?.data.length>0) ?<CardContent>
+{(summaryData?.data?.length>0) ?<CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
             {(summaryData?.data[0]?.select_type==1)? "Projects List":"Funders List"} 
               {/* for gfl it should be showned as project not as funder */}
