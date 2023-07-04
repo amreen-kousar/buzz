@@ -1,10 +1,6 @@
 import { useState } from 'react';
-// material
 import { Menu, Button, MenuItem, Typography } from '@mui/material';
-// component
 import Iconify from '../../../components/Iconify';
-
-// ----------------------------------------------------------------------
 
 const SORT_BY_OPTIONS = [
   { value: 'featured', label: 'Featured' },

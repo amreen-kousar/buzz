@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from "react"
 import Button from '@mui/material/Button';
-// import Dialog from '@mui/material/Dialog';
+
+
 import { Input } from '@mui/material';
 
 import ListItemText from '@mui/material/ListItemText';
@@ -12,7 +13,8 @@ import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import { Dialog, Toolbar, DialogContent, DialogContentText, Card } from '@mui/material'
 import PropTypes from 'prop-types';
-// import Toolbar from '@mui/material/Toolbar';
+
+
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
@@ -56,7 +58,8 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
 
   const [sendData, setSendData] = useState(editData);
 
-  // const webcamRef = React.useRef(null);
+
+
   const [imgSrc, setImgSrc] = React.useState(null);
   const [datadrop, setDataDrop] = useState();
   const handleClickOpen = () => {
@@ -74,8 +77,6 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
     });
   const handleClose = () => {
     setOpen(false);
-    console.log("closedddddddd")
-    console.log(open)
   };
   const [age, setAge] = useState('');
 
@@ -85,43 +86,20 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
   useEffect(() => {
 
     drop()
-    //imageUpload()
+
+
     location()
   }, [coords]
   )
 
   useEffect(() => {
     setSendData(editData)
-    // {
-    //   odimeter: "",
-    //   location: "",
-    //   poa: "",
-    //   date: new Date(),
-    //   mode_of_travel: "",
-    //   rate_per_KM: "",
-    //   da: "",
-    //   telephone: "",
-    //   printing: "",
-    //   stationary: "",
-    //   others: "",
-    //   other_text: "",
-    //   end_odometer: "",
-    //   end_location_name: "",
-    //   totalkm: ""
-    // }
-
-    console.log(sendData, "sendDataaaaaaaaaaaaaa")
   }, [])
 
   const [image, setImage] = React.useState([]);
   const [imagePath, setImagePath] = React.useState([]);
   const [viewImage, setViewImage] = React.useState(false);
   const hiddenFileInput = React.useRef(null);
-
-  const handleClick = event => {
-    console.log("click", event.target)
-    hiddenFileInput.current.click();
-  };
 
   function getBase64(file, callback) {
 
@@ -134,19 +112,16 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
   const data = new FormData();
 
   const convertImage = (e) => {
-    console.log("this is calleddddfdsfs")
     data.append('emp_id', userid);
     data.append('file', e.target.files[0]);
     setImagePath([...imagePath, e.target.files[0]])
     const imageData = URL.createObjectURL(e.target.files[0]);
-    console.log(imageData, "files")
     getBase64(e.target.files[0], function (base64Data) {
       setImage([...image, base64Data])
       setViewImage(true)
     });
   }
   const SendData = async => {
-    console.log(sendData)
     var data = JSON.stringify({
       "ta_id": sendData?.id,
       "date": sendData?.date,
@@ -178,17 +153,14 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
       data
     };
 
-
-    console.log(config)
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         viewMessage('Travel allowance edited sucessfully')
         list()
         onCloseFilter()
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
 
   }
@@ -201,7 +173,8 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
     var dataImage = []
     const form = new FormData()
     form?.append("emp_id", userid)
-    //form?.append("file[]",imagePath[0])
+
+
 
     const data = imagePath?.map(itm => {
       form?.append("file[]", itm)
@@ -212,13 +185,11 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
       redirect: 'follow'
     };
     let res = fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn => {
-      console.log(itn, "<--itemgh")
+      // console.log(itn, "<--itemgh")
     })
       .catch(err => {
-        console.log(err, "<---wertyu")
+        // console.log(err, "<---wertyu")
       })
-    //console.log(res,"<----2werdcfvghbj")
-
 
   }
 
@@ -226,10 +197,9 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
     Geocode.fromLatLng(coords?.latitude, coords?.longitude).then(
       (response) => {
         const address = response.results[0].formatted_address;
-        console.log(address, "<----addressss");
       },
       (error) => {
-        console.error(error);
+        // console.error(error);
       }
     );
   }
@@ -255,56 +225,16 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
     axios(config)
       .then(function (response) {
         setDataDrop(response.data)
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
 
-  // const [imgSrc, setImgSrc] = React.useState(null);
-  // const WebcamCapture = () => {
-  // const webcamRef = React.useRef(null);
-
-  // }
-  // const capture =() => {
-  //   // console.log(webcamRef.current,"<----webcamRef.current")
-  //   const imageSrc = webcamRef.current.getScreenshot();
-  //   setImgSrc(imageSrc);
-  // };
-
-
-  // console.log(imgSrc, "<-----gfvimageSrc")
-
-
-
-  const imageApiCall = (config) => {
-
-  }
-
   const deleteImage = (index) => {
-
     image.splice(index, 1);
     setImage([...image])
   }
-
-  //   const clickImages = () =>{
-  //     console.log("fefefergregre");
-  //    // handleClose()
-  //     return(
-  //         <>
-
-
-  //       <button onClick={capture}>Capture photo</button>
-  //       {imgSrc && (
-  //         <img
-  //           src={imgSrc}
-  //         />
-  //       )}
-  //     </>
-  //     )
-  //   }
-
   useEffect(() => {
 getTadata()
   
@@ -326,22 +256,13 @@ getTadata()
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
       setTaData(response.data)
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
     
   }
-  
-
-
-console.log(editData,"editabledtaaaaaaaaaa",taData)
-
-
-
-
 
   return (
     <div>
@@ -356,18 +277,7 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
           <Typography id="edit-travel-allowances" sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
             View Travel Allowance
           </Typography>
-
-{/* 
-          <Button disabled id="save-button" autoFocus color="inherit" onClick={() => SendData()}>
-            save
-          </Button> */}
         </Toolbar>
-        {/* <Webcam
-    ref={webcamRef}
-    screenshotFormat="image/jpeg"odimeter:"",
-
-    /> */}
-        {/* </AppBar> */}
         <DialogContent dividers={scroll === 'paper'} sx={{ background: "#f9fafb" }}>
           <DialogContentText
             id="scroll-dialog-description"
@@ -391,9 +301,6 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
                     {datadrop?.data?.map(itm => {
                       return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
                     })}
-
-                    {/* <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem> */}
                   </Select>
                 </FormControl>
 
@@ -403,7 +310,6 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                   disabled
-                    // label="Date"
                     id="edit-data-date"
                     defaultValue={editData?.date}
                     onChange={(newValue) => {
@@ -423,7 +329,8 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
                     onChange={(e) => setSendData({ ...sendData, mode_of_travel: e?.target?.value })}
                     label="select Mode Of Travel"
 
-                  //onChange={handleChange}
+
+
                   >
                     {datadrop?.Mode_of_Travel?.map(itm => {
                       return (<MenuItem value={itm?.id}>{itm?.name}</MenuItem>)
@@ -443,7 +350,6 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
                     onChange={(e) => setSendData({ ...sendData, rate_per_KM: e?.target?.value })}
                   >
                     {datadrop?.Rate_per_KM?.map(itm => {
-                      console.log(itm)
                       return (<MenuItem value={itm?.amount}>{itm?.amount}</MenuItem>)
                     })}
                   </Select>
@@ -503,54 +409,7 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
               <Stack style={{ marginTop: 20 }}>
                 <TextField disabled id="outlined-basic" defaultValue={editData?.end_location_name} onChange={(e) => { setSendData({ ...sendData, end_location_name: e?.target?.value }) }} label="end location" variant="outlined" color="common" />
               </Stack>
-              {/* <Stack style={{ marginTop: 20 }}>
-                <TextField disabled id="outlined-basic" defaultValue={editData?.location} onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="total Kilometer" variant="outlined" color="common" />
-              </Stack> */}
               <br /><br />
-              {/* <div>
-                <div style={{ display: "flex" }}>
-                  {
-                    viewImage ?
-                      image.map((i, index) => {
-                        return <div style={{ display: "flex", margin: "1rem" }}>
-                          <img src={i} style={{ height: "50px", width: "70px" }} alt="hello" />
-                          <Iconify
-                            onClick={() => { deleteImage(index) }}
-                            icon={'typcn:delete'}
-                            sx={{ width: 16, height: 16, ml: 1, color: "red" }}
-                          />
-                        </div>
-                      }) : null
-                  }
-                </div>
-                <label for="inputTag" style={{ cursor: "pointer", display: "flex" }}>
-                  <Iconify
-                    icon={'mdi:camera'}
-                    sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
-                  />&nbsp;
-                  Click to upoad images
-                  <input style={{ display: "none" }} id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
-                </label>
-              </div>
-              <Button onClick={postImages}
-                sx={{
-                  '&:hover': {
-                    backgroundColor: '#ffd796',
-                  },
-                  color: "#ff7424"
-                }}>Send Images</Button>
-              <br /><br />
-
-              <Button onClick={() => capture()}>Click here to to upload snaps</Button>
-
-           
-            <Button onClick={() => SendData()} variant="filled" sx={{
-              '&:hover': {
-                backgroundColor: '#ffd796',
-              },
-              color: "#ff7424",
-
-            }}>Upload</Button><br></br> */}
             <div>
                 <div style={{ display: "flex" }}>
                   {
@@ -568,26 +427,6 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
                       }) : null
                   }
                 </div>
-                {/* <div style={{display:'flex'}}>
-                <label id="input-tag" for="inputTag" style={{ cursor: "pointer", display: "flex" }} disabled>
-                  <Iconify disabled
-                    id="icon-camera"
-                    icon={'mdi:camera'}
-                    sx={{ width: 25, height: 25, ml: 2, color: "#ff7424" }}
-                  />&nbsp;
-                  Click here to Add images
-                  <input style={{ display: "none" }} accept="image/png, image/gif, image/jpeg" id="inputTag" type="file" onChange={(e) => { convertImage(e) }} />
-                </label>
-                <Button disabled id="post-images-button" onClick={postImages} 
-                sx={{
-                  '&:hover': {
-                    backgroundColor: '#ffd796',
-                  },
-                  color: "#ff7424",
-                  backgroundColor:'#ffd796',
-                  marginLeft:'10px'
-                }}>Upload</Button></div> */}
-
 <div><Typography variant="h6">Uploaded Images</Typography> <br/>
   {(taData?.files?.length>0)?<img src={taData?.files[0]?.image_name}/>:"No Images Found"}
 </div>
@@ -601,12 +440,20 @@ console.log(editData,"editabledtaaaaaaaaaa",taData)
 }
 
 
-// import React from 'react'
-// export default function Edittraveldialog()
-// {
-//   return(
-//     <>
-//     <div>edit Travel allowance</div>
-//     </>
-//   )
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -53,25 +53,13 @@ function TabPanel(props) {
   
 }
 const SingleQulityDashboard = ({openSingleQulityDashboard , handleClose ,item} )=> {
-
-//   const {state} = useLocation()
-//   // console.log("🚀 ~ file: GreenSurvey.jsx:48 ~ GreenSurvey ~ enrolledGreenMotivators:", enrolledGreenMotivators)
-//   const [open, setOpen] = React.useState(false);
-console.log("itemtypeof")
 const [value, setValue] = React.useState(0);
 const data = localStorage?.getItem('userId')
 var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
 const image = ["tykml", "exrdcftvbgyhnuj"]
 const [drawerEvent, SetDrawerEvent] = useState(false);
-//const [image, setImage] = React.useState(['data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==']);
-const [viewImage, setViewImage] = React.useState(false);
-const [listdata, setListData] = React.useState()
-const [openMessage, setOpenMessage] = React.useState(false);
-const [message, setMessage] = useState(false)
 const [editData, setEditData] = useState(null)
 const [openFilter, setOpenFilter] = useState(false);
-const [clcikData, setClickData] = useState()
-const [teamMembersData, setTeamMembersData] = useState([])
 const [mainValue, setMainValue] = useState(0)
 const [batch,setBatch] = useState('')
 const [showSingleform ,setShowSingleForm] = useState(false)
@@ -80,13 +68,8 @@ var [itmForForm, setItemForForm ] = useState()
 const [openGetSingleQualityForm ,setOpenGetSingleQualityForm] = useState(false)
 const userOwnPermissions=['9','5','12','4','13','6','3']
 const userTeamPermissions=['2','1','12','4','13','3','11']
-
-
-console.log(item , "iteminsingledashboard")
 var [todayPoa,setTodayPoa]=useState('');
-
  
-
 const getPOA =()=>{
     var data = JSON.stringify({
         "Emp_id":parseInt(item?.id),
@@ -97,7 +80,6 @@ const getPOA =()=>{
         method: 'post',
         url: baseURL + 'listQualityAssessmentForm',
         headers: { 
-
           'Content-Type': 'application/json'
         },
         data : data
@@ -105,91 +87,45 @@ const getPOA =()=>{
       
       axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         todayPoa = response.data
         setTodayPoa(todayPoa)
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
       
 }
-
-
-
-
 useEffect(()=>{
   if(!userOwnPermissions.includes(data)){
   setMainValue(1)
   }
     },[])
-  
-
-const handleOpenFilter = (itm) => {
-  // itm.klmtr = +klmtr;
-  setEditData(itm)
-  console.log(editData)
-  setOpenFilter(true);
-};
-
-const handleCloseFilter = () => {
-  setOpenFilter(false);
-};
-
 const getDateValue = (e) => {
   setDatevalue(e)
 }
-
 const returnDateValue = () => {
   return dateValue
 }
-
 const handleChange = (event, newValue) => {
   setValue(newValue);
 };
-
-
-
-
-
- 
-//   const handleClickOpen = () => {
-//     setOpen(true);
-//   };
-
-//   const handleClose = () => {
-//     setOpen(false);
-//   };
-console.log(item , "itm.itm")
-  
 useEffect(()=>{
     getPOA();
-    console.log("mounting")
        },[item])
        const handleCloseGetSingleQualityForm = ()=>{
         setOpenGetSingleQualityForm(false)
       }
        const singleformHandler = (itm) =>{
-        console.log("imworkingfinre")
         setShowSingleForm(true)
         itmForForm = itm
         setItemForForm(itm)
         setOpenGetSingleQualityForm(true)
        }
   return (
-    <div>
-     
-       
-       
-       
-      <Dialog fullScreen open={openSingleQulityDashboard} onClose={handleClose} TransitionComponent={Transition}>
-        
-      
-      <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
+    <div> <Dialog fullScreen open={openSingleQulityDashboard} onClose={handleClose} TransitionComponent={Transition}>
+        <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
           <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }} >
-          
-       
-                        <IconButton style={{color:"white"}} onClick={handleClose}>
+             <IconButton style={{color:"white"}} onClick={handleClose}>
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
@@ -198,7 +134,6 @@ useEffect(()=>{
  </Toolbar>
               </AppBar>
      
-       
               <div  style={{marginTop:"50px"}}>
             {
            todayPoa &&  todayPoa?.data?.map((itm)=>{
@@ -235,11 +170,8 @@ useEffect(()=>{
                                                 <Iconify id="icon-outline-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
                                            */}
                                             </Grid>
-
-
                                         </Grid>
                     
-
                     </Card>
                 </>
                 )
@@ -263,14 +195,5 @@ useEffect(()=>{
     </div>
   );
 }
-
-
-
-
-
-
-
-
  
-
 export default SingleQulityDashboard

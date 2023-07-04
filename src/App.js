@@ -13,7 +13,6 @@ export default function App() {
     <ThemeProvider>
        <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ScrollToTop />
-      {/* <BaseOptionChartStyle /> */}
       <Router />
       </LocalizationProvider>
     </ThemeProvider>

@@ -6,8 +6,6 @@ import Blog from './pages/Blog';
 import User from './pages/user/User';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
-import Trainerdashboard from './pages/Trainerdashboardapp';
-import Gelathidashboard from './pages/Gelathidashboard';
 import Logout from './pages/Logout';
 import Register from './pages/Register';
 import Products from './pages/Products';
@@ -35,13 +33,10 @@ import ScheduleBeehiveVisit from './pages/projects/scheduleBeehiveVisit';
 import ScheduleCircleMeet from './pages/projects/scheduleCircleMeet';
 import ScheduleVillage from './pages/projects/scheduleVillage';
 import AssignBatches from './pages/projects/AssignBatches';
-import Operationmanagerdashboard from './pages/Operationmanagerdashboard';
-import Test from './pages/Test';
 import DashboardHome from './pages/dashboard/DashboardHome';
 import AssignTargets from './pages/projects/AssignTargets';
 import QualityAssurance from './pages/qualityAssurance/QualityAssurance';
 import Addbus from './pages/buses/Addbus';
-import  SelfSakthiProgramDashboard  from './pages/projects/ProgramDashboard/SelfSakthiProgramDashboard';
 import VyaparProgramDashboard from './pages/projects/ProgramDashboard/VyaparProgramDashboard';
 import GreenProgramDashboard from './pages/projects/ProgramDashboard/GreenProgramDashboard';
 import GelathiProgramDashboard from './pages/projects/ProgramDashboard/GelathiProgramDashboard';
@@ -107,8 +102,8 @@ export default function Router() {
                     { path: 'chart', element: <Chart /> },
                 ]
             },
-            // { path: 'trainer', element: <Trainerdashboard />, id: [5] },
-            { path: 'gelathi', element: <Gelathidashboard />, id: [6, 13] },
+            // // { path: 'trainer', element: <Trainerdashboard />, id: [5] },
+            // { path: 'gelathi', element: <Gelathidashboard />, id: [6, 13] },
             // { path: 'operationmanager', element: <Operationmanagerdashboard />, id: [4]},
             { path: 'operationmanager/chart', element: <Chart />, id: [4]},
             { path: 'buslist', element: <BusList />, id: [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 12,11] },
@@ -125,7 +120,6 @@ export default function Router() {
             { path: 'demogrphy', element: <Demography />, id: [0, 1, 2, 3, 12,11] },
             { path: 'logout', element: <Logout />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13] },
             { path: 'qualityAssessment',element: <QualityAssurance/>, id:[1,2,3,4,12,13]},
-            { path : 'selfsakthiprogramdashboard' , element: <SelfSakthiProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
             { path : 'gelathiprogramdashboard' , element: <GelathiProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
             { path : 'greenprogramdashboard' , element: <GreenProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
             { path : 'vyaparprogramdashboard' , element: <VyaparProgramDashboard/> , id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13]},
@@ -149,14 +143,11 @@ export default function Router() {
             exact: true,
             element: <Login />,
         },
-        {
-            path: 'register',
-            element: <Register />,
-        },
-        {
-            path: '/test',
-            element: <Test />
-        },
+        // {
+        //     path: 'register',
+        //     element: <Register />,
+        // },
+        
         {
             path: '/dashboard',
             element: <DashboardLayout />,

@@ -8,10 +8,8 @@ import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, C
 import { baseURL } from 'src/utils/api';
 import GetSingleQualityForm from './GetSingleQualityForm';
 import Iconify from 'src/components/Iconify';
-// components
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
         <div
             role="tabpanel"
@@ -28,26 +26,22 @@ function TabPanel(props) {
         </div>
     );
 }
-
 TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
 };
-
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,
         'aria-controls': `simple-tabpanel-${index}`,
     };
 }
-
 export default function OwnQuality({reload}) {
 var [singleFormData , setSingleFormData] = useState('')
 const [ open ,setOpen] = useState(false)
     const [todayPoa,setTodayPoa]=useState('');
     const [showSingleform ,setShowSingleForm] = useState(false)
-// console.log(props?.componentname,"componenttttttttt")
     useEffect(()=>{
        getPOA();
           },[reload])
@@ -69,7 +63,6 @@ const getPOA =()=>{
         method: 'post',
         url: baseURL + 'listQualityAssessmentForm',
         headers: { 
-
           'Content-Type': 'application/json'
         },
         data : data
@@ -77,18 +70,13 @@ const getPOA =()=>{
       
       axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         setTodayPoa(response.data)
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
       
 }
-
-
-console.log(todayPoa)
-
 const handleClose = ()=>{
     setOpen(false)
   }
@@ -96,7 +84,6 @@ const handleClose = ()=>{
     setOpenGetSingleQualityForm(false)
   }
   const singleformHandler = (itm) =>{
-    console.log("imworkingfinre")
     setShowSingleForm(true)
     itmForForm = itm
     setItemForForm(itm)
@@ -116,7 +103,6 @@ const handleClose = ()=>{
                     <>
                     <Card id="card-own-ta-amount" style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: "1rem" }} onClick={() => {
                                             
-                                            // alert("Work in Progress")
                                                  }} >
                     <Grid id="grid-own-ta-amount" container spacing={2} >
                                             <Grid id="grid-own-open-filter"  item xs={8}>
@@ -143,48 +129,19 @@ const handleClose = ()=>{
                                             </Grid>
                                             <Grid item xs={4}>
                                                 <Iconify id="uiicons-cross" onClick={() => {
-                                                    //  handleDeleteTA(itm) 
                                                     singleformHandler(itm)
-                                                    // alert("Work in progress")
                                                      }} style={{ float: "right", marginTop: 5, marginRight: 10, fontSize: 30, color: "gray" }} icon="mdi:form-outline"></Iconify>
-                                                {/* <Iconify id="icon-outline-access-time" style={{ float: "right", marginTop: 5, marginRight: 30, fontSize: 30, color: "#303030" }} icon="ic:outline-access-time"></Iconify>
-                                           */}
+                                             
                                             </Grid>
-
-
                                         </Grid>
                     
-
                     </Card>
                 </>
                 )
             })
           } 
-       
-          
-             {/* <Select fullWidth variant='standard' color="common"
-              labelId="Today POA"
-              id="demo-simple-select"
-              label="Today POA"
-              
-          
-            >
-                <MenuItem value="" style={{ backgroundColor: 'gray' }}> <em>Select POA</em></MenuItem>
-                  {
-           todayPoa && todayPoa?.map((itm,index)=>{
-                return (
-                    
-                    <MenuItem value={index}>{itm?.full_name} - {itm?.name}</MenuItem>
-                )
-            })
-          }
-             
-            </Select>  */}
-
 {itmForForm &&   <GetSingleQualityForm item ={itmForForm}  open={openGetSingleQualityForm} handleClose={handleCloseGetSingleQualityForm}/>
-
      } 
-
  
        </div>
     );

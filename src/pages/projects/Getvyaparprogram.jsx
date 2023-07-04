@@ -39,28 +39,21 @@ import { Icon } from '@iconify/react';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function GetVyaparProgram({itm}) {
   const [open, setOpen] = React.useState(false);
-  // const [openMessage, setOpenMessage] = useState(false);
+
+
   const [surveyData,setSurveydata]=React.useState('');
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-
-
   useEffect(() => {
     GetVyaparformData()
   }, []
   )
-
-console.log(itm?.id,"itemmmmmmmmm")
-  
-
 const GetVyaparformData=()=>{
     var data = JSON.stringify({
         "partcipantId": itm?.id
@@ -77,18 +70,16 @@ const GetVyaparformData=()=>{
       
       axios(config)
       .then(function (response) {
-        // console.log(JSON.stringify(response.data));
+
+
         setSurveydata(response.data.data[0])
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
       
 }
- console.log(surveyData,"reposnedata")
-  
-  
-  
+
   return (
     <div>
       
@@ -98,7 +89,6 @@ const GetVyaparformData=()=>{
          <Icon  icon="ic:twotone-fact-check" width={30} height={25} marginTop={5}  color="green"  />
         </IconButton>
         </Stack> 
-
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
       <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
           <Toolbar sx={{ bgcolor: '#ff7424' }}>
@@ -116,18 +106,7 @@ const GetVyaparformData=()=>{
       
      
         <Grid>
-        {/* <Card mt={1} style={{ borderRadius: 20}} >
-                <CardContent>
-               
-                    <Typography variant="subtitle2" style={{color:'white',backgroundColor:"#ff7424",padding:10,borderRadius:5}}>
-                    Buzz Vyapar Program Baseline
-                  </Typography>  
-                  <Typography variant="subtitle2" style={{color:'#ff7424',backgroundColor:"white",paddingTop:10}}>
-                    * Required
-                  </Typography>  
-                  </CardContent>    
-          </Card> */}
-
+     
           <Card>
      
             <CardContent>
@@ -149,7 +128,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Name of vyapari / ವ್ಯಾಪಾರಿಯ ಹೆಸರು *</Typography>
@@ -188,7 +166,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Name of the Cohort / ಸ್ಥಳ/ವೃತ್ತ *</Typography>
@@ -209,7 +186,6 @@ const GetVyaparformData=()=>{
                 </CardContent>
               </Card>
                 
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                   
@@ -240,8 +216,6 @@ const GetVyaparformData=()=>{
                 </CardContent>
               </Card>
           
-
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                
                 <CardContent>
@@ -264,7 +238,6 @@ const GetVyaparformData=()=>{
               </Card>
                 
                 
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                   
@@ -293,7 +266,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Your profit (last month) / ನಿಮ್ಮ ಲಾಭ (ಕಳೆದ ತಿಂಗಳು) </Typography>
@@ -302,7 +274,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>How much monthly income would you like to ideally earn / ನೀವು ಎಷ್ಟು ಮಾಸಿಕ ಆದಾಯವನ್ನು ಆದರ್ಶಪ್ರಾಯವಾಗಿ ಗಳಿಸಲು ಬಯಸುತ್ತೀರಿ</Typography>
@@ -311,7 +282,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Amount invested when the business started (approximately if they know) / ವ್ಯಾಪಾರ ಪ್ರಾರಂಭವಾದಾಗ ಹೂಡಿಕೆ ಮಾಡಿದ ಮೊತ್ತ (ಅವರು ತಿಳಿದಿದ್ದರೆ)</Typography>
@@ -320,8 +290,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                  
@@ -331,7 +299,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>For any reason have you stopped or kept hold your business / ಯಾವುದೇ ಕಾರಣಕ್ಕಾಗಿ ನೀವು ನಿಮ್ಮ ವ್ಯಾಪಾರವನ್ನು ನಿಲ್ಲಿಸಿದ್ದೀರಿ ಅಥವಾ ಹಿಡಿದಿಟ್ಟುಕೊಳ್ಳುತ್ತೀರಿ</Typography>
@@ -342,7 +309,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>No.of hours engaged in a day for business / ವ್ಯವಹಾರಕ್ಕಾಗಿ ಒಂದು ದಿನದಲ್ಲಿ ಎಷ್ಟು ಗಂಟೆಗಳು ತೊಡಗಿಸಿಕೊಳ್ಳುವಿರಿ?</Typography>
@@ -351,7 +317,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                  
@@ -363,7 +328,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 
@@ -383,7 +347,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Tell us three things about you as an enterpreneur / ವಾಣಿಜ್ಯೋದ್ಯಮಿಯಾಗಿ ನಿಮ್ಮ ಬಗ್ಗೆ ಮೂರು ವಿಷಯಗಳನ್ನು ನಮಗೆ ತಿಳಿಸಿ</Typography>
@@ -393,7 +356,6 @@ const GetVyaparformData=()=>{
                  
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Tell us three things about your role as a woman at home</Typography>
@@ -402,14 +364,12 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20, backgroundColor: '#ff7424',borderRadius:0,height:'60px'}}>
                 <CardContent>
                 <Typography style={{color:"#ffffff"}}>Business Challenges</Typography>
                 
                 </CardContent>
               </Card>
-
     
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
@@ -421,7 +381,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>What is your plan to overcome these challenges?</Typography>
@@ -430,7 +389,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
@@ -440,7 +398,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>What are the resources available with you for your business? / ನಿಮ್ಮ ವ್ಯಾಪಾರಕ್ಕಾಗಿ ನಿಮ್ಮ ಬಳಿ ಲಭ್ಯವಿರುವ ಸಂಪನ್ಮೂಲಗಳು ಯಾವುವು?</Typography>
@@ -449,14 +406,12 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20, backgroundColor: '#ff7424',borderRadius:0,height:'60px'}}>
                 <CardContent>
                 <Typography style={{color:"#ffffff"}}>Business Components</Typography>
                 
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Who is your customer? Describe them to us / ನಿಮ್ಮ ಗ್ರಾಹಕ ಯಾರು? ಅವುಗಳನ್ನು ನಮಗೆ ವಿವರಿಸಿ</Typography>
@@ -465,9 +420,7 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
  
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>Please identify parts/aspects of business / ವ್ಯಾಪಾರದ ಭಾಗಗಳು/ಮಗ್ಗಲುಗಳನ್ನು ಗುರುತಿಸಿ</Typography>
@@ -476,8 +429,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                   
@@ -497,7 +448,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
           
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
@@ -518,14 +468,12 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20, backgroundColor: '#ff7424',borderRadius:0,height:'60px'}}>
                 <CardContent>
                 <Typography style={{color:"#ffffff"}}>Business Goal</Typography>
                 
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>What is your business goal / ನಿಮ್ಮ ವ್ಯಾಪಾರ ಗುರಿ ಏನು?</Typography>
@@ -546,7 +494,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>Can you submit a business plan for your goal to us right now?</Typography>
@@ -555,7 +502,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               
               <Card style={{ marginTop: 20, backgroundColor: '#ff7424',borderRadius:0,height:'60px'}}>
                 <CardContent>
@@ -572,7 +518,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>What are weaknesses of your business?</Typography>
@@ -581,7 +526,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                 <Typography style={{color:"#ff7424"}}>What are opportunities of your business?</Typography>
@@ -590,7 +534,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20, backgroundColor: '#ff7424',borderRadius:0,height:'60px'}}>
                 <CardContent>
                 <Typography style={{color:"#ffffff"}}>Access to finance</Typography>
@@ -607,8 +550,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
-
                  
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
@@ -620,7 +561,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
                
                <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
@@ -632,24 +572,17 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
-
               
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                   <Typography style={{color:"#ff7424"}}>What are the prerequisites to access a loan? Tick the one's you think you need / ಸಾಲವನ್ನು ಪ್ರವೇಶಿಸಲು ಪೂರ್ವಾಪೇಕ್ಷಿತಗಳು ಯಾವುವು? ನಿಮಗೆ ಬೇಕು ಎಂದು ನೀವು ಭಾವಿಸುವದನ್ನು ಟಿಕ್ ಮಾಡಿ</Typography>
                   <Stack mt={2}>
                 <Typography>Answer: 
-                   {/* {surveyData?.what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need.map((itm)=> {
-                   return (
-                    <>{itm}</>
-                   )} )} */}
                    {surveyData?.what_are_the_prerequisites_to_access_a_loan_Tick_the_ones_you_think_you_need}
                   </Typography>
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                  
@@ -660,7 +593,6 @@ const GetVyaparformData=()=>{
                   </Stack>
                 </CardContent>
               </Card>
-
               <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
                   

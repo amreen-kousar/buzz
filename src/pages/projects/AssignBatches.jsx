@@ -12,7 +12,6 @@ import { Container } from "@mui/system";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow';
 import TableCell from "@mui/material/TableCell";
 import { vi } from "date-fns/locale";
@@ -27,7 +26,6 @@ export default function AssignBatches(){
     const [batch,setBatch] = useState('');
     const [tc, setTc] = useState('');
     var [alloted,setAlloted]=useState(0)
-    console.log("🚀 ~ file: AssignBatches.jsx:30 ~ AssignBatches ~ alloted:", alloted)
     const [item,setItem]=useState('')
    const [selected,setSelected]=useState([])
 
@@ -38,7 +36,6 @@ useEffect(() => {
 }, [])
 
 const projData = async => {
-  console.log(location, "location props")
   var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
   var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -60,47 +57,14 @@ const projData = async => {
   axios(config)
     .then(function (response) {
       setData1({ ...response.data.list })
-      console.log(response.data.list, '<--------------setData1setData1');
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
 
 }
-  // useEffect(() => {
-  //   gelathinamelist(35)
-   
-  // }, []
-  // )
-//   const gelathinamelist= async() =>{
-   
-//     var data = JSON.stringify({
-//         "project_id":234,
-//         "role_id":13  , 
-//         "operation_manager_id":35,
-//         "pageNum": 1
-//       });
-      
-//       var config = {
-//         method: 'post',
-//         url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         data : data
-//       };
-//       axios(config)
-//       .then(function (response) {
-//         setGelathi(response?.data)
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
-      
-// }
 
 const villagelist= async(itm) =>{
-  console.log(itm,"itemassignedddddddddddd")
   setGl(true)
   setItem(itm)
   var data = JSON.stringify({
@@ -125,21 +89,17 @@ const villagelist= async(itm) =>{
       setTc(response?.data?.list.length)
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
     
     
 }
-
-
-console.log(item,"hyyyy")
 
 const CreateBatch= async(itm,i) =>{
   
   const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   selected.push(itm?.training_batch_id)
   setSelected(selected)
-  console.log(itm,"createbatchhhhhh")
   var data = JSON.stringify({
      
      "project_id":data1?.project_id, 
@@ -148,18 +108,8 @@ const CreateBatch= async(itm,i) =>{
     });
     villages.list[i].flag = 1;
     setVillages(villages)
-    // console.log(villages.list[i], "villagelist");
     setAlloted(alloted?alloted+1:1)
-    // await new Promise((resolve) => {
-    //   setAlloted((alloted) => {
-    //     const newAlloted = parseInt(alloted) +1 || alloted.length > 0;
-    //     resolve(newAlloted);
-    //     return newAlloted;
-    //   }); 
-    // });
-    
-    
-  {console.log(alloted,"countttttttt")}
+
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createGFBatch.php',
@@ -174,31 +124,12 @@ const CreateBatch= async(itm,i) =>{
       
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
     
 }
 
-// const removeFlag=(itm,i)=>{
-
-//   console.log(itm,"villagessssssssss")
-//   villages.list[i].flag=0;
-//   console.log(villages.list[i],"villagelist")
-//   if(alloted.length==0){
-//     setAlloted(alloted=>parseInt(alloted)+1 ) 
-//   }else{
-
-//     setAlloted(alloted=>parseInt(alloted)-1 || alloted.length> 0 ) 
-//   }
-     
-// }
 const removeFlag = async (itm, i) => {
-  console.log(i, "villagessssssssss");
-  // villages.list[i].flag = 0;
-  // setVillages(villages)
-  // console.log(villages.list[i], "villagelist");
-  // setAlloted(alloted?alloted-1:0)
-
   var data = JSON.stringify({
      
     "project_id":data1?.project_id, 
@@ -207,11 +138,8 @@ const removeFlag = async (itm, i) => {
    });
    villages.list[i].flag = 0;
    setVillages(villages)
-   console.log(villages.list[i], "villagelist");
    setAlloted(alloted?alloted-1:0)
    
-   
- {console.log(alloted,"countttttttt")}
    var config = {
      method: 'post',
      url: 'https://bdms.buzzwomen.org/appTest/deleteGFBatch.php',
@@ -226,12 +154,10 @@ const removeFlag = async (itm, i) => {
      
    })
    .catch(function (error) {
-     console.log(error);
+    //  console.log(error);
    });
    
 };
-
-console.log(alloted,"allottedddddddddddddddddd",villages?.list)
     return(
        
      
@@ -267,12 +193,8 @@ console.log(alloted,"allottedddddddddddddddddd",villages?.list)
                   </Stack>
                 </CardContent>
           </Card>:<h3 style={{textAlign:'center'}}>No Gelathi facilitators</h3>}<br/>
-
-          
-       
                      {(gl)?<Typography gutterBottom style={{textAlign:'center'}}>
                      Total Villages: {alloted}/{tc}
-                     {console.log(alloted,"alloteddddddddd")}
                      </Typography>:null}
                 
                  {(gl)?<Card style={{ marginTop: 20,  borderRadius: 20 }}>
@@ -280,35 +202,26 @@ console.log(alloted,"allottedddddddddddddddddd",villages?.list)
                  
                   <Stack mt={2} mb={2}>
              
-             
                   {villages?.list?.map((itm,i)=>{
                   
                     return(
                       <>
-                            {/* <Typography value={itm?.training_batch_id}>{itm?.name}
-                             <Iconify icon="mdi:car-sports-utility-vehicle" style={{float:'left',margin:10}}/>
-                            </Typography> */}
-
                             <TableContainer >
                   <Table aria-label="customized table">
                     <TableBody>
                       <TableRow >
                         <TableCell> <Iconify icon="mdi:car-sports-utility-vehicle" style={{float:'left',margin:5,display:'flex',fontSize:20, color:'black'}}/> 
                         <Typography value={itm?.training_batch_id}>{itm?.name} 
-                        {/* (selected.includes(itm?.training_batch_id)) ||  */}
-                        
                     {
                     
-                    
-                    
                     (['1',1].includes(villages?.list[i]?.flag))?<IconButton  style={{float:'right'}} onClick={()=>removeFlag(itm,i)}>
-                         {console.log(villages.list[i]?.flag,"flag value now")}
+                       
 
                           <Iconify icon="typcn:tick" style={{fontSize:20,color:"green"}}/>
                         </IconButton>:
                         (['0',0].includes(villages.list[i]?.flag))?<IconButton onClick={()=>CreateBatch(itm,i)} style={{float:'right'}}>
                           <Iconify icon="material-symbols:add-circle-rounded" style={{fontSize:20,color:"	#0ad5ee"}}/>
-                        </IconButton>:console.log(itm?.flag,"itemmmm flaaggg")}
+                        </IconButton>:null}
                           
                         </Typography>
                        

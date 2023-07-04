@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import shakthiapirequest from './selfshakthiapi';
 import Iconify from '../../../components/Iconify';
-
 import { Card } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,7 +11,6 @@ export default function Trainersdata({ selectDATA, getData,type,data1}) {
  
   const [train, setTrain] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
-
   useEffect(() => {
     trainer()
   }, []
@@ -24,13 +22,10 @@ export default function Trainersdata({ selectDATA, getData,type,data1}) {
   const getSearchFilter = (e) => {
     setSearchInFilter(e)
   }
-
   const returnSearchFilter = () => {
     return searchInFilter
   }
-  console.log(data1?.trainers)
   return (
-
      <Card>
     {data1?.trainers?.length !== 0 && data1?.trainers?.map(itm => {
         if (itm?.name?.toLowerCase())

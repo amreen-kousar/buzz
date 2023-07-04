@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Button, Box, TextField, Stack, CardContent, Card, FormControl, InputLabel, Select, MenuItem } from '@mui/material/';
 import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -20,10 +16,7 @@ import Iconify from 'src/components/Iconify';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function EditTrainingBatch({batch,editSession, setEditsession}) {
-  
-    console.log(batch,"batchdataaaaaaaaaaa")
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(dayjs('2022-04-07'));
   const [village, setVillage] = useState([]);
@@ -42,24 +35,15 @@ export default function EditTrainingBatch({batch,editSession, setEditsession}) {
     "talaq_id": batch?.data?.taluk_id
   })
   const [data, setData] = useState({
-
     talaq_id: '',
-
   })
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-//   useEffect(() => {
-//     villageList(props?.data1);
-
-//   }, [props?.data1])
   
-//   console.log(props?.data1?.location_id,"location")
-
 useEffect(()=>{
     villageList(batch?.data)
 },[batch?.data])
@@ -68,7 +52,6 @@ useEffect(()=>{
     var data = JSON.stringify({
       "taluk_id":i?.taluk_id
     });
-console.log(batch?.data?.taluk_id    ,"<----------------------props?.data1?.location_idprops?.data1?.location_id")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getVillageList.php',
@@ -77,14 +60,12 @@ console.log(batch?.data?.taluk_id    ,"<----------------------props?.data1?.loca
       },
       data: data
     };
-console.log(data,"data")
     axios(config)
       .then(function (response) {
         setVillage(response.data)
-        console.log(JSON.stringify(response.data),"<-----reponsievdevsvs");
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const EditTraining= ()=>{
@@ -108,16 +89,13 @@ console.log(data,"data")
       },
       data : data
     };
-
-
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
       handleClose();
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
       
     });
     alert(response.data.message)
@@ -132,14 +110,10 @@ console.log(data,"data")
  
  
   React.useEffect(() => {
-    //setShown(shown)
     setOpen(editSession)
   }, [editSession])
-
-
   return (
     <div>
-
       
       <Dialog
         fullScreen
@@ -166,39 +140,19 @@ console.log(data,"data")
             </Button>
           </Toolbar>
         </AppBar>
-        {/* <Card style={{ marginTop: 20 }}>
-          <CardContent>
-            <Stack style={{ marginTop: 20 }}>
-              <Typography>Project : {props?.data1?.project_name}</Typography>
-            </Stack>
-            <Stack style={{ marginTop: 20 }}>
-              <Typography> Partner : {props?.data1?.partnerName}</Typography>
-            </Stack>
-          </CardContent>
-        </Card> */}
+    
       <DialogContentText style={{ marginLeft: 20 ,marginTop: 20}}>
-      {/* <Typography>Project&nbsp;:&nbsp; {props?.data1?.project_name}</Typography>
-        <Typography> Partner &nbsp;:&nbsp; {props?.data1?.partnerName}</Typography> */}
       </DialogContentText>
-     
-        
-       
         <Stack mt={3}>
-          {console.log(trainerData, "><0khjhgbfd")}
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label" color="common">Select Village</InputLabel>
             <Select color="common"
-              // labelId="demo-simple-select-label"
-              //id="demo-simple-select"
               
               defaultValue={batch?.data?.taluq_id}
               label="Select Village"
               
               onChange={(e => {
-                console.log(e?.target)
                 setTrainerData({ ...trainerData, talaq_id: e?.target?.value })
-                //setData({ ...data, taluk_id: e?.target?.value })
-
               })}
             >
               <MenuItem value="" default disabled>Choose Village</MenuItem>
@@ -249,7 +203,6 @@ console.log(data,"data")
             onChange={(e) => { 
               const limitChar = 10
               if (e.target.value.toString().length <= limitChar) {
-                console.log("number change", e.target.value)
                 setTrainerData({ ...trainerData, contact_number: e?.target?.value }) 
               }
             }}
@@ -263,7 +216,6 @@ console.log(data,"data")
           <Typography>Day 1</Typography>
         </Stack>
         <Stack style={{ marginTop: 20 }} color="common" >
-
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
             label="DateTimePicker"
@@ -272,7 +224,6 @@ console.log(data,"data")
             value={trainerData?.day1}
             onChange={(newValue) => {
               setTrainerData({ ...trainerData, day1: newValue })
-              //setValue(newValue);
             }}
             PopperProps={{
               placement: "top"
@@ -280,24 +231,20 @@ console.log(data,"data")
             }}
           />
         </Stack>
-
         <Stack style={{ marginTop: 40 }}>
           <Typography>Day 2</Typography>
         </Stack>
         <Stack style={{ marginTop: 20 }}>
-
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
             label="DateTimePicker"
             value={trainerData?.day2}
-            // value={value}
             PopperProps={{
               placement: "top"
           
             }}
             onChange={(newValue) => {
               setTrainerData({ ...trainerData, day2: newValue })
-              //setValue(newValue);
             }}
           />
         </Stack>

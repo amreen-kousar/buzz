@@ -8,15 +8,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 export default function GelathiFacilitators({ selectDATA, getData,type,data1 }) {
-
   const [glead, setGlead] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
-
-
   useEffect(() => {
     lead()
   }, [])
-
   const lead = async () => { 
   
     Filtersapirequest({ selectDATA: 6 ,data1}).then(res => setGlead(res))
@@ -25,11 +21,9 @@ export default function GelathiFacilitators({ selectDATA, getData,type,data1 }) 
   const getSearchFilter = (e) => {
     setSearchInFilter(e)
   }
-
   const returnSearchFilter = () => {
     return searchInFilter
   }
-
   return (
     <Card>
     {data1?.gelathiFacilitator?.length !== 0 && data1?.gelathiFacilitator?.map(itm => {

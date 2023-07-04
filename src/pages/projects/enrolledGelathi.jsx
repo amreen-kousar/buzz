@@ -20,20 +20,17 @@ export default function enrolledGelathiList() {
         enrolledGelathi();
     }, []
     )
-
     const [openFilter, setOpenFilter] = useState(false);
     const [filter,setFilter]=useState(false);
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
-
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
     const handleopen=()=>{
       setFilter(true)
     };
-
     const handleclose=()=>{
       setFilter(false)
     }
@@ -69,21 +66,17 @@ const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
           .then(function (response) {
             setenrolled(response.data)
             setCount(response?.data?.list.length)
-            console.log(response.data,'<---------------setenrolledsetenrolled');
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
     }
-
   const id = sessionStorage?.getItem("proId")
   useEffect(() => {
     projData();
-
   }, [])
   
   const projData = async => {
-    console.log(location, "location props")
     var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -92,7 +85,6 @@ const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
       "role_id": role,
       "emp_id": idvalue
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
@@ -101,16 +93,13 @@ const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setData1(response.data.list)
-        console.log(response.data, '<--------------setData1setData1');
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
-
   }
   const handleDelete = () => {
     setSelected(null)
@@ -119,16 +108,12 @@ const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
     enrolledGelathi();
 }
 const getData = (itm, i) => {
-  console.log(itm,"getdata")
   setSelected({itm,type:'Gelathi Facilitators'})
   const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
   enrolledGelathi(itm, i)
-  console.log(data, i, itm, "<----sdfssreerfer")
   setFilterData(data)
   handleclose()
-  console.log("sdfgsdfdfssd", itm, i)
   }
-
   const removeGelathi= async(itm)=>{
     if (confirm("Do You Want To Remove Gelathi?")){
     var data = JSON.stringify({
@@ -147,18 +132,16 @@ const getData = (itm, i) => {
  
   axios(config)
   .then(function (response) {
-    console.log(JSON.stringify(response.data));
     setRemoved(response.data)
     enrolledGelathi()
   })
   
   .catch(function (error) {
-    console.log(error);
+    // console.log(error);
   });
   }}
   const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     return (
-
         <Container>  <Searchbar getSearch={(e) => searchFunction(e)} />
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
@@ -171,9 +154,7 @@ const getData = (itm, i) => {
                 {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
           </Button>:null}
-                {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
+                
             </Stack>
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <Filtersmain
@@ -203,8 +184,6 @@ const getData = (itm, i) => {
                     onCloseFilter={handleCloseFilter}
                 />
             </Stack>
-            {/* </Stack> */}
-         
             {
               enrolled == ""?
               <div style={{marginTop:"20%" , marginLeft:"40%"}}>
@@ -223,9 +202,6 @@ const getData = (itm, i) => {
                             <Typography variant="subtitle1" gutterBottom>
                                 {` Gelathi Name : ${itm?.gelathiname}`}
                             </Typography>
-                           
-                            {console.log(itm,'<-------gelathinamegelathiname')}
-                        
                         <Typography variant="subtitle1" gutterBottom>
                                 {` Village Name : ${itm?.villagename}`}
                             </Typography>
@@ -240,9 +216,7 @@ const getData = (itm, i) => {
             }):<>
             <h4 style={{textAlign:'center'}}>No Enrolled Gelathi Found</h4>
             </>}
-
         </Container>
-
     );
 }
 const styles = {

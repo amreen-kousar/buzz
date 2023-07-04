@@ -3,20 +3,14 @@ import axios from 'axios';
 import { Container, Stack, Typography, Box, Toolbar, Button, TextField, Select, MenuItem, Snackbar, Chip } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
-
-// components
 import Pagination from '@mui/material/Pagination';
-
 import Page from '../../components/Page';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../../sections/@dashboard/products';
-// mock
 import PRODUCTS from '../../_mock/products';
 import UserDrawer from '../Components/UserDrawer';
-
 import AddUser from './AddUser';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
-
 export default function User() {
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
@@ -32,38 +26,27 @@ export default function User() {
   const [message, setMessage] = useState(false)
   const [selected, setSelected] = useState(null)
   const [loader, setLoader] = useState(true)
-
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);
     setScroll(scrollType);
-    // getProjects()
   };
-
   const handleClose = () => {
-    console.log(AddUser)
     setOpen(false);
   };
   const descriptionElementRef = useRef(null);
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
-
   const handlepeopleOpenFilter = () => {
     setpeopleFilter(true);
   };
-
-  const submitBus = () => {
-    console.log(AddUser)
-  }
-
+ 
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
-
   const handlepeopleCloseFilter = () => {
     setpeopleFilter(false);
   };
@@ -72,10 +55,7 @@ export default function User() {
     setLoader(true)
   }, [searchUser]
   )
-
   const getProjects = async (d) => {
-
-
     const data = JSON.stringify({
       "search": "",
       "id": 1,
@@ -84,9 +64,6 @@ export default function User() {
       "type": "",
       "pageNum": d ? d : 1
     });
-
-
-
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
@@ -95,20 +72,14 @@ export default function User() {
       },
       data
     };
-
     axios(config)
       .then((response) => {
         setProjects(response.data)
-
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
-
   }
-
-
-
   useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef;
@@ -117,14 +88,8 @@ export default function User() {
       }
     }
   }, [open]);
-
-
-
   var userAccess = ['2']
-
   var userIdCheck = localStorage?.getItem('userId')
-
-
   const user = async (d, filter_type) => {
     setLoader(true)
     if (filter_type) {
@@ -132,8 +97,6 @@ export default function User() {
       let ids = { "Trainers": 5, "Drivers": 7, "Funders": 8, "Partner": 9, 'Gelathi Facilitators': 6 }
       filter_type.id = ids[filter_type.type]
     }
-
-    console.log(filter_type, "filter typr")
     const dataid = localStorage?.getItem('userDetails')
     const data = JSON.stringify({
       "search": searchUser,
@@ -143,7 +106,6 @@ export default function User() {
       "type": "",
       "pageNum": d ? d : 1
     });
-    console.log(data,"<---efewfewfefrefregferggre")
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getAllPeople.php',
@@ -152,48 +114,35 @@ export default function User() {
       },
       data
     };
-
     axios(config)
       .then((response) => {
-        console.log(response, "response in user.jsxsssssssssssss")
         if (response.data.list) {
-
           setUsers(response.data.list)
         }
         else {
           setUsers([])
-
         }
         setCount(response?.data?.total_count % 25 == 0 ? parseInt(response?.data?.total_count / 25) : parseInt(response?.data?.total_count / 25) + 1)
         setLoader(false)
-        // let ceo = []
-        // response.data.list.map(r => (r.role_name === "CEO") ? ceo = [...ceo, { label: r.first_name, ...r }] : null)
-        // setCeoUser([...ceo])
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }
-  console.log(users, '<------------------response.data.list')
   const pageChange = (event, newPage) => {
     setPage(newPage);
     (selected?.type) ? user(newPage, selected) : user(newPage)
-    console.log(newPage, "<----efesfdsefsd")
   }
-
   const handleDelete = () => {
     setSearchUser([])
     setSelected([])
     user()
-    console.log('deleteeeeeeeeeee')
   }
-
   const searchBarCall = (e) => {
     setSearchUser(e)
     setSelected({ type: `Search :  ${e}` })
-    console.log(e)
+    // console.log(e)
   }
-
   if (loader) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
@@ -242,7 +191,6 @@ export default function User() {
                 handlepeopleOpenFilter()
               }}>Filters</Button>
           </Typography>
-
           {selected?.type &&
             <div><Stack direction="row" spacing={1}>
                <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type}`} onDelete={() => { handleDelete() }} />
@@ -261,7 +209,6 @@ export default function User() {
               />
             </Stack>
           </Stack>
-
         
           <ProductCartWidget /><br></br>
           {
@@ -271,6 +218,4 @@ export default function User() {
       </Page >
     );
   }
-
-
 }

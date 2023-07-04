@@ -8,20 +8,14 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../../components/Page';
-import TravelDialog from '../Components/DashboardFilters/TravelDialog'
 import moment from 'moment';
-// import Edittraveldialog from './Editta';
 import Iconify from 'src/components/Iconify';
-import Team from '../travelAllowance/Team';
-import Own from '../travelAllowance/Own';
 import DialogForm from './components/DialogForm';
 import { Link } from 'react-router-dom';
 import OwnQuality from './OwnQuality';
 import TeamQuality from './TeamQuality';
-// components
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -38,34 +32,23 @@ function TabPanel(props) {
     </div>
   );
 }
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
-
 const SelfSakthiQulityAssurance = () => {
     const [value, setValue] = React.useState(0);
     const data = localStorage?.getItem('userId')
     var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
     const image = ["tykml", "exrdcftvbgyhnuj"]
-    const [drawerEvent, SetDrawerEvent] = useState(false);
-    //const [image, setImage] = React.useState(['data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==']);
-    const [viewImage, setViewImage] = React.useState(false);
-    const [listdata, setListData] = React.useState()
     const [openMessage, setOpenMessage] = React.useState(false);
     const [message, setMessage] = useState(false)
     const [editData, setEditData] = useState(null)
     const [openFilter, setOpenFilter] = useState(false);
-    const [clcikData, setClickData] = useState()
-    const [teamMembersData, setTeamMembersData] = useState([])
     const [mainValue, setMainValue] = useState(0)
     const [batch,setBatch] = useState('')
-
     const [shown,setShown] = React.useState(false);
-
     const userOwnPermissions=['2','1','12','4','13','3']
     const userTeamPermissions=['2','1','12','4','3','11']
   
@@ -83,7 +66,6 @@ const SelfSakthiQulityAssurance = () => {
       
   
     const handleOpenFilter = (itm) => {
-      // itm.klmtr = +klmtr;
       setEditData(itm)
       console.log(editData)
       setOpenFilter(true);
@@ -142,15 +124,12 @@ const SelfSakthiQulityAssurance = () => {
                   bgcolor: '#ffd796', // theme.palette.primary.main
                   color: '#ff7424',
                 },
-  
                 color: 'black',
               }} label="OWN" style={mainValue == 0 ? {
                 borderBottom: '3px solid #ff7424',
                 color: "#ff7424",
               } : null} />
              }
-  
-  
   {
   userTeamPermissions.includes(data) &&
   <Tab
@@ -167,16 +146,11 @@ const SelfSakthiQulityAssurance = () => {
     borderBottom: '3px solid #ff7424',
     color: "#ff7424",
   } : null} />
-  
-  
   }
-             
-  
-            </Tabs>
+         </Tabs>
           </Box>
           <br />
          
-       
         {
           userTeamPermissions.includes(data) &&   <TabPanel id="return-date-tab" value={mainValue} index={1}>
           <Stack id="return-date-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -193,7 +167,6 @@ const SelfSakthiQulityAssurance = () => {
         </TabPanel>
          }
   
-  
           <br></br>
   
     { (mainValue==0) &&     <Stack id="travel-dialog-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -201,12 +174,7 @@ const SelfSakthiQulityAssurance = () => {
             reloadfunction={reloadfunction}
             />
           </Stack>}
-  
-          
-        
-  
         </Container ></Page >
     );
   }
-
 export default SelfSakthiQulityAssurance

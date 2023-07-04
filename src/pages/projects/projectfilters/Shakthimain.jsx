@@ -2,42 +2,30 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Trainersdata from './Trainersdata';
 import axios from 'axios';
-// material
 import {
   Grid, Radio, Stack, Button, Drawer, Rating, Divider, Checkbox, FormGroup, IconButton, Typography, Chip, Card, CardContent, Box,
 } from '@mui/material';
-
-
-// components
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import Daterange from './Daterange';
 ;
 import { id } from 'date-fns/locale';
-
 Shakthimain.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
   };
-
 export default function Shakthimain({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, user, getData, onSumbit, onDateSubmit, type, shakti,data1 }) {
-
     var [selectDATA, setSelectData] = useState()
   
     const filterPermissions = {
   
       SelfShakthi: [{ id: 46, roles: ['1', '4','5', '12', '3', '11', '9', '7'] },  { id: 9, roles: ['1', '4','5', '12', '3', '11', '9', '7'] }, {id:1,roles:['1', '4','5', '12', '3', '11', '9', '7']},{id:2,roles:['1', '4','5', '12', '3', '11', '9', '7']},{id:5,roles:['1', '4', '12', '3', '11', '9', '7']}],
   
-    //   GelathiProgram: [{id:45,roles:['1','8','12']},{id:2,roles:['1','12']},{id:1,roles:['1','12']},{id:3,roles:['1','12']},{ id: 9, roles: ['1', '2', '3', '4', '5', '9', '11', '12', '13', '6'] },{id:6,roles:['1','12']},{id:4,roles:['1','12']},{id:5,roles:['1','12']}],
   
-      // Gelathis: [{ id: 6, roles: ['1', '3', '12', '11', '4', '2'] }],
   
-      // GreenMotivators: [{ id: 6, roles: ['1', '3', '12', '11', '4', '2'] }],
   
-      // Vyapar: [{ id: 6, roles: ['1', '3', '12', '11', '4', '2'] }],
   
-      // Gelathicircles: [{ id: 6, roles: ['1', '3', '12', '11', '4', '2'] }]
     }
   
   
@@ -48,7 +36,6 @@ export default function Shakthimain({ isOpenFilter, onOpenFilter, onCloseFilter,
   
     const setData = (value) => {
       setSelectData(value)
-      console.log(value,"selectedvalue")
       if(value==46){
         shakti();
         onCloseFilter();
@@ -56,25 +43,16 @@ export default function Shakthimain({ isOpenFilter, onOpenFilter, onCloseFilter,
     
       if (filtersHeaders[value]=='Rescheduled' || filtersHeaders[value]=='Cancelled' ) {
         user(1, { id: value, type: filtersHeaders[value] });
-       console.log(filtersHeaders[value],"value")
         onCloseFilter()
       }
-
-     
-
     }
-    console.log(Object.keys(filterPermissions[type],"filtersssssss"))
     useEffect(() => {
-      console.log(Object.keys(filterPermissions[type],"filtersssssss"))
-  
-      
         if (type == 'Demography') {
           setSelectData(filterPermissions[type][0].id)
         }
         else {
           filterPermissions[type].forEach
             ((e, i, arr) => {
-              console.log(e, "filterer")
               if (e.roles.includes(data)) {
                 setSelectData(e?.id);
                 arr.length = i + 1; // Behaves like `break`
@@ -159,8 +137,6 @@ export default function Shakthimain({ isOpenFilter, onOpenFilter, onCloseFilter,
                   <Daterange getData={getData} selectDATA={selectDATA} onDateSubmit={onDateSubmit} />
                 </Grid>
               }
-              {console.log(selectDATA,"selected")}
-          
              
             </div>
           }

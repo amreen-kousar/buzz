@@ -69,14 +69,7 @@ const FunderVyaparDashboard = () => {
       </Box>
     );
   }
-  const handleOpenFilter = () => {
-    setOpenFilter(true);
-  };
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
- 
-  
+
   if (summaryData?.length === 0) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
@@ -147,9 +140,7 @@ const FunderVyaparDashboard = () => {
                 color="motivator"
               />
             </Grid>
-            {/* <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title="Number of Beehives" total={summaryData?.summary_green} color="motivator" />
-            </Grid> */}
+           
           </Grid>
           
      

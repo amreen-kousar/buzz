@@ -349,7 +349,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
-                title="Number of Self Sakthi Survey"
+                title="Number of Self Shakthi Survey"
                 total={(summaryData?.summary_Noofselfshakthisurvey>=0)?summaryData?.summary_Noofselfshakthisurvey:summaryData?.summary_nosurvey}
                 color="motivator"
               />

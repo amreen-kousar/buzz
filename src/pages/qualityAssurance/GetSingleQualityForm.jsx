@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
 import {
   Button,
   Grid,
@@ -53,40 +52,21 @@ import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 const GetSingleQualityForm = ({ item, open, handleClose }) => {
   const [sendForm, setSendForm] = useState('');
   useEffect(() => {
     if (item === undefined) {
-      console.log('gettting as undefined');
+
     } else {
-      // Formrender(item)
       setSendForm(item);
-      console.log(sendForm, '  Formrender(item) ');
     }
-    console.log('mounting is working');
   }, [item]);
-  console.log(item, 'heckitem');
   const myJSON = JSON.stringify(item);
-  console.log(item, 'heck');
-
-  var value = "hi, hello, bye bye"
-
-  console.log(value.split(",") ,"valueplited")
-
   const RenderStringToArray = ( {string}) =>{
-    // var string = "hi, hello, bye bye"
 var value =string?.split(",")
-    console.log(value,"valueplited")
   return value?.map((val) =><li style={{color:"gray"}}>{val}</li> )
-    
-    
-    
-  
   }
-
   const Formrender = () => {
-    console.log(item, 'Formrender');
     return (
       <>
         {Object?.entries(item).map(([key, value]) => (
@@ -108,7 +88,6 @@ var value =string?.split(",")
       </>
     );
   };
-
   const SelfSakthiDay1 = () => {
     return (
       <>
@@ -116,7 +95,6 @@ var value =string?.split(",")
           <CardContent>
             <Stack>
               <Typography>Day1 or Day 2</Typography>
-
               <TextField
                 type="day"
                 disabled
@@ -155,7 +133,6 @@ var value =string?.split(",")
       </>
     );
   };
-
   return (
     <div>
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
@@ -169,20 +146,16 @@ var value =string?.split(",")
             </Typography>
           </Toolbar>
         </AppBar>
-
         {/* <div style={{marginTop:"60px"}}>
       <Formrender/>
       </div> */}
         {/* 1 */}
         <Grid style={{ backgroundColor: '#FFD580', marginTop: '30px' }}>
          
-       
           <Card sx={{ mt: 4, margin: '20px' }}>
             <CardContent>
               <Typography>Email</Typography>
-              {/* <RenderStringToArray string={} /> */}
               <Stack mt={2} mb={2}>
-                {/* <TextField disabled label="Your Answer" variant="outlined" color="common" /> */}
                 <TextField
                   type="email"
                   disabled
@@ -190,7 +163,6 @@ var value =string?.split(",")
                   label="Your Answer"
                   variant="outlined"
                   color="common"
-
                   onChange={(e) => setSendForm({ ...sendForm, email_address: e.target.value })}
                   value={sendForm?.email_address}
                 />
@@ -345,7 +317,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Typography>No of participants at the start of the session</Typography>
@@ -365,7 +336,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -384,7 +354,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Typography>The Gelathi Facilitator competently carried out the following functions</Typography>
@@ -406,7 +375,6 @@ var value =string?.split(",")
                 </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Typography>
@@ -417,7 +385,6 @@ var value =string?.split(",")
                
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Typography>How many stories of success or change emerged from the recap</Typography>
@@ -1239,7 +1206,6 @@ var value =string?.split(",")
                         The purpose of the section is to collect quantitative data around participation, excitement,
                         preparedness and the maintenance of interest level of the participants during the training.
                       </Typography>
-
                    </CardContent>
                   </Card>
                   <Card sx={{ marginTop: '20px' }}>
@@ -1281,7 +1247,6 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Typography mb={2}>Level of participation (1 is poor and 5 is excellent)</Typography>
@@ -1360,12 +1325,8 @@ var value =string?.split(",")
                           The purpose of this sector is to help Gelathis learn to improves their skill sets around
                           facilitation of the training.
                         </Typography>
-
                         <Stack>
-
-
                         </Stack>
-
                       </Stack>
                     </CardContent>
                   </Card>
@@ -1403,7 +1364,6 @@ var value =string?.split(",")
                   />
                 </Stack>
                 <Typography mb={2}>Venue
-
 </Typography>
                     <Stack mt={2} mb={2}>
                   <TextField
@@ -1417,7 +1377,6 @@ var value =string?.split(",")
                   />
                 </Stack>
                 <Typography mb={2}>Report of GF with Gelathis
-
 </Typography>
                     <Stack mt={2} mb={2}>
                   <TextField
@@ -1431,7 +1390,6 @@ var value =string?.split(",")
                   />
                 </Stack>
                 <Typography mb={2}>Body language during the training
-
 </Typography>
                     <Stack mt={2} mb={2}>
                   <TextField
@@ -1445,7 +1403,6 @@ var value =string?.split(",")
                   />
                 </Stack>
                 <Typography mb={2}>Making session interactive and fun
-
 </Typography>
                     <Stack mt={2} mb={2}>
                   <TextField
@@ -1459,7 +1416,6 @@ var value =string?.split(",")
                   />
                 </Stack>
                 <Typography mb={2}>Knowledge of the content of the training
-
 </Typography>
                     <Stack mt={2} mb={2}>
                   <TextField
@@ -1473,7 +1429,6 @@ var value =string?.split(",")
                   />
                 </Stack>
                 <Typography mb={2}>Ability to clear doubts
-
 </Typography>
                     <Stack mt={2} mb={2}>
                   <TextField
@@ -1487,7 +1442,6 @@ var value =string?.split(",")
                   />
                 </Stack>
                 <Typography mb={2}>Ability to inspire the Gelathi's
-
 </Typography>
                     <Stack mt={2} mb={2}>
                   <TextField
@@ -1501,7 +1455,6 @@ var value =string?.split(",")
                   />
                 </Stack>
                 <Typography mb={2}>Ability to give clear link between the activity and the content
-
 </Typography>
                     <Stack mt={2} mb={2}>
                   <TextField
@@ -1515,7 +1468,6 @@ var value =string?.split(",")
                   />
                 </Stack>
                 <Typography mb={2}>Vulnerable and honest
-
 </Typography>
                     <Stack mt={2} mb={2}>
                   <TextField
@@ -1569,7 +1521,6 @@ var value =string?.split(",")
                     <Typography>
                       Any further training and understanding disabled by the Gelathi Facilitator of any of the training
                       modules delivered
-
                       
                     </Typography>
                     <RenderStringToArray string={sendForm?.any_futher_training_and_understding_reqired_by_gf_traing_module} />
@@ -1655,7 +1606,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Typography>No of participants at end of the session</Typography>
@@ -1674,7 +1624,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Typography>Any other comments about the Gelathi Facilitator</Typography>
@@ -1716,7 +1665,6 @@ var value =string?.split(",")
                         <Stack mt={2} mb={2}>
                         <TextField
                           disabled
-
                           label="Your Answer"
                           variant="outlined"
                           color="common"
@@ -1746,7 +1694,6 @@ var value =string?.split(",")
                   </Card>
                   <CardContent>
                     <Typography>Name of the trainer being evaluated</Typography>
-
                     <Stack mt={2} mb={2}>
                       <TextField
                         disabled
@@ -1779,7 +1726,6 @@ var value =string?.split(",")
                   <CardContent>
                     <Typography>Check which ones the Trainer did NOT do</Typography>
                     <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do} />
-
                  
                   </CardContent>
                 </Card>
@@ -1815,7 +1761,6 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Typography>Check which ones the trainer did not do</Typography>
@@ -1824,7 +1769,6 @@ var value =string?.split(",")
                    
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1857,7 +1801,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
              {  (sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module=='Yes')? <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Typography>If so, how many?</Typography>
@@ -1874,7 +1817,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>:null}
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -1900,7 +1842,6 @@ var value =string?.split(",")
           {sendForm?.day1_or_day2 == 'Day 1' ? (
             <Grid style={{ backgroundColor: '#FFD580' }}>
             
-
               <Card sx={{ mt: 4, margin: '20px', backgroundColor: '#ff7424' }}>
                 <CardContent>
                   <Stack>
@@ -1931,7 +1872,6 @@ var value =string?.split(",")
                   </CardContent>
                 </Card>
               </Card>
-
               {/* <Card sx={{mt:2,}} >
         <CardContent>
         <Stack mt={2}>
@@ -1955,7 +1895,6 @@ var value =string?.split(",")
              
         </CardContent>
      </Card> */}
-
              {(sendForm?.did_any_new_women_attend_the_training_session_during_module=="Yes")? <Card sx={{ margin: '20px' }}>
                 <CardContent>
                   <Stack>
@@ -1975,7 +1914,6 @@ var value =string?.split(",")
                   </Stack>
                 </CardContent>
               </Card>: null}
-
               <Card sx={{ margin: '20px' }}>
                 <CardContent>
                   <Stack mt={2}>
@@ -2026,7 +1964,6 @@ var value =string?.split(",")
                   </Stack>
                 </CardContent>
               </Card>
-
             { (sendForm?.did_any_women_leve_training_session_during_or_after_1st_module_1=='Yes')? <Card sx={{ margin: '20px' }}>
                 <CardContent>
                 
@@ -2046,7 +1983,6 @@ var value =string?.split(",")
                 
                 </CardContent>
               </Card>: null}
-
               <Card sx={{ margin: '20px' }}>
                 <CardContent>
                   <Stack mt={2}>
@@ -2105,7 +2041,6 @@ var value =string?.split(",")
               </CardContent>
               </Card> */}
                 </Card>
-
                 <Card sx={{ mt: 2, margin: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2126,7 +2061,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 {(sendForm?.did_any_new_women_attend_training_session_during_this_module_1=='Yes')? <Card sx={{ margin: '20px' }}>
                   <CardContent>
                  
@@ -2146,7 +2080,6 @@ var value =string?.split(",")
                    
                   </CardContent>
                 </Card>: null}
-
                 <Card sx={{ margin: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2188,7 +2121,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ margin: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2208,7 +2140,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ margin: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2227,7 +2158,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ margin: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2246,7 +2176,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1=='Yes')? <Card sx={{ margin: '20px' }}>
                   <CardContent>
                  
@@ -2266,7 +2195,6 @@ var value =string?.split(",")
                 
                   </CardContent>
                 </Card>: null}
-
                 <Card sx={{ margin: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2278,7 +2206,6 @@ var value =string?.split(",")
                           label="Your Answer"
                           variant="outlined"
                           color="common"
-
                           value={sendForm?.did_this_module_take_30_minutes_as_allotted_1}
                         />
                       </Stack>
@@ -2316,7 +2243,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                {(sendForm?.did_any_new_women_attend_training_session_during_this_module_2=='Yes')? <Card sx={{ margin: '20px' }}>
                   <CardContent>
                     <Stack>
@@ -2336,7 +2262,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>: null}
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2347,7 +2272,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack>
@@ -2399,7 +2323,6 @@ var value =string?.split(",")
                           label="Your Answer"
                           variant="outlined"
                           color="common"
-
                           value={sendForm?.did_this_module_take_30_minutes_as_allotted_1}
                         />
                       </Stack>
@@ -2430,7 +2353,6 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                 </Card>
-
                 {/* <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack mt={2}>
@@ -2478,7 +2400,6 @@ var value =string?.split(",")
                       <Typography variant="h5">Day-2</Typography>
                     </CardContent>
                   </Card>
-
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Name of the trainer being evaluated</Typography>
@@ -2498,7 +2419,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack>
@@ -2518,7 +2438,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2548,7 +2467,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2569,7 +2487,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2689,7 +2606,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                {(sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module=='Yes')? <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2711,7 +2627,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>:null}
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2877,7 +2792,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
               {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1=='Yes')?  <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2899,7 +2813,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>: null}
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -2962,7 +2875,6 @@ var value =string?.split(",")
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Check which ones the trainer did not do:</Typography>
-
                       <RenderStringToArray string={sendForm?.check_which_ones_the_trainer_did_not_do_3} />
                     
                    
@@ -3008,7 +2920,6 @@ var value =string?.split(",")
                           value={sendForm?.what_did_the_trainer_not_do}
                         />
                       </Stack>
-
                     </Stack>
                   </CardContent>
                 </Card>
@@ -3076,7 +2987,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2=='Yes')? <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3098,7 +3008,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>:null}
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3172,7 +3081,6 @@ var value =string?.split(",")
                     <Stack mt={2}>
                       <Typography>During the debrief did the trainer not ask:</Typography>
                       
-
                       <Stack mt={2} mb={2}>
                         <TextField
                           disabled
@@ -3194,7 +3102,6 @@ var value =string?.split(",")
                     <Stack mt={2}>
                       <Typography>Were the participants responsive during the debriefing?</Typography>
                       
-
                       <Stack mt={2} mb={2}>
                         <TextField
                           disabled
@@ -3232,7 +3139,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3=='Yes')? <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3254,7 +3160,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>:null}
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3336,14 +3241,13 @@ var value =string?.split(",")
                             }
                             value={sendForm?.name_of_the_gelathi_being_evaluated}
 
-                            // onChange={(e) => { setSendForm({ ...setSendForm, name_of_the_gelathi_being_evaluated: e.target.value }) }}
+
                           />
                         </Stack>
                       </Stack>
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Stack mt={2}>
                   <Card>
                     <CardContent>
@@ -3401,7 +3305,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>{' '}
                 </Card>
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3423,7 +3326,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3508,7 +3410,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>{' '}
                 </Card>
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3532,12 +3433,10 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>Was the recap done?</Typography>
-
                       
                       <Stack mt={2} mb={2}>
                         <TextField
@@ -3585,7 +3484,6 @@ var value =string?.split(",")
                           value={sendForm?.check_which_ones_the_gelathi_did_not_do_1}
                         />
                       </Stack>
-
                       </Stack>
                     </Stack>
                   </CardContent>{' '}
@@ -3623,13 +3521,11 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack mt={2}>
                       <Typography>During the debrief did the Gelathi:</Typography>
                       
-
                       <Stack mt={2} mb={2}>
                         <TextField
                           disabled
@@ -3658,7 +3554,6 @@ var value =string?.split(",")
                       <Typography variant="h5">Post - Session:</Typography>
                     </CardContent>
                   </Card>
-
                   <Card sx={{ marginTop: 2 }}>
                     <CardContent>
                       <Stack mt={2}>
@@ -3716,7 +3611,6 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3785,7 +3679,6 @@ var value =string?.split(",")
                       <Typography variant="h5">Session 5: Assets & Liabilities: </Typography>
                     </CardContent>
                   </Card>
-
                   <Card sx={{ marginTop: 2 }}>
                     <CardContent>
                       <Stack>
@@ -3802,14 +3695,13 @@ var value =string?.split(",")
                             }
                             value={sendForm?.name_of_the_gelathi_being_evaluated_1}
 
-                            // onChange={(e) => { setSendForm({ ...setSendForm, name_of_the_gelathi_being_evaluated_1: e.target.value }) }}
+
                           />
                         </Stack>
                       </Stack>
                     </CardContent>
                   </Card>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack>
@@ -3849,11 +3741,9 @@ var value =string?.split(",")
                           value={sendForm?.was_the_recap_done_1}
                         />
                       </Stack>
-
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3899,21 +3789,6 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                 </Card>
-
-                {/* <Card sx={{marginTop:2}}>
-        <CardContent>
-        <Stack>
-                <Typography variant="body1">
-                How many women attended the training session?
-                </Typography>
-                <Stack mt={3}>
-                  <TextField id="Your Answer" label="Your Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
-                </Stack>
-              </Stack>
-       
-        </CardContent>
-     </Card> */}
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3946,7 +3821,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -3968,7 +3842,6 @@ var value =string?.split(",")
                     </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Stack mt={2}>
@@ -4043,13 +3916,11 @@ var value =string?.split(",")
                       </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Typography>The Gelathi did not ask</Typography>
                  
                     
-
                     <Stack mt={2} mb={2}>
                         <TextField
                           disabled
@@ -4065,12 +3936,10 @@ var value =string?.split(",")
                       </Stack>
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Typography>During the debrief did the Gelathi not ask:</Typography>
                     
-
                     <Stack mt={2} mb={2}>
                         <TextField
                           disabled
@@ -4137,10 +4006,8 @@ var value =string?.split(",")
                           value={sendForm?.check_which_ones_the_gelathi_did_not_do}
                         />
                       </Stack>
-
                   </CardContent>
                 </Card>
-
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Typography>During the debrief did the Gelathi not ask:</Typography>
@@ -4201,5 +4068,4 @@ var value =string?.split(",")
     </div>
   );
 };
-
 export default GetSingleQualityForm;

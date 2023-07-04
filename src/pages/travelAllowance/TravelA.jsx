@@ -10,14 +10,11 @@ import Tab from '@mui/material/Tab';
 import Page from '../../components/Page';
 import TravelDialog from '../Components/DashboardFilters/TravelDialog'
 import moment from 'moment';
-import Edittraveldialog from './Editta';
 import Iconify from 'src/components/Iconify';
 import Team from './Team';
 import Own from './Own'
-// components
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -34,27 +31,23 @@ function TabPanel(props) {
     </div>
   );
 }
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-
 export default function TravelA() {
   const [value, setValue] = React.useState(0);
   const data = localStorage?.getItem('userId')
   var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
   const image = ["tykml", "exrdcftvbgyhnuj"]
   const [drawerEvent, SetDrawerEvent] = useState(false);
-  //const [image, setImage] = React.useState(['data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==']);
   const [viewImage, setViewImage] = React.useState(false);
   const [listdata, setListData] = React.useState()
   const [openMessage, setOpenMessage] = React.useState(false);
@@ -64,54 +57,30 @@ export default function TravelA() {
   const [clcikData, setClickData] = useState()
   const [teamMembersData, setTeamMembersData] = useState([])
   const [mainValue, setMainValue] = useState(0)
-
   const userOwnPermissions=['9','5','12','4','13','6','3']
   const userTeamPermissions=['2','1','12','4','13','3','11']
-
-
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-
-
   
   useEffect(()=>{
     if(!userOwnPermissions.includes(data)){
     setMainValue(1)
     }
       },[])
-    
-
-  const handleOpenFilter = (itm) => {
-    // itm.klmtr = +klmtr;
-    setEditData(itm)
-    console.log(editData)
-    setOpenFilter(true);
-  };
-
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
-
+ 
   const getDateValue = (e) => {
     setDatevalue(e)
   }
-
   const returnDateValue = () => {
     return dateValue
   }
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-
-
   return (
     <Page id="dashboard-products" title="Dashboard: Products">
       <Container id="container-travel-allowance">
-
-
         <Typography id="travel-allowance" variant="h4" sx={{ mb: 5 }}>
           Travel Allowance
           {/* <Button style={{ float: "right" }}>Filters</Button> */}
@@ -123,7 +92,6 @@ export default function TravelA() {
         </Snackbar>
     <Box id="warning-box" sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs id="warning" variant="fullWidth" indicatorColor='warning'>
-
            {
             userOwnPermissions.includes(data) &&  
             <Tab
@@ -134,15 +102,12 @@ export default function TravelA() {
                 bgcolor: '#ffd796', // theme.palette.primary.main
                 color: '#ff7424',
               },
-
               color: 'black',
             }} label="OWN" style={mainValue == 0 ? {
               borderBottom: '3px solid #ff7424',
               color: "#ff7424",
             } : null} />
            }
-
-
 {
 userTeamPermissions.includes(data) &&
 <Tab
@@ -153,17 +118,13 @@ sx={{
     bgcolor: '#ffd796', // theme.palette.primary.main
     color: '#ff7424',
   },
-
   color: 'black',
 }} label="TEAM" style={mainValue == 1 ? {
   borderBottom: '3px solid #ff7424',
   color: "#ff7424",
 } : null} />
-
-
 }
            
-
           </Tabs>
         </Box>
         <br />
@@ -172,21 +133,6 @@ sx={{
           onChange={(e) => { getDateValue(e?.target?.value) }} label="Select Date" variant="outlined" InputLabelProps={{
             shrink: true,
           }} />
-           {/* <Stack style={{ marginTop: 20 }}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                    
-                    inputFormat="YYYY-MM-DD"
-                    views={["year", "month", "day"]}
-                    // label="Date"
-                    value={getDateValue?.date}
-                    onChange={(newValue) => {
-                      setSendData({ ...sendData, date: newValue })
-                    }}
-                    renderInput={(params) => <TextField {...params} fullWidth />}
-                  />
-                </LocalizationProvider>
-              </Stack> */}
       {
         userTeamPermissions.includes(data) &&   <TabPanel id="return-date-tab" value={mainValue} index={1}>
         <Stack id="return-date-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -195,28 +141,19 @@ sx={{
           </Box>
         </Stack>
       </TabPanel>
-
       }
        {
         userOwnPermissions.includes(data) &&  <TabPanel value={mainValue} index={0}>
         <Own returnDateValue={returnDateValue} />
       </TabPanel>
        }
-
-
         <br></br>
-
   { (mainValue==0) &&     <Stack id="travel-dialog-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <TravelDialog id="travel-dialog" viewMessage={(text) => {
             setMessage(text)
             setOpenMessage(true)
-            // list()
           }} />
         </Stack>}
-
-        
-        {/* </Stack> */}
-
       </Container ></Page >
   );
 }

@@ -29,17 +29,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
     '&:last-child td, &:last-child th': {
       border: 0,
     },
   }));
-
   const Userrole = localStorage.getItem("userId")
-  console.log(Userrole , "role logged in")
 export default function MaterialStockList() {
   const Userrole = localStorage.getItem("userId")
-  console.log(Userrole , "role logged in")
   const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const [materialStock, setmaterialStock] = useState([]);
@@ -53,7 +49,6 @@ const [reloadMaterialData , setReloadMaterialData] = useState(false)
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
-
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
@@ -72,15 +67,11 @@ demo.forEach((item)=>{
    
     quantity:null
   })
-
 })
 setmaterialStock(materialData)
-console.log(materialStock, "stock details ")
-
 }, [demo])
 const id = sessionStorage?.getItem('proId');
 const projData = (async) => {
-  console.log(location, 'location props');
   var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
   var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -89,7 +80,6 @@ const projData = (async) => {
     role_id: role,
     emp_id: idvalue,
   });
-
   var config = {
     method: 'post',
     url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
@@ -98,29 +88,21 @@ const projData = (async) => {
     },
     data: data,
   };
-
   axios(config)
     .then(function (response) {
       setData1({ ...response.data.list });
-      console.log(response.data.list, '<--------------setData1setData1');
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
 };
-
-
 const onChangeMaterialValue = (index , quantity)=>{
   const apiData = [...materialStock]
   const changedData = apiData[index]
   changedData['quantity'] = quantity
   apiData[index]=changedData
   setmaterialStock(apiData)
-
-console.log(materialStock , " chnaged data")
 }
-
-
     const demoi = async () => {
       
         var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
@@ -129,8 +111,6 @@ console.log(materialStock , " chnaged data")
             "project_id":state?.id
         });
      
-    
-        console.log(data, "checking for search",state?.id)
         const config = {
           method: 'post',
           url: 'https://bdms.buzzwomen.org/appTest/getStockItems.php', 
@@ -140,16 +120,12 @@ console.log(materialStock , " chnaged data")
           },
           data
         };
-        console.log("dataaaaaaaaaaaaa", data);
-    
         axios(config)
           .then((response) => {
-            console.log("responseeeeeeeeeeee", response)
             setDemo(response.data?.data)
-            console.log(response.data?.data,"stockdataaaaaaaaa");
           })
           .catch((error) => {
-            console.log(error);
+            // console.log(error);
           });
       }
       let 
@@ -158,16 +134,9 @@ console.log(materialStock , " chnaged data")
       const onSubmit = ()=>{
         var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
         var role =JSON.parse(localStorage.getItem('userDetails'))?.role
-        // let stock =[]
-        // stock.push(materialStock)
-        // var formdata = new FormData();
         
-        // console.log(formdata , "formdata look")
         if(stock.length<=0){
           alert("nothng ")
-          
-        }{
-          console.log(stock, " updated stock")
         }
         var data = JSON.stringify({
           
@@ -177,7 +146,6 @@ console.log(materialStock , " chnaged data")
             "stock_list" :stock
         });
        
-        console.log(data , "material api")
         const config = {
           method: 'post',
           url: 'https://bdms.buzzwomen.org/appTest/consumeStock.php', 
@@ -198,7 +166,6 @@ console.log(materialStock , " chnaged data")
             timer: 2000
           });
          demoi()
-          console.log("susscesfully added data material")
          }
          
         })
@@ -210,9 +177,7 @@ console.log(materialStock , " chnaged data")
             confirmButtonText: 'Ok',
             timer: 2000
           });
-          console.log(error , "failed");
         });
-        console.log("submit")
         setAdmin(false)
       }
     return (
@@ -245,16 +210,10 @@ console.log(materialStock , " chnaged data")
                      }>
                         <Iconify style={{color:"white"  }} icon="material-symbols:add" />
                       </IconButton>
-
                   }
                   </>
-                
-                    
                     :null }
                 </Typography>
-                {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
             </Stack> 
             <Grid
         sx={{
@@ -280,7 +239,6 @@ console.log(materialStock , " chnaged data")
                     {row.name} {row.id}
                   </StyledTableCell>
                   <StyledTableCell>{row.quantity_exist}</StyledTableCell>
-                  {console.log(row , "data in row")}
                 {
                   admin?   <StyledTableCell>{<>
                     <TextField
@@ -307,9 +265,6 @@ console.log(materialStock , " chnaged data")
         </TableContainer>
         {(Userrole == 2 || Userrole==4) && close?
                   
-                  // <IconButton  style={{ float: 'right', color: '#ff7424', position: 'absolute', right: 0, marginRight: '125px' }} onClick={
-                  //  onSubmit
-                  //  }>
                   <div style={{ display: 'flex' ,marginTop:"20px", marginLeft:"97%" }}>
                    
                     
@@ -331,13 +286,10 @@ console.log(materialStock , " chnaged data")
       
                   </div>
                
-                      // <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
-                    // </IconButton>
                     :null }
         </Grid>
         </Container>
         </Page>
-
     );
 }
 const styles = {

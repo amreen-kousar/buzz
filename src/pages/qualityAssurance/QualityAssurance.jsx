@@ -81,11 +81,9 @@ const [errorMsg,setErrormsg]=useState('');
   };
 
   const apiHit = async (id, i, g) => {
-    console.log("🚀 ~ file: Gelathidashboard.js:45 ~ apiHit ~ id, i, g:", id, i, g)
     setLoader(true)
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-    console.log( role , userid , " role user id ")
    
     const data = {
       "Emp_id":JSON.parse(userid),
@@ -98,11 +96,8 @@ const [errorMsg,setErrormsg]=useState('');
       "Filter_EndDate":g === "Date" ? i :""
      
   }
-  
-    console.log(data, '<------bbbbbbb');
     const config = {
       method: 'post',
-      // url: "https://cors-anywhere.herokuapp.com/{http://3.7.7.138/appTest/Scripts/getDashboardData.php}",
       url: baseURL +'getDashboard',
       headers: {
         'Content-Type': 'application/json',
@@ -114,27 +109,16 @@ const [errorMsg,setErrormsg]=useState('');
     axios(config)
       .then((response) => { 
         setLoader(false)
-console.log(response.data,"________>responsedata")
-
 setSummaryData(response?.data);
-
-        console.log("responseofapi", response.data)
       })
       .catch((error) => {
-    
-        setErrormsg(error)
-        console.log(error);
+        // console.log(error);
       });
   };
 
-
-console.log(summaryData?.data?.GelathiProgram,"resposeapi")
-let formatdata = summaryData?.data
-  console.log("🚀 ~ file: Gelathidashboard.js:105 ~ Gelathidashboard ~ formatdata:", formatdata)
   useEffect(() => {
     apiHit();
   }, []);
-
 
   if (loader) {
     return (
@@ -143,40 +127,24 @@ let formatdata = summaryData?.data
       </Box>
     )
   }
-  
-  // if(errorMsg!=''){
-  //   return(
-  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh',fontWeight:700}} style={{fontSize:30}} >
-  //       {errorMsg?.message}
-  //     </Box>
-  //   )
-  // }
   const onSumbit = (e, i) => {
     setSelected({ type: 'Location', name: `  State : Karnataka ; District : ${e?.district?.name} ; Taluk : ${e?.talaq}` })
-    console.log(e,"evaluesssssssssssss",e?.district?.name)
     handleCloseFilter()
     apiHit(e?.district?.name,e?.talaq,"Location")
   }
-
   const onDateSubmit = (e) => {
     setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` })
     apiHit(e?.startDate, e?.endDate, "Date")
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
     handleCloseFilter()
   }
-
   const getData = (itm,i) => {
-  //  var itemrole = (itm?.empRole==13)?"Gelathi Facilitator Lead":(itm?.empRole==2)?"Admin":(itm?.empRole==6)?"Gelathi Facilitators":"Role"
     setSelected({type:"Role",itm})
     handleCloseFilter()
     apiHit(itm?.id,i,"Role")
-    console.log(filterData,"hyyyyyyyyyyy")
    
   }
-  
-  console.log(slected,"selectedvalueeeeeeeeee")
   return (
-    
     <>
       <Page title="Dashboard">
         <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -199,19 +167,14 @@ let formatdata = summaryData?.data
         {
     slected && (slected.type =='Date Range')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }}  />
   }
-
 {
     slected && (slected.type =='Location')&& <Chip label={`${slected?.type} : ${slected?.name} `} onDelete={() => { handleDelete(slected) }}  />
 }
 {
   slected && (slected?.type=='Role') && <Chip label={` ${slected?.itm?.name} `} onDelete={() => { handleDelete(slected) }}  />
 }
-
-
-
-          <Grid justifyContent="center" container spacing={3} marginTop={1}>
+  <Grid justifyContent="center" container spacing={3} marginTop={1}>
             <Grid onClick={handleClickOpen} item xs={4} sm={8} md={4}>
-           
               <AppWidgetSummary title="Self Shakti Training Program" total={summaryData?.data?.SStraining} color="primary" />
             </Grid>
 
@@ -222,15 +185,12 @@ let formatdata = summaryData?.data
               <AppWidgetSummary title="Self Shakti by Gelathi" total={summaryData?.data?.SSbyGelathi} color="gelathis" />
             </Grid>
           </Grid>
-     
           <div style={{display:'flex', flexDirection:'column', justifyContent:"center",alignItems:"center" ,width:"100%"}}>
           <div style={{marginTop:"20px" }}>
           <Link to="/dashboard/qualityAssessment/selfsakthi"
-        //    state={{ id: data1?.project_id }}
             style={styles.linkStyle}>
                     <Button variant="secondary"
                      onClick={()=>{
-                   
                      }}
                      style={styles.buttonStyle}
                     endIcon={<IconButton> <Iconify style={{ color: "black" }} icon="material-symbols:add" /> </IconButton>}
@@ -238,12 +198,8 @@ let formatdata = summaryData?.data
                     <span style={{ width: "200px" }}>  Quality Assessment Form</span>
                   </Button>
                   </Link>
-
                   </div>
-              
           </div>
-          {console.log(summaryData?.SSbyGelathi , " insidereturn")}
-         
         </Container>
       </Page>
     </>

@@ -18,7 +18,6 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 export default function enrolledGreenMotivatorsList() {
     const {state} = useLocation()
-    console.log("nwewepewrwe",state)
     const [clcikData, setClickData] = useState()
     const [green , setGreen] = useState('')
      const [filterData, setFilterData] = useState({})
@@ -34,7 +33,6 @@ export default function enrolledGreenMotivatorsList() {
     }, []
     )
     const [successMessage,setsuccessMessage]=useState(false);
-
     const [openFilter, setOpenFilter] = useState(false);
     const [filter,setFilter]=useState(false);
     const searchFunction = (e) => {
@@ -47,23 +45,19 @@ export default function enrolledGreenMotivatorsList() {
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
-
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
     const handleopen=()=>{
       setFilter(true)
     };
-
     const handleclose=()=>{
       setFilter(false)
     }
     const changeState = () => {
       setReload(!reload);
-      console.log('changeState is called ');
     };
     const enrolledGreenMotivators = async(id,i,g) =>{
-      console.log(id,'hy',i)
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
@@ -87,22 +81,18 @@ export default function enrolledGreenMotivatorsList() {
             setGreen(response.data)
             changeState();
             setCount(response?.data?.list.length)
-            console.log(response.data);
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
           
     }
-
   const id = sessionStorage?.getItem("proId")
   useEffect(() => {
     projData();
-
   }, [])
   
   const projData = async => {
-    console.log(location, "location props")
     var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -111,7 +101,6 @@ export default function enrolledGreenMotivatorsList() {
       "role_id": role,
       "emp_id": idvalue
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
@@ -120,16 +109,13 @@ export default function enrolledGreenMotivatorsList() {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setData1(response.data.list)
-        console.log(response.data, '<--------------setData1setData1');
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
-
   }
   const handleDelete = () => {
     setSelected(null)
@@ -140,19 +126,13 @@ export default function enrolledGreenMotivatorsList() {
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-
 const getData = (itm, i) => {
-  console.log(itm,"getdata")
   setSelected({itm,type:'Gelathi Facilitators'})
- 
   const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
   enrolledGreenMotivators(itm, i)
-  console.log(data, i, itm, "<----sdfssreerfer")
   setFilterData(data)
   handleclose()
-  console.log("sdfgsdfdfssd", itm, i)
   }
-
   const removeGelathi=async(itm)=>{
     if(confirm("Are you sure want to remove Gelathi")){
   var data = JSON.stringify({
@@ -171,30 +151,15 @@ const getData = (itm, i) => {
   
   axios(config)
   .then(function (response) {
-    console.log(JSON.stringify(response.data));
     enrolledGreenMotivators()
-    // setMessage('Poa deleted successfully')
-    // setOpenMessage(true)
   })
   .catch(function (error) {
-    console.log(error);
+    // console.log(error);
   });
 }
 }
-
-
   const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     return (
-      // {openMessage &&
-      //   <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
-      //     <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
-      //       {message}
-      //     </Alert>
-      //   </Snackbar>
-      // }
-
-
-
         <Container><Searchbar getSearch={(e) => searchFunction(e)} />
          {successMessage && (
         <Snackbar open={successMessage} autoHideDuration={6000} onClose={() => setsuccessMessage(false)}>
@@ -217,9 +182,6 @@ const getData = (itm, i) => {
                         </IconButton></Link>
                     Green Motivators    
                 </Typography>
-                {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
             {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
           </Button>:null}
@@ -244,8 +206,7 @@ const getData = (itm, i) => {
             
             <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}>Green Motivators : ({count})</Typography> 
-            {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
-
+           
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ParticipantDrawer
                     clcikData={clcikData}
@@ -254,8 +215,6 @@ const getData = (itm, i) => {
                     onCloseFilter={handleCloseFilter}
                 />
             </Stack>
-            {/* </Stack> */}
-
             {
               green==""?
               <div style={{marginTop:"20%" , marginLeft:"40%"}}>
@@ -264,13 +223,10 @@ const getData = (itm, i) => {
               :
             
             green?.list?.length!==0?green?.list?.map((itm) => {
-                console.log(itm,'<----------greengreengreen')
                 return (
                     <Card  style={styles.card1}>
-                   {/* {(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)}><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}<GreenSurvey />      */}
-              
                    <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}
-                   {/* <GreenSurvey itm={itm} changeState={changeState}/> */}
+                  
                    </div>
               <div onClick={() => {
                         setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
@@ -278,9 +234,7 @@ const getData = (itm, i) => {
                     }} pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
              <div variant="subtitle1" gutterBottom>
                                 {` Gelathi Name : ${itm?.gelathiname}`}
-
                                 <div>{(role==4)?
-
 (itm?.is_survey)?
   <IconButton style={{float:'right',right:30}} >  
   <Iconify icon="clarity:form-line" color="green" />
@@ -297,47 +251,15 @@ const getData = (itm, i) => {
                 </div>:null}
                 <div variant="body2"  gutterBottom >
                 {` Enrolled Date  : ${itm?.enroll_date}`}
-{/* 
-               { (role == 1 ||role == 2 || role == 3 ||role == 4 ||role == 12  )?( itm?.is_survey? <Iconify icon="ic:sharp-remove-circle"/> : ) : null}
-                  */}
                 </div>
                
-
               </div>
-                      
-              {/* <TableContainer component={Paper} sx={{width:"50vw"}} style={styles.card1} >
-          <Table aria-label="customized table">
-           
-            <TableBody onClick={() => {
-                        setClickData({ name: itm, title: "Enrolled Green Motivator Name",id:itm?.id})
-                        handleOpenFilter()
-                    }}  direction="row" alignItems="center" justifyContent="space-between" >
-             
-                <TableRow>
-                  <TableCell component="th" scope="row">
-                  <Typography >Enrolled Gelathi Name </Typography>
-                  </TableCell>
-                  <TableCell>: {`${itm?.gelathiname}`}     </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">
-                  Enrolled Village Name : 
-                  </TableCell>
-                  <TableCell> {`${itm?.villagename}`}     </TableCell>
-                </TableRow>
-              
-            </TableBody>
-          </Table>
-        </TableContainer>         */}
                     </Card>)
             }):
             <>
             <h4 style={{textAlign:'center'}}>No Green  Motivators Found</h4>
             </>}
-
-
         </Container>
-
     );
 }
 const styles = {

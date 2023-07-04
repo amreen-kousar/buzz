@@ -8,7 +8,6 @@ import Filtersmain from './projectfilters/filtersmain';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 export default function gelathiProgram(props) {
     const {state} = useLocation();
-  console.log(props,"<----props",state)
     const [clcikData, setClickData] = useState()
     const [programe,setPrograme] = useState('')
     const [filterData, setFilterData] = useState({})
@@ -16,17 +15,6 @@ export default function gelathiProgram(props) {
     const [count,setCount]= useState('');
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
-    // const [openFilter, setOpenFilter] = useState(false);
-    // const handleOpenFilter = () => {
-    //   setOpenFilter(true);
-    // };
-    // const handleCloseFilter = () => {
-    //   setOpenFilter(false);
-    // };
-
-  // useEffect(() => {
-  //     user()
-  //   })
     const user = async (d, filter_type) => {
        if (filter_type) {
          setSelected(filter_type)
@@ -35,14 +23,12 @@ export default function gelathiProgram(props) {
          filter_type.id = ids[filter_type.type]
        }
        gelathiPrograme(d,filter_type);
-       console.log(filter_type?.id,"filterid")
     }
     useEffect(() => {
         gelathiPrograme();
         }, []
     )
     const gelathiPrograme = async(id,i,g) =>{
-      console.log(id,"gelrhaiiii",i)
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
@@ -68,13 +54,11 @@ export default function gelathiProgram(props) {
           .then(function (response) {
             setPrograme(response.data)
             setCount(response.data?.list.length)
-            console.log(response.data,'<--------------setProgramesetProgramesetPrograme');
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
     }
-
     
     const id = sessionStorage?.getItem("proId")
     useEffect(() => {
@@ -83,7 +67,6 @@ export default function gelathiProgram(props) {
       }, [])
       
     const projData = async => {
-        console.log(location, "location props")
         var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -105,10 +88,9 @@ export default function gelathiProgram(props) {
         axios(config)
           .then(function (response) {
             setData1(response.data.list)
-            console.log(response.data, '<--------------setData1setData1');
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
     
       }
@@ -117,7 +99,6 @@ export default function gelathiProgram(props) {
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
-
     const handleCloseFilter = () => {
         setOpenFilter(false);
         
@@ -125,7 +106,6 @@ export default function gelathiProgram(props) {
     const handleopen=()=>{
       setFilter(true)
     };
-
     const handleclose=()=>{
       setFilter(false)
     }
@@ -135,7 +115,6 @@ export default function gelathiProgram(props) {
       setSearch(search)
       gelathiPrograme()   
   }
-
     const searchFunction = (e) => {
        
         search = e
@@ -145,28 +124,18 @@ export default function gelathiProgram(props) {
     }
     const onDateSubmit = (e) => {
       setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
-  
       gelathiPrograme(e?.startDate, e?.endDate, "date")
       setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
       handleclose()
-      console.log(e, "<----scasds")
     }
     const getData = (itm, i) => {
-    console.log(itm,"getdata")
     setSelected({itm,type:'Gelathi Facilitators'})
     const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     gelathiPrograme(itm, i)
-    console.log(data, i, itm, "<----sdfssreerfer")
     setFilterData(data)
     handleclose()
-    console.log("sdfgsdfdfssd", itm, i)
     }
-  
-   
-  console.log(selected,"value")
-  
     return (
-
         <Container>
                <Searchbar getSearch={(e) => searchFunction(e)} />
           
@@ -197,8 +166,6 @@ export default function gelathiProgram(props) {
                     || selected?.type=='VPS'|| selected?.type=='VPM1'|| selected?.type=='VPM2'|| selected?.type=='VPM3'|| selected?.type=='VPM4'|| selected?.type=='VPM5')
                      && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
-            
-            
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <Filtersmain
                     type="GelathiProgram"
@@ -215,7 +182,6 @@ export default function gelathiProgram(props) {
                <Card>
                 <CardContent style={{fontWeight:700}}>Project Name : {data1?.project_name}</CardContent> </Card><br/>
                <Typography style={{fontWeight:500,marginLeft:2}}> All Gelathi Sessions  ({count})</Typography> 
-         {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             {clcikData && <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <GelathiProgrameDrawer
                     clcikData={clcikData}
@@ -226,29 +192,17 @@ export default function gelathiProgram(props) {
                     gelathiFacikitatorLead={data1}
                 />
             </Stack>}
-            {/* </Stack> */}
-
             { programe == "" ? 
-
 <div style={{marginTop:"20%" , marginLeft:"40%"}}>
   <CircularProgress />
   </div>
-:
-            
-            programe?.list?.length!==0?programe?.list?.map((itm) => {
-                        // console.log(itm, "<---programeprogrameprograme")
+:   programe?.list?.length!==0?programe?.list?.map((itm) => {
                         return (
                             <Card style={styles.card1} onClick={() => {
                                 setClickData({ name: itm?.gf_session_id, title: "Gelathi program Name" })
-                               
-                                console.log(clcikData ,"clicked data called")
                                 handleOpenFilter()
                             }}>  
                      
-                     
-                     {/* <div style={{ float: 'left'}}>
-                <Iconify icon="mdi:flower-lotus" width={20} height={20} />
-              </div>  */}
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{marginLeft:15}}>
                          <Typography variant="subtitle1" gutterBottom>
                                 {` ${itm?.gf_session_name}`}
@@ -259,21 +213,14 @@ export default function gelathiProgram(props) {
                         <Grid style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle2" gutterBottom >
                                Date : {itm?.plan_date}</Typography>
-
-                          
-                            {/* <Typography variant="subtitle2" gutterBottom style={{ color: '#707EA3' }}>
-                            Day 2 : {itm?.status}</Typography> */}
-                            
                         </Grid>
                     </Card>)
              }):
              <>
              <h4 style={{textAlign:'center'}}>No  Gelathi  Program Found</h4>
              </>}
-
           
         </Container>
-
     );
 }
 const styles = {

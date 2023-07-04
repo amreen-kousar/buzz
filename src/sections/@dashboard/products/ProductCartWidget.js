@@ -31,11 +31,6 @@ const RootStyle = styled('div')(({ theme }) => ({
 
 export default function CartWidget() {
   return (
-    // <RootStyle>
-    //   <Badge showZero badgeContent={0} color="error" max={99}>
-    //     <Iconify icon="eva:shopping-cart-fill" width={24} height={24} />
-    //   </Badge>
-    // </RootStyle>
     <></>
   );
 }

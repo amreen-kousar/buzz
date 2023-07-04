@@ -1,11 +1,7 @@
 import PropTypes from 'prop-types';
-// material
 import { styled } from '@mui/material/styles';
 import { Toolbar, Tooltip, IconButton, Typography, OutlinedInput, InputAdornment } from '@mui/material';
-// component
 import Iconify from '../../../components/Iconify';
-
-// ----------------------------------------------------------------------
 
 const RootStyle = styled(Toolbar)(({ theme }) => ({
   height: 96,

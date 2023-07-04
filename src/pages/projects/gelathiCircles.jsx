@@ -18,7 +18,6 @@ export default function gelathiCirclesList() {
   var [search, setSearch] = useState('');
   var [selected, setSelected] = useState(null);
   const [count, setCount] = useState('');
-
   const [openFilter, setOpenFilter] = useState(false);
   const [filter, setFilter] = useState(false);
   const [reloadFromForm, setReloadFromForm] = useState(false);
@@ -67,7 +66,7 @@ export default function gelathiCirclesList() {
         setData1(response.data.list);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
   useEffect(() => {
@@ -108,7 +107,7 @@ export default function gelathiCirclesList() {
         setReload(!reload);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
   const handleDelete = () => {

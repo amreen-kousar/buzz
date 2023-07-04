@@ -23,7 +23,6 @@ export default function ProjectWiseGelathiCircle() {
   const [reloadFromForm, setReloadFromForm] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
   const [filter, setFilter] = useState(false);
-  console.log("state,head", state.head)
   const reloadFunction = () => {
     setReloadFromForm(!reloadFromForm);
   };
@@ -34,8 +33,6 @@ export default function ProjectWiseGelathiCircle() {
       projData();
       circle();
     }
-
-
     return () => {
       isApiSubscribed = false;
     };
@@ -72,7 +69,7 @@ export default function ProjectWiseGelathiCircle() {
         setData1(response.data.list);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
   useEffect(() => {
@@ -116,7 +113,6 @@ export default function ProjectWiseGelathiCircle() {
         console.log(error);
       });
   };
-
  
   const handleDelete = () => {
     setSelected(null);
@@ -131,14 +127,12 @@ export default function ProjectWiseGelathiCircle() {
     setFilterData(data);
     handleclose();
   };
-
   const deleteDelete = (id) => {
     setOpenFilter(false);
     alert('Its Under PRoduction ');
     setOpenFilter(false);
   };
   const role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-
  
   return (
     <Container>
@@ -218,17 +212,7 @@ export default function ProjectWiseGelathiCircle() {
       </Card>
       <br />
       <Typography style={{ fontWeight: 500, marginLeft: 2 }}>Circles : ({count})</Typography>
-     
-      {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-        <GelathiCircleDrawer
-          clcikData={clcikData}
-          isOpenFilter={openFilter}
-          onOpenFilter={handleOpenFilter}
-          onCloseFilter={handleCloseFilter}
-          data1={data1}
-          reloadmethod={reloadFunction}
-        />
-      </Stack> */}
+   
       <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
        <Circledrawer
           clcikData={clcikData}
@@ -240,11 +224,9 @@ export default function ProjectWiseGelathiCircle() {
          
         />
       </Stack>
-
 {(state?.title)?
      <>
       {gelathiCircles == ""?
-
 <div style={{marginTop:"20%" , marginLeft:"40%"}}>
 <CircularProgress />
 </div>
@@ -278,14 +260,6 @@ export default function ProjectWiseGelathiCircle() {
                   >
                     <Iconify icon="material-symbols:auto-schedule" color="#ff7424" width="40"  ></Iconify>
                   </IconButton>
-                  {/* <IconButton
-                    style={{ position: 'absolute', right: 60, color: 'black' }}
-                    onClick={(e) => {
-                      deleteDelete(e);
-                    }}
-                  >
-                    <Iconify icon="ic:baseline-remove-circle-outline" color="#ff7424"></Iconify>
-                  </IconButton> */}
                 </Grid>
               </Grid>
               <Grid
@@ -312,59 +286,8 @@ export default function ProjectWiseGelathiCircle() {
           <h4 style={{ textAlign: 'center' }}>No Gelathi Circle Found </h4>
         </>
       )}
-     
-     
      </>
-     
      :
-     //NEED TO CHECK WITH TH CHANGES DONE BY PRIYA ONCE 
-//  <>  incomming change 
-//       {gelathiCircles?.list?.length !== 0 ? (
-//         gelathiCircles?.list?.map((itm) => {
-//           return (
-//             <Card
-//               style={styles.card1}
-//               onClick={() => {
-//                 setClickData({ name: itm.circle_name, title: ' Gelathi Cirlce Name', id: itm?.circle_id });
-//                 handleOpenFilter();
-//               }}
-//             >
-//               <Grid
-//                 pt={1}
-//                 pb={1}
-//                 container
-//                 xs={12}
-//                 md={4}
-//                 direction="row"
-//                 alignItems="center"
-//                 justifyContent="space-between"
-//                 style={{ marginLeft: 15 }}
-//               >
-//                 <Typography variant="subtitle1" gutterBottom>
-//                   {`  ${itm?.circle_name}`}{' '}
-//                   <IconButton style={{ float: 'right', position: 'absolute', right: 20, color: 'black' }}>
-//                     <Iconify icon="mdi:clock-time-four-outline"></Iconify>
-//                   </IconButton>
-//                 </Typography>
-//               </Grid>
-//               <Grid style={{ marginLeft: 15 }}>
-//                 <Typography variant="subtitle2" gutterBottom>
-//                   {`   ${itm?.circle_date}`}
-//                 </Typography>
-//               </Grid>
-//             </Card>
-//           );
-//         })
-//       ) : (
-//         <>
-//           <h4 style={{ textAlign: 'center' }}>No Gelathi Circle Found</h4>
-//         </>
-//       )}
-//       </> 
-      
-
-      // my changes
-
       <>
       {gelathiCircles?.list?.length !== 0 ? (
         gelathiCircles?.list?.map((itm) => {
@@ -429,12 +352,8 @@ export default function ProjectWiseGelathiCircle() {
           <h4 style={{ textAlign: 'center' }}>No Gelathi Circle Found </h4>
         </>
       )}
-     
-     
      </>
       }
-
-
     </Container>
   );
 }
@@ -446,5 +365,3 @@ const styles = {
     padding: '1rem',
   },
 };
-
-

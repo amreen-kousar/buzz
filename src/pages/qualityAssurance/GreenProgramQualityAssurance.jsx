@@ -11,17 +11,13 @@ import Tab from '@mui/material/Tab';
 import Page from '../../components/Page';
 import TravelDialog from '../Components/DashboardFilters/TravelDialog'
 import moment from 'moment';
-// import Edittraveldialog from './Editta';
 import Iconify from 'src/components/Iconify';
-
 import DialogForm from './components/DialogForm';
 import { Link } from 'react-router-dom';
 import TeamQuality from './TeamQuality';
 import OwnQuality from './OwnQuality';
-// components
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -38,21 +34,17 @@ function TabPanel(props) {
     </div>
   );
 }
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
-
 const GreenProgramQualityAssurance = () => {
     const [value, setValue] = React.useState(0);
     const data = localStorage?.getItem('userId')
     var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
     const image = ["tykml", "exrdcftvbgyhnuj"]
     const [drawerEvent, SetDrawerEvent] = useState(false);
-    //const [image, setImage] = React.useState(['data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==']);
     const [viewImage, setViewImage] = React.useState(false);
     const [listdata, setListData] = React.useState()
     const [openMessage, setOpenMessage] = React.useState(false);
@@ -63,9 +55,7 @@ const GreenProgramQualityAssurance = () => {
     const [teamMembersData, setTeamMembersData] = useState([])
     const [mainValue, setMainValue] = useState(0)
     const [batch,setBatch] = useState('')
-
     const [shown,setShown] = React.useState(false);
-
     const userOwnPermissions=['9','5','12','4','13','6','3']
     const userTeamPermissions=['2','1','12','4','13','3','11']
   
@@ -84,9 +74,7 @@ const GreenProgramQualityAssurance = () => {
       
   
     const handleOpenFilter = (itm) => {
-      // itm.klmtr = +klmtr;
       setEditData(itm)
-      console.log(editData)
       setOpenFilter(true);
     };
   
@@ -172,26 +160,6 @@ const GreenProgramQualityAssurance = () => {
             </Tabs>
           </Box>
           <br />
-          {/* <TextField id="outlined-basic" type="date" defaultValue={dateValue}
-            fullWidth
-            onChange={(e) => { getDateValue(e?.target?.value) }} label="Select Date" variant="outlined" InputLabelProps={{
-              shrink: true,
-            }} /> */}
-             {/* <Stack style={{ marginTop: 20 }}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      
-                      inputFormat="YYYY-MM-DD"
-                      views={["year", "month", "day"]}
-                      // label="Date"
-                      value={getDateValue?.date}
-                      onChange={(newValue) => {
-                        setSendData({ ...sendData, date: newValue })
-                      }}
-                      renderInput={(params) => <TextField {...params} fullWidth />}
-                    />
-                  </LocalizationProvider>
-                </Stack> */}
         {
           userTeamPermissions.includes(data) &&   <TabPanel id="return-date-tab" value={mainValue} index={1}>
           <Stack id="return-date-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -213,19 +181,12 @@ const GreenProgramQualityAssurance = () => {
   
     { (mainValue==0) &&     <Stack id="travel-dialog-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <DialogForm id="travel-dialog"  batch={batch} shown={shown} setShown={(e)=>{setShown(e)}}
-            // viewMessage={(text) => {
-            //   setMessage(text)
-            //   setOpenMessage(true)
-            //   // list()
-            // }} 
+            
             />
           </Stack>}
   
-          
-          {/* </Stack> */}
   
         </Container ></Page >
     );
   }
-
 export default GreenProgramQualityAssurance

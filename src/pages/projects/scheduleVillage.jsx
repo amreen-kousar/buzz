@@ -6,10 +6,8 @@ import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Villagevisitdrawer from './Components/schedulevillagevisitdrawer';
-
 export default function scheduleVillage() {
     const {state} = useLocation()
-    console.log("stateeeeeee",state)
     const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
@@ -26,17 +24,13 @@ export default function scheduleVillage() {
         scheduleVillage();
     }, []
     )
-
     const [openFilter, setOpenFilter] = useState(false);
-
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
-
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
-
     const scheduleVillage = async =>{
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -59,13 +53,11 @@ export default function scheduleVillage() {
           .then(function (response) {
             setVillageData(response.data)
             setCount(response?.data?.list.length)
-            console.log(response.data,'<---------------setVillageDatasetVillageData');
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
     }
-
     const id = sessionStorage?.getItem("proId")
     useEffect(() => {
       projData();
@@ -73,7 +65,6 @@ export default function scheduleVillage() {
     }, [])
     
     const projData = async => {
-      console.log(location, "location props")
       var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
       var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
       var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -95,23 +86,19 @@ export default function scheduleVillage() {
       axios(config)
         .then(function (response) {
           setData1(response.data.list)
-          console.log(response.data, '<--------------setData1setData1');
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
   
     }
-
     const handleDelete = () => {
       setSelected(null)
       search = ''
       setSearch(search)
      scheduleVillage();
   }
-
     return (
-
         <Container> <Searchbar getSearch={(e) => searchFunction(e)} />
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
@@ -121,9 +108,6 @@ export default function scheduleVillage() {
                         </IconButton></Link>
                     Schedule Village Visit 
                 </Typography>
-                {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
             </Stack> 
              {
                     selected && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
@@ -141,7 +125,6 @@ export default function scheduleVillage() {
                 />
             </Stack>
             {/* </Stack> */}
-
             {
             
             villageData == ""?
@@ -150,18 +133,15 @@ export default function scheduleVillage() {
             </div>
             :
             villageData?.list?.length!==0?villageData?.list?.map((itm) => {
-
                 return (
                     <Card style={styles.card1} onClick={() => {
                         setClickData({ name: itm.training_batch_name, title: "Schedule a Village visit",id:itm?.training_batch_id })
                         handleOpenFilter()
                     }}>
-
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15}}>
                           <Typography variant="subtitle1" gutterBottom>
                                 {` ${itm?.training_batch_name}`}
                             </Typography>
-                            {/* {console.log(itm?.list?.gelathiname,'<-------gelathinamegelathiname')} */}
                         </Grid>
                       
                     </Card>)
@@ -169,9 +149,7 @@ export default function scheduleVillage() {
               <>
               <h1>No Schedule Village Visit Found</h1>
               </>}
-
         </Container>
-
     );
 }
 const styles = {

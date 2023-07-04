@@ -4,8 +4,6 @@ import Scrollbar from '../../../components/Scrollbar';
 import LocationQuality from './Location';
 import DateRangeQuality from './Daterange';
 import { useState } from 'react';
-
-// material
 import {
   Grid,
   Box,
@@ -24,10 +22,6 @@ import {
   CardContent,
 } from '@mui/material';
 import AdminQuality from './Admin';
-// components
-
-// ----------------------------------------------------------------------
-
 export const SORT_BY_OPTIONS = [
   { value: 'featured', label: 'Featured' },
   { value: 'newest', label: 'Newest' },
@@ -52,26 +46,16 @@ export const FILTER_COLOR_OPTIONS = [
   '#94D82D',
   '#FFC107',
 ];
-
-// ----------------------------------------------------------------------
-
 QualityAssuranceFilter.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
-
 export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, resetBus, onDateSubmit }) {
-
   const [selectDATA, setSelectData] = useState()
   const data = localStorage?.getItem('userId')
-
   return (
     <>
-      {/* <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
-      </Button> */}
-
       <Drawer
         anchor="right"
         open={isOpenFilter}
@@ -103,15 +87,12 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
             <Iconify icon="eva:close-fill" width={20} height={20} />
           </IconButton>
         </Stack>
-
         <Divider />
         <Scrollbar>
           {/* <Stack spacing={3} sx={{ p: 3 }}> */}
           <div>
             <Card style={{ backgroundColor: '#f6f8fb' }}>
               <CardContent>
-
-
                 {(data == 1) ? <Button onClick={() => {
                   setSelectData(2);
                 }}
@@ -127,10 +108,8 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                     color: 'black',
                   }}
                 >
-
                   Admins
                 </Button> : null}
-
                 {(data == 1 || data == 2) ? <Button onClick={() => {
                   setSelectData(3);
                 }}
@@ -149,7 +128,6 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                 >
                   Program Managers
                 </Button> : null}
-
                 {(data == 1 || data == 2 || data == 3) ? <Button onClick={() => {
                   setSelectData(12);
                 }}
@@ -168,7 +146,6 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                 >
                   Senior Operation Managers
                 </Button> : null}
-
                 {(data == 1 || data == 2 || data == 3 || data == 12) ? <Button onClick={() => {
                   setSelectData(4);
                 }}
@@ -187,7 +164,6 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                 >
                   Operation Managers
                 </Button> : null}
-
                 {(data == 1 || data == 2 || data == 3 || data == 12 || data == 4) ? <Button onClick={() => {
                   setSelectData(13);
                 }}
@@ -206,9 +182,6 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                 >
                   Gelathi Facilitator Leads
                 </Button> : null}
-
-
-
                 <Button
                   onClick={() => {
                     setSelectData(7);
@@ -249,19 +222,15 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                 </Button>
               </CardContent>
             </Card>
-
-
             {selectDATA && selectDATA == 7 && <Grid style={{ marginTop: 30 }}>
               <LocationQuality selectDATA={selectDATA} onSumbit={(e, i) => { onSumbit(e, i) }} />
             </Grid>}
             {selectDATA && selectDATA == 9 && <Grid style={{ marginTop: 30 }}>
               <DateRangeQuality selectDATA={selectDATA} onDateSubmit={(e) => { onDateSubmit(e) }} />
             </Grid>}
-
             {selectDATA && selectDATA == 2 && <Grid style={{ marginTop: 30 }}>
               <AdminQuality selectDATA={selectDATA} getData={getData} />
             </Grid>}
-
             {selectDATA && selectDATA == 3 && <Grid style={{ marginTop: 30 }}>
               <AdminQuality selectDATA={selectDATA} getData={getData} />
             </Grid>}

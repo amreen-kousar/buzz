@@ -38,17 +38,14 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-// components
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { SecurityUpdate } from '@mui/icons-material';
 import moment from 'moment';
-
 import ProjectMultiDrawer from '../pages/Components/ProjectMultiDrawer';
 import PoaGF from './Components/PlanofactionFilters/PoaGF';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -65,20 +62,17 @@ function TabPanel(props) {
     </div>
   );
 }
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-
 export default function PlanofAction() {
   const [value, setValue] = React.useState(0);
   const [openFilter, setOpenFilter] = useState(false);
@@ -87,7 +81,6 @@ export default function PlanofAction() {
   const [poa, SetPoa] = useState([]);
   const [openMessage, setOpenMessage] = useState(false);
   const [day1, setDay1] = useState(false);
-
   const [select, setSelect] = useState();
   const [season, setSeason] = useState(0);
   const [date, setDate] = useState(new Date());
@@ -97,7 +90,6 @@ export default function PlanofAction() {
   const [batchState, setBatchState] = useState();
   const [clcikData, setClickData] = useState();
   const [reload, setReload] = useState(false);
-
   const [poaData, setPoaData] = [
     {
       emp_id: '',
@@ -109,17 +101,9 @@ export default function PlanofAction() {
   var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
   var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
   var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-  console.log(idvalue, 'iddddddd');
   const role_name = JSON.parse(localStorage?.getItem('userDetails'))?.role_name;
-  const handleOpenDay1 = () => {
-    setDay1(true);
-  };
-  const handleCloseDay1 = () => {
-    setSelect('');
-    setDay1(false);
-  };
+
   const handleChange = (event, newValue) => {
-    console.log('gsfdhfgdhgfhgf', newValue);
     setSeason(newValue);
     setValue(newValue);
   };
@@ -143,20 +127,16 @@ export default function PlanofAction() {
     setSelect('');
     SetGFDrawer(false);
   };
-
   useEffect(() => {
     todaypoa();
   }, [season, date, userId, reload,!gfDrawer]);
-
   const todaypoa = (async) => {
-    console.log(date, '<----ergregerger');
     var data = JSON.stringify({
       emp_id: userId ? userId : userDetails?.id,
       team: '',
       date: moment(date?.$d)?.format('YYYY-MM-DD'),
       for: season,
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getPoa.php',
@@ -165,30 +145,19 @@ export default function PlanofAction() {
       },
       data: data,
     };
-    console.log(data, 'roleiddssssssssss');
-
-    // console.log(userDetails?.id,"useidddddd")
     axios(config)
       .then(function (response) {
-        console.log(response.data, 'response.dataaa');
-        // let arr = []
-        // response?.data?.data?.map((itm, index) => {
-        //   arr.push(...itm)
-        // })
         SetPoa(response?.data?.data);
-        console.log(poa, '<-----------poaDatalist');
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
   const data = localStorage?.getItem('userId');
-  console.log(data, 'dataaaaaaaaaaaaaaaaaaaa');
   const user = localStorage?.getItem('userDetails');
-  console.log(user, 'userrrrrrrrrrrrrrrr');
   const { pathname } = useLocation();
   const AccountStyle = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -200,12 +169,10 @@ export default function PlanofAction() {
   const setDefaut = () => {
     setUserId(651);
   };
-
   const handleDelete = (itm) => {
     var data = JSON.stringify({
       poa_id: itm?.id,
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/updateEventCancel.php',
@@ -214,30 +181,24 @@ export default function PlanofAction() {
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
-        console.log(response, '<-----------------planof action deleted');
         todaypoa();
         setMessage('Poa deleted successfully');
         setOpenMessage(true);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
-
   const changeState = () => {
     setReload(!reload);
-    console.log('changeState is called ');
   };
-
   const handleDeleteSelected = () => {
     setName('');
     setUserId();
     todaypoa();
   };
-
   return (
     <div>
       {openMessage && (
@@ -254,15 +215,12 @@ export default function PlanofAction() {
         </Snackbar>
         
       )}
-
       <br />
       <Typography id="plan-of-actions" variant="h4" style={{ margin: 2 }}>
         Plan Of Actions 
         {role == 1 || role == 3 || role == 4 || role == 12 || role == 13 || role == 11 ? (
           <PoaTeam setUserId={(e) => setUserId(e)} setName={(e) => setName(e)}  />
         ) : null}
-        {console.log(userId, 'useridddddddd')}
-        {console.log(name, 'nameeeeeeee')}
         <br />
         {name !== '' && (
           <Stack id="delete-selected" direction="row" spacing={1}>
@@ -279,22 +237,9 @@ export default function PlanofAction() {
     {(userId)?<PoaCreate changeState={changeState} userId={userId}/>:<PoaCreate changeState={changeState}/>}
       <br />
       <br />
-
-      {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-        <POA
-          // onDateSubmit={onDateSubmit}
-          // onSumbit={onSumbit}
-          // getData={getData}
-          //  clcikData={clcikData}
-          isOpenFilter={openFilter}
-          onOpenFilter={handleOpenFilter}
-          onCloseFilter={handleCloseFilter}
-        />
-      </Stack> */}
-
+      
       {drawerEvent && (
         <Stack id="poa-event-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          {console.log(select, 'selectedvalue')}
           <PoaEvent id="poa-event"
           changeState={changeState}
             select={select}
@@ -307,7 +252,6 @@ export default function PlanofAction() {
           />{' '}
         </Stack>
       )}
-      {console.log(select?.user_id, 'uservalueeeeeeeee')}
       {gfDrawer && (
         <Stack id="poagf-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <PoaGF
@@ -329,12 +273,8 @@ export default function PlanofAction() {
             defaultValue={date}
             value={date}
             onChange={(newValue) => {
-              console.log(newValue, '<----newValuenewValue');
               setDate(newValue);
-              // value=newValue
             }}
-            //   setSendData({ ...sendData, date: newValue })
-            // }}
             renderInput={(params) => <TextField {...params} color="common" />}
           />
         </LocalizationProvider>
@@ -350,7 +290,6 @@ export default function PlanofAction() {
           onCloseFilter={handleCloseFilter}
         />
       </Stack>
-
       <Stack id="tabs-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
         <Box id="tabs-box" sx={{ width: '100%' }}>
           <Box id="tabs-example" sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -369,7 +308,6 @@ export default function PlanofAction() {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   },
-
                   color: 'black',
                 }}
                 style={
@@ -390,7 +328,6 @@ export default function PlanofAction() {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   },
-
                   color: 'black',
                 }}
                 style={
@@ -411,7 +348,6 @@ export default function PlanofAction() {
                     bgcolor: '#ffd796', // theme.palette.primary.main
                     color: '#ed6c02',
                   },
-
                   color: 'black',
                 }}
                 style={
@@ -427,7 +363,6 @@ export default function PlanofAction() {
               />
             </Tabs>
           </Box>
-
           <TabPanel id="tab-panel-1" value={value} index={0}>
             {poa?.length !== 0 ? (
               poa?.map((item) => {
@@ -451,7 +386,7 @@ export default function PlanofAction() {
                                       component="th"
                                       scope="row"
                                       onClick={() => {
-                                        console.log(itm, '<---sadasdasdsa');
+                                        
                                         setClickData(itm);
                                         if (itm?.type == '3') {
                                           handleOpenEvent();
@@ -461,40 +396,14 @@ export default function PlanofAction() {
                                         } else if (itm?.type == '2') {
                                           setClickData(itm);
                                           handleOpenGf();
-                                          console.log(itm, '<---handleOpenGf');
                                         }
                                       }}
                                     >
-                                      {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
-                                      {/* {itm?.type == '2' ? (
-                                        <>
-                                          {itm?.time}
-                                          <br />
-                                          Village :{itm?.name}
-                                          <br />
-                                          Project : {itm?.project_name}
-                                          <br />
-                                          District : {itm?.location_name}
-                                          <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
-                                        </>
-                                      ) : (
-                                        <>
-                                          {itm?.time}
-                                          <br></br> Title: {itm?.name}
-                                          <br></br>
-                                          {itm?.roleName}:{itm?.emp_name}
-                                        </>
-                                      )} */}
                                       {(itm?.type == '2') ?
                                         <>
                                        
-                                        
-                                        
                                         {itm?.time}
-                                         
                                          <h4>Village :{itm?.name}</h4> 
-                                         
                                           Project : {itm?.project_name}
                                           <br />
                                           District : {itm?.location_name}
@@ -505,11 +414,7 @@ export default function PlanofAction() {
                                         </>
                                        :(itm?.type=='1')?
                                         <>
-                                         
-                                          
                                           {itm?.time}
-                                          
-                                         
                                          <h4>Village :{itm?.name}</h4> 
                                          
                                           Project : {itm?.project_name}
@@ -519,20 +424,11 @@ export default function PlanofAction() {
                                           Trainer :{itm?.emp_name}
                                          <br/>
                                         </>
-                                      :
-                                       
-                                      
-                                        <>
-                                        
-                                          
+                                      : <>
                                           {itm?.time}
-                                         
                                          <h4> Title: {itm?.name}</h4> 
-                                         
                                           {itm?.roleName}:{itm?.emp_name}
                                           <br />
-                                        
-                                          
                                         </>
                                       }
                                        {(itm?.type=='2' && itm?.status=='1' || itm?.type=='3' && itm?.status=='1') ? 
@@ -598,7 +494,6 @@ export default function PlanofAction() {
               </Grid>
             )}
           </TabPanel>
-
           <TabPanel id="tab-panel-plan-of-action" value={value} index={1}>
             {poa?.length !== 0 ? (
               poa?.map((item) => {
@@ -622,7 +517,6 @@ export default function PlanofAction() {
                                       component="th"
                                       scope="row"
                                       onClick={() => {
-                                        console.log(itm, '<---sadasdasdsa');
                                         setClickData(itm);
                                         if (itm?.type == '3') {
                                           handleOpenEvent();
@@ -632,36 +526,11 @@ export default function PlanofAction() {
                                         } else if (itm?.type == '2') {
                                           setClickData(itm);
                                           handleOpenGf();
-                                          console.log(itm, '<---handleOpenGf');
                                         }
                                       }}
                                     >
-                                      {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
-                                      {/* {itm?.type == '2' ? (
-                                        <>
-                                          {itm?.time}
-                                          <br />
-                                          Village :{itm?.name}
-                                          <br />
-                                          Project : {itm?.project_name}
-                                          <br />
-                                          District : {itm?.location_name}
-                                          <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
-                                        </>
-                                      ) : (
-                                        <>
-                                          {itm?.time}
-                                          <br></br> Title: {itm?.name}
-                                          <br></br>
-                                          {itm?.roleName}:{itm?.emp_name}
-                                        </>
-                                      )} */}
                                       {(itm?.type == '2') ?
                                         <>
-                                       
-                                        
-                                        
                                         {itm?.time}
                                          
                                          <h4>Village :{itm?.name}</h4> 
@@ -792,7 +661,6 @@ export default function PlanofAction() {
                                       component="th"
                                       scope="row"
                                       onClick={() => {
-                                        console.log(itm, '<---sadasdasdsa');
                                         setClickData(itm);
                                         if (itm?.type == '3') {
                                           handleOpenEvent();
@@ -802,37 +670,12 @@ export default function PlanofAction() {
                                         } else if (itm?.type == '2') {
                                           setClickData(itm);
                                           handleOpenGf();
-                                          console.log(itm, '<---handleOpenGf');
                                         }
                                       }}
                                     >
-                                      {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
-
-                                      {/* {itm?.type == '2' ? (
-                                        <>
-                                          {itm?.time}
-                                          <br />
-                                          Village :{itm?.name}
-                                          <br />
-                                          Project : {itm?.project_name}
-                                          <br />
-                                          District : {itm?.location_name}
-                                          <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
-                                        </>
-                                      ) : (
-                                        <>
-                                          {itm?.time}
-                                          <br></br> Title: {itm?.name}
-                                          <br></br>
-                                          {itm?.roleName}:{itm?.emp_name}
-                                        </>
-                                      )} */}
                                       {(itm?.type == '2') ?
                                         <>
                                        
-                                        
-                                        
                                         {itm?.time}
                                          
                                          <h4>Village :{itm?.name}</h4> 
@@ -847,11 +690,7 @@ export default function PlanofAction() {
                                         </>
                                        :(itm?.type=='1')?
                                         <>
-                                         
-                                          
                                           {itm?.time}
-                                          
-                                         
                                          <h4>Village :{itm?.name}</h4> 
                                          
                                           Project : {itm?.project_name}
@@ -862,32 +701,21 @@ export default function PlanofAction() {
                                          <br/>
                                         </>
                                       :
-                                       
-                                      
                                         <>
-                                        
-                                          
                                           {itm?.time}
                                          
                                          <h4> Title: {itm?.name}</h4> 
                                          
                                           {itm?.roleName}:{itm?.emp_name}
                                           <br />
-                                        
-                                          
-                                          
                                         </>
                                       }
-                                      {console.log(idvalue, 'hyyyyyyyyy')}
-
                                      {(itm?.type=='2' && itm?.status=='1' || itm?.type=='3' && itm?.status=='1') ? 
                                       <span style={{ color: 'green' }}>
                                          (Rescheduled)
-                                        
                                       </span>
                                     :(itm?.status=='2')
                                     ? <span style={{ color: 'red' }}>
-                                    
                                     (Canceled)
                                   </span>:null}
                                     </TableCell>

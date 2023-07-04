@@ -15,14 +15,9 @@ import Box from '@mui/material/Box';
 export default function Daterange(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
-  const [open, setOpen] = React.useState(false);
-  const [dateRange, setDateRange] = React.useState({});
-
   return (
     <Card style={{ marginTop: 20 }} sx={{ color: "#ed6c02" }} >
       <CardContent sx={{ color: "#ed6c02" }}>
-
         <Stack>
          <label>From</label>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -32,7 +27,6 @@ export default function Daterange(props) {
                 setStartDate(newstartvalue)
               }}
               renderInput={(params) => <TextField {...params} sx={{ color: "white" }} />}
-
             />
           </LocalizationProvider></Stack>
         <Stack>
@@ -46,7 +40,6 @@ export default function Daterange(props) {
               renderInput={(params) => <TextField {...params} sx={{ color: "white" }} variant="outlined" color="" />}
             />
           </LocalizationProvider></Stack>
-
         <Button onClick={() => props?.onDateSubmit({ startDate: moment(startDate?.$d)?.format('YYYY-MM-DD'), endDate: moment(endDate?.$d)?.format('YYYY-MM-DD') })}
           sx=
           {{
@@ -54,11 +47,9 @@ export default function Daterange(props) {
               color: "#ed6c02",
               bgcolor: "#ffd796"
             },
-
             color: "#ffffff", bgcolor: "#ed6c02"
           }}>Submit</Button>
       </CardContent>
     </Card>
   );
 }
-

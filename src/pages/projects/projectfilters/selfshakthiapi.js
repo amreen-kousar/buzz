@@ -1,12 +1,9 @@
 import axios from 'axios';
 
 export default async function shakthiapirequest(props) {
-    console.log('filtersrequest',props?.data1,props)
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var response = []
-    console.log(props,"propertiesssssss")
-    // console.log(idvalue,"hyyyyyyyyyyy",roleid);
     const data = JSON.stringify({
         "role_id": role,
         "pageNum": 1,
@@ -18,7 +15,6 @@ export default async function shakthiapirequest(props) {
         "trainer_id":"", 
         "start_date":"", 
     });
-    console.log("🚀 ~ file: selfshakthiapi.js:21 ~ shakthiapirequest ~ data:", data)
     const config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatch.php',
@@ -36,7 +32,6 @@ export default async function shakthiapirequest(props) {
         .catch((error) => {
             return null
         });
-      console.log(response?.data,"responseeeeeeee")
     return await response;
 }
 

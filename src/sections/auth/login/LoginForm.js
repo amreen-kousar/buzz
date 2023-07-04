@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// @mui
 import { Link, Card, CardActions, CardContent, Button, TextField, Grid, Checkbox, FormControlLabel } from '@mui/material';
-
-// ----------------------------------------------------------------------
 
 export default function LoginForm() {
 	const navigate = useNavigate();

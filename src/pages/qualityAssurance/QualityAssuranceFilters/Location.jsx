@@ -17,9 +17,7 @@ const bull = (
     •
   </Box>
 );
-
 export default function LocationQuality(props) {
-  console.log(props, "<---dadsad")
   const [country, setCountry] = useState([])
   const [states, setStates] = useState([])
   const [district, setDistrict] = useState([])
@@ -37,9 +35,7 @@ export default function LocationQuality(props) {
   const location = async => {
     var data = JSON.stringify({
       "country_id": "1",
-
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
@@ -48,23 +44,19 @@ export default function LocationQuality(props) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         setStates(response?.data?.list)
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const getState = async (id) => {
     var data = JSON.stringify({
       "country_id": "1",
       "state_id": id
-
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
@@ -73,14 +65,12 @@ export default function LocationQuality(props) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setDistrict(response.data.list)
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const getDistrict = async (district) => {
@@ -89,9 +79,7 @@ export default function LocationQuality(props) {
       "state_id": data?.state,
       "district_id": district?.id,
       
-
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
@@ -100,26 +88,18 @@ export default function LocationQuality(props) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setTaluk(response.data.list)
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
-  }
-  const getTalaq = async (id) => {
-    console.log(id, data, "<---somethimnfff")
   }
   return (
     <div>
       <Card>
-
-
         <CardContent>
-
           <Typography style={{ flexDirection: 'row', color: '#ff7424' }} variant="subtitle1" gutterBottom>
             State
             <Select fullWidth variant='standard' color="common"
@@ -176,14 +156,10 @@ export default function LocationQuality(props) {
               })
               }
             </Select></Typography>
-
         </CardContent>
-
-        {console.log(data,"location_dataaaaaaaaaaaaaa")}
         <Button style={{ float: "right", color: 'white', marginRight: '160px', marginBottom: '10px', backgroundColor: '#ff7424', }}
           onClick={() => props?.onSumbit(data)}>Submit</Button>
       </Card>
     </div>
   );
 }
-

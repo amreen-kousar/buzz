@@ -29,16 +29,14 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Page from '../../components/Page';
-
 import moment from 'moment';
-
 import Iconify from 'src/components/Iconify';
 import { oldbaseURL } from 'src/utils/api';
 import SingleQulityDashboard from './SingleQulityDashboard';
-// components
+
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -55,13 +53,11 @@ function TabPanel(props) {
     </div>
   );
 }
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
 export default function TeamQuality({reload}) {
   const [value, setValue] = React.useState(0);
   const data = localStorage?.getItem('userId');
@@ -83,29 +79,24 @@ export default function TeamQuality({reload}) {
   const [statusValue, setStatus] = useState([]);
   const [reject, setreject] = useState('');
   const [verifylist, setverifylist] = useState('');
-
   const [open, setOpen] = useState(false);
   var [singlePersonFormDetail, setSinglePersonFormDetail] = useState('');
-
   var [todayPoa, setTodayPoa] = useState([]);
-  // console.log(props?.componentname, 'componenttttttttt');
+
+
   useEffect(() => {
     getPOA();
   }, [reload]);
-
   useEffect(() => {
     getPOA();
   }, [])
   var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
   var role =JSON.parse(localStorage.getItem('userDetails'))?.role
-
-  console.log(userid , "useridinteam")
   const getPOA = () => {
     var data = JSON.stringify({
       emp_id: userid,
       team: '',
     });
-
     var config = {
       method: 'post',
       url: oldbaseURL + 'getMyTeamQAF.php',
@@ -114,30 +105,24 @@ export default function TeamQuality({reload}) {
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
-        console.log(response.data.data, 'in team ');
         todayPoa = response.data.data;
-        console.log(todayPoa, 'data in state ');
         setTodayPoa(todayPoa);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
   const handleClose = () => {
     setOpen(false);
   };
   const singleItemHandler = (itm) => {
-    console.log(itm, 'itm in method');
     singlePersonFormDetail = itm;
     setSinglePersonFormDetail(singlePersonFormDetail);
     setOpen(true);
   };
-
   return (
-
     todayPoa == "" ?
     <div style={{marginTop:"20%" , marginLeft:"40%"}}>
 <CircularProgress />
@@ -146,9 +131,6 @@ export default function TeamQuality({reload}) {
     <div>
       {todayPoa &&
         todayPoa?.map((itm) => {
-          {
-            console.log('iamworking');
-          }
           return (
             <>
               <Card
@@ -165,8 +147,6 @@ export default function TeamQuality({reload}) {
                   <Grid
                     id="grid-own-open-filter"
                     onClick={() => {
-                     
-                      // alert('work in Progress');
                     }}
                     item
                     xs={8}
@@ -175,52 +155,22 @@ export default function TeamQuality({reload}) {
                       {itm?.name}
                     </b>
                     <br></br>
-                    {/* <Typography id="typography-ta-amount" variant="body" gutterBottom > <b>{itm?.telephone}</b></Typography>
-                     */}
                   </Grid>
                   <Grid item xs={4}>
                     <Iconify
                       id="uiicons-cross"
-                      onClick={() => {
-                        // handleDeleteTA(itm);
-                        // alert("work in progress")
-                        singleItemHandler( itm )
+                      onClick={() => {   singleItemHandler( itm )
                       }}
                       style={{ float: 'right', marginTop: 5, marginRight: 10, fontSize: 30, color: 'gray' }}
                       icon="mdi:form-outline"
                     ></Iconify>
-                    {/* <Iconify
-                      id="icon-outline-access-time"
-                      style={{ float: 'right', marginTop: 5, marginRight: 30, fontSize: 30, color: '#303030' }}
-                      icon="ic:outline-access-time"
-                    ></Iconify> */}
-
-                    {console.log(itm, 'itm in manpo')}
+                  
                   </Grid>
                 </Grid>
               </Card>
             </>
           );
         })}
-
-      {/* <Select fullWidth variant='standard' color="common"
-          labelId="Today POA"
-          id="demo-simple-select"
-          label="Today POA"
-          
-      
-        >
-            <MenuItem value="" style={{ backgroundColor: 'gray' }}> <em>Select POA</em></MenuItem>
-              {
-       todayPoa && todayPoa?.map((itm,index)=>{
-            return (
-                
-                <MenuItem value={index}>{itm?.full_name} - {itm?.name}</MenuItem>
-            )
-        })
-      }
-         
-        </Select>  */}
       <SingleQulityDashboard openSingleQulityDashboard={open} handleClose={handleClose} item={singlePersonFormDetail} />
     </div>
   );

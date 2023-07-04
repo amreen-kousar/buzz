@@ -30,49 +30,40 @@ const [remove,setremove]=useState('');
         setSelected({ name: e, type: "Search" })
         enrolledVyaapar()
     }
-
-
       const handleDelete = () => {
         setSelected(null)
         search = ''
         setSearch(search)
         enrolledVyaapar();
     }
-
     useEffect(() => {
       let isApiSubscribed = true;
-
       if (isApiSubscribed){
         enrolledVyaapar();
       }
       return () => {
-        // cancel the subscription
+
+
         isApiSubscribed = false;
     };
 
-        // setenrolledVyaapar([{ stockname: "fist" }, { stockname: "second" }])
+
     }, [reload]
     )
-
    
     
 const changeState = () => {
   setReload(!reload);
-  console.log('changeState is called ');
 };
-
-
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
-
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
     const handleopen=()=>{
       setFilter(true)
     };
-
     const handleclose=()=>{
       setFilter(false)
     }
@@ -98,31 +89,29 @@ const changeState = () => {
           axios(config)
           .then(function (response) {
             setVyaapar(response?.data)
-            // changeState();
+
+
             setCount(response?.data?.list.length)
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
           
     }
 const id = sessionStorage?.getItem("proId")
   useEffect(() => {
     let isApiSubscribed = true;
-
     if (isApiSubscribed){
     projData();
     }
-
     return () => {
-      // cancel the subscription
+
+
       isApiSubscribed = false;
   };
-
   }, [])
   
   const projData = async => {
-    console.log(location, "location props")
     var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -132,7 +121,6 @@ const id = sessionStorage?.getItem("proId")
       "emp_id": idvalue,
       
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
@@ -141,26 +129,20 @@ const id = sessionStorage?.getItem("proId")
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setData1(response.data.list)
-        console.log(response.data, '<--------------setData1setData1');
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
-
   }
   const getData = (itm, i) => {
-    console.log(itm,"getdata")
     setSelected({itm,type:'Gelathi Facilitators'})
     const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     enrolledVyaapar(itm, i)
-    console.log(data, i, itm, "<----sdfssreerfer")
     setFilterData(data)
     handleclose()
-    console.log("sdfgsdfdfssd", itm, i)
     }
     const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
   const removevyapar=async(itm)=>{
@@ -181,17 +163,14 @@ const id = sessionStorage?.getItem("proId")
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
       setremove(response.data)
       enrolledVyaapar()
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
 }}
-
     return (
-
         <Container> <Searchbar getSearch={(e) => searchFunction(e)} />
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
@@ -201,10 +180,7 @@ const id = sessionStorage?.getItem("proId")
                         </IconButton></Link>
                    Enrolled Vyaapar   
                 </Typography>
-                {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
-          {console.log(clcikData,"clickeddataaaaaa")}
+            
            {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
           </Button>:null}
@@ -238,7 +214,6 @@ const id = sessionStorage?.getItem("proId")
                 />
             </Stack>
             {/* </Stack> */}
-
             {vyaapar == ""?
                           <div style={{marginTop:"20%" , marginLeft:"40%"}}>
                           <CircularProgress />
@@ -247,7 +222,6 @@ const id = sessionStorage?.getItem("proId")
             
             
             vyaapar?.list?.length!==0?vyaapar?.list?.map((itm) => {
-               console.log(itm,'<---------------vyaaparvyaaparvyaaparvyaapar')
                 return (
                     <Card style={styles.card1} >
                       <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removevyapar(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}
@@ -284,9 +258,7 @@ const id = sessionStorage?.getItem("proId")
             <>
             <h4 style={{textAlign:'center'}}>No  Enrolled  Vyapar Found</h4>
             </>}
-
         </Container>
-
     );
 }
 const styles = {

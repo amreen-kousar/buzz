@@ -11,10 +11,8 @@ import Paper from '@mui/material/Paper';
 import { Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import Page from 'src/components/Page';
-
 import axios from 'axios';
 import FiltersHome from './Filters/FiltersHome';
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -24,21 +22,17 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
 }));
-
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
 }));
-
 function createData(name, calories) {
   return { name, calories };
 }
-
 export default function BuzzStock() {
   const [demo, setDemo] = useState([]);
   const [openFilter, setOpenFilter] = useState(false);
@@ -48,38 +42,29 @@ export default function BuzzStock() {
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
-
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
-
   const handleopenbusfilter = () => {
     setopenbusfilter(true);
   };
-
   const handleclosebusfilter = () => {
     setopenbusfilter(false);
   };
-
-
   const onDateSubmit = (e) => {
     setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
     demoi(e?.startDate, e?.endDate, "date")
     handleclosebusfilter()
   }
-
-
   useEffect(() => {
     demoi()
   }, []
   )
-
   const handleDelete = () => {
     setSelected(null)
     demoi()
   }
   const demoi = async (id, i, g) => {
-    console.log(id, i, g, "buzz stock")
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     var role =JSON.parse(localStorage.getItem('userDetails'))?.role
     var data = JSON.stringify({
@@ -91,7 +76,6 @@ export default function BuzzStock() {
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
       funder_id: g ? "" : i === 2 ? id?.id : '',
-
     });
     const datas = {
       to_date: i,
@@ -104,8 +88,6 @@ export default function BuzzStock() {
       project_id: '',
       opsManager: '',
     };
-
-
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getTotalStocks.php',
@@ -115,41 +97,26 @@ export default function BuzzStock() {
       },
       data
     };
-    console.log("dataaaaaaaaaaaaa", data);
-
     axios(config)
       .then((response) => {
-        console.log("responseeeeeeeeeeee", response)
         setDemo(response.data?.data)
-        console.log(JSON.stringify(response.data, '<----333ssss'));
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }
-
   const onSumbit = (e, i) => {
-    console.log("🚀 ~ file: BuzzStock.jsx:133 ~ onSumbit ~ e:", e)
     setSelected({ type: 'Location', name: ` ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
-    console.log(e, i, "<---onSUbmittttt")
     handleclosebusfilter()
     demoi(e?.district_id, e?.talaq_id, "country")
-
   }
-
-
   const getData = (itm, i) => {
     setSelected(itm)
     setopenbusfilter(false);
-    console.log(itm, i, "<-----qwertyu")
-
-
     const data = i === 2 ? { "funder_id": itm?.id } : { "project_id": itm?.id }
     demoi(itm, i)
-    console.log(data, i, itm, "<----sdfssreerfer")
     setFilterData(data)
     handleCloseFilter()
-    console.log("sdfgsdfdfssd", itm, i)
   }
   return (
     
@@ -177,15 +144,7 @@ export default function BuzzStock() {
         </Stack>
       }
       <Stack direction="row" spacing={1} flexShrink={0} >
-        {/* <BusListFilter
-          getData={getData}
-          onSumbit={onSumbit}
-           
-            same={()=>{demoi(),handleclosebusfilter()}}
-            isOpenFilter={openbusfilter}
-            onOpenFilter={handleopenbusfilter}
-            onCloseFilter={handleclosebusfilter}
-          /> */}
+        
         <FiltersHome
           type="BuzzStock"
           getData={getData}
@@ -196,7 +155,6 @@ export default function BuzzStock() {
           onOpenFilter={handleopenbusfilter}
           onCloseFilter={handleclosebusfilter} />
       </Stack>
-      {console.log(selected?.type,"selectedddddddd")}
       <Grid
         sx={{
           p: 1,
@@ -215,7 +173,6 @@ export default function BuzzStock() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {console.log(demo, "<--demodedede")}
               {demo && demo.map((row) => (
                 <StyledTableRow >
                   <StyledTableCell component="th" scope="row">
@@ -235,7 +192,6 @@ export default function BuzzStock() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {console.log(demo, "<--demodedede")}
               {demo && demo.map((row) => (
                 <StyledTableRow >
                   <StyledTableCell component="th" scope="row">
@@ -247,7 +203,6 @@ export default function BuzzStock() {
             </TableBody>
           </Table>
         </TableContainer>}
-
       </Grid>
       </Container>
     </Page>

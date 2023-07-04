@@ -1,28 +1,20 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-// material
 import {
   Grid, Radio, Stack, Button, Drawer, Rating, Divider, Checkbox, FormGroup, IconButton, Typography, Chip, Card, CardContent, Box,
 } from '@mui/material';
-
-
-// components
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import GelathiFacilitators from './Gelathifacilitators';
 import Daterange from './Daterange';
-
 import { id } from 'date-fns/locale';
-
 Filtersmain.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
   };
-
 export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, user, getData, onSumbit, onDateSubmit, type, data1, gelathiPrograme }) {
-
     var [selectDATA, setSelectData] = useState()
   
     const filterPermissions = {
@@ -44,7 +36,6 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
       Vyapar: [{ id: 6, roles: ['1','3','12','4','6','13'] }],
   
       Gelathicircles: [{ id: 6, roles: ['1','3','12','4','6','13'] }],
-
       Gelathis:[{id:6,roles:['1','3','12','4','6']}]
     }
   
@@ -79,13 +70,11 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
       23:'Cancelled',
       45: 'All Gelathi Sessions',
      
-
     };
   
   
     const setData = (value) => {
       setSelectData(value)
-      console.log(value,"selectedvalue")
       if(value==46){
         shakti();
         onCloseFilter();
@@ -102,25 +91,17 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
        || filtersHeaders[value]=='GPM5' || filtersHeaders[value]=='VPS' || filtersHeaders[value]=='VPM1'|| filtersHeaders[value]=='VPM2' || filtersHeaders[value]=='VPM3'
        || filtersHeaders[value]=='VPM4' || filtersHeaders[value]=='VPM5') {
         user(1, { id: value, type: filtersHeaders[value] });
-       console.log(filtersHeaders[value],"value")
         onCloseFilter()
       }
-
      
-
     }
-    console.log(Object.keys(filterPermissions[type],"filtersssssss"))
     useEffect(() => {
-      console.log(Object.keys(filterPermissions[type],"filtersssssss"))
-  
-      
         if (type == 'Demography') {
           setSelectData(filterPermissions[type][0].id)
         }
         else {
           filterPermissions[type].forEach
             ((e, i, arr) => {
-              console.log(e, "filterer")
               if (e.roles.includes(data)) {
                 setSelectData(e?.id);
                 arr.length = i + 1; // Behaves like `break`
@@ -200,9 +181,7 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
                   <Daterange getData={getData} selectDATA={selectDATA} onDateSubmit={onDateSubmit} />
                 </Grid>
               }
-              {console.log(selectDATA,"selected")}
-          
-             
+            
             </div>
           }
             

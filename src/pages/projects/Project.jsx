@@ -64,11 +64,9 @@ function Project(props) {
     projectDuration: ' From: 01 - 04 - 2019 To: 31 - 03 - 2020',
     projectStatus: 'Completed',
   });
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -82,7 +80,6 @@ function Project(props) {
   const vyaparHandleClick= (event) => {
     setAnchorE4(event.currentTarget);
   };
-
   const villageVisitHandleClick= (event) => {
     setAnchorE5(event.currentTarget);
   };
@@ -101,8 +98,6 @@ function Project(props) {
   const villageVisitHandleClose = () => {
     setAnchorE5(null);
   };
-
-
  
   const handleCircleClick = (event) => {
     setCirclemeeting(event.currentTarget);
@@ -120,19 +115,14 @@ function Project(props) {
   useEffect(() => {
     projData();
   }, []);
-
   const viewUser = (itm) => {
     localStorage.setItem('profiledetails', JSON.stringify(itm));
-
     handleOpenFilter();
   };
-
   const viewPeople = (item) => {
     localStorage.setItem('profiledetails', JSON.stringify({ emp_id: item }));
-
     handleOpenFilter();
   };
-
   const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
   const projData = (async) => {
     var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
@@ -143,7 +133,6 @@ function Project(props) {
       role_id: role,
       emp_id: idvalue,
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
@@ -152,16 +141,14 @@ function Project(props) {
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
         setData1({ ...response.data.list });
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
-
   const styles = {
     buttonStyle: {
       boxShadow: 'none',
@@ -179,7 +166,6 @@ function Project(props) {
       <Iconify style={{ color: '#6d7c89' }} icon="material-symbols:add" />
     </IconButton>
   );
-
   return (
     <div>
       <Page title="Dashboard: Project">
@@ -212,7 +198,6 @@ function Project(props) {
                   </Button>
                 ) : null}
               </Typography>
-
               <Card>
                 <TableContainer>
                   <Table aria-label="customized table">
@@ -312,7 +297,6 @@ function Project(props) {
                   >
                     <span>{data1?.operations_manager_name}</span>
                   </Card>
-
                   <Card
                     sx={{ width: '95%' }}
                     style={{
@@ -327,7 +311,6 @@ function Project(props) {
                   >
                     <span> My Poa</span>
                   </Card>
-
                   <Card
                     sx={{ width: '95%' }}
                     style={{
@@ -344,7 +327,6 @@ function Project(props) {
                       Trainers({data1?.trainers_count}) <Trainerslist />
                     </Box>{' '}
                   </Card>
-
                   <Card
                     sx={{ width: '95%' }}
                     style={{
@@ -362,7 +344,6 @@ function Project(props) {
                       Gelathi Facilitators({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />{' '}
                     </Box>
                   </Card>
-
                   <Card
                     sx={{ width: '95%' }}
                     style={{
@@ -672,41 +653,7 @@ function Project(props) {
                   userDetails == 12 ? (
                     <br />
                   ) : null}
-                  {/* {userDetails == 1 ||
-                  userDetails == 6 ||
-                  userDetails == 3 ||
-                  userDetails == 4 ||
-                  userDetails == 13 ||
-                  userDetails == 6 ? (
-                    <Link
-                      to="/dashboard/projects/gelathiCirlces"
-                      state={{ id: data1?.project_id }}
-                      style={styles.linkStyle}
-                    >
-                      <Button
-                        variant="secondary"
-                        style={styles.buttonStyle}
-                        endIcon={
-                          <IconButton>
-                            {' '}
-                            <Iconify style={{ color: 'black' }} icon="material-symbols:add" />{' '}
-                          </IconButton>
-                        }
-                        startIcon={
-                          <IconButton>
-                            {' '}
-                            <Iconify style={{ color: 'black' }} icon="ic:sharp-supervised-user-circle" />
-                          </IconButton>
-                        }
-                      >
-                        <span style={{ width: '200px' }}> Gelathi Circles</span>
-                      </Button>
-                    </Link>
-                  ) : null
-                  
-                  } */}
-                
-                  {userDetails == 6 || userDetails == 13 ? (
+                    {userDetails == 6 || userDetails == 13 ? (
                     <>
                       <span style={styles.linkStyle}>
                         <Button
@@ -763,7 +710,6 @@ function Project(props) {
                             </Button>
                           </Link>
                         </MenuItem>
-
                         <MenuItem>
                           <Link
                             to="/dashboard/projects/assignedVillages"
@@ -841,7 +787,6 @@ function Project(props) {
                       MenuListProps={{
                         'aria-labelledby': 'basic-button',
                       }}
-
                       style={{ justifyContent: 'flex-end' }}
                     >
                       {/* spoorthi menu item  */}
@@ -865,7 +810,6 @@ function Project(props) {
                       MenuListProps={{
                         'aria-labelledby': 'basic-button',
                       }}
-
                       style={{ justifyContent: 'flex-end' }}
                     >
                       {/* spoorthi menu item  */}
@@ -880,7 +824,6 @@ function Project(props) {
                         </Button>
                         </Link></MenuItem>
                      
-
                       <MenuItem>
                         <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_SPM1" }} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
@@ -921,7 +864,6 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                      
-
                     </Menu>
  {/* spoorthi menu item end   */}
  {/* green menu item  */}
@@ -945,13 +887,11 @@ function Project(props) {
                       MenuListProps={{
                         'aria-labelledby': 'basic-button',
                       }}
-
                       style={{ justifyContent: 'flex-end' }}
                     >
                       {/* spoorthi menu item  */}
                       <IconButton onClick={greenHandleClose} > <Iconify style={{ color: "black" ,margingLeft:"10px"}} icon="material-symbols:close-rounded"  /></IconButton>
                       
-
                     <MenuItem>
                         <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Green Survey CM" , head:"_GPS"}}style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
@@ -960,7 +900,6 @@ function Project(props) {
                         </Button>
                         </Link></MenuItem>
                      
-
                       <MenuItem>
                         <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_GPM1"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
@@ -1001,10 +940,8 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                       
-
                     </Menu>
  {/* green menu item end  */}
-
  {/* vyapar menu item start */}
  <MenuItem>
                       <Button variant="secondary" style={styles.buttonStyle}
@@ -1026,7 +963,6 @@ function Project(props) {
                       MenuListProps={{
                         'aria-labelledby': 'basic-button',
                       }}
-
                       style={{ justifyContent: 'flex-end' }}
                     >
                    <IconButton onClick={vyaparHandleClose} > <Iconify style={{ color: "black" ,margingLeft:"10px"}} icon="material-symbols:close-rounded"  /></IconButton>
@@ -1040,7 +976,6 @@ function Project(props) {
                         </Button>
                         </Link></MenuItem>
                      
-
                       <MenuItem>
                         <Link to="/dashboard/projects/ProjectWiseGelathiCircle" state={{ id: data1?.project_id , title: "Module 1 CM" , head:"_VPM1"}} style={styles.linkStyle}><Button variant="secondary" style={styles.buttonStyle}
                           endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
@@ -1054,7 +989,6 @@ function Project(props) {
                           startIcon={<IconButton> <Iconify style={{ color: "black" }} icon="ic:baseline-home" /> </IconButton>}>
                           <span style={{ width: "200px" }}> Module 2</span>
                         </Button>
-
                         </Link>
                         </MenuItem>
                         <MenuItem>
@@ -1082,14 +1016,11 @@ function Project(props) {
                         </Link>
                         </MenuItem>
                       
-
                     </Menu>
  {/* vyapar menu item end  */}
                     
-
                     </Menu></> : null}
                       {/* gelati menu end */}
-
                   {userDetails == 6 || userDetails == 13 ? <br /> : null}
                   {userDetails == 6 || userDetails == 13 ? (
                     <Link
@@ -1129,5 +1060,4 @@ function Project(props) {
     </div>
   );
 }
-
 export default Project;

@@ -9,7 +9,6 @@ import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Shakthimain from './projectfilters/Shakthimain';
 export default function selfShaktiProj() {
     const {state} = useLocation()
-    // console.log("shaktishakti",state)
     const [clcikData, setClickData] = useState()
     
   const [filterData, setFilterData] = useState({})
@@ -18,7 +17,6 @@ export default function selfShaktiProj() {
     var [search, setSearch] = useState('')
     const [trainerdata,setrainerdata]=useState('')
     const userid = JSON.parse(localStorage.getItem('userDetails'))?.role
-    // const [selfShakthi, setselfShakthi] = useState([{ stockname: "fist" }, { stockname: "second" }]);
     const searchFunction = (e) => {
         search = e
         setSearch(search)
@@ -37,15 +35,12 @@ export default function selfShaktiProj() {
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
-
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
-
     const handleopen=()=>{
       setFilter(true)
     };
-
     const handleclose=()=>{
       setFilter(false)
     }
@@ -56,16 +51,12 @@ export default function selfShaktiProj() {
         filter_type.id = ids[filter_type.type]
       }
       shakti(d,filter_type);
-      console.log(filter_type?.id,"filterid")
    }
    useEffect(() => {
        shakti();
        }, []
    )
-
     const shakti = async(id,i,g) =>{
-
-
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
@@ -78,7 +69,6 @@ export default function selfShaktiProj() {
             "trainer_id":id?.emp_id,
             "emp_id": idvalue
           });
-          console.log("🚀 ~ file: selfShaktiProj.jsx:81 ~ shakti ~ data:", data)
           
           var config = {
             method: 'post',
@@ -93,13 +83,11 @@ export default function selfShaktiProj() {
           .then(function (response) {
             setSelfShakthi(response.data)
             setCount(response.data.list.length)
-            // console.log(response.data,'<-------------setSelfShakthisetSelfShakthisetSelfShakthi');
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
     }
-    // console.log(state.id , "project id in state ")
   
     const id = sessionStorage?.getItem("proId")
     useEffect(() => {
@@ -108,7 +96,6 @@ export default function selfShaktiProj() {
     }, [])
     
     const projData = async => {
-      // console.log(location, "location props")
       var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
       var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
       var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -130,16 +117,12 @@ export default function selfShaktiProj() {
       axios(config)
         .then(function (response) {
           setData1(response.data.list)
-          // console.log(response.data, '<--------------setData1setData1');
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
   
     }
-
-
-
     const handleDelete = () => {
       setSelected(null)
         search = ''
@@ -153,21 +136,16 @@ export default function selfShaktiProj() {
       shakti(e?.startDate, e?.endDate, "date")
       setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
       handleclose()
-      // console.log(e, "<----scasds")
     }
     const getData = (itm, i) => {
     setSelected({itm,type:'Trainers'})
     const data = i === 5 ? { "trainer_id": itm?.emp_id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     shakti(itm, i)
-    // console.log(data, i, itm, "<----sdfssreerfer")
     setFilterData(data)
     
     handleclose()
-    // console.log("sdfgsdfdfssd", itm, i)
   }
-
     return (
-
         <Container>
                            <Searchbar getSearch={(e) => searchFunction(e)} />
                            <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
@@ -194,9 +172,6 @@ export default function selfShaktiProj() {
                     onCloseFilter={handleclose}
                 />
             </Stack>
-                {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
             </Stack>
             {
                     selected && (selected?.type=='Search') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
@@ -210,7 +185,7 @@ export default function selfShaktiProj() {
             }
             <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}> All Training Batch : ({count})</Typography> 
-               {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
+             
                            <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ProjectMultiDrawer
                 batchState={batchState}
@@ -222,13 +197,8 @@ export default function selfShaktiProj() {
                     projectId={state?.id}
                 />
             </Stack>
-            {/* </Stack> */}
-            {/* {selfShakti?.map((itm) => {
-                return ( */}
-
                     {selfShakti == " "?
                     <>
-
                     <div style={{display:"flex", marginTop:"50%", marginLeft:"40%" }}>
                           <CircularProgress />
                           </div>
@@ -236,10 +206,7 @@ export default function selfShaktiProj() {
                      :
                     
                     selfShakti?.list?.length!==0?selfShakti?.list?.map((itm) => {
-                        // console.log(itm, "<---asdasdasdsadas")
                         return (
-                          
-                     
                     <Card style={styles.card1} 
                     onClick={() => {
                         setBatchState(itm)
@@ -268,9 +235,7 @@ export default function selfShaktiProj() {
             <>
             <h4 style={{textAlign:'center'}}>No Training Batch</h4>
             </>}
-
         </Container>
-
 );
           }      
 const styles = {

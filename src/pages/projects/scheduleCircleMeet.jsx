@@ -12,10 +12,8 @@ export default function scheduleCircleMeet() {
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
     const [data1, setData1] = useState('')
-    console.log("🚀 ~ file: scheduleCircleMeet.jsx:15 ~ scheduleCircleMeet ~ data1:", data1)
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
-
     const searchFunction = (e) => {
         search = e
         setSearch(search)
@@ -27,47 +25,15 @@ export default function scheduleCircleMeet() {
         enrolledGelathi();
     }, []
     )
-
     const [openFilter, setOpenFilter] = useState(false);
-
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
-
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
-
-  //   const enrolledGelathi = async =>{
-  //       var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-  // var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-  //       var data = JSON.stringify({
-  //           "search": search,
-  //           "project_id": state?.id,
-  //           "emp_id": idvalue,
-  //           // "role_id": 6
-  //         });
           
-  //         var config = {
-  //           method: 'post',
-  //           url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
-  //           headers: { 
-  //             'Content-Type': 'application/json'
-  //           },
-  //           data : data
-  //         };
           
-  //         axios(config)
-  //         .then(function (response) {
-  //           setenrolled(response.data)
-  //           setCount(response?.data?.list.length)
-  //           console.log(response.data,'<---------------setenrolledsetenrolled');
-  //         })
-  //         .catch(function (error) {
-  //           console.log(error);
-  //         });
-  //   }
-
   const enrolledGelathi = async(id,i,g) => {
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -76,7 +42,6 @@ export default function scheduleCircleMeet() {
       "project_id": state?.id,
       "gelathi_id": id?.emp_id?id?.emp_id:idvalue
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircle.php',
@@ -85,17 +50,14 @@ export default function scheduleCircleMeet() {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setenrolled(response.data)
         setCount(response?.data?.list.length)
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
-
   }
     const id = sessionStorage?.getItem("proId")
     useEffect(() => {
@@ -104,7 +66,6 @@ export default function scheduleCircleMeet() {
     }, [])
     
     const projData = async => {
-      console.log(location, "location props")
       var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
       var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
       var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -126,10 +87,9 @@ export default function scheduleCircleMeet() {
       axios(config)
         .then(function (response) {
           setData1(response.data.list)
-          console.log(response.data, '<--------------setData1setData1');
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
   
     }
@@ -139,9 +99,7 @@ export default function scheduleCircleMeet() {
       setSearch(search)
       enrolledGelathi();
   }
-
     return (
-
         <Container><Searchbar getSearch={(e) => searchFunction(e)} />
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
@@ -151,19 +109,15 @@ export default function scheduleCircleMeet() {
                         </IconButton></Link>
                         Schedule Circle Meet 
                 </Typography>
-                {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
             </Stack>  
             {
                     selected && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}>Circles : ({count})</Typography> 
-             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
+           
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-              {console.log(clcikData,"cliked")}
-              {console.log(enrolled?.list,"enrolledlist")}
+           
                 <Circledrawer
                     clcikData={clcikData}
                     isOpenFilter={openFilter}
@@ -172,12 +126,8 @@ export default function scheduleCircleMeet() {
                     id={state?.id}
                     data1={data1}
                     head={'CM'}
-                    // enrolled={enrolled}
-                    
                 />
             </Stack>
-            {/* </Stack> */}
-
             {
             enrolled == ""?
             <div style={{marginTop:"20%" , marginLeft:"40%"}}>
@@ -187,20 +137,17 @@ export default function scheduleCircleMeet() {
            
             
             enrolled?.list?.length!==0?enrolled?.list?.map((itm) => {
-              {console.log(itm,"itemeeeeeee")}
                 return (
                     <Card style={styles.card1} onClick={() => {
                         setClickData({ name: itm?.circle_name, title: "Schedule A Circle Meeting",id:itm?.circle_id  , date: itm?.circle_date})
                         handleOpenFilter()
                     }}>
-
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                         <Typography variant="subtitle1" gutterBottom>
                 {`  ${itm?.circle_name}`} <IconButton sx={{float:'right',position:'absolute',right:20,color:'black'}}><Iconify icon="mdi:clock-time-four-outline"></Iconify></IconButton>
               </Typography>
             </Grid>
             <Grid style={{ marginLeft: 15 }}>
-
               <Typography variant="subtitle2" gutterBottom>
                 {`   ${itm?.circle_date}`}
               </Typography>
@@ -210,9 +157,7 @@ export default function scheduleCircleMeet() {
             <>
             <h1>No Circle Meet Found</h1>
             </>}
-
         </Container>
-
     );
 }
 const styles = {

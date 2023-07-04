@@ -15,7 +15,8 @@ import DialogForm from './components/DialogForm';
 import { Link } from 'react-router-dom';
 import OwnQuality from './OwnQuality';
 import TeamQuality from './TeamQuality';
-// components
+
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -48,16 +49,7 @@ const SelfSakthiByGelathi = () => {
     const data = localStorage?.getItem('userId')
     var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
     const image = ["tykml", "exrdcftvbgyhnuj"]
-    const [drawerEvent, SetDrawerEvent] = useState(false);
-    //const [image, setImage] = React.useState(['data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==']);
-    const [viewImage, setViewImage] = React.useState(false);
-    const [listdata, setListData] = React.useState()
     const [openMessage, setOpenMessage] = React.useState(false);
-    const [message, setMessage] = useState(false)
-    const [editData, setEditData] = useState(null)
-    const [openFilter, setOpenFilter] = useState(false);
-    const [clcikData, setClickData] = useState()
-    const [teamMembersData, setTeamMembersData] = useState([])
     const [mainValue, setMainValue] = useState(0)
     const [batch,setBatch] = useState('')
 
@@ -83,18 +75,6 @@ const SelfSakthiByGelathi = () => {
       }
         },[])
       
-  
-    const handleOpenFilter = (itm) => {
-      // itm.klmtr = +klmtr;
-      setEditData(itm)
-      console.log(editData)
-      setOpenFilter(true);
-    };
-  
-    const handleCloseFilter = () => {
-      setOpenFilter(false);
-    };
-  
     const getDateValue = (e) => {
       setDatevalue(e)
     }
@@ -106,9 +86,6 @@ const SelfSakthiByGelathi = () => {
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-  
-  
-  
     return (
       <Page id="dashboard-products" title="Dashboard: Products">
         <Container id="container-travel-allowance">
@@ -166,33 +143,10 @@ const SelfSakthiByGelathi = () => {
     color: "#ff7424",
   } : null} />
   
-  
-  }
-             
-  
-            </Tabs>
+  }   </Tabs>
           </Box>
           <br />
-          {/* <TextField id="outlined-basic" type="date" defaultValue={dateValue}
-            fullWidth
-            onChange={(e) => { getDateValue(e?.target?.value) }} label="Select Date" variant="outlined" InputLabelProps={{
-              shrink: true,
-            }} /> */}
-             {/* <Stack style={{ marginTop: 20 }}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      
-                      inputFormat="YYYY-MM-DD"
-                      views={["year", "month", "day"]}
-                      // label="Date"
-                      value={getDateValue?.date}
-                      onChange={(newValue) => {
-                        setSendData({ ...sendData, date: newValue })
-                      }}
-                      renderInput={(params) => <TextField {...params} fullWidth />}
-                    />
-                  </LocalizationProvider>
-                </Stack> */}
+      
         {
           userTeamPermissions.includes(data) &&   <TabPanel id="return-date-tab" value={mainValue} index={1}>
           <Stack id="return-date-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -214,17 +168,8 @@ const SelfSakthiByGelathi = () => {
   
     { (mainValue==0) &&     <Stack id="travel-dialog-stack" direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <DialogForm id="travel-dialog"  batch={batch} shown={shown} setShown={(e)=>{setShown(e)} }  reloadfunction={reloadfunction}
-            // viewMessage={(text) => {
-            //   setMessage(text)
-            //   setOpenMessage(true)
-            //   // list()
-            // }} 
-            />
+   />
           </Stack>}
-  
-          
-          {/* </Stack> */}
-  
         </Container ></Page >
     );
   }

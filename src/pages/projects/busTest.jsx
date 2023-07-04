@@ -25,7 +25,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import BusEdit from '../Components/Buslistfilters/BusEdit';
-
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -49,36 +48,29 @@ export default function busTestList() {
         details()
     }, []
     )
-
     useEffect(() => {
       busesdata()
       details()
   }, [reload]
   )
-
   const reloadHandler = ()=>{
     setReload(!reload)
   }
-
     const [openFilter, setOpenFilter] = useState(false);
-
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
-
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
         const handleClickOpen = () => {
         setOpen(true);
       };
-
       const handleClose=()=>{
     
         setOpen(false)
       }
       const onDateSubmit = (e) => {
-        console.log(e,"hyyyyyyyyyyy")
         setSelected({  name: `${e?.fromDate} to ${e?.toDate}` })  
         busesdata(e?.fromDate, e?.toDate, "date")
         handleClose()
@@ -104,14 +96,12 @@ export default function busTestList() {
   
       axios(config)
         .then(function (response) {
-          // deletebuses()
           setDeleteBus(response.data)
           alert(response.data.message)
           reloadHandler()
-          console.log(response.data, '<------deleteee');
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
   
     }
@@ -126,8 +116,6 @@ export default function busTestList() {
         "bus_id":state?.id,
         });
     
-        console.log(data, "checking for search",state?.id)
-    
         const config = {
           method: 'post',
           url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
@@ -139,24 +127,16 @@ export default function busTestList() {
     
         axios(config)
           .then((response) => {
-            console.log("respoonse in Bus List", response.data)
-           
             setBuses(response?.data)
-        
-           
           })
           .catch((error) => {
-            console.log(error);
+            // console.log(error);
           });
       }
-    
-{console.log(buses,"buesesssssssssss")}
 const details = async => {
-  console.log(clcikData, "<-----clcikDataclcikData")
   var data = JSON.stringify({
     "bus_id": buses?.bus_id 
   });
-
   var config = {
     method: 'post',
     url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
@@ -165,22 +145,16 @@ const details = async => {
     },
     data
   };
-
   axios(config)
     .then(function (response) {
-
       setDetailsData(response.data)
       updatedata()
-      console.log(JSON.stringify(response.data, '<njnjnjn'));
-      console.log(response.data , "busdetails ")
     })
     .catch(function (error) {
-      console.log(error, "<---error");
+      // console.log(error, "<---error");
     });
-
 }
     return (
-
         <Container>
              <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
@@ -204,7 +178,6 @@ const details = async => {
            {(userDetails==2)?
            <div style={{"width":"30px"}}>
            <BusEdit clcikData={buses}
-            // busesd={busesd}
              admin ={admin}
              updatedata={()=>{setUserUpdate(!userUpdate)}}
              reloadHandler={reloadHandler}
@@ -243,7 +216,6 @@ const details = async => {
             defaultValue={date1}
             
             onChange={(newValue) => {
-              console.log(newValue, "<----newValuenewValue")
               setDate1(newValue)
              
               busesdata()
@@ -260,7 +232,6 @@ const details = async => {
             defaultValue={date2}
             minDate={dayjs(date1)}
             onChange={(newValue) => {
-              console.log(newValue, "<----newValuenewValue")
               setDate2(newValue)
               busesdata()
             }}
@@ -334,9 +305,7 @@ const details = async => {
             </TableBody>
           </Table>
         </TableContainer>
-
         </Container>
-
     );
 }
 const styles = {

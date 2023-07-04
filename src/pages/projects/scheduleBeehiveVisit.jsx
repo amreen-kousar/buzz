@@ -8,7 +8,6 @@ import BeehiveDrawer from './Components/BeehiveDrawer';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 export default function scheduleBeehiveVisit() {
    const {state} = useLocation()
-   console.log("nwewepewrwe",state)
     const [clcikData, setClickData] = useState()
     const [beehive, setBeehive] = useState('');
     const [data1, setData1] = useState('')
@@ -25,17 +24,13 @@ export default function scheduleBeehiveVisit() {
         BeehiveGelathi();
     }, []
     )
-
     const [openFilter, setOpenFilter] = useState(false);
-
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
-
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
-
     const BeehiveGelathi = async =>{
         var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -59,15 +54,12 @@ export default function scheduleBeehiveVisit() {
           .then(function (response) {
             setBeehive(response.data)
             setCount(response.data?.list?.length)
-            console.log(response.data,'<---------------setBeehive');
-            
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
        
     }
-
     const id = sessionStorage?.getItem("proId")
     useEffect(() => {
       projData();
@@ -75,7 +67,6 @@ export default function scheduleBeehiveVisit() {
     }, [])
     
     const projData = async => {
-      console.log(location, "location props")
       var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
       var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
       var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
@@ -97,10 +88,9 @@ export default function scheduleBeehiveVisit() {
       axios(config)
         .then(function (response) {
           setData1(response.data.list)
-          console.log(response.data, '<--------------setData1setData1');
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
   
     }
@@ -110,9 +100,7 @@ export default function scheduleBeehiveVisit() {
       setSearch(search)
       BeehiveGelathi();
   }
-
     return (
-
         <Container><Searchbar getSearch={(e) => searchFunction(e)} />
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                 <Typography variant="h5" gutterBottom>
@@ -122,16 +110,13 @@ export default function scheduleBeehiveVisit() {
                         </IconButton></Link>
                         Schedule Beehive Visit
                 </Typography>
-                {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button> */}
             </Stack>
             {
                     selected && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}>Villages:  ({count})</Typography> 
-            {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
+          
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <BeehiveDrawer
                     clcikData={clcikData}
@@ -141,27 +126,21 @@ export default function scheduleBeehiveVisit() {
                     id={state?.id}
                 />
             </Stack>
-            {/* </Stack> */}
             {beehive?.list?.map((itm) => {
-                console.log(itm,"<----itmasas")
                 return (
                     <Card style={styles.card1} onClick={() => {
                         setClickData({ name: itm.training_batch_id, title: "Schedule A Beehive Visit",id:itm?.id })
                         handleOpenFilter()
                     }}>
-
                         <Grid pt={1} pb={1} container xs={12} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {itm?.training_batch_name}
                             </Typography>
-                            {/* {console.log(itm?.list?.gelathiname,'<-------gelathinamegelathiname')} */}
                         </Grid>
                        
                     </Card>)
             })}
-
         </Container>
-
     );
 }
 const styles = {

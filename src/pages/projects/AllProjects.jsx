@@ -11,16 +11,9 @@ import { Link } from 'react-router-dom';
 import AddProject from './Addproject';
 import FiltersHome from '../Filters/FiltersHome';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-
 import Searchbar from 'src/layouts/dashboard/Searchbar';
-// components
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-    //   const resetBus = () => {
-    //     setSelected([])
-    //     setSearch([])
-    //     projectr()
-    //   }
     return (
         <div
             role="tabpanel"
@@ -37,28 +30,23 @@ function TabPanel(props) {
         </div>
     );
 }
-
 TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
 };
-
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,
         'aria-controls': `simple-tabpanel-${index}`,
     };
 }
-
 export default function AllProjects({ handleClickOpen, handleClose, open }) {
     var userAccess = ['2']
-
     const callOpenFunction = (id) => {
         sessionStorage.setItem("proId", id)
         handleClickOpen()
     }
-
     var userIdCheck = localStorage?.getItem('userId')
     var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
     var [page, setPage] = useState(1)
@@ -74,21 +62,16 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     const [openMessage, setOpenMessage] = useState(false);
     const [message, setMessage] = useState(false)
     const [countCompleted, setCountCompleted] = useState('')
-
     const [countPublished, setCountPublished] = useState('')
     const [countInprogress,setCountInprogress]=useState('');
-
     const pageChange = (event, newPage) => {
         page = newPage
         setPage(page);
         projectr()
     }
-
-
     const handleOpenFilter = () => {
         setOpenFilter(true);
     };
-
     const handleCloseFilter = () => {
         setOpenFilter(false);
     };
@@ -99,9 +82,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
         projectr()
     }, []
     )
-
     const projectr = async (i, id, g) => {
-        console.log(i,"consolevalues")
 var data ={}
         {(id==4)? 
              data = JSON.stringify({
@@ -124,7 +105,6 @@ var data ={}
             count: count,
             "trainer_id": g ? "" : id === 5 ? i?.id : null,
         }):(id==13)? data = JSON.stringify({
-
             "search": search,
             "id": userDetails?.id,
             "role_id": userIdCheck,
@@ -150,7 +130,6 @@ var data ={}
         :(i?.type=='custom')?  
        
         data = JSON.stringify({
-
             end_date: i?.endDate,
             start_date: i?.startDate,
             "search": search,
@@ -173,7 +152,6 @@ var data ={}
         }) 
         :
         data = JSON.stringify({
-
             end_date: g === "date" ? id : null,
             start_date: g === "date" ? i : null,
             "search": search,
@@ -192,10 +170,7 @@ var data ={}
             "partner_id": g ? "" : id === 1 ? i?.id : null,
            
         })
-
     }
-
-
         const config = {
             method: 'post',
             url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
@@ -204,67 +179,47 @@ var data ={}
             },
             data
         };
-console.log(data,"dataaaaaaaaaaa")
         axios(config)
             .then((response) => {
-                console.log(response, "projects responseeeeeeeeeeeeee", projects)
                 setCount(response.data.count % 25 == 0 ? parseInt(response.data.count / 25) : parseInt(response.data.count / 25) + 1)
                 setProjects(response.data.list)
                 let published = response.data.list.filter(r => r.project_status_name == 'Published')
                 setCountPublished(published?.length % 25 == 0 ? parseInt(published?.length / 25) : parseInt(published?.length / 25) + 1)
-
                 setPublishedProject(published)
                
                 let completed = response.data.list.filter(r => r.project_status_name == 'Completed')
-
                 setCountCompleted(completed?.length % 25 == 0 ? parseInt(completed?.length / 25) : parseInt(completed?.length / 25) + 1)
-
                 setCompletedProject(completed)
-
                 let inprogress = response.data.list.filter(r=>r.project_status_name == 'In Progress')
                 setCountInprogress(inprogress?.length % 25 ==0 ? parseInt(inprogress?.length / 25): parseInt(inprogress?.length / 25 ) + 1)
                 setInProgressProjects(inprogress)
-
-
-
                
-                console.log(JSON.stringify(response.data, 'get All projectrs'));
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
             });
     }
     
     const getData = (itm, i) => {
-     
         setOpenFilter(false);
-      
         setSelected(itm)
-        
-        console.log(selected, "Selected ")
         projectr(itm, i)
     }
-
     const onSumbit = (e, i) => {
         setSelected({ type: 'Location', name: ` ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
-       
         handleCloseFilter()
         projectr(e?.district_id, e?.talaq_id, "country")
     }
-    console.log(selected,"selectedstateeeeeeeeeee")
     const onDateSubmit = (e) => {
         setSelected({ type: 'Date Range', name: `${e?.startDate} - ${e?.endDate}` })
         projectr(e?.startDate, e?.endDate, "date")
         setOpenFilter(false);
     }
-
     const onDatasubmit=(e)=>{
         setSelected({type:'Custom Filter',name: `District: ${e?.district?.name};Taluk:${e?.talaq?.name} ; From: ${e?.startDate} to:${e?.endDate}`})
-        // setSelected({type:'Custom Filter',name: `District: ${e?.district?.name};Taluk:${e?.talaq?.name} ; From: ${e?.startDate} to:${e?.endDate}; Funder:${e?.funder?.name}; Operation Manager:${e?.opsManager?.first_name}; Trainer:${e?.trainer?.first_name} ; GelathiFacilitator:${e?.gelathi?.first_name}`})
         handleCloseFilter()
         projectr(e,"custom")
     }
-
     const searchFunction = (e) => {
         page = 1
         setPage(page)
@@ -273,15 +228,11 @@ console.log(data,"dataaaaaaaaaaa")
         setSelected({ name: e, type: "Search" })
         projectr()
     }
-
-    console.log(selected,"selectedtype")
-
     const resetProjects = () => {
         setSelected(null)
         setSearch('')
         projectr()
     }
-
     const handleDelete = () => {
         setSelected(null)
         search = ''
@@ -290,21 +241,16 @@ console.log(data,"dataaaaaaaaaaa")
         setPage(page)
         projectr();
     }
-
     const Alert = forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
-
-
     return (
         <Page title="Dashboard: Projects">
-
             <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)} id="alertmessage">
                 <Alert onClose={() => { setOpenMessage(false) }} severity="success" sx={{ width: '100%' }}>
                     {message}
                 </Alert>
             </Snackbar>
-
             <Searchbar getSearch={(e) => searchFunction(e)} id="search-bar"/>
             <Container>
                 <Typography variant="h4" sx={{ mb: 5 }}>
@@ -321,27 +267,13 @@ console.log(data,"dataaaaaaaaaaa")
                         Filter
                     </Button>
                 </Typography>
-
-
-                {console.log(selected,"selectedd")}
                 { selected &&  ( selected?.type=='Location' || selected?.type=='Date Range') &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /> }
                   
                 { selected  && ( selected?.type=='Funder' || selected?.type=='Operation Manager' || selected?.type=='Trainers' || selected?.type=='Gelathi Facilitator' ) &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.first_name} `} onDelete={() => { handleDelete(selected) }} /> }
          
                 {selected && (selected?.type=='Custom Filter') &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/> }
                 {selected && (selected?.type=='Search') && <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/>}
-
              
-                {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mt: -9 }}>
-        <h1>jnjn</h1>
-        </Stack> */}
-                {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <ProjectDialog
-              
-              open={handleClickOpen}
-              onClose={handleClose}
-            />
-          </Stack> */}
                 <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                     <FiltersHome
                         type="Projects"
@@ -356,28 +288,18 @@ console.log(data,"dataaaaaaaaaaa")
                         onCloseFilter={handleCloseFilter}
                     />
                 </Stack>
-
-
                 <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                     <Box sx={{ width: '100%' }}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }} >
-
-
-
                             <Tabs variant="fullWidth" value={value} onChange={handleChange} indicatorColor="warning"
-
                                 aria-label="basic tabs example">
                                 <Tab id="All_projects"
-
                                     sx={{
                                         ':hover': {
                                             bgcolor: '#ffd796', // theme.palette.primary.main
                                             color: '#ff7424',
                                         },
-
                                         color: 'black',
-
-
                                     }} label="All" {...a11yProps(0)} style={value == 0 ? {
                                         borderBottom: '3px solid #ff7424',
                                         color: "#ff7424",
@@ -388,9 +310,7 @@ console.log(data,"dataaaaaaaaaaa")
                                             bgcolor: '#ffd796', // theme.palette.primary.main
                                             color: '#ff7424',
                                         },
-
                                         color: 'black',
-
                                     }} style={value == 1 ? {
                                         borderBottom: '3px solid #ff7424',
                                         color: "#ff7424",
@@ -401,10 +321,7 @@ console.log(data,"dataaaaaaaaaaa")
                                             bgcolor: '#ffd796', // theme.palette.primary.main
                                             color: '#ff7424',
                                         },
-
-
                                         color: 'black',
-
                                     }} label="Completed" {...a11yProps(2)} style={value == 2 ? {
                                         borderBottom: '3px solid #ff7424',
                                         color: "#ff7424",
@@ -415,26 +332,18 @@ console.log(data,"dataaaaaaaaaaa")
                                             bgcolor: '#ffd796', // theme.palette.primary.main
                                             color: '#ff7424',
                                         },
-
-
                                         color: 'black',
-
                                     }} label="In Progress" {...a11yProps(3)} style={value == 3 ? {
                                         borderBottom: '3px solid #ff7424',
                                         color: "#ff7424",
                                     } : null} />
                             </Tabs>
                         </Box>
-
-
-
                         <TabPanel value={value} index={0}>
                             {projects == []?
                             <div >
-
 <CircularProgress />
                             </div>
-
                             :   projects?.length > 0 ? 
                                 <>
                                     {projects.map(p => <Link to="/dashboard/projects/project"
@@ -462,9 +371,6 @@ console.log(data,"dataaaaaaaaaaa")
                                     <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
                             }
                         </TabPanel>
-
-
-
                         <TabPanel value={value} index={1}>
                             {
                                 publishedProject?.length > 0 ? <>
@@ -488,10 +394,6 @@ console.log(data,"dataaaaaaaaaaa")
                                     <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
                             }
                         </TabPanel>
-
-
-
-
                         <TabPanel value={value} index={2}>
                             {
                                 completedProject?.length > 0 ? <>
@@ -513,10 +415,8 @@ console.log(data,"dataaaaaaaaaaa")
                                     } */}
                                 </> :
                                     <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
-
                             }
                         </TabPanel>
-
                         <TabPanel value={value} index={3}>
                             {
                                 inProgressProjects?.length > 0 ? <>
@@ -538,46 +438,11 @@ console.log(data,"dataaaaaaaaaaa")
                                     } */}
                                 </> :
                                     <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
-
                             }
                         </TabPanel>
-
-
-
-
-
-
-
-
-
-                        {/* <TabPanel value={value} index={3}>
-                            {
-                                inProgress.length > 0 ? <>
-                                    {inProgress.map(p => <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }} >
-                                        <Card onClick={() => { callOpenFunction(p.id) }}>
-                                            <CardContent>
-                                                <Typography variant='h6'>{p?.name}</Typography>
-                                                <Grid items direction={'row'} spacing={20}>
-                                                    <Typography variant='body1'>{p?.location_name}</Typography>
-                                                    <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                    {( p?.project_status_name=='In Progress')? <Chip style={{ backgroundColor: 'orange', color: '#fff' }} label={p?.project_status_name} size="small" variant="outlined" />:null}
-                                                    </Stack>
-                                                </Grid>
-                                            </CardContent>
-                                        </Card><br />
-                                    </Link>)}
-                                    {
-                                        <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countInprogress} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
-                                    }
-                                </> :
-                                    <h2 style={{ textAlign: "center", color: "black" }}><br />No Projects</h2>
-
-                            }
-                        </TabPanel> */}
+                     
                     </Box>
                 </Stack>
-
-
                 {userAccess.includes(userIdCheck) &&
                     <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                         <AddProject viewMessage={(text) => {

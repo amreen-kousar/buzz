@@ -1,12 +1,8 @@
 import axios from 'axios';
-
 export default async function Filtersapirequest(props) {
-    console.log('filtersrequest',props?.data1)
     var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
     var response = []
-    console.log(props,"propertiesssssss")
-    // console.log(idvalue,"hyyyyyyyyyyy",roleid);
     const data = JSON.stringify({
         "role_id": role,
         "pageNum": 1,
@@ -26,7 +22,6 @@ export default async function Filtersapirequest(props) {
         },
         data
     };
-
    
     response = await axios(config)
         .then((response) => {
@@ -35,7 +30,5 @@ export default async function Filtersapirequest(props) {
         .catch((error) => {
             return null
         });
-      console.log(response?.data,"responseeeeeeee")
     return await response;
 }
-

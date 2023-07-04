@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import React from "react";
 import axios from 'axios';
-
 import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -13,7 +12,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ProfileCard from './Components/ProfileCard'
-
 export default function Profile(index) {
   const [state, setState] = React.useState({
     top: false,
@@ -29,11 +27,9 @@ export default function Profile(index) {
   )
   const profile = async => {
     const userData = localStorage?.getItem('userDetails')
-
     var data = JSON.stringify({
       "id": JSON?.parse(userData)?.id
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
@@ -42,26 +38,20 @@ export default function Profile(index) {
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setProfileData(response.data)
-        console.log(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
-
   }
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
-
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 400 }}
@@ -87,7 +77,6 @@ export default function Profile(index) {
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -109,8 +98,6 @@ export default function Profile(index) {
       }}>
         <ProfileCard changeUser={() => { setUserUpdate(!userUpdate) }} profileData={profileData} />
       </Grid>
-
-
     </Grid>
   );
 }

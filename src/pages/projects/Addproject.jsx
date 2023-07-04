@@ -6,7 +6,6 @@ import { useLocation, Link } from 'react-router-dom'
 import CreateProj from './Components/CreateProj';
 import Iconify from 'src/components/Iconify';
 function AddProject({ viewMessage }) {
-
     const [open, setAddProject] = useState(false)
     const [country, setCountry] = useState([])
     const [fund, setFund] = useState()
@@ -20,7 +19,6 @@ function AddProject({ viewMessage }) {
         locationName: "",
         funderId: "",
         funderName: "",
-
     })
     const [data, setData] = useState({
         country: 1,
@@ -29,30 +27,22 @@ function AddProject({ viewMessage }) {
         talaq_id: '',
         funder_id: ""
     })
-
-
     useEffect(() => {
         setData([])
         location();
         getFunder();
-        // createProject();
     }, [open]
     )
     
-
     const handleClickOpen = () => {
-        console.log("clicked")
         setAddProject(true);
     };
-
     const handleClose = () => {
         setAddProject(false);
     };
-
     const location = async => {
         var data = JSON.stringify({
             "country_id": "1",
-
         });
         
         var config = {
@@ -63,26 +53,19 @@ function AddProject({ viewMessage }) {
             },
             data: data
         };
-
         axios(config)
             .then(function (response) {
-                console.log(JSON.stringify(response.data));
                 setStates(response?.data?.list)
             })
             .catch(function (error) {
-                console.log(error);
+                // console.log(error);
             });
     }
-
-
-
     const getState = async (id) => {
         var data = JSON.stringify({
             "country_id": "1",
             "state_id": id
-
         });
-
         var config = {
             method: 'post',
             url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
@@ -91,26 +74,20 @@ function AddProject({ viewMessage }) {
             },
             data: data
         };
-
         axios(config)
             .then(function (response) {
                 setDistrict(response.data.list)
-                console.log(JSON.stringify(response.data));
             })
             .catch(function (error) {
-                console.log(error);
+                // console.log(error);
             });
     }
-
-
-
     const getDistrict = async (id) => {
         var data = JSON.stringify({
             "country_id": "1",
             "state_id": data?.state,
             "district_id": id
         });
-
         var config = {
             method: 'post',
             url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
@@ -119,19 +96,14 @@ function AddProject({ viewMessage }) {
             },
             data: data
         };
-
         axios(config)
             .then(function (response) {
                 setTaluk(response.data.list)
-
-                console.log(JSON.stringify(response.data));
             })
             .catch(function (error) {
-                console.log(error);
+                // console.log(error);
             });
     }
-
-
     const getFunder = () => {
         const data = JSON.stringify({
             "role_id": 1,
@@ -139,7 +111,6 @@ function AddProject({ viewMessage }) {
             "pageNum": 1,
             "emp_id": 206
         });
-
         const config = {
             method: 'post',
             url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
@@ -148,23 +119,18 @@ function AddProject({ viewMessage }) {
             },
             data
         };
-
         axios(config)
             .then((response) => {
                 setFund(response?.data?.data)
-                console.log(JSON.stringify(response.data));
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
             });
     }
-
-
     const createProject = () => {
         if (confirm("Are You Sure You Want To Create Project?")) {
             const fundList = fund?.filter(itm => itm?.id === mainState?.funderId)
             const talukList = taluk?.filter(itm => itm?.id === mainState?.locationID)
-            console.log(fundList, talukList, "<----talukListtalukList")
             const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
             var data = new FormData();
             data.append('user_id', userid);
@@ -174,13 +140,11 @@ function AddProject({ viewMessage }) {
             data.append('lastUpdatedBy', userid);
             data.append('location_name', talukList[0]?.name);
             data.append('funderName', fundList[0]?.name);
-
             var config = {
                 method: 'post',
                 url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
                 data: data
             };
-
             axios(config)
                 .then(function (response) {
                     setSendData({
@@ -191,34 +155,14 @@ function AddProject({ viewMessage }) {
                     })
                     setCreatePro(true)
                     setAddProject(response.data)
-                    console.log(response, '<----------setAddProjectsetAddProjectsetAddProject', sendData);
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    // console.log(error);
                 });
         }
-        console.log(sendData, "<---qwertyui")
-        //    else{
-        //         setSendData({
-        //             projectId:"",
-        //             projectname:"",
-        //             locationName:"",
-        //             locationid:""
-        //         })
-        //         setCreatePro(true)
-        //         console.log("form is cancelsdsd")
-        //   }
-
-
     }
-
-
-
-
     return (
         <div>
-
-
             <Button variant="contained" id="New_Project" style={{ float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem", position: 'fixed', zIndex: '1', bottom: 40, right: 40 }} onClick={handleClickOpen} sx={{
                 ':hover': {
                     bgcolor: '#ffd796', // theme.palette.primary.main
@@ -236,8 +180,6 @@ function AddProject({ viewMessage }) {
                 <span style={{ fontSize: "2rem" }}>+</span>
             </Button>
             <Dialog fullScreen open={open} onClose={handleClose} >
-
-
                 <form onSubmit={(event) => { event.preventDefault(); createProject() }}>
                     <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
                         <Toolbar>
@@ -247,37 +189,30 @@ function AddProject({ viewMessage }) {
                             <Typography sx={{ ml: 2, flex: 1, color: "inherit" }} variant="h6" component="div" >
                                 New Project
                             </Typography>
-
                             <IconButton type="submit" color="inherit" id="save_project" >
                                 <Iconify icon="material-symbols:save"/>
                             </IconButton>
                         </Toolbar>
                     </AppBar>
-
                     <br /> <Typography style={{textAlign:'center',fontWeight:500}}>Select Location and Funder</Typography>
                     <div style={{ margin: "1rem" }}>
                        
                         <FormControl fullWidth>
-
                             <InputLabel id="Country" color="common" sx={{ borderBlockColor: 'black' }}> Country</InputLabel>
                             <Select
                                 labelId="country-label"
                                 id="Select_country"
-
                                 label="Country"
                                 required
                             >
                                 <MenuItem value="" default disabled>Country </MenuItem>
                                 <MenuItem value="India" >India </MenuItem>
-
                             </Select>
                         </FormControl><br /><br />
                         <FormControl fullWidth>
-
                             <InputLabel id="State"> State</InputLabel>
                             <Select
                                 required
-
                                 labelId="state-label"
                                 id="Select_state"
                                 value={data.state}
@@ -297,7 +232,6 @@ function AddProject({ viewMessage }) {
                             </Select>
                         </FormControl><br /><br />
                         <FormControl fullWidth>
-
                             <InputLabel id="District"> District</InputLabel>
                             <Select
                                 labelId="district-label"
@@ -305,7 +239,6 @@ function AddProject({ viewMessage }) {
                                 value={data.district_id}
                                 label="District"
                                 required
-
                                 onChange={(e => {
                                     setData({ ...data, district_id: e?.target?.value }),
                                         getDistrict(e?.target?.value)
@@ -320,11 +253,9 @@ function AddProject({ viewMessage }) {
                             </Select>
                         </FormControl><br /><br />
                         <FormControl fullWidth>
-
                             <InputLabel id="Taluk"> Taluk</InputLabel>
                             <Select
                                 required
-
                                 labelId="Taluk-label"
                                 id="select_taluk"
                                 value={data.talaq_id}
@@ -332,7 +263,6 @@ function AddProject({ viewMessage }) {
                                 onChange={(e => {
                                     setData({ ...data, talaq_id: e?.target?.value })
                                     setMainState({ ...mainState, locationID: e?.target?.value })
-                                    // getTaluk(e?.target?.value)
                                 })}
                             >
                                 {taluk?.map(itm => {
@@ -344,19 +274,16 @@ function AddProject({ viewMessage }) {
                             </Select>
                         </FormControl><br /><br />
                         <FormControl fullWidth>
-
                             <InputLabel id="Funder"> Funder</InputLabel>
                             <Select
                                 labelId="Funder-label"
                                 id="select_funder"
                                 value={data.funder_id}
                                 required
-
                                 label="Funder"
                                 onChange={(e => {
                                     setData({ ...data, funder_id: e?.target?.value })
                                     setMainState({ ...mainState, funderId: e?.target?.value })
-                                    // getTaluk(e?.target?.value)
                                 })}
                             >
                                 {fund?.map(itm => {
@@ -368,27 +295,13 @@ function AddProject({ viewMessage }) {
                             </Select>
                         </FormControl>
                         <br /><br />
-
-                        {/* <Link to="/dashboard/projects/CreateProj"><Button fullWidth variant="filled">
-                    <span style={{ width: "235px" }}>Create New Project</span>
-                  </Button>
-                  </Link><br /> */}
-                        {/* <Button onClick={() => createProject()} fullWidth variant="filled" style={{background:"#f5f5f5"}}>Create New Project</Button> */}
-
-                        {console.log(createPro)}
-
-
-
                     </div> </form>
-
                 {
                     (sendData && createPro && AddProject) ? <CreateProj sendData={sendData}
                         setCreatePro={(e) => { setCreatePro(e), handleClose() }} createPro={createPro} viewMessage={viewMessage} />
                         : null}
-
             </Dialog>
         </div>
     )
 }
-
 export default AddProject

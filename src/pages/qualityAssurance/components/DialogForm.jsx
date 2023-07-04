@@ -18,7 +18,6 @@ import {
     CardContent,Icon,RadioGroup, FormHelperText, Autocomplete, Popper
   } from '@mui/material';
   import Swal from 'sweetalert2'
-
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
@@ -31,20 +30,16 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import axios from 'axios';
-
 import moment from 'moment';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import { setISODay } from 'date-fns/esm';
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function DialogForm({ shown, setShown, batch,reloadfunction }) {
     const [openFilter, setOpenFilter] = useState(false);
     const [clcikData, setClickData] = useState()
-
     const handleOpenFilter = () => {
       setOpenFilter(true);
     };
@@ -52,7 +47,6 @@ export default function DialogForm({ shown, setShown, batch,reloadfunction }) {
     const handleCloseFilter = () => {
       setOpenFilter(false);
     };
-
     var checkData = {
       the_gf_comptetly_carried_out_following_funtions:[],
       the_gf_caried_followig_fuctions_bfore_traning_or_meting_started:[],
@@ -88,7 +82,6 @@ export default function DialogForm({ shown, setShown, batch,reloadfunction }) {
       
   };
   
-
   const handleprerequisites = (label, event) => {
     var updatedList = [...checked[label]];
     if (event.target.checked) {
@@ -100,38 +93,25 @@ export default function DialogForm({ shown, setShown, batch,reloadfunction }) {
     tempData[label] = updatedList;
     setChecked(tempData);
   };
-////////////
   const filterOptions = (options, { inputValue }) => {
-    // Implement your custom filtering logic here
     const values = options.filter(option =>
       {
-        console.log("hi")
         return option.first_name.toLowerCase().includes(inputValue.toLowerCase());
         
     }
     );
     return values;
   };
-
-
     var role = JSON.parse(localStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-    // console.log("🚀 ~ file: DialogForm.jsx:92 ~ DialogForm ~ userid:", userid)
-    // console.log("🚀 ~ file: DialogForm.jsx:50 ~ DialogForm ~ role:", role)
     const [open, setOpen] = React.useState(false);
     React.useEffect(() => {
-      //setShown(shown)
       setOpen(shown)
     }, [shown])
   
     const handleClickOpen = () => {
       sendForm = {...formData};
-      // setProgramAssessment('')
-      // setDay1Day2('')
       setSendForm(sendForm);
-      // checked = {...checkData}
-      // setChecked(checked)
-      // setSendForm(sendForm);
 checked = {...checkData}
 setProgramAssessment('')
 setLeave2('')
@@ -156,7 +136,6 @@ reloadfunction()
   const [age, setAge] = React.useState('');
   const [states, setStates] = useState([]);
   const [trainers,setTrainers]=useState([]);
-  console.log("🚀 ~ file: DialogForm.jsx:99 ~ DialogForm ~ trainers:", trainers)
   const [assessmentType,setassessmentType]=useState('');
   const [intract,setIntract]=useState('');
   const [module,setModule]=useState('');
@@ -174,15 +153,12 @@ reloadfunction()
   const [rate9,setRate9]=useState('');
   const [rate10,setRate10]=useState('');
   const [leave,setLeave]=useState('');
-
   const [leave1,setLeave1]=useState('');
   const [leave2,setLeave2]=useState('');
   const [leave3,setLeave3]=useState('');
   const [leave4,setLeave4]=useState('');
-
   const [engage,setEngage]=useState('');
   const [participant,setParticipant]=useState('');
-  console.log("🚀 ~ file: DialogForm.jsx:130 ~ DialogForm ~ participant:", participant)
   const [level1,setLevel1]=useState('');
   const [level2,setLevel2]=useState('');
   const [level3,setLevel3]=useState('');
@@ -190,21 +166,12 @@ reloadfunction()
   const [level5,setLevel5]=useState('');
   const [day1Day2,setDay1Day2]=useState('');
   var [Id,setID]=useState();
-  console.log("🚀 ~ file: DialogForm.jsx:161 ~ DialogForm ~ Id:", Id)
-  console.log("🚀 ~ file: DialogForm.jsx:102 ~ DialogForm ~ day1Day2:", day1Day2)
-
-  console.log("🚀 ~ file: DialogForm.jsx:101 ~ DialogForm ~ assessmentType:", assessmentType)
   const [programAssessment,setProgramAssessment]=useState('')
-  console.log("🚀 ~ file: DialogForm.jsx:103 ~ DialogForm ~ programAssessment:", programAssessment)
   const [district, setDistrict] = useState([])
-  console.log("🚀 ~ file: DialogForm.jsx:165 ~ DialogForm ~ district:", district)
   const [poa, setPoa] = useState([])
   const [taluk, setTaluk] = useState([])
-  // console.log("🚀 ~ file: DialogForm.jsx:103 ~ DialogForm ~ taluk:", taluk)
   const [gfName,setGFName]=useState([])
-  console.log("🚀 ~ file: DialogForm.jsx:192 ~ DialogForm ~ gfName:", gfName)
   const today = dayjs();
-  console.log("🚀 ~ file: DialogForm.jsx:76 ~ DialogForm ~ gfName:", gfName)
   const [data, setData] = useState({
     country: 1,
     state: '',
@@ -212,32 +179,21 @@ reloadfunction()
     talaq_id: ''
   })
   
-  // const handleClose = () => {
-  //   alert("form saved sucessfully");
-  //   console.log("form saved sucessfully");
-  //   setOpen(false);
-  // };
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-
-
   
  
   useEffect(() => {
-    // console.log("use effect-----");
     getGFname()
     Trainerlist()
     getDistrict()
-    // Trainerlist()
     
   }, []
   )
-
   const handleprogramassessment=(event)=>{
     setProgramAssessment(event.target.value)
     getPoa(event.target.value)
-    console.log(programAssessment,"programmmmmmmmmmmmmmmmmmmmmmmmmm")
 }
   const handleassessmentType=(event)=>{
     setassessmentType(event.target.value)
@@ -331,7 +287,6 @@ reloadfunction()
     setParticipant(event.target.value)
     
 }
-
   const handlelevel1=(event)=>{
     setLevel1(event.target.value)
     
@@ -357,19 +312,11 @@ reloadfunction()
     
 }
  
-// const type = programAssessment
   const getPoa = (type) => {
-console.log(programAssessment,"program assesment")
-
     var data = JSON.stringify({
-      // "country_id": "1",
-      // "state_id": 3,
-     // "district_id": id
      "type":  type==3 ? '' : type,
      "session_type":'',
-
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appGo/getPoa ',
@@ -378,20 +325,16 @@ console.log(programAssessment,"program assesment")
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setPoa(response.data)
-        console.log(response.data,"<------------------setTaluksetTaluk");
-        // getTaluk();
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const getDistrict = () => {
   
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appGo/allDist',
@@ -400,27 +343,19 @@ console.log(programAssessment,"program assesment")
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setDistrict(response.data)
-        console.log(response.data,"<------------------setTaluksetTaluk");
-        
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
   const getGFname = async (id) => {
     
     var data = JSON.stringify({
-      // "country_id": "1",
-      // "state_id": 3,
-     // "district_id": id
      "role_id":6,
-
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
@@ -429,20 +364,13 @@ console.log(programAssessment,"program assesment")
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setGFName(response.data.list
-        //   .sort((x,y)=>{
-        //   if (x.first_name > y.first_name ) return 1
-        //   if (y.first_name > x.first_name)  return -1
-        //   return 0
-        // })
         )
-        // console.log(response.data,"<------------------setTaluksetTaluk");
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
  
@@ -450,9 +378,7 @@ console.log(programAssessment,"program assesment")
     
     var data = JSON.stringify({
       "dist_id":Id,
-
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appGo/listTaluk',
@@ -461,14 +387,12 @@ console.log(programAssessment,"program assesment")
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setTaluk(response.data)
-        console.log(response.data,"<------------------setTaluksetTaluk");
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
  
@@ -476,9 +400,7 @@ console.log(programAssessment,"program assesment")
     
     var data = JSON.stringify({
       "role_id":"5"
-
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getTrainersList.php',
@@ -487,17 +409,14 @@ console.log(programAssessment,"program assesment")
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setTrainers(response?.data?.list)
-        console.log(response,"<------------------setTaluksetTaluk");
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
-
   const validationData = {
     1:{
       "Day 1":[],
@@ -506,9 +425,6 @@ console.log(programAssessment,"program assesment")
     2:[],
     3:[]
   }
-
-
-
  
   var formData =     {
     emp_id:"",
@@ -628,15 +544,11 @@ console.log(programAssessment,"program assesment")
      check_which_instructions_the_gelathi_did_not_do:'',
      did_this_module_take_30_minutes_as_allotted_3:"",
    }
-
 const [apiData, setApiData] = useState({})
   var [sendForm, setSendForm]  = useState ({...formData})
   var [checked, setChecked]  = useState ({...checkData})
-  console.log("🚀 ~ file: DialogForm.jsx:344 ~ DialogForm ~ sendForm:", sendForm.name_of_the_trainer_being_evaluated)
-
   const setFormDistrictName = (value)=>{
     let {id,name}=value
-    console.log(value,"districtttttt",id,name)
     setSendForm({ ...sendForm, name_of_the_district:name,district:value})
     Id = id;
     setID(id)
@@ -714,17 +626,14 @@ const [apiData, setApiData] = useState({})
   const [the_gelathi_did_not_ask_1Error,setthe_gelathi_did_not_ask_1Error]=useState(false)
 const validation =()=>{
   if(programAssessment==0){
-    // alert('please Fill all the field')
     setprogramAssessmentError(true);
     setHelperText('Please Select The Option');
   }
   
   if(sendForm.today_poa==''){
-    // alert('please Fill all the field')
     settoday_poaError(true);
     setHelperText('Please Select The Option');
   }
-
   if(sendForm.district==''){
     alert('please Fill all the field')
     setdistrictError(true);
@@ -734,14 +643,7 @@ const validation =()=>{
     alert('please Fill all the field')
     setname_of_the_talukError(true);
     setHelperText('Please Select The Option');
-    //commonValidation(setname_of_the_talukError);
   }
-
-  // function commonValidation(variable){
-  //   alert('please Fill all the field')
-  //   variable(true);
-  //   setHelperText('Please Select The Option');
-  // }
   if(programAssessment ==1 ){
     if(day1Day2==''){
       alert('please Fill all the field')
@@ -755,166 +657,102 @@ const validation =()=>{
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-      // else if (checked['check_which_ones_the_trainer_did_not_do'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_doError(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
       else if (sendForm.how_many_women_attended_the_training_session == '')
       {
         sethow_many_women_attended_the_training_sessionError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
-      // else if  (checked['check_which_ones_the_trainer_did_not_do_1'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_do_1Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
      else if  (intract == '')
       {
         setintractError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
      else if  (sendForm.did_any_women_leave_tring_session_dring_or_after_1st_module == '')
       {
         setdid_any_women_leave_tring_session_dring_or_after_1st_moduleError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
      else if  (module == '')
       {
         setmoduleError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
      else if  (sendForm.did_any_new_women_attend_the_training_session_during_module == '')
       {
         setdid_any_new_women_attend_the_training_session_during_moduleError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
-    //  else if  (checked['check_which_ones_the_trainer_did_not_do_2'] == 0)
-    //   {
-    //     setcheck_which_ones_the_trainer_did_not_do_2Error(true)
-    //     setHelperText('Please Select The Option');
-    //     alert("please fill ")
-    //   }
-
      else if  (checked['during_the_debrief_the_trainer_did'] == 0)
       {
         setduring_the_debrief_the_trainer_didError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
      else if  (sendForm.did_any_women_leve_training_session_during_or_after_1st_module_1=='')
       {
         setdid_any_women_leve_training_session_during_or_after_1st_module_1Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
      else if  (module1=='')
       {
         setmodule1Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
      else if  (attend=='')
       {
         setattendError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
-      // else if  (checked['check_which_ones_the_trainer_did_not_do_3'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_do_3Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
-      // else if  (checked['during_the_debriefs_for_role_plays_the_trainer_did_not_ask'] == 0)
-      // {
-      //   setduring_the_debriefs_for_role_plays_the_trainer_did_not_askError(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
       else if  (leave2=='')
       {
         setleave2Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if  (engage=='')
       {
         setengageError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if  (participant=='')
       {
         setparticipantError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if (sendForm.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1 == '')
       {
         setdid_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")   
       }
-
       else if  (sendForm.did_this_module_take_30_minutes_as_allotted=='')
       {
         setdid_this_module_take_30_minutes_as_allottedError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if  (sendForm.did_any_new_women_attend_training_session_during_this_module_2=='')
       {
         setdid_any_new_women_attend_training_session_during_this_module_2Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
-      // else if (checked['check_which_ones_the_trainer_did_not_do_4'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_do_4Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
       else if  (sendForm.did_this_module_take_30_minutes_as_allotted_1=='')
       {
         setdid_this_module_take_30_minutes_as_allotted_1Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
-      // else if (checked['check_which_ones_the_trainer_did_not_do_5'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_do_5Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
       else{
         apiFormHit()
       }
@@ -926,95 +764,42 @@ const validation =()=>{
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-      // else if (checked['check_which_ones_the_trainer_did_not_do'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_doError(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
       else if (sendForm.was_the_recap_done=='')
       {
         setwas_the_recap_doneError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if (sendForm.did_the_recap_take_15_minutes_as_allotted=='')
       {
         setdid_the_recap_take_15_minutes_as_allottedError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
-      // else if  (checked['check_which_ones_the_trainer_did_not_do_1'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_do_1Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
-      // else if  (checked['check_which_ones_the_trainer_did_not_do_2'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_do_2Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
-      // else if  (checked['during_the_debrief_did_the_trainer_did_not_do_the_following'] == 0)
-      // {
-      //   setduring_the_debrief_did_the_trainer_did_not_do_the_followingError(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
       else if  (participant=='')
       {
         setparticipantError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if  (sendForm.did_any_women_leave_tring_session_dring_or_after_1st_module == '')
       {
         setdid_any_women_leave_tring_session_dring_or_after_1st_moduleError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if  (sendForm.did_this_module_take_30_minutes_as_allotted=='')
       {
         setdid_this_module_take_30_minutes_as_allottedError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
-      // else if  (checked['check_which_ones_the_trainer_did_not_do_3'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_do_3Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-      // else if  (checked['check_which_instructions_the_trainer_did_not_do'] == 0)
-      // {
-      //   secheck_which_instructions_the_trainer_did_not_doError(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // 
-
       else if  (sendForm.repeat_the_activity_with_the_second_volunteer=='')
       {
         setrepeat_the_activity_with_the_second_volunteerError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
-      // else if  (checked['check_which_ones_the_trainer_did_not_do_2'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_do_2Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
       
       else if  (sendForm.were_the_participants_responsive_during_the_debriefing_1=='')
       {
@@ -1022,47 +807,18 @@ const validation =()=>{
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if (sendForm.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1 == '')
       {
         setdid_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if  (sendForm.did_this_module_take_30_minutes_as_allotted_1=='')
       {
         setdid_this_module_take_30_minutes_as_allotted_1Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
-      // else if (checked['check_which_ones_the_trainer_did_not_do_4'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_do_4Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
-      // else if (checked['the_trainer_did_not_ask'] == 0)
-      // {
-      //   setthe_trainer_did_not_askError(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
-      // else if (checked['what_did_the_trainer_not_do'] == 0)
-      // {
-      //   setwhat_did_the_trainer_not_doError(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-      // else if (checked['during_the_debrief_did_the_trainer_not_ask_1'] == 0)
-      // {
-      //   setduring_the_debrief_did_the_trainer_not_ask_1Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
       
       else if  (sendForm.were_the_participants_responsive_during_the_debriefing_2=='')
       {
@@ -1070,74 +826,44 @@ const validation =()=>{
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if  (sendForm.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2=='')
       {
         setdid_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if  (sendForm.did_this_module_take_30_minutes_as_allotted_3=='')
       {
         setdid_this_module_take_30_minutes_as_allotted_3Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
-      // else if (checked['check_which_ones_the_trainer_did_not_do_5'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_do_5Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
-      // else if (checked['check_which_ones_the_trainer_did_not_do_5'] == 0)
-      // {
-      //   setduring_the_debrief_did_the_trainer_not_ask_2Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
       else if  (sendForm.were_the_participants_responsive_during_the_debriefing_3=='')
       {
         setwere_the_participants_responsive_during_the_debriefing_3Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if  (sendForm.did_this_module_take_30_minutes_as_allotted_2=='')
       {
         setdid_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if  (sendForm.were_the_participants_responsive_during_the_debriefing_3=='')
       {
         setdid_this_module_take_30_minutes_as_allotted_2Error(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
-      // else if (checked['check_which_ones_the_trainer_did_not_do_6'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_do_6Error(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
-
       else{
         apiFormHit()
       }
-
   
     }
  
   }
-
   if(programAssessment ==2 ){
-
     if(sendForm.name_of_the_gf==''){
       alert('please Fill all the field')
       setname_of_the_gfError(true);
@@ -1148,25 +874,16 @@ const validation =()=>{
       setassessmentTypeError(true);
       setHelperText('Please Select The Option');
     }
-
     else if (checked['the_gf_comptetly_carried_out_following_funtions'] == 0){
       alert('please Fill all the field')
       setthe_gf_comptetly_carried_out_following_funtionsError(true);
       setHelperText('Please Select The Option');
     }
-
     else if (checked['the_gf_caried_followig_fuctions_bfore_traning_or_meting_started'] == 0){
       alert('please Fill all the field')
       setthe_gf_caried_followig_fuctions_bfore_traning_or_meting_startedError(true);
       setHelperText('Please Select The Option');
     }
-
-    // else if (checked['check_which_ones_the_gf_did_not_do'] == 0){
-    //   alert('please Fill all the field')
-    //   setcheck_which_ones_the_gf_did_not_doError(true);
-    //   setHelperText('Please Select The Option');
-    // }
-
     else if (level1=='' || level2=='' || level3==''  || level4==''  || level5=='' ){
       alert('please Fill all the field')
       setlevelError(true);
@@ -1178,85 +895,16 @@ const validation =()=>{
       setthe_gf_competently_covered_folowing_things_in_training_deliveredError(true);
       setHelperText('Please Select The Option');
     }
-
     else if (rate1=='' || rate2=='' || rate3=='' || rate4=='' || rate5=='' || rate6=='' || rate7=='' || rate8=='' || rate9=='' || rate10==''  ){
       alert('please Fill all the field')
       setrateError(true);
       setHelperText('Please Select All Sesion  The Option');
     }
-
     else if (checked['any_futher_training_and_understding_reqired_by_gf_traing_module'] == 0){
       alert('please Fill all the field')
       setany_futher_training_and_understding_reqired_by_gf_traing_moduleError(true);
       setHelperText('Please Select The Option');
     }
-
-    // else if(assessmentType=='Circle Meeting'){
-    //   if (checked['check_which_ones_the_gf_did_not_do'] == 0){
-    //     alert('please Fill all the field')
-    //     setcheck_which_ones_the_gf_did_not_doError(true);
-    //     setHelperText('Please Select The Option');
-    //   }
-    //   else{
-    //     apiFormHit()
-    //   }
-    // }
-
-    // else if(assessmentType=='Spoorthi Module 1'){
-    //   if (checked['check_which_ones_the_gf_did_not_do'] == 0){
-    //     alert('please Fill all the field')
-    //     setcheck_which_ones_the_gf_did_not_doError(true);
-    //     setHelperText('Please Select The Option');
-    //   }
-    //   else{
-    //     apiFormHit()
-    //   }
-    // }
-
-    // else if(assessmentType=='Spoorthi Module 2'){
-    //   if (checked['check_which_ones_the_gf_did_not_do'] == 0){
-    //     alert('please Fill all the field')
-    //     setcheck_which_ones_the_gf_did_not_doError(true);
-    //     setHelperText('Please Select The Option');
-    //   }
-    //   else{
-    //     apiFormHit()
-    //   }
-    // }
-
-    // else if(assessmentType=='Spoorthi Module 3'){
-    //   if (checked['check_which_ones_the_gf_did_not_do'] == 0){
-    //     alert('please Fill all the field')
-    //     setcheck_which_ones_the_gf_did_not_doError(true);
-    //     setHelperText('Please Select The Option');
-    //   }
-    //   else{
-    //     apiFormHit()
-    //   }
-    // }
-
-    // else if(assessmentType=='Spoorthi Module 4'){
-    //   if (checked['check_which_ones_the_gf_did_not_do'] == 0){
-    //     alert('please Fill all the field')
-    //     setcheck_which_ones_the_gf_did_not_doError(true);
-    //     setHelperText('Please Select The Option');
-    //   }
-    //   else{
-    //     apiFormHit()
-    //   }
-    // }
-
-    // else if(assessmentType=='Green Module 1'){
-    //   if (checked['check_which_ones_the_gf_did_not_do'] == 0){
-    //     alert('please Fill all the field')
-    //     setcheck_which_ones_the_gf_did_not_doError(true);
-    //     setHelperText('Please Select The Option');
-    //   }
-    //   else{
-    //     apiFormHit()
-    //   }
-    // }
-
     else{
       apiFormHit()
     }
@@ -1270,106 +918,35 @@ const validation =()=>{
  
     }
     else if(sendForm.days_modules=='Session-1 _ Introduction'){
-
-      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
-      //   setHelperText('Please Select The Option');
-      // }
-      // else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
-      //   setHelperText('Please Select The Option');
-      // }
-
-      // else if(checked['check_which_ones_the_gelathi_did_not_do_2'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_do_2Error(true);
-      //   setHelperText('Please Select The Option');
-      // }
-      // else {
         apiFormHit()
-      // }
     }
-
     else if(sendForm.days_modules=='Session-2 _ Financial Management'){
-      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
-      //   setHelperText('Please Select The Option');
-      // }
-
       if (sendForm.was_the_recap_done=='')
       {
         setwas_the_recap_doneError(true)
         setHelperText('Please Select The Option');
         alert("Please Select The Option")
       }
-      // else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
-      //   setHelperText('Please Select The Option');
-      // }
       else {
         apiFormHit()
       }
     }
-
     else if(sendForm.days_modules=='Session-3 _Basics of an enterprise'){
-      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
-      //   setHelperText('Please Select The Option');
-      // }
-
     
        if(checked['during_the_debrief_did_the_gelathi'] == 0){
         alert('please Fill all the field')
         setduring_the_debrief_did_the_gelathiError(true);
         setHelperText('Please Select The Option');
       }
-
-      // else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
-      //   setHelperText('Please Select The Option');
-      // }
       else {
         apiFormHit()
       }
     }
-
     else if(sendForm.days_modules=='Session-4 _Building Relationship'){
-      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
-      //   setHelperText('Please Select The Option');
-      // }
-
     
-      // else if(checked['during_the_debriefs_for_role_plays_the_gelathi_did_not_ask'] == 0){
-      //   alert('please Fill all the field')
-      //   setduring_the_debriefs_for_role_plays_the_gelathi_did_not_askError(true);
-      //   setHelperText('Please Select The Option');
-      // }
-
-      // else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
-      //   setHelperText('Please Select The Option');
-      // }
-      // else {
         apiFormHit()
-      // }
     }
-
     else if(sendForm.days_modules=='Session-5 _Assets and Liabilities'){
-      // if (checked['check_which_ones_the_trainer_did_not_do'] == 0)
-      // {
-      //   setcheck_which_ones_the_trainer_did_not_doError(true)
-      //   setHelperText('Please Select The Option');
-      //   alert("please fill ")
-      // }
       if (sendForm.was_the_recap_done_1=='')
       {
         setwas_the_recap_done_1Error(true)
@@ -1380,94 +957,42 @@ const validation =()=>{
         apiFormHit()
       }
     }
-
-
     else if(sendForm.days_modules=='Session-6 _Goal setting game'){
       
       
-
        if  (sendForm.repeat_the_activity_with_the_second_volunteer=='')
       {
         setrepeat_the_activity_with_the_second_volunteerError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else if  (sendForm.did_the_debrief_done_by_gelathi=='')
       {
         setdid_the_debrief_done_by_gelathiError(true)
         setHelperText('Please Select The Option');
         alert("please fill ")
       }
-
       else {
         apiFormHit()
       }
     }
-
     else if(sendForm.days_modules=='Session-7 _Financial Goals'){
-      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
-      //   setHelperText('Please Select The Option');
-      // }
-
-      // else if(checked['the_gelathi_did_not_ask_1'] == 0){
-      //   alert('please Fill all the field')
-      //   setthe_gelathi_did_not_ask_1Error(true);
-      //   setHelperText('Please Select The Option');
-      // }
-
-      // else if(checked['during_the_debrief_did_the_gelathi_not_ask'] == 0){
-      //   alert('please Fill all the field')
-      //   setduring_the_debrief_did_the_gelathi_not_askError(true);
-      //   setHelperText('Please Select The Option');
-      // }
-      // else {
         apiFormHit()
-      // }
     }
-
     else if(sendForm.days_modules=='Session-8 _Loans-Group discussion of Case Studies'){
-      // if(checked['check_which_ones_the_gelathi_did_not_do'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_doError(true);
-      //   setHelperText('Please Select The Option');
-      // }
-
-
-
-      // else if(checked['during_the_debrief_did_the_gelathi_not_ask'] == 0){
-      //   alert('please Fill all the field')
-      //   setduring_the_debrief_did_the_gelathi_not_askError(true);
-      //   setHelperText('Please Select The Option');
-      // }
-
-      // else if(checked['check_which_ones_the_gelathi_did_not_do_1'] == 0){
-      //   alert('please Fill all the field')
-      //   setcheck_which_ones_the_gelathi_did_not_do_1Error(true);
-      //   setHelperText('Please Select The Option');
-      // }
-      // else {
         apiFormHit()
-      // }
     }
-
     else{
       apiFormHit()
     }
   }
 }
   const apiFormHit = async => {
-
-// }else{
 let data = JSON.stringify({
   emp_id:parseInt(userid) ,
   role_id: parseInt(role) ,
   email_address: sendForm?.email_address,
   name_of_the_assessor: sendForm?.name_of_the_assessor,
-  // "entry_date": "2023-05-18"+"T00:00:00Z",
-
  entry_date: moment(sendForm?.entry_date?.$d)?.format('YYYY-MM-DDTHH:mm:ss') + "Z",
   program_assessment: parseInt(programAssessment),
   today_poa: sendForm.today_poa,
@@ -1498,7 +1023,6 @@ let data = JSON.stringify({
   did_the_trainer_leave_women_to_read_role_play_card_themselves: leave2,
   did_the_groups_engage_and_interact_among_themselves_well: engage,
   were_the_participants_responsive_during_the_debriefing:participant,
-  // did_any_women_leave_tring_session_dring_or_after_1st_module_2: leave3,
   did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1: sendForm.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1,
   if_so_how_many_4: parseInt(sendForm.if_so_how_many_4),
   did_this_module_take_30_minutes_as_allotted: sendForm.did_this_module_take_30_minutes_as_allotted,
@@ -1547,7 +1071,6 @@ let data = JSON.stringify({
   any_other_comments_about_the_gelathi_facilitator: sendForm.any_other_comments_about_the_gelathi_facilitator,
   name_of_the_gelathi_being_evaluated: sendForm.name_of_the_gelathi_being_evaluated,
   name_of_the_gelathi_being_evaluated_1: sendForm.name_of_the_gelathi_being_evaluated_1,
-
   days_modules: sendForm.days_modules,
   check_which_ones_the_gelathi_did_not_do: checked['check_which_ones_the_gelathi_did_not_do'],
   how_many_women_attended_the_training_session_2:parseInt (sendForm.how_many_women_attended_the_training_session_2),
@@ -1582,8 +1105,6 @@ let data = JSON.stringify({
   did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3:sendForm.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3,
   did_this_module_take_30_minutes_as_allotted_3:sendForm.did_this_module_take_30_minutes_as_allotted_3,
   });
-console.log("🚀 ~ file: DialogForm.jsx:292 ~ apiFormHit ~ data:", data.deadline_to_collect_the_stories)
-
 let config = {
   method: 'post',
   maxBodyLength: Infinity,
@@ -1593,7 +1114,6 @@ let config = {
   },
   data : data
 };
-
 axios.request(config)
 .then((response) => {
  setApiData(response.data)
@@ -1615,7 +1135,6 @@ setEngage('')
 setDay1Day2('')
 setChecked(checked)
 reloadfunction()
-  console.log(JSON.stringify(response.data),'<-----------------------question tag------------------>')
 })
 .catch((error) => {
   Swal.fire({
@@ -1626,37 +1145,23 @@ reloadfunction()
     timer: 2000
   });
   handleClose();
-  console.log(error);
 });
-// }
   }
-//   else{
-//     alert('Please Fill All the Fields')
-//   }
-// }
-
-
   const handleTime = (event) => {
   setSendForm({ ...sendForm, entry_date: event });
    
   }; 
   const [others,setothers] = useState('')
-  console.log("🚀 ~ file: DialogForm.jsx:474 ~ DialogForm ~ others:", others)
   const handlother=(e)=>{
     setothers(e.target.value)
   }
-
   const validate = ( )=>{
-
   }
   const TenQna = ()=>{
  
     <FormControl >
-
     </FormControl>
-
   }
-
   return (
     <>
         <Button variant="contained" style={{
@@ -1710,12 +1215,9 @@ reloadfunction()
         
   
         
-
-
     {/* 1 */}
     <Grid style={{backgroundColor:"#FFD580", marginTop: "30px"}}>
             <Typography></Typography>
-
        
         
         <Card sx={{marginTop:'60px', margin:"20px"}}>
@@ -1751,7 +1253,6 @@ reloadfunction()
                 </Stack> 
         </CardContent>
      </Card>
-
      <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Stack>
@@ -1766,16 +1267,13 @@ id="date-time-picker"
   value={sendForm?.entry_date}
   PopperProps={{
     placement: "top"
-
   }}
   renderInput={(params) => <TextField  required inputProps={{ required: true }} {...params} color="common" />}
 />
                 </Stack> 
               </Stack>
-
         </CardContent>
      </Card>
-
      <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -1787,7 +1285,6 @@ id="date-time-picker"
                 </Typography>
                 <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
-              // defaultValue="Natural Resource"
               name="radio-buttons-group"
               value={programAssessment}
               onChange={handleprogramassessment}
@@ -1827,20 +1324,15 @@ id="date-time-picker"
               <MenuItem value={itm?.name}>{itm?.name}</MenuItem>
             )
           })}
-
         </Select>
       </FormControl>
     </Box>
-
-
               </Stack>
         </CardContent>: null}
      </Card>
      <Card sx={{ margin:"20px"}}>
         <CardContent>
     
-
-
 <Box sx={{ minWidth: 120 }}>
       <FormControl style={{marginTop:"5px"}} fullWidth>
         <InputLabel id="Name of the District">Name of the District
@@ -1854,10 +1346,8 @@ id="date-time-picker"
           value={sendForm?.district}
           label="Name of the District"
           onChange={(e =>{
-            console.log(e,"distruct target value")
             setFormDistrictName(e?.target?.value)
             
-
           })}
         >
           {district?.map(itm =>{
@@ -1865,14 +1355,9 @@ id="date-time-picker"
               <MenuItem value={itm}>{itm?.name}</MenuItem>
             )
           })}
-
         </Select>
       </FormControl>
     </Box>
-
-
-
-
         </CardContent>
      </Card>
      <Card sx={{ margin:"20px"}}>
@@ -1897,13 +1382,11 @@ id="date-time-picker"
               <MenuItem value={itm}>{itm}</MenuItem>
             )
           })}
-
         </Select>
       </FormControl>
     </Box>
         </CardContent>
      </Card>
-
      <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Stack>
@@ -1916,8 +1399,6 @@ id="date-time-picker"
         </CardContent>
      </Card>
      
-
-
         </Grid>
         <br/>
         
@@ -1938,26 +1419,7 @@ id="date-time-picker"
         <CardContent>
          
           <Box sx={{ minWidth: 120, }}>
-      {/* <FormControl style={{marginTop:"5px"}} fullWidth>
-        <InputLabel id="Name of the Gelathi Facilitator">Name of the Gelathi Facilitator</InputLabel>
-        <Select
-          labelId="Name of the Gelathi Facilitator"
-          id="Name of the Gelathi Facilitator"
-        
-          label="Name of the Gelathi Facilitator"
-          onChange={(e =>{
-            setSendForm({ ...sendForm, name_of_the_gf:e?.target?.value})
-          })}
-          value={sendForm?.name_of_the_gf}
-        >
-          {gfName?.map(itm =>{
-            return (
-              <MenuItem value={itm?.first_name}>{itm?.first_name}</MenuItem>
-            )
-          })}
-
-        </Select>
-      </FormControl> */}
+  
       <Autocomplete
       disablePortal
       
@@ -1967,22 +1429,6 @@ id="date-time-picker"
       getOptionLabel={(option) => ( option.first_name  ) }
       sx={{ width: '100%'}}
       
-//       PopperComponent={(props) => <Popper {...props} sx={{
-//          position: "absolute",
-//       // top: 'auto',
-//       // left: 'auto',
-//       width: '100%',
-//       zIndex: 1,
-//       // height: 200
-//      }}
-//        placement='top-start' 
-//        />}
-//  PaperProps={{
-//     style: {
-//       zIndex: 9999,
-//       position: 'relative',
-//     },
-//   }}
       componentsProps={{
         paper: {
           sx: {
@@ -1993,16 +1439,11 @@ id="date-time-picker"
           }
         }
       }}
-      // onChange={(e =>{
-      //   setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated:e?.target?.value})
-      // })}
      onChange={(event, value) => {
   setSendForm({ ...sendForm, name_of_the_gf: value.first_name });
 }}
-
 renderOption={(props, option) => (
   <Box  component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props} key={option.id}>
-
     {option.first_name}
   </Box>
 )}
@@ -2012,7 +1453,6 @@ renderOption={(props, option) => (
     </Box>
         </CardContent>
           </Card>
-
           <Card  sx={{ marginTop:"20px"}}>
               <CardContent>
                   <Typography>No of participants at the start of the session
@@ -2022,7 +1462,6 @@ renderOption={(props, option) => (
                       </Stack> 
               </CardContent>
           </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -2054,13 +1493,11 @@ renderOption={(props, option) => (
                         <FormControlLabel control={<Radio  />} label="Vyapar Module 3" value="Vyapar Module 3"/>
                         <FormControlLabel control={<Radio  />} label="Vyapar Module 4" value="Vyapar Module 4"/>
                         <FormControlLabel control={<Radio  />} label="Vyapar Module 5" value="Vyapar Module 5"/>
-
                   </RadioGroup>
                 </Stack>
               </Stack>
         </CardContent>
           </Card>
-
           <Card sx={{marginTop:2}}>
                 <CardContent>
                 <Typography >
@@ -2081,7 +1518,6 @@ renderOption={(props, option) => (
       </CardContent>
            </Card>
       
-
            <Card sx={{marginTop:2}}>
               <CardContent>
                         <Typography >
@@ -2100,7 +1536,6 @@ renderOption={(props, option) => (
                   </FormGroup>
               </CardContent>
               </Card>
-
         <Card  sx={{ marginTop:"20px"}}>
                 <CardContent>
                     <Typography>How many stories of success or change emerged from the recap
@@ -2119,12 +1554,9 @@ renderOption={(props, option) => (
                         </Stack> 
                 </CardContent>
         </Card>
-
         </CardContent>
         </Grid> :null}
-
       
-
          {/* 3 */}
      {  ( assessmentType=='Circle Meeting' )?    <Grid  backgroundColor={"#FFD580"}>
           
@@ -2160,16 +1592,13 @@ renderOption={(props, option) => (
             <FormControlLabel control={<Checkbox  />} label="Explain about the Buzz Vyapar programme" value="Explain about the Buzz Vyapar programme" onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
             <FormControlLabel control={<Checkbox  />} label="Share the mobile number" value="Share the mobile number" onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
             <FormControlLabel control={<Checkbox  />} label="Get the sign, group photo and vote of thanks" value="Get the sign, group photo and vote of thanks" onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
-
     </FormGroup>
         </CardContent>
           </Card>
       
         </CardContent>
         </Grid>:null}
-
         
-
               {/* 4 */}
      { ( assessmentType=='Spoorthi Module 1' )?   <Grid  backgroundColor={"#FFD580"}>
           
@@ -2208,7 +1637,6 @@ renderOption={(props, option) => (
         </CardContent>
         </Grid>:null}
        
-
        {/* 5 */}
       { ( assessmentType=='Spoorthi Module 2' )? 
           <div>
@@ -2242,9 +1670,7 @@ renderOption={(props, option) => (
             <FormControlLabel control={<Checkbox  />} label="Given name for Spoorthi-2" value="Given name for Spoorthi-2"  onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
             <FormControlLabel control={<Checkbox  />} label="Feedback done" value="Feedback done" onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
             
-
             
-
     </FormGroup>
         </CardContent>
           </Card>
@@ -2255,8 +1681,6 @@ renderOption={(props, option) => (
           </div>
         :null  }      
         
-
-
           {/* 6 */}
          {( assessmentType=='Spoorthi Module 3' )?  <Grid  backgroundColor={"#FFD580"}>
           {/* page-6 */}
@@ -2295,8 +1719,6 @@ renderOption={(props, option) => (
       
         </CardContent>
           </Grid>:null}
-
-
            {/* 7 */}
          { ( assessmentType=='Spoorthi Module 4' )?  <Grid  backgroundColor={"#FFD580"}>
           {/* page-7 */}
@@ -2335,7 +1757,6 @@ renderOption={(props, option) => (
         </CardContent>
         </Grid>:null}
         
-
         {   ( assessmentType=='Green Module 1' )?  <Grid backgroundColor={"#FFD580"}> 
         <CardContent>
           {/* page-40 */}
@@ -2369,7 +1790,6 @@ renderOption={(props, option) => (
       <FormControlLabel control={<Checkbox  />} label="Provided and discussed homework" value={'Provided and discussed homework'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
       <FormControlLabel control={<Checkbox  />} label=" Green Song" value={'Green Song'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
       <FormControlLabel control={<Checkbox  />} label=" Survey of 3 green motivators" value={'Survey of 3 green motivatorsGreen Song'} onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
-
     </FormGroup>
         </CardContent>
           </Card>
@@ -2414,7 +1834,6 @@ renderOption={(props, option) => (
       
         </CardContent>
         </Grid>:null}
-
        {( assessmentType=='Green Module 3' )?  <Grid  backgroundColor={"#FFD580"}>
           {/* page-42 */}
         <CardContent>
@@ -2450,9 +1869,7 @@ renderOption={(props, option) => (
             <FormControlLabel control={<Checkbox  />} label="Provide feedback GF and GM" value={'Provide feedback GF and GM'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
             <FormControlLabel control={<Checkbox  />} label="Homework" value={'Homework'}onChange={(event) =>handleprerequisites('check_which_ones_the_gf_did_not_do', event)}/>
             
-
             
-
     </FormGroup>
         </CardContent>
           </Card>
@@ -2580,7 +1997,6 @@ renderOption={(props, option) => (
                </Stack>
                </Stack>
          </CardContent>   </Card>
-
         
      </CardContent>
          </Grid>:null}
@@ -2627,7 +2043,6 @@ renderOption={(props, option) => (
                </Stack>
                </Stack>
          </CardContent>   </Card>
-
         
      </CardContent>
          </Grid>:null}
@@ -2670,7 +2085,6 @@ renderOption={(props, option) => (
                </Stack>
                </Stack>
          </CardContent>   </Card>
-
         
      </CardContent>
          </Grid>:null}
@@ -2714,7 +2128,6 @@ renderOption={(props, option) => (
                </Stack>
                </Stack>
          </CardContent>   </Card>
-
         
      </CardContent>
          </Grid>:null}
@@ -2759,11 +2172,9 @@ renderOption={(props, option) => (
                </Stack>
                </Stack>
          </CardContent>   </Card>
-
         
      </CardContent>
          </Grid>:null}
-
            {/* 10  common*/}
     {  ( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"}>
           {/* page-10 */}
@@ -2780,7 +2191,6 @@ renderOption={(props, option) => (
                 <Typography>
                 
                 <Typography >The purpose of the section is to collect quantitative data around participation, excitement, preparedness and the maintenance of interest level of the participants during the training.</Typography>
-
                 </Typography>
                 
                 <Stack>
@@ -2788,7 +2198,6 @@ renderOption={(props, option) => (
                 </Stack>
               </Stack>
         </CardContent>
-
  </Card>
  </Card>
         <Card  sx={{ marginTop:"20px"}}>
@@ -2814,7 +2223,6 @@ renderOption={(props, option) => (
         </CardContent>
           </Card>
          
-
           
  <Card sx={{marginTop:2}}>
           <CardContent>
@@ -2846,7 +2254,6 @@ renderOption={(props, option) => (
                       value={level1}
                    onChange={handlelevel1}
                     style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
-
                  
                     <FormControlLabel value="1" control={<Radio />}  />
                     <FormControlLabel value="2" control={<Radio />}  />
@@ -2857,7 +2264,6 @@ renderOption={(props, option) => (
                   
                 </CardContent>
             </CardContent>
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Present for the entire session</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between',alignItems:'center' }}>
@@ -2873,8 +2279,6 @@ renderOption={(props, option) => (
                   </RadioGroup>
                 </CardContent>
             </CardContent>
-
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Leave in the meeting/ training in between?</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
@@ -2891,7 +2295,6 @@ renderOption={(props, option) => (
                   
                 </CardContent>
             </CardContent>
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Signed the ledger/meeting minute</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
@@ -2907,7 +2310,6 @@ renderOption={(props, option) => (
                   </RadioGroup>
                 </CardContent>
             </CardContent>
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Brought the books / pens to take down notes?</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
@@ -2925,13 +2327,11 @@ renderOption={(props, option) => (
               </CardContent>
               
             </Card>
-
               </CardContent>
           </Card>
       
         </CardContent>
         </Grid>:null}
-
            {/* 12 common */}
     { ( programAssessment==2 )? 
   <div>
@@ -2952,7 +2352,6 @@ renderOption={(props, option) => (
                 <Typography>
                 
 The purpose of this sector is to help Gelathis learn to improves their skill sets around facilitation of the training.
-
                 </Typography>
                 
                 <Stack>
@@ -2960,9 +2359,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                 </Stack>
               </Stack>
         </CardContent>
-
  </Card>
-
           </Card>
       <Card sx={{marginTop:2}}>
       <CardContent>
@@ -2976,10 +2373,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           <FormControlLabel control={<Checkbox  />} label="Good Communication Skills" value={'Good Communication Skills'}onChange={(event) =>handleprerequisites('the_gf_competently_covered_folowing_things_in_training_delivered', event)}/>
           <FormControlLabel control={<Checkbox  />} label="Dressing Sense (Appearance)"value={'Dressing Sense (Appearance)'} onChange={(event) =>handleprerequisites('the_gf_competently_covered_folowing_things_in_training_delivered', event)}/>
           <FormControlLabel control={<Checkbox  />} label="Facilitation Skills (Concept Delivery, Voice, Involving participants)"value={'Facilitation Skills (Concept Delivery, Voice, Involving participants)'} onChange={(event) =>handleprerequisites('the_gf_competently_covered_folowing_things_in_training_delivered', event)}/>
-
-
-
-
     </FormGroup>
         </CardContent>
       </Card>
@@ -3014,7 +2407,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   value={rate1}
                   onChange={handleRate1}
                    style={{display:'flex',flexDirection:'row',justifyContent: 'space-between'}} >
-
                  
                     <FormControlLabel value="1" control={<Radio />}  />
                     <FormControlLabel value="2" control={<Radio />}  />
@@ -3025,7 +2417,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   
                 </CardContent>
             </CardContent>
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Venue</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between',alignItems:'center' }}>
@@ -3041,8 +2432,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   </RadioGroup>
                 </CardContent>
             </CardContent>
-
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Report of GF with Gelathis</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
@@ -3059,7 +2448,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   </RadioGroup>
                 </CardContent>
             </CardContent>
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Body language during the training</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
@@ -3076,7 +2464,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   </RadioGroup>
                 </CardContent>
             </CardContent>
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Making session interactive and fun</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
@@ -3110,7 +2497,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   </RadioGroup>
                 </CardContent>
               </CardContent>
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Ability to clear doubts</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
@@ -3127,7 +2513,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   </RadioGroup>
                 </CardContent>
               </CardContent>
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Ability to inspire the Gelathi's</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
@@ -3144,7 +2529,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   </RadioGroup>
                 </CardContent>
               </CardContent>
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Ability to give clear link between the activity and the  content</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
@@ -3161,7 +2545,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                   </RadioGroup>
                 </CardContent>
               </CardContent>
-
             <CardContent sx={{display: 'flex',flexDirection:"row"}}>
                 <CardContent sx={{width:'30%'}}>Vulnerable and honest</CardContent>
                 <CardContent sx={{width:'70%',display:'flex',flexDirection:'row',justifyContent: 'space-between' }}>
@@ -3180,15 +2563,10 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
               </CardContent>
               
             </Card>
-
-
-
               </CardContent>
-
           </Card>
           <Card  sx={{ marginTop:"20px"}}>
         <CardContent>
-
             <Typography>What worked in the training?
  
           </Typography>
@@ -3200,7 +2578,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           </Card>
           <Card  sx={{ marginTop:"20px"}}>
         <CardContent>
-
             <Typography>What can be better next time?
  
           </Typography>
@@ -3209,7 +2586,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                     </Stack> 
   
         </CardContent>
-
           </Card>
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
@@ -3229,7 +2605,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </Card>
         <Card  sx={{ marginTop:"20px"}}>
         <CardContent>
-
             <Typography>Did you find anything in the training/ Gelathi Facilitator that needs to be worked on priority?
  
           </Typography>
@@ -3238,11 +2613,9 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                     </Stack> 
   
         </CardContent>
-
           </Card>
         <Card  sx={{ marginTop:"20px"}}>
         <CardContent>
-
             <Typography>Details of success stories to be collected from Gelathis by GF
  
           </Typography>
@@ -3251,7 +2624,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                     </Stack> 
   
         </CardContent>
-
           </Card>
         <Card  sx={{ marginTop:"20px"}}>
         <CardContent>
@@ -3281,7 +2653,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                     </Stack> 
         </CardContent>
           </Card>
-
         <Card  sx={{ marginTop:"20px"}}>
         <CardContent>
             <Typography>Any other comments about the Gelathi Facilitator
@@ -3335,7 +2706,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
               </Stack>
         </CardContent>
  </Card>
-
           </Card>
       
         </CardContent>
@@ -3363,65 +2733,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
                           <FormHelperText style={{ color: 'red' }} >{helperText}</FormHelperText>
                         ) : null}{' '}
                 </Typography>
-                {/* <Box sx={{ minWidth: 120 }}>
-      <FormControl style={{marginTop:"5px"}} fullWidth>
-        <InputLabel id="Name of the trainer">Trainer
-      
-        </InputLabel>
-        <Select
-          labelId="Name of the trainer"
-          id="Name of the trainer"
-          value={sendForm?.name_of_the_trainer}
-          label="trainer"
-          onChange={(e =>{
-            setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated:e?.target?.value})
-          })}
-        >
-          {trainers?.map(itm =>{
-            return (
-              <MenuItem value={itm?.first_name}>{itm?.first_name}</MenuItem>
-            )
-          })}
-
-        </Select>
-      </FormControl>
-    </Box> */}
-
-{/* <Autocomplete
-      disablePortal
-      
-      id="combo-box-demo"
-      options={trainers}
-      getOptionLabel={(option) => option.first_name}
-      sx={{ width: '100%'}}
-      
-      PopperComponent={(props) => <Popper {...props} sx={{
-      //    position: "fixed",
-      // top: 'auto',
-      // left: 'auto',
-      width: '100%'
-     }}
-       placement='top-start' 
-       />}
-
-      componentsProps={{
-        paper: {
-          sx: {
-            height: 130
-          }
-        }
-      }}
-      // onChange={(e =>{
-      //   setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated:e?.target?.value})
-      // })}
-     onChange={(event, value) => {
-  setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated: value.first_name });
-}}
-      renderInput={(params) => <TextField  fullWidth {...params} label="Trainer"       
-    
-      
-       />}
-    /> */}
+            
     <Box>
       <Autocomplete
       disablePortal
@@ -3432,22 +2744,6 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
       getOptionLabel={(option) =>  option.first_name }
       sx={{ width: '100%'}}
       
-//       PopperComponent={(props) => <Popper {...props} sx={{
-//          position: "absolute",
-//       // top: 'auto',
-//       // left: 'auto',
-//       width: '100%',
-//       zIndex: 1,
-//       // height: 200
-//      }}
-//        placement='top-start' 
-//        />}
-//  PaperProps={{
-//     style: {
-//       zIndex: 9999,
-//       position: 'relative',
-//     },
-//   }}
       componentsProps={{
         paper: {
           sx: {
@@ -3458,16 +2754,11 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           }
         }
       }}
-      // onChange={(e =>{
-      //   setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated:e?.target?.value})
-      // })}
      onChange={(event, value) => {
   setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated: value.first_name });
 }}
-
 renderOption={(props, option) => (
   <Box  component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props} key={option.id}>
-
     {option.first_name}
   </Box>
 )}
@@ -3475,11 +2766,8 @@ renderOption={(props, option) => (
        />}     
     />
     </Box>
-
-
               </Stack>
         </CardContent>
-
           </Card>
           
         </CardContent>
@@ -3528,7 +2816,6 @@ renderOption={(props, option) => (
         </div>
         :null} 
         
-
         {/* 15 */}
         {( day1Day2=='Day 1')? 
         <div>
@@ -3555,7 +2842,6 @@ renderOption={(props, option) => (
      </Card>
           </Card>
       
-
           <Card sx={{marginTop:2}}>
               <CardContent>
                         <Typography >
@@ -3584,8 +2870,6 @@ renderOption={(props, option) => (
                   </FormGroup>
               </CardContent>
           </Card>
-
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -3622,7 +2906,6 @@ renderOption={(props, option) => (
                   <FormGroup>
                     <RadioGroup
                       onChange={(e) => setSendForm({ ...sendForm, did_any_women_leave_tring_session_dring_or_after_1st_module:e.target.value})} value={sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module}   
-
                     >
                     <FormControlLabel value="Yes"  control={<Radio />} label="Yes" />
                     <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -3632,7 +2915,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
            </Card>
-
        { (sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module=='Yes' )?  <Card  sx={{ marginTop:"20px"}}>
               <CardContent>
                   <Typography>If so, how many?
@@ -3642,7 +2924,6 @@ renderOption={(props, option) => (
                       </Stack> 
               </CardContent>
         </Card> : null}
-
         <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -3666,22 +2947,13 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
            </Card>
-
-
         </CardContent>
-
-
           
-
-
-
         </Grid>
         <br/>
         </div>
         :null} 
-
         
-
      
      {( day1Day2=='Day 1')? 
     <div>
@@ -3689,7 +2961,6 @@ renderOption={(props, option) => (
             <Typography>
               {/* PAGE 16  */}
               </Typography>
-
        
         
         <Card sx={{mt:4, margin:"20px", backgroundColor:'#ff7424'}}>
@@ -3728,13 +2999,11 @@ renderOption={(props, option) => (
         </CardContent>
      </Card>
         </Card>
-
   { (sendForm?.did_any_new_women_attend_the_training_session_during_module=='Yes')?  <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Stack>
                 <Typography variant="body1">
                   If so, How many?/ಹಾಗಿದ್ದರೆ ಎಷ್ಟು?
-
                 </Typography>
                 <Stack mt={3}>
                   <TextField type='number' required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendForm({ ...sendForm, if_so_how_many_1: e.target.value }) }} value={sendForm?.if_so_how_many_1}/>
@@ -3744,7 +3013,6 @@ renderOption={(props, option) => (
         
         </CardContent>
      </Card>: null}
-
      <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -3796,7 +3064,6 @@ renderOption={(props, option) => (
         <CardContent>
         <Stack mt={2}> 
                 <Typography> Did any women leave the training session during or after the first module?/ಮೊದಲ ಮಾಡ್ಯೂಲ್ ಸಮಯದಲ್ಲಿ ಅಥವಾ ನಂತರ ಯಾವುದೇ ಮಹಿಳೆಯರು ಸೆಷನ್ ಅನ್ನು ತೊರೆದಿದ್ದಾರೆಯೇ?
-
                 {did_any_women_leve_training_session_during_or_after_1st_module_1Error ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -3804,11 +3071,8 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, did_any_women_leve_training_session_during_or_after_1st_module_1:e.target.value})} value={sendForm?.did_any_women_leve_training_session_during_or_after_1st_module_1}   
-
-                      // onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
                   
                     >
                     <div style={{display:"flex"}}>
@@ -3823,7 +3087,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
    { (sendForm?.did_any_women_leve_training_session_during_or_after_1st_module_1=="Yes")?  <Card sx={{ margin:"20px"}}>
         <CardContent>
         <Stack>
@@ -3847,17 +3110,13 @@ renderOption={(props, option) => (
                 <Typography>Did this module take 20 minutes as allotted?/ಈ ಮಾಡ್ಯೂಲ್  {module1Error ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '} ನಿಗದಿಪಡಿಸಿದಂತೆ 20 ನಿಮಿಷಗಳನ್ನು ತೆಗೆದುಕೊಂಡಿದೆಯೇ?
-
                 </Typography>
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       value={module1}
                       onChange={handleModule1}
-                      // onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
-
                   
                     >
                     <div style={{display:"flex"}}>
@@ -3874,8 +3133,6 @@ renderOption={(props, option) => (
         </CardContent>
      </Card>
      
-
-
      </Grid>
      <br/>
     </div>
@@ -3888,7 +3145,6 @@ renderOption={(props, option) => (
               </Typography>
    <CardContent>
     
-
    
        
         
@@ -3935,8 +3191,6 @@ renderOption={(props, option) => (
         </Card>
         </Card>
         
-
-
         
     { (attend=="Yes")? <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
@@ -3953,9 +3207,6 @@ renderOption={(props, option) => (
         </CardContent>
          </Card>: null}
      
-
-
-
      <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}>
@@ -4024,7 +3275,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       value={leave2}
                       onChange={handleLeave2}
@@ -4042,7 +3292,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
      <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}> 
@@ -4054,7 +3303,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       value={engage}
                       onChange={handleEngage}
@@ -4074,7 +3322,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
      <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}> 
@@ -4082,12 +3329,10 @@ renderOption={(props, option) => (
                 {participantError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
-
                     </Typography>
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       value={participant}
                       onChange={handleParticipant}
@@ -4107,7 +3352,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
      <Card sx={{margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}> 
@@ -4115,16 +3359,13 @@ renderOption={(props, option) => (
                 {did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1Error ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
-
                     </Typography>
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                      
                       onChange={(e) => setSendForm({ ...sendForm, did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1:e.target.value})} value={sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1}   
-
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -4139,7 +3380,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
      {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1=='Yes')? <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack>
@@ -4153,12 +3393,10 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>: null}
-
      <Card sx={{ margin:"20px 0px 0px",}}>
         <CardContent>
         <Stack mt={2}>
                 <Typography> Did this module take 30 minutes as allotted?
-
                 {did_this_module_take_30_minutes_as_allottedError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -4166,11 +3404,8 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
-                      // onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
                       onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted}   
-
                   
                     >
                     <div style={{display:"flex"}}>
@@ -4183,18 +3418,13 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
-
      
    </CardContent>
      
      
      
-
-
      </Grid>
      :null}
-
      {( day1Day2=='Day 1')? 
        <Grid  backgroundColor={"#FFD580"}>
           {/* page-18 */}
@@ -4211,14 +3441,11 @@ renderOption={(props, option) => (
                 {did_any_new_women_attend_training_session_during_this_module_2Error ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
-
                     </Typography>
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
-                      // onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
                       onChange={(e) => setSendForm({ ...sendForm, did_any_new_women_attend_training_session_during_this_module_2:e.target.value})} value={sendForm?.did_any_new_women_attend_training_session_during_this_module_2}
                     >
                     <div style={{display:"flex"}}>
@@ -4234,9 +3461,7 @@ renderOption={(props, option) => (
        
         </CardContent>
        
-
           </Card>
-
     {  (sendForm?.did_any_new_women_attend_training_session_during_this_module_2=='Yes')?    <Card sx={{ margin:'20px 0 0 0' }}>
         <CardContent>
         <Stack>
@@ -4250,7 +3475,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>: null}
-
      <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack mt={2}>
@@ -4305,7 +3529,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
      <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack>
@@ -4344,7 +3567,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted_1:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted_1}
                   
@@ -4360,12 +3582,10 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
          
         </CardContent>
         </Grid>
            :null}
-
 {( day1Day2=='Day 1')? 
         <Grid  backgroundColor={"#FFD580"}>
           {/* page-19 */}
@@ -4411,46 +3631,8 @@ renderOption={(props, option) => (
         </CardContent>
      </Card>
        
-
           </Card>
-        
-     {/* <Card sx={{marginTop:2}}>
-        <CardContent>
-        <Stack mt={2}>
-                <Typography>
-                Name of the trainer being evaluated
-                </Typography>
-                <Stack mt={2}>
-                  <FormGroup>
-                    
-                    
-                    
-                    
-                    <FormControlLabel value="Ask how was it for you?" control={<Checkbox />} label="Ask how was it for you?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Ask what did you learn new today?" control={<Checkbox />} label="Ask what did you learn new today?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Ask do you have any feedback for me as a trainer or for our organisation so that we can deliver the best experience for you?" control={<Checkbox />} label="Ask do you have any feedback for me as a trainer or for our organisation so that we can deliver the best experience for you?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Ask the women that if they have any doubts/questions they can ask right now in the group or ask in person?" control={<Checkbox />} label="Ask the women that if they have any doubts/questions they can ask right now in the group or ask in person?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Tell the women what will be covered in the next training session" control={<Checkbox />} label="Tell the women what will be covered in the next training session" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Ask them to share with their family what they have learnt?" control={<Checkbox />} label="Ask them to share with their family what they have learnt?" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Create excitement/curiosity among the participants about the next training session" control={<Checkbox />} label="Create excitement/curiosity among the participants about the next training session" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Tell them that Buzz India will be following up on them for the next three years through a Buzz Gelathi" control={<Checkbox />} label="Tell them that Buzz India will be following up on them for the next three years through a Buzz Gelathi" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Explain the concept and functions of the Buzz Gelathi" control={<Checkbox />} label="Explain the concept and functions of the Buzz Gelathi" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    <FormControlLabel value="Appreciate the Anganwadi teacher" control={<Checkbox />} label="Appreciate the Anganwadi teacher" onChange={(event)=>handlecheckedata('borrowedmoney',event)}/>
-                    
-                    
-                   
-                   
-                    
-                  </FormGroup>
-                </Stack>
-              </Stack>
-        
-       
-        </CardContent>
-     </Card> */}
-
-    
-
+      
          
         </CardContent>
         </Grid>
@@ -4475,27 +3657,7 @@ renderOption={(props, option) => (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
                 </Typography>
-                {/* <Box sx={{ minWidth: 120 }}>
-      <FormControl style={{marginTop:"5px"}} fullWidth>
-        <InputLabel id="Name of the trainer">Trainer</InputLabel>
-        <Select
-          labelId="Name of the trainer"
-          id="Name of the trainer"
-          value={sendForm?.name_of_the_trainer}
-          label="trainer"
-          onChange={(e =>{
-            setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated:e?.target?.value})
-          })}
-        >
-          {trainers?.map(itm =>{
-            return (
-              <MenuItem value={itm?.first_name}>{itm?.first_name}</MenuItem>
-            )
-          })}
-
-        </Select>
-      </FormControl>
-    </Box> */}
+ 
       <Box>
       <Autocomplete
       disablePortal
@@ -4506,22 +3668,6 @@ renderOption={(props, option) => (
       getOptionLabel={(option) => option.first_name }
       sx={{ width: '100%'}}
       
-//       PopperComponent={(props) => <Popper {...props} sx={{
-//          position: "absolute",
-//       // top: 'auto',
-//       // left: 'auto',
-//       width: '100%',
-//       zIndex: 1,
-//       // height: 200
-//      }}
-//        placement='top-start' 
-//        />}
-//  PaperProps={{
-//     style: {
-//       zIndex: 9999,
-//       position: 'relative',
-//     },
-//   }}
       componentsProps={{
         paper: {
           sx: {
@@ -4532,16 +3678,11 @@ renderOption={(props, option) => (
           }
         }
       }}
-      // onChange={(e =>{
-      //   setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated:e?.target?.value})
-      // })}
      onChange={(event, value) => {
   setSendForm({ ...sendForm, name_of_the_trainer_being_evaluated: value.first_name });
 }}
-
 renderOption={(props, option) => (
   <Box  component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props} key={option.id}>
-
     {option.first_name}
   </Box>
 )}
@@ -4549,15 +3690,10 @@ renderOption={(props, option) => (
        />}     
     />
     </Box>
-
-
               </Stack>
         </CardContent>
-
           </Card>
-
          
-
    <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack>
@@ -4571,7 +3707,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
           
      
      <Card sx={{marginTop:2}}>
@@ -4612,12 +3747,10 @@ renderOption={(props, option) => (
                 {was_the_recap_doneError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
-
                     </Typography>
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, was_the_recap_done:e.target.value})} value={sendForm?.was_the_recap_done}
                   
@@ -4635,7 +3768,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
      <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack mt={2}> 
@@ -4643,15 +3775,12 @@ renderOption={(props, option) => (
                 {did_the_recap_take_15_minutes_as_allottedError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
-
                     </Typography>
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, did_the_recap_take_15_minutes_as_allotted:e.target.value})} value={sendForm?.did_the_recap_take_15_minutes_as_allotted}
-
                   
                     >
                     <div style={{display:"flex"}}>
@@ -4667,7 +3796,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
      <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack mt={2}>
@@ -4705,17 +3833,14 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
      
      
     
    
-
          
         </CardContent>
         </Grid>:null}
   
-
        { (day1Day2=='Day 2')?<Grid  backgroundColor={"#FFD580"}>
          
         <CardContent>
@@ -4740,7 +3865,6 @@ renderOption={(props, option) => (
               </Stack>
               </Stack>
         </CardContent>
-
           </Card>
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
@@ -4766,7 +3890,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
           </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -4787,13 +3910,11 @@ renderOption={(props, option) => (
             <FormControlLabel control={<Checkbox  />} value='Make them aware of different interest rates from different lenders' label="Make them aware of different interest rates from different lenders" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
             <FormControlLabel control={<Checkbox  />} value='Ask the women if they feel they are using assets now to the fullest or are they remaining dormant' label="Ask the women if they feel they are using assets now to the fullest or are they remaining dormant? (More of a reflection question and need not be answered by the women)" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
             <FormControlLabel control={<Checkbox  />} value='Re-emphasize why it is necessary to know this: in order to set realistic and achievable goals' label="Re-emphasize why it is necessary to know this: in order to set realistic and achievable goals." onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_did_not_do_the_following', event)}/>
-
     </FormGroup>
                 </Stack>
               </Stack>
         </CardContent>
           </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -4805,7 +3926,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       value={participant}
                       onChange={handleParticipant}
@@ -4830,11 +3950,8 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
-                      // onChange={(e, value) => { setSendData({ ...sendData, spendMoney: value }) }}
                       onChange={(e) => setSendForm({ ...sendForm, did_any_women_leave_tring_session_dring_or_after_1st_module:e.target.value})} value={sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module}   
-
                     >
                     <div style={{display:"flex"}}>
                       <FormControlLabel value="No" control={<Radio style={{color:"#595959"}} />} label="No" />
@@ -4846,7 +3963,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
      {(sendForm?.did_any_women_leave_tring_session_dring_or_after_1st_module=="Yes")? <Card sx={{ marginTop:"20px"}}>
      <CardContent>
         <Stack mt={2}>
@@ -4862,7 +3978,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
         </Card>: null}
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -4874,7 +3989,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted}   
                   
@@ -4915,7 +4029,6 @@ renderOption={(props, option) => (
               </Stack>
               </Stack>
         </CardContent>
-
           </Card>
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
@@ -4936,7 +4049,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
           </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -4959,7 +4071,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
           </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -4971,7 +4082,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, repeat_the_activity_with_the_second_volunteer:e.target.value})} value={sendForm?.repeat_the_activity_with_the_second_volunteer}
                   
@@ -4986,7 +4096,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -5014,7 +4123,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
           </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -5026,7 +4134,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, were_the_participants_responsive_during_the_debriefing_1:e.target.value})} value={sendForm?.were_the_participants_responsive_during_the_debriefing_1}   
                   
@@ -5051,7 +4158,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1:e.target.value})} value={sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_1}
                   
@@ -5083,7 +4189,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
         </Card>: null}
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -5095,7 +4200,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted_1:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted_1}                  
                     >
@@ -5111,7 +4215,6 @@ renderOption={(props, option) => (
      </Card>
         </CardContent>
         </Grid>:null}
-
         
        {(day1Day2=='Day 2')? <Grid  backgroundColor={"#FFD580"}>
          
@@ -5136,7 +4239,6 @@ renderOption={(props, option) => (
               </Stack>
               </Stack>
         </CardContent>
-
           </Card>
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
@@ -5161,7 +4263,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
           </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -5183,7 +4284,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
           </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -5206,9 +4306,7 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
           </Card>
-
          
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -5231,7 +4329,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
           </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -5243,7 +4340,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, were_the_participants_responsive_during_the_debriefing_2:e.target.value})} value={sendForm?.were_the_participants_responsive_during_the_debriefing_2}                  
                     >
@@ -5267,7 +4363,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2:e.target.value})} value={sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2}                  
                     >
@@ -5281,7 +4376,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
     {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_2=='Yes')? <Card sx={{ marginTop:"20px"}}>
      <CardContent>
         <Stack mt={2}>
@@ -5298,7 +4392,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
         </Card>: null}
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -5310,7 +4403,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted_3:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted_3}                  
                     >
@@ -5326,11 +4418,8 @@ renderOption={(props, option) => (
      </Card>
         </CardContent>
         </Grid> :null}
-
       
-
      
-
        { (day1Day2=='Day 2')?<Grid  backgroundColor={"#FFD580"}>
          
         <CardContent>
@@ -5354,7 +4443,6 @@ renderOption={(props, option) => (
               </Stack>
               </Stack>
         </CardContent>
-
           </Card>
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
@@ -5376,7 +4464,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
           </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -5395,13 +4482,11 @@ renderOption={(props, option) => (
             <FormControlLabel control={<Checkbox  />} label="When can you save and reach a goal? When will you need to take a loan to reach it?" value={'When can you save and reach a goal? When will you need to take a loan to reach it'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_2', event)}/>
             <FormControlLabel control={<Checkbox  />} label="Where can you get loans with minimum or no interest?" value={'Where can you get loans with minimum or no interest'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_2', event)}/>
             <FormControlLabel control={<Checkbox  />} label="What are productive loans? What are consumption loans?" value={'What are productive loans? What are consumption loans'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_trainer_not_ask_2', event)}/>
-
     </FormGroup>
                 </Stack>
               </Stack>
         </CardContent>
           </Card>
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -5413,7 +4498,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, were_the_participants_responsive_during_the_debriefing_3:e.target.value})} value={sendForm?.were_the_participants_responsive_during_the_debriefing_3}                  
                     >
@@ -5437,7 +4521,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3:e.target.value})} value={sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3}                  
                     >
@@ -5451,7 +4534,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
     {(sendForm?.did_any_wmen_leave_the_trning_sesion_during_or_aftr_tis_modle_3=='Yes')? <Card sx={{ marginTop:"20px"}}>
      <CardContent>
         <Stack mt={2}>
@@ -5467,7 +4549,6 @@ renderOption={(props, option) => (
               </Stack>
         </CardContent>
         </Card>: null}
-
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
         <Stack mt={2}>
@@ -5479,7 +4560,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, did_this_module_take_30_minutes_as_allotted_2:e.target.value})} value={sendForm?.did_this_module_take_30_minutes_as_allotted_2}                  
                     >
@@ -5495,7 +4575,6 @@ renderOption={(props, option) => (
      </Card>
         </CardContent>
         </Grid>:null}
-
        { (day1Day2=='Day 2')?<Grid  backgroundColor={"#FFD580"}>
         <CardContent>
           <Card>
@@ -5520,16 +4599,13 @@ renderOption={(props, option) => (
             <FormControlLabel control={<Checkbox  />} label="Respect a woman’s decision to not be a Gelathi"value={'Respect a woman’s decision to not be a Gelathi'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_6', event)} />
             <FormControlLabel control={<Checkbox  />} label="Thank the group for being a wonderful audience." value={'Thank the group for being a wonderful audience.'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_6', event)}/>
             <FormControlLabel control={<Checkbox  />} label="Trainer celebrate the certificate distribution." value={'Trainer celebrate the certificate distribution.'}onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do_6', event)}/>
-
     </FormGroup>
                 </Stack>
               </Stack>
         </CardContent>
-
           </Card>
         </CardContent>
         </Grid> :null}
-
        {( programAssessment==3 )?  <Grid  backgroundColor={"#FFD580"}>
         <CardContent>
           <Card>
@@ -5553,15 +4629,11 @@ renderOption={(props, option) => (
                 <Stack mt={3}>
                   <TextField required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" 
                                         onChange={(e) => setSendForm({ ...sendForm, name_of_the_gelathi_being_evaluated:e.target.value})} value={sendForm?.name_of_the_gelathi_being_evaluated}
-
-                  // onChange={(e) => { setSendForm({ ...setSendForm, name_of_the_gelathi_being_evaluated: e.target.value }) }}
                   />
                 </Stack>
               </Stack></Stack></CardContent>
         </Card>
-
               <Stack mt={2}>
-
 <Card>
               <CardContent>
         <Stack mt={2}>
@@ -5572,18 +4644,7 @@ renderOption={(props, option) => (
                         ) : null}{' '}
                 </Typography>
                 <Stack mt={2}>
-                {/* <FormGroup>
-            <FormControlLabel control={<Checkbox  />}value='Session-1 _ Introduction' label="Session-1 _ Introduction" onChange={(event) =>handleprerequisites('days_modules', event)}/>
-            <FormControlLabel control={<Checkbox  />}value='Session-2 _ Financial Management' label="Session-2 _ Financial Management" onChange={(event) =>handleprerequisites('days_modules', event)}/>
-            <FormControlLabel control={<Checkbox  />}value='Session-3 _Basics of an enterprise' label="Session-3 _Basics of an enterprise" onChange={(event) =>handleprerequisites('days_modules', event)}/>
-            <FormControlLabel control={<Checkbox  />}value='Session-4 _Building Relationship' label="Session-4 _Building Relationships" onChange={(event) =>handleprerequisites('days_modules', event)}/>
-            <FormControlLabel control={<Checkbox  />}value='Session-5 _Assets and Liabilities' label="Session-5 _Assets and Liabilities" onChange={(event) =>handleprerequisites('days_modules', event)}/>
-            <FormControlLabel control={<Checkbox  />}value='Session-6 _Goal setting game' label="Session-6 _Goal setting game" onChange={(event) =>handleprerequisites('days_modules', event)}/>
-            <FormControlLabel control={<Checkbox  />}value='Session-7 _Financial Goals' label="Session-7 _Financial Goals" onChange={(event) =>handleprerequisites('days_modules', event)}/>
-            <FormControlLabel control={<Checkbox  />}value='Session-8 _Loans-Group discussion of Case Studies' label="Session-8 _Loans-Group discussion of Case Studies" onChange={(event) =>handleprerequisites('days_modules', event)}/>
-
-
-    </FormGroup> */}
+            
     <RadioGroup 
                      name="radio-buttons-group"
                      onChange={(e) => setSendForm({ ...sendForm, days_modules:e.target.value})} value={sendForm?.days_modules}
@@ -5598,16 +4659,13 @@ renderOption={(props, option) => (
                         <FormControlLabel control={<Radio  />} label="Session-7 Financial Goals" value="Session-7 _Financial Goals"/>
                         <FormControlLabel control={<Radio  />} label="Session-8 Loans-Group discussion of Case Studies" value="Session-8 _Loans-Group discussion of Case Studies"/>
                    
-
                   </RadioGroup>
                 </Stack>
               </Stack>
         </CardContent></Card></Stack>
-
          
         </CardContent>
         </Grid>:null}
-
         {( sendForm?.days_modules=='Session-1 _ Introduction' )? <Grid  backgroundColor={"#FFD580"}>
          
          <CardContent>
@@ -5656,7 +4714,6 @@ renderOption={(props, option) => (
          </Card> 
  
         
-
           
            <Card sx={{ marginTop:"20px"}}>
          <CardContent>
@@ -5685,9 +4742,7 @@ renderOption={(props, option) => (
         
      </CardContent>
          </Grid>:null}
-
          
-
          {( sendForm?.days_modules=='Session-1 _ Introduction' )? <Grid  backgroundColor={"#FFD580"}>
          
          <CardContent>
@@ -5717,7 +4772,6 @@ renderOption={(props, option) => (
                </Stack>
                </Stack>
          </CardContent>   </Card>
-
         
      </CardContent>
          </Grid>:null}
@@ -5787,12 +4841,10 @@ renderOption={(props, option) => (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
                  </Typography>
-
                  <Stack mt={3}>
                
                  <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, was_the_recap_done:e.target.value})} value={sendForm?.was_the_recap_done}                  
                     >
@@ -5810,7 +4862,6 @@ renderOption={(props, option) => (
         
      </CardContent>
          </Grid>:null}
-
         { ( sendForm?.days_modules=='Session-2 _ Financial Management' )?<Grid  backgroundColor={"#FFD580"}>
          
          <CardContent>
@@ -5841,11 +4892,9 @@ renderOption={(props, option) => (
                </Stack>
                </Stack>
          </CardContent>   </Card>
-
         
      </CardContent>
          </Grid>:null}
-
        { ( sendForm?.days_modules=='Session-3 _Basics of an enterprise' )? <Grid  backgroundColor={"#FFD580"}>
           {/* page-31 */}
         <CardContent>
@@ -5882,7 +4931,6 @@ renderOption={(props, option) => (
      </Card>
         
        
-
           </Card>
         
     
@@ -5900,7 +4948,6 @@ renderOption={(props, option) => (
  
                     <FormControlLabel value="Ask why is this important to maintain account?" control={<Checkbox />} label="Ask why is this important to maintain account?" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi', event)}/>
                     <FormControlLabel value="Ask which are the places/situations where income, profit, savings could be asked?" control={<Checkbox />} label="Ask which are the places/situations where income, profit, savings could be asked?" onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi', event)}/>
-
                   </FormGroup>
                 </Stack>
               </Stack>
@@ -5908,16 +4955,11 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
-
     
-
          
         </CardContent>
         </Grid>:null}
-
        
-
    {  ( sendForm?.days_modules=='Session-3 _Basics of an enterprise' )?    <Grid  backgroundColor={"#FFD580"}>
           {/* page-32 */}
         <CardContent>
@@ -5960,21 +5002,15 @@ renderOption={(props, option) => (
         </CardContent>
      </Card>
        
-
           </Card>
         
      
     
-
-
     
-
          
         </CardContent>
         </Grid> :null}
-
         
-
   {  ( sendForm?.days_modules=='Session-4 _Building Relationship' )?  <Grid  backgroundColor={"#FFD580"}>
           {/* page-33 */}
         <CardContent>
@@ -5992,7 +5028,6 @@ renderOption={(props, option) => (
                 {check_which_ones_the_gelathi_did_not_doError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
-
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
@@ -6018,7 +5053,6 @@ renderOption={(props, option) => (
      </Card>
         
        
-
           </Card>
         
     
@@ -6059,10 +5093,7 @@ renderOption={(props, option) => (
         </CardContent>
      </Card>
      
-
-
     
-
          
         </CardContent>
         </Grid>:null}
@@ -6101,7 +5132,6 @@ renderOption={(props, option) => (
                     <FormControlLabel value="Create excitement/curiosity among the participants about the next training session?" control={<Checkbox />} label="Create excitement/curiosity among the participants about the next training session?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
                     <FormControlLabel value="Tell them that Buzz India will be following up on them for the next three years through a Buzz Gelathi?" control={<Checkbox />} label="Tell them that Buzz India will be following up on them for the next three years through a Buzz Gelathi?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do_1', event)}/>
                     
-
                     
                     
                     
@@ -6116,20 +5146,15 @@ renderOption={(props, option) => (
         </CardContent>
      </Card>
        
-
           </Card>
         
      
     
      
-
-
     
-
          
         </CardContent>
         </Grid>:null}
-
        
      { ( sendForm?.days_modules=='Session-5 _Assets and Liabilities' )? <Grid  backgroundColor={"#FFD580"}>
           {/* page-35 */}
@@ -6150,21 +5175,16 @@ renderOption={(props, option) => (
                 <Stack mt={3}>
                   <TextField required inputProps={{ required: true }} id="Correct Answer" label="Correct Answer" variant="outlined" 
                                         onChange={(e) => setSendForm({ ...sendForm, name_of_the_gelathi_being_evaluated_1:e.target.value})} value={sendForm?.name_of_the_gelathi_being_evaluated_1}
-
-                  // onChange={(e) => { setSendForm({ ...setSendForm, name_of_the_gelathi_being_evaluated_1: e.target.value }) }}
                   />
                 </Stack>
               </Stack>
        
         </CardContent>
      </Card>
-
        
         
        
-
           </Card>
-
      <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack>
@@ -6183,7 +5203,6 @@ renderOption={(props, option) => (
         <CardContent>
         <Stack mt={2}> 
                 <Typography>Was the recap done?
-
         {was_the_recap_done_1Error ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -6191,7 +5210,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, was_the_recap_done_1:e.target.value})} value={sendForm?.was_the_recap_done_1}                  
                   
@@ -6233,7 +5251,6 @@ renderOption={(props, option) => (
                     <FormControlLabel value="Was the debrief done?" control={<Checkbox />} label="Was the debrief done?" onChange={(event) =>handleprerequisites('check_which_ones_the_trainer_did_not_do', event)}/>
                     
                     
-
                     
                     
                     
@@ -6249,14 +5266,10 @@ renderOption={(props, option) => (
      </Card>
     
      
-
-
     
-
          
         </CardContent>
         </Grid>:null}
-
        
      { ( sendForm?.days_modules=='Session-6 _Goal setting game' )? <Grid  backgroundColor={"#FFD580"}>
           {/* page-36 */}
@@ -6281,30 +5294,11 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
        
         
        
-
           </Card>
-
-         
-
-     {/* <Card sx={{marginTop:2}}>
-        <CardContent>
-        <Stack>
-                <Typography variant="body1">
-                How many women attended the training session?
-                </Typography>
-                <Stack mt={3}>
-                  <TextField id="Correct Answer" label="Correct Answer" variant="outlined" onChange={(e) => { setSendData({ ...sendData, annualLoanInterest: e.target.value }) }}/>
-                </Stack>
-              </Stack>
-       
-        </CardContent>
-     </Card> */}
-     
-        
+   
      <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack mt={2}>
@@ -6316,30 +5310,13 @@ renderOption={(props, option) => (
                 </Typography>
                 <Stack mt={2}>
                   <FormGroup>
-                    
-                    
-                    
-                    
-                    
-                    
                     <FormControlLabel value="Ask two or three participants to volunteer to play the game." control={<Checkbox />} label="Ask two or three participants to volunteer to play the game." onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     <FormControlLabel value="Ensure the volunteer who is not playing the game, is out of earshot when relaying instructions to the volunteer who is playing first." control={<Checkbox />} label="Ensure the volunteer who is not playing the game, is out of earshot when relaying instructions to the volunteer who is playing first." onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     <FormControlLabel value="Give instructions step by step with all constraints added, to the first volunteer, records her goal (for the blocks) and blindfolds her before she begins." control={<Checkbox />} label="Give instructions step by step with all constraints added, to the first volunteer, records her goal (for the blocks) and blindfolds her before she begins." onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
                     
-                    
-                    
-
-                    
-                    
-                    
-                   
-                   
-                    
                   </FormGroup>
                 </Stack>
               </Stack>
-        
-       
         </CardContent>
      </Card>
      <Card sx={{marginTop:2}}>
@@ -6365,7 +5342,6 @@ renderOption={(props, option) => (
                     <FormControlLabel value="All the steps of instructions given" control={<Checkbox />} label="All the steps of instructions given"onChange={(event) =>handleprerequisites('check_which_instructions_the_gelathi_did_not_do', event)}/>
                     
                     
-
                     
                     
                     
@@ -6379,7 +5355,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
      <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack mt={2}> 
@@ -6387,16 +5362,12 @@ renderOption={(props, option) => (
                 {repeat_the_activity_with_the_second_volunteerError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
-
                     </Typography>
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
-                      // onChange={(e, value) => { setSendData({ ...sendData, separateFinancialAsset: value }) }}
                       onChange={(e) => setSendForm({ ...sendForm, repeat_the_activity_with_the_second_volunteer:e.target.value})} value={sendForm?.repeat_the_activity_with_the_second_volunteer}
-
                   
                     >
                     <div style={{display:"flex"}}>
@@ -6412,7 +5383,6 @@ renderOption={(props, option) => (
        
         </CardContent>
      </Card>
-
      <Card sx={{marginTop:2}}>
         <CardContent>
         <Stack mt={2}> 
@@ -6424,7 +5394,6 @@ renderOption={(props, option) => (
                 <Stack mt={2}>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      // defaultValue="Yes"
                       name="radio-buttons-group"
                       onChange={(e) => setSendForm({ ...sendForm, did_the_debrief_done_by_gelathi:e.target.value})} value={sendForm?.did_the_debrief_done_by_gelathi}
                     >
@@ -6443,14 +5412,10 @@ renderOption={(props, option) => (
      </Card>
     
      
-
-
     
-
          
         </CardContent>
         </Grid>:null}
-
          {/* 37 */}
        { ( sendForm?.days_modules=='Session-7 _Financial Goals' )?  <Grid  backgroundColor={"#FFD580"}>
           {/* page-37 */}
@@ -6473,7 +5438,6 @@ renderOption={(props, option) => (
                     </Stack> 
         </CardContent>
           </Card>
-
           </Card>
           <Card sx={{marginTop:2}}>
           <CardContent>
@@ -6484,15 +5448,12 @@ renderOption={(props, option) => (
                         ) : null}{' '}
           </Typography>
           <FormGroup>
-
           <FormControlLabel control={<Checkbox  />}value={'Ask what the difference between a dream and a goal is'} label="Ask what the difference between a dream and a goal is?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
           <FormControlLabel control={<Checkbox  />}value={'Tell the participants the difference between dream and goal'} label="Tell the participants the difference between dream and goal?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
           <FormControlLabel control={<Checkbox  />}value={'Ask for one volunteer who is willing to come forward and ask them to chart their financial goal on the board'} label="Ask for one volunteer who is willing to come forward and ask them to chart their financial goal on the board?" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
-
     </FormGroup>
  </CardContent>
           </Card>
-
           <Card sx={{marginTop:2}}>
           <CardContent>
           <Typography >
@@ -6502,18 +5463,15 @@ renderOption={(props, option) => (
                         ) : null}{' '}
           </Typography>
           <FormGroup>
-
           <FormControlLabel control={<Checkbox  />} label="What is your goal?"value={'What is your goal'}onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask_1', event)} />
           <FormControlLabel control={<Checkbox  />} label="How much will it cost?" value={'How much will it cost'} onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask_1', event)}/>
           <FormControlLabel control={<Checkbox  />} label="In how many years do you want to achieve this goal?"value={'In how many years do you want to achieve this goal'} onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask_1', event)} />
           <FormControlLabel control={<Checkbox  />} label="How much loan do you want to take for it?" value={'How much loan do you want to take for it'}onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask_1', event)} />
           <FormControlLabel control={<Checkbox  />} label="Do you know where you will take a loan from?" value={'Do you know where you will take a loan from'} onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask_1', event)}/>
           <FormControlLabel control={<Checkbox  />} label="How much will you save for the goal?" value={'How much will you save for the goa'}onChange={(event) =>handleprerequisites('the_gelathi_did_not_ask_1', event)} />
-
     </FormGroup>
  </CardContent>
           </Card>
-
           <Card sx={{marginTop:2}}>
           <CardContent>
           <Typography >
@@ -6526,13 +5484,10 @@ renderOption={(props, option) => (
           <FormControlLabel control={<Checkbox  />} label="Does your goal look realistic to you?" value={'Does your goal look realistic to you'} onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
           <FormControlLabel control={<Checkbox  />} label="Can you increase your savings or your income?"  value={'Can you increase your savings or your income'} onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
           <FormControlLabel control={<Checkbox  />} label="Can you increase the time frame to reach the goal?"  value={'Can you increase the time frame to reach the goal'} onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
-          {/* <FormControlLabel control={<Checkbox  />} label="Do you know where you will take a loan from?" />
-          <FormControlLabel control={<Checkbox  />} label="How much will you save for the goal?" /> */}
 
     </FormGroup>
  </CardContent>
           </Card>
-
         </CardContent>
         </Grid>:null}
         
@@ -6554,12 +5509,10 @@ renderOption={(props, option) => (
                 <Stack mt={2} mb={2}>
                         <TextField type='number' required inputProps={{ required: true }} label="Your Answer" variant="outlined" color="common"
                                                 onChange={(e) => setSendForm({ ...sendForm, how_many_women_attended_the_training_session:e.target.value})} value={sendForm?.how_many_women_attended_the_training_session}                  
-
                          />
                     </Stack> 
         </CardContent>
           </Card>
-
           </Card>
           <Card sx={{marginTop:2}}>
           <CardContent>
@@ -6570,14 +5523,12 @@ renderOption={(props, option) => (
                         ) : null}{' '}
           </Typography>
           <FormGroup>
-
           <FormControlLabel control={<Checkbox  />} value={'Make 4 groups from all the participants'} label="Make 4 groups from all the participants" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
           <FormControlLabel control={<Checkbox  />}value={'Give a case study to each group'} label="Give a case study to each group" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
           <FormControlLabel control={<Checkbox  />}value={'Made sure that the impression given was not of that loans are not necessary. They are important but to know the source of the loan, own credibility, credit worthiness, credit utilization and repayment strateg'} label="Made sure that the impression given was not of that loans are not necessary. They are important but to know the source of the loan, own credibility, credit worthiness, credit utilization and repayment strategy" onChange={(event) =>handleprerequisites('check_which_ones_the_gelathi_did_not_do', event)}/>
           </FormGroup>
  </CardContent>
           </Card>
-
           <Card sx={{marginTop:2}}>
           <CardContent>
           <Typography >
@@ -6587,7 +5538,6 @@ renderOption={(props, option) => (
                         ) : null}{' '}
           </Typography>
           <FormGroup>
-
           <FormControlLabel control={<Checkbox  />} label="What was your group’s story or case study about?" value={'What was your group’s story or case study about'} onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
           <FormControlLabel control={<Checkbox  />} label="How much does that person need?" value={'How much does that person need'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)}/>
             <FormControlLabel control={<Checkbox  />} label="How much do they have in their hand as saving or earning?" value={'How much do they have in their hand as saving or earning'}onChange={(event) =>handleprerequisites('during_the_debrief_did_the_gelathi_not_ask', event)} />
@@ -6598,13 +5548,10 @@ renderOption={(props, option) => (
     </FormGroup>
  </CardContent>
           </Card>
-
           
-
         </CardContent>
         </Grid>:null}
          
-
           {/* 39 */}
     { ( sendForm?.days_modules=='Session-8 _Loans-Group discussion of Case Studies' )?    <Grid  backgroundColor={"#FFD580"}>
           {/* page-39 */}
@@ -6636,16 +5583,9 @@ renderOption={(props, option) => (
      
         </form>
     
-
     
-
      
-
-
-
  
-
-
       </Dialog>
     
     </>

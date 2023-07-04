@@ -14,15 +14,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
 export default function AdminQuality({selectDATA,getData}) {
  
   const [partner,setPartner] = useState();
   useEffect(()=>{
-    console.log(selectDATA,"<--dffgdfgdf")
-   
     UserData()
-   
     },[]
     )
   
@@ -44,18 +40,15 @@ export default function AdminQuality({selectDATA,getData}) {
           
           axios(config)
           .then(function (response) {
-            console.log(JSON.stringify(response.data));
             setPartner(response.data)
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
     }
-console.log(partner,"partnerss")
     
   return (
     <div>
-
     
 <Card style={{marginTop:20}}>
         {partner?.length!==0?partner?.Data?.map(itm=>{
