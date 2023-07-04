@@ -143,10 +143,10 @@ export default function Router() {
             exact: true,
             element: <Login />,
         },
-        // {
-        //     path: 'register',
-        //     element: <Register />,
-        // },
+        {
+            path: 'register',
+            element: <Register />,
+        },
         
         {
             path: '/dashboard',

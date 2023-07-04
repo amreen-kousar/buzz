@@ -1,6 +1,7 @@
 
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useEffect,useState } from 'react';
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import { Card, Link, Container, Typography, Button } from '@mui/material';
@@ -17,6 +18,8 @@ export default function Login() {
       display: 'flex',
     },
   }));
+
+  const [emailExists,setEmailExists] = useState(false);
   const apiHit = async (itm) => {
     var data = JSON.stringify({
       "email": itm?.user?.email
@@ -96,7 +99,10 @@ export default function Login() {
     auth.signInWithPopup(provider)
       .then(itm => { apiHit(itm) })
       .catch((error) => alert(error.message));
+  
   }
+
+
   return (
     <Page title="Login" style={{ backgroundColor: "#ed6c02" }}>
       <RootStyle>
