@@ -633,7 +633,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
       <Page title="Dashboard">
       <Stack direction="row" alignItems="center" justifyContent="space-between" >
           <Typography variant="h5" gutterBottom sx={{ml:4}}>
-          Self Sakthi Program Summary  
+          Self Sakthi Program Summary   
  
           </Typography>
           <Button style={{ float: "right", color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleOpenFilter() }}>
@@ -796,7 +796,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
      
      </>
      :
-     (roleid == 5 || roleid == 6 ||roleid == 13)?
+     (roleid == 5 ||roleid == 13)?
     
      <>
      <Grid container spacing={3} marginTop={4}>
@@ -897,24 +897,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-
-              <AppWidgetSummary
-                title="Number of Green"
-                total={(summaryData?.summary_green>=0)?summaryData?.summary_green:null}
-                color="motivator"
-
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={4}>
-
-              <AppWidgetSummary
-                title="Number of Vyapar"
-                total={(summaryData?.summary_vyapar>=0)?summaryData?.summary_vyapar:null}
-                color="motivator"
-
-              />
-            </Grid>
+            
             <Grid item xs={4} sm={8} md={4}>
 
               <AppWidgetSummary
@@ -1059,7 +1042,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 </CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
 </CardContent>
 : 
- (roleid == 5 || roleid == 6||roleid == 13)?
+ (roleid == 5 || roleid == 13)?
 <>
 {(summaryData?.data?.length>0) ?<CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
@@ -1131,7 +1114,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
                   <Grid container spacing={3} marginTop={4}>
       
 
-<Grid item xs={12} sm={6} md={6}>
+<Grid item xs={6} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number  of Villages Visits"
@@ -1186,7 +1169,142 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 </CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
 </>
 :
+(roleid == 6)?
+<>
+{(summaryData?.data?.length>0) ?<CardContent>
+            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+            {"Projects List"} 
+              {/* for gfl it should be showned as project not as funder */}
+            </Typography>
+          
+            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            <Grid item xs={12} sm={12} md={12} >
+          {summaryData?.data?.map((itm) => {
+            return (
+              <Card
+                style={{
+                  backgroundColor: '#f5f5f5',
+                  flexDirection: 'column',
+                  borderRadius: 12,
+                  border: '2px solid',
+                  borderColor: '#ffcc80',
+                  marginBottom: '40px',
+                }}
+               >
+                <CardContent>
 
+                <Container style={{ display: 'flex', flexDirection: 'column' }}>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+      {(itm?.select_type=='1')?"Project Name":"Funder"}<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
+      &nbsp;:&nbsp;{itm?.name}<br />
+      {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
+    </span>
+    
+    
+    </Grid>
+    {/* <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Actual / Target  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
+    </span>
+  </Grid> */}
+  {/* <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Start Date  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.startDate} 
+    </span>
+  </Grid> */}
+  {/* <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    End Date  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.endDate} 
+    </span>
+  </Grid> */}
+</Container>
+                  <Divider mt={1} />
+                  <Grid container spacing={3} marginTop={4}>
+      
+
+<Grid item xs={6} sm={6} md={6}>
+
+<AppWidgetSummary
+  title="Number  of Villages Visits"
+  total={(itm?.villagevisit>=0)?itm?.villagevisit:null}
+  color="villages"
+  icon= "fontisto:holiday-village"
+
+/>
+</Grid>
+  <Grid item xs={6} sm={6} md={6}>
+
+<AppWidgetSummary
+  title="Number of Circle"
+  total={(itm?.circles>=0)?itm?.circles:itm?.circles}
+  color="info"
+  icon = "twemoji:women-holding-hands"
+
+/>
+</Grid>
+           
+ <Grid item xs={6} sm={6} md={6}>
+
+              <AppWidgetSummary
+                title="Number of Enroll"
+                total={(itm?.enroll>=0)?itm?.enroll:itm?.enroll}
+                color="vyapar"
+                icon="eos-icons:product-subscriptions-outlined"
+
+              />
+            </Grid>
+ <Grid item xs={6} sm={6} md={6}>
+
+<AppWidgetSummary
+  title="Number of Circle Meet"
+  total={itm?.circle_meet}
+  color="info"
+  icon = "twemoji:women-holding-hands"
+
+/>
+</Grid>
+<Grid item xs={6} sm={6} md={6}>
+
+<AppWidgetSummary
+  title="Number of Circle Meet"
+  total={itm?.beehive}
+  color="info"
+  icon = "twemoji:women-holding-hands"
+
+/>
+</Grid>
+
+
+
+          
+          </Grid>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </Grid>
+</CardContent>
+</CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
+</>:
 <>
 </>
 
