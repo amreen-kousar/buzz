@@ -15,6 +15,7 @@ import NavSection from '../../components/NavSection';
 //
 import navConfig from './NavConfig';
 import defaultImage from '../../assets/images/default.png';
+import Trainerdashboard from 'src/pages/Trainerdashboardapp';
 
 // ----------------------------------------------------------------------
 
@@ -48,7 +49,9 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
 
   var account = localStorage?.getItem('userDetails')
   account = JSON.parse(account)
+  var roleValue = JSON.parse(localStorage.getItem('userDetails'))?.trainer_type;
 
+  console.log(roleValue,"roleeeee")
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive('up', 'lg');
@@ -67,33 +70,47 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
      11:['1','15','16','17','18','5','6','7','8','9','11','10','12','13'],
      12:['1','16','17','18','5','6','7','8','9','14','11','10','12','13'],
      
-     13:['3','6','7','14','16','17','18','10','12','13',]
-    
+    13:['3','6','7','14','16','17','18','10','12','13',],
+    15:['1','8']
      
      
     }
 
-  useEffect(() => {
-    let temp = []
-    for (let r = 0; r < roleDashboard[data].length; r++) {
-      let s = roleDashboard[data][r]
-      // console.log(navConfig[s].id.includes(data), data, "ssssssssssssssssssssssssssssssss")
-      if (navConfig[s].id.includes(data)) {
+    const seniorTrainerDashboard={
+      5:['2','5','23','6','7','8','9','10','12','13']
+    }
+
+ if(roleValue==='senior'){ 
+
+    useEffect(()=>{
+    let temp=[]
+    for(let r=0;r<seniorTrainerDashboard[data].length;r++){
+      let s = seniorTrainerDashboard[data][r]
+      if(navConfig[s].id.includes(data)){
         temp.push(navConfig[s])
       }
     }
+    
     setNavConfig(temp)
-  }, [])
-
-
-  let tempnavConfig = []
-
-  console.log(filteredNavConfig, "temp navv config")
-
+  
+  },[])
+ }
+ 
+ else{
+  console.log("trainerrrrrrrrrr")
   useEffect(() => {
-
-    // roleDashboard[data].map(r => navConfig[r].id.filter(account => itm?.find(it => it == data)))
-
+  let temp = []
+  for (let r = 0; r < roleDashboard[data].length; r++) {
+    let s = roleDashboard[data][r]
+    // console.log(navConfig[s].id.includes(data), data, "ssssssssssssssssssssssssssssssss")
+    if (navConfig[s].id.includes(data)) {
+      temp.push(navConfig[s])
+    }
+  }
+  setNavConfig(temp)
+}, [])
+ }
+  useEffect(() => {
 
     if (isOpenSidebar) {
       onCloseSidebar();
@@ -123,7 +140,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             {/* </AccountStyle> */}</div>
           <Box sx={{ ml: 2 }}>
             <Typography variant="subtitle2" color='#ffffff' style={{ textAlign: "center" }}>
-              Welcome, {account.first_name}  ({account.role_name})
+              Welcome, {account.first_name}  {(account.trainer_type=='senior')?<><br/>(Senior Trainer)</>:'('+(account.role_name)+')'}
             </Typography>
             <Typography variant="body2" sx={{ color: '#ffffff' }} style={{ textAlign: 'center' }}>
             

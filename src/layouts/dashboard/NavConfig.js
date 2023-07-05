@@ -4,6 +4,10 @@ import Iconify from '../../components/Iconify';
 // ----------------------------------------------------------------------
 
 const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
+const roleValue=JSON.parse(localStorage.getItem('userDetails'))?.trainer_type;
+if(roleValue=='senior'){
+ var roleid="15"
+}
 
 const navConfig = {
   1:
@@ -55,13 +59,13 @@ const navConfig = {
     title: 'People',
     path: '/dashboard/people',
     icon: getIcon('eva:people-fill'),
-    id: ['0', '1', '2', '3', '4', '12','11']
+    id: ['0', '1', '2', '3', '4', '12','11','5']
   },
   9: {
     title: 'Buzz Stock',
     path: '/dashboard/BuzzStock',
     icon: getIcon('ant-design:stock-outlined'),
-    id: ['0', '1', '2', '3', '4', '12','11']
+    id: ['0', '1', '2', '3', '4', '12','11','5']
   },
   10: {
     title: 'My Profile',
@@ -141,6 +145,12 @@ const navConfig = {
     icon: getIcon("foundation:torsos-all-female"  ),
     id: [ '8' ]
   },
+  23:{
+    title: 'Material Stock List',
+    path: '/dashboard/MaterialStockList',
+    icon: getIcon('material-symbols:list-alt-outline-sharp'),
+    id:['5']
+  }
   // 1:
   // {
   //   title: 'Main',

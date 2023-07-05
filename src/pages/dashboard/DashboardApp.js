@@ -435,6 +435,7 @@ const [errorMsg,setErrormsg]=useState(false)
 
 
   var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
+  var rolevalue = JSON.parse(localStorage.getItem('userDetails'))?.trainer_type;
   var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
 
 
@@ -633,7 +634,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
       <Page title="Dashboard">
       <Stack direction="row" alignItems="center" justifyContent="space-between" >
           <Typography variant="h5" gutterBottom sx={{ml:4}}>
-          Self Sakthi Program Summary   
+          Self Shakthi Program Summary   
  
           </Typography>
           <Button style={{ float: "right", color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleOpenFilter() }}>
@@ -796,7 +797,61 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
      
      </>
      :
-     (roleid == 5 ||roleid == 13)?
+     (rolevalue=='senior')?
+     <>
+     <Grid container spacing={3} marginTop={4}>
+            <Grid item xs={12} sm={6} md={4}>
+
+              <AppWidgetSummary
+                title="Target"
+                total={(summaryData?.summary_target>=0)?summaryData?.summary_target:null}
+                color="motivator"
+
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+
+              <AppWidgetSummary
+                title="Actual"
+                total={(summaryData?.summary_actual>=0)?summaryData?.summary_actual:null}
+                color="motivator"
+
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+
+<AppWidgetSummary
+  title="2nd Day Turnout  %"
+  total={(summaryData?.summary_day2>=0)?summaryData?.summary_day2:null}
+  color="motivator"
+
+/>
+</Grid>
+            <Grid item xs={12} sm={6} md={6}>
+
+              <AppWidgetSummary
+                title="Villages"
+                total={(summaryData?.summary_villages>=0)?summaryData?.summary_villages:null}
+                color="motivator"
+
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={6}>
+
+<AppWidgetSummary
+  title="Women"
+  total={(summaryData?.summary_actual>=0)?summaryData?.summary_actual:null}
+  color="motivator"
+
+/>
+</Grid>
+          
+          
+          </Grid>
+     </>:
+     ((roleid == 5) ||roleid == 13)?
     
      <>
      <Grid container spacing={3} marginTop={4}>
@@ -804,7 +859,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
 
               <AppWidgetSummary
                 title="Target"
-                total={(summaryData?.summary_Target>=0)?summaryData?.summary_Target:null}
+                total={(summaryData?.summary_target>=0)?summaryData?.summary_target:null}
                 color="motivator"
 
               />
@@ -910,9 +965,7 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
           </Grid>
      
      </>
-     :
-     <>
-     </>
+     :null
 
      
      }
@@ -1041,7 +1094,124 @@ const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
         </Grid>
 </CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
 </CardContent>
-: 
+: (rolevalue=='senior')?
+<>
+{(summaryData?.data?.length>0) ?<CardContent>
+            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+            {"Projects List"} 
+              {/* for gfl it should be showned as project not as funder */}
+            </Typography>
+          
+            {/* <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}> */}
+            <Grid item xs={12} sm={12} md={12} >
+          {summaryData?.data?.map((itm) => {
+            return (
+        <> 
+         <Card
+                style={{
+                  backgroundColor: '#f5f5f5',
+                  flexDirection: 'column',
+                  borderRadius: 12,
+                  border: '2px solid',
+                  borderColor: '#ffcc80',
+                  marginBottom: '40px',
+                }}
+                >
+                <CardContent>
+
+
+<Container style={{ display: 'flex', flexDirection: 'column' }}>
+        <Grid container spacing={3}>  
+        
+
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+      {(itm?.select_type=='1')?"Project Name":"Funder"}<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
+      &nbsp;:&nbsp;{itm?.name}<br />
+      {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
+    </span>
+    
+    
+    </Grid>
+    <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Actual / Target  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
+    </span>
+  </Grid>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Start Date  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.startDate} 
+    </span>
+  </Grid>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    End Date  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.endDate} 
+    </span>
+  </Grid>
+                  <Divider mt={1} />
+                  <Grid container spacing={2} marginTop={4}>
+<Grid item xs={4} sm={8} md={4}>
+
+<AppWidgetSummary
+  title="Villages"
+  total={(itm?.villages>=0)?itm?.villages:null}
+  color="villages"
+  icon= "fontisto:holiday-village"
+
+/>
+</Grid>
+  <Grid item xs={4} sm={8} md={4}>
+
+<AppWidgetSummary
+  title="Women"
+  total={(itm?.actual>=0)?itm?.actual:itm?.actual}
+  color="info"
+  icon = "twemoji:women-holding-hands"
+
+/>
+</Grid>
+           
+ <Grid item xs={4} sm={8} md={4}>
+
+              <AppWidgetSummary
+                title="2nd day Turnout(%)"
+                total={(itm?.day2>=0)?itm?.day2:itm?.day2}
+                color="vyapar"
+                icon="eos-icons:product-subscriptions-outlined"
+
+              />
+            </Grid>
+
+          </Grid>
+              </Grid>
+              </Container>
+              </CardContent>
+              </Card>
+              </> 
+            );
+          })}
+        </Grid>
+{/* </CardContent> */}
+</CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
+</>:
  (roleid == 5 || roleid == 13)?
 <>
 {(summaryData?.data?.length>0) ?<CardContent>
