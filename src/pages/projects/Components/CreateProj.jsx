@@ -332,14 +332,16 @@ axios(config)
 
   const createProject2 = () => {
 
-   if(name.length==0){
+   if(data?.operations_manager_id === '0'){
+    console.log(" iam inside if ")
+    // 
     setWarn(true)
-    setMessage("Please Add trainers")
+    setMessage("Please Add Operations manager")
 
    }
-   else if(gelathiName.length==0){
+   else if(data?.driverId === '0'){
     setWarn(true)
-    setMessage("Please Add Gelathi Facilators ")
+    setMessage("Please Add Driver ")
    }
    else{
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
