@@ -22,7 +22,7 @@ export default function TravelDialog({ viewMessage }) {
   Geocode.setApiKey("AIzaSyAQZSphbIdAeypWHytAIHtJ5K-wuUHBfx4");
   const [open, setOpen] = useState(false);
   const [imageId,setImageId]=useState('');
-  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   const [sendData, setSendData] = useState({
     odimeter: "",
     location: "",
@@ -224,8 +224,8 @@ axios(config)
     );
   }
   const drop = async => {
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
       "emp_id": userid,
      
@@ -256,7 +256,7 @@ axios(config)
     image.splice(index, 1);
     setImage([...image])
   }
-  const userDetails = localStorage?.getItem('userId')
+  const userDetails = sessionStorage?.getItem('userId')
   return (
     <div>
 {( userDetails ==3 ||userDetails==4 || userDetails==5 || userDetails==6 || userDetails==12 || userDetails==13)?<Button variant="contained" style={{

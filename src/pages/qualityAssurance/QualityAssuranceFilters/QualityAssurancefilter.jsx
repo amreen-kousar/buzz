@@ -53,7 +53,7 @@ QualityAssuranceFilter.propTypes = {
 };
 export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, getData, onSumbit, resetBus, onDateSubmit }) {
   const [selectDATA, setSelectData] = useState()
-  const data = localStorage?.getItem('userId')
+  const data = sessionStorage?.getItem('userId')
   return (
     <>
       <Drawer

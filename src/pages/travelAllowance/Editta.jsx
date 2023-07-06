@@ -66,7 +66,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
     setOpen(true);
   };
 
-  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     useGeolocated({
@@ -205,8 +205,8 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
   }
 
   const drop = async => {
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
       "emp_id":userid,
       "role_id": role,

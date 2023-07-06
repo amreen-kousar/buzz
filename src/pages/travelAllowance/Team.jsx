@@ -10,7 +10,7 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Iconify from 'src/components/Iconify';
 export default function Team(props) {
     const [value, setValue] = React.useState(0);
-    const data = localStorage?.getItem('userId')
+    const data = sessionStorage?.getItem('userId')
     var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
     const [drawerEvent, SetDrawerEvent] = useState(false);
     const [selectedTeamTA, setselectedTeamTA] = useState(null);
@@ -51,8 +51,8 @@ export default function Team(props) {
     };
     const teamMembersApiCall = () => {
         if (filterData) { dateValue = filterData }
-        var role = JSON.parse(localStorage.getItem('userDetails'))?.role
-        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+        var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+        var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
             "date": dateValue,
              "role_id": role,
@@ -123,7 +123,7 @@ export default function Team(props) {
     }
     const verifyTA = () => {
         handleCloseFilter()
-        const idvalue = JSON.parse(localStorage.getItem('userDetails'))?.id
+        const idvalue = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
             "ta_id": checkedData,
             "user_id": idvalue,
@@ -149,7 +149,7 @@ export default function Team(props) {
     }
     const approveTA = (e) => {
         handleCloseFilter()
-        const idvalue = JSON.parse(localStorage.getItem('userDetails'))?.id
+        const idvalue = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
             "ta_id": checkedData,
             "user_id":idvalue,
@@ -176,7 +176,7 @@ export default function Team(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-const userrole = JSON.parse(localStorage.getItem('userDetails'))?.role
+const userrole = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     return (
         <div>
             {

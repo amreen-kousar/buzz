@@ -38,7 +38,7 @@ const ExpandMore = styled((props) => {
 function Project(props) {
   const location = useLocation();
   const [openFilter, setOpenFilter] = useState(false);
-  const userDetails = localStorage?.getItem('userId');
+  const userDetails = sessionStorage?.getItem('userId');
   const [data1, setData1] = useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
@@ -116,18 +116,18 @@ function Project(props) {
     projData();
   }, []);
   const viewUser = (itm) => {
-    localStorage.setItem('profiledetails', JSON.stringify(itm));
+    sessionStorage.setItem('profiledetails', JSON.stringify(itm));
     handleOpenFilter();
   };
   const viewPeople = (item) => {
-    localStorage.setItem('profiledetails', JSON.stringify({ emp_id: item }));
+    sessionStorage.setItem('profiledetails', JSON.stringify({ emp_id: item }));
     handleOpenFilter();
   };
-  const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
+  const roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
   const projData = (async) => {
-    var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'));
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       project_id: id,
       role_id: role,

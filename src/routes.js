@@ -137,7 +137,7 @@ export default function Router() {
         ]
 
 
-    const data = localStorage?.getItem('userId')
+    const data = sessionStorage?.getItem('userId')
     return useRoutes([
 
 

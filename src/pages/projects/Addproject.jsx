@@ -131,7 +131,7 @@ function AddProject({ viewMessage }) {
         if (confirm("Are You Sure You Want To Create Project?")) {
             const fundList = fund?.filter(itm => itm?.id === mainState?.funderId)
             const talukList = taluk?.filter(itm => itm?.id === mainState?.locationID)
-            const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+            const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
             var data = new FormData();
             data.append('user_id', userid);
             data.append('locationID', talukList[0]?.id);

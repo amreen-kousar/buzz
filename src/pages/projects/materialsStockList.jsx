@@ -33,9 +33,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       border: 0,
     },
   }));
-  const Userrole = localStorage.getItem("userId")
+  const Userrole = sessionStorage.getItem("userId")
 export default function MaterialStockList() {
-  const Userrole = localStorage.getItem("userId")
+  const Userrole = sessionStorage.getItem("userId")
   const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const [materialStock, setmaterialStock] = useState([]);
@@ -72,9 +72,9 @@ setmaterialStock(materialData)
 }, [demo])
 const id = sessionStorage?.getItem('proId');
 const projData = (async) => {
-  var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
-  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'));
+  var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+  var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
   var data = JSON.stringify({
     project_id: id,
     role_id: role,
@@ -105,8 +105,8 @@ const onChangeMaterialValue = (index , quantity)=>{
 }
     const demoi = async () => {
       
-        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-        var role =JSON.parse(localStorage.getItem('userDetails'))?.role
+        var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+        var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
         var data = JSON.stringify({
             "project_id":state?.id
         });
@@ -132,8 +132,8 @@ const onChangeMaterialValue = (index , quantity)=>{
       stock = materialStock;
       
       const onSubmit = ()=>{
-        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-        var role =JSON.parse(localStorage.getItem('userDetails'))?.role
+        var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+        var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
         
         if(stock.length<=0){
           alert("nothng ")

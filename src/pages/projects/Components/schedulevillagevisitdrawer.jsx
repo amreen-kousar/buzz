@@ -44,7 +44,7 @@ export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onClose
         VillageVisit();
     }, [clcikData])
     const createGfSession = async =>{
-      const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+      const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
             "project_id": scheduleData?.data?.project_id,
             "user_id": userid,
@@ -82,8 +82,8 @@ export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onClose
           
     }
     const VillageVisit = async =>{
-        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+        var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
             var data = JSON.stringify({
               "batch_id": clcikData?.id,
               "role_id": role

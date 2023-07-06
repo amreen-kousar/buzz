@@ -28,8 +28,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
         })
     };
     const submitBus = () => {
-        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-        var role =JSON.parse(localStorage.getItem('userDetails'))?.role
+        var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+        var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
         var data = JSON.stringify({
             "lastUpdatedBy": userid,
             "createdBy": userid ,

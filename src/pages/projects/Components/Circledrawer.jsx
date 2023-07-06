@@ -60,9 +60,9 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     searchFunction(e?.target?.value);
   };
   const enrolledGelathi = (async) => {
-    var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'));
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       search: search,
       project_id: state?.id,
@@ -126,7 +126,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
   }, [clcikData]);
   const [circleData, setcircleData] = useState('');
   const createGfSession = (async) => {
-    const userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+    const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var data = JSON.stringify({
        project_id: data1?.project_id,
       user_id: userid,
@@ -198,8 +198,8 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
       });
   };
   const VillageVisit = (async) => {
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       batch_id: clcikData?.id,
       role_id: role,
@@ -222,7 +222,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
       });
   };
   const circle = async () => {
-    const userid = await JSON.parse(localStorage.getItem('userDetails'))?.id;
+    const userid = await JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       circle_id: clcikData?.id,
       project_id: data1?.project_id,

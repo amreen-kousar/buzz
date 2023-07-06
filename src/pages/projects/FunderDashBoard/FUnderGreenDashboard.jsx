@@ -28,12 +28,12 @@ const FUnderGreenDashboard = () => {
   const [errorMsg,setErrormsg]=useState(false)
  
   const [summaryData, setSummaryData] = useState([]);
-  var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
-  var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+  var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
+  var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
   const apiHit = async (id, i, g) => {
     setLoader(true);
-    var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     
     const data = {
      

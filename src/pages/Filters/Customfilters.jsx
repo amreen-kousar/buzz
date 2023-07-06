@@ -24,7 +24,7 @@ export default function Customfilter(props) {
   const [district, setDistrict] = useState([])
   const [taluk, setTaluk] = useState([])
   const [teamData, setTeamData] = useState([])
-  const userid = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  const userid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
   const [listData, setListData] = useState();
   const [gelathiData, setGelathiData] = useState();
   var [data, setData] = useState({
@@ -317,7 +317,7 @@ const trainerList = async => {
                     label="Select Operation Manager"
                     onChange={(e => {
                       setData({ ...data, opsManager: e?.target?.value });
-                      localStorage.setItem("opsManager", e?.target?.value)
+                      sessionStorage.setItem("opsManager", e?.target?.value)
                     })}
                   >
                     <MenuItem value="" default disabled>Choose Operation Manager</MenuItem>
@@ -344,7 +344,7 @@ const trainerList = async => {
                     label="Select Operation Manager"
                     onChange={(e => {
                       setData({ ...data, trainer: e?.target?.value });
-                      localStorage.setItem("trainerdata", e?.target?.value)
+                      sessionStorage.setItem("trainerdata", e?.target?.value)
                     })}
                   >
                     <MenuItem value="" default disabled>Choose Trainer</MenuItem>
@@ -370,7 +370,7 @@ const trainerList = async => {
                     label="Select Gelathi Facilitator"
                     onChange={(e => {
                       setData({ ...data, gelathi: e?.target?.value });
-                      localStorage.setItem("gelathidata", e?.target?.value)
+                      sessionStorage.setItem("gelathidata", e?.target?.value)
                     })}
                   >
                     <MenuItem value="" default disabled>Choose Gelathi Faciliatator</MenuItem>

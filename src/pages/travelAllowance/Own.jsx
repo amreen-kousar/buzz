@@ -43,7 +43,7 @@ function a11yProps(index) {
 }
 export default function Own(props) {
     const [value, setValue] = React.useState(0);
-    const data = localStorage?.getItem('userId')
+    const data = sessionStorage?.getItem('userId')
     var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
     const image = ["tykml", "exrdcftvbgyhnuj"]
     const [drawerEvent, SetDrawerEvent] = useState(false);
@@ -111,9 +111,9 @@ export default function Own(props) {
     }
     const list = async () => {
         if (filterData) { dateValue = filterData }
-        const userDetails = localStorage?.getItem("userDetails")
+        const userDetails = sessionStorage?.getItem("userDetails")
        
-        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+        var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
             "emp_id": userid,
             "date": dateValue,

@@ -86,8 +86,8 @@ export default function ChooseGelathi( {data1,circle}) {
 }, []
 )
 const enrolledVyaapar= async(id,i,g) =>{
-  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+  var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
   var data = JSON.stringify({
       "search": search,
       "project_id": state?.id,
@@ -115,8 +115,8 @@ const enrolledVyaapar= async(id,i,g) =>{
     
 }
 const enrolledGreenMotivators = async(id,i,g) =>{
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
         "search": search,
         "project_id": state?.id,
@@ -144,9 +144,9 @@ const enrolledGreenMotivators = async(id,i,g) =>{
       
 }
   const enrolledGelathi = async =>{
-    var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
+var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
         "search": search,
         "project_id": state?.id,

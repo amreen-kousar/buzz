@@ -50,7 +50,7 @@ export default function BeehiveDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
         beehiveVillageVisit();
     }, [clcikData])
     const createGfSession = async =>{
-      const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+      const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
             "project_id": scheduleData?.data?.project_id,
             "user_id": userid,
@@ -89,8 +89,8 @@ export default function BeehiveDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           
     }
     const beehiveVillageVisit = async =>{
-      var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-      var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+      var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+      var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
           var data = JSON.stringify({
             "batch_id": clcikData?.name,
             "role_id": role

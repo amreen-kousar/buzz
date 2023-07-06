@@ -23,7 +23,7 @@ export default function AdminQuality({selectDATA,getData}) {
     )
   
     const UserData=()=>{
-        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+        var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
             "id": JSON.parse(userid),
             "Role_Id": JSON.parse(selectDATA)

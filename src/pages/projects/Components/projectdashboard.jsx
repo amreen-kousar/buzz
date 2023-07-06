@@ -34,7 +34,7 @@ export default function Projectdashboard({profileData}) {
     const handleClose=()=>{
       setOpen(false)
     }
-  const data = localStorage?.getItem('userId')
+  const data = sessionStorage?.getItem('userId')
   useEffect(() => {
     apiHit();
   }, []);
@@ -76,27 +76,27 @@ export default function Projectdashboard({profileData}) {
   const apiHit = async (id, i, g) => {
     setLoader(true)
     
-    var userid = JSON.parse(localStorage.getItem('profiledetails'))?.emp_id
-    var role = JSON.parse(localStorage.getItem('profiledetails'))?.role_id
+    var userid = JSON.parse(sessionStorage.getItem('profiledetails'))?.emp_id
+    var role = JSON.parse(sessionStorage.getItem('profiledetails'))?.role_id
     var roleid 
     if(role==="Trainer"){
       roleid="5"
-      localStorage.setItem('profilerole','5')
+      sessionStorage.setItem('profilerole','5')
     }else
     if(role==="Operations Manager"){
       roleid="4"
-      localStorage.setItem('profilerole','4')
+      sessionStorage.setItem('profilerole','4')
     }else if(role==="Gelathi Facilitator"){
       roleid="6"
-    localStorage.setItem('profilerole','6')
+    sessionStorage.setItem('profilerole','6')
     }
     else if(role==="Driver"){
       roleid= "7"
-      localStorage.setItem('profilerole','7')
+      sessionStorage.setItem('profilerole','7')
     }
     else if(role==="Gelathi Facilitator Lead"){
       roleid="13"
-      localStorage.setItem('profilerole','13')
+      sessionStorage.setItem('profilerole','13')
     }
     const data = {
       end_date: g === "date" ? i : '',

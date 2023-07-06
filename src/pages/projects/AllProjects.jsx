@@ -47,8 +47,8 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
         sessionStorage.setItem("proId", id)
         handleClickOpen()
     }
-    var userIdCheck = localStorage?.getItem('userId')
-    var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
+    var userIdCheck = sessionStorage?.getItem('userId')
+    var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
     var [page, setPage] = useState(1)
     const [value, setValue] = useState(0);
     const [projects, setProjects] = useState([])

@@ -82,8 +82,8 @@ const [errorMsg,setErrormsg]=useState('');
 
   const apiHit = async (id, i, g) => {
     setLoader(true)
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
    
     const data = {
       "Emp_id":JSON.parse(userid),

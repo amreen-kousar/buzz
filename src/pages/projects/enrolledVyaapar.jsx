@@ -11,7 +11,7 @@ import Filtersmain from './projectfilters/filtersmain';
 export default function enrolledVyaaparList() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
-    const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role
+    const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     const [filterData, setFilterData] = useState({})
      const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')
@@ -68,8 +68,8 @@ const changeState = () => {
       setFilter(false)
     }
     const enrolledVyaapar= async(id,i,g) =>{
-        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+        var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": search,
             "project_id": state?.id,
@@ -112,9 +112,9 @@ const id = sessionStorage?.getItem("proId")
   }, [])
   
   const projData = async => {
-    var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       "project_id": id,
       "role_id": role,
@@ -144,7 +144,7 @@ const id = sessionStorage?.getItem("proId")
     setFilterData(data)
     handleclose()
     }
-    const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+    const role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
   const removevyapar=async(itm)=>{
     if(confirm("Do You want to Remove Gelathi?")){
     var data = JSON.stringify({

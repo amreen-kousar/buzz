@@ -152,7 +152,7 @@ setShowAddBuss(false)
         // console.log(error);
       });
   }
-var userdata = localStorage?.getItem('operations_manager_id')
+var userdata = sessionStorage?.getItem('operations_manager_id')
   useEffect(() => {
     Gfl();
   },[userdata])
@@ -218,7 +218,7 @@ axios(config)
     setMessage("Please Add Driver ")
    }
    else{
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var formdata = new FormData();
     setCreatePro(false)
     formdata.append('user_id', userid);
@@ -251,7 +251,7 @@ axios(config)
    }
   }
   const createProjectpublish = () => {
-     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
      var formdata = new FormData();
      setCreatePro(false)
      formdata.append('user_id', userid);
@@ -485,7 +485,7 @@ const mainShowBussHandler = ()=>{
                     label="Select Operation Manager"
                     onChange={(e => {
                       setData({ ...data, operations_manager_id: e?.target?.value });
-                      localStorage.setItem("operations_manager_id", e?.target?.value)
+                      sessionStorage.setItem("operations_manager_id", e?.target?.value)
                     })}
                   >
                     <MenuItem id="operation-manager" value="" default disabled>Choose Operation Manager</MenuItem>

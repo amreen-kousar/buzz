@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------------
-let userDetails = localStorage?.getItem('userDetails')
+let userDetails = sessionStorage?.getItem('userDetails')
 userDetails = JSON.parse(userDetails)
 const account = {
   displayName: `${userDetails?.first_name} ${userDetails?.last_name}`,

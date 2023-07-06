@@ -46,8 +46,8 @@ export default function SeniorTrainerMaterialStocklist(){
     const [materialStock, setmaterialStock] = useState([]);
     const [ProjectId,setProjectId]=useState('');
 const getProjects = async()=>{
-    var roleid= JSON.parse(localStorage.getItem('userDetails'))?.role;
-    var userid= JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var roleid= JSON.parse(sessionStorage.getItem('userDetails'))?.role;
+    var userid= JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var data = JSON.stringify({
         "search": "",
         "id": userid,
@@ -88,8 +88,8 @@ const getProjects = async()=>{
   
       const demoi = async (itm) => {
           
-        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-        var role =JSON.parse(localStorage.getItem('userDetails'))?.role
+        var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+        var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
         var data = JSON.stringify({
             "project_id":itm?.id
         });
@@ -148,8 +148,8 @@ const getProjects = async()=>{
       console.log(stock, " updated stock")
       
       const onSubmit = ()=>{
-        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-        var role =JSON.parse(localStorage.getItem('userDetails'))?.role
+        var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+        var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
         var data = JSON.stringify({
           
             "project_id": ProjectId?.id,

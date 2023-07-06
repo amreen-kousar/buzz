@@ -13,7 +13,7 @@ ProductList.propTypes = {
 export default function ProductList({ isOpenFilter, onOpenFilter, onCloseFilter, products, users, ...other }) {
 
   const viewUser = (itm) => {
-    localStorage.setItem('people', JSON.stringify(itm))
+    sessionStorage.setItem('people', JSON.stringify(itm))
     onOpenFilter()
   }
 

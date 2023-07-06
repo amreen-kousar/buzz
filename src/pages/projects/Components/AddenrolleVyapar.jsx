@@ -82,7 +82,7 @@ getAddPartcipants();
     
   }
 const getAddPartcipants=()=>{
-  var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   var data = JSON.stringify({
     "search": "",
     "project_id": session?.project_id,

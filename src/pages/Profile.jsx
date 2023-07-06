@@ -26,7 +26,7 @@ export default function Profile(index) {
   }, [userUpdate]
   )
   const profile = async => {
-    const userData = localStorage?.getItem('userDetails')
+    const userData = sessionStorage?.getItem('userDetails')
     var data = JSON.stringify({
       "id": JSON?.parse(userData)?.id
     });

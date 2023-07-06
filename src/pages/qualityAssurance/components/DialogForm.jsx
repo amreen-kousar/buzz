@@ -102,8 +102,8 @@ export default function DialogForm({ shown, setShown, batch,reloadfunction }) {
     );
     return values;
   };
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     const [open, setOpen] = React.useState(false);
     React.useEffect(() => {
       setOpen(shown)

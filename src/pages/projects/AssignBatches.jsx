@@ -36,9 +36,9 @@ useEffect(() => {
 }, [])
 
 const projData = async => {
-  var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
+  var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+  var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
   var data = JSON.stringify({
     "project_id": id,
     "role_id": role,
@@ -97,7 +97,7 @@ const villagelist= async(itm) =>{
 
 const CreateBatch= async(itm,i) =>{
   
-  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   selected.push(itm?.training_batch_id)
   setSelected(selected)
   var data = JSON.stringify({

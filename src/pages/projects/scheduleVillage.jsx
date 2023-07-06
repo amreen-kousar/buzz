@@ -32,8 +32,8 @@ export default function scheduleVillage() {
         setOpenFilter(false);
     };
     const scheduleVillage = async =>{
-        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+        var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": search,
             "project_id": state?.id,
@@ -65,9 +65,9 @@ export default function scheduleVillage() {
     }, [])
     
     const projData = async => {
-      var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-      var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-      var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+      var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
+      var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+      var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
       var data = JSON.stringify({
         "project_id": id,
         "role_id": role,

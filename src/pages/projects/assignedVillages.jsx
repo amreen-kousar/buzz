@@ -27,8 +27,8 @@ export default function assignedVillages() {
         setOpenFilter(false);
     };
     const assignedVillages = async =>{
-        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+        var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": search,
             "project_id": state?.id,
@@ -66,9 +66,9 @@ export default function assignedVillages() {
   }, [])
   
   const projData = async => {
-    var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       "project_id": id,
       "role_id": role,
@@ -101,8 +101,8 @@ useEffect(() => {
   
 }, [batchState])
 const getTrainingBatch = async =>{
-  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+  var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
   var data = JSON.stringify({
       "batch_id": batchState?.training_batch_id?batchState?.training_batch_id:clcikData?.id,
       "role_id": role

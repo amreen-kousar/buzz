@@ -112,7 +112,7 @@ axios(config)
       });
   }
 const GetStatus = async=>{
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       event_id: batch?.id,
       user_id: idvalue,

@@ -15,7 +15,7 @@ import {baseURL} from 'src/utils/api';
 import moment from 'moment';
 const DashboardApp = () => {
   const navigate = useNavigate();
-  const data = localStorage?.getItem('userId')
+  const data = sessionStorage?.getItem('userId')
   const theme = useTheme();
   const intialValues = {
     funder: "",
@@ -32,13 +32,13 @@ const [errorMsg,setErrormsg]=useState(false)
   const [summaryData, setSummaryData] = useState([]);
   const [graphData, setGraphData] = useState(null);
   const itemStyles = [{ itemXs: 4, itemSm: 8, itemMd: 4 }, { itemXs: 6, itemSm: 8, itemMd: 6 }]
-  var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
-  var rolevalue = JSON.parse(localStorage.getItem('userDetails'))?.trainer_type;
-  var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+  var rolevalue = JSON.parse(sessionStorage.getItem('userDetails'))?.trainer_type;
+  var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   const apiHit = async (id, i, g,date1,date2) => {
     setLoader(true)
-    var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     const data  ={
       "partner_id": i === 1 ? id?.id : '',
     "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
@@ -76,8 +76,8 @@ const [errorMsg,setErrormsg]=useState(false)
   };
   
   const filterApi = async(id,i,g,date1,date2)=>{
-    var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
       "end_date":(g === "date")?i:(g=== "countryCalendar" || g==="Calendar")?moment(date2?.$d)?.format('YYYY-MM-DD'): '',
       "role_id": parseInt(roleid),
@@ -183,7 +183,7 @@ const [errorMsg,setErrormsg]=useState(false)
     }
   }
  
-const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
+const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
   return (
     <>
       <Page title="Dashboard">

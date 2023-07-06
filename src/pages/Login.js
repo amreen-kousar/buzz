@@ -34,14 +34,14 @@ export default function Login() {
     };
     axios(config)
       .then(function (response) {
-        localStorage?.setItem('user', JSON?.stringify(itm?.user))
-        localStorage?.setItem('userId', response?.data?.role)
+        sessionStorage?.setItem('user', JSON?.stringify(itm?.user))
+        sessionStorage?.setItem('userId', response?.data?.role)
         if (response?.data?.code == 404) {
           alert("email id not found")
         }
         else {
-          localStorage.setItem('userDetails', JSON.stringify(response.data))
-          if (localStorage?.userDetails) {
+          sessionStorage.setItem('userDetails', JSON.stringify(response.data))
+          if (sessionStorage?.userDetails) {
             if (
               response.data.role == 2
             ) {

@@ -176,7 +176,7 @@ const emailchangeHandler=(e) => {
                 // console.log(error);
             });
     }
-let userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     const submitUser = () => {
         AddUser.project_list = inputProject.map(i => parseInt(i.id))
         AddUser.officeMailId = AddUser?.officeMailId

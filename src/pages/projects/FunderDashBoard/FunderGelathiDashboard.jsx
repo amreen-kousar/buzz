@@ -21,7 +21,7 @@ import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
 const FunderGelathiDashboard = () => {
     const navigate = useNavigate();
-    const data = localStorage?.getItem('userId')
+    const data = sessionStorage?.getItem('userId')
     const theme = useTheme();
     const intialValues = {
       funder: "",
@@ -38,13 +38,13 @@ const FunderGelathiDashboard = () => {
    const [summaryData, setSummaryData] = useState([]);
     const [graphData, setGraphData] = useState(null);
   
-    var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   
     const apiHit = async (id, i, g) => {
       setLoader(true)
-      var role = JSON.parse(localStorage.getItem('userDetails'))?.role
-      var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+      var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+      var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
       
       const data = {
         

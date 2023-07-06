@@ -40,12 +40,12 @@ const [errorMsg,setErrormsg]=useState(false)
   const [graphData, setGraphData] = useState(null);
   const itemStyles = [{ itemXs: 4, itemSm: 8, itemMd: 4 }, { itemXs: 6, itemSm: 8, itemMd: 6 }]
   
-  var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
-  var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+  var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   const apiHit = async (id, i, g) => {
     setLoader(true)
-    var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     const data  ={
  
     "roleid":roleid,
@@ -106,7 +106,7 @@ setSummaryData(response.data);
     { ...itemStyles[0], title: "Green Motivator", total: 'greenMotivators', color: "motivator", icon: 'openmoji:leafy-green' },
     { ...itemStyles[0], title: "Vyapar", total: 'vyapar', color: "vyapar", icon: 'eos-icons:product-subscriptions-outlined' },
   ]
-const userId = JSON.parse(localStorage.getItem('userDetails'))?.role
+const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
   return (
     <>
       <Page title="Dashboard">

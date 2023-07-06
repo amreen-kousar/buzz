@@ -65,8 +65,8 @@ export default function BuzzStock() {
     demoi()
   }
   const demoi = async (id, i, g) => {
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-    var role =JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+    var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
     var data = JSON.stringify({
       "from_date": g === "date" ? id : '',
       "to_date": g === "date" ? i : '',

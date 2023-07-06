@@ -30,8 +30,8 @@ Peopleprofile.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter}){
-    var [user,setUser]=useState(JSON.parse(localStorage?.getItem('profiledetails')))
-    let userprofile =JSON.parse(localStorage.getItem('profiledetails'))
+    var [user,setUser]=useState(JSON.parse(sessionStorage?.getItem('profiledetails')))
+    let userprofile =JSON.parse(sessionStorage.getItem('profiledetails'))
   
     const [profileData, setProfileData] = useState()
     useEffect(() => {
@@ -39,7 +39,7 @@ export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter})
       },
       [isOpenFilter])
       const profile = async => {
-        const userData = JSON.parse(localStorage?.getItem('profiledetails'))?.emp_id
+        const userData = JSON.parse(sessionStorage?.getItem('profiledetails'))?.emp_id
         var data = JSON.stringify({
           "id": userData
         });

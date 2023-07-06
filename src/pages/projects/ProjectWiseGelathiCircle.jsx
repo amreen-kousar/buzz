@@ -12,7 +12,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 export default function ProjectWiseGelathiCircle() {
   const { state } = useLocation();
   const [clcikData, setClickData] = useState();
-  const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
+  const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
   const [gelathiCircles, setgelathiCircles] = useState('');
   const [filterData, setFilterData] = useState({});
   const [reload, setReload] = useState(false);
@@ -48,9 +48,9 @@ export default function ProjectWiseGelathiCircle() {
     projData();
   }, []);
   const projData = (async) => {
-    var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'));
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       project_id: id,
       role_id: role,
@@ -88,8 +88,8 @@ export default function ProjectWiseGelathiCircle() {
     setFilter(false);
   };
   const circle = async (id, i, g) => {
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       search: search,
       project_id: state?.id,
@@ -132,7 +132,7 @@ export default function ProjectWiseGelathiCircle() {
     alert('Its Under PRoduction ');
     setOpenFilter(false);
   };
-  const role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
+  const role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
  
   return (
     <Container>

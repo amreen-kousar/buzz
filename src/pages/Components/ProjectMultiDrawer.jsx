@@ -96,9 +96,9 @@ export default function projectMultiDrawer({
     setExpanded(!expanded);
   };
   const [viewImage, setViewImage] = React.useState(false);
-  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-  const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
-  const roleID = JSON.parse(localStorage.getItem('userDetails'))?.role;
+  var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
+  const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
+  const roleID = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
   useEffect(() => {
     getTrainingBatch();
   }, [batchState, clcikData]);
@@ -111,8 +111,8 @@ export default function projectMultiDrawer({
   }, [batchState?.training_batch_id]);
 
   const getTrainingBatch = (async) => {
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       batch_id: batchState?.training_batch_id ? batchState?.training_batch_id : clcikData?.id,
       role_id: role,
@@ -256,8 +256,8 @@ export default function projectMultiDrawer({
 
   //createnotes
   const noteSubmitHandler = () => {
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
 
     var data = JSON.stringify({
       notes: gelatiNote,
@@ -293,8 +293,8 @@ export default function projectMultiDrawer({
     getNoteHandler();
   }, [batch?.data?.id]);
   const getNoteHandler = () => {
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       type: 1,
       tb_id: batch?.data?.id,

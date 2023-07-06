@@ -19,9 +19,9 @@ export default function PoaCreate(props) {
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState('');
   const [userId, setUserId] = useState();
-  var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
-  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-  const role_name = JSON.parse(localStorage?.getItem('userDetails'))?.role_name;
+  var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'));
+  var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+  const role_name = JSON.parse(sessionStorage?.getItem('userDetails'))?.role_name;
   const [value, setValue] = React.useState(false);
  const [successMessage,setsuccessMessage]=useState(false);
  const [message, setMessage] = useState('')

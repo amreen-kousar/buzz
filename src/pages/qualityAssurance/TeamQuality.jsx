@@ -60,7 +60,7 @@ TabPanel.propTypes = {
 };
 export default function TeamQuality({reload}) {
   const [value, setValue] = React.useState(0);
-  const data = localStorage?.getItem('userId');
+  const data = sessionStorage?.getItem('userId');
   var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0]);
   const [drawerEvent, SetDrawerEvent] = useState(false);
   const [selectedTeamTA, setselectedTeamTA] = useState(null);
@@ -90,8 +90,8 @@ export default function TeamQuality({reload}) {
   useEffect(() => {
     getPOA();
   }, [])
-  var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-  var role =JSON.parse(localStorage.getItem('userDetails'))?.role
+  var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+  var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
   const getPOA = () => {
     var data = JSON.stringify({
       emp_id: userid,

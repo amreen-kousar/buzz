@@ -11,7 +11,7 @@ import { Chart, registerables } from 'chart.js'
 
 export default function Charts(props) {
   Chart.register(...registerables)
-  const userDetails = JSON.parse(localStorage.getItem('userDetails'))
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'))
   const location = useLocation();
   const navigate = useNavigate();
   const [searchparams] = useSearchParams()
@@ -40,8 +40,8 @@ export default function Charts(props) {
     chart();
   }, [location?.state?.filterData]);
   const chart = async => {
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
 
       "role_id": role,

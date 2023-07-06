@@ -16,7 +16,7 @@ export default function selfShaktiProj() {
     var [selected, setSelected] = useState(null)
     var [search, setSearch] = useState('')
     const [trainerdata,setrainerdata]=useState('')
-    const userid = JSON.parse(localStorage.getItem('userDetails'))?.role
+    const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     const searchFunction = (e) => {
         search = e
         setSearch(search)
@@ -57,8 +57,8 @@ export default function selfShaktiProj() {
        }, []
    )
     const shakti = async(id,i,g) =>{
-        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+        var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "end_date": g==="date"?i:'',
             "search": search,
@@ -96,9 +96,9 @@ export default function selfShaktiProj() {
     }, [])
     
     const projData = async => {
-      var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-      var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-      var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+      var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
+      var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+      var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
       var data = JSON.stringify({
         "project_id": id,
         "role_id": role,

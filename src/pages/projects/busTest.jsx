@@ -30,8 +30,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   });
 export default function busTestList() {
   const {state} = useLocation()
-  const userDetails = localStorage?.getItem('userId')
-  const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
+  const userDetails = sessionStorage?.getItem('userId')
+  const roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     const [clcikData, setClickData] = useState()
     const [date1, setDate1] = useState(null)
     const [open, setOpen] = React.useState(false);
@@ -107,8 +107,8 @@ export default function busTestList() {
     }
    
     const busesdata = async (i, id, g) => {
-        var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-        var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+        var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+        var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
       
         const data = JSON.stringify({
         "fromDate":date1 && moment(date1?.$d)?.format('YYYY-MM-DD'),

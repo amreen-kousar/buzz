@@ -60,7 +60,7 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
    changeState();
     setAddData({
       date: itm?.date1,
-      user_id:localStorage?.getItem('userId'),
+      user_id:sessionStorage?.getItem('userId'),
       name: itm?.name,
       all_day: 0,
       description: itm?.description,
@@ -75,7 +75,7 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
     var data = JSON.stringify({
       "poa_id": addData?.poa_id,
       "date": moment(addData?.date?.$d)?.format('DD-MM-YYYY HH:mm:ss'),
-      "user_id": localStorage?.getItem('userId'),
+      "user_id": sessionStorage?.getItem('userId'),
       "name": addData?.name,
       "all_day": addData?.all_day,
       "description": addData?.description,

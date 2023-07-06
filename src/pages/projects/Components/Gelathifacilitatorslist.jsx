@@ -35,11 +35,11 @@ export default function Gelathifacilitatorlist(){
         projData();
     
       }, [])
-      const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
+      const roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
       const projData = async => {
-        var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+        var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
+        var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
           "project_id": id,
           "role_id": role,
@@ -66,7 +66,7 @@ export default function Gelathifacilitatorlist(){
       }
     
       const viewUser = (item) => {
-        localStorage.setItem('profiledetails', JSON.stringify(item))
+        sessionStorage.setItem('profiledetails', JSON.stringify(item))
        handleOpenFilter()
       }
      

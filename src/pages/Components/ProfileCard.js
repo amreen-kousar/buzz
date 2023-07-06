@@ -52,7 +52,7 @@ function SimpleDialog(props) {
 
 
 
-    localStorage.clear()
+    sessionStorage.clear()
     navigate('/')
   }
   const loginuser = (path) => {
@@ -95,7 +95,7 @@ SimpleDialog.propTypes = {
 };
 export default function RecipeReviewCard({ profileData, changeUser }) {
   const [expanded, setExpanded] = React.useState(false);
-  const userDetails = JSON.parse(localStorage.getItem('userDetails'))
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'))
   const [open, setOpen] = React.useState(false);
   const [count, setCount] = React.useState('');
   const [editData, setEditData] = useState({
@@ -161,7 +161,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
 
 
     handleCloseClick();
-    const userDetails = localStorage?.getItem("userDetails")
+    const userDetails = sessionStorage?.getItem("userDetails")
     var data = JSON.stringify({
       "id": JSON?.parse(userDetails)?.id,
       "countryID": 1,

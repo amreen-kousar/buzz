@@ -58,8 +58,8 @@ export default function enrolledGreenMotivatorsList() {
       setReload(!reload);
     };
     const enrolledGreenMotivators = async(id,i,g) =>{
-        var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-        var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+        var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+        var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": search,
             "project_id": state?.id,
@@ -93,9 +93,9 @@ export default function enrolledGreenMotivatorsList() {
   }, [])
   
   const projData = async => {
-    var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       "project_id": id,
       "role_id": role,
@@ -158,7 +158,7 @@ const getData = (itm, i) => {
   });
 }
 }
-  const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  const role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     return (
         <Container><Searchbar getSearch={(e) => searchFunction(e)} />
          {successMessage && (

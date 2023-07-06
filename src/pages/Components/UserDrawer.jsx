@@ -44,7 +44,7 @@ UserDrawer.propTypes = {
 export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users }) {
   const [profileData, setProfileData] = useState();
   const [user, setUser] = useState();
-  const userDetails = localStorage?.getItem('userId');
+  const userDetails = sessionStorage?.getItem('userId');
   const isSmallScreen = useMediaQuery('(max-width:600px)');
 
   useEffect(() => {
@@ -53,14 +53,14 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
   }, []);
 
   const updateSetUser = () => {
-    setUser(JSON.parse(localStorage?.getItem('people')));
+    setUser(JSON.parse(sessionStorage?.getItem('people')));
   };
 
   useEffect(() => {
     profile();
   }, [isOpenFilter,onCloseFilter]);
   const profile = (async) => {
-    const userData = JSON.parse(localStorage?.getItem('people'))?.id;
+    const userData = JSON.parse(sessionStorage?.getItem('people'))?.id;
     var data = JSON.stringify({
       id: userData,
     });
@@ -84,9 +84,9 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
   };
 
   const deleteprofile=(async)=>{
-    const userData = JSON.parse(localStorage?.getItem('people'))?.id;
-    const roleid = JSON.parse(localStorage?.getItem('people'))?.role_id;
-    const projectlist = JSON.parse(localStorage?.getItem('people'))?.project_list;
+    const userData = JSON.parse(sessionStorage?.getItem('people'))?.id;
+    const roleid = JSON.parse(sessionStorage?.getItem('people'))?.role_id;
+    const projectlist = JSON.parse(sessionStorage?.getItem('people'))?.project_list;
     if(confirm('Are you sure want to  delete')){
     var data = JSON.stringify({
       "emp_id": userData,
@@ -115,8 +115,8 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
   }
   }
 
-  var roleid = JSON.parse(localStorage?.getItem('people'))?.role_id;
-  var peopledetails =JSON.parse(localStorage?.getItem('people'))
+  var roleid = JSON.parse(sessionStorage?.getItem('people'))?.role_id;
+  var peopledetails =JSON.parse(sessionStorage?.getItem('people'))
   return (
     <>
       <Drawer

@@ -78,8 +78,8 @@ export default function CreateTrainerBatch(props) {
       });
   }
   const createTrainerBatch = async => {
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     const datass = village?.list?.filter(it => { return it?.id === trainerData?.talaq_id })
     var data = JSON.stringify({
       "batch_name": datass[0]?.name,

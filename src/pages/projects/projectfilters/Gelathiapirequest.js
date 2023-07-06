@@ -1,7 +1,7 @@
 import axios from 'axios';
 export default async function Filtersapirequest(props) {
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var response = []
     const data = JSON.stringify({
         "role_id": role,

@@ -29,7 +29,7 @@ export default function Shakthimain({ isOpenFilter, onOpenFilter, onCloseFilter,
     }
   
   
-    const data = localStorage?.getItem('userId')
+    const data = sessionStorage?.getItem('userId')
   
     const filtersHeaders = {  5: 'Trainers', 9: 'Date Range',1:'Rescheduled',2:'Cancelled',46:'All Training Batch'}
   

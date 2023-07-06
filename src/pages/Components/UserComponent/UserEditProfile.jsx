@@ -38,7 +38,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function UserEditProfile({ updateSetUser ,closeUserDrawer  ,profileData}) {
-  let user = JSON.parse(localStorage?.getItem('people'));
+  let user = JSON.parse(sessionStorage?.getItem('people'));
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
    var [inputProject, setInputProject] = React.useState([])
@@ -50,8 +50,8 @@ export default function UserEditProfile({ updateSetUser ,closeUserDrawer  ,profi
   const [rolesData, setRolesData] = useState([]);
   const [reportingManager, setReportingManager] = useState([]);
   const [reportingManagerProject, setReportingManagerProject] = useState([]);
-  var roleID = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  var roleID = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
 useEffect(()=>{
 let isApiSubscribed = true;
 if(isApiSubscribed)
@@ -212,7 +212,7 @@ useEffect(()=>{
     };
     axios(config)
       .then(function (response) {
-        localStorage.setItem('people', data);
+        sessionStorage.setItem('people', data);
         setUsersDataEdit(response.data);
         updateSetUser();
         closeUserDrawer()

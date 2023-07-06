@@ -46,7 +46,7 @@ gelathiData.forEach((itm) => {
   itm.isSelected="true"
 });
 const apiHit = () =>{
-  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
 var data = JSON.stringify({
   "project_id": data1?.project_id,
   "circle_name":sendData?.circle_name,
@@ -73,7 +73,7 @@ axios(config)
 });
 }
 const createCircle = () =>{
-  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   var data = JSON.stringify({
     
     "project_id": data1?.project_id,

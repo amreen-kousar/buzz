@@ -37,7 +37,7 @@ Gelathifacilitatorprofile.propTypes = {
 };
 export default function Gelathifacilitatorprofile({isOpenFilter,onOpenFilter,onCloseFilter}){
  
-  var [user,setUser]=useState(JSON.parse(localStorage?.getItem('people')))
+  var [user,setUser]=useState(JSON.parse(sessionStorage?.getItem('people')))
     const [profileData, setProfileData] = useState()
     useEffect(() => {
      
@@ -45,14 +45,14 @@ export default function Gelathifacilitatorprofile({isOpenFilter,onOpenFilter,onC
     }, []
     )
     const updateSetUser=()=>{
-      setUser(JSON.parse(localStorage?.getItem('people')))
+      setUser(JSON.parse(sessionStorage?.getItem('people')))
     }  
     useEffect(() => {
         profile()
       },
       [isOpenFilter])
       const profile = async => {
-        const userData = JSON.parse(localStorage?.getItem('profiledetails'))?.emp_id
+        const userData = JSON.parse(sessionStorage?.getItem('profiledetails'))?.emp_id
         var data = JSON.stringify({
           "id": userData
         });

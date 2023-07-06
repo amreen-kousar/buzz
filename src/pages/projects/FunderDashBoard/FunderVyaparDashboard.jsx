@@ -30,8 +30,8 @@ const FunderVyaparDashboard = () => {
   const apiHit = async (id, i, g) => {
     
     setLoader(true);
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
   
    
     const data = {

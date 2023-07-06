@@ -135,8 +135,8 @@ getTrainingBatch();
   const getTrainingBatch = async =>{
         
    
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
         "batch_id": batch?.data?.id,
         "role_id": role

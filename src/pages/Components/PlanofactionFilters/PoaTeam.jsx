@@ -26,7 +26,7 @@ function SimpleDialog(props) {
   var [tempData,setTempData]=useState([...teamData]);
   const [user, setUser] = useState();
   
-  var account = localStorage?.getItem('userDetails')
+  var account = sessionStorage?.getItem('userDetails')
   account = JSON.parse(account)
   const handleClose = () => {
     onClose(selectedValue);
@@ -91,7 +91,7 @@ export default function PoaTeam({ setUserId, setName, users }) {
   )
   
   const team = async => {
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id
     var data = JSON.stringify({
       "emp_id": idvalue,
       "team": ""

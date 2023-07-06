@@ -10,7 +10,7 @@ import FiltersHome from '../Filters/FiltersHome';
 import Iconify from '../../components/Iconify';
 export default function User() {
   var userAccess = ['2']
-  var userIdCheck = localStorage?.getItem('userId')
+  var userIdCheck = sessionStorage?.getItem('userId')
   const [openMessage, setOpenMessage] = useState(false);
   var [selected, setSelected] = useState(null)
   const [clcikData, setClickData] = useState()
@@ -35,8 +35,8 @@ export default function User() {
     }
   }, [open]);
   const busesd = async (i, id, g) => {
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
   
     const data = JSON.stringify({
       "date": "",

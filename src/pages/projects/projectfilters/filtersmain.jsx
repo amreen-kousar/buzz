@@ -40,7 +40,7 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
     }
   
   
-    const data = localStorage?.getItem('userId')
+    const data = sessionStorage?.getItem('userId')
   
     const filtersHeaders = {
       46: 'Gelathi Facilitators',

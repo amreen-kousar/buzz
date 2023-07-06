@@ -10,7 +10,7 @@ function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
   const navigate = useNavigate();
   const logoutuser = (path) => {
-    localStorage.clear()
+    sessionStorage.clear()
     navigate('/')
   }
   const loginuser = (path) => {

@@ -21,7 +21,7 @@ import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
 const GreenProgramDashboard = () => {
   const navigate = useNavigate();
-  const data = localStorage?.getItem('userId');
+  const data = sessionStorage?.getItem('userId');
   const theme = useTheme();
   const intialValues = {
     funder: '',
@@ -37,12 +37,12 @@ const GreenProgramDashboard = () => {
   const [slected, setSelected] = useState(null);
   const [summaryData, setSummaryData] = useState([]);
   const [graphData, setGraphData] = useState(null);
-  var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
-  var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+  var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
+  var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
   const apiHit = async (id, i, g,date1,date2) => {
     setLoader(true);
-    var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     const data = {
       "partner_id": i === 1 ? id?.id : '',
       "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',

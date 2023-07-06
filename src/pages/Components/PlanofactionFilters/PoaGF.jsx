@@ -71,7 +71,7 @@ const [gelatiNote, setGelatiNote] = useState('');
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-   const role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
+   const role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
   useEffect(() => {
     getTrainingBatch();
     changeState();
@@ -93,8 +93,8 @@ const [gelatiNote, setGelatiNote] = useState('');
     };
   }, [session.tb_id , session.check_in ,batch.check_1]);
   const getTrainingBatch = (async) => {
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       gf_session_id: clcikData?.id,
       role_id: role,
@@ -118,7 +118,7 @@ const [gelatiNote, setGelatiNote] = useState('');
   };
  
   const getGFSessionData = (async) => {
-    var userid = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var userid = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       gf_session_id: clcikData?.id,
       user_id : userid
@@ -141,8 +141,8 @@ const [gelatiNote, setGelatiNote] = useState('');
   };
 const noteSubmitHandler = () => {
     
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       notes: gelatiNote,
       type: session.type,
@@ -174,8 +174,8 @@ const noteSubmitHandler = () => {
   }
    const getNoteHandler = () => {
    
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       type: session.type,
       tb_id: session.tb_id,
@@ -216,7 +216,7 @@ const noteSubmitHandler = () => {
       alert("No photos to upload.")
       throw new Error('No photos to upload.');
     }
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
    
       setISLoading(true)
       var raw = JSON.stringify({
@@ -248,7 +248,7 @@ const noteSubmitHandler = () => {
     images.splice(index, 1);
     setImages([...images]);
   };
-  const roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
+  const roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
    
   const removesession=(e)=>{
     if(confirm("Do You want to Cancel?")){

@@ -95,7 +95,7 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
   }
   const day = new Date()
   const hitApi = () =>{
-    const roleid = JSON.parse(localStorage.getItem('userDetails'))?.id
+    const roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
         "education": enterData?.education,
         "husbandName": enterData?.husbandName,

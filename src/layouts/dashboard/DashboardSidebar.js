@@ -27,10 +27,10 @@ DashboardSidebar.propTypes = {
   onCloseSidebar: PropTypes.func,
 };
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
-  const data = localStorage?.getItem('userId')
-  var account = localStorage?.getItem('userDetails')
+  const data = sessionStorage?.getItem('userId')
+  var account = sessionStorage?.getItem('userDetails')
   account = JSON.parse(account)
-  var roleValue = JSON.parse(localStorage.getItem('userDetails'))?.trainer_type;
+  var roleValue = JSON.parse(sessionStorage.getItem('userDetails'))?.trainer_type;
 
   const { pathname } = useLocation();
   const isDesktop = useResponsive('up', 'lg');

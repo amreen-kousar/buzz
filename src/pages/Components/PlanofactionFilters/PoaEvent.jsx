@@ -41,13 +41,13 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   const [type, setType] = React.useState('1');
   const [viewImage, setViewImage] = React.useState(false);
   const [eventdetails, seteventdetails] = React.useState(false);
-  const userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+  const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
   const [locationdata, setlocationdata] = React.useState('');
   const hiddenFileInput = React.useRef(null);
-  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+  var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
   const [eventData, setEventData] = useState('');
   const [addImage, setAddImage] = useState('');
-  const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  const role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
   const [showCheckoutBtn , setCheckoutBtn] = useState(true)
   function getBase64(file, callback) {
     const reader = new FileReader();
@@ -149,7 +149,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
     });
   }, []);
   const postlocation = (async) => {
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     navigator.geolocation.getCurrentPosition(function (position) {
       var data = JSON.stringify({
         location_name: locationS,
@@ -227,7 +227,7 @@ const handlecheckin = () => {
     event()
   };
   const event = (async) => {
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       event_id: select?.id,
       user_id: idvalue,
@@ -253,7 +253,7 @@ const handlecheckin = () => {
     getlocationdata();
   }, [select ]);
   const getlocationdata = (async) => {
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       event_id: select?.id,
       user_id: idvalue,

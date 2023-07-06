@@ -54,7 +54,7 @@ function TabPanel(props) {
 }
 const SingleQulityDashboard = ({openSingleQulityDashboard , handleClose ,item} )=> {
 const [value, setValue] = React.useState(0);
-const data = localStorage?.getItem('userId')
+const data = sessionStorage?.getItem('userId')
 var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
 const image = ["tykml", "exrdcftvbgyhnuj"]
 const [drawerEvent, SetDrawerEvent] = useState(false);

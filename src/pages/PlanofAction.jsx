@@ -98,10 +98,10 @@ export default function PlanofAction() {
       for: '',
     },
   ];
-  var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
-  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
-  const role_name = JSON.parse(localStorage?.getItem('userDetails'))?.role_name;
+  var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'));
+  var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+  var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
+  const role_name = JSON.parse(sessionStorage?.getItem('userDetails'))?.role_name;
 
   const handleChange = (event, newValue) => {
     setSeason(newValue);
@@ -156,8 +156,8 @@ export default function PlanofAction() {
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-  const data = localStorage?.getItem('userId');
-  const user = localStorage?.getItem('userDetails');
+  const data = sessionStorage?.getItem('userId');
+  const user = sessionStorage?.getItem('userDetails');
   const { pathname } = useLocation();
   const AccountStyle = styled('div')(({ theme }) => ({
     display: 'flex',

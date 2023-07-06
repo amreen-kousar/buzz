@@ -20,8 +20,8 @@ import FiltersHome from 'src/pages/Filters/FiltersHome';
 import {baseURL} from 'src/utils/api';
 const VyaparProgramDashboard = () => {
   const navigate = useNavigate();
-  const data = localStorage?.getItem('userId');
-  var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role;
+  const data = sessionStorage?.getItem('userId');
+  var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
   const theme = useTheme();
   const intialValues = {
     funder: '',
@@ -39,8 +39,8 @@ const VyaparProgramDashboard = () => {
   const [graphData, setGraphData] = useState(null);
   const apiHit = async (id, i, g,date1,date2) => {
     setLoader(true);
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     const data = {
       "partner_id":i === 1 ? id?.id : '',
       "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',

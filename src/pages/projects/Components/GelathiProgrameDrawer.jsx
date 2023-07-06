@@ -79,8 +79,8 @@ export default function GelathiProgrameDrawer({
     setReloadFromForm(!reloadFromForm);
   };
 const [iserror, setIsError] = useState(false)
-  var roleid = JSON.parse(localStorage.getItem('userDetails'))?.role
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
+  var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   const [SaveBtn, setSaveBtn] = useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -104,10 +104,10 @@ const [iserror, setIsError] = useState(false)
   const [images, setImages] = useState([]);
   const [viewImage, setViewImage] = React.useState(false);
   const [openFilter, setOpenFilter] = useState(false);
-  localStorage.setItem('clickData', clcikData);
-  const localstoragrClickData = localStorage.getItem('clcikData');
-  const userName = JSON.parse(localStorage.getItem('userDetails'))?.first_name;
-  const userId = JSON.parse(localStorage.getItem('userDetails'))?.role;
+  sessionStorage.setItem('clickData', clcikData);
+  const localstoragrClickData = sessionStorage.getItem('clcikData');
+  const userName = JSON.parse(sessionStorage.getItem('userDetails'))?.first_name;
+  const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
   useEffect(()=>{
     let isSubscribe = true;
     setIsError(false)
@@ -239,8 +239,8 @@ const [iserror, setIsError] = useState(false)
       });
   };
   const noteSubmitHandler = () => {
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       notes: gelatiNote,
       type: session.type,
@@ -271,8 +271,8 @@ const [iserror, setIsError] = useState(false)
       });
   };
   const getNoteHandler = () => {
-    var userid = JSON.parse(localStorage.getItem('userDetails'))?.id;
-    var role = JSON.parse(localStorage.getItem('userDetails'))?.role;
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       type: session.type,
       tb_id: session.tb_id,

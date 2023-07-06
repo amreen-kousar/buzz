@@ -51,8 +51,8 @@ const [ open ,setOpen] = useState(false)
           var [itmForForm, setItemForForm ] = useState()
           const [openGetSingleQualityForm ,setOpenGetSingleQualityForm] = useState(false)     
           
-          var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
-          var role =JSON.parse(localStorage.getItem('userDetails'))?.role
+          var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+          var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
 const getPOA =()=>{
     var data = JSON.stringify({
         "Emp_id":parseInt(userid),

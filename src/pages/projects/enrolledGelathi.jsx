@@ -40,11 +40,11 @@ export default function enrolledGelathiList() {
         setSelected({ name: e, type: "Search" })
         enrolledGelathi()
     }
-const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
+const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
     const enrolledGelathi = async(id,i,g) =>{
-        var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-  var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-  var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+        var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
+  var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+  var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
             "search": search,
             "project_id": state?.id,
@@ -77,9 +77,9 @@ const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
   }, [])
   
   const projData = async => {
-    var userDetails = JSON.parse(localStorage?.getItem('userDetails'))
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       "project_id": id,
       "role_id": role,
@@ -140,7 +140,7 @@ const getData = (itm, i) => {
     // console.log(error);
   });
   }}
-  const role = JSON.parse(localStorage?.getItem('userDetails'))?.role
+  const role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     return (
         <Container>  <Searchbar getSearch={(e) => searchFunction(e)} />
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>

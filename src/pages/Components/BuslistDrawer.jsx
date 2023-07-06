@@ -67,7 +67,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
         // console.log(error, "<---error");
       });
   }
-  const userDetails = localStorage?.getItem('userId')
+  const userDetails = sessionStorage?.getItem('userId')
   const DeleteBus = async => {
     var data = JSON.stringify({
       "bus_id": clcikData?.bus_id

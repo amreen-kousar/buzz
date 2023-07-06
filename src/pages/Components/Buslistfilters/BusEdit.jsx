@@ -17,7 +17,7 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
   const [age, setAge] = React.useState('');
   const [editData, setEditData] = useState('')
   const [date, setDate] = useState(new Date())
-  const userDetails = localStorage?.getItem('userId')
+  const userDetails = sessionStorage?.getItem('userId')
   const [sendData, setSendData] = useState({
     lastUpdatedBy: "",
     chassis_number: "",

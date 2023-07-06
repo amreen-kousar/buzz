@@ -10,7 +10,7 @@ import Filtersmain from './projectfilters/filtersmain';
 export default function gelathiCirclesList() {
   const { state } = useLocation();
   const [clcikData, setClickData] = useState();
-  const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
+  const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
   const [gelathiCircles, setgelathiCircles] = useState('');
   const [filterData, setFilterData] = useState({});
   const [reload, setReload] = useState(false);
@@ -45,9 +45,9 @@ export default function gelathiCirclesList() {
     projData();
   }, []);
   const projData = (async) => {
-    var userDetails = JSON.parse(localStorage?.getItem('userDetails'));
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'));
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       project_id: id,
       role_id: role,
@@ -85,8 +85,8 @@ export default function gelathiCirclesList() {
     setFilter(false);
   };
   const circle = async (id, i, g) => {
-    var role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
-    var idvalue = JSON.parse(localStorage?.getItem('userDetails'))?.id;
+    var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       search: search,
       project_id: state?.id,
@@ -123,7 +123,7 @@ export default function gelathiCirclesList() {
     setFilterData(data);
     handleclose();
   };
-  const role = JSON.parse(localStorage?.getItem('userDetails'))?.role;
+  const role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
   return (
     <Container>
       {' '}

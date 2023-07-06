@@ -89,7 +89,7 @@ export default function User() {
     }
   }, [open]);
   var userAccess = ['2']
-  var userIdCheck = localStorage?.getItem('userId')
+  var userIdCheck = sessionStorage?.getItem('userId')
   const user = async (d, filter_type) => {
     setLoader(true)
     if (filter_type) {
@@ -97,7 +97,7 @@ export default function User() {
       let ids = { "Trainers": 5, "Drivers": 7, "Funders": 8, "Partner": 9, 'Gelathi Facilitators': 6 }
       filter_type.id = ids[filter_type.type]
     }
-    const dataid = localStorage?.getItem('userDetails')
+    const dataid = sessionStorage?.getItem('userDetails')
     const data = JSON.stringify({
       "search": searchUser,
       "user_id": JSON?.parse(dataid)?.id,
