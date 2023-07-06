@@ -51,7 +51,7 @@ import FUnderSSDashboard from './pages/projects/FunderDashBoard/FUnderSSDashboar
 import FunderGelathiDashboard from './pages/projects/FunderDashBoard/FunderGelathiDashboard';
 import Page404 from './pages/Page404';
 import SeniorTrainerMaterialStocklist from './pages/SeniorTrainerMaterialStocklist';
-import BusCheckList from './pages/projects/SeniorTrainerBuschecklist';
+// import BusCheckList from './pages/projects/SeniorTrainerBuschecklist';
 
 // ----------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ export default function Router() {
         { path: '', element: <AllProjects />, exact: true, },
         { path: "project", element: <Project /> },
         { path: "busTest", element: <BusTest /> },
-        { path: 'buschecklist',element:<BusCheckList />},
+        // { path: 'buschecklist',element:<BusCheckList />},
         { path: "materialStock", element: <MaterialStockList /> },
         { path: "selfShakthi", element: <SelfShakthi /> },
         { path: "gelathiProgram", element: <GelathiProgram /> },
