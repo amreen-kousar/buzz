@@ -1,5 +1,14 @@
+
 {
+
   "projects": {
-    "default": "buzz-staffw"
-  }
+
+    "default": "buzzstaffwomen",
+
+    "prod": "buzzstaffwomen"
+
+  },
+
+  "targets": {}
+
 }
