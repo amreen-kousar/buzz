@@ -209,8 +209,6 @@ axios(config)
   const createProject2 = () => {
 
    if(data?.operations_manager_id === '0'){
-    console.log(" iam inside if ")
-    // 
     setWarn(true)
     setMessage("Please Add Operations manager")
 

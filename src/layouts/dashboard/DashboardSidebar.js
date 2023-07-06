@@ -9,7 +9,6 @@ import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
 import navConfig from './NavConfig';
 import defaultImage from '../../assets/images/default.png';
-import Trainerdashboard from 'src/pages/Trainerdashboardapp';
 
 // ----------------------------------------------------------------------
 
