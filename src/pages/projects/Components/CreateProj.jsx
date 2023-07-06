@@ -332,17 +332,15 @@ axios(config)
 
   const createProject2 = () => {
 
-   if(data?.operations_manager_id === '0'){
-    console.log(" iam inside if ")
-    // 
-    setWarn(true)
-    setMessage("Please Add Operations manager")
-
-   }
-   else if(data?.driverId === '0'){
-    setWarn(true)
-    setMessage("Please Add Driver ")
-   }
+    if(data.operations_manager_id<=0 || data.operations_manager_id == ''){
+      setWarn(true)
+      setMessage("Please Add operations manager")
+  
+     }
+     else if(data.driverId.length<=0 || data.driverId.length==""){
+      setWarn(true)
+      setMessage("Please Add Driver ")
+     }
    else{
     var userid = JSON.parse(localStorage.getItem('userDetails'))?.id
     var formdata = new FormData();
@@ -351,8 +349,21 @@ axios(config)
     formdata.append('project_id', data.project_id)
     formdata.append('partnerID', data.partner_id)
     formdata.append('training_target', data.training_target)
-    formdata.append('start_date', moment(data.start_date)?.format('DD-MM-YYYY'))
-    formdata.append('end_date', moment(data.end_date)?.format('DD-MM-YYYY'))
+    // formdata.append('start_date', moment(data.start_date)?.format('DD-MM-YYYY'))
+    // formdata.append('end_date', moment(data.end_date)?.format('DD-MM-YYYY'))
+    if (data?.start_date) {
+      formdata.append('start_date', moment(data?.start_date).format('DD-MM-YYYY'));
+    }
+    else{
+      formdata.append('start_date', data?.startDate);
+    }
+    //  formdata.append('end_date', moment(data.end_date)?.format('DD-MM-YYYY'))
+    if (data?.end_date) {
+      formdata.append('end_date', moment(data?.end_date)?.format('DD-MM-YYYY'));
+    }
+    else{
+      formdata.append('end_date',data?.endDate);
+    }
     formdata.append('busID', data.bus_id)
     formdata.append('driverID', data.driverId)
     formdata.append("gfl_id",data.gfl_id)
@@ -859,7 +870,7 @@ const mainShowBussHandler = ()=>{
               }}>
                 <CardContent>
 
-                <div id="gelathi-facilators-list" style={{fontWeight:700}}>Gelathi Facilators  ({gelathiName?.length?gelathiName?.length:0})
+                <div id="gelathi-facilators-list" style={{fontWeight:700}}>Field Associate  ({gelathiName?.length?gelathiName?.length:0})
                   <IconButton id="gelathidrawer" style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>

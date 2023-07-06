@@ -166,8 +166,7 @@ let formatdata = summaryData?.data
   }
 
   const getData = (itm,i) => {
-  //  var itemrole = (itm?.empRole==13)?"Gelathi Facilitator Lead":(itm?.empRole==2)?"Admin":(itm?.empRole==6)?"Gelathi Facilitators":"Role"
-    setSelected({type:"Role",itm})
+   setSelected({type:"Role",itm})
     handleCloseFilter()
     apiHit(itm?.id,i,"Role")
     console.log(filterData,"hyyyyyyyyyyy")

@@ -484,7 +484,7 @@ export default function PlanofAction() {
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
+                                          Field Associate :{itm?.emp_name}
                                         </>
                                       ) : (
                                         <>
@@ -507,7 +507,7 @@ export default function PlanofAction() {
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
+                                          Field Associate :{itm?.emp_name}
                                           <br/>
                                           
                                         </>
@@ -655,7 +655,7 @@ export default function PlanofAction() {
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
+                                          Field Associate :{itm?.emp_name}
                                         </>
                                       ) : (
                                         <>
@@ -678,7 +678,7 @@ export default function PlanofAction() {
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
+                                          Field Associate :{itm?.emp_name}
                                           <br/>
                                           
                                         </>
@@ -826,7 +826,7 @@ export default function PlanofAction() {
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
+                                          Field Associate :{itm?.emp_name}
                                         </>
                                       ) : (
                                         <>
@@ -849,7 +849,7 @@ export default function PlanofAction() {
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
+                                          Field Associate :{itm?.emp_name}
                                           <br/>
                                           
                                         </>

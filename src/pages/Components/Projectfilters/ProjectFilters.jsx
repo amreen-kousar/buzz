@@ -163,7 +163,7 @@ export default function ProjectFilter({ isOpenFilter, onOpenFilter, onCloseFilte
                     color: '#ff7424',
                   },
                   color: 'black',
-                }}>Gelathi Facilitator</Button> : null}
+                }}>Field Associate</Button> : null}
 
 
 

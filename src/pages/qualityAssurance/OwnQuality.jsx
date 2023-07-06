@@ -129,7 +129,7 @@ const handleClose = ()=>{
                                                 </> :
                                                 itm?.program_assessment == 2? 
                                                 <>
-                                                Gelathi Facilitator Evaluated: {itm?.name_of_the_gf}<br/>
+                                                Field Associate Evaluated: {itm?.name_of_the_gf}<br/>
                                                 Program Name : Gelathi Program  &nbsp;({itm?.assessment_of})
                                                 </>
                                                 : itm?.program_assessment == 3? 

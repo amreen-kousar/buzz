@@ -154,7 +154,7 @@ const id = sessionStorage?.getItem("proId")
   }
   const getData = (itm, i) => {
     console.log(itm,"getdata")
-    setSelected({itm,type:'Gelathi Facilitators'})
+    setSelected({itm,type:'Field Associates'})
     const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     enrolledVyaapar(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
@@ -224,7 +224,7 @@ const id = sessionStorage?.getItem("proId")
                     selected && (selected?.type=='Search') && <><Chip label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
                 }
                  {
-                    selected && (selected?.type=='Gelathi Facilitators') && <><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected && (selected?.type=='Field Associates') && <><Chip label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
                 }
                 <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
                 <Typography style={{fontWeight:500,marginLeft:2}}>Enrolled Vyapar : ({count})</Typography> 

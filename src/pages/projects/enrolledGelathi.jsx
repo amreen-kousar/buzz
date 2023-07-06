@@ -120,7 +120,7 @@ const roleid = JSON.parse(localStorage?.getItem('userDetails'))?.role;
 }
 const getData = (itm, i) => {
   console.log(itm,"getdata")
-  setSelected({itm,type:'Gelathi Facilitators'})
+  setSelected({itm,type:'Field Associates'})
   const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
   enrolledGelathi(itm, i)
   console.log(data, i, itm, "<----sdfssreerfer")
@@ -190,7 +190,7 @@ const getData = (itm, i) => {
                     selected &&(selected?.type=='Search') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
              {
-                    selected &&(selected?.type=='Gelathi Facilitators') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected &&(selected?.type=='Field Associates') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
                    <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
             <Typography style={{fontWeight:500,marginLeft:2}}>Enrolled Gelathis ({count})</Typography> 

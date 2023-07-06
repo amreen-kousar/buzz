@@ -412,7 +412,7 @@ const trainerList = async => {
                 <FormControl fullWidth>
                  
         <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
-            {data.funder_id == "" && "Select "}Gelathi Facilitator
+            {data.funder_id == "" && "Select "}Field Associate
 <Select fullWidth variant='standard' color="common"
 
                     labelId="demo-simple-select-label"
@@ -420,7 +420,7 @@ const trainerList = async => {
                     defaultValue={data.gelathiId}
                 
                     value={data.gelathiId}
-                    label="Select Gelathi Facilitator"
+                    label="Select Field Associate"
                     onChange={(e => {
                       setData({ ...data, gelathi: e?.target?.value });
                       localStorage.setItem("gelathidata", e?.target?.value)

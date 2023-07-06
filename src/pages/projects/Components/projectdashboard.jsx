@@ -118,7 +118,7 @@ export default function Projectdashboard({profileData}) {
     if(role==="Operations Manager"){
       roleid="4"
       localStorage.setItem('profilerole','4')
-    }else if(role==="Gelathi Facilitator"){
+    }else if(role==="Field Associate"){
       roleid="6"
     localStorage.setItem('profilerole','6')
     }

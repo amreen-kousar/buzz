@@ -30,7 +30,7 @@ export default function gelathiProgram(props) {
     const user = async (d, filter_type) => {
        if (filter_type) {
          setSelected(filter_type)
-         let ids = { "Circle Meetings": 1,"Village Visits":2,"Beehive Visits":3,"Rescheduled":22,"Cancelled":23,"Gelathi Facilitators":6  ,"SPS":4, "SPM1":5 , "SPM2":6 , "SPM3":7, 
+         let ids = { "Circle Meetings": 1,"Village Visits":2,"Beehive Visits":3,"Rescheduled":22,"Cancelled":23,"Field Associates":6  ,"SPS":4, "SPM1":5 , "SPM2":6 , "SPM3":7, 
          "SPM4":8,"SPM5":9,"GPS":10,"GPM1":11,"GPM2":12,"GPM3":13,"GPM4":14,"GPM5":15,"VPS":16,"VPM1":17,"VPM2":18,"VPM3":19,"VPM4":20,"VPM5":21 }
          filter_type.id = ids[filter_type.type]
        }
@@ -153,7 +153,7 @@ export default function gelathiProgram(props) {
     }
     const getData = (itm, i) => {
     console.log(itm,"getdata")
-    setSelected({itm,type:'Gelathi Facilitators'})
+    setSelected({itm,type:'Field Associates'})
     const data = i === 6 ? { "gelathi_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : { "project_id": itm?.id }
     gelathiPrograme(itm, i)
     console.log(data, i, itm, "<----sdfssreerfer")
@@ -188,7 +188,7 @@ export default function gelathiProgram(props) {
                     selected  && (selected?.type=='Search') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
              {
-                    selected  && (selected?.type=='Gelathi Facilitators') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
+                    selected  && (selected?.type=='Field Associates') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
             {
                     selected  && (selected?.type=='Circle Meetings' || selected?.type=='Beehive Visits' || selected?.type=='Rescheduled'|| selected?.type=='Cancelled' || selected?.type=='Village Visits' 

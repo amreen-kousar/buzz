@@ -95,7 +95,7 @@ function SimpleDialog(props) {
         <Dialog onClose={handleClose} open={open}>
             <Stack direction={'row'}>
                 <Button variant="subtitle2" style={{ color: '#ed6c02' }} mt={2} ml={2} onClick={handleClose}>Back</Button>
-                <DialogTitle>Add Gelathi Facilitators From List</DialogTitle>
+                <DialogTitle>Add Field Associates From List</DialogTitle>
                 <Button mt={2} mr={2} variant="subtitle2" style={{ color: '#ff7424' }} onClick={() => {
           getData(arr),
             handleClose()
@@ -138,7 +138,7 @@ function SimpleDialog(props) {
             </ListItemButton>
           </ListItem>
         ))}
-            </List>:<List><ListItemText><h3 style={{textAlign:'center'}}>No Gelathi Facilitators</h3></ListItemText></List>}
+            </List>:<List><ListItemText><h3 style={{textAlign:'center'}}>No Field Associates</h3></ListItemText></List>}
         </Dialog>
     );
 }

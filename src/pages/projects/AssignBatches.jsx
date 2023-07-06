@@ -250,10 +250,10 @@ console.log(alloted,"allottedddddddddddddddddd",villages?.list)
         
         {(data1?.gelathiFacilitator?.length>0)?<Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
-                  <Typography style={{color:"#ff7424"}}>Select Gelathi Facilitator </Typography>
+                  <Typography style={{color:"#ff7424"}}>Select Field Associate </Typography>
                   <Stack mt={2} mb={2}>
                   {/* {data.state == "" && "Select "} */}
-              <Select color="common" label="Gelathi Facilitator" variant="standard">
+              <Select color="common" label="Field Associate" variant="standard">
              
                   {data1?.gelathiFacilitator?.map((itm)=>{
                   
@@ -266,7 +266,7 @@ console.log(alloted,"allottedddddddddddddddddd",villages?.list)
                 </Select>
                   </Stack>
                 </CardContent>
-          </Card>:<h3 style={{textAlign:'center'}}>No Gelathi facilitators</h3>}<br/>
+          </Card>:<h3 style={{textAlign:'center'}}>No Field Associates</h3>}<br/>
 
           
        

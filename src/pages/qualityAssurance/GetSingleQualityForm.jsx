@@ -328,7 +328,7 @@ var value =string?.split(",")
                 </Card>
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
-                    <Typography>Name of the Gelathi Facilitator</Typography>
+                    <Typography>Name of the Field Associate</Typography>
                     <Stack mt={2} mb={2}>
                       <TextField
                         disabled
@@ -387,7 +387,7 @@ var value =string?.split(",")
 
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
-                    <Typography>The Gelathi Facilitator competently carried out the following functions</Typography>
+                    <Typography>The Field Associate competently carried out the following functions</Typography>
                     
                     <RenderStringToArray string={sendForm?.the_gf_comptetly_carried_out_following_funtions} />
                       
@@ -410,7 +410,7 @@ var value =string?.split(",")
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
                     <Typography>
-                      The Gelathi Facilitator carried out the following functions before the training/meeting started
+                      The Field Associate carried out the following functions before the training/meeting started
                     </Typography>
                     <RenderStringToArray string={sendForm?.the_gf_caried_followig_fuctions_bfore_traning_or_meting_started} />
                       
@@ -478,7 +478,7 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                   <CardContent>
-                    <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
+                    <Typography>Check which ones the Field Associate did NOT do</Typography>
                     <RenderStringToArray string={sendForm?.check_which_ones_the_gf_did_not_do} />
                     
                 
@@ -499,7 +499,7 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                   <CardContent>
-                    <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
+                    <Typography>Check which ones the Field Associate did NOT do</Typography>
                     <RenderStringToArray string={sendForm?.check_which_ones_the_gelathi_did_not_do} />
                     
                    
@@ -520,7 +520,7 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                   <CardContent>
-                    <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
+                    <Typography>Check which ones the Field Associate did NOT do</Typography>
                     <RenderStringToArray string={sendForm?.check_which_ones_the_gelathi_did_not_do} />
                     
                  
@@ -542,7 +542,7 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                   <CardContent>
-                    <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
+                    <Typography>Check which ones the Field Associate did NOT do</Typography>
                     <RenderStringToArray string={sendForm?.check_which_ones_the_gelathi_did_not_do_2} />
                     
                   
@@ -564,7 +564,7 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                   <CardContent>
-                    <Typography>Check which ones the Gelathi Facilitator did NOT do</Typography>
+                    <Typography>Check which ones the Field Associate did NOT do</Typography>
                     <RenderStringToArray string={sendForm?.check_which_ones_the_gelathi_did_not_do_1} />
                     
                  
@@ -586,7 +586,7 @@ var value =string?.split(",")
                     </CardContent>
                   </Card>
                   <CardContent>
-                    <Typography>Check which ones the Gelathi Facilitator did not do</Typography>
+                    <Typography>Check which ones the Field Associate did not do</Typography>
                     <RenderStringToArray string={sendForm?.check_which_ones_the_gf_did_not_do} />
                     
                    
@@ -742,7 +742,7 @@ var value =string?.split(",")
                   <CardContent>
                     <Stack mt={2}>
                       <Stack>
-                        <Typography variant="body1">Check which ones the Gelathi Facilitator did not do</Typography>
+                        <Typography variant="body1">Check which ones the Field Associate did not do</Typography>
                         <RenderStringToArray string={sendForm?.check_which_ones_the_gf_did_not_do} />
                     
                       
@@ -891,7 +891,7 @@ var value =string?.split(",")
                   <CardContent>
                     <Stack mt={2}>
                       <Stack>
-                        <Typography variant="body1">Check which ones the Gelathi Facilitators did not do</Typography>
+                        <Typography variant="body1">Check which ones the Field Associates did not do</Typography>
                         <Stack mt={2}>
                           <FormGroup>
                             <FormControlLabel
@@ -999,7 +999,7 @@ var value =string?.split(",")
                   <CardContent>
                     <Stack mt={2}>
                       <Stack>
-                        <Typography variant="body1">Check which ones the Gelathi Facilitators did not do</Typography>
+                        <Typography variant="body1">Check which ones the Field Associates did not do</Typography>
                         <Stack mt={2}>
                           <FormGroup>
                             <FormControlLabel
@@ -1113,7 +1113,7 @@ var value =string?.split(",")
                   <CardContent>
                     <Stack mt={2}>
                       <Stack>
-                        <Typography variant="body1">Check which ones the Gelathi Facilitators did not do</Typography>
+                        <Typography variant="body1">Check which ones the Field Associates did not do</Typography>
                         <Stack mt={2}>
                           <FormGroup>
                             <FormControlLabel
@@ -1350,7 +1350,7 @@ var value =string?.split(",")
                 <Card>
                   <Card sx={{ backgroundColor: '#ff7424' }} mt={2}>
                     <CardContent>
-                      <Typography>Feedback to Gelathi Facilitator</Typography>
+                      <Typography>Feedback to Field Associate</Typography>
                     </CardContent>
                   </Card>
                   <Card sx={{ marginTop: '20px' }}>
@@ -1374,7 +1374,7 @@ var value =string?.split(",")
                   <CardContent>
                   
                         <Typography>
-                        The Gelathi Facilitator competently covered the following things in the training delivered
+                        The Field Associate competently covered the following things in the training delivered
                  
                         </Typography>
                         <RenderStringToArray string={sendForm?.the_gf_competently_covered_folowing_things_in_training_delivered} />
@@ -1387,7 +1387,7 @@ var value =string?.split(",")
                 </Card>
                 <Card sx={{ marginTop: 2 }}>
                   <CardContent>
-                    <Typography mb={2}>Rate The Gelathi Facilitator(Out of 5)</Typography>
+                    <Typography mb={2}>Rate The Field Associate(Out of 5)</Typography>
                   
                     <Typography mb={2}>Prior preparedness and planning for the session
 </Typography>
@@ -1567,7 +1567,7 @@ var value =string?.split(",")
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Typography>
-                      Any further training and understanding disabled by the Gelathi Facilitator of any of the training
+                      Any further training and understanding disabled by the Field Associate of any of the training
                       modules delivered
 
                       
@@ -1580,7 +1580,7 @@ var value =string?.split(",")
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
                     <Typography>
-                      Did you find anything in the training/ Gelathi Facilitator that needs to be worked on priority?
+                      Did you find anything in the training/ Field Associate that needs to be worked on priority?
                     </Typography>
                     <Stack mt={2} mb={2}>
                       <TextField
@@ -1677,7 +1677,7 @@ var value =string?.split(",")
 
                 <Card sx={{ marginTop: '20px' }}>
                   <CardContent>
-                    <Typography>Any other comments about the Gelathi Facilitator</Typography>
+                    <Typography>Any other comments about the Field Associate</Typography>
                     <Stack mt={2} mb={2}>
                       <TextField
                         disabled
