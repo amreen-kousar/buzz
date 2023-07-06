@@ -50,6 +50,7 @@ import FUnderGreenDashboard from './pages/projects/FunderDashBoard/FUnderGreenDa
 import FUnderSSDashboard from './pages/projects/FunderDashBoard/FUnderSSDashboard';
 import FunderGelathiDashboard from './pages/projects/FunderDashBoard/FunderGelathiDashboard';
 import Page404 from './pages/Page404';
+import SeniorTrainerMaterialStocklist from './pages/SeniorTrainerMaterialStocklist';
 
 
 // ----------------------------------------------------------------------
@@ -113,8 +114,9 @@ export default function Router() {
                 path: 'projects', element: <ProjectHome />, id: [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 12, 13,11],
                 children: getProjectRoutes
             },
-            { path: 'people', element: <User />, id: [0, 1, 2, 3, 4, 12,11] },
-            { path: 'BuzzStock', element: <BuzzStock />, id: [0, 1, 2, 3, 4, 12,11] },
+            { path: 'people', element: <User />, id: [0, 1, 2, 3, 4, 12,11,5] },
+            { path: 'MaterialStockList', element : <SeniorTrainerMaterialStocklist/>, id:[5]},
+            { path: 'BuzzStock', element: <BuzzStock />, id: [0, 1, 2, 3, 4, 12,11,5] },
             { path: 'profile', element: <Profile />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13,11] },
             { path: 'travel', element: <TravelA />, id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,11] },
             { path: 'demogrphy', element: <Demography />, id: [0, 1, 2, 3, 12,11] },

@@ -324,7 +324,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
                 variant="subtitle1"
                 gutterBottom
               >
-                Enrolled Gelathis Facilitator (
+                Enrolled Gelathis  (
                 {scheduleData?.all_participants?.length > 0
                   ? scheduleData?.all_participants?.length
                   : circleData?.gelathis?.length}
