@@ -34,9 +34,6 @@ export default function Login() {
     };
     axios(config)
       .then(function (response) {
-        // response.data = {
-        //   code: 200, first_name: "Anas", id: "144", last_name: "", message: "successfully", profile_pic: "", role: "6", role_name: "Field Associate", success: true, supervisorId: "0"
-        // }
         sessionStorage?.setItem('user', JSON?.stringify(itm?.user))
         sessionStorage?.setItem('userId', response?.data?.role)
         if (response?.data?.code == 404) {
