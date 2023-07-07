@@ -68,10 +68,11 @@ const getProjects = async()=>{
       
       axios(config)
       .then(function (response) {
+        console.log(JSON.stringify(response.data.list));
         setProjects(response.data.list)
       })
       .catch(function (error) {
-        // console.log(error);
+        console.log(error);
       });
       
 }
@@ -103,12 +104,16 @@ const getProjects = async()=>{
           },
           data
         };
+        console.log("dataaaaaaaaaaaaa", data);
+    
         axios(config)
           .then((response) => {
+            console.log("responseeeeeeeeeeee", response)
             setDemo(response.data?.data)
+            console.log(response.data?.data,"stockdataaaaaaaaa");
           })
           .catch((error) => {
-            // console.log(error);
+            console.log(error);
           });
       }
 
@@ -120,6 +125,8 @@ const getProjects = async()=>{
         apiData[index]=changedData
         setmaterialStock(apiData)
       }
+            
+      console.log(materialStock , " chnaged data")
       useEffect(()=>{
       
         const materialData = []
@@ -132,11 +139,14 @@ const getProjects = async()=>{
         
         })
         setmaterialStock(materialData)
+        console.log(materialStock, "stock details ")
         
         }, [demo])
     
 
       let  stock = materialStock;
+      console.log(stock, " updated stock")
+      
       const onSubmit = ()=>{
         var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
@@ -168,7 +178,9 @@ const getProjects = async()=>{
             timer: 2000
           });
          demoi(ProjectId)
+          console.log("susscesfully added data material")
          }
+         console.log(response.data)
         })
         .catch(function (error) {
         //   Swal.fire({
@@ -178,8 +190,9 @@ const getProjects = async()=>{
         //     confirmButtonText: 'Ok',
         //     timer: 2000
         //   });
-          // console.log(error , "failed");
+          console.log(error , "failed");
         });
+        console.log("submit")
         setAdmin(false)
       }
 
