@@ -139,7 +139,7 @@ setSummaryData(response?.data);
     handleCloseFilter()
   }
   const getData = (itm,i) => {
-    setSelected({type:"Role",itm})
+   setSelected({type:"Role",itm})
     handleCloseFilter()
     apiHit(itm?.id,i,"Role")
    

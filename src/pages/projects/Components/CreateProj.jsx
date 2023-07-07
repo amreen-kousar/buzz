@@ -617,7 +617,8 @@ const mainShowBussHandler = ()=>{
                 handlegelathiOpenFilter()
               }}>
                 <CardContent>
-                <div id="gelathi-facilators-list" style={{fontWeight:700}}>Gelathi Facilators  ({gelathiName?.length?gelathiName?.length:0})
+
+                <div id="gelathi-facilators-list" style={{fontWeight:700}}>Field Associate  ({gelathiName?.length?gelathiName?.length:0})
                   <IconButton id="gelathidrawer" style={{float:'right'}}>
                       <Iconify style={{ color: "black" }} icon="material-symbols:add" />
                     </IconButton>

@@ -43,7 +43,7 @@ export default function Filtersmain({ isOpenFilter, onOpenFilter, onCloseFilter,
     const data = sessionStorage?.getItem('userId')
   
     const filtersHeaders = {
-      46: 'Gelathi Facilitators',
+      46: 'Field Associates',
       9: 'Date Range',
       2: 'Village Visits',
       1: 'Circle Meetings',
