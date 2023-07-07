@@ -121,7 +121,7 @@ export default function ProjectWiseGelathiCircle() {
     circle();
   };
   const getData = (itm, i) => {
-    setSelected({ itm, type: 'Field Associates' });
+    setSelected({ itm, type: 'Gelathi Facilitators' });
     const data = i === 6 ? { gelathi_id: itm?.id } : i === 1 ? { partner_id: itm?.id } : { project_id: itm?.id };
     circle(itm, i);
     setFilterData(data);
@@ -192,7 +192,7 @@ export default function ProjectWiseGelathiCircle() {
           &nbsp;
         </>
       )}
-      {selected && selected?.type == 'Field Associates' && (
+      {selected && selected?.type == 'Gelathi Facilitators' && (
         <>
           {' '}
           <Chip

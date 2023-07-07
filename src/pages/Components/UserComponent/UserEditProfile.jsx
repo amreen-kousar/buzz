@@ -194,7 +194,7 @@ useEffect(()=>{
       editData?.empRole == "Program Manager" ? 3 :
       editData?.empRole == "Operations Manager" ? 4 :  
       editData?.empRole == "Trainer" ? 5 :
-      editData?.empRole == "Field Associate" ? "6" :
+      editData?.empRole == "Gelathi Facilitator" ? "6" :
       editData?.empRole == "Driver" ? 7:
       editData?.empRole == "Funder" ?8 :
       editData?.empRole == "Partner" ? 9 :
@@ -409,9 +409,9 @@ sethowProjectListData([...updatedlist]);
                     variant="outlined"
                     color="common"
                     onChange={(e) => {
-                      setEditData({ ...editData, address: e?.target?.value });
+                      setEditData({ ...editData, address1: e?.target?.value });
                     }}
-                    value={editData?.address}
+                    value={editData?.address1}
                   />
                 </Stack>
                 <Stack>
@@ -442,9 +442,7 @@ sethowProjectListData([...updatedlist]);
                 <Stack>
                  
                   {
-
-["Trainer", 'Field Associate', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(editData?.empRole) && <FormControl fullWidth>
-
+["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(editData?.empRole) && <FormControl fullWidth>
     <Autocomplete                
         multiple
         limitTags={2}

@@ -269,7 +269,7 @@ var data ={}
                 </Typography>
                 { selected &&  ( selected?.type=='Location' || selected?.type=='Date Range') &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /> }
                   
-                { selected  && ( selected?.type=='Funder' || selected?.type=='Operation Manager' || selected?.type=='Trainers' || selected?.type=='Field Associate' ) &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.first_name} `} onDelete={() => { handleDelete(selected) }} /> }
+                { selected  && ( selected?.type=='Funder' || selected?.type=='Operation Manager' || selected?.type=='Trainers' || selected?.type=='Gelathi Facilitator' ) &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.first_name} `} onDelete={() => { handleDelete(selected) }} /> }
          
                 {selected && (selected?.type=='Custom Filter') &&  <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/> }
                 {selected && (selected?.type=='Search') && <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type}:${selected?.name}`} onDelete={() => { handleDelete(selected) }}/>}

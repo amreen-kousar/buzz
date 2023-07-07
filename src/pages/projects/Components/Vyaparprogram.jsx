@@ -584,7 +584,7 @@ const [entreprenur , setentrepreneurError] = useState(false)
                     <Stack mt={2} mb={2}>
                       <Select
                         color="common"
-                        label="Choose Field Associate"
+                        label="Choose Gelathi Facilitator"
                         required
                         variant="standard"
                         onChange={(e) => setSendData({ ...sendData, gfId: e?.target?.value })}

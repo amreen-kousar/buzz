@@ -399,27 +399,6 @@ export default function PlanofAction() {
                                         }
                                       }}
                                     >
-                                      {/* {(role==6)? <>{itm?.time}<br></br> <b>Village : {itm?.name}</b> <br></br>Project name : {itm?.project_name}<br/>District : {itm?.location_name}<br/>{itm?.roleName}:{itm?.emp_name}</>: <>Time : {itm?.time}<br></br>  Title: {itm?.name}<br></br>{itm?.roleName}:{itm?.emp_name}</>} */}
-                                      {/* {itm?.type == '2' ? (
-                                        <>
-                                          {itm?.time}
-                                          <br />
-                                          Village :{itm?.name}
-                                          <br />
-                                          Project : {itm?.project_name}
-                                          <br />
-                                          District : {itm?.location_name}
-                                          <br />
-                                          Field Associate :{itm?.emp_name}
-                                        </>
-                                      ) : (
-                                        <>
-                                          {itm?.time}
-                                          <br></br> Title: {itm?.name}
-                                          <br></br>
-                                          {itm?.roleName}:{itm?.emp_name}
-                                        </>
-                                      )} */}
                                       {(itm?.type == '2') ?
                                         <>
                                        
@@ -429,7 +408,7 @@ export default function PlanofAction() {
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Field Associate :{itm?.emp_name}
+                                          Gelathi Facilitator :{itm?.emp_name}
                                           <br/>
                                           
                                         </>
@@ -550,7 +529,6 @@ export default function PlanofAction() {
                                         }
                                       }}
                                     >
-                                      
                                       {(itm?.type == '2') ?
                                         <>
                                         {itm?.time}
@@ -561,7 +539,7 @@ export default function PlanofAction() {
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Field Associate :{itm?.emp_name}
+                                          Gelathi Facilitator :{itm?.emp_name}
                                           <br/>
                                           
                                         </>
@@ -695,7 +673,6 @@ export default function PlanofAction() {
                                         }
                                       }}
                                     >
-                                   
                                       {(itm?.type == '2') ?
                                         <>
                                        
@@ -707,7 +684,7 @@ export default function PlanofAction() {
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Field Associate :{itm?.emp_name}
+                                          Gelathi Facilitator :{itm?.emp_name}
                                           <br/>
                                           
                                         </>

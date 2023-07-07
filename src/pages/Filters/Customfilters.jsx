@@ -360,14 +360,14 @@ const trainerList = async => {
                 <FormControl fullWidth>
                  
         <Typography style={{ flexDirection: 'row', color: '#ed6c02' }} variant="subtitle1" gutterBottom>
-            {data.funder_id == "" && "Select "}Field Associate
+            {data.funder_id == "" && "Select "}Gelathi Facilitator
 <Select fullWidth variant='standard' color="common"
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     defaultValue={data.gelathiId}
                 
                     value={data.gelathiId}
-                    label="Select Field Associate"
+                    label="Select Gelathi Facilitator"
                     onChange={(e => {
                       setData({ ...data, gelathi: e?.target?.value });
                       sessionStorage.setItem("gelathidata", e?.target?.value)

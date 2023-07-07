@@ -341,7 +341,7 @@ function Project(props) {
                     }}
                   >
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      Field Associates({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />{' '}
+                      Gelathi Facilitators({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />{' '}
                     </Box>
                   </Card>
                   <Card
@@ -536,7 +536,7 @@ function Project(props) {
                             </IconButton>
                           }
                         >
-                          <span style={{ width: '200px' }}> Assign Villages to Field Associate</span>
+                          <span style={{ width: '200px' }}> Assign Villages to Gelathi Facilitator</span>
                         </Button>
                       </Link>
                     </div>
