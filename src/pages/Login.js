@@ -100,7 +100,6 @@ export default function Login() {
     auth.signInWithPopup(provider)
       .then(itm => { apiHit(itm) })
       .catch((error) => alert(error.message));
-  
   }
 
 

@@ -60,7 +60,7 @@ export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter})
             console.log(response.data)
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
     
       }
@@ -88,7 +88,7 @@ const roleid = profileData?.role_id
         </AppBar>
         <Divider /><br />
         <Scrollbar>
-          <Stack spacing={1} sx={{ px: 1 }}>
+          {(profileData?.code==200)?<Stack spacing={1} sx={{ px: 1 }}>
             <div>
               <Card >
                 <CardContent>
@@ -161,7 +161,11 @@ const roleid = profileData?.role_id
                 </CardContent>
               </Card>
             </div>
-          </Stack>
+          </Stack>:<Stack spacing={1} sx={{ px: 1 }}>      <div>
+              <Card >
+                <CardContent style={{alignItems:'center',justifyContent:'center',display:'flex',marginTop:'30px'}}>{profileData?.message}
+                </CardContent>
+                </Card></div></Stack>}
         </Scrollbar>
     
       </Drawer>

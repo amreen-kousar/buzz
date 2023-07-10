@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton,Button ,CardContent,Select,MenuItem,TextField} from '@mui/material';
+import { baseURL } from 'src/utils/api';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -97,7 +98,7 @@ const getProjects = async()=>{
     
         const config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getStockItems.php', 
+          url:baseURL + 'getStockItems',
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json'
