@@ -26,6 +26,7 @@ import {
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress'
 import is from 'date-fns/locale/is';
+import { baseURL } from 'src/utils/api';
 PoaFilter.propTypes = {
   isOpenEvent: PropTypes.bool,
   onOpenEvent: PropTypes.func,
@@ -235,7 +236,7 @@ const handlecheckin = () => {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
+      url: baseURL + 'getEventDetail',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -260,7 +261,7 @@ const handlecheckin = () => {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
+      url: baseURL + 'getEventDetail',
       headers: {
         'Content-Type': 'application/json',
       },

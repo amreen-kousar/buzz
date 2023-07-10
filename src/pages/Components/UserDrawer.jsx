@@ -34,6 +34,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useMediaQuery } from '@mui/material';
+import { baseURL } from 'src/utils/api';
 // ----------------------------------------------------------------------
 UserDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
@@ -67,7 +68,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
 
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
+      url: baseURL + 'getProfileData',
       headers: {
         'Content-Type': 'application/json',
       },

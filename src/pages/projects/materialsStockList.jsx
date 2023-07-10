@@ -13,7 +13,8 @@ import Paper from '@mui/material/Paper';
 import Page from 'src/components/Page';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { baseURL } from 'src/utils/api';
 import { AltRouteTwoTone } from '@mui/icons-material';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -82,7 +83,7 @@ const projData = (async) => {
   });
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+    url: baseURL + 'getProjectData',
     headers: {
       'Content-Type': 'application/json',
     },

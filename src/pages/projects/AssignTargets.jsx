@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow';
 import TableCell from "@mui/material/TableCell";
 import axios from "axios";
+import { baseURL } from "src/utils/api";
 import { useEffect, useState} from "react";
 export default function AssignTargets()
 {
@@ -87,7 +88,7 @@ const projData = async => {
   });
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+    url: baseURL + 'getProjectData',
     headers: {
       'Content-Type': 'application/json'
     },

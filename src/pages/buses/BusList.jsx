@@ -8,6 +8,7 @@ import Addbus from './Addbus';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
 import Iconify from '../../components/Iconify';
+import { baseURL } from 'src/utils/api';
 export default function User() {
   var userAccess = ['2']
   var userIdCheck = sessionStorage?.getItem('userId')
@@ -51,7 +52,7 @@ export default function User() {
     console.log(data, "checking for search")
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getBuses.php',
+      url:baseURL + 'getBuses',
       headers: {
         'Content-Type': 'application/json'
       },

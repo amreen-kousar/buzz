@@ -146,7 +146,7 @@ const getProjects = async()=>{
           
             "project_id": ProjectId?.id,
             // "bus_id": ProjectId.bus_id,
-            "type": "0",
+            "type": "1",
             "stock_list" :stock
         });
        

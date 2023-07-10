@@ -7,6 +7,7 @@ import Iconify from 'src/components/Iconify';
 import { Link, useLocation } from 'react-router-dom';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Shakthimain from './projectfilters/Shakthimain';
+import { baseURL } from 'src/utils/api';
 export default function selfShaktiProj() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
@@ -107,7 +108,7 @@ export default function selfShaktiProj() {
   
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+        url: baseURL + 'getProjectData',
         headers: {
           'Content-Type': 'application/json'
         },

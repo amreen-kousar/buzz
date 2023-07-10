@@ -7,6 +7,7 @@ import defaultImage from '../../../assets/images/default.png';
 import {useState} from 'react'
 import { useEffect } from 'react';
 import axios from 'axios';
+import { baseURL } from 'src/utils/api';
 import {
   Box,
   Radio,
@@ -46,7 +47,7 @@ export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter})
     
         var config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
+          url: baseURL + 'getProfileData',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -56,9 +57,10 @@ export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter})
         axios(config)
           .then(function (response) {
             setProfileData(response.data)
+            console.log(response.data)
           })
           .catch(function (error) {
-            // console.log(error);
+            console.log(error);
           });
     
       }
