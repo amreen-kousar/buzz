@@ -111,7 +111,7 @@ const getTrainingBatch = async =>{
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
+      url: baseURL + 'getTrainingBatchData',
       headers: { 
         'Content-Type': 'application/json'
       },

@@ -73,7 +73,7 @@ export default function selfShaktiProj() {
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatch.php',
+            url: baseURL + 'getTrainingBatch',
             headers: { 
               'Content-Type': 'application/json'
             },

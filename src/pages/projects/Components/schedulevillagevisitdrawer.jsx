@@ -25,6 +25,7 @@ import {
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import moment from 'moment';
+import { baseURL } from 'src/utils/api';
 Villagevisitdrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
@@ -92,7 +93,7 @@ export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onClose
             var config = {
               method: 'post',
             maxBodyLength: Infinity,
-              url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
+              url: baseURL + 'getTrainingBatchData',
               headers: { 
                 'Content-Type': 'application/json'
               },

@@ -51,8 +51,8 @@ const getProjects = async()=>{
     var userid= JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var data = JSON.stringify({
         "search": "",
-        "id": userid,
-        "role_id": roleid,
+        "id": JSON.stringify(userid),
+        "role_id": JSON.stringify(roleid),
         "filter_id": "",
         "type": "",
         "pageNum": ""
@@ -60,7 +60,7 @@ const getProjects = async()=>{
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
+        url: baseURL + 'getProjects',
         headers: { 
           'Content-Type': 'application/json'
         },

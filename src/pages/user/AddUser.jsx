@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, Dialog, Toolbar, IconButton, Typography, TextField, DialogContent, DialogContentText, Box, DialogActions, FormControl, InputLabel, Select, MenuItem, RadioGroup, Radio, Autocomplete, FormControlLabel, FormGroup, Switch, CardContent } from '@mui/material'
 import Iconify from '../../components/Iconify';
 import AppBar from '@mui/material/AppBar';
+import { baseURL } from 'src/utils/api';
 function AddUser(props) {
   
     const [open, setOpen] = useState(false);
@@ -154,15 +155,15 @@ const emailchangeHandler=(e) => {
     const getProjects = async () => {
         const data = JSON.stringify({
             "search": "",
-            "id": 1,
-            "role_id": 1,
+            "id": "1",
+            "role_id": "1",
             "filter_id": 0,
             "type": "",
             "pageNum": 1
         });
         const config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
+            url: baseURL + 'getProjects',
             headers: {
                 'Content-Type': 'application/json'
             },

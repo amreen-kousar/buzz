@@ -19,6 +19,7 @@ import Iconify from 'src/components/Iconify';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -143,7 +144,7 @@ const getTrainingBatch = async =>{
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
+      url: baseURL + 'getTrainingBatchData',
       headers: { 
         'Content-Type': 'application/json'
       },

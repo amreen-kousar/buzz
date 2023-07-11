@@ -23,6 +23,7 @@ import {
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
+import { baseURL } from 'src/utils/api';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 ParticipantDrawer.propTypes = {
@@ -38,13 +39,13 @@ export default function ParticipantDrawer({ isOpenFilter, onOpenFilter, onCloseF
     }, [clcikData])
     const Participant = async =>{
         var data = JSON.stringify({
-            "participant_id": clcikData?.id
+            "participant_id": parseInt(clcikData?.id)
           });
           
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getParticipantData.php',
+            url: baseURL + 'getParticipantData',
             headers: { 
               'Content-Type': 'application/json'
             },

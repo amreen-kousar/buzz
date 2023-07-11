@@ -41,7 +41,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
-import { oldbaseURL } from 'src/utils/api';
+import { baseURL, oldbaseURL } from 'src/utils/api';
 import GelathiCircleDrawer from './GelathiCircleDrawer';
 import { isError } from 'lodash';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
@@ -280,7 +280,7 @@ const [iserror, setIsError] = useState(false)
     });
     const config = {
       method: 'post',
-      url: oldbaseURL + 'getNotes.php',
+      // url: baseURL + 'getNotes',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',

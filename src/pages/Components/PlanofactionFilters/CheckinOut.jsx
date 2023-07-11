@@ -17,6 +17,7 @@ import Box from '@mui/material/Box';
 import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import { useGeolocated } from 'react-geolocated';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -157,14 +158,14 @@ axios(config)
   const GetStatus = async=>{
     var data = JSON.stringify({
       "project_id": batch?.data?.project_id,
-      "poa_type": 1,
-      "type": 2,
+      "poa_type": "1",
+      "type": "2",
       "tb_id": batch?.data?.id
     });
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
+      url: baseURL + 'getCheckInOutStatus',
       headers: { 
         'Content-Type': 'application/json'
       },
