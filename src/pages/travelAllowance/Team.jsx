@@ -159,7 +159,7 @@ export default function Team(props) {
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/approveTa.php',
+            url: baseURL + 'approveTa',
             headers: {
                 'Content-Type': 'application/json'
             },
