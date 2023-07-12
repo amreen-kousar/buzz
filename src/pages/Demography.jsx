@@ -12,6 +12,7 @@ import axios from 'axios';
 import { assertTSAnyKeyword } from '@babel/types';
 import FiltersHome from './Filters/FiltersHome';
 import Page from 'src/components/Page';
+import { baseURL } from 'src/utils/api';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -62,19 +63,14 @@ export default function Demography() {
     const data = {
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
-      // trainerId: g ? "" : i === 5 ? id?.id : '',
-      // somId: g ? "" : i === 12 ? id?.id : '',
-      // gflId: g ? "" : i === 13 ? id?.id : '',
       funder_id: g ? "" : i === 2 ? id?.id : '',
-      // partner_id: g ? "" : i === 1 ? id?.id : '',
       project_id: g ? "" : i === 3 ? id?.id : '',
-      // opsManager: g ? "" : i === 4 ? id?.id : '',
       
     };
    
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getDemoGraphy.php',
+      url: baseURL + 'getDemoGraphy',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
