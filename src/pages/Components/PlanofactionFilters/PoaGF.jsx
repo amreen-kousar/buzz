@@ -146,13 +146,13 @@ const noteSubmitHandler = () => {
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       notes: gelatiNote,
-      type: session.type,
+      type: JSON.stringify(session.type),
       tb_id: session.tb_id,
       emp_id: userid,
     });
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createNotes.php',
+      url: baseURL+'createNotes',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',

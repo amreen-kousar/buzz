@@ -83,22 +83,24 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
         // console.log(error);
       });
   };
-
+  const projectlist = JSON.parse(sessionStorage?.getItem('people'))?.project_list;
+  var project_ids=[]
+  var updatedList = projectlist?.map((itm)=>project_ids.push(itm?.project_id))
   const deleteprofile=(async)=>{
     const userData = JSON.parse(sessionStorage?.getItem('people'))?.id;
     const roleid = JSON.parse(sessionStorage?.getItem('people'))?.role_id;
-    const projectlist = JSON.parse(sessionStorage?.getItem('people'))?.project_list;
+    
     if(confirm('Are you sure want to  delete')){
     var data = JSON.stringify({
       "emp_id": userData,
-      "delete": 1,
+      "delete": "1",
       "role_id": roleid,
-      "project_id": projectlist,
+      "project_id": project_ids
     });
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/deleteUser.php',
+      url: baseURL+'deleteUser',
       headers: { 
         'Content-Type': 'application/json'
       },
