@@ -94,7 +94,7 @@ export default function Own(props) {
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/deleteTa.php',
+            url: baseURL + 'deleteTa',
             headers: {
                 'Content-Type': 'application/json'
             },

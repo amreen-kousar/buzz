@@ -8,6 +8,7 @@ import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, C
 import CloseIcon from '@mui/icons-material/Close';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Iconify from 'src/components/Iconify';
+import { baseURL } from 'src/utils/api';
 export default function Team(props) {
     const [value, setValue] = React.useState(0);
     const data = sessionStorage?.getItem('userId')
@@ -128,11 +129,11 @@ export default function Team(props) {
             "ta_id": checkedData,
             "user_id": idvalue,
             "extra_comments": comments,
-            "status": 4
+            "status": "4"
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/verifyTa.php',
+            url: baseURL + 'verifyTa',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -236,13 +237,15 @@ const userrole = JSON.parse(sessionStorage.getItem('userDetails'))?.role
                                     <Grid id="team-verified-data-grid" container spacing={2}>
                                         <Grid id="checked-data-grid" item sm={11}>
                                             {/* {(itm?.status==0)? */}
-                                            {(itm?.verifyed_by==null || (itm?.verifyed_by!=null && itm?.approved_by==null && userrole==3) )?<Checkbox
+                                            {(itm?.status=='0'|| (itm?.status==4 && userrole==3) )?
+                                            <Checkbox
                                                 style={{ color: "#f97d3f" }} 
                                                 item={itm}
                                                 value={itm.id}
                                                 checked={checkedData.includes(itm.id)}
                                                 onChange={() => { setToCheckedData(itm, i) }}
-                                            />:null}
+                                            />
+                                            :null}
                                             <b style={{ color: "#3c88ed" }} >{itm?.Ta_Name}</b>
                                             {(itm?.status==4)?<Typography id="verified" style={{color:'green',float:'right'}}>Verified</Typography>:(itm?.status==0)?<Typography style={{color:'red',float:'right'}}>Pending</Typography>:(itm.status==1)?<Typography style={{color:'green',float:'right'}}>Approved</Typography>:<Typography style={{color:'red',float:'right'}}>Rejected</Typography>}
                                         </Grid>

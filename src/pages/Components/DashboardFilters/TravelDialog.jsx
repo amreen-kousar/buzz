@@ -126,17 +126,17 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
     var data = JSON.stringify({
       "date": moment(sendData?.date)?.format('YYYY-MM-DD'),
       "insideBangalore": false,
-      "end_odometer": sendData?.endOdimeter,
+      "end_odometer": (sendData?.endOdimeter)?sendData?.endOdimeter:'',
       "telephone": (sendData?.telephonecharges==1)?249:0,
       "end_location_name":locationS,
       "fairamount":sendData?.fairamount,
       "printing": sendData?.printing,
       "start_location_name": locationS,
-      "poa_id": sendData?.poa,
+      "poa_id": JSON.stringify(sendData?.poa),
       "start_odometer": (sendData?.odimeter)?sendData?.odimeter:'',
-      "rate_per_KM": sendData?.rateperkm,
+      "rate_per_KM": (sendData?.rateperkm)?sendData?.rateperkm:'',
       "stationery": sendData?.stationery,
-      "klmtr": sendData?.rateperkm,
+      "klmtr": (sendData?.rateperkm)?sendData?.rateperkm:'',
       "da": sendData?.foodexpenses,
       "others": sendData?.otherExpenses,
       "emp_id":userid,
@@ -147,7 +147,7 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/addNewTA.php',
+      url: baseURL + 'addNewTA',
       headers: {
         'Content-Type': 'application/json'
       },
