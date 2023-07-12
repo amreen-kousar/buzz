@@ -8,7 +8,6 @@ import Vyaparprogram from './Components/Vyaparprogram';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import GetVyaparProgram from './Getvyaparprogram';
 import Filtersmain from './projectfilters/filtersmain';
-import { baseURL } from 'src/utils/api';
 export default function enrolledVyaaparList() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
@@ -124,7 +123,7 @@ const id = sessionStorage?.getItem("proId")
     });
     var config = {
       method: 'post',
-      url: baseURL + 'getProjectData',
+      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
       headers: {
         'Content-Type': 'application/json'
       },

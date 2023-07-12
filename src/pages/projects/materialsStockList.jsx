@@ -13,8 +13,7 @@ import Paper from '@mui/material/Paper';
 import Page from 'src/components/Page';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-import Swal from 'sweetalert2';
-import { baseURL } from 'src/utils/api';
+import Swal from 'sweetalert2'
 import { AltRouteTwoTone } from '@mui/icons-material';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -83,7 +82,7 @@ const projData = (async) => {
   });
   var config = {
     method: 'post',
-    url: baseURL + 'getProjectData',
+    url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -114,7 +113,7 @@ const onChangeMaterialValue = (index , quantity)=>{
      
         const config = {
           method: 'post',
-          url: baseURL + 'getStockItems',
+          url: 'https://bdms.buzzwomen.org/appTest/getStockItems.php', 
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json'

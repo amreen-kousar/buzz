@@ -4,7 +4,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, Dialog, Toolbar, IconButton, Typography, TextField, DialogContent, DialogContentText, Box, DialogActions, FormControl, InputLabel, Select, MenuItem, RadioGroup, Radio, Autocomplete, FormControlLabel, FormGroup, Switch, CardContent } from '@mui/material'
 import Iconify from '../../components/Iconify';
 import AppBar from '@mui/material/AppBar';
-import { baseURL, oldbaseURL } from 'src/utils/api';
 function AddUser(props) {
   
     const [open, setOpen] = useState(false);
@@ -60,7 +59,7 @@ const emailchangeHandler=(e) => {
       });
       const config = {
           method: 'post',
-          url: oldbaseURL+'getEmailExist.php',
+          url: 'https://bdms.buzzwomen.org/appTest/getEmailExist.php',
           headers: {
               'Content-Type': 'application/json'
           },
@@ -93,7 +92,7 @@ const emailchangeHandler=(e) => {
         });
         const config = {
             method: 'post',
-            url: baseURL+'roles_list',
+            url: 'https://bdms.buzzwomen.org/appTest/roles_list.php',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -112,7 +111,7 @@ const emailchangeHandler=(e) => {
         let formData = new FormData();
         formData.append('role_id', value.id);
         formData.append('name', '');
-        let res = await fetch(baseURL+'getAllBuzzTeam',
+        let res = await fetch('https://bdms.buzzwomen.org/appTest/getAllBuzzTeam.php',
             {
                 body: formData,
                 method: "post"
@@ -155,15 +154,15 @@ const emailchangeHandler=(e) => {
     const getProjects = async () => {
         const data = JSON.stringify({
             "search": "",
-            "id": "1",
-            "role_id": "1",
+            "id": 1,
+            "role_id": 1,
             "filter_id": 0,
             "type": "",
             "pageNum": 1
         });
         const config = {
             method: 'post',
-            url: baseURL + 'getProjects',
+            url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -181,7 +180,7 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     const submitUser = () => {
         AddUser.project_list = inputProject.map(i => parseInt(i.id))
         AddUser.officeMailId = AddUser?.officeMailId
-        AddUser.empRole = JSON.stringify(AddUser?.role.id)
+        AddUser.empRole = AddUser?.role.id
         AddUser.supervisorId = AddUser?.reportingManager.id
         AddUser.profile_pic = ''
         AddUser.status = AddUser.present_status ? '1' : '0';
@@ -191,7 +190,7 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         const data = JSON.stringify(AddUser);
         const config = {
             method: 'post',
-            url: baseURL+'createUser',
+            url: 'https://bdms.buzzwomen.org/appTest/createUser.php',
             headers: {
                 'Content-Type': 'application/json'
             },

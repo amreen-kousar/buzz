@@ -11,7 +11,6 @@ import UserDrawer from '../Components/UserDrawer';
 import AddUser from './AddUser';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
-import { baseURL } from 'src/utils/api';
 export default function User() {
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
@@ -59,15 +58,15 @@ export default function User() {
   const getProjects = async (d) => {
     const data = JSON.stringify({
       "search": "",
-      "id": "1",
-      "role_id": "1",
+      "id": 1,
+      "role_id": 1,
       "filter_id": 0,
       "type": "",
       "pageNum": d ? d : 1
     });
     const config = {
       method: 'post',
-      url: baseURL + 'getProjects',
+      url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
       headers: {
         'Content-Type': 'application/json'
       },

@@ -34,7 +34,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useMediaQuery } from '@mui/material';
-import { baseURL } from 'src/utils/api';
 // ----------------------------------------------------------------------
 UserDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
@@ -68,7 +67,7 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
 
     var config = {
       method: 'post',
-      url: baseURL + 'getProfileData',
+      url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -83,24 +82,22 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
         // console.log(error);
       });
   };
-  const projectlist = JSON.parse(sessionStorage?.getItem('people'))?.project_list;
-  var project_ids=[]
-  var updatedList = projectlist?.map((itm)=>project_ids.push(itm?.project_id))
+
   const deleteprofile=(async)=>{
     const userData = JSON.parse(sessionStorage?.getItem('people'))?.id;
     const roleid = JSON.parse(sessionStorage?.getItem('people'))?.role_id;
-    
+    const projectlist = JSON.parse(sessionStorage?.getItem('people'))?.project_list;
     if(confirm('Are you sure want to  delete')){
     var data = JSON.stringify({
       "emp_id": userData,
-      "delete": "1",
+      "delete": 1,
       "role_id": roleid,
-      "project_id": project_ids
+      "project_id": projectlist,
     });
     
     var config = {
       method: 'post',
-      url: baseURL+'deleteUser',
+      url: 'https://bdms.buzzwomen.org/appTest/deleteUser.php',
       headers: { 
         'Content-Type': 'application/json'
       },

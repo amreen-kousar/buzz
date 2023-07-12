@@ -15,7 +15,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableCell from "@mui/material/TableCell";
 import { vi } from "date-fns/locale";
-import { baseURL } from "src/utils/api";
 
 export default function AssignBatches(){
    
@@ -48,7 +47,7 @@ const projData = async => {
 
   var config = {
     method: 'post',
-    url: baseURL + 'getProjectData',
+    url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
     headers: {
       'Content-Type': 'application/json'
     },

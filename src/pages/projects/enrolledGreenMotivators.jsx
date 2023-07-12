@@ -16,7 +16,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import { baseURL } from 'src/utils/api';
 export default function enrolledGreenMotivatorsList() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
@@ -104,7 +103,7 @@ export default function enrolledGreenMotivatorsList() {
     });
     var config = {
       method: 'post',
-      url: baseURL + 'getProjectData',
+      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
       headers: {
         'Content-Type': 'application/json'
       },

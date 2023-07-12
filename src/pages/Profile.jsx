@@ -11,8 +11,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ProfileCard from './Components/ProfileCard';
-import { baseURL } from 'src/utils/api';
+import ProfileCard from './Components/ProfileCard'
 export default function Profile(index) {
   const [state, setState] = React.useState({
     top: false,
@@ -33,7 +32,7 @@ export default function Profile(index) {
     });
     var config = {
       method: 'post',
-      url: baseURL + 'getProfileData',
+      url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
       headers: {
         'Content-Type': 'application/json'
       },

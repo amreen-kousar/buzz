@@ -24,7 +24,6 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
-import { baseURL } from 'src/utils/api';
 ParticipentDetailsDailoge.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
@@ -38,13 +37,13 @@ export default function ParticipentDetailsDailoge({ isOpenFilter, onOpenFilter, 
     }, [clcikData])
     const Participant = async =>{
         var data = JSON.stringify({
-            "participant_id": parseInt(clcikData?.id)
+            "participant_id": clcikData?.id
           });
           
           
           var config = {
             method: 'post',
-            url: baseURL + 'getParticipantData',
+            url: 'https://bdms.buzzwomen.org/appTest/getParticipantData.php',
             headers: { 
               'Content-Type': 'application/json'
             },

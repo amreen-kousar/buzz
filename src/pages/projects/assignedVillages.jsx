@@ -5,7 +5,6 @@ import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import VillageDialog from './projectfilters/Villagesdialog';
-import { baseURL } from 'src/utils/api';
 export default function assignedVillages() {
     const {state} = useLocation()
     const [data1, setData1] = useState('')
@@ -77,7 +76,7 @@ export default function assignedVillages() {
     });
     var config = {
       method: 'post',
-      url: baseURL + 'getProjectData',
+      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -111,7 +110,7 @@ const getTrainingBatch = async =>{
     
     var config = {
       method: 'post',
-      url: baseURL + 'getTrainingBatchData',
+      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
       headers: { 
         'Content-Type': 'application/json'
       },

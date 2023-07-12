@@ -30,7 +30,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import moment from 'moment';
 import GelathiCircleForm from './GelathiCircleForm';
-import {oldbaseURL,baseURL} from 'src/utils/api';
+import {oldbaseURL} from 'src/utils/api';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 Circledrawer.propTypes = {
@@ -207,7 +207,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     var config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: baseURL +'getTrainingBatchData',
+      url: oldbaseURL+'getTrainingBatchData.php',
       headers: {
         'Content-Type': 'application/json',
       },

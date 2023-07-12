@@ -13,7 +13,6 @@ import Button from '@mui/material/Button';
 import Page from 'src/components/Page';
 import axios from 'axios';
 import FiltersHome from './Filters/FiltersHome';
-import { baseURL } from 'src/utils/api';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -91,7 +90,7 @@ export default function BuzzStock() {
     };
     const config = {
       method: 'post',
-      url: baseURL+'getTotalstocks',
+      url: 'https://bdms.buzzwomen.org/appTest/getTotalStocks.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'

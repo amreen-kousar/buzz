@@ -5,7 +5,6 @@ import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
-import { baseURL } from 'src/utils/api';
 import Villagevisitdrawer from './Components/schedulevillagevisitdrawer';
 export default function scheduleVillage() {
     const {state} = useLocation()
@@ -77,7 +76,7 @@ export default function scheduleVillage() {
   
       var config = {
         method: 'post',
-        url: baseURL + 'getProjectData',
+        url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
         headers: {
           'Content-Type': 'application/json'
         },

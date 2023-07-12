@@ -8,7 +8,6 @@ import Addbus from './Addbus';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
 import Iconify from '../../components/Iconify';
-import { baseURL } from 'src/utils/api';
 export default function User() {
   var userAccess = ['2']
   var userIdCheck = sessionStorage?.getItem('userId')
@@ -41,18 +40,18 @@ export default function User() {
   
     const data = JSON.stringify({
       "date": "",
-      "role_id": parseInt(role),
+      "role_id": role,
       "project_id": id === 3 ? i?.id : "",
       taluk_id: g === "country" ? id : "",
       district_id: g === "country" ? i : "",
       "funder_id": id === 2 ? i?.id : "",
-      "emp_id": parseInt(userid),
+      "emp_id": userid,
       "search": search
     });
     console.log(data, "checking for search")
     const config = {
       method: 'post',
-      url:baseURL + 'getBuses',
+      url: 'https://bdms.buzzwomen.org/appTest/getBuses.php',
       headers: {
         'Content-Type': 'application/json'
       },

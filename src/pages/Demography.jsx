@@ -62,16 +62,29 @@ export default function Demography() {
     const data = {
       taluk_id: g === "country" ? i : "",
       district_id: g === "country" ? id : "",
-      // trainerId: g ? "" : i === 5 ? id?.id : '',
-      // somId: g ? "" : i === 12 ? id?.id : '',
-      // gflId: g ? "" : i === 13 ? id?.id : '',
+      trainerId: g ? "" : i === 5 ? id?.id : '',
+      somId: g ? "" : i === 12 ? id?.id : '',
+      gflId: g ? "" : i === 13 ? id?.id : '',
       funder_id: g ? "" : i === 2 ? id?.id : '',
-      // partner_id: g ? "" : i === 1 ? id?.id : '',
+      partner_id: g ? "" : i === 1 ? id?.id : '',
       project_id: g ? "" : i === 3 ? id?.id : '',
-      // opsManager: g ? "" : i === 4 ? id?.id : '',
+      opsManager: g ? "" : i === 4 ? id?.id : '',
       
     };
-   
+    const datas = {
+      end_date: i,
+      taluk_id: "",
+      district_id: "",
+      trainerId: '',
+      emp_id: 1,
+      start_date: id,
+      somId: '',
+      gflId: '',
+      funder_id: "",
+      partner_id: "",
+      project_id: '',
+      opsManager: '',
+    };
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getDemoGraphy.php',

@@ -36,7 +36,6 @@ import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import { EightK } from '@mui/icons-material';
-import { baseURL } from 'src/utils/api';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -146,13 +145,13 @@ const noteSubmitHandler = () => {
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       notes: gelatiNote,
-      type: JSON.stringify(session.type),
+      type: session.type,
       tb_id: session.tb_id,
       emp_id: userid,
     });
     const config = {
       method: 'post',
-      url: baseURL+'createNotes',
+      url: 'https://bdms.buzzwomen.org/appTest/createNotes.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -183,7 +182,7 @@ const noteSubmitHandler = () => {
     });
     const config = {
       method: 'post',
-      // url: baseURL + 'getNotes',
+      url: 'https://bdms.buzzwomen.org/appTest/getNotes.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',

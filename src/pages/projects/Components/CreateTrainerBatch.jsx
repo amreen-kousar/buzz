@@ -17,8 +17,6 @@ import { DialogContentText } from '@mui/material';
 import dayjs from 'dayjs';
 import moment from 'moment/moment';
 import Iconify from 'src/components/Iconify';
-import { baseURL } from 'src/utils/api';
-import { parseInt } from 'lodash';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -61,12 +59,11 @@ export default function CreateTrainerBatch(props) {
   
   const villageList = async(i) => {
     var data = JSON.stringify({
-      "taluk_id":parseInt(i?.location_id),
-      "search":'',
+      "taluk_id":i?.location_id
     });
     var config = {
       method: 'post',
-      url: baseURL + 'getVillageList',
+      url: 'https://bdms.buzzwomen.org/appTest/getVillageList.php',
       headers: {
         'Content-Type': 'application/json'
       },

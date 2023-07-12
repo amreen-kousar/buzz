@@ -6,7 +6,6 @@ import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import BeehiveDrawer from './Components/BeehiveDrawer';
-import { baseURL } from 'src/utils/api';
 import Circledrawer from './Components/Circledrawer';
 export default function scheduleCircleMeet() {
     const {state} = useLocation()
@@ -78,7 +77,7 @@ export default function scheduleCircleMeet() {
   
       var config = {
         method: 'post',
-        url: baseURL + 'getProjectData',
+        url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
         headers: {
           'Content-Type': 'application/json'
         },

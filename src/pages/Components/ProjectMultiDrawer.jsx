@@ -43,7 +43,6 @@ import Day2Completed from '../projects/Components/day2Completion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import ShaktiDialogday2 from '../projects/Components/ShaktiDialogday2';
-import { baseURL } from 'src/utils/api';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -121,7 +120,7 @@ export default function projectMultiDrawer({
 
     var config = {
       method: 'post',
-      url: baseURL + 'getTrainingBatchData',
+      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -262,13 +261,13 @@ export default function projectMultiDrawer({
 
     var data = JSON.stringify({
       notes: gelatiNote,
-      type: "1",
+      type: 1,
       tb_id: batch?.data?.id,
       emp_id: userid,
     });
     const config = {
       method: 'post',
-      url: baseURL+'createNotes',
+      url: 'https://bdms.buzzwomen.org/appTest/createNotes.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -297,12 +296,12 @@ export default function projectMultiDrawer({
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
-      type: "1",
+      type: 1,
       tb_id: batch?.data?.id,
     });
     const config = {
       method: 'post',
-      // url: baseURL + 'getNotes',
+      url: 'https://bdms.buzzwomen.org/appTest/getNotes.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -323,14 +322,14 @@ export default function projectMultiDrawer({
   const GetStatus = (async) => {
     var data = JSON.stringify({
       project_id: projectId,
-      poa_type: "1",
-      type: "2",
+      poa_type: 1,
+      type: 2,
       tb_id: batchState?.training_batch_id ? batchState?.training_batch_id : clcikData?.id,
     });
 
     var config = {
       method: 'post',
-      url: baseURL + 'getCheckInOutStatus',
+      url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
       headers: {
         'Content-Type': 'application/json',
       },

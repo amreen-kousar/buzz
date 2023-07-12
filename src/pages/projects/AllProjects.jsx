@@ -12,7 +12,6 @@ import AddProject from './Addproject';
 import FiltersHome from '../Filters/FiltersHome';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
-import { baseURL } from 'src/utils/api';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -174,8 +173,8 @@ var data ={}
     }
         const config = {
             method: 'post',
-            url: baseURL + 'getProjects',
-            headers: { 
+            url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
+            headers: {
                 'Content-Type': 'application/json'
             },
             data

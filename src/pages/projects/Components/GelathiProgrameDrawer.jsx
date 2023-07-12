@@ -41,7 +41,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
-import { baseURL, oldbaseURL } from 'src/utils/api';
+import { oldbaseURL } from 'src/utils/api';
 import GelathiCircleDrawer from './GelathiCircleDrawer';
 import { isError } from 'lodash';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
@@ -243,13 +243,13 @@ const [iserror, setIsError] = useState(false)
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       notes: gelatiNote,
-      type: JSON.stringify(session.type),
+      type: session.type,
       tb_id: session.tb_id,
       emp_id: userid,
     });
     const config = {
       method: 'post',
-      url: baseURL+'createNotes',
+      url: oldbaseURL + 'createNotes.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -280,7 +280,7 @@ const [iserror, setIsError] = useState(false)
     });
     const config = {
       method: 'post',
-      // url: baseURL + 'getNotes',
+      url: oldbaseURL + 'getNotes.php',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',

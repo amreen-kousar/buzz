@@ -5,7 +5,6 @@ import GelathiProgrameDrawer from '../projects/Components/GelathiProgrameDrawer'
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Filtersmain from './projectfilters/filtersmain';
-import { baseURL } from 'src/utils/api';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 export default function gelathiProgram(props) {
     const {state} = useLocation();
@@ -79,7 +78,7 @@ export default function gelathiProgram(props) {
     
         var config = {
           method: 'post',
-          url: baseURL + 'getProjectData',
+          url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
           headers: {
             'Content-Type': 'application/json'
           },

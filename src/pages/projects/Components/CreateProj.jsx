@@ -22,7 +22,6 @@ import Add from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Iconify from 'src/components/Iconify';
-import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -164,7 +163,7 @@ var userdata = sessionStorage?.getItem('operations_manager_id')
   });
 var config = {
   method: 'post',
-  url: baseURL+'getgfl',
+  url: 'https://bdms.buzzwomen.org/appTest/new/getgfl.php',
   headers: { 
     'Content-Type': 'application/json'
   },

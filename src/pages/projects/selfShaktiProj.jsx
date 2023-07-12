@@ -7,7 +7,6 @@ import Iconify from 'src/components/Iconify';
 import { Link, useLocation } from 'react-router-dom';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Shakthimain from './projectfilters/Shakthimain';
-import { baseURL } from 'src/utils/api';
 export default function selfShaktiProj() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
@@ -73,7 +72,7 @@ export default function selfShaktiProj() {
           
           var config = {
             method: 'post',
-            url: baseURL + 'getTrainingBatch',
+            url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatch.php',
             headers: { 
               'Content-Type': 'application/json'
             },
@@ -108,7 +107,7 @@ export default function selfShaktiProj() {
   
       var config = {
         method: 'post',
-        url: baseURL + 'getProjectData',
+        url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
         headers: {
           'Content-Type': 'application/json'
         },

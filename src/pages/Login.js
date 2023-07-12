@@ -12,7 +12,6 @@ import { LoginForm } from '../sections/auth/login';
 import { auth, provider } from "../Firebase"
 import AuthSocial from '../sections/auth/AuthSocial';
 import Iconify from 'src/components/Iconify';
-import { baseURL } from 'src/utils/api';
 export default function Login() {
   const RootStyle = styled('div')(({ theme }) => ({
     [theme.breakpoints.up('md')]: {
@@ -27,7 +26,7 @@ export default function Login() {
     });
     var config = {
       method: 'post',
-      url: baseURL + 'signIn',
+      url: 'https://bdms.buzzwomen.org/appTest/signIn.php',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -100,6 +99,7 @@ export default function Login() {
     auth.signInWithPopup(provider)
       .then(itm => { apiHit(itm) })
       .catch((error) => alert(error.message));
+  
   }
 
 

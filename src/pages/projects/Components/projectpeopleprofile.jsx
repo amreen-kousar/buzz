@@ -7,7 +7,6 @@ import defaultImage from '../../../assets/images/default.png';
 import {useState} from 'react'
 import { useEffect } from 'react';
 import axios from 'axios';
-import { baseURL } from 'src/utils/api';
 import {
   Box,
   Radio,
@@ -47,7 +46,7 @@ export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter})
     
         var config = {
           method: 'post',
-          url: baseURL + 'getProfileData',
+          url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -57,7 +56,6 @@ export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter})
         axios(config)
           .then(function (response) {
             setProfileData(response.data)
-            console.log(response.data)
           })
           .catch(function (error) {
             // console.log(error);
@@ -88,7 +86,7 @@ const roleid = profileData?.role_id
         </AppBar>
         <Divider /><br />
         <Scrollbar>
-          {(profileData?.code==200)?<Stack spacing={1} sx={{ px: 1 }}>
+          <Stack spacing={1} sx={{ px: 1 }}>
             <div>
               <Card >
                 <CardContent>
@@ -161,11 +159,7 @@ const roleid = profileData?.role_id
                 </CardContent>
               </Card>
             </div>
-          </Stack>:<Stack spacing={1} sx={{ px: 1 }}>      <div>
-              <Card >
-                <CardContent style={{alignItems:'center',justifyContent:'center',display:'flex',marginTop:'30px'}}>{profileData?.message}
-                </CardContent>
-                </Card></div></Stack>}
+          </Stack>
         </Scrollbar>
     
       </Drawer>

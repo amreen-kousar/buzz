@@ -30,7 +30,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import { useMediaQuery } from '@mui/material';
-import { baseURL } from 'src/utils/api';
 BuslistDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
@@ -52,7 +51,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
     });
     var config = {
       method: 'post',
-      url: baseURL + 'getBusdata',
+      url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
       headers: {
         'Content-Type': 'application/json'
       },

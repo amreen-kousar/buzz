@@ -6,7 +6,6 @@ import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import BeehiveDrawer from './Components/BeehiveDrawer';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
-import { baseURL } from 'src/utils/api';
 export default function scheduleBeehiveVisit() {
    const {state} = useLocation()
     const [clcikData, setClickData] = useState()
@@ -79,7 +78,7 @@ export default function scheduleBeehiveVisit() {
   
       var config = {
         method: 'post',
-        url: baseURL + 'getProjectData',
+        url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
         headers: {
           'Content-Type': 'application/json'
         },

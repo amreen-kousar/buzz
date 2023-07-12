@@ -10,7 +10,6 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import Alert from '@mui/material/Alert';
 import Iconify from 'src/components/Iconify';
-import { baseURL } from 'src/utils/api';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -75,7 +74,7 @@ const tomorrow = dayjs().add(1, 'day');
     });
     var config = {
       method: 'post',
-      url: baseURL + 'createEvent',
+      url: 'https://bdms.buzzwomen.org/appTest/createEvent.php',
       headers: {
         'Content-Type': 'application/json',
       },

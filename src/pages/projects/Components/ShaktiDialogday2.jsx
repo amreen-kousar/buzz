@@ -28,7 +28,6 @@ import axios from 'axios';
 import { CheckBox } from '@mui/icons-material';
 import Iconify from 'src/components/Iconify';
 import EditParticipantdata from './Editparticipantdata';
-import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -125,7 +124,7 @@ getTrainingBatch();
       .then((response) => {
         alert(response.data.message)
         setOpen(shown);
-        {batch?.data?.id && getTrainingBatch()}
+        getTrainingBatch()
       
       })
       .catch((error) => {
@@ -145,7 +144,7 @@ getTrainingBatch();
       
       var config = {
         method: 'post',
-        url: baseURL + 'getTrainingBatchData',
+        url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
         headers: { 
           'Content-Type': 'application/json'
         },
