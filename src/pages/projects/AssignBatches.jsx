@@ -70,14 +70,14 @@ const villagelist= async(itm) =>{
   setItem(itm)
   var data = JSON.stringify({
     "project_id":data1?.project_id, 
-    "emp_id":itm?.emp_id,
+    "emp_id":JSON.stringify(itm?.emp_id),
     
   
     });
 
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchList.php',
+      url: baseURL+'getTrainingBatchList',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -105,7 +105,7 @@ const CreateBatch= async(itm,i) =>{
      
      "project_id":data1?.project_id, 
      "training_batch_id":itm?.training_batch_id,
-      "emp_id":item?.emp_id
+      "emp_id":JSON.stringify(item?.emp_id)
     });
     villages.list[i].flag = 1;
     setVillages(villages)
@@ -113,7 +113,7 @@ const CreateBatch= async(itm,i) =>{
 
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createGFBatch.php',
+      url: baseURL+'createGFBatch',
       headers: {
         'Content-Type': 'application/json'
       },

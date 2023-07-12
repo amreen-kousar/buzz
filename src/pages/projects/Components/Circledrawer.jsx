@@ -71,7 +71,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     });
     var config = {
       method: 'post',
-      url: oldbaseURL +'getEnrollGelathi.php',
+      url: baseURL+'getEnrollGelathi',
       headers: {
         'Content-Type': 'application/json',
       },

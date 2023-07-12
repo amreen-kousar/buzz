@@ -80,7 +80,7 @@ const changeState = () => {
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollVyaparEnrollment.php',
+            url: baseURL+'getEnrollVyaparEnrollment',
             headers: { 
               'Content-Type': 'application/json'
             },

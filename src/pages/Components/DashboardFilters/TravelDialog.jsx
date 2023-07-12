@@ -18,6 +18,7 @@ import LocalPrintshop from '@mui/icons-material/LocalPrintshop';
 import CurrencyRupee  from '@mui/icons-material/CurrencyRupee';
 import DiamondRounded  from '@mui/icons-material/DiamondRounded';
 import  Room  from '@mui/icons-material/Room';
+import { baseURL } from 'src/utils/api';
 export default function TravelDialog({ viewMessage }) {
   Geocode.setApiKey("AIzaSyAQZSphbIdAeypWHytAIHtJ5K-wuUHBfx4");
   const [open, setOpen] = useState(false);
@@ -192,12 +193,12 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(function(position) {
 var data = JSON.stringify({
-  "latitude": position.coords.latitude,
-  "longitude": position.coords.longitude
+  "latitude": JSON.stringify(position.coords.latitude),
+  "longitude": JSON.stringify(position.coords.longitude)
 });
 var config = {
   method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
+  url: baseURL+'getlocationName',
   headers: { 
     'Content-Type': 'application/json'
   },
@@ -232,7 +233,7 @@ axios(config)
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/getPoaTa.php',
+      url: baseURL+'getPoaTa',
       headers: {
         'Content-Type': 'application/json'
       },

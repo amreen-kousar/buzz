@@ -93,12 +93,12 @@ export default function CheckinOut({photos,batch,setCheck}) {
     navigator.geolocation.getCurrentPosition(function(position) {
       setLats({lat:position.coords.latitude,lng:position.coords.longitude})
 var data = JSON.stringify({
-  "latitude": position.coords.latitude,
-  "longitude": position.coords.longitude
+  "latitude": JSON.stringify(position.coords.latitude),
+  "longitude": JSON.stringify(position.coords.longitude)
 });
 var config = {
   method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
+  url: baseURL+'getlocationName',
   headers: { 
     'Content-Type': 'application/json'
   },

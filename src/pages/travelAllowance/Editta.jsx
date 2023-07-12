@@ -215,7 +215,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
 
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/getPoaTa.php',
+      url: baseURL+'getPoaTa',
       headers: {
         'Content-Type': 'application/json'
       },

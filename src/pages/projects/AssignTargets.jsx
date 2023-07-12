@@ -32,7 +32,7 @@ var data = JSON.stringify({
 });
 var config = {
   method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/getAssignTargets.php',
+  url: baseURL+'getAssignTargets',
   headers: { 
     'Content-Type': 'application/json'
   },
@@ -43,7 +43,7 @@ axios(config)
   let temp=[]
   response?.data?.list?.target_list?.forEach(r=>temp.push({
     
-      "emp_id": r?.emp_id,
+      "emp_id": JSON.stringify(r?.emp_id),
       "emp_target": r?.emp_target
     
   }))
@@ -62,7 +62,7 @@ var data = JSON.stringify({
 });
 var config = {
   method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/createTrainerTarget.php',
+  url: baseURL+'createTrainerTarget',
   headers: { 
     'Content-Type': 'application/json'
   },
