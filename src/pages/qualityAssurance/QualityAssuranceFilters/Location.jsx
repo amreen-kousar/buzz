@@ -12,6 +12,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Select, { SelectChangeEvent, } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { date } from 'yup';
+import { baseURL } from 'src/utils/api';
 const bull = (
   <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
     •
@@ -38,7 +39,7 @@ export default function LocationQuality(props) {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: baseURL + 'getLocation',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -55,11 +56,11 @@ export default function LocationQuality(props) {
   const getState = async (id) => {
     var data = JSON.stringify({
       "country_id": "1",
-      "state_id": id
+      "state_id": JSON.stringify(parseInt(id))
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: baseURL + 'getLocation',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -77,12 +78,12 @@ export default function LocationQuality(props) {
     var data = JSON.stringify({
       "country_id": "1",
       "state_id": data?.state,
-      "district_id": district?.id,
+      "district_id": JSON.stringify(district?.id),
       
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: baseURL + 'getLocation',
       headers: {
         'Content-Type': 'application/json'
       },

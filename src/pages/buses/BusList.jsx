@@ -43,8 +43,8 @@ export default function User() {
       "date": "",
       "role_id": parseInt(role),
       "project_id": id === 3 ? i?.id : "",
-      taluk_id: g === "country" ? id : "",
-      district_id: g === "country" ? i : "",
+      taluk_id: g === "country" ? JSON.stringify(id) : "",
+      district_id: g === "country" ? JSON.stringify(i) : "",
       "funder_id": id === 2 ? i?.id : "",
       "emp_id": parseInt(userid),
       "search": search

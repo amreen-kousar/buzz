@@ -129,12 +129,12 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       var data = JSON.stringify({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
+        latitude: JSON.stringify(position.coords.latitude),
+        longitude:JSON.stringify( position.coords.longitude),
       });
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
+        url: baseURL + 'getlocationName',
         headers: {
           'Content-Type': 'application/json',
         },

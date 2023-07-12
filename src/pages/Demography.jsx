@@ -61,8 +61,8 @@ export default function Demography() {
   )
   const demoi = async (id, i, g) => {
     const data = {
-      taluk_id: g === "country" ? i : "",
-      district_id: g === "country" ? id : "",
+      taluk_id: g === "country" ? JSON.stringify(i) : "",
+      district_id: g === "country" ? JSON.stringify(id) : "",
       funder_id: g ? "" : i === 2 ? id?.id : '',
       project_id: g ? "" : i === 3 ? id?.id : '',
       
