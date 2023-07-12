@@ -68,7 +68,7 @@ const circle = (async) => {
     });
 var config = {
       method: 'post',
-      url: oldbaseURL+'getGelathiCircleDataNew.php',
+      url: baseURL+'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
       },

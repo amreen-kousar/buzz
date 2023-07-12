@@ -44,7 +44,7 @@ export default function scheduleBeehiveVisit() {
           var config = {
             method: 'post',
           maxBodyLength: Infinity,
-            url: 'https://bdms.buzzwomen.org/appTest/getGFAssignedBatch.php',
+          url: baseURL+'getGFAssignedBatch',
             headers: { 
               'Content-Type': 'application/json'
             },

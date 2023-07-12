@@ -5,6 +5,7 @@ import { Card,Dialog, CardContent,Divider,AppBAr,Toolbar,IconButton,Typography,S
 import { Stack } from '@mui/system';
 import moment from 'moment';
 import axios from 'axios';
+import { baseURL } from 'src/utils/api';
 import { useState,useEffect } from 'react';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -81,7 +82,7 @@ axios(config)
       var config = {
         method: 'post',
       maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/checkInOut.php',
+        url: baseURL + 'checkInOut',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -120,7 +121,7 @@ const GetStatus = async=>{
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
+      url: baseURL + 'getEventDetail',
       headers: {
         'Content-Type': 'application/json',
       },

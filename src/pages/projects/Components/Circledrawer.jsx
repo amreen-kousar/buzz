@@ -230,7 +230,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     });
     var config = {
       method: 'post',
-      url: oldbaseURL+'getGelathiCircleDataNew.php',
+      url: baseURL+'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
       },

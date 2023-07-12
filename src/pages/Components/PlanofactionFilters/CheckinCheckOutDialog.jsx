@@ -9,6 +9,7 @@ import { useGeolocated } from 'react-geolocated';
 import Geocode from 'react-geocode';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -85,7 +86,7 @@ axios(config)
       var config = {
         method: 'post',
       maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/checkInOut.php',
+        url: baseURL + 'checkInOut',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -124,7 +125,7 @@ const GetStatus = async=>{
   });
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
+    url: baseURL + 'getEventDetail',
     headers: {
       'Content-Type': 'application/json',
     },

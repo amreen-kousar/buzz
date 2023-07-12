@@ -103,7 +103,7 @@ const [gelatiNote, setGelatiNote] = useState('');
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData.php',
+      url: baseURL+'getGFSessionData',
       headers: {
         'Content-Type': 'application/json',
       },

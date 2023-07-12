@@ -38,7 +38,7 @@ export default function assignedVillages() {
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getGFAssignedBatch.php',
+            url: baseURL+'getGFAssignedBatch',
             headers: { 
               'Content-Type': 'application/json'
             },

@@ -18,6 +18,7 @@ import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import { CheckBox , ScaleOutlined } from '@mui/icons-material';
 import { size, transform } from 'lodash';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -73,7 +74,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData.php',
+        url: baseURL+'getGFSessionData',
         headers: { 
           'Content-Type': 'application/json'
         },

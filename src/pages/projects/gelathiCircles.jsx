@@ -95,7 +95,7 @@ export default function gelathiCirclesList() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircle.php',
+      url: baseURL+'getGelathiCircle',
       headers: {
         'Content-Type': 'application/json',
       },

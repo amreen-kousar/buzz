@@ -127,7 +127,7 @@ axios(config)
       var config = {
         method: 'post',
       maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/checkInOut.php',
+        url: baseURL + 'checkInOut',
         headers: { 
           'Content-Type': 'application/json'
         },
