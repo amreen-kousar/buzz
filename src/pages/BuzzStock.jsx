@@ -74,21 +74,11 @@ export default function BuzzStock() {
       "user_id": userid,
       "role_id": role,
       project_id: g ? "" : i === 3 ? id?.id : '',
-      taluk_id: g === "country" ? i : "",
-      district_id: g === "country" ? id : "",
+      taluk_id: g === "country" ? JSON.stringify(i) : "",
+      district_id: g === "country" ? JSON.stringify(id) : "",
       funder_id: g ? "" : i === 2 ? id?.id : '',
     });
-    const datas = {
-      to_date: i,
-      taluk_id: "",
-      district_id: "",
-      emp_id: 1,
-      from_date: id,
-      funder_id: "",
-      partner_id: "",
-      project_id: '',
-      opsManager: '',
-    };
+  
     const config = {
       method: 'post',
       url: baseURL+'getTotalstocks',
