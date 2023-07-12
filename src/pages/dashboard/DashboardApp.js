@@ -284,28 +284,33 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
                 color="motivator"
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+          </Grid>
+          <Grid  container spacing={3} marginTop={4}>
+          <Grid item xs={6} sm={8} md={6}>
               <AppWidgetSummary
                 title="Number of Enroll"
                 total={(summaryData?.summary_enroll>=0)?summaryData?.summary_enroll:null}
                 color="motivator"
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={6} sm={8} md={6}>
               <AppWidgetSummary
                 title="Number of Green"
                 total={(summaryData?.summary_green>=0)?summaryData?.summary_green:null}
                 color="motivator"
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+
+          </Grid>
+          <Grid  container spacing={3} marginTop={4}>
+          <Grid item xs={6} sm={8} md={6}>
               <AppWidgetSummary
                 title="Number of Vyapar"
                 total={(summaryData?.summary_vyapar>=0)?summaryData?.summary_vyapar:null}
                 color="motivator"
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={6} sm={8} md={6}>
               <AppWidgetSummary
                 title="Number of VIllage Visits"
                 total={(summaryData?.summary_villagevisit>=0)?summaryData?.summary_villagevisit:null}
@@ -444,7 +449,10 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
                 color="motivator"
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+
+          </Grid>
+          <Grid  container spacing={2} marginTop={4}>
+          <Grid item xs={6} sm={8} md={6}>
               <AppWidgetSummary
                 title="Number of Enroll"
                 total={(summaryData?.summary_enroll>=0)?summaryData?.summary_enroll:null}
@@ -452,7 +460,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
               />
             </Grid>
             
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={6} sm={8} md={6}>
               <AppWidgetSummary
                 title="Number of VIllage Visits"
                 total={(summaryData?.summary_villagevisit>=0)?summaryData?.summary_villagevisit:null}
@@ -711,6 +719,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
             return (
               <Card
                 style={{
+                  display:'flex',
                   backgroundColor: '#f5f5f5',
                   flexDirection: 'column',
                   borderRadius: 12,
@@ -768,7 +777,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
                   <Grid container spacing={3} marginTop={4}>
       
 
-<Grid item xs={6} sm={6} md={6}>
+<Grid item xs={4} sm={6} md={6}>
 
 <AppWidgetSummary
   title="Number  of Villages Visits"
@@ -777,7 +786,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
   icon= "fontisto:holiday-village"
 />
 </Grid>
-  <Grid item xs={6} sm={6} md={6}>
+  <Grid item xs={4} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Batch"
   total={(itm?.noofbatches>=0)?itm?.noofbatches:itm?.nobatches}

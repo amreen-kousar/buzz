@@ -33,6 +33,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
+import "../../../assets/css/custom.css"
 import { setISODay } from 'date-fns/esm';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -1403,10 +1404,10 @@ id="date-time-picker"
         <br/>
         
          {/* 2 */}
-      {( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"} >
+      {( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"} sx={{maxHeight:'3500px'}} >
           
         <CardContent>
-          <Card>
+          <Card sx={{maxHeight:'600px'}}>
           <Card sx = {{backgroundColor:'#ff7424', }} mt={2}>
           <CardContent>
           <Typography variant = 'h5'>Gelathi Program
@@ -1415,10 +1416,10 @@ id="date-time-picker"
                         ) : null}{' '}
           </Typography>
           </CardContent>
-        </Card>
+        </Card  >
         <CardContent>
          
-          <Box sx={{ minWidth: 120, }}>
+          <Box sx={{ minWidth: 120 }}>
   
       <Autocomplete
       disablePortal
@@ -1427,17 +1428,34 @@ id="date-time-picker"
       options={gfName}
       filterOptions={filterOptions}
       getOptionLabel={(option) => ( option.first_name  ) }
-      sx={{ width: '100%'}}
+      sx={{zIndex: 9999, width: '100%'}}
+      
       
       componentsProps={{
         paper: {
           sx: {
-            height: 100,
+            height: 120,
             zIndex: 9999,
             position: 'relative',
             
           }
         }
+      }}
+      MenuProps={{
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'left',
+        },
+        transformOrigin: {
+          vertical: 'top',
+          horizontal: 'left',
+        },
+        getContentAnchorEl: null,
+        PaperProps: {
+          style: {
+            maxHeight: 200, // Adjust the maximum height of the dropdown
+          },
+        },
       }}
      onChange={(event, value) => {
   setSendForm({ ...sendForm, name_of_the_gf: value.first_name });
