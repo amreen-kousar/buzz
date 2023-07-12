@@ -249,7 +249,7 @@ axios(config)
     formdata.append("publish", "")
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
+      url: 'https://bdms.buzzwomen.org/appGo/createProject',
       data: formdata
     };
     axios(config)
@@ -294,7 +294,7 @@ axios(config)
      formdata.append("", "")
      var config = {
        method: 'post',
-       url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
+       url: 'https://bdms.buzzwomen.org/appGo/createProject',
        data: formdata
      };
  
@@ -348,7 +348,7 @@ const mainShowBussHandler = ()=>{
               <IconButton id="material-symbol-save" edge="end"  autoFocus color="inherit" type="submit" sx={{right:40,float:'right',position:'absolute'}}>
                  <Iconify icon="material-symbols:save"/>
               </IconButton>
-               <Button id="publish" autoFocus color="inherit" sx={{float:'right',color: "inherit" }} variant="h6" onClick={createProject2}>
+               <Button  id="publish" autoFocus color="inherit" sx={{float:'right',color: "inherit"}}  variant="h6" onClick={createProject2}>
                 publish
               </Button>
             </Toolbar>
