@@ -218,7 +218,7 @@ const [iserror, setIsError] = useState(false)
   }
     var config = {
       method: 'post',
-      url: oldbaseURL + 'getGFSessionData1.php',
+      url: baseURL + 'getGFSessionData1',
       headers: {
         'Content-Type': 'application/json',
       },

@@ -103,13 +103,13 @@ export default function User() {
       "search": searchUser,
       "user_id": JSON?.parse(dataid)?.id,
       "role_id": JSON?.parse(dataid)?.role,
-      "filter_id": filter_type?.id ? filter_type?.id : '',
+      "filter_id": JSON.stringify(filter_type?.id ? filter_type?.id:  null) ,
       "type": "",
-      "pageNum": d ? d : 1
+      "pageNum": JSON.stringify(d ? d : 1)
     });
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getAllPeople.php',
+      url: baseURL+'getAllPeople',
       headers: {
         'Content-Type': 'application/json'
       },

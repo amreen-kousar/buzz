@@ -126,7 +126,7 @@ const [gelatiNote, setGelatiNote] = useState('');
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData1.php',
+      url: baseURL + 'getGFSessionData1',
       headers: {
         'Content-Type': 'application/json',
       },

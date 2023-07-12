@@ -82,7 +82,7 @@ export default function Team(props) {
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/listTa.php',
+            url: baseURL+'listTa',
             headers: {
                 'Content-Type': 'application/json'
             },

@@ -70,7 +70,7 @@ export default function enrolledGreenMotivatorsList() {
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollGreenMotivators.php',
+            url: baseURL+'getEnrollGreenMotivators',
             headers: { 
               'Content-Type': 'application/json'
             },

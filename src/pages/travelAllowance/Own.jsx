@@ -12,6 +12,7 @@ import TravelDialog from '../Components/DashboardFilters/TravelDialog'
 import moment from 'moment';
 import Edittraveldialog from './Editta';
 import Iconify from 'src/components/Iconify';
+import { baseURL } from 'src/utils/api';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -121,7 +122,7 @@ export default function Own(props) {
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/listTa.php',
+            url: baseURL+'listTa',
             headers: {
                 'Content-Type': 'application/json'
             },

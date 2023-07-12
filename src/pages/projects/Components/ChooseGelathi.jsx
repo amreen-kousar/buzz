@@ -97,7 +97,7 @@ const enrolledVyaapar= async(id,i,g) =>{
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollVyaparEnrollment.php',
+      url: baseURL+'getEnrollVyaparEnrollment',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -126,7 +126,7 @@ const enrolledGreenMotivators = async(id,i,g) =>{
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollGreenMotivators.php',
+        url: baseURL+'getEnrollGreenMotivators',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -155,7 +155,7 @@ var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
       });
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
+        url: baseURL+'getEnrollGelathi',
         headers: {
           'Content-Type': 'application/json'
         },

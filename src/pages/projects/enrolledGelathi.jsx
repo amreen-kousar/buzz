@@ -56,7 +56,7 @@ const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
+            url: baseURL+'getEnrollGelathi',
             headers: { 
               'Content-Type': 'application/json'
             },
