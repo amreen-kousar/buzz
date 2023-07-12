@@ -44,7 +44,7 @@ export default function gelathiProgram(props) {
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getGFSessionsNew.php',
+            url: baseURL+'getGFSessionsNew',
             headers: { 
               'Content-Type': 'application/json'
             },
