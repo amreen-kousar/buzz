@@ -41,12 +41,12 @@ export default function User() {
   
     const data = JSON.stringify({
       "date": "",
-      "role_id": role,
+      "role_id": parseInt(role),
       "project_id": id === 3 ? i?.id : "",
       taluk_id: g === "country" ? id : "",
       district_id: g === "country" ? i : "",
       "funder_id": id === 2 ? i?.id : "",
-      "emp_id": userid,
+      "emp_id": parseInt(userid),
       "search": search
     });
     console.log(data, "checking for search")
