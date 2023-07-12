@@ -26,6 +26,7 @@ import {
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress'
 import is from 'date-fns/locale/is';
+import { baseURL } from 'src/utils/api';
 PoaFilter.propTypes = {
   isOpenEvent: PropTypes.bool,
   onOpenEvent: PropTypes.func,
@@ -227,15 +228,12 @@ const handlecheckin = () => {
     event()
   };
   const event = (async) => {
-    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
-      event_id: select?.id,
-      user_id: idvalue,
-      check_in_location: 'RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India',
+      event_id: select?.id
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
+      url: baseURL + 'getEventDetail',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -253,14 +251,12 @@ const handlecheckin = () => {
     getlocationdata();
   }, [select ]);
   const getlocationdata = (async) => {
-    var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
-      event_id: select?.id,
-      user_id: idvalue,
+      event_id: select?.id
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
+      url: baseURL + 'getEventDetail',
       headers: {
         'Content-Type': 'application/json',
       },

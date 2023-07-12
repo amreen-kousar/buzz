@@ -32,6 +32,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import moment from 'moment';
 import { Navigate } from 'react-router-dom';
+import { baseURL } from 'src/utils/api';
 BeehiveDrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
@@ -99,7 +100,7 @@ export default function BeehiveDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
           var config = {
             method: 'post',
           maxBodyLength: Infinity,
-            url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
+            url: baseURL + 'getTrainingBatchData',
             headers: { 
               'Content-Type': 'application/json'
             },

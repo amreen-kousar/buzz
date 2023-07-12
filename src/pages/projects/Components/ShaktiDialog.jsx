@@ -19,6 +19,7 @@ import Paper from '@mui/material/Paper';
 import AddParticipants from './AddParticipants'
 import ParticipentDetailsDailoge from './ParticipentDetailsDailoge';
 import axios from 'axios';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -53,14 +54,14 @@ export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,ha
   const GetStatus = async=>{
     var data = JSON.stringify({
       "project_id": batch?.data?.project_id,
-      "poa_type": 1,
-      "type": 2,
+      "poa_type": "1",
+      "type": "2",
       "tb_id": batch?.data?.id
     });
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
+      url: baseURL + 'getCheckInOutStatus',
       headers: { 
         'Content-Type': 'application/json'
       },

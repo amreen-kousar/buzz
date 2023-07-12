@@ -34,6 +34,7 @@ import Iconify from 'src/components/Iconify';
 import moment from 'moment';
 import { Icon } from '@iconify/react';
 import Autocomplete from '@mui/material/Autocomplete';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -110,7 +111,7 @@ useEffect(()=>{
     const data = JSON.stringify({});
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/roles_list.php',
+      url:baseURL+'roles_list',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -129,7 +130,7 @@ useEffect(()=>{
     let formData = new FormData();
     formData.append('role_id', (value?.id)?value?.id:user?.role_id);
     formData.append('name', '');
-    let res = await fetch('https://bdms.buzzwomen.org/appTest/getAllBuzzTeam.php', {
+    let res = await fetch(baseURL+'getAllBuzzTeam', {
       body: formData,
       method: 'post',
     }).then((res) => res.json()
@@ -204,7 +205,7 @@ useEffect(()=>{
    
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/editUser.php',
+      url: baseURL+'editUser',
       headers: {
         'Content-Type': 'application/json',
       },

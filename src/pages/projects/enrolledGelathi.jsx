@@ -5,6 +5,7 @@ import ParticipantDrawer from '../projects/Components/ParticipantDrawer';
 import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import { baseURL } from 'src/utils/api';
 import Filtersmain from './projectfilters/filtersmain';
 export default function enrolledGelathiList() {
     const {state} = useLocation()
@@ -87,7 +88,7 @@ const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+      url: baseURL + 'getProjectData',
       headers: {
         'Content-Type': 'application/json'
       },

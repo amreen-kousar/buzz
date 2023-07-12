@@ -36,6 +36,7 @@ import { useNavigate } from 'react-router-dom';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { DialogContent } from '@mui/material';
+import { baseURL } from 'src/utils/api';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -188,7 +189,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/editUser.php',
+      url: baseURL+'editUser',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -284,7 +285,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                       <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#ff7424' }}>
                         Projects
                       </Card>
-                      {(profileData?.project_list.length > 0) ? <Card>
+                      {(profileData?.project_list) ? <Card>
                         <CardContent>
                           {
                             profileData?.project_list?.map((item) =>

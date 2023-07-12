@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton,Button ,CardContent,Select,MenuItem,TextField} from '@mui/material';
+import { baseURL } from 'src/utils/api';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -50,8 +51,8 @@ const getProjects = async()=>{
     var userid= JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var data = JSON.stringify({
         "search": "",
-        "id": userid,
-        "role_id": roleid,
+        "id": JSON.stringify(userid),
+        "role_id": JSON.stringify(roleid),
         "filter_id": "",
         "type": "",
         "pageNum": ""
@@ -59,7 +60,7 @@ const getProjects = async()=>{
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
+        url: baseURL + 'getProjects',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -97,7 +98,7 @@ const getProjects = async()=>{
     
         const config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getStockItems.php', 
+          url:baseURL + 'getStockItems',
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json'
@@ -146,7 +147,7 @@ const getProjects = async()=>{
           
             "project_id": ProjectId?.id,
             // "bus_id": ProjectId.bus_id,
-            "type": "0",
+            "type": "1",
             "stock_list" :stock
         });
        

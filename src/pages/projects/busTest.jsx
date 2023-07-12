@@ -25,6 +25,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import BusEdit from '../Components/Buslistfilters/BusEdit';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -118,7 +119,7 @@ export default function busTestList() {
     
         const config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
+          url: baseURL + 'getBusData',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -139,7 +140,7 @@ const details = async => {
   });
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
+    url: baseURL + 'getBusdata',
     headers: {
       'Content-Type': 'application/json'
     },

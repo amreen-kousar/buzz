@@ -8,6 +8,7 @@ import {useState} from 'react'
 import { useEffect } from 'react';
 import axios from 'axios';
 import Dialog from '@mui/material/Dialog';
+import { baseURL } from 'src/utils/api';
 import React from 'react';
 import {
   Box,
@@ -59,7 +60,7 @@ export default function Gelathifacilitatorprofile({isOpenFilter,onOpenFilter,onC
     
         var config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
+          url: baseURL + 'getProfileData',
           headers: {
             'Content-Type': 'application/json'
           },

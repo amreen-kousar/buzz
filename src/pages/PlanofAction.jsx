@@ -44,6 +44,7 @@ import { SecurityUpdate } from '@mui/icons-material';
 import moment from 'moment';
 import ProjectMultiDrawer from '../pages/Components/ProjectMultiDrawer';
 import PoaGF from './Components/PlanofactionFilters/PoaGF';
+import { baseURL } from 'src/utils/api';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -139,7 +140,7 @@ export default function PlanofAction() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getPoa.php',
+      url: baseURL + 'getPOA',
       headers: {
         'Content-Type': 'application/json',
       },

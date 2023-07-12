@@ -34,6 +34,7 @@ import moment from 'moment';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import { setISODay } from 'date-fns/esm';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -354,11 +355,11 @@ reloadfunction()
   const getGFname = async (id) => {
     
     var data = JSON.stringify({
-     "role_id":6,
+     //"role_id":6,
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
+      url: baseURL+'getGelathiList',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -399,11 +400,11 @@ reloadfunction()
   const Trainerlist = async (id) => {
     
     var data = JSON.stringify({
-      "role_id":"5"
+      //"role_id":"5"
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getTrainersList.php',
+      url: baseURL+'getTrainersList',
       headers: {
         'Content-Type': 'application/json'
       },
