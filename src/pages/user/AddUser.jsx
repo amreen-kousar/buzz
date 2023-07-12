@@ -17,7 +17,7 @@ function AddUser(props) {
     let [errors, setErrors] = useState({ office_email_id: false })
     let [emailExists, setEmailExists] = useState(false)
     var [AddUser, setAddUser] = useState({
-        role:'', first_name: '', last_name: "", contactNum: '', workNum: '', officeMailId: '', address: '', address3: "", address2: "",
+        role:'', first_name: '', last_name: "", contactNum: '', workNum: '', officeMailId: '',personalMailId:'', address: '', address3: "", address2: "",
         pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project_list: "",
         emp_id: ""
     })
@@ -181,6 +181,7 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     const submitUser = () => {
         AddUser.project_list = inputProject.map(i => parseInt(i.id))
         AddUser.officeMailId = AddUser?.officeMailId
+        AddUser.personalMailId = AddUser?.personalMailId
         AddUser.empRole = JSON.stringify(AddUser?.role.id)
         AddUser.supervisorId = AddUser?.reportingManager.id
         AddUser.profile_pic = ''
@@ -210,6 +211,7 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                                 "workPhone": AddUser.workNum,
                                 "mobilePhone": AddUser.contactNum,
                                 "emailID": AddUser.officeMailId,
+                                "workemailId": AddUser.personalMailId,
                                 "address": AddUser.address,
                                 "status": AddUser.present_status ? '1' : '0',
                                 "city": "banglore",
@@ -224,6 +226,7 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                                 "workPhone": AddUser.workNum,
                                 "mobilePhone": AddUser.contactNum,
                                 "emailID": AddUser.officeMailId,
+                                "workemailId": AddUser.personalMailId,
                                 "address": AddUser.address,
                                 "status": AddUser.present_status ? '1' : '0',
                                 "city": "banglore",
@@ -362,6 +365,14 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                                 <div style={{ marginLeft: "1rem", fontSize: "0.8rem", fontWeight: "700" }}>
                                     {/* {emailExists ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp; Email Id already exists !</span> : (errors.office_email_id) ? <span style={{ color: "crimson", display: "flex" }}><Iconify icon="gridicons:cross-circle" width={20} height={20} /> &nbsp;Invalid Email Id</span> : (AddUser.office_email_id != "") ? <span style={{ color: "green", display: "flex" }}><Iconify icon="mdi:tick-circle" width={20} height={20} /> &nbsp;Valid Email Id</span> : null} */}
                                 </div>
+
+                                <TextField fullWidth type="email" required id="Email" label="Personal Email"  value={AddUser?.personalMailId} 
+                                onChange={(e)=>{
+                                    setAddUser({ ...AddUser, personalMailId: e.target.value }); 
+                                }} 
+                                    
+                                         variant="outlined" color="common" /><br/><br/>
+
                                 <TextField fullWidth required id="Address" label="Address" helperText='Address Required*' value={AddUser.address} onChange={(e) => { setAddUser({ ...AddUser, address: e.target.value }) }} variant="outlined" color="common"/><br/><br/>
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <TextField fullWidth id="Address1" label="Address 1" value={AddUser.address3} onChange={(e) => { setAddUser({ ...AddUser, address3: e.target.value }) }} variant="outlined" color="common"/>}<br/><br/>
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && < TextField fullWidth id="Address2" label="Address 2" value={AddUser.address2} onChange={(e) => { setAddUser({ ...AddUser, address2: e.target.value }) }} variant="outlined" color="common"/>}<br/><br/>

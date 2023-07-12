@@ -88,7 +88,7 @@ export default function busTestList() {
   
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/deleteBus.php',
+        url: baseURL + 'deleteBus',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -140,7 +140,7 @@ const details = async => {
   });
   var config = {
     method: 'post',
-    url: baseURL + 'getBusdata',
+    url: baseURL + 'getBusData',
     headers: {
       'Content-Type': 'application/json'
     },

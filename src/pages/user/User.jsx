@@ -135,7 +135,7 @@ export default function User() {
     (selected?.type) ? user(newPage, selected) : user(newPage)
   }
   const handleDelete = () => {
-    setSearchUser([])
+    setSearchUser()
     setSelected([])
     user()
   }
