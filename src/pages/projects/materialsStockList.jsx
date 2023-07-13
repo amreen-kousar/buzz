@@ -149,7 +149,7 @@ const onChangeMaterialValue = (index , quantity)=>{
        
         const config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/consumeStock', 
+          url: baseURL+'consumeStock', 
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json'

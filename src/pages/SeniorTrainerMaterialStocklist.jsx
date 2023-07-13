@@ -153,7 +153,7 @@ const getProjects = async()=>{
        
         const config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/consumeStock.php', 
+          url: baseURL+'consumeStock', 
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json'

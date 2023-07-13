@@ -133,7 +133,7 @@ export default function Customfilter(props) {
 const teamList = async => {
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getOperationsManagerList.php',
+    url: baseURL+'getOperationsManagerList',
     headers: {}
   };
   axios(config)

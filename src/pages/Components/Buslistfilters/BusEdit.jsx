@@ -8,6 +8,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Iconify from 'src/components/Iconify';
 import moment from 'moment';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -97,7 +98,7 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
     })
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/editBus.php',
+      url: baseURL + 'editBus',
       headers: {
         'Content-Type': 'application/json'
       },
