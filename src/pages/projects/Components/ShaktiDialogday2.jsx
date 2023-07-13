@@ -78,13 +78,13 @@ getTrainingBatch();
         "participant_day2": batch?.data?.day2,
         "participant_id": itm?.participant_id,
         "tb_id": batch?.data?.id ,
-        "status": 1
+        "status": "1"
       });
       
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/updateParticipantDay.php',
+        url: baseURL + 'updateParticipantDay',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -108,13 +108,13 @@ getTrainingBatch();
         "participant_day2": batch?.data?.day2,
         "participant_id": itm?.participant_id,
         "tb_id": batch?.data?.id ,
-        "status": 0
+        "status": "0"
       });
       
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/updateParticipantDay.php',
+        url: baseURL+ 'updateParticipantDay',
         headers: { 
           'Content-Type': 'application/json'
         },

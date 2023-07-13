@@ -105,27 +105,47 @@ const UploadImages = async(e) =>{
       alert("No Image is Selected!")
     }else{
       var raw = JSON.stringify({
-        "project_id":  batch?.data?.project_id,
-        "tb_id":batch?.data?.id,
-        "trainer_id": idvalue,
+        "project_id":  parseInt(batch?.data?.project_id),
+        "tb_id":parseInt(batch?.data?.id),
+        "trainer_id": parseInt(idvalue),
         "day": e,
         "photos": [images.toString().slice(22,)]
     })
-    var requestOptions = {
-        method: 'POST',
-        body: raw,
-        redirect: 'follow'
-      };
-let res =  fetch("https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php", requestOptions)
-.then((response) => {
+//     var requestOptions = {
+//         method: 'POST',
+//         body: raw,
+//         redirect: 'follow'
+//       };
+// // let res =  fetch("https://bdms.buzzwomen.org/uploadTrainingPhotos", requestOptions)
+
+// .then((response) => {
  
-setImages([])
+// setImages([])
+// setReload(!reload);
+// alert("Photo Uploaded Successfully..")
+// })
+// .catch((error) => {
+//   // console.log('error', error)
+// });
+var config = {
+  method: 'post',
+  url: 'https://bdms.buzzwomen.org/appGo/uploadTrainingPhotos',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : raw
+};
+
+axios(config)
+.then(function (response) {
+  setImages([])
 setReload(!reload);
 alert("Photo Uploaded Successfully..")
 })
-.catch((error) => {
-  // console.log('error', error)
+.catch(function (error) {
+  console.log(error);
 });
+
 }
     }
 //Method to delete the images that is selected 
@@ -285,7 +305,7 @@ const getTrainingBatch = async =>{
       <Card > <CardContent>  
         <Grid container spacing={2}>
   <Grid  xs={10} sm={6} style={{paddingRight:5}} >
-    
+    {console.log(batch?.photos[0]?.photo1,"picccccc")}
     {(photos )?<img id="img-event-data" src={(trainingData?.photos[0].photo1)?(trainingData?.photos[0]?.photo1):batch?.photos[0].photo1} />:"No Photos"}</Grid>
     <Grid  xs={10} sm={6} style={{paddingRight:5}} >{(photos)?<img id="img-event-data" src={(trainingData?.photos[0].photo2)?(trainingData?.photos[0]?.photo2):batch?.photos[0].photo2} />:null}</Grid></Grid></CardContent></Card> 
       </TabPanel>
