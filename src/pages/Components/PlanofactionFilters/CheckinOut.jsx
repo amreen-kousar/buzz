@@ -329,13 +329,14 @@ axios(config)
         {batch?.data?.name}
         </Typography>
         <Typography mb={2}>
-        {moment(batch?.data?.day2_actual)?.format('DD-MM-YYYY')}
+        {batch?.data?.day2_actual}
         </Typography>
         <Divider />
         <Typography mt={2}>
             Start :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
         </Typography>
-        {(checkData?.data?.check_in_date_day2=='' && batch?.data?.day2_actual==todaydate)?<Button sx={{
+        {console.log(checkData,"hgasdha")}
+        {(checkData?.data?.check_in_date_day2=="" && checkData?.data?.check_in_date_day1!="")?<Button sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
              },

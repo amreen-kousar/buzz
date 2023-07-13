@@ -176,15 +176,33 @@ export default function projectMultiDrawer({
         redirect: 'follow',
       };
 
-      let res = fetch('https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php', requestOptions)
-        .then((response) => {
-          setImages([]);
-          alert('Photo Uploaded Successfully..');
-        })
+      // let res = fetch('https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php', requestOptions)
+      //   .then((response) => {
+      //     setImages([]);
+      //     alert('Photo Uploaded Successfully..');
+      //   })
 
-        .catch((error) => {
-          // console.log('error', error);
-        });
+      //   .catch((error) => {
+      //     // console.log('error', error);
+      //   });
+
+      var config = {
+        method: 'post',
+        url: 'https://bdms.buzzwomen.org/appGo/uploadTrainingPhotos',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : raw
+      };
+      
+      axios(config)
+      .then(function (response) {
+        setImages([]);
+      alert('Photo Uploaded Successfully..');
+      })
+      .catch(function (error) {
+        // console.log(error);
+      });
     }
   };
 
