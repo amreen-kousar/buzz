@@ -57,7 +57,7 @@ const tomorrow = dayjs().add(1, 'day');
       date: dayjs(new Date()),
       user_id: '',
       name: '',
-      all_day: 0,
+      all_day: "0",
       description: '',
       date2: dayjs(new Date()),
     })
@@ -69,7 +69,7 @@ const tomorrow = dayjs().add(1, 'day');
       date: moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
       user_id: (props?.userId)?props?.userId:userDetails?.id,
       name: addData?.name,
-      all_day: addData?.all_day,
+      all_day: JSON.stringify(parseInt(addData?.all_day)),
       description: addData?.description,
       date2: moment(addData?.date2?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
     });

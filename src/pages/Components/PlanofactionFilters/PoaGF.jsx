@@ -260,7 +260,7 @@ const noteSubmitHandler = () => {
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/updatePoaCancel.php',
+        url: baseURL + 'updatePoaCancel',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -286,12 +286,12 @@ const noteSubmitHandler = () => {
     
     var data = JSON.stringify({
       "poa_id": e,
-      "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss')
+      "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm')
     });
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/updateReschedule.php',
+      url: baseURL+'updateReschedule',
       headers: { 
         'Content-Type': 'application/json'
       },

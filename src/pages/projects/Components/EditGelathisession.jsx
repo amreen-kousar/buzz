@@ -20,6 +20,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import axios from 'axios';
 import moment from 'moment';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -49,7 +50,7 @@ export default function EditGelathiSession({session,editSession, setEditsession}
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/editGFSession.php',
+        url: baseURL + 'editGFSession',
         headers: { 
           'Content-Type': 'application/json'
         },
