@@ -146,7 +146,7 @@ const noteSubmitHandler = () => {
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       notes: gelatiNote,
-      type: JSON.stringify(session.type),
+      type: JSON.stringify(parseInt(session.type)),
       tb_id: session.tb_id,
       emp_id: userid,
     });
@@ -183,7 +183,7 @@ const noteSubmitHandler = () => {
     });
     const config = {
       method: 'post',
-      // url: baseURL + 'getNotes',
+      url: baseURL + 'getNotes',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',

@@ -53,9 +53,9 @@ const getProjects = async()=>{
         "search": "",
         "id": JSON.stringify(userid),
         "role_id": JSON.stringify(roleid),
-        "filter_id": "",
+        "filter_id": 0,
         "type": "",
-        "pageNum": ""
+        "pageNum": 1
       });
       
       var config = {

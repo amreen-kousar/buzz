@@ -93,7 +93,6 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
             "operations_manager_id": g ? "" : id === 4 ? i?.id : null,
          }):(id==5)?
         data = JSON.stringify({
@@ -103,7 +102,6 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
             "trainer_id": g ? "" : id === 5 ? i?.id : null,
         }):(id==13)? data = JSON.stringify({
             "search": search,
@@ -112,7 +110,6 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
             "gelathi_id":g?"":id==13?i?.id:null
         }): 
        (g=='date') ?
@@ -125,7 +122,7 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
+            
            
         })
         :(i?.type=='custom')?  
@@ -139,7 +136,7 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
+            // count: count,
             taluk_id: i?.taluk_id,
             district_id: i?.district?.id,
             districtName:i?.district?.name,
@@ -161,7 +158,7 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
+            // count: count,
             taluk_id: g === "country" ? id : null,
             district_id: g === "country" ? i : null,
             "funder_id": id === 2 ? i?.id : null,

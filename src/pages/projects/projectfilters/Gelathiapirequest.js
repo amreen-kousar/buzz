@@ -5,19 +5,18 @@ export default async function Filtersapirequest(props) {
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var response = []
     const data = JSON.stringify({
-        "role_id": role,
-        "pageNum": 1,
+        // "role_id": role,
+        // "pageNum": 1,
         "emp_id": idvalue,
-        "filter":props.selectDATA, 
+        "filter":JSON.stringify(parseInt(props.selectDATA)),
         "end_date":"",
         "search":"",
         "project_id":props?.data1?.project_id, 
-        "gelathi_id":"", 
         "start_date":"", 
     });
     const config = {
         method: 'post',
-        url: baseURL + 'getGFsessions',
+        url: baseURL + 'getGFsessionsNew',
         headers: {
             'Content-Type': 'application/json'
         },

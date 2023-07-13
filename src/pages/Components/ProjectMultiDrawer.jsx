@@ -302,7 +302,7 @@ export default function projectMultiDrawer({
     });
     const config = {
       method: 'post',
-      // url: baseURL + 'getNotes',
+      url: baseURL + 'getNotes',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',

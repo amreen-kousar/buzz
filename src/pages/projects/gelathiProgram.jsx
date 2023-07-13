@@ -33,11 +33,11 @@ export default function gelathiProgram(props) {
         var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
-            "filter": i?.id?i?.id:'',
+            "filter": i?.id?JSON.stringify(parseInt(i?.id)):'',
             "end_date":  g==="date"?i:'',
             "search": search,
             "project_id": state?.id,
-            "gelathi_id": id?.emp_id,
+            "gelathi_id": JSON.stringify(id?.emp_id),
             "start_date":  g==="date"?id:'',
             "emp_id": idvalue
           });
