@@ -118,10 +118,10 @@ axios(config)
     var data = JSON.stringify({
         "location_name": location,
         "user_id": batch?.data?.user_id,
-        "lon": lats?.lng,
+        "lon": JSON.stringify(lats?.lng),
         "id": batchid,
-        "type": type,
-        "lat": lats?.lat
+        "type": JSON.stringify(type),
+        "lat": JSON.stringify(lats?.lat)
       });
       
       var config = {
@@ -180,7 +180,7 @@ axios(config)
       // console.log(error);
     });
   }
-  var todaydate = moment(new Date()).format('YYYY-MM-DD');
+  var todaydate = moment(new Date()).format('DD-MM-YYYY');
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
@@ -271,14 +271,15 @@ axios(config)
         {batch?.data?.name}
         </Typography>
         <Typography mb={2}>
-        {moment(batch?.data?.day1_actual)?.format('DD-MM-YYYY')}
+        {batch?.data?.day1_actual}
         </Typography>
         <Divider />
         <Typography mt={2}>
             Start :{batch?.data?.day1?.split(" ")[1]}&nbsp;{batch?.data?.day1?.split(" ")[2]}
         </Typography>
+        {console.log(checkData?.data,"hsga",batch?.data)}
    
-        {(checkData?.data?.check_in_date_day1=='' && batch?.data?.day1_actual==todaydate)?<Button style={{float:'left',position:'absolute',left:20,top:320,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1,batch?.data?.day1_id)} sx={{
+        {(checkData?.data?.check_in_date_day1=="" )?<Button style={{float:'left',position:'absolute',left:20,top:320,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1,batch?.data?.day1_id)} sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
              },

@@ -15,6 +15,7 @@ import { Stack } from '@mui/system';
 import axios from 'axios';
 import moment from 'moment';
 import { number } from 'prop-types';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -54,7 +55,7 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
     var config = {
         method: 'post',
       maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/getCaste.php',
+        url: baseURL + 'getCaste',
         headers: { }
       };
       
@@ -70,7 +71,7 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
     var config = {
         method: 'post',
       maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/getEducation.php',
+        url: baseURL + 'getEducation',
         headers: { }
       };
       

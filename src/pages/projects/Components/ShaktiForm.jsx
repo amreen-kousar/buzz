@@ -30,6 +30,7 @@ import Iconify from 'src/components/Iconify';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import  { useRef } from 'react';
+import { baseURL, oldbaseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -229,8 +230,8 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
       specificGoalForSavings: sendData?.specificGoalForSavings,
       solutionToProblems: problemsolutions,
       others: null,
-      familyIncomeGeneration: 1,
-      goal: 100,
+      familyIncomeGeneration: "1",
+      goal: "100",
       householdUse: null,
       personOfWorth: worthperson,
       reasonOthersToBorrowLoan: checked['loanborrow'],
@@ -262,7 +263,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/addSurveyData.php',
+      url: oldbaseURL + 'addSurveyData.php',
       headers: {
         'Content-Type': 'application/json',
       },
