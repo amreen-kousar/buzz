@@ -176,7 +176,7 @@ export default function PlanofAction() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/updateEventCancel.php',
+      url: baseURL + 'updateEventCancel',
       headers: {
         'Content-Type': 'application/json',
       },

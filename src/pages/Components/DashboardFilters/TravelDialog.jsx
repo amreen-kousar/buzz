@@ -112,7 +112,7 @@ var requestOptions = {
   body: form,
   redirect: 'follow'
 };
-fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions)
+fetch("https://bdms.buzzwomen.org/appGo/taAttachments", requestOptions)
   .then(response => response.text())
   .then(result => setImageId(JSON.parse(result)))
   alert("Uploaded Successfully")
@@ -182,7 +182,7 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
      
     };
    
-    let res = fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn => {
+    let res = fetch("https://bdms.buzzwomen.org/appGo/taAttachments", requestOptions).then(itn => {
       alert("added succesfully ")
     })
       .catch(err => {

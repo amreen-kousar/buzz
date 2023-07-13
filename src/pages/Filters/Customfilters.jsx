@@ -110,13 +110,13 @@ export default function Customfilter(props) {
   const getFunder = () => {
     const data = JSON.stringify({
         "role_id": 1,
-        "filter_type": 2,
+        "filter_type": "2",
         "pageNum": 1,
-        "emp_id": 206
+        "emp_id": "206"
     });
     const config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
+        url: baseURL + 'getPeopleFilters',
         headers: {
             'Content-Type': 'application/json'
         },

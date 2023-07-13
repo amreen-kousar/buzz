@@ -25,6 +25,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
 import Swal from 'sweetalert2'
+import { baseURL } from 'src/utils/api';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -83,7 +84,7 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/updateRescheduleEvent.php',
+      url: baseURL + 'updateRescheduleEvent',
       headers: {
         'Content-Type': 'application/json'
       },

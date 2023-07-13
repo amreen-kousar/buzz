@@ -60,7 +60,7 @@ const emailchangeHandler=(e) => {
       });
       const config = {
           method: 'post',
-          url: oldbaseURL+'getEmailExist.php',
+          url: baseURL + 'getEmailExist',
           headers: {
               'Content-Type': 'application/json'
           },
@@ -131,7 +131,7 @@ const emailchangeHandler=(e) => {
         });
         const config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getProjectList.php',
+            url: baseURL + 'getProjectList',
             headers: {
                 'Content-Type': 'application/json'
             },
