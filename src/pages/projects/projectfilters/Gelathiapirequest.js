@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { baseURL } from 'src/utils/api';
 export default async function Filtersapirequest(props) {
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
@@ -16,7 +17,7 @@ export default async function Filtersapirequest(props) {
     });
     const config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getGFSessions.php',
+        url: baseURL + 'getGFsessions',
         headers: {
             'Content-Type': 'application/json'
         },

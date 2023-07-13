@@ -25,6 +25,7 @@ import Slide from '@mui/material/Slide';
 import { useLocation } from 'react-router-dom';
 import FormHelperText from '@mui/material/FormHelperText';
 import Iconify from '../../../components/Iconify';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -123,16 +124,14 @@ export default function GelathiCircleForm({
    
   }, []);
   const gelathinamelist = (async) => {
-    var data = JSON.stringify({
-      partcipantId: id,
-    });
+  
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
+      url: baseURL + 'getGelathiList',
       headers: {
         'Content-Type': 'application/json',
       },
-      data: data,
+  
     };
     axios(config)
       .then(function (response) {

@@ -54,7 +54,6 @@ const FunderGelathiDashboard = () => {
     
       const config = {
         method: 'post',
-        // url: "https://cors-anywhere.herokuapp.com/{http://3.7.7.138/appTest/Scripts/getDashboardData.php}",
         url: baseURL + 'funderGelathiDashboard',
         headers: {
           'Content-Type': 'application/json',
