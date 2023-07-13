@@ -512,7 +512,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     
     
     </Grid>
-    <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <Grid item xs={12} md={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
     Actual / Target  <br />
      
