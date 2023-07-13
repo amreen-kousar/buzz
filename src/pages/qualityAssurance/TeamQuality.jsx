@@ -122,12 +122,10 @@ export default function TeamQuality({reload}) {
     setSinglePersonFormDetail(singlePersonFormDetail);
     setOpen(true);
   };
+  console.log(todayPoa,"todaypoa")
   return (
-    todayPoa == "" ?
-    <div style={{marginTop:"20%" , marginLeft:"40%"}}>
-<CircularProgress />
-</div>
-:
+
+todayPoa?.length>0?
     <div>
       {todayPoa &&
         todayPoa?.map((itm) => {
@@ -172,6 +170,7 @@ export default function TeamQuality({reload}) {
           );
         })}
       <SingleQulityDashboard openSingleQulityDashboard={open} handleClose={handleClose} item={singlePersonFormDetail} />
-    </div>
+    </div>:
+    <div style={{textAlign:'center',justifyContent:"center"}}><h3>NO DATA</h3></div>
   );
 }

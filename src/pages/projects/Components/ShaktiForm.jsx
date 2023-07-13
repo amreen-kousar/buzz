@@ -263,7 +263,8 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
     });
     var config = {
       method: 'post',
-      url: oldbaseURL + 'addSurveyData.php',
+      // url: oldbaseURL + 'addSurveyData.php',
+      url: baseURL + 'addSurveyData',
       headers: {
         'Content-Type': 'application/json',
       },
