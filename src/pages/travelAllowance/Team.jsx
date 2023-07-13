@@ -61,7 +61,7 @@ export default function Team(props) {
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/teamMembers.php',
+            url: 'https://bdms.buzzwomen.org/appTest/new/teamMembers',
             headers: {
                 'Content-Type': 'application/json'
             },

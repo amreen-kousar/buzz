@@ -24,6 +24,7 @@ import { baseURL } from 'src/utils/api';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 function SimpleDialog(props) {
   const { onClose, selectedValue, open, teamData, setUserId } = props;
+  console.log(teamData,"hjsagd")
   var [tempData,setTempData]=useState([...teamData]);
   const [user, setUser] = useState();
   

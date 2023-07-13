@@ -42,6 +42,7 @@ import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
 import FormHelperText from '@mui/material/FormHelperText';
 import Swal from 'sweetalert2';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -402,16 +403,14 @@ const [entreprenur , setentrepreneurError] = useState(false)
     }
   };
   const gelathinamelist = (async) => {
-    var data = JSON.stringify({
-      partcipantId: 457065,
-    });
+   
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
+      url: baseURL + 'getGelathiList',
       headers: {
         'Content-Type': 'application/json',
       },
-      data: data,
+    
     };
     axios(config)
       .then(function (response) {
