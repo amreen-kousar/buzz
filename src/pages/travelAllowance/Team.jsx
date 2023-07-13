@@ -9,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Iconify from 'src/components/Iconify';
 import { baseURL } from 'src/utils/api';
+import moment from 'moment';
 export default function Team(props) {
     const [value, setValue] = React.useState(0);
     const data = sessionStorage?.getItem('userId')
@@ -55,13 +56,15 @@ export default function Team(props) {
         var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
         var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
-            "date": dateValue,
-             "role_id": role,
-            "emp_id": userid
+            // moment(startDate?.$d)?.format('YYYY-MM-DD')
+            "date": moment(dateValue)?.format('YYYY/MM/DD'),
+             "role_id": parseInt(role),
+            "emp_id": parseInt(userid)
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/teamMembers',
+            // url: 'https://bdms.buzzwomen.org/appTest/new/teamMembers.php',
+            url : baseURL + 'teamMembers',
             headers: {
                 'Content-Type': 'application/json'
             },

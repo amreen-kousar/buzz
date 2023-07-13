@@ -149,7 +149,7 @@ useEffect(()=>{
     });
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProjectList.php',
+      url: baseURL + 'getProjectList',
       headers: {
         'Content-Type': 'application/json',
       },

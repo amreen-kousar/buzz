@@ -73,10 +73,10 @@ axios(config)
     var data = JSON.stringify({
         "location_name": location,
         "user_id": batch?.user_id,
-        "lon": lats?.lng,
+        "lon": JSON.stringify(lats?.lng),
         "id": batch?.id,
-        "type": type,
-        "lat": lats?.lat
+        "type": JSON.stringify(parseInt(type)),
+        "lat": JSON.stringify(lats?.lat)
       });
       
       var config = {

@@ -85,7 +85,7 @@ useEffect(()=>{
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/editTrainingBatch.php',
+      url: baseURL + 'editTrainingBatch',
       headers: { 
         'Content-Type': 'application/json'
       },

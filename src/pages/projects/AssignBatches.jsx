@@ -15,7 +15,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableCell from "@mui/material/TableCell";
 import { vi } from "date-fns/locale";
-import { baseURL } from "src/utils/api";
+import { baseURL, oldbaseURL } from "src/utils/api";
 
 export default function AssignBatches(){
    
@@ -77,7 +77,8 @@ const villagelist= async(itm) =>{
 
     var config = {
       method: 'post',
-      url: baseURL+'getTrainingBatchList',
+      // url: baseURL+'getTrainingBatchList',
+      url: oldbaseURL + 'getTrainingBatchList.php',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -135,7 +136,7 @@ const removeFlag = async (itm, i) => {
      
     "project_id":data1?.project_id, 
     "training_batch_id":itm?.training_batch_id,
-     "emp_id":item?.emp_id
+     "emp_id":JSON.stringify(parseInt(item?.emp_id))
    });
    villages.list[i].flag = 0;
    setVillages(villages)
@@ -143,7 +144,7 @@ const removeFlag = async (itm, i) => {
    
    var config = {
      method: 'post',
-     url: 'https://bdms.buzzwomen.org/appTest/deleteGFBatch.php',
+     url: baseURL + 'deleteGFBatch',
      headers: {
        'Content-Type': 'application/json'
      },

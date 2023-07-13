@@ -86,7 +86,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
       redirect: 'follow',
     };
   
-    let res = fetch('https://bdms.buzzwomen.org/appTest/uploadEventPhotos.php', requestOptions)
+    let res = fetch('https://bdms.buzzwomen.org/appGo/uploadEventPhotos', requestOptions)
       .then((itn) => {
         setImage([])
         alert("Image uploaded successfully..")
@@ -155,10 +155,10 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
       var data = JSON.stringify({
         location_name: locationS,
         user_id: idvalue,
-        lon: position.coords.longitude,
+        lon: JSON.stringify(position.coords.longitude),
         id: select?.id,
-        type: type,
-        lat: position.coords.latitude,
+        type: JSON.stringify(parseInt(type)),
+        lat: JSON.stringify(position.coords.latitude),
       });
       var config = {
         method: 'post',

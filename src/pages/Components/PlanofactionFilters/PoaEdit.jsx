@@ -75,12 +75,12 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
   const AddPoa = async => {
     var data = JSON.stringify({
       "poa_id": addData?.poa_id,
-      "date": moment(addData?.date?.$d)?.format('DD-MM-YYYY HH:mm:ss'),
+      "date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
       "user_id": sessionStorage?.getItem('userId'),
       "name": addData?.name,
       "all_day": addData?.all_day,
       "description": addData?.description,
-      "date2": moment(addData?.date?.$d)?.format('DD-MM-YYYY HH:mm:ss')
+      "date2": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss')
     });
     var config = {
       method: 'post',
