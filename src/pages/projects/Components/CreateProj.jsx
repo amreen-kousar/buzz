@@ -250,7 +250,7 @@ axios(config)
     formdata.append("publish", "")
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
+      url: 'https://bdms.buzzwomen.org/appGo/createProject',
       data: formdata
     };
     axios(config)

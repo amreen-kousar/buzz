@@ -134,16 +134,16 @@ function AddProject({ viewMessage }) {
             const talukList = taluk?.filter(itm => itm?.id === mainState?.locationID)
             const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
             var data = new FormData();
-            data.append('user_id', userid);
             data.append('locationID', talukList[0]?.id);
-            data.append('funderID', fundList[0]?.id);
-            data.append('createdBy', userid);
-            data.append('lastUpdatedBy', userid);
             data.append('location_name', talukList[0]?.name);
-            data.append('funderName', fundList[0]?.name);
+            data.append('funderID', fundList[0]?.id);
+            data.append('funder_name', fundList[0]?.name);
+             data.append('createdBy', userid);
+            data.append('lastUpdatedBy', userid);
+            // data.append('user_id', userid);
             var config = {
                 method: 'post',
-                url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
+                url: 'https://bdms.buzzwomen.org/appGo/createProject',
                 data: data
             };
             axios(config)
