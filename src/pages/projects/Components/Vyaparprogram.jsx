@@ -50,7 +50,7 @@ export default function Vyaparprogram({ itm, changeState }) {
   const [successMessage, setsuccessMessage] = useState(false);
   const [message, setMessage] = useState('');
   const [selectedValue, setSelectedValue] = React.useState('a');
-  const [vyaparform, setvyaparform] = useState('');
+  const [vyaparform, setvyaparform] = useState([]);
   const [survey, setsurvey] = React.useState('');
   const [education, seteducation] = React.useState('');
   const [maritalstatus, setmaritalstatus] = React.useState('');
@@ -189,21 +189,23 @@ console.log(itm,"itemmmmmmm")
     console.log("i called and store ", updatedData)
   // localStorage.setItem(key, JSON.stringify(data));
 };
-// Get data from local storage
+// Get data from local 
+
+useEffect(()=>{
+  const existingData = localStorage.getItem('vyapar');
+      const parsedData = existingData ? JSON.parse(existingData) : [];
+      if(parsedData?.length){
+        parsedData.map(item=>{
+          if(item?.partcipantId===itm.gelathi_id){
+            setSendData(item);
+           
+          }
+        })
+      }
+  },[])
 const data1 = localStorage.getItem("vyapar");
 console.log(JSON.parse(data1) ," getlocal")
-useEffect(()=>{
-const existingData = localStorage.getItem('vyapar');
-    const parsedData = existingData ? JSON.parse(existingData) : [];
-    if(parsedData?.length){
-      parsedData.map(item=>{
-        if(item?.partcipantId===itm.gelathi_id){
-          setSendData(item);
-         
-        }
-      })
-    }
-},[])
+
 const getDataLocally = (key) => {
   const data = localStorage.getItem("vyapar");
   console.log(data ," getlocal")
@@ -212,8 +214,6 @@ const getDataLocally = (key) => {
 const isOnline = () => {
   return navigator.onLine;
 };
-
-
 
 
 const networkAccess = async () => {
@@ -421,8 +421,10 @@ const networkAccess = async () => {
 if(localStorage.getItem('vyapar')){
   data = setvyaparform(saveDataLocally('vyapar',JSON.parse(data)));
   setvyaparform(data);
+  console.log("heyyy")
 }
 else{
+  console.log("elseeeeeeeeeee")
       var data = JSON.stringify({
         partcipantId: itm?.id || itm?.gelathi_id,
         gfId: sendData?.gfId,
@@ -700,13 +702,13 @@ else{
           <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
             <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
               <IconButton style={{ color: 'white' }} onClick={handleClose}>
-                <Iconify icon="material-symbols:arrow-back-rounded" />
+               {(isOnline())? <Iconify icon="material-symbols:arrow-back-rounded" />:"Back"}
               </IconButton>
               <Typography sx={{ ml: 2, flex: 1, color: 'white' }} variant="h6" component="div">
                 Buzz Vyapar Program Baseline
               </Typography>
               <Button autoFocus edge="end" color="inherit" type="submit" style={{ color: 'white' }}>
-                <Iconify icon="material-symbols:save" width={30} height={30} />
+               {(isOnline())? <Iconify icon="material-symbols:save" width={30} height={30} />:"save"}
               </Button>
             </Toolbar>
           </AppBar>

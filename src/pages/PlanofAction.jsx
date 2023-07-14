@@ -216,7 +216,7 @@ export default function PlanofAction() {
 
   useEffect(()=>{
      apiCall()
- 
+ VyaparApicall()
 
 },[isOnline])
 const apiCall = async() =>{
@@ -224,6 +224,7 @@ const apiCall = async() =>{
   const newData =JSON?.parse(data)
   console.log(JSON?.parse(data),"<--ertyui",[0])
   for(let i=0; i<newData?.length;i++){
+    console.log(i,"dsfdd")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/new/addGreenBaselineSurvey.php',
@@ -244,6 +245,37 @@ const apiCall = async() =>{
  })
   console.log(JSON?.parse(data),"<-wertyui")
 }
+
+const VyaparApicall = async()=>{
+  const data = localStorage?.getItem('vyapar');
+  const newData =JSON?.parse(data)
+  console.log(JSON?.parse(data),"<--ertyui",[0])
+  for(let i=0; i<newData?.length;i++){
+    console.log(i,"ivalueeeeeee")
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data:newData[i],
+    };
+    const res = await axios(config)
+    console.log(res?.data,i,"<--result")
+  }
+  
+  localStorage.removeItem('vyapar')
+ 
+ axios(config)?.then(itm=>{
+   console.log("qwerty",itm)
+ })
+ .catch(err=>{
+   console.log(err,"<--GELATHIHR")
+ })
+
+}
+
+
   // event listeners to update the state 
   window.addEventListener('online', () => {
       setOnline(true)

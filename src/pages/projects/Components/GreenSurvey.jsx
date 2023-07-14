@@ -423,7 +423,8 @@ useEffect(()=>{
         if (localStorage.getItem('green')) {
           data = setGreenForm(saveDataLocally('green', JSON.parse(data)));
           setGreenForm(data);
-        } else {
+        } 
+        else {
           data = JSON.stringify({
             partcipantId: props?.itm?.id || props?.itm.gelathi_id,
             Email: sendData?.Email,
