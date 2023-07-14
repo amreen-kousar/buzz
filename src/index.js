@@ -8,6 +8,8 @@ import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
+import swDev from './swDev'
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -19,7 +21,8 @@ root.render(
 );
 
 // If you want to enable client cache, register instead.
-serviceWorker.unregister();
+swDev();
+// serviceWorker.unregister();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

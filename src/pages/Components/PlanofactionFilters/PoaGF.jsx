@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { oldbaseURL } from 'src/utils/api';
+import { Icon } from '@iconify/react';
+import GreenSurvey from 'src/pages/projects/Components/GreenSurvey';
+import Vyaparprogram from 'src/pages/projects/Components/Vyaparprogram';
+import GelathiCircleForm from 'src/pages/projects/Components/GelathiCircleForm';
 import {
   Box,TextField,
   Radio,
@@ -60,6 +65,8 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [getAllNotes, setGetAllNotes] = useState([]);
 const [SaveBtn , setSaveBtn] = useState(false) 
 const [gelatiNote, setGelatiNote] = useState('');
+const[gelathisData,setGelathisdata] = useState('');
+const [showSurvey,setSurvey]=useState(false);
   const [session, setSession] = useState('');
   const [expanded, setExpanded] = React.useState(false);
   const [reload, setReload] = useState(false);
@@ -133,11 +140,15 @@ const [gelatiNote, setGelatiNote] = useState('');
     };
     axios(config)
       .then(function (response) {
+        localStorage.setItem('sessiondata',JSON.stringify(response.data));
         setSession(response.data);
       })
       .catch(function (error) {
-        // console.log(error);
+        let localData=JSON.parse(localStorage.getItem('sessiondata'))
+        setSession(localData)
+      
       });
+      circle()
   };
 const noteSubmitHandler = () => {
     
@@ -197,6 +208,33 @@ const noteSubmitHandler = () => {
       })
       .catch(function (error) {
         // console.log(error, 'failed');
+      });
+  };
+  const circle = (async) => {
+    const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
+    var data = JSON.stringify({
+      circle_id: session?.circle_id,
+      project_id: session?.project_id,
+      emp_id: userid,
+    });
+var config = {
+      method: 'post',
+      url: oldbaseURL+'getGelathiCircleDataNew.php',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+axios(config)
+      .then(function (response) {
+        localStorage.setItem('gelathisdata',JSON.stringify(response?.data));
+        setGelathisdata(response?.data); 
+        
+      })
+      .catch(function (error) {
+        // console.log(error);
+        let localgelathisdata=JSON.parse(localStorage.getItem('gelathisdata'))
+        setGelathisdata(localgelathisdata)
       });
   };
   function getBase64(file, callback) {
@@ -313,6 +351,24 @@ const noteSubmitHandler = () => {
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
     linkStyle: { textDecoration: 'none', color: "black" }
   }
+  const [showForm, setShowForm] = useState(false);
+  const [selectedFromIndex, setSelectedFormIndex] = useState({
+    index: '',
+    id: '',
+  });
+  const callGelathiFormComponent = (index, id) => {
+    setShowForm(true);
+    setSelectedFormIndex({
+      index: index,
+      id: id,
+    });
+  };
+
+
+const handleform=()=>{
+  alert('survey was done')
+}
+
   return (
     <>
       <Drawer
@@ -337,13 +393,13 @@ const noteSubmitHandler = () => {
         </Stack>
         <Divider />
        
-{
+{/* {
   session == "" ?
   <>
   <div style={{display:"flex", marginTop:"50%", marginLeft:"40%" }}>
       <CircularProgress />
       </div>
-  </>:
+  </>: */}
 <Scrollbar>
           <Stack spacing={3} sx={{ p: 2 }}>
             <div>
@@ -503,8 +559,8 @@ const noteSubmitHandler = () => {
                     }}> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
                     startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="ph:note-pencil" /></IconButton>}>
                     <span style={{ width: "200px" }}>Notes</span>
-                  </Button>
-     
+                  </Button> <br/>
+                  
 {showNote ? (
                 <div>
                   {/* <Dialog fullScreen open={open} onClose={handleClose}TransitionComponent={Transition}></Dialog> */}
@@ -573,7 +629,123 @@ const noteSubmitHandler = () => {
                   
                   </Card>
                 </div>
-              ) : null}
+              ) : null}<br/>
+                  <Button variant="secondary" style={styles.buttonStyle} onClick={() => {
+                      setSurvey(true);
+                    }}
+                    endIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="material-symbols:add" /> </IconButton>}
+                    startIcon={<IconButton> <Iconify style={{ color: "#6d7c89" }} icon="clarity:form-line" /></IconButton>}>
+                    <span style={{ width: "200px" }}>Survey Form</span>
+                  </Button>{
+  showSurvey ? (
+    <Stack>
+        <div>
+          
+        <Card style={{ marginTop: 20, marginLeft: 10 }}>
+          {(session?.type==4 || session.type==10 || session.type==16)?<>
+
+          {gelathisData?.gelathis?.map((itm,index)=>{
+return (
+  <Card style={{borderRadius:0}}>
+   
+    <CardContent style={{display:'flex'}}>
+    {itm?.firstName}
+    {
+    (( session?.type == 4) )? (
+                            (itm?.is_survey)?
+                            <IconButton
+                             
+                              onClick={handleform}
+                            >
+                              <Icon icon="clarity:form-line" width={20} height={20} marginTop={20} color="green" />
+                            </IconButton>
+                            : (session?.type==4 && session?.check_in != "0")? (
+                            
+                              
+                            <IconButton
+                          
+                            onClick={() => {
+                               callGelathiFormComponent(index, itm?.gelathi_id);
+                             
+                            }}
+                          >
+                            <Icon icon="clarity:form-line" width={20} height={20} marginTop={20} color="#ff7424" />
+                          </IconButton>
+                          ):null
+                          ) : 
+                          (( session?.type == 10) )? (
+                            (itm?.is_green_survey)?
+                            <IconButton
+                             
+                            onClick={handleform}
+                            >
+                              <Icon icon="clarity:form-line" width={20} height={20} marginTop={20} color="green" />
+                            </IconButton>
+                            : (session?.type==10 && session?.check_in != "0" )? (
+                                <IconButton
+                           
+                              onClick={() => {
+                                // callGelathiFormComponent(index , itm?.gelathi_id  )
+                                // if we want to see filed form means need to call another component so that time we can use this kind of methods to call instead of rendering inside the map
+                              }}
+                            >
+                              <GreenSurvey itm={itm }  />
+                               </IconButton>
+                             
+                          ):null
+                          ) : (( session?.type == 16) )? (
+                            (itm?.is_vyapar_survey)?
+                            <IconButton
+                            
+                            onClick={handleform}
+                            >
+                              <Icon icon="clarity:form-line" width={20} height={20} marginTop={20} color="green" />
+                            </IconButton>
+                            : (session?.type==16 && session?.check_in != "0")? (
+                              <IconButton
+                          
+                              onClick={() => {
+                                // callGelathiFormComponent(index , itm?.gelathi_id  )
+                                // if we want to see filed form means need to call another component so that time we can use this kind of methods to call instead of rendering inside the map
+                              }}
+                            >
+                              <Vyaparprogram itm={itm }  />
+                           </IconButton>
+                          ):<></>
+                          ): <></>
+    }
+</CardContent>
+  </Card>
+  
+)
+          })}</>:<CardContent><Typography style={{textAlign:'center',alignItems:'center',fontWeight:700}}>No Survey</Typography></CardContent>}
+          </Card>
+
+          {showForm && (
+              <GelathiCircleForm
+                index={selectedFromIndex.index}
+                // reloadmethod={reloadmethod}
+                // clcikData={clcikData}
+                // circleData={circleData}
+                // singleCircleData={singleCircleData}
+                id={selectedFromIndex.id}
+                setShowForm={setShowForm}
+                // gelathiDrawerReloder={gelathiDrawerReloder}
+              />
+            )}
+            {/* {showGreenFrom && <GreenSurvey itm={formData } />} */}
+      <Button
+                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20,backgroundColor:'#aec6c1' }}
+                  onClick={()=>{
+                   setSurvey(false)
+                  }}
+                >
+                   Cancel
+                  </Button>
+        </div>
+        </Stack>
+  ):null
+}
 <Card>
                 <CardContent>
                   View All Comments :
@@ -608,12 +780,11 @@ const noteSubmitHandler = () => {
                      
                   </Collapse>
                 </CardContent>
-              </Card>
-            </div>
+              </Card>            </div>
             
           </Stack>
         </Scrollbar>
-}
+{/* } */}
    </Drawer>
     </>
   );

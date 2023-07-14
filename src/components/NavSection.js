@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink as RouterLink, matchPath, useLocation } from 'react-router-dom';
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@mui/material';
 import Iconify from './Iconify';
+import { NoInternetConnection } from 'src/connection';
+
 const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(({ theme }) => ({
   ...theme.typography.body2,
   height: 48,
@@ -134,12 +136,30 @@ NavSection.propTypes = {
   navConfig: PropTypes.array,
 };
 export default function NavSection({ navConfig, ...other }) {
+  const [isOnline, setOnline] = useState(true);
+ const projectline = navConfig?.filter(itm=>itm?.title ==="Plan Of Action")
+ console.log(projectline,"<----projectline")
+  // On initization set the isOnline state.
+  useEffect(()=>{
+      setOnline(navigator.onLine)
+  },[])
+
+  // event listeners to update the state 
+  window.addEventListener('online', () => {
+      setOnline(true)
+  });
+
+  window.addEventListener('offline', () => {
+      setOnline(false)
+  });
+  const mainData = isOnline? navConfig:projectline
+  console.log(mainData,"<---navConfig")
   const { pathname } = useLocation();
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
   return (
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
-        {navConfig.map((item) => (
+        {mainData.map((item) => (
           <NavItem key={item.title} item={item} active={match} />
         ))}
       </List>

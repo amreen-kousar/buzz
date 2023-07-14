@@ -74,6 +74,7 @@ function a11yProps(index) {
   };
 }
 export default function PlanofAction() {
+  const[localData,setLocalStoragedata]=useState([]);
   const [value, setValue] = React.useState(0);
   const [openFilter, setOpenFilter] = useState(false);
   const [drawerEvent, SetDrawerEvent] = useState(false);
@@ -90,6 +91,7 @@ export default function PlanofAction() {
   const [batchState, setBatchState] = useState();
   const [clcikData, setClickData] = useState();
   const [reload, setReload] = useState(false);
+  const [isOnline, setOnline] = useState(true);
   const [poaData, setPoaData] = [
     {
       emp_id: '',
@@ -102,6 +104,7 @@ export default function PlanofAction() {
   var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
   var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
   const role_name = JSON.parse(sessionStorage?.getItem('userDetails'))?.role_name;
+
 
   const handleChange = (event, newValue) => {
     setSeason(newValue);
@@ -129,7 +132,8 @@ export default function PlanofAction() {
   };
   useEffect(() => {
     todaypoa();
-  }, [season, date, userId, reload,!gfDrawer]);
+  }, [season, date, userId, reload,!gfDrawer,isOnline]);
+
   const todaypoa = (async) => {
     var data = JSON.stringify({
       emp_id: userId ? userId : userDetails?.id,
@@ -147,12 +151,16 @@ export default function PlanofAction() {
     };
     axios(config)
       .then(function (response) {
+        localStorage.setItem('poadata',JSON.stringify(response?.data?.data))
         SetPoa(response?.data?.data);
       })
       .catch(function (error) {
-        // console.log(error);
+        let localPoa=JSON.parse(localStorage.getItem('poadata'))
+        SetPoa(localPoa)
+        console.log(error,"data assigned",localPoa);
       });
   };
+
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -199,8 +207,59 @@ export default function PlanofAction() {
     setUserId();
     todaypoa();
   };
+
+
+  // On initization set the isOnline state.
+  useEffect(()=>{
+      setOnline(navigator.onLine)
+  },[])
+
+  useEffect(()=>{
+     apiCall()
+ 
+
+},[isOnline])
+const apiCall = async() =>{
+  const data = localStorage?.getItem("green")
+  const newData =JSON?.parse(data)
+  console.log(JSON?.parse(data),"<--ertyui",[0])
+  for(let i=0; i<newData?.length;i++){
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/new/addGreenBaselineSurvey.php',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data:newData[i],
+    };
+    const res = await axios(config)
+    console.log(res?.data,i,"<--result")
+  }
+ 
+ axios(config)?.then(itm=>{
+   console.log("qwerty",itm)
+ })
+ .catch(err=>{
+   console.log(err,"<--GELATHIHR")
+ })
+  console.log(JSON?.parse(data),"<-wertyui")
+}
+  // event listeners to update the state 
+  window.addEventListener('online', () => {
+      setOnline(true)
+  });
+
+  window.addEventListener('offline', () => {
+      setOnline(false)
+  });
+
+  
+  
+
   return (
     <div>
+      {!isOnline&&
+      <h1> you are offline</h1>}
       {openMessage && (
         <Snackbar id="poa-snackbar" open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
           <Alert id="alert-open-message"
@@ -364,8 +423,8 @@ export default function PlanofAction() {
             </Tabs>
           </Box>
           <TabPanel id="tab-panel-1" value={value} index={0}>
-            {poa?.length !== 0 ? (
-              poa?.map((item) => {
+          {poa?.length !== 0 ? (
+           poa?.map((item) => {
                 return (
                   <>
                     <h3>{item[0]?.date}</h3>
@@ -495,8 +554,8 @@ export default function PlanofAction() {
             )}
           </TabPanel>
           <TabPanel id="tab-panel-plan-of-action" value={value} index={1}>
-            {poa?.length !== 0 ? (
-              poa?.map((item) => {
+          {poa?.length !== 0 ? (
+               poa?.map((item) => {
                 return (
                   <>
                     <h3 id="item-date">{item[0]?.date}</h3>
@@ -639,8 +698,8 @@ export default function PlanofAction() {
             )}
           </TabPanel>
           <TabPanel id="tab-panel-poa" value={value} index={2}>
-            {poa?.length !== 0 ? (
-              poa?.map((item) => {
+          {poa?.length !== 0 ? (
+               poa?.map((item) => {
                 return (
                   <>
                     <h3>{item[0]?.date}</h3>
