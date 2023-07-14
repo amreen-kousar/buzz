@@ -265,50 +265,51 @@ axios(config)
    }
   }
   const createProjectpublish = () => {
-     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
-     var formdata = new FormData();
-     setCreatePro(false)
-     formdata.append('user_id', userid);
-     formdata.append('project_id', data.project_id)
-     formdata.append('partnerID', data.partner_id)
-     formdata.append('training_target', data.training_target)
-    //  formdata.append('start_date', moment(data.start_date)?.format('DD-MM-YYYY'))
-    if (data?.start_date) {
-      formdata.append('start_date', moment(data?.start_date).format('DD-MM-YYYY'));
-    }
-    else{
-      formdata.append('start_date', data?.startDate);
-    }
-    //  formdata.append('end_date', moment(data.end_date)?.format('DD-MM-YYYY'))
-    if (data?.end_date) {
-      formdata.append('end_date', moment(data?.end_date)?.format('DD-MM-YYYY'));
-    }
-    else{
-      formdata.append('end_date',data?.endDate);
-    }
-     formdata.append('busID', data.bus_id)
-     formdata.append('driverID', data.driverId)
-     formdata.append("operations_manager_id", data.operations_manager_id)
-     formdata.append("gfl_id",data.gfl_id)
-     formdata.append("locationID", data.location_id)
-     formdata.append("location_name", data.location_name),
-     formdata.append("", "")
-     var config = {
-       method: 'post',
-       url: 'https://bdms.buzzwomen.org/appTest/createProject.php',
-       data: formdata
-     };
- 
-     axios(config)
-       .then(function (response) {
-         projData();
-         viewMessage('Project added sucessfully')
-      
-       })
-       .catch(function (error) {
-        //  console.log(error);
-       });
-    
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+    var formdata = new FormData();
+    setCreatePro(false)
+    formdata.append('user_id', userid);
+    formdata.append('project_id', data.project_id)
+    formdata.append('partnerID', data.partner_id)
+    formdata.append('training_target', data.training_target)
+   //  formdata.append('start_date', moment(data.start_date)?.format('DD-MM-YYYY'))
+   if (data?.start_date) {
+     formdata.append('start_date', moment(data?.start_date).format('DD-MM-YYYY'));
+   }
+   else{
+     formdata.append('start_date', data?.startDate);
+   }
+   //  formdata.append('end_date', moment(data.end_date)?.format('DD-MM-YYYY'))
+   if (data?.end_date) {
+     formdata.append('end_date', moment(data?.end_date)?.format('DD-MM-YYYY'));
+   }
+   else{
+     formdata.append('end_date',data?.endDate);
+   }
+    formdata.append('busID', data.bus_id)
+    formdata.append('driverID', data.driverId)
+    formdata.append("operations_manager_id", data.operations_manager_id)
+    formdata.append("gfl_id",data.gfl_id)
+    formdata.append("locationID", data.location_id)
+    formdata.append("location_name", data.location_name),
+    formdata.append("", "")
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appGo/createProject',
+      data: formdata
+    };
+
+    axios(config)
+      .then(function (response) {
+        projData();
+        viewMessage('Project added sucessfully')
+     
+      })
+      .catch(function (error) {
+       //  console.log(error);
+      });
+   
+  
    }
    useEffect(()=>{
      
