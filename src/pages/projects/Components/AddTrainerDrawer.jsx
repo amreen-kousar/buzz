@@ -25,13 +25,13 @@ function SimpleDialog(props) {
   const handleListItemClick = (value) => {
     if (arr?.find(itm=>itm?.name===value?.first_name)) {
       var data = JSON.stringify({
-        "project_id": sendData?.projectId,
+        "project_id": sendData?.project_id,
         "role_id": value?.role_id,
         "emp_id": value?.id
       });
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/deleteEmpFromProject.php',
+        url: baseURL + 'deleteEmpFromProject',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -54,7 +54,7 @@ function SimpleDialog(props) {
       });
       var config = {
         method: 'post',
-        url: baseURL+ 'addEmpToProject',
+        url: baseURL + 'addEmpToProject',
         headers: {
           'Content-Type': 'application/json'
         },

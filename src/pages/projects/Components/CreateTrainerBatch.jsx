@@ -90,15 +90,15 @@ export default function CreateTrainerBatch(props) {
       "project_id": props?.data1?.project_id,
       "contact_person": trainerData?.contact_person,
       "number_of_participants": trainerData?.number_of_participants,
-      "day1": moment(trainerData?.day1.$d)?.format('YYYY/MM/DD  h:mm:ss '),
-      "day2": moment(trainerData?.day2.$d)?.format('YYYY/MM/DD  h:mm:ss '),
+      "day1": moment(trainerData?.day1.$d)?.format('YYYY/MM/DD  h:mm A'),
+      "day2": moment(trainerData?.day2.$d)?.format('YYYY/MM/DD  h:mm A'),
       "location_id": props?.data1?.location_id,
       "contact_number": trainerData?.contact_number,
       "trainer_id": idvalue
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createTrainingBatch.php',
+      url: baseURL + 'createTrainingBatch',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -106,9 +106,12 @@ export default function CreateTrainerBatch(props) {
     };
     axios(config)
       .then(function (response) {
+     
         if (response?.data?.code) {
           alert(response?.data?.message)
+          handleClose()
         }
+       
         else{
           alert("added succesfully")
           handleClose()
@@ -116,6 +119,8 @@ export default function CreateTrainerBatch(props) {
       })
       .catch(function (error) {
         // console.log(error);
+        alert(error)
+        handleClose()
       });
   }
   const styles = {

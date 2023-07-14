@@ -53,7 +53,7 @@ export default function Charts(props) {
 
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getDashBoardChart.php',
+      url: 'https://bdms.buzzwomen.org/appTest/getDashBoardChart',
       headers: {
         'Content-Type': 'application/json'
       },

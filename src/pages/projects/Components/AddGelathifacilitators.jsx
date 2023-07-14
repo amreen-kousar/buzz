@@ -22,6 +22,7 @@ import { baseURL } from 'src/utils/api';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 function SimpleDialog(props) {
     const { onClose, selectedValue, open, data, getData, sendData,name } = props;
+    console.log(sendData,"sendataaaaaaaaaaa")
     const handleClose = () => {
         onClose(selectedValue);
       };
@@ -29,14 +30,14 @@ function SimpleDialog(props) {
       const handleListItemClick = (value) => {
         if (arr?.find(itm=>itm?.name===value?.first_name)) {
           var data = JSON.stringify({
-            "project_id": sendData?.projectId,
+            "project_id": sendData?.project_id,
             "role_id": value?.role_id,
             "emp_id": value?.id
           });
     
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/deleteEmpFromProject.php',
+            url: baseURL + 'deleteEmpFromProject',
             headers: {
               'Content-Type': 'application/json'
             },
@@ -64,7 +65,11 @@ function SimpleDialog(props) {
     
           var config = {
             method: 'post',
+<<<<<<< HEAD
             url: baseURL+'addEmpToProject',
+=======
+            url:baseURL +  'addEmpToProject',
+>>>>>>> e8bea1869a982f5a832ca94db84378780068bf26
             headers: {
               'Content-Type': 'application/json'
             },
