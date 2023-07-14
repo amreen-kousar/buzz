@@ -65,11 +65,7 @@ function SimpleDialog(props) {
     
           var config = {
             method: 'post',
-<<<<<<< HEAD
             url: baseURL+'addEmpToProject',
-=======
-            url:baseURL +  'addEmpToProject',
->>>>>>> e8bea1869a982f5a832ca94db84378780068bf26
             headers: {
               'Content-Type': 'application/json'
             },
