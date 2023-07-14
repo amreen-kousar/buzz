@@ -54,14 +54,14 @@ export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onClose
             "numOfParticipants":scheduleData?.all_participants?.length ,
             "tb_id": scheduleData?.data?.id,
             "gf_session_type": 2,
-            "plan_date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+            "plan_date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm A'),
             "gf_session_name": null,
           });
           
           var config = {
             method: 'post',
           maxBodyLength: Infinity,
-            url: 'https://bdms.buzzwomen.org/appTest/createGFSessions.php',
+          url: baseURL+'createGFSessions',
             headers: { 
               'Content-Type': 'application/json'
             },

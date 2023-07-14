@@ -14,6 +14,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
+import { baseURL } from 'src/utils/api';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 function SimpleDialog(props) {
   const { onClose, selectedValue, open, data, getData, sendData,name } = props;
@@ -53,7 +54,7 @@ function SimpleDialog(props) {
       });
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/addEmpToProject.php',
+        url: baseURL+ 'addEmpToProject',
         headers: {
           'Content-Type': 'application/json'
         },
