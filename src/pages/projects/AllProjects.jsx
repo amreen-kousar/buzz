@@ -12,6 +12,7 @@ import AddProject from './Addproject';
 import FiltersHome from '../Filters/FiltersHome';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import { baseURL } from 'src/utils/api';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -92,7 +93,6 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
             "operations_manager_id": g ? "" : id === 4 ? i?.id : null,
          }):(id==5)?
         data = JSON.stringify({
@@ -102,7 +102,6 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
             "trainer_id": g ? "" : id === 5 ? i?.id : null,
         }):(id==13)? data = JSON.stringify({
             "search": search,
@@ -111,7 +110,6 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
             "gelathi_id":g?"":id==13?i?.id:null
         }): 
        (g=='date') ?
@@ -124,7 +122,7 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
+            
            
         })
         :(i?.type=='custom')?  
@@ -138,9 +136,9 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
-            taluk_id: i?.taluk_id,
-            district_id: i?.district?.id,
+            // count: count,
+            taluk_id: JSON.stringify(i?.taluk_id),
+            district_id:JSON.stringify(i?.district?.id),
             districtName:i?.district?.name,
             "funder_id": i?.funder?.id,
             funder_name:i?.funder?.name,
@@ -160,9 +158,9 @@ var data ={}
             "filter_id": 0,
             "type": "",
             "pageNum": page,
-            count: count,
-            taluk_id: g === "country" ? id : null,
-            district_id: g === "country" ? i : null,
+            // count: count,
+            taluk_id: g === "country" ? JSON.stringify(id ): null,
+            district_id: g === "country" ? JSON.stringify(i) : null,
             "funder_id": id === 2 ? i?.id : null,
             "opsManager":id===4?i?.id:null,
             "trainerId":g?"":id===5?i?.id:null,
@@ -173,8 +171,8 @@ var data ={}
     }
         const config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
-            headers: {
+            url: baseURL + 'getProjects',
+            headers: { 
                 'Content-Type': 'application/json'
             },
             data

@@ -176,7 +176,125 @@ const [entreprenur , setentrepreneurError] = useState(false)
     gelathinamelist();
     // setenrolledVyaapar([{ stockname: "fist" }, { stockname: "second" }])
   }, []);
+
+console.log(itm,"itemmmmmmm")
+  const saveDataLocally = (key, data) => {
+ 
+    const existingData = localStorage.getItem('vyapar');
+    const parsedData = existingData ? JSON.parse(existingData) : [];
+    const newData = { ...data}; // Replace with your own data object
+    parsedData.push(newData);
+    const updatedData = JSON.stringify(parsedData);
+    localStorage.setItem('vyapar', updatedData);
+    console.log("i called and store ", updatedData)
+  // localStorage.setItem(key, JSON.stringify(data));
+};
+// Get data from local storage
+const data1 = localStorage.getItem("vyapar");
+console.log(JSON.parse(data1) ," getlocal")
+useEffect(()=>{
+const existingData = localStorage.getItem('vyapar');
+    const parsedData = existingData ? JSON.parse(existingData) : [];
+    if(parsedData?.length){
+      parsedData.map(item=>{
+        if(item?.partcipantId===itm.gelathi_id){
+          setSendData(item);
+         
+        }
+      })
+    }
+},[])
+const getDataLocally = (key) => {
+  const data = localStorage.getItem("vyapar");
+  console.log(data ," getlocal")
+  return data ? JSON.parse(data) : null;
+};
+const isOnline = () => {
+  return navigator.onLine;
+};
+
+
+
+
+const networkAccess = async () => {
+  try {
+    await fetch('https://www.google.com/', { mode: 'no-cors' });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+
+
   const vyaparformdata = (async) => {
+    var data ={}
+    data = JSON.stringify({
+      partcipantId: itm?.id || itm?.gelathi_id,
+      gfId: sendData?.gfId,
+      when_was_survey_done: survey,
+      name_of_the_vyapari: sendData?.name_of_the_vyapari,
+      age: sendData?.age,
+      contact_number: sendData?.contact_number,
+      village_id: itm?.villagename  || sendData?.village_id,
+      name_of_the_cohort: sendData?.name_of_the_cohort,
+      highter_education: education,
+      marital_status: maritalstatus,
+      number_of_people_in_the_household: sendData?.number_of_people_in_the_household,
+      do_you_own_a_smart_phone: phone,
+      do_you_have_internet_connection_on_your_smart_phone: '3',
+      sector_type_of_business: sector,
+      are_you_proficient_with_numbers: numberproficiency,
+      are_you_proficient_with_written_language: writtenproficiency,
+      household_income_monthly: sendData?.household_income_monthly,
+      over_the_last_month_your_average_income: sendData?.over_the_last_month_your_average_income,
+      your_business_profit_last_month: sendData?.your_business_profit_last_month,
+      how_much_monthly_income_would_you_like_to_ideally_earn:
+        sendData?.how_much_monthly_income_would_you_like_to_ideally_earn,
+      amount_invested_when_the_business_started: sendData?.amount_invested_when_the_business_started,
+      number_of_years_the_business_has_been_operating: bussinessyears,
+      you_stopped_hold_your_business: sendData?.you_stopped_hold_your_business,
+      no_hours_engaged_business: sendData?.no_hours_engaged_business,
+      license_for_existing_business: licensevalue,
+      home_based_work_from_shop: homebased,
+      why_do_you_do_business: sendData?.why_do_you_do_business,
+      tell_us_three_things_about_you_as_an_entrepreneur: checked['tell_us_three_things_about_you_as_an_entrepreneur'],
+      tell_us_three_things_about_your_role_as_a_woman_at_home:
+        sendData?.tell_us_three_things_about_your_role_as_a_woman_at_home,
+      what_are_your_challenges_in_running_and_growing_your_business: challengesvalue,
+      what_is_your_plan_to_overcome_these_challenges: sendData?.what_is_your_plan_to_overcome_these_challenges,
+      what_are_your_skills: sendData?.what_are_your_skills,
+      what_are_the_resources_available_with_you_for_your_business:
+        sendData?.what_are_the_resources_available_with_you_for_your_business,
+      who_is_your_customer_Describe_them_to_us: sendData?.who_is_your_customer_Describe_them_to_us,
+      please_list_down_the_various_components_of_business:
+        checked['please_list_down_the_various_components_of_business'],
+      I_know_the_current_state_of_my_business_in_profit_loss_revenue: bussinesscurrentstate,
+      what_kind_of_books_of_accounts_do_you_maintain: accountbooks,
+      i_can_generate_ideas_to_solve_my_business_problems: generateideas,
+      tell_us_about_one_business_problem: sendData?.tell_us_about_one_business_problem,
+      what_is_your_business_goal_Business_impurumenet_madodu:
+        sendData?.what_is_your_business_goal_Business_impurumenet_madodu,
+      do_you_have_a_business_plan_to_reach_that_goal: bussinessplan,
+      can_you_submit_a_business_plan_for_your_goal_to_us_right_now: submitbussinessplan,
+      what_are_the_strenghts_of_your_business: sendData?.what_are_the_strenghts_of_your_business,
+      what_are_the_weaknesses_of_your_business: sendData?.what_are_the_weaknesses_of_your_business,
+      what_are_the_oppourtunities_for_your_business: sendData?.what_are_the_oppourtunities_for_your_business,
+      are_you_able_to_raise_the_required_finance: finance,
+      i_have_taken_a_loan_from: loan,
+      i_have_trouble_accessing_loan_for_my_business: accessingloan,
+      what_are_the_prerequisites_to_access_a_loan: checked['what_are_the_prerequisites_to_access_a_loan'],
+      loan_currently_availed: currentloan,
+      ' need_additional_skills_business': bussinesskills,
+      relation_who_borrowed: sendData?.relation_who_borrowed,
+      loan_total_amount: sendData?.loan_total_amount,
+      loan_source: sendData?.loan_source,
+      loan_repayment_till_date: sendData?.loan_repayment_till_date,
+      skils_what_are_those : sendData?.skils_what_are_those,
+      do_you_have_internet_connection_on_your_smart_phone : internet
+    });
+    if(isOnline() && networkAccess())
+    {
     if (education == '') {
       setEducationError(true);
       setHelperText('Please Select The Option');
@@ -298,7 +416,13 @@ const [entreprenur , setentrepreneurError] = useState(false)
       (checked['please_list_down_the_various_components_of_business'] != 0)&&
       (checked['tell_us_three_things_about_you_as_an_entrepreneur'] != 0)&&
       (checked['what_are_the_prerequisites_to_access_a_loan'] != 0)
-    ) {
+    ) 
+    {
+if(localStorage.getItem('vyapar')){
+  data = setvyaparform(saveDataLocally('vyapar',JSON.parse(data)));
+  setvyaparform(data);
+}
+else{
       var data = JSON.stringify({
         partcipantId: itm?.id || itm?.gelathi_id,
         gfId: sendData?.gfId,
@@ -363,6 +487,7 @@ const [entreprenur , setentrepreneurError] = useState(false)
         skils_what_are_those : sendData?.skils_what_are_those,
         do_you_have_internet_connection_on_your_smart_phone : internet
       });
+}
       var config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
@@ -374,6 +499,7 @@ const [entreprenur , setentrepreneurError] = useState(false)
       axios(config)
         .then(function (response) {
           setvyaparform(response?.data);
+          localStorage.removeItem('vyapar');
           Swal.fire({
             icon: 'success',
             title: 'Success',
@@ -389,17 +515,23 @@ const [entreprenur , setentrepreneurError] = useState(false)
           handleClose();
         })
         .catch(function (error) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: response.data.message,
-            confirmButtonText: 'Ok',
-            timer: 2000,
-          });
+          // Swal.fire({
+          //   icon: 'error',
+          //   title: 'Error',
+          //   text: response.data.message,
+          //   confirmButtonText: 'Ok',
+          //   timer: 2000,
+          // });
+          setvyaparform(saveDataLocally('vyapar',data));
         });
-    } else {
+      } 
+      else {
       alert('PLease Fill All The Field ');
     }
+  }
+  else{
+    setvyaparform(saveDataLocally('vyapar',JSON.parse(data)));
+  }
   };
   const gelathinamelist = (async) => {
     var data = JSON.stringify({
@@ -415,9 +547,13 @@ const [entreprenur , setentrepreneurError] = useState(false)
     };
     axios(config)
       .then(function (response) {
+        localStorage.setItem('gelathilist',JSON.stringify(response?.data));
         setVyaapar(response?.data);
       })
       .catch(function (error) {
+        let gelathidata=JSON.parse(localStorage.getItem('gelathilist'))
+        setVyaapar(gelathidata);
+        console.log(error,"data assigned",gelathidata);
         // console.log(error);
       });
   };
