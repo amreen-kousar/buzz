@@ -36,7 +36,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import { EightK } from '@mui/icons-material';
-import { baseURL } from 'src/utils/api';
+import { baseURL, oldbaseURL } from 'src/utils/api';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -127,6 +127,7 @@ const [gelatiNote, setGelatiNote] = useState('');
     var config = {
       method: 'post',
       url: baseURL + 'getGFSessionData1',
+      
       headers: {
         'Content-Type': 'application/json',
       },

@@ -179,7 +179,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     var config = {
       method: 'post',
       maxBodyLength: Infinity,
-       url: oldbaseURL+'createGFSessionsNew1.php',
+       url: baseURL+'createGFSessionsNew1',
       headers: {
         'Content-Type': 'application/json',
       },

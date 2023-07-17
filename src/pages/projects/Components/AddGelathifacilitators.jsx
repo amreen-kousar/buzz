@@ -142,14 +142,14 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
     )
     const trainerList = () => {
         var data = JSON.stringify({
-            "role_id": 6,
-            "project_id": sendData?.project_id?sendData?.project_id:sendData?.projectId,
-            "operation_manager_id":operations_manager_id ,
-            "pageNum": 1
+            "role_id": "6",
+            "project_id": JSON.stringify(sendData?.project_id?sendData?.project_id:sendData?.projectId),
+            "operation_manager_id":JSON.stringify(operations_manager_id) ,
+            "pageNum": "1"
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
+            url: baseURL + 'getPeopleList',
             headers: {
                 'Content-Type': 'application/json'
             },

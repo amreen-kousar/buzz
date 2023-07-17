@@ -57,14 +57,15 @@ export default function BeehiveDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
             "user_id": userid,
             "locationId":scheduleData?.data?.location_id ,
             "tb_name": scheduleData?.data?.name,
-            "numOfParticipants":scheduleData?.all_participants?.length ,
+            "numOfParticipants":JSON.stringify(scheduleData?.all_participants?.length) ,
             "tb_id": scheduleData?.data?.id,
             "gf_session_type": 3,
-            "plan_date":  moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm A'),
+            "plan_date":  moment(addData?.date?.$d)?.format('YYYY-MM-DD hh:mm A'),
+        
             "gf_session_name": null,
             "circle_id":""
           });
-          
+
           var config = {
             method: 'post',
           maxBodyLength: Infinity,

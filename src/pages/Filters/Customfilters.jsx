@@ -146,14 +146,14 @@ const teamList = async => {
 }
 const trainerList = async => {
   var data = JSON.stringify({
-    "role_id": 5,
-    "project_id": 292,
-    "operation_manager_id": 122,
-    "pageNum": 1
+    "role_id": "5",
+    "project_id": "292",
+    "operation_manager_id": "122",
+    "pageNum": "1"
   });
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
+    url: baseURL + 'getPeopleList',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -169,14 +169,14 @@ const trainerList = async => {
   }
   const gelathiList = () => {
     var data = JSON.stringify({
-        "role_id": 6,
-        "project_id": 292,
-        "operation_manager_id": 35,
-        "pageNum": 1
+        "role_id": "6",
+        "project_id": "292",
+        "operation_manager_id": "35",
+        "pageNum": "1"
     });
     var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
+        url: baseURL + 'getPeopleList',
         headers: {
             'Content-Type': 'application/json'
         },

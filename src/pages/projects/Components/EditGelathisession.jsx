@@ -44,7 +44,7 @@ export default function EditGelathiSession({session,editSession, setEditsession}
         "tb_name": session?.training_batch_name,
         "tb_id": session?.tb_id,
         "gf_session_type": session?.type,
-        "plan_date": moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+        "plan_date": moment(date?.$d)?.format('DD-MM-YYYY HH:mm:ss'),
         "gf_session_id": session?.id
       });
       

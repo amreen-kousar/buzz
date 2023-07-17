@@ -125,9 +125,9 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
   const SendData = async => {
     var data = JSON.stringify({
       "date": moment(sendData?.date)?.format('YYYY-MM-DD'),
-      "insideBangalore": false,
+      "insideBangalore": "false",
       "end_odometer": (sendData?.endOdimeter)?sendData?.endOdimeter:'',
-      "telephone": (sendData?.telephonecharges==1)?249:0,
+      "telephone": JSON.stringify((sendData?.telephonecharges==1))?"249":"0",
       "end_location_name":locationS,
       "fairamount":sendData?.fairamount,
       "printing": sendData?.printing,
@@ -137,10 +137,10 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
       "rate_per_KM": (sendData?.rateperkm)?sendData?.rateperkm:'',
       "stationery": sendData?.stationery,
       "klmtr": (sendData?.rateperkm)?sendData?.rateperkm:'',
-      "da": sendData?.foodexpenses,
+      "da": JSON.stringify(sendData?.foodexpenses),
       "others": sendData?.otherExpenses,
       "emp_id":userid,
-      "mode_of_travel": sendData?.modeoftravel,
+      "mode_of_travel": JSON.stringify(sendData?.modeoftravel),
       "other_text": sendData?.OtherAmount,
       "files": [parseInt(Imagevalue)]
     
