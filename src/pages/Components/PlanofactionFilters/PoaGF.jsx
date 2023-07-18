@@ -21,7 +21,7 @@ import {
   Typography,
   RadioGroup,
   Card,Grid,
-  CardContent,
+  CardContent,Tooltip
 } from '@mui/material';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
@@ -369,6 +369,53 @@ const handleform=()=>{
   alert('survey was done')
 }
 
+const  [localFormPresent,setlocalFormPresent] = useState("")
+
+useEffect(()=>{
+
+let localFormPresent1=new Map();
+
+  let existingData = localStorage.getItem('green');
+
+
+
+
+      let parsedData =  JSON.parse(existingData)
+
+
+
+
+      parsedData?.map((item)=>{
+
+
+
+
+        localFormPresent1.set(item?.partcipantId, 'true')
+
+
+
+
+      })
+
+
+
+
+   console.log(localFormPresent1 ,"partcipantIdpartcipantId");
+
+   setlocalFormPresent(localFormPresent1)
+
+
+
+
+},[])
+
+useEffect(()=>{
+
+
+
+
+},[localFormPresent])
+
   return (
     <>
       <Drawer
@@ -690,6 +737,12 @@ return (
                               }}
                             >
                               <GreenSurvey itm={itm }  />
+                              {localFormPresent.has(itm?.gelathi_id)?
+    <Tooltip title="Its Field in Offline Mode">        
+
+<ErrorOutlinedIcon/>
+</Tooltip >
+:""}
                                </IconButton>
                              
                           ):null

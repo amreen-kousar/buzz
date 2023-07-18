@@ -186,7 +186,7 @@ export default function GreenSurvey(props) {
       console.log("i called and store ", updatedData)
     // localStorage.setItem(key, JSON.stringify(data));
   };
-
+  const localStorageData = localStorage.getItem('green');
 useEffect(()=>{
   const existingData = localStorage.getItem('green');
       const parsedData = existingData ? JSON.parse(existingData) : [];
@@ -194,7 +194,7 @@ useEffect(()=>{
         parsedData.map(item=>{
           if(item?.partcipantId===props?.itm?.id || item?.partcipantId===props?.itm.gelathi_id){
             setSendData(item);
-           
+            setwealth(item?.Natural_Wealth)
           }
         })
       }
@@ -423,8 +423,7 @@ useEffect(()=>{
         if (localStorage.getItem('green')) {
           data = setGreenForm(saveDataLocally('green', JSON.parse(data)));
           setGreenForm(data);
-        } 
-        else {
+        } else {
           data = JSON.stringify({
             partcipantId: props?.itm?.id || props?.itm.gelathi_id,
             Email: sendData?.Email,
@@ -659,6 +658,8 @@ useEffect(()=>{
     tempData[label] = updatedList;
     setChecked(tempData);
   };
+
+
   return (
     <div>
       <Stack style={{ position: 'absolute', right: 0, float: 'right', margin: 2, padding: 2 }} mb={2}>
@@ -787,6 +788,9 @@ useEffect(()=>{
                     <Typography style={{ color: '#ff7424' }}>
                       Which of the following are natural resources? / ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವುದು ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲಗಳು? *
                     </Typography>
+                   
+               
+                   
                     <Stack mt={2}>
                       <FormGroup>
                         <FormControlLabel
