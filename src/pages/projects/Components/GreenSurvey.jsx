@@ -185,6 +185,7 @@ export default function GreenSurvey(props) {
       const updatedData = JSON.stringify(parsedData);
       localStorage.setItem('green', updatedData);
       console.log("i called and store ", updatedData)
+      props?.componentreloadmethod()
     // localStorage.setItem(key, JSON.stringify(data));
   };
   const [isFormPresentLocally ,setIsFormPresentLocally] =useState(false)
@@ -507,6 +508,7 @@ useEffect(()=>{
             // console.log(error);
             console.log('i am inside catch ');
             setGreenForm(saveDataLocally('green', data));
+            props?.componentreloadmethod()
           });
         Swal.fire({
           icon: 'error',
@@ -525,6 +527,7 @@ useEffect(()=>{
       console.log('i AM IN ELSE PART AND SAVING LOCALLY');
       setGreenForm(saveDataLocally('green', JSON.parse(data)));
       handleClose();
+      props?.componentreloadmethod()
     }
   };
   const wealthvalue = (event) => {
