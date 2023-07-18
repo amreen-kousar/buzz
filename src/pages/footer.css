@@ -1,0 +1,38 @@
+.footer {
+    position: fixed;
+    bottom: 3%;
+    /* top:1; */
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    height: 6%;
+    color: white;
+    text-align: center;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+  }
+  
+.footer.show {
+    opacity: 1;
+  }
+  
+  .footer.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .status-text {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  .footer.online {
+    background-color: green;
+   
+  }
+  
+  .footer.offline {
+    background-color: black;
+  }

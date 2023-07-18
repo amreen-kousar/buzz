@@ -1037,6 +1037,7 @@ return (
               <GelathiCircleForm
                 index={selectedFromIndex.index}
                 // reloadmethod={reloadmethod}
+                // itm={itm } 
                 // clcikData={clcikData}
                 // circleData={circleData}
                 // singleCircleData={singleCircleData}

@@ -29,6 +29,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function GelathiCircleForm({
+  itm,
   gelathiDrawerReloder,
   setShowForm,
   index,
@@ -38,6 +39,8 @@ export default function GelathiCircleForm({
   singleCircleData,
   id,
 }) {
+  console.log("🚀 ~ file: GelathiCircleForm.jsx:41 ~ clcikData:", )
+  
   const { state } = useLocation();
   const [open, setOpen] = React.useState(true);
   const [vyaapar, setVyaapar] = useState('');
@@ -79,6 +82,7 @@ export default function GelathiCircleForm({
   const [communitymemError, setcommunitymemError] = useState(false);
   const [bringtogetherError, setbringtogetherError] = useState(false);
   const [conflictsError, setconflictsError] = useState(false);
+  const [spoorthiForm, setSpoorthiForm] = useState('');
   const handleChangeSelect = (event) => {
     setAge(event.target.value);
   };
@@ -122,27 +126,136 @@ export default function GelathiCircleForm({
     gelathinamelist();
    
   }, []);
+  useEffect(()=>{
+
+    const existingData = localStorage.getItem('spoorthi');
+    // console.log("🚀 ~ file: GelathiCircleForm.jsx:137 ~ useEffect ~ item:", item)
+  
+        const parsedData = existingData ? JSON.parse(existingData) : [];
+  
+        if(parsedData?.length){
+  
+          parsedData.map(item=>{
+  
+            if(
+              item?.partcipantId=== id
+              // || item?.partcipantId===props?.itm.gelathi_id
+              ){
+  
+              setSendData(item);
+  
+             
+  
+            }
+  
+          })
+  
+        }
+  
+  },[])
   const gelathinamelist = (async) => {
-    var data = JSON.stringify({
-      partcipantId: id,
-    });
+    // var data = JSON.stringify({
+    //   partcipantId: id,
+    // });
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
       headers: {
         'Content-Type': 'application/json',
       },
-      data: data,
+      // data: data,
     };
     axios(config)
       .then(function (response) {
+        localStorage.setItem('gelathilist',JSON.stringify(response?.data));
         setVyaapar(response?.data);
       })
       .catch(function (error) {
         // console.log(error);
+        let gelathidata=JSON.parse(localStorage.getItem('gelathilist'))
+        setVyaapar(gelathidata);
       });
   };
+
+//   const saveDataLocally = (key, data) => {
+//   console.log("🚀 ~ file: GelathiCircleForm.jsx:181 ~ saveDataLocally ~ data:", data)
+
+  
+ 
+
+//     const existingData = localStorage.getItem('spoorthi');
+//     console.log("🚀 ~ file: GelathiCircleForm.jsx:185 ~ saveDataLocally ~ existingData:", existingData)
+
+//     const parsedData = existingData ? JSON.parse(existingData) : [];
+//     console.log("🚀 ~ file: GelathiCircleForm.jsx:187 ~ saveDataLocally ~ existingData:", existingData)
+
+//     const newData = data; // Replace with your own data object
+//     console.log("🚀 ~ file: GelathiCircleForm.jsx:191 ~ saveDataLocally ~ newData:", newData)
+
+//     parsedData.push(newData);
+//     console.log("🚀 ~ file:    ~ saveDataLocally ~ parsedData:", parsedData)
+
+//     const updatedData = parsedData;
+
+//     localStorage.setItem('spoorthi', updatedData);
+
+//     console.log("i called and store ", updatedData)
+
+//   // localStorage.setItem(key, JSON.stringify(data));
+
+// };
+
+const saveDataLocally = (key, data) => {
+ 
+  const existingData = localStorage.getItem('spoorthi');
+  const parsedData = existingData ? JSON.parse(existingData) : [];
+  const newData = data; // Replace with your own data object
+  parsedData.push(newData);
+  const updatedData = JSON.stringify(parsedData);
+  localStorage.setItem('spoorthi', updatedData);
+  console.log("i called and store ", updatedData)
+// localStorage.setItem(key, JSON.stringify(data));
+};
+
+  const isOnline = () => {
+    return navigator.onLine;
+  };
+  const networkAccess = async () => {
+    try {
+      await fetch('https://www.google.com/', { mode: 'no-cors' });
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
   const gelathicircleformdata = async () => {
+    var data = {}
+    data = JSON.stringify({
+      partcipantId: id,
+      email_address: sendData?.email_address,
+      GelathiId: sendData?.GelathiId,
+      Spoorthi_Session_Number: selectedValue,
+      list_down_your_skills: sendData?.list_down_your_skills,
+      skills_to_overcome_my_challenges: skillValue,
+      used_skills_resources_combat_challenge: sendData?.used_skills_resources_combat_challenge,
+      listen_paragraph: listenpara,
+      summarize_main_points_paragraph: sendData?.summarize_main_points_paragraph,
+      ask_two_questions_help_you_understand: sendData?.ask_two_questions_help_you_understand,
+      three_infrastructure_of_your_village: sendData?.three_infrastructure_of_your_village,
+      know_the_need_of_my_community: community,
+      together_community_members_community_infrastructure: communitymem,
+      with_other_community_infrastructure: sendData?.with_other_community_infrastructure,
+      bring_someone_together: bringtogether,
+      brought_people_together_incident: sendData?.brought_people_together_incident,
+      conflict_with_anyone_ask_position: sendData?.conflict_with_anyone_ask_position,
+      conflict_matters_interest_mine: conflicts,
+      There_puja_at_my_house: sendData?.There_puja_at_my_house,
+    }); 
+    if(isOnline() && networkAccess()){
+
+   
     if (selectedValue == '') {
       setSessionValueError(true);
     }
@@ -173,27 +286,37 @@ export default function GelathiCircleForm({
       skillValue != '' &&
       selectedValue != ''
     ) {
-      var data = JSON.stringify({
-        partcipantId: id,
-        email_address: sendData?.email_address,
-        GelathiId: sendData?.GelathiId,
-        Spoorthi_Session_Number: selectedValue,
-        list_down_your_skills: sendData?.list_down_your_skills,
-        skills_to_overcome_my_challenges: skillValue,
-        used_skills_resources_combat_challenge: sendData?.used_skills_resources_combat_challenge,
-        listen_paragraph: listenpara,
-        summarize_main_points_paragraph: sendData?.summarize_main_points_paragraph,
-        ask_two_questions_help_you_understand: sendData?.ask_two_questions_help_you_understand,
-        three_infrastructure_of_your_village: sendData?.three_infrastructure_of_your_village,
-        know_the_need_of_my_community: community,
-        together_community_members_community_infrastructure: communitymem,
-        with_other_community_infrastructure: sendData?.with_other_community_infrastructure,
-        bring_someone_together: bringtogether,
-        brought_people_together_incident: sendData?.brought_people_together_incident,
-        conflict_with_anyone_ask_position: sendData?.conflict_with_anyone_ask_position,
-        conflict_matters_interest_mine: conflicts,
-        There_puja_at_my_house: sendData?.There_puja_at_my_house,
-      });
+      if(localStorage.getItem('spoorthi')){
+        // data  = setSpoorthiForm()
+        // setSpoorthiForm(data)
+        saveDataLocally('spoorthi', data)
+        data = setSpoorthiForm(saveDataLocally('spoorthi', data));
+        setSpoorthiForm(data);
+
+      }else{
+
+        data = JSON.stringify({
+         partcipantId: id,
+         email_address: sendData?.email_address,
+         GelathiId: sendData?.GelathiId,
+         Spoorthi_Session_Number: selectedValue,
+         list_down_your_skills: sendData?.list_down_your_skills,
+         skills_to_overcome_my_challenges: skillValue,
+         used_skills_resources_combat_challenge: sendData?.used_skills_resources_combat_challenge,
+         listen_paragraph: listenpara,
+         summarize_main_points_paragraph: sendData?.summarize_main_points_paragraph,
+         ask_two_questions_help_you_understand: sendData?.ask_two_questions_help_you_understand,
+         three_infrastructure_of_your_village: sendData?.three_infrastructure_of_your_village,
+         know_the_need_of_my_community: community,
+         together_community_members_community_infrastructure: communitymem,
+         with_other_community_infrastructure: sendData?.with_other_community_infrastructure,
+         bring_someone_together: bringtogether,
+         brought_people_together_incident: sendData?.brought_people_together_incident,
+         conflict_with_anyone_ask_position: sendData?.conflict_with_anyone_ask_position,
+         conflict_matters_interest_mine: conflicts,
+         There_puja_at_my_house: sendData?.There_puja_at_my_house,
+       });
+      }
       var config = {
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appTest/new/addSpoorthiBaselineQuestionnaire.php',
@@ -213,11 +336,20 @@ export default function GelathiCircleForm({
         })
         .catch(function (error) {
           // console.log(error);
+          setSpoorthiForm(saveDataLocally('green', data));
         });
       handleClose();
     } else {
       alert('Please Select The Option. ');
     }
+  } else{
+    console.log("🚀 ~ file: GelathiCircleForm.jsx:268 ~ gelathicircleformdata ~ else:", data)
+    // setSpoorthiForm()
+    // saveDataLocally('spoorthi', data)
+    setSpoorthiForm(saveDataLocally('green', data));
+    handleClose();
+  }
+
   };
   return (
     <div>
@@ -239,7 +371,7 @@ export default function GelathiCircleForm({
               <Iconify icon="material-symbols:arrow-back-rounded" />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
-              Spoorthi Baseline Questionnaire
+              Spoorthi Baseline Questionnaire 
             </Typography>
             <Button
               edge="end"

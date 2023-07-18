@@ -92,6 +92,7 @@ export default function PlanofAction() {
   const [clcikData, setClickData] = useState();
   const [reload, setReload] = useState(false);
   const [isOnline, setOnline] = useState(true);
+  const [showDiv, setShowDiv] = useState(false);
   const [poaData, setPoaData] = [
     {
       emp_id: '',
@@ -130,6 +131,17 @@ export default function PlanofAction() {
   };
   useEffect(() => {
     todaypoa();
+    const timeout = setTimeout(() => {
+      setShowDiv(true);
+    }, 1000); // Timeout duration in milliseconds
+    if(isOnline){
+      hideMessage()
+    }else{
+      setShowDiv(true)
+    }
+
+    return () => clearTimeout(timeout);
+    
   }, [season, date, userId, reload,!gfDrawer,isOnline]);
   const todaypoa = (async) => {
     var data = JSON.stringify({
@@ -212,6 +224,7 @@ export default function PlanofAction() {
  VyaparApicall()
  apigelathicircle()
 },[isOnline])
+
 const apiCall = async() =>{
   const data = localStorage?.getItem("green")
   const newData =JSON?.parse(data)
@@ -304,9 +317,26 @@ const apigelathicircle = async() =>{
   
   
   return (
+    
     <div>
-      {!isOnline&&
-      <h1> you are offline</h1>}
+      {/* {!isOnline?
+      <div style={{backgroundColor: 'red'}}>
+        <p>
+          
+         you are offline
+        </p>
+         </div> :  
+           <div>
+           {showDiv && hideMessage() && (
+             <div style={{backgroundColor: 'green'}}>
+             <p>
+               
+              you are online
+             </p>
+              </div>
+           )}
+         </div>
+         } */}
       {openMessage && (
         <Snackbar id="poa-snackbar" open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
           <Alert id="alert-open-message"

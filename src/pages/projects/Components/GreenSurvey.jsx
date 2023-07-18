@@ -649,8 +649,7 @@ useEffect(()=>{
   const handleform = () => {
     alert('Surevy was done');
   };
-  const 
-  handleresources = (label, event) => {
+  const handleresources = (label, event) => {
     var updatedList = [...checked[label]];
     if (event.target.checked) {
       updatedList = [...checked[label], event.target.value];
