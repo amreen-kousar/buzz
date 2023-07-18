@@ -205,8 +205,6 @@ useEffect(()=>{
       }
   },[])
 const data1 = localStorage.getItem("vyapar");
-console.log(JSON.parse(data1) ," getlocal")
-
 const getDataLocally = (key) => {
   const data = localStorage.getItem("vyapar");
   console.log(data ," getlocal")

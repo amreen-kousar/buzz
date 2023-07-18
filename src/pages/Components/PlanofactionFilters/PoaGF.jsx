@@ -396,6 +396,11 @@ if(session?.type == 10){
 }
 if(session?.type == 16){
  existingData = localStorage.getItem('vyapar');
+ let parsedData = JSON.parse(existingData);
+
+ parsedData?.map((item) => {
+   localFormPresent1.set(item?.partcipantId, 'true');
+ });
 }
     // let existingData = localStorage.getItem('green');
 
@@ -836,6 +841,9 @@ const gelathinamelist = (async) => {
               >
                 <span style={{ width: '200px' }}>Survey Form</span>
               </Button>
+
+  
+             
               {showSurvey ? (
                 <Stack>
                   <div>
@@ -843,9 +851,10 @@ const gelathinamelist = (async) => {
                       {session?.type == 4 || session.type == 10 || session.type == 16 ? (
                         <>
                           {gelathisData?.gelathis?.map((itm, index) => {
+                          
                             return (
                               <Card style={{borderRadius:0}}>
-   
+
                               <CardContent style={{display:'flex',justifyContent: 'space-between'}}>
                             <div style={{alignItems:"flex-start"}}> {itm?.firstName}</div> 
                             <div style={{alignItems:"flex-end"}}>  
@@ -936,7 +945,8 @@ const gelathinamelist = (async) => {
                                           ''
                                         )}
                                       </IconButton>
-                                    ) : (
+                                    ) : 
+                                    (
                                       <></>
                                     )
                                   ) : (
