@@ -45,7 +45,7 @@ import Swal from 'sweetalert2';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-export default function Vyaparprogram({ itm, changeState }) {
+export default function Vyaparprogram({ itm, changeState,componentreloadmethod }) {
   const [open, setOpen] = React.useState(false);
   const [successMessage, setsuccessMessage] = useState(false);
   const [message, setMessage] = useState('');
@@ -189,6 +189,8 @@ console.log(itm,"itemmmmmmm")
     localStorage.setItem('vyapar', updatedData);
     console.log("i called and store ", updatedData)
   // localStorage.setItem(key, JSON.stringify(data));
+  // changeState();
+  componentreloadmethod()
 };
 // Get data from local 
 const [isFormPresentLocally ,setIsFormPresentLocally] =useState(false)
@@ -523,6 +525,7 @@ else{
           //   confirmButtonText: 'Ok',
           //   timer: 2000,
           // });
+          componentreloadmethod()
           setvyaparform(saveDataLocally('vyapar',data));
         });
       } 
@@ -532,6 +535,7 @@ else{
   }
   else{
     setvyaparform(saveDataLocally('vyapar',JSON.parse(data)));
+    componentreloadmethod()
   }
   };
   const gelathinamelist = (async) => {

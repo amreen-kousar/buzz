@@ -369,13 +369,21 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const handleform = () => {
     alert('survey was done');
   };
+  const handleSurveyform = ()=>{
+    alert("This form was Filled!!")
+  }
+const [componentreload  ,setComponentReload] = useState(false)
 
+const componentreloadmethod  = ()=>{
+  setComponentReload(!componentreload)
+  console.log("i a, calling componentreloadmethod(); from spoorthi")
+}
   const [localFormPresent, setlocalFormPresent] = useState('');
 
   useEffect(() => {
     console.log(clcikData , "clickeddata in useEffect")
     console.log(batchState , "batchstate in useEffect")
-    console.log(session ,"sessiondata")
+    let session = JSON.parse(localStorage.getItem('sessiondata'))
     let localFormPresent1 = new Map();
     let existingData;
 if(session?.type == 4){
@@ -402,16 +410,13 @@ if(session?.type == 16){
    localFormPresent1.set(item?.partcipantId, 'true');
  });
 }
-    // let existingData = localStorage.getItem('green');
-
-   
-
+ 
     console.log(localFormPresent1, 'partcipantIdparhandleClosehandleClosetcipantId');
-
+ 
     setlocalFormPresent(localFormPresent1);
-  }, []);
+  },[localStorage?.getItem("vyapar"),localStorage?.getItem("spoorthi"),localStorage?.getItem("green")]);
 
-  useEffect(() => {}, [localFormPresent]);
+  useEffect(() => {}, [componentreload]);
 
 const gelathinamelist = (async) => {
   var config = {
@@ -433,7 +438,9 @@ const gelathinamelist = (async) => {
       // console.log(error);
     });
 };
+useEffect(()=>{
 
+},[localStorage?.getItem("vyapar"),localStorage?.getItem("spoorthi"),localStorage?.getItem("green")])
 
 
   return (
@@ -870,7 +877,9 @@ const gelathinamelist = (async) => {
                                         />
                                       </IconButton>
                                     ) : session?.type == 4 && session?.check_in != '0' ? (
-                                      <IconButton
+                                        <>
+                                        
+                                       {!localFormPresent.has(itm?.gelathi_id) && <IconButton
                                         onClick={() => {
                                           callGelathiFormComponent(index, itm?.gelathi_id);
                                         }}
@@ -882,14 +891,22 @@ const gelathinamelist = (async) => {
                                           
                                           color="#ff7424"
                                         />
-                                          {localFormPresent.has(itm?.gelathi_id) ? (
-                                          <Tooltip title="Its Field in Offline Mode">
-                                            <ErrorOutlinedIcon />
-                                          </Tooltip>
+                                      </IconButton>}
+                                      {localFormPresent.has(itm?.gelathi_id) ? (
+                                            <IconButton onClick={handleSurveyform}>
+                                            <Icon
+                                              icon="clarity:form-line"
+                                              width={20}
+                                              height={20}
+                                             
+                                              color="black"
+                                            />
+                                          </IconButton>
+                                        
                                         ) : (
                                           ''
                                         )}
-                                      </IconButton>
+                                      </>
                                     ) : null
                                   ) : session?.type == 10 ? (
                                     itm?.is_green_survey ? (
@@ -908,11 +925,18 @@ const gelathinamelist = (async) => {
                                           // if we want to see filed form means need to call another component so that time we can use this kind of methods to call instead of rendering inside the map
                                         }}
                                       >
-                                        <GreenSurvey itm={itm} />
+                                       {!localFormPresent.has(itm?.gelathi_id) && <GreenSurvey itm={itm} componentreloadmethod ={componentreloadmethod} />}
                                         {localFormPresent.has(itm?.gelathi_id) ? (
-                                          <Tooltip title="Its Field in Offline Mode">
-                                            <ErrorOutlinedIcon />
-                                          </Tooltip>
+                                            <IconButton onClick={handleSurveyform}>
+                                            <Icon
+                                              icon="clarity:form-line"
+                                              width={20}
+                                              height={20}
+                                             
+                                              color="black"
+                                            />
+                                          </IconButton>
+                                        
                                         ) : (
                                           ''
                                         )}
@@ -929,18 +953,26 @@ const gelathinamelist = (async) => {
                                           color="green"
                                         />
                                       </IconButton>
-                                    ) : session?.type == 16 && session?.check_in != '0' ? (
+                                    ) : 
+                                    session?.type == 16 && session?.check_in != '0' ? (
+                                      
                                       <IconButton
-                                        onClick={() => {
-                                          // callGelathiFormComponent(index , itm?.gelathi_id  )
-                                          // if we want to see filed form means need to call another component so that time we can use this kind of methods to call instead of rendering inside the map
-                                        }}
                                       >
-                                        <Vyaparprogram itm={itm} />
-                                        {localFormPresent.has(itm?.gelathi_id) ? (
-                                          <Tooltip title="Its Field in Offline Mode">
-                                            <ErrorOutlinedIcon />
-                                          </Tooltip>
+                                        {!localFormPresent.has(itm?.gelathi_id) && 
+                                        <Vyaparprogram itm={itm}  componentreloadmethod={componentreloadmethod}/>}
+                                        {localFormPresent.has(itm?.gelathi_id) ? ( 
+                                          // <Tooltip title="Its Field in Offline Mode">
+                                          //   <ErrorOutlinedIcon />
+                                          // </Tooltip>
+                                          <IconButton onClick={handleSurveyform}>
+                                          <Icon
+                                            icon="clarity:form-line"
+                                            width={20}
+                                            height={20}
+                                           
+                                            color="black"
+                                          />
+                                        </IconButton>
                                         ) : (
                                           ''
                                         )}
@@ -965,7 +997,20 @@ const gelathinamelist = (async) => {
                         </CardContent>
                       )}
                     </Card>
-
+                    {showForm && (
+              <GelathiCircleForm
+                index={selectedFromIndex.index}
+                // reloadmethod={reloadmethod}
+                // itm={itm } 
+                // clcikData={clcikData}
+                // circleData={circleData}
+                // singleCircleData={singleCircleData}
+                id={selectedFromIndex.id}
+                setShowForm={setShowForm}
+                componentreloadmethod={componentreloadmethod}
+                // gelathiDrawerReloder={gelathiDrawerReloder}
+              />
+            )}
           {/* {gelathisData?.gelathis?.map((itm,index)=>{
 return (
   <Card style={{borderRadius:0}}>
@@ -1043,19 +1088,7 @@ return (
              */}
         
 
-          {showForm && (
-              <GelathiCircleForm
-                index={selectedFromIndex.index}
-                // reloadmethod={reloadmethod}
-                // itm={itm } 
-                // clcikData={clcikData}
-                // circleData={circleData}
-                // singleCircleData={singleCircleData}
-                id={selectedFromIndex.id}
-                setShowForm={setShowForm}
-                // gelathiDrawerReloder={gelathiDrawerReloder}
-              />
-            )}
+
             {/* {showGreenFrom && <GreenSurvey itm={formData } />} */}
       <Button
                   style={{ color: 'white', marginTop: 20, marginLeft: 20, marginBottom: 20,backgroundColor:'#ff7424' }}

@@ -37,7 +37,7 @@ export default function GelathiCircleForm({
   reloadmethod,
   clcikData,
   singleCircleData,
-  id,
+  id,componentreloadmethod
 }) {
   console.log("🚀 ~ file: GelathiCircleForm.jsx:41 ~ clcikData:", )
   
@@ -214,6 +214,7 @@ const saveDataLocally = (key, data) => {
   const updatedData = JSON.stringify(parsedData);
   localStorage.setItem('spoorthi', updatedData);
   console.log("i called and store ", updatedData)
+  componentreloadmethod();
 // localStorage.setItem(key, JSON.stringify(data));
 };
 
@@ -337,6 +338,7 @@ const saveDataLocally = (key, data) => {
         .catch(function (error) {
           // console.log(error);
           setSpoorthiForm(saveDataLocally('green', data));
+          componentreloadmethod();
         });
       handleClose();
     } else {
@@ -347,6 +349,7 @@ const saveDataLocally = (key, data) => {
     // setSpoorthiForm()
     // saveDataLocally('spoorthi', data)
     setSpoorthiForm(saveDataLocally('green', data));
+    componentreloadmethod();
     handleClose();
   }
 
