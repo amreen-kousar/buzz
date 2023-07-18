@@ -536,16 +536,12 @@ else{
   }
   };
   const gelathinamelist = (async) => {
-    var data = JSON.stringify({
-      partcipantId: 457065,
-    });
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
       headers: {
         'Content-Type': 'application/json',
-      },
-      data: data,
+      }
     };
     axios(config)
       .then(function (response) {

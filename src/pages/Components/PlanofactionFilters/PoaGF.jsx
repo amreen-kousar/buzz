@@ -62,6 +62,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [isLoading, setISLoading] = useState(false)
   const [editSession,setEditsession]=useState(false);
   const [check, setCheck] = useState(false);
+   const [vyaapar, setVyaapar] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
 const [SaveBtn , setSaveBtn] = useState(false) 
 const [gelatiNote, setGelatiNote] = useState('');
@@ -319,6 +320,11 @@ axios(config)
   const reschedudlehandler=()=>{
    setReschedule(true)
   }
+  useEffect(() => {
+    gelathinamelist();
+  }, []);
+
+
   const Reschedule=(e)=>{
     
     var data = JSON.stringify({
@@ -368,6 +374,29 @@ axios(config)
 const handleform=()=>{
   alert('survey was done')
 }
+
+const gelathinamelist = (async) => {
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  };
+  axios(config)
+    .then(function (response) {
+      localStorage.setItem('gelathilist',JSON.stringify(response?.data));
+      setVyaapar(response?.data);
+    })
+    .catch(function (error) {
+      let gelathidata=JSON.parse(localStorage.getItem('gelathilist'))
+      setVyaapar(gelathidata);
+      console.log(error,"data assigned",gelathidata);
+      // console.log(error);
+    });
+};
+
+
 
   return (
     <>
@@ -648,20 +677,18 @@ const handleform=()=>{
 return (
   <Card style={{borderRadius:0}}>
    
-    <CardContent style={{display:'flex'}}>
-    {itm?.firstName}
-    {
+    <CardContent style={{display:'flex',justifyContent: 'space-between'}}>
+  <div style={{alignItems:"flex-start"}}> {itm?.firstName}</div> 
+  <div style={{alignItems:"flex-end"}}>  {
     (( session?.type == 4) )? (
                             (itm?.is_survey)?
-                            <IconButton
+                            <IconButton 
                              
                               onClick={handleform}
                             >
-                              <Icon icon="clarity:form-line" width={20} height={20} marginTop={20} color="green" />
+                              <Icon icon="clarity:form-line" width={20} height={20} color="green" />
                             </IconButton>
                             : (session?.type==4 && session?.check_in != "0")? (
-                            
-                              
                             <IconButton
                           
                             onClick={() => {
@@ -669,7 +696,7 @@ return (
                              
                             }}
                           >
-                            <Icon icon="clarity:form-line" width={20} height={20} marginTop={20} color="#ff7424" />
+                            <Icon icon="clarity:form-line" width={20} height={20} color="#ff7424" />
                           </IconButton>
                           ):null
                           ) : 
@@ -679,7 +706,7 @@ return (
                              
                             onClick={handleform}
                             >
-                              <Icon icon="clarity:form-line" width={20} height={20} marginTop={20} color="green" />
+                              <Icon icon="clarity:form-line" width={20} height={20} color="green" />
                             </IconButton>
                             : (session?.type==10 && session?.check_in != "0" )? (
                                 <IconButton
@@ -699,7 +726,7 @@ return (
                             
                             onClick={handleform}
                             >
-                              <Icon icon="clarity:form-line" width={20} height={20} marginTop={20} color="green" />
+                              <Icon icon="clarity:form-line" width={20} height={20} color="green" />
                             </IconButton>
                             : (session?.type==16 && session?.check_in != "0")? (
                               <IconButton
@@ -713,7 +740,7 @@ return (
                            </IconButton>
                           ):<></>
                           ): <></>
-    }
+    }</div>
 </CardContent>
   </Card>
   
@@ -735,7 +762,7 @@ return (
             )}
             {/* {showGreenFrom && <GreenSurvey itm={formData } />} */}
       <Button
-                  style={{ color: 'black', marginTop: 20, marginLeft: 20, marginBottom: 20,backgroundColor:'#aec6c1' }}
+                  style={{ color: 'white', marginTop: 20, marginLeft: 20, marginBottom: 20,backgroundColor:'#ff7424' }}
                   onClick={()=>{
                    setSurvey(false)
                   }}
