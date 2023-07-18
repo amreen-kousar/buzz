@@ -171,6 +171,7 @@ const [entreprenur , setentrepreneurError] = useState(false)
   };
   const handleClose = () => {
     setOpen(false);
+    setIsFormPresentLocally(true)
   };
   useEffect(() => {
     gelathinamelist();
@@ -190,7 +191,7 @@ console.log(itm,"itemmmmmmm")
   // localStorage.setItem(key, JSON.stringify(data));
 };
 // Get data from local 
-
+const [isFormPresentLocally ,setIsFormPresentLocally] =useState(false)
 useEffect(()=>{
   const existingData = localStorage.getItem('vyapar');
       const parsedData = existingData ? JSON.parse(existingData) : [];
@@ -198,7 +199,7 @@ useEffect(()=>{
         parsedData.map(item=>{
           if(item?.partcipantId===itm.gelathi_id){
             setSendData(item);
-           
+            setIsFormPresentLocally(true)
           }
         })
       }
@@ -708,7 +709,11 @@ else{
               </Button>
             </Toolbar>
           </AppBar>
-          <Grid>
+       {    isFormPresentLocally?
+         <Typography sx={{ ml: 2, flex: 1, color: 'white' }} variant="h6" component="div">
+         This form is already filled!
+       </Typography>
+       : <Grid>
       
             <Card>
               <CardContent>
@@ -2365,7 +2370,7 @@ else{
                 {/* -------------------------------- */}
               </CardContent>
             </Card>
-          </Grid>
+          </Grid>}
         </form>
       </Dialog>
     </div>

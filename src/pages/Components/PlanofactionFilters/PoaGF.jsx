@@ -414,7 +414,7 @@ if(session?.type == 10){
 if(session?.type == 16){
   let existingData = localStorage.getItem('vyapar');
 }
-    let existingData = localStorage.getItem('green');
+    // let existingData = localStorage.getItem('green');
 
     let parsedData = JSON.parse(existingData);
 
