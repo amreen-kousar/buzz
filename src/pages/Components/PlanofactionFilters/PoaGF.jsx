@@ -65,6 +65,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [isLoading, setISLoading] = useState(false);
   const [editSession, setEditsession] = useState(false);
   const [check, setCheck] = useState(false);
+   const [vyaapar, setVyaapar] = useState('');
   const [getAllNotes, setGetAllNotes] = useState([]);
   const [SaveBtn, setSaveBtn] = useState(false);
   const [gelatiNote, setGelatiNote] = useState('');
@@ -337,15 +338,46 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       .catch(function (error) {
         // console.log(error);
       });
-  };
-  const styles = {
-    buttonStyle: {
-      boxShadow: 'none',
-      borderRadius: '7px',
-      backgroundColor: '#edeff1',
-      fontWeight: 500,
-      textAlign: 'left',
-    },
+      
+    }
+  }
+  const reschedudlehandler=()=>{
+   setReschedule(true)
+  }
+  useEffect(() => {
+    gelathinamelist();
+  }, []);
+
+
+  const Reschedule=(e)=>{
+    
+    var data = JSON.stringify({
+      "poa_id": e,
+      "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss')
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/updateReschedule.php',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setReschedule(false)
+      onCloseFilterGF()
+      getTrainingBatch()
+    })
+    .catch(function (error) {
+      // console.log(error);
+    });
+    
+  }
+ const styles = {
+    buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
     linkStyle: { textDecoration: 'none', color: 'black' },
   };
@@ -396,6 +428,29 @@ if(session?.type == 16){
   }, []);
 
   useEffect(() => {}, [localFormPresent]);
+
+const gelathinamelist = (async) => {
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  };
+  axios(config)
+    .then(function (response) {
+      localStorage.setItem('gelathilist',JSON.stringify(response?.data));
+      setVyaapar(response?.data);
+    })
+    .catch(function (error) {
+      let gelathidata=JSON.parse(localStorage.getItem('gelathilist'))
+      setVyaapar(gelathidata);
+      console.log(error,"data assigned",gelathidata);
+      // console.log(error);
+    });
+};
+
+
 
   return (
     <>
@@ -921,37 +976,109 @@ if(session?.type == 16){
                       )}
                     </Card>
 
-                    {showForm && (
-                      <GelathiCircleForm
-                        index={selectedFromIndex.index}
-                        // reloadmethod={reloadmethod}
-                        // clcikData={clcikData}
-                        // circleData={circleData}
-                        // singleCircleData={singleCircleData}
-                        id={selectedFromIndex.id}
-                        setShowForm={setShowForm}
-                        // gelathiDrawerReloder={gelathiDrawerReloder}
-                      />
-                    )}
-                    {/* {showGreenFrom && <GreenSurvey itm={formData } />} */}
-                    <Button
-                      style={{
-                        color: 'black',
-                        marginTop: 20,
-                        marginLeft: 20,
-                        marginBottom: 20,
-                        backgroundColor: '#aec6c1',
-                      }}
-                      onClick={() => {
-                        setSurvey(false);
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                  </div>
-                </Stack>
-              ) : null}
-              <Card>
+          {gelathisData?.gelathis?.map((itm,index)=>{
+return (
+  <Card style={{borderRadius:0}}>
+   
+    <CardContent style={{display:'flex',justifyContent: 'space-between'}}>
+  <div style={{alignItems:"flex-start"}}> {itm?.firstName}</div> 
+  <div style={{alignItems:"flex-end"}}>  {
+    (( session?.type == 4) )? (
+                            (itm?.is_survey)?
+                            <IconButton 
+                             
+                              onClick={handleform}
+                            >
+                              <Icon icon="clarity:form-line" width={20} height={20} color="green" />
+                            </IconButton>
+                            : (session?.type==4 && session?.check_in != "0")? (
+                            <IconButton
+                          
+                            onClick={() => {
+                               callGelathiFormComponent(index, itm?.gelathi_id);
+                             
+                            }}
+                          >
+                            <Icon icon="clarity:form-line" width={20} height={20} color="#ff7424" />
+                          </IconButton>
+                          ):null
+                          ) : 
+                          (( session?.type == 10) )? (
+                            (itm?.is_green_survey)?
+                            <IconButton
+                             
+                            onClick={handleform}
+                            >
+                              <Icon icon="clarity:form-line" width={20} height={20} color="green" />
+                            </IconButton>
+                            : (session?.type==10 && session?.check_in != "0" )? (
+                                <IconButton
+                           
+                              onClick={() => {
+                                // callGelathiFormComponent(index , itm?.gelathi_id  )
+                                // if we want to see filed form means need to call another component so that time we can use this kind of methods to call instead of rendering inside the map
+                              }}
+                            >
+                              <GreenSurvey itm={itm }  />
+                               </IconButton>
+                             
+                          ):null
+                          ) : (( session?.type == 16) )? (
+                            (itm?.is_vyapar_survey)?
+                            <IconButton
+                            
+                            onClick={handleform}
+                            >
+                              <Icon icon="clarity:form-line" width={20} height={20} color="green" />
+                            </IconButton>
+                            : (session?.type==16 && session?.check_in != "0")? (
+                              <IconButton
+                          
+                              onClick={() => {
+                                // callGelathiFormComponent(index , itm?.gelathi_id  )
+                                // if we want to see filed form means need to call another component so that time we can use this kind of methods to call instead of rendering inside the map
+                              }}
+                            >
+                              <Vyaparprogram itm={itm }  />
+                           </IconButton>
+                          ):<></>
+                          ): <></>
+    }</div>
+</CardContent>
+  </Card>
+  
+)
+          })}:<CardContent>
+            <Typography style={{textAlign:'center',alignItems:'center',fontWeight:700}}>No Survey</Typography></CardContent>
+            
+        
+
+          {showForm && (
+              <GelathiCircleForm
+                index={selectedFromIndex.index}
+                // reloadmethod={reloadmethod}
+                // clcikData={clcikData}
+                // circleData={circleData}
+                // singleCircleData={singleCircleData}
+                id={selectedFromIndex.id}
+                setShowForm={setShowForm}
+                // gelathiDrawerReloder={gelathiDrawerReloder}
+              />
+            )}
+            {/* {showGreenFrom && <GreenSurvey itm={formData } />} */}
+      <Button
+                  style={{ color: 'white', marginTop: 20, marginLeft: 20, marginBottom: 20,backgroundColor:'#ff7424' }}
+                  onClick={()=>{
+                   setSurvey(false)
+                  }}
+                >
+                   Cancel
+                  </Button>
+        </div>
+        </Stack>
+  ):null
+}
+<Card>
                 <CardContent>
                   View All Comments :
                   <ExpandMore
@@ -994,4 +1121,4 @@ if(session?.type == 16){
       </Drawer>
     </>
   );
-}
+
