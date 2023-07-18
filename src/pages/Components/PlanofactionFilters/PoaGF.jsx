@@ -311,9 +311,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
         });
     }
   };
-  const reschedudlehandler = () => {
-    setReschedule(true);
-  };
+ 
   const Reschedule = (e) => {
     var data = JSON.stringify({
       poa_id: e,
@@ -340,42 +338,16 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       });
       
     }
-  }
-  const reschedudlehandler=()=>{
-   setReschedule(true)
-  }
+  
+    const reschedudlehandler = () => {
+      setReschedule(true);
+    };
+
   useEffect(() => {
     gelathinamelist();
   }, []);
 
 
-  const Reschedule=(e)=>{
-    
-    var data = JSON.stringify({
-      "poa_id": e,
-      "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss')
-    });
-    
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/updateReschedule.php',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
-    
-    axios(config)
-    .then(function (response) {
-      setReschedule(false)
-      onCloseFilterGF()
-      getTrainingBatch()
-    })
-    .catch(function (error) {
-      // console.log(error);
-    });
-    
-  }
  const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
@@ -1121,4 +1093,4 @@ return (
       </Drawer>
     </>
   );
-
+}
