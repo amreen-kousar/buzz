@@ -104,8 +104,6 @@ export default function PlanofAction() {
   var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
   var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
   const role_name = JSON.parse(sessionStorage?.getItem('userDetails'))?.role_name;
-
-
   const handleChange = (event, newValue) => {
     setSeason(newValue);
     setValue(newValue);
@@ -133,7 +131,6 @@ export default function PlanofAction() {
   useEffect(() => {
     todaypoa();
   }, [season, date, userId, reload,!gfDrawer,isOnline]);
-
   const todaypoa = (async) => {
     var data = JSON.stringify({
       emp_id: userId ? userId : userDetails?.id,
@@ -160,7 +157,6 @@ export default function PlanofAction() {
         console.log(error,"data assigned",localPoa);
       });
   };
-
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -207,17 +203,14 @@ export default function PlanofAction() {
     setUserId();
     todaypoa();
   };
-
-
   // On initization set the isOnline state.
   useEffect(()=>{
       setOnline(navigator.onLine)
   },[])
-
   useEffect(()=>{
      apiCall()
  VyaparApicall()
-
+ apigelathicircle()
 },[isOnline])
 const apiCall = async() =>{
   const data = localStorage?.getItem("green")
@@ -245,7 +238,6 @@ const apiCall = async() =>{
  })
   console.log(JSON?.parse(data),"<-wertyui")
 }
-
 const VyaparApicall = async()=>{
   const data = localStorage?.getItem('vyapar');
   const newData =JSON?.parse(data)
@@ -272,25 +264,45 @@ const VyaparApicall = async()=>{
  .catch(err=>{
    console.log(err,"<--GELATHIHR")
  })
-
 }
-
-
-
-
-
+const apigelathicircle = async() =>{
+  const data = localStorage?.getItem("spoorthi")
+  const newData =JSON?.parse(data)
+  console.log("🚀 ~ file: PlanofAction.jsx:254 ~ apigelathicircle ~ newData:", newData)
+  console.log(JSON?.parse(data),"<--ertyui",[0])
+  for(let i=0; i<=newData?.length;i++){
+    console.log("iam inside ")
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/new/addSpoorthiBaselineQuestionnaire.php',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data:newData[i],
+    };
+    const res = await axios(config)
+    console.log(res?.data,i,"<--result")
+   
+  }
+ 
+ axios(config)?.then(itm=>{
+   console.log("qwerty",itm)
+   localStorage.removeItem('spoorthi');
+ })
+ .catch(err=>{
+   console.log(err,"<--GELATHIHR")
+ })
+  console.log(JSON?.parse(data),"<-wertyui")
+}
   // event listeners to update the state 
   window.addEventListener('online', () => {
       setOnline(true)
   });
-
   window.addEventListener('offline', () => {
       setOnline(false)
   });
-
   
   
-
   return (
     <div>
       {!isOnline&&
