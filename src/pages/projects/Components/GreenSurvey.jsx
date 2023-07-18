@@ -147,6 +147,7 @@ export default function GreenSurvey(props) {
   };
   const handleClose = () => {
     setOpen(false);
+    setIsFormPresentLocally(false)
   };
 
   const [helperText, setHelperText] = useState('');
@@ -186,6 +187,7 @@ export default function GreenSurvey(props) {
       console.log("i called and store ", updatedData)
     // localStorage.setItem(key, JSON.stringify(data));
   };
+  const [isFormPresentLocally ,setIsFormPresentLocally] =useState(false)
   const localStorageData = localStorage.getItem('green');
 useEffect(()=>{
   const existingData = localStorage.getItem('green');
@@ -194,6 +196,7 @@ useEffect(()=>{
         parsedData.map(item=>{
           if(item?.partcipantId===props?.itm?.id || item?.partcipantId===props?.itm.gelathi_id){
             setSendData(item);
+            setIsFormPresentLocally(true)
             setwealth(item?.Natural_Wealth)
           }
         })
@@ -695,7 +698,11 @@ useEffect(()=>{
             </Toolbar>
           </AppBar>
 
-          <Grid>
+        {isFormPresentLocally?
+       <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
+       This Form is Filled Already1
+     </Typography>
+        :<Grid>
             {/* <Card mt={1} style={{ borderRadius: 20}} >
         <CardContent>
        
@@ -711,7 +718,7 @@ useEffect(()=>{
               <CardContent>
                 <Card mt={1} style={{ backgroundColor: '#F6F8FB', marginTop: 50 }}>
                   <CardContent>
-                    <Typography style={{ color: '#ff7424' }}>Email working*</Typography>
+                    <Typography style={{ color: '#ff7424' }}>Email *</Typography>
                     <Stack mt={2} mb={2}>
                       <TextField
                         id="Email"
@@ -1986,7 +1993,7 @@ useEffect(()=>{
                 {/* -------------------------------- */}
               </CardContent>
             </Card>
-          </Grid>
+          </Grid>}
         </form>
       </Dialog>
     </div>
