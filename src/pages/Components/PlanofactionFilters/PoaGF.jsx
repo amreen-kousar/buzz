@@ -377,22 +377,29 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     console.log(batchState , "batchstate in useEffect")
     console.log(session ,"sessiondata")
     let localFormPresent1 = new Map();
+    let existingData;
 if(session?.type == 4){
-  let existingData = localStorage.getItem('spoorthi');
+  existingData = localStorage.getItem('spoorthi');
+  let parsedData = JSON.parse(existingData);
+
+  parsedData?.map((item) => {
+    localFormPresent1.set(item?.partcipantId, 'true');
+  });
 }
 if(session?.type == 10){
-  let existingData = localStorage.getItem('green');
-}
-if(session?.type == 16){
-  let existingData = localStorage.getItem('vyapar');
-}
-    // let existingData = localStorage.getItem('green');
-
-    let parsedData = JSON.parse(existingData);
+  existingData = localStorage.getItem('green');
+   let parsedData = JSON.parse(existingData);
 
     parsedData?.map((item) => {
       localFormPresent1.set(item?.partcipantId, 'true');
     });
+}
+if(session?.type == 16){
+ existingData = localStorage.getItem('vyapar');
+}
+    // let existingData = localStorage.getItem('green');
+
+   
 
     console.log(localFormPresent1, 'partcipantIdpartcipantId');
 
@@ -832,14 +839,17 @@ const gelathinamelist = (async) => {
               {showSurvey ? (
                 <Stack>
                   <div>
-                    <Card style={{ marginTop: 20, marginLeft: 10 }}>
+                    <Card>
                       {session?.type == 4 || session.type == 10 || session.type == 16 ? (
                         <>
                           {gelathisData?.gelathis?.map((itm, index) => {
                             return (
-                              <Card style={{ borderRadius: 0 }}>
-                                <CardContent style={{ display: 'flex' }}>
-                                  {itm?.firstName}
+                              <Card style={{borderRadius:0}}>
+   
+                              <CardContent style={{display:'flex',justifyContent: 'space-between'}}>
+                            <div style={{alignItems:"flex-start"}}> {itm?.firstName}</div> 
+                            <div style={{alignItems:"flex-end"}}>  
+                                  
                                   {session?.type == 4 ? (
                                     itm?.is_survey ? (
                                       <IconButton onClick={handleform}>
@@ -847,7 +857,6 @@ const gelathinamelist = (async) => {
                                           icon="clarity:form-line"
                                           width={20}
                                           height={20}
-                                          marginTop={20}
                                           color="green"
                                         />
                                       </IconButton>
@@ -861,7 +870,7 @@ const gelathinamelist = (async) => {
                                           icon="clarity:form-line"
                                           width={20}
                                           height={20}
-                                          marginTop={20}
+                                          
                                           color="#ff7424"
                                         />
                                           {localFormPresent.has(itm?.gelathi_id) ? (
@@ -880,7 +889,6 @@ const gelathinamelist = (async) => {
                                           icon="clarity:form-line"
                                           width={20}
                                           height={20}
-                                          marginTop={20}
                                           color="green"
                                         />
                                       </IconButton>
@@ -908,7 +916,7 @@ const gelathinamelist = (async) => {
                                           icon="clarity:form-line"
                                           width={20}
                                           height={20}
-                                          marginTop={20}
+                                         
                                           color="green"
                                         />
                                       </IconButton>
@@ -933,7 +941,7 @@ const gelathinamelist = (async) => {
                                     )
                                   ) : (
                                     <></>
-                                  )}
+                                  )} </div>
                                 </CardContent>
                               </Card>
                             );
@@ -948,7 +956,7 @@ const gelathinamelist = (async) => {
                       )}
                     </Card>
 
-          {gelathisData?.gelathis?.map((itm,index)=>{
+          {/* {gelathisData?.gelathis?.map((itm,index)=>{
 return (
   <Card style={{borderRadius:0}}>
    
@@ -1022,7 +1030,7 @@ return (
 )
           })}:<CardContent>
             <Typography style={{textAlign:'center',alignItems:'center',fontWeight:700}}>No Survey</Typography></CardContent>
-            
+             */}
         
 
           {showForm && (
