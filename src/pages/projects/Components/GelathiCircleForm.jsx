@@ -216,7 +216,6 @@ const saveDataLocally = (key, data) => {
   console.log("i called and store ", updatedData)
 // localStorage.setItem(key, JSON.stringify(data));
 };
-
   const isOnline = () => {
     return navigator.onLine;
   };
@@ -346,7 +345,7 @@ const saveDataLocally = (key, data) => {
     console.log("🚀 ~ file: GelathiCircleForm.jsx:268 ~ gelathicircleformdata ~ else:", data)
     // setSpoorthiForm()
     // saveDataLocally('spoorthi', data)
-    setSpoorthiForm(saveDataLocally('green', data));
+    setSpoorthiForm(saveDataLocally('spoorthi', data));
     handleClose();
   }
 
