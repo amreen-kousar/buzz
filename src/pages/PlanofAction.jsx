@@ -131,16 +131,16 @@ export default function PlanofAction() {
   };
   useEffect(() => {
     todaypoa();
-    const timeout = setTimeout(() => {
-      setShowDiv(true);
-    }, 1000); // Timeout duration in milliseconds
-    if(isOnline){
-      hideMessage()
-    }else{
-      setShowDiv(true)
-    }
+    // const timeout = setTimeout(() => {
+    //   setShowDiv(true);
+    // }, 1000); // Timeout duration in milliseconds
+    // if(isOnline){
+    //   hideMessage()
+    // }else{
+    //   setShowDiv(true)
+    // }
 
-    return () => clearTimeout(timeout);
+    // return () => clearTimeout(timeout);
     
   }, [season, date, userId, reload,!gfDrawer,isOnline]);
   const todaypoa = (async) => {
