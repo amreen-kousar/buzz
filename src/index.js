@@ -9,13 +9,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
 import swDev from './swDev'
+// import OfflineStatus from './pages/offlineStatusbar';
+// import Footer from './pages/offlineStatusbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <HelmetProvider>
     <BrowserRouter>
+    
       <App />
+      
     </BrowserRouter>
   </HelmetProvider>
 );

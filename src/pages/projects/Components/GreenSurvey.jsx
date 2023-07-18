@@ -187,19 +187,6 @@ export default function GreenSurvey(props) {
     // localStorage.setItem(key, JSON.stringify(data));
   };
 
-useEffect(()=>{
-  const existingData = localStorage.getItem('green');
-      const parsedData = existingData ? JSON.parse(existingData) : [];
-      if(parsedData?.length){
-        parsedData.map(item=>{
-          if(item?.partcipantId===props?.itm?.id || item?.partcipantId===props?.itm.gelathi_id){
-            setSendData(item);
-           
-          }
-        })
-      }
-},[])
-
   // Get data from local storage
   const data1 = localStorage.getItem("green");
   console.log(JSON.parse(data1) ," getlocal")
@@ -646,8 +633,7 @@ useEffect(()=>{
   const handleform = () => {
     alert('Surevy was done');
   };
-  const 
-  handleresources = (label, event) => {
+  const handleresources = (label, event) => {
     var updatedList = [...checked[label]];
     if (event.target.checked) {
       updatedList = [...checked[label], event.target.value];

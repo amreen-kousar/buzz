@@ -92,6 +92,7 @@ export default function PlanofAction() {
   const [clcikData, setClickData] = useState();
   const [reload, setReload] = useState(false);
   const [isOnline, setOnline] = useState(true);
+  const [showDiv, setShowDiv] = useState(false);
   const [poaData, setPoaData] = [
     {
       emp_id: '',
@@ -132,8 +133,25 @@ export default function PlanofAction() {
   };
   useEffect(() => {
     todaypoa();
+    const timeout = setTimeout(() => {
+      setShowDiv(true);
+    }, 1000); // Timeout duration in milliseconds
+    if(isOnline){
+      hideMessage()
+    }else{
+      setShowDiv(true)
+    }
+
+    return () => clearTimeout(timeout);
+    
   }, [season, date, userId, reload,!gfDrawer,isOnline]);
 
+  const hideMessage = () => {
+    const timeout = setTimeout(() => {
+      setShowDiv(false);
+    }, 3000);
+    return true;
+  }
   const todaypoa = (async) => {
     var data = JSON.stringify({
       emp_id: userId ? userId : userDetails?.id,
@@ -215,10 +233,12 @@ export default function PlanofAction() {
   },[])
 
   useEffect(()=>{
-     apiCall()
+    apigelathicircle();
+     apiCall();
  
 
 },[isOnline])
+
 const apiCall = async() =>{
   const data = localStorage?.getItem("green")
   const newData =JSON?.parse(data)
@@ -244,6 +264,40 @@ const apiCall = async() =>{
  })
   console.log(JSON?.parse(data),"<-wertyui")
 }
+
+
+const apigelathicircle = async() =>{
+  const data = localStorage?.getItem("spoorthi")
+  const newData =JSON?.parse(data)
+  console.log("🚀 ~ file: PlanofAction.jsx:254 ~ apigelathicircle ~ newData:", newData)
+  console.log(JSON?.parse(data),"<--ertyui",[0])
+  for(let i=0; i<=newData?.length;i++){
+    console.log("iam inside ")
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/new/addSpoorthiBaselineQuestionnaire.php',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data:newData[i],
+    };
+    const res = await axios(config)
+    console.log(res?.data,i,"<--result")
+    
+  }
+ 
+ axios(config)?.then(itm=>{
+   console.log("qwerty",itm)
+   localStorage.removeItem('spoorthi');
+ })
+ .catch(err=>{
+
+   console.log(err,"<--GELATHIHR")
+ })
+  console.log(JSON?.parse(data),"<-wertyui")
+}
+
+
   // event listeners to update the state 
   window.addEventListener('online', () => {
       setOnline(true)
@@ -254,12 +308,29 @@ const apiCall = async() =>{
   });
 
   
-  
+ 
 
   return (
+    
     <div>
-      {!isOnline&&
-      <h1> you are offline</h1>}
+      {/* {!isOnline?
+      <div style={{backgroundColor: 'red'}}>
+        <p>
+          
+         you are offline
+        </p>
+         </div> :  
+           <div>
+           {showDiv && hideMessage() && (
+             <div style={{backgroundColor: 'green'}}>
+             <p>
+               
+              you are online
+             </p>
+              </div>
+           )}
+         </div>
+         } */}
       {openMessage && (
         <Snackbar id="poa-snackbar" open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
           <Alert id="alert-open-message"

@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
+import Footer from 'src/pages/offlineStatusbar';
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
 const RootStyle = styled('div')({
@@ -39,18 +40,27 @@ export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
   const noSearchRequired = ['/dashboard/planofaction']
   return (
+   <div>
+   
     <RootStyle>
-      <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
-      <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
-      {noSearchRequired.includes(pathname) ?
-        <NoSearchMainStyle>
-          <Outlet />
-        </NoSearchMainStyle>
-        :
-        <MainStyle>
-          <Outlet />
-        </MainStyle>
-      }
-    </RootStyle>
+
+    <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
+  
+    <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
+   
+    {noSearchRequired.includes(pathname) ?
+      <NoSearchMainStyle>
+        <Footer/>
+        <Outlet />
+      </NoSearchMainStyle>
+      :
+      <MainStyle>
+        <Footer/>
+        <Outlet />
+      </MainStyle>
+    }
+  </RootStyle>
+
+  </div>
   );
 }
