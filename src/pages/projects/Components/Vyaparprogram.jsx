@@ -171,7 +171,7 @@ const [entreprenur , setentrepreneurError] = useState(false)
   };
   const handleClose = () => {
     setOpen(false);
-    setIsFormPresentLocally(true)
+    setIsFormPresentLocally(false)
   };
   useEffect(() => {
     gelathinamelist();
@@ -699,21 +699,22 @@ else{
           <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
             <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
               <IconButton style={{ color: 'white' }} onClick={handleClose}>
-               {(isOnline())? <Iconify icon="material-symbols:arrow-back-rounded" />:"Back"}
+               {(isOnline())? <Iconify icon="material-symbols:arrow-back-rounded" />:<div style={{borderRadius:5}}>back</div>}
               </IconButton>
               <Typography sx={{ ml: 2, flex: 1, color: 'white' }} variant="h6" component="div">
                 Buzz Vyapar Program Baseline
               </Typography>
-              <Button autoFocus edge="end" color="inherit" type="submit" style={{ color: 'white' }}>
+              <Button edge="end" color="inherit" type="submit" onClick={handleClose} style={{ color: 'white' }}>
                {(isOnline())? <Iconify icon="material-symbols:save" width={30} height={30} />:"save"}
               </Button>
             </Toolbar>
           </AppBar>
-       {    isFormPresentLocally?
-         <Typography sx={{ ml: 2, flex: 1, color: 'white' }} variant="h6" component="div">
+       {/* {isFormPresentLocally?
+         <Typography sx={{ ml: 2, flex: 1, color: 'black',textAlign:'center' ,justifyContent:"center",alignItems:'center'}}  variant="h6" component="div">
          This form is already filled!
-       </Typography>
-       : <Grid>
+       </Typography> */}
+       {/* :  */}
+       <Grid>
       
             <Card>
               <CardContent>
@@ -2370,7 +2371,8 @@ else{
                 {/* -------------------------------- */}
               </CardContent>
             </Card>
-          </Grid>}
+          </Grid>
+          {/* } */}
         </form>
       </Dialog>
     </div>
