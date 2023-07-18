@@ -234,7 +234,7 @@ const noteSubmitHandler = () => {
       redirect: 'follow',
     };
    
-    let res = fetch('https://bdms.buzzwomen.org/appTest/uploadGFSessionPhotos', requestOptions)
+    let res = fetch('https://bdms.buzzwomen.org/appGo/uploadGFSessionPhotos', requestOptions)
       .then((itn) => {
         setImages([])
         alert("Image uploaded successfully..")

@@ -124,7 +124,7 @@ const getData = (itm, i) => {
   
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/removeEnrollGelathi.php',
+    url: baseURL + 'removeEnrollGelathi',
     headers: { 
       'Content-Type': 'application/json'
     },

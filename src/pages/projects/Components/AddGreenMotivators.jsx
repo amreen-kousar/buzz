@@ -19,6 +19,7 @@ import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import AddParticipants from './AddParticipants';
 import { InsertEmoticon } from '@mui/icons-material';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -51,7 +52,7 @@ const setGreenmotivators=(itm)=>{
     // this.refs[itm.participant_id].checked = false;
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/setGreenMotivators.php',
+      url: baseURL + 'setGreenMotivators',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -85,7 +86,7 @@ else{
       // this.refs[itm.participant_id].checked = false;
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/setGreenMotivators.php',
+        url: baseURL + 'setGreenMotivators',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -111,7 +112,7 @@ getGreenMotivators();
   })
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/getGreenMotivators.php',
+      url: baseURL + 'getGreenMotivators',
       headers: { 
         'Content-Type': 'text/plain'
       },

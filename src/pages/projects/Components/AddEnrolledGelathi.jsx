@@ -47,7 +47,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/setEnrollGelathi.php',
+        url: baseURL + 'setEnrollGelathi',
         headers: { 
           'Content-Type': 'application/json'
         },

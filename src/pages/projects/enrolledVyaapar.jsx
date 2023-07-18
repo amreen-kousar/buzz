@@ -155,7 +155,7 @@ const id = sessionStorage?.getItem("proId")
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/removeVyaparEnrollment.php',
+      url: baseURL + 'removeVyaparEnrollment',
       headers: { 
         'Content-Type': 'application/json'
       },

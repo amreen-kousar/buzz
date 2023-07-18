@@ -8,6 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import AddParticipants from './AddParticipants';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -38,7 +39,7 @@ const setEnrolledVyapar=(itm)=>{
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/setVyaparEnrollment.php',
+        url: baseURL + 'setVyaparEnrollment',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -65,7 +66,7 @@ getAddPartcipants();
   })
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/getVyaparEnrollment.php',
+      url: baseURL + 'getVyaparEnrollment',
       headers: { 
         'Content-Type': 'text/plain'
       },

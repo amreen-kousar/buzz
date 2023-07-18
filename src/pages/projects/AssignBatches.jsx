@@ -78,7 +78,7 @@ const villagelist= async(itm) =>{
     var config = {
       method: 'post',
        url: baseURL+'getTrainingBatchList',
-      //url: oldbaseURL + 'getTrainingBatchList.php',
+      
       headers: {
         'Content-Type': 'application/json'
       },

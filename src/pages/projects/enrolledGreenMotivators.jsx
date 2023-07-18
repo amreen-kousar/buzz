@@ -143,7 +143,7 @@ const getData = (itm, i) => {
   
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/new/removeGreenMotivators.php',
+    url: baseURL + 'removeGreenMotivators',
     headers: { 
       'Content-Type': 'application/json'
     },

@@ -173,7 +173,7 @@ export default function GelathiCircleForm({
       selectedValue != ''
     ) {
       var data = JSON.stringify({
-        partcipantId: id,
+        partcipantId: JSON.stringify(id),
         email_address: sendData?.email_address,
         GelathiId: sendData?.GelathiId,
         Spoorthi_Session_Number: selectedValue,
@@ -195,7 +195,7 @@ export default function GelathiCircleForm({
       });
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/addSpoorthiBaselineQuestionnaire.php',
+        url: baseURL + 'addSpoorthiBaselineQuestionnaire',
         headers: {
           'Content-Type': 'application/json',
         },

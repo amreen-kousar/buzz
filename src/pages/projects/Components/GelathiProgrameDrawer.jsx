@@ -190,7 +190,7 @@ const [iserror, setIsError] = useState(false)
       body: raw,
       redirect: 'follow',
     };
-    let res = fetch(oldbaseURL + 'uploadGFSessionPhotos.php', requestOptions)
+    let res = fetch(baseURL + 'uploadGFsessionPhotos', requestOptions)
       .then((itn) => {
         setImages([]);
         alert('Image uploaded successfully..');
@@ -219,7 +219,7 @@ const [iserror, setIsError] = useState(false)
     var config = {
       method: 'post',
       url: baseURL + 'getGFSessionData1',
-      //url: oldbaseURL + 'getGFSessionData1.php',
+     
       headers: {
         'Content-Type': 'application/json',
       },

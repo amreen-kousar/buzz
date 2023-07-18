@@ -120,7 +120,7 @@ alert("error!!!!!!")
         var config = {
           method: 'post',
         maxBodyLength: Infinity,
-          url: 'https://bdms.buzzwomen.org/appTest/createParticipant.php',
+          url: baseURL + 'createParticipant',
           headers: { 
             'Content-Type': 'application/json'
           },

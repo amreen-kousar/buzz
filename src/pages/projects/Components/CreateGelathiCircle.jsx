@@ -18,7 +18,8 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import moment from 'moment';
 import axios from 'axios';
-import baseURL from 'src/utils/api';
+// import baseURL from 'src/utils/api';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -56,7 +57,7 @@ var data = JSON.stringify({
 });
 var config = {
   method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/createCircle.php',
+  url: baseURL + 'createCircle',
   headers: { 
     'Content-Type': 'application/json'
   },
@@ -88,7 +89,7 @@ const createCircle = () =>{
   
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/createCircle.php',
+    url: baseURL + 'createCircle',
     headers: { 
       'Content-Type': 'application/json'
     },

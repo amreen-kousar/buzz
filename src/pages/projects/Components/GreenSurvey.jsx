@@ -38,6 +38,7 @@ import products from 'src/_mock/products';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -305,7 +306,7 @@ export default function GreenSurvey(props ) {
     paychemicals != '' && products != '' && climateffort != '' &&  climateaction != ''  && initiativemeasures != '' && environment != '' && (checked['natural_resources'] != 0)&& (checked['natural_resources_impacting_your_life'] != 0)&& (checked['changes_happened_to_the_climate'] != 0)&& (checked['main_source_of_water'] != 0) && communitytogether != '')
     {
     var data = JSON.stringify({
-    "partcipantId":props?.itm?.id || props?.itm.gelathi_id ,
+    "partcipantId":JSON.stringify(props?.itm?.id || props?.itm.gelathi_id) ,
     "Email": sendData?.Email,
     "Name_of_the_surveyor": sendData?.Name_of_the_surveyor,
     "Name_of_the_respondent": sendData?.Name_of_the_respondent,
@@ -347,10 +348,10 @@ export default function GreenSurvey(props ) {
     "initiative_to_conserve_the_environment": environment,
     "community_together_achieve_my_conservation_goal":communitytogether
       });
-    
+      
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/addGreenBaselineSurvey.php',
+        url: baseURL + 'addGreenBaselineSurvey',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -525,6 +526,7 @@ const handleresources=(label,event)=>{
     tempData[label]=updatedList
     setChecked(tempData);
 }
+
   return (
     <div>
      
