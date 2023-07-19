@@ -8,7 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import AddParticipants from './AddParticipants';
-import { baseURL } from 'src/utils/api';
+import { baseURL, oldbaseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -34,7 +34,7 @@ const setEnrolledVyapar=(itm)=>{
         "id": itm?.participant_id,
         "gelathi_id": session?.user_id,
         "tb_id": session?.tb_id,
-        "projectId": session?.projectId
+        "projectId": session?.project_id
       });
       
       var config = {
@@ -67,6 +67,7 @@ getAddPartcipants();
     var config = {
       method: 'post',
       url: baseURL + 'getVyaparEnrollment',
+      // url: oldbaseURL + 'new/getVyaparEnrollment',
       headers: { 
         'Content-Type': 'text/plain'
       },
@@ -93,6 +94,7 @@ const getAddPartcipants=()=>{
   var config = {
     method: 'post',
     url: baseURL+'getEnrollVyaparEnrollment',
+// url : oldbaseURL +'new/getEnrollVyaparEnrollment.php',
     headers: { 
       'Content-Type': 'application/json'
     },

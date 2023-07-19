@@ -126,8 +126,8 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
   const trainerList = async => {
     var data = JSON.stringify({
       "role_id": "5",
-      "project_id": JSON.stringify(sendData?.project_id?sendData?.project_id:sendData?.projectId),
-      "operation_manager_id": JSON.stringify(operations_manager_id),
+      "project_id": JSON.stringify(parseInt(sendData?.project_id?sendData?.project_id:sendData?.projectId)),
+      "operation_manager_id": JSON.stringify(parseInt(operations_manager_id)),
       "pageNum": "1"
     });
     var config = {

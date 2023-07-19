@@ -92,7 +92,7 @@ const removegelathicircle = async (itm) => {
       });
       var config = {
         method: 'post',
-        url: oldbaseURL +'updateEnrolledGelathi.php',
+        url: baseURL +'updateEnrolledGelathi',
         headers: {
           'Content-Type': 'application/json',
         },
