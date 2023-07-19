@@ -49,7 +49,7 @@ export default function User() {
       "emp_id": parseInt(userid),
       "search": search
     });
-    console.log(data, "checking for search")
+ 
     const config = {
       method: 'post',
       url:baseURL + 'getBuses',
@@ -67,7 +67,10 @@ export default function User() {
       .catch((error) => {
         // console.log(error);
       });
+     
   }
+
+ 
   const onSumbit = (e, i) => {
     setSelected({ type: 'Location', name: ` ${e?.stateName} ; District : ${e?.districtName} ; Taluk : ${e?.talukName}` })
     handleclosebusfilter()
@@ -121,7 +124,7 @@ export default function User() {
         </Snackbar>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
-            {selected?.type ? " Bus List" : "All Bus List "}&nbsp;({count})
+            {selected?.type ? " Bus List" : "All Bus List "}&nbsp;({totalCount})
           </Typography>
           <Button id="bus-list" style={{ float: "right", color: '#ff7424' }}
             sx={{
@@ -168,9 +171,9 @@ export default function User() {
             onCloseFilter={handleclosebusfilter}
           />
         </Stack>
-        {buses?.length == 0 && (
+        {totalCount == 0 && (
           <div>
-            <h1 id="bus-no-data-fnd" style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
+            <h1 id="bus-no-data-fnd" style={{ fontWeight: 900, textAlign: 'center' }}><br />No Buses</h1>
           </div>
         )}
         {buses?.map((itm,index) => {

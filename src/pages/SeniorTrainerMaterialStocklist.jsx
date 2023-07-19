@@ -146,7 +146,6 @@ const getProjects = async()=>{
         var data = JSON.stringify({
           
             "project_id": ProjectId?.id,
-            // "bus_id": ProjectId.bus_id,
             "type": "1",
             "stock_list" :stock
         });

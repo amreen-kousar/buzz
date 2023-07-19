@@ -63,7 +63,10 @@ export default function Team(props) {
         });
         var config = {
             method: 'post',
+<<<<<<< HEAD
            
+=======
+>>>>>>> 41ddceb5e3f94246024e5af4ac8cdfaf0abe4e70
             url : baseURL + 'teamMembers',
             headers: {
                 'Content-Type': 'application/json'
