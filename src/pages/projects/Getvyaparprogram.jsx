@@ -61,7 +61,7 @@ const GetVyaparformData=()=>{
       
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/getBuzzVyaparProgramBaseline',
+        url: 'https://bdms.buzzwomen.org/appTest/new/getBuzzVyaparProgramBaseline.php',
         headers: { 
           'Content-Type': 'application/json'
         },
