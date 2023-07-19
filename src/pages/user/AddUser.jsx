@@ -238,7 +238,7 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                             }
                         const partnerFunderConfig = {
                             method: 'post',
-                            url: `https://bdms.buzzwomen.org/appTest/${apiCallName}.php`,
+                            url:  baseURL + `${apiCallName}`,
                             headers: {
                                 'Content-Type': 'application/json'
                             },

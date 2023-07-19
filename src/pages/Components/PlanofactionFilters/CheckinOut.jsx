@@ -277,8 +277,7 @@ axios(config)
         <Typography mt={2}>
             Start :{batch?.data?.day1?.split(" ")[1]}&nbsp;{batch?.data?.day1?.split(" ")[2]}
         </Typography>
-        {console.log(checkData?.data,"hsga",batch?.data)}
-   
+      
         {(checkData?.data?.check_in_date_day1=="" )?<Button style={{float:'left',position:'absolute',left:20,top:320,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1,batch?.data?.day1_id)} sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
@@ -335,7 +334,6 @@ axios(config)
         <Typography mt={2}>
             Start :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
         </Typography>
-        {console.log(checkData,"hgasdha")}
         {(checkData?.data?.check_in_date_day2=="" && checkData?.data?.check_in_date_day1!="")?<Button sx={{
              '&:hover': {
                backgroundColor: '#ffd796',

@@ -305,7 +305,6 @@ const getTrainingBatch = async =>{
       <Card > <CardContent>  
         <Grid container spacing={2}>
   <Grid  xs={10} sm={6} style={{paddingRight:5}} >
-    {console.log(batch?.photos[0]?.photo1,"picccccc")}
     {(photos )?<img id="img-event-data" src={(trainingData?.photos[0].photo1)?(trainingData?.photos[0]?.photo1):batch?.photos[0].photo1} />:"No Photos"}</Grid>
     <Grid  xs={10} sm={6} style={{paddingRight:5}} >{(photos)?<img id="img-event-data" src={(trainingData?.photos[0].photo2)?(trainingData?.photos[0]?.photo2):batch?.photos[0].photo2} />:null}</Grid></Grid></CardContent></Card> 
       </TabPanel>
