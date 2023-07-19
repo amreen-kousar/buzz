@@ -37,9 +37,9 @@ export default function GelathiCircleForm({
   reloadmethod,
   clcikData,
   singleCircleData,
-  id,componentreloadmethod
+  id,componentreloadmethod 
 }) {
-  console.log("🚀 ~ file: GelathiCircleForm.jsx:41 ~ clcikData:", )
+  console.log("🚀 ~ file: GelathiCircleForm.jsx:42 ~ componentreloadmethod:", componentreloadmethod)
   
   const { state } = useLocation();
   const [open, setOpen] = React.useState(true);
@@ -83,6 +83,7 @@ export default function GelathiCircleForm({
   const [bringtogetherError, setbringtogetherError] = useState(false);
   const [conflictsError, setconflictsError] = useState(false);
   const [spoorthiForm, setSpoorthiForm] = useState('');
+  const [isFormPresentLocally ,setIsFormPresentLocally] =useState(false)
   const handleChangeSelect = (event) => {
     setAge(event.target.value);
   };
@@ -120,6 +121,7 @@ export default function GelathiCircleForm({
   };
   const handleClose = () => {
     setOpen(false);
+    setIsFormPresentLocally(false)
     setShowForm(false);
   };
   useEffect(() => {
@@ -129,7 +131,6 @@ export default function GelathiCircleForm({
   useEffect(()=>{
 
     const existingData = localStorage.getItem('spoorthi');
-    // console.log("🚀 ~ file: GelathiCircleForm.jsx:137 ~ useEffect ~ item:", item)
   
         const parsedData = existingData ? JSON.parse(existingData) : [];
   
@@ -144,7 +145,7 @@ export default function GelathiCircleForm({
   
               setSendData(item);
   
-             
+              setIsFormPresentLocally(true)
   
             }
   
@@ -178,23 +179,13 @@ export default function GelathiCircleForm({
   };
 
 //   const saveDataLocally = (key, data) => {
-//   console.log("🚀 ~ file: GelathiCircleForm.jsx:181 ~ saveDataLocally ~ data:", data)
-
   
  
 
 //     const existingData = localStorage.getItem('spoorthi');
-//     console.log("🚀 ~ file: GelathiCircleForm.jsx:185 ~ saveDataLocally ~ existingData:", existingData)
-
 //     const parsedData = existingData ? JSON.parse(existingData) : [];
-//     console.log("🚀 ~ file: GelathiCircleForm.jsx:187 ~ saveDataLocally ~ existingData:", existingData)
-
 //     const newData = data; // Replace with your own data object
-//     console.log("🚀 ~ file: GelathiCircleForm.jsx:191 ~ saveDataLocally ~ newData:", newData)
-
 //     parsedData.push(newData);
-//     console.log("🚀 ~ file:    ~ saveDataLocally ~ parsedData:", parsedData)
-
 //     const updatedData = parsedData;
 
 //     localStorage.setItem('spoorthi', updatedData);
@@ -290,12 +281,12 @@ const saveDataLocally = (key, data) => {
         // data  = setSpoorthiForm()
         // setSpoorthiForm(data)
         saveDataLocally('spoorthi', data)
-        data = setSpoorthiForm(saveDataLocally('spoorthi', data));
+        data = setSpoorthiForm(saveDataLocally('spoorthi', JSON.parse(data)));
         setSpoorthiForm(data);
 
       }else{
 
-        data = JSON.stringify({
+     var  data = JSON.stringify({
          partcipantId: id,
          email_address: sendData?.email_address,
          GelathiId: sendData?.GelathiId,
@@ -336,7 +327,7 @@ const saveDataLocally = (key, data) => {
         })
         .catch(function (error) {
           // console.log(error);
-          setSpoorthiForm(saveDataLocally('green', data));
+          setSpoorthiForm(saveDataLocally('spoorthi', data));
           componentreloadmethod();
         });
       handleClose();
@@ -344,10 +335,10 @@ const saveDataLocally = (key, data) => {
       alert('Please Select The Option. ');
     }
   } else{
-    console.log("🚀 ~ file: GelathiCircleForm.jsx:268 ~ gelathicircleformdata ~ else:", data)
     // setSpoorthiForm()
     // saveDataLocally('spoorthi', data)
-    setSpoorthiForm(saveDataLocally('spoorthi', data));
+    setSpoorthiForm(saveDataLocally('spoorthi', JSON.parse(data)));
+    componentreloadmethod();
     handleClose();
   }
 
@@ -369,7 +360,7 @@ const saveDataLocally = (key, data) => {
         >
           <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }}>
             <IconButton style={{ float: 'right', color: 'white' }} onClick={handleClose}>
-              <Iconify icon="material-symbols:arrow-back-rounded" />
+            {(isOnline())? <Iconify icon="material-symbols:arrow-back-rounded" />:<div style={{borderRadius:5}}>Back</div>}
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
               Spoorthi Baseline Questionnaire 
@@ -382,7 +373,7 @@ const saveDataLocally = (key, data) => {
               }}
               color="inherit"
             >
-              <Iconify icon="material-symbols:save" width={30} height={30} />
+             {(isOnline())? <Iconify icon="material-symbols:save" width={30} height={30} />:"save"}
             </Button>
           </Toolbar>
           <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
