@@ -301,7 +301,7 @@ const [entreprenur , setentrepreneurError] = useState(false)
       (checked['what_are_the_prerequisites_to_access_a_loan'] != 0)
     ) {
       var data = JSON.stringify({
-        partcipantId: itm?.id || itm?.gelathi_id,
+        partcipantId: JSON.stringify(itm?.id || itm?.gelathi_id),
         gfId: sendData?.gfId,
         when_was_survey_done: survey,
         name_of_the_vyapari: sendData?.name_of_the_vyapari,
