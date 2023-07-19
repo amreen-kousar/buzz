@@ -228,8 +228,8 @@ export default function PlanofAction() {
 const apiCall = async() =>{
   const data = localStorage?.getItem("green")
   const newData =JSON?.parse(data)
-  console.log(JSON?.parse(data),"<--ertyui",[0])
-  for(let i=0; i<newData?.length;i++){
+  // for(let i=0; i<newData?.length;i++){
+    newData.map((itm,index)=>{
     console.log(i,"dsfdd")
     var config = {
       method: 'post',
@@ -237,75 +237,68 @@ const apiCall = async() =>{
       headers: {
         'Content-Type': 'application/json',
       },
-      data:newData[i],
+      data:newData[index],
     };
-    const res = await axios(config)
-    console.log(res?.data,i,"<--result")
-  }
+    const res = axios(config)
+  })
  
  axios(config)?.then(itm=>{
-   console.log("qwerty",itm)
+  //  console.log("qwerty",itm)
  })
  .catch(err=>{
-   console.log(err,"<--GELATHIHR")
+  //  console.log(err,"<--GELATHIHR")
  })
-  console.log(JSON?.parse(data),"<-wertyui")
 }
 const VyaparApicall = async()=>{
   const data = localStorage?.getItem('vyapar');
   const newData =JSON?.parse(data)
-  console.log(JSON?.parse(data),"<--ertyui",[0])
-  for(let i=0; i<newData?.length;i++){
-    console.log(i,"ivalueeeeeee")
+  // for(let i=0; i<newData?.length;i++){
+    newData.map((item,index)=>{
+    console.log(index,"ivalueeeeeee")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
       headers: {
         'Content-Type': 'application/json',
       },
-      data:newData[i],
+      data:newData[index],
     };
-    const res = await axios(config)
-    console.log(res?.data,i,"<--result")
-  }
+    const res = axios(config)
+  })
   
   localStorage.removeItem('vyapar')
  
  axios(config)?.then(itm=>{
-   console.log("qwerty",itm)
+  //  console.log("qwerty",itm)
  })
  .catch(err=>{
-   console.log(err,"<--GELATHIHR")
+  //  console.log(err,"<--GELATHIHR")
  })
 }
 const apigelathicircle = async() =>{
   const data = localStorage?.getItem("spoorthi")
   const newData =JSON?.parse(data)
-  console.log("🚀 ~ file: PlanofAction.jsx:254 ~ apigelathicircle ~ newData:", newData)
-  console.log(JSON?.parse(data),"<--ertyui",[0])
-  for(let i=0; i<=newData?.length;i++){
-    console.log("iam inside ")
+  // for(let i=0; i<=newData?.length;i++){
+  newData.map((item,index)=>{
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/new/addSpoorthiBaselineQuestionnaire.php',
       headers: {
         'Content-Type': 'application/json',
       },
-      data:newData[i],
+      data:newData[index],
     };
-    const res = await axios(config)
-    console.log(res?.data,i,"<--result")
+    const res = axios(config)
    
-  }
+  })
  
  axios(config)?.then(itm=>{
-   console.log("qwerty",itm)
+  //  console.log("qwerty",itm)
    localStorage.removeItem('spoorthi');
  })
  .catch(err=>{
-   console.log(err,"<--GELATHIHR")
+  //  console.log(err,"<--GELATHIHR")
  })
-  console.log(JSON?.parse(data),"<-wertyui")
 }
   // event listeners to update the state 
   window.addEventListener('online', () => {
