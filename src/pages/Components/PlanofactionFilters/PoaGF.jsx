@@ -389,8 +389,9 @@ const componentreloadmethod  = ()=>{
 if(session?.type == 4){
   existingData = localStorage.getItem('spoorthi');
   let parsedData = JSON.parse(existingData);
-
+console.log(parsedData, "inside useEffect")
   parsedData?.map((item) => {
+    console.log(parsedData, "inside map")
     localFormPresent1.set(item?.partcipantId, 'true');
   });
 }
@@ -414,7 +415,7 @@ if(session?.type == 16){
     console.log(localFormPresent1, 'partcipantIdparhandleClosehandleClosetcipantId');
  
     setlocalFormPresent(localFormPresent1);
-  },[localStorage?.getItem("vyapar"),localStorage?.getItem("spoorthi"),localStorage?.getItem("green")]);
+  },[localStorage?.getItem("vyapar"),localStorage?.getItem("spoorthi"),localStorage?.getItem("green"),componentreload]);
 
   useEffect(() => {}, [componentreload]);
 
@@ -868,14 +869,30 @@ useEffect(()=>{
                                   
                                   {session?.type == 4 ? (
                                     itm?.is_survey ? (
-                                      <IconButton onClick={handleform}>
+                                      <>
+                                 {(!localFormPresent.has(itm?.gelathi_id)) &&   <IconButton onClick={handleform}>
                                         <Icon
                                           icon="clarity:form-line"
                                           width={20}
                                           height={20}
                                           color="green"
                                         />
-                                      </IconButton>
+                                      </IconButton>}
+                                      {localFormPresent.has(itm?.gelathi_id) ? (
+                                            <IconButton onClick={handleSurveyform}>
+                                            <Icon
+                                              icon="clarity:form-line"
+                                              width={20}
+                                              height={20}
+                                             
+                                              color="black"
+                                            />
+                                          </IconButton>
+                                        
+                                        ) : (
+                                          ''
+                                        )}
+                                      </>
                                     ) : session?.type == 4 && session?.check_in != '0' ? (
                                         <>
                                         
