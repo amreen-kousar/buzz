@@ -689,13 +689,14 @@ useEffect(()=>{
           <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
             <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }}>
               <IconButton style={{ color: 'white' }} onClick={handleClose}>
-                <Iconify icon="material-symbols:arrow-back-rounded" />
-              </IconButton>
+              {(isOnline())? <Iconify icon="material-symbols:arrow-back-rounded" />:<div style={{borderRadius:5}}>back</div>}
+               </IconButton>
               <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
                 Green Baseline Survey
               </Typography>
               <Button autoFocus edge="end" color="inherit" type="submit">
-                <Iconify icon="material-symbols:save" width={30} height={30} />
+              {(isOnline())? <Iconify icon="material-symbols:save" width={30} height={30} />:"save"}
+             
               </Button>
             </Toolbar>
           </AppBar>
