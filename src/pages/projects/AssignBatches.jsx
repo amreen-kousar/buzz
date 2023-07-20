@@ -15,7 +15,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableCell from "@mui/material/TableCell";
 import { vi } from "date-fns/locale";
-
 export default function AssignBatches(){
    
     const state = useLocation();
@@ -28,13 +27,10 @@ export default function AssignBatches(){
     var [alloted,setAlloted]=useState(0)
     const [item,setItem]=useState('')
    const [selected,setSelected]=useState([])
-
    const id = sessionStorage?.getItem("proId")
 useEffect(() => {
   projData();
-
 }, [])
-
 const projData = async => {
   var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
   var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
@@ -44,7 +40,6 @@ const projData = async => {
     "role_id": role,
     "emp_id": idvalue
   });
-
   var config = {
     method: 'post',
     url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
@@ -53,7 +48,6 @@ const projData = async => {
     },
     data: data
   };
-
   axios(config)
     .then(function (response) {
       setData1({ ...response.data.list })
@@ -61,9 +55,7 @@ const projData = async => {
     .catch(function (error) {
       // console.log(error);
     });
-
 }
-
 const villagelist= async(itm) =>{
   setGl(true)
   setItem(itm)
@@ -73,7 +65,6 @@ const villagelist= async(itm) =>{
     
   
     });
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchList.php',
@@ -94,7 +85,6 @@ const villagelist= async(itm) =>{
     
     
 }
-
 const CreateBatch= async(itm,i) =>{
   
   const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
@@ -109,7 +99,6 @@ const CreateBatch= async(itm,i) =>{
     villages.list[i].flag = 1;
     setVillages(villages)
     setAlloted(alloted?alloted+1:1)
-
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/createGFBatch.php',
@@ -128,7 +117,6 @@ const CreateBatch= async(itm,i) =>{
     });
     
 }
-
 const removeFlag = async (itm, i) => {
   var data = JSON.stringify({
      
@@ -197,10 +185,11 @@ const removeFlag = async (itm, i) => {
                      Total Villages: {alloted}/{tc}
                      </Typography>:null}
                 
-                 {(gl)?<Card style={{ marginTop: 20,  borderRadius: 20 }}>
+                 {(gl)?<Card style={{ marginTop: 10,  borderRadius: 20 }}>
                 <CardContent>
                  
-                  <Stack mt={2} mb={2}>
+                 {tc==0? <div style={{textAlign:'center',justifyContent:"center",alignItems:"center",fontWeight:700,fontSize:15}}>No Villages</div>:
+                 <Stack mt={2} mb={2}>
              
                   {villages?.list?.map((itm,i)=>{
                   
@@ -216,7 +205,6 @@ const removeFlag = async (itm, i) => {
                     
                     (['1',1].includes(villages?.list[i]?.flag))?<IconButton  style={{float:'right'}} onClick={()=>removeFlag(itm,i)}>
                        
-
                           <Iconify icon="typcn:tick" style={{fontSize:20,color:"green"}}/>
                         </IconButton>:
                         (['0',0].includes(villages.list[i]?.flag))?<IconButton onClick={()=>CreateBatch(itm,i)} style={{float:'right'}}>
@@ -234,12 +222,10 @@ const removeFlag = async (itm, i) => {
                     )
                   })}
                 
-                  </Stack>
+                  </Stack>}
                 </CardContent>
                  </Card>:null}
             
-
-
         </Container>
        
     )
