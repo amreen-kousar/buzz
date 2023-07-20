@@ -165,11 +165,6 @@ const details = async => {
                         Bus Details  
                         </Typography>
                         <div style={{display:"flex"}}>
-                   
-                   
-                  
-                   
-                    
                     {(userDetails==2)?<Button id="delete-icon" onClick={DeleteBus} style={{float:'right',textAlign:'left'}} sx={{
           '&:hover': {
             backgroundColor: 'white',
@@ -245,7 +240,7 @@ const details = async => {
       {
                     selected && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={` ${selected?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
       }
-         <TableContainer component={Paper} sx={{width:'40vw',justifyContent:'center',alignItems:'center',ml:10}}>
+         <TableContainer component={Paper} sx={{width: ['100%', '60vw', '40vw'],justifyContent:'center',alignItems:'center',ml:10}}>
           <Table aria-label="customized table">
            
             <TableBody>

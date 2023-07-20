@@ -317,7 +317,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                         Edit User
                       </Button>
                     </ExpandMore> :
-                      <IconButton title="close" onClick={handleCloseClick} color="inherit" aria-label="close" style={{ float: 'right' }} id="close">
+                      <IconButton title="close" onClick={handleCloseClick} color="inherit" aria-label="close" style={{ float: 'right',left:50 }} id="close">
                         <CloseIcon />
                       </IconButton>}
                   </CardActions>
