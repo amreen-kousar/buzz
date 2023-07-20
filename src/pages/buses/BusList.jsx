@@ -48,7 +48,6 @@ export default function User() {
       "emp_id": userid,
       "search": search
     });
-    console.log(data, "checking for search")
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getBuses.php',

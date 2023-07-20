@@ -184,7 +184,6 @@ export default function GreenSurvey(props) {
       parsedData.push(newData);
       const updatedData = JSON.stringify(parsedData);
       localStorage.setItem('green', updatedData);
-      console.log("i called and store ", updatedData)
       props?.componentreloadmethod()
     // localStorage.setItem(key, JSON.stringify(data));
   };
@@ -206,10 +205,8 @@ useEffect(()=>{
 
   // Get data from local storage
   const data1 = localStorage.getItem("green");
-  console.log(JSON.parse(data1) ," getlocal")
   const getDataLocally = (key) => {
     const data = localStorage.getItem("green");
-    console.log(data ," getlocal")
 
     return data ? JSON.parse(data) : null;
   };
@@ -505,8 +502,6 @@ useEffect(()=>{
           })
 
           .catch(function (error) {
-            // console.log(error);
-            console.log('i am inside catch ');
             setGreenForm(saveDataLocally('green', data));
             props?.componentreloadmethod()
           });
@@ -523,8 +518,6 @@ useEffect(()=>{
       }
     } else {
      
-      console.log(data, "insideoffline")
-      console.log('i AM IN ELSE PART AND SAVING LOCALLY');
       setGreenForm(saveDataLocally('green', JSON.parse(data)));
       handleClose();
       props?.componentreloadmethod()

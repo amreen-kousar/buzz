@@ -39,8 +39,6 @@ export default function GelathiCircleForm({
   singleCircleData,
   id,componentreloadmethod 
 }) {
-  console.log("🚀 ~ file: GelathiCircleForm.jsx:42 ~ componentreloadmethod:", componentreloadmethod)
-  
   const { state } = useLocation();
   const [open, setOpen] = React.useState(true);
   const [vyaapar, setVyaapar] = useState('');
@@ -204,7 +202,6 @@ const saveDataLocally = (key, data) => {
   parsedData.push(newData);
   const updatedData = JSON.stringify(parsedData);
   localStorage.setItem('spoorthi', updatedData);
-  console.log("i called and store ", updatedData)
   componentreloadmethod();
 // localStorage.setItem(key, JSON.stringify(data));
 };

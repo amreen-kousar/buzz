@@ -166,7 +166,6 @@ export default function PlanofAction() {
       .catch(function (error) {
         let localPoa=JSON.parse(localStorage.getItem('poadata'))
         SetPoa(localPoa)
-        console.log(error,"data assigned",localPoa);
       });
   };
   const Alert = forwardRef(function Alert(props, ref) {
@@ -230,7 +229,7 @@ const apiCall = async() =>{
   const newData =JSON?.parse(data)
   // for(let i=0; i<newData?.length;i++){
     newData.map((itm,index)=>{
-    console.log(i,"dsfdd")
+    
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/new/addGreenBaselineSurvey.php',
@@ -254,7 +253,6 @@ const VyaparApicall = async()=>{
   const newData =JSON?.parse(data)
   // for(let i=0; i<newData?.length;i++){
     newData.map((item,index)=>{
-    console.log(index,"ivalueeeeeee")
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',

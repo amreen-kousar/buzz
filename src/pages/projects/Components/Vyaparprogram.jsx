@@ -178,7 +178,6 @@ const [entreprenur , setentrepreneurError] = useState(false)
     // setenrolledVyaapar([{ stockname: "fist" }, { stockname: "second" }])
   }, []);
 
-console.log(itm,"itemmmmmmm")
   const saveDataLocally = (key, data) => {
  
     const existingData = localStorage.getItem('vyapar');
@@ -187,9 +186,6 @@ console.log(itm,"itemmmmmmm")
     parsedData.push(newData);
     const updatedData = JSON.stringify(parsedData);
     localStorage.setItem('vyapar', updatedData);
-    console.log("i called and store ", updatedData)
-  // localStorage.setItem(key, JSON.stringify(data));
-  // changeState();
   componentreloadmethod()
 };
 // Get data from local 
@@ -209,7 +205,6 @@ useEffect(()=>{
 const data1 = localStorage.getItem("vyapar");
 const getDataLocally = (key) => {
   const data = localStorage.getItem("vyapar");
-  console.log(data ," getlocal")
   return data ? JSON.parse(data) : null;
 };
 const isOnline = () => {
@@ -422,10 +417,8 @@ const networkAccess = async () => {
 if(localStorage.getItem('vyapar')){
   data = setvyaparform(saveDataLocally('vyapar',JSON.parse(data)));
   setvyaparform(data);
-  console.log("heyyy")
 }
 else{
-  console.log("elseeeeeeeeeee")
       var data = JSON.stringify({
         partcipantId: itm?.id || itm?.gelathi_id,
         gfId: sendData?.gfId,
@@ -554,8 +547,6 @@ else{
       .catch(function (error) {
         let gelathidata=JSON.parse(localStorage.getItem('gelathilist'))
         setVyaapar(gelathidata);
-        console.log(error,"data assigned",gelathidata);
-        // console.log(error);
       });
   };
   const surveydone = (event) => {
