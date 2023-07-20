@@ -167,7 +167,7 @@ export default function User() {
             onCloseFilter={handleclosebusfilter}
           />
         </Stack>
-        {totalCount == null && (
+        {totalCount == null || totalCount==0 && (
           <div>
             <h1 id="bus-no-data-fnd" style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
           </div>
