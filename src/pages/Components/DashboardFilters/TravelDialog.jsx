@@ -41,7 +41,8 @@ export default function TravelDialog({ viewMessage }) {
     endOdimeter: "",
     endLocation: "",
     totalkm: "",
-    fairamount:""
+    fairamount:"",
+    klmtr:""
   });
   const [datadrop, setDataDrop] = useState();
   const handleClickOpen = () => {
@@ -127,16 +128,16 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
       "date": moment(sendData?.date)?.format('YYYY-MM-DD'),
       "insideBangalore": "false",
       "end_odometer": (sendData?.endOdimeter)?sendData?.endOdimeter:'',
-      "telephone": JSON.stringify((sendData?.telephonecharges==1))?"249":"0",
+      "telephone": (sendData?.telephonecharges==1)?"249":"0",
       "end_location_name":locationS,
-      "fairamount":sendData?.fairamount,
+      "fare_amount":(sendData?.fairamount)?sendData?.fairamount:"",
       "printing": sendData?.printing,
       "start_location_name": locationS,
       "poa_id": JSON.stringify(sendData?.poa),
       "start_odometer": (sendData?.odimeter)?sendData?.odimeter:'',
       "rate_per_KM": (sendData?.rateperkm)?sendData?.rateperkm:'',
       "stationery": sendData?.stationery,
-      "klmtr": (sendData?.rateperkm)?sendData?.rateperkm:'',
+      "klmtr": (sendData?.klmtr)?sendData?.klmtr:'',
       "da": JSON.stringify(sendData?.foodexpenses),
       "others": sendData?.otherExpenses,
       "emp_id":userid,
@@ -477,7 +478,7 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                }}   />
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="Total Kilometer" variant="outlined" color="common"   />
+                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, klmtr: e?.target?.value }) }} label="Total Kilometer" variant="outlined" color="common"   />
               </Stack>
               <br /><br /> 
             </div></form> 
