@@ -298,6 +298,7 @@ var data ={}
                                             color: '#ff7424',
                                         },
                                         color: 'black',
+                                        minWidth:'auto'
                                     }} label="All" {...a11yProps(0)} style={value == 0 ? {
                                         borderBottom: '3px solid #ff7424',
                                         color: "#ff7424",
@@ -309,6 +310,7 @@ var data ={}
                                             color: '#ff7424',
                                         },
                                         color: 'black',
+                                        minWidth:'auto',
                                     }} style={value == 1 ? {
                                         borderBottom: '3px solid #ff7424',
                                         color: "#ff7424",
@@ -320,6 +322,7 @@ var data ={}
                                             color: '#ff7424',
                                         },
                                         color: 'black',
+                                        minWidth:'auto'
                                     }} label="Completed" {...a11yProps(2)} style={value == 2 ? {
                                         borderBottom: '3px solid #ff7424',
                                         color: "#ff7424",
@@ -331,6 +334,7 @@ var data ={}
                                             color: '#ff7424',
                                         },
                                         color: 'black',
+                                        minWidth:'auto'
                                     }} label="In Progress" {...a11yProps(3)} style={value == 3 ? {
                                         borderBottom: '3px solid #ff7424',
                                         color: "#ff7424",
@@ -344,24 +348,34 @@ var data ={}
                             </div>
                             :   projects?.length > 0 ? 
                                 <>
-                                    {projects.map(p => <Link to="/dashboard/projects/project"
-                                        style={{ textDecoration: 'none' }}>
-                                        <Card onClick={() => { callOpenFunction(p.id) }}>
-                                            <CardContent>
-                                                <Typography variant='h6'>{p?.name}</Typography>
-                                                <Grid items direction={'row'} spacing={20}>
-                                                    <Typography variant='body1'>{p?.location_name}</Typography>
-                                                    <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                        {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: 'green', color: '#fff' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />
-                                                        :(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />
-                                                        
-                                                        :(p?.project_status_name=='In Progress')?<Chip style={{ backgroundColor: 'orange', color: '#000' }}label={p?.project_status_name} size="small" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small"  variant="outlined" />
-}
-                                                    </Stack>
-                                                </Grid>
-                                            </CardContent>
-                                        </Card><br />
-                                    </Link>)}
+                                         {projects.map((p) => (
+        <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }}>
+          <Card onClick={() => { callOpenFunction(p.id) }}>
+            <CardContent>
+              <Typography variant='h6'>{p?.name}</Typography>
+              <Grid container direction="row" spacing={2} alignItems="center">
+                <Grid item xs={12} md={6}>
+                  <Typography variant='body1'>{p?.location_name}</Typography>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Stack direction="row" flexWrap="wrap" justifyContent="flex-end" alignItems="center" marginTop={-1}>
+                    {p?.project_status_name === 'Completed' ? (
+                      <Chip style={{ backgroundColor: 'green', color: '#fff' }} label={p?.project_status_name} size="small" color="success" variant="outlined" />
+                    ) : p?.project_status_name === 'Published' ? (
+                      <Chip style={{ backgroundColor: '#ffd796', color: '#000' }} label={p?.project_status_name} size="small" color="secondary" variant="outlined" />
+                    ) : p?.project_status_name === 'In Progress' ? (
+                      <Chip style={{ backgroundColor: 'orange', color: '#000' }} label={p?.project_status_name} size="small" variant="outlined" />
+                    ) : (
+                      <Chip style={{ backgroundColor: '#ffd796', color: '#000' }} label={p?.project_status_name} size="small" variant="outlined" />
+                    )}
+                  </Stack>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card><br />
+        </Link>
+      ))}
+
                                     {/* {
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={count} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
                                     } */}
@@ -376,12 +390,16 @@ var data ={}
                                         <Card onClick={() => { callOpenFunction(p.id) }}>
                                             <CardContent>
                                                 <Typography variant='h6'>{p?.name}</Typography>
-                                                <Grid items direction={'row'} spacing={20}>
-                                                    <Typography variant='body1'>{p?.location_name}</Typography>
-                                                    <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
+                                                <Grid container direction="row" spacing={2} alignItems="center">
+                                                <Grid item xs={12} md={6}>
+                  <Typography variant='body1'>{p?.location_name}</Typography>
+                </Grid>    
+                                                    <Grid item xs={12} md={6}>
+                                      <Stack direction="row" flexWrap="wrap" justifyContent="flex-end" alignItems="center" marginTop={-1}>
                                                     {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: 'green', color: '#fff' }} label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
-                                                    </Stack>
-                                                </Grid>
+                                                    </Stack></Grid>
+                                                    </Grid>
+                                              
                                             </CardContent>
                                         </Card><br />
                                     </Link>)}
@@ -395,19 +413,31 @@ var data ={}
                         <TabPanel value={value} index={2}>
                             {
                                 completedProject?.length > 0 ? <>
-                                    {completedProject.map(p => <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }} >
-                                        <Card onClick={() => { callOpenFunction(p.id) }}>
-                                            <CardContent>
-                                                <Typography variant='h6'>{p?.name}</Typography>
-                                                <Grid items direction={'row'} spacing={20}>
-                                                    <Typography variant='body1'>{p?.location_name}</Typography>
-                                                    <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                    {( p?.project_status_name=='Completed')? <Chip style={{ backgroundColor: 'green', color: '#fff' }}label={p?.project_status_name} size="small" color="success" variant="outlined" />:(p?.project_status_name=='Published')? <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="secondary" variant="outlined" />: <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={p?.project_status_name} size="small" color="error" variant="outlined" />}
-                                                    </Stack>
-                                                </Grid>
-                                            </CardContent>
-                                        </Card><br />
-                                    </Link>)}
+                                      {completedProject.map((p) => (
+        <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }}>
+          <Card onClick={() => { callOpenFunction(p.id) }}>
+            <CardContent>
+              <Typography variant='h6'>{p?.name}</Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <Typography variant='body1'>{p?.location_name}</Typography>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Stack direction="row" justifyContent="flex-end" alignItems="center">
+                    {p?.project_status_name === 'Completed' ? (
+                      <Chip style={{ backgroundColor: 'green', color: '#fff' }} label={p?.project_status_name} size="small" color="success" variant="outlined" />
+                    ) : p?.project_status_name === 'Published' ? (
+                      <Chip style={{ backgroundColor: '#ffd796', color: '#000' }} label={p?.project_status_name} size="small" color="secondary" variant="outlined" />
+                    ) : (
+                      <Chip style={{ backgroundColor: '#ffd796', color: '#000' }} label={p?.project_status_name} size="small" color="error" variant="outlined" />
+                    )}
+                  </Stack>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card><br />
+        </Link>
+      ))}
                                     {/* {
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countCompleted} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
                                     } */}
@@ -418,19 +448,27 @@ var data ={}
                         <TabPanel value={value} index={3}>
                             {
                                 inProgressProjects?.length > 0 ? <>
-                                    {inProgressProjects.map(p => <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }} >
-                                        <Card onClick={() => { callOpenFunction(p.id) }}>
-                                            <CardContent>
-                                                <Typography variant='h6'>{p?.name}</Typography>
-                                                <Grid items direction={'row'} spacing={20}>
-                                                    <Typography variant='body1'>{p?.location_name}</Typography>
-                                                    <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" textAlign="flex-end" marginTop={-4}>
-                                                    {( p?.project_status_name=='In Progress')? <Chip style={{ backgroundColor: 'orange', color: '#fff' }} label={p?.project_status_name} size="small" variant="outlined" />:null}
-                                                    </Stack>
-                                                </Grid>
-                                            </CardContent>
-                                        </Card><br />
-                                    </Link>)}
+                                       {inProgressProjects.map((p) => (
+        <Link to="/dashboard/projects/project" style={{ textDecoration: 'none' }}>
+          <Card onClick={() => { callOpenFunction(p.id) }}>
+            <CardContent>
+              <Typography variant='h6'>{p?.name}</Typography>
+              <Grid container direction="row" spacing={2} alignItems="center">
+                <Grid item xs={12} md={6}>
+                  <Typography variant='body1'>{p?.location_name}</Typography>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Stack direction="row" justifyContent="flex-end" alignItems="center">
+                    {p?.project_status_name === 'In Progress' ? (
+                      <Chip style={{ backgroundColor: 'orange', color: '#fff' }} label={p?.project_status_name} size="small" variant="outlined" />
+                    ) : null}
+                  </Stack>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card><br />
+        </Link>
+      ))}
                                     {/* {
                                         <Pagination page={page} onChange={pageChange} rowsPerPage={25} count={countInprogress} variant="outlined" color="warning" sx={{ color: "#ffd796" }} style={{ float: "right" }} />
                                     } */}

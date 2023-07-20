@@ -105,11 +105,13 @@ function AddProject({ viewMessage }) {
             });
     }
     const getFunder = () => {
+        var roleid= JSON.parse(sessionStorage.getItem('userDetails'))?.role;
+        var empid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
         const data = JSON.stringify({
-            "role_id": 1,
+            "role_id": parseInt(roleid),
             "filter_type": 2,
             "pageNum": 1,
-            "emp_id": 206
+            "emp_id": parseInt(empid)
         });
         const config = {
             method: 'post',
