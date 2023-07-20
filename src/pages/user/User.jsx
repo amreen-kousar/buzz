@@ -206,6 +206,11 @@ export default function User() {
                 onOpenFilter={handleOpenFilter}
                 onCloseFilter={handleCloseFilter}
                 users={users}
+                deleteuser={() => {
+                  setOpenFilter(!openFilter)
+                  handleCloseFilter();
+                  handleDelete();
+                }}
               />
             </Stack>
           </Stack>

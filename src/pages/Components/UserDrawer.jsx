@@ -41,12 +41,15 @@ UserDrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users }) {
+export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users ,deleteuser}) {
   const [profileData, setProfileData] = useState();
   const [user, setUser] = useState();
   const userDetails = sessionStorage?.getItem('userId');
   const isSmallScreen = useMediaQuery('(max-width:600px)');
+const handleclose=()=>{
+   isOpenFilter=false;
 
+}
   useEffect(() => {
     //   editUser()
     updateSetUser();
@@ -54,11 +57,15 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
 
   const updateSetUser = () => {
     setUser(JSON.parse(sessionStorage?.getItem('people')));
+    handleclose();
   };
 
   useEffect(() => {
     profile();
   }, [isOpenFilter,onCloseFilter]);
+
+
+
   const profile = (async) => {
     const userData = JSON.parse(sessionStorage?.getItem('people'))?.id;
     var data = JSON.stringify({
@@ -107,13 +114,15 @@ export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, 
     axios(config)
     .then(function (response) {
       updateSetUser()
-      onCloseFilter()
+      deleteuser()
+     
     })
     .catch(function (error) {
       // console.log(error);
     });
   }
   }
+
 
   var roleid = JSON.parse(sessionStorage?.getItem('people'))?.role_id;
   var peopledetails =JSON.parse(sessionStorage?.getItem('people'))
