@@ -7,6 +7,7 @@ import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import ChooseGelathi from './Components/ChooseGelathi';
 import Filtersmain from './projectfilters/filtersmain';
+import { baseURL } from 'src/utils/api';
 export default function gelathiCirclesList() {
   const { state } = useLocation();
   const [clcikData, setClickData] = useState();
@@ -94,7 +95,8 @@ export default function gelathiCirclesList() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircle.php',
+      
+      url: baseURL+'getGelathiCircle',
       headers: {
         'Content-Type': 'application/json',
       },
