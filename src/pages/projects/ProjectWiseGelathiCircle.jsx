@@ -9,6 +9,7 @@ import ChooseGelathi from './Components/ChooseGelathi';
 import Filtersmain from './projectfilters/filtersmain';
 import Circledrawer from './Components/Circledrawer';
 import CircularProgress from '@mui/material/CircularProgress';
+import { baseURL } from 'src/utils/api';
 export default function ProjectWiseGelathiCircle() {
   const { state } = useLocation();
   const [clcikData, setClickData] = useState();
@@ -97,7 +98,7 @@ export default function ProjectWiseGelathiCircle() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGelathiCircle.php',
+      url: baseURL +'getGelathiCircle',
       headers: {
         'Content-Type': 'application/json',
       },
