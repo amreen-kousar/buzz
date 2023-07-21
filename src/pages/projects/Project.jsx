@@ -31,6 +31,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import CreateProj from './Components/CreateProj';
+import BusCheckList from '../BusCheckList';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -166,6 +167,13 @@ function Project(props) {
       <Iconify style={{ color: '#6d7c89' }} icon="material-symbols:add" />
     </IconButton>
   );
+const [openbusChecklist,setOpenBusChecklist] = useState(false);
+
+  const handlebusChecklist=()=>{
+    setOpenBusChecklist(true)
+  }
+
+  const userrole = JSON.parse(sessionStorage.getItem('userDetails'))?.trainer_type;
   return (
     <div>
       <Page title="Dashboard: Project">
@@ -381,7 +389,8 @@ function Project(props) {
             <Grid item xs={12} sm={12} md={5}>
               <Box display="flex" justifyContent="center" alignItems="center" minHeight="10vh" marginTop="80px">
                 <ButtonGroup orientation="vertical" style={{ boxShadow: 'none', borderRadius: '0px' }} elevation={0}>
-                  {userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 2 || userDetails == 12 ? (
+                  {(userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 2 || userDetails == 12) ? 
+                  (
                     <Link to="/dashboard/projects/busTest" state={{ id: data1?.bus_id }} style={styles.linkStyle}>
                       <Button
                         variant="secondary"
@@ -395,10 +404,24 @@ function Project(props) {
                         <span style={{ width: '235px' }}>Bus&nbsp;{data1?.bus_number} & check List</span>
                       </Button>
                     </Link>
-                  ) : null}
+                  ) : (userrole=='senior')? <Button
+                  variant="secondary"
+                  style={styles.buttonStyle}
+          
+                  // endIcon={
+                  //   <IconButton>
+                  //     <Iconify style={{ color: 'black' }} icon="material-symbols:add" />
+                  //   </IconButton>
+                  // }
+
+                >
+                  <span style={{ display:'flex' }}>Bus&nbsp;:&nbsp;{data1?.bus_number} & check List 
+                  <div style={{marginLeft:'37px'}}><BusCheckList data1={data1}/></div></span>
+                </Button>:null}
+
                   {userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 2 || userDetails == 12 ? (
                     <br />
-                  ) : null}
+                  ) : (userrole=='senior')?<br/>:null}
                   {userDetails == 1 || userDetails == 4 || userDetails == 3 || userDetails == 2 || userDetails == 12 ? (
                     <Link
                       to="/dashboard/projects/materialStock"
