@@ -294,33 +294,34 @@ export default function PlanofAction() {
 //  })
  
 // }
-const VyaparApicall = async()=>{
-  const data = localStorage?.getItem('vyapar');
-  const newData =JSON?.parse(data)
-  var config 
-  // for(let i=0; i<newData?.length;i++){
-    newData?.map((item,index)=>{
-     config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data:newData[index],
-    };
-    const res = axios(config)
-    changeState()
-  })
+// const VyaparApicall = async()=>{
+//   const data = localStorage?.getItem('vyapar');
+//   const newData =JSON?.parse(data)
+//   var config 
+//   // for(let i=0; i<newData?.length;i++){
+//     newData?.map((item,index)=>{
+//      config = {
+//       method: 'post',
+//       url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       data:newData[index],
+//     };
+//     const res = axios(config)
+//     changeState()
+//   })
   
-  localStorage.removeItem('vyapar')
-  changeState()
- axios(config)?.then(itm=>{
-  //  console.log("qwerty",itm)
- })
- .catch(err=>{
-  //  console.log(err,"<--GELATHIHR")
- })
-}
+//   localStorage.removeItem('vyapar')
+//   changeState()
+//  axios(config)?.then(itm=>{
+//   //  console.log("qwerty",itm)
+//   changeState()
+//  })
+//  .catch(err=>{
+//   //  console.log(err,"<--GELATHIHR")
+//  })
+// }
 
 // Create a mutex to ensure only one instance of the function runs at a time
 const mutex = {
@@ -398,6 +399,46 @@ const apiCall = async () => {
 
       // Remove the "spoorthi" item from localStorage after all API calls are successful
       localStorage.removeItem('green');
+
+      // Call changeState after all API calls are successful
+      changeState();
+    }
+  } catch (err) {
+    console.error(err);
+    // Handle errors if needed
+  } finally {
+    // Release the mutex lock
+    mutex.unlock();
+    changeState();
+  }
+  changeState();
+};
+const VyaparApicall = async () => {
+  // Acquire the mutex lock
+  if (!mutex.lock()) return;
+
+  try {
+    const data = localStorage?.getItem("vyapar");
+    const newData = JSON?.parse(data);
+
+    if (newData && newData.length > 0) {
+      for (const item of newData) {
+        const config = {
+          method: 'post',
+          url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          data: item,
+        };
+
+        await axios(config);
+        changeState();
+        // Handle the response if needed
+      }
+
+      // Remove the "spoorthi" item from localStorage after all API calls are successful
+      localStorage.removeItem('vyapar');
 
       // Call changeState after all API calls are successful
       changeState();
