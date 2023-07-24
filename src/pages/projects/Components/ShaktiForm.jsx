@@ -30,6 +30,7 @@ import Iconify from 'src/components/Iconify';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import  { useRef } from 'react';
+import { ConnectingAirportsOutlined } from '@mui/icons-material';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -54,6 +55,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
   const [purchase, setpurchase] = React.useState(false);
   const [sharelearning, setsharelearning] = React.useState(false);
   const [shareproblems, setshareproblems] = React.useState(false);
+  const [localFormPresent, setlocalFormPresent] = React.useState(new Map());
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [checked, setChecked] = React.useState({
     loanborrow: [],
@@ -93,7 +95,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
         const parsedData = existingData ? JSON.parse(existingData) : [];
         if(parsedData?.length){
           parsedData.map(item=>{
-            if(item?.partcipantId===itm?.participant_id){
+            if(item?.participantId===itm?.participant_id){
               setSendData(item);
               setIsFormPresentLocally(true)
             }
@@ -394,15 +396,50 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
    }
    
   };
+  useEffect(() => {
+    let localFormPresent1 = new Map();
+    let existingData;
+    existingData = localStorage.getItem('shaktiform');
+    let parsedData = JSON.parse(existingData);
+    parsedData?.map((item) => {
+      localFormPresent1.set(item?.participantId, 'true');
+    });
+      setlocalFormPresent(localFormPresent1);
+
+      console.log(localFormPresent1,"localFormPresent1")
+    },[localStorage?.getItem("shaktiform")]);
+  
+  useEffect(()=>{
+console.log("localFormPresent1 called")
+  },[localFormPresent])
+    const handleSurveyform = ()=>{
+      alert("This form was Filled!!")
+    }
+
+const handlesurvey=()=>{
+  alert('Form is already filled')
+}
+{console.log(itm,"itemmmmm")}
+{console.log(itm?.isSurveyDone==='0' , (localFormPresent?.has(itm?.participant_id)),"localdataaaaaaa")}
   return (
     <>
       {/* <Button variant="outlined" onClick={handleClickOpen}>
      Survey form
       </Button> */}
       <div style={{ position: 'absolute', right: 0, float: 'right' }}>
-        {(itm?.isSurveyDone=='0')?<IconButton onClick={handleClickOpen}>
-          <Iconify icon="clarity:form-line" width={20} height={20} color="#ff7424" />
-        </IconButton>:<IconButton >
+        {
+        (itm?.isSurveyDone=='0' && !(localFormPresent?.has(itm?.participant_id)))?
+        <IconButton onClick={handleClickOpen}>
+          <Iconify icon="clarity:form-line" width={20} height={20} color="#ff7424" /> 
+        </IconButton>
+              
+        :( itm?.isSurveyDone==='0' && (localFormPresent?.has(itm?.participant_id)))?
+
+     <>
+       <IconButton onClick={handleSurveyform}>
+                
+       <span style={{color:"black"}}>📄</span>
+                   </IconButton></> :<IconButton onClick={handlesurvey}>
           <Iconify icon="charm:notes-tick" width={20} height={20} color="green" />
         </IconButton>}
       </div>
@@ -414,7 +451,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
             shakthiformdata();
           }}
         >
-          <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+          <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
             <Toolbar>
               <IconButton edge="start" color="inherit" onClick={handledClose} aria-label="close">
                 <CloseIcon />
@@ -427,8 +464,8 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
               </Button>
             </Toolbar>
           </AppBar>
-          <Grid>
-            <Card>
+          <Grid style={{marginTop:20}}>
+            <Card >
               <CardContent>
                 <Stack>
                   <Typography mt={3} variant="h6" color="primary">
