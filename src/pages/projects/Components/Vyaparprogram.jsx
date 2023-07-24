@@ -692,7 +692,7 @@ else{
           <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
             <Toolbar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
               <IconButton style={{ color: 'white' }} onClick={handleClose}>
-               {(isOnline())? <Iconify icon="material-symbols:arrow-back-rounded" />:<div style={{borderRadius:5}}>back</div>}
+               {(isOnline())? <Iconify icon="material-symbols:arrow-back-rounded" />:<div style={{borderRadius:5}}>🡠</div>}
               </IconButton>
               <Typography sx={{ ml: 2, flex: 1, color: 'white' }} variant="h6" component="div">
                 Buzz Vyapar Program Baseline

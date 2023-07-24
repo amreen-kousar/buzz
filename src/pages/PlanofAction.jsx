@@ -223,6 +223,7 @@ export default function PlanofAction() {
      apiCall()
  VyaparApicall()
  apigelathicircle()
+ shaktiformapi();
 },[isOnline])
 useEffect(()=>{
 
@@ -314,6 +315,32 @@ const apigelathicircle = async() =>{
  })
   changeState()
 }
+
+const shaktiformapi = async()=>{
+  const data = localStorage?.getItem('shaktiform');
+  const newData = JSON?.parse(data);
+  newData.map((itm,index)=>{
+    var config = {
+      method: 'post',
+      url: 'https://bdms.buzzwomen.org/appTest/addSurveyData.php',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: newData[index],
+    };
+    const res = axios(config);
+  })
+  localStorage.removeItem('shaktiform');
+  axios(config)?.then(itm=>{
+    //  console.log("qwerty",itm)
+   })
+   .catch(err=>{
+    //  console.log(err,"<--GELATHIHR")
+   })
+}
+
+
+
   // event listeners to update the state 
   window.addEventListener('online', () => {
       setOnline(true)
