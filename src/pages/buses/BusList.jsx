@@ -8,6 +8,7 @@ import Addbus from './Addbus';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
 import Iconify from '../../components/Iconify';
+import BusCheckList from '../BusCheckList';
 export default function User() {
   var userAccess = ['2']
   var userIdCheck = sessionStorage?.getItem('userId')
@@ -48,7 +49,6 @@ export default function User() {
       "emp_id": userid,
       "search": search
     });
-    console.log(data, "checking for search")
     const config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/getBuses.php',
@@ -109,6 +109,7 @@ export default function User() {
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
+  const userrole = JSON.parse(sessionStorage.getItem('userDetails'))?.trainer_type
   return (
     <Page title="User">
       <Searchbar id="search-bar" getSearch={(e) => searchFunction(e)} />
@@ -120,7 +121,7 @@ export default function User() {
         </Snackbar>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h5" gutterBottom>
-            {selected?.type ? " Bus List" : "All Bus List "}&nbsp;({count})
+            {selected?.type ? " Bus List" : "All Bus List "}&nbsp;({totalCount})
           </Typography>
           <Button id="bus-list" style={{ float: "right", color: '#ff7424' }}
             sx={{
@@ -167,22 +168,22 @@ export default function User() {
             onCloseFilter={handleclosebusfilter}
           />
         </Stack>
-        {buses?.length == 0 && (
+        {totalCount == null || totalCount==0 && (
           <div>
             <h1 id="bus-no-data-fnd" style={{ fontWeight: 900, textAlign: 'center' }}><br />No data found</h1>
           </div>
         )}
         {buses?.map((itm,index) => {
           return (
-            <Card id={index} style={styles.card1}
-              onClick={() => {
-                setClickData(itm)
-                handleOpenFilter()
-              }}>
+            <Card id={index} style={styles.card1}>
               <div style={{ float: 'left', padding:'20px',backgroundColor:'white' }}>
                 <Iconify id="direction-bus-icon" icon="material-symbols:directions-bus" width={30} height={30} />
               </div>
-              <Card sx={{ boxShadow: 0 }} >
+            <div style={{display:'flex'}}>
+                <Card sx={{ boxShadow: 0 }}  style={{justifyContent:'flex-start'}}   onClick={() => {
+                setClickData(itm)
+                handleOpenFilter()
+              }}>
               <Grid pt={1} pb={1} container xs={6} md={4} direction="row" alignItems="center" justifyContent="space-between" style={{ marginLeft: 15, cursor: "pointer" }}>
                 <Typography id="bus-number" variant="subtitle1" gutterBottom  >
                   {`Bus Number : ${itm?.register_number}`} 
@@ -193,7 +194,13 @@ export default function User() {
               <Typography id="project-name" gutterBottom  >
                   {`Project Name : ${itm?.project_name}`}
                 </Typography>
-              </Grid></Card>
+              </Grid>
+            
+              </Card>  
+              {(userrole=='senior')?  <div style={{ marginLeft: 'auto' , padding:10}}>
+          <BusCheckList itm={itm} busesd={busesd} />
+        </div>:null}
+            </div>
             </Card>
           )
         })}
@@ -204,6 +211,8 @@ export default function User() {
      
       </Stack>
       }
+    
+
     </Page>
   );
 }

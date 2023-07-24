@@ -142,7 +142,7 @@ useEffect(()=>{
     setReportingManager([...temprepoManager]);
   };
   const getProjectOfManager = async (value) => {
-    setEditData({ ...editData, reportingManager: value?.id });
+    setEditData({ ...editData, supervisorId: value?.id });
     const data = JSON.stringify({
       manager_id: (value)? value?.id : user?.supervisorId,
     });

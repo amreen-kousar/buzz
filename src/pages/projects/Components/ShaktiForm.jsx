@@ -30,6 +30,7 @@ import Iconify from 'src/components/Iconify';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import  { useRef } from 'react';
+import { ConnectingAirportsOutlined } from '@mui/icons-material';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -43,6 +44,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
   const [problemsdisheartened, setproblemsdisheartened] = React.useState(false);
   const [problemsolutions, setproblemsolutions] = React.useState(false);
   const [plan, setplan] = React.useState(false);
+  const [shaktidata,setshaktidata]=React.useState('');
   const [worthperson,setworthperson] = React.useState(false);
   const[qualitiesgood,setqualitiesgood]=React.useState(false);
   const [failureperson,setfailureperson]=React.useState(false);
@@ -53,6 +55,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
   const [purchase, setpurchase] = React.useState(false);
   const [sharelearning, setsharelearning] = React.useState(false);
   const [shareproblems, setshareproblems] = React.useState(false);
+  const [localFormPresent, setlocalFormPresent] = React.useState(new Map());
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [checked, setChecked] = React.useState({
     loanborrow: [],
@@ -76,6 +79,46 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
     setOpen(false);
    
   };
+
+  const saveDataLocally = (key, data) => {
+    const existingData = localStorage.getItem('shaktiform');
+    const parsedData = existingData ? JSON.parse(existingData) : [];
+    const newData = { ...data}; // Replace with your own data object
+    parsedData.push(newData);
+    const updatedData = JSON.stringify(parsedData);
+    localStorage.setItem('shaktiform', updatedData);
+};
+
+
+  useEffect(()=>{
+    const existingData = localStorage.getItem('shaktiform');
+        const parsedData = existingData ? JSON.parse(existingData) : [];
+        if(parsedData?.length){
+          parsedData.map(item=>{
+            if(item?.participantId===itm?.participant_id){
+              setSendData(item);
+              setIsFormPresentLocally(true)
+            }
+          })
+        }
+    },[])
+
+
+  const isOnline = () => {
+    return navigator.onLine;
+  };
+  
+  
+  const networkAccess = async () => {
+    try {
+      await fetch('https://www.google.com/', { mode: 'no-cors' });
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+  
+
   const handledClose = () => {
     setOpen(false);
     setworthperson(false);
@@ -217,7 +260,8 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
     moneyborrowed: '',
   });
   const shakthiformdata = async () => {
-    var data = JSON.stringify({
+    var data ={}
+   data = JSON.stringify({
       participantId: itm?.participant_id,
       implementationPlan: plan,
       goodQuality: qualitiesgood,
@@ -260,6 +304,59 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
       savingMoney: savemoney,
       assetPurchase: purchase,
     });
+
+   if(isOnline() && networkAccess()){
+    if(localStorage.getItem('shaktiform')){
+      data = setshaktidata(saveDataLocally('shaktiform',JSON.parse(data)))
+      setshaktidata(data);
+    }
+   
+   else{
+    var data = JSON.stringify({
+       participantId: itm?.participant_id,
+       implementationPlan: plan,
+       goodQuality: qualitiesgood,
+       accessToHealtcare: healthcareaccess,
+       accessToCredit: creditaccess,
+       household_books_accounts: sendData?.household_books_accounts,
+       saveRegularly: sendData?.saveRegularly,
+       middleman: null,
+       specificGoalForSavings: sendData?.specificGoalForSavings,
+       solutionToProblems: problemsolutions,
+       others: null,
+       familyIncomeGeneration: 1,
+       goal: 100,
+       householdUse: null,
+       personOfWorth: worthperson,
+       reasonOthersToBorrowLoan: checked['loanborrow'],
+       moneyborrowed: checked['borrowedmoney'],
+       ownAsset: sendData?.ownAsset,
+       separateFinancialAsset: sendData?.separateFinancialAsset,
+       partOfCollective: sendData?.partOfCollective,
+       whereSaveMoney: moneysave,
+       annualLoanInterest: sendData?.annualLoanInterest,
+       haveLoan: sendData?.haveLoan,
+       importantToShareTheirProb: shareproblems,
+       profitForSarees: sendData?.profitForSarees,
+       spendMoney: sendData?.spendMoney,
+       frequencyOfSaving: savingfrequency,
+       loanOnWhoseName: sendData?.loanOnWhoseName,
+       haveGoal: sendData?.haveGoal,
+       pathwayToGoal: sendData?.pathwayToGoal,
+       howMuchSaveToAchieve: sendData?.howMuchSaveToAchieve,
+       educationDecision: education,
+       noChoiceForSolution: solution,
+       livelihood: livelihoodvalue,
+       shareLearningWithCommunity: sharelearning,
+       disheartenedToProblems: problemsdisheartened,
+       amFailure: failureperson,
+       dayTodayExpenditure: expenditure,
+       accounts_for_Self_Enterprises: sendData?.accounts_for_Self_Enterprises,
+       savingMoney: savemoney,
+       assetPurchase: purchase,
+     });
+   }
+
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/addSurveyData.php',
@@ -290,17 +387,59 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
           timer: 2000,
         });
       });
-    handleClose();
+      handleClose();
+   }
+  
+   else{
+       setshaktidata(saveDataLocally('shaktiform',JSON.parse(data)));
+        handleClose(); 
+   }
+   
   };
+  useEffect(() => {
+    let localFormPresent1 = new Map();
+    let existingData;
+    existingData = localStorage.getItem('shaktiform');
+    let parsedData = JSON.parse(existingData);
+    parsedData?.map((item) => {
+      localFormPresent1.set(item?.participantId, 'true');
+    });
+      setlocalFormPresent(localFormPresent1);
+
+      console.log(localFormPresent1,"localFormPresent1")
+    },[localStorage?.getItem("shaktiform")]);
+  
+  useEffect(()=>{
+console.log("localFormPresent1 called")
+  },[localFormPresent])
+    const handleSurveyform = ()=>{
+      alert("This form was Filled!!")
+    }
+
+const handlesurvey=()=>{
+  alert('Form is already filled')
+}
+{console.log(itm,"itemmmmm")}
+{console.log(itm?.isSurveyDone==='0' , (localFormPresent?.has(itm?.participant_id)),"localdataaaaaaa")}
   return (
     <>
       {/* <Button variant="outlined" onClick={handleClickOpen}>
      Survey form
       </Button> */}
       <div style={{ position: 'absolute', right: 0, float: 'right' }}>
-        {(itm?.isSurveyDone=='0')?<IconButton onClick={handleClickOpen}>
-          <Iconify icon="clarity:form-line" width={20} height={20} color="#ff7424" />
-        </IconButton>:<IconButton >
+        {
+        (itm?.isSurveyDone=='0' && !(localFormPresent?.has(itm?.participant_id)))?
+        <IconButton onClick={handleClickOpen}>
+          <Iconify icon="clarity:form-line" width={20} height={20} color="#ff7424" /> 
+        </IconButton>
+              
+        :( itm?.isSurveyDone==='0' && (localFormPresent?.has(itm?.participant_id)))?
+
+     <>
+       <IconButton onClick={handleSurveyform}>
+                
+       <span style={{color:"black"}}>📄</span>
+                   </IconButton></> :<IconButton onClick={handlesurvey}>
           <Iconify icon="charm:notes-tick" width={20} height={20} color="green" />
         </IconButton>}
       </div>
@@ -312,7 +451,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
             shakthiformdata();
           }}
         >
-          <AppBar sx={{ position: 'relative', bgcolor: '#ff7424' }}>
+          <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
             <Toolbar>
               <IconButton edge="start" color="inherit" onClick={handledClose} aria-label="close">
                 <CloseIcon />
@@ -325,8 +464,8 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
               </Button>
             </Toolbar>
           </AppBar>
-          <Grid>
-            <Card>
+          <Grid style={{marginTop:20}}>
+            <Card >
               <CardContent>
                 <Stack>
                   <Typography mt={3} variant="h6" color="primary">

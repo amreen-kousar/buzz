@@ -246,7 +246,7 @@ axios(config)
     formdata.append("operations_manager_id", data.operations_manager_id)
     formdata.append("locationID", data.location_id)
     formdata.append("location_name", data.location_name),
-    formdata.append("publish", "")
+    formdata.append("publish", 1)
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appGo/createProject',

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import React from 'react'
-import { Button, Card, CardActions, CardContent, Stack } from '@mui/material';
+import { Button, Card, CardActions, CardContent, Stack ,Icon} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -26,6 +26,7 @@ export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,ha
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
   const [checkData,setCheckData]=React.useState('');
+
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -75,6 +76,9 @@ export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,ha
       // console.log(error);
     });
   }
+
+  
+
   return (
     <div>
       <Dialog
@@ -140,7 +144,7 @@ export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,ha
                       }>
                         {itm?.participant_name}
                         </Typography>
-                   <ShaktiForm itm={itm} reloadFUnction={reloadfuncton} />
+                 <ShaktiForm itm={itm} reloadFUnction={reloadfuncton} />
                     </div>
                   </CardActions>
                 </CardContent>

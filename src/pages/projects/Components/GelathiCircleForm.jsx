@@ -39,8 +39,6 @@ export default function GelathiCircleForm({
   singleCircleData,
   id,componentreloadmethod 
 }) {
-  console.log("🚀 ~ file: GelathiCircleForm.jsx:42 ~ componentreloadmethod:", componentreloadmethod)
-  
   const { state } = useLocation();
   const [open, setOpen] = React.useState(true);
   const [vyaapar, setVyaapar] = useState('');
@@ -204,7 +202,6 @@ const saveDataLocally = (key, data) => {
   parsedData.push(newData);
   const updatedData = JSON.stringify(parsedData);
   localStorage.setItem('spoorthi', updatedData);
-  console.log("i called and store ", updatedData)
   componentreloadmethod();
 // localStorage.setItem(key, JSON.stringify(data));
 };
@@ -360,7 +357,7 @@ const saveDataLocally = (key, data) => {
         >
           <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }}>
             <IconButton style={{ float: 'right', color: 'white' }} onClick={handleClose}>
-            {(isOnline())? <Iconify icon="material-symbols:arrow-back-rounded" />:<div style={{borderRadius:5}}>Back</div>}
+            {(isOnline())? <Iconify icon="material-symbols:arrow-back-rounded" />:<div style={{borderRadius:5}}> 🡠</div>}
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
               Spoorthi Baseline Questionnaire 

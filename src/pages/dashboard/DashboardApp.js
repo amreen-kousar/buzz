@@ -320,61 +320,62 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
           </Grid>
      
      </>
-     :
-     (rolevalue=='senior')?
-     <>
-     <Grid container spacing={3} marginTop={4}>
-            <Grid item xs={12} sm={6} md={4}>
+//      :
+//      (rolevalue=='senior')?
+//      <>
+//      <Grid container spacing={3} marginTop={4}>
+//             <Grid item xs={12} sm={6} md={4}>
 
-              <AppWidgetSummary
-                title="Target"
-                total={(summaryData?.summary_target>=0)?summaryData?.summary_target:null}
-                color="motivator"
+//               <AppWidgetSummary
+//                 title="Target"
+//                 total={(summaryData?.summary_target>=0)?summaryData?.summary_target:null}
+//                 color="motivator"
 
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+//               />
+//             </Grid>
+//             <Grid item xs={12} sm={6} md={4}>
 
-              <AppWidgetSummary
-                title="Actual"
-                total={(summaryData?.summary_actual>=0)?summaryData?.summary_actual:null}
-                color="motivator"
+//               <AppWidgetSummary
+//                 title="Actual"
+//                 total={(summaryData?.summary_actual>=0)?summaryData?.summary_actual:null}
+//                 color="motivator"
 
-              />
-            </Grid>
+//               />
+//             </Grid>
 
-            <Grid item xs={12} sm={6} md={4}>
+//             <Grid item xs={12} sm={6} md={4}>
 
-<AppWidgetSummary
-  title="2nd Day Turnout  %"
-  total={(summaryData?.summary_day2>=0)?summaryData?.summary_day2:null}
-  color="motivator"
+// <AppWidgetSummary
+//   title="2nd Day Turnout  %"
+//   total={(summaryData?.summary_day2>=0)?summaryData?.summary_day2:null}
+//   color="motivator"
 
-/>
-</Grid>
-            <Grid item xs={12} sm={6} md={6}>
+// />
+// </Grid>
+//             <Grid item xs={12} sm={6} md={6}>
 
-              <AppWidgetSummary
-                title="Villages"
-                total={(summaryData?.summary_villages>=0)?summaryData?.summary_villages:null}
-                color="motivator"
+//               <AppWidgetSummary
+//                 title="Villages"
+//                 total={(summaryData?.summary_villages>=0)?summaryData?.summary_villages:null}
+//                 color="motivator"
 
-              />
-            </Grid>
+//               />
+//             </Grid>
 
-            <Grid item xs={12} sm={6} md={6}>
+//             <Grid item xs={12} sm={6} md={6}>
 
-<AppWidgetSummary
-  title="Women"
-  total={(summaryData?.summary_actual>=0)?summaryData?.summary_actual:null}
-  color="motivator"
+// <AppWidgetSummary
+//   title="Women"
+//   total={(summaryData?.summary_actual>=0)?summaryData?.summary_actual:null}
+//   color="motivator"
 
-/>
-</Grid>
+// />
+// </Grid>
           
           
-          </Grid>
-     </>:
+//           </Grid>
+//      </>:
+:
      ((roleid == 5) ||roleid == 13)?
     
      <>

@@ -219,14 +219,13 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
             <div style={{ display: "flex", justifyContent: "center", width: "60vw" }}>
               <div>
                 <Card sx={{ width: '100wh' }} ><br />
-                  <Stack spacing={1} sx={{ px: 1 }}>
+                  <Stack spacing={1} sx={{ px: [0, 1, 2] }}>
                     <Card >
                       <CardContent>
-                        <div style={{ float: 'left', paddingTop: 40, paddingRight: 5, paddingBottom: 40 }}>
+                        <div style={{ display:"flex",alignItems:"center", paddingBottom: 40 }}>
                           <Avatar src={(profileData?.profile_pic) ? profileData.profile_pic : defaultImage} alt="photoURL" style={{ height: 50, width: 50 }} />
-                        </div>
-                        <Card sx={{ boxShadow: 0 }}>
-                          <CardContent >
+                       
+                       <div style={{ marginLeft: 10 }}>
                             <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name}</Typography>
                             <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
                               Role : <span style={{ fontWeight: 100, color: '#444444' }}>{userDetails?.role_name}</span>
@@ -239,9 +238,9 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                             </Typography>
                             <Typography variant="body1" gutterBottom style={{ color: '#444444' }}>
                               Date Of Joining : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.doj}</span> </Typography>
+                         
+                          </div> </div>
                           </CardContent>
-                        </Card>
-                      </CardContent>
                     </Card>
                     <div>
                       <Card style={{ width: "auto" }}>
@@ -281,6 +280,8 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                     </div>
                     <br></br>
                     <div>
+                      <Card style={{ width: "auto", marginTop:0}}>
+                        <CardContent>
                       <Card variant="subtitle1" gutterBottom style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#ff7424' }}>
                         Projects
                       </Card>
@@ -293,7 +294,9 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                             )
                           }
                         </CardContent>
-                      </Card> : <span style={{ textAlign: 'center' }}>No data</span>}
+                      </Card> : <div style={{ textAlign: 'center',alignItems:'center',justifyContent:'center' }}>No data</div>}
+                      </CardContent>
+                      </Card>
                     </div>
                   </Stack>
                   <CardActions disableSpacing>
@@ -314,7 +317,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                         Edit User
                       </Button>
                     </ExpandMore> :
-                      <IconButton title="close" onClick={handleCloseClick} color="inherit" aria-label="close" style={{ float: 'right' }} id="close">
+                      <IconButton title="close" onClick={handleCloseClick} color="inherit" aria-label="close" style={{ float: 'right',left:50 }} id="close">
                         <CloseIcon />
                       </IconButton>}
                   </CardActions>
@@ -322,7 +325,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
                   <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
                       <Stack mb={3} style={{ backgroundColor: '#ffd796', borderRadius: 9 }}>
-                        <Typography style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#ff7424' }}
+                        <Typography style={{ padding: 10, color: 'white', textAlign: 'center', borderRadius: '0px', backgroundColor: '#ff7424' ,marginTop:0}}
                           variant="h6">
 
                           User Information

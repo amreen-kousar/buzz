@@ -54,7 +54,7 @@ PoaGF.propTypes = {
   onOpenFilterGF: PropTypes.func,
   onCloseFilterGF: PropTypes.func,
 };
-export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF, clcikData, batchState }) {
+export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF, clcikData, batchState, reloadPOAGF}) {
   const [batch, setBatch] = useState('');
   const [photos, setPhotos] = React.useState(false);
   const [shown, setShown] = React.useState(false);
@@ -208,6 +208,9 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
         // console.log(error, 'failed');
       });
   };
+  useEffect(()=>{
+    circle()
+  },[reloadPOAGF])
   const circle = (async) => {
     const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var data = JSON.stringify({
@@ -376,22 +379,18 @@ const [componentreload  ,setComponentReload] = useState(false)
 
 const componentreloadmethod  = ()=>{
   setComponentReload(!componentreload)
-  console.log("i a, calling componentreloadmethod(); from spoorthi")
 }
   const [localFormPresent, setlocalFormPresent] = useState('');
 
   useEffect(() => {
-    console.log(clcikData , "clickeddata in useEffect")
-    console.log(batchState , "batchstate in useEffect")
+  
     let session = JSON.parse(localStorage.getItem('sessiondata'))
     let localFormPresent1 = new Map();
     let existingData;
 if(session?.type == 4){
   existingData = localStorage.getItem('spoorthi');
   let parsedData = JSON.parse(existingData);
-console.log(parsedData, "inside useEffect")
   parsedData?.map((item) => {
-    console.log(parsedData, "inside map")
     localFormPresent1.set(item?.partcipantId, 'true');
   });
 }
@@ -411,9 +410,6 @@ if(session?.type == 16){
    localFormPresent1.set(item?.partcipantId, 'true');
  });
 }
- 
-    console.log(localFormPresent1, 'partcipantIdparhandleClosehandleClosetcipantId');
- 
     setlocalFormPresent(localFormPresent1);
   },[localStorage?.getItem("vyapar"),localStorage?.getItem("spoorthi"),localStorage?.getItem("green"),componentreload]);
 
@@ -435,8 +431,6 @@ const gelathinamelist = (async) => {
     .catch(function (error) {
       let gelathidata=JSON.parse(localStorage.getItem('gelathilist'))
       setVyaapar(gelathidata);
-      console.log(error,"data assigned",gelathidata);
-      // console.log(error);
     });
 };
 useEffect(()=>{

@@ -129,9 +129,12 @@ export default function projectMultiDrawer({
 
     axios(config)
       .then(function (response) {
+        localStorage.setItem('trainingbatchdata',JSON.stringify(response.data));
         setBatch(response.data);
       })
       .catch(function (error) {
+        let localData = JSON.parse(localStorage.getItem('trainingbatchdata'));
+        setBatch(localData);
         // console.log(error);
       });
     GetStatus();
@@ -356,6 +359,8 @@ export default function projectMultiDrawer({
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
     linkStyle: { textDecoration: 'none', color: 'black' },
   };
+
+
 
   return (
     <>

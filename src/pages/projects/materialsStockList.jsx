@@ -223,70 +223,58 @@ const onChangeMaterialValue = (index , quantity)=>{
           flexGrow: 1,
         }}
       >
-        <TableContainer component={Paper} sx={{justifyContent:'center',alignItems:'center',ml:10}}>
-          <Table aria-label="customized table">
-            <TableHead>
-              <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                <StyledTableCell>ITEM</StyledTableCell>
-                <StyledTableCell>Available</StyledTableCell>
-               {admin? <StyledTableCell>Add</StyledTableCell> : null }
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {demo && demo.map((row , index) => (
-                <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                    {row.name} {row.id}
-                  </StyledTableCell>
-                  <StyledTableCell>{row.quantity_exist}</StyledTableCell>
-                {
-                  admin?   <StyledTableCell>{<>
+          <TableContainer component={Paper} sx={{ justifyContent: 'center', alignItems: 'center', ml: 'auto', mr: 'auto', maxWidth: '800px', mt: '20px' }}>
+      <Table aria-label="customized table">
+        <TableHead>
+          <TableRow style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <StyledTableCell>ITEM</StyledTableCell>
+            <StyledTableCell>Available</StyledTableCell>
+            {admin ? <StyledTableCell>Add</StyledTableCell> : null}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {demo && demo.map((row, index) => (
+            <StyledTableRow key={index}>
+              <StyledTableCell component="th" scope="row">
+                {row.name} {row.id}
+              </StyledTableCell>
+              <StyledTableCell>{row.quantity_exist}</StyledTableCell>
+              {
+                admin ? (
+                  <StyledTableCell>
                     <TextField
-          required
-          id="standard-required"
-          type="number"
-         onChange={
-          
-            (e)=>{onChangeMaterialValue(index , e.target.value) }
-        
-      
-      }
-          defaultValue=""
-          variant="standard"
-        />
-                  </>}</StyledTableCell>
-                  :null
-                }
-               
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {(Userrole == 2 || Userrole==4) && close?
-                  
-                  <div style={{ display: 'flex' ,marginTop:"20px", marginLeft:"97%" }}>
-                   
-                    
-                    <Button
-           onClick={onSubmit}
-           
-           sx={{
-             '&:hover': {
-               backgroundColor: '#ffd796',
-             },
-             color: '#ff7424',
-             backgroundColor: '#ffd796',
-             marginLeft: '10px',
-           }}
-         >
-           Save  
-         </Button>
-                  
-      
-                  </div>
-               
-                    :null }
+                      required
+                      id={`standard-required-${index}`}
+                      type="number"
+                      onChange={(e) => { onChangeMaterialValue(index, e.target.value) }}
+                      defaultValue=""
+                      variant="standard"
+                    />
+                  </StyledTableCell>
+                ) : null
+              }
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+      {(Userrole == 2 || Userrole == 4) && close ? (
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
+          <Button
+            onClick={onSubmit}
+            sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+              },
+              color: '#ff7424',
+              backgroundColor: '#ffd796',
+            }}
+          >
+            Save
+          </Button>
+        </div>
+      ) : null}
+    </TableContainer>
+
         </Grid>
         </Container>
         </Page>

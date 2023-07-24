@@ -122,10 +122,11 @@ export default function TeamQuality({reload}) {
     setSinglePersonFormDetail(singlePersonFormDetail);
     setOpen(true);
   };
+
   return (
-    todayPoa == "" ?
-    <div style={{marginTop:"20%" , marginLeft:"40%"}}>
-<CircularProgress />
+    todayPoa.length==0 ?
+    <div style={{fontWeight:700,fontSize:20,textAlign:"center",justifyContent:'center',alignItems:"center"}}>
+No Data Found
 </div>
 :
     <div>

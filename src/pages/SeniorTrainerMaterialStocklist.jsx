@@ -32,13 +32,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       border: 0,
     },
   }));
-
  
-
-
-
 export default function SeniorTrainerMaterialStocklist(){
-
     const [close , setClose ] = useState(false)
     const [demo,setDemo] = useState([])
     const [admin, setAdmin] = useState(false);
@@ -76,15 +71,10 @@ const getProjects = async()=>{
       });
       
 }
-
-
     useEffect(()=>{
         getProjects();
       },[])
-
-
    
-
   
       const demoi = async (itm) => {
           
@@ -93,9 +83,7 @@ const getProjects = async()=>{
         var data = JSON.stringify({
             "project_id":itm?.id
         });
-     
-    
-        const config = {
+    const config = {
           method: 'post',
           url: 'https://bdms.buzzwomen.org/appTest/getStockItems.php', 
           headers: {
@@ -113,8 +101,6 @@ const getProjects = async()=>{
             // console.log(error);
           });
       }
-
-
       const onChangeMaterialValue = (index , quantity)=>{
         const apiData = [...materialStock]
         const changedData = apiData[index]
@@ -137,7 +123,6 @@ const getProjects = async()=>{
         
         }, [demo])
     
-
       let  stock = materialStock;
       const onSubmit = ()=>{
         var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
@@ -183,7 +168,6 @@ const getProjects = async()=>{
         });
         setAdmin(false)
       }
-
     
     return (
         <Page title="Buzz Stock">
@@ -213,14 +197,12 @@ const getProjects = async()=>{
                      }>
                         <Iconify style={{color:"white"  }} icon="mdi:minus" />
                       </IconButton>
-
                   }
                   </>
                 
                
             </Stack> 
             
-
             {(projectsList?.length>0)?
             <Card style={{ marginTop: 20,  borderRadius: 20 }}>
                 <CardContent>
@@ -241,8 +223,6 @@ const getProjects = async()=>{
                 </CardContent>
           </Card>
          :<h3 style={{textAlign:'center'}}>No Projects</h3>}<br/>
-
-
       <Grid
         sx={{
           p: 1,
@@ -251,78 +231,63 @@ const getProjects = async()=>{
           flexGrow: 1,
         }}
       >
-        <TableContainer component={Paper} sx={{justifyContent:'center',alignItems:'center',ml:10}}>
-          <Table aria-label="customized table">
-          {demo.length>0 ?<TableHead>
-              <TableRow style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 200 }}>
-                <StyledTableCell>Item</StyledTableCell>
-                <StyledTableCell>Available</StyledTableCell>
-                {admin? <StyledTableCell>Consume</StyledTableCell> : null }
+         <TableContainer component={Paper} sx={{ justifyContent: 'center', alignItems: 'center', mx: 'auto', maxWidth: '800px', mt: '20px' }}>
+      <Table aria-label="customized table">
+        {demo.length > 0 ? (
+          <TableHead>
+            <TableRow style={{ justifyContent: 'center', alignItems: 'center' }}>
+              <StyledTableCell>Item</StyledTableCell>
+              <StyledTableCell>Available</StyledTableCell>
+              {admin ? <StyledTableCell>Consume</StyledTableCell> : null}
+            </TableRow>
+          </TableHead>
+        ) : null}
+        <TableBody>
+          {demo.map((row, index) => (
+            <StyledTableRow key={index}>
+              <StyledTableCell component="th" scope="row">
+                {row.name} {row.id}
+              </StyledTableCell>
+              <StyledTableCell>{row.quantity_exist}</StyledTableCell>
+              {admin ? (
+                <StyledTableCell>
+                  <TextField
+                    required
+                    id={`standard-required-${index}`}
+                    type="number"
+                    onChange={(e) => {
+                      onChangeMaterialValue(index, e.target.value);
+                    }}
+                    defaultValue=""
+                    variant="standard"
+                  />
+                </StyledTableCell>
+              ) : null}
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+      {close ? (
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
+          <Button
+            onClick={onSubmit}
+            sx={{
+              '&:hover': {
+                backgroundColor: '#ffd796',
+              },
+              color: '#ff7424',
+              backgroundColor: '#ffd796',
+              marginLeft: '10px',
+            }}
+          >
+            Save
+          </Button>
+        </div>
+      ) : null}
+    </TableContainer>
 
-              </TableRow>
-            </TableHead>:null}
-            <TableBody>
-              {demo && demo.map((row , index) => (
-                <StyledTableRow >
-                  <StyledTableCell component="th" scope="row">
-                    {row.name} {row.id}
-                  </StyledTableCell>
-                  <StyledTableCell>{row.quantity_exist}</StyledTableCell>
-                 
-                  {admin?   <StyledTableCell>{<>
-                    <TextField
-          required
-          id="standard-required"
-          type="number"
-         onChange={
-          
-            (e)=>{onChangeMaterialValue(index , e.target.value) }
-        
-      
-      }
-          defaultValue=""
-          variant="standard"
-        />
-                  </>}</StyledTableCell>
-                  :null
-                }
-                </StyledTableRow>
-              ))}
-            </TableBody>
-            <TableBody>
-            
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {close?
-                  
-                  
-                  <div style={{ display: 'flex' ,marginTop:"20px", marginLeft:"97%" }}>
-                   
-                    
-                    <Button
-           onClick={onSubmit}
-           
-           sx={{
-             '&:hover': {
-               backgroundColor: '#ffd796',
-             },
-             color: '#ff7424',
-             backgroundColor: '#ffd796',
-             marginLeft: '10px',
-           }}
-         >
-           Save  
-         </Button>
-                  
-      
-                  </div>:null}
-               
-   
-      
         </Grid>
         </Container>
         </Page>
-
     );
 }

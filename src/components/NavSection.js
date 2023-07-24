@@ -138,7 +138,6 @@ NavSection.propTypes = {
 export default function NavSection({ navConfig, ...other }) {
   const [isOnline, setOnline] = useState(true);
  const projectline = navConfig?.filter(itm=>itm?.title ==="Plan Of Action")
- console.log(projectline,"<----projectline")
   // On initization set the isOnline state.
   useEffect(()=>{
       setOnline(navigator.onLine)
@@ -153,7 +152,7 @@ export default function NavSection({ navConfig, ...other }) {
       setOnline(false)
   });
   const mainData = isOnline? navConfig:projectline
-  console.log(mainData,"<---navConfig")
+
   const { pathname } = useLocation();
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
   return (
