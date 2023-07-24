@@ -41,6 +41,7 @@ import products from 'src/_mock/products';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -474,7 +475,7 @@ useEffect(()=>{
 
         var config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/new/addGreenBaselineSurvey.php',
+          url: baseURL + 'addGreenBaselineSurvey',
           headers: {
             'Content-Type': 'application/json',
           },
