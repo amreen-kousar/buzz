@@ -94,7 +94,6 @@ const getAddPartcipants=()=>{
   var config = {
     method: 'post',
     url: baseURL+'getEnrollVyaparEnrollment',
-// url : oldbaseURL +'new/getEnrollVyaparEnrollment.php',
     headers: { 
       'Content-Type': 'application/json'
     },
