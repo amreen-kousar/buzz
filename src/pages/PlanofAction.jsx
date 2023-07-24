@@ -148,7 +148,7 @@ export default function PlanofAction() {
       apiCall()
 
     VyaparApicall()
-
+    shaktiformapi()
     apigelathicircle()
 
   },[season, date, userId,!gfDrawer,isOnline])
@@ -247,6 +247,7 @@ export default function PlanofAction() {
 //  VyaparApicall()
 //  apigelathicircle()
 //  shaktiformapi();
+
 // },[isOnline])
 // useEffect(()=>{
 
@@ -315,7 +316,6 @@ const VyaparApicall = async()=>{
   changeState()
  axios(config)?.then(itm=>{
   //  console.log("qwerty",itm)
-  changeState()
  })
  .catch(err=>{
   //  console.log(err,"<--GELATHIHR")
@@ -412,9 +412,6 @@ const apiCall = async () => {
   }
   changeState();
 };
-
-
-
 
 
 const shaktiformapi = async()=>{
