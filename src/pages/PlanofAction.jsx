@@ -206,6 +206,7 @@ export default function PlanofAction() {
         // console.log(error);
       });
   };
+
   const changeState = () => {
     setReload(!reload);
   };
@@ -223,14 +224,17 @@ export default function PlanofAction() {
  VyaparApicall()
  apigelathicircle()
 },[isOnline])
+useEffect(()=>{
 
+},[reload])
 const apiCall = async() =>{
   const data = localStorage?.getItem("green")
   const newData =JSON?.parse(data)
+  var config 
   // for(let i=0; i<newData?.length;i++){
-    newData.map((itm,index)=>{
+    newData?.map((itm,index)=>{
     
-    var config = {
+     config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/new/addGreenBaselineSurvey.php',
       headers: {
@@ -240,20 +244,27 @@ const apiCall = async() =>{
     };
     const res = axios(config)
   })
- 
+  todaypoa()
+  changeState()
+
+  localStorage.removeItem('green')
  axios(config)?.then(itm=>{
   //  console.log("qwerty",itm)
+  // todaypoa()
+  changeState()
  })
  .catch(err=>{
   //  console.log(err,"<--GELATHIHR")
  })
+ 
 }
 const VyaparApicall = async()=>{
   const data = localStorage?.getItem('vyapar');
   const newData =JSON?.parse(data)
+  var config 
   // for(let i=0; i<newData?.length;i++){
-    newData.map((item,index)=>{
-    var config = {
+    newData?.map((item,index)=>{
+     config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
       headers: {
@@ -262,12 +273,14 @@ const VyaparApicall = async()=>{
       data:newData[index],
     };
     const res = axios(config)
+    changeState()
   })
   
   localStorage.removeItem('vyapar')
- 
+  changeState()
  axios(config)?.then(itm=>{
   //  console.log("qwerty",itm)
+  changeState()
  })
  .catch(err=>{
   //  console.log(err,"<--GELATHIHR")
@@ -276,9 +289,10 @@ const VyaparApicall = async()=>{
 const apigelathicircle = async() =>{
   const data = localStorage?.getItem("spoorthi")
   const newData =JSON?.parse(data)
+  var config 
   // for(let i=0; i<=newData?.length;i++){
-  newData.map((item,index)=>{
-    var config = {
+  newData?.map((item,index)=>{
+     config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appTest/new/addSpoorthiBaselineQuestionnaire.php',
       headers: {
@@ -287,16 +301,18 @@ const apigelathicircle = async() =>{
       data:newData[index],
     };
     const res = axios(config)
-   
+    changeState()
   })
  
  axios(config)?.then(itm=>{
   //  console.log("qwerty",itm)
    localStorage.removeItem('spoorthi');
+   changeState()
  })
  .catch(err=>{
   //  console.log(err,"<--GELATHIHR")
  })
+  changeState()
 }
   // event listeners to update the state 
   window.addEventListener('online', () => {
@@ -306,6 +322,22 @@ const apigelathicircle = async() =>{
       setOnline(false)
   });
   
+
+ 
+  useEffect(()=>{
+
+    todaypoa();
+    // setOnline(navigator.onLine)
+
+
+    //   apiCall()
+
+    // VyaparApicall()
+
+    // apigelathicircle()
+
+  },[season, date, userId, reload,!gfDrawer,isOnline])
+
   
   return (
     
@@ -387,6 +419,7 @@ const apigelathicircle = async() =>{
             isOpenFilterGF={gfDrawer}
             onOpenFilterGF={handleOpenGf}
             onCloseFilterGF={handleCloseGf}
+            reloadPOAGF ={reload}
           />
         </Stack>
       )}

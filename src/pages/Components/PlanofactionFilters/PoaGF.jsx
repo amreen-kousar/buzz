@@ -54,7 +54,7 @@ PoaGF.propTypes = {
   onOpenFilterGF: PropTypes.func,
   onCloseFilterGF: PropTypes.func,
 };
-export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF, clcikData, batchState }) {
+export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF, clcikData, batchState, reloadPOAGF}) {
   const [batch, setBatch] = useState('');
   const [photos, setPhotos] = React.useState(false);
   const [shown, setShown] = React.useState(false);
@@ -208,6 +208,9 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
         // console.log(error, 'failed');
       });
   };
+  useEffect(()=>{
+    circle()
+  },[reloadPOAGF])
   const circle = (async) => {
     const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var data = JSON.stringify({

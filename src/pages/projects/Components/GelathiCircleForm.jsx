@@ -357,7 +357,7 @@ const saveDataLocally = (key, data) => {
         >
           <Toolbar sx={{ bgcolor: '#ff7424', color: 'white' }}>
             <IconButton style={{ float: 'right', color: 'white' }} onClick={handleClose}>
-            {(isOnline())? <Iconify icon="material-symbols:arrow-back-rounded" />:<div style={{borderRadius:5}}>Back</div>}
+            {(isOnline())? <Iconify icon="material-symbols:arrow-back-rounded" />:<div style={{borderRadius:5}}> 🡠</div>}
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
               Spoorthi Baseline Questionnaire 
