@@ -6,7 +6,6 @@ import account from '.././_mock/account';
 import { styled } from '@mui/material/styles';
 import Iconify from 'src/components/Iconify';
 import PropTypes from 'prop-types';
-import { baseURL } from 'src/utils/api';
 import {
   Link,
   Container,
