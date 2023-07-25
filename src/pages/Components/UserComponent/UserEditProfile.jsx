@@ -200,7 +200,7 @@ useEffect(()=>{
       editData?.empRole == "Funder" ?8 :
       editData?.empRole == "Partner" ? 9 :
       editData?.empRole == "FIN/HR/VIEWER" ? 11 :
-      editData?.empRole == "Senior Operations Manager" ? 12 :editData?.empRole == "Field Associate Lead" ? 13 : editData?.empRole == "Senior Trainer" ? 14 : null,
+      editData?.empRole == "Senior Operations Manager" ? 12 :editData?.empRole == "Gelathi Facilitator Lead" ? 13 : editData?.empRole == "Senior Trainer" ? 14 : null,
     });
    
     var config = {
