@@ -42,6 +42,7 @@ export default function Trainersdata({ selectDATA, getData,type,data1}) {
                 </TableContainer>
             )
     })}
+    {data1?.trainers?.length==0 && <div style={{textAlign:'center',justifyContent:"center",alignItems:"center",fontWeight:700,marginTop:20}}>No Trainers</div>}
   </Card>
     );
 }

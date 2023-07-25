@@ -169,7 +169,7 @@ export default function BuzzStock() {
                   <StyledTableCell component="th" scope="row">
                     {row.name}        :        
                   </StyledTableCell>
-                  <StyledTableCell>{row.consumed}/{row.current_stock}</StyledTableCell>
+                  <StyledTableCell>{(row.consumed=="")?0:row.consumed}/{row.current_stock}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>

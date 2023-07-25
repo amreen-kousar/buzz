@@ -179,7 +179,7 @@ useEffect(()=>{
            
           } 
            
-         { todayPoa== null? 
+         { todayPoa?.data== null? 
           
        <>
               <h4 style={{textAlign:'center' ,marginTop:"40px"}}>No Data Found</h4>
