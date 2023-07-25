@@ -18,7 +18,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import moment from 'moment';
 import axios from 'axios';
-import baseURL from 'src/utils/api';
+import {baseURL} from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -47,21 +47,21 @@ gelathiData.forEach((itm) => {
 });
 const apiHit = () =>{
   const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
-var data = JSON.stringify({
-  "project_id": data1?.project_id,
-  "circle_name":sendData?.circle_name,
-  "circle_date": moment(sendData?.circle_date)?.format('YYYY-MM-DD'),
-  "gelathi_created_id": userid,
-  "gelathi":gelathiData
-});
-var config = {
-  method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/createCircle.php',
-  headers: { 
-    'Content-Type': 'application/json'
-  },
-  data : data
-};
+  var data = JSON.stringify({
+    "project_id": data1?.project_id,
+    "circle_name":sendData?.circle_name,
+    "circle_date": moment(sendData?.circle_date)?.format('YYYY-MM-DD'),
+    "gelathi_created_id": userid,
+    "gelathi":gelathiData
+  });
+  var config = {
+    method: 'post',
+    url: baseURL + 'createCircle',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
 axios(config)
 .then(function (response) {
   handleClose();
@@ -84,11 +84,9 @@ const createCircle = () =>{
     
   });
  
- 
-  
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/createCircle.php',
+    url: baseURL + 'createCircle',
     headers: { 
       'Content-Type': 'application/json'
     },

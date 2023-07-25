@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from "react"
 import PropTypes from 'prop-types';
+import { baseURL } from 'src/utils/api';
 // material
 import {
     Box,
@@ -37,19 +38,16 @@ export default function ParticipentDetailsDailoge({ isOpenFilter, onOpenFilter, 
     }, [clcikData])
     const Participant = async =>{
         var data = JSON.stringify({
-            "participant_id": clcikData?.id
+            "participant_id": parseInt(clcikData?.id)
           });
-          
-          
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getParticipantData.php',
+            url: baseURL + 'getParticipantData',
             headers: { 
               'Content-Type': 'application/json'
             },
             data : data
           };
-          
           axios(config)
           .then(function (response) {
             setpartiData(response.data)

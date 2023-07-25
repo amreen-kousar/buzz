@@ -15,6 +15,7 @@ import { Stack } from '@mui/system';
 import axios from 'axios';
 import moment from 'moment';
 import { number } from 'prop-types';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -52,12 +53,12 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
 }, [])
   const casted = async =>{
     var config = {
-        method: 'post',
-      maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/getCaste.php',
-        headers: { }
-      };
-      
+      method: 'post',
+    maxBodyLength: Infinity,
+      url: baseURL + 'getCaste',
+      headers: { }
+    };
+    
       axios(config)
       .then(function (response) {
         setCaste(response.data?.data)
@@ -68,12 +69,12 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
   }
   const educationd = async =>{
     var config = {
-        method: 'post',
-      maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/getEducation.php',
-        headers: { }
-      };
-      
+      method: 'post',
+    maxBodyLength: Infinity,
+      url: baseURL + 'getEducation',
+      headers: { }
+    };
+    
       axios(config)
       .then(function (response) {
         setEducation(response.data?.list)
@@ -118,12 +119,13 @@ alert("error!!!!!!")
       }else{
         var config = {
           method: 'post',
-        maxBodyLength: Infinity,
-          url: 'https://bdms.buzzwomen.org/appTest/createParticipant.php',
-          headers: { 
-            'Content-Type': 'application/json'
-          },
-          data : data
+          maxBodyLength: Infinity,
+            url: baseURL + 'createParticipant',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : data
+          
         };
         
         axios(config)

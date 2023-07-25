@@ -20,6 +20,7 @@ import CreateGelathiCircle from './CreateGelathiCircle';
 import { Container } from '@mui/system';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+import { baseURL } from 'src/utils/api';
 // import SearchBar from '@mkyy/mui-search-bar';
 import Box from '@mui/material/Box';
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -89,20 +90,20 @@ const enrolledVyaapar= async(id,i,g) =>{
   var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
   var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
   var data = JSON.stringify({
-      "search": search,
-      "project_id": state?.id,
-      "emp_id": idvalue,
-      "gelathi_id":id?.emp_id?id?.emp_id:'',
-    });
-    
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollVyaparEnrollment.php',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
+    "search": search,
+    "project_id": state?.id,
+    "emp_id": idvalue,
+    "gelathi_id":id?.emp_id?id?.emp_id:'',
+  });
+  
+  var config = {
+    method: 'post',
+    url: baseURL+'getEnrollVyaparEnrollment',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
     
     axios(config)
     .then(function (response) {
@@ -118,20 +119,20 @@ const enrolledGreenMotivators = async(id,i,g) =>{
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
-        "search": search,
-        "project_id": state?.id,
-        "emp_id": idvalue,
-        "gelathi_id":id?.emp_id?id?.emp_id:""
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollGreenMotivators.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
+      "search": search,
+      "project_id": state?.id,
+      "emp_id": idvalue,
+      "gelathi_id":id?.emp_id?id?.emp_id:""
+    });
+    
+    var config = {
+      method: 'post',
+      url: baseURL+'getEnrollGreenMotivators',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
       
       axios(config)
       .then(function (response) {
@@ -147,20 +148,20 @@ const enrolledGreenMotivators = async(id,i,g) =>{
     var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
 var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
 var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
-    var data = JSON.stringify({
-        "search": search,
-        "project_id": state?.id,
-        "emp_id": idvalue,
-        "role_id": role
-      });
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
+var data = JSON.stringify({
+  "search": search,
+  "project_id": state?.id,
+  "emp_id": idvalue,
+  "role_id": role
+});
+var config = {
+  method: 'post',
+  url: baseURL+'getEnrollGelathi',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
       axios(config)
       .then(function (response) {
         setenrolled(response.data)

@@ -159,11 +159,10 @@ export default function GelathiCircleForm({
     // });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
+      url: baseURL + 'getGelathiList',
       headers: {
         'Content-Type': 'application/json',
-      },
-      // data: data,
+      }
     };
     axios(config)
       .then(function (response) {

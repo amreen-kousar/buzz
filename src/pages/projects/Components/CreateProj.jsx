@@ -22,6 +22,7 @@ import Add from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Iconify from 'src/components/Iconify';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -77,7 +78,6 @@ const [isReload , setIsReload]= useState(false)
     }
 setShowAddBuss(false)
     partnerList();
-    Associateproject();
     teamList();
     driverList();
     setNotify(true);
@@ -98,7 +98,7 @@ setShowAddBuss(false)
   const partnerList = async => {
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getPartnerList.php',
+      url: baseURL +'getPartnerList',
       headers: {}
     };
     axios(config)
@@ -112,7 +112,7 @@ setShowAddBuss(false)
   const busList = async => {
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getBusList.php',
+      url: baseURL + 'getBusList',
       headers: {}
     };
     axios(config)
@@ -126,7 +126,7 @@ setShowAddBuss(false)
   const teamList = async => {
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getOperationsManagerList.php',
+      url: baseURL + 'getOperationsManagerList',
       headers: {}
     };
     axios(config)
@@ -141,7 +141,7 @@ setShowAddBuss(false)
   const driverList = async => {
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getDriverList.php',
+      url: baseURL + 'getDriverList',
       headers: {}
     };
     axios(config)
@@ -158,17 +158,17 @@ var userdata = sessionStorage?.getItem('operations_manager_id')
   },[userdata])
   const Gfl = async=>{
     
-  var data = JSON.stringify({
-  "user_id": userdata
-  });
-var config = {
-  method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/new/getgfl.php',
-  headers: { 
-    'Content-Type': 'application/json'
-  },
-  data : data
-};
+    var data = JSON.stringify({
+      "user_id": userdata
+      });
+    var config = {
+      method: 'post',
+      url: baseURL+'getgfl',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
 axios(config)
 .then(function (response) {
   setGf(response.data.gfl_list);
@@ -178,33 +178,33 @@ axios(config)
 });
   
   }
-  useEffect(()=>{
-     Associateproject()
-  },[data?.operations_manager_id])
-  const Associateproject=()=>{
-    var associatedata = JSON.stringify({
-      "oprMgrId": 9,
-      "locationId": 43,
-      "funderId": 5,
-      "projectId": 180
-    });
+  // useEffect(()=>{
+  //    Associateproject()
+  // },[data?.operations_manager_id])
+  // const Associateproject=()=>{
+  //   var associatedata = JSON.stringify({
+  //     "oprMgrId": 9,
+  //     "locationId": 43,
+  //     "funderId": 5,
+  //     "projectId": 180
+  //   });
     
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProjectsListToAssociate.php',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      associatedata : associatedata
-    };
-    axios(config)
-    .then(function (response) {
-      setAssproject(response.data);
-    })
-    .catch(function (error) {
-      // console.log(error);
-    });
-  }
+  //   var config = {
+  //     method: 'post',
+  //     url: 'https://bdms.buzzwomen.org/appTest/getProjectsListToAssociate.php',
+  //     headers: { 
+  //       'Content-Type': 'application/json'
+  //     },
+  //     associatedata : associatedata
+  //   };
+  //   axios(config)
+  //   .then(function (response) {
+  //     setAssproject(response.data);
+  //   })
+  //   .catch(function (error) {
+  //     // console.log(error);
+  //   });
+  // }
  
   const createProject2 = () => {
 

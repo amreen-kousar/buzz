@@ -18,6 +18,7 @@ import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import { baseURL } from 'src/utils/api';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 function SimpleDialog(props) {
     const { onClose, selectedValue, open, data, getData, sendData,name } = props;
@@ -28,20 +29,19 @@ function SimpleDialog(props) {
       const handleListItemClick = (value) => {
         if (arr?.find(itm=>itm?.name===value?.first_name)) {
           var data = JSON.stringify({
-            "project_id": sendData?.projectId,
+            "project_id": sendData?.project_id,
             "role_id": value?.role_id,
             "emp_id": value?.id
           });
     
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/deleteEmpFromProject.php',
+            url: baseURL + 'deleteEmpFromProject',
             headers: {
               'Content-Type': 'application/json'
             },
             data: data
           };
-    
           axios(config)
             .then(function (response) {
               const getList = arr?.filter(ite =>ite?.name !== value?.first_name )
@@ -63,7 +63,7 @@ function SimpleDialog(props) {
     
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/addEmpToProject.php',
+            url: baseURL+'addEmpToProject',
             headers: {
               'Content-Type': 'application/json'
             },
@@ -139,20 +139,20 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
     }, []
     )
     const trainerList = () => {
-        var data = JSON.stringify({
-            "role_id": 6,
-            "project_id": sendData?.project_id?sendData?.project_id:sendData?.projectId,
-            "operation_manager_id":operations_manager_id ,
-            "pageNum": 1
-        });
-        var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: data
-        };
+      var data = JSON.stringify({
+        "role_id": "6",
+        "project_id": JSON.stringify(parseInt(sendData?.project_id?sendData?.project_id:sendData?.projectId)),
+        "operation_manager_id":JSON.stringify(parseInt(operations_manager_id)) ,
+        "pageNum": "1"
+    });
+    var config = {
+        method: 'post',
+        url: baseURL + 'getPeopleList',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: data
+    };
         axios(config)
             .then(function (response) {
                 setListData(response.data)

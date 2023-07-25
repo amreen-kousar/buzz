@@ -15,6 +15,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent, } from '@mui/material/Select';
+import { baseURL } from 'src/utils/api';
 export default function Customfilter(props) {
   const [country, setCountry] = useState([])
   const [fund, setFund] = useState()
@@ -48,7 +49,7 @@ export default function Customfilter(props) {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: baseURL + 'getLocation',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -65,11 +66,11 @@ export default function Customfilter(props) {
   const getState = async (id) => {
     var data = JSON.stringify({
       "country_id": "1",
-      "state_id": id
+      "state_id": JSON.stringify(parseInt(id))
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: baseURL + 'getLocation',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -87,12 +88,12 @@ export default function Customfilter(props) {
     var data = JSON.stringify({
       "country_id": "1",
       "state_id": data?.state,
-      "district_id": district.id,
+      "district_id": JSON.stringify(parseInt(district.id)),
       "district_name":district.name
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: baseURL + 'getLocation',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -107,20 +108,22 @@ export default function Customfilter(props) {
       });
   }
   const getFunder = () => {
+    var roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+    var empid = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     const data = JSON.stringify({
-        "role_id": 1,
-        "filter_type": 2,
-        "pageNum": 1,
-        "emp_id": 206
-    });
-    const config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data
-    };
+      "role_id": JSON.stringify(parseInt(roleid)),
+      "filter_type": "2",
+      "pageNum": 1,
+      "emp_id": JSON.stringify(parseInt(empid))
+  });
+  const config = {
+      method: 'post',
+      url: baseURL + 'getPeopleFilters',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      data
+  };
     axios(config)
         .then((response) => {
             setFund(response?.data?.data)
@@ -132,7 +135,7 @@ export default function Customfilter(props) {
 const teamList = async => {
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getOperationsManagerList.php',
+    url: baseURL+'getOperationsManagerList',
     headers: {}
   };
   axios(config)
@@ -145,14 +148,14 @@ const teamList = async => {
 }
 const trainerList = async => {
   var data = JSON.stringify({
-    "role_id": 5,
-    "project_id": 292,
-    "operation_manager_id": 122,
-    "pageNum": 1
+    "role_id": "5",
+    "project_id": "292",
+    "operation_manager_id": "122",
+    "pageNum": "1"
   });
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
+    url: baseURL + 'getPeopleList',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -168,19 +171,19 @@ const trainerList = async => {
   }
   const gelathiList = () => {
     var data = JSON.stringify({
-        "role_id": 6,
-        "project_id": 292,
-        "operation_manager_id": 35,
-        "pageNum": 1
-    });
-    var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data: data
-    };
+      "role_id": "6",
+      "project_id": "292",
+      "operation_manager_id": "35",
+      "pageNum": "1"
+  });
+  var config = {
+      method: 'post',
+      url: baseURL + 'getPeopleList',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      data: data
+  };
     axios(config)
         .then(function (response) {
             setGelathiData(response.data)

@@ -18,6 +18,7 @@ import { Card,CardContent, Grid } from '@mui/material';
 import Iconify from 'src/components/Iconify';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import { baseURL } from 'src/utils/api';
 import axios from 'axios';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -110,21 +111,26 @@ const UploadImages = async(e) =>{
         "day": e,
         "photos": [images.toString().slice(22,)]
     })
-    var requestOptions = {
-        method: 'POST',
-        body: raw,
-        redirect: 'follow'
-      };
-let res =  fetch("https://bdms.buzzwomen.org/appTest/uploadTrainingPhotos.php", requestOptions)
-.then((response) => {
- 
-setImages([])
+var config = {
+  method: 'post',
+  url: 'https://bdms.buzzwomen.org/appGo/uploadTrainingPhotos',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : raw
+};
+
+axios(config)
+.then(function (response) {
+  setImages([])
 setReload(!reload);
 alert("Photo Uploaded Successfully..")
 })
-.catch((error) => {
-  // console.log('error', error)
+.catch(function (error) {
+  console.log(error);
 });
+
+
 }
     }
 //Method to delete the images that is selected 
@@ -137,19 +143,18 @@ const getTrainingBatch = async =>{
   var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
   var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
   var data = JSON.stringify({
-      "batch_id": batch?.data?.id,
-      "role_id": role
-    });
-    
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
-    
+    "batch_id": batch?.data?.id,
+    "role_id": role
+  });
+  
+  var config = {
+    method: 'post',
+    url: baseURL + 'getTrainingBatchData',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
     axios(config)
     .then(function (response) {
       setTrainingData(response.data)

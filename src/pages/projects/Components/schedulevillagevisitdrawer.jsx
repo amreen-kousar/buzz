@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { baseURL } from 'src/utils/api';
 import {
     Box,
     Radio,
@@ -45,27 +46,27 @@ export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onClose
     }, [clcikData])
     const createGfSession = async =>{
       const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
-        var data = JSON.stringify({
-            "project_id": scheduleData?.data?.project_id,
-            "user_id": userid,
-            "locationId":scheduleData?.data?.location_id ,
-            "tb_name": scheduleData?.data?.name,
-            "numOfParticipants":scheduleData?.all_participants?.length ,
-            "tb_id": scheduleData?.data?.id,
-            "gf_session_type": 2,
-            "plan_date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
-            "gf_session_name": null,
-          });
-          
-          var config = {
-            method: 'post',
-          maxBodyLength: Infinity,
-            url: 'https://bdms.buzzwomen.org/appTest/createGFSessions.php',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
+      var data = JSON.stringify({
+        "project_id": scheduleData?.data?.project_id,
+        "user_id": userid,
+        "locationId":scheduleData?.data?.location_id ,
+        "tb_name": scheduleData?.data?.name,
+        "numOfParticipants":JSON.stringify(scheduleData?.all_participants?.length) ,
+        "tb_id": scheduleData?.data?.id,
+        "gf_session_type": 2,
+        "plan_date": moment(addData?.date?.$d)?.format('YYYY-MM-DD hh:mm A'),
+        "gf_session_name": null,
+      });
+      
+      var config = {
+        method: 'post',
+      maxBodyLength: Infinity,
+      url: baseURL+'createGFSessions',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
           
           axios(config)
           .then(function (response) {
@@ -84,20 +85,20 @@ export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onClose
     const VillageVisit = async =>{
         var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
-            var data = JSON.stringify({
-              "batch_id": clcikData?.id,
-              "role_id": role
-            });
-            
-            var config = {
-              method: 'post',
-            maxBodyLength: Infinity,
-              url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
-              headers: { 
-                'Content-Type': 'application/json'
-              },
-              data : data
-            };
+        var data = JSON.stringify({
+          "batch_id": clcikData?.id,
+          "role_id": role
+        });
+        
+        var config = {
+          method: 'post',
+        maxBodyLength: Infinity,
+          url: baseURL + 'getTrainingBatchData',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
             
             axios(config)
             .then(function (response) {

@@ -8,6 +8,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Iconify from 'src/components/Iconify';
 import moment from 'moment';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -75,9 +76,10 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
   const edit = async => {
   
     handleClose()
-    
+    var empid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
-      "lastUpdatedBy": "144",
+
+      "lastUpdatedBy": JSON.stringify(parseInt(empid)),
       "chassis_number": sendData?.chassis_number,
       "insurance_number": sendData?.insurance_number,
       "register_date":sendData?.register_date,
@@ -97,7 +99,7 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
     })
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/editBus.php',
+      url: baseURL + 'editBus',
       headers: {
         'Content-Type': 'application/json'
       },

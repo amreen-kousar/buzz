@@ -8,7 +8,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import axios from 'axios';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });

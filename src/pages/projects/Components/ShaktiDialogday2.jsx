@@ -28,6 +28,7 @@ import axios from 'axios';
 import { CheckBox } from '@mui/icons-material';
 import Iconify from 'src/components/Iconify';
 import EditParticipantdata from './Editparticipantdata';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -74,22 +75,21 @@ getTrainingBatch();
   };
   const addParticipant=(itm)=>{
     let data = JSON.stringify({
-        "participant_day2": batch?.data?.day2,
-        "participant_id": itm?.participant_id,
-        "tb_id": batch?.data?.id ,
-        "status": 1
-      });
-      
-      let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/updateParticipantDay.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
+      "participant_day2": batch?.data?.day2,
+      "participant_id": itm?.participant_id,
+      "tb_id": batch?.data?.id ,
+      "status": "1"
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: baseURL + 'updateParticipantDay',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
       axios.request(config)
       .then((response) => {
         alert(response.data.message)
@@ -104,22 +104,21 @@ getTrainingBatch();
   
   const DeleteParticipant=(itm)=>{
     let data = JSON.stringify({
-        "participant_day2": batch?.data?.day2,
-        "participant_id": itm?.participant_id,
-        "tb_id": batch?.data?.id ,
-        "status": 0
-      });
-      
-      let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/updateParticipantDay.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
+      "participant_day2": batch?.data?.day2,
+      "participant_id": itm?.participant_id,
+      "tb_id": batch?.data?.id ,
+      "status": "0"
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: baseURL+ 'updateParticipantDay',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
       axios.request(config)
       .then((response) => {
         alert(response.data.message)
@@ -138,18 +137,18 @@ getTrainingBatch();
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
-        "batch_id": batch?.data?.id,
-        "role_id": role
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
+      "batch_id": batch?.data?.id,
+      "role_id": role
+    });
+    
+    var config = {
+      method: 'post',
+      url: baseURL + 'getTrainingBatchData',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
       
       axios(config)
       .then(function (response) {
