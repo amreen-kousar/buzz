@@ -167,7 +167,7 @@ useEffect(()=>{
   };
   const editUser = (async) => {
     var data = JSON.stringify({
-      id: editData?.id,
+      id: parseInt(editData?.id),
       countryID: editData?.countryID,
       first_name: editData?.first_name,
       last_name: editData?.last_name,
@@ -182,7 +182,7 @@ useEffect(()=>{
       address: editData?.address,
       address1: editData?.address1,
       address2: editData?.address2,
-      empRole: editData?.empRole,
+      empRole: JSON.stringify(editData?.empRole),
       supervisorId: editData?.supervisorId,
       profile_pic: editData?.profile_pic,
       status: editData?.status,
@@ -191,16 +191,16 @@ useEffect(()=>{
       project_list: overallprojects,
       license_number: editData?.license_number,
       role_name: editData?.role_name,
-      empRole: editData?.empRole == "Admin" ? 2 :
-      editData?.empRole == "Program Manager" ? 3 :
-      editData?.empRole == "Operations Manager" ? 4 :  
-      editData?.empRole == "Trainer" ? 5 :
+      empRole: editData?.empRole == "Admin" ? "2" :
+      editData?.empRole == "Program Manager" ? "3" :
+      editData?.empRole == "Operations Manager" ? "4" :  
+      editData?.empRole == "Trainer" ? "5" :
       editData?.empRole == "Field Associate" ? "6" :
-      editData?.empRole == "Driver" ? 7:
-      editData?.empRole == "Funder" ?8 :
-      editData?.empRole == "Partner" ? 9 :
-      editData?.empRole == "FIN/HR/VIEWER" ? 11 :
-      editData?.empRole == "Senior Operations Manager" ? 12 :editData?.empRole == "Gelathi Facilitator Lead" ? 13 : editData?.empRole == "Senior Trainer" ? 14 : null,
+      editData?.empRole == "Driver" ? "7":
+      editData?.empRole == "Funder" ?"8":
+      editData?.empRole == "Partner" ? "9" :
+      editData?.empRole == "FIN/HR/VIEWER" ? "11" :
+      editData?.empRole == "Senior Operations Manager" ? "12" :editData?.empRole == "Gelathi Facilitator Lead" ? "13" : editData?.empRole == "Senior Trainer" ? "14" : null,
     });
    
     var config = {
