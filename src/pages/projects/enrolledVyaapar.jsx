@@ -8,6 +8,7 @@ import Vyaparprogram from './Components/Vyaparprogram';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import GetVyaparProgram from './Getvyaparprogram';
 import Filtersmain from './projectfilters/filtersmain';
+import { baseURL } from 'src/utils/api';
 export default function enrolledVyaaparList() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
@@ -71,20 +72,20 @@ const changeState = () => {
         var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
-            "search": search,
-            "project_id": state?.id,
-            "emp_id": idvalue,
-            "gelathi_id":id?.emp_id?id?.emp_id:'',
-          });
-          
-          var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollVyaparEnrollment.php',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
+          "search": search,
+          "project_id": state?.id,
+          "emp_id": idvalue,
+          "gelathi_id":id?.emp_id?id?.emp_id:'',
+        });
+        
+        var config = {
+          method: 'post',
+          url: baseURL+'getEnrollVyaparEnrollment',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
           
           axios(config)
           .then(function (response) {
@@ -123,7 +124,7 @@ const id = sessionStorage?.getItem("proId")
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+      url: baseURL + 'getProjectData',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -147,19 +148,19 @@ const id = sessionStorage?.getItem("proId")
     const role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
   const removevyapar=async(itm)=>{
     if(confirm("Do You want to Remove Gelathi?")){
-    var data = JSON.stringify({
-      "id": itm?.id,
-      "tb_id": itm?.tb_id
-    });
-    
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/removeVyaparEnrollment.php',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
+      var data = JSON.stringify({
+        "id": itm?.id,
+        "tb_id": itm?.tb_id
+      });
+      
+      var config = {
+        method: 'post',
+        url: baseURL + 'removeVyaparEnrollment',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
     
     axios(config)
     .then(function (response) {

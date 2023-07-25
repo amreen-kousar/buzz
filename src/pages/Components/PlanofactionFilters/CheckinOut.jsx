@@ -17,6 +17,7 @@ import Box from '@mui/material/Box';
 import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import { useGeolocated } from 'react-geolocated';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -91,18 +92,18 @@ export default function CheckinOut({photos,batch,setCheck}) {
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(function(position) {
       setLats({lat:position.coords.latitude,lng:position.coords.longitude})
-var data = JSON.stringify({
-  "latitude": position.coords.latitude,
-  "longitude": position.coords.longitude
-});
-var config = {
-  method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
-  headers: { 
-    'Content-Type': 'application/json'
-  },
-  data : data
-};
+      var data = JSON.stringify({
+        "latitude": JSON.stringify(position.coords.latitude),
+        "longitude": JSON.stringify(position.coords.longitude)
+      });
+      var config = {
+        method: 'post',
+        url: baseURL+'getlocationName',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
 axios(config)
 .then(function (response) {
   setLocation(response?.data)
@@ -115,24 +116,23 @@ axios(config)
   },[])
   const checkinout = async(type,batchid) =>{
     var data = JSON.stringify({
-        "location_name": location,
-        "user_id": batch?.data?.user_id,
-        "lon": lats?.lng,
-        "id": batchid,
-        "type": type,
-        "lat": lats?.lat
-      });
-      
-      var config = {
-        method: 'post',
-      maxBodyLength: Infinity,
-        url: 'https://bdms.buzzwomen.org/appTest/checkInOut.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
+      "location_name": location,
+      "user_id": batch?.data?.user_id,
+      "lon": JSON.stringify(lats?.lng),
+      "id": batchid,
+      "type": JSON.stringify(type),
+      "lat": JSON.stringify(lats?.lat)
+    });
+    
+    var config = {
+      method: 'post',
+    maxBodyLength: Infinity,
+      url: baseURL + 'checkInOut',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
       axios(config)
       .then(function (response) {
         
@@ -157,20 +157,19 @@ axios(config)
   const GetStatus = async=>{
     var data = JSON.stringify({
       "project_id": batch?.data?.project_id,
-      "poa_type": 1,
-      "type": 2,
+      "poa_type": "1",
+      "type": "2",
       "tb_id": batch?.data?.id
     });
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getCheckInOutStatus.php',
+      url: baseURL + 'getCheckInOutStatus',
       headers: { 
         'Content-Type': 'application/json'
       },
       data : data
     };
-    
     axios(config)
     .then(function (response) {
       setCheckData(response.data)

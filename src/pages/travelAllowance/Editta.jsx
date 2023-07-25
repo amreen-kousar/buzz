@@ -14,7 +14,7 @@ import AppBar from '@mui/material/AppBar';
 import { Dialog, Toolbar, DialogContent, DialogContentText, Card } from '@mui/material'
 import PropTypes from 'prop-types';
 
-
+import { baseURL } from 'src/utils/api';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
@@ -121,50 +121,49 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
       setViewImage(true)
     });
   }
-  const SendData = async => {
-    var data = JSON.stringify({
-      "ta_id": sendData?.id,
-      "date": sendData?.date,
-      "insideBangalore": false,
-      "end_odometer": sendData?.end_odometer,
-      "telephone": sendData?.telephone,
-      "end_location_name": sendData?.end_location_name,
-      "printing": sendData?.printing,
-      "start_location_name": sendData?.start_location_name,
-      "poa_id": sendData?.poa_id,
-      "start_odometer": sendData?.start_odometer,
-      "rate_per_KM": sendData?.rate_per_KM,
-      "stationery": sendData?.stationery,
-      "klmtr": sendData?.rate_per_KM,
-      "da": sendData?.da,
-      "others": sendData?.others,
-      "emp_id": userid,
-      "mode_of_travel": sendData?.mode_of_travel,
-      "other_text": sendData?.other_text
-    });
+  // const SendData = async => {
+  //   var data = JSON.stringify({
+  //     "ta_id": sendData?.id,
+  //     "date": sendData?.date,
+  //     "insideBangalore": false,
+  //     "end_odometer": sendData?.end_odometer,
+  //     "telephone": sendData?.telephone,
+  //     "end_location_name": sendData?.end_location_name,
+  //     "printing": sendData?.printing,
+  //     "start_location_name": sendData?.start_location_name,
+  //     "poa_id": sendData?.poa_id,
+  //     "start_odometer": sendData?.start_odometer,
+  //     "rate_per_KM": sendData?.rate_per_KM,
+  //     "stationery": sendData?.stationery,
+  //     "klmtr": sendData?.rate_per_KM,
+  //     "da": sendData?.da,
+  //     "others": sendData?.others,
+  //     "emp_id": userid,
+  //     "mode_of_travel": sendData?.mode_of_travel,
+  //     "other_text": sendData?.other_text
+  //   });
 
 
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/updateTa.php',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data
-    };
+  //   var config = {
+  //     method: 'post',
+  //     url: 'https://bdms.buzzwomen.org/appTest/new/updateTa.php',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     data
+  //   };
 
-    axios(config)
-      .then(function (response) {
-        viewMessage('Travel allowance edited sucessfully')
-        list()
-        onCloseFilter()
-      })
-      .catch(function (error) {
-        // console.log(error);
-      });
+  //   axios(config)
+  //     .then(function (response) {
+  //       viewMessage('Travel allowance edited sucessfully')
+  //       list()
+  //       onCloseFilter()
+  //     })
+  //     .catch(function (error) {
+  //       // console.log(error);
+  //     });
 
-  }
-
+  // }
   const postImages = async () => {
     if (image.length === 0) {
       alert("No photos to upload.")
@@ -184,7 +183,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
       body: form,
       redirect: 'follow'
     };
-    let res = fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn => {
+    let res = fetch("https://bdms.buzzwomen.org/appGo/taAttachments", requestOptions).then(itn => {
       // console.log(itn, "<--itemgh")
     })
       .catch(err => {
@@ -215,13 +214,12 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
 
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/getPoaTa.php',
+      url: baseURL+'getPoaTa',
       headers: {
         'Content-Type': 'application/json'
       },
       data: data
     };
-
     axios(config)
       .then(function (response) {
         setDataDrop(response.data)
@@ -247,7 +245,7 @@ getTadata()
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/getTa.php',
+      url: baseURL + 'getTa',
       headers: { 
         'Content-Type': 'application/json'
       },

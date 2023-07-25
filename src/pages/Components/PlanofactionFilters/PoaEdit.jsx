@@ -24,7 +24,8 @@ import Switch from '@mui/material/Switch';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { baseURL } from 'src/utils/api';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -74,16 +75,16 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
   const AddPoa = async => {
     var data = JSON.stringify({
       "poa_id": addData?.poa_id,
-      "date": moment(addData?.date?.$d)?.format('DD-MM-YYYY HH:mm:ss'),
+      "date": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
       "user_id": sessionStorage?.getItem('userId'),
       "name": addData?.name,
       "all_day": addData?.all_day,
       "description": addData?.description,
-      "date2": moment(addData?.date?.$d)?.format('DD-MM-YYYY HH:mm:ss')
+      "date2": moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss')
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/updateRescheduleEvent.php',
+      url: baseURL + 'updateRescheduleEvent',
       headers: {
         'Content-Type': 'application/json'
       },

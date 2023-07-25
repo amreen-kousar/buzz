@@ -33,6 +33,7 @@ import defaultImage from '../../assets/images/default.png';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { baseURL } from 'src/utils/api';
 import { useMediaQuery } from '@mui/material';
 // ----------------------------------------------------------------------
 UserDrawer.propTypes = {
@@ -74,12 +75,13 @@ const handleclose=()=>{
 
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
+      url: baseURL + 'getProfileData',
       headers: {
         'Content-Type': 'application/json',
       },
       data: data,
     };
+
 
     axios(config)
       .then(function (response) {
@@ -95,21 +97,21 @@ const handleclose=()=>{
     const roleid = JSON.parse(sessionStorage?.getItem('people'))?.role_id;
     const projectlist = JSON.parse(sessionStorage?.getItem('people'))?.project_list;
     if(confirm('Are you sure want to  delete')){
-    var data = JSON.stringify({
-      "emp_id": userData,
-      "delete": 1,
-      "role_id": roleid,
-      "project_id": projectlist,
-    });
-    
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/deleteUser.php',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
+      var data = JSON.stringify({
+        "emp_id": userData,
+        "delete": "1",
+        "role_id": roleid,
+        "project_id": project_ids
+      });
+      
+      var config = {
+        method: 'post',
+        url: baseURL+'deleteUser',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
     
     axios(config)
     .then(function (response) {

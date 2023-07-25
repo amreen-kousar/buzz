@@ -4,7 +4,7 @@ import React from "react";
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, Card, CardActionArea, Checkbox, Dialog, DialogContentText, Toolbar, IconButton, DialogContent } from '@mui/material';
-
+import { baseURL } from 'src/utils/api';
 import CloseIcon from '@mui/icons-material/Close';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Iconify from 'src/components/Iconify';
@@ -54,13 +54,14 @@ export default function Team(props) {
         var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
         var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var data = JSON.stringify({
-            "date": dateValue,
-             "role_id": role,
-            "emp_id": userid
+            // moment(startDate?.$d)?.format('YYYY-MM-DD')
+            "date": moment(dateValue)?.format('YYYY/MM/DD'),
+             "role_id": parseInt(role),
+            "emp_id": parseInt(userid)
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/teamMembers.php',
+            url : baseURL + 'teamMembers',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -82,7 +83,7 @@ export default function Team(props) {
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/listTa.php',
+            url: baseURL+'listTa',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -128,11 +129,11 @@ export default function Team(props) {
             "ta_id": checkedData,
             "user_id": idvalue,
             "extra_comments": comments,
-            "status": 4
+            "status": "4"
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/verifyTa.php',
+            url: baseURL + 'verifyTa',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -158,7 +159,7 @@ export default function Team(props) {
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/approveTa.php',
+            url: baseURL + 'approveTa',
             headers: {
                 'Content-Type': 'application/json'
             },

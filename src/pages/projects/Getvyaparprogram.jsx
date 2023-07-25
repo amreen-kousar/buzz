@@ -55,18 +55,18 @@ export default function GetVyaparProgram({itm}) {
   }, []
   )
 const GetVyaparformData=()=>{
-    var data = JSON.stringify({
-        "partcipantId": itm?.id
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/getBuzzVyaparProgramBaseline.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
+  var data = JSON.stringify({
+    "partcipantId": itm?.id
+  });
+  
+  var config = {
+    method: 'post',
+    url: 'https://bdms.buzzwomen.org/appTest/new/getBuzzVyaparProgramBaseline.php',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
       
       axios(config)
       .then(function (response) {

@@ -7,6 +7,7 @@ import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { baseURL } from 'src/utils/api';
 import {
   Box,
   Radio,
@@ -71,7 +72,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     });
     var config = {
       method: 'post',
-      url: oldbaseURL +'getEnrollGelathi.php',
+      url: baseURL+'getEnrollGelathi',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -94,7 +95,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
       });
       var config = {
         method: 'post',
-        url: oldbaseURL+'updateEnrolledGelathi.php',
+        url: baseURL+'updateEnrolledGelathi',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -179,7 +180,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     var config = {
       method: 'post',
       maxBodyLength: Infinity,
-       url: oldbaseURL+'createGFSessionsNew1.php',
+       url: baseURL+'createGFSessionsNew1',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -207,7 +208,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     var config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: oldbaseURL+'getTrainingBatchData.php',
+      url: baseURL +'getTrainingBatchData',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -230,7 +231,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     });
     var config = {
       method: 'post',
-      url: oldbaseURL+'getGelathiCircleDataNew.php',
+      url: baseURL+'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
       },

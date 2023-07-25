@@ -6,6 +6,7 @@ import account from '.././_mock/account';
 import { styled } from '@mui/material/styles';
 import Iconify from 'src/components/Iconify';
 import PropTypes from 'prop-types';
+import { baseURL } from 'src/utils/api';
 import {
   Link,
   Container,
@@ -44,6 +45,7 @@ import { SecurityUpdate } from '@mui/icons-material';
 import moment from 'moment';
 import ProjectMultiDrawer from '../pages/Components/ProjectMultiDrawer';
 import PoaGF from './Components/PlanofactionFilters/PoaGF';
+import { baseURL } from 'src/utils/api';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -129,20 +131,42 @@ export default function PlanofAction() {
     setSelect('');
     SetGFDrawer(false);
   };
-  useEffect(() => {
-    todaypoa();
-    // const timeout = setTimeout(() => {
-    //   setShowDiv(true);
-    // }, 1000); // Timeout duration in milliseconds
-    // if(isOnline){
-    //   hideMessage()
-    // }else{
-    //   setShowDiv(true)
-    // }
+  useEffect(()=>{
 
-    // return () => clearTimeout(timeout);
+    setOnline(navigator.onLine)
+
+    todaypoa();
+
+      apiCall()
+
+    VyaparApicall()
+
+    apigelathicircle()
+
+  },[season, date, userId,!gfDrawer,isOnline])
+  useEffect(()=>{
+
+      apiCall()
+
+    VyaparApicall()
+    shaktiformapi()
+    apigelathicircle()
+
+  },[season, date, userId,!gfDrawer,isOnline])
+  // useEffect(() => {
+  //   todaypoa();
+  //   // const timeout = setTimeout(() => {
+  //   //   setShowDiv(true);
+  //   // }, 1000); // Timeout duration in milliseconds
+  //   // if(isOnline){
+  //   //   hideMessage()
+  //   // }else{
+  //   //   setShowDiv(true)
+  //   // }
+
+  //   // return () => clearTimeout(timeout);
     
-  }, [season, date, userId, reload,!gfDrawer,isOnline]);
+  // }, [season, date, userId, reload,!gfDrawer,isOnline]);
   const todaypoa = (async) => {
     var data = JSON.stringify({
       emp_id: userId ? userId : userDetails?.id,
@@ -152,7 +176,7 @@ export default function PlanofAction() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getPoa.php',
+      url: baseURL + 'getPOA',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -190,7 +214,7 @@ export default function PlanofAction() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/updateEventCancel.php',
+      url: baseURL + 'updateEventCancel',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -216,105 +240,221 @@ export default function PlanofAction() {
     todaypoa();
   };
   // On initization set the isOnline state.
-  useEffect(()=>{
-      setOnline(navigator.onLine)
-  },[])
-  useEffect(()=>{
-     apiCall()
- VyaparApicall()
- apigelathicircle()
- shaktiformapi();
-},[isOnline])
-useEffect(()=>{
+  // useEffect(()=>{
+  //     setOnline(navigator.onLine)
+  // },[])
+//   useEffect(()=>{
+//      apiCall()
+//  VyaparApicall()
+//  apigelathicircle()
+//  shaktiformapi();
 
-},[reload])
-const apiCall = async() =>{
-  const data = localStorage?.getItem("green")
-  const newData =JSON?.parse(data)
-  var config 
-  // for(let i=0; i<newData?.length;i++){
-    newData?.map((itm,index)=>{
+// },[isOnline])
+// useEffect(()=>{
+
+// },[reload])
+// const mutex1 = {
+//   locked: false,
+//   lock() {
+//     if (this.locked) return false;
+//     this.locked = true;
+//     return true;
+//   },
+//   unlock() {
+//     this.locked = false;
+//   }
+// };
+// const apiCall = async() =>{
+//   const data = localStorage?.getItem("green")
+//   const newData =JSON?.parse(data)
+//   var config 
+//   // for(let i=0; i<newData?.length;i++){
+//     newData?.map((itm,index)=>{
     
-     config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/addGreenBaselineSurvey.php',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data:newData[index],
-    };
-    const res = axios(config)
-  })
-  todaypoa()
-  changeState()
+//      config = {
+//       method: 'post',
+//       url: 'https://bdms.buzzwomen.org/appTest/new/addGreenBaselineSurvey.php',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       data:newData[index],
+//     };
+//     const res = axios(config)
+//   })
+//   todaypoa()
+//   changeState()
 
-  localStorage.removeItem('green')
- axios(config)?.then(itm=>{
-  //  console.log("qwerty",itm)
-  // todaypoa()
-  changeState()
- })
- .catch(err=>{
-  //  console.log(err,"<--GELATHIHR")
- })
+//   localStorage.removeItem('green')
+//  axios(config)?.then(itm=>{
+//   //  console.log("qwerty",itm)
+//   // todaypoa()
+//   changeState()
+//  })
+//  .catch(err=>{
+//   //  console.log(err,"<--GELATHIHR")
+//  })
  
-}
-const VyaparApicall = async()=>{
-  const data = localStorage?.getItem('vyapar');
-  const newData =JSON?.parse(data)
-  var config 
-  // for(let i=0; i<newData?.length;i++){
-    newData?.map((item,index)=>{
-     config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data:newData[index],
-    };
-    const res = axios(config)
-    changeState()
-  })
+// }
+// const VyaparApicall = async()=>{
+//   const data = localStorage?.getItem('vyapar');
+//   const newData =JSON?.parse(data)
+//   var config 
+//   // for(let i=0; i<newData?.length;i++){
+//     newData?.map((item,index)=>{
+//      config = {
+//       method: 'post',
+//       url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       data:newData[index],
+//     };
+//     const res = axios(config)
+//     changeState()
+//   })
   
-  localStorage.removeItem('vyapar')
-  changeState()
- axios(config)?.then(itm=>{
-  //  console.log("qwerty",itm)
-  changeState()
- })
- .catch(err=>{
-  //  console.log(err,"<--GELATHIHR")
- })
-}
-const apigelathicircle = async() =>{
-  const data = localStorage?.getItem("spoorthi")
-  const newData =JSON?.parse(data)
-  var config 
-  // for(let i=0; i<=newData?.length;i++){
-  newData?.map((item,index)=>{
-     config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/addSpoorthiBaselineQuestionnaire.php',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data:newData[index],
-    };
-    const res = axios(config)
-    changeState()
-  })
- 
- axios(config)?.then(itm=>{
-  //  console.log("qwerty",itm)
-   localStorage.removeItem('spoorthi');
-   changeState()
- })
- .catch(err=>{
-  //  console.log(err,"<--GELATHIHR")
- })
-  changeState()
-}
+//   localStorage.removeItem('vyapar')
+//   changeState()
+//  axios(config)?.then(itm=>{
+//   //  console.log("qwerty",itm)
+//   changeState()
+//  })
+//  .catch(err=>{
+//   //  console.log(err,"<--GELATHIHR")
+//  })
+// }
+
+// Create a mutex to ensure only one instance of the function runs at a time
+const mutex = {
+  locked: false,
+  lock() {
+    if (this.locked) return false;
+    this.locked = true;
+    return true;
+  },
+  unlock() {
+    this.locked = false;
+  }
+};
+
+const apigelathicircle = async () => {
+  // Acquire the mutex lock
+  if (!mutex.lock()) return;
+
+  try {
+    const data = localStorage?.getItem("spoorthi");
+    const newData = JSON?.parse(data);
+
+    if (newData && newData.length > 0) {
+      for (const item of newData) {
+        const config = {
+          method: 'post',
+          url:baseURL+ 'addSpoorthiBaselineQuestionnaire',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          data: item,
+        };
+
+        await axios(config);
+        // Handle the response if needed
+      }
+
+      // Remove the "spoorthi" item from localStorage after all API calls are successful
+      localStorage.removeItem('spoorthi');
+
+      // Call changeState after all API calls are successful
+      changeState();
+    }
+  } catch (err) {
+    console.error(err);
+    // Handle errors if needed
+  } finally {
+    // Release the mutex lock
+    mutex.unlock();
+  }
+};
+const apiCall = async () => {
+  // Acquire the mutex lock
+  if (!mutex.lock()) return;
+
+  try {
+    const data = localStorage?.getItem("green");
+    const newData = JSON?.parse(data);
+
+    if (newData && newData.length > 0) {
+      for (const item of newData) {
+        const config = {
+          method: 'post',
+          url:baseURL + 'addGreenBaselineSurvey',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          data: item,
+        };
+
+        await axios(config);
+        changeState();
+        // Handle the response if needed
+      }
+
+      // Remove the "spoorthi" item from localStorage after all API calls are successful
+      localStorage.removeItem('green');
+
+      // Call changeState after all API calls are successful
+      changeState();
+    }
+  } catch (err) {
+    console.error(err);
+    // Handle errors if needed
+  } finally {
+    // Release the mutex lock
+    mutex.unlock();
+    changeState();
+  }
+  changeState();
+};
+const VyaparApicall = async () => {
+  // Acquire the mutex lock
+  if (!mutex.lock()) return;
+
+  try {
+    const data = localStorage?.getItem("vyapar");
+    const newData = JSON?.parse(data);
+
+    if (newData && newData.length > 0) {
+      for (const item of newData) {
+        const config = {
+          method: 'post',
+          url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          data: item,
+        };
+
+        await axios(config);
+        changeState();
+        // Handle the response if needed
+      }
+
+      // Remove the "spoorthi" item from localStorage after all API calls are successful
+      localStorage.removeItem('vyapar');
+
+      // Call changeState after all API calls are successful
+      changeState();
+    }
+  } catch (err) {
+    console.error(err);
+    // Handle errors if needed
+  } finally {
+    // Release the mutex lock
+    mutex.unlock();
+    changeState();
+  }
+  changeState();
+};
+
 
 const shaktiformapi = async()=>{
   const data = localStorage?.getItem('shaktiform');
@@ -351,19 +491,19 @@ const shaktiformapi = async()=>{
   
 
  
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    todaypoa();
-    // setOnline(navigator.onLine)
+  //   todaypoa();
+  //   // setOnline(navigator.onLine)
 
 
-    //   apiCall()
+  //   //   apiCall()
 
-    // VyaparApicall()
+  //   // VyaparApicall()
 
-    // apigelathicircle()
+  //   // apigelathicircle()
 
-  },[season, date, userId, reload,!gfDrawer,isOnline])
+  // },[season, date, userId, reload,!gfDrawer,isOnline])
 
   
   return (

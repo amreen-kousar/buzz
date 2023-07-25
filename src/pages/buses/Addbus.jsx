@@ -6,6 +6,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useLocation, useNavigate } from "react-router-dom";
+import { baseURL } from 'src/utils/api';
 import moment from 'moment'
 function Addbus( {showAddBuss,createProj,showBussHandler}) {
     const navigate = useNavigate();
@@ -38,7 +39,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
         
             var config = {
                 method: 'post',
-                url: 'https://bdms.buzzwomen.org/appTest/createBus.php',
+                url: baseURL + 'createBus',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -48,7 +49,6 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
             showBussHandler() 
             
             : null
-    
     
             axios(config)
                 .then(function (response) {

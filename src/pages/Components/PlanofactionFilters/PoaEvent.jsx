@@ -26,6 +26,7 @@ import {
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress'
 import is from 'date-fns/locale/is';
+import { baseURL } from 'src/utils/api';
 PoaFilter.propTypes = {
   isOpenEvent: PropTypes.bool,
   onOpenEvent: PropTypes.func,
@@ -85,7 +86,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
       redirect: 'follow',
     };
   
-    let res = fetch('https://bdms.buzzwomen.org/appTest/uploadEventPhotos.php', requestOptions)
+    let res = fetch('https://bdms.buzzwomen.org/appGo/uploadEventPhotos', requestOptions)
       .then((itn) => {
         setImage([])
         alert("Image uploaded successfully..")
@@ -128,12 +129,12 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       var data = JSON.stringify({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
+        latitude: JSON.stringify(position.coords.latitude),
+        longitude:JSON.stringify( position.coords.longitude),
       });
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
+        url: baseURL + 'getlocationName',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -154,14 +155,14 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
       var data = JSON.stringify({
         location_name: locationS,
         user_id: idvalue,
-        lon: position.coords.longitude,
+        lon: JSON.stringify(position.coords.longitude),
         id: select?.id,
-        type: type,
-        lat: position.coords.latitude,
+        type: JSON.stringify(parseInt(type)),
+        lat: JSON.stringify(position.coords.latitude),
       });
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/checkInOut.php',
+        url: baseURL + 'checkInOut',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -229,13 +230,11 @@ const handlecheckin = () => {
   const event = (async) => {
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
-      event_id: select?.id,
-      user_id: idvalue,
-      check_in_location: 'RCC4+M26, Narayanapuram, Andhra Pradesh 534411, India',
+      event_id: select?.id
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
+      url: baseURL + 'getEventDetail',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -255,12 +254,11 @@ const handlecheckin = () => {
   const getlocationdata = (async) => {
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
-      event_id: select?.id,
-      user_id: idvalue,
+      event_id: select?.id
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getEventDetail.php',
+      url: baseURL + 'getEventDetail',
       headers: {
         'Content-Type': 'application/json',
       },

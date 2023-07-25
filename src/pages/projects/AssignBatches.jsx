@@ -14,6 +14,7 @@ import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableCell from "@mui/material/TableCell";
+import { baseURL } from "src/utils/api";
 import { vi } from "date-fns/locale";
 export default function AssignBatches(){
    
@@ -40,14 +41,16 @@ const projData = async => {
     "role_id": role,
     "emp_id": idvalue
   });
+
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+    url: baseURL + 'getProjectData',
     headers: {
       'Content-Type': 'application/json'
     },
     data: data
   };
+
   axios(config)
     .then(function (response) {
       setData1({ ...response.data.list })
@@ -61,13 +64,15 @@ const villagelist= async(itm) =>{
   setItem(itm)
   var data = JSON.stringify({
     "project_id":data1?.project_id, 
-    "emp_id":itm?.emp_id,
+    "emp_id":JSON.stringify(itm?.emp_id),
     
   
     });
+
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchList.php',
+       url: baseURL+'getTrainingBatchList',
+      
       headers: {
         'Content-Type': 'application/json'
       },
@@ -92,21 +97,22 @@ const CreateBatch= async(itm,i) =>{
   setSelected(selected)
   var data = JSON.stringify({
      
-     "project_id":data1?.project_id, 
-     "training_batch_id":itm?.training_batch_id,
-      "emp_id":item?.emp_id
-    });
-    villages.list[i].flag = 1;
-    setVillages(villages)
-    setAlloted(alloted?alloted+1:1)
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createGFBatch.php',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
+    "project_id":data1?.project_id, 
+    "training_batch_id":itm?.training_batch_id,
+     "emp_id":JSON.stringify(item?.emp_id)
+   });
+   villages.list[i].flag = 1;
+   setVillages(villages)
+   setAlloted(alloted?alloted+1:1)
+
+   var config = {
+     method: 'post',
+     url: baseURL+'createGFBatch',
+     headers: {
+       'Content-Type': 'application/json'
+     },
+     data : data
+   };
     axios(config)
     .then(function (response) {
       setBatch(response?.data)
@@ -122,7 +128,7 @@ const removeFlag = async (itm, i) => {
      
     "project_id":data1?.project_id, 
     "training_batch_id":itm?.training_batch_id,
-     "emp_id":item?.emp_id
+     "emp_id":JSON.stringify(parseInt(item?.emp_id))
    });
    villages.list[i].flag = 0;
    setVillages(villages)
@@ -130,7 +136,7 @@ const removeFlag = async (itm, i) => {
    
    var config = {
      method: 'post',
-     url: 'https://bdms.buzzwomen.org/appTest/deleteGFBatch.php',
+     url: baseURL + 'deleteGFBatch',
      headers: {
        'Content-Type': 'application/json'
      },

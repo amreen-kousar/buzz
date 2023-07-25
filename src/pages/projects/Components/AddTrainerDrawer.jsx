@@ -12,7 +12,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-
+import { baseURL } from 'src/utils/api';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 function SimpleDialog(props) {
@@ -24,13 +24,13 @@ function SimpleDialog(props) {
   const handleListItemClick = (value) => {
     if (arr?.find(itm=>itm?.name===value?.first_name)) {
       var data = JSON.stringify({
-        "project_id": sendData?.projectId,
+        "project_id": sendData?.project_id,
         "role_id": value?.role_id,
         "emp_id": value?.id
       });
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/deleteEmpFromProject.php',
+        url: baseURL + 'deleteEmpFromProject',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -53,7 +53,7 @@ function SimpleDialog(props) {
       });
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/addEmpToProject.php',
+        url: baseURL + 'addEmpToProject',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -124,14 +124,14 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
   )
   const trainerList = async => {
     var data = JSON.stringify({
-      "role_id": 5,
-      "project_id": sendData?.project_id?sendData?.project_id:sendData?.projectId,
-      "operation_manager_id": operations_manager_id,
-      "pageNum": 1
+      "role_id": "5",
+      "project_id": JSON.stringify(parseInt(sendData?.project_id?sendData?.project_id:sendData?.projectId)),
+      "operation_manager_id": JSON.stringify(parseInt(operations_manager_id)),
+      "pageNum": "1"
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getPeopleList.php',
+      url: baseURL + 'getPeopleList',
       headers: {
         'Content-Type': 'application/json'
       },

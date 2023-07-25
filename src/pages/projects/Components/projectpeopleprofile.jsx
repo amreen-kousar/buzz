@@ -24,6 +24,7 @@ import {
   CardContent,
 } from '@mui/material';
 import Projectdashboard from './projectdashboard';
+import { baseURL } from 'src/utils/api';
 Peopleprofile.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
@@ -46,7 +47,7 @@ export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter})
     
         var config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getProfileData.php',
+          url: baseURL + 'getProfileData',
           headers: {
             'Content-Type': 'application/json'
           },

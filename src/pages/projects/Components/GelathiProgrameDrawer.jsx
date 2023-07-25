@@ -41,7 +41,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
-import { oldbaseURL } from 'src/utils/api';
+import { oldbaseURL,baseURL } from 'src/utils/api';
 import GelathiCircleDrawer from './GelathiCircleDrawer';
 import { isError } from 'lodash';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
@@ -190,7 +190,7 @@ const [iserror, setIsError] = useState(false)
       body: raw,
       redirect: 'follow',
     };
-    let res = fetch(oldbaseURL + 'uploadGFSessionPhotos.php', requestOptions)
+    let res = fetch(baseURL + 'uploadGFsessionPhotos', requestOptions)
       .then((itn) => {
         setImages([]);
         alert('Image uploaded successfully..');
@@ -209,16 +209,14 @@ const [iserror, setIsError] = useState(false)
       
       ,
     }):
-  data  = JSON.stringify({
+    data  = JSON.stringify({
       gf_session_id: clcikData?.name,
-     
-      
-      
+   
     })
   }
     var config = {
       method: 'post',
-      url: oldbaseURL + 'getGFSessionData1.php',
+      url: baseURL + 'getGFSessionData1',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -243,13 +241,13 @@ const [iserror, setIsError] = useState(false)
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       notes: gelatiNote,
-      type: session.type,
+      type: JSON.stringify(parseInt(session.type)),
       tb_id: session.tb_id,
       emp_id: userid,
     });
     const config = {
       method: 'post',
-      url: oldbaseURL + 'createNotes.php',
+      url: baseURL+'createNotes',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -280,7 +278,7 @@ const [iserror, setIsError] = useState(false)
     });
     const config = {
       method: 'post',
-      url: oldbaseURL + 'getNotes.php',
+      url: baseURL + 'getNotes',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -306,7 +304,7 @@ const [iserror, setIsError] = useState(false)
       });
       var config = {
         method: 'post',
-        url: oldbaseURL + 'updatePoaCancel.php',
+        url: baseURL + 'updatePoaCancel',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -328,11 +326,11 @@ const [iserror, setIsError] = useState(false)
   const Reschedule = (e) => {
     var data = JSON.stringify({
       poa_id: e,
-      date_time: moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+      date_time: moment(date?.$d)?.format('YYYY-MM-DD HH:mm'),
     });
     var config = {
       method: 'post',
-      url: oldbaseURL + 'updateReschedule.php',
+      url: baseURL + 'updateReschedule',
       headers: {
         'Content-Type': 'application/json',
       },

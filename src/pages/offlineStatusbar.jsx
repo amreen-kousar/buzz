@@ -45,7 +45,7 @@ const Footer = () => {
             <div  className={`footer ${isOnline ? 'online' : 'offline'}`}>
               <p>
                 
-               you are offline
+               You Are Offline
               </p>
                </div> :  
                  <div  >
@@ -53,7 +53,7 @@ const Footer = () => {
                    <div className={`footer ${isOnline ? 'online' : 'offline'}`}>
                    <p>
                      
-                    you are online
+                   You Are Online
                    </p>
                     </div>
                  )}

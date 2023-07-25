@@ -16,6 +16,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import moment from 'moment';
+import { baseURL } from 'src/utils/api';
 import Iconify from 'src/components/Iconify';
 import AddParticipants from './AddParticipants';
 import { InsertEmoticon } from '@mui/icons-material';
@@ -48,16 +49,14 @@ const setGreenmotivators=(itm)=>{
       "projectId": session?.projectId
     });
     
-    // this.refs[itm.participant_id].checked = false;
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/setGreenMotivators.php',
+      url: baseURL + 'setGreenMotivators',
       headers: { 
         'Content-Type': 'application/json'
       },
       data : data
     };
-    
     axios(config)
     .then(function (response) {
       alert(response.data.message);
@@ -75,22 +74,23 @@ const setGreenmotivators=(itm)=>{
     checkbox.checked = false;
   }
 else{
-    var data = JSON.stringify({
-        "id": itm?.participant_id,
-        "gelathi_id": session?.user_id,
-        "tb_id": session?.tb_id,
-        "projectId": session?.projectId
-      });
-      
-      // this.refs[itm.participant_id].checked = false;
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/setGreenMotivators.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
+  var data = JSON.stringify({
+    "id": itm?.participant_id,
+    "gelathi_id": session?.user_id,
+    "tb_id": session?.tb_id,
+    "projectId": session?.projectId
+  });
+  
+  // this.refs[itm.participant_id].checked = false;
+  var config = {
+    method: 'post',
+    url: baseURL + 'setGreenMotivators',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+  
       
       axios(config)
       .then(function (response) {
@@ -107,17 +107,16 @@ getGreenMotivators();
 },[open])
   const getGreenMotivators=()=>{
     var data = JSON.stringify({
-    "gf_session_id":session?.id
-  })
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/getGreenMotivators.php',
-      headers: { 
-        'Content-Type': 'text/plain'
-      },
-      data : data
-    };
-    
+      "gf_session_id":session?.id
+    })
+      var config = {
+        method: 'post',
+        url: baseURL + 'getGreenMotivators',
+        headers: { 
+          'Content-Type': 'text/plain'
+        },
+        data : data
+      };
     axios(config)
     .then(function (response) {
       setSessiondata(response.data);

@@ -35,7 +35,7 @@ export default function Charts(props) {
         chart();
       }, [location?.state?.filterData]);
       const chart = async => {
-        var data = JSON.stringify({
+          var data = JSON.stringify({
            
             "role_id": 1,
             

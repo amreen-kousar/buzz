@@ -11,6 +11,7 @@ import UserDrawer from '../Components/UserDrawer';
 import AddUser from './AddUser';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
+import { baseURL } from 'src/utils/api';
 export default function User() {
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
@@ -46,6 +47,9 @@ export default function User() {
  
   const handleCloseFilter = () => {
     setOpenFilter(false);
+    setSearchUser([])
+    setSelected([])
+    user()
   };
   const handlepeopleCloseFilter = () => {
     setpeopleFilter(false);
@@ -58,15 +62,15 @@ export default function User() {
   const getProjects = async (d) => {
     const data = JSON.stringify({
       "search": "",
-      "id": 1,
-      "role_id": 1,
+      "id": "1",
+      "role_id": "1",
       "filter_id": 0,
       "type": "",
       "pageNum": d ? d : 1
     });
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
+      url: baseURL + 'getProjects',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -102,13 +106,13 @@ export default function User() {
       "search": searchUser,
       "user_id": JSON?.parse(dataid)?.id,
       "role_id": JSON?.parse(dataid)?.role,
-      "filter_id": filter_type?.id ? filter_type?.id : '',
+      "filter_id": JSON.stringify(filter_type?.id ? filter_type?.id:  null) ,
       "type": "",
-      "pageNum": d ? d : 1
+      "pageNum": JSON.stringify(d ? d : 1)
     });
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getAllPeople.php',
+      url: baseURL+'getAllPeople',
       headers: {
         'Content-Type': 'application/json'
       },

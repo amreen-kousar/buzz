@@ -18,6 +18,7 @@ import LocalPrintshop from '@mui/icons-material/LocalPrintshop';
 import CurrencyRupee  from '@mui/icons-material/CurrencyRupee';
 import DiamondRounded  from '@mui/icons-material/DiamondRounded';
 import  Room  from '@mui/icons-material/Room';
+import { baseURL } from 'src/utils/api';
 export default function TravelDialog({ viewMessage }) {
   Geocode.setApiKey("AIzaSyAQZSphbIdAeypWHytAIHtJ5K-wuUHBfx4");
   const [open, setOpen] = useState(false);
@@ -111,7 +112,7 @@ var requestOptions = {
   body: form,
   redirect: 'follow'
 };
-fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions)
+fetch("https://bdms.buzzwomen.org/appGo/taAttachments", requestOptions)
   .then(response => response.text())
   .then(result => setImageId(JSON.parse(result)))
   alert("Uploaded Successfully")
@@ -124,32 +125,33 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
   const SendData = async => {
     var data = JSON.stringify({
       "date": moment(sendData?.date)?.format('YYYY-MM-DD'),
-      "insideBangalore": false,
-      "end_odometer": sendData?.endOdimeter,
-      "telephone": (sendData?.telephonecharges==1)?249:0,
+      "insideBangalore": "false",
+      "end_odometer": (sendData?.endOdimeter)?sendData?.endOdimeter:'',
+      "telephone": (sendData?.telephonecharges==1)?"249":"0",
       "end_location_name":locationS,
-      "fairamount":sendData?.fairamount,
+      "fare_amount":(sendData?.fairamount)?sendData?.fairamount:"",
       "printing": sendData?.printing,
       "start_location_name": locationS,
-      "poa_id": sendData?.poa,
+      "poa_id": JSON.stringify(sendData?.poa),
       "start_odometer": (sendData?.odimeter)?sendData?.odimeter:'',
-      "rate_per_KM": sendData?.rateperkm,
+      "rate_per_KM": (sendData?.rateperkm)?sendData?.rateperkm:'',
       "stationery": sendData?.stationery,
-      "klmtr": sendData?.rateperkm,
-      "da": sendData?.foodexpenses,
+      "klmtr": (sendData?.klmtr)?sendData?.klmtr:'',
+      "da": JSON.stringify(sendData?.foodexpenses),
       "others": sendData?.otherExpenses,
       "emp_id":userid,
-      "mode_of_travel": sendData?.modeoftravel,
+      "mode_of_travel": JSON.stringify(sendData?.modeoftravel),
       "other_text": sendData?.OtherAmount,
       "files": [parseInt(Imagevalue)]
     
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/addNewTA.php',
+      url: baseURL + 'addNewTA',
       headers: {
         'Content-Type': 'application/json'
       },
+
       data: data
     };
     axios(config)
@@ -164,45 +166,21 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
         alert(response.message)
       });
   }
-  const postImages = async () => {
-    if(image.length===0){
-      alert("No photos to upload.")
-      throw new Error('No photos to upload.');
-    }
-    var dataImage = []
-    const form = new FormData()
-    form?.append("emp_id", userid)
-    const data = imagePath?.map(itm => {
-      form?.append("file[]", itm)
-    })
-    var requestOptions = {
-      method: 'POST',
-      body: form,
-     
-    };
-   
-    let res = fetch("https://bdms.buzzwomen.org/appTest/new/taAttachments.php", requestOptions).then(itn => {
-      alert("added succesfully ")
-    })
-      .catch(err => {
-        // console.log(err, "<---wertyu")
-      })
-    
-  }
+ 
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(function(position) {
-var data = JSON.stringify({
-  "latitude": position.coords.latitude,
-  "longitude": position.coords.longitude
-});
-var config = {
-  method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/getlocationName.php',
-  headers: { 
-    'Content-Type': 'application/json'
-  },
-  data : data
-};
+      var data = JSON.stringify({
+        "latitude": JSON.stringify(position.coords.latitude),
+        "longitude": JSON.stringify(position.coords.longitude)
+      });
+      var config = {
+        method: 'post',
+        url: baseURL+'getlocationName',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
 axios(config)
 .then(function (response) {
   setLocation(response?.data)
@@ -232,7 +210,7 @@ axios(config)
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/getPoaTa.php',
+      url: baseURL+'getPoaTa',
       headers: {
         'Content-Type': 'application/json'
       },

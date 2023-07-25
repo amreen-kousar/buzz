@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Villagevisitdrawer from './Components/schedulevillagevisitdrawer';
+import { baseURL } from 'src/utils/api';
 export default function scheduleVillage() {
     const {state} = useLocation()
     const [data1, setData1] = useState('')
@@ -35,19 +36,19 @@ export default function scheduleVillage() {
         var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
-            "search": search,
-            "project_id": state?.id,
-            "emp_id": idvalue
-          });
-          
-          var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getGFAssignedBatch.php',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
+          "search": search,
+          "project_id": state?.id,
+          "emp_id": idvalue
+        });
+        
+        var config = {
+          method: 'post',
+          url: baseURL+'getGFAssignedBatch',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
           
           axios(config)
           .then(function (response) {
@@ -76,7 +77,7 @@ export default function scheduleVillage() {
   
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+        url: baseURL + 'getProjectData',
         headers: {
           'Content-Type': 'application/json'
         },

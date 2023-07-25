@@ -1,17 +1,18 @@
 import axios from 'axios';
+import { baseURL } from 'src/utils/api';
 export default async function ApiRequest(props) {
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var response = []
     const data = JSON.stringify({
         "role_id": role,
-        "filter_type": props.selectDATA,
+        "filter_type": JSON.stringify(parseInt(props.selectDATA)),
         "pageNum": 1,
-        "emp_id": idvalue
+        "emp_id": JSON.stringify(parseInt(idvalue))
     });
     const config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
+        url: baseURL + 'getPeopleFilters',
         headers: {
             'Content-Type': 'application/json'
         },
