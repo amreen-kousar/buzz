@@ -152,7 +152,7 @@ setSummaryData(response?.data);
           <Typography variant="h5" gutterBottom sx={{ ml: 4 }}>
            Quality Assessment  
           </Typography>
-          {(role!=2)?<Button
+          {(userrole!=2)?<Button
             style={{ float: 'right', color: '#ff7424' }}
             sx={{ '&:hover': { backgroundColor: '#ffd796' } }}
             onClick={() => {

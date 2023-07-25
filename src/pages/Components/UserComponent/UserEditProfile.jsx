@@ -215,7 +215,7 @@ useEffect(()=>{
       .then(function (response) {
         sessionStorage.setItem('people', data);
         setUsersDataEdit(response.data);
-        
+        updateSetUser()
         closeUserDrawer()
       })
       .catch(function (error) {
