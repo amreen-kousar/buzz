@@ -214,13 +214,14 @@ useEffect(()=>{
       .then(function (response) {
         sessionStorage.setItem('people', data);
         setUsersDataEdit(response.data);
-        updateSetUser();
+        
         closeUserDrawer()
       })
       .catch(function (error) {
         // console.log(error);
       });
     handleClose();
+    updateSetUser();
   };
   const deleteProject = (id,index)=>{
 let updatedlist = updatedProjectlist.filter((e)=> e.id != id)
