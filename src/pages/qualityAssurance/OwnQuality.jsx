@@ -91,9 +91,9 @@ const handleClose = ()=>{
    }
   
     return (
-        todayPoa == "" ?
-        <div style={{marginTop:"20%" , marginLeft:"40%"}}>
-  <CircularProgress />
+        todayPoa?.data == null ?
+        <div style={{marginTop:"20%" , marginLeft:"40%",fontWeight:700,fontSize:20}}>
+     No data Found
   </div>
 :  
         <div>

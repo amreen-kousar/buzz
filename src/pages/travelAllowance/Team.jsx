@@ -8,6 +8,7 @@ import { baseURL } from 'src/utils/api';
 import CloseIcon from '@mui/icons-material/Close';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Iconify from 'src/components/Iconify';
+import moment from 'moment';
 export default function Team(props) {
     const [value, setValue] = React.useState(0);
     const data = sessionStorage?.getItem('userId')
@@ -232,7 +233,7 @@ const userrole = JSON.parse(sessionStorage.getItem('userDetails'))?.role
                             Select All
                         </div>
                         {
-                            teamTAData.map((itm, i) => {
+                            teamTAData?.map((itm, i) => {
                                 return <Card id="team-verified-data-card"  style={{ margin: "20px", borderRadius: "5px", backgroundColor: "#f7f7f7", cursor: "pointer", padding: '0.5rem', height: "10vh" }} >
                                     <Grid id="team-verified-data-grid" container spacing={2}>
                                         <Grid id="checked-data-grid" item sm={11}>
