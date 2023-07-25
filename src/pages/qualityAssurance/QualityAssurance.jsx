@@ -144,6 +144,7 @@ setSummaryData(response?.data);
     apiHit(itm?.id,i,"Role")
    
   }
+  const userrole = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
   return (
     <>
       <Page title="Dashboard">
@@ -151,7 +152,7 @@ setSummaryData(response?.data);
           <Typography variant="h5" gutterBottom sx={{ ml: 4 }}>
            Quality Assessment  
           </Typography>
-          <Button
+          {(role!=2)?<Button
             style={{ float: 'right', color: '#ff7424' }}
             sx={{ '&:hover': { backgroundColor: '#ffd796' } }}
             onClick={() => {
@@ -159,7 +160,7 @@ setSummaryData(response?.data);
             }}
           >
             Filter
-          </Button>
+          </Button>:null}
           <QualityAssuranceFilter isOpenFilter={openFilter} onCloseFilter={handleCloseFilter}  onSumbit={onSumbit} onDateSubmit={onDateSubmit} getData={getData}/>
         </Stack>
         <Container maxWidth="xl">

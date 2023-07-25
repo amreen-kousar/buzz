@@ -462,7 +462,7 @@ const shaktiformapi = async()=>{
   newData.map((itm,index)=>{
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/addSurveyData.php',
+      url: baseURL + 'addSurveyData',
       headers: {
         'Content-Type': 'application/json',
       },

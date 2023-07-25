@@ -215,6 +215,19 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   },[reloadPOAGF])
   const circle = (async) => {
     const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
+    // var data = JSON.stringify({
+    //   circle_id: session?.circle_id,
+    //   project_id: session?.project_id,
+    //   emp_id: userid,
+    // });
+    // var config = {
+    //   method: 'post',
+    //   url: oldbaseURL + 'getGelathiCircleDataNew.php',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   data: data,
+    // };
     var data = JSON.stringify({
       circle_id: session?.circle_id,
       project_id: session?.project_id,
@@ -222,7 +235,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     });
     var config = {
       method: 'post',
-      url: oldbaseURL + 'getGelathiCircleDataNew.php',
+      url: baseURL+'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
       },
