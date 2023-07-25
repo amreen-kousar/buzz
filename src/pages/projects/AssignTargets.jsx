@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow';
 import TableCell from "@mui/material/TableCell";
 import axios from "axios";
+import { baseURL } from "src/utils/api";
 import { useEffect, useState} from "react";
 export default function AssignTargets()
 {
@@ -26,17 +27,17 @@ const assign=(e,index)=>{
   setCreateTarget(createTarget)
 }
   const targets=async=>{
-var data = JSON.stringify({
-  "project_id": state?.id
-});
-var config = {
-  method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/getAssignTargets.php',
-  headers: { 
-    'Content-Type': 'application/json'
-  },
-  data : data
-};
+    var data = JSON.stringify({
+      "project_id": state?.id
+    });
+    var config = {
+      method: 'post',
+      url: baseURL+'getAssignTargets',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
 axios(config)
 .then(function (response) {
   let temp=[]
@@ -55,18 +56,18 @@ axios(config)
   }
   
 const createTrainerTarget=async=>{
-var data = JSON.stringify({
-  "target_list":createTarget,
-  "project_id": state?.id
-});
-var config = {
-  method: 'post',
-  url: 'https://bdms.buzzwomen.org/appTest/createTrainerTarget.php',
-  headers: { 
-    'Content-Type': 'application/json'
-  },
-  data : data
-};
+  var data = JSON.stringify({
+    "target_list":createTarget,
+    "project_id": state?.id
+  });
+  var config = {
+    method: 'post',
+    url: baseURL+'createTrainerTarget',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
 axios(config)
 .then(function (response) {
  alert("Target Added Successfully")
@@ -87,7 +88,7 @@ const projData = async => {
   });
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+    url: baseURL + 'getProjectData',
     headers: {
       'Content-Type': 'application/json'
     },

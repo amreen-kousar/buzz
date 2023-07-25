@@ -15,6 +15,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Snackbar from '@mui/material/Snackbar';
+import { baseURL } from 'src/utils/api';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 export default function enrolledGreenMotivatorsList() {
     const {state} = useLocation()
@@ -61,21 +62,20 @@ export default function enrolledGreenMotivatorsList() {
         var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
-            "search": search,
-            "project_id": state?.id,
-            "emp_id": idvalue,
-            "gelathi_id":id?.emp_id?id?.emp_id:""
-          });
-          
-          var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollGreenMotivators.php',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
-          
+          "search": search,
+          "project_id": state?.id,
+          "emp_id": idvalue,
+          "gelathi_id":id?.emp_id?id?.emp_id:""
+        });
+        
+        var config = {
+          method: 'post',
+          url: baseURL+'getEnrollGreenMotivators',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
           axios(config)
           .then(function (response) {
             setGreen(response.data)
@@ -103,7 +103,7 @@ export default function enrolledGreenMotivatorsList() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+      url: baseURL + 'getProjectData',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -135,19 +135,19 @@ const getData = (itm, i) => {
   }
   const removeGelathi=async(itm)=>{
     if(confirm("Are you sure want to remove Gelathi")){
-  var data = JSON.stringify({
-    "id": itm?.id,
-    "tb_id": itm?.tb_id
-  });
-  
-  var config = {
-    method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/new/removeGreenMotivators.php',
-    headers: { 
-      'Content-Type': 'application/json'
-    },
-    data : data
-  };
+      var data = JSON.stringify({
+        "id": itm?.id,
+        "tb_id": itm?.tb_id
+      });
+      
+      var config = {
+        method: 'post',
+        url: baseURL + 'removeGreenMotivators',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
   
   axios(config)
   .then(function (response) {

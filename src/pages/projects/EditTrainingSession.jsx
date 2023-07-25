@@ -13,6 +13,7 @@ import { DialogContentText } from '@mui/material';
 import dayjs from 'dayjs';
 import moment from 'moment/moment';
 import Iconify from 'src/components/Iconify';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -50,11 +51,12 @@ useEffect(()=>{
   const villageList = async(i) => {
     
     var data = JSON.stringify({
-      "taluk_id":i?.taluk_id
+      "taluk_id":parseInt(i?.taluk_id),
+      "search":'',
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getVillageList.php',
+      url: baseURL + 'getVillageList',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -83,7 +85,7 @@ useEffect(()=>{
     
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/editTrainingBatch.php',
+      url: baseURL + 'editTrainingBatch',
       headers: { 
         'Content-Type': 'application/json'
       },

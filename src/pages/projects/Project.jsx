@@ -32,6 +32,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import CreateProj from './Components/CreateProj';
 import BusCheckList from '../BusCheckList';
+import { baseURL } from 'src/utils/api';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -136,7 +137,7 @@ function Project(props) {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+      url: baseURL + 'getProjectData',
       headers: {
         'Content-Type': 'application/json',
       },

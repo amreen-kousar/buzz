@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import VillageDialog from './projectfilters/Villagesdialog';
+import { baseURL } from 'src/utils/api';
 export default function assignedVillages() {
     const {state} = useLocation()
     const [data1, setData1] = useState('')
@@ -30,19 +31,19 @@ export default function assignedVillages() {
         var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
-            "search": search,
-            "project_id": state?.id,
-            "emp_id": idvalue
-          });
-          
-          var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getGFAssignedBatch.php',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
+          "search": search,
+          "project_id": state?.id,
+          "emp_id": idvalue
+        });
+        
+        var config = {
+          method: 'post',
+          url: baseURL+'getGFAssignedBatch',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
           
           axios(config)
           .then(function (response) {
@@ -76,7 +77,7 @@ export default function assignedVillages() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+      url: baseURL + 'getProjectData',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -104,18 +105,18 @@ const getTrainingBatch = async =>{
   var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
   var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
   var data = JSON.stringify({
-      "batch_id": batchState?.training_batch_id?batchState?.training_batch_id:clcikData?.id,
-      "role_id": role
-    });
-    
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
+    "batch_id": batchState?.training_batch_id?batchState?.training_batch_id:clcikData?.id,
+    "role_id": role
+  });
+  
+  var config = {
+    method: 'post',
+    url: baseURL + 'getTrainingBatchData',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
     
     axios(config)
     .then(function (response) {

@@ -6,6 +6,7 @@ import account from '.././_mock/account';
 import { styled } from '@mui/material/styles';
 import Iconify from 'src/components/Iconify';
 import PropTypes from 'prop-types';
+import { baseURL } from 'src/utils/api';
 import {
   Link,
   Container,
@@ -152,7 +153,7 @@ export default function PlanofAction() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getPoa.php',
+      url: baseURL + 'getPOA',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -190,7 +191,7 @@ export default function PlanofAction() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/updateEventCancel.php',
+      url: baseURL + 'updateEventCancel',
       headers: {
         'Content-Type': 'application/json',
       },

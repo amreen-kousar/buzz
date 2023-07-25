@@ -15,6 +15,7 @@ import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { AltRouteTwoTone } from '@mui/icons-material';
+import { baseURL } from 'src/utils/api';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -82,7 +83,7 @@ const projData = (async) => {
   });
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+    url: baseURL + 'getProjectData',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -108,18 +109,18 @@ const onChangeMaterialValue = (index , quantity)=>{
         var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
         var data = JSON.stringify({
-            "project_id":state?.id
-        });
-     
-        const config = {
-          method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getStockItems.php', 
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-          },
-          data
-        };
+          "project_id":state?.id
+      });
+   
+      const config = {
+        method: 'post',
+        url: baseURL + 'getStockItems',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        data
+      };
         axios(config)
           .then((response) => {
             setDemo(response.data?.data)
@@ -140,21 +141,21 @@ const onChangeMaterialValue = (index , quantity)=>{
         }
         var data = JSON.stringify({
           
-            "project_id": data1.project_id,
-            "bus_id": data1.bus_id,
-            "type": "0",
-            "stock_list" :stock
-        });
-       
-        const config = {
-          method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/consumeStock.php', 
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-          },
-          data :data
-        };
+          "project_id": data1.project_id,
+          "bus_id": data1.bus_id,
+          "type": "0",
+          "stock_list" :stock
+      });
+     
+      const config = {
+        method: 'post',
+        url: baseURL+'consumeStock', 
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        data :data
+      };
         axios(config)
         .then(function (response) {
          if(response.status == 200){

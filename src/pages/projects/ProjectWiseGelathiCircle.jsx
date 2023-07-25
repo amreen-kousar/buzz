@@ -59,7 +59,7 @@ export default function ProjectWiseGelathiCircle() {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+      url: baseURL + 'getProjectData',
       headers: {
         'Content-Type': 'application/json',
       },

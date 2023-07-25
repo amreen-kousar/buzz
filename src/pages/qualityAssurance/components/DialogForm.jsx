@@ -31,6 +31,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import axios from 'axios';
 import moment from 'moment';
+import { baseURL } from 'src/utils/api';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import "../../../assets/css/custom.css"
@@ -355,16 +356,16 @@ reloadfunction()
   const getGFname = async (id) => {
     
     var data = JSON.stringify({
-     "role_id":6,
-    });
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: data
-    };
+      //"role_id":6,
+     });
+     var config = {
+       method: 'post',
+       url: baseURL+'getGelathiList',
+       headers: {
+         'Content-Type': 'application/json'
+       },
+       data: data
+     };
     axios(config)
       .then(function (response) {
         setGFName(response.data.list
@@ -400,11 +401,11 @@ reloadfunction()
   const Trainerlist = async (id) => {
     
     var data = JSON.stringify({
-      "role_id":"5"
+      //"role_id":"5"
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getTrainersList.php',
+      url: baseURL+'getTrainersList',
       headers: {
         'Content-Type': 'application/json'
       },

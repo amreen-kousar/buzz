@@ -13,6 +13,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { baseURL } from 'src/utils/api';
 import Paper from '@mui/material/Paper';
 import Page from 'src/components/Page';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
@@ -87,7 +88,7 @@ export default function busTestList() {
   
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/deleteBus.php',
+        url: baseURL + 'deleteBus',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -111,19 +112,19 @@ export default function busTestList() {
         var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
       
         const data = JSON.stringify({
-        "fromDate":date1 && moment(date1?.$d)?.format('YYYY-MM-DD'),
-        "toDate":date2 && moment(date2?.$d)?.format('YYYY-MM-DD'), 
-        "bus_id":state?.id,
-        });
-    
-        const config = {
-          method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data
-        };
+          "fromDate":date1 && moment(date1?.$d)?.format('YYYY-MM-DD'),
+          "toDate":date2 && moment(date2?.$d)?.format('YYYY-MM-DD'), 
+          "bus_id":state?.id,
+          });
+      
+          const config = {
+            method: 'post',
+            url: baseURL + 'getBusData',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data
+          };
     
         axios(config)
           .then((response) => {
@@ -139,7 +140,7 @@ const details = async => {
   });
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getBusData.php',
+    url: baseURL + 'getBusData',
     headers: {
       'Content-Type': 'application/json'
     },

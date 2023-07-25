@@ -5,6 +5,7 @@ import { Button, Dialog, AppBar, Toolbar, IconButton, Typography, InputLabel, Me
 import { useLocation, Link } from 'react-router-dom'
 import CreateProj from './Components/CreateProj';
 import Iconify from 'src/components/Iconify';
+import { baseURL } from 'src/utils/api';
 function AddProject({ viewMessage }) {
     const [open, setAddProject] = useState(false)
     const [country, setCountry] = useState([])
@@ -47,7 +48,7 @@ function AddProject({ viewMessage }) {
         
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+            url: baseURL + 'getLocation',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -64,11 +65,11 @@ function AddProject({ viewMessage }) {
     const getState = async (id) => {
         var data = JSON.stringify({
             "country_id": "1",
-            "state_id": id
+            "state_id": JSON.stringify(parseInt(id))
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+            url: baseURL + 'getLocation',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -86,11 +87,11 @@ function AddProject({ viewMessage }) {
         var data = JSON.stringify({
             "country_id": "1",
             "state_id": data?.state,
-            "district_id": id
+            "district_id": JSON.stringify(parseInt(id))
         });
         var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+            url: baseURL + 'getLocation',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -108,14 +109,14 @@ function AddProject({ viewMessage }) {
         var roleid= JSON.parse(sessionStorage.getItem('userDetails'))?.role;
         var empid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
         const data = JSON.stringify({
-            "role_id": parseInt(roleid),
-            "filter_type": 2,
+            "role_id": roleid,
+            "filter_type": "2",
             "pageNum": 1,
-            "emp_id": parseInt(empid)
+            "emp_id": empid
         });
         const config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
+            url: baseURL + 'getPeopleFilters',
             headers: {
                 'Content-Type': 'application/json'
             },

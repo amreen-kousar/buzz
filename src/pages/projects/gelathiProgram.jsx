@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Filtersmain from './projectfilters/filtersmain';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
+import { baseURL } from 'src/utils/api';
 export default function gelathiProgram(props) {
     const {state} = useLocation();
     const [clcikData, setClickData] = useState()
@@ -32,23 +33,23 @@ export default function gelathiProgram(props) {
         var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
         var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
         var data = JSON.stringify({
-            "filter": i?.id?i?.id:'',
-            "end_date":  g==="date"?i:'',
-            "search": search,
-            "project_id": state?.id,
-            "gelathi_id": id?.emp_id,
-            "start_date":  g==="date"?id:'',
-            "emp_id": idvalue
-          });
-          
-          var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getGFSessionsNew.php',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
+          "filter": i?.id?JSON.stringify(parseInt(i?.id)):'',
+          "end_date":  g==="date"?i:'',
+          "search": search,
+          "project_id": state?.id,
+          "gelathi_id": JSON.stringify(id?.emp_id),
+          "start_date":  g==="date"?id:'',
+          "emp_id": idvalue
+        });
+        
+        var config = {
+          method: 'post',
+          url: baseURL+'getGFSessionsNew',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
           
           axios(config)
           .then(function (response) {
@@ -78,7 +79,7 @@ export default function gelathiProgram(props) {
     
         var config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+          url: baseURL + 'getProjectData',
           headers: {
             'Content-Type': 'application/json'
           },

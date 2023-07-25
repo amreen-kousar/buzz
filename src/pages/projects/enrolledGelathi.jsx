@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Filtersmain from './projectfilters/filtersmain';
+import { baseURL } from 'src/utils/api';
 export default function enrolledGelathiList() {
     const {state} = useLocation()
     const [data1, setData1] = useState('')
@@ -45,22 +46,22 @@ const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
         var userDetails = JSON.parse(sessionStorage?.getItem('userDetails'))
   var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
   var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
-        var data = JSON.stringify({
-            "search": search,
-            "project_id": state?.id,
-            "emp_id": idvalue,
-            "role_id": role,
-            "gelathi_id":id?.emp_id?id?.emp_id:'',
-          });
-          
-          var config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getEnrollGelathi.php',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
+  var data = JSON.stringify({
+    "search": search,
+    "project_id": state?.id,
+    "emp_id": idvalue,
+    "role_id": role,
+    "gelathi_id":id?.emp_id?id?.emp_id:'',
+  });
+  
+  var config = {
+    method: 'post',
+    url: baseURL+'getEnrollGelathi',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
           
           axios(config)
           .then(function (response) {
@@ -87,7 +88,7 @@ const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+      url: baseURL + 'getProjectData',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -116,19 +117,19 @@ const getData = (itm, i) => {
   }
   const removeGelathi= async(itm)=>{
     if (confirm("Do You Want To Remove Gelathi?")){
-    var data = JSON.stringify({
-    "id": itm?.id,
-    "tb_id": itm?.tb_id
-  });
-  
-  var config = {
-    method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/removeEnrollGelathi.php',
-    headers: { 
-      'Content-Type': 'application/json'
-    },
-    data : data
-  };
+      var data = JSON.stringify({
+        "id": itm?.id,
+        "tb_id": itm?.tb_id
+      });
+      
+      var config = {
+        method: 'post',
+        url: baseURL + 'removeEnrollGelathi',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
  
   axios(config)
   .then(function (response) {

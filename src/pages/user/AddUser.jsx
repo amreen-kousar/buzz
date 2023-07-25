@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, Dialog, Toolbar, IconButton, Typography, TextField, DialogContent, DialogContentText, Box, DialogActions, FormControl, InputLabel, Select, MenuItem, RadioGroup, Radio, Autocomplete, FormControlLabel, FormGroup, Switch, CardContent } from '@mui/material'
 import Iconify from '../../components/Iconify';
 import AppBar from '@mui/material/AppBar';
+import { baseURL } from 'src/utils/api';
 function AddUser(props) {
   
     const [open, setOpen] = useState(false);
@@ -54,17 +55,17 @@ const emailchangeHandler=(e) => {
         setOpen(false);
     };
     const checkEmailExists = () => {
-      const data = JSON.stringify({
-          office_email_id: AddUser.officeMailId
-      });
-      const config = {
-          method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getEmailExist.php',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          data
-      };
+        const data = JSON.stringify({
+            office_email_id: AddUser.officeMailId
+        });
+        const config = {
+            method: 'post',
+            url: baseURL + 'getEmailExist',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data
+        };
       axios(config)
           .then((response) => {
               if (response.data.code===409) {
@@ -92,7 +93,7 @@ const emailchangeHandler=(e) => {
         });
         const config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/roles_list.php',
+            url: baseURL+'roles_list',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -111,7 +112,7 @@ const emailchangeHandler=(e) => {
         let formData = new FormData();
         formData.append('role_id', value.id);
         formData.append('name', '');
-        let res = await fetch('https://bdms.buzzwomen.org/appTest/getAllBuzzTeam.php',
+        let res = await fetch(baseURL+'getAllBuzzTeam',
             {
                 body: formData,
                 method: "post"
@@ -130,7 +131,7 @@ const emailchangeHandler=(e) => {
         });
         const config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getProjectList.php',
+            url: baseURL + 'getProjectList',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -154,15 +155,15 @@ const emailchangeHandler=(e) => {
     const getProjects = async () => {
         const data = JSON.stringify({
             "search": "",
-            "id": 1,
-            "role_id": 1,
+            "id": "1",
+            "role_id": "1",
             "filter_id": 0,
             "type": "",
             "pageNum": 1
         });
         const config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
+            url: baseURL + 'getProjects',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -187,15 +188,15 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         AddUser.createdBy = userid,
             AddUser.lastUpdatedBy = userid
        
-        const data = JSON.stringify(AddUser);
-        const config = {
-            method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/createUser.php',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data
-        };
+            const data = JSON.stringify(AddUser);
+            const config = {
+                method: 'post',
+                url: baseURL+'createUser',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data
+            };
         let apiCallName = (AddUser.role.roleName == "Funder") ? 'createFunder' : (AddUser.role.roleName == "Partner") ? 'createPartner' : false;
         axios(config)
             .then((response) => {
@@ -232,14 +233,14 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                                 "createdBy": userid,
                                 "lastUpdatedBy": userid
                             }
-                        const partnerFunderConfig = {
-                            method: 'post',
-                            url: `https://bdms.buzzwomen.org/appTest/${apiCallName}.php`,
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            funderPartnerData
-                        }
+                            const partnerFunderConfig = {
+                                method: 'post',
+                                url:  baseURL + `${apiCallName}`,
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                funderPartnerData
+                            }
                         axios(partnerFunderConfig)
                             .then((responseIn) => {
                                 setOpen(false)

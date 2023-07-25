@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import { baseURL } from 'src/utils/api';
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton,Button ,CardContent,Select,MenuItem,TextField} from '@mui/material';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -44,22 +45,22 @@ const getProjects = async()=>{
     var roleid= JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var userid= JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var data = JSON.stringify({
-        "search": "",
-        "id": userid,
-        "role_id": roleid,
-        "filter_id": "",
-        "type": "",
-        "pageNum": ""
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getProjects.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
+      "search": "",
+      "id": JSON.stringify(userid),
+      "role_id": JSON.stringify(roleid),
+      "filter_id": 0,
+      "type": "",
+      "pageNum": 1
+    });
+    
+    var config = {
+      method: 'post',
+      url: baseURL + 'getProjects',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
       
       axios(config)
       .then(function (response) {
@@ -81,17 +82,19 @@ const getProjects = async()=>{
         var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
         var data = JSON.stringify({
-            "project_id":itm?.id
-        });
-    const config = {
-          method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getStockItems.php', 
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-          },
-          data
-        };
+          "project_id":itm?.id
+      });
+   
+  
+      const config = {
+        method: 'post',
+        url:baseURL + 'getStockItems',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        data
+      };
     
         axios(config)
           .then((response) => {
@@ -129,21 +132,20 @@ const getProjects = async()=>{
         var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
         var data = JSON.stringify({
           
-            "project_id": ProjectId?.id,
-            // "bus_id": ProjectId.bus_id,
-            "type": "0",
-            "stock_list" :stock
-        });
-       
-        const config = {
-          method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/consumeStock.php', 
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-          },
-          data :data
-        };
+          "project_id": ProjectId?.id,
+          "type": "1",
+          "stock_list" :stock
+      });
+     
+      const config = {
+        method: 'post',
+        url: baseURL+'consumeStock', 
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        data :data
+      };
         axios(config)
         .then(function (response) {
          if(response.status == 200){
