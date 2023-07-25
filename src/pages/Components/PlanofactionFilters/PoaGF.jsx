@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { oldbaseURL } from 'src/utils/api';
+import { baseURL, oldbaseURL } from 'src/utils/api';
 import { Icon } from '@iconify/react';
 import GreenSurvey from 'src/pages/projects/Components/GreenSurvey';
 import Vyaparprogram from 'src/pages/projects/Components/Vyaparprogram';
@@ -45,6 +45,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import { EightK } from '@mui/icons-material';
 import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined';
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -111,7 +112,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData.php',
+      url: baseURL+'getGFSessionData',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -130,11 +131,12 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     var userid = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       gf_session_id: clcikData?.id,
-      user_id: userid,
+      user_id : userid
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData1.php',
+      url: baseURL + 'getGFSessionData1',
+      
       headers: {
         'Content-Type': 'application/json',
       },
@@ -156,13 +158,13 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       notes: gelatiNote,
-      type: session.type,
+      type: JSON.stringify(parseInt(session.type)),
       tb_id: session.tb_id,
       emp_id: userid,
     });
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createNotes.php',
+      url: baseURL+'createNotes',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -191,7 +193,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     });
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getNotes.php',
+      url: baseURL + 'getNotes',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -269,7 +271,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       redirect: 'follow',
     };
 
-    let res = fetch('https://bdms.buzzwomen.org/appTest/uploadGFSessionPhotos.php', requestOptions)
+    let res = fetch('https://bdms.buzzwomen.org/appGo/uploadGFSessionPhotos', requestOptions)
       .then((itn) => {
         setImages([]);
         alert('Image uploaded successfully..');
@@ -290,19 +292,18 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const removesession = (e) => {
     if (confirm('Do You want to Cancel?')) {
       var data = JSON.stringify({
-        poa_id: e?.id,
-        day: '',
+        "poa_id": e?.id,
+        "day": ""
       });
-
+      
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/updatePoaCancel.php',
-        headers: {
-          'Content-Type': 'application/json',
+        url: baseURL + 'updatePoaCancel',
+        headers: { 
+          'Content-Type': 'application/json'
         },
-        data: data,
+        data : data
       };
-
       axios(config)
         .then(function (response) {
           onCloseFilterGF();
@@ -317,19 +318,19 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
  
   const Reschedule = (e) => {
     var data = JSON.stringify({
-      poa_id: e,
-      date_time: moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+      "poa_id": e,
+      "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm')
     });
-
+    
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/updateReschedule.php',
-      headers: {
-        'Content-Type': 'application/json',
+      url: baseURL+'updateReschedule',
+      headers: { 
+        'Content-Type': 'application/json'
       },
-      data: data,
+      data : data
     };
-
+    
     axios(config)
       .then(function (response) {
         setReschedule(false);
@@ -418,7 +419,7 @@ if(session?.type == 16){
 const gelathinamelist = (async) => {
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
+    url: baseURL + 'getGelathiList',
     headers: {
       'Content-Type': 'application/json',
     }

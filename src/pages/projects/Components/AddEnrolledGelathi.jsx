@@ -18,6 +18,7 @@ import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import { CheckBox , ScaleOutlined } from '@mui/icons-material';
 import { size, transform } from 'lodash';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -37,22 +38,21 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       };
   const addGelathi=(itm)=>{
     var data = JSON.stringify({
-        "id": itm?.participant_id,
-        "gelathi_id":session?.user_id,
-        "tb_id": session?.tb_id,
-        "projectId": session?.project_id,
-        
-      });
+      "id": itm?.participant_id,
+      "gelathi_id":session?.user_id,
+      "tb_id": session?.tb_id,
+      "projectId": session?.project_id,
       
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/setEnrollGelathi.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
+    });
+    
+    var config = {
+      method: 'post',
+      url: baseURL + 'setEnrollGelathi',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
       axios(config)
       .then(function (response) {
           setSessiondata(response.data)
@@ -68,18 +68,18 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   }
   const getGfsessiondata=()=>{
     var data = JSON.stringify({
-        "gf_session_id": session?.id
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
+      "gf_session_id": session?.id
+    });
+    
+    var config = {
+      method: 'post',
+      url: baseURL+'getGFSessionData',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
       axios(config)
       .then(function (response) {
         // console.log(JSON.stringify(response.data));

@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { baseURL } from 'src/utils/api';
 export default async function shakthiapirequest(props) {
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
@@ -17,7 +17,7 @@ export default async function shakthiapirequest(props) {
     });
     const config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatch.php',
+        url: baseURL + 'getTrainingBatch',
         headers: {
             'Content-Type': 'application/json'
         },

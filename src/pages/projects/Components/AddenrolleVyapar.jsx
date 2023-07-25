@@ -8,6 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import AddParticipants from './AddParticipants';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -29,21 +30,21 @@ const Transition = React.forwardRef(function Transition(props, ref) {
         setOpen(false);
       };
 const setEnrolledVyapar=(itm)=>{
-    var data = JSON.stringify({
-        "id": itm?.participant_id,
-        "gelathi_id": session?.user_id,
-        "tb_id": session?.tb_id,
-        "projectId": session?.projectId
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/new/setVyaparEnrollment.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
+  var data = JSON.stringify({
+    "id": itm?.participant_id,
+    "gelathi_id": session?.user_id,
+    "tb_id": session?.tb_id,
+    "projectId": session?.project_id
+  });
+  
+  var config = {
+    method: 'post',
+    url: baseURL + 'setVyaparEnrollment',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
       
       axios(config)
       .then(function (response) {
@@ -61,16 +62,17 @@ getAddPartcipants();
 },[open ,reload])
   const getEnrollVyapar=()=>{
     var data = JSON.stringify({
-    "gf_session_id":session?.id
-  })
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/new/getVyaparEnrollment.php',
-      headers: { 
-        'Content-Type': 'text/plain'
-      },
-      data : data
-    };
+      "gf_session_id":session?.id
+    })
+      var config = {
+        method: 'post',
+        url: baseURL + 'getVyaparEnrollment',
+        headers: { 
+          'Content-Type': 'text/plain'
+        },
+        data : data
+      };
+      
     
     axios(config)
     .then(function (response) {
@@ -91,12 +93,13 @@ const getAddPartcipants=()=>{
   
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/new/getEnrollVyaparEnrollment.php',
+    url: baseURL+'getEnrollVyaparEnrollment',
     headers: { 
       'Content-Type': 'application/json'
     },
     data : data
   };
+  
   
   axios(config)
   .then(function (response) {

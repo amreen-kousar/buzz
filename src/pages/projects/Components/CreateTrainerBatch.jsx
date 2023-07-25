@@ -15,6 +15,7 @@ import Slide from '@mui/material/Slide';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { DialogContentText } from '@mui/material';
 import dayjs from 'dayjs';
+import { baseURL } from 'src/utils/api';
 import moment from 'moment/moment';
 import Iconify from 'src/components/Iconify';
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -59,11 +60,12 @@ export default function CreateTrainerBatch(props) {
   
   const villageList = async(i) => {
     var data = JSON.stringify({
-      "taluk_id":i?.location_id
+      "taluk_id":parseInt(i?.location_id),
+      "search":'',
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getVillageList.php',
+      url: baseURL + 'getVillageList',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -87,15 +89,15 @@ export default function CreateTrainerBatch(props) {
       "project_id": props?.data1?.project_id,
       "contact_person": trainerData?.contact_person,
       "number_of_participants": trainerData?.number_of_participants,
-      "day1": moment(trainerData?.day1.$d)?.format('YYYY/MM/DD  h:mm:ss '),
-      "day2": moment(trainerData?.day2.$d)?.format('YYYY/MM/DD  h:mm:ss '),
+      "day1": moment(trainerData?.day1.$d)?.format('YYYY/MM/DD  h:mm A'),
+      "day2": moment(trainerData?.day2.$d)?.format('YYYY/MM/DD  h:mm A'),
       "location_id": props?.data1?.location_id,
       "contact_number": trainerData?.contact_number,
       "trainer_id": idvalue
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createTrainingBatch.php',
+      url: baseURL + 'createTrainingBatch',
       headers: {
         'Content-Type': 'application/json'
       },

@@ -9,6 +9,7 @@ import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
 import Iconify from '../../components/Iconify';
 import BusCheckList from '../BusCheckList';
+import { baseURL } from 'src/utils/api';
 export default function User() {
   var userAccess = ['2']
   var userIdCheck = sessionStorage?.getItem('userId')
@@ -41,17 +42,18 @@ export default function User() {
   
     const data = JSON.stringify({
       "date": "",
-      "role_id": role,
+      "role_id": parseInt(role),
       "project_id": id === 3 ? i?.id : "",
-      taluk_id: g === "country" ? id : "",
-      district_id: g === "country" ? i : "",
+      taluk_id: g === "country" ? JSON.stringify(id) : "",
+      district_id: g === "country" ? JSON.stringify(i) : "",
       "funder_id": id === 2 ? i?.id : "",
-      "emp_id": userid,
+      "emp_id": parseInt(userid),
       "search": search
     });
+ 
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getBuses.php',
+      url:baseURL + 'getBuses',
       headers: {
         'Content-Type': 'application/json'
       },

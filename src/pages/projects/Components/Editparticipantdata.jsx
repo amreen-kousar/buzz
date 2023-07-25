@@ -25,6 +25,7 @@ import Switch from '@mui/material/Switch';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import RadioGroup from '@mui/material/RadioGroup';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -62,12 +63,11 @@ export default function EditParticipantdata({editSession, setEditsession,Trainin
     changeState();
   };
 const Occupation =()=>{
-    var config = {
-        method: 'get',
-        url: 'https://bdms.buzzwomen.org/appTest/getOccupations.php',
-        headers: { }
-      };
-      
+  var config = {
+    method: 'post',
+    url: baseURL + 'getOccupations',
+    headers: { }
+  };
       axios(config)
       .then(function (response) {
         setOccupationdata(response.data)
@@ -78,31 +78,31 @@ const Occupation =()=>{
       
 }
 const SendData = async => {
-    var data = JSON.stringify({
-        "income":sendData?.income, 
-        "occupation":sendData?.occupation,
-         "typeOfEnterprise":sendData?.typeOfEnterprise, 
-         "participant_id":participantdata?.id, 
-         "final_save":1, 
-         "husbandOccupation":sendData?.husbandOccupation,
-         "wifeIncomeMonthly":sendData?.wifeIncomeMonthly, 
-         "saving_goal":sendData?.saving_goal, 
-         "bank_acc":sendData?.bank_acc, 
-         "wifeSavingsMonthly":sendData?.wifeSavingsMonthly,
-         "saving_amt":sendData?.saving_amt, 
-         "participant_day2":Trainingdata?.data?.day2, 
-         "gelathiRecomm":sendData?.gelathiRecomm, 
-         "project_id":Trainingdata?.data?.project_id, 
-         "tb_id":Trainingdata?.data?.id
-    });
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/editParticipant.php',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: data
-    };
+  var data = JSON.stringify({
+    "income":parseInt(sendData?.income), 
+    "occupation":JSON.stringify(parseInt(sendData?.occupation)),
+     "typeOfEnterprise":sendData?.typeOfEnterprise, 
+     "participant_id":parseInt(participantdata?.id), 
+     "final_save":1, 
+     "husbandOccupation":JSON.stringify(parseInt(sendData?.husbandOccupation)),
+     "wifeIncomeMonthly":parseInt(sendData?.wifeIncomeMonthly), 
+     "saving_goal":sendData?.saving_goal, 
+     "bank_acc":parseInt(sendData?.bank_acc), 
+     "wifeSavingsMonthly":parseInt(sendData?.wifeSavingsMonthly),
+     "saving_amt":parseInt(sendData?.saving_amt), 
+     "participant_day2":Trainingdata?.data?.day2, 
+     "gelathiRecomm":sendData?.gelathiRecomm, 
+     "project_id":parseInt(Trainingdata?.data?.project_id), 
+     "tb_id":parseInt(Trainingdata?.data?.id)
+});
+var config = {
+  method: 'post',
+  url: baseURL + 'editParticipant',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  data: data
+};
     axios(config)
       .then(function (response) {
         setSendData({

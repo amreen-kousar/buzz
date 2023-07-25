@@ -10,6 +10,7 @@ import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { baseURL } from 'src/utils/api';
 import Gelathifacilitatorprofile from './Gelathifacilitatorprofile';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -48,7 +49,7 @@ export default function Gelathifacilitatorlist(){
     
         var config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appTest/getProjectData.php',
+          url: baseURL + 'getProjectData',
           headers: {
             'Content-Type': 'application/json'
           },

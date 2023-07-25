@@ -27,6 +27,7 @@ import ParticipentDetailsDailoge from './ParticipentDetailsDailoge';
 import axios from 'axios';
 import { CheckBox } from '@mui/icons-material';
 import Iconify from 'src/components/Iconify';
+import { baseURL } from 'src/utils/api';
 import EditParticipantdata from './Editparticipantdata';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -82,18 +83,19 @@ const handlesurvey =()=>{
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
-        "batch_id": batch?.data?.id,
-        "role_id": role
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/getTrainingBatchData.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
+      "batch_id": batch?.data?.id,
+      "role_id": role
+    });
+    
+    var config = {
+      method: 'post',
+      url: baseURL + 'getTrainingBatchData',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
       
       axios(config)
       .then(function (response) {

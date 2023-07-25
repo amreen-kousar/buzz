@@ -10,6 +10,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import Alert from '@mui/material/Alert';
 import Iconify from 'src/components/Iconify';
+import { baseURL } from 'src/utils/api';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -68,13 +69,13 @@ const tomorrow = dayjs().add(1, 'day');
       date: moment(addData?.date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
       user_id: (props?.userId)?props?.userId:userDetails?.id,
       name: addData?.name,
-      all_day: addData?.all_day,
+      all_day: JSON.stringify(parseInt(addData?.all_day)),
       description: addData?.description,
       date2: moment(addData?.date2?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createEvent.php',
+      url: baseURL + 'createEvent',
       headers: {
         'Content-Type': 'application/json',
       },

@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import { baseURL } from 'src/utils/api';
 import { date } from 'yup';
 const bull = (
   <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
@@ -39,7 +40,7 @@ export default function Location(props) {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: baseURL + 'getLocation',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -56,11 +57,11 @@ export default function Location(props) {
   const getState = async (id) => {
     var data = JSON.stringify({
       "country_id": "1",
-      "state_id": id
+      "state_id": JSON.stringify(parseInt(id))
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: baseURL + 'getLocation',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -78,11 +79,11 @@ export default function Location(props) {
     var data = JSON.stringify({
       "country_id": "1",
       "state_id": data?.state,
-      "district_id": id
+      "district_id": JSON.stringify(parseInt(id))
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: baseURL + 'getLocation',
       headers: {
         'Content-Type': 'application/json'
       },

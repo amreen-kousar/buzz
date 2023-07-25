@@ -30,6 +30,7 @@ import Iconify from 'src/components/Iconify';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import  { useRef } from 'react';
+import { baseURL } from 'src/utils/api';
 import { ConnectingAirportsOutlined } from '@mui/icons-material';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -56,6 +57,8 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
   const [sharelearning, setsharelearning] = React.useState(false);
   const [shareproblems, setshareproblems] = React.useState(false);
   const [localFormPresent, setlocalFormPresent] = React.useState(new Map());
+  const [isFormPresentLocally ,setIsFormPresentLocally] =React.useState(false)
+
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [checked, setChecked] = React.useState({
     loanborrow: [],
@@ -77,6 +80,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
   };
   const handleClose = () => {
     setOpen(false);
+    setIsFormPresentLocally(false)
    
   };
 
@@ -262,6 +266,57 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
   const shakthiformdata = async () => {
     var data ={}
    data = JSON.stringify({
+    participantId: itm?.participant_id,
+    implementationPlan: plan,
+    goodQuality: qualitiesgood,
+    accessToHealtcare: healthcareaccess,
+    accessToCredit: creditaccess,
+    household_books_accounts: sendData?.household_books_accounts,
+    saveRegularly: sendData?.saveRegularly,
+    middleman: null,
+    specificGoalForSavings: sendData?.specificGoalForSavings,
+    solutionToProblems: problemsolutions,
+    others: null,
+    familyIncomeGeneration: "1",
+    goal: "100",
+    householdUse: null,
+    personOfWorth: worthperson,
+    reasonOthersToBorrowLoan: checked['loanborrow'],
+    moneyborrowed: checked['borrowedmoney'],
+    ownAsset: sendData?.ownAsset,
+    separateFinancialAsset: sendData?.separateFinancialAsset,
+    partOfCollective: sendData?.partOfCollective,
+    whereSaveMoney: moneysave,
+    annualLoanInterest: sendData?.annualLoanInterest,
+    haveLoan: sendData?.haveLoan,
+    importantToShareTheirProb: shareproblems,
+    profitForSarees: sendData?.profitForSarees,
+    spendMoney: sendData?.spendMoney,
+    frequencyOfSaving: savingfrequency,
+    loanOnWhoseName: sendData?.loanOnWhoseName,
+    haveGoal: sendData?.haveGoal,
+    pathwayToGoal: sendData?.pathwayToGoal,
+    howMuchSaveToAchieve: sendData?.howMuchSaveToAchieve,
+    educationDecision: education,
+    noChoiceForSolution: solution,
+    livelihood: livelihoodvalue,
+    shareLearningWithCommunity: sharelearning,
+    disheartenedToProblems: problemsdisheartened,
+    amFailure: failureperson,
+    dayTodayExpenditure: expenditure,
+    accounts_for_Self_Enterprises: sendData?.accounts_for_Self_Enterprises,
+    savingMoney: savemoney,
+    assetPurchase: purchase,
+    });
+
+   if(isOnline() && networkAccess()){
+    if(localStorage.getItem('shaktiform')){
+      data = setshaktidata(saveDataLocally('shaktiform',JSON.parse(data)))
+      setshaktidata(data);
+    }
+   
+   else{
+    var data = JSON.stringify({
       participantId: itm?.participant_id,
       implementationPlan: plan,
       goodQuality: qualitiesgood,
@@ -273,8 +328,8 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
       specificGoalForSavings: sendData?.specificGoalForSavings,
       solutionToProblems: problemsolutions,
       others: null,
-      familyIncomeGeneration: 1,
-      goal: 100,
+      familyIncomeGeneration: "1",
+      goal: "100",
       householdUse: null,
       personOfWorth: worthperson,
       reasonOthersToBorrowLoan: checked['loanborrow'],
@@ -304,67 +359,15 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
       savingMoney: savemoney,
       assetPurchase: purchase,
     });
-
-   if(isOnline() && networkAccess()){
-    if(localStorage.getItem('shaktiform')){
-      data = setshaktidata(saveDataLocally('shaktiform',JSON.parse(data)))
-      setshaktidata(data);
-    }
-   
-   else{
-    var data = JSON.stringify({
-       participantId: itm?.participant_id,
-       implementationPlan: plan,
-       goodQuality: qualitiesgood,
-       accessToHealtcare: healthcareaccess,
-       accessToCredit: creditaccess,
-       household_books_accounts: sendData?.household_books_accounts,
-       saveRegularly: sendData?.saveRegularly,
-       middleman: null,
-       specificGoalForSavings: sendData?.specificGoalForSavings,
-       solutionToProblems: problemsolutions,
-       others: null,
-       familyIncomeGeneration: 1,
-       goal: 100,
-       householdUse: null,
-       personOfWorth: worthperson,
-       reasonOthersToBorrowLoan: checked['loanborrow'],
-       moneyborrowed: checked['borrowedmoney'],
-       ownAsset: sendData?.ownAsset,
-       separateFinancialAsset: sendData?.separateFinancialAsset,
-       partOfCollective: sendData?.partOfCollective,
-       whereSaveMoney: moneysave,
-       annualLoanInterest: sendData?.annualLoanInterest,
-       haveLoan: sendData?.haveLoan,
-       importantToShareTheirProb: shareproblems,
-       profitForSarees: sendData?.profitForSarees,
-       spendMoney: sendData?.spendMoney,
-       frequencyOfSaving: savingfrequency,
-       loanOnWhoseName: sendData?.loanOnWhoseName,
-       haveGoal: sendData?.haveGoal,
-       pathwayToGoal: sendData?.pathwayToGoal,
-       howMuchSaveToAchieve: sendData?.howMuchSaveToAchieve,
-       educationDecision: education,
-       noChoiceForSolution: solution,
-       livelihood: livelihoodvalue,
-       shareLearningWithCommunity: sharelearning,
-       disheartenedToProblems: problemsdisheartened,
-       amFailure: failureperson,
-       dayTodayExpenditure: expenditure,
-       accounts_for_Self_Enterprises: sendData?.accounts_for_Self_Enterprises,
-       savingMoney: savemoney,
-       assetPurchase: purchase,
-     });
-   }
-
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/addSurveyData.php',
+      url: baseURL + 'addSurveyData',
       headers: {
         'Content-Type': 'application/json',
       },
       data: data,
     };
+  }
     axios(config)
       .then(function (response) {
         reloadFUnction()

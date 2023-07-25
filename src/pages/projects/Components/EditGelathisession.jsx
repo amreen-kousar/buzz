@@ -20,6 +20,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import axios from 'axios';
 import moment from 'moment';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -40,21 +41,21 @@ export default function EditGelathiSession({session,editSession, setEditsession}
   };
   const UpdateSession=()=>{
     var data = JSON.stringify({
-        "tb_name": session?.training_batch_name,
-        "tb_id": session?.tb_id,
-        "gf_session_type": session?.type,
-        "plan_date": moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
-        "gf_session_id": session?.id
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/editGFSession.php',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
+      "tb_name": session?.training_batch_name,
+      "tb_id": session?.tb_id,
+      "gf_session_type": session?.type,
+      "plan_date": moment(date?.$d)?.format('DD-MM-YYYY HH:mm:ss'),
+      "gf_session_id": session?.id
+    });
+    
+    var config = {
+      method: 'post',
+      url: baseURL + 'editGFSession',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
       
       axios(config)
       .then(function (response) {

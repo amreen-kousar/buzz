@@ -16,7 +16,7 @@ import { Icon } from '@iconify/react';
 import GelathiCircleForm from './GelathiCircleForm';
 import GreenSurvey from './GreenSurvey';
 import Vyaparprogram from './Vyaparprogram';
-import { oldbaseURL } from 'src/utils/api';
+import { oldbaseURL,baseURL } from 'src/utils/api';
 GelathiCircleDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
@@ -68,7 +68,7 @@ const circle = (async) => {
     });
 var config = {
       method: 'post',
-      url: oldbaseURL+'getGelathiCircleDataNew.php',
+      url: baseURL+'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -92,7 +92,7 @@ const removegelathicircle = async (itm) => {
       });
       var config = {
         method: 'post',
-        url: oldbaseURL +'updateEnrolledGelathi.php',
+        url: baseURL +'updateEnrolledGelathi',
         headers: {
           'Content-Type': 'application/json',
         },
