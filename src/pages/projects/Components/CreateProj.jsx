@@ -535,25 +535,25 @@ const mainShowBussHandler = ()=>{
                 </FormControl></Stack> 
                 <Stack mt={3}>
                 <FormControl fullWidth>
-                  <InputLabel id="driver">Select Gelathi Facilitator Leads</InputLabel>
+                  <InputLabel id="driver">Select Field Associate Leads</InputLabel>
                  {(Gf?.length>0)? <Select
                     id="select_GF"
                     value={data.gfl_id}
                     defaultValue={data.gfl_id}
-                    label="Select Gelathi Facilitator Lead"
+                    label="Select Field Associate Lead"
                     onChange={(e => {
                       setData({ ...data, gfl_id: e?.target?.value })
                       // driverList(e?.target?.value)
                     })}
                   >
-                    <MenuItem id="Choose Gelathi Facilitator Lead" value="" default disabled>Choose Gelathi Facilitator Lead</MenuItem>
+                    <MenuItem id="Choose Field Associate Lead" value="" default disabled>Choose Field Associate Lead</MenuItem>
                     {Gf?.map(itm => {
                       return (
                         <MenuItem value={itm?.id}>{itm?.first_name}</MenuItem>
                       )
                     })
                     }
-                  </Select>:<Select label="Select Gelathi Facilitator Lead"><MenuItem id="Select Gelathi Facilitator Lead" value="" disabled>No Gelathi Facilitator Lead</MenuItem></Select>}
+                  </Select>:<Select label="Select Field Associate Lead"><MenuItem id="Select Field Associate Lead" value="" disabled>No Field Associate Lead</MenuItem></Select>}
                 </FormControl></Stack>  
                
             </CardContent>

@@ -74,7 +74,7 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
             {selectDATA && selectDATA === 3 && ': Program Managers'}
             {selectDATA && selectDATA === 4 && ': Operation Managers'}
             {selectDATA && selectDATA === 12 && ': Senior Operation Managers'}
-            {selectDATA && selectDATA === 13 && ': Gelathi Facilitator Leads'}
+            {selectDATA && selectDATA === 13 && ': Field Associate Leads'}
             {selectDATA && selectDATA === 7 && ': Location'}
             {selectDATA && selectDATA === 9 && ': Date Range'}
           </Typography>
@@ -180,7 +180,7 @@ export default function QualityAssuranceFilter({ isOpenFilter, onOpenFilter, onC
                     color: 'black',
                   }}
                 >
-                  Gelathi Facilitator Leads
+                  Field Associate Leads
                 </Button> : null}
                 <Button
                   onClick={() => {

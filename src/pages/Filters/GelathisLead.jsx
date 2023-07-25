@@ -20,7 +20,7 @@ export default function GelathisLead({ selectDATA, getData ,date,endDate,dateVal
   return (
     <div>
       <SearchCommon getSearchFilter={(e) => { getSearchFilter(e) }} />
-      <ListTabledata data={glead} getData={getData} date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} selectDATA={13} type="Gelathi Facilitator Lead" returnSearchFilter={returnSearchFilter} />
+      <ListTabledata data={glead} getData={getData} date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} selectDATA={13} type="Field Associate Lead" returnSearchFilter={returnSearchFilter} />
     </div>
   );
 }

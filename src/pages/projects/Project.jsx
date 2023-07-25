@@ -349,7 +349,7 @@ const [openbusChecklist,setOpenBusChecklist] = useState(false);
                     }}
                   >
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      Gelathi Facilitators({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />{' '}
+                      Field Associates({data1?.gelathiFacilitator_count}) <Gelathifacilitatorlist />{' '}
                     </Box>
                   </Card>
                   <Card
@@ -559,7 +559,7 @@ const [openbusChecklist,setOpenBusChecklist] = useState(false);
                             </IconButton>
                           }
                         >
-                          <span style={{ width: '200px' }}> Assign Villages to Gelathi Facilitator</span>
+                          <span style={{ width: '200px' }}> Assign Villages to Field Associate</span>
                         </Button>
                       </Link>
                     </div>

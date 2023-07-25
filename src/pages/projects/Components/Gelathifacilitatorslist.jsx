@@ -102,7 +102,7 @@ export default function Gelathifacilitatorlist(){
        <Card>
         <CardContent>
             <Typography>Project : {data1?.project_name}</Typography>
-            <Typography>Role : Gelathi Facilitators</Typography>
+            <Typography>Role : Field Associates</Typography>
         </CardContent>
        </Card><br/>
        {

@@ -86,7 +86,7 @@ export default function Projectdashboard({profileData}) {
     if(role==="Operations Manager"){
       roleid="4"
       sessionStorage.setItem('profilerole','4')
-    }else if(role==="Gelathi Facilitator"){
+    }else if(role==="Field Associate"){
       roleid="6"
     sessionStorage.setItem('profilerole','6')
     }
@@ -94,7 +94,7 @@ export default function Projectdashboard({profileData}) {
       roleid= "7"
       sessionStorage.setItem('profilerole','7')
     }
-    else if(role==="Gelathi Facilitator Lead"){
+    else if(role==="Field Associate Lead"){
       roleid="13"
       sessionStorage.setItem('profilerole','13')
     }

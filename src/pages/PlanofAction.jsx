@@ -595,7 +595,7 @@ const shaktiformapi = async()=>{
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
+                                          Field Associate :{itm?.emp_name}
                                           <br/>
                                           
                                         </>
@@ -726,7 +726,7 @@ const shaktiformapi = async()=>{
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
+                                          Field Associate :{itm?.emp_name}
                                           <br/>
                                           
                                         </>
@@ -871,7 +871,7 @@ const shaktiformapi = async()=>{
                                           <br />
                                           District : {itm?.location_name}
                                           <br />
-                                          Gelathi Facilitator :{itm?.emp_name}
+                                          Field Associate :{itm?.emp_name}
                                           <br/>
                                           
                                         </>

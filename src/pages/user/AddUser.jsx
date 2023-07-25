@@ -305,7 +305,7 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                                 </FormControl>
                                <br/><br/> <TextField fullWidth id="First_name" helperText='Name required*' label="Name" value={AddUser.first_name} required onChange={(e) => { setAddUser({ ...AddUser, first_name: e.target.value }) }} variant="outlined" color="common" />
                                 {
-                                    ["Admin", "Program Manager", "Operations Manager", "Gelathi Facilitator Lead", 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <TextField fullWidth id="last_name" label="Last Name" variant="outlined" value={AddUser.last_name} onChange={(e) => { setAddUser({ ...AddUser, last_name: e.target.value }) }} />
+                                    ["Admin", "Program Manager", "Operations Manager", "Field Associate Lead", 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <TextField fullWidth id="last_name" label="Last Name" variant="outlined" value={AddUser.last_name} onChange={(e) => { setAddUser({ ...AddUser, last_name: e.target.value }) }} />
                                 }<br/>
                                 {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl style={{ marginLeft: "1rem" }}>
                                     <RadioGroup
@@ -370,7 +370,7 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
             e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,6)
           }} type="number" required value={AddUser.pincode}  onChange={(e) => { setAddUser({ ...AddUser, pincode: e.target.value }) }} variant="outlined" color="common"/><br/><br/>
                                 {
-                                    ["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <FormControl fullWidth>
+                                    ["Trainer", 'Field Associate', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(AddUser.role?.roleName) && <FormControl fullWidth>
                                         <Autocomplete
                                             multiple
                                             limitTags={2}

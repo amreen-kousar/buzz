@@ -154,7 +154,7 @@ useEffect(()=>{
                                                 itm?.program_assessment == 2? 
                                                 
                                                 <>
-                                                Gelathi Facilitator : {itm?.name_of_the_gf}<br/>
+                                                Field Associate : {itm?.name_of_the_gf}<br/>
                                                 Program Name: Gelathi Program &nbsp;({itm?.assessment_of})
                                                 </>
                                                 : itm?.program_assessment == 3? 

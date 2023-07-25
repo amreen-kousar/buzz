@@ -1465,7 +1465,7 @@ renderOption={(props, option) => (
     {option.first_name}
   </Box>
 )}
-      renderInput={(params) => <TextField  fullWidth {...params} label="Name of the Gelathi Facilitator"       
+      renderInput={(params) => <TextField  fullWidth {...params} label="Name of the Field Associate"       
        />}     
     />
     </Box>
@@ -1519,7 +1519,7 @@ renderOption={(props, option) => (
           <Card sx={{marginTop:2}}>
                 <CardContent>
                 <Typography >
-                The Gelathi Facilitator competently carried out the following functions
+                The Field Associate competently carried out the following functions
                 {the_gf_comptetly_carried_out_following_funtionsError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -1539,7 +1539,7 @@ renderOption={(props, option) => (
            <Card sx={{marginTop:2}}>
               <CardContent>
                         <Typography >
-                        The Gelathi Facilitator carried out the following functions before the training/meeting started
+                        The Field Associate carried out the following functions before the training/meeting started
                         {the_gf_caried_followig_fuctions_bfore_traning_or_meting_startedError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -1549,7 +1549,7 @@ renderOption={(props, option) => (
                         <FormControlLabel control={<Checkbox  />} label="Welcomed the gathering" value="Welcomed the gathering" onChange={(event) =>handleprerequisites('the_gf_caried_followig_fuctions_bfore_traning_or_meting_started', event)}/>
                         <FormControlLabel control={<Checkbox  />} label="Briefed everyone about the rules of the meeting/training" value="Briefed everyone about the rules of the meeting/training" onChange={(event) =>handleprerequisites('the_gf_caried_followig_fuctions_bfore_traning_or_meting_started', event)}/>
                         <FormControlLabel control={<Checkbox  />} label="Started the session with a brief recap of previous sessions" value="Started the session with a brief recap of previous sessions" onChange={(event) =>handleprerequisites('the_gf_caried_followig_fuctions_bfore_traning_or_meting_started', event)}/>
-                        <FormControlLabel control={<Checkbox  />} label="Gelathi Facilitator distributed the notes and seed pens or pencils" value="Gelathi Facilitator distributed the notes and seed pens or pencils" onChange={(event) =>handleprerequisites('the_gf_caried_followig_fuctions_bfore_traning_or_meting_started', event)}/>
+                        <FormControlLabel control={<Checkbox  />} label="Field Associate distributed the notes and seed pens or pencils" value="Field Associate distributed the notes and seed pens or pencils" onChange={(event) =>handleprerequisites('the_gf_caried_followig_fuctions_bfore_traning_or_meting_started', event)}/>
                         {/* <FormControlLabel control={<Checkbox  />} label="Beehive Initiative Circle Meeting" value="Beehive Initiative Circle Meeting" onChange={(event) =>handleprerequisites('the_gf_caried_followig_fuctions_bfore_traning_or_meting_started', event)}/> */}
                   </FormGroup>
               </CardContent>
@@ -1587,7 +1587,7 @@ renderOption={(props, option) => (
         </Card>
         <CardContent>
           <Typography >
-          Check which ones the Gelathi Facilitator did NOT do
+          Check which ones the Field Associate did NOT do
           {check_which_ones_the_gf_did_not_doError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -1629,7 +1629,7 @@ renderOption={(props, option) => (
         </Card>
         <CardContent>
           <Typography >
-          Check which ones the Gelathi Facilitator did NOT do
+          Check which ones the Field Associate did NOT do
           {check_which_ones_the_gf_did_not_doError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -1669,7 +1669,7 @@ renderOption={(props, option) => (
         </Card>
         <CardContent>
           <Typography >
-          Check which ones the Gelathi Facilitator did NOT do
+          Check which ones the Field Associate did NOT do
           {check_which_ones_the_gf_did_not_doError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -1711,7 +1711,7 @@ renderOption={(props, option) => (
         </Card>
         <CardContent>
           <Typography >
-          Check which ones the Gelathi Facilitator did NOT do
+          Check which ones the Field Associate did NOT do
           {check_which_ones_the_gf_did_not_doError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -1749,7 +1749,7 @@ renderOption={(props, option) => (
         </Card>
         <CardContent>
           <Typography >
-          Check which ones the Gelathi Facilitator did NOT do
+          Check which ones the Field Associate did NOT do
           {check_which_ones_the_gf_did_not_doError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -1786,7 +1786,7 @@ renderOption={(props, option) => (
         </Card>
         <CardContent>
           <Typography >
-          Check which ones the Gelathi Facilitator did not do
+          Check which ones the Field Associate did not do
           {check_which_ones_the_gf_did_not_doError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -1983,7 +1983,7 @@ renderOption={(props, option) => (
          <Stack mt={2}>
          <Stack>
                  <Typography variant="body1">
-                 Check which ones the Gelathi Facilitator did not do
+                 Check which ones the Field Associate did not do
                  {check_which_ones_the_gf_did_not_doError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -2077,7 +2077,7 @@ renderOption={(props, option) => (
          <Stack mt={2}>
          <Stack>
                  <Typography variant="body1">
-                 Check which ones the Gelathi Facilitators did not do
+                 Check which ones the Field Associates did not do
                  {check_which_ones_the_gf_did_not_doError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -2119,7 +2119,7 @@ renderOption={(props, option) => (
          <Stack mt={2}>
          <Stack>
                  <Typography variant="body1">
-                 Check which ones the Gelathi Facilitators did not do
+                 Check which ones the Field Associates did not do
                  {check_which_ones_the_gf_did_not_doError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -2162,7 +2162,7 @@ renderOption={(props, option) => (
          <Stack mt={2}>
          <Stack>
                  <Typography variant="body1">
-                 Check which ones the Gelathi Facilitators did not do
+                 Check which ones the Field Associates did not do
                  {check_which_ones_the_gf_did_not_doError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -2360,7 +2360,7 @@ renderOption={(props, option) => (
           <Card sx = {{backgroundColor:'#ff7424'}} mt={2}>
           <CardContent>
           <Typography>
-                  Feedback to Gelathi Facilitator
+                  Feedback to Field Associate
                 </Typography>
           </CardContent>
         </Card>
@@ -2382,7 +2382,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
       <Card sx={{marginTop:2}}>
       <CardContent>
         <FormGroup>
-        The Gelathi Facilitator competently covered the following things in the training delivered
+        The Field Associate competently covered the following things in the training delivered
         {the_gf_competently_covered_folowing_things_in_training_deliveredError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -2397,7 +2397,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
       <Card sx={{marginTop:2}}>
           <CardContent>
           <Typography mb={2} >
-          Rate The Gelathi Facilitator
+          Rate The Field Associate
           {rateError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -2608,7 +2608,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           <Card sx={{ marginTop:"20px"}}>
         <CardContent>
           <Typography >
-          Any further training and understanding required by the Gelathi Facilitator of any of the training modules delivered
+          Any further training and understanding required by the Field Associate of any of the training modules delivered
           {any_futher_training_and_understding_reqired_by_gf_traing_moduleError ? (
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                         ) : null}{' '}
@@ -2623,7 +2623,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
         </Card>
         <Card  sx={{ marginTop:"20px"}}>
         <CardContent>
-            <Typography>Did you find anything in the training/ Gelathi Facilitator that needs to be worked on priority?
+            <Typography>Did you find anything in the training/ Field Associate that needs to be worked on priority?
  
           </Typography>
                 <Stack mt={2} mb={2}>
@@ -2673,7 +2673,7 @@ The purpose of this sector is to help Gelathis learn to improves their skill set
           </Card>
         <Card  sx={{ marginTop:"20px"}}>
         <CardContent>
-            <Typography>Any other comments about the Gelathi Facilitator
+            <Typography>Any other comments about the Field Associate
           </Typography>
                 <Stack mt={2} mb={2}>
                         <TextField required inputProps={{ required: true }}  type="text" label="Your Answer" variant="outlined" color="common" onChange={(e) => setSendForm({ ...sendForm, any_other_comments_about_the_gelathi_facilitator:e.target.value})} value={sendForm?.any_other_comments_about_the_gelathi_facilitator}/>
