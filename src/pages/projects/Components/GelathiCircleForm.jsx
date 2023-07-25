@@ -247,24 +247,31 @@ const saveDataLocally = (key, data) => {
    
     if (selectedValue == '') {
       setSessionValueError(true);
+      setHelperText('Please Select The Option');
     }
     if (skillValue == '') {
       setSkillError(true);
+      setHelperText('Please Select The Option');
     }
     if (listenpara == '') {
       setListenParaError(true);
+      setHelperText('Please Select The Option');
     }
     if (community == '') {
       setcommunityError(true);
+      setHelperText('Please Select The Option');
     }
     if (communitymem == '') {
       setcommunitymemError(true);
+      setHelperText('Please Select The Option');
     }
     if (bringtogether == '') {
       setbringtogetherError(true);
+      setHelperText('Please Select The Option');
     }
     if (conflicts == '') {
       setconflictsError(true);
+      setHelperText('Please Select The Option');
     }
     if (
       conflicts != '' &&
