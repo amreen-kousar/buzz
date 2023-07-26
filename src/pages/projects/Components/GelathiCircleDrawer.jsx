@@ -145,7 +145,7 @@ return (
                   return (
                     <Card style={{ marginTop: 20 }}>
                       <CardContent>
-                        <Stack style={{ float: 'right',marginBottom:35 }}>
+                        <Stack style={{ float: 'right',marginBottom:30  }}>
                           <IconButton style={{ marginLeft: 70 }} onClick={() => removegelathicircle(itm)}>
                             <Icon
                               icon="material-symbols:check-box-rounded"
