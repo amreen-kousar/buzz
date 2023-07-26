@@ -337,7 +337,8 @@ const saveDataLocally = (key, data) => {
           componentreloadmethod();
         });
       handleClose();
-    } else {
+    }
+     else {
       alert('Please Select The Option. ');
     }
   }

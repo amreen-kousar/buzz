@@ -527,8 +527,137 @@ else{
     }
   }
   else{
+
+    if (education == '') {
+      setEducationError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (survey == '') {
+      setwWenSurveyDoneError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (maritalstatus == '') {
+      setMAritalStatusError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (phone == '') {
+      setSmartPhoneError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (sector == '') {
+      setSectorError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (numberproficiency == '') {
+      setNumberproficiencyError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (writtenproficiency == '') {
+      setWrittenproficiencyError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinessyears == '') {
+      setBussinessyearsError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (licensevalue == '') {
+      setlicensevalueError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (homebased == '') {
+      setHounseBaseError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (challengesvalue == '') {
+      setchallengesvalueError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinesscurrentstate == '') {
+      setbussinesscurrentstateError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (accountbooks == '') {
+      setaccountbooksError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (generateideas == '') {
+      setgenerateideasError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinessplan == '') {
+      setbussinessplanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (submitbussinessplan == '') {
+      setsubmitbussinessplanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (finance == '') {
+      setfinanceError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (loan == '') {
+      setloanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (accessingloan == '') {
+      setaccessingloanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (currentloan == '') {
+      setcurrentloanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinesskills == '') {
+      setbussinessSkillError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (checked['please_list_down_the_various_components_of_business'] == 0) {
+      setbusinessError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (checked['tell_us_three_things_about_you_as_an_entrepreneur'] == 0) {
+      setentrepreneurError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (checked['what_are_the_prerequisites_to_access_a_loan'] == 0) {
+      setloansError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (
+      bussinesskills != ' ' &&
+      currentloan != '' &&
+      accessingloan != '' &&
+      loan != '' &&
+      finance != '' &&
+      submitbussinessplan != '' &&
+      bussinessplan != '' &&
+      generateideas != '' &&
+      accountbooks != '' &&
+      bussinesscurrentstate != '' &&
+      challengesvalue != '' &&
+      homebased != '' &&
+      licensevalue != '' &&
+      bussinessyears != '' &&
+      writtenproficiency != '' &&
+      numberproficiency != '' &&
+      sector != '' &&
+      phone != '' &&
+      maritalstatus != '' &&
+      survey != '' &&
+      education != ''&&
+      (checked['please_list_down_the_various_components_of_business'] != 0)&&
+      (checked['tell_us_three_things_about_you_as_an_entrepreneur'] != 0)&&
+      (checked['what_are_the_prerequisites_to_access_a_loan'] != 0)
+    ) {
+
     setvyaparform(saveDataLocally('vyapar',JSON.parse(data)));
-    componentreloadmethod()
+    componentreloadmethod();
+    handleClose();
+    }
+    else{
+      alert('Please Select the Option');
+    }
   }
   };
   const gelathinamelist = (async) => {
