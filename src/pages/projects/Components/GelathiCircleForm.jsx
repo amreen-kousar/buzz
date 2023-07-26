@@ -162,7 +162,8 @@ export default function GelathiCircleForm({
       url: baseURL + 'getGelathiList',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
+      // data: data,
     };
     axios(config)
       .then(function (response) {
@@ -246,24 +247,31 @@ const saveDataLocally = (key, data) => {
    
     if (selectedValue == '') {
       setSessionValueError(true);
+      setHelperText('Please Select The Option');
     }
     if (skillValue == '') {
       setSkillError(true);
+      setHelperText('Please Select The Option');
     }
     if (listenpara == '') {
       setListenParaError(true);
+      setHelperText('Please Select The Option');
     }
     if (community == '') {
       setcommunityError(true);
+      setHelperText('Please Select The Option');
     }
     if (communitymem == '') {
       setcommunitymemError(true);
+      setHelperText('Please Select The Option');
     }
     if (bringtogether == '') {
       setbringtogetherError(true);
+      setHelperText('Please Select The Option');
     }
     if (conflicts == '') {
       setconflictsError(true);
+      setHelperText('Please Select The Option');
     }
     if (
       conflicts != '' &&
@@ -273,7 +281,8 @@ const saveDataLocally = (key, data) => {
       listenpara != '' &&
       skillValue != '' &&
       selectedValue != ''
-    ) {
+    )
+     {
       if(localStorage.getItem('spoorthi')){
         // data  = setSpoorthiForm()
         // setSpoorthiForm(data)
@@ -328,15 +337,58 @@ const saveDataLocally = (key, data) => {
           componentreloadmethod();
         });
       handleClose();
-    } else {
+    }
+     else {
       alert('Please Select The Option. ');
     }
-  } else{
-    // setSpoorthiForm()
-    // saveDataLocally('spoorthi', data)
-    setSpoorthiForm(saveDataLocally('spoorthi', JSON.parse(data)));
-    componentreloadmethod();
-    handleClose();
+  }
+   else{
+    if (selectedValue == '') {
+      setSessionValueError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (skillValue == '') {
+      setSkillError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (listenpara == '') {
+      setListenParaError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (community == '') {
+      setcommunityError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (communitymem == '') {
+      setcommunitymemError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bringtogether == '') {
+      setbringtogetherError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (conflicts == '') {
+      setconflictsError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (
+      conflicts != '' &&
+      bringtogether != '' &&
+      communitymem != ' ' &&
+      community != '' &&
+      listenpara != '' &&
+      skillValue != '' &&
+      selectedValue != ''
+    ){
+      // setSpoorthiForm()
+      // saveDataLocally('spoorthi', data)
+      setSpoorthiForm(saveDataLocally('spoorthi', JSON.parse(data)));
+      componentreloadmethod();
+      handleClose();
+    }else{
+      alert("Please Select The Option")
+
+    }
   }
 
   };
@@ -398,12 +450,12 @@ const saveDataLocally = (key, data) => {
                 <Card mt={1} style={{ marginTop: 10, borderRadius: 20 }}>
                   <CardContent>
                     <Typography variant="subtitle2" style={{ color: '#ff7424' }}>
-                      Name of the Field Associate/  /ಗೆಳತಿ ಆಯೋಜಕನ ಹೆಸರು*
+                      Name of the Gelathi Facilitator/  /ಗೆಳತಿ ಆಯೋಜಕನ ಹೆಸರು*
                     </Typography>
                     <Stack mt={2} mb={2}>
                       <Select
                         color="common"
-                        label="Choose Field Associate"
+                        label="Choose Gelathi Facilitator"
                         variant="standard"
                         required
                         onChange={(e) => setSendData({ ...sendData, GelathiId: e?.target?.value })}
