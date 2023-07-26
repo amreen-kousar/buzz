@@ -145,6 +145,8 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       lastUpdatedBy: profileData?.id
     })
   }, [profileData])
+
+  // console.log(profileData?.project_list.map((e)=>e.project_id),"projects")
   const handleExpandClick = () => {
     setExpanded(true);
   };
@@ -164,7 +166,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
     handleCloseClick();
     const userDetails = sessionStorage?.getItem("userDetails")
     var data = JSON.stringify({
-      "id": JSON?.parse(userDetails)?.id,
+      "id": parseInt(JSON?.parse(userDetails)?.id),
      // "countryID": 1,
       "first_name": editData?.firstName,
       "last_name": editData?.lastName,
@@ -172,6 +174,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "gender": editData?.gender,
       "doj": editData?.doj,
       "pincode": editData?.pincode,
+      "role": (editData?.role?.id)?JSON.stringify(parseInt(editData?.role?.id)):editData?.role,
       "officeMailId": editData?.officeMailId,
       "personalMailId": editData?.personalMailId,
       "contactNum": editData?.contactNum,
@@ -179,12 +182,21 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "address": editData?.address,
       "address3": editData?.address3,
       "address2": editData?.address2,
-      "empRole": editData?.empRole,
+      "empRole": editData?.empRole == "Admin" ? "2" :
+      editData?.empRole == "Program Manager" ? "3" :
+      editData?.empRole == "Operations Manager" ? "4" :  
+      editData?.empRole == "Trainer" ? "5" :
+      editData?.empRole == "Field Associate" ? "6" :
+      editData?.empRole == "Driver" ? "7":
+      editData?.empRole == "Funder" ?"8":
+      editData?.empRole == "Partner" ? "9" :
+      editData?.empRole == "FIN/HR/VIEWER" ? "11" :
+      editData?.empRole == "Senior Operations Manager" ? "12" :editData?.empRole == "Gelathi Facilitator Lead" ? "13" : editData?.empRole == "Senior Trainer" ? "5" : null,
       "supervisorId": editData?.supervisorId,
       "status": editData?.status,
       "createdBy": editData?.createdBy,
       "lastUpdatedBy": editData?.lastUpdatedBy,
-      "project_list": editData?.project_list,
+      "project_list": profileData?.project_list.map((e)=>e.project_id),
       "license_number": editData?.license_number
     });
     var config = {

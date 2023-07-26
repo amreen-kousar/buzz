@@ -21,7 +21,10 @@ export default function Login() {
   }));
 
   const [emailExists,setEmailExists] = useState(false);
+ 
   const apiHit = async (itm) => {
+    console.log(itm?.user?.photoURL,"profile",itm?.user?.email)
+    sessionStorage.setItem('profile_pic',itm?.user?.photoURL)
     var data = JSON.stringify({
       "email": itm?.user?.email
     });

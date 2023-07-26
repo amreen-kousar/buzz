@@ -179,9 +179,9 @@ const emailchangeHandler=(e) => {
     }
 let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     const submitUser = () => {
-        AddUser.project_list = inputProject.map(i => parseInt(i.id))
+        AddUser.project_list = inputProject.map(i => i.id)
         AddUser.officeMailId = AddUser?.officeMailId
-        AddUser.empRole = AddUser?.role.id
+        AddUser.empRole = JSON.stringify(AddUser?.role.id);
         AddUser.supervisorId = AddUser?.reportingManager.id
         AddUser.profile_pic = ''
         AddUser.status = AddUser.present_status ? '1' : '0';
