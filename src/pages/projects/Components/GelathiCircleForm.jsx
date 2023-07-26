@@ -247,24 +247,31 @@ const saveDataLocally = (key, data) => {
    
     if (selectedValue == '') {
       setSessionValueError(true);
+      setHelperText('Please Select The Option');
     }
     if (skillValue == '') {
       setSkillError(true);
+      setHelperText('Please Select The Option');
     }
     if (listenpara == '') {
       setListenParaError(true);
+      setHelperText('Please Select The Option');
     }
     if (community == '') {
       setcommunityError(true);
+      setHelperText('Please Select The Option');
     }
     if (communitymem == '') {
       setcommunitymemError(true);
+      setHelperText('Please Select The Option');
     }
     if (bringtogether == '') {
       setbringtogetherError(true);
+      setHelperText('Please Select The Option');
     }
     if (conflicts == '') {
       setconflictsError(true);
+      setHelperText('Please Select The Option');
     }
     if (
       conflicts != '' &&
@@ -274,7 +281,8 @@ const saveDataLocally = (key, data) => {
       listenpara != '' &&
       skillValue != '' &&
       selectedValue != ''
-    ) {
+    )
+     {
       if(localStorage.getItem('spoorthi')){
         // data  = setSpoorthiForm()
         // setSpoorthiForm(data)
@@ -329,15 +337,58 @@ const saveDataLocally = (key, data) => {
           componentreloadmethod();
         });
       handleClose();
-    } else {
+    }
+     else {
       alert('Please Select The Option. ');
     }
-  } else{
-    // setSpoorthiForm()
-    // saveDataLocally('spoorthi', data)
-    setSpoorthiForm(saveDataLocally('spoorthi', JSON.parse(data)));
-    componentreloadmethod();
-    handleClose();
+  }
+   else{
+    if (selectedValue == '') {
+      setSessionValueError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (skillValue == '') {
+      setSkillError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (listenpara == '') {
+      setListenParaError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (community == '') {
+      setcommunityError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (communitymem == '') {
+      setcommunitymemError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bringtogether == '') {
+      setbringtogetherError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (conflicts == '') {
+      setconflictsError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (
+      conflicts != '' &&
+      bringtogether != '' &&
+      communitymem != ' ' &&
+      community != '' &&
+      listenpara != '' &&
+      skillValue != '' &&
+      selectedValue != ''
+    ){
+      // setSpoorthiForm()
+      // saveDataLocally('spoorthi', data)
+      setSpoorthiForm(saveDataLocally('spoorthi', JSON.parse(data)));
+      componentreloadmethod();
+      handleClose();
+    }else{
+      alert("Please Select The Option")
+
+    }
   }
 
   };
