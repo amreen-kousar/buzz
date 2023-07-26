@@ -224,6 +224,143 @@ useEffect(()=>{
       return false;
     }
   };
+
+
+
+  const wealthvalue = (event) => {
+    setwealth(event.target.value);
+    setWealthError(false);
+  };
+  const climatechangevalue = (event) => {
+    setClimate(event.target.value);
+    setClimateError(false);
+    if (event.target.value == 'Yes') {
+      setShowClimateDiscription(true);
+    } else {
+      setShowClimateDiscription(false);
+    }
+    // console.log(climate," value is climate")
+  };
+  const weathervalue = (event) => {
+    setweather(event.target.value);
+    setWeatherError(false);
+  };
+  const ratingvalue = (event) => {
+    setclimatechangerating(event.target.value);
+    setClimatechangeratingError(false);
+  };
+  const tacklevalue = (event) => {
+    settackleclimatechange(event.target.value);
+    setTackleclimatechangeError(false);
+  };
+  const handlesomethingtacklevalue = (event) => {
+    setsomethingtackle(event.target.value);
+    setSomethingtackleError(false);
+  };
+  const groundwatervalue = (event) => {
+    setgroundwaterstatement(event.target.value);
+    setGroundwaterstatementError(false);
+  };
+  const waterqualityvalue = (event) => {
+    setwaterquality(event.target.value);
+    setWaterqualityError(false);
+  };
+  const wateraffectvalue = (event) => {
+    setwateraffect(event.target.value);
+    setWateraffectError(false);
+  };
+  const conservationmeasures = (event) => {
+    setwaterconservation(event.target.value);
+    setWaterconservationError(false);
+    if (event.target.value == 'Yes') {
+      setShowWaterConsuDiscription(true);
+    } else {
+      setShowWaterConsuDiscription(false);
+    }
+  };
+  const handleland = (event) => {
+    setland(event.target.value);
+    setLandError(false);
+  };
+  const conservenvironment = (event) => {
+    setEnvironment(event.target.value);
+    setEnvironmentError(false);
+  };
+  const communityvalue = (event) => {
+    setcommunitytogether(event.target.value);
+    setCommunitytogetherError(false);
+  };
+  const handleinitiativemeasures = (event) => {
+    setinitiativemeasures(event.target.value);
+    setInitiativemeasuresError(false);
+    if (event.target.value == 'Yes') {
+      setShowPark(true);
+    } else {
+      setShowPark(false);
+    }
+  };
+  const handleclimateaction = (event) => {
+    setclimateaction(event.target.value);
+    setClimateactionError(false);
+    if (event.target.value == 'Yes') {
+      setShowClimateChangeDiscription(true);
+    } else {
+      setShowClimateChangeDiscription(false);
+    }
+  };
+  const handleclimateffort = (event) => {
+    setclimateffort(event.target.value);
+    setClimateffortError(false);
+  };
+  const handlechemicals = (event) => {
+    setpaychemicals(event.target.value);
+    setPaychemicalsError(false);
+    if (event.target.value == 'Yes') {
+      setShowEcoFriendlyDiscription(true);
+    } else {
+      setShowEcoFriendlyDiscription(false);
+    }
+  };
+  const handleproducts = (event) => {
+    setproducts(event.target.value);
+    setProductsError(false);
+  };
+  const handlepollutioncause = (event) => {
+    setpollutioncause(event.target.value);
+    setPollutioncauseError(false);
+    if (event.target.value == 'Yes') {
+      setShowHouseHoldDiscription(true);
+    } else {
+      setShowHouseHoldDiscription(false);
+    }
+  };
+  const handlehouseholdactivity = (event) => {
+    sethouseholdactivity(event.target.value);
+    setHouseholdactivityError(false);
+  };
+  const handlefoodconnection = (event) => {
+    setfoodconnection(event.target.value);
+    setFoodconnectionError(false);
+  };
+  const handletrees = (event) => {
+    settrees(event.target.value);
+    setTreesError(false);
+  };
+  const handleform = () => {
+    alert('Surevy was done');
+  };
+  const handleresources = (label, event) => {
+    var updatedList = [...checked[label]];
+    if (event.target.checked) {
+      updatedList = [...checked[label], event.target.value];
+    } else {
+      updatedList.splice(checked[label].indexOf(event.target.value), 1);
+    }
+    let tempData = { ...checked };
+    tempData[label] = updatedList;
+    setChecked(tempData);
+  };
+
   const greensurveyformdata = async () => {
   var  data = {}
 
@@ -517,145 +654,166 @@ useEffect(()=>{
       } else {
         alert('Please Fill All The Fields');
       }
-    } else {
+    } 
+    
+    else {
+      let validationSchema = [
+        {
+          field: wealth,
+          setField: setWealthError,
+          errorText: 'Please Select The Option',
+        },
+      ];
+      validationSchema.map((x) => {
+        if (x.key == '') {
+          const y = x.setField;
+          y(true);
+        }
+      });
+      if (wealth == '') {
+        setWealthError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (climate == '') {
+        setClimateError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (weather == '') {
+        setWeatherError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (climatechangerating == '') {
+        setClimatechangeratingError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (tackleclimatechange == '') {
+        setTackleclimatechangeError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (somethingtackle == '') {
+        setSomethingtackleError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (groundwaterstatement == '') {
+        setGroundwaterstatementError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (waterquality == '') {
+        setWaterqualityError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (wateraffect == '') {
+        setWateraffectError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (waterconservation == '') {
+        setWaterconservationError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (land == '') {
+        setLandError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (trees == '') {
+        setTreesError(true);
+        setHelperText('Please Select The Option');
+      }
+
+      if (foodconnection == '') {
+        setFoodconnectionError(true);
+        setHelperText('Please Select The Option');
+      }
+
+      if (householdactivity == '') {
+        setHouseholdactivityError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (checked['natural_resources'].length == 0) {
+        setHouseholdactivityError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (checked['natural_resources_impacting_your_life'].length == 0) {
+        setHouseholdactivityError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (checked['changes_happened_to_the_climate'].length == 0) {
+        setHouseholdactivityError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (checked['main_source_of_water'].length == 0) {
+        setHouseholdactivityError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (pollutioncause == '') {
+        setPollutioncauseError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (paychemicals == '') {
+        setPaychemicalsError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (products == '') {
+        setProductsError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (climateffort == '') {
+        setClimateffortError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (climateaction == '') {
+        setClimateactionError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (initiativemeasures == '') {
+        setInitiativemeasuresError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (environment == '') {
+        setEnvironmentError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (communitytogether == '') {
+        setCommunitytogetherError(true);
+        setHelperText('Please Select The Option');
+      }
+      if (
+        wealth != ' ' &&
+        climate != '' &&
+        weather != '' &&
+        climatechangerating != '' &&
+        tackleclimatechange != '' &&
+        somethingtackle != '' &&
+        groundwaterstatement != '' &&
+        waterquality != '' &&
+        wateraffect != '' &&
+        waterconservation != '' &&
+        land != '' &&
+        trees != '' &&
+        foodconnection != '' &&
+        householdactivity != '' &&
+        pollutioncause != '' &&
+        paychemicals != '' &&
+        products != '' &&
+        climateffort != '' &&
+        climateaction != '' &&
+        initiativemeasures != '' &&
+        environment != '' &&
+        checked['natural_resources'] != 0 &&
+        checked['natural_resources_impacting_your_life'] != 0 &&
+        checked['changes_happened_to_the_climate'] != 0 &&
+        checked['main_source_of_water'] != 0 &&
+        communitytogether != ''
+      ) {
+       
+        setGreenForm(saveDataLocally('green', JSON.parse(data)));
+        handleClose();
+        props?.componentreloadmethod()
+        }
+        else{
+          alert("Please Select the option")
+        }
      
-      setGreenForm(saveDataLocally('green', JSON.parse(data)));
-      handleClose();
-      props?.componentreloadmethod()
     }
-  };
-  const wealthvalue = (event) => {
-    setwealth(event.target.value);
-    setWealthError(false);
-  };
-  const climatechangevalue = (event) => {
-    setClimate(event.target.value);
-    setClimateError(false);
-    if (event.target.value == 'Yes') {
-      setShowClimateDiscription(true);
-    } else {
-      setShowClimateDiscription(false);
-    }
-    // console.log(climate," value is climate")
-  };
-  const weathervalue = (event) => {
-    setweather(event.target.value);
-    setWeatherError(false);
-  };
-  const ratingvalue = (event) => {
-    setclimatechangerating(event.target.value);
-    setClimatechangeratingError(false);
-  };
-  const tacklevalue = (event) => {
-    settackleclimatechange(event.target.value);
-    setTackleclimatechangeError(false);
-  };
-  const handlesomethingtacklevalue = (event) => {
-    setsomethingtackle(event.target.value);
-    setSomethingtackleError(false);
-  };
-  const groundwatervalue = (event) => {
-    setgroundwaterstatement(event.target.value);
-    setGroundwaterstatementError(false);
-  };
-  const waterqualityvalue = (event) => {
-    setwaterquality(event.target.value);
-    setWaterqualityError(false);
-  };
-  const wateraffectvalue = (event) => {
-    setwateraffect(event.target.value);
-    setWateraffectError(false);
-  };
-  const conservationmeasures = (event) => {
-    setwaterconservation(event.target.value);
-    setWaterconservationError(false);
-    if (event.target.value == 'Yes') {
-      setShowWaterConsuDiscription(true);
-    } else {
-      setShowWaterConsuDiscription(false);
-    }
-  };
-  const handleland = (event) => {
-    setland(event.target.value);
-    setLandError(false);
-  };
-  const conservenvironment = (event) => {
-    setEnvironment(event.target.value);
-    setEnvironmentError(false);
-  };
-  const communityvalue = (event) => {
-    setcommunitytogether(event.target.value);
-    setCommunitytogetherError(false);
-  };
-  const handleinitiativemeasures = (event) => {
-    setinitiativemeasures(event.target.value);
-    setInitiativemeasuresError(false);
-    if (event.target.value == 'Yes') {
-      setShowPark(true);
-    } else {
-      setShowPark(false);
-    }
-  };
-  const handleclimateaction = (event) => {
-    setclimateaction(event.target.value);
-    setClimateactionError(false);
-    if (event.target.value == 'Yes') {
-      setShowClimateChangeDiscription(true);
-    } else {
-      setShowClimateChangeDiscription(false);
-    }
-  };
-  const handleclimateffort = (event) => {
-    setclimateffort(event.target.value);
-    setClimateffortError(false);
-  };
-  const handlechemicals = (event) => {
-    setpaychemicals(event.target.value);
-    setPaychemicalsError(false);
-    if (event.target.value == 'Yes') {
-      setShowEcoFriendlyDiscription(true);
-    } else {
-      setShowEcoFriendlyDiscription(false);
-    }
-  };
-  const handleproducts = (event) => {
-    setproducts(event.target.value);
-    setProductsError(false);
-  };
-  const handlepollutioncause = (event) => {
-    setpollutioncause(event.target.value);
-    setPollutioncauseError(false);
-    if (event.target.value == 'Yes') {
-      setShowHouseHoldDiscription(true);
-    } else {
-      setShowHouseHoldDiscription(false);
-    }
-  };
-  const handlehouseholdactivity = (event) => {
-    sethouseholdactivity(event.target.value);
-    setHouseholdactivityError(false);
-  };
-  const handlefoodconnection = (event) => {
-    setfoodconnection(event.target.value);
-    setFoodconnectionError(false);
-  };
-  const handletrees = (event) => {
-    settrees(event.target.value);
-    setTreesError(false);
-  };
-  const handleform = () => {
-    alert('Surevy was done');
-  };
-  const handleresources = (label, event) => {
-    var updatedList = [...checked[label]];
-    if (event.target.checked) {
-      updatedList = [...checked[label], event.target.value];
-    } else {
-      updatedList.splice(checked[label].indexOf(event.target.value), 1);
-    }
-    let tempData = { ...checked };
-    tempData[label] = updatedList;
-    setChecked(tempData);
   };
 
 
