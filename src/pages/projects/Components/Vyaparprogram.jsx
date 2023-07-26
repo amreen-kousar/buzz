@@ -81,6 +81,121 @@ export default function Vyaparprogram({ itm, changeState,componentreloadmethod }
   const [helperText, setHelperText] = React.useState('');
   const [vyaapar, setVyaapar] = useState('');
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+ 
+  const surveydone = (event) => {
+    setsurvey(event.target.value);
+    setwWenSurveyDoneError(false);
+  };
+  const educationlevel = (event) => {
+    seteducation(event.target.value);
+    setEducationError(false);
+  };
+  const marital = (event) => {
+    setmaritalstatus(event.target.value);
+    setMAritalStatusError(false);
+  };
+  const phonestatus = (event) => {
+    setphone(event.target.value);
+    setSmartPhoneError(false);
+    if (event.target.value == 'Yes') {
+      setIsSmartPhone(true);
+    } else {
+      setIsSmartPhone(false);
+    }
+  };
+  const sectortype = (event) => {
+    setSector(event.target.value);
+    setSectorError(false);
+  };
+  const numberproficiencyvalue = (event) => {
+    setnumberproficiency(event.target.value);
+    setNumberproficiencyError(false);
+  };
+  const writtenproficiencyvalue = (event) => {
+    setwrittenproficiency(event.target.value);
+    setWrittenproficiencyError(false);
+  };
+  const bussinessyearsvalue = (event) => {
+    setBussinessyears(event.target.value);
+    setBussinessyearsError(false);
+  };
+  const handlelicensevalue = (event) => {
+    setlicensevalue(event.target.value);
+    setlicensevalueError(false);
+  };
+  const homebasedvalue = (event) => {
+    sethomebased(event.target.value);
+    setHounseBaseError(false);
+  };
+  const challengesbussiness = (event) => {
+    setChallengesvalue(event.target.value);
+    setchallengesvalueError(false);
+  };
+  const bussinesscurrentstatevalue = (event) => {
+    setbussinesscurrentstate(event.target.value);
+    setbussinesscurrentstateError(false);
+  };
+  const handleaccountbooks = (event) => {
+    setaccountbooks(event.target.value);
+    setaccountbooksError(false);
+  };
+  const generateideasvalue = (event) => {
+    setgenerateideas(event.target.value);
+    setgenerateideasError(false);
+  };
+  const bussinessplanvalue = (event) => {
+    setbussinessplan(event.target.value);
+    setbussinessplanError(false);
+  };
+  const submitbussinessplanvalue = (event) => {
+    setsubmitbussinessplan(event.target.value);
+    setsubmitbussinessplanError(false);
+  };
+  const financevalue = (event) => {
+    setfinance(event.target.value);
+    setfinanceError(false);
+  };
+  const loanvalue = (event) => {
+    setloan(event.target.value);
+    setloanError(false);
+  };
+  const accessingloanvalue = (event) => {
+    setaccessingloan(event.target.value);
+    setaccessingloanError(false);
+  };
+  const currentloanvalue = (event) => {
+    setcurrentloan(event.target.value);
+    setcurrentloanError(false);
+    if (event.target.value == 'Yes') {
+      setIsCurrentLoan(true);
+    } else {
+      setIsCurrentLoan(false);
+    }
+  };
+  const bussinesskillsvalue = (event) => {
+    setbussinesskills(event.target.value);
+    setbussinessSkillError(false);
+    if(event.target.value == "Yes"){
+      setisAdditionalSkill(true)
+    }else{
+      setisAdditionalSkill(false)
+    }
+  };
+  const internetHandler = (event) =>{
+    setinternet(event.target.value)
+  }
+  const handleprerequisites = (label, event) => {
+    var updatedList = [...checked[label]];
+    if (event.target.checked) {
+      updatedList = [...checked[label], event.target.value];
+    } else {
+      updatedList.splice(checked[label].indexOf(event.target.value), 1);
+    }
+    let tempData = { ...checked };
+    tempData[label] = updatedList;
+    setChecked(tempData);
+  };
+ 
   const [sendData, setSendData] = useState({
     gfId: '',
     when_was_survey_done: '',
@@ -496,13 +611,7 @@ else{
         .then(function (response) {
           setvyaparform(response?.data);
           localStorage.removeItem('vyapar');
-          Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: response.data.message,
-            confirmButtonText: 'Ok',
-            timer: 2000,
-          });
+      
           setMessage(response?.data.message);
           setsuccessMessage(true);
           changeState();
@@ -518,17 +627,148 @@ else{
           //   confirmButtonText: 'Ok',
           //   timer: 2000,
           // });
-          componentreloadmethod()
+         
           setvyaparform(saveDataLocally('vyapar',data));
+          componentreloadmethod()
         });
+        handleClose()
       } 
       else {
       alert('PLease Fill All The Field ');
     }
   }
   else{
+
+    if (education == '') {
+      setEducationError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (survey == '') {
+      setwWenSurveyDoneError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (maritalstatus == '') {
+      setMAritalStatusError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (phone == '') {
+      setSmartPhoneError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (sector == '') {
+      setSectorError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (numberproficiency == '') {
+      setNumberproficiencyError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (writtenproficiency == '') {
+      setWrittenproficiencyError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinessyears == '') {
+      setBussinessyearsError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (licensevalue == '') {
+      setlicensevalueError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (homebased == '') {
+      setHounseBaseError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (challengesvalue == '') {
+      setchallengesvalueError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinesscurrentstate == '') {
+      setbussinesscurrentstateError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (accountbooks == '') {
+      setaccountbooksError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (generateideas == '') {
+      setgenerateideasError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinessplan == '') {
+      setbussinessplanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (submitbussinessplan == '') {
+      setsubmitbussinessplanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (finance == '') {
+      setfinanceError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (loan == '') {
+      setloanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (accessingloan == '') {
+      setaccessingloanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (currentloan == '') {
+      setcurrentloanError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (bussinesskills == '') {
+      setbussinessSkillError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (checked['please_list_down_the_various_components_of_business'] == 0) {
+      setbusinessError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (checked['tell_us_three_things_about_you_as_an_entrepreneur'] == 0) {
+      setentrepreneurError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (checked['what_are_the_prerequisites_to_access_a_loan'] == 0) {
+      setloansError(true);
+      setHelperText('Please Select The Option');
+    }
+    if (
+      bussinesskills != ' ' &&
+      currentloan != '' &&
+      accessingloan != '' &&
+      loan != '' &&
+      finance != '' &&
+      submitbussinessplan != '' &&
+      bussinessplan != '' &&
+      generateideas != '' &&
+      accountbooks != '' &&
+      bussinesscurrentstate != '' &&
+      challengesvalue != '' &&
+      homebased != '' &&
+      licensevalue != '' &&
+      bussinessyears != '' &&
+      writtenproficiency != '' &&
+      numberproficiency != '' &&
+      sector != '' &&
+      phone != '' &&
+      maritalstatus != '' &&
+      survey != '' &&
+      education != ''&&
+      (checked['please_list_down_the_various_components_of_business'] != 0)&&
+      (checked['tell_us_three_things_about_you_as_an_entrepreneur'] != 0)&&
+      (checked['what_are_the_prerequisites_to_access_a_loan'] != 0)
+    ) {
+
     setvyaparform(saveDataLocally('vyapar',JSON.parse(data)));
-    componentreloadmethod()
+    componentreloadmethod();
+    handleClose();
+    }
+    else{
+      alert('Please Select the Option');
+    }
   }
   };
   const gelathinamelist = (async) => {
@@ -549,119 +789,7 @@ else{
         setVyaapar(gelathidata);
       });
   };
-  const surveydone = (event) => {
-    setsurvey(event.target.value);
-    setwWenSurveyDoneError(false);
-  };
-  const educationlevel = (event) => {
-    seteducation(event.target.value);
-    setEducationError(false);
-  };
-  const marital = (event) => {
-    setmaritalstatus(event.target.value);
-    setMAritalStatusError(false);
-  };
-  const phonestatus = (event) => {
-    setphone(event.target.value);
-    setSmartPhoneError(false);
-    if (event.target.value == 'Yes') {
-      setIsSmartPhone(true);
-    } else {
-      setIsSmartPhone(false);
-    }
-  };
-  const sectortype = (event) => {
-    setSector(event.target.value);
-    setSectorError(false);
-  };
-  const numberproficiencyvalue = (event) => {
-    setnumberproficiency(event.target.value);
-    setNumberproficiencyError(false);
-  };
-  const writtenproficiencyvalue = (event) => {
-    setwrittenproficiency(event.target.value);
-    setWrittenproficiencyError(false);
-  };
-  const bussinessyearsvalue = (event) => {
-    setBussinessyears(event.target.value);
-    setBussinessyearsError(false);
-  };
-  const handlelicensevalue = (event) => {
-    setlicensevalue(event.target.value);
-    setlicensevalueError(false);
-  };
-  const homebasedvalue = (event) => {
-    sethomebased(event.target.value);
-    setHounseBaseError(false);
-  };
-  const challengesbussiness = (event) => {
-    setChallengesvalue(event.target.value);
-    setchallengesvalueError(false);
-  };
-  const bussinesscurrentstatevalue = (event) => {
-    setbussinesscurrentstate(event.target.value);
-    setbussinesscurrentstateError(false);
-  };
-  const handleaccountbooks = (event) => {
-    setaccountbooks(event.target.value);
-    setaccountbooksError(false);
-  };
-  const generateideasvalue = (event) => {
-    setgenerateideas(event.target.value);
-    setgenerateideasError(false);
-  };
-  const bussinessplanvalue = (event) => {
-    setbussinessplan(event.target.value);
-    setbussinessplanError(false);
-  };
-  const submitbussinessplanvalue = (event) => {
-    setsubmitbussinessplan(event.target.value);
-    setsubmitbussinessplanError(false);
-  };
-  const financevalue = (event) => {
-    setfinance(event.target.value);
-    setfinanceError(false);
-  };
-  const loanvalue = (event) => {
-    setloan(event.target.value);
-    setloanError(false);
-  };
-  const accessingloanvalue = (event) => {
-    setaccessingloan(event.target.value);
-    setaccessingloanError(false);
-  };
-  const currentloanvalue = (event) => {
-    setcurrentloan(event.target.value);
-    setcurrentloanError(false);
-    if (event.target.value == 'Yes') {
-      setIsCurrentLoan(true);
-    } else {
-      setIsCurrentLoan(false);
-    }
-  };
-  const bussinesskillsvalue = (event) => {
-    setbussinesskills(event.target.value);
-    setbussinessSkillError(false);
-    if(event.target.value == "Yes"){
-      setisAdditionalSkill(true)
-    }else{
-      setisAdditionalSkill(false)
-    }
-  };
-  const internetHandler = (event) =>{
-    setinternet(event.target.value)
-  }
-  const handleprerequisites = (label, event) => {
-    var updatedList = [...checked[label]];
-    if (event.target.checked) {
-      updatedList = [...checked[label], event.target.value];
-    } else {
-      updatedList.splice(checked[label].indexOf(event.target.value), 1);
-    }
-    let tempData = { ...checked };
-    tempData[label] = updatedList;
-    setChecked(tempData);
-  };
+
   return (
     <div>
       {successMessage && (
@@ -697,7 +825,7 @@ else{
               <Typography sx={{ ml: 2, flex: 1, color: 'white' }} variant="h6" component="div">
                 Buzz Vyapar Program Baseline
               </Typography>
-              <Button edge="end" color="inherit" type="submit" onClick={handleClose} style={{ color: 'white' }}>
+              <Button edge="end" color="inherit" type="submit" onClick={()=>{}} style={{ color: 'white' }}>
                {(isOnline())? <Iconify icon="material-symbols:save" width={30} height={30} />:"save"}
               </Button>
             </Toolbar>
