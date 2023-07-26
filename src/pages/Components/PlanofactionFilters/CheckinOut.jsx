@@ -179,7 +179,6 @@ axios(config)
     });
   }
   var todaydate = moment(new Date()).format('DD-MM-YYYY');
-  console.log(todaydate,"ajdgjs")
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
@@ -274,7 +273,6 @@ axios(config)
         {batch?.data?.day1?.split(" ")[0]}
         </Typography>
         <Divider />
-        {console.log(batch?.data,"batchdataaaaa",checkData?.data)}
         <Typography mt={2}>
             Start :{batch?.data?.day1?.split(" ")[1]}&nbsp;{batch?.data?.day1?.split(" ")[2]}
         </Typography>
