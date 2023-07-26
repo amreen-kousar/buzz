@@ -443,7 +443,7 @@ sethowProjectListData([...updatedlist]);
                 <Stack>
                  
                   {
-// ["Trainer", 'Gelathi Facilitator', 'FIN/HR/VIEWER', 'Senior Operations Manager',"Gelathi Facilitator Lead"].includes(editData?.empRole) &&
+["Trainer", 'Field Associate', 'FIN/HR/VIEWER', 'Senior Operations Manager',"Gelathi Facilitator Lead"].includes(editData?.empRole) &&
  <FormControl fullWidth>
     <Autocomplete                
         multiple
