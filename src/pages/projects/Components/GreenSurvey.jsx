@@ -820,7 +820,7 @@ useEffect(()=>{
   return (
     <div>
       <Stack style={{ position: 'absolute', right: 0, float: 'right', margin: 2, padding: 2 }} mb={2}>
-        {!props?.itm?.is_survey ? (
+        {!props?.itm?.is_green_survey ? (
           <IconButton onClick={handleClickOpen}>
             <Icon icon="clarity:form-line" width={20} height={20} marginTop={20} color="#ff7424" />
           </IconButton>
