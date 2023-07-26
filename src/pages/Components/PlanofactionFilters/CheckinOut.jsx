@@ -178,7 +178,8 @@ axios(config)
       // console.log(error);
     });
   }
-  var todaydate = moment(new Date()).format('YYYY-MM-DD');
+  var todaydate = moment(new Date()).format('DD-MM-YYYY');
+  console.log(todaydate,"ajdgjs")
   const styles = {
     buttonStyle: { boxShadow: "none", borderRadius: "7px", backgroundColor: "#edeff1", fontWeight: 500, textAlign: "left" },
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
@@ -269,14 +270,16 @@ axios(config)
         {batch?.data?.name}
         </Typography>
         <Typography mb={2}>
-        {moment(batch?.data?.day1_actual)?.format('DD-MM-YYYY')}
+        {/* {moment(batch?.data?.day1_actual)?.format('DD-MM-YYYY')} */}
+        {batch?.data?.day1?.split(" ")[0]}
         </Typography>
         <Divider />
+        {console.log(batch?.data,"batchdataaaaa",checkData?.data)}
         <Typography mt={2}>
             Start :{batch?.data?.day1?.split(" ")[1]}&nbsp;{batch?.data?.day1?.split(" ")[2]}
         </Typography>
    
-        {(checkData?.data?.check_in_date_day1=='' && batch?.data?.day1_actual==todaydate)?<Button style={{float:'left',position:'absolute',left:20,top:320,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1,batch?.data?.day1_id)} sx={{
+        {(checkData?.data?.check_in_date_day1=="" && (batch?.data?.day1_actual?.split(" ")[0])==todaydate)?<Button style={{float:'left',position:'absolute',left:20,top:320,color:'#ff7424',marginTop:5,marginBottom:5}} onClick={()=>checkinout(1,batch?.data?.day1_id)} sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
              },
@@ -326,13 +329,14 @@ axios(config)
         {batch?.data?.name}
         </Typography>
         <Typography mb={2}>
-        {moment(batch?.data?.day2_actual)?.format('DD-MM-YYYY')}
+        {/* {moment(batch?.data?.day2_actual)?.format('DD-MM-YYYY')} */}
+        {batch?.data?.day2?.split(" ")[0]}
         </Typography>
         <Divider />
         <Typography mt={2}>
             Start :{batch?.data?.day2?.split(" ")[1]}&nbsp;{batch?.data?.day2?.split(" ")[2]}
         </Typography>
-        {(checkData?.data?.check_in_date_day2=='' && batch?.data?.day2_actual==todaydate)?<Button sx={{
+        {(checkData?.data?.check_in_date_day2=='' && (batch?.data?.day2_actual?.split(" ")[0])==todaydate)?<Button sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
              },
