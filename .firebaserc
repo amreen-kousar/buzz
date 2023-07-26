@@ -2,9 +2,9 @@
 
   "projects": {
 
-    "default": "buzzstaffwomen",
+    "default": "buzztestapi",
 
-    "prod": "buzzstaffwomen"
+    "prod": "buzztestapi"
 
   },
 

@@ -1,29 +1,65 @@
 // Import the functions you need from the SDKs you need
 
+
+
+
 // import * as firebase from "firebase/app";
+
+
+
 
 // // Import the functions you need from the SDKs you need
 
+
+
+
 // import * as auth from "firebase/auth";
+
+
+
 
 import firebase from 'firebase'
 
+
+
+
 // import { initializeApp } from "firebase/app";
+
+
+
 
 // import { getAnalytics } from "firebase/analytics";
 
+
+
+
 // TODO: Add SDKs for Firebase products that you want to use
+
+
+
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 
 
 
+
+
+
 // Your web app's Firebase configuration
+
+
+
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
+
+
+
 // const firebaseConfig = {
+
+
+
 
 
 
@@ -33,7 +69,13 @@ import firebase from 'firebase'
 
 
 
+
+
+
 //   authDomain: "nw1buzzstaff.firebaseapp.com",
+
+
+
 
 
 
@@ -43,7 +85,13 @@ import firebase from 'firebase'
 
 
 
+
+
+
 //   storageBucket: "nw1buzzstaff.appspot.com",
+
+
+
 
 
 
@@ -53,7 +101,13 @@ import firebase from 'firebase'
 
 
 
+
+
+
 //   appId: "1:208460223530:web:e4da52dc554101efb85f53",
+
+
+
 
 
 
@@ -63,39 +117,61 @@ import firebase from 'firebase'
 
 
 
+
+
+
 // };
+
+
+
 
 
 
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyA_RZRSh9SGriOaWnNE3kZNDwWfm3KwRkQ",
+  apiKey: "AIzaSyB8res4yEPOILRo6YV5RvZAzyD9yFKH9sM",
 
-  authDomain: "buzzstaffwomen.firebaseapp.com",
+  authDomain: "buzztestapi.firebaseapp.com",
 
-  projectId: "buzzstaffwomen",
+  projectId: "buzztestapi",
 
-  storageBucket: "buzzstaffwomen.appspot.com",
+  storageBucket: "buzztestapi.appspot.com",
 
-  messagingSenderId: "844879114039",
+  messagingSenderId: "89679097200",
 
-  appId: "1:844879114039:web:afd6c08f94795c862134b2",
+  appId: "1:89679097200:web:a6b9db1d6e40074e20f3b5",
 
-  measurementId: "G-73CF6KJRYP"
+  measurementId: "G-KHHK81GYT8"
 
 };
 
 
 
 
+
+
+
+
 // Initialize Firebase
+
+
+
 
 // const firebaseApp = firebase.initializeApp(firebaseConfig);
 
+
+
+
 // const auths = firebaseApp.auth();
 
+
+
+
 // const provider = new auth.GoogleAuthProvider();
+
+
+
 
 
 
@@ -105,11 +181,23 @@ const firebaseConfig = {
 
 
 
+
+
+
 const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+
+
 
 const auth = firebaseApp.auth();
 
+
+
+
 const provider = new firebase.auth.GoogleAuthProvider();
+
+
+
 
 
 
