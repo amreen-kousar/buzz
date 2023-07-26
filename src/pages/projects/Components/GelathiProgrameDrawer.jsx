@@ -22,6 +22,7 @@ import {
   CardContent,
   TextareaAutosize,
   Grid,
+  Tooltip,
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 // components
@@ -398,23 +399,35 @@ session.length <=0 ?
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     Partner :&nbsp;{session?.partnerName}
+                    <br/>
                     {userId == 6 || userId == 13 ? (
                       <>
                         {' '}
+                        <Tooltip title='Edit'>
+
                         <IconButton
                           onClick={() => {
                             setEditsession(true);
                           }}
                           style={{ right: -20 }}
                         >
+                         
                           <Iconify icon="material-symbols:edit"></Iconify>
+                          
                         </IconButton>
+                        </Tooltip>
+                        <Tooltip title='Reshedule'>
+
                         <IconButton onClick={reschedudlehandler} style={{ right: -20 }}>
                           <Iconify icon="mdi:clock-time-four-outline"></Iconify>
                         </IconButton>
+                        </Tooltip>
+                        <Tooltip title='Delete'>
+
                         <IconButton onClick={() => removesession(session)} style={{ right: -20 }}>
                           <Iconify icon="mdi:cancel-circle"></Iconify>
                         </IconButton>
+                        </Tooltip>
                       </>
                     ) : null}
                   </Typography>
@@ -530,6 +543,7 @@ session.length <=0 ?
                             color: '#ff7424',
                             backgroundColor: '#ffd796',
                             marginLeft: '10px',
+                            marginBottom:'6px'
                           }}
                         >
                           Upload
