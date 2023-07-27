@@ -194,12 +194,12 @@ useEffect(()=>{
       editData?.empRole == "Program Manager" ? 3 :
       editData?.empRole == "Operations Manager" ? 4 :  
       editData?.empRole == "Trainer" ? 5 :
-      editData?.empRole == "Gelathi Facilitator" ? "6" :
+      editData?.empRole == "Field Associate" ? "6" :
       editData?.empRole == "Driver" ? 7:
       editData?.empRole == "Funder" ?8 :
       editData?.empRole == "Partner" ? 9 :
       editData?.empRole == "FIN/HR/VIEWER" ? 11 :
-      editData?.empRole == "Senior Operations Manager" ? 12 :editData?.empRole == "Gelathi Facilitator Lead" ? 13 : editData?.empRole == "Senior Trainer" ? 14 : null,
+      editData?.empRole == "Senior Operations Manager" ? 12 :editData?.empRole == "Gelathi Facilitator Lead" ? 13 : editData?.empRole == "Senior Trainer" ? 5 : null,
     });
    
     var config = {
