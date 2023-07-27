@@ -153,6 +153,8 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       });
     circle();
   };
+
+  console.log(session,"sessindata")
   const noteSubmitHandler = () => {
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
@@ -161,6 +163,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       type: JSON.stringify(parseInt(session.type)),
       tb_id: session.tb_id,
       emp_id: userid,
+      primary_id:session.primary_id
     });
     const config = {
       method: 'post',
@@ -190,6 +193,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     var data = JSON.stringify({
       type: session.type,
       tb_id: session.tb_id,
+      primary_id:session.primary_id
     });
     const config = {
       method: 'post',

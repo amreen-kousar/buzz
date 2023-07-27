@@ -244,6 +244,7 @@ const [iserror, setIsError] = useState(false)
       type: JSON.stringify(parseInt(session.type)),
       tb_id: session.tb_id,
       emp_id: userid,
+      primary_id:session.primary_id
     });
     const config = {
       method: 'post',
@@ -274,6 +275,7 @@ const [iserror, setIsError] = useState(false)
     var data = JSON.stringify({
       type: session.type,
       tb_id: session.tb_id,
+      primary_id:session.primary_id
       // "type":2, "tb_id":21407
     });
     const config = {

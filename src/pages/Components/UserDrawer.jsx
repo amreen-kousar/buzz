@@ -70,7 +70,7 @@ const handleclose=()=>{
   const profile = (async) => {
     const userData = JSON.parse(sessionStorage?.getItem('people'))?.id;
     var data = JSON.stringify({
-      id: userData,
+      id: JSON.stringify(parseInt(userData)),
     });
 
     var config = {
