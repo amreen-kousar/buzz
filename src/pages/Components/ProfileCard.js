@@ -160,6 +160,10 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
   const handleClose = (value) => {
     setOpen(false);
   };
+
+  console.log(profileData?.project_list,"projectssss")
+  var Project_List = profileData?.project_list?.map((e)=>e.project_id)
+  console.log(Project_List,"projectsssss")
   const editProfile = async => {
 
 
@@ -196,7 +200,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "status": editData?.status,
       "createdBy": editData?.createdBy,
       "lastUpdatedBy": editData?.lastUpdatedBy,
-      "project_list": profileData?.project_list.map((e)=>e.project_id),
+      "project_list": Project_List,
       "license_number": editData?.license_number
     });
     var config = {

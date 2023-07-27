@@ -234,7 +234,7 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                                 "lastUpdatedBy": userid
                             }
                             const partnerFunderConfig = {
-                                method: 'post',
+                                method: 'POST',
                                 url:  baseURL + `${apiCallName}`,
                                 headers: {
                                     'Content-Type': 'application/json'

@@ -29,7 +29,7 @@ export default function Profile(index) {
   const profile = async => {
     const userData = sessionStorage?.getItem('userDetails')
     var data = JSON.stringify({
-      "id": JSON.stringify(JSON?.parse(userData)?.id)
+      "id": JSON?.parse(userData)?.id
     });
     var config = {
       method: 'post',
