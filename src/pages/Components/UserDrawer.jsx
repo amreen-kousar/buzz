@@ -57,7 +57,9 @@ const handleclose=()=>{
 
   const updateSetUser = () => {
     setUser(JSON.parse(sessionStorage?.getItem('people')));
+ 
     handleclose();
+    profile()
   };
 
   useEffect(() => {

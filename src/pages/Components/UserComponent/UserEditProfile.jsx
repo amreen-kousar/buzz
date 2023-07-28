@@ -44,7 +44,8 @@ export default function UserEditProfile({ updateSetUser ,closeUserDrawer  ,profi
    var [inputProject, setInputProject] = React.useState([])
   const [age, setAge] = React.useState('');
   var [showProjectListData, sethowProjectListData] = React.useState(profileData?.project_list)
-  var [updatedProjectlist,setUpdatedProjectList]=React.useState(user?.project_list)
+  {console.log(profileData?.project_list,"projectssssssss")}
+  var [updatedProjectlist,setUpdatedProjectList]=React.useState(profileData?.project_list)
   const [ceoUser, setCeoUser] = useState([]);
   const [usersDataEdit, setUsersDataEdit] = useState('');
   const [rolesData, setRolesData] = useState([]);
@@ -60,39 +61,43 @@ return () => {
   // cancel the subscription
   isApiSubscribed = false;
 };
-},[user])
+},[profileData])
 useEffect(()=>{
   getEmpId()
 },[])
+
+
   const [editData, setEditData] = useState({
-    id: user.id,
-    countryID: user.countryID,
-    first_name: user.first_name,
-    last_name: user.last_name,
-    gender: user.gender,
-    doj: new Date(user.doj),
-    role: user.role_id,
-    pincode: user.pincode,
-    officeMailId: user.officeMailId,
-    personalMailId: user.personalMailId,
-    contactNum: user.contactNum,
-    workNum: user.workNum,
-    address: user.address,
-    address1: user.address1,
-    address2: user.address2,
-    empRole: user.role_name,
-    supervisorId: user.supervisorId,
-    supervisorName: user.supervisorName,
-    profile_pic: user.profile_pic,
-    status: user.status,
-    createdBy: user.createdBy,
-    lastUpdatedBy: user.lastUpdatedBy,
+    id: profileData.id,
+    countryID: profileData.countryID,
+    first_name: profileData.first_name,
+    last_name: profileData.last_name,
+    gender: profileData.gender,
+    doj: new Date(profileData.doj),
+    role: profileData.role_id,
+    pincode: profileData.pincode,
+    officeMailId: profileData.officeMailId,
+    personalMailId: profileData.personalMailId,
+    contactNum: profileData.contactNum,
+    workNum: profileData.workNum,
+    address: profileData.address,
+    address1: profileData.address1,
+    address2: profileData.address2,
+    empRole: profileData.role_name,
+    supervisorId: profileData.supervisorId,
+    supervisorName: profileData.supervisorName,
+    profile_pic: profileData.profile_pic,
+    status: profileData.status,
+    createdBy: profileData.createdBy,
+    lastUpdatedBy: profileData.lastUpdatedBy,
     project_list: showProjectListData,
-    license_number: user.license_number,
+    license_number: profileData.license_number,
   });
+
+
   const handleClickOpen = () => {
     setOpen(true);
-    setUpdatedProjectList(user?.project_list)
+    setUpdatedProjectList(profileData?.project_list)
     setScroll(scrollType);
   };
   const handleClose = () => {
@@ -127,7 +132,7 @@ useEffect(()=>{
   const getEmpId = async (value) => {
     setEditData({ ...editData, role: value });
     let formData = new FormData();
-    formData.append('role_id', (value?.id)?value?.id:user?.role_id);
+    formData.append('role_id', (value?.id)?value?.id:profileData?.role_id);
     formData.append('name', '');
     let res = await fetch('https://bdms.buzzwomen.org/appTest/getAllBuzzTeam.php', {
       body: formData,
@@ -144,7 +149,7 @@ useEffect(()=>{
   const getProjectOfManager = async (value) => {
     setEditData({ ...editData, supervisorId: value?.id });
     const data = JSON.stringify({
-      manager_id: (value)? value?.id : user?.supervisorId,
+      manager_id: (value)? value?.id : profileData?.supervisorId,
     });
     const config = {
       method: 'post',
@@ -168,28 +173,29 @@ useEffect(()=>{
     var data = JSON.stringify({
       id: editData?.id,
       countryID: editData?.countryID,
-      first_name: editData?.first_name,
-      last_name: editData?.last_name,
-      gender: editData?.gender,
+      first_name: (editData?.first_name)?editData?.first_name:profileData.first_name,
+      last_name:(editData?.last_name)? editData?.last_name:profileData.last_name,
+      gender: (editData?.gender)?editData.gender:profileData.gender,
       doj: moment(editData?.doj?.$d)?.format('YYYY-MM-DD'),
-      role: editData?.role,
-      pincode: editData?.pincode,
-      officeMailId: editData?.officeMailId,
-      personalMailId: editData?.personalMailId,
-      contactNum: editData?.contactNum,
-      workNum: editData?.workNum,
-      address: editData?.address,
-      address1: editData?.address1,
-      address2: editData?.address2,
-      empRole: editData?.empRole,
-      supervisorId: editData?.supervisorId,
-      profile_pic: editData?.profile_pic,
+      role: (editData?.role)?editData.role:profileData.role_id,
+      pincode: (editData?.pincode)?editData?.pincode:profileData.pincode,
+      officeMailId: (editData?.officeMailId)?editData?.officeMailId:profileData.officeMailId,
+     
+     
+      personalMailId: (editData?.personalMailId)?editData.personalMailId:profileData.personalMailId,
+      contactNum: (editData?.contactNum)?editData?.contactNum:profileData.contactNum,
+      workNum: (editData?.workNum)?editData?.workNum:profileData.workNum,
+      address: (editData?.address)?editData.address:profileData.address,
+      address2: (editData?.address1)?editData?.address1:profileData?.address2,
+      address3: (editData?.address2)?editData?.address2:profileData.address3,
+      supervisorId: (editData?.supervisorId)?editData?.supervisorId:profileData?.supervisorId,
+      profile_pic: (editData?.profile_pic)?editData?.profile_pic:profileData?.profile_pic,
       status: editData?.status,
       createdBy: editData?.createdBy,
       lastUpdatedBy: '',
       project_list: overallprojects,
       license_number: editData?.license_number,
-      role_name: editData?.role_name,
+      role_name: (editData?.role_name)?editData?.role_name:profileData.role_name,
       empRole: editData?.empRole == "Admin" ? 2 :
       editData?.empRole == "Program Manager" ? 3 :
       editData?.empRole == "Operations Manager" ? 4 :  
@@ -228,11 +234,12 @@ let updatedlist = updatedProjectlist.filter((e)=> e.id != id)
 setUpdatedProjectList([...updatedlist]);
 sethowProjectListData([...updatedlist]);
   }
+  console.log(updatedProjectlist,"project_updated")
      const changeProject = (value) => {
         setInputProject([...value])
     }
-    let projectvariable = updatedProjectlist.map((e)=>e.project_id);
-    let inputprojectvalues = inputProject.map((e)=>e.id)
+    let projectvariable = updatedProjectlist?.map((e)=>e.project_id);
+    let inputprojectvalues = inputProject?.map((e)=>e.id)
     let overallprojects = [...projectvariable,...inputprojectvalues]
   return (
     <div>

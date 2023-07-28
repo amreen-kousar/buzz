@@ -46,9 +46,9 @@ export default function User() {
  
   const handleCloseFilter = () => {
     setOpenFilter(false);
-    setSearchUser([])
-    setSelected([])
-    user()
+    // setSearchUser([])
+    // setSelected([])
+    // user()
   };
   const handlepeopleCloseFilter = () => {
     setpeopleFilter(false);
