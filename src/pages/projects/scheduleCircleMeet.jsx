@@ -7,7 +7,7 @@ import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import BeehiveDrawer from './Components/BeehiveDrawer';
 import Circledrawer from './Components/Circledrawer';
-import { baseURL } from 'src/utils/api';
+import { baseURL, oldbaseURL } from 'src/utils/api';
 export default function scheduleCircleMeet() {
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
@@ -45,7 +45,7 @@ export default function scheduleCircleMeet() {
     });
     var config = {
       method: 'post',
-      url: baseURL+'getGelathiCircle',
+      url: oldbaseURL+'getGelathiCircle.php',
       headers: {
         'Content-Type': 'application/json'
       },
