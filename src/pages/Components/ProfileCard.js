@@ -164,6 +164,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
   console.log(profileData?.project_list,"projectssss")
   var Project_List = profileData?.project_list?.map((e)=>e.project_id)
   console.log(Project_List,"projectsssss")
+  console.log(profileData,"roleeeeee")
   const editProfile = async => {
 
 
@@ -178,7 +179,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "gender": editData?.gender,
       "doj": editData?.doj,
       "pincode": editData?.pincode,
-      "role": (editData?.role?.id)?JSON.stringify(parseInt(editData?.role?.id)):editData?.role,
+      "role": JSON.stringify(parseInt(editData?.role?.id)),
       "officeMailId": editData?.officeMailId,
       "personalMailId": editData?.personalMailId,
       "contactNum": editData?.contactNum,
@@ -186,16 +187,16 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "address": editData?.address,
       "address3": editData?.address3,
       "address2": editData?.address2,
-      "empRole": editData?.empRole == "Admin" ? "2" :
-      editData?.empRole == "Program Manager" ? "3" :
-      editData?.empRole == "Operations Manager" ? "4" :  
-      editData?.empRole == "Trainer" ? "5" :
-      editData?.empRole == "Field Associate" ? "6" :
-      editData?.empRole == "Driver" ? "7":
-      editData?.empRole == "Funder" ?"8":
-      editData?.empRole == "Partner" ? "9" :
-      editData?.empRole == "FIN/HR/VIEWER" ? "11" :
-      editData?.empRole == "Senior Operations Manager" ? "12" :editData?.empRole == "Gelathi Facilitator Lead" ? "13" : editData?.empRole == "Senior Trainer" ? "5" : null,
+      "empRole": profileData?.role_name == "Admin" ? "2" :
+      profileData?.role_name == "Program Manager" ? "3" :
+      profileData?.role_name == "Operations Manager" ? "4" :  
+      profileData?.role_name == "Trainer" ? "5" :
+      profileData?.role_name == "Field Associate" ? "6" :
+      profileData?.role_name == "Driver" ? "7":
+      profileData?.role_name == "Funder" ?"8":
+      profileData?.role_name == "Partner" ? "9" :
+      profileData?.role_name == "FIN/HR/VIEWER" ? "11" :
+      profileData?.role_name == "Senior Operations Manager" ? "12" :profileData?.role_name == "Gelathi Facilitator Lead" ? "13" : profileData?.role_name == "Senior Trainer" ? "5" : null,
       "supervisorId": editData?.supervisorId,
       "status": editData?.status,
       "createdBy": editData?.createdBy,

@@ -359,6 +359,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
       savingMoney: savemoney,
       assetPurchase: purchase,
     });
+   }
     var config = {
       method: 'post',
       url: baseURL + 'addSurveyData',
@@ -367,7 +368,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
       },
       data: data,
     };
-  }
+  
     axios(config)
       .then(function (response) {
         reloadFUnction()
@@ -394,9 +395,9 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
    }
   
    else{
-       setshaktidata(saveDataLocally('shaktiform',JSON.parse(data)));
-        handleClose(); 
-   }
+    setshaktidata(saveDataLocally('shaktiform',JSON.parse(data)));
+     handleClose(); 
+}
    
   };
   useEffect(() => {
@@ -436,7 +437,7 @@ const handlesurvey=()=>{
           <Iconify icon="clarity:form-line" width={20} height={20} color="#ff7424" /> 
         </IconButton>
               
-        :( itm?.isSurveyDone==='0' && (localFormPresent?.has(itm?.participant_id)))?
+        :( itm?.isSurveyDone=='0' && (localFormPresent?.has(itm?.participant_id)))?
 
      <>
        <IconButton onClick={handleSurveyform}>
