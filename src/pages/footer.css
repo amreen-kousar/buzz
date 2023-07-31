@@ -1,14 +1,14 @@
 .footer {
     position: fixed;
-    bottom: 3%;
+    bottom: 0.5%;
     /* top:1; */
     left: 0;
     width: 100%;
-    padding: 10px;
-    height: 6%;
+    padding: 5px;
+    height: 3%;
     color: white;
     text-align: center;
-    z-index: 999;
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;

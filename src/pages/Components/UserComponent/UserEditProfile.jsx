@@ -43,7 +43,7 @@ export default function UserEditProfile({ updateSetUser ,closeUserDrawer,profile
   const [scroll, setScroll] = useState('paper');
    var [inputProject, setInputProject] = React.useState([])
   const [age, setAge] = React.useState('');
-  var [showProjectListData, setshowprojectlist] = React.useState(profileData?.project_list)
+  var [showProjectListData, setshowprojectlist] = React.useState(user?.project_list)
   var [updatedProjectlist,setUpdatedProjectList]=React.useState(profileData?.project_list)
   const [ceoUser, setCeoUser] = useState([]);
   const [usersDataEdit, setUsersDataEdit] = useState('');

@@ -63,7 +63,7 @@ export default function DashboardLayout() {
             <Outlet />
           </NoSearchMainStyle>
         ) : (
-          <MainStyle>
+          <MainStyle >
             <Outlet />
           </MainStyle>
         )}
