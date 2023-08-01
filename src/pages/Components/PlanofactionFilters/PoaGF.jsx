@@ -74,6 +74,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [session, setSession] = useState('');
   const [expanded, setExpanded] = React.useState(false);
   const [reload, setReload] = useState(false);
+  const [isOnline, setOnline] = useState(true);
   const isSmallScreen = useMediaQuery('(max-width:600px)');
 
   const changeState = () => {
@@ -82,6 +83,18 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  useEffect(()=>{
+    setOnline(navigator.onLine)
+  })
+  window.addEventListener('online', () => {
+    setOnline(true)
+});
+window.addEventListener('offline', () => {
+    setOnline(false)
+});
+
+
+
   const role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
   useEffect(() => {
     getTrainingBatch();
@@ -831,7 +844,8 @@ useEffect(()=>{
                 </div>
               ) : null}
               <br />
-              <Button
+             {(session?.type==4 || session?.type==10 || session?.type==16) && (!(isOnline)) && 
+             <Button
                 variant="secondary"
                 style={styles.buttonStyle}
                 onClick={() => {
@@ -852,10 +866,11 @@ useEffect(()=>{
               >
                 <span style={{ width: '200px' }}>Survey Form</span>
               </Button>
+             }
 
   
              
-              {showSurvey ? (
+              {(showSurvey && (!isOnline)) ? (
                 <Stack>
                   <div>
                     <Card>
