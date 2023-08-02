@@ -288,6 +288,7 @@ export default function projectMultiDrawer({
       type: "1",
       tb_id: batch?.data?.id,
       emp_id: userid,
+      primary_id:batch?.data?.primary_id
     });
     const config = {
       method: 'post',
@@ -322,6 +323,7 @@ export default function projectMultiDrawer({
     var data = JSON.stringify({
       type: "1",
       tb_id: batch?.data?.id,
+      primary_id:batch?.data?.primary_id
     });
     const config = {
       method: 'post',
@@ -648,7 +650,7 @@ export default function projectMultiDrawer({
               ) : null}
               <Programevaluationday1 batch={batch} onCloseFilter={onCloseFilter} />
               <Evaluationday2 batch={batch} onCloseFilter={onCloseFilter} />
-
+{console.log(batch?.data,"batchdata")}
               <Stack style={{ flexDirection: 'row' }} mb={2}>
                 <Button
                   variant="secondary"

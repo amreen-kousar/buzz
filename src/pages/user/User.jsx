@@ -47,6 +47,8 @@ export default function User() {
  
   const handleCloseFilter = () => {
     setOpenFilter(false);
+    setSearchUser(null);
+    setSelected(null)
    };
   const handlepeopleCloseFilter = () => {
     setpeopleFilter(false);
@@ -136,7 +138,7 @@ export default function User() {
   }
   const handleDelete = () => {
     setSearchUser([])
-    setSelected([])
+    setSelected(null)
     user()
   }
   const searchBarCall = (e) => {

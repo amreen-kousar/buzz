@@ -76,7 +76,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [expanded, setExpanded] = React.useState(false);
   const [reload, setReload] = useState(false);
   const isSmallScreen = useMediaQuery('(max-width:600px)');
-
+  const [isOnline, setOnline] = useState(true);
   const changeState = () => {
     setReload(!reload);
   };
@@ -102,6 +102,18 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       isSubscribe = false;
     };
   }, [session.tb_id, session.check_in, batch.check_1]);
+
+  useEffect(()=>{
+    setOnline(navigator.onLine)
+  })
+  window.addEventListener('online', () => {
+    setOnline(true)
+});
+window.addEventListener('offline', () => {
+    setOnline(false)
+});
+
+
   const getTrainingBatch = (async) => {
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
@@ -153,6 +165,8 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       });
     circle();
   };
+
+  console.log(session,"sessindata")
   const noteSubmitHandler = () => {
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
@@ -161,6 +175,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
       type: JSON.stringify(parseInt(session.type)),
       tb_id: session.tb_id,
       emp_id: userid,
+      primary_id:session.primary_id
     });
     const config = {
       method: 'post',
@@ -190,6 +205,7 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
     var data = JSON.stringify({
       type: session.type,
       tb_id: session.tb_id,
+      primary_id:session.primary_id
     });
     const config = {
       method: 'post',
@@ -844,6 +860,7 @@ useEffect(()=>{
                 </div>
               ) : null}
               <br />
+              {(session?.type==4 || session?.type==10 || session?.type==16) && (!(isOnline)) && 
               <Button
                 variant="secondary"
                 style={styles.buttonStyle}
@@ -865,10 +882,10 @@ useEffect(()=>{
               >
                 <span style={{ width: '200px' }}>Survey Form</span>
               </Button>
-
+}
   
              
-              {showSurvey ? (
+              {(showSurvey && (!isOnline)) ? (
                 <Stack>
                   <div>
                     <Card>
@@ -992,7 +1009,7 @@ useEffect(()=>{
                                       <IconButton
                                       >
                                         {!localFormPresent.has(itm?.gelathi_id) && 
-                                        <Vyaparprogram itm={itm}  componentreloadmethod={componentreloadmethod}/>}
+                                        <Vyaparprogram itm={itm}  componentreloadmethod={componentreloadmethod} />}
                                         {localFormPresent.has(itm?.gelathi_id) ? ( 
                                           // <Tooltip title="Its Field in Offline Mode">
                                           //   <ErrorOutlinedIcon />

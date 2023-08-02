@@ -21,9 +21,11 @@ export default function Login() {
   }));
 
   const [emailExists,setEmailExists] = useState(false);
+ 
   const apiHit = async (itm) => {
     var data = JSON.stringify({
-      "email": itm?.user?.email
+      "email": itm?.user?.email,
+      "profile_pic":itm?.user?.photoURL
     });
     var config = {
       method: 'post',

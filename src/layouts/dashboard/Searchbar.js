@@ -56,7 +56,12 @@ export default function Searchbar({ getSearch }) {
   const changeText = (e) => {
     searchData = e?.target?.value
   }
-  
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      getSearch(searchData);
+      handleClose();
+    }
+  };
   return (
     <RootStyle>
       <ToolbarStyle>
@@ -83,6 +88,7 @@ export default function Searchbar({ getSearch }) {
                   autoFocus
                   fullWidth
                   onChange={(e) => { changeText(e) }}
+                  onKeyDown={handleKeyPress}
                   disableUnderline
                   placeholder="Search…"
                   startAdornment={

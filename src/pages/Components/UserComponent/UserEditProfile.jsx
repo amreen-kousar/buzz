@@ -165,6 +165,8 @@ useEffect(()=>{
         // console.log(error);
       });
   };
+
+
   const editUser = (async) => {
     var data = JSON.stringify({
       id: parseInt(editData?.id),
@@ -173,7 +175,7 @@ useEffect(()=>{
       last_name: editData?.last_name,
       gender: editData?.gender,
       doj: moment(editData?.doj?.$d)?.format('YYYY-MM-DD'),
-      role: editData?.role,
+      role: (editData?.role?.id)?JSON.stringify(parseInt(editData?.role?.id)):editData?.role,
       pincode: editData?.pincode,
       officeMailId: editData?.officeMailId,
       personalMailId: editData?.personalMailId,
@@ -182,12 +184,12 @@ useEffect(()=>{
       address: editData?.address,
       address1: editData?.address1,
       address2: editData?.address2,
-      empRole: JSON.stringify(editData?.empRole),
-      supervisorId: editData?.supervisorId,
+      empRole: (editData?.empRole)?JSON.stringify(editData?.empRole):user.role_name,
+      supervisorId: (editData?.supervisorId)?editData?.supervisorId:user?.supervisorId,
       profile_pic: editData?.profile_pic,
       status: editData?.status,
       createdBy: editData?.createdBy,
-      lastUpdatedBy: '',
+      lastUpdatedBy: editData?.lastUpdatedBy,
       project_list: overallprojects,
       license_number: editData?.license_number,
       role_name: editData?.role_name,
@@ -200,7 +202,7 @@ useEffect(()=>{
       editData?.empRole == "Funder" ?"8":
       editData?.empRole == "Partner" ? "9" :
       editData?.empRole == "FIN/HR/VIEWER" ? "11" :
-      editData?.empRole == "Senior Operations Manager" ? "12" :editData?.empRole == "Gelathi Facilitator Lead" ? "13" : editData?.empRole == "Senior Trainer" ? "14" : null,
+      editData?.empRole == "Senior Operations Manager" ? "12" :editData?.empRole == "Gelathi Facilitator Lead" ? "13" : editData?.empRole == "Senior Trainer" ? "5" : null,
     });
    
     var config = {
@@ -444,7 +446,7 @@ sethowProjectListData([...updatedlist]);
                 <Stack>
                  
                   {
-["Trainer", 'Field Associate', 'FIN/HR/VIEWER', 'Senior Operations Manager'].includes(editData?.empRole) && <FormControl fullWidth>
+["Trainer", 'Field Associate', 'FIN/HR/VIEWER', 'Senior Operations Manager',"Gelathi Facilitator Lead"].includes(editData?.empRole) && <FormControl fullWidth>
     <Autocomplete                
         multiple
         limitTags={2}

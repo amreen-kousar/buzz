@@ -145,6 +145,8 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       lastUpdatedBy: profileData?.id
     })
   }, [profileData])
+
+  // console.log(profileData?.project_list.map((e)=>e.project_id),"projects")
   const handleExpandClick = () => {
     setExpanded(true);
   };
@@ -158,13 +160,18 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
   const handleClose = (value) => {
     setOpen(false);
   };
+
+  console.log(profileData?.project_list,"projectssss")
+  var Project_List = profileData?.project_list?.map((e)=>e.project_id)
+  console.log(Project_List,"projectsssss")
+  console.log(profileData,"roleeeeee")
   const editProfile = async => {
 
 
     handleCloseClick();
     const userDetails = sessionStorage?.getItem("userDetails")
     var data = JSON.stringify({
-      "id": JSON?.parse(userDetails)?.id,
+      "id": parseInt(JSON?.parse(userDetails)?.id),
      // "countryID": 1,
       "first_name": editData?.firstName,
       "last_name": editData?.lastName,
@@ -172,6 +179,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "gender": editData?.gender,
       "doj": editData?.doj,
       "pincode": editData?.pincode,
+      "role": JSON.stringify(parseInt(editData?.role?.id)),
       "officeMailId": editData?.officeMailId,
       "personalMailId": editData?.personalMailId,
       "contactNum": editData?.contactNum,
@@ -179,12 +187,21 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "address": editData?.address,
       "address3": editData?.address3,
       "address2": editData?.address2,
-      "empRole": editData?.empRole,
+      "empRole": profileData?.role_name == "Admin" ? "2" :
+      profileData?.role_name == "Program Manager" ? "3" :
+      profileData?.role_name == "Operations Manager" ? "4" :  
+      profileData?.role_name == "Trainer" ? "5" :
+      profileData?.role_name == "Field Associate" ? "6" :
+      profileData?.role_name == "Driver" ? "7":
+      profileData?.role_name == "Funder" ?"8":
+      profileData?.role_name == "Partner" ? "9" :
+      profileData?.role_name == "FIN/HR/VIEWER" ? "11" :
+      profileData?.role_name == "Senior Operations Manager" ? "12" :profileData?.role_name == "Gelathi Facilitator Lead" ? "13" : profileData?.role_name == "Senior Trainer" ? "5" : null,
       "supervisorId": editData?.supervisorId,
       "status": editData?.status,
       "createdBy": editData?.createdBy,
       "lastUpdatedBy": editData?.lastUpdatedBy,
-      "project_list": editData?.project_list,
+      "project_list": Project_List,
       "license_number": editData?.license_number
     });
     var config = {
