@@ -32,15 +32,12 @@ const [errorMsg,setErrormsg]=useState(false)
   const [summaryData, setSummaryData] = useState([]);
   var startdate = moment(new Date()).format('YYYY-04-01')
   var endDate = moment(startdate, 'YYYY').add(1, 'year').format('YYYY-03-31')
-
-  console.log(startdate,"financilayear",endDate)
   const [graphData, setGraphData] = useState(null);
   const itemStyles = [{ itemXs: 4, itemSm: 8, itemMd: 4 }, { itemXs: 6, itemSm: 8, itemMd: 6 }]
   var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
   var rolevalue = JSON.parse(sessionStorage.getItem('userDetails'))?.trainer_type;
   var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   const apiHit = async (id, i, g,date1,date2) => {
-    console.log(id,i,g,"agsfdhgds")
     setLoader(true)
     var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
