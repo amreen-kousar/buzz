@@ -40,13 +40,14 @@ const [errorMsg,setErrormsg]=useState(false)
   var rolevalue = JSON.parse(sessionStorage.getItem('userDetails'))?.trainer_type;
   var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   const apiHit = async (id, i, g,date1,date2) => {
+    console.log(id,i,g,"agsfdhgds")
     setLoader(true)
     var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     const data  ={
       "partner_id": i === 1 ? id?.id : '',
-    "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): startdate,
-    "end_date":  (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):endDate,
+    "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'):(id===undefined)? startdate:"",
+    "end_date":  (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):(i ===undefined)?endDate:"",
     "funder_id":i === 2 ? id?.id : '',
     "dist":(g === "country" || g==="countryCalendar")? id : "",
     "taluk":(g === "country" || g==="countryCalendar") ? i : "",
