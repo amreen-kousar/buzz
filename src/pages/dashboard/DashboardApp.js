@@ -78,6 +78,7 @@ const [errorMsg,setErrormsg]=useState(false)
   };
   
   const filterApi = async(id,i,g,date1,date2)=>{
+    setLoader(true)
     var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
@@ -101,6 +102,7 @@ const [errorMsg,setErrormsg]=useState(false)
     axios(config)
     .then(function (response) {
       setSummaryData(response.data)
+      setLoader(false)
     })
     .catch(function (error) {
       // console.log(error);
