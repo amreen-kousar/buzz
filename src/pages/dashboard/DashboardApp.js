@@ -30,6 +30,10 @@ const DashboardApp = () => {
 const [errorMsg,setErrormsg]=useState(false)
   const [slected, setSelected] = useState(null)
   const [summaryData, setSummaryData] = useState([]);
+  var startdate = moment(new Date()).format('YYYY-04-01')
+  var endDate = moment(startdate, 'YYYY').add(1, 'year').format('YYYY-03-31')
+
+  console.log(startdate,"financilayear",endDate)
   const [graphData, setGraphData] = useState(null);
   const itemStyles = [{ itemXs: 4, itemSm: 8, itemMd: 4 }, { itemXs: 6, itemSm: 8, itemMd: 6 }]
   var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
@@ -41,8 +45,8 @@ const [errorMsg,setErrormsg]=useState(false)
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     const data  ={
       "partner_id": i === 1 ? id?.id : '',
-    "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
-    "end_date":  (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):'',
+    "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): startdate,
+    "end_date":  (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):endDate,
     "funder_id":i === 2 ? id?.id : '',
     "dist":(g === "country" || g==="countryCalendar")? id : "",
     "taluk":(g === "country" || g==="countryCalendar") ? i : "",
