@@ -27,11 +27,13 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import Iconify from 'src/components/Iconify';
+import FormHelperText from '@mui/material/FormHelperText';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import  { useRef } from 'react';
 import { baseURL } from 'src/utils/api';
 import { ConnectingAirportsOutlined } from '@mui/icons-material';
+import { useState } from 'react';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -58,6 +60,41 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
   const [shareproblems, setshareproblems] = React.useState(false);
   const [localFormPresent, setlocalFormPresent] = React.useState(new Map());
   const [isFormPresentLocally ,setIsFormPresentLocally] =React.useState(false)
+
+  //validation
+  const [helperText, setHelperText] = React.useState('');
+  const [implementationPlanError, SetImplementationPlanError] = useState(false);
+  const [qualitiesgoodError, SetQualitiesgoodError] = useState(false);
+  const [accessToHealtcareError, SetAccessToHealtcareError] = useState(false);
+  const [creditaccessError, SetCreditaccessError] = useState(false);
+  const [household_books_accountsError, SetHousehold_books_accountsError] = useState(false);
+  const [saveRegularlyError, SetsaveRegularlyError] = useState(false);
+  const [specificGoalForSavingsError, SetspecificGoalForSavingsError] = useState(false);
+  const [problemsolutionsError, SetproblemsolutionsError] = useState(false);
+  const [worthpersonError, SetworthpersonError] = useState(false);
+  const [loanborrowError, SetloanborrowError] = useState(false);
+  const [borrowedmoneyError, SetborrowedmoneyError] = useState(false);
+  const [ownAssetError, SetownAssetError] = useState(false);
+  const [separateFinancialAssetError, SetseparateFinancialAssetError] = useState(false);
+  const [partOfCollectiveError, SetpartOfCollectiveError] = useState(false);
+  const [moneysaveError, SetmoneysaveError] = useState(false);
+  const [haveLoanError, SethaveLoanError] = useState(false);
+  const [shareproblemsError, SetshareproblemsError] = useState(false);
+  const [spendMoneyError, SetspendMoneyError] = useState(false);
+  const [savingfrequencyError, SetsavingfrequencyError] = useState(false);
+  const [loanOnWhoseNameError, SetloanOnWhoseNameError] = useState(false);
+  const [haveGoalError, SethaveGoalError] = useState(false);
+  const [pathwayToGoalError, SetpathwayToGoalError] = useState(false);
+  const [educationError, SeteducationError] = useState(false);
+  const [solutionError, SetsolutionError] = useState(false);
+  const [livelihoodvalueError, SetlivelihoodvalueError] = useState(false);
+  const [sharelearningError, SetsharelearningError] = useState(false);
+  const [problemsdisheartenedError, SetproblemsdisheartenedError] = useState(false);
+  const [failurepersonError, SetfailurepersonError] = useState(false);
+  const [expenditureError, SetexpenditureError] = useState(false);
+  const [accounts_for_Self_EnterprisesError, Setaccounts_for_Self_EnterprisesError] = useState(false);
+  const [savemoneyError, SetsavemoneyError] = useState(false);
+  const [purchaseError, SetpurchaseError] = useState(false);
 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [checked, setChecked] = React.useState({
@@ -146,57 +183,75 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
   };
   const handleworthperson = (event) => {
     setworthperson(event.target.value);
+    SetworthpersonError(false)
   };
   const handlequalitiesgood = (event) => {
     setqualitiesgood(event.target.value);
+    SetQualitiesgoodError(false)
   };
   const handlefailureperson = (event) => {
     setfailureperson(event.target.value);
+    SetfailurepersonError(false);
   };
   const handleproblemsdisheartened = (event) => {
     setproblemsdisheartened(event.target.value);
+    SetproblemsdisheartenedError(false);
   };
   const handleproblemsolutions = (event) => {
     setproblemsolutions(event.target.value);
+    SetproblemsolutionsError(false);
   };
   const handleplan = (event) => {
     setplan(event.target.value);
+    SetImplementationPlanError(false);
   };
   const handlesolution = (event) => {
     setsolution(event.target.value);
+    SetsolutionError(false);
   };
   const handlemoneysave = (event) => {
     setmoneysave(event.target.value);
+    SetmoneysaveError(false);
   };
   const handlesavingfrequency = (event) => {
     setsavingfrequency(event.target.value);
+    SetsavingfrequencyError(false);
   };
   const handleducation = (event) => {
     seteducation(event.target.value);
+    SeteducationError(false)
   };
   const handlehealthcareaccess = (event) => {
     sethealthcareaccess(event.target.value);
+    SetAccessToHealtcareError(false)
   };
   const handlecreditaccess = (event) => {
     setcreditaccess(event.target.value);
+    SetCreditaccessError(false);
   };
   const handlesavemoney = (event) => {
     setsavemoney(event.target.value);
+    SetsavemoneyError(false);
   };
   const handlepurchase = (event) => {
     setpurchase(event.target.value);
+    SetpurchaseError(false)
   };
   const handlexpenditure = (event) => {
     setexpenditure(event.target.value);
+    SetexpenditureError(false);
   };
   const handlelivelihood = (event) => {
     setlivelihoodvalue(event.target.value);
+    SetlivelihoodvalueError(false);
   };
   const handleshareproblems = (event) => {
     setshareproblems(event.target.value);
+    SetshareproblemsError(false);
   };
   const handlesharelearning = (event) => {
     setsharelearning(event.target.value);
+    SetsharelearningError(false);
   };
   const [sendData, setSendData] = React.useState({
     implementationPlan: '',
@@ -264,6 +319,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
     moneyborrowed: '',
   });
   const shakthiformdata = async () => {
+
     var data ={}
    data = JSON.stringify({
     participantId: itm?.participant_id,
@@ -310,10 +366,172 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
     });
 
    if(isOnline() && networkAccess()){
+    if(plan == ''){
+      SetImplementationPlanError(true);
+      setHelperText('please select the option')
+    }
+    if(qualitiesgood == ''){
+      SetQualitiesgoodError(true);
+      setHelperText('please select the option')
+    }
+    if(healthcareaccess == ''){
+      SetAccessToHealtcareError(true);
+      setHelperText('please select the option')
+    }
+    if(creditaccess == ''){
+      SetCreditaccessError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.household_books_accounts == ''){
+      SetHousehold_books_accountsError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.saveRegularly == ''){
+      SetsaveRegularlyError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.specificGoalForSavings == ''){
+      SetspecificGoalForSavingsError(true);
+      setHelperText('please select the option')
+    }
+    if(problemsolutions == ''){
+      SetproblemsolutionsError(true);
+      setHelperText('please select the option')
+    }
+    if(worthperson == ''){
+      SetworthpersonError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.ownAsset == ''){
+      SetownAssetError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.separateFinancialAsset == ''){
+      SetseparateFinancialAssetError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.partOfCollective == ''){
+      SetpartOfCollectiveError(true);
+      setHelperText('please select the option')
+    }
+    if(moneysave == ''){
+      SetmoneysaveError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.haveLoan == ''){
+      SethaveLoanError(true);
+      setHelperText('please select the option')
+    }
+    if(shareproblems == ''){
+      SetshareproblemsError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.spendMoney == ''){
+      SetspendMoneyError(true);
+      setHelperText('please select the option')
+    }
+    if(savingfrequency == ''){
+      SetsavingfrequencyError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.loanOnWhoseName == ''){
+      SetloanOnWhoseNameError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.haveGoal == ''){
+      SethaveGoalError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.pathwayToGoal == ''){
+      SetpathwayToGoalError(true);
+      setHelperText('please select the option')
+    }
+    if(education == ''){
+      SeteducationError(true);
+      setHelperText('please select the option')
+    }
+    if(solution == ''){
+      SetsolutionError(true);
+      setHelperText('please select the option')
+    }
+    if(livelihoodvalue == ''){
+      SetlivelihoodvalueError(true);
+      setHelperText('please select the option')
+    }
+    if(sharelearning == ''){
+      SetsharelearningError(true);
+      setHelperText('please select the option')
+    }
+    if(problemsdisheartened == ''){
+      SetproblemsdisheartenedError(true);
+      setHelperText('please select the option')
+    }
+    if(failureperson == ''){
+      SetfailurepersonError(true);
+      setHelperText('please select the option')
+    }
+    if(expenditure == ''){
+      SetexpenditureError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.accounts_for_Self_Enterprises == ''){
+      Setaccounts_for_Self_EnterprisesError(true);
+      setHelperText('please select the option')
+    }
+    if(savemoney == ''){
+      SetsavemoneyError(true);
+      setHelperText('please select the option')
+    }
+    if(purchase == ''){
+      SetpurchaseError(true);
+      setHelperText('please select the option')
+    }
+    if(checked['loanborrow'] == 0){
+      SetloanborrowError(true);
+      setHelperText('please select the option')
+    }
+    if(checked['borrowedmoney'] == 0){
+      SetborrowedmoneyError(true);
+      setHelperText('please select the option')
+    }
+    if(
+       plan != '' && 
+       healthcareaccess != '' && 
+       creditaccess != '' && 
+       sendData?.household_books_accounts != '' && 
+       sendData?.saveRegularly != '' && 
+       sendData?.specificGoalForSavings!= '' && 
+       problemsolutions!= '' && 
+       worthperson!= '' && 
+       moneysave!= '' && 
+       sendData?.haveLoan!= '' && 
+       sendData?.separateFinancialAsset!= '' && 
+       sendData?.partOfCollective!= '' && 
+       sendData?.ownAsset!= '' && 
+       shareproblems!= '' && 
+       sendData?.spendMoney!= '' && 
+       savingfrequency!= '' && 
+       sendData?.loanOnWhoseName!= '' && 
+       sendData?.haveGoal!= '' && 
+       sendData?.pathwayToGoal!= '' && 
+       education!= '' && 
+       solution!= '' && 
+       livelihoodvalue!= '' && 
+       sharelearning!= '' && 
+       failureperson!= '' && 
+       problemsdisheartened!= '' && 
+       expenditure!= '' && 
+       sendData?.accounts_for_Self_Enterprises!= '' && 
+       savemoney!= '' && 
+       purchase!= '' && 
+       checked['loanborrow']!= 0 && 
+       checked['borrowedmoney']!= 0 && 
+    qualitiesgood!= ''){
     if(localStorage.getItem('shaktiform')){
       data = setshaktidata(saveDataLocally('shaktiform',JSON.parse(data)))
       setshaktidata(data);
     }
+
    
    else{
     var data = JSON.stringify({
@@ -393,10 +611,177 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
       });
       handleClose();
    }
-  
+  else{
+    alert('PLease Fill All The Field ');
+  }
+}
    else{
+    if(plan == ''){
+      SetImplementationPlanError(true);
+      setHelperText('please select the option')
+    }
+    if(qualitiesgood == ''){
+      SetQualitiesgoodError(true);
+      setHelperText('please select the option')
+    }
+    if(healthcareaccess == ''){
+      SetAccessToHealtcareError(true);
+      setHelperText('please select the option')
+    }
+    if(creditaccess == ''){
+      SetCreditaccessError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.household_books_accounts == ''){
+      SetHousehold_books_accountsError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.saveRegularly == ''){
+      SetsaveRegularlyError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.specificGoalForSavings == ''){
+      SetspecificGoalForSavingsError(true);
+      setHelperText('please select the option')
+    }
+    if(problemsolutions == ''){
+      SetproblemsolutionsError(true);
+      setHelperText('please select the option')
+    }
+    if(worthperson == ''){
+      SetworthpersonError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.ownAsset == ''){
+      SetownAssetError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.separateFinancialAsset == ''){
+      SetseparateFinancialAssetError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.partOfCollective == ''){
+      SetpartOfCollectiveError(true);
+      setHelperText('please select the option')
+    }
+    if(moneysave == ''){
+      SetmoneysaveError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.haveLoan == ''){
+      SethaveLoanError(true);
+      setHelperText('please select the option')
+    }
+    if(shareproblems == ''){
+      SetshareproblemsError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.spendMoney == ''){
+      SetspendMoneyError(true);
+      setHelperText('please select the option')
+    }
+    if(savingfrequency == ''){
+      SetsavingfrequencyError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.loanOnWhoseName == ''){
+      SetloanOnWhoseNameError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.haveGoal == ''){
+      SethaveGoalError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.pathwayToGoal == ''){
+      SetpathwayToGoalError(true);
+      setHelperText('please select the option')
+    }
+    if(education == ''){
+      SeteducationError(true);
+      setHelperText('please select the option')
+    }
+    if(solution == ''){
+      SetsolutionError(true);
+      setHelperText('please select the option')
+    }
+    if(livelihoodvalue == ''){
+      SetlivelihoodvalueError(true);
+      setHelperText('please select the option')
+    }
+    if(sharelearning == ''){
+      SetsharelearningError(true);
+      setHelperText('please select the option')
+    }
+    if(problemsdisheartened == ''){
+      SetproblemsdisheartenedError(true);
+      setHelperText('please select the option')
+    }
+    if(failureperson == ''){
+      SetfailurepersonError(true);
+      setHelperText('please select the option')
+    }
+    if(expenditure == ''){
+      SetexpenditureError(true);
+      setHelperText('please select the option')
+    }
+    if(sendData?.accounts_for_Self_Enterprises == ''){
+      Setaccounts_for_Self_EnterprisesError(true);
+      setHelperText('please select the option')
+    }
+    if(savemoney == ''){
+      SetsavemoneyError(true);
+      setHelperText('please select the option')
+    }
+    if(purchase == ''){
+      SetpurchaseError(true);
+      setHelperText('please select the option')
+    }
+    if(checked['loanborrow'] == 0){
+      SetloanborrowError(true);
+      setHelperText('please select the option')
+    }
+    if(checked['borrowedmoney'] == 0){
+      SetborrowedmoneyError(true);
+      setHelperText('please select the option')
+    }
+    if(
+       plan != '' && 
+       healthcareaccess != '' && 
+       creditaccess != '' && 
+       sendData?.household_books_accounts != '' && 
+       sendData?.saveRegularly != '' && 
+       sendData?.specificGoalForSavings!= '' && 
+       problemsolutions!= '' && 
+       worthperson!= '' && 
+       moneysave!= '' && 
+       sendData?.haveLoan!= '' && 
+       sendData?.separateFinancialAsset!= '' && 
+       sendData?.partOfCollective!= '' && 
+       sendData?.ownAsset!= '' && 
+       shareproblems!= '' && 
+       sendData?.spendMoney!= '' && 
+       savingfrequency!= '' && 
+       sendData?.loanOnWhoseName!= '' && 
+       sendData?.haveGoal!= '' && 
+       sendData?.pathwayToGoal!= '' && 
+       education!= '' && 
+       solution!= '' && 
+       livelihoodvalue!= '' && 
+       sharelearning!= '' && 
+       failureperson!= '' && 
+       problemsdisheartened!= '' && 
+       expenditure!= '' && 
+       sendData?.accounts_for_Self_Enterprises!= '' && 
+       savemoney!= '' && 
+       purchase!= '' && 
+       checked['loanborrow']!= 0 && 
+       checked['borrowedmoney']!= 0 && 
+    qualitiesgood!= ''){
     setshaktidata(saveDataLocally('shaktiform',JSON.parse(data)));
      handleClose(); 
+    }else{
+      alert("please select all the fields")
+    }
 }
    
   };
@@ -480,6 +865,9 @@ const handlesurvey=()=>{
                   <Typography mt={2} variant="body2">
                     1. I feel That I am Person of worth
                   </Typography>
+                  {worthpersonError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label" required>
                       Answer
@@ -509,6 +897,9 @@ const handlesurvey=()=>{
                 <br />
                 <Stack>
                   <Typography variant="body2">2. I feel That I have Several good Qualities</Typography>
+                  {qualitiesgoodError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
                       Answer
@@ -535,6 +926,9 @@ const handlesurvey=()=>{
                 <br />
                 <Stack>
                   <Typography variant="body2">3. Sometimes I feel I am a Failure Person</Typography>
+                  {failurepersonError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
                       Answer
@@ -567,6 +961,9 @@ const handlesurvey=()=>{
                 </Stack>
                 <Stack>
                   <Typography variant="body2">1. Do you have a goal? what is it ?</Typography>
+                  {haveGoalError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -588,6 +985,9 @@ const handlesurvey=()=>{
               </Stack> */}
                 <Stack>
                   <Typography variant="body2">2. Is there a pathway to that goal ?</Typography>
+                  {pathwayToGoalError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -613,6 +1013,9 @@ const handlesurvey=()=>{
                 </Stack>
                 <Stack>
                   <Typography variant="body2">1. I look at problems and get disheartened</Typography>
+                  {problemsdisheartenedError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
                       Answer
@@ -641,6 +1044,9 @@ const handlesurvey=()=>{
                   <Typography variant="body2">
                     2. I take problem and attempt to think about solutions for it ?
                   </Typography>
+                  {problemsolutionsError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
                       Answer
@@ -667,6 +1073,9 @@ const handlesurvey=()=>{
                 <Stack>
                   &nbsp;{' '}
                   <Typography variant="body2">
+                  {implementationPlanError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                     3. Once I Choose A Solution I Make An Implementation Plan For It ?
                     <Stack mt={2}>
                       <InputLabel variant="standard" id="demo-simple-select-standard-label">
@@ -695,6 +1104,9 @@ const handlesurvey=()=>{
                 </Stack>
                 <Stack>
                   <Typography variant="body2">4. I Look A Solution Since I Don't Have An Choice?</Typography>
+                  {solutionError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
                       Answer
@@ -766,6 +1178,9 @@ const handlesurvey=()=>{
                   <Typography style={{ fontWeight: 700 }} color="primary">
                     Number of Trained Women With Growing Savings (how much saved , frequency , regularities of savings)
                   </Typography>
+                  {saveRegularlyError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Typography variant="body2">1. Do You Save Regularly ?</Typography>
                   <Stack mt={2}>
                     <RadioGroup
@@ -785,6 +1200,9 @@ const handlesurvey=()=>{
                 </Stack>
                 <Stack>
                   <Typography variant="body1">2. Where Do You Save Up Money ? </Typography>
+                  {moneysaveError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
                       Answer
@@ -811,6 +1229,9 @@ const handlesurvey=()=>{
                 </Stack>
                 <Stack mt={2}>
                   <Typography variant="body1">3. What Is The Frequency Of Your Savings ? </Typography>
+                  {savingfrequencyError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Age
@@ -843,6 +1264,9 @@ const handlesurvey=()=>{
                 </Stack>
                 <Stack mt={2}>
                   <Typography variant="body2">1. Do You Own Assets In Your Name ?</Typography>
+                  {ownAssetError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -860,6 +1284,9 @@ const handlesurvey=()=>{
                 </Stack>
                 <Stack mt={2}>
                   <Typography>2. Do You Seperate Financial Assets/Savings From That of Your Husbands ?</Typography>
+                  {separateFinancialAssetError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -878,6 +1305,9 @@ const handlesurvey=()=>{
                 </Stack>
                 <Stack mt={2}>
                   <Typography>3. Do You Spend The Money Earned By You As You Want To?</Typography>
+                  {spendMoneyError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -896,6 +1326,9 @@ const handlesurvey=()=>{
                 </Stack>
                 <Stack mt={2}>
                   <Typography>4. Do You Have A Loan?</Typography>
+                  {haveLoanError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -914,6 +1347,9 @@ const handlesurvey=()=>{
                 </Stack>
                 <Stack mt={2}>
                   <Typography>5. In Whose Name Is the Loan ?</Typography>
+                  {loanOnWhoseNameError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -934,6 +1370,9 @@ const handlesurvey=()=>{
                   <Typography>
                     6. What Are All the Places That You Have Ever Borrowed Money Or Taken Out Loan From ?
                   </Typography>
+                  {borrowedmoneyError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <FormGroup>
                       <FormControlLabel
@@ -1025,6 +1464,9 @@ const handlesurvey=()=>{
                 </Stack>
                 <Stack mt={2}>
                   <Typography>7. What Is The Reason To Borrow A Loan ?</Typography>
+                  {loanborrowError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <FormGroup>
                       <FormControlLabel
@@ -1106,6 +1548,9 @@ const handlesurvey=()=>{
                   <Typography style={{ fontWeight: 700 }} color="primary">
                     Number Of Women With A Financial Plan For Next 1 Year
                   </Typography>
+                  {specificGoalForSavingsError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Typography variant="body2">1. Do You Have A Specific Goal That You Are Saving Up For ?</Typography>
                   <Stack mt={2}>
                     <RadioGroup
@@ -1146,6 +1591,9 @@ const handlesurvey=()=>{
                     {' '}
                     1. Who Takes the Majority of Decisons From the Following Household?
                   </Typography>
+                  {educationError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                 </Stack>
                 <Stack>
                   <Typography mt={2}> Education</Typography>
@@ -1171,6 +1619,9 @@ const handlesurvey=()=>{
                     </Select>
                   </Stack>
                   <Typography mt={2}> Access To HealthCare </Typography>
+                  {accessToHealtcareError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1193,6 +1644,9 @@ const handlesurvey=()=>{
                     </Select>
                   </Stack>
                   <Typography mt={2}> Access To Credit </Typography>
+                  {creditaccessError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1215,6 +1669,9 @@ const handlesurvey=()=>{
                     </Select>
                   </Stack>
                   <Typography mt={2}> Saving Money </Typography>
+                  {savemoneyError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1237,6 +1694,9 @@ const handlesurvey=()=>{
                     </Select>
                   </Stack>
                   <Typography mt={2}> Asset Purchase </Typography>
+                  {purchaseError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1259,6 +1719,9 @@ const handlesurvey=()=>{
                     </Select>
                   </Stack>
                   <Typography mt={2}> Day To Day Expenditure </Typography>
+                  {expenditureError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1281,6 +1744,9 @@ const handlesurvey=()=>{
                     </Select>
                   </Stack>
                   <Typography mt={2}> Livelihood </Typography>
+                  {livelihoodvalueError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1308,6 +1774,9 @@ const handlesurvey=()=>{
                     Number Of Women Who Finds Solution In Beehive Sessions
                   </Typography>
                   <Typography variant="body2">1. Do You See yourself as a part of a community?</Typography>
+                  {partOfCollectiveError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -1333,6 +1802,9 @@ const handlesurvey=()=>{
                       {' '}
                       1. It Is Important For Woman To Come Together And Share Their Everyday Challenges And Problems{' '}
                     </Typography>
+                    {shareproblemsError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                     <Stack mt={2}>
                       <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                         Answer
@@ -1359,6 +1831,9 @@ const handlesurvey=()=>{
                   <Typography mt={2}>
                     2. I Have A Woman In My Community Whom I Share My Learnings And Problems , Solution With{' '}
                   </Typography>
+                  {sharelearningError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
                       Answer
@@ -1388,6 +1863,9 @@ const handlesurvey=()=>{
                   </Typography>
                   <Typography mt={2} variant="body2">
                     Are You Maintaining the household Books Of Accounts
+                    {household_books_accountsError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   </Typography>
                   <Stack mt={2}>
                     <RadioGroup
@@ -1407,6 +1885,9 @@ const handlesurvey=()=>{
                   <Typography mt={2} variant="body2">
                     Are You Maintaining the Books Of Accounts For Self Enterprise
                   </Typography>
+                  {accounts_for_Self_EnterprisesError ? (
+                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                        ) : null}{' '}
                   <Stack mt={2} mb={5}>
                     {/* <div>
                     <Radio
