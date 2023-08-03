@@ -240,7 +240,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
   };
   const handlesharelearning = (event) => {
     setsharelearning(event.target.value);
-    
+    SetsharelearningError(false);
   };
   const [sendData, setSendData] = React.useState({
     implementationPlan: '',
@@ -1164,9 +1164,7 @@ const handlesurvey=()=>{
                     Number of Trained Women With Growing Savings (how much saved , frequency , regularities of savings)
                   </Typography>
                   {saveRegularlyError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Typography variant="body2">1. Do You Save Regularly ?</Typography>
                   <Stack mt={2}>
@@ -1188,9 +1186,7 @@ const handlesurvey=()=>{
                 <Stack>
                   <Typography variant="body1">2. Where Do You Save Up Money ? </Typography>
                   {moneysaveError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" id="demo-simple-select-standard-label">
@@ -1219,9 +1215,7 @@ const handlesurvey=()=>{
                 <Stack mt={2}>
                   <Typography variant="body1">3. What Is The Frequency Of Your Savings ? </Typography>
                   {savingfrequencyError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
@@ -1256,9 +1250,7 @@ const handlesurvey=()=>{
                 <Stack mt={2}>
                   <Typography variant="body2">1. Do You Own Assets In Your Name ?</Typography>
                   {ownAssetError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
@@ -1278,9 +1270,7 @@ const handlesurvey=()=>{
                 <Stack mt={2}>
                   <Typography>2. Do You Seperate Financial Assets/Savings From That of Your Husbands ?</Typography>
                   {separateFinancialAssetError ? (
-
                          <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
@@ -1301,9 +1291,7 @@ const handlesurvey=()=>{
                 <Stack mt={2}>
                   <Typography>3. Do You Spend The Money Earned By You As You Want To?</Typography>
                   {spendMoneyError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                       ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
@@ -1324,9 +1312,7 @@ const handlesurvey=()=>{
                 <Stack mt={2}>
                   <Typography>4. Do You Have A Loan?</Typography>
                   {haveLoanError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
@@ -1347,9 +1333,7 @@ const handlesurvey=()=>{
                 <Stack mt={2}>
                   <Typography>5. In Whose Name Is the Loan ?</Typography>
                   {loanOnWhoseNameError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
@@ -1372,9 +1356,7 @@ const handlesurvey=()=>{
                     6. What Are All the Places That You Have Ever Borrowed Money Or Taken Out Loan From ?
                   </Typography>
                   {borrowedmoneyError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <FormGroup>
@@ -1468,9 +1450,7 @@ const handlesurvey=()=>{
                 <Stack mt={2}>
                   <Typography>7. What Is The Reason To Borrow A Loan ?</Typography>
                   {loanborrowError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <FormGroup>
@@ -1554,9 +1534,7 @@ const handlesurvey=()=>{
                     Number Of Women With A Financial Plan For Next 1 Year
                   </Typography>
                   {specificGoalForSavingsError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Typography variant="body2">1. Do You Have A Specific Goal That You Are Saving Up For ?</Typography>
                   <Stack mt={2}>
@@ -1599,9 +1577,7 @@ const handlesurvey=()=>{
                     1. Who Takes the Majority of Decisons From the Following Household?
                   </Typography>
                   {educationError ? (
-
                        <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                 </Stack>
                 <Stack>
@@ -1629,9 +1605,7 @@ const handlesurvey=()=>{
                   </Stack>
                   <Typography mt={2}> Access To HealthCare </Typography>
                   {accessToHealtcareError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
@@ -1656,9 +1630,7 @@ const handlesurvey=()=>{
                   </Stack>
                   <Typography mt={2}> Access To Credit </Typography>
                   {creditaccessError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
@@ -1683,9 +1655,7 @@ const handlesurvey=()=>{
                   </Stack>
                   <Typography mt={2}> Saving Money </Typography>
                   {savemoneyError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
@@ -1710,9 +1680,7 @@ const handlesurvey=()=>{
                   </Stack>
                   <Typography mt={2}> Asset Purchase </Typography>
                   {purchaseError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
@@ -1737,9 +1705,7 @@ const handlesurvey=()=>{
                   </Stack>
                   <Typography mt={2}> Day To Day Expenditure </Typography>
                   {expenditureError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
@@ -1764,9 +1730,7 @@ const handlesurvey=()=>{
                   </Stack>
                   <Typography mt={2}> Livelihood </Typography>
                   {livelihoodvalueError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
@@ -1796,9 +1760,7 @@ const handlesurvey=()=>{
                   </Typography>
                   <Typography variant="body2">1. Do You See yourself as a part of a community?</Typography>
                   {partOfCollectiveError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
@@ -1826,9 +1788,7 @@ const handlesurvey=()=>{
                       1. It Is Important For Woman To Come Together And Share Their Everyday Challenges And Problems{' '}
                     </Typography>
                     {shareproblemsError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                     <Stack mt={2}>
                       <InputLabel variant="standard" color="common" id="demo-simple-select-standard-label">
@@ -1857,7 +1817,6 @@ const handlesurvey=()=>{
                     2. I Have A Woman In My Community Whom I Share My Learnings And Problems , Solution With{' '}
                   </Typography>
                   {sharelearningError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
                    
                    ) : null}{' '}
@@ -1892,9 +1851,7 @@ const handlesurvey=()=>{
                     Are You Maintaining the household Books Of Accounts
                   </Typography>
                   {household_books_accountsError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2}>
                     <RadioGroup
@@ -1915,9 +1872,7 @@ const handlesurvey=()=>{
                     Are You Maintaining the Books Of Accounts For Self Enterprise
                   </Typography>
                   {accounts_for_Self_EnterprisesError ? (
-
                           <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
-
                         ) : null}{' '}
                   <Stack mt={2} mb={5}>
                     {/* <div>
