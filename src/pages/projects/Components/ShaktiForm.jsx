@@ -321,7 +321,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
   const shakthiformdata = async () => {
 
     var data ={}
-   data = JSON.stringify({
+    data = JSON.stringify({
     participantId: itm?.participant_id,
     implementationPlan: plan,
     goodQuality: qualitiesgood,
