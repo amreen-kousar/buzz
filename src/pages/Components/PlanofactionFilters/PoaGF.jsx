@@ -421,7 +421,7 @@ if(session?.type == 4){
   existingData = localStorage.getItem('spoorthi');
   let parsedData = JSON.parse(existingData);
   parsedData?.map((item) => {
-    localFormPresent1.set(item?.partcipantId, 'true');
+    localFormPresent1.set(parseInt(item?.partcipantId), 'true');
   });
 }
 if(session?.type == 10){
@@ -429,7 +429,7 @@ if(session?.type == 10){
    let parsedData = JSON.parse(existingData);
 
     parsedData?.map((item) => {
-      localFormPresent1.set(item?.partcipantId, 'true');
+      localFormPresent1.set(parseInt(item?.partcipantId), 'true');
     });
 }
 if(session?.type == 16){
@@ -437,7 +437,7 @@ if(session?.type == 16){
  let parsedData = JSON.parse(existingData);
 
  parsedData?.map((item) => {
-   localFormPresent1.set(item?.partcipantId, 'true');
+   localFormPresent1.set(parseInt(item?.partcipantId), 'true');
  });
 }
     setlocalFormPresent(localFormPresent1);
@@ -467,7 +467,7 @@ useEffect(()=>{
 
 },[localStorage?.getItem("vyapar"),localStorage?.getItem("spoorthi"),localStorage?.getItem("green")])
 
-
+console.log(localFormPresent,"localformmm")
   return (
     <>
       <Drawer
@@ -884,6 +884,7 @@ useEffect(()=>{
               </Button>
 }
   
+  {console.log(localFormPresent,"inside")}
              
               {(showSurvey && (!isOnline)) ? (
                 <Stack>
@@ -892,7 +893,7 @@ useEffect(()=>{
                       {session?.type == 4 || session.type == 10 || session.type == 16 ? (
                         <>
                           {gelathisData?.gelathis?.map((itm, index) => {
-                          
+                          {console.log(localFormPresent,"heyyy")}
                             return (
                               <Card style={{borderRadius:0}}>
 

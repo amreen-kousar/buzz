@@ -51,7 +51,7 @@ export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,ha
     //setShown(shown)
     GetStatus();
    
-  }, [batch])
+  }, [batch,reloadfuncton])
   const GetStatus = async=>{
     var data = JSON.stringify({
       "project_id": batch?.data?.project_id,

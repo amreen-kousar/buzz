@@ -107,6 +107,7 @@ export default function CreateTrainerBatch(props) {
       .then(function (response) {
         if (response?.data?.code) {
           alert(response?.data?.message)
+          handleClose()
         }
         else{
           alert("added succesfully")
