@@ -12,7 +12,7 @@ import AddProject from './Addproject';
 import FiltersHome from '../Filters/FiltersHome';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
-import { baseURL } from 'src/utils/api';
+import { baseURL, oldbaseURL } from 'src/utils/api';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -171,7 +171,7 @@ var data ={}
     }
         const config = {
             method: 'post',
-            url: baseURL + 'getProjects',
+            url: oldbaseURL + 'getProjects.php',
             headers: { 
                 'Content-Type': 'application/json'
             },
