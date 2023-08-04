@@ -52,6 +52,7 @@ const GreenProgramDashboard = () => {
       "taluk": (g === "country" || g==="countryCalendar") ? i : '',
       "project_id":  i === 3 ? id?.id :'',
       "trainer_id":i === 5 ? id?.id : '',
+      "gfid": i===6?id?.id:'',
       "opsmanager":  i === 4 ? id?.id : '',
       "somid": i === 12 ? id?.id : '',
       "gflid": i === 13 ? id?.id : '',
@@ -112,7 +113,7 @@ const GreenProgramDashboard = () => {
   const getData = (itm, i,date1,date2,dateValue,endDateValue,g) => {
     setSelected(itm);
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
-    i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
+    i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:i===6?{"gfid":itm?.id}:{"gflId":itm?.id}
 
     if(dateValue || endDateValue)
         {
@@ -162,7 +163,7 @@ const GreenProgramDashboard = () => {
 </Grid>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <FiltersHome
-              type="Dashboard"
+              type="GreenDashboard"
               onDateSubmit={onDateSubmit}
               onSumbit={onSumbit}
               getData={getData}

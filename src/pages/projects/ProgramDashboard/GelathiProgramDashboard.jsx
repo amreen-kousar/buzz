@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
+import { isThisMinute } from 'date-fns';
 const GelathiProgramDashboard = () => {
     const navigate = useNavigate();
     const data = sessionStorage?.getItem('userId')
@@ -42,6 +43,7 @@ const GelathiProgramDashboard = () => {
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   
     const apiHit = async (id, i, g,date1,date2) => {
+      console.log(id,"idvalue",i,"ivalue")
       setLoader(true)
       var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
       var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
@@ -54,6 +56,7 @@ const GelathiProgramDashboard = () => {
         "taluk":(g === "country" || g==="countryCalendar") ? i : "",
         "project_id":i === 3 ? id?.id : '',
         "trainer_id":i === 5 ? id?.id : '',
+        "gfid":i===6?id?.id:'',
         "opsmanager":i === 4 ? id?.id : '',
         "somid":i === 12 ? id?.id : '',
         "gflid":i === 13 ? id?.id : '',
@@ -126,9 +129,10 @@ const GelathiProgramDashboard = () => {
     }
   
     const getData = (itm, i,date1,date2,dateValue,endDateValue,g) => {
+      console.log(i,"sjas",itm)
       setSelected(itm)
       const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
-      i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
+      i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:i===6?{"gfid":itm?.id}:{"gflId":itm?.id}
       if(dateValue || endDateValue)
       {
         apiHit(itm, i,"Calendar",date1,date2)
@@ -174,7 +178,7 @@ const GelathiProgramDashboard = () => {
   
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
               <FiltersHome
-                type="Dashboard"
+                type="GreenDashboard"
   
                 onDateSubmit={onDateSubmit}
                 onSumbit={onSumbit}
