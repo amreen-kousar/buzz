@@ -300,7 +300,7 @@ axios(config)
         <Typography mt={2}>
             End 
         </Typography>
-        {(checkData?.data?.check_in_date_day1!='' && checkData?.data?.check_out_date_day1=='' )?<Button onClick={()=>checkinout(2,batch?.data?.day1_id)} style={{float:'left',position:'absolute',left:20,top:520,marginBottom:2,color:'#ff7424'}} sx={{
+        {(checkData?.data?.check_in_date_day1!='' && checkData?.data?.check_out_date_day1=='' && batch?.countOfSurvey>=3 )?<Button onClick={()=>checkinout(2,batch?.data?.day1_id)} style={{float:'left',position:'absolute',left:20,top:520,marginBottom:2,color:'#ff7424'}} sx={{
              '&:hover': {
                backgroundColor: '#ffd796',
              },
