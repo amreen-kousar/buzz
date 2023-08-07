@@ -228,7 +228,7 @@ countsuggestedgelathi();
             onCloseFilter={handleCloseFilter}
           />
         </Stack>
-        {!Trainingdata && batch?.all_participants?.filter((itm) => itm?.isSurveyDone == '1').map((itm) =>{
+        {!Trainingdata && batch?.all_participants?.map((itm) =>{
           return (
             <Stack style={{ top: 100 }}>
               <Card >
@@ -256,7 +256,7 @@ countsuggestedgelathi();
           )
           })
         }
-{Trainingdata && Trainingdata?.all_participants?.filter((itm)=>itm?.isSurveyDone=='1').map((itm)=> {
+{Trainingdata && Trainingdata?.all_participants?.map((itm)=> {
           return (
             <Stack style={{ top: 100 }}>
             

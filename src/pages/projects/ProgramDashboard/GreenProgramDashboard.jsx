@@ -77,6 +77,39 @@ const GreenProgramDashboard = () => {
         // console.log(error);
       });
   };
+
+  const filterApi = async(id,i,g,date1,date2)=>{
+    setLoader(true)
+    var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+    var data = JSON.stringify({
+      "end_date":(g === "date")?i:(g=== "countryCalendar" || g==="Calendar")?moment(date2?.$d)?.format('YYYY-MM-DD'): '',
+      "role_id": parseInt(roleid),
+      "taluk_id":(g === "country" || g==="countryCalendar") ? i : "",
+      "gfid": (i===6)?id?.id:'',
+      "emp_id": parseInt(userid),
+      "start_date":(g === "date")?id:(g=== "countryCalendar" || g==="Calendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
+    });
+    
+    var config = {
+      method: 'post',
+      url: baseURL + 'greenfilter',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+  
+    axios(config)
+    .then(function (response) {
+      setSummaryData(response.data)
+      setLoader(false)
+    })
+    .catch(function (error) {
+      // console.log(error);
+    });
+    
+  }
   useEffect(() => {
     apiHit();
   }, []);
@@ -95,7 +128,7 @@ const GreenProgramDashboard = () => {
   };
   const onDateSubmit = (e) => {
     setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` });
-    apiHit(e?.startDate, e?.endDate, 'date');
+    filterApi(e?.startDate, e?.endDate, 'date');
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate });
     handleCloseFilter();
   };
@@ -115,14 +148,23 @@ const GreenProgramDashboard = () => {
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
     i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:i===6?{"gfid":itm?.id}:{"gflId":itm?.id}
 
-    if(dateValue || endDateValue)
+    if(i==6){
+     if(dateValue || endDateValue)
         {
-          apiHit(itm, i,"Calendar",date1,date2)
-          
+          filterApi(itm, i,"Calendar",date1,date2)
         }
         else{
-          apiHit(itm,i)
+          filterApi(itm,i)
         }
+    }
+    else{
+      if((dateValue || endDateValue)){
+        apiHit(itm,i,"Calendar",date1,date2)
+      }
+      else{
+        apiHit(itm,i)
+      }
+    }
     setFilterData(data);
     handleCloseFilter();
   };
@@ -131,10 +173,10 @@ const GreenProgramDashboard = () => {
     setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` });
     if(e?.dateValue || e?.endDateValue)
     {
-      apiHit(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
+      filterApi(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
     }
     else{
-      apiHit(e?.district_id,e?.talaq_id,"country")
+      filterApi(e?.district_id,e?.talaq_id,"country")
     }
   };
 
@@ -179,33 +221,34 @@ const GreenProgramDashboard = () => {
           
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
-                title={"Number of Green Cohorts"  }
-                total={summaryData?.summary_NoofGreencoharts }
+                title={"Number of Green Cohorts"}
+                total={(summaryData?.summary_NoofGreencoharts)?summaryData?.summary_NoofGreencoharts:summaryData?.summary_nofvyaparcoharts}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title={"Number of Villages" }
-               total={summaryData?.summary_villages } color="motivator" />
+              <AppWidgetSummary title={"Number of Villages"}
+               total={summaryData?.summary_villages } 
+               color="motivator" />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number  of Green Motivators Enrolled"
-                total={summaryData?.summary_Greenenrolled}
+                total={(summaryData?.summary_Greenenrolled)?summaryData?.summary_Greenenrolled:summaryData?.summary_greenenroll}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Green Survey"
-                total={summaryData?.summary_NoofGreenrsurvey}
+                total={(summaryData?.summary_NoofGreenrsurvey?summaryData?.summary_NoofGreenrsurvey:summaryData?.summary_nogreensurvey)}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Green Modules Completed"
-                total={summaryData?.summary_NoofGreenmodulecomoleted}
+                total={(summaryData?.summary_NoofGreenmodulecomoleted)?summaryData?.summary_NoofGreenmodulecomoleted:summaryData?.summary_greenmodule}
                 color="motivator"
               />
             </Grid>
@@ -220,7 +263,7 @@ const GreenProgramDashboard = () => {
             
             <AppWidgetSummary
               title="Actual"  
-              total={summaryData?.summary_actual }
+              total={summaryData?.summary_actual}
               color="motivator"
             />
           </Grid>
@@ -228,19 +271,20 @@ const GreenProgramDashboard = () => {
             
             <AppWidgetSummary
               title="Target"  
-              total={summaryData?.summary_Target }
+              total={(summaryData?.summary_Target)?summaryData?.summary_Target:summaryData?.summary_target }
               color="motivator"
             />
           </Grid>
              <Grid item xs={4} sm={8} md={4}>
             <AppWidgetSummary title={"Number of Villages" }
-             total={summaryData?.summary_villages } color="motivator" />
+             total={summaryData?.summary_villages } 
+             color="motivator" />
           </Grid>
           <Grid item xs={4} sm={8} md={4}>
             
             <AppWidgetSummary
               title={"Number of Green Cohorts"  }
-              total={summaryData?.summary_Greencoharts }
+              total={(summaryData?.summary_Greencoharts)?summaryData?.summary_Greencoharts:summaryData?.summary_nofvyaparcoharts }
               color="motivator"
             />
           </Grid>
@@ -248,21 +292,21 @@ const GreenProgramDashboard = () => {
           <Grid item xs={4} sm={8} md={4}>
             <AppWidgetSummary
               title="Number  of Green Motivators Enrolled"
-              total={summaryData?.summary_Greenenrolled}
+              total={(summaryData?.summary_Greenenrolled)?summaryData?.summary_Greenenrolled:summaryData?.summary_greenenroll}
               color="motivator"
             />
           </Grid>
           <Grid item xs={4} sm={8} md={4}>
             <AppWidgetSummary
               title="Number of Green Survey"
-              total={summaryData?.summary_Greensurvey}
+              total={(summaryData?.summary_Greensurvey)?summaryData?.summary_Greensurvey:summaryData?.summary_nogreensurvey}
               color="motivator"
             />
           </Grid>
           <Grid item xs={4} sm={8} md={4}>
             <AppWidgetSummary
               title="Number of Green Modules Completed"
-              total={summaryData?.summary_noofGreenmodulecompleted}
+              total={(summaryData?.summary_noofGreenmodulecompleted)?summaryData?.summary_noofGreenmodulecompleted:summaryData?.summary_greenmodule}
               color="motivator"
             />
           </Grid>
@@ -277,9 +321,16 @@ const GreenProgramDashboard = () => {
          (roleid == 1 || roleid == 9 || roleid == 3 || roleid == 4 || roleid == 12)?  <>
           <CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: '20px' }}>
-              Funders List :
+            {
+  (summaryData && summaryData.data && summaryData.data[0]?.startDate === "")
+    ? "Funders List"
+    : "Projects List"
+}
+
+          
             </Typography>
-          <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            {(summaryData?.data?.length>0) ?
+             <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
               <Grid item xs={12} sm={12} md={12} marginTop={3}>
                 {summaryData?.data?.map((itm) => {
                   return (
@@ -297,7 +348,7 @@ const GreenProgramDashboard = () => {
                         <Container style={{ display: 'flex', flexDirection: 'column' }}>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-      {(itm?.startDate)?"Project Name":"Funder"}<br />
+    {(itm?.select_type=='1')?"Project Name":"Funder Name"}<br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
@@ -315,7 +366,27 @@ const GreenProgramDashboard = () => {
     &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
     </span>
   </Grid>
- 
+  {(itm?.select_type=='1')?<Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Start Date<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.start_date}
+    </span>
+  </Grid>:null}
+  {(itm?.select_type=='1')?<Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    End Date<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.end_date}
+    </span>
+  </Grid>:null}
+  
  
 </Container>
                         <Divider mt={1} />
@@ -340,7 +411,7 @@ const GreenProgramDashboard = () => {
                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Enrolled"
-                              total={itm?.greenenrolled}
+                              total={(itm?.greenenrolled)?itm?.greenenrolled:itm?.greenenroll}
                               color="motivator"
                               icon="openmoji:leafy-green"
                             />
@@ -348,7 +419,7 @@ const GreenProgramDashboard = () => {
                          <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Modules Completed"
-                              total={itm?.noofgreenmodulecompleted}
+                              total={(itm?.noofgreenmodulecompleted)?itm?.noofgreenmodulecompleted:itm?.noofgreenmodule}
                               color="info"
                               icon="eos-icons:product-subscriptions-outlined"
                             />
@@ -368,7 +439,7 @@ const GreenProgramDashboard = () => {
                   );
                 })}
               </Grid>
-            </CardContent>
+            </CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
             </CardContent>
             </>
             :
@@ -377,9 +448,13 @@ const GreenProgramDashboard = () => {
             <>
             <CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: '20px' }}>
-              Project List :
+            {
+  (summaryData && summaryData.data && summaryData.data[0]?.startDate === "")
+    ? "Funders List"
+    : "Projects List"
+}
             </Typography>
-          <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            {(summaryData?.data?.length>0) ? <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
               <Grid item xs={12} sm={12} md={12} marginTop={3}>
                 {summaryData?.data?.map((itm) => {
                   return (
@@ -398,7 +473,7 @@ const GreenProgramDashboard = () => {
                         <Container style={{ display: 'flex', flexDirection: 'column' }}>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-      {(itm?.startDate)?"Project Name":"Funder"}<br />
+      {(itm?.select_type=='1')?"Project Name":"Funder Name"}<br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
@@ -417,72 +492,73 @@ const GreenProgramDashboard = () => {
       &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
     </span>
   </Grid>
-  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+  {(itm?.select_type=='1')?
+   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
     Start Date  <br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.startDate} 
+      &nbsp;:&nbsp;{(itm?.startDate?itm?.startDate:itm?.start_date)} 
     </span>
-  </Grid>
-  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+  </Grid>:null}
+  {(itm?.select_type=='1')?<Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
     End Date  <br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.endDate} 
+      &nbsp;:&nbsp;{(itm?.endDate)?itm?.endDate:itm?.end_date} 
     </span>
-  </Grid>
+  </Grid>:null}
 </Container>
                         <Divider mt={1} />
                         <Grid container spacing={3} marginTop={4}>
                          <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
-                              title="Number  of Vilage "
+                              title="Number  of Villages"
                               total={itm?.villages}
                               color="villages"
                               icon="fontisto:holiday-village"
                             />
                           </Grid>
-                         <Grid item xs={6} sm={6} md={6}>
+                         {/* <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Vyapar Cohorts"
-                              total={itm?.noofVyaparCohorts}
+                              total={(itm?.noofVyaparCohorts)?itm?.noofVyaparCohorts:itm?.noofgreencoharts}
                               color="motivator"
                               icon="twemoji:women-holding-hands"
                             />
-                          </Grid>
+                          </Grid> */}
                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
-                              title="Number of Green Enrolle"
-                              total={itm?.Greenenrolled}
+                              title="Number of Green Enrolled"
+                              total={(itm?.Greenenrolled)?itm?.Greenenrolled:itm?.greenenroll}
                               color="motivator"
                               icon="openmoji:leafy-green"
                             />
                           </Grid><Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
-                              title="Number of Vyapar Survey"
-                              total={itm?.noOfvyaparsurvey}
+                              title="Number of Green Survey"
+                              total={(itm?.noOfvyaparsurvey)?itm?.noOfvyaparsurvey:itm?.noofgreensurvey}
                               color="vyapar"
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
                          <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
-                              title="Number of Vyapar Module Completed"
-                              total={itm?.noofvyaparmodulcompleted}
+                              title="Number of Green Module Completed"
+                              total={(itm?.noofvyaparmodulcompleted)?itm?.noofvyaparmodulcompleted:itm?.noofgreenmodule}
                               color="info"
                               icon="eos-icons:product-subscriptions-outlined"
                             />
                           </Grid>
                          <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
-                              title="Number of Vyapar Cohorts"
-                              total={itm?.noofVyaparCohorts}
+                              title="Number of Green Cohorts"
+                              total={(itm?.noofVyaparCohorts)?itm?.noofVyaparCohorts:itm?.noofgreencoharts}
                               color="vyapar"
                               icon="eos-icons:product-subscriptions-outlined"
                             />
@@ -493,8 +569,8 @@ const GreenProgramDashboard = () => {
                   );
                 })}
               </Grid>
-            </CardContent>
-            </CardContent>
+            </CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}          
+  </CardContent>
             
             </>
             :

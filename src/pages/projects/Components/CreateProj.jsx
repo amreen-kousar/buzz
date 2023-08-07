@@ -82,6 +82,9 @@ setShowAddBuss(false)
     driverList();
     setNotify(true);
   }, [])
+
+
+  {console.log(sendData.operations_manager_id,"omm")}
   const assignValues = () => {
     let tempdata = {
       ...sendData,
@@ -152,7 +155,7 @@ setShowAddBuss(false)
         // console.log(error);
       });
   }
-var userdata = sessionStorage?.getItem('operations_manager_id')
+var userdata = sendData.operations_manager_id
   useEffect(() => {
     Gfl();
   },[userdata])
