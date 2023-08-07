@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
+import { isThisMinute } from 'date-fns';
 const GelathiProgramDashboard = () => {
     const navigate = useNavigate();
     const data = sessionStorage?.getItem('userId')
@@ -42,6 +43,7 @@ const GelathiProgramDashboard = () => {
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
   
     const apiHit = async (id, i, g,date1,date2) => {
+      console.log(id,"idvalue",i,"ivalue")
       setLoader(true)
       var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
       var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
@@ -50,10 +52,11 @@ const GelathiProgramDashboard = () => {
         "start_date": (g === "date")? id:(g==="Calendar" || g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
         "end_date": (g === "date")? i:(g==="Calendar" || g==="countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):'',
         "funder_id": i === 2 ? id?.id : '',
-        "dist":(g === "country" || g==="countryCalendar") ? JSON.stringify(id) : "",
-        "taluk":(g === "country" || g==="countryCalendar") ? JSON.stringify(i) : "",
+        "dist":(g === "country" || g==="countryCalendar") ? id : "",
+        "taluk":(g === "country" || g==="countryCalendar") ? i : "",
         "project_id":i === 3 ? id?.id : '',
         "trainer_id":i === 5 ? id?.id : '',
+        // "gfid":i===6?id?.id:'',
         "opsmanager":i === 4 ? id?.id : '',
         "somid":i === 12 ? id?.id : '',
         "gflid":i === 13 ? id?.id : '',
@@ -80,6 +83,40 @@ const GelathiProgramDashboard = () => {
               //console.log(error)
         });
     };
+
+    const filterApi = async(id,i,g,date1,date2)=>{
+      setLoader(true)
+      var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+      var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+      var data = JSON.stringify({
+        "end_date":(g === "date")?i:(g=== "countryCalendar" || g==="Calendar")?moment(date2?.$d)?.format('YYYY-MM-DD'): '',
+        "role_id": parseInt(roleid),
+        "taluk_id":(g === "country" || g==="countryCalendar") ? i : "",
+        "gfid": (i==6)?id?.id:'',
+        "emp_id": parseInt(userid),
+        "start_date":(g === "date")?id:(g=== "countryCalendar" || g==="Calendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
+      });
+      
+      var config = {
+        method: 'post',
+        url: baseURL + 'gelathifilter',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+    
+      axios(config)
+      .then(function (response) {
+        setSummaryData(response.data)
+        setLoader(false)
+      })
+      .catch(function (error) {
+        // console.log(error);
+      });
+      
+    }
+
     useEffect(() => {
       apiHit();
     }, []);
@@ -105,8 +142,7 @@ const GelathiProgramDashboard = () => {
   
     const onDateSubmit = (e) => {
       setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` })
-  
-      apiHit(e?.startDate, e?.endDate, "date")
+      filterApi(e?.startDate, e?.endDate, "date")
       setFilterData({ from_date: e?.startDate, to_date: e?.endDate })
       handleCloseFilter()
     }
@@ -126,18 +162,27 @@ const GelathiProgramDashboard = () => {
     }
   
     const getData = (itm, i,date1,date2,dateValue,endDateValue,g) => {
+      console.log(i,"sjas",itm)
       setSelected(itm)
       const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
-      i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
-      if(dateValue || endDateValue)
-      {
-        apiHit(itm, i,"Calendar",date1,date2)
-        
-      }
-      else{
-        apiHit(itm,i)
-      }
-      
+      i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:i===6?{"gfid":itm?.id}:{"gflId":itm?.id}
+      if(i==6){
+        if(dateValue || endDateValue)
+           {
+             filterApi(itm, i,"Calendar",date1,date2)
+           }
+           else{
+             filterApi(itm,i)
+           }
+       }
+       else{
+         if((dateValue || endDateValue)){
+           apiHit(itm,i,"Calendar",date1,date2)
+         }
+         else{
+           apiHit(itm,i)
+         }
+       }
       setFilterData(data)
       handleCloseFilter()
     }
@@ -146,10 +191,10 @@ const GelathiProgramDashboard = () => {
       setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` })
     if(e?.dateValue || e?.endDateValue)
     {
-      apiHit(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
+      filterApi(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
     }
     else{
-      apiHit(e?.district_id,e?.talaq_id,"country")
+      filterApi(e?.district_id,e?.talaq_id,"country")
     }
     }
     return (
@@ -174,7 +219,7 @@ const GelathiProgramDashboard = () => {
   
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
               <FiltersHome
-                type="Dashboard"
+                type="GreenDashboard"
   
                 onDateSubmit={onDateSubmit}
                 onSumbit={onSumbit}
@@ -200,7 +245,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Gelathi Enrolled"
-                  total={summaryData?.summary_Gelathienrolled}
+                  total={(summaryData?.summary_Gelathienrolled)?summaryData?.summary_Gelathienrolled:summaryData?.summary_spoorthienroll}
                   color="motivator"
   
                 />
@@ -209,7 +254,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number  of Circle Meeting"
-                  total={summaryData?.summary_NoofGelathiCohorts}
+                  total={(summaryData?.summary_NoofGelathiCohorts)?summaryData?.summary_NoofGelathiCohorts:summaryData?.summary_nospoorthiciclemeet}
                   color="motivator"
   
                 />
@@ -218,7 +263,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Survey"
-                  total={summaryData?.summary_sporthisurvey}
+                  total={(summaryData?.summary_sporthisurvey)?summaryData?.summary_sporthisurvey:summaryData?.summary_nospoorthisurvey}
                   color="motivator"
   
                 />
@@ -227,7 +272,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Modules Completed"
-                  total={summaryData?.summary_Noofsporthicompleted}
+                  total={(summaryData?.summary_Noofsporthicompleted)?summaryData?.summary_Noofsporthicompleted:summaryData?.summary_spoorthimodule}
                   color="motivator"
   
                 />
@@ -236,7 +281,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Beehives"
-                  total={summaryData?.summary_Noofbeehives}
+                  total={(summaryData?.summary_Noofbeehives)?summaryData?.summary_Noofbeehives:summaryData?.summary_noofspoorthibeehives}
                   color="motivator"
   
                 />
@@ -251,7 +296,7 @@ const GelathiProgramDashboard = () => {
   
   <AppWidgetSummary
     title="Target"
-    total={summaryData?.summary_Target}
+    total={(summaryData?.summary_Target)?summaryData?.summary_Target:summaryData?.summary_target}
     color="motivator"
   />
 </Grid>
@@ -276,7 +321,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Gelathi Enrolled"
-                  total={summaryData?.summary_Gelathienrolled}
+                  total={(summaryData?.summary_Gelathienrolled)?summaryData?.summary_Gelathienrolled:summaryData?.summary_spoorthienroll}
                   color="motivator"
   
                 />
@@ -285,7 +330,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number  of Circle Meeting"
-                  total={summaryData?.summary_NoofGelathiCohorts}
+                  total={(summaryData?.summary_NoofGelathiCohorts)?summaryData?.summary_NoofGelathiCohorts:summaryData?.summary_nospoorthiciclemeet}
                   color="motivator"
   
                 />
@@ -294,7 +339,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Survey"
-                  total={summaryData?.summary_noofsporthisurvey}
+                  total={(summaryData?.summary_noofsporthisurvey)?summaryData?.summary_noofsporthisurvey:summaryData?.summary_nospoorthisurvey}
                   color="motivator"
   
                 />
@@ -303,7 +348,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Modules Completed"
-                  total={summaryData?.summary_noofsporthicompleted}
+                  total={(summaryData?.summary_noofsporthicompleted)?summaryData?.summary_noofsporthicompleted:summaryData?.summary_spoorthimodule}
                   color="motivator"
   
                 />
@@ -312,7 +357,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Beehives"
-                  total={summaryData?.summary_noofbeehives}
+                  total={(summaryData?.summary_noofbeehives)?summaryData?.summary_noofbeehives:summaryData?.summary_noofspoorthibeehives}
                   color="motivator"
   
                 />
@@ -331,10 +376,14 @@ const GelathiProgramDashboard = () => {
          
   <CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Funders List : 
+            {
+  (summaryData && summaryData.data && summaryData.data[0]?.startDate === "")
+    ? "Funders List"
+    : "Projects List"
+}
             </Typography>
           
-            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            {(summaryData?.data?.length>0) ? <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
             <Grid item xs={12} sm={12} md={12} marginTop={3}>
           {summaryData?.data?.map((itm) => {
             return (
@@ -354,7 +403,7 @@ const GelathiProgramDashboard = () => {
 <Container style={{ display: 'flex', flexDirection: 'column' }}>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-      {(itm?.startDate)?"Project ":"Funder"}<br />
+      {(itm?.select_type=='1')?"Project ":"Funder"}<br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
@@ -374,6 +423,26 @@ const GelathiProgramDashboard = () => {
       &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
     </span>
   </Grid>
+  {(itm?.select_type=='1')? <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Start Date  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{(itm?.startDate)?itm?.startDate:itm?.start_date} 
+    </span>
+  </Grid>:null}
+  {(itm?.select_type=='1')?<Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    End Date  <br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{(itm?.endDate)?itm?.endDate:itm?.end_date} 
+    </span>
+  </Grid>:null}
 </Container>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={4}>
@@ -389,7 +458,7 @@ const GelathiProgramDashboard = () => {
            <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Circle Meeting"
-                total={itm?.NoofGelathiCohorts}
+                total={(itm?.NoofGelathiCohorts)?itm?.NoofGelathiCohorts:itm?.noofspoortthimeeting}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
               />
@@ -397,7 +466,7 @@ const GelathiProgramDashboard = () => {
             <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Gelathi Enrolled"
-                total={itm?.Gelathienrolled}
+                total={(itm?.Gelathienrolled)?itm?.Gelathienrolled:itm?.spoorthienroll}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
               />
@@ -405,7 +474,7 @@ const GelathiProgramDashboard = () => {
             <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Sporthi Survey"
-  total={itm?.Noofsporthisurvey}
+  total={(itm?.Noofsporthisurvey)?itm?.Noofsporthisurvey:itm?.noofspoorthisurvey}
   color="info"
   icon = "eos-icons:product-subscriptions-outlined"
 />
@@ -413,7 +482,7 @@ const GelathiProgramDashboard = () => {
 <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Beehives"
-  total={itm?.Noofbeehives}
+  total={(itm?.Noofbeehives)?itm?.Noofbeehives:itm?.noofspoorthibeehives}
   color="info"
   icon = "twemoji:women-holding-hands"
 />
@@ -421,7 +490,7 @@ const GelathiProgramDashboard = () => {
 <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Sporthi Modules Completed"
-                total={itm?.Noofsporthicompleted}
+                total={(itm?.Noofsporthicompleted)?itm?.Noofsporthicompleted:itm?.noofspoorthimodule}
                 color="vyapar"
                 icon="eos-icons:product-subscriptions-outlined"
               />
@@ -434,7 +503,7 @@ const GelathiProgramDashboard = () => {
             );
           })}
         </Grid>
-</CardContent>
+</CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
 </CardContent>
         
 :
@@ -442,10 +511,14 @@ const GelathiProgramDashboard = () => {
 <>
 <CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Project List : 
+            {
+  (summaryData && summaryData.data && summaryData.data[0]?.startDate === "")
+    ? "Funders List"
+    : "Projects List"
+}
             </Typography>
           
-            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            {(summaryData?.data?.length>0) ? <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
             <Grid item xs={12} sm={12} md={12} marginTop={3}>
           {summaryData?.data?.map((itm) => {
             return (
@@ -484,26 +557,26 @@ const GelathiProgramDashboard = () => {
       &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
     </span>
   </Grid>
-  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+  {(itm?.select_type=='1')? <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
     Start Date  <br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.startDate} 
+      &nbsp;:&nbsp;{(itm?.startDate)?itm?.startDate:itm?.start_date} 
     </span>
-  </Grid>
-  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+  </Grid>:null}
+  {(itm?.select_type=='1')?<Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
     End Date  <br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.endDate} 
+      &nbsp;:&nbsp;{(itm?.endDate)?itm?.endDate:itm?.end_date} 
     </span>
-  </Grid>
+  </Grid>:null}
 </Container>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={4}>
@@ -518,7 +591,7 @@ const GelathiProgramDashboard = () => {
            <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Vyapar cohorts"
-                total={itm?.noofVyaparCohorts}
+                total={(itm?.noofVyaparCohorts)? itm?.noofVyaparCohorts:itm?.noofspoortthimeeting}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
               />
@@ -527,7 +600,7 @@ const GelathiProgramDashboard = () => {
            <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Beeives"
-                total={itm?.Noofbeehives}
+                total={(itm?.Noofbeehives)?itm?.Noofbeehives:itm?.noofspoorthibeehives}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
               />
@@ -535,7 +608,7 @@ const GelathiProgramDashboard = () => {
            <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Gelathi Enroll"
-  total={itm?.Gelathienrolled}
+  total={(itm?.Gelathienrolled)?itm?.Gelathienrolled:itm?.spoorthienroll}
   color="info"
   icon = "eos-icons:product-subscriptions-outlined"
 />
@@ -543,7 +616,7 @@ const GelathiProgramDashboard = () => {
 <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Spoorthi Survey "
-  total={itm?.Noofsporthisurvey}
+  total={(itm?.Noofsporthisurvey)?itm?.Noofsporthisurvey:itm?.noofspoorthisurvey}
   color="info"
   icon = "twemoji:women-holding-hands"
 />
@@ -551,7 +624,7 @@ const GelathiProgramDashboard = () => {
            <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Spoorthi Completed"
-                total={itm?.Noofsporthicompleted}
+                total={(itm?.Noofsporthicompleted)?itm?.Noofsporthicompleted:itm?.noofspoorthimodule}
                 color="vyapar"
                 icon="eos-icons:product-subscriptions-outlined"
               />
@@ -564,7 +637,7 @@ const GelathiProgramDashboard = () => {
             );
           })}
         </Grid>
-</CardContent>
+</CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
 </CardContent>
 </>
 :
