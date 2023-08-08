@@ -42,10 +42,8 @@ export default function UserEditProfile({ updateSetUser ,closeUserDrawer,profile
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
    var [inputProject, setInputProject] = React.useState([])
-  const [age, setAge] = React.useState('');
   var [showProjectListData, setshowprojectlist] = React.useState(user?.project_list)
   var [updatedProjectlist,setUpdatedProjectList]=React.useState(profileData?.project_list)
-  const [ceoUser, setCeoUser] = useState([]);
   const [usersDataEdit, setUsersDataEdit] = useState('');
   const [rolesData, setRolesData] = useState([]);
   const [reportingManager, setReportingManager] = useState([]);
@@ -173,16 +171,20 @@ let updatedlist = updatedProjectlist.filter((e)=> e.id != id)
 setUpdatedProjectList([...updatedlist]);
 setshowprojectlist([...updatedlist]);
   }
-  console.log(updatedProjectlist,"updatedprohectsssss")
      const changeProject = (value) => {
         setInputProject([...value])
     }
-    let projectvariable =[]
-    projectvariable= updatedProjectlist?.map((e)=>e.project_id);
-    let inputprojectvalues = inputProject?.map((e)=>e.id)
-    let overallprojects = [...projectvariable,...inputprojectvalues]
-
-    console.log(overallprojects,"overallprojecs")
+    let projectvariable = [];
+    let inputprojectvalues = [];
+    if (Array.isArray(updatedProjectlist)) {
+      projectvariable = updatedProjectlist.map((e) => e.project_id);
+    }
+    
+    if (Array.isArray(inputProject)) {
+      inputprojectvalues = inputProject.map((e) => e.id);
+    }
+    
+    let overallprojects = [...projectvariable, ...inputprojectvalues];
  
   const editUser = (async) => {
     var data = JSON.stringify({

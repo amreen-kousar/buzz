@@ -261,9 +261,9 @@ const handleclose=()=>{
                     Projects
                   </Card>
                   <br />
-                  {profileData?.project_list ? (
+                  {peopledetails?.project_list ? (
                     <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                      {profileData?.project_list.map((project) => {
+                      {peopledetails?.project_list.map((project) => {
                         return (
                           <Typography variant="body1" gutterBottom>
                             {' '}
@@ -273,7 +273,7 @@ const handleclose=()=>{
                       })}
                     </Typography>
                   ) : (
-                    <div style={{ textAlign: 'center' }}>No projects found .</div>
+                    <div style={{ textAlign: 'center' }}>No projects found</div>
                   )}
                 </CardContent>
               </Card>
@@ -370,9 +370,10 @@ const handleclose=()=>{
                     Projects
                   </Card>
                   <br />
-                  {profileData?.project_list ? (
+
+                  {peopledetails?.project_list ? (
                     <Typography variant="subtitle1" gutterBottom style={{ color: '#444444' }}>
-                      {profileData?.project_list.map((project) => {
+                      {peopledetails?.project_list.map((project) => {
                         return (
                           <Typography variant="body1" gutterBottom>
                             {' '}
