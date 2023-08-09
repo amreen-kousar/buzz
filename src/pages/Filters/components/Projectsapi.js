@@ -6,7 +6,6 @@ export default async function Projectapi(props) {
     var response = []
     const data = JSON.stringify({
         "role_id": role,
-       
         "user_id": idvalue,
         "filter_id": JSON.stringify(props.selectDATA),
         "type": ""
