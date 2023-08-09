@@ -105,7 +105,7 @@ export default function User() {
       "search": searchUser,
       "user_id": JSON?.parse(dataid)?.id,
       "role_id": JSON?.parse(dataid)?.role,
-      "filter_id": JSON.stringify(filter_type?.id ? filter_type?.id:  null) ,
+      "filter_id": filter_type?.id ? filter_type?.id:"",
       "type": "",
       "pageNum": JSON.stringify(d ? d : 1)
     });
