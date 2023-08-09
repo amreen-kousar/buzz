@@ -11,8 +11,10 @@ export default function OperationManager({ selectDATA, getData,type,date,endDate
   }, [])
   const getSearchFilter = (e) => {
     setSearchInFilter(e)
+    console.log(e,"propee")
   }
   const returnSearchFilter = () => {
+    console.log(searchInFilter,"propertiess")
     return searchInFilter
   }
   const OperationManage = async () => {
@@ -27,7 +29,7 @@ export default function OperationManager({ selectDATA, getData,type,date,endDate
   }
   return (
     <div>
-      <SearchCommon getSearchFilter={(e) => { getSearchFilter(e) }} />
+      <SearchCommon getSearchFilter={(e) => { getSearchFilter(e),console.log(getSearchFilter(e),"elfehf") }} />
       <ListTabledata data={omdata} getData={getData} date={date} endDate={endDate} dateValue={dateValue} endDateValue={endDateValue} selectDATA={4} type="Operation Manager" returnSearchFilter={returnSearchFilter} />
     </div>
   );

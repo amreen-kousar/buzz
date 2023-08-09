@@ -34,6 +34,7 @@ import Iconify from 'src/components/Iconify';
 import moment from 'moment';
 import { Icon } from '@iconify/react';
 import Autocomplete from '@mui/material/Autocomplete';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -187,50 +188,51 @@ setshowprojectlist([...updatedlist]);
     let overallprojects = [...projectvariable, ...inputprojectvalues];
  
   const editUser = (async) => {
-    var data = JSON.stringify({
-      id: editData?.id,
-      countryID: editData?.countryID,
-      first_name: (editData?.first_name)?editData?.first_name:profileData.first_name,
-      last_name:(editData?.last_name)? editData?.last_name:profileData.last_name,
-      gender: (editData?.gender)?editData.gender:profileData.gender,
-      doj: moment(editData?.doj?.$d)?.format('YYYY-MM-DD'),
-      role: (editData?.role)?editData.role:profileData.role_id,
-      pincode: (editData?.pincode)?editData?.pincode:profileData.pincode,
-      officeMailId: (editData?.officeMailId)?editData?.officeMailId:profileData.officeMailId,
-      personalMailId: (editData?.personalMailId)?editData.personalMailId:profileData.personalMailId,
-      contactNum: (editData?.contactNum)?editData?.contactNum:profileData.contactNum,
-      workNum: (editData?.workNum)?editData?.workNum:profileData.workNum,
-      address: (editData?.address)?editData.address:profileData.address,
-      address2: (editData?.address1)?editData?.address1:profileData?.address2,
-      address3: (editData?.address2)?editData?.address2:profileData.address3,
-      supervisorId: (editData?.supervisorId)?editData?.supervisorId:profileData?.supervisorId,
-      profile_pic: (editData?.profile_pic)?editData?.profile_pic:profileData?.profile_pic,
-      status: editData?.status,
-      createdBy: editData?.createdBy,
-      lastUpdatedBy: '',
-      project_list: overallprojects,
-      license_number: editData?.license_number,
-      role_name: (editData?.role_name)?editData?.role_name:profileData.role_name,
-      empRole: editData?.empRole == "Admin" ? 2 :
-      editData?.empRole == "Program Manager" ? 3 :
-      editData?.empRole == "Operations Manager" ? 4 :  
-      editData?.empRole == "Trainer" ? 5 :
-      editData?.empRole == "Field Associate" ? "6" :
-      editData?.empRole == "Driver" ? 7:
-      editData?.empRole == "Funder" ?8 :
-      editData?.empRole == "Partner" ? 9 :
-      editData?.empRole == "FIN/HR/VIEWER" ? 11 :
-      editData?.empRole == "Senior Operations Manager" ? 12 :editData?.empRole == "Gelathi Facilitator Lead" ? 13 : editData?.empRole == "Senior Trainer" ? 5 : null,
-    });
-   
-    var config = {
-      method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/editUser.php',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: data,
-    };
+      var data = JSON.stringify({
+        id: parseInt(editData?.id),
+        countryID: editData?.countryID,
+        first_name: editData?.first_name,
+        last_name: editData?.last_name,
+        gender: editData?.gender,
+        doj: moment(editData?.doj?.$d)?.format('YYYY-MM-DD'),
+        role: (editData?.role?.id)?JSON.stringify(parseInt(editData?.role?.id)):editData?.role,
+        pincode: editData?.pincode,
+        officeMailId: editData?.officeMailId,
+        personalMailId: editData?.personalMailId,
+        contactNum: editData?.contactNum,
+        workNum: editData?.workNum,
+        address: editData?.address,
+        address1: editData?.address1,
+        address2: editData?.address2,
+        empRole: (editData?.empRole)?JSON.stringify(editData?.empRole):user.role_name,
+        supervisorId: (editData?.supervisorId)?editData?.supervisorId:user?.supervisorId,
+        profile_pic: editData?.profile_pic,
+        status: editData?.status,
+        createdBy: editData?.createdBy,
+        lastUpdatedBy: editData?.lastUpdatedBy,
+        project_list: overallprojects,
+        license_number: editData?.license_number,
+        role_name: editData?.role_name,
+        empRole: editData?.empRole == "Admin" ? "2" :
+        editData?.empRole == "Program Manager" ? "3" :
+        editData?.empRole == "Operations Manager" ? "4" :  
+        editData?.empRole == "Trainer" ? "5" :
+        editData?.empRole == "Field Associate" ? "6" :
+        editData?.empRole == "Driver" ? "7":
+        editData?.empRole == "Funder" ?"8":
+        editData?.empRole == "Partner" ? "9" :
+        editData?.empRole == "FIN/HR/VIEWER" ? "11" :
+        editData?.empRole == "Senior Operations Manager" ? "12" :editData?.empRole == "Gelathi Facilitator Lead" ? "13" : editData?.empRole == "Senior Trainer" ? "5" : null,
+      });
+     
+      var config = {
+        method: 'post',
+        url: baseURL+'editUser',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: data,
+      };
     axios(config)
       .then(function (response) {
         sessionStorage.setItem('people', data);
