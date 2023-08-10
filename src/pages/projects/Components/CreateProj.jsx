@@ -155,7 +155,7 @@ setShowAddBuss(false)
         // console.log(error);
       });
   }
-var userdata = sendData.operations_manager_id
+  var userdata =  (sendData?.operations_manager_id)?sendData?.operations_manager_id:data?.operations_manager_id
   useEffect(() => {
     Gfl();
   },[userdata])
