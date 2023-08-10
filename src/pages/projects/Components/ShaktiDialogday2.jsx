@@ -227,7 +227,7 @@ countsuggestedgelathi();
             onCloseFilter={handleCloseFilter}
           />
         </Stack>
-        {!Trainingdata && batch?.all_participants?.map(itm => {
+        {!Trainingdata && batch?.all_participants?.map((itm) =>{
           return (
             <Stack style={{ top: 100 }}>
               <Card >
@@ -254,7 +254,7 @@ countsuggestedgelathi();
             </Stack>
           )
         })}
-{Trainingdata && Trainingdata?.all_participants?.map(itm => {
+{Trainingdata && Trainingdata?.all_participants?.map((itm)=> {
           return (
             <Stack style={{ top: 100 }}>
             

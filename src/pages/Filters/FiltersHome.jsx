@@ -64,6 +64,7 @@ const [endDateValue,setendateValue]=useState(false);
 const [endDate, setEndDate] = useState(new Date())
   const filterPermissions = {
     Dashboard: [{ id: 2, roles: ['1', '8', '12', '3', '11', '9', '7'] }, { id: 1, roles: ['1', '8', '11', '12', '9', '3', '7'] }, { id: 3, roles: ['1', '4', '8', '5', '6', '12', '13', '11', '3', '9', '7'] }, { id: 4, roles: ['1', '8', '12', '9', '11', '3', '7'] }, { id: 5, roles: ['1', '9', '11', '4', '8', '12', '3', '7'] }, { id: 6, roles: ['13'] }, { id: 9, roles: ['1', '9', '11', '4', '6', '8', '5', '12', '13', '3', '7'] }, { id: 7, roles: ['1', '4', '9', '11', '8', '12', '3', '7'] },  { id: 12, roles: ['1', '3', '11'] }, { id: 13, roles: ['1', '11', '3'] }],
+    GreenDashboard: [{ id: 2, roles: ['1', '8', '12', '3', '11', '9', '7'] }, { id: 1, roles: ['1', '8', '11', '12', '9', '3', '7'] }, { id: 3, roles: ['1', '4', '8', '5', '6', '12', '13', '11', '3', '9', '7'] }, { id: 4, roles: ['1', '8', '12', '9', '11', '3', '7'] },{ id: 5, roles: ['9', '11', '4', '8', '12', '3', '7'] }, { id: 6, roles: ['1','13','12','4','3'] }, { id: 9, roles: ['1', '9', '11', '4', '6', '8', '5', '12', '13', '3', '7'] }, { id: 7, roles: ['1', '4', '9', '11', '8', '12', '3', '7'] },  { id: 12, roles: ['1', '3', '11'] }, { id: 13, roles: ['1', '11', '3'] }],
     ProjectDashboard: [{ id: 2, roles: ['1', '8', '12', '3', '11', '9', '7'] }, { id: 1, roles: ['1', '8', '11', '12', '9', '3', '7'] }, { id: 3, roles: ['1', '4', '8', '5', '6', '12', '13', '11', '3', '9', '7'] }, { id: 4, roles: ['1', '8', '12', '9', '11', '3', '7'] }, { id: 5, roles: ['1', '9', '11', '4', '8', '12', '3', '7'] }, { id: 6, roles: ['13'] }, { id: 9, roles: ['1', '9', '11', '4', '6', '8', '5', '12', '13', '3', '7'] }, { id: 7, roles: ['1', '4', '9', '11', '8', '12', '3', '7'] },  { id: 12, roles: ['1', '3', '11'] }, { id: 13, roles: ['1', '11', '3'] }],
     Projects: [{ id: 31, roles: ['1', '2', '3', '4', '5', '9', '11', '12', '13', '6'] }, { id: 7, roles: ['1', '2', '3', '4', '13', '12', '5', '9', '11', '6'] }, { id: 9, roles: ['1', '2', '3', '13', '4', '12', '11', '5', '9', '6'] }, { id: 2, roles: ['1', '3', '12', '11', '2'] }, { id: 4, roles: ['1', '3', '12', '11', '2'] }, { id: 5, roles: ['1', '3', '12', '11', '2'] }, { id: 6, roles: ['1', '3', '12', '11', '2'] },{id:35,roles:['1','3','12','2','4']}],
     BusList: [{ id: 30, roles: true }, { id: 3, roles: true }, { id: 2, roles: true }, { id: 7, roles: true },],
@@ -73,7 +74,7 @@ const [endDate, setEndDate] = useState(new Date())
   }
   const data = sessionStorage?.getItem('userId')
   // partner = 1, funder = 2, project = 3, opm = 4, trainer = 5, gelathi = 6 SOM=12 GFl=13
-  const filtersHeaders = { 1: 'Partner', 2: 'Funders', 3: 'Project', 4: 'Operations Manager', 5: 'Trainers', 6: 'Field Associates', 12: 'Sr. Operations Manager', 13: 'Gelathi Facilitator Leads', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Drivers',35:'Custom Filters' }
+  const filtersHeaders = { 1: 'Partner', 2: 'Funder', 3: 'Project', 4: 'Operation Manager', 5: 'Trainer', 6: 'Gelathi Facilitators', 12: 'Sr. Operation Manager', 13: 'Gelathi Facilitator Leads', 9: 'Date Range', 7: 'Location', 10: 'Participant', 30: 'All Bus', 31: 'All Projects', 32: 'All Buzz team Members', 33: 'Management Team', 34: 'Drivers',35:'Custom Filters' }
   const setData = (value) => {
     setSelectData(value)
     if (type == 'People') {
@@ -144,7 +145,7 @@ const [endDate, setEndDate] = useState(new Date())
           <Typography variant="subtitle1" sx={{ ml: 1 }} style={{ marginLeft: 25 }}>
             Filters :  {filtersHeaders[selectDATA]} 
           </Typography>
-          {(filtersHeaders[selectDATA] !="Date Range" && type=='Dashboard')?
+          {(filtersHeaders[selectDATA] !="Date Range" && (type=='Dashboard' || type=='GreenDashboard'))?
           <><IconButton onClick={handleCalendar} sx={{float:'right',position:'absolute',right:40}}><Iconify icon="material-symbols:calendar-month" ></Iconify></IconButton></>:null}
          
  
@@ -183,7 +184,7 @@ sx={{margin:5}}
             <Card style={{ backgroundColor: '#F6F8FB', }}>
               <CardContent>
                 {
-                  filterPermissions[type].map(f => {
+                  filterPermissions[type]?.map(f => {
                     return (f.roles === true || f.roles.includes(data)) && <Button onClick={() => { setData(f.id) }}
                       sx={styles.buttonStyle} style={selectDATA == f.id ? styles.highlightStyle : null}>{filtersHeaders[f.id]}</Button>
                   })

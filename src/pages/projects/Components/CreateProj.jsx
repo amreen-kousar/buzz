@@ -152,7 +152,8 @@ setShowAddBuss(false)
         // console.log(error);
       });
   }
-var userdata = sessionStorage?.getItem('operations_manager_id')
+  {console.log(sendData?.operations_manager_id,"opssss")}
+var userdata =  (sendData?.operations_manager_id)?sendData?.operations_manager_id:data?.operations_manager_id
   useEffect(() => {
     Gfl();
   },[userdata])
@@ -327,7 +328,7 @@ const mainShowBussHandler = ()=>{
   useEffect(()=>{
     busList();
   }, [showAddBuss])
- 
+ {console.log(data.operations_manager_id,"operationmanagerrre")}
   return (
     <div>
       {

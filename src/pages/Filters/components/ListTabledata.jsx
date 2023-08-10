@@ -16,7 +16,7 @@ function ListTabledata(props) {
     return (
         <Card>
             {props.data?.length !== 0 && props.data?.map(itm => {
-                if (itm?.name?.toLowerCase()?.includes(filterData?.toLowerCase()) || filterData == null)
+                if ((itm?.name?.toLowerCase()?.includes(filterData?.toLowerCase()) || filterData == null) || itm?.first_name?.toLowerCase()?.includes(filterData?.toLowerCase()) || filterData == null)
                     return (
                         <TableContainer sx={{ paddingLeft: "1rem" }} ><br />
                             <Table aria-label="customized table"  >

@@ -44,7 +44,7 @@ export default function UserEditProfile({ updateSetUser ,closeUserDrawer  ,profi
   const [scroll, setScroll] = useState('paper');
    var [inputProject, setInputProject] = React.useState([])
   const [age, setAge] = React.useState('');
-  var [showProjectListData, sethowProjectListData] = React.useState(profileData?.project_list)
+  var [showProjectListData, sethowProjectListData] = React.useState(user?.project_list)
   var [updatedProjectlist,setUpdatedProjectList]=React.useState(user?.project_list)
   const [ceoUser, setCeoUser] = useState([]);
   const [usersDataEdit, setUsersDataEdit] = useState('');
@@ -234,9 +234,18 @@ sethowProjectListData([...updatedlist]);
      const changeProject = (value) => {
         setInputProject([...value])
     }
-    let projectvariable = updatedProjectlist.map((e)=>e.project_id);
-    let inputprojectvalues = inputProject.map((e)=>e.id)
-    let overallprojects = [...projectvariable,...inputprojectvalues]
+    let projectvariable = [];
+    let inputprojectvalues = [];
+    if (Array.isArray(updatedProjectlist)) {
+      projectvariable = updatedProjectlist.map((e) => e.project_id);
+    }
+    
+    if (Array.isArray(inputProject)) {
+      inputprojectvalues = inputProject.map((e) => e.id);
+    }
+    
+    let overallprojects = [...projectvariable, ...inputprojectvalues];
+ 
   return (
     <div>
       <Button

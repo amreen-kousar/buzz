@@ -46,10 +46,11 @@ const VyaparProgramDashboard = () => {
       "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
       "end_date": (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):'',
       "funder_id":i === 2 ? id?.id : '',
-      "dist":(g === "country" || g==="countryCalendar") ? JSON.stringify(id) : '',
-      "taluk":(g === "country" || g==="countryCalendar") ? JSON.stringify(i) : '',
+      "dist":(g === "country" || g==="countryCalendar") ? id : '',
+      "taluk":(g === "country" || g==="countryCalendar") ? i : '',
       "project_id":i === 3 ? id?.id : '',
       "trainer_id":i === 5 ? id?.id : '',
+      "gfid":i===6?id?.id:'',
       "opsmanager": i === 4 ? id?.id : '',
       "somid":i === 12 ? id?.id : '',
       "gflid": i === 13 ? id?.id : '',
@@ -75,6 +76,39 @@ const VyaparProgramDashboard = () => {
         // console.log(error,"errorrrrrrrrrrrr");
       });
   };
+
+  const filterApi = async(id,i,g,date1,date2)=>{
+    setLoader(true)
+    var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+    var data = JSON.stringify({
+      "end_date":(g === "date")?i:(g=== "countryCalendar" || g==="Calendar")?moment(date2?.$d)?.format('YYYY-MM-DD'): '',
+      "role_id": parseInt(roleid),
+      "taluk_id":(g === "country" || g==="countryCalendar") ? i : "",
+      "gfid": (i==6)?id?.id:'',
+      "emp_id": parseInt(userid),
+      "start_date":(g === "date")?id:(g=== "countryCalendar" || g==="Calendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
+    });
+    
+    var config = {
+      method: 'post',
+      url: baseURL + 'vyaparfilter',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+  
+    axios(config)
+    .then(function (response) {
+      setSummaryData(response.data)
+      setLoader(false)
+    })
+    .catch(function (error) {
+      // console.log(error);
+    });
+    
+  }
   useEffect(() => {
     apiHit();
   }, []);
@@ -93,7 +127,7 @@ const VyaparProgramDashboard = () => {
   };
   const onDateSubmit = (e) => {
     setSelected({ type: 'Date Range', name: `${e?.startDate} to ${e?.endDate}` });
-    apiHit(e?.startDate, e?.endDate, 'date');
+    filterApi(e?.startDate, e?.endDate, 'date');
     setFilterData({ from_date: e?.startDate, to_date: e?.endDate });
     handleCloseFilter();
   };
@@ -111,16 +145,25 @@ const VyaparProgramDashboard = () => {
   const getData = (itm, i,date1,date2,dateValue,endDateValue,g) => {
     setSelected(itm);
     const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
-    i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:{"gflId":itm?.id}
-    if(dateValue || endDateValue)
-    {
-      apiHit(itm, i,"Calendar",date1,date2)
-      
-    }
-    else{
-      
-      apiHit(itm,i)
-    }
+    i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:i===6?{"gfid":itm?.id}:{"gflId":itm?.id}
+    
+    if(i==6){
+      if(dateValue || endDateValue)
+         {
+           filterApi(itm, i,"Calendar",date1,date2)
+         }
+         else{
+           filterApi(itm,i)
+         }
+     }
+     else{
+       if((dateValue || endDateValue)){
+         apiHit(itm,i,"Calendar",date1,date2)
+       }
+       else{
+         apiHit(itm,i)
+       }
+     }
     setFilterData(data);
     handleCloseFilter();
   };
@@ -129,10 +172,10 @@ const VyaparProgramDashboard = () => {
     setSelected({ type: 'Location', name: ` ${e?.stateName} - ${e?.districtName} - ${e?.talukName}` });
     if(e?.dateValue || e?.endDateValue)
     {
-      apiHit(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
+      filterApi(e?.district_id, e?.talaq_id, "countryCalendar",e?.start_date,e?.end_date,)
     }
     else{
-      apiHit(e?.district_id,e?.talaq_id,"country")
+      filterApi(e?.district_id,e?.talaq_id,"country")
     }
   };
  
@@ -161,7 +204,7 @@ const VyaparProgramDashboard = () => {
         </Grid>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
             <FiltersHome
-              type="Dashboard"
+              type="GreenDashboard"
               onDateSubmit={onDateSubmit}
               onSumbit={onSumbit}
               getData={getData}
@@ -176,34 +219,34 @@ const VyaparProgramDashboard = () => {
          <Grid container spacing={3} marginTop={4}>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary title="Number of Vyapar Cohorts"
-               total={summaryData?.summary_Noofvyaparcoharts} 
+               total={(summaryData?.summary_Noofvyaparcoharts)?summaryData?.summary_Noofvyaparcoharts:summaryData?.summary_nofvyaparcoharts} 
                color="motivator" />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Villages"
-                total={summaryData?.summary_villages}
+                total={(summaryData?.summary_villages)?summaryData?.summary_villages:summaryData?.summary_villages}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
-                title="Number  of Vyapari's Enrolled"
-                total={summaryData?.summary_vyaparenrolled}
+                title="Number  of Vyapari Enrolled"
+                total={(summaryData?.summary_vyaparenrolled)?summaryData?.summary_vyaparenrolled:summaryData?.summary_vyaparenroll}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Vyapar Survey"
-                total={summaryData?.summary_NoofVyaparsurvey}
+                total={(summaryData?.summary_NoofVyaparsurvey)?summaryData?.summary_NoofVyaparsurvey:summaryData?.summary_novyaparsurvey}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Vyapar Modules Completed"
-                total={summaryData?.summary_Noofvyaparmodulecomoleted}
+                total={(summaryData?.summary_Noofvyaparmodulecomoleted)?summaryData?.summary_Noofvyaparmodulecomoleted:summaryData?.summary_vyaparmodule}
                 color="motivator"
               />
             </Grid>
@@ -222,7 +265,7 @@ const VyaparProgramDashboard = () => {
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary title="Target"
-               total={summaryData?.summary_Target} 
+               total={(summaryData?.summary_Target)?summaryData?.summary_Target:summaryData?.summary_target} 
                color="motivator" />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
@@ -235,35 +278,35 @@ const VyaparProgramDashboard = () => {
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number  of Vyapar Enrolled"
-                total={summaryData?.summary_vyparenrolled}
+                total={(summaryData?.summary_vyparenrolled)?summaryData?.summary_vyparenrolled:summaryData?.summary_vyaparenroll}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Vyapar Cohorts"
-                total={summaryData?.summary_vyaparcoharts}
+                total={(summaryData?.summary_vyaparcoharts)?summaryData?.summary_vyaparcoharts:summaryData?.summary_nofvyaparcoharts}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Vyapar Survey"
-                total={summaryData?.summary_vyaparsurvey}
+                total={(summaryData?.summary_vyaparsurvey)?summaryData?.summary_vyaparsurvey:summaryData?.summary_novyaparsurvey}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Vyapar Enrolled"
-                total={summaryData?.summary_vyparenrolled}
+                total={(summaryData?.summary_vyparenrolled)?summaryData?.summary_vyparenrolled:summaryData?.summary_vyaparenroll}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Module Completed "
-                total={summaryData?.summary_noofmodulecompleted}
+                total={(summaryData?.summary_noofmodulecompleted)?summaryData?.summary_noofmodulecompleted:summaryData?.summary_vyaparmodule}
                 color="motivator"
               />
             </Grid>
@@ -278,10 +321,15 @@ const VyaparProgramDashboard = () => {
        
   <CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Funders List : 
+            {
+  (summaryData && summaryData.data && summaryData.data[0]?.startDate === "")
+    ? "Funders List"
+    : "Projects List"
+}
+
             </Typography>
           
-            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            {(summaryData?.data?.length>0) ?<CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
             <Grid item xs={12} sm={12} md={12} marginTop={3}>
           {summaryData?.data?.map((itm) => {
             return (
@@ -300,7 +348,7 @@ const VyaparProgramDashboard = () => {
 <Container style={{ display: 'flex', flexDirection: 'column' }}>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-      {(itm?.startDate)?"Project Name":"Funder"}<br />
+    {(itm?.select_type=='1')?"Project Name":"Funder Name"}<br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
@@ -319,6 +367,26 @@ const VyaparProgramDashboard = () => {
       &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
     </span>
   </Grid>
+  {(itm?.select_type=='1')?<Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Start Date<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.start_date}
+    </span>
+  </Grid>:null}
+  {(itm?.select_type=='1')?<Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    End Date<br />
+     
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+     
+      &nbsp;:&nbsp;{itm?.end_date}
+    </span>
+  </Grid>:null}
  
 </Container>
                   <Divider mt={1} />
@@ -326,7 +394,7 @@ const VyaparProgramDashboard = () => {
           
 <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
-                title="Number  of Villages"
+                title="Number of Villages"
                 total={itm?.villages}
                 color="villages"
                 icon= "fontisto:holiday-village"
@@ -334,7 +402,7 @@ const VyaparProgramDashboard = () => {
             </Grid>
   <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
-                title="Number of Batches"
+                title="Number of vyapar Coharts"
                 total={itm?.noofvyaparcoharts}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
@@ -343,7 +411,7 @@ const VyaparProgramDashboard = () => {
   <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Vyapar Survey "
-  total={itm?.nofvyaparsurvey}
+  total={(itm?.nofvyaparsurvey)?itm?.nofvyaparsurvey:itm?.noofvyaparsurvey}
   color="vyapar"
   icon="eos-icons:product-subscriptions-outlined"
 />
@@ -351,7 +419,7 @@ const VyaparProgramDashboard = () => {
   <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Module Completed"
-                total={itm?.noofvyaparmodulecompleted}
+                total={(itm?.noofvyaparmodulecompleted)?itm?.noofvyaparmodulecompleted:itm?.noofvyaparmodule}
                 color="vyapar"
                 icon="eos-icons:product-subscriptions-outlined"
               />
@@ -359,7 +427,7 @@ const VyaparProgramDashboard = () => {
   <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Vyapar Enrolled "
-                total={itm?.vyaparenrolled}
+                total={(itm?.vyaparenrolled)?itm?.vyaparenrolled:itm?.vyaparenroll}
                 color="info"
                 icon = "twemoji:women-holding-hands"
               />
@@ -371,7 +439,7 @@ const VyaparProgramDashboard = () => {
             );
           })}
         </Grid>
-</CardContent>
+</CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
 </CardContent>
 :         
           
@@ -379,10 +447,16 @@ const VyaparProgramDashboard = () => {
 <>
 <CardContent>
             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-              Project List : 
+            {
+  (summaryData && summaryData.data && summaryData.data[0]?.startDate === "")
+    ? "Funders List"
+    : "Projects List"
+}
+
             </Typography>
           
-            <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+            {(summaryData?.data?.length>0) ?
+             <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
             <Grid item xs={12} sm={12} md={12} marginTop={3}>
           {summaryData?.data?.map((itm) => {
             return (
@@ -402,8 +476,7 @@ const VyaparProgramDashboard = () => {
                 <Container style={{ display: 'flex', flexDirection: 'column' }}>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-      {(itm?.startDate)?"Project Name":"Funder"}<br />
-     
+    {(itm?.select_type=='1')?"Project Name":"Funder Name"}<br />
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
       &nbsp;:&nbsp;{itm?.name}<br />
@@ -420,33 +493,33 @@ const VyaparProgramDashboard = () => {
       &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
     </span>
   </Grid>
-  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+  {(itm?.select_type=='1')? <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
     Start Date  <br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.startDate} 
+      &nbsp;:&nbsp;{(itm?.startDate)?itm?.startDate:itm?.start_date} 
     </span>
-  </Grid>
-  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+  </Grid>:null}
+  {(itm?.select_type=='1')?<Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
     End Date  <br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.endDate} 
+      &nbsp;:&nbsp;{(itm?.endDate)?itm?.endDate:itm?.end_date} 
     </span>
-  </Grid>
+  </Grid>:null}
 </Container>
                   <Divider mt={1} />
                   <Grid container spacing={3} marginTop={4}>
           
 <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
-                title="Number  of Villages "
+                title="Number  of Villages"
                 total={itm?.villages}
                 color="villages"
                 icon= "fontisto:holiday-village"
@@ -455,7 +528,8 @@ const VyaparProgramDashboard = () => {
   <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Vyapar Cohorts"
-                total={itm?.noofVyaparCohorts}
+                total={(itm?.noofVyaparCohorts)?itm?.noofVyaparCohorts:itm?.noofvyaparcoharts}
+                
                 color="motivator"
                 icon="twemoji:women-holding-hands"
               />
@@ -463,7 +537,7 @@ const VyaparProgramDashboard = () => {
   <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Vyapar Survey"
-  total={itm?.noOfvyaparsurvey}
+  total={(itm?.noOfvyaparsurvey)?itm?.noOfvyaparsurvey:itm?.noofvyaparsurvey}
   color="vyapar"
   icon="eos-icons:product-subscriptions-outlined"
 />
@@ -471,7 +545,7 @@ const VyaparProgramDashboard = () => {
   <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Vyapar Module Completed "
-  total={itm?.noofvyaparmodulcompleted}
+  total={(itm?.noofvyaparmodulcompleted)?itm?.noofvyaparmodulcompleted:itm?.itm?.noofvyaparmodule}
   color="vyapar"
   icon="eos-icons:product-subscriptions-outlined"
 />
@@ -481,7 +555,7 @@ const VyaparProgramDashboard = () => {
 <Grid item xs={12} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Vypar "
-  total={itm?.vyapar}
+  total={(itm?.vyapar)?itm?.vyapar:itm?.vyaparenroll}
   color="info"
   icon = "twemoji:women-holding-hands"
 />
@@ -494,7 +568,7 @@ const VyaparProgramDashboard = () => {
             );
           })}
         </Grid>
-</CardContent>
+</CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
 </CardContent>
 </>:      
 <>

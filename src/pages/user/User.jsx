@@ -47,8 +47,8 @@ export default function User() {
  
   const handleCloseFilter = () => {
     setOpenFilter(false);
-    setSearchUser(null);
-    setSelected(null)
+    // setSearchUser(null);
+    // setSelected(null)
    };
   const handlepeopleCloseFilter = () => {
     setpeopleFilter(false);
@@ -105,7 +105,7 @@ export default function User() {
       "search": searchUser,
       "user_id": JSON?.parse(dataid)?.id,
       "role_id": JSON?.parse(dataid)?.role,
-      "filter_id": JSON.stringify(filter_type?.id ? filter_type?.id:  null) ,
+      "filter_id": filter_type?.id ? filter_type?.id:"",
       "type": "",
       "pageNum": JSON.stringify(d ? d : 1)
     });
@@ -137,9 +137,10 @@ export default function User() {
     (selected?.type) ? user(newPage, selected) : user(newPage)
   }
   const handleDelete = () => {
-    setSearchUser([])
-    setSelected(null)
     user()
+    setSelected(null)
+    setSearchUser("")
+   
   }
   const searchBarCall = (e) => {
     setSearchUser(e)
