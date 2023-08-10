@@ -184,7 +184,7 @@ sx={{margin:5}}
             <Card style={{ backgroundColor: '#F6F8FB', }}>
               <CardContent>
                 {
-                  filterPermissions[type].map(f => {
+                  filterPermissions[type]?.map(f => {
                     return (f.roles === true || f.roles.includes(data)) && <Button onClick={() => { setData(f.id) }}
                       sx={styles.buttonStyle} style={selectDATA == f.id ? styles.highlightStyle : null}>{filtersHeaders[f.id]}</Button>
                   })
