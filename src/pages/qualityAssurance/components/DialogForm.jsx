@@ -1407,7 +1407,7 @@ id="date-time-picker"
          {/* 2 */}
       {( programAssessment==2 )?  <Grid  backgroundColor={"#FFD580"} sx={{maxHeight:'3500px'}} >
           
-        <CardContent>
+        <CardContent >
           <Card sx={{maxHeight:'600px'}}>
           <Card sx = {{backgroundColor:'#ff7424', }} mt={2}>
           <CardContent>
@@ -1418,7 +1418,7 @@ id="date-time-picker"
           </Typography>
           </CardContent>
         </Card  >
-        <CardContent>
+        <CardContent style={{height:'200px'}}>
          
           <Box sx={{ minWidth: 120 }}>
   
@@ -1435,7 +1435,7 @@ id="date-time-picker"
       componentsProps={{
         paper: {
           sx: {
-            height: 120,
+            height: 200,
             zIndex: 9999,
             position: 'relative',
             
