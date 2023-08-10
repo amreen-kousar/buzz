@@ -34,7 +34,7 @@ const setEnrolledVyapar=(itm)=>{
     "id": itm?.participant_id,
     "gelathi_id": session?.user_id,
     "tb_id": session?.tb_id,
-    "projectId": session?.project_id
+    "projectId": (session?.projectId)?session?.projectId:session?.project_id
   });
   
   var config = {
