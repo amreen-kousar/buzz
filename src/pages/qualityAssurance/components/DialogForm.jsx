@@ -1417,7 +1417,7 @@ id="date-time-picker"
           </Typography>
           </CardContent>
         </Card  >
-        <CardContent>
+        <CardContent style={{height:'200px'}}>
          
           <Box sx={{ minWidth: 120 }}>
   
