@@ -179,13 +179,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
                       <Typography variant="subtitle2">{itm?.participant_name}</Typography> &nbsp;&nbsp; {(itm?.gelathi_status!="")?<div style={{color:'#f75f66'}}>{itm?.gelathi_status}</div >:null} 
                       
                       </div>
-  {(itm?.enroll=='0')? 
-   <input type="radio" 
-   style={styles.input}  
-   name="asd" onClick={() => {addGelathi(itm)}}  id="specifyColor"  value={{...label}}></input>: 
+  {(itm?.enroll=='1')? 
    <input type="radio"  id="specifyColor"
    style={styles.input} 
-   defaultChecked={true}  name="asd" onClick={() => {addGelathi(itm)}} value={{...label}}></input>}
+   defaultChecked={true}  name="asd" onClick={() => {addGelathi(itm)}} value={{...label}}></input>:  
+   <input type="radio" 
+   style={styles.input}  
+   name="asd" onClick={() => {addGelathi(itm)}}  id="specifyColor"  value={{...label}}></input>}
                   </CardActions>  
                   </CardContent>
                 );
