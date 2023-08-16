@@ -182,7 +182,7 @@ export default function User() {
                 <Iconify id="direction-bus-icon" icon="material-symbols:directions-bus" width={30} height={30} />
               </div>
             <div style={{display:'flex'}}>
-                <Card sx={{ boxShadow: 0 }}  style={{justifyContent:'flex-start'}}   onClick={() => {
+                <Card sx={{ boxShadow: 0 }}  style={{justifyContent:'flex-start',width:"100%"}}   onClick={() => {
                 setClickData(itm)
                 handleOpenFilter()
               }}>
