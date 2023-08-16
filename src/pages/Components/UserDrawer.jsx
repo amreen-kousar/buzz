@@ -41,7 +41,7 @@ UserDrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 
-export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users ,deleteuser}) {
+export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users,userapi ,deleteuser}) {
   const [profileData, setProfileData] = useState();
   const [user, setUser] = useState();
   const userDetails = sessionStorage?.getItem('userId');
@@ -154,7 +154,7 @@ const handleclose=()=>{
 
         {userDetails && userDetails == 2 && (
           <Stack direction={'row'} justifyContent="flex-end">
-            <UserEditProfile updateSetUser={updateSetUser} profileData={profileData} closeUserDrawer={onCloseFilter}  />
+            <UserEditProfile updateSetUser={updateSetUser} userapi={userapi} profileData={profileData} closeUserDrawer={onCloseFilter}  />
             <Button onClick={()=>deleteprofile()}
               style={{ float: 'right' }}
               sx={{

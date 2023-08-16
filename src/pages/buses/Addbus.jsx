@@ -11,10 +11,26 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
     const navigate = useNavigate();
     const location = useLocation();
     const [date, setDate] = useState(moment(new Date())?.format('YYYY-MM-DD'))
+    // const [addBus, setAddBus] = useState({
+    //     register_number: '', register_date: moment(date?.$d)?.format('YYYY-MM-DD'), engine_number: '', chassis_number: '', insurance_number: '',
+    //     insurance_company: "", insurance_start_date: new Date(), insurance_end_date: moment(date?.$d)?.format('YYYY-MM-DD'), last_service_date: moment(date?.$d)?.format('YYYY-MM-DD'), next_service_due_date: moment(date?.$d)?.format('YYYY-MM-DD'), fitness_certificate: moment(date?.$d)?.format('YYYY-MM-DD'), permit: moment(date?.$d)?.format('YYYY-MM-DD'), emission_date:moment(date?.$d)?.format('YYYY-MM-DD')
+    // })
     const [addBus, setAddBus] = useState({
-        register_number: '', register_date: moment(date?.$d)?.format('YYYY-MM-DD'), engine_number: '', chassis_number: '', insurance_number: '',
-        insurance_company: "", insurance_start_date: new Date(), insurance_end_date: moment(date?.$d)?.format('YYYY-MM-DD'), last_service_date: moment(date?.$d)?.format('YYYY-MM-DD'), next_service_due_date: moment(date?.$d)?.format('YYYY-MM-DD'), fitness_certificate: moment(date?.$d)?.format('YYYY-MM-DD'), permit: moment(date?.$d)?.format('YYYY-MM-DD'), emission_date:moment(date?.$d)?.format('YYYY-MM-DD')
-    })
+        register_number: '',
+        register_date: null, // Set to null
+        engine_number: '',
+        chassis_number: '',
+        insurance_number: '',
+        insurance_company: "",
+        insurance_start_date:null,
+        insurance_end_date: null, // Set to null
+        last_service_date: null, // Set to null
+        next_service_due_date: null, // Set to null
+        fitness_certificate: null, // Set to null
+        permit: null, // Set to null
+        emission_date: null, // Set to null
+      });
+      
     const [openAddBus, setOpenAddBus] = useState(false)
     const handleClickOpen = () => {
         setOpenAddBus(true);
@@ -262,19 +278,21 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                             <TextField fullWidth id="Bus Number" label="Bus Number" helperText="Bus Number required*" defaultValue={addBus.register_number} onChange={(e) => { setAddBus({ ...addBus, register_number: e.target.value }) }} variant="outlined" color="common" /><br />
                     
                             <Stack style={{ marginTop: 20 }} color="common">
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker id="register-date"
-                                        inputFormat="YYYY/MM/DD"
-                                        views={["year", "month", "day"]}
-                                        label="Register Date"
-                                        onChange={(e) => {
-                                            setAddBus({ ...addBus, register_date: e })
-                                        }}
-                                        value={addBus?.register_date}
-                                        renderInput={(params) => <TextField {...params} fullWidth />}
-                                    />
-                                </LocalizationProvider>
-                            </Stack>
+  <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <DatePicker
+      id="register-date"
+      inputFormat="YYYY/MM/DD"
+      views={["year", "month", "day"]}
+      label="Register Date"
+      onChange={(e) => {
+        setAddBus({ ...addBus, register_date: e });
+      }}
+      value={addBus?.register_date }
+      renderInput={(params) => <TextField {...params} fullWidth />}
+    />
+  </LocalizationProvider>
+</Stack>
+
                             <TextField fullWidth id="engine-number" label="Engine Number" defaultValue={addBus.engine_number} onChange={(e) => { setAddBus({ ...addBus, engine_number: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="chassis-number" label="Chassis Number" defaultValue={addBus.chassis_number} onChange={(e) => { setAddBus({ ...addBus, chassis_number: e.target.value }) }} variant="outlined" color="common" /><br />
                             <TextField fullWidth id="insurance-number" label="Insurance Number" defaultValue={addBus.insurance_number} onChange={(e) => { setAddBus({ ...addBus, insurance_number: e.target.value }) }} variant="outlined" color="common" /><br />
