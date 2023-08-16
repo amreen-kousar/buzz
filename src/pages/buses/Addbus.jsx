@@ -12,10 +12,26 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
     const navigate = useNavigate();
     const location = useLocation();
     const [date, setDate] = useState(moment(new Date())?.format('YYYY-MM-DD'))
-    const [addBus, setAddBus] = useState({
-        register_number: '', register_date: moment(date?.$d)?.format('YYYY-MM-DD'), engine_number: '', chassis_number: '', insurance_number: '',
-        insurance_company: "", insurance_start_date: new Date(), insurance_end_date: moment(date?.$d)?.format('YYYY-MM-DD'), last_service_date: moment(date?.$d)?.format('YYYY-MM-DD'), next_service_due_date: moment(date?.$d)?.format('YYYY-MM-DD'), fitness_certificate: moment(date?.$d)?.format('YYYY-MM-DD'), permit: moment(date?.$d)?.format('YYYY-MM-DD'), emission_date:moment(date?.$d)?.format('YYYY-MM-DD')
-    })
+    // const [addBus, setAddBus] = useState({
+    //     register_number: '', register_date: moment(date?.$d)?.format('YYYY-MM-DD'), engine_number: '', chassis_number: '', insurance_number: '',
+    //     insurance_company: "", insurance_start_date: new Date(), insurance_end_date: moment(date?.$d)?.format('YYYY-MM-DD'), last_service_date: moment(date?.$d)?.format('YYYY-MM-DD'), next_service_due_date: moment(date?.$d)?.format('YYYY-MM-DD'), fitness_certificate: moment(date?.$d)?.format('YYYY-MM-DD'), permit: moment(date?.$d)?.format('YYYY-MM-DD'), emission_date:moment(date?.$d)?.format('YYYY-MM-DD')
+    // })
+    const initialState = {
+        register_number: '',
+        register_date: null,
+        engine_number: '',
+        chassis_number: '',
+        insurance_number: '',
+        insurance_company: '',
+        insurance_start_date: null,
+        insurance_end_date: null,
+        last_service_date: null,
+        next_service_due_date: null,
+        fitness_certificate: null,
+        permit: null,
+        emission_date: null,
+      };
+    const [addBus, setAddBus] = useState(initialState);
     const [openAddBus, setOpenAddBus] = useState(false)
     const handleClickOpen = () => {
         setOpenAddBus(true);
@@ -23,6 +39,10 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
     const handleClose = () => {
         setOpenAddBus(false);
         showBussHandler()
+        // setAddBus({
+        //     register_number: '', register_date: moment(date?.$d)?.format('YYYY-MM-DD'), engine_number: '', chassis_number: '', insurance_number: '',
+        //     insurance_company: "", insurance_start_date: new Date(), insurance_end_date: moment(date?.$d)?.format('YYYY-MM-DD'), last_service_date: moment(date?.$d)?.format('YYYY-MM-DD'), next_service_due_date: moment(date?.$d)?.format('YYYY-MM-DD'), fitness_certificate: moment(date?.$d)?.format('YYYY-MM-DD'), permit: moment(date?.$d)?.format('YYYY-MM-DD'), emission_date:moment(date?.$d)?.format('YYYY-MM-DD')
+        // })
         setAddBus({
             register_number: '', register_date: moment(date?.$d)?.format('YYYY-MM-DD'), engine_number: '', chassis_number: '', insurance_number: '',
             insurance_company: "", insurance_start_date: new Date(), insurance_end_date: moment(date?.$d)?.format('YYYY-MM-DD'), last_service_date: moment(date?.$d)?.format('YYYY-MM-DD'), next_service_due_date: moment(date?.$d)?.format('YYYY-MM-DD'), fitness_certificate: moment(date?.$d)?.format('YYYY-MM-DD'), permit: moment(date?.$d)?.format('YYYY-MM-DD'), emission_date:moment(date?.$d)?.format('YYYY-MM-DD')
@@ -31,6 +51,11 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
     const submitBus = () => {
         var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
+
+        addBus["register_date"] = moment(addBus["register_date"])?.format('YYYY-MM-DD')
+        addBus["fitness_certificate"] = moment(addBus["fitness_certificate"])?.format('YYYY-MM-DD')
+        addBus["permit"] = moment(addBus["permit    "])?.format('YYYY-MM-DD')
+
         var data = JSON.stringify({
             "lastUpdatedBy": userid,
             "createdBy": userid ,
@@ -49,7 +74,7 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
             showBussHandler() 
             
             : null
-    
+            setAddBus(initialState)
             axios(config)
                 .then(function (response) {
                     alert(response.data.message)
