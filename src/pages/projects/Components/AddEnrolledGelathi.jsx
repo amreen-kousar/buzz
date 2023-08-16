@@ -68,8 +68,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       });
   }
   const getGfsessiondata=()=>{
+    var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+   var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     var data = JSON.stringify({
-      "gf_session_id": session?.id
+      "gf_session_id": session?.id,
+      "user_id":userid,
+      "role_id":roleid
     });
     
     var config = {
