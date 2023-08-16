@@ -5,6 +5,7 @@ import { Button, Dialog, AppBar, Toolbar, IconButton, Typography, InputLabel, Me
 import { useLocation, Link } from 'react-router-dom'
 import CreateProj from './Components/CreateProj';
 import Iconify from 'src/components/Iconify';
+import { baseURL } from 'src/utils/api';
 function AddProject({ viewMessage }) {
     const [open, setAddProject] = useState(false)
     const [country, setCountry] = useState([])
@@ -115,7 +116,7 @@ function AddProject({ viewMessage }) {
         });
         const config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/getPeopleFilters.php',
+            url: baseURL + 'getFunderList',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -123,7 +124,7 @@ function AddProject({ viewMessage }) {
         };
         axios(config)
             .then((response) => {
-                setFund(response?.data?.data)
+                setFund(response?.data?.list)
             })
             .catch((error) => {
                 // console.log(error);
@@ -290,7 +291,7 @@ function AddProject({ viewMessage }) {
                             >
                                 {fund?.map(itm => {
                                     return (
-                                        <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                                        <MenuItem value={itm?.funderId}>{itm?.funderName}</MenuItem>
                                     )
                                 })
                                 }
