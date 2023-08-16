@@ -11,6 +11,7 @@ import UserDrawer from '../Components/UserDrawer';
 import AddUser from './AddUser';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
+import { baseURL } from 'src/utils/api';
 export default function User() {
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
@@ -94,24 +95,25 @@ export default function User() {
   var userAccess = ['2']
   var userIdCheck = sessionStorage?.getItem('userId')
   const user = async (d, filter_type) => {
+    console.log(filter_type,"filterrr")
     setLoader(true)
     if (filter_type) {
       setSelected(filter_type)
-      let ids = { "Trainers": 5, "Drivers": 7, "Funders": 8, "Partner": 9, 'Gelathi Facilitators': 6 }
+      let ids = { "Trainer": 5, "Drivers": 7, "Funder": 8, "Partner": 9, 'Gelathi Facilitators': 6 }
       filter_type.id = ids[filter_type.type]
     }
     const dataid = sessionStorage?.getItem('userDetails')
     const data = JSON.stringify({
-      "search": searchUser,
+      "search": (searchUser)?searchUser:"",
       "user_id": JSON?.parse(dataid)?.id,
       "role_id": JSON?.parse(dataid)?.role,
-      "filter_id": filter_type?.id ? filter_type?.id : '',
+      "filter_id": filter_type?.id ? JSON.stringify(filter_type?.id):"",
       "type": "",
-      "pageNum": d ? d : 1
+      "pageNum":  JSON.stringify(d ? d : 1)
     });
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getAllPeople.php',
+      url: baseURL + 'getAllPeople',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -137,7 +139,7 @@ export default function User() {
     (selected?.type) ? user(newPage, selected) : user(newPage)
   }
   const handleDelete = () => {
-    setSearchUser([])
+    setSearchUser("")
     setSelected([])
     user()
   }
