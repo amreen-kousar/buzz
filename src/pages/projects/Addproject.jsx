@@ -26,7 +26,7 @@ function AddProject({ viewMessage }) {
         state: '',
         district_id: '',
         talaq_id: '',
-        funder_id: ""
+        funderId: ""
     })
     useEffect(() => {
         setData([])
@@ -124,7 +124,6 @@ function AddProject({ viewMessage }) {
         };
         axios(config)
             .then((response) => {
-                console.log(response?.data,"response")
                 setFund(response?.data?.list)
             })
             .catch((error) => {
@@ -133,14 +132,16 @@ function AddProject({ viewMessage }) {
     }
     const createProject = () => {
         if (confirm("Are You Sure You Want To Create Project?")) {
-            const fundList = fund?.filter(itm => itm?.id === mainState?.funderId)
+            {console.log(mainState?.funderId,"mainstate")}
+            const fundList = fund?.filter(itm => parseInt(itm?.funderID) == mainState?.funderId)
+            {console.log(fundList[0],"fundlist",fund)}
             const talukList = taluk?.filter(itm => itm?.id === mainState?.locationID)
             const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
             var data = new FormData();
             data.append('locationID', talukList[0]?.id);
             data.append('location_name', talukList[0]?.name);
-            data.append('funderID', fundList[0]?.id);
-            data.append('funder_name', fundList[0]?.name);
+            data.append('funderID', fundList[0]?.funderID);
+            data.append('funder_name', fundList[0]?.funderName);
              data.append('createdBy', userid);
             data.append('lastUpdatedBy', userid);
             // data.append('user_id', userid);
@@ -282,11 +283,11 @@ function AddProject({ viewMessage }) {
                             <Select
                                 labelId="Funder-label"
                                 id="select_funder"
-                                value={data.funder_id}
+                                value={data.funderId}
                                 required
                                 label="Funder"
                                 onChange={(e => {
-                                    setData({ ...data, funder_id: e?.target?.value })
+                                    setData({ ...data, funderId: e?.target?.value })
                                     setMainState({ ...mainState, funderId: e?.target?.value })
                                 })}
                             >
