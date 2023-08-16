@@ -94,10 +94,11 @@ export default function User() {
   var userAccess = ['2']
   var userIdCheck = sessionStorage?.getItem('userId')
   const user = async (d, filter_type) => {
+    console.log(filter_type,"filterrr");
     setLoader(true)
     if (filter_type) {
       setSelected(filter_type)
-      let ids = { "Trainers": 5, "Drivers": 7, "Funders": 8, "Partner": 9, 'Field Associates': 6 }
+      let ids = { "Trainer": 5, "Drivers": 7, "Funder": 8, "Partner": 9,'Field Associate': 6 }
       filter_type.id = ids[filter_type.type]
     }
     const dataid = sessionStorage?.getItem('userDetails')
@@ -105,7 +106,7 @@ export default function User() {
       "search": searchUser,
       "user_id": JSON?.parse(dataid)?.id,
       "role_id": JSON?.parse(dataid)?.role,
-      "filter_id": filter_type?.id ? filter_type?.id:"",
+      "filter_id": filter_type?.id ? JSON.stringify(filter_type?.id):"",
       "type": "",
       "pageNum": JSON.stringify(d ? d : 1)
     });
