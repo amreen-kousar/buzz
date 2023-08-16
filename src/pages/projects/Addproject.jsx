@@ -108,23 +108,24 @@ function AddProject({ viewMessage }) {
     const getFunder = () => {
         var roleid= JSON.parse(sessionStorage.getItem('userDetails'))?.role;
         var empid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
-        const data = JSON.stringify({
-            "role_id": roleid,
-            "filter_type": "2",
-            "pageNum": 1,
-            "emp_id": empid
-        });
+        // const data = JSON.stringify({
+        //     "role_id": roleid,
+        //     "filter_type": "2",
+        //     "pageNum": 1,
+        //     "emp_id": empid
+        // });
         const config = {
             method: 'post',
-            url: baseURL + 'getPeopleFilters',
+            url: baseURL + 'getFunderList',
             headers: {
                 'Content-Type': 'application/json'
             },
-            data
+            
         };
         axios(config)
             .then((response) => {
-                setFund(response?.data?.data)
+                console.log(response?.data,"response")
+                setFund(response?.data?.list)
             })
             .catch((error) => {
                 // console.log(error);
@@ -291,7 +292,7 @@ function AddProject({ viewMessage }) {
                             >
                                 {fund?.map(itm => {
                                     return (
-                                        <MenuItem value={itm?.id}>{itm?.name}</MenuItem>
+                                        <MenuItem value={itm?.funderID}>{itm?.funderName}</MenuItem>
                                     )
                                 })
                                 }
