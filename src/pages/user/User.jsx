@@ -56,7 +56,7 @@ export default function User() {
   useEffect(() => {
     user()
     setLoader(true)
-  }, [searchUser]
+  }, [searchUser ]
   )
   const getProjects = async (d) => {
     const data = JSON.stringify({
@@ -183,7 +183,7 @@ export default function User() {
       
         <Container>
           <Typography variant="h4" sx={{ mb: 5 }}>
-            People
+            People 
             <Button style={{ float: "right", color: '#ff7424' }} id="filters"
               sx={{
                 '&:hover': {
@@ -209,6 +209,7 @@ export default function User() {
                 onOpenFilter={handleOpenFilter}
                 onCloseFilter={handleCloseFilter}
                 users={users}
+                userapi={user}
                 deleteuser={() => {
                   setOpenFilter(!openFilter)
                   handleCloseFilter();

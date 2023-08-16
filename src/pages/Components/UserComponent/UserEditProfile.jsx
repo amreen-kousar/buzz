@@ -38,7 +38,7 @@ import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-export default function UserEditProfile({ updateSetUser ,closeUserDrawer,profileData}) {
+export default function UserEditProfile({ updateSetUser ,userapi,closeUserDrawer,profileData}) {
   let user = JSON.parse(sessionStorage?.getItem('people'));
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
@@ -202,8 +202,8 @@ setshowprojectlist([...updatedlist]);
         contactNum: editData?.contactNum,
         workNum: editData?.workNum,
         address: editData?.address,
-        address1: editData?.address1,
-        address2: editData?.address2,
+        address2: editData?.address1,
+        address3: editData?.address2,
         empRole: (editData?.empRole)?JSON.stringify(editData?.empRole):user.role_name,
         supervisorId: (editData?.supervisorId)?editData?.supervisorId:user?.supervisorId,
         profile_pic: editData?.profile_pic,
@@ -238,6 +238,7 @@ setshowprojectlist([...updatedlist]);
         sessionStorage.setItem('people', data);
         setUsersDataEdit(response.data);
         
+        userapi();
         closeUserDrawer()
       })
       .catch(function (error) {
@@ -245,6 +246,7 @@ setshowprojectlist([...updatedlist]);
       });
     handleClose();
     updateSetUser();
+    
   };
 
   return (
@@ -377,18 +379,24 @@ setshowprojectlist([...updatedlist]);
                   </Typography>
                 </Stack>
                 <Stack>
-                  <TextField
-                    id="outlined-basic"
-                    inputProps={{ inputMode: 'numeric', pattern: '[1-9]{1}[0-9]{9}', maxLength: 10 }}
-                    label="Mobile Number"
-                    type="number"
-                    variant="outlined"
-                    color="common"
-                    onChange={(e) => {
-                      setEditData({ ...editData, contactNum: e?.target?.value });
-                    }}
-                    value={editData?.contactNum}
-                  />
+<TextField
+  id="outlined-basic"
+  inputProps={{
+    inputMode: 'numeric',
+    pattern: '[0-9]*',
+    maxLength: 10,
+  }}
+  label="Mobile Number"
+  variant="outlined"
+  onChange={(e) => {
+    // Add validation to ensure the input doesn't exceed 10 characters
+    if (e.target.value.length <= 10) {
+      setEditData({ ...editData, contactNum: e.target.value });
+    }
+  }}
+  value={editData?.contactNum}
+/>
+
                 </Stack>
                 <Stack>
                   <TextField

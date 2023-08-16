@@ -107,7 +107,7 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
                             <Iconify icon="material-symbols:arrow-back-rounded" />
                         </IconButton>
                         <Typography id="bus-details" variant="subtitle2" style={{color:'white'}}>
-                    Bus Details   
+                    Bus Details   ass
           </Typography>
          
           </Toolbar>

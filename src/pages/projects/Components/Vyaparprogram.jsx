@@ -301,7 +301,7 @@ const [entreprenur , setentrepreneurError] = useState(false)
     parsedData.push(newData);
     const updatedData = JSON.stringify(parsedData);
     localStorage.setItem('vyapar', updatedData);
-  componentreloadmethod()
+  // componentreloadmethod()
 };
 // Get data from local 
 const [isFormPresentLocally ,setIsFormPresentLocally] =useState(false)
@@ -629,7 +629,7 @@ else{
           // });
          
           setvyaparform(saveDataLocally('vyapar',data));
-          componentreloadmethod()
+          // componentreloadmethod()
         });
         handleClose()
       } 
@@ -763,7 +763,7 @@ else{
     ) {
 
     setvyaparform(saveDataLocally('vyapar',JSON.parse(data)));
-    componentreloadmethod();
+    // componentreloadmethod();
     handleClose();
     }
     else{
