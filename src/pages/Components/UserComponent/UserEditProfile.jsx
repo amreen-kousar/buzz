@@ -209,7 +209,7 @@ setshowprojectlist([...updatedlist]);
         supervisorId: (editData?.supervisorId)?editData?.supervisorId:user?.supervisorId,
         profile_pic: editData?.profile_pic,
         status: editData?.status,
-        createdBy: (editData?.createdBy)?editData?.createdBy:userid,
+        createdBy: (editData?.createdBy)?editData?.createdBy:"",
         lastUpdatedBy: (editData?.lastUpdatedBy)?editData?.lastUpdatedBy:userid,
         project_list: overallprojects,
         license_number: editData?.license_number,
