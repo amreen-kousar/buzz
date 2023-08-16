@@ -79,7 +79,7 @@ useEffect(()=>{
     contactNum:user.contactNum,
     workNum:user.workNum,
     address:user.address,
-    address1:user.address1,
+    address3:user.address3,
     address2:user.address2,
     empRole:user.role_name,
     supervisorId:user.supervisorId,
@@ -188,9 +188,10 @@ setshowprojectlist([...updatedlist]);
     let overallprojects = [...projectvariable, ...inputprojectvalues];
  
   const editUser = (async) => {
+    var usserid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
       var data = JSON.stringify({
         id: parseInt(editData?.id),
-        countryID: editData?.countryID,
+        countryID: (editData?.countryID)?editData?.countryID:profileData?.countryID,
         first_name: editData?.first_name,
         last_name: editData?.last_name,
         gender: editData?.gender,
@@ -198,18 +199,18 @@ setshowprojectlist([...updatedlist]);
         role: (editData?.role?.id)?JSON.stringify(parseInt(editData?.role?.id)):editData?.role,
         pincode: editData?.pincode,
         officeMailId: editData?.officeMailId,
-        personalMailId: editData?.personalMailId,
+        personalMailId: (editData?.personalMailId)?editData?.personalMailId:profileData?.personalMailId,
         contactNum: editData?.contactNum,
         workNum: editData?.workNum,
         address: editData?.address,
-        address1: editData?.address1,
         address2: editData?.address2,
+        address3: (editData?.address3)?editData?.address3:profileData?.address3,
         empRole: (editData?.empRole)?JSON.stringify(editData?.empRole):user.role_name,
         supervisorId: (editData?.supervisorId)?editData?.supervisorId:user?.supervisorId,
         profile_pic: editData?.profile_pic,
         status: editData?.status,
-        createdBy: editData?.createdBy,
-        lastUpdatedBy: editData?.lastUpdatedBy,
+        createdBy: (editData?.createdBy)?editData?.createdBy:userid,
+        lastUpdatedBy: (editData?.lastUpdatedBy)?editData?.lastUpdatedBy:userid,
         project_list: overallprojects,
         license_number: editData?.license_number,
         role_name: editData?.role_name,
