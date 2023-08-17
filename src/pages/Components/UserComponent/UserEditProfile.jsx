@@ -377,18 +377,23 @@ sethowProjectListData([...updatedlist]);
                   </Typography>
                 </Stack>
                 <Stack>
-                  <TextField
-                    id="outlined-basic"
-                    inputProps={{ inputMode: 'numeric', pattern: '[1-9]{1}[0-9]{9}', maxLength: 10 }}
-                    label="Mobile Number"
-                    type="number"
-                    variant="outlined"
-                    color="common"
-                    onChange={(e) => {
-                      setEditData({ ...editData, contactNum: e?.target?.value });
-                    }}
-                    value={editData?.contactNum}
-                  />
+                <TextField
+  id="outlined-basic"
+  inputProps={{
+    inputMode: 'numeric',
+    pattern: '[0-9]*',
+    maxLength: 10,
+  }}
+  label="Mobile Number"
+  variant="outlined"
+  onChange={(e) => {
+    // Add validation to ensure the input doesn't exceed 10 characters
+    if (e.target.value.length <= 10) {
+      setEditData({ ...editData, contactNum: e.target.value });
+    }
+  }}
+  value={editData?.contactNum}
+/>
                 </Stack>
                 <Stack>
                   <TextField
