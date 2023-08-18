@@ -155,14 +155,14 @@ setShowAddBuss(false)
         // console.log(error);
       });
   }
-  var userdata =  (sendData?.operations_manager_id)?sendData?.operations_manager_id:data?.operations_manager_id
+  var userdata =  (sendData?.operations_manager_id)?sendData?.operations_manager_id:JSON.parse(sessionStorage?.getItem('operations_manager_id'))
   useEffect(() => {
     Gfl();
   },[userdata])
   const Gfl = async=>{
     
   var data = JSON.stringify({
-  "user_id": userdata
+  "user_id": JSON.stringify(parseInt(userdata))
   });
 var config = {
   method: 'post',
@@ -313,7 +313,7 @@ axios(config)
     
    }
    useEffect(()=>{
-     
+     Gfl()
   },[data?.operations_manager_id])
 const [showAddBuss , setShowAddBuss] = useState(false)
 const [showbusForm ,setShowBusForm] =useState(true)
