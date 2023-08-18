@@ -92,7 +92,7 @@ const handleclose=()=>{
       });
   };
   const projectlist = JSON.parse(sessionStorage?.getItem('people'))?.project_list;
-  const projectIds = projectlist.map(item => item.project_id);
+  const projectIds = projectlist?.map(item => item.project_id);
 
   const deleteprofile=(async)=>{
     const userData = JSON.parse(sessionStorage?.getItem('people'))?.id;
