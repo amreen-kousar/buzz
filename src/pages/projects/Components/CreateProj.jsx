@@ -163,7 +163,7 @@ useEffect(() => {
   const Gfl = async()=>{
     
     var data = JSON.stringify({
-      "user_id": JSON.stringify(userdata)
+      "user_id": JSON.stringify(parseInt(userdata))
       });
     var config = {
       method: 'post',
