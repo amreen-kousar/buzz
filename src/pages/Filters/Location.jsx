@@ -39,7 +39,7 @@ export default function Location(props) {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: 'https://bdms.buzzwomen.org/appGo/getLocation',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -56,11 +56,11 @@ export default function Location(props) {
   const getState = async (id) => {
     var data = JSON.stringify({
       "country_id": "1",
-      "state_id": id
+      "state_id": String(id) // Convert id to a string
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: 'https://bdms.buzzwomen.org/appGo/getLocation',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -78,11 +78,11 @@ export default function Location(props) {
     var data = JSON.stringify({
       "country_id": "1",
       "state_id": data?.state,
-      "district_id": id
+      "district_id": String(id)
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getLocation.php',
+      url: 'https://bdms.buzzwomen.org/appGo/getLocation',
       headers: {
         'Content-Type': 'application/json'
       },
