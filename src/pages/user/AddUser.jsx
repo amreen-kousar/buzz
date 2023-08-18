@@ -18,7 +18,7 @@ function AddUser(props) {
     let [emailExists, setEmailExists] = useState(false)
     var [AddUser, setAddUser] = useState({
         role:'', first_name: '', last_name: "", contactNum: '', workNum: '', officeMailId: '', address: '', address3: "", address2: "",
-        pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project_list: "",
+        pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: {}, license_number: "", project_list: "",
         emp_id: ""
     })
     const [roles, setRoles] = useState([])

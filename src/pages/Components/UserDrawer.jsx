@@ -91,17 +91,20 @@ const handleclose=()=>{
         // console.log(error);
       });
   };
+  const projectlist = JSON.parse(sessionStorage?.getItem('people'))?.project_list;
+  const projectIds = projectlist.map(item => item.project_id);
 
   const deleteprofile=(async)=>{
     const userData = JSON.parse(sessionStorage?.getItem('people'))?.id;
     const roleid = JSON.parse(sessionStorage?.getItem('people'))?.role_id;
-    const projectlist = JSON.parse(sessionStorage?.getItem('people'))?.project_list;
+ 
+    {console.log(projectIds,"projectsss")}
     if(confirm('Are you sure want to  delete')){
       var data = JSON.stringify({
         "emp_id": userData,
         "delete": "1",
         "role_id": roleid,
-        "project_id": project_ids
+        "project_id": projectIds
       });
       
       var config = {

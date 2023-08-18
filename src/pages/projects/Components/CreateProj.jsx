@@ -152,15 +152,17 @@ setShowAddBuss(false)
         // console.log(error);
       });
   }
-  {console.log(sendData?.operations_manager_id,"opssss")}
-var userdata =  (sendData?.operations_manager_id)?sendData?.operations_manager_id:data?.operations_manager_id
-  useEffect(() => {
+  {console.log(sendData?.operations_manager_id,"opssss",JSON.parse(sessionStorage.getItem('operations_manager_id')))}
+var userdata =  JSON.parse(sessionStorage.getItem('operations_manager_id'))
+  {console.log(userdata,"userrr")}
+useEffect(() => {
     Gfl();
   },[userdata])
-  const Gfl = async=>{
+
+  const Gfl = async()=>{
     
     var data = JSON.stringify({
-      "user_id": userdata
+      "user_id": JSON.stringify(userdata)
       });
     var config = {
       method: 'post',
@@ -311,7 +313,7 @@ axios(config)
     
    }
    useEffect(()=>{
-     
+     Gfl()
   },[data?.operations_manager_id])
 const [showAddBuss , setShowAddBuss] = useState(false)
 const [showbusForm ,setShowBusForm] =useState(true)
@@ -328,7 +330,7 @@ const mainShowBussHandler = ()=>{
   useEffect(()=>{
     busList();
   }, [showAddBuss])
- {console.log(data.operations_manager_id,"operationmanagerrre")}
+
   return (
     <div>
       {
