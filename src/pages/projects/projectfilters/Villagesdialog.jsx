@@ -8,6 +8,7 @@ import Slide from '@mui/material/Slide';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
+import ParticipantGf from '../ParticipantGf';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -86,7 +87,7 @@ export default function VillageDialog({ shown, setShown, batchState,batch,isOpen
             <Stack style={{ top: 100 }}>
               <Card onClick={() => {
                 handleOpenFilter()
-                setClickData({ name: itm.gelathiname, title: "Enrolled  Name" })
+                setClickData({ name: itm.participant_name, title: "Enrolled  Name" ,id:itm?.participant_id})
                 
               }} style={{borderRadius:'0'}}>
                 <CardContent>
@@ -100,6 +101,16 @@ export default function VillageDialog({ shown, setShown, batchState,batch,isOpen
             </Stack>
           )
         })}
+
+<Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                <ParticipantGf
+                  clcikData={clcikData}
+                  isOpenFilter={openFilter}
+                  onOpenFilter={handleOpenFilter}
+                  onCloseFilter={handleCloseFilter}
+                 
+                />
+              </Stack>
       </Drawer>
     </div>
   );
