@@ -153,8 +153,9 @@ setShowAddBuss(false)
       });
   }
   {console.log(sendData?.operations_manager_id,"opssss",JSON.parse(sessionStorage.getItem('operations_manager_id')))}
-var userdata =  JSON.parse(sessionStorage.getItem('operations_manager_id'))
+var userdata = (sendData?.operations_manager_id)?sendData?.operations_manager_id: JSON.parse(sessionStorage.getItem('operations_manager_id'))
   {console.log(userdata,"userrr")}
+
 useEffect(() => {
     Gfl();
   },[userdata])
