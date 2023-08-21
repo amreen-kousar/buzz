@@ -101,11 +101,17 @@ export default function projectMultiDrawer({
   const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
   const roleID = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
   useEffect(() => {
-    getTrainingBatch();
+    if(batchState?.training_batch_id ? batchState?.training_batch_id : clcikData?.id){
+      getTrainingBatch()
+    }
+
   }, [batchState, clcikData]);
 
   useEffect(() => {
-    getTrainingBatch();
+   if(batchState?.training_batch_id ? batchState?.training_batch_id : clcikData?.id) 
+   {
+    getTrainingBatch()
+   }
   }, [reload]);
   useEffect(() => {
     setImages([]);
@@ -236,7 +242,10 @@ export default function projectMultiDrawer({
       axios(config)
         .then(function (response) {
           onCloseFilter();
-          getTrainingBatch();
+          if(batchState?.training_batch_id ? batchState?.training_batch_id : clcikData?.id)
+          {
+            getTrainingBatch();
+          }
         })
         .catch(function (error) {
           // console.log(error);
@@ -315,7 +324,10 @@ export default function projectMultiDrawer({
   };
   //getting Notes
   useEffect(() => {
-    getNoteHandler();
+    if(batch?.data?.primary_id && batch?.data?.id){
+      getNoteHandler();
+    }
+  
   }, [batch?.data?.id]);
   const getNoteHandler = () => {
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
