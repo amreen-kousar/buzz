@@ -46,7 +46,9 @@ export default function EditTrainingBatch({batch,editSession, setEditsession}) {
   };
   
 useEffect(()=>{
+  if(batch?.data){
     villageList(batch?.data)
+  } 
 },[batch?.data])
   const villageList = async(i) => {
     

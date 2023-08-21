@@ -35,7 +35,9 @@ export default function ParticipantDrawer({ isOpenFilter, onOpenFilter, onCloseF
      const [session,setSession] = useState('')
      const [partiData,setpartiData] = useState('')
     useEffect(() => {
-        Participant();
+       if(parseInt(clcikData?.id)){
+         Participant();
+        }
     }, [clcikData])
     const Participant = async =>{
         var data = JSON.stringify({

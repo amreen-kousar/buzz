@@ -35,12 +35,16 @@ export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter})
     let userprofile =JSON.parse(sessionStorage.getItem('profiledetails'))
   
     const [profileData, setProfileData] = useState()
+    const userData = JSON.parse(sessionStorage?.getItem('profiledetails'))?.emp_id
     useEffect(() => {
+      if(userData){
         profile()
+      } 
       },
       [isOpenFilter])
+     
       const profile = async => {
-        const userData = JSON.parse(sessionStorage?.getItem('profiledetails'))?.emp_id
+      
         var data = JSON.stringify({
           "id": userData
         });

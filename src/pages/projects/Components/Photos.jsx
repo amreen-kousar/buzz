@@ -271,7 +271,7 @@ const getTrainingBatch = async =>{
          
            <Button
            id="upload-btn"
-           onClick={()=>UploadImages(1)}
+           onClick={()=>UploadImages("1")}
            
            sx={{
              '&:hover': {
@@ -334,7 +334,7 @@ const getTrainingBatch = async =>{
          
            <Button
            id="upload-btn"
-           onClick={()=>UploadImages(2)}
+           onClick={()=>UploadImages("2")}
            
            sx={{
              '&:hover': {

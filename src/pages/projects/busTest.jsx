@@ -46,14 +46,14 @@ export default function busTestList() {
     const [admin , setAdmin] = useState(true)
     useEffect(() => {
         busesdata()
-        details()
-    }, []
+        // details()
+    }, [reload]
     )
-    useEffect(() => {
-      busesdata()
-      details()
-  }, [reload]
-  )
+  //   useEffect(() => {
+  //     busesdata()
+  //     details()
+  // }, [reload]
+  // )
   const reloadHandler = ()=>{
     setReload(!reload)
   }
@@ -214,7 +214,9 @@ const details = async => {
             onChange={(newValue) => {
               setDate1(newValue)
              
-              busesdata()
+              if(state?.id){
+                busesdata()
+              }
             }}
             value={date1}
             renderInput={(params) => <TextField {...params} color="common" />}
@@ -229,7 +231,9 @@ const details = async => {
             minDate={dayjs(date1)}
             onChange={(newValue) => {
               setDate2(newValue)
-              busesdata()
+             if(state?.id){
+               busesdata()
+             }
             }}
             value={date2}
             renderInput={(params) => <TextField {...params} color="common" />}

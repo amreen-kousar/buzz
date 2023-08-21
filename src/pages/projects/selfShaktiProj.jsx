@@ -64,7 +64,7 @@ export default function selfShaktiProj() {
           "end_date": g==="date"?i:'',
           "search": search,
           "project_id": state?.id,
-          "filter_type": i?.id?i?.id:'',
+          "filter_type": i?.id?JSON.stringify(parseInt(i?.id)):'',
           "start_date": g==="date"?id:'',
           "type":state?.type,
           "trainer_id":id?.emp_id,

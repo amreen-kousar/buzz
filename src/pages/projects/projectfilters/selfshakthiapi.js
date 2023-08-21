@@ -8,7 +8,7 @@ export default async function shakthiapirequest(props) {
         "role_id": role,
         "pageNum": 1,
         "emp_id": idvalue,
-        "filter":props.selectDATA, 
+        "filter":JSON.stringify(parseInt(props.selectDATA)), 
         "end_date":"",
         "search":"",
         "project_id":props?.data1?.project_id, 

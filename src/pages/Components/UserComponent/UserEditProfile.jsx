@@ -63,7 +63,9 @@ return () => {
 };
 },[user])
 useEffect(()=>{
+ if(user?.role_id!=undefined) {
   getEmpId()
+ }
 },[])
   const [editData, setEditData] = useState({
     id: user.id,

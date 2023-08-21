@@ -152,9 +152,9 @@ const getData = (itm, i) => {
                         </IconButton></Link>
                    Gelathis  
                 </Typography>
-                {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+                {/* {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
-          </Button>:null}
+          </Button>:null} */}
                 
             </Stack>
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -175,7 +175,7 @@ const getData = (itm, i) => {
                     selected &&(selected?.type=='Field Associates') && <> <Chip style={{ backgroundColor: '#ffd796', color: '#000' }}label={`${selected?.type} : ${selected?.itm?.name} `} onDelete={() => { handleDelete(selected) }} /><br/>&nbsp;</>
             }
                    <Card><CardContent style={{fontWeight:700}}>Project Name : {data1.project_name}</CardContent> </Card><br/>
-            <Typography style={{fontWeight:500,marginLeft:2}}>Enrolled Gelathis ({count})</Typography> 
+            <Typography style={{fontWeight:500,marginLeft:2}}>Enrolled Gelathis({count})</Typography> 
             {/* <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}> */}
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
                 <ParticipantDrawer

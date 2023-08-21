@@ -35,7 +35,10 @@ export default function ParticipantGf({ isOpenFilter, onOpenFilter, onCloseFilte
      const [session,setSession] = useState('')
      const [partiData,setpartiData] = useState('')
     useEffect(() => {
-        Participant();
+        if(parseInt(clcikData?.id)){
+            Participant();
+        }
+      
     }, [clcikData])
     const Participant = async =>{
         var data = JSON.stringify({

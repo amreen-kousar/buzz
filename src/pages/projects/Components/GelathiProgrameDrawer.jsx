@@ -128,14 +128,18 @@ const [iserror, setIsError] = useState(false)
   useEffect(() => {
     setIsError(false)
     getGFSessionData();
-    getNoteHandler();
+    if(session.type && session?.tb_id && session.primary_id){
+      getNoteHandler();
+    }  
   }, [clcikData]);
   useEffect(() => {
     setIsError(false)
     let isSubscribe = true;
     setIsError(false)
     if (isSubscribe) {
-      getNoteHandler();
+      if(session.type && session?.tb_id && session.primary_id){
+        getNoteHandler();
+      }  
       getGFSessionData();
     }
     return () => {
@@ -147,7 +151,9 @@ const [iserror, setIsError] = useState(false)
     let isSubscribe = true;
     setIsError(false)
     if (isSubscribe) {
-      getNoteHandler();
+      if(session.type && session?.tb_id && session.primary_id){
+        getNoteHandler();
+      }  
       getGFSessionData();
     }
     return () => {
@@ -261,7 +267,9 @@ const [iserror, setIsError] = useState(false)
         if (response.status == 200) {
           // viewMessage('Project added sucessfully');
           setShowNote(false);
+        if(session.type && session?.tb_id && session.primary_id){
           getNoteHandler();
+        }  
           setSaveBtn(false);
           alert('Note Added Successfully...');
         }

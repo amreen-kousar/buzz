@@ -26,7 +26,7 @@ function AddUser(props) {
     const [reportingManagerProject, setReportingManagerProject] = useState([])
     useEffect(() => {
         getRoles()
-        getEmpId(2)
+        // getEmpId(2)
     }, [])
 useEffect(()=>{
     let subscribe =true 

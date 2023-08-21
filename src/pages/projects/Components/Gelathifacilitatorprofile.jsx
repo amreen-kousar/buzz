@@ -47,13 +47,16 @@ export default function Gelathifacilitatorprofile({isOpenFilter,onOpenFilter,onC
     )
     const updateSetUser=()=>{
       setUser(JSON.parse(sessionStorage?.getItem('people')))
-    }  
+    }    
+    const userData = JSON.parse(sessionStorage?.getItem('profiledetails'))?.emp_id
     useEffect(() => {
+       if(userData){
         profile()
+       } 
       },
       [isOpenFilter])
       const profile = async => {
-        const userData = JSON.parse(sessionStorage?.getItem('profiledetails'))?.emp_id
+      
         var data = JSON.stringify({
           "id": userData
         });

@@ -176,7 +176,7 @@ export default function projectMultiDrawer({
         project_id: batch?.data?.project_id,
         tb_id: batch?.data?.id,
         trainer_id: idvalue,
-        day: 1,
+        day: "1",
         photos: [images.toString().slice(22)],
       });
 

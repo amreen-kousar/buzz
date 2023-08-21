@@ -55,7 +55,9 @@ export default function CreateTrainerBatch(props) {
     setOpen(false);
   };
   useEffect(() => {
+  if(props?.data1){
     villageList(props?.data1);
+  }  
   }, [props?.data1])
   
   const villageList = async(i) => {

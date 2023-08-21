@@ -60,9 +60,11 @@ const handleclose=()=>{
     setUser(JSON.parse(sessionStorage?.getItem('people')));
     handleclose();
   };
-
+  const userData = JSON.parse(sessionStorage?.getItem('people'))?.id;
   useEffect(() => {
-    profile();
+   if(userData){
+     profile()
+   }
   }, [isOpenFilter,onCloseFilter]);
 
 

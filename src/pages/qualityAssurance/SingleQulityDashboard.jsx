@@ -110,7 +110,9 @@ const handleChange = (event, newValue) => {
   setValue(newValue);
 };
 useEffect(()=>{
-    getPOA();
+  if(item?.id!=null && item?.empRole!=null ) {
+    getPOA()
+  }
        },[item])
        const handleCloseGetSingleQualityForm = ()=>{
         setOpenGetSingleQualityForm(false)
