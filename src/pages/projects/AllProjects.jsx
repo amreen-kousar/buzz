@@ -59,6 +59,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     const [openFilter, setOpenFilter] = useState(false);
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
+    const [loader, setLoader] = useState(false);
     const [count, setCount] = useState('')
     const [openMessage, setOpenMessage] = useState(false);
     const [message, setMessage] = useState(false)
@@ -84,6 +85,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     }, []
     )
     const projectr = async (i, id, g) => {
+        setLoader(true);
 var data ={}
         {(id==4)? 
              data = JSON.stringify({
@@ -179,6 +181,7 @@ var data ={}
         };
         axios(config)
             .then((response) => {
+                setLoader(false);
                 setCount(response.data.count % 25 == 0 ? parseInt(response.data.count / 25) : parseInt(response.data.count / 25) + 1)
                 setProjects(response.data.list)
                 let published = response.data.list.filter(r => r.project_status_name == 'Published')
@@ -197,7 +200,13 @@ var data ={}
                 // console.log(error);
             });
     }
-    
+    if (loader) {
+        return (
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+            <CircularProgress />
+          </Box>
+        );
+      }
     const getData = (itm, i) => {
         setOpenFilter(false);
         setSelected(itm)

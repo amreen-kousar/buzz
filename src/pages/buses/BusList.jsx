@@ -1,8 +1,9 @@
 import { useState, useEffect, forwardRef, useRef } from 'react';
-import { Card, Stack, Chip, Button, Container, Typography, Grid, Snackbar } from '@mui/material';
+import { Card,Box, Stack, Chip, Button, Container, Typography, Grid, Snackbar } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 import Page from '../../components/Page';
+import CircularProgress from '@mui/material/CircularProgress';
 import BuslistDrawer from '../Components/BuslistDrawer';
 import Addbus from './Addbus';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
@@ -16,6 +17,7 @@ export default function User() {
   const [openMessage, setOpenMessage] = useState(false);
   var [selected, setSelected] = useState(null)
   const [clcikData, setClickData] = useState()
+  const [loader, setLoader] = useState(false);
   var [search, setSearch] = useState('')
   const [dw, setDw] = useState(false)
   const descriptionElementRef = useRef(null);
@@ -37,6 +39,7 @@ export default function User() {
     }
   }, [open]);
   const busesd = async (i, id, g) => {
+    setLoader(true);
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
   
@@ -60,7 +63,8 @@ export default function User() {
       data
     };
     axios(config)
-      .then((response) => {    
+      .then((response) => {   
+        setLoader(false); 
         settotalCount(response?.data?.total_count)
         setBuses(response?.data?.list)
         setCount(response?.data?.list.length)
@@ -75,6 +79,7 @@ export default function User() {
     busesd(e?.district_id, e?.talaq_id, "country")
   }
   const [openFilter, setOpenFilter] = useState(false);
+
   const [openbusfilter, setopenbusfilter] = useState(false);
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -111,6 +116,13 @@ export default function User() {
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
   const userrole = JSON.parse(sessionStorage.getItem('userDetails'))?.trainer_type
   return (
     <Page title="User">

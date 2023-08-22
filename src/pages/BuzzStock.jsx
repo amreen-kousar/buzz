@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import { Stack, Chip, Typography, Container} from '@mui/material';
+import { Stack, Chip, Typography, Container,Box,CircularProgress} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -40,6 +40,7 @@ export default function BuzzStock() {
   const [openbusfilter, setopenbusfilter] = useState(false);
   const [selected, setSelected] = useState(null)
   const [filterData, setFilterData] = useState({})
+  const [loader, setLoader] = useState(false);
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -66,6 +67,7 @@ export default function BuzzStock() {
     demoi()
   }
   const demoi = async (id, i, g) => {
+    setLoader(true);
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var role =JSON.parse(sessionStorage.getItem('userDetails'))?.role
     var data = JSON.stringify({
@@ -90,6 +92,7 @@ export default function BuzzStock() {
     };
     axios(config)
       .then((response) => {
+        setLoader(false);
         setDemo(response.data?.data)
       })
       .catch((error) => {
@@ -108,6 +111,13 @@ export default function BuzzStock() {
     demoi(itm, i)
     setFilterData(data)
     handleCloseFilter()
+  }
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    );
   }
   return (
     

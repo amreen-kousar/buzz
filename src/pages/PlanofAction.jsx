@@ -6,6 +6,7 @@ import account from '.././_mock/account';
 import { styled } from '@mui/material/styles';
 import Iconify from 'src/components/Iconify';
 import PropTypes from 'prop-types';
+import CircularProgress from '@mui/material/CircularProgress';
 import {
   Link,
   Container,
@@ -23,6 +24,7 @@ import {
 } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+
 import Page from '../components/Page';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -81,6 +83,7 @@ export default function PlanofAction() {
   const [drawerEvent, SetDrawerEvent] = useState(false);
   const [gfDrawer, SetGFDrawer] = useState(false);
   const [poa, SetPoa] = useState([]);
+  const [loader, setLoader] = useState(false);
   const [openMessage, setOpenMessage] = useState(false);
   const [day1, setDay1] = useState(false);
   const [select, setSelect] = useState();
@@ -167,6 +170,7 @@ export default function PlanofAction() {
     
   // }, [season, date, userId, reload,!gfDrawer,isOnline]);
   const todaypoa = (async) => {
+    setLoader(true);
     var data = JSON.stringify({
       emp_id: userId ? userId : userDetails?.id,
       team: '',
@@ -183,6 +187,7 @@ export default function PlanofAction() {
     };
     axios(config)
       .then(function (response) {
+        setLoader(false);
         localStorage.setItem('poadata',JSON.stringify(response?.data?.data))
         SetPoa(response?.data?.data);
       })
@@ -488,7 +493,13 @@ const shaktiformapi = async()=>{
       setOnline(false)
   });
   
-
+if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
  
   // useEffect(()=>{
 

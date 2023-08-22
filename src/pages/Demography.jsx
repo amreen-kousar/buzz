@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Grid, Button, Stack, CardContent, Chip , Typography,Container} from '@mui/material';
+import { Grid, Button, Stack, CardContent, Chip , Typography,Container,Box,CircularProgress} from '@mui/material';
 import axios from 'axios';
 import { assertTSAnyKeyword } from '@babel/types';
 import FiltersHome from './Filters/FiltersHome';
@@ -48,6 +48,7 @@ export default function Demography() {
   const [openFilter, setOpenFilter] = useState(false);
   const [filterData, setFilterData] = useState({})
   const [selected, setSelected] = useState()
+  const [loader, setLoader] = useState(false);
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -60,6 +61,7 @@ export default function Demography() {
   }, []
   )
   const demoi = async (id, i, g) => {
+    setLoader(true);
     const data = {
       taluk_id: g === "country" ? JSON.stringify(i) : "",
       district_id: g === "country" ? JSON.stringify(id) : "",
@@ -79,6 +81,7 @@ export default function Demography() {
     };
     axios(config)
       .then((response) => {
+        setLoader(false);
         setDemo(response.data.list)
       })
       .catch((error) => {
@@ -122,6 +125,13 @@ export default function Demography() {
   const handleDelete = () => {
     setSelected(null)
     demoi()
+  }
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    );
   }
   return (
     <Page title="Demography">
