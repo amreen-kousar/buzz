@@ -409,6 +409,9 @@ getTadata()
               <Stack style={{ marginTop: 20 }}>
                 <TextField disabled id="outlined-basic" defaultValue={editData?.end_location_name} onChange={(e) => { setSendData({ ...sendData, end_location_name: e?.target?.value }) }} label="end location" variant="outlined" color="common" />
               </Stack>
+              <Stack style={{ marginTop: 20 }}>
+                <TextField disabled id="outlined-basic" defaultValue={editData?.klmtr} onChange={(e) => { setSendData({ ...sendData, klmtr: e?.target?.value }) }} label="Total Kilometer" variant="outlined" color="common" />
+              </Stack>
               <br /><br />
             <div>
                 <div style={{ display: "flex" }}>
