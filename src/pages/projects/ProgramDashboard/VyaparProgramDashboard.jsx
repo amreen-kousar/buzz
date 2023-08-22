@@ -296,13 +296,13 @@ const VyaparProgramDashboard = () => {
                 color="motivator"
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            {/* <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Vyapar Enrolled"
                 total={(summaryData?.summary_vyparenrolled>=0)?summaryData?.summary_vyparenrolled:summaryData?.summary_vyaparenroll}
                 color="motivator"
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Module Completed "
