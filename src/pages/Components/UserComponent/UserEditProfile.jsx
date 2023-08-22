@@ -305,6 +305,10 @@ setshowprojectlist([...updatedlist]);
                   variant="outlined"
                   color="common"
                   fullWidth
+                  readOnly
+                  InputProps={{
+                    readOnly: true // Set the readOnly attribute
+                  }}
                   onChange={(e) => {
                     setEditData({ ...editData, first_name: e?.target?.value });
                   }}
@@ -419,6 +423,10 @@ setshowprojectlist([...updatedlist]);
                     type="email"
                     variant="outlined"
                     color="common"
+                    readOnly
+                    InputProps={{
+                      readOnly: true // Set the readOnly attribute
+                    }}
                     onChange={(e) => {
                       setEditData({ ...editData, officeMailId: e?.target?.value });
                     }}
