@@ -236,7 +236,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Villages"
-                  total={summaryData?.summary_villages}
+                  total={(summaryData?.summary_villages)?summaryData?.summary_villages:0}
                   color="motivator"
   
                 />
@@ -245,7 +245,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Gelathi Enrolled"
-                  total={(summaryData?.summary_Gelathienrolled)?summaryData?.summary_Gelathienrolled:summaryData?.summary_spoorthienroll}
+                  total={(summaryData?.summary_Gelathienrolled>=0)?summaryData?.summary_Gelathienrolled:summaryData?.summary_spoorthienroll}
                   color="motivator"
   
                 />
@@ -321,16 +321,16 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Gelathi Enrolled"
-                  total={(summaryData?.summary_Gelathienrolled)?summaryData?.summary_Gelathienrolled:summaryData?.summary_spoorthienroll}
+                  total={(summaryData?.summary_Gelathienrolled>=0)?summaryData?.summary_Gelathienrolled:summaryData?.summary_spoorthienroll}
                   color="motivator"
-  
+                
                 />
               </Grid>
               <Grid item xs={4} sm={8} md={4}>
   
                 <AppWidgetSummary
                   title="Number  of Circle Meeting"
-                  total={(summaryData?.summary_NoofGelathiCohorts)?summaryData?.summary_NoofGelathiCohorts:summaryData?.summary_nospoorthiciclemeet}
+                  total={(summaryData?.summary_NoofCircleMeeting>=0)?summaryData?.summary_NoofCircleMeeting:summaryData?.summary_nospoorthiciclemeet}
                   color="motivator"
   
                 />
@@ -339,7 +339,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Survey"
-                  total={(summaryData?.summary_noofsporthisurvey)?summaryData?.summary_noofsporthisurvey:summaryData?.summary_nospoorthisurvey}
+                  total={(summaryData?.summary_sporthisurvey>=0)?summaryData?.summary_sporthisurvey:summaryData?.summary_nospoorthisurvey}
                   color="motivator"
   
                 />
@@ -348,7 +348,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Modules Completed"
-                  total={(summaryData?.summary_noofsporthicompleted)?summaryData?.summary_noofsporthicompleted:summaryData?.summary_spoorthimodule}
+                  total={(summaryData?.summary_Noofsporthicompleted>=0)?summaryData?.summary_Noofsporthicompleted:summaryData?.summary_spoorthimodule}
                   color="motivator"
   
                 />
@@ -357,7 +357,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Beehives"
-                  total={(summaryData?.summary_noofbeehives)?summaryData?.summary_noofbeehives:summaryData?.summary_noofspoorthibeehives}
+                  total={(summaryData?.summary_Noofbeehives>=0)?summaryData?.summary_Noofbeehives:summaryData?.summary_noofspoorthibeehives}
                   color="motivator"
   
                 />
@@ -458,7 +458,7 @@ const GelathiProgramDashboard = () => {
            <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Circle Meeting"
-                total={(itm?.NoofGelathiCohorts)?itm?.NoofGelathiCohorts:itm?.noofspoortthimeeting}
+                total={(itm?.NoofCircleMeeting>=0)?itm?.NoofCircleMeeting:itm?.noofspoortthimeeting}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
               />
@@ -466,7 +466,7 @@ const GelathiProgramDashboard = () => {
             <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Gelathi Enrolled"
-                total={(itm?.Gelathienrolled)?itm?.Gelathienrolled:itm?.spoorthienroll}
+                total={(itm?.Gelathienrolled>=0)?itm?.Gelathienrolled:itm?.spoorthienroll}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
               />
@@ -474,7 +474,7 @@ const GelathiProgramDashboard = () => {
             <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Sporthi Survey"
-  total={(itm?.Noofsporthisurvey)?itm?.Noofsporthisurvey:itm?.noofspoorthisurvey}
+  total={(itm?.Noofsporthisurvey>=0)?itm?.Noofsporthisurvey:itm?.noofspoorthisurvey}
   color="info"
   icon = "eos-icons:product-subscriptions-outlined"
 />
@@ -482,7 +482,7 @@ const GelathiProgramDashboard = () => {
 <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Beehives"
-  total={(itm?.Noofbeehives)?itm?.Noofbeehives:itm?.noofspoorthibeehives}
+  total={(itm?.Noofbeehives>=0)?itm?.Noofbeehives:itm?.noofspoorthibeehives}
   color="info"
   icon = "twemoji:women-holding-hands"
 />
@@ -490,7 +490,7 @@ const GelathiProgramDashboard = () => {
 <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Sporthi Modules Completed"
-                total={(itm?.Noofsporthicompleted)?itm?.Noofsporthicompleted:itm?.noofspoorthimodule}
+                total={(itm?.Noofsporthicompleted>=0)?itm?.Noofsporthicompleted:itm?.noofspoorthimodule}
                 color="vyapar"
                 icon="eos-icons:product-subscriptions-outlined"
               />
@@ -590,8 +590,8 @@ const GelathiProgramDashboard = () => {
             </Grid>
            <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
-                title="Number of Vyapar cohorts"
-                total={(itm?.noofVyaparCohorts)? itm?.noofVyaparCohorts:itm?.noofspoortthimeeting}
+                title="Number of Gelathi cohorts"
+                total={(itm?.noofVyaparCohorts>=0)? itm?.noofVyaparCohorts:itm?.noofspoortthimeeting}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
               />
@@ -599,8 +599,8 @@ const GelathiProgramDashboard = () => {
             
            <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
-                title="Number of Beeives"
-                total={(itm?.Noofbeehives)?itm?.Noofbeehives:itm?.noofspoorthibeehives}
+                title="Number of Beehive"
+                total={(itm?.Noofbeehives>=0)?itm?.Noofbeehives:itm?.noofspoorthibeehives}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
               />
@@ -608,7 +608,7 @@ const GelathiProgramDashboard = () => {
            <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Gelathi Enroll"
-  total={(itm?.Gelathienrolled)?itm?.Gelathienrolled:itm?.spoorthienroll}
+  total={(itm?.Gelathienrolled>=0)?itm?.Gelathienrolled:itm?.spoorthienroll}
   color="info"
   icon = "eos-icons:product-subscriptions-outlined"
 />
@@ -616,7 +616,7 @@ const GelathiProgramDashboard = () => {
 <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
   title="Number of Spoorthi Survey "
-  total={(itm?.Noofsporthisurvey)?itm?.Noofsporthisurvey:itm?.noofspoorthisurvey}
+  total={(itm?.Noofsporthisurvey>=0)?itm?.Noofsporthisurvey:itm?.noofspoorthisurvey}
   color="info"
   icon = "twemoji:women-holding-hands"
 />
@@ -624,7 +624,7 @@ const GelathiProgramDashboard = () => {
            <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Spoorthi Completed"
-                total={(itm?.Noofsporthicompleted)?itm?.Noofsporthicompleted:itm?.noofspoorthimodule}
+                total={(itm?.Noofsporthicompleted>=0)?itm?.Noofsporthicompleted:itm?.noofspoorthimodule}
                 color="vyapar"
                 icon="eos-icons:product-subscriptions-outlined"
               />
