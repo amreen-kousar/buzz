@@ -254,7 +254,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number  of Circle Meeting"
-                  total={(summaryData?.summary_NoofGelathiCohorts)?summaryData?.summary_NoofGelathiCohorts:summaryData?.summary_nospoorthiciclemeet}
+                  total={(summaryData?.summary_NoofCircleMeeting)?summaryData?.summary_NoofCircleMeeting:summaryData?.summary_nospoorthiciclemeet}
                   color="motivator"
   
                 />
