@@ -37,7 +37,7 @@ export default function User() {
     }
   }, [open]);
   const busesd = async (i, id, g) => {
-    setLoader(true);
+
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
   
@@ -61,7 +61,7 @@ export default function User() {
     };
     axios(config)
       .then((response) => {    
-        setLoader(false);
+      
         settotalCount(response?.data?.total_count)
         setBuses(response?.data?.list)
         setCount(response?.data?.list.length)
@@ -113,13 +113,13 @@ export default function User() {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
   const userrole = JSON.parse(sessionStorage.getItem('userDetails'))?.trainer_type
-  if (loader) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
+  // if (loader) {
+  //   return (
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+  //       <CircularProgress />
+  //     </Box>
+  //   );
+  // }
   return (
     <Page title="User">
       <Searchbar id="search-bar" getSearch={(e) => searchFunction(e)} />
