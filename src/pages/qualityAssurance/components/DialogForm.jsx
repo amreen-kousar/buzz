@@ -1207,7 +1207,7 @@ reloadfunction()
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, color:"white"  }} variant="h6" component="div">
-              Self Shakti Training program Form
+            Quality Assessment Form 
             </Typography>
             <Button autoFocus color="inherit" type='submit'>
               save
