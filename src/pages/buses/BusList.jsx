@@ -39,7 +39,7 @@ export default function User() {
     }
   }, [open]);
   const busesd = async (i, id, g) => {
-    setLoader(true);
+  
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
   
@@ -64,7 +64,7 @@ export default function User() {
     };
     axios(config)
       .then((response) => {   
-        setLoader(false); 
+       
         settotalCount(response?.data?.total_count)
         setBuses(response?.data?.list)
         setCount(response?.data?.list.length)
@@ -116,13 +116,7 @@ export default function User() {
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-  if (loader) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
+ 
   const userrole = JSON.parse(sessionStorage.getItem('userDetails'))?.trainer_type
   return (
     <Page title="User">
