@@ -475,9 +475,10 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                    ),
                }}   />
               </Stack>
-              <Stack style={{ marginTop: 20 }}>
+              {(sendData?.modeoftravel&&sendData?.modeoftravel===2 | sendData?.modeoftravel===3)?
+                <Stack style={{ marginTop: 20 }}>
                 <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, totalkm: e?.target?.value }) }} label="Total Kilometer" variant="outlined" color="common"   />
-              </Stack>
+              </Stack>:null}
               <br /><br /> 
             </div></form> 
               <div>
