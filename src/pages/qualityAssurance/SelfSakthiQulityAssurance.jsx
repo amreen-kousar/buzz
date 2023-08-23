@@ -102,7 +102,7 @@ const SelfSakthiQulityAssurance = () => {
                   <IconButton>
                     <Iconify icon="material-symbols:arrow-back-rounded" />
                   </IconButton></Link>
-            Self Shakthi By Gelathi Program
+                  Quality Assessment Form 
             {/* <Button style={{ float: "right" }}>Filters</Button> */}
           </Typography>
           <Snackbar id="ta-snackbar" open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)}>
