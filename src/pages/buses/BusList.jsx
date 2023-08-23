@@ -1,5 +1,5 @@
 import { useState, useEffect, forwardRef, useRef } from 'react';
-import { Card, Stack, Chip, Button, Container, Typography, Grid, Snackbar } from '@mui/material';
+import { Card, Stack, Chip, Button, Container, Typography, Grid, Snackbar,Box,CircularProgress } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 import Page from '../../components/Page';
@@ -18,6 +18,7 @@ export default function User() {
   var [search, setSearch] = useState('')
   const [dw, setDw] = useState(false)
   const descriptionElementRef = useRef(null);
+  const [loader, setLoader] = useState(false);
   const [buses, setBuses] = useState();
   const [count, setCount] = useState()
   const [cc, setCc] = useState()
@@ -36,6 +37,7 @@ export default function User() {
     }
   }, [open]);
   const busesd = async (i, id, g) => {
+
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
   
@@ -59,6 +61,7 @@ export default function User() {
     };
     axios(config)
       .then((response) => {    
+      
         settotalCount(response?.data?.total_count)
         setBuses(response?.data?.list)
         setCount(response?.data?.list.length)
@@ -110,6 +113,13 @@ export default function User() {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
   const userrole = JSON.parse(sessionStorage.getItem('userDetails'))?.trainer_type
+  // if (loader) {
+  //   return (
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+  //       <CircularProgress />
+  //     </Box>
+  //   );
+  // }
   return (
     <Page title="User">
       <Searchbar id="search-bar" getSearch={(e) => searchFunction(e)} />

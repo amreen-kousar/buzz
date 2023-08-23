@@ -57,6 +57,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     const [completedProject, setCompletedProject] = useState([])
     const [inProgressProjects,setInProgressProjects]=useState([])
     const [openFilter, setOpenFilter] = useState(false);
+    const [loader, setLoader] = useState(false);
     var [search, setSearch] = useState('')
     var [selected, setSelected] = useState(null)
     const [count, setCount] = useState('')
@@ -84,6 +85,7 @@ export default function AllProjects({ handleClickOpen, handleClose, open }) {
     }, []
     )
     const projectr = async (i, id, g) => {
+        setLoader(true);
 var data ={}
         {(id==4)? 
              data = JSON.stringify({
@@ -179,6 +181,7 @@ var data ={}
         };
         axios(config)
             .then((response) => {
+                setLoader(false);
                 setCount(response.data.count % 25 == 0 ? parseInt(response.data.count / 25) : parseInt(response.data.count / 25) + 1)
                 setProjects(response.data.list)
                 let published = response.data.list.filter(r => r.project_status_name == 'Published')
@@ -242,6 +245,15 @@ var data ={}
     const Alert = forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
+
+    if (loader) {
+        return (
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+            <CircularProgress />
+          </Box>
+        );
+      }
+
     return (
         <Page title="Dashboard: Projects">
             <Snackbar open={openMessage} autoHideDuration={6000} onClose={() => setOpenMessage(false)} id="alertmessage">

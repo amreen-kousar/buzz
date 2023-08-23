@@ -135,7 +135,7 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
       "start_odometer": (sendData?.odimeter)?sendData?.odimeter:'',
       "rate_per_KM": sendData?.rateperkm,
       "stationery": sendData?.stationery,
-      "klmtr": sendData?.rateperkm,
+      "klmtr": sendData?.totalkm,
       "da": sendData?.foodexpenses,
       "others": sendData?.otherExpenses,
       "emp_id":userid,
@@ -475,9 +475,10 @@ inputProps={{inputmode: 'numeric',pattern: '[0-9]*' }} onChange={(e) => { setSen
                    ),
                }}   />
               </Stack>
-              <Stack style={{ marginTop: 20 }}>
-                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, location: e?.totalkm?.value }) }} label="Total Kilometer" variant="outlined" color="common"   />
-              </Stack>
+              {(sendData?.modeoftravel&&sendData?.modeoftravel===2 | sendData?.modeoftravel===3)?
+                <Stack style={{ marginTop: 20 }}>
+                <TextField required type="number" id="outlined-basic" onChange={(e) => { setSendData({ ...sendData, totalkm: e?.target?.value }) }} label="Total Kilometer" variant="outlined" color="common"   />
+              </Stack>:null}
               <br /><br /> 
             </div></form> 
               <div>

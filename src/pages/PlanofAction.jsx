@@ -19,7 +19,7 @@ import {
   Avatar,
   Grid,
   Chip,
-  IconButton,
+  IconButton,CircularProgress
 } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -83,6 +83,7 @@ export default function PlanofAction() {
   const [poa, SetPoa] = useState([]);
   const [openMessage, setOpenMessage] = useState(false);
   const [day1, setDay1] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [select, setSelect] = useState();
   const [season, setSeason] = useState(0);
   const [date, setDate] = useState(new Date());
@@ -167,6 +168,7 @@ export default function PlanofAction() {
     
   // }, [season, date, userId, reload,!gfDrawer,isOnline]);
   const todaypoa = (async) => {
+    setLoader(true);
     var data = JSON.stringify({
       emp_id: userId ? userId : userDetails?.id,
       team: '',
@@ -183,6 +185,7 @@ export default function PlanofAction() {
     };
     axios(config)
       .then(function (response) {
+        setLoader(false);
         localStorage.setItem('poadata',JSON.stringify(response?.data?.data))
         SetPoa(response?.data?.data);
       })
@@ -489,7 +492,13 @@ const shaktiformapi = async()=>{
   });
   
 
- 
+  if (loader) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
   // useEffect(()=>{
 
   //   todaypoa();

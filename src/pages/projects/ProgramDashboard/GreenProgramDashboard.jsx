@@ -222,7 +222,7 @@ const GreenProgramDashboard = () => {
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title={"Number of Green Cohorts"}
-                total={(summaryData?.summary_NoofGreencoharts)?summaryData?.summary_NoofGreencoharts:summaryData?.summary_nofvyaparcoharts}
+                total={(summaryData?.summary_NoofGreencoharts>=0)?summaryData?.summary_NoofGreencoharts:summaryData?.summary_nofgreencoharts}
                 color="motivator"
               />
             </Grid>
@@ -234,21 +234,21 @@ const GreenProgramDashboard = () => {
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number  of Green Motivators Enrolled"
-                total={(summaryData?.summary_Greenenrolled)?summaryData?.summary_Greenenrolled:summaryData?.summary_greenenroll}
+                total={(summaryData?.summary_Greenenrolled>=0)?summaryData?.summary_Greenenrolled:summaryData?.summary_greenenroll}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Green Survey"
-                total={(summaryData?.summary_NoofGreenrsurvey?summaryData?.summary_NoofGreenrsurvey:summaryData?.summary_nogreensurvey)}
+                total={(summaryData?.summary_NoofGreenrsurvey>=0)?summaryData?.summary_NoofGreenrsurvey:summaryData?.summary_nogreensurvey}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Green Modules Completed"
-                total={(summaryData?.summary_NoofGreenmodulecomoleted)?summaryData?.summary_NoofGreenmodulecomoleted:summaryData?.summary_greenmodule}
+                total={(summaryData?.summary_NoofGreenmodulecomoleted>=0)?summaryData?.summary_NoofGreenmodulecomoleted:summaryData?.summary_greenmodule}
                 color="motivator"
               />
             </Grid>
@@ -271,20 +271,20 @@ const GreenProgramDashboard = () => {
             
             <AppWidgetSummary
               title="Target"  
-              total={(summaryData?.summary_Target)?summaryData?.summary_Target:summaryData?.summary_target }
+              total={(summaryData?.summary_Target>=0)?summaryData?.summary_Target:summaryData?.summary_target }
               color="motivator"
             />
           </Grid>
              <Grid item xs={4} sm={8} md={4}>
             <AppWidgetSummary title={"Number of Villages" }
-             total={summaryData?.summary_villages } 
+             total={summaryData?.summary_villages} 
              color="motivator" />
           </Grid>
           <Grid item xs={4} sm={8} md={4}>
             
             <AppWidgetSummary
               title={"Number of Green Cohorts"  }
-              total={(summaryData?.summary_Greencoharts)?summaryData?.summary_Greencoharts:summaryData?.summary_nofvyaparcoharts }
+              total={(summaryData?.summary_Greencoharts>=0)?summaryData?.summary_Greencoharts:summaryData?.summary_nofgreencoharts }
               color="motivator"
             />
           </Grid>
@@ -292,21 +292,21 @@ const GreenProgramDashboard = () => {
           <Grid item xs={4} sm={8} md={4}>
             <AppWidgetSummary
               title="Number  of Green Motivators Enrolled"
-              total={(summaryData?.summary_Greenenrolled)?summaryData?.summary_Greenenrolled:summaryData?.summary_greenenroll}
+              total={(summaryData?.summary_Greenenrolled>=0)?summaryData?.summary_Greenenrolled:summaryData?.summary_greenenroll}
               color="motivator"
             />
           </Grid>
           <Grid item xs={4} sm={8} md={4}>
             <AppWidgetSummary
               title="Number of Green Survey"
-              total={(summaryData?.summary_Greensurvey)?summaryData?.summary_Greensurvey:summaryData?.summary_nogreensurvey}
+              total={(summaryData?.summary_Greensurvey>=0)?summaryData?.summary_Greensurvey:summaryData?.summary_nogreensurvey}
               color="motivator"
             />
           </Grid>
           <Grid item xs={4} sm={8} md={4}>
             <AppWidgetSummary
               title="Number of Green Modules Completed"
-              total={(summaryData?.summary_noofGreenmodulecompleted)?summaryData?.summary_noofGreenmodulecompleted:summaryData?.summary_greenmodule}
+              total={(summaryData?.summary_noofGreenmodulecompleted>=0)?summaryData?.summary_noofGreenmodulecompleted:summaryData?.summary_greenmodule}
               color="motivator"
             />
           </Grid>
@@ -403,7 +403,7 @@ const GreenProgramDashboard = () => {
                          <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Coharts"
-                              total={itm?.noofgreencoharts}
+                              total={(itm?.noofgreencoharts>=0)?itm?.noofgreencoharts:itm?.NoOfgreencoharts}
                               color="motivator"
                               icon="twemoji:women-holding-hands"
                             />
@@ -411,7 +411,7 @@ const GreenProgramDashboard = () => {
                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Enrolled"
-                              total={(itm?.greenenrolled)?itm?.greenenrolled:itm?.greenenroll}
+                              total={(itm?.greenenrolled>=0)?itm?.greenenrolled:itm?.greenenroll}
                               color="motivator"
                               icon="openmoji:leafy-green"
                             />
@@ -419,7 +419,7 @@ const GreenProgramDashboard = () => {
                          <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Modules Completed"
-                              total={(itm?.noofgreenmodulecompleted)?itm?.noofgreenmodulecompleted:itm?.noofgreenmodule}
+                              total={(itm?.noofgreenmodulecompleted>=0)?itm?.noofgreenmodulecompleted:itm?.noofgreenmodule}
                               color="info"
                               icon="eos-icons:product-subscriptions-outlined"
                             />
@@ -427,7 +427,7 @@ const GreenProgramDashboard = () => {
                          <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Survey"
-                              total={itm?.nofgreensurvey}
+                              total={(itm?.nofgreensurvey>=0)?itm?.nofgreensurvey:itm?.noOfgreensurvey}
                               color="vyapar"
                               icon="eos-icons:product-subscriptions-outlined"
                             />
@@ -535,14 +535,14 @@ const GreenProgramDashboard = () => {
                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Enrolled"
-                              total={(itm?.Greenenrolled)?itm?.Greenenrolled:itm?.greenenroll}
+                              total={(itm?.Greenenrolled>=0)?itm?.Greenenrolled:itm?.greenenroll}
                               color="motivator"
                               icon="openmoji:leafy-green"
                             />
                           </Grid><Grid item xs={12} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Survey"
-                              total={(itm?.noOfvyaparsurvey)?itm?.noOfvyaparsurvey:itm?.noofgreensurvey}
+                              total={(itm?.nofgreensurvey>=0)?itm?.nofgreensurvey:itm?.noofgreensurvey}
                               color="vyapar"
                               icon="eos-icons:product-subscriptions-outlined"
                             />
@@ -550,7 +550,7 @@ const GreenProgramDashboard = () => {
                          <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Module Completed"
-                              total={(itm?.noofvyaparmodulcompleted)?itm?.noofvyaparmodulcompleted:itm?.noofgreenmodule}
+                              total={(itm?.noofgreenmodulecompleted>=0)?itm?.noofgreenmodulecompleted:itm?.noofgreenmodule}
                               color="info"
                               icon="eos-icons:product-subscriptions-outlined"
                             />
@@ -558,7 +558,7 @@ const GreenProgramDashboard = () => {
                          <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Cohorts"
-                              total={(itm?.noofVyaparCohorts)?itm?.noofVyaparCohorts:itm?.noofgreencoharts}
+                              total={(itm?.noofgreencoharts>=0)?itm?.noofgreencoharts:itm?.noofgreencoharts}
                               color="vyapar"
                               icon="eos-icons:product-subscriptions-outlined"
                             />
