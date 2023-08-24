@@ -50,8 +50,11 @@ export default function EditParticipantdata({editSession, setEditsession,Trainin
   React.useEffect(() => {
     //setShown(shown)
     setOpen(editSession)
-    Occupation();
+    
   }, [editSession])
+  React.useEffect(()=>{
+    Occupation()
+  },[])
   const handleClickOpen = () => {
     setEditsession(true)
     setOpen(true);

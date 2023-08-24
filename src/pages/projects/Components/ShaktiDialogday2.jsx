@@ -286,14 +286,16 @@ countsuggestedgelathi();
                           <Iconify icon="material-symbols:edit"></Iconify></IconButton>}</>}
                  
                      
-                        <EditParticipantdata participantdata={participantdata} changeState={changeState} cvalue={c} Trainingdata={Trainingdata} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}} />
-                  
+                      
                   </CardActions>
                 </CardContent>
               </Card>
             </Stack>
           )
         })}
+         
+          <EditParticipantdata participantdata={participantdata} changeState={changeState} cvalue={c} Trainingdata={Trainingdata} editSession={editSession} setEditsession={(e)=>{setEditsession(e)}} />
+                  
       </Dialog>
     </div>
   );
