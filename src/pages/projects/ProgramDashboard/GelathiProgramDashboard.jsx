@@ -473,7 +473,7 @@ const GelathiProgramDashboard = () => {
             </Grid>
             <Grid item xs={6} sm={6} md={6}>
 <AppWidgetSummary
-  title="Number of Sporthi Survey"
+  title="Number of Spoorthi Survey"
   total={(itm?.Noofsporthisurvey>=0)?itm?.Noofsporthisurvey:itm?.noofspoorthisurvey}
   color="info"
   icon = "eos-icons:product-subscriptions-outlined"
@@ -489,7 +489,7 @@ const GelathiProgramDashboard = () => {
 </Grid>
 <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
-                title="Number of Sporthi Modules Completed"
+                title="Number of Spoorthi Modules Completed"
                 total={(itm?.Noofsporthicompleted>=0)?itm?.Noofsporthicompleted:itm?.noofspoorthimodule}
                 color="vyapar"
                 icon="eos-icons:product-subscriptions-outlined"

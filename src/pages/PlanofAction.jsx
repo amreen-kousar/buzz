@@ -168,7 +168,7 @@ export default function PlanofAction() {
     
   // }, [season, date, userId, reload,!gfDrawer,isOnline]);
   const todaypoa = (async) => {
-    setLoader(true);
+  
     var data = JSON.stringify({
       emp_id: userId ? userId : userDetails?.id,
       team: '',
@@ -185,7 +185,7 @@ export default function PlanofAction() {
     };
     axios(config)
       .then(function (response) {
-        setLoader(false);
+     
         localStorage.setItem('poadata',JSON.stringify(response?.data?.data))
         SetPoa(response?.data?.data);
       })
@@ -492,13 +492,7 @@ const shaktiformapi = async()=>{
   });
   
 
-  if (loader) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
+ 
   // useEffect(()=>{
 
   //   todaypoa();
