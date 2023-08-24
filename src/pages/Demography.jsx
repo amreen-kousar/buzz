@@ -67,6 +67,7 @@ export default function Demography() {
       district_id: g === "country" ? JSON.stringify(id) : "",
       funder_id: g ? "" : i === 2 ? id?.id : '',
       project_id: g ? "" : i === 3 ? id?.id : '',
+    
       
     };
    
