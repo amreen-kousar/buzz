@@ -67,7 +67,7 @@ export default function selfShaktiProj() {
           "filter_type": i?.id?JSON.stringify(parseInt(i?.id)):'',
           "start_date": g==="date"?id:'',
           "type":state?.type,
-          "trainer_id":id?.emp_id,
+          "trainer_id":id?.emp_id?JSON.stringify(parseInt(id?.emp_id)):'',
           "emp_id": idvalue
         });
         
