@@ -151,9 +151,9 @@ const getData = (itm, i) => {
                         </IconButton></Link>
                    Gelathis  
                 </Typography>
-                {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
+                {/* {(role==1 || role==3||role==5||role==4||role==12)?<Button style={{ float: "right",right:30,position:'absolute', color: '#ff7424' }} sx={{ '&:hover': { backgroundColor: '#ffd796', }, }} onClick={() => { handleopen() }}>
             Filter
-          </Button>:null}
+          </Button>:null} */}
                 
             </Stack>
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
