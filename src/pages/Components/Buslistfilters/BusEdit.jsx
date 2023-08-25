@@ -265,15 +265,16 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
-                        setSendData({ ...sendData, permit: moment(new Date(e?.$d)).format("DD/MM/YYYY")})
+                        setSendData({ ...sendData, permit: e})
                       }}
                       label="Permit Details"
-                      value={sendData?.permit}
+                     
                       renderInput={(params) => <TextField value={sendData?.permit} {...params} fullWidth />}
+                      value={sendData?.permit}
                     />
                   </LocalizationProvider>
                 </Stack>
-                <Stack style={{ marginTop: 10 }}>
+                {/* <Stack style={{ marginTop: 10 }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
@@ -282,6 +283,19 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
                       label="Emission Date"
                       value={sendData?.emission_date}
                       renderInput={(params) => <TextField value={sendData?.emission_date} {...params} fullWidth />}
+                    />
+                  </LocalizationProvider>
+                </Stack> */}
+                                <Stack style={{ marginTop: 10 }}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      onChange={(e) => {
+                        setSendData({ ...sendData, emission_date: e})
+                      }}
+                      label="Emission Date"
+                     
+                      renderInput={(params) => <TextField value={sendData?.emission_date} {...params} fullWidth />}
+                      value={sendData?.emission_date}
                     />
                   </LocalizationProvider>
                 </Stack>
