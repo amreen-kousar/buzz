@@ -59,7 +59,9 @@ const [Trainingdata,setTrainingData]=useState(false);
   }, [shown])
   React.useEffect(() => {
     //setShown(shown)
-getTrainingBatch();
+if( batch?.data?.id){
+  getTrainingBatch();
+}
     
    
   }, [open])

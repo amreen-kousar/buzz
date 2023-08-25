@@ -103,7 +103,9 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
       };
       axios(config)
         .then(function (response) {
-          circle();
+          if(clcikData?.id &&data1?.project_id){
+             circle()
+          }
         })
         .catch(function (error) {
           // console.log(error);
@@ -119,8 +121,12 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     setAddData({ ...addData, date: event });
   };
   useEffect(() => {
-    VillageVisit();
-    circle();
+    if(clcikData?.id){
+      VillageVisit();
+    }
+    if(clcikData?.id &&data1?.project_id){
+      circle();
+   }
     setSendData({
       circle_date: clcikData?.date,
     });

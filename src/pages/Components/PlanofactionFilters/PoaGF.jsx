@@ -90,12 +90,16 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   }, [batchState, clcikData]);
   useEffect(() => {
     getGFSessionData();
-    getNoteHandler();
+    if(session.type && session?.tb_id && session?.primary_id){
+      getNoteHandler();
+    } 
   }, [clcikData, editSession]);
   useEffect(() => {
     let isSubscribe = true;
     if (isSubscribe) {
-      getNoteHandler();
+      if(session.type && session?.tb_id && session?.primary_id){
+        getNoteHandler();
+      } 
       getGFSessionData();
     }
     return () => {
@@ -163,7 +167,7 @@ window.addEventListener('offline', () => {
         let localData = JSON.parse(localStorage.getItem('sessiondata'));
         setSession(localData);
       });
-    circle();
+    if(session?.circle_id && session?.project_id){circle()}
   };
 
   console.log(session,"sessindata")
@@ -190,7 +194,9 @@ window.addEventListener('offline', () => {
       .then(function (response) {
         if (response.status == 200) {
           setShowNote(false);
+        if(session.type && session?.tb_id && session?.primary_id){
           getNoteHandler();
+        } 
           setSaveBtn(false);
           alert('Note Added Successfully...');
         }
@@ -227,7 +233,9 @@ window.addEventListener('offline', () => {
       });
   };
   useEffect(()=>{
+   if(session?.circle_id && session?.project_id){
     circle()
+   }
   },[reloadPOAGF])
   const circle = (async) => {
     const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;

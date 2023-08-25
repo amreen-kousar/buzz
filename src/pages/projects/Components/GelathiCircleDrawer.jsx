@@ -45,7 +45,9 @@ export default function GelathiCircleDrawer({
 const [showGreenFrom ,setShowGreenForm] = useState(false)
 const [formData , setFormData] = useState()
   useEffect(() => {
-    circle();
+    if(clcikData?.id && data1?.project_id){
+      circle();
+       }
   }, [clcikData]);
   const gelathiDrawerReloder = () => {
     setReloadFromForm(!reloadFromForm);
@@ -53,7 +55,9 @@ const [formData , setFormData] = useState()
   useEffect(() => {
     let isApiSubscribed = true;
     if (isApiSubscribed) {
-      circle();
+     if(clcikData?.id && data1?.project_id){
+    circle();
+     }
     }
     return () => {
       isApiSubscribed = false;
