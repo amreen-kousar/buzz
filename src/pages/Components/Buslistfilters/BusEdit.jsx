@@ -8,10 +8,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Iconify from 'src/components/Iconify';
 import moment from 'moment';
+import dayjs from 'dayjs'; // Import the Dayjs library
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHandler ,busDetails}) {
+  console.log("🚀 ~ file:    ~ BusEdit1323 ~ clcikData:", clcikData)
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [age, setAge] = React.useState('');
@@ -60,7 +62,7 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
       "insurance_end_date":moment( clcikData?.insurance_end_date).format('DD/MM/YYYY'),
       "createdBy": clcikData?.createdBy,
       "engine_number": clcikData?.engine_number,
-      "permit": moment(clcikData?.permit).format('DD/MM/YYYY'),
+      "permit":  moment(clcikData?.permit).format('DD/MM/YYYY'),
       "fitness_certificate": moment(clcikData?.fitness_certificate).format('DD/MM/YYYY'),
       "register_number": clcikData?.register_number,
       "bus_id": clcikData?.bus_id || busDetails?.bus_id,
@@ -118,6 +120,23 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
     edit();
     
   }
+  console.log("moment:", moment)
+  let register_date = clcikData?.register_date;
+  // console.log("moment_date:", moment(register_date))
+  let testdate = moment(register_date, "DD-MM-YYYY").format("DD/MM/YYYY");
+  console.log("🚀 ~ file: BusEdit.jsx:127 ~ BusEdit ~ testdate:", testdate)
+  console.log("moment_date2:", moment(register_date, "DD-MM-YYYY").format("DD/MM/YYYY"))
+  // console.log("🚀 ~ file: BusEdit.jsx:125 ~ BusEdit ~ testdate:", testdate)
+  // const [sendDateData, setSendDateData] = useState({
+  //   register_date
+  // });
+  // console.log("🚀 ~ file: BusEdit.jsx:126 ~ BusEdit ~ sendDateData:", sendDateData)
+  // console.log("clcikData?.register_date", clcikData?.register_date);
+  // let dateExpected = clcikData?.register_date + '00:00:00';
+
+  // let regdate = moment(dateExpected).format('DD/MM/YYYY')
+  // console.log("🚀 ~ file: BusEdit.jsx:127 ~ BusEdit ~ clcikData?.register_date:",typeof (clcikData?.register_date))
+  // console.log('Formatted register date:', regdate);
   return (
     <div>
       <Button onClick={handleClickOpen} sx={{
@@ -175,14 +194,16 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
                 <TextField fullWidth id="outlined-basic" value={sendData?.register_number} onChange={(e) => { setSendData({ ...sendData, register_number: e?.target?.value }) }} label="Bus Number" variant="outlined" />
             
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                   defaultValue={clcikData?.register_date}
-                    onChange={(e) => {
-                      setSendData({ ...sendData, register_date: e })}}
-                    label="Registration Date"
-                   
-                    renderInput={(params) => <TextField value={sendData?.register_date} {...params} fullWidth />}
-                  /></LocalizationProvider>
+  <DatePicker
+    value={sendData?.register_date}
+    onChange={(date) => {
+      setSendData({ ...sendData, register_date: date });
+    }}
+    // inputFormat="DD/MM/YYYY" 
+    label="Registration Date"
+    renderInput={(params) => <TextField {...params} fullWidth />}
+  />
+</LocalizationProvider>
                
                
                 <Stack style={{ marginTop: 10 }}>
@@ -204,7 +225,7 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
                         setSendData({ ...sendData, insurance_start_date:e })
                       }}
                       label="Insurance Start Date"
-                      defaultValue={sendData?.insurance_start_date}
+                      value={sendData?.insurance_start_date}
                       renderInput={(params) => <TextField value={sendData?.insurance_start_date} {...params} fullWidth />}
                     />
                   </LocalizationProvider>
@@ -259,7 +280,7 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
                     />
                   </LocalizationProvider>
                 </Stack>
-                <Stack style={{ marginTop: 10 }}>
+                {/* <Stack style={{ marginTop: 10 }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
@@ -270,8 +291,21 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
                       renderInput={(params) => <TextField value={sendData?.permit} {...params} fullWidth />}
                     />
                   </LocalizationProvider>
+                </Stack> */}
+                                <Stack style={{ marginTop: 10 }}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      onChange={(e) => {
+                        setSendData({ ...sendData, permit: e})
+                      }}
+                      label="Permit Details"
+                     
+                      renderInput={(params) => <TextField value={sendData?.permit} {...params} fullWidth />}
+                      value={sendData?.permit}
+                    />
+                  </LocalizationProvider>
                 </Stack>
-                <Stack style={{ marginTop: 10 }}>
+                {/* <Stack style={{ marginTop: 10 }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       onChange={(e) => {
@@ -280,6 +314,19 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
                       label="Emission Date"
                       value={sendData?.emission_date}
                       renderInput={(params) => <TextField value={sendData?.emission_date} {...params} fullWidth />}
+                    />
+                  </LocalizationProvider>
+                </Stack> */}
+                                <Stack style={{ marginTop: 10 }}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      onChange={(e) => {
+                        setSendData({ ...sendData, emission_date: e})
+                      }}
+                      label="Emission Date"
+                     
+                      renderInput={(params) => <TextField value={sendData?.emission_date} {...params} fullWidth />}
+                      value={sendData?.emission_date}
                     />
                   </LocalizationProvider>
                 </Stack>
