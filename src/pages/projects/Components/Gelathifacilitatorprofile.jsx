@@ -105,7 +105,7 @@ export default function Gelathifacilitatorprofile({isOpenFilter,onOpenFilter,onC
                   </div>
                   <Card sx={{ px: 1, boxShadow: 0 }} >
                     <Typography style={{ flexDirection: 'row', color: '#444444', }} variant="subtitle1" gutterBottom>{profileData?.first_name}&nbsp;{profileData?.last_name} 
-                   <Projectdashboard profileData={profileData}/>
+                   {/* <Projectdashboard profileData={profileData}/> */}
                     </Typography> 
                     <Typography style={{ flexDirection: 'row', color: '#444444' }} variant="body1" gutterBottom>
                       Role : <span style={{ fontWeight: 100, color: '#444444' }}>{profileData?.role_name}</span>
