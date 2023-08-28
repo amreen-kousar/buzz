@@ -591,124 +591,125 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
         </Grid>
 </CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
 </CardContent>
-: (rolevalue=='senior')?
-<>
-{(summaryData?.data?.length>0) ?<CardContent>
-            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-            {"Projects List"} 
-              {/* for gfl it should be showned as project not as funder */}
-            </Typography>
+: 
+// (rolevalue=='senior')?
+// <>
+// {(summaryData?.data?.length>0) ?<CardContent>
+//             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+//             {"Projects List"} 
+//               {/* for gfl it should be showned as project not as funder */}
+//             </Typography>
           
-            {/* <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}> */}
-            <Grid item xs={12} sm={12} md={12} >
-          {summaryData?.data?.map((itm) => {
-            return (
-        <> 
-         <Card
-                style={{
-                  backgroundColor: '#f5f5f5',
-                  flexDirection: 'column',
-                  borderRadius: 12,
-                  border: '2px solid',
-                  borderColor: '#ffcc80',
-                  marginBottom: '40px',
-                }}
-                >
-                <CardContent>
+//             {/* <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}> */}
+//             <Grid item xs={12} sm={12} md={12} >
+//           {summaryData?.data?.map((itm) => {
+//             return (
+//         <> 
+//          <Card
+//                 style={{
+//                   backgroundColor: '#f5f5f5',
+//                   flexDirection: 'column',
+//                   borderRadius: 12,
+//                   border: '2px solid',
+//                   borderColor: '#ffcc80',
+//                   marginBottom: '40px',
+//                 }}
+//                 >
+//                 <CardContent>
 
 
-<Container style={{ display: 'flex', flexDirection: 'column' }}>
-        <Grid container spacing={3}>  
+// <Container style={{ display: 'flex', flexDirection: 'column' }}>
+//         <Grid container spacing={3}>  
         
 
-  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-      {(itm?.select_type=='1')?"Project Name":"Funder"}<br />
+//   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+//       {(itm?.select_type=='1')?"Project Name":"Funder"}<br />
      
-    </span>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
-      &nbsp;:&nbsp;{itm?.name}<br />
-      {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
-    </span>
+//     </span>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
+//       &nbsp;:&nbsp;{itm?.name}<br />
+//       {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
+//     </span>
     
     
-    </Grid>
-    <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-    Actual / Target  <br />
+//     </Grid>
+//     <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+//     Actual / Target  <br />
      
-    </span>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+//     </span>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
-    </span>
-  </Grid>
-  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-    Start Date  <br />
+//       &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
+//     </span>
+//   </Grid>
+//   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+//     Start Date  <br />
      
-    </span>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+//     </span>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.startDate} 
-    </span>
-  </Grid>
-  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-    End Date  <br />
+//       &nbsp;:&nbsp;{itm?.startDate} 
+//     </span>
+//   </Grid>
+//   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+//     End Date  <br />
      
-    </span>
-    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+//     </span>
+//     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.endDate} 
-    </span>
-  </Grid>
-                  <Divider mt={1} />
-                  <Grid container spacing={2} marginTop={4}>
-<Grid item xs={4} sm={8} md={4}>
+//       &nbsp;:&nbsp;{itm?.endDate} 
+//     </span>
+//   </Grid>
+//                   <Divider mt={1} />
+//                   <Grid container spacing={2} marginTop={4}>
+// <Grid item xs={4} sm={8} md={4}>
 
-<AppWidgetSummary
-  title="Villages"
-  total={(itm?.villages>=0)?itm?.villages:null}
-  color="villages"
-  icon= "fontisto:holiday-village"
+// <AppWidgetSummary
+//   title="Villages"
+//   total={(itm?.villages>=0)?itm?.villages:null}
+//   color="villages"
+//   icon= "fontisto:holiday-village"
 
-/>
-</Grid>
-  <Grid item xs={4} sm={8} md={4}>
+// />
+// </Grid>
+//   <Grid item xs={4} sm={8} md={4}>
 
-<AppWidgetSummary
-  title="Women"
-  total={(itm?.actual>=0)?itm?.actual:itm?.actual}
-  color="info"
-  icon = "twemoji:women-holding-hands"
+// <AppWidgetSummary
+//   title="Women"
+//   total={(itm?.actual>=0)?itm?.actual:itm?.actual}
+//   color="info"
+//   icon = "twemoji:women-holding-hands"
 
-/>
-</Grid>
+// />
+// </Grid>
            
- <Grid item xs={4} sm={8} md={4}>
+//  <Grid item xs={4} sm={8} md={4}>
 
-              <AppWidgetSummary
-                title="2nd day Turnout(%)"
-                total={(itm?.day2>=0)?itm?.day2:itm?.day2}
-                color="vyapar"
-                icon="eos-icons:product-subscriptions-outlined"
+//               <AppWidgetSummary
+//                 title="2nd day Turnout(%)"
+//                 total={(itm?.day2>=0)?itm?.day2:itm?.day2}
+//                 color="vyapar"
+//                 icon="eos-icons:product-subscriptions-outlined"
 
-              />
-            </Grid>
+//               />
+//             </Grid>
 
-          </Grid>
-              </Grid>
-              </Container>
-              </CardContent>
-              </Card>
-              </> 
-            );
-          })}
-        </Grid>
-{/* </CardContent> */}
-</CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
-</>:
+//           </Grid>
+//               </Grid>
+//               </Container>
+//               </CardContent>
+//               </Card>
+//               </> 
+//             );
+//           })}
+//         </Grid>
+// {/* </CardContent> */}
+// </CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
+// </>:
  (roleid == 5 || roleid == 13)?
 <>
 {(summaryData?.data?.length>0) ?<CardContent>
@@ -763,7 +764,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.startDate} 
+      &nbsp;:&nbsp;{(itm?.startDate)?itm?.startDate:itm?.start_date} 
     </span>
   </Grid>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
@@ -773,7 +774,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.endDate} 
+      &nbsp;:&nbsp;{(itm?.endDate)?itm?.endDate:itm?.end_date} 
     </span>
   </Grid>
 </Container>
