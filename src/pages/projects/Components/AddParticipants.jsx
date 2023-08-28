@@ -14,6 +14,7 @@ import Slide from '@mui/material/Slide';
 import { Stack } from '@mui/system';
 import axios from 'axios';
 import moment from 'moment';
+import { baseURL } from 'src/utils/api';
 import { number } from 'prop-types';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -94,6 +95,16 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
     }
   }
   const day = new Date()
+
+  const handleApicall=()=>{
+  if(type=='vyapar' || type=='green'){
+    gfApi()
+  }
+  else
+  {
+    hitApi()
+  }
+  }
   const hitApi = () =>{
     const roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var data = JSON.stringify({
@@ -149,6 +160,59 @@ alert("error!!!!!!")
       }
     
   }
+  const gfApi = () =>{
+    const roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
+    var data = JSON.stringify({
+      "education": enterData?.education,
+      "husbandName": enterData?.husbandName,
+      "caste": enterData?.caste,
+      "firstName": enterData?.firstName,
+      "nameOfSHG": enterData?.nameOfSHG,
+      "project_id": (session && type=="vyapar")?session?.project_id:(session && type=="green")?session?.project_id:batch?.data?.project_id,
+      "contact_no": enterData?.contact_no,
+      "dob": "",
+      "tb_id":(batch)?batch?.data?.primary_id:session?.tb_id,
+      "age": enterData?.age,
+      "gelathi_id":roleid,
+      type:(type=='vyapar' || type=="green")? type :moment(day)?.format()
+    })
+    if(data.education =="" || data.husbandName == ""){
+      alert("error!!!!!!")
+            }
+            else{
+              var config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                  url: baseURL + 'createProgramParticipant',
+                  headers: { 
+                    'Content-Type': 'application/json'
+                  },
+                  data : data
+                
+              };
+              
+              axios(config)
+              .then(function (response) {
+                reloadFUnction()
+                handleClose()
+                handleCloseDilog()
+                if(response?.data?.code ==200){
+                  handleClose()
+                  handleCloseDilog()
+                    handleCloseSaveBtn()
+                }
+                if(response?.code ==200){
+                  handleClose()
+                    handleCloseSaveBtn()
+                    handleCloseDilog()
+                }
+               
+              })
+              .catch(function (error) {
+                // console.log(error);
+              });
+            }
+  }
   return (
     <div>
       {(checkData?.data?.check_in_time_day1!="" )?
@@ -174,7 +238,7 @@ alert("error!!!!!!")
             <Typography sx={{ ml: 2, flex: 1, color:'white'}} variant="h6" component="div">
               Add Participants  
             </Typography>
-            <Button autoFocus color="inherit" onClick={hitApi}>
+            <Button autoFocus color="inherit" onClick={handleApicall}>
               save
             </Button>
           </Toolbar>
