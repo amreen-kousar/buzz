@@ -37,6 +37,8 @@ const GreenProgramDashboard = () => {
   const [slected, setSelected] = useState(null);
   const [summaryData, setSummaryData] = useState([]);
   const [graphData, setGraphData] = useState(null);
+  var startdate = moment(new Date()).format('YYYY-04-01')
+  var endDate = moment(startdate, 'YYYY').add(1, 'year').format('YYYY-03-31')
   var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
   var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
   const apiHit = async (id, i, g,date1,date2) => {
@@ -45,8 +47,8 @@ const GreenProgramDashboard = () => {
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     const data = {
       "partner_id": i === 1 ? id?.id : '',
-      "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
-      "end_date": (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):'',
+      "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'):(id===undefined)? startdate:"",
+      "end_date": (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):(i ===undefined)?endDate:"",
       "funder_id": i === 2 ? id?.id : '',
       "dist":  (g === "country" || g==="countryCalendar") ? id : '',
       "taluk": (g === "country" || g==="countryCalendar") ? i : '',
