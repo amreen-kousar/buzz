@@ -41,7 +41,8 @@ const GelathiProgramDashboard = () => {
   
     var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
-  
+    var startdate = moment(new Date()).format('YYYY-04-01')
+    var endDate = moment(startdate, 'YYYY').add(1, 'year').format('YYYY-03-31')
     const apiHit = async (id, i, g,date1,date2) => {
       console.log(id,"idvalue",i,"ivalue")
       setLoader(true)
@@ -49,8 +50,8 @@ const GelathiProgramDashboard = () => {
       var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
       const data = {
         "partner_id": i === 1 ? id?.id : '',
-        "start_date": (g === "date")? id:(g==="Calendar" || g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'): '',
-        "end_date": (g === "date")? i:(g==="Calendar" || g==="countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):'',
+        "start_date": (g === "date")? id:(g==="Calendar" || g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'):(id===undefined)? startdate:"",
+        "end_date": (g === "date")? i:(g==="Calendar" || g==="countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):(i ===undefined)?endDate:"",
         "funder_id": i === 2 ? id?.id : '',
         "dist":(g === "country" || g==="countryCalendar") ? id : "",
         "taluk":(g === "country" || g==="countryCalendar") ? i : "",
@@ -254,7 +255,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number  of Circle Meeting"
-                  total={(summaryData?.summary_NoofCircleMeeting)?summaryData?.summary_NoofCircleMeeting:summaryData?.summary_nospoorthiciclemeet}
+                  total={(summaryData?.summary_NoofCircleMeeting>=0)?summaryData?.summary_NoofCircleMeeting:summaryData?.summary_nospoorthiciclemeet}
                   color="motivator"
   
                 />
@@ -263,7 +264,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Survey"
-                  total={(summaryData?.summary_sporthisurvey)?summaryData?.summary_sporthisurvey:summaryData?.summary_nospoorthisurvey}
+                  total={(summaryData?.summary_sporthisurvey>=0)?summaryData?.summary_sporthisurvey:summaryData?.summary_nospoorthisurvey}
                   color="motivator"
   
                 />
@@ -272,7 +273,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Modules Completed"
-                  total={(summaryData?.summary_Noofsporthicompleted)?summaryData?.summary_Noofsporthicompleted:summaryData?.summary_spoorthimodule}
+                  total={(summaryData?.summary_Noofsporthicompleted>=0)?summaryData?.summary_Noofsporthicompleted:summaryData?.summary_spoorthimodule}
                   color="motivator"
   
                 />
@@ -281,7 +282,7 @@ const GelathiProgramDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Beehives"
-                  total={(summaryData?.summary_Noofbeehives)?summaryData?.summary_Noofbeehives:summaryData?.summary_noofspoorthibeehives}
+                  total={(summaryData?.summary_Noofbeehives>=0)?summaryData?.summary_Noofbeehives:summaryData?.summary_noofspoorthibeehives}
                   color="motivator"
   
                 />
