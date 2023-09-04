@@ -42,7 +42,10 @@ export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onClose
         setAddData({ ...addData, date: event })
       }
     useEffect(() => {
+      if(clcikData?.id){
         VillageVisit();
+      }
+       
     }, [clcikData])
     const createGfSession = async =>{
       const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id

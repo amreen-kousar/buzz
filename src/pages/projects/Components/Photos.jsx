@@ -67,11 +67,16 @@ export default function FullScreenDialog({ photos, setPhotos, batch }) {
   }, [photos])
   React.useEffect(() => {
     //setShown(shown)
-     getTrainingBatch()
+    if(batch?.data?.id){
+      getTrainingBatch()
+    }
+    
   }, [reload])
   React.useEffect(() => {
     //setShown(shown)
-     getTrainingBatch()
+    if(batch?.data?.id){
+      getTrainingBatch()
+    }
   }, [])
   const handleClickOpen = () => {
     setPhotos(true)
