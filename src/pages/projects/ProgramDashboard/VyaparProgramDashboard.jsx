@@ -220,10 +220,20 @@ const VyaparProgramDashboard = () => {
            
          <Grid container spacing={3} marginTop={4}>
             <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title="Number of Vyapar Cohorts"
-               total={(summaryData?.summary_noofvyaparcoharts>=0)?summaryData?.summary_noofvyaparcoharts:summaryData?.summary_nofvyaparcoharts} 
-               color="motivator" />
+              <AppWidgetSummary
+                title="Target"
+                total={(summaryData?.summary_target>=0)?summaryData?.summary_target:null}
+                color="motivator"
+              />
             </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+              <AppWidgetSummary
+                title="Actual"
+                total={(summaryData?.summary_actual>=0)?summaryData?.summary_actual:null}
+                color="motivator"
+              />
+            </Grid>
+           
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Villages"
@@ -231,21 +241,26 @@ const VyaparProgramDashboard = () => {
                 color="motivator"
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={6} sm={8} md={6}>
+              <AppWidgetSummary title="Number of Vyapar Cohorts"
+               total={(summaryData?.summary_noofvyaparcoharts>=0)?summaryData?.summary_noofvyaparcoharts:summaryData?.summary_nofvyaparcoharts} 
+               color="motivator" />
+            </Grid>
+            <Grid item xs={6} sm={8} md={6}>
               <AppWidgetSummary
                 title="Number  of Vyapar Enrolled"
                 total={(summaryData?.summary_vyaparenrolled>=0)?summaryData?.summary_vyaparenrolled:summaryData?.summary_vyaparenroll}
                 color="motivator"
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={6} sm={8} md={6}>
               <AppWidgetSummary
                 title="Number of Vyapar Survey"
                 total={(summaryData?.summary_noofVyaparsurvey>=0)?summaryData?.summary_noofVyaparsurvey:summaryData?.summary_novyaparsurvey}
                 color="motivator"
               />
             </Grid>
-            <Grid item xs={4} sm={8} md={4}>
+            <Grid item xs={6} sm={8} md={6}>
               <AppWidgetSummary
                 title="Number of Vyapar Modules Completed"
                 total={(summaryData?.summary_noofvyaparmodulecomoleted>=0)?summaryData?.summary_noofvyaparmodulecomoleted:summaryData?.summary_vyaparmodule}
@@ -261,7 +276,8 @@ const VyaparProgramDashboard = () => {
           <>
           <Grid container spacing={3} marginTop={4}>
             <Grid item xs={4} sm={8} md={4}>
-              <AppWidgetSummary title="Actual"
+              <AppWidgetSummary 
+               title="Actual"
                total={summaryData?.summary_actual} 
                color="motivator" />
             </Grid>

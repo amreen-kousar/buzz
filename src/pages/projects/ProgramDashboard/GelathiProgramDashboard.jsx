@@ -233,6 +233,22 @@ const GelathiProgramDashboard = () => {
           { 
            (roleid == 1 || roleid == 9 || roleid == 3 || roleid == 4 || roleid == 12 )?
           <Grid container spacing={3} marginTop={4}>
+            <Grid item xs={4} sm={8} md={4}>
+  
+      <AppWidgetSummary
+    title="Target"
+    total={(summaryData?.summary_Target)?summaryData?.summary_Target:summaryData?.summary_target}
+    color="motivator"
+  />
+            </Grid>
+            <Grid item xs={4} sm={8} md={4}>
+  
+  <AppWidgetSummary
+    title="Actual"
+    total={summaryData?.summary_actual}
+    color="motivator"
+  />
+           </Grid>
               <Grid item xs={4} sm={8} md={4}>
   
                 <AppWidgetSummary
@@ -269,7 +285,7 @@ const GelathiProgramDashboard = () => {
   
                 />
               </Grid>
-              <Grid item xs={4} sm={8} md={4}>
+              <Grid item xs={6} sm={8} md={6}>
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Modules Completed"
@@ -278,7 +294,7 @@ const GelathiProgramDashboard = () => {
   
                 />
               </Grid>
-              <Grid item xs={4} sm={8} md={4}>
+              <Grid item xs={6} sm={8} md={6}>
   
                 <AppWidgetSummary
                   title="Number of Beehives"
@@ -345,7 +361,7 @@ const GelathiProgramDashboard = () => {
   
                 />
               </Grid>
-              <Grid item xs={4} sm={8} md={4}>
+              <Grid item xs={6} sm={8} md={6}>
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Modules Completed"
@@ -354,7 +370,7 @@ const GelathiProgramDashboard = () => {
   
                 />
               </Grid>
-              <Grid item xs={4} sm={8} md={4}>
+              <Grid item xs={6} sm={8} md={6}>
   
                 <AppWidgetSummary
                   title="Number of Beehives"
