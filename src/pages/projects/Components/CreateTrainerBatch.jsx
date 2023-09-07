@@ -120,6 +120,18 @@ export default function CreateTrainerBatch(props) {
     tableRowStyle: { justifyContent: 'center', alignItems: 'center', marginLeft: 200 },
     linkStyle: { textDecoration: 'none', color: "black" }
   }
+  const [error, setError] = useState(false);
+const handlenumber = (e) =>{
+  const inputValue = e.target.value;
+  if(/^[6-9]\d{0,9}$/.test(inputValue) || inputValue === ''){
+    setTrainerData({ ...trainerData, contact_number: e?.target?.value })
+    setError(false)
+  }
+  else{
+   setError(true)
+  }
+}
+
   return (
     <div>
       <Button variant="secondary" style={styles.buttonStyle} onClick={handleClickOpen}
@@ -221,17 +233,20 @@ export default function CreateTrainerBatch(props) {
           <TextField
             fullWidth
             color="common"
-            onChange={(e) => { 
-              const limitChar = 10
-              if (e.target.value.toString().length <= limitChar) {
-                setTrainerData({ ...trainerData, contact_number: e?.target?.value }) 
-              }
-            }}
+            label="Contact Number "
+            inputProps={{  inputMode: 'numeric',
+            pattern: '[0-9]*', maxLength: 10 }}
+            // onChange={(e) => { 
+            //   const limitChar = 10
+            //   if (e.target.value.toString().length <= limitChar) {
+            //     setTrainerData({ ...trainerData, contact_number: e?.target?.value }) 
+            //   }
+            // }}
+            onChange={handlenumber}
             value= {trainerData.contact_number}
-            type="number"
-            id="outlined-error"
-            inputProps={{ maxLength: 10 }}
-            label="Contact Number " />
+            error = {error}
+            helperText ={error?'Invalid Input':''}
+           />
         </Stack>
         <Stack  style={{ marginTop: 10 }}>
           <Typography margin={2}>Day 1</Typography>

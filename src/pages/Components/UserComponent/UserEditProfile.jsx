@@ -249,7 +249,32 @@ setshowprojectlist([...updatedlist]);
     updateSetUser();
     
   };
+  const [error, setError] = useState(false);
+  const [workError,setWorkError]=useState(false);
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
 
+    // Check if the input matches the desired pattern (starts with 6-9) and doesn't exceed 10 characters
+    if (/^[6-9]\d{0,9}$/.test(inputValue) || inputValue === '') {
+      setEditData({ ...editData, contactNum: inputValue });
+      setError(false)
+    }
+    else{
+      setError(true)
+    }
+  };
+  const handleworknumber = (e) => {
+    const inputValue = e.target.value;
+
+    // Check if the input matches the desired pattern (starts with 6-9) and doesn't exceed 10 characters
+    if (/^[6-9]\d{0,9}$/.test(inputValue) || inputValue === '') {
+      setEditData({ ...editData, workNum: inputValue });
+      setWorkError(false)
+    }
+    else{
+      setWorkError(true)
+    }
+  };
   return (
     <div>
       <Button
@@ -393,27 +418,32 @@ setshowprojectlist([...updatedlist]);
   }}
   label="Mobile Number"
   variant="outlined"
-  onChange={(e) => {
-    // Add validation to ensure the input doesn't exceed 10 characters
-    if (e.target.value.length <= 10) {
-      setEditData({ ...editData, contactNum: e.target.value });
-    }
-  }}
+  // onChange={(e) => {
+  //   // Add validation to ensure the input doesn't exceed 10 characters
+  //   if (e.target.value.length <= 10) {
+  //     setEditData({ ...editData, contactNum: e.target.value });
+  //   }
+  // }}
+  onChange={handleInputChange}
   value={editData?.contactNum}
+  error={error} 
+  helperText={error ? 'Invalid input' : ''}
 />
 
                 </Stack>
                 <Stack>
                   <TextField
                     id="outlined-basic"
-                    label="Work  "
-                    type="number"
-                    variant="outlined"
-                    color="common"
-                    onChange={(e) => {
-                      setEditData({ ...editData, workNum: e?.target?.value });
+                    inputProps={{
+                      inputMode: 'numeric',
+                      pattern: '[0-9]*',
+                      maxLength: 10,
                     }}
+                    label="Work"
+                    variant="outlined" onChange={handleworknumber}
                     value={editData?.workNum}
+                    error={workError}
+                    helperText={workError ? 'Invalid input' : ''}
                   />
                 </Stack>
                 <Stack>
