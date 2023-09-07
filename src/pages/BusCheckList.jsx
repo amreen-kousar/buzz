@@ -47,12 +47,11 @@ const getbuschecklist=async()=>{
       
       axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
-       
+
         setBusData(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
 }
 
@@ -111,13 +110,12 @@ const getbuschecklist=async()=>{
       
       axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         alert(response.data.message)
         handleClose();
     
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
    }
    
