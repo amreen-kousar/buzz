@@ -322,16 +322,18 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                                 </FormControl>}
                                 <br /><br/>
                                  {!["Funder", "Partner"].includes(AddUser.role?.roleName) && <FormControl fullWidth>
-                                    <Autocomplete
+                                 {reportingManager.length > 0 && 
+                                   <Autocomplete
                                         disablePortal
                                         id="combo-box-demo"
-                                        options={reportingManager}
+                                        options={Array.isArray(reportingManager) ? reportingManager : []}
+                                        // getOptionLabel={(option) => option.name} // Specify how to extract the label
                                         defaultValue={AddUser.reportingManager}
                                         label="reportingManager"
                                         onChange={(event, value) => getProjectOfManager(value)}
                                        
                                         renderInput={(params) => <TextField id="reposrting-manager" {...params} label="ReportingManger" />}
-                                    />
+                                    />}
                                 </FormControl>
                                 } 
                             </div>

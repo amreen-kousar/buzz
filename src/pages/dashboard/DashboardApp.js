@@ -30,9 +30,9 @@ const DashboardApp = () => {
 const [errorMsg,setErrormsg]=useState(false)
   const [slected, setSelected] = useState(null)
   const [summaryData, setSummaryData] = useState([]);
-  const [graphData, setGraphData] = useState(null);
   var startdate = moment(new Date()).format('YYYY-04-01')
   var endDate = moment(startdate, 'YYYY').add(1, 'year').format('YYYY-03-31')
+  const [graphData, setGraphData] = useState(null);
   const itemStyles = [{ itemXs: 4, itemSm: 8, itemMd: 4 }, { itemXs: 6, itemSm: 8, itemMd: 6 }]
   var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
   var rolevalue = JSON.parse(sessionStorage.getItem('userDetails'))?.trainer_type;
@@ -43,10 +43,11 @@ const [errorMsg,setErrormsg]=useState(false)
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     const data  ={
       "partner_id": i === 1 ? id?.id : '',
-      "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'):(id===undefined)? startdate:"",
-      "end_date":  (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):(i ===undefined)?endDate:"",
-    "dist":(g === "country" || g==="countryCalendar")? JSON.stringify(id) : "",
-    "taluk":(g === "country" || g==="countryCalendar") ? JSON.stringify(i) : "",
+    "start_date": (g === "date")? id:(g==="Calendar"|| g=== "countryCalendar")?moment(date1?.$d)?.format('YYYY-MM-DD'):(id===undefined)? startdate:"",
+    "end_date":  (g === "date")? i:(g==="Calendar"|| g=== "countryCalendar")?moment(date2?.$d)?.format('YYYY-MM-DD'):(i ===undefined)?endDate:"",
+    "funder_id":i === 2 ? id?.id : '',
+    "dist":(g === "country" || g==="countryCalendar")? id : "",
+    "taluk":(g === "country" || g==="countryCalendar") ? i : "",
     "project_id":i===3? id?.id : '',
     "trainer_id":i === 5 ? id?.id : '',
     "opsmanager":i === 4 ? id?.id : '',
@@ -591,125 +592,124 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
         </Grid>
 </CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
 </CardContent>
-: 
-// (rolevalue=='senior')?
-// <>
-// {(summaryData?.data?.length>0) ?<CardContent>
-//             <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
-//             {"Projects List"} 
-//               {/* for gfl it should be showned as project not as funder */}
-//             </Typography>
+: (rolevalue=='senior')?
+<>
+{(summaryData?.data?.length>0) ?<CardContent>
+            <Typography variant="h4" gutterBottom style={{ marginLeft: "20px" }}>
+            {"Projects List"} 
+              {/* for gfl it should be showned as project not as funder */}
+            </Typography>
           
-//             {/* <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}> */}
-//             <Grid item xs={12} sm={12} md={12} >
-//           {summaryData?.data?.map((itm) => {
-//             return (
-//         <> 
-//          <Card
-//                 style={{
-//                   backgroundColor: '#f5f5f5',
-//                   flexDirection: 'column',
-//                   borderRadius: 12,
-//                   border: '2px solid',
-//                   borderColor: '#ffcc80',
-//                   marginBottom: '40px',
-//                 }}
-//                 >
-//                 <CardContent>
+            {/* <CardContent maxWidth="md" style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}> */}
+            <Grid item xs={12} sm={12} md={12} >
+          {summaryData?.data?.map((itm) => {
+            return (
+        <> 
+         <Card
+                style={{
+                  backgroundColor: '#f5f5f5',
+                  flexDirection: 'column',
+                  borderRadius: 12,
+                  border: '2px solid',
+                  borderColor: '#ffcc80',
+                  marginBottom: '40px',
+                }}
+                >
+                <CardContent>
 
 
-// <Container style={{ display: 'flex', flexDirection: 'column' }}>
-//         <Grid container spacing={3}>  
+<Container style={{ display: 'flex', flexDirection: 'column' }}>
+        <Grid container spacing={3}>  
         
 
-//   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-//       {(itm?.select_type=='1')?"Project Name":"Funder"}<br />
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+      {(itm?.select_type=='1')?"Project Name":"Funder"}<br />
      
-//     </span>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
-//       &nbsp;:&nbsp;{itm?.name}<br />
-//       {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
-//     </span>
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
+      &nbsp;:&nbsp;{itm?.name}<br />
+      {/* &nbsp;:&nbsp;{itm?.actual} / {itm?.target} */}
+    </span>
     
     
-//     </Grid>
-//     <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-//     Actual / Target  <br />
+    </Grid>
+    <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Actual / Target  <br />
      
-//     </span>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-//       &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
-//     </span>
-//   </Grid>
-//   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-//     Start Date  <br />
+      &nbsp;:&nbsp;{itm?.actual} / {itm?.target}
+    </span>
+  </Grid>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    Start Date  <br />
      
-//     </span>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-//       &nbsp;:&nbsp;{itm?.startDate} 
-//     </span>
-//   </Grid>
-//   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-//     End Date  <br />
+      &nbsp;:&nbsp;{itm?.startDate} 
+    </span>
+  </Grid>
+  <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
+    End Date  <br />
      
-//     </span>
-//     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
+    </span>
+    <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-//       &nbsp;:&nbsp;{itm?.endDate} 
-//     </span>
-//   </Grid>
-//                   <Divider mt={1} />
-//                   <Grid container spacing={2} marginTop={4}>
-// <Grid item xs={4} sm={8} md={4}>
+      &nbsp;:&nbsp;{itm?.endDate} 
+    </span>
+  </Grid>
+                  <Divider mt={1} />
+                  <Grid container spacing={2} marginTop={4}>
+<Grid item xs={4} sm={8} md={4}>
 
-// <AppWidgetSummary
-//   title="Villages"
-//   total={(itm?.villages>=0)?itm?.villages:null}
-//   color="villages"
-//   icon= "fontisto:holiday-village"
+<AppWidgetSummary
+  title="Villages"
+  total={(itm?.villages>=0)?itm?.villages:null}
+  color="villages"
+  icon= "fontisto:holiday-village"
 
-// />
-// </Grid>
-//   <Grid item xs={4} sm={8} md={4}>
+/>
+</Grid>
+  <Grid item xs={4} sm={8} md={4}>
 
-// <AppWidgetSummary
-//   title="Women"
-//   total={(itm?.actual>=0)?itm?.actual:itm?.actual}
-//   color="info"
-//   icon = "twemoji:women-holding-hands"
+<AppWidgetSummary
+  title="Women"
+  total={(itm?.actual>=0)?itm?.actual:itm?.actual}
+  color="info"
+  icon = "twemoji:women-holding-hands"
 
-// />
-// </Grid>
+/>
+</Grid>
            
-//  <Grid item xs={4} sm={8} md={4}>
+ <Grid item xs={4} sm={8} md={4}>
 
-//               <AppWidgetSummary
-//                 title="2nd day Turnout(%)"
-//                 total={(itm?.day2>=0)?itm?.day2:itm?.day2}
-//                 color="vyapar"
-//                 icon="eos-icons:product-subscriptions-outlined"
+              <AppWidgetSummary
+                title="2nd day Turnout(%)"
+                total={(itm?.day2>=0)?itm?.day2:itm?.day2}
+                color="vyapar"
+                icon="eos-icons:product-subscriptions-outlined"
 
-//               />
-//             </Grid>
+              />
+            </Grid>
 
-//           </Grid>
-//               </Grid>
-//               </Container>
-//               </CardContent>
-//               </Card>
-//               </> 
-//             );
-//           })}
-//         </Grid>
-// {/* </CardContent> */}
-// </CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
-// </>:
+          </Grid>
+              </Grid>
+              </Container>
+              </CardContent>
+              </Card>
+              </> 
+            );
+          })}
+        </Grid>
+{/* </CardContent> */}
+</CardContent>:<h4 style={{textAlign:"center"}}>No Data</h4>}
+</>:
  (roleid == 5 || roleid == 13)?
 <>
 {(summaryData?.data?.length>0) ?<CardContent>
@@ -764,7 +764,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{(itm?.startDate)?itm?.startDate:itm?.start_date} 
+      &nbsp;:&nbsp;{itm?.startDate} 
     </span>
   </Grid>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
@@ -774,7 +774,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{(itm?.endDate)?itm?.endDate:itm?.end_date} 
+      &nbsp;:&nbsp;{itm?.endDate} 
     </span>
   </Grid>
 </Container>
