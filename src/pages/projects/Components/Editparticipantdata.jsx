@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import React from 'react'
-import { Button, Card, CardActions, CardContent, Stack,TextField ,Radio, DialogContent, DialogContentText,FormControlLabel} from '@mui/material';
+import { Button, Card, CardActions, CardContent, Stack,TextField ,Radio, DialogContent, DialogContentText,FormControlLabel, FormHelperText} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -45,9 +45,13 @@ export default function EditParticipantdata({editSession, setEditsession,Trainin
     income:"",
     bank_acc:""
   });
+  const [helperText, setHelperText] = useState('');
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = useState(new Date());
   const [occupationdata,setOccupationdata]=React.useState('');
+  const [HusbandOccupationError, setHusbandOccupationError] = useState(false);
+  const [OccupationError, setOccupationError] = useState(false);
+  const [BankError, setBankError] = useState(false);
   React.useEffect(() => {
     //setShown(shown)
     setOpen(editSession)
@@ -99,6 +103,22 @@ const SendData = async => {
      "project_id":parseInt(Trainingdata?.data?.project_id), 
      "tb_id":parseInt(Trainingdata?.data?.id)
 });
+if (sendData?.husbandOccupation == '') {
+  setHusbandOccupationError(true);
+  setHelperText('Please Select The Option');
+}
+if (sendData?.occupation == '') {
+  setOccupationError(true);
+  setHelperText('Please Select The Option');
+}
+if (sendData?.bank_acc == '') {
+  setBankError(true);
+  setHelperText('Please Select The Option');
+}
+if (sendData?.husbandOccupation == '' || sendData?.occupation == '') {
+  alert("Please Select The Option'");
+}
+else{
 var config = {
   method: 'post',
   url: baseURL + 'editParticipant',
@@ -129,11 +149,18 @@ var config = {
         // console.log(error);
       });
   }
+}
   return (
     <div>
         <Dialog fullScreen open={open} onClose={handleClose}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description">
+                  <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            SendData();
+          }}
+        >
         <Toolbar sx={{ bgcolor: '#ed6c02', color: 'white' }} >
           <IconButton edge="start" sx={{ color: "inherit" }} onClick={handleClose} aria-label="close">
             <CloseIcon />
@@ -142,7 +169,10 @@ var config = {
            Update Participant Detail 
           </Typography>
         
-          <Button autoFocus color="inherit" onClick={() => SendData()}>
+          <Button autoFocus color="inherit" 
+          type='submit'
+          // onClick={() => SendData()}
+          >
             save
           </Button>
         </Toolbar>
@@ -153,6 +183,7 @@ var config = {
             tabIndex={-1}
           >
             <FormControl fullWidth >
+            {OccupationError ? <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText> : null}{' '}
                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 ,marginTop:20}}>
                     {sendData?.occupation== "" ? "Select wife's occupation" : "Wife occupation"}</InputLabel>  <br/><br/>
                     <Select labelId="Select Wife's Occupation" id="demo-simple-select" value={sendData?.occupation} label="Wife Occupation" onChange={(e) => setSendData({ ...sendData, occupation: e?.target?.value })} variant="standard" color="common">
@@ -163,6 +194,7 @@ var config = {
                   </Select>
                   </FormControl> 
                   <FormControl fullWidth >
+                  {HusbandOccupationError ? <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText> : null}{' '}
                  <InputLabel id="demo-simple-select-label" style={{ flexDirection: 'row', color: '#ed6c02', fontWeight: 700 ,marginTop:30}}>
                     {sendData?.husbandOccupation== "" ? "Select Husband's occupation" : "Husband occupation"}</InputLabel>  <br/><br/><br/>
                     <Select labelId="Select Wife's Occupation" id="demo-simple-select" value={sendData?.husbandOccupation} label="Husband Occupation" onChange={(e) => setSendData({ ...sendData, husbandOccupation: e?.target?.value })} variant="standard" color="common">
@@ -173,25 +205,29 @@ var config = {
                   </Select>
                   </FormControl> 
                   <Stack style={{ marginTop: 20 }}>
-                <TextField id="Monthly-income" onChange={(e) => { setSendData({ ...sendData,wifeIncomeMonthly : e?.target?.value }) }} label="Monthly Wife's income" variant="outlined" color="common"/>
+                <TextField required id="Monthly-income" onChange={(e) => { setSendData({ ...sendData,wifeIncomeMonthly : e?.target?.value }) }} label="Monthly Wife's income" variant="outlined" color="common"/>
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="Monthly-savings" onChange={(e) => { setSendData({ ...sendData,wifeSavingsMonthly : e?.target?.value }) }} label="Monthly Wife's Savings" variant="outlined" color="common"/>
+                <TextField required id="Monthly-savings" onChange={(e) => { setSendData({ ...sendData,wifeSavingsMonthly : e?.target?.value }) }} label="Monthly Wife's Savings" variant="outlined" color="common"/>
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="goal" onChange={(e) => { setSendData({ ...sendData,saving_goal : e?.target?.value }) }} label="What is your goal" variant="outlined" color="common"/>
+                <TextField required id="goal" onChange={(e) => { setSendData({ ...sendData,saving_goal : e?.target?.value }) }} label="What is your goal" variant="outlined" color="common"/>
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="Monthly family income" onChange={(e) => { setSendData({ ...sendData,income: e?.target?.value }) }} label="Monthly Family Income" variant="outlined" color="common"/>
+                <TextField required id="Monthly family income" onChange={(e) => { setSendData({ ...sendData,income: e?.target?.value }) }} label="Monthly Family Income" variant="outlined" color="common"/>
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="Monthly _family_savings" onChange={(e) => { setSendData({ ...sendData,saving_amt : e?.target?.value }) }} label="Monthly Family Savings" variant="outlined" color="common"/>
+                <TextField required id="Monthly _family_savings" onChange={(e) => { setSendData({ ...sendData,saving_amt : e?.target?.value }) }} label="Monthly Family Savings" variant="outlined" color="common"/>
               </Stack>
               <Stack style={{ marginTop: 20 }}>
-                <TextField id="type_of_enterprise" onChange={(e) => { setSendData({ ...sendData,typeOfEnterprise : e?.target?.value }) }} label="Type of Enterprise" variant="outlined" color="common"/>
+                <TextField required id="type_of_enterprise" onChange={(e) => { setSendData({ ...sendData,typeOfEnterprise : e?.target?.value }) }} label="Type of Enterprise" variant="outlined" color="common"/>
               </Stack>
               <Stack mt={1}>
                 <Typography style={{fontWeight:500}} >Bank Account *</Typography>
+                <Typography>
+               
+               {BankError ? <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText> : null}{' '}
+             </Typography>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       name="radio-buttons-group"
@@ -211,7 +247,9 @@ var config = {
                      setSendData({ ...sendData, gelathiRecomm: sendData?.gelathiRecomm === 1 ? 0 : 1 }) 
                   }}/>
                 </Stack>
-          </DialogContentText></DialogContent>  </Dialog>
+          </DialogContentText></DialogContent> 
+          </form>
+           </Dialog>
     </div>
   );
 }

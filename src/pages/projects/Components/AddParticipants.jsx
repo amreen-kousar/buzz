@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import {Button,CardContent,TextField,Select,MenuItem,InputLabel,Box} from '@mui/material';
+import {Button,CardContent,TextField,Select,MenuItem,InputLabel,Box, FormHelperText} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
@@ -29,12 +29,14 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
         "participant_day1":"", 
         "nameOfSHG":"",
          "contact_no":"", "dob":"", "age":""}
-  
+         const [helperText, setHelperText] = React.useState('');
   const [open, setOpen] = React.useState(false);
    const [caste,setCaste] = useState([]);
    const [education,setEducation] = useState([]);
    const [participant, setParticipant] = useState(false);
    const [enterData,setEnterData] = React.useState(intialState)
+   const[educationError,setEducationError] = useState(false)
+   const[castError,setcastError] = useState(false)
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -124,8 +126,19 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
         participant_day1:(batch)?moment(day)?.format():'',
         type:(type=='vyapar' || type=="green")? type :moment(day)?.format()
       });
-      if(data.education =="" || data.husbandName == ""){
-alert("error!!!!!!")
+      if(enterData.education ==""){
+        // alert('please Fill all the field')
+       setEducationError(true)
+       setHelperText('Please Select The Option');
+      }
+      if(enterData.caste ==""){
+        // alert('please Fill all the field')
+       setcastError(true)
+       setHelperText('Please Select The Option');
+      }
+      if(enterData.age==""|| enterData.firstName==""|| enterData.caste =="" ||enterData.contact_no==""
+      || enterData.husbandName==""|| enterData.nameOfSHG=="" || data.education =="" || data.husbandName == ""){
+        alert("Please fil all the required data ")
       }else{
         var config = {
           method: 'post',
@@ -227,6 +240,7 @@ alert("error!!!!!!")
         onClose={handleClose}
         TransitionComponent={Transition}
       >
+         <form onSubmit={(e)=>{e.preventDefault(); handleapicall()}}>
         <AppBar sx={{ position: 'fixed', bgcolor: '#ff7424' }}>
           <Toolbar>
             <IconButton
@@ -240,7 +254,10 @@ alert("error!!!!!!")
             <Typography sx={{ ml: 2, flex: 1, color:'white'}} variant="h6" component="div">
               Add Participants  
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleapicall}>
+            <Button autoFocus color="inherit"
+            type='submit'
+            //  onClick={handleapicall}
+             >
               save
             </Button>
           </Toolbar>
@@ -257,12 +274,12 @@ alert("error!!!!!!")
     </Stack>
     <Stack mt={1}>
         <CardContent>
-        <TextField fullWidth id="fathername" onChange={(e)=>{setEnterData({...enterData,husbandName:e?.target?.value})}}label="Father/Husband name / Mother's name" variant="outlined" />
+        <TextField required fullWidth id="fathername" onChange={(e)=>{setEnterData({...enterData,husbandName:e?.target?.value})}}label="Father/Husband name / Mother's name" variant="outlined" />
         </CardContent>
     </Stack>
     <Stack mt={1}>
         <CardContent>
-        <TextField fullWidth id="Number" onChange={(e)=>{
+        <TextField required fullWidth id="Number" onChange={(e)=>{
           if(e.target.value.toString().length<= 10){
             setEnterData({...enterData,contact_no:e?.target?.value})
           }
@@ -274,11 +291,20 @@ alert("error!!!!!!")
     </Stack>
     <Stack mt={1}>
         <CardContent>
-        <TextField fullWidth id="shg" onChange={(e)=>{setEnterData({...enterData,nameOfSHG:e?.target?.value})}} label="Name of SHG" variant="outlined" />
+        <TextField required fullWidth id="shg" onChange={(e)=>{setEnterData({...enterData,nameOfSHG:e?.target?.value})}} label="Name of SHG" variant="outlined" />
         </CardContent>
     </Stack>
     <CardContent>
-    <InputLabel id="demo-simple-select-label">Caste</InputLabel>
+    <InputLabel id="demo-simple-select-label">
+    <Typography>
+      
+      Caste
+      {castError ? (
+                            <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                          ) : null}{' '}
+      </Typography>
+
+    </InputLabel>
   <Select
   fullWidth
     labelId="demo-simple-select-label"
@@ -296,7 +322,15 @@ alert("error!!!!!!")
   </Select>
   </CardContent>
   <CardContent>
-  <InputLabel id="demo-simple-select-label">Education</InputLabel>
+  <InputLabel id="demo-simple-select-label">
+  <Typography>
+      
+      Education
+      {educationError ? (
+                            <FormHelperText style={{ color: 'red' }}>{helperText}</FormHelperText>
+                          ) : null}{' '}
+      </Typography>
+  </InputLabel>
   <Select
     fullWidth
     labelId="demo-simple-select-label"
@@ -314,6 +348,7 @@ alert("error!!!!!!")
     })}
   </Select>
   </CardContent>
+  </form>
       </Dialog>
     </div>
   );
