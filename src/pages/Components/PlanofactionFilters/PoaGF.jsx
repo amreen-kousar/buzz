@@ -524,7 +524,7 @@ console.log(localFormPresent,"localformmm")
                   <Typography variant="body1" gutterBottom>
                     Partner : &nbsp;{session?.partnerName}
                     <br />
-                    {role != 12 ? (
+                    {session?.check_out=="0" && role != 12 ? (
                       <>
                       <Tooltip title="Edit">
 
