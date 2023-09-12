@@ -500,7 +500,7 @@ useEffect(()=>{
                     Partner : &nbsp;{session?.partnerName}
                     <br />
                     <br />
-                    {role != 12 ? (
+                    {session?.check_out=="0" && role != 12 ? (
                       <>
                       <Tooltip title="Edit">
 
