@@ -410,7 +410,8 @@ session.length <=0 ?
                   <Typography variant="body1" gutterBottom>
                     Partner :&nbsp;{session?.partnerName}
                     <br/>
-                    {userId == 6 || userId == 13 ? (
+                  {(session?.check_out=="0" && (userId == 6 || userId == 13))? 
+
                       <>
                         {' '}
                         <Tooltip title='Edit'>
@@ -439,7 +440,7 @@ session.length <=0 ?
                         </IconButton>
                         </Tooltip>
                       </>
-                    ) : null}
+                     :null}
                   </Typography>
                   {schedule && (
                     <Stack>
