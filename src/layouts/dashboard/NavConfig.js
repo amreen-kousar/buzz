@@ -113,25 +113,25 @@ const navConfig = {
     id: ['0', '1', '2', '3', '4', '6', '7', '8', '9', '11', '12', '13']
   },
   19: {
-    title: ' Funder Vyapar Program',
+    title: 'Funder Vyapar Program',
     path: '/dashboard/fundervyapardashboard',
     icon: getIcon("material-symbols:business-center-rounded" ),
     id: [ '8' ]
   },
   20: {
-    title: ' Funder Green Program',
+    title: 'Funder Green Program',
     path: '/dashboard/fundergreendashboard',
     icon: getIcon("noto-v1:man-farmer-dark-skin-tone" ),
     id: [ '8' ]
   },
   21: {
-    title: ' Funder Self Shakthi Program',
+    title: 'Funder Self Shakthi Program',
     path: '/dashboard/funderselshaktidashboard',
     icon: getIcon("bx:female" ),
     id: [ '8' ]
   },
   22: {
-    title: ' Funder Gelathi Program',
+    title: 'Funder Gelathi Program',
     path: '/dashboard/fundergelathidashboard',
     icon: getIcon("foundation:torsos-all-female"  ),
     id: [ '8' ]
