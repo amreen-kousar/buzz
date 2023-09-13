@@ -37,6 +37,7 @@ const FUnderSSDashboard = () => {
 const [errorMsg,setErrormsg]=useState(false)
   const [slected, setSelected] = useState(null)
   const [summaryData, setSummaryData] = useState([]);
+
   const [graphData, setGraphData] = useState(null);
   const itemStyles = [{ itemXs: 4, itemSm: 8, itemMd: 4 }, { itemXs: 6, itemSm: 8, itemMd: 6 }]
   
@@ -98,6 +99,7 @@ setSummaryData(response.data);
       </Box>
     )
   }
+  console.log("🚀 ~ file:  ~ FUnderSSDashboard ~ summaryData:", summaryData[0]?.actual)
   const summarySubDataView = [
     { ...itemStyles[0], title: "Villages", total: 'villages', color: "villages", icon: 'fontisto:holiday-village' },
     { ...itemStyles[0], title: "Women", total: 'women', color: "info", icon: 'twemoji:women-holding-hands' },
@@ -124,42 +126,42 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Target"
-                total={summaryData?.target}
+                total={summaryData[0]?.target}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Actual"
-                total={summaryData?.actual}
+                total={summaryData[0]?.actual}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number  of Vilages"
-                total={summaryData?.villages}
+                total={summaryData[0]?.villages}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Batches"
-                total={summaryData?.noofbatches}
+                total={summaryData[0]?.noofbatches}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Self Sakthi Survey"
-                total={summaryData?.noofselfshakthisurvey}
+                total={summaryData[0]?.noofselfshakthisurvey}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="2nd Day Turnout  %"
-                total={summaryData?.day2}
+                total={summaryData[0]?.day2}
                 color="motivator"
               />
             </Grid>
