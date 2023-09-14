@@ -98,14 +98,14 @@ const FUnderGreenDashboard = () => {
           <Grid item xs={4} sm={8} md={4}>
 <AppWidgetSummary
   title="Target"
-  total={summaryData?.target}
+  total={summaryData[0]?.target}
   color="motivator"
 />
 </Grid>
 <Grid item xs={4} sm={8} md={4}>
 <AppWidgetSummary
   title="Actual"
-  total={summaryData?.actual}
+  total={summaryData[0]?.actual}
   color="motivator"
 />
 </Grid>
@@ -113,7 +113,7 @@ const FUnderGreenDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Villages"
-                  total={summaryData?.villages}
+                  total={summaryData[0]?.villages}
                   color="motivator"
   
                 />
@@ -122,7 +122,7 @@ const FUnderGreenDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Green Enrolled"
-                  total={summaryData?.greenenrolled}
+                  total={summaryData[0]?.greenenrolled}
                   color="motivator"
   
                 />
@@ -131,7 +131,7 @@ const FUnderGreenDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number  of Green Cohorts"
-                  total={summaryData?.noofgreencoharts}
+                  total={summaryData[0]?.noofgreencoharts}
                   color="motivator"
   
                 />
@@ -140,7 +140,7 @@ const FUnderGreenDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Green Survey"
-                  total={summaryData?.nofgreensurvey}
+                  total={summaryData[0]?.nofgreensurvey}
                   color="motivator"
   
                 />
@@ -149,7 +149,7 @@ const FUnderGreenDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Green Modules Completed"
-                  total={summaryData?.noofgreenmodulecompleted}
+                  total={summaryData[0]?.noofgreenmodulecompleted}
                   color="motivator"
   
                 />

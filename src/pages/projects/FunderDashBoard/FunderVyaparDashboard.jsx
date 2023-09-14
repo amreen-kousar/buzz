@@ -96,47 +96,47 @@ const FunderVyaparDashboard = () => {
    <Grid item xs={4} sm={8} md={4}>
 <AppWidgetSummary
   title="Target"
-  total={summaryData?.target}
+  total={summaryData[0]?.target}
   color="motivator"
 />
 </Grid>
 <Grid item xs={4} sm={8} md={4}>
 <AppWidgetSummary
   title="Actual"
-  total={summaryData?.actual}
+  total={summaryData[0]?.actual}
   color="motivator"
 />
 </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary title="Number of Vyapar Cohorts"
-               total={summaryData?.noofvyaparcoharts} 
+               total={summaryData[0]?.noofvyaparcoharts} 
                color="motivator" />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Villages"
-                total={summaryData?.villages}
+                total={summaryData[0]?.villages}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number  of Vyapari Enrolled"
-                total={summaryData?.vyaparenrolled}
+                total={summaryData[0]?.vyaparenrolled}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Vyapar Survey"
-                total={summaryData?.nofvyaparsurvey}
+                total={summaryData[0]?.nofvyaparsurvey}
                 color="motivator"
               />
             </Grid>
             <Grid item xs={4} sm={8} md={4}>
               <AppWidgetSummary
                 title="Number of Vyapar Modules Completed"
-                total={summaryData?.noofvyaparmodulecompleted}
+                total={summaryData[0]?.noofvyaparmodulecompleted}
                 color="motivator"
               />
             </Grid>

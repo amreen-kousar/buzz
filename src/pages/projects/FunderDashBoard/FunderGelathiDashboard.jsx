@@ -141,14 +141,14 @@ const FunderGelathiDashboard = () => {
           <Grid item xs={4} sm={8} md={4}>
 <AppWidgetSummary
   title="Target"
-  total={summaryData?.target}
+  total={(summaryData[0]?.target>=0)?summaryData[0]?.target:null}
   color="motivator"
 />
 </Grid>
 <Grid item xs={4} sm={8} md={4}>
 <AppWidgetSummary
   title="Actual"
-  total={summaryData?.actual}
+  total={(summaryData[0]?.actual>=0)?summaryData[0]?.actual:null}
   color="motivator"
 />
 </Grid>
@@ -156,7 +156,7 @@ const FunderGelathiDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Villages"
-                  total={summaryData?.villages}
+                  total={(summaryData[0]?.villages>=0)?summaryData[0]?.villages:null}
                   color="motivator"
   
                 />
@@ -165,7 +165,7 @@ const FunderGelathiDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Gelathi Enrolled"
-                  total={summaryData?.Gelathienrolled}
+                  total={(summaryData[0]?.Gelathienrolled>=0)?summaryData[0]?.Gelathienrolled:null}
                   color="motivator"
   
                 />
@@ -174,7 +174,7 @@ const FunderGelathiDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number  of Gelathi Cohorts"
-                  total={summaryData?.NoofGelathiCohorts}
+                  total={(summaryData[0]?.NoofGelathiCohorts>=0)?summaryData[0]?.NoofGelathiCohorts:null}
                   color="motivator"
   
                 />
@@ -183,7 +183,7 @@ const FunderGelathiDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Survey"
-                  total={summaryData?.Noofsporthisurvey}
+                  total={(summaryData[0]?.Noofsporthisurvey>=0)?summaryData[0]?.Noofsporthisurvey:null}
                   color="motivator"
   
                 />
@@ -192,7 +192,7 @@ const FunderGelathiDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Spoorthi Modules Completed"
-                  total={summaryData?.Noofsporthicompleted}
+                  total={(summaryData[0]?.Noofsporthicompleted>=0)?summaryData[0]?.Noofsporthicompleted:null}
                   color="motivator"
   
                 />
@@ -201,7 +201,7 @@ const FunderGelathiDashboard = () => {
   
                 <AppWidgetSummary
                   title="Number of Beehives"
-                  total={summaryData?.Noofbeehives}
+                  total={(summaryData[0]?.Noofbeehives>=0)?summaryData[0]?.Noofbeehives:null}
                   color="motivator"
   
                 />
