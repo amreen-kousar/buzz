@@ -105,6 +105,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
     profilepic: profileData?.profile_pic,
     gender: profileData?.gender,
     doj: profileData?.doj,
+    role: profileData?.role_id,
     pincode: profileData?.pincode,
     officeMailId: profileData?.officeMailId,
     personalMailId: profileData?.personalMailId,
@@ -146,7 +147,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
     })
   }, [profileData])
 
-  // console.log(profileData?.project_list.map((e)=>e.project_id),"projects")
+  console.log(profileData?.role,"rolee")
   const handleExpandClick = () => {
     setExpanded(true);
   };
@@ -172,14 +173,14 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
     const userDetails = sessionStorage?.getItem("userDetails")
     var data = JSON.stringify({
       "id": parseInt(JSON?.parse(userDetails)?.id),
-     // "countryID": 1,
+      "countryID": "1",
       "first_name": editData?.firstName,
       "last_name": editData?.lastName,
       "profile_pic": editData?.profilepic,
       "gender": editData?.gender,
       "doj": editData?.doj,
       "pincode": editData?.pincode,
-      "role": JSON.stringify(parseInt(editData?.role?.id)),
+      "empRole": profileData?.role_id,
       "officeMailId": editData?.officeMailId,
       "personalMailId": editData?.personalMailId,
       "contactNum": editData?.contactNum,
@@ -187,7 +188,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "address": editData?.address,
       "address3": editData?.address3,
       "address2": editData?.address2,
-      "empRole": profileData?.role_name == "Admin"?"2":
+      "role": profileData?.role_name == "Admin"?"2":
       profileData?.role_name == "CEO" ? "1" :
       profileData?.role_name == "Program Manager" ? "3" :
       profileData?.role_name == "Operations Manager" ? "4" :  
