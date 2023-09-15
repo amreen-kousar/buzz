@@ -187,7 +187,8 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       "address": editData?.address,
       "address3": editData?.address3,
       "address2": editData?.address2,
-      "empRole": profileData?.role_name == "Admin" ? "2" :
+      "empRole": profileData?.role_name == "Admin"?"2":
+      profileData?.role_name == "CEO" ? "1" :
       profileData?.role_name == "Program Manager" ? "3" :
       profileData?.role_name == "Operations Manager" ? "4" :  
       profileData?.role_name == "Trainer" ? "5" :
