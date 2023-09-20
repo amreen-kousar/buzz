@@ -18,6 +18,7 @@ import Snackbar from '@mui/material/Snackbar';
 import { baseURL } from 'src/utils/api';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 export default function enrolledGreenMotivatorsList() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const [green , setGreen] = useState('')
@@ -72,7 +73,8 @@ export default function enrolledGreenMotivatorsList() {
           method: 'post',
           url: baseURL+'getEnrollGreenMotivators',
           headers: { 
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
           },
           data : data
         };
@@ -105,7 +107,8 @@ export default function enrolledGreenMotivatorsList() {
       method: 'post',
       url: baseURL + 'getProjectData',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -144,7 +147,8 @@ const getData = (itm, i) => {
         method: 'post',
         url: baseURL + 'removeGreenMotivators',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };

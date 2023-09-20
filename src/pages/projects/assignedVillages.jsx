@@ -7,6 +7,7 @@ import Searchbar from 'src/layouts/dashboard/Searchbar';
 import VillageDialog from './projectfilters/Villagesdialog';
 import { baseURL } from 'src/utils/api';
 export default function assignedVillages() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const {state} = useLocation()
     const [data1, setData1] = useState('')
     const [batch,setBatch] = useState('')
@@ -40,7 +41,8 @@ export default function assignedVillages() {
           method: 'post',
           url: baseURL+'getGFAssignedBatch',
           headers: { 
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
           },
           data : data
         };
@@ -79,7 +81,8 @@ export default function assignedVillages() {
       method: 'post',
       url: baseURL + 'getProjectData',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -113,7 +116,8 @@ const getTrainingBatch = async =>{
     method: 'post',
     url: baseURL + 'getTrainingBatchData',
     headers: { 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data : data
   };

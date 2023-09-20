@@ -25,6 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   });
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   export default function AddGreenMotivators ({session ,reloadmethod}){
+    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const [open, setOpen] = React.useState(false);
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState('');
@@ -53,7 +54,8 @@ const setGreenmotivators=(itm)=>{
       method: 'post',
       url: baseURL + 'setGreenMotivators',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -86,7 +88,8 @@ else{
     method: 'post',
     url: baseURL + 'setGreenMotivators',
     headers: { 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data : data
   };
@@ -113,7 +116,8 @@ getGreenMotivators();
         method: 'post',
         url: baseURL + 'getGreenMotivators',
         headers: { 
-          'Content-Type': 'text/plain'
+          'Content-Type': 'text/plain',
+           'Authorization': `${apikey}`
         },
         data : data
       };

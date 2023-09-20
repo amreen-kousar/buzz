@@ -31,6 +31,7 @@ Villagevisitdrawer.propTypes = {
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
 }; 
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,data,id }){
     const [scheduleData,setScheduleData] = useState('')
       const navigate = useNavigate();
@@ -66,7 +67,8 @@ export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onClose
       maxBodyLength: Infinity,
       url: baseURL+'createGFSessions',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };
@@ -98,7 +100,8 @@ export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onClose
         maxBodyLength: Infinity,
           url: baseURL + 'getTrainingBatchData',
           headers: { 
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+             'Authorization': `${apikey}`
           },
           data : data
         };

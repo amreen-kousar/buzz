@@ -18,6 +18,7 @@ const bull = (
     •
   </Box>
 );
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function LocationQuality(props) {
   const [country, setCountry] = useState([])
   const [states, setStates] = useState([])
@@ -41,7 +42,8 @@ export default function LocationQuality(props) {
       method: 'post',
       url: baseURL + 'getLocation',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -62,7 +64,8 @@ export default function LocationQuality(props) {
       method: 'post',
       url: baseURL + 'getLocation',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data: data
     };
@@ -85,7 +88,8 @@ export default function LocationQuality(props) {
       method: 'post',
       url: baseURL + 'getLocation',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data: data
     };

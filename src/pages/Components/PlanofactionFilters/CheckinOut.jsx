@@ -54,7 +54,8 @@ function TabPanel(props) {
     };
   }
 export default function CheckinOut({photos,batch,setCheck}) {
-    const newTime = new Date()
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+  const newTime = new Date()
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const [checkData,setCheckData]=React.useState('');
@@ -100,7 +101,8 @@ export default function CheckinOut({photos,batch,setCheck}) {
         method: 'post',
         url: baseURL+'getlocationName',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };
@@ -129,7 +131,8 @@ axios(config)
     maxBodyLength: Infinity,
       url: baseURL + 'checkInOut',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -166,7 +169,8 @@ axios(config)
       method: 'post',
       url: baseURL + 'getCheckInOutStatus',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };

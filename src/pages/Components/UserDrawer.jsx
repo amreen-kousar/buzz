@@ -43,6 +43,7 @@ UserDrawer.propTypes = {
 };
 
 export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users ,deleteuser}) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [profileData, setProfileData] = useState();
   const [user, setUser] = useState();
   const userDetails = sessionStorage?.getItem('userId');
@@ -80,6 +81,7 @@ const handleclose=()=>{
       url: baseURL + 'getProfileData',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -113,7 +115,8 @@ const handleclose=()=>{
         method: 'post',
         url: baseURL+'deleteUser',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };

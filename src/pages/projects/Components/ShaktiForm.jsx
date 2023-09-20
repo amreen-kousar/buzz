@@ -31,12 +31,13 @@ import FormHelperText from '@mui/material/FormHelperText';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import  { useRef } from 'react';
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
 import { ConnectingAirportsOutlined } from '@mui/icons-material';
 import { useState } from 'react';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function ShaktiForm({itm ,reloadFUnction}) {
   const [open, setOpen] = React.useState(false);
   const [solution,setsolution]= React.useState(false);
@@ -583,6 +584,7 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
       url: baseURL + 'addSurveyData',
       headers: {
         'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data: data,
     };

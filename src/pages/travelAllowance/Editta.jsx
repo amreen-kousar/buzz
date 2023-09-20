@@ -39,7 +39,7 @@ function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
 const orangecolor = orange[800];
-
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 
 Edittraveldialog.propTypes = {
   isOpenFilter: PropTypes.bool,
@@ -181,7 +181,10 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
     var requestOptions = {
       method: 'POST',
       body: form,
-      redirect: 'follow'
+      redirect: 'follow',
+      headers: { 
+        'Authorization': `${apikey}`
+      },
     };
     let res = fetch("https://bdms.buzzwomen.org/appGo/taAttachments", requestOptions).then(itn => {
       // console.log(itn, "<--itemgh")
@@ -216,7 +219,8 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
       method: 'post',
       url: baseURL+'getPoaTa',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -247,7 +251,8 @@ getTadata()
       method: 'post',
       url: baseURL + 'getTa',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };

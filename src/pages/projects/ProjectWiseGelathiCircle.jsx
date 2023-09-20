@@ -12,6 +12,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { baseURL } from 'src/utils/api';
 export default function ProjectWiseGelathiCircle() {
   const { state } = useLocation();
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [clcikData, setClickData] = useState();
   const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
   const [gelathiCircles, setgelathiCircles] = useState('');
@@ -62,6 +63,7 @@ export default function ProjectWiseGelathiCircle() {
       url: baseURL + 'getProjectData',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -101,6 +103,7 @@ export default function ProjectWiseGelathiCircle() {
       url: baseURL +'getGelathiCircle',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };

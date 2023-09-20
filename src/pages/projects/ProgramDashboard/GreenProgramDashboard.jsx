@@ -20,6 +20,7 @@ import FiltersHome from 'src/pages/Filters/FiltersHome';
 import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
 const GreenProgramDashboard = () => {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const navigate = useNavigate();
   const data = sessionStorage?.getItem('userId');
   const theme = useTheme();
@@ -67,6 +68,7 @@ const GreenProgramDashboard = () => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+         'Authorization': `${apikey}`
       },
       data,
     };
@@ -97,7 +99,8 @@ const GreenProgramDashboard = () => {
       method: 'post',
       url: baseURL + 'greenfilter',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data : data
     };

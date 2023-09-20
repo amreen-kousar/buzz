@@ -8,6 +8,7 @@ import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Villagevisitdrawer from './Components/schedulevillagevisitdrawer';
 import { baseURL } from 'src/utils/api';
 export default function scheduleVillage() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const {state} = useLocation()
     const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')
@@ -45,7 +46,8 @@ export default function scheduleVillage() {
           method: 'post',
           url: baseURL+'getGFAssignedBatch',
           headers: { 
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
           },
           data : data
         };
@@ -79,7 +81,8 @@ export default function scheduleVillage() {
         method: 'post',
         url: baseURL + 'getProjectData',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data: data
       };

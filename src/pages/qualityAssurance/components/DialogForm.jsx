@@ -31,7 +31,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import axios from 'axios';
 import moment from 'moment';
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import "../../../assets/css/custom.css"
@@ -39,6 +39,7 @@ import { setISODay } from 'date-fns/esm';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function DialogForm({ shown, setShown, batch,reloadfunction }) {
     const [openFilter, setOpenFilter] = useState(false);
     const [clcikData, setClickData] = useState()
@@ -323,7 +324,8 @@ reloadfunction()
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appGo/getPoa ',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -341,7 +343,8 @@ reloadfunction()
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appGo/allDist',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -362,7 +365,8 @@ reloadfunction()
        method: 'post',
        url: baseURL+'getGelathiList',
        headers: {
-         'Content-Type': 'application/json'
+         'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
        },
        data: data
      };
@@ -385,7 +389,8 @@ reloadfunction()
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appGo/listTaluk',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data: data
     };
@@ -407,7 +412,8 @@ reloadfunction()
       method: 'post',
       url: baseURL+'getTrainersList',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -1112,7 +1118,8 @@ let config = {
   maxBodyLength: Infinity,
   url: 'https://bdms.buzzwomen.org/appGo/addQualityAssessmentForm ',
   headers: { 
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `${apikey}`
   },
   data : data
 };

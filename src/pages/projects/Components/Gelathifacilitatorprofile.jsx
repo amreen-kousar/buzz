@@ -36,6 +36,7 @@ Gelathifacilitatorprofile.propTypes = {
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function Gelathifacilitatorprofile({isOpenFilter,onOpenFilter,onCloseFilter}){
  
   var [user,setUser]=useState(JSON.parse(sessionStorage?.getItem('people')))
@@ -65,7 +66,8 @@ export default function Gelathifacilitatorprofile({isOpenFilter,onOpenFilter,onC
           method: 'post',
           url: baseURL + 'getProfileData',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+             'Authorization': `${apikey}`
           },
           data: data
         };

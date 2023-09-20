@@ -8,6 +8,7 @@ import BeehiveDrawer from './Components/BeehiveDrawer';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import { baseURL } from 'src/utils/api';
 export default function scheduleBeehiveVisit() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
    const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const [beehive, setBeehive] = useState('');
@@ -46,7 +47,8 @@ export default function scheduleBeehiveVisit() {
         maxBodyLength: Infinity,
         url: baseURL+'getGFAssignedBatch',
           headers: { 
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
           },
           data : data
         };
@@ -81,7 +83,8 @@ export default function scheduleBeehiveVisit() {
         method: 'post',
         url: baseURL + 'getProjectData',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data: data
       };

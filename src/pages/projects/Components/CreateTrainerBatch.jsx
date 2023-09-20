@@ -15,12 +15,13 @@ import Slide from '@mui/material/Slide';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { DialogContentText } from '@mui/material';
 import dayjs from 'dayjs';
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
 import moment from 'moment/moment';
 import Iconify from 'src/components/Iconify';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function CreateTrainerBatch(props) {
   const [open, setOpen] = React.useState(false);
   const [village, setVillage] = useState([]);
@@ -69,7 +70,8 @@ export default function CreateTrainerBatch(props) {
       method: 'post',
       url: baseURL + 'getVillageList',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -101,7 +103,8 @@ export default function CreateTrainerBatch(props) {
       method: 'post',
       url: baseURL + 'createTrainingBatch',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };

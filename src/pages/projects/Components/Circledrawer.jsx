@@ -40,6 +40,7 @@ Circledrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onCloseFilter, clcikData, data1, id }) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [scheduleData, setScheduleData] = useState('');
   var [searchData, setSearchData] = useState('');
   var [search, setSearch] = useState('');
@@ -75,6 +76,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
       url: baseURL+'getEnrollGelathi',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -98,6 +100,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
         url: baseURL+'updateEnrolledGelathi',
         headers: {
           'Content-Type': 'application/json',
+           'Authorization': `${apikey}`
         },
         data: data,
       };
@@ -189,6 +192,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
        url: baseURL+'createGFSessionsNew1',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -217,6 +221,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
       url: baseURL +'getTrainingBatchData',
       headers: {
         'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -240,6 +245,7 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
       url: baseURL+'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data: data,
     };

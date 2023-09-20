@@ -20,6 +20,7 @@ import DiamondRounded  from '@mui/icons-material/DiamondRounded';
 import  Room  from '@mui/icons-material/Room';
 import { baseURL } from 'src/utils/api';
 export default function TravelDialog({ viewMessage }) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   Geocode.setApiKey("AIzaSyAQZSphbIdAeypWHytAIHtJ5K-wuUHBfx4");
   const [open, setOpen] = useState(false);
   const [imageId,setImageId]=useState('');
@@ -110,7 +111,10 @@ export default function TravelDialog({ viewMessage }) {
 var requestOptions = {
   method: 'POST',
   body: form,
-  redirect: 'follow'
+  redirect: 'follow',
+  headers: { 
+    'Authorization': `${apikey}`
+  },
 };
 fetch("https://bdms.buzzwomen.org/appGo/taAttachments", requestOptions)
   .then(response => response.text())
@@ -149,7 +153,8 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
       method: 'post',
       url: baseURL + 'addNewTA',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
 
       data: data
@@ -177,7 +182,8 @@ var Imagevalue = [(Uimagelength)?Uimagelength[0]?.id :""]
         method: 'post',
         url: baseURL+'getlocationName',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };
@@ -212,7 +218,8 @@ axios(config)
       method: 'post',
       url: baseURL+'getPoaTa',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };

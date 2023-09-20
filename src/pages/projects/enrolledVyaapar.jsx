@@ -8,8 +8,9 @@ import Vyaparprogram from './Components/Vyaparprogram';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import GetVyaparProgram from './Getvyaparprogram';
 import Filtersmain from './projectfilters/filtersmain';
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
 export default function enrolledVyaaparList() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
@@ -82,7 +83,8 @@ const changeState = () => {
           method: 'post',
           url: baseURL+'getEnrollVyaparEnrollment',
           headers: { 
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
           },
           data : data
         };
@@ -126,7 +128,8 @@ const id = sessionStorage?.getItem("proId")
       method: 'post',
       url: baseURL + 'getProjectData',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -157,7 +160,8 @@ const id = sessionStorage?.getItem("proId")
         method: 'post',
         url: baseURL + 'removeVyaparEnrollment',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };

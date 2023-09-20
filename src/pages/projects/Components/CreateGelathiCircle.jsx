@@ -22,6 +22,7 @@ import {baseURL} from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data1,circle,setGelathiDataToEmpty}) {
   const {state} = useLocation()
   var todayDate = dayjs()
@@ -58,7 +59,8 @@ const apiHit = () =>{
     method: 'post',
     url: baseURL + 'createCircle',
     headers: { 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data : data
   };
@@ -88,7 +90,8 @@ const createCircle = () =>{
     method: 'post',
     url: baseURL + 'createCircle',
     headers: { 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data : data
   };

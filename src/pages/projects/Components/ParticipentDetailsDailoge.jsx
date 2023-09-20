@@ -30,6 +30,7 @@ ParticipentDetailsDailoge.propTypes = {
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
 };
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function ParticipentDetailsDailoge({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
      const [session,setSession] = useState('')
      const [partiData,setpartiData] = useState('')
@@ -46,7 +47,8 @@ export default function ParticipentDetailsDailoge({ isOpenFilter, onOpenFilter, 
             method: 'post',
             url: baseURL + 'getParticipantData',
             headers: { 
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+               'Authorization': `${apikey}`
             },
             data : data
           };

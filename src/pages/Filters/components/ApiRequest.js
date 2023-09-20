@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { baseURL } from 'src/utils/api';
 export default async function ApiRequest(props) {
+    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var response = []
@@ -14,7 +15,8 @@ export default async function ApiRequest(props) {
         method: 'post',
         url: baseURL + 'getPeopleFilters',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
         },
         data
     };

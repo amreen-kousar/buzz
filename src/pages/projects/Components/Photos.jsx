@@ -23,6 +23,7 @@ import axios from 'axios';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -120,7 +121,8 @@ var config = {
   method: 'post',
   url: 'https://bdms.buzzwomen.org/appGo/uploadTrainingPhotos',
   headers: { 
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `${apikey}`
   },
   data : raw
 };
@@ -156,7 +158,8 @@ const getTrainingBatch = async =>{
     method: 'post',
     url: baseURL + 'getTrainingBatchData',
     headers: { 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+       'Authorization': `${apikey}`
     },
     data : data
   };

@@ -18,6 +18,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function EditTrainingBatch({batch,editSession, setEditsession}) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(dayjs('2022-04-07'));
   const [village, setVillage] = useState([]);
@@ -60,7 +61,8 @@ useEffect(()=>{
       method: 'post',
       url: baseURL + 'getVillageList',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -89,7 +91,8 @@ useEffect(()=>{
       method: 'post',
       url: baseURL + 'editTrainingBatch',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };

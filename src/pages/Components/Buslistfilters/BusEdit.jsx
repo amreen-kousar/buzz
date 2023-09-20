@@ -13,6 +13,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHandler ,busDetails}) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [age, setAge] = React.useState('');
@@ -101,7 +102,8 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
       method: 'post',
       url: baseURL + 'editBus',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };

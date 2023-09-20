@@ -34,7 +34,7 @@ import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import { oldbaseURL } from 'src/utils/api';
 import SingleQulityDashboard from './SingleQulityDashboard';
-
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -103,6 +103,7 @@ export default function TeamQuality({reload}) {
       url: baseURL + 'getMyTeamQAF',
       headers: {
         'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data: data,
     };

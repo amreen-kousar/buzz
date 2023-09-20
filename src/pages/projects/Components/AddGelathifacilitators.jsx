@@ -18,8 +18,9 @@ import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 function SimpleDialog(props) {
     const { onClose, selectedValue, open, data, getData, sendData,name } = props;
     const handleClose = () => {
@@ -38,7 +39,8 @@ function SimpleDialog(props) {
             method: 'post',
             url: baseURL + 'deleteEmpFromProject',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+               'Authorization': `${apikey}`
             },
             data: data
           };
@@ -65,7 +67,8 @@ function SimpleDialog(props) {
             method: 'post',
             url: baseURL+'addEmpToProject',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': `${apikey}`
             },
             data: data
           };
@@ -118,7 +121,7 @@ SimpleDialog.propTypes = {
     selectedValue: PropTypes.string.isRequired,
 };
 export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name,operations_manager_id }) {
-    
+
   useEffect(() => {
     trainerList()
 }, [operations_manager_id]
@@ -149,7 +152,8 @@ export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData,
         method: 'post',
         url: baseURL + 'getPeopleList',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
         },
         data: data
     };

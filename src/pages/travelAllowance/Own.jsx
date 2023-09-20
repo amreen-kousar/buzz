@@ -12,7 +12,8 @@ import TravelDialog from '../Components/DashboardFilters/TravelDialog'
 import moment from 'moment';
 import Edittraveldialog from './Editta';
 import Iconify from 'src/components/Iconify';
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -96,7 +97,8 @@ export default function Own(props) {
             method: 'post',
             url: baseURL + 'deleteTa',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             data: data
         };
@@ -124,7 +126,8 @@ export default function Own(props) {
             method: 'post',
             url: baseURL+'listTa',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             data: data
         };

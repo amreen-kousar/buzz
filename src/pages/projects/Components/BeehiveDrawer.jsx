@@ -39,7 +39,8 @@ BeehiveDrawer.propTypes = {
     onCloseFilter: PropTypes.func,
 };
 export default function BeehiveDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,data,id }) {
-    const {data3} = useLocation()
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+  const {data3} = useLocation()
     const navigate = useNavigate();
      const [session,setSession] = useState('')
      const [scheduleData,setScheduleData] = useState('')
@@ -70,7 +71,8 @@ export default function BeehiveDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
       maxBodyLength: Infinity,
         url: baseURL+'createGFSessions',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };
@@ -102,7 +104,8 @@ export default function BeehiveDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
       maxBodyLength: Infinity,
         url: baseURL + 'getTrainingBatchData',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };

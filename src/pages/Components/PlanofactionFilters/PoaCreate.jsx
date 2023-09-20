@@ -16,6 +16,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function PoaCreate(props) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState('');
@@ -78,6 +79,7 @@ const tomorrow = dayjs().add(1, 'day');
       url: baseURL + 'createEvent',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };

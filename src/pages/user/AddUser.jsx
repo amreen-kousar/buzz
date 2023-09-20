@@ -5,6 +5,7 @@ import { Button, Dialog, Toolbar, IconButton, Typography, TextField, DialogConte
 import Iconify from '../../components/Iconify';
 import AppBar from '@mui/material/AppBar';
 import { baseURL } from 'src/utils/api';
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 function AddUser(props) {
   
     const [open, setOpen] = useState(false);
@@ -62,7 +63,8 @@ const emailchangeHandler=(e) => {
             method: 'post',
             url: baseURL + 'getEmailExist',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             data
         };
@@ -95,7 +97,8 @@ const emailchangeHandler=(e) => {
             method: 'post',
             url: baseURL+'roles_list',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                 'Authorization': `${apikey}`
             },
             data
         };
@@ -115,7 +118,10 @@ const emailchangeHandler=(e) => {
         let res = await fetch(baseURL+'getAllBuzzTeam',
             {
                 body: formData,
-                method: "post"
+                method: "post",
+                headers:{
+                    'Authorization': `${apikey}`
+                }
             })
             .then((res) => res.json())
         let temprepoManager = res.list.map(repo => { return { label: repo?.name, id: repo.id, role: repo.role } })
@@ -133,7 +139,8 @@ const emailchangeHandler=(e) => {
             method: 'post',
             url: baseURL + 'getProjectList',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             data
         };
@@ -165,7 +172,8 @@ const emailchangeHandler=(e) => {
             method: 'post',
             url: baseURL + 'getProjects',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             data
         };
@@ -193,7 +201,8 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                 method: 'post',
                 url: baseURL+'createUser',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `${apikey}`
                 },
                 data
             };
@@ -237,7 +246,8 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                                 method: 'POST',
                                 url:  baseURL + `${apiCallName}`,
                                 headers: {
-                                    'Content-Type': 'application/json'
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `${apikey}`
                                 },
                                 funderPartnerData
                             }

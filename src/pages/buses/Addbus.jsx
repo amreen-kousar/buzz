@@ -6,9 +6,10 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useLocation, useNavigate } from "react-router-dom";
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
 import moment from 'moment'
 function Addbus( {showAddBuss,createProj,showBussHandler}) {
+    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const navigate = useNavigate();
     const location = useLocation();
     const [date, setDate] = useState(moment(new Date())?.format('YYYY-MM-DD'))
@@ -66,7 +67,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                 method: 'post',
                 url: baseURL + 'createBus',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `${apikey}`
                 },
                 data: data
             };

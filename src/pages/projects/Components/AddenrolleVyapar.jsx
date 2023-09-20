@@ -14,6 +14,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   });
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   export default function AddEnrollVyapar({session}){
+    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const [open, setOpen] = React.useState(false);
     const [sessiondata,setSessiondata]=useState('');
     const [participantData,setParticipantData]=useState('');
@@ -41,7 +42,8 @@ const setEnrolledVyapar=(itm)=>{
     method: 'post',
     url: baseURL + 'setVyaparEnrollment',
     headers: { 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data : data
   };
@@ -68,7 +70,8 @@ getAddPartcipants();
         method: 'post',
         url: baseURL + 'getVyaparEnrollment',
         headers: { 
-          'Content-Type': 'text/plain'
+          'Content-Type': 'text/plain',
+          'Authorization': `${apikey}`
         },
         data : data
       };
@@ -95,7 +98,8 @@ const getAddPartcipants=()=>{
     method: 'post',
     url: baseURL+'getEnrollVyaparEnrollment',
     headers: { 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data : data
   };

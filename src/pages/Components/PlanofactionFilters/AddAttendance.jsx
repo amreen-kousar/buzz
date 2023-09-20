@@ -8,6 +8,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export default function AddAttendance({ shown, setShown, batch }) {
+  const apikey = JSON.parse(sessionStorage?.getItem('userDetails'))?.token
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState();
   const [addValue, setAddValue] = useState([]);
@@ -33,6 +34,7 @@ export default function AddAttendance({ shown, setShown, batch }) {
       url: 'https://bdms.buzzwomen.org/appGo/allAttendence',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };

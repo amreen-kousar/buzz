@@ -29,6 +29,7 @@ import FiltersHome from 'src/pages/Filters/FiltersHome';
 import {baseURL} from 'src/utils/api';
 import moment from 'moment';
 const FUnderSSDashboard = () => {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const navigate = useNavigate();
  
   const [openFilter, setOpenFilter] = useState(false);
@@ -59,6 +60,7 @@ const [errorMsg,setErrormsg]=useState(false)
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+         'Authorization': `${apikey}`
       },
       data,
     };

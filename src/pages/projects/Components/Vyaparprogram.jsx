@@ -46,6 +46,7 @@ import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function Vyaparprogram({ itm, changeState,componentreloadmethod }) {
   const [open, setOpen] = React.useState(false);
   const [successMessage, setsuccessMessage] = useState(false);
@@ -605,6 +606,7 @@ else{
         url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
         headers: {
           'Content-Type': 'application/json',
+           'Authorization': `${apikey}`
         },
         data: data,
       };
@@ -778,6 +780,7 @@ else{
       url: baseURL + 'getGelathiList',
       headers: {
         'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       }
     };
     axios(config)

@@ -9,6 +9,7 @@ import ChooseGelathi from './Components/ChooseGelathi';
 import Filtersmain from './projectfilters/filtersmain';
 import { baseURL } from 'src/utils/api';
 export default function gelathiCirclesList() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const { state } = useLocation();
   const [clcikData, setClickData] = useState();
   const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
@@ -59,6 +60,7 @@ export default function gelathiCirclesList() {
       url: baseURL + 'getProjectData',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -99,6 +101,7 @@ export default function gelathiCirclesList() {
       url: baseURL+'getGelathiCircle',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };

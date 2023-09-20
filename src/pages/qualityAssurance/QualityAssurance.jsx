@@ -30,7 +30,7 @@ import {baseURL} from 'src/utils/api';
 
 export default function QualityAssessment() {
   
-  
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   
   const [loader, setLoader] = useState(false)
 const [errorMsg,setErrormsg]=useState('');
@@ -102,6 +102,7 @@ const [errorMsg,setErrormsg]=useState('');
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+         'Authorization': `${apikey}`
       },
       data,
     };

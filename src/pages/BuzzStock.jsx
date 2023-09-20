@@ -35,6 +35,7 @@ function createData(name, calories) {
   return { name, calories };
 }
 export default function BuzzStock() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [demo, setDemo] = useState([]);
   const [openFilter, setOpenFilter] = useState(false);
   const [openbusfilter, setopenbusfilter] = useState(false);
@@ -86,7 +87,8 @@ export default function BuzzStock() {
       url: baseURL+'getTotalstocks',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
+        'Authorization': `${apikey}`
       },
       data
     };

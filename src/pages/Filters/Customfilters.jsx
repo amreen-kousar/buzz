@@ -17,6 +17,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent, } from '@mui/material/Select';
 import { baseURL } from 'src/utils/api';
 export default function Customfilter(props) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [country, setCountry] = useState([])
   const [fund, setFund] = useState()
   const [endDate, setEndDate] = useState(new Date());
@@ -51,7 +52,8 @@ export default function Customfilter(props) {
       method: 'post',
       url: baseURL + 'getLocation',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -72,7 +74,8 @@ export default function Customfilter(props) {
       method: 'post',
       url: baseURL + 'getLocation',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -95,7 +98,8 @@ export default function Customfilter(props) {
       method: 'post',
       url: baseURL + 'getLocation',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -120,7 +124,8 @@ export default function Customfilter(props) {
       method: 'post',
       url: baseURL + 'getPeopleFilters',
       headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
       },
       data
   };
@@ -136,7 +141,9 @@ const teamList = async => {
   var config = {
     method: 'post',
     url: baseURL+'getOperationsManagerList',
-    headers: {}
+    headers: {
+      'Authorization': `${apikey}`
+    }
   };
   axios(config)
     .then(function (response) {
@@ -157,7 +164,8 @@ const trainerList = async => {
     method: 'post',
     url: baseURL + 'getPeopleList',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data: data
   };
@@ -180,7 +188,8 @@ const trainerList = async => {
       method: 'post',
       url: baseURL + 'getPeopleList',
       headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
       },
       data: data
   };

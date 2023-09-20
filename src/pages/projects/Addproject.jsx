@@ -7,6 +7,7 @@ import CreateProj from './Components/CreateProj';
 import Iconify from 'src/components/Iconify';
 import { baseURL } from 'src/utils/api';
 function AddProject({ viewMessage }) {
+    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const [open, setAddProject] = useState(false)
     const [country, setCountry] = useState([])
     const [fund, setFund] = useState()
@@ -50,7 +51,8 @@ function AddProject({ viewMessage }) {
             method: 'post',
             url: baseURL + 'getLocation',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             data: data
         };
@@ -71,7 +73,8 @@ function AddProject({ viewMessage }) {
             method: 'post',
             url: baseURL + 'getLocation',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             data: data
         };
@@ -93,7 +96,8 @@ function AddProject({ viewMessage }) {
             method: 'post',
             url: baseURL + 'getLocation',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             data: data
         };
@@ -118,7 +122,8 @@ function AddProject({ viewMessage }) {
             method: 'post',
             url: baseURL + 'getFunderList',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             
         };
@@ -148,6 +153,9 @@ function AddProject({ viewMessage }) {
             var config = {
                 method: 'post',
                 url: 'https://bdms.buzzwomen.org/appGo/createProject',
+                headers: {
+                    'Authorization': `${apikey}`
+                },
                 data: data
             };
             axios(config)

@@ -56,6 +56,7 @@ PoaGF.propTypes = {
   onCloseFilterGF: PropTypes.func,
 };
 export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF, clcikData, batchState, reloadPOAGF}) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [batch, setBatch] = useState('');
   const [photos, setPhotos] = React.useState(false);
   const [shown, setShown] = React.useState(false);
@@ -131,6 +132,7 @@ window.addEventListener('offline', () => {
       url: baseURL+'getGFSessionData',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -155,6 +157,7 @@ window.addEventListener('offline', () => {
       
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -187,6 +190,7 @@ window.addEventListener('offline', () => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -219,6 +223,7 @@ window.addEventListener('offline', () => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -262,6 +267,7 @@ window.addEventListener('offline', () => {
       url: baseURL+'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -306,6 +312,9 @@ window.addEventListener('offline', () => {
       method: 'POST',
       body: raw,
       redirect: 'follow',
+      headers: { 
+        'Authorization': `${apikey}`
+      },
     };
 
     let res = fetch('https://bdms.buzzwomen.org/appGo/uploadGFSessionPhotos', requestOptions)
@@ -337,7 +346,8 @@ window.addEventListener('offline', () => {
         method: 'post',
         url: baseURL + 'updatePoaCancel',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };
@@ -363,7 +373,8 @@ window.addEventListener('offline', () => {
       method: 'post',
       url: baseURL+'updateReschedule',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -459,6 +470,7 @@ const gelathinamelist = (async) => {
     url: baseURL + 'getGelathiList',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     }
   };
   axios(config)

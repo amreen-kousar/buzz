@@ -32,6 +32,7 @@ ParticipantGf.propTypes = {
     onCloseFilter: PropTypes.func,
 };
 export default function ParticipantGf({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
+    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
      const [session,setSession] = useState('')
      const [partiData,setpartiData] = useState('')
     useEffect(() => {
@@ -48,7 +49,8 @@ export default function ParticipantGf({ isOpenFilter, onOpenFilter, onCloseFilte
             method: 'post',
             url: baseURL + 'getParticipantData',
             headers: { 
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': `${apikey}`
             },
             data : data
           };

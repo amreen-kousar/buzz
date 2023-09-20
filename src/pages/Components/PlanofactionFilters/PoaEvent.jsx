@@ -33,6 +33,7 @@ PoaFilter.propTypes = {
   onCloseEvent: PropTypes.func,
 };
 export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridvalue , changeState ,clickedItemData}) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [locationS, setLocation] = useState();
   const [checkin, setCheckIn] = useState('');
   const [checkout, setCheckout] = useState('');
@@ -84,6 +85,9 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
       method: 'POST',
       body: dataImage,
       redirect: 'follow',
+      headers: { 
+        'Authorization': `${apikey}`
+      },
     };
   
     let res = fetch('https://bdms.buzzwomen.org/appGo/uploadEventPhotos', requestOptions)
@@ -137,6 +141,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
         url: baseURL + 'getlocationName',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data: data,
       };
@@ -165,6 +170,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
         url: baseURL + 'checkInOut',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data: data,
       };
@@ -237,6 +243,7 @@ const handlecheckin = () => {
       url: baseURL + 'getEventDetail',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -261,6 +268,7 @@ const handlecheckin = () => {
       url: baseURL + 'getEventDetail',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };

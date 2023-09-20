@@ -35,6 +35,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
  
 export default function SeniorTrainerMaterialStocklist(){
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const [close , setClose ] = useState(false)
     const [demo,setDemo] = useState([])
     const [admin, setAdmin] = useState(false);
@@ -57,7 +58,8 @@ const getProjects = async()=>{
       method: 'post',
       url: baseURL + 'getProjects',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -91,6 +93,7 @@ const getProjects = async()=>{
         url:baseURL + 'getStockItems',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `${apikey}`,
           Accept: 'application/json'
         },
         data
@@ -142,7 +145,8 @@ const getProjects = async()=>{
         url: baseURL+'consumeStock', 
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json'
+          Accept: 'application/json',
+          'Authorization': `${apikey}`
         },
         data :data
       };

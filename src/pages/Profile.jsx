@@ -14,6 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ProfileCard from './Components/ProfileCard'
 import { baseURL } from 'src/utils/api';
 export default function Profile(index) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -35,7 +36,8 @@ export default function Profile(index) {
       method: 'post',
       url: baseURL + 'getProfileData',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };

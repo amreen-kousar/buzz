@@ -30,6 +30,7 @@ Peopleprofile.propTypes = {
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter}){
     var [user,setUser]=useState(JSON.parse(sessionStorage?.getItem('profiledetails')))
     let userprofile =JSON.parse(sessionStorage.getItem('profiledetails'))
@@ -53,7 +54,8 @@ export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter})
           method: 'post',
           url: baseURL + 'getProfileData',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
           },
           data: data
         };

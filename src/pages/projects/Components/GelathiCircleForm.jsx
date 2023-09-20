@@ -29,6 +29,7 @@ import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function GelathiCircleForm({
   itm,
   gelathiDrawerReloder,
@@ -162,6 +163,7 @@ export default function GelathiCircleForm({
       url: baseURL + 'getGelathiList',
       headers: {
         'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       // data: data,
     };
@@ -319,6 +321,7 @@ const saveDataLocally = (key, data) => {
         url: baseURL+ 'addSpoorthiBaselineQuestionnaire',
         headers: {
           'Content-Type': 'application/json',
+           'Authorization': `${apikey}`
         },
         data: data,
       };

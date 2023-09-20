@@ -8,6 +8,7 @@ import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Filtersmain from './projectfilters/filtersmain';
 import { baseURL } from 'src/utils/api';
 export default function enrolledGelathiList() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const {state} = useLocation()
     const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')
@@ -58,7 +59,8 @@ const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
     method: 'post',
     url: baseURL+'getEnrollGelathi',
     headers: { 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data : data
   };
@@ -90,7 +92,8 @@ const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
       method: 'post',
       url: baseURL + 'getProjectData',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -126,7 +129,8 @@ const getData = (itm, i) => {
         method: 'post',
         url: baseURL + 'removeEnrollGelathi',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };

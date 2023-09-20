@@ -11,6 +11,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function CheckinGFL({ photos, setCheck, batch,getTrainingBatch ,getGFSessionData}) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
     setOpen(photos)
@@ -55,7 +56,8 @@ export default function CheckinGFL({ photos, setCheck, batch,getTrainingBatch ,g
         method: 'post',
         url: baseURL+'getlocationName',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };
@@ -85,7 +87,8 @@ axios(config)
     maxBodyLength: Infinity,
       url: baseURL + 'checkInOut',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -125,6 +128,7 @@ const GetStatus = async=>{
       url: baseURL + 'getEventDetail',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };

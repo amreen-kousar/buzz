@@ -95,6 +95,7 @@ SimpleDialog.propTypes = {
 
 };
 export default function RecipeReviewCard({ profileData, changeUser }) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [expanded, setExpanded] = React.useState(false);
   const userDetails = JSON.parse(sessionStorage.getItem('userDetails'))
   const [open, setOpen] = React.useState(false);
@@ -210,7 +211,8 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
       method: 'post',
       url: baseURL+'editUser',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };

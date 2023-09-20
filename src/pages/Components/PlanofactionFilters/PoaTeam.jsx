@@ -84,6 +84,7 @@ SimpleDialog.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 export default function PoaTeam({ setUserId, setName, users }) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [open, setOpen] = React.useState(false);
   const [teamData, setTeamData] = useState([])
   useEffect(() => {
@@ -102,7 +103,8 @@ export default function PoaTeam({ setUserId, setName, users }) {
       method: 'post',
       url: baseURL + 'getMyTeam',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };

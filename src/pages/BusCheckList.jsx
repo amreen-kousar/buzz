@@ -14,6 +14,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 export default function BusCheckList({itm,busesd,data1}){
+  const apikey = JSON.parse(sessionStorage?.getItem('userDetails'))?.token
     const [open,setOpen] = useState(false);
     const [busData,setBusData]=useState(false);
     const handleClickOpen = () => {
@@ -40,7 +41,8 @@ const getbuschecklist=async()=>{
         method: 'post',
         url: baseURL + 'getBusCheckList',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };
@@ -104,7 +106,8 @@ const getbuschecklist=async()=>{
         method: 'post',
         url: baseURL + 'addBusCheckList',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };

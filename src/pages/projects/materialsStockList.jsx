@@ -15,7 +15,7 @@ import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { AltRouteTwoTone } from '@mui/icons-material';
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -36,6 +36,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
   const Userrole = sessionStorage.getItem("userId")
 export default function MaterialStockList() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const Userrole = sessionStorage.getItem("userId")
   const {state} = useLocation()
     const [clcikData, setClickData] = useState()
@@ -86,6 +87,7 @@ const projData = (async) => {
     url: baseURL + 'getProjectData',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data: data,
   };
@@ -117,7 +119,8 @@ const onChangeMaterialValue = (index , quantity)=>{
         url: baseURL + 'getStockItems',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json'
+          Accept: 'application/json',
+          'Authorization': `${apikey}`
         },
         data
       };
@@ -152,7 +155,8 @@ const onChangeMaterialValue = (index , quantity)=>{
         url: baseURL+'consumeStock', 
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json'
+          Accept: 'application/json',
+          'Authorization': `${apikey}`
         },
         data :data
       };

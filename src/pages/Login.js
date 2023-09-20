@@ -31,7 +31,7 @@ export default function Login() {
       method: 'post',
       url: baseURL + 'signIn',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       data: data
     };

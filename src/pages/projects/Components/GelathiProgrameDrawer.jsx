@@ -62,6 +62,7 @@ GelathiProgrameDrawer.propTypes = {
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function GelathiProgrameDrawer({
   isOpenFilter,
   onOpenFilter,
@@ -196,6 +197,9 @@ const [iserror, setIsError] = useState(false)
       method: 'POST',
       body: raw,
       redirect: 'follow',
+      headers: {
+        'Authorization': `${apikey}`
+      }
     };
     let res = fetch(baseURL + 'uploadGFsessionPhotos', requestOptions)
       .then((itn) => {
@@ -226,6 +230,7 @@ const [iserror, setIsError] = useState(false)
       url: baseURL + 'getGFSessionData1',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -259,6 +264,7 @@ const [iserror, setIsError] = useState(false)
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -293,6 +299,7 @@ const [iserror, setIsError] = useState(false)
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+         'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -318,6 +325,7 @@ const [iserror, setIsError] = useState(false)
         url: baseURL + 'updatePoaCancel',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data: data,
       };
@@ -344,6 +352,7 @@ const [iserror, setIsError] = useState(false)
       url: baseURL + 'updateReschedule',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };

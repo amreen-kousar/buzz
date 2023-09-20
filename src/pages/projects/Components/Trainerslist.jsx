@@ -10,12 +10,13 @@ import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
 import Peopleprofile from './projectpeopleprofile';
 import Gelathifacilitatorprofile from './Gelathifacilitatorprofile';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function Trainerslist(){
     const [data1, setData1] = useState('')
     const [open, setOpen] = React.useState(false);
@@ -52,7 +53,8 @@ export default function Trainerslist(){
           method: 'post',
           url: baseURL + 'getProjectData',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+             'Authorization': `${apikey}`
           },
           data: data
         };

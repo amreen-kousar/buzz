@@ -20,6 +20,7 @@ import FiltersHome from 'src/pages/Filters/FiltersHome';
 import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
 const FunderGelathiDashboard = () => {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const navigate = useNavigate();
     const data = sessionStorage?.getItem('userId')
     const theme = useTheme();
@@ -59,6 +60,7 @@ const FunderGelathiDashboard = () => {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
+          'Authorization': `${apikey}`
         },
         data,
       };

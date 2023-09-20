@@ -23,6 +23,7 @@ import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,handleCloseDilog }) {
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
@@ -64,7 +65,8 @@ export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,ha
       method: 'post',
       url: baseURL + 'getCheckInOutStatus',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };

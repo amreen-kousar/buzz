@@ -15,6 +15,7 @@ import Gelathifacilitatorprofile from './Gelathifacilitatorprofile';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function Gelathifacilitatorlist(){
     const [data1, setData1] = useState('')
     const [open, setOpen] = React.useState(false);
@@ -51,7 +52,8 @@ export default function Gelathifacilitatorlist(){
           method: 'post',
           url: baseURL + 'getProjectData',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
           },
           data: data
         };

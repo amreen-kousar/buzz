@@ -17,7 +17,7 @@ import TableCell from "@mui/material/TableCell";
 import { baseURL } from "src/utils/api";
 import { vi } from "date-fns/locale";
 export default function AssignBatches(){
-   
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const state = useLocation();
     const [gelathi, setGelathi] = useState('');
     const [gl,setGl] = useState(false);
@@ -46,7 +46,8 @@ const projData = async => {
     method: 'post',
     url: baseURL + 'getProjectData',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data: data
   };
@@ -74,7 +75,8 @@ const villagelist= async(itm) =>{
        url: baseURL+'getTrainingBatchList',
       
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -109,7 +111,8 @@ const CreateBatch= async(itm,i) =>{
      method: 'post',
      url: baseURL+'createGFBatch',
      headers: {
-       'Content-Type': 'application/json'
+       'Content-Type': 'application/json',
+       'Authorization': `${apikey}`
      },
      data : data
    };
@@ -138,7 +141,8 @@ const removeFlag = async (itm, i) => {
      method: 'post',
      url: baseURL + 'deleteGFBatch',
      headers: {
-       'Content-Type': 'application/json'
+       'Content-Type': 'application/json',
+       'Authorization': `${apikey}`
      },
      data : data
    };

@@ -17,7 +17,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
-import {baseURL} from 'src/utils/api';
+import {baseURL,apikey} from 'src/utils/api';
 const VyaparProgramDashboard = () => {
   const navigate = useNavigate();
   const data = sessionStorage?.getItem('userId');
@@ -66,6 +66,7 @@ const VyaparProgramDashboard = () => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization': `${apikey}`
       },
       data,
     };
@@ -96,7 +97,8 @@ const VyaparProgramDashboard = () => {
       method: 'post',
       url: baseURL + 'vyaparfilter',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data : data
     };

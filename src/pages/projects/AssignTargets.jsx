@@ -9,10 +9,11 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow';
 import TableCell from "@mui/material/TableCell";
 import axios from "axios";
-import { baseURL } from "src/utils/api";
+import { baseURL} from "src/utils/api";
 import { useEffect, useState} from "react";
 export default function AssignTargets()
 {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const {state} =useLocation()
 const [trainersTargets,setTrainersTargets]=useState('');
 var [createTarget,setCreateTarget] = useState([]);
@@ -34,7 +35,8 @@ const assign=(e,index)=>{
       method: 'post',
       url: baseURL+'getAssignTargets',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -64,7 +66,8 @@ const createTrainerTarget=async=>{
     method: 'post',
     url: baseURL+'createTrainerTarget',
     headers: { 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data : data
   };
@@ -90,7 +93,8 @@ const projData = async => {
     method: 'post',
     url: baseURL + 'getProjectData',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data: data
   };

@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import {baseURL} from 'src/utils/api';
 const FunderVyaparDashboard = () => {
+    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const navigate = useNavigate();
  
   const [openFilter, setOpenFilter] = useState(false);
@@ -44,6 +45,7 @@ const FunderVyaparDashboard = () => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+         'Authorization': `${apikey}`
       },
       data,
     };

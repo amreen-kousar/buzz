@@ -9,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Iconify from 'src/components/Iconify';
 import moment from 'moment';
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function Team(props) {
     const [value, setValue] = React.useState(0);
     const data = sessionStorage?.getItem('userId')
@@ -64,7 +65,8 @@ export default function Team(props) {
             method: 'post',
             url : baseURL + 'teamMembers',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             data: data
         };
@@ -86,7 +88,8 @@ export default function Team(props) {
             method: 'post',
             url: baseURL+'listTa',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             data: data
         };
@@ -136,7 +139,8 @@ export default function Team(props) {
             method: 'post',
             url: baseURL + 'verifyTa',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                 'Authorization': `${apikey}`
             },
             data: data
         };
@@ -162,7 +166,8 @@ export default function Team(props) {
             method: 'post',
             url: baseURL + 'approveTa',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                 'Authorization': `${apikey}`
             },
             data: data
         };

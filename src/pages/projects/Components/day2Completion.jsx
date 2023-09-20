@@ -32,6 +32,7 @@ import EditParticipantdata from './Editparticipantdata';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export default function Day2Completed({ shown, setShown, batch }) {
   const [openFilter, setOpenFilter] = useState(false);
@@ -93,7 +94,8 @@ const handlesurvey =()=>{
       method: 'post',
       url: baseURL + 'getTrainingBatchData',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data : data
     };

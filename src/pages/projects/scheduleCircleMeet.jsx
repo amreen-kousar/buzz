@@ -9,6 +9,7 @@ import BeehiveDrawer from './Components/BeehiveDrawer';
 import Circledrawer from './Components/Circledrawer';
 import { baseURL } from 'src/utils/api';
 export default function scheduleCircleMeet() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const [enrolled, setenrolled] = useState('');
@@ -47,7 +48,8 @@ export default function scheduleCircleMeet() {
       method: 'post',
       url: baseURL+'getGelathiCircle',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };
@@ -80,7 +82,8 @@ export default function scheduleCircleMeet() {
         method: 'post',
         url: baseURL + 'getProjectData',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data: data
       };

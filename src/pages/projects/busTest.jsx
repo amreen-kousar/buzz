@@ -30,6 +30,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 export default function busTestList() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const {state} = useLocation()
   const userDetails = sessionStorage?.getItem('userId')
   const roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
@@ -90,7 +91,8 @@ export default function busTestList() {
         method: 'post',
         url: baseURL + 'deleteBus',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data: data
       };
@@ -121,7 +123,8 @@ export default function busTestList() {
             method: 'post',
             url: baseURL + 'getBusData',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': `${apikey}`
             },
             data
           };
@@ -142,7 +145,8 @@ const details = async => {
     method: 'post',
     url: baseURL + 'getBusData',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     },
     data
   };

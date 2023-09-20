@@ -9,6 +9,7 @@ import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Shakthimain from './projectfilters/Shakthimain';
 import { baseURL } from 'src/utils/api';
 export default function selfShaktiProj() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     
@@ -75,7 +76,8 @@ export default function selfShaktiProj() {
           method: 'post',
           url: baseURL + 'getTrainingBatch',
           headers: { 
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
           },
           data : data
         };
@@ -111,7 +113,8 @@ export default function selfShaktiProj() {
         method: 'post',
         url: baseURL + 'getProjectData',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data: data
       };

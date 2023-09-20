@@ -24,6 +24,7 @@ import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function EditGelathiSession({session,editSession, setEditsession}) {
   const [openFilter, setOpenFilter] = useState(false);
   const [open, setOpen] = React.useState(false);
@@ -52,7 +53,8 @@ export default function EditGelathiSession({session,editSession, setEditsession}
       method: 'post',
       url: baseURL + 'editGFSession',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data : data
     };

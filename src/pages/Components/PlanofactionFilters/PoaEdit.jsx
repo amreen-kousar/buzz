@@ -31,6 +31,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function PoaEdit({ setSucess, itm ,changeState}) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState("");
@@ -86,7 +87,8 @@ export default function PoaEdit({ setSucess, itm ,changeState}) {
       method: 'post',
       url: baseURL + 'updateRescheduleEvent',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };

@@ -25,6 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   });
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   export default function AddEnrollGelathi ({session}){
+    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const [open, setOpen] = React.useState(false);
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState();
@@ -50,7 +51,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       method: 'post',
       url: baseURL + 'setEnrollGelathi',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -80,7 +82,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       method: 'post',
       url: baseURL+'getGFSessionData',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };

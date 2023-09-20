@@ -22,6 +22,7 @@ GelathiCircleDrawer.propTypes = {
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function GelathiCircleDrawer({
   reloadmethod,
   isOpenFilter,
@@ -75,6 +76,7 @@ var config = {
       url: baseURL+'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -99,6 +101,7 @@ const removegelathicircle = async (itm) => {
         url: baseURL +'updateEnrolledGelathi',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data: data,
       };

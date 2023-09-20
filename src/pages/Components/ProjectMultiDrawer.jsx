@@ -65,7 +65,7 @@ export default function projectMultiDrawer({
   batchState,
   projectId,
 }) {
-
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [batch, setBatch] = useState('');
   const [schedule, setReschedule] = React.useState(false);
   const [day2Schedule, setday2Reschedule] = React.useState(false);
@@ -130,6 +130,7 @@ export default function projectMultiDrawer({
       url: baseURL + 'getTrainingBatchData',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -199,7 +200,8 @@ export default function projectMultiDrawer({
         method: 'post',
         url: 'https://bdms.buzzwomen.org/appGo/uploadTrainingPhotos',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : raw
       };
@@ -234,6 +236,7 @@ export default function projectMultiDrawer({
         url: baseURL + 'updatePoaCancel',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data: data,
       };
@@ -272,6 +275,7 @@ export default function projectMultiDrawer({
       url: baseURL+'updateReschedule',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -305,6 +309,7 @@ export default function projectMultiDrawer({
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -343,6 +348,7 @@ export default function projectMultiDrawer({
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -370,6 +376,7 @@ export default function projectMultiDrawer({
       url: baseURL + 'getCheckInOutStatus',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };

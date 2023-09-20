@@ -39,6 +39,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function UserEditProfile({ updateSetUser ,closeUserDrawer  ,profileData}) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   let user = JSON.parse(sessionStorage?.getItem('people'));
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
@@ -116,6 +117,7 @@ useEffect(()=>{
       url:baseURL+'roles_list',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data,
     };
@@ -135,6 +137,9 @@ useEffect(()=>{
     let res = await fetch(baseURL+'getAllBuzzTeam', {
       body: formData,
       method: 'post',
+      headers: { 
+        'Authorization': `${apikey}`
+      },
     }).then((res) => res.json()
    
     );
@@ -154,6 +159,7 @@ useEffect(()=>{
       url: baseURL + 'getProjectList',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data,
     };
@@ -213,6 +219,7 @@ useEffect(()=>{
       url: baseURL+'editUser',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };

@@ -14,6 +14,7 @@ import FiltersHome from 'src/pages/Filters/FiltersHome';
 import {baseURL} from 'src/utils/api';
 import moment from 'moment';
 const DashboardApp = () => {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const navigate = useNavigate();
   const data = sessionStorage?.getItem('userId')
   const theme = useTheme();
@@ -62,6 +63,7 @@ const [errorMsg,setErrormsg]=useState(false)
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        // 'Authorization': `${apikey}`
       },
       data,
     };
@@ -94,7 +96,9 @@ const [errorMsg,setErrormsg]=useState(false)
       method: 'post',
       url: baseURL + 'ssfilter',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        //  'Authorization': `${apikey}`
+
       },
       data : data
     };

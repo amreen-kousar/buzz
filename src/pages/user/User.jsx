@@ -12,6 +12,7 @@ import AddUser from './AddUser';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
 import { baseURL } from 'src/utils/api';
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function User() {
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
@@ -71,7 +72,8 @@ export default function User() {
       method: 'post',
       url: baseURL + 'getProjects',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data
     };
@@ -114,7 +116,8 @@ export default function User() {
       method: 'post',
       url: baseURL+'getAllPeople',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data
     };

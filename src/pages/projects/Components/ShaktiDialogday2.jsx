@@ -32,6 +32,7 @@ import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export default function ShaktiDialogday2({ shown, setShown, batch }) {
   const [openFilter, setOpenFilter] = useState(false);
@@ -86,7 +87,8 @@ getTrainingBatch();
       maxBodyLength: Infinity,
       url: baseURL + 'updateParticipantDay',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -115,7 +117,8 @@ getTrainingBatch();
       maxBodyLength: Infinity,
       url: baseURL+ 'updateParticipantDay',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -145,7 +148,8 @@ getTrainingBatch();
       method: 'post',
       url: baseURL + 'getTrainingBatchData',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+         'Authorization': `${apikey}`
       },
       data : data
     };

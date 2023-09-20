@@ -48,6 +48,7 @@ import GetSingleQualityForm from './GetSingleQualityForm';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
@@ -80,7 +81,8 @@ const getPOA =()=>{
         method: 'post',
         url: baseURL + 'listQualityAssessmentForm',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };

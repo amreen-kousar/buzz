@@ -15,11 +15,12 @@ import { Stack } from '@mui/system';
 import axios from 'axios';
 import moment from 'moment';
 import { number } from 'prop-types';
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function AddParticipants({batch,checkData,type,session ,reloadFUnction ,handleCloseDilog}) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const intialState={
     "education":"",
      "husbandName":"",
@@ -58,7 +59,9 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
       method: 'post',
     maxBodyLength: Infinity,
       url: baseURL + 'getCaste',
-      headers: { }
+      headers: { 
+        'Authorization': `${apikey}`
+      }
     };
     
       axios(config)
@@ -74,7 +77,9 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
       method: 'post',
     maxBodyLength: Infinity,
       url: baseURL + 'getEducation',
-      headers: { }
+      headers: {
+         'Authorization': `${apikey}`
+       }
     };
     
       axios(config)
@@ -145,7 +150,8 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
           maxBodyLength: Infinity,
             url: baseURL + 'createParticipant',
             headers: { 
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': `${apikey}`
             },
             data : data
           
@@ -200,7 +206,8 @@ export default function AddParticipants({batch,checkData,type,session ,reloadFUn
                 maxBodyLength: Infinity,
                   url: baseURL + 'createProgramParticipant',
                   headers: { 
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `${apikey}`
                   },
                   data : data
                 

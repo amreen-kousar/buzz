@@ -12,7 +12,7 @@ import axios from 'axios';
 import { assertTSAnyKeyword } from '@babel/types';
 import FiltersHome from './Filters/FiltersHome';
 import Page from 'src/components/Page';
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -41,6 +41,7 @@ function createData2(r1, r2) {
   return { r1, r2 };
 }
 export default function Demography() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const intialValues = {
     funder: "",
     project: "",
@@ -77,6 +78,7 @@ export default function Demography() {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization': `${apikey}`
       },
       data
     };

@@ -27,6 +27,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function ChooseGelathi( {data1,circle}) {
   var [searchData,setSearchData]=useState('')
     const {state} = useLocation()
@@ -100,7 +101,8 @@ const enrolledVyaapar= async(id,i,g) =>{
     method: 'post',
     url: baseURL+'getEnrollVyaparEnrollment',
     headers: { 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+       'Authorization': `${apikey}`
     },
     data : data
   };
@@ -129,7 +131,8 @@ const enrolledGreenMotivators = async(id,i,g) =>{
       method: 'post',
       url: baseURL+'getEnrollGreenMotivators',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -158,7 +161,8 @@ var config = {
   method: 'post',
   url: baseURL+'getEnrollGelathi',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `${apikey}`
   },
   data : data
 };

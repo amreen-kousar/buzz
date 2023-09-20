@@ -15,7 +15,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 export default function AdminQuality({selectDATA,getData}) {
- 
+  const apikey = JSON.parse(sessionStorage?.getItem('userDetails'))?.token
+  
   const [partner,setPartner] = useState();
   useEffect(()=>{
     UserData()
@@ -33,7 +34,8 @@ export default function AdminQuality({selectDATA,getData}) {
             method: 'post',
             url: 'https://bdms.buzzwomen.org/appGo/getEmpData',
             headers: { 
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': `${apikey}`
             },
             data : data
           };

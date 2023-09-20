@@ -37,6 +37,7 @@ BuslistDrawer.propTypes = {
   onCloseFilter: PropTypes.func,
 };
 export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData, bus_id, deletebuses,busesd,updatedata }) {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const [detailsData, setDetailsData] = useState();
   const [deletebus, setDeleteBus] = useState();
   const [userUpdate,setUserUpdate]=useState(false)
@@ -54,7 +55,8 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
       method: 'post',
       url: baseURL + 'getBusData',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data
     };
@@ -77,7 +79,8 @@ export default function BuslistDrawer({ isOpenFilter, onOpenFilter, onCloseFilte
       method: 'post',
       url: baseURL + 'deleteBus',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data
     };

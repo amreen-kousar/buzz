@@ -26,6 +26,7 @@ import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 export default function CreateProj({ createPro, setCreatePro, sendData, viewMessage, edit ,projData}) {
   const formatDate = (itm)=>{
     const currentDATE = itm?.split("-")
@@ -99,7 +100,9 @@ setShowAddBuss(false)
     var config = {
       method: 'post',
       url: baseURL +'getPartnerList',
-      headers: {}
+      headers: {
+         'Authorization': `${apikey}`
+      }
     };
     axios(config)
       .then(function (response) {
@@ -113,7 +116,9 @@ setShowAddBuss(false)
     var config = {
       method: 'post',
       url: baseURL + 'getBusList',
-      headers: {}
+      headers: {
+        'Authorization': `${apikey}`
+      }
     };
     axios(config)
       .then(function (response) {
@@ -127,7 +132,9 @@ setShowAddBuss(false)
     var config = {
       method: 'post',
       url: baseURL + 'getOperationsManagerList',
-      headers: {}
+      headers: {
+        'Authorization': `${apikey}`
+      }
     };
     axios(config)
       .then(function (response) {
@@ -142,7 +149,9 @@ setShowAddBuss(false)
     var config = {
       method: 'post',
       url: baseURL + 'getDriverList',
-      headers: {}
+      headers: {
+         'Authorization': `${apikey}`
+      }
     };
     axios(config)
       .then(function (response) {
@@ -169,7 +178,8 @@ useEffect(() => {
       method: 'post',
       url: baseURL+'getgfl',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };
@@ -254,6 +264,9 @@ axios(config)
     var config = {
       method: 'post',
       url: 'https://bdms.buzzwomen.org/appGo/createProject',
+      headers: {
+        'Authorization': `${apikey}`
+      },
       data: formdata
     };
     axios(config)
@@ -299,6 +312,9 @@ axios(config)
      var config = {
        method: 'post',
        url: 'https://bdms.buzzwomen.org/appGo/createProject',
+       headers: {
+        'Authorization': `${apikey}`
+       },
        data: formdata
      };
  

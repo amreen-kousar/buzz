@@ -77,6 +77,7 @@ function a11yProps(index) {
   };
 }
 export default function PlanofAction() {
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const[localData,setLocalStoragedata]=useState([]);
   const [value, setValue] = React.useState(0);
   const [openFilter, setOpenFilter] = useState(false);
@@ -182,6 +183,7 @@ export default function PlanofAction() {
       url: baseURL + 'getPOA',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -221,6 +223,7 @@ export default function PlanofAction() {
       url: baseURL + 'updateEventCancel',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -356,6 +359,7 @@ const apigelathicircle = async () => {
           url:baseURL+ 'addSpoorthiBaselineQuestionnaire',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
           },
           data: item,
         };
@@ -393,6 +397,7 @@ const apiCall = async () => {
           url:baseURL + 'addGreenBaselineSurvey',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
           },
           data: item,
         };
@@ -433,6 +438,8 @@ const VyaparApicall = async () => {
           url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `${apikey}`
+          
           },
           data: item,
         };
@@ -469,6 +476,7 @@ const shaktiformapi = async()=>{
       url: baseURL + 'addSurveyData',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: newData[index],
     };

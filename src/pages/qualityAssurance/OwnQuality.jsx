@@ -5,9 +5,10 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import Select from '@mui/material/Select';
 import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, Card, CardActionArea, MenuItem, CircularProgress } from '@mui/material';
-import { baseURL } from 'src/utils/api';
+import { baseURL} from 'src/utils/api';
 import GetSingleQualityForm from './GetSingleQualityForm';
 import Iconify from 'src/components/Iconify';
+const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -70,7 +71,8 @@ const getPOA =()=>{
         method: 'post',
         url: baseURL + 'listQualityAssessmentForm',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };

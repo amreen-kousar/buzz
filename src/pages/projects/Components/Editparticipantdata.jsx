@@ -29,6 +29,7 @@ import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 export default function EditParticipantdata({editSession, setEditsession,Trainingdata, changeState,participantdata,cvalue}) {
   const [openFilter, setOpenFilter] = useState(false);
@@ -74,7 +75,9 @@ const Occupation =()=>{
   var config = {
     method: 'post',
     url: baseURL + 'getOccupations',
-    headers: { }
+    headers: {
+       'Authorization': `${apikey}`
+     }
   };
       axios(config)
       .then(function (response) {
@@ -123,7 +126,8 @@ var config = {
   method: 'post',
   url: baseURL + 'editParticipant',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+     'Authorization': `${apikey}`
   },
   data: data
 };
