@@ -550,7 +550,7 @@ const GreenProgramDashboard = () => {
                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Enrolled"
-                              total={(itm?.Greenenrolled>=0)?itm?.Greenenrolled:itm?.greenenroll}
+                              total={(itm?.greenenrolled>=0)?itm?.greenenrolled:itm?.greenenroll}
                               color="motivator"
                               icon="openmoji:leafy-green"
                             />
