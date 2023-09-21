@@ -20,7 +20,6 @@ import FiltersHome from 'src/pages/Filters/FiltersHome';
 import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
 const GreenProgramDashboard = () => {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   const navigate = useNavigate();
   const data = sessionStorage?.getItem('userId');
   const theme = useTheme();
@@ -68,7 +67,6 @@ const GreenProgramDashboard = () => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-         'Authorization': `${apikey}`
       },
       data,
     };
@@ -99,8 +97,7 @@ const GreenProgramDashboard = () => {
       method: 'post',
       url: baseURL + 'greenfilter',
       headers: { 
-        'Content-Type': 'application/json',
-         'Authorization': `${apikey}`
+        'Content-Type': 'application/json'
       },
       data : data
     };
@@ -553,7 +550,7 @@ const GreenProgramDashboard = () => {
                         <Grid item xs={6} sm={6} md={6}>
                             <AppWidgetSummary
                               title="Number of Green Enrolled"
-                              total={(itm?.Greenenrolled>=0)?itm?.Greenenrolled:itm?.greenenroll}
+                              total={(itm?.greenenrolled>=0)?itm?.greenenrolled:itm?.greenenroll}
                               color="motivator"
                               icon="openmoji:leafy-green"
                             />

@@ -21,7 +21,6 @@ import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
 import { isThisMinute } from 'date-fns';
 const GelathiProgramDashboard = () => {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
     const navigate = useNavigate();
     const data = sessionStorage?.getItem('userId')
     const theme = useTheme();
@@ -72,7 +71,6 @@ const GelathiProgramDashboard = () => {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-           'Authorization': `${apikey}`
         },
         data,
       };
@@ -104,8 +102,7 @@ const GelathiProgramDashboard = () => {
         method: 'post',
         url: baseURL + 'gelathifilter',
         headers: { 
-          'Content-Type': 'application/json',
-           'Authorization': `${apikey}`
+          'Content-Type': 'application/json'
         },
         data : data
       };
@@ -557,7 +554,7 @@ const GelathiProgramDashboard = () => {
 <Container style={{ display: 'flex', flexDirection: 'column' }}>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '1' }}>
-      {(itm?.startDate)?"Project Name":"Funder"}<br />
+      {(itm?.select_type=="1")?"Project":"Funder"}<br />
      
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2'}}>
@@ -611,7 +608,7 @@ const GelathiProgramDashboard = () => {
            <Grid item xs={6} sm={6} md={6}>
               <AppWidgetSummary
                 title="Number of Gelathi cohorts"
-                total={(itm?.noofVyaparCohorts>=0)? itm?.noofVyaparCohorts:itm?.noofspoortthimeeting}
+                total={(itm?.NoofCircleMeeting>=0)? itm?.NoofCircleMeeting:itm?.noofspoortthimeeting}
                 color="motivator"
                 icon="twemoji:women-holding-hands"
               />
