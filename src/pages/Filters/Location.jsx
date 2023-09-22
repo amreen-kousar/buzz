@@ -9,12 +9,15 @@ import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { date } from 'yup';
+import { useAuth } from 'src/AuthContext';
+import { baseURL } from 'src/utils/api';
 const bull = (
   <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
     •
   </Box>
 );
 export default function Location(props) {
+  const { apikey } = useAuth();
   const [country, setCountry] = useState([])
   const [states, setStates] = useState([])
   const [district, setDistrict] = useState([])
@@ -39,9 +42,10 @@ export default function Location(props) {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appGo/getLocation',
+      url: baseURL + 'getLocation',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization':`${apikey}`
       },
       data: data
     };
@@ -60,9 +64,10 @@ export default function Location(props) {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appGo/getLocation',
+      url: baseURL + 'getLocation',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization':`${apikey}`  
       },
       data: data
     };
@@ -82,9 +87,10 @@ export default function Location(props) {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appGo/getLocation',
+      url: baseURL + 'getLocation',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization':`${apikey}`
       },
       data: data
     };

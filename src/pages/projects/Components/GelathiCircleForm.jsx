@@ -26,6 +26,7 @@ import { useLocation } from 'react-router-dom';
 import FormHelperText from '@mui/material/FormHelperText';
 import Iconify from '../../../components/Iconify';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -41,6 +42,7 @@ export default function GelathiCircleForm({
   id,componentreloadmethod 
 }) {
   const { state } = useLocation();
+  const { apikey } = useAuth();
   const [open, setOpen] = React.useState(true);
   const [vyaapar, setVyaapar] = useState('');
   const [circleform, setcircleform] = useState('');
@@ -319,6 +321,7 @@ const saveDataLocally = (key, data) => {
         url: baseURL+ 'addSpoorthiBaselineQuestionnaire',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization':`${apikey}`
         },
         data: data,
       };

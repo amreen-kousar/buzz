@@ -6,7 +6,9 @@ import { useLocation, Link } from 'react-router-dom'
 import CreateProj from './Components/CreateProj';
 import Iconify from 'src/components/Iconify';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 function AddProject({ viewMessage }) {
+    const { apikey } = useAuth();
     const [open, setAddProject] = useState(false)
     const [country, setCountry] = useState([])
     const [fund, setFund] = useState()
@@ -118,7 +120,8 @@ function AddProject({ viewMessage }) {
             method: 'post',
             url: baseURL + 'getFunderList',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization':`${apikey}`
             },
             data
         };
@@ -146,7 +149,10 @@ function AddProject({ viewMessage }) {
             // data.append('user_id', userid);
             var config = {
                 method: 'post',
-                url: 'https://bdms.buzzwomen.org/appGo/createProject',
+                url: baseURL + 'createProject',
+                headers:{
+                    'Authorization':`${apikey}`
+                },
                 data: data
             };
             axios(config)

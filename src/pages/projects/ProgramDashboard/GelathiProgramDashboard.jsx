@@ -20,8 +20,11 @@ import FiltersHome from 'src/pages/Filters/FiltersHome';
 import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
 import { isThisMinute } from 'date-fns';
+import { useAuth } from 'src/AuthContext';
+
 const GelathiProgramDashboard = () => {
     const navigate = useNavigate();
+    const { apikey } = useAuth();
     const data = sessionStorage?.getItem('userId')
     const theme = useTheme();
     const intialValues = {
@@ -71,6 +74,7 @@ const GelathiProgramDashboard = () => {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
+          'Authorization':`${apikey}`
         },
         data,
       };
@@ -102,7 +106,8 @@ const GelathiProgramDashboard = () => {
         method: 'post',
         url: baseURL + 'gelathifilter',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization':`${apikey}`
         },
         data : data
       };

@@ -35,10 +35,12 @@ import moment from 'moment';
 import { Icon } from '@iconify/react';
 import Autocomplete from '@mui/material/Autocomplete';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function UserEditProfile({ updateSetUser ,userapi,closeUserDrawer,profileData}) {
+  const { apikey } = useAuth(); 
   let user = JSON.parse(sessionStorage?.getItem('people'));
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
@@ -231,6 +233,7 @@ setshowprojectlist([...updatedlist]);
         url: baseURL+'editUser',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization':`${apikey}`
         },
         data: data,
       };

@@ -17,9 +17,10 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import {baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const FunderVyaparDashboard = () => {
   const navigate = useNavigate();
- 
+  const { apikey } = useAuth();
   const [openFilter, setOpenFilter] = useState(false);
   const [filterData, setFilterData] = useState({});
   const [loader, setLoader] = useState(false);
@@ -44,6 +45,7 @@ const FunderVyaparDashboard = () => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization':`${apikey}`
       },
       data,
     };

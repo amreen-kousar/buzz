@@ -19,7 +19,9 @@ import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const GreenProgramDashboard = () => {
+  const { apikey } = useAuth();
   const navigate = useNavigate();
   const data = sessionStorage?.getItem('userId');
   const theme = useTheme();
@@ -67,6 +69,7 @@ const GreenProgramDashboard = () => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization':`${apikey}`
       },
       data,
     };
@@ -97,7 +100,8 @@ const GreenProgramDashboard = () => {
       method: 'post',
       url: baseURL + 'greenfilter',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization':`${apikey}`
       },
       data : data
     };

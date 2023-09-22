@@ -12,7 +12,9 @@ import AddUser from './AddUser';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 export default function User() {
+  const { apikey } = useAuth();
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
   const [ceoUser, setCeoUser] = useState([])
@@ -114,7 +116,8 @@ export default function User() {
       method: 'post',
       url: baseURL + 'getAllPeople',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization':`${apikey}`
       },
       data
     };

@@ -27,10 +27,11 @@ import { useNavigate } from 'react-router-dom';
 import FiltersHome from '../Filters/FiltersHome';
 import DialogForm from './components/DialogForm'
 import {baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 
 export default function QualityAssessment() {
   
-  
+  const { apikey } = useAuth();
   
   const [loader, setLoader] = useState(false)
 const [errorMsg,setErrormsg]=useState('');
@@ -102,6 +103,7 @@ const [errorMsg,setErrormsg]=useState('');
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization':`${apikey}`
       },
       data,
     };

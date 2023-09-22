@@ -42,10 +42,13 @@ import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
 import FormHelperText from '@mui/material/FormHelperText';
 import Swal from 'sweetalert2';
+import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function Vyaparprogram({ itm, changeState,componentreloadmethod }) {
+  const { apikey } = useAuth();
   const [open, setOpen] = React.useState(false);
   const [successMessage, setsuccessMessage] = useState(false);
   const [message, setMessage] = useState('');
@@ -601,9 +604,10 @@ else{
 }
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
+        url: baseURL + 'addBuzzVyapar',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization':`${apikey}`
         },
         data: data,
       };

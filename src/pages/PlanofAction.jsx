@@ -45,6 +45,7 @@ import moment from 'moment';
 import ProjectMultiDrawer from '../pages/Components/ProjectMultiDrawer';
 import PoaGF from './Components/PlanofactionFilters/PoaGF';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -75,6 +76,7 @@ function a11yProps(index) {
   };
 }
 export default function PlanofAction() {
+  const { apikey } = useAuth();
   const[localData,setLocalStoragedata]=useState([]);
   const [value, setValue] = React.useState(0);
   const [openFilter, setOpenFilter] = useState(false);
@@ -354,6 +356,7 @@ const apigelathicircle = async () => {
           url:baseURL+ 'addSpoorthiBaselineQuestionnaire',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization':`${apikey}`
           },
           data: item,
         };
@@ -391,6 +394,7 @@ const apiCall = async () => {
           url:baseURL + 'addGreenBaselineSurvey',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization':`${apikey}`
           },
           data: item,
         };
@@ -428,9 +432,10 @@ const VyaparApicall = async () => {
       for (const item of newData) {
         const config = {
           method: 'post',
-          url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
+          url: baseURL +'addBuzzVyapar',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization':`${apikey}`
           },
           data: item,
         };

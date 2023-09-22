@@ -7,10 +7,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useLocation, useNavigate } from "react-router-dom";
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 import moment from 'moment'
 function Addbus( {showAddBuss,createProj,showBussHandler}) {
     const navigate = useNavigate();
     const location = useLocation();
+    const { apikey } = useAuth();
     const [date, setDate] = useState(moment(new Date())?.format('YYYY-MM-DD'))
     // const [addBus, setAddBus] = useState({
     //     register_number: '', register_date: moment(date?.$d)?.format('YYYY-MM-DD'), engine_number: '', chassis_number: '', insurance_number: '',
@@ -62,7 +64,8 @@ function Addbus( {showAddBuss,createProj,showBussHandler}) {
                 method: 'post',
                 url: baseURL + 'createBus',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization':`${apikey}`
                 },
                 data: data
             };

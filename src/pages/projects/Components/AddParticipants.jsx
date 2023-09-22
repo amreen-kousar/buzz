@@ -15,11 +15,13 @@ import { Stack } from '@mui/system';
 import axios from 'axios';
 import moment from 'moment';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 import { number } from 'prop-types';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function AddParticipants({batch,checkData,type,session ,reloadFUnction ,handleCloseDilog}) {
+  const { apikey } = useAuth();
   const intialState={
     "education":"",
      "husbandName":"",
@@ -204,7 +206,8 @@ if(enterData.age==""|| enterData.firstName==""|| enterData.caste =="" ||enterDat
                 maxBodyLength: Infinity,
                   url: baseURL + 'createProgramParticipant',
                   headers: { 
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization':`${apikey}`
                   },
                   data : data
                 

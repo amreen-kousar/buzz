@@ -42,11 +42,12 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function GreenSurvey(props) {
-  
+  const { apikey } = useAuth();
   const { state } = useLocation();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(false);
@@ -615,6 +616,7 @@ useEffect(()=>{
           url: baseURL + 'addGreenBaselineSurvey',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization':`${apikey}`
           },
           data: data,
         };

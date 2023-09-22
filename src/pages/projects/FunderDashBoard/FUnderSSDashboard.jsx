@@ -27,8 +27,10 @@ import FiltersHome from 'src/pages/Filters/FiltersHome';
 //  import GalathiChart from './Components/Charts/GalathiChart';
  import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 import moment from 'moment';
 const FUnderSSDashboard = () => {
+  const { apikey } = useAuth();
   const navigate = useNavigate();
  
   const [openFilter, setOpenFilter] = useState(false);
@@ -58,6 +60,7 @@ const [errorMsg,setErrormsg]=useState(false)
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization':`${apikey}`
       },
       data,
     };

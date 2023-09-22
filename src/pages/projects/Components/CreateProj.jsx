@@ -22,10 +22,13 @@ import Add from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Iconify from 'src/components/Iconify';
+import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function CreateProj({ createPro, setCreatePro, sendData, viewMessage, edit ,projData}) {
+  const { apikey } = useAuth();
   const formatDate = (itm)=>{
     const currentDATE = itm?.split("-")
      const newDate = `${currentDATE[2]}-${currentDATE[1]}-${currentDATE[0]}`
@@ -252,7 +255,11 @@ axios(config)
     formdata.append("publish", 1)
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appGo/createProject',
+      url: baseURL + 'createProject',
+      headers:
+      {
+           'Authorization':`${apikey}`
+      },
       data: formdata
     };
     axios(config)
@@ -297,8 +304,11 @@ axios(config)
      formdata.append("", "")
      var config = {
        method: 'post',
-       url: 'https://bdms.buzzwomen.org/appGo/createProject',
-       data: formdata
+       url: baseURL + 'createProject',
+       headers:{
+        'Authorization':`${apikey}`
+       },
+      data: formdata
      };
  
      axios(config)

@@ -18,8 +18,10 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import {baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const VyaparProgramDashboard = () => {
   const navigate = useNavigate();
+  const { apikey } = useAuth();
   const data = sessionStorage?.getItem('userId');
   var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
   const theme = useTheme();
@@ -40,6 +42,7 @@ const VyaparProgramDashboard = () => {
   var startdate = moment(new Date()).format('YYYY-04-01')
   var endDate = moment(startdate, 'YYYY').add(1, 'year').format('YYYY-03-31')
   const apiHit = async (id, i, g,date1,date2) => {
+
     setLoader(true);
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
@@ -66,6 +69,7 @@ const VyaparProgramDashboard = () => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+           'Authorization':`${apikey}`
       },
       data,
     };
@@ -96,7 +100,8 @@ const VyaparProgramDashboard = () => {
       method: 'post',
       url: baseURL + 'vyaparfilter',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization':`${apikey}`
       },
       data : data
     };

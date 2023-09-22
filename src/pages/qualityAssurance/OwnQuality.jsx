@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Select from '@mui/material/Select';
 import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, Card, CardActionArea, MenuItem, CircularProgress } from '@mui/material';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 import GetSingleQualityForm from './GetSingleQualityForm';
 import Iconify from 'src/components/Iconify';
 function TabPanel(props) {
@@ -38,6 +39,7 @@ function a11yProps(index) {
     };
 }
 export default function OwnQuality({reload}) {
+  const { apikey } = useAuth();
 var [singleFormData , setSingleFormData] = useState('')
 const [ open ,setOpen] = useState(false)
     const [todayPoa,setTodayPoa]=useState('');
@@ -63,7 +65,8 @@ const getPOA =()=>{
         method: 'post',
         url: baseURL + 'listQualityAssessmentForm',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization':`${apikey}`
         },
         data : data
       };

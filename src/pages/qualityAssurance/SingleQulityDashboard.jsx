@@ -44,6 +44,7 @@ import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
 import { ReplayCircleFilled } from '@mui/icons-material';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 import GetSingleQualityForm from './GetSingleQualityForm';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -53,6 +54,7 @@ function TabPanel(props) {
   
 }
 const SingleQulityDashboard = ({openSingleQulityDashboard , handleClose ,item} )=> {
+  const { apikey } = useAuth();
 const [value, setValue] = React.useState(0);
 const data = sessionStorage?.getItem('userId')
 var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])
@@ -80,7 +82,8 @@ const getPOA =()=>{
         method: 'post',
         url: baseURL + 'listQualityAssessmentForm',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization':`${apikey}`
         },
         data : data
       };

@@ -19,7 +19,9 @@ import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const FunderGelathiDashboard = () => {
+  const { apikey } = useAuth(); 
     const navigate = useNavigate();
     const data = sessionStorage?.getItem('userId')
     const theme = useTheme();
@@ -59,6 +61,7 @@ const FunderGelathiDashboard = () => {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
+          'Authorization':`${apikey}`
         },
         data,
       };

@@ -14,8 +14,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 export default function AdminQuality({selectDATA,getData}) {
- 
+  const { apikey } = useAuth();
   const [partner,setPartner] = useState();
   useEffect(()=>{
     UserData()
@@ -31,9 +33,10 @@ export default function AdminQuality({selectDATA,getData}) {
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appGo/getEmpData',
+            url: baseURL + 'getEmpData',
             headers: { 
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization':`${apikey}`
             },
             data : data
           };
