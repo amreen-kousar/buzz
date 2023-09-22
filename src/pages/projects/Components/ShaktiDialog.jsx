@@ -20,11 +20,13 @@ import AddParticipants from './AddParticipants'
 import ParticipentDetailsDailoge from './ParticipentDetailsDailoge';
 import axios from 'axios';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+ 
 export default function ShaktiDialog({ shown, setShown, batch ,reloadfuncton ,handleCloseDilog }) {
+   const { apikey } = useAuth();
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState()
   const [checkData,setCheckData]=React.useState('');

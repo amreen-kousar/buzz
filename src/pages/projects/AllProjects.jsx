@@ -13,6 +13,7 @@ import FiltersHome from '../Filters/FiltersHome';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -43,7 +44,7 @@ function a11yProps(index) {
     };
 }
 export default function AllProjects({ handleClickOpen, handleClose, open }) {
-    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+      const { apikey } = useAuth();
     var userAccess = ['2']
     const callOpenFunction = (id) => {
         sessionStorage.setItem("proId", id)
@@ -177,7 +178,7 @@ var data ={}
             url: baseURL + 'getProjects',
             headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': `${apikey}`
+                // 'Authorization': `${apikey}`
             },
             data
         };

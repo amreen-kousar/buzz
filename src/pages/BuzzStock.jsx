@@ -14,6 +14,7 @@ import Page from 'src/components/Page';
 import axios from 'axios';
 import FiltersHome from './Filters/FiltersHome';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -35,7 +36,7 @@ function createData(name, calories) {
   return { name, calories };
 }
 export default function BuzzStock() {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+  const { apikey } = useAuth();
   const [demo, setDemo] = useState([]);
   const [openFilter, setOpenFilter] = useState(false);
   const [openbusfilter, setopenbusfilter] = useState(false);

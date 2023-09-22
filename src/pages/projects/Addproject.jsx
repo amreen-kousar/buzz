@@ -6,8 +6,9 @@ import { useLocation, Link } from 'react-router-dom'
 import CreateProj from './Components/CreateProj';
 import Iconify from 'src/components/Iconify';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 function AddProject({ viewMessage }) {
-    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+      const { apikey } = useAuth();
     const [open, setAddProject] = useState(false)
     const [country, setCountry] = useState([])
     const [fund, setFund] = useState()

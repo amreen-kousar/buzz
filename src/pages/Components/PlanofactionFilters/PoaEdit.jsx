@@ -26,12 +26,14 @@ import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
 import Swal from 'sweetalert2';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
+
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function PoaEdit({ setSucess, itm ,changeState}) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState("");

@@ -18,11 +18,14 @@ import dayjs from 'dayjs';
 import { baseURL} from 'src/utils/api';
 import moment from 'moment/moment';
 import Iconify from 'src/components/Iconify';
+import { useAuth } from 'src/AuthContext';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+   
 export default function CreateTrainerBatch(props) {
+   const { apikey } = useAuth();
   const [open, setOpen] = React.useState(false);
   const [village, setVillage] = useState([]);
   const [date, setDate] = useState("")

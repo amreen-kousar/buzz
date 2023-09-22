@@ -11,9 +11,10 @@ import TableCell from "@mui/material/TableCell";
 import axios from "axios";
 import { baseURL} from "src/utils/api";
 import { useEffect, useState} from "react";
+import { useAuth } from "src/AuthContext";
 export default function AssignTargets()
 {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const {state} =useLocation()
 const [trainersTargets,setTrainersTargets]=useState('');
 var [createTarget,setCreateTarget] = useState([]);

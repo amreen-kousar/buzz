@@ -10,9 +10,11 @@ import Filtersmain from './projectfilters/filtersmain';
 import Circledrawer from './Components/Circledrawer';
 import CircularProgress from '@mui/material/CircularProgress';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
+
 export default function ProjectWiseGelathiCircle() {
   const { state } = useLocation();
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [clcikData, setClickData] = useState();
   const roleid = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
   const [gelathiCircles, setgelathiCircles] = useState('');

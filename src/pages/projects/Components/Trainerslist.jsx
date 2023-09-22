@@ -12,12 +12,14 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { baseURL} from 'src/utils/api';
 import Peopleprofile from './projectpeopleprofile';
+import { useAuth } from 'src/AuthContext';
 import Gelathifacilitatorprofile from './Gelathifacilitatorprofile';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+
 export default function Trainerslist(){
+  const { apikey } = useAuth();
     const [data1, setData1] = useState('')
     const [open, setOpen] = React.useState(false);
     const [openFilter, setOpenFilter] = useState(false);

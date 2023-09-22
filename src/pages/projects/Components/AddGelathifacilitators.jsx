@@ -19,9 +19,11 @@ import { blue } from '@mui/material/colors';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import { baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+  
 function SimpleDialog(props) {
+  const { apikey } = useAuth();
     const { onClose, selectedValue, open, data, getData, sendData,name } = props;
     const handleClose = () => {
         onClose(selectedValue);
@@ -121,7 +123,7 @@ SimpleDialog.propTypes = {
     selectedValue: PropTypes.string.isRequired,
 };
 export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name,operations_manager_id }) {
-
+  const { apikey } = useAuth();
   useEffect(() => {
     trainerList()
 }, [operations_manager_id]

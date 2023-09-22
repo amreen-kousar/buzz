@@ -9,11 +9,12 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Iconify from 'src/components/Iconify';
 import moment from 'moment';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHandler ,busDetails}) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [age, setAge] = React.useState('');

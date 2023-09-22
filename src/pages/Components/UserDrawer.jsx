@@ -35,7 +35,8 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { baseURL } from 'src/utils/api';
 import { useMediaQuery } from '@mui/material';
-// ----------------------------------------------------------------------
+import { useAuth } from 'src/AuthContext';
+
 UserDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
@@ -43,7 +44,7 @@ UserDrawer.propTypes = {
 };
 
 export default function UserDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, users ,deleteuser}) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [profileData, setProfileData] = useState();
   const [user, setUser] = useState();
   const userDetails = sessionStorage?.getItem('userId');

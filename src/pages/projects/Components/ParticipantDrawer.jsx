@@ -26,14 +26,16 @@ import Scrollbar from '../../../components/Scrollbar';
 import { ColorManyPicker } from '../../../components/color-utils';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
+import { useAuth } from 'src/AuthContext';
 ParticipantDrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
 };
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+   
 export default function ParticipantDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
-     const [session,setSession] = useState('')
+    const { apikey } = useAuth();
+    const [session,setSession] = useState('')
      const [partiData,setpartiData] = useState('')
     useEffect(() => {
        if(parseInt(clcikData?.id)){

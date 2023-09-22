@@ -8,8 +8,9 @@ import { Link, useLocation } from 'react-router-dom';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Shakthimain from './projectfilters/Shakthimain';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 export default function selfShaktiProj() {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     

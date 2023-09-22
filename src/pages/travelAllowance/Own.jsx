@@ -13,7 +13,8 @@ import moment from 'moment';
 import Edittraveldialog from './Editta';
 import Iconify from 'src/components/Iconify';
 import { baseURL} from 'src/utils/api';
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+import { useAuth } from 'src/AuthContext';
+ 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -44,6 +45,7 @@ function a11yProps(index) {
     };
 }
 export default function Own(props) {
+      const { apikey } = useAuth();
     const [value, setValue] = React.useState(0);
     const data = sessionStorage?.getItem('userId')
     var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])

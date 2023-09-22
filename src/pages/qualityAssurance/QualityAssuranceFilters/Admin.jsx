@@ -14,8 +14,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useAuth } from 'src/AuthContext';
 export default function AdminQuality({selectDATA,getData}) {
-  const apikey = JSON.parse(sessionStorage?.getItem('userDetails'))?.token
+  const { apikey } = useAuth();
   
   const [partner,setPartner] = useState();
   useEffect(()=>{

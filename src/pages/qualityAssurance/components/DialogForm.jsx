@@ -36,11 +36,13 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import "../../../assets/css/custom.css"
 import { setISODay } from 'date-fns/esm';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+  
 export default function DialogForm({ shown, setShown, batch,reloadfunction }) {
+  const { apikey } = useAuth();
     const [openFilter, setOpenFilter] = useState(false);
     const [clcikData, setClickData] = useState()
     const handleOpenFilter = () => {

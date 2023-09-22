@@ -47,6 +47,7 @@ import moment from 'moment';
 import ProjectMultiDrawer from '../pages/Components/ProjectMultiDrawer';
 import PoaGF from './Components/PlanofactionFilters/PoaGF';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -77,7 +78,7 @@ function a11yProps(index) {
   };
 }
 export default function PlanofAction() {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+  const { apikey } = useAuth();
   const[localData,setLocalStoragedata]=useState([]);
   const [value, setValue] = React.useState(0);
   const [openFilter, setOpenFilter] = useState(false);
@@ -98,6 +99,7 @@ export default function PlanofAction() {
   const [reload, setReload] = useState(false);
   const [isOnline, setOnline] = useState(true);
   const [showDiv, setShowDiv] = useState(false);
+ 
   const [poaData, setPoaData] = [
     {
       emp_id: '',

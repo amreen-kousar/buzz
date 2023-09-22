@@ -35,11 +35,12 @@ import Iconify from 'src/components/Iconify';
 import moment from 'moment'
 import { orange } from '@mui/material/colors';
 import Webcam from "react-webcam";
+import { useAuth } from 'src/AuthContext';
 function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
 const orangecolor = orange[800];
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+ 
 
 Edittraveldialog.propTypes = {
   isOpenFilter: PropTypes.bool,
@@ -49,6 +50,7 @@ Edittraveldialog.propTypes = {
 
 
 export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFilter, viewMessage, editData, list }) {
+  const { apikey } = useAuth();
   Geocode.setApiKey("AIzaSyAQZSphbIdAeypWHytAIHtJ5K-wuUHBfx4");
   const [open, setOpen] = useState(true);
   const [startTime, setStartTime] = useState('');

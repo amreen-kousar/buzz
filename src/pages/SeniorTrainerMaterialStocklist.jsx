@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 import { Card, Stack, Chip, Container, Typography, Grid, IconButton,Button ,CardContent,Select,MenuItem,TextField} from '@mui/material';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -35,7 +36,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
  
 export default function SeniorTrainerMaterialStocklist(){
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
     const [close , setClose ] = useState(false)
     const [demo,setDemo] = useState([])
     const [admin, setAdmin] = useState(false);

@@ -17,9 +17,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
-import {baseURL,apikey} from 'src/utils/api';
+import {baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const VyaparProgramDashboard = () => {
   const navigate = useNavigate();
+  const { apikey } = useAuth();
   const data = sessionStorage?.getItem('userId');
   var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
   const theme = useTheme();

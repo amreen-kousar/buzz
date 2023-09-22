@@ -33,8 +33,9 @@ import Page from '../../components/Page';
 import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import { oldbaseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 import SingleQulityDashboard from './SingleQulityDashboard';
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+  
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,6 +61,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 export default function TeamQuality({reload}) {
+    const { apikey } = useAuth();
   const [value, setValue] = React.useState(0);
   const data = sessionStorage?.getItem('userId');
   var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0]);

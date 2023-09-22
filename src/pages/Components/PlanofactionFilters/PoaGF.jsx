@@ -45,7 +45,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import { EightK } from '@mui/icons-material';
 import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined';
-
+import { useAuth } from 'src/AuthContext';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -56,7 +56,7 @@ PoaGF.propTypes = {
   onCloseFilterGF: PropTypes.func,
 };
 export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF, clcikData, batchState, reloadPOAGF}) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [batch, setBatch] = useState('');
   const [photos, setPhotos] = React.useState(false);
   const [shown, setShown] = React.useState(false);

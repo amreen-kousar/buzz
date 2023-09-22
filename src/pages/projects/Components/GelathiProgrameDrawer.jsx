@@ -45,6 +45,7 @@ import { useMediaQuery } from '@mui/material';
 import { oldbaseURL,baseURL } from 'src/utils/api';
 import GelathiCircleDrawer from './GelathiCircleDrawer';
 import { isError } from 'lodash';
+import { useAuth } from 'src/AuthContext';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
 // ----------------------------------------------------------------------
 const ExpandMore = styled((props) => {
@@ -62,7 +63,7 @@ GelathiProgrameDrawer.propTypes = {
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+
 export default function GelathiProgrameDrawer({
   isOpenFilter,
   onOpenFilter,
@@ -70,6 +71,7 @@ export default function GelathiProgrameDrawer({
   clcikData,
   gelathiFacikitatorLead,
 }) {
+  const { apikey } = useAuth();
   var [session, setSession] = useState('');
   const [showNote, setShowNote] = useState(false);
   const [gelatiNote, setGelatiNote] = useState('');

@@ -28,6 +28,7 @@ import {
 } from '@mui/material';
 import Projectdashboard from './projectdashboard';
 import Slide from '@mui/material/Slide';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -36,9 +37,9 @@ Gelathifacilitatorprofile.propTypes = {
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
-export default function Gelathifacilitatorprofile({isOpenFilter,onOpenFilter,onCloseFilter}){
  
+export default function Gelathifacilitatorprofile({isOpenFilter,onOpenFilter,onCloseFilter}){
+  const { apikey } = useAuth();
   var [user,setUser]=useState(JSON.parse(sessionStorage?.getItem('people')))
     const [profileData, setProfileData] = useState()
     useEffect(() => {

@@ -9,8 +9,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Iconify from 'src/components/Iconify';
 import moment from 'moment';
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+import { useAuth } from 'src/AuthContext';
+
 export default function Team(props) {
+    const { apikey } = useAuth();
     const [value, setValue] = React.useState(0);
     const data = sessionStorage?.getItem('userId')
     var [dateValue, setDatevalue] = useState(new Date().toISOString().split('T')[0])

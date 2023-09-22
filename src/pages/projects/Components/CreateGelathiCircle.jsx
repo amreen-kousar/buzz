@@ -19,11 +19,13 @@ import Alert from '@mui/material/Alert';
 import moment from 'moment';
 import axios from 'axios';
 import {baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+   
 export default function CreateGelathiCircle({gelathiData,handleCloseGelathi,data1,circle,setGelathiDataToEmpty}) {
+  const { apikey } = useAuth();
   const {state} = useLocation()
   var todayDate = dayjs()
   const [open, setOpen] = React.useState(false);

@@ -16,6 +16,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 import { AltRouteTwoTone } from '@mui/icons-material';
 import { baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -36,7 +37,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
   const Userrole = sessionStorage.getItem("userId")
 export default function MaterialStockList() {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const Userrole = sessionStorage.getItem("userId")
   const {state} = useLocation()
     const [clcikData, setClickData] = useState()

@@ -13,6 +13,7 @@ import { auth, provider } from "../Firebase"
 import AuthSocial from '../sections/auth/AuthSocial';
 import Iconify from 'src/components/Iconify';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 export default function Login() {
   const RootStyle = styled('div')(({ theme }) => ({
     [theme.breakpoints.up('md')]: {
@@ -21,7 +22,8 @@ export default function Login() {
   }));
 
   const [emailExists,setEmailExists] = useState(false);
- 
+  var userDetails;
+  const { apikey, setApiKey } = useAuth();
   const apiHit = async (itm) => {
     var data = JSON.stringify({
       "email": itm?.user?.email,
@@ -42,8 +44,23 @@ export default function Login() {
         if (response?.data?.code == 404) {
           alert("email id not found")
         }
+        if(response?.data?.code == 400)
+        {
+          alert("Not Authorized")
+        }
         else {
-          sessionStorage.setItem('userDetails', JSON.stringify(response.data))
+          sessionStorage.setItem('userDetails', JSON.stringify(response.data));
+          userDetails = JSON.parse(JSON.stringify(response.data));
+          console.log(userDetails,"userdetailsss")
+          if (userDetails.token) {
+            console.log('Token exists in userDetails');
+            setApiKey(userDetails.token);
+            const updatedUserDetails = { ...userDetails };
+            delete updatedUserDetails.token;
+          
+            sessionStorage.setItem('userDetails', JSON.stringify(updatedUserDetails));
+          }
+    
           if (sessionStorage?.userDetails) {
             if (
               response.data.role == 2
@@ -66,6 +83,8 @@ export default function Login() {
         // console.log(error);
       });
   }
+
+
   const HeaderStyle = styled('header')(({ theme }) => ({
     top: 0,
     zIndex: 9,
@@ -107,7 +126,7 @@ export default function Login() {
       .catch((error) => alert(error.message));
   
   }
-
+  console.log(apikey,"apikey",userDetails);
 
   return (
     <Page title="Login" style={{ backgroundColor: "#ed6c02" }}>

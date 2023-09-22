@@ -8,7 +8,8 @@ import { Container, Stack, Typography, Box, Button, TextField, Grid, Snackbar, C
 import { baseURL} from 'src/utils/api';
 import GetSingleQualityForm from './GetSingleQualityForm';
 import Iconify from 'src/components/Iconify';
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+import { useAuth } from 'src/AuthContext';
+  
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -39,6 +40,7 @@ function a11yProps(index) {
     };
 }
 export default function OwnQuality({reload}) {
+  const { apikey } = useAuth();
 var [singleFormData , setSingleFormData] = useState('')
 const [ open ,setOpen] = useState(false)
     const [todayPoa,setTodayPoa]=useState('');

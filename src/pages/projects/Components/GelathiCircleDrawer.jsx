@@ -17,12 +17,13 @@ import GelathiCircleForm from './GelathiCircleForm';
 import GreenSurvey from './GreenSurvey';
 import Vyaparprogram from './Vyaparprogram';
 import { oldbaseURL,baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 GelathiCircleDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+
 export default function GelathiCircleDrawer({
   reloadmethod,
   isOpenFilter,
@@ -37,6 +38,7 @@ export default function GelathiCircleDrawer({
     index: '',
     id: '',
   });
+    const { apikey } = useAuth();
   const [session, setSession] = useState('');
   const [SessionClickData,setSessionClickData]=useState('');
   const [circleData, setcircleData] = useState('');

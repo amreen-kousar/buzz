@@ -21,6 +21,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchCommon from 'src/pages/Filters/components/SearchCommon';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
+
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 function SimpleDialog(props) {
   const { onClose, selectedValue, open, teamData, setUserId } = props;
@@ -84,7 +86,7 @@ SimpleDialog.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 export default function PoaTeam({ setUserId, setName, users }) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [open, setOpen] = React.useState(false);
   const [teamData, setTeamData] = useState([])
   useEffect(() => {

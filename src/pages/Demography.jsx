@@ -13,6 +13,7 @@ import { assertTSAnyKeyword } from '@babel/types';
 import FiltersHome from './Filters/FiltersHome';
 import Page from 'src/components/Page';
 import { baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -41,7 +42,7 @@ function createData2(r1, r2) {
   return { r1, r2 };
 }
 export default function Demography() {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+  const { apikey } = useAuth();
   const intialValues = {
     funder: "",
     project: "",

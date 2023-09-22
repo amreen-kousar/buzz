@@ -13,8 +13,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ProfileCard from './Components/ProfileCard'
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
+
 export default function Profile(index) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [state, setState] = React.useState({
     top: false,
     left: false,

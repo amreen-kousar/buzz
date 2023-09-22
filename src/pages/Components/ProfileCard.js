@@ -37,6 +37,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { DialogContent } from '@mui/material';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -95,7 +96,7 @@ SimpleDialog.propTypes = {
 
 };
 export default function RecipeReviewCard({ profileData, changeUser }) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [expanded, setExpanded] = React.useState(false);
   const userDetails = JSON.parse(sessionStorage.getItem('userDetails'))
   const [open, setOpen] = React.useState(false);

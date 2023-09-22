@@ -7,11 +7,13 @@ import moment from 'moment';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function CheckinGFL({ photos, setCheck, batch,getTrainingBatch ,getGFSessionData}) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
     setOpen(photos)

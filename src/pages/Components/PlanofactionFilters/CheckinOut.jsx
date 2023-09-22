@@ -18,6 +18,7 @@ import moment from 'moment';
 import Iconify from 'src/components/Iconify';
 import { useGeolocated } from 'react-geolocated';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -54,7 +55,7 @@ function TabPanel(props) {
     };
   }
 export default function CheckinOut({photos,batch,setCheck}) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const newTime = new Date()
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);

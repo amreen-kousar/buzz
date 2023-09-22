@@ -25,13 +25,16 @@ import {
 } from '@mui/material';
 import Projectdashboard from './projectdashboard';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
+
 Peopleprofile.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+   
 export default function Peopleprofile({isOpenFilter,onOpenFilter,onCloseFilter}){
+   const { apikey } = useAuth();
     var [user,setUser]=useState(JSON.parse(sessionStorage?.getItem('profiledetails')))
     let userprofile =JSON.parse(sessionStorage.getItem('profiledetails'))
   

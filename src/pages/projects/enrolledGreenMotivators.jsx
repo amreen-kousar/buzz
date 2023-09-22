@@ -16,9 +16,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Snackbar from '@mui/material/Snackbar';
 import { baseURL } from 'src/utils/api';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { useAuth } from 'src/AuthContext';
+import  MuiAlert, {AlertProps} from '@mui/material/Alert';
 export default function enrolledGreenMotivatorsList() {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()
     const [green , setGreen] = useState('')

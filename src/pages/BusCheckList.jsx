@@ -10,11 +10,13 @@ import moment from "moment";
 import Scrollbar from "src/components/Scrollbar";
 import { CheckBox } from "@mui/icons-material";
 import { baseURL } from "src/utils/api";
+import { useAuth } from "src/AuthContext";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 export default function BusCheckList({itm,busesd,data1}){
-  const apikey = JSON.parse(sessionStorage?.getItem('userDetails'))?.token
+  const { apikey } = useAuth();
     const [open,setOpen] = useState(false);
     const [busData,setBusData]=useState(false);
     const handleClickOpen = () => {

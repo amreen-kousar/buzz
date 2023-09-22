@@ -26,13 +26,15 @@ import {
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import moment from 'moment';
+import { useAuth } from 'src/AuthContext';
 Villagevisitdrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
 }; 
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+
 export default function Villagevisitdrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,data,id }){
+  const { apikey } = useAuth();
     const [scheduleData,setScheduleData] = useState('')
       const navigate = useNavigate();
     const [addData, setAddData] = useState({

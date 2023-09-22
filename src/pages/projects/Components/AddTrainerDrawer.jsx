@@ -13,10 +13,12 @@ import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+
 function SimpleDialog(props) {
+    const { apikey } = useAuth();
   const { onClose, selectedValue, open, data, getData, sendData,name } = props;
   const handleClose = () => {
     onClose(selectedValue);
@@ -107,6 +109,8 @@ SimpleDialog.propTypes = {
   selectedValue: PropTypes.string.isRequired,
 };
 export default function SimpleDialogDemo({ isOpenFilter, onCloseFilter, getData, sendData,name,operations_manager_id}) {
+  
+  const { apikey } = useAuth();
   useEffect(()=>{
     trainerList()
   },[operations_manager_id])

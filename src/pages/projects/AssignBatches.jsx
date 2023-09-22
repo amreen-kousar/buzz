@@ -16,8 +16,9 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from "@mui/material/TableCell";
 import { baseURL } from "src/utils/api";
 import { vi } from "date-fns/locale";
+import { useAuth } from "src/AuthContext";
 export default function AssignBatches(){
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
     const state = useLocation();
     const [gelathi, setGelathi] = useState('');
     const [gl,setGl] = useState(false);

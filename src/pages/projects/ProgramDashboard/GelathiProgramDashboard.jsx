@@ -19,9 +19,11 @@ import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import GalathiChart from 'src/pages/Components/Charts/GalathiChart';
 import {baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 import { isThisMinute } from 'date-fns';
 const GelathiProgramDashboard = () => {
     const navigate = useNavigate();
+    const { apikey } = useAuth();
     const data = sessionStorage?.getItem('userId')
     const theme = useTheme();
     const intialValues = {
@@ -38,7 +40,7 @@ const GelathiProgramDashboard = () => {
     const [slected, setSelected] = useState(null)
    const [summaryData, setSummaryData] = useState([]);
     const [graphData, setGraphData] = useState(null);
-  
+   
     var roleid = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     var startdate = moment(new Date()).format('YYYY-04-01')
@@ -71,6 +73,7 @@ const GelathiProgramDashboard = () => {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
+          'Authorization':`${apikey}`
         },
         data,
       };

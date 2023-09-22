@@ -34,11 +34,13 @@ import  { useRef } from 'react';
 import { baseURL} from 'src/utils/api';
 import { ConnectingAirportsOutlined } from '@mui/icons-material';
 import { useState } from 'react';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+
 export default function ShaktiForm({itm ,reloadFUnction}) {
+  const { apikey } = useAuth();
   const [open, setOpen] = React.useState(false);
   const [solution,setsolution]= React.useState(false);
   const [livelihoodvalue,setlivelihoodvalue] = React.useState(false);

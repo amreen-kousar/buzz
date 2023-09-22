@@ -19,13 +19,13 @@ import Iconify from 'src/components/Iconify';
 import { baseURL } from 'src/utils/api';
 import { CheckBox , ScaleOutlined } from '@mui/icons-material';
 import { size, transform } from 'lodash';
-
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   export default function AddEnrollGelathi ({session}){
-    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+      const { apikey } = useAuth();
     const [open, setOpen] = React.useState(false);
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState();

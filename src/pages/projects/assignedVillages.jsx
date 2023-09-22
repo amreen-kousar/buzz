@@ -6,8 +6,10 @@ import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import VillageDialog from './projectfilters/Villagesdialog';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
+
 export default function assignedVillages() {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
     const {state} = useLocation()
     const [data1, setData1] = useState('')
     const [batch,setBatch] = useState('')

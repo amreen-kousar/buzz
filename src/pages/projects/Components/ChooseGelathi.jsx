@@ -23,12 +23,15 @@ import SearchIcon from '@mui/icons-material/Search';
 import { baseURL } from 'src/utils/api';
 // import SearchBar from '@mkyy/mui-search-bar';
 import Box from '@mui/material/Box';
+import { useAuth } from 'src/AuthContext';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+  
 export default function ChooseGelathi( {data1,circle}) {
+  const { apikey } = useAuth();
   var [searchData,setSearchData]=useState('')
     const {state} = useLocation()
     const [clcikData, setClickData] = useState()

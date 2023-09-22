@@ -7,8 +7,9 @@ import Iconify from 'src/components/Iconify';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import Villagevisitdrawer from './Components/schedulevillagevisitdrawer';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 export default function scheduleVillage() {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
     const {state} = useLocation()
     const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')

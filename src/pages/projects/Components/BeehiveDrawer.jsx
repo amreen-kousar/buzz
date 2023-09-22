@@ -33,13 +33,14 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import moment from 'moment';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from 'src/AuthContext';
 BeehiveDrawer.propTypes = {
     isOpenFilter: PropTypes.bool,
     onOpenFilter: PropTypes.func,
     onCloseFilter: PropTypes.func,
 };
 export default function BeehiveDrawer({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData,data,id }) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const {data3} = useLocation()
     const navigate = useNavigate();
      const [session,setSession] = useState('')

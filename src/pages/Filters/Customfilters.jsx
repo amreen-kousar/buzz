@@ -16,8 +16,9 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent, } from '@mui/material/Select';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 export default function Customfilter(props) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [country, setCountry] = useState([])
   const [fund, setFund] = useState()
   const [endDate, setEndDate] = useState(new Date());

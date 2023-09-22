@@ -22,6 +22,7 @@ import {
 } from '@mui/material';
 // components
 import Iconify from '../../components/Iconify';
+import { useAuth } from 'src/AuthContext';
 import Scrollbar from '../../components/Scrollbar';
 import { ColorManyPicker } from '../../components/color-utils';
 // import ShaktiDialog from '../projects/Components/ShaktiDialog'
@@ -32,7 +33,7 @@ ParticipantGf.propTypes = {
     onCloseFilter: PropTypes.func,
 };
 export default function ParticipantGf({ isOpenFilter, onOpenFilter, onCloseFilter, clcikData }) {
-    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+      const { apikey } = useAuth();
      const [session,setSession] = useState('')
      const [partiData,setpartiData] = useState('')
     useEffect(() => {

@@ -12,8 +12,10 @@ import AddUser from './AddUser';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import FiltersHome from '../Filters/FiltersHome';
 import { baseURL } from 'src/utils/api';
-const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+import { useAuth } from 'src/AuthContext';
+  
 export default function User() {
+  const { apikey } = useAuth();
   const [openFilter, setOpenFilter] = useState(false);
   const [users, setUsers] = useState([]);
   const [ceoUser, setCeoUser] = useState([])

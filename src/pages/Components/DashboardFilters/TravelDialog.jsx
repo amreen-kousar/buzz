@@ -19,8 +19,9 @@ import CurrencyRupee  from '@mui/icons-material/CurrencyRupee';
 import DiamondRounded  from '@mui/icons-material/DiamondRounded';
 import  Room  from '@mui/icons-material/Room';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 export default function TravelDialog({ viewMessage }) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   Geocode.setApiKey("AIzaSyAQZSphbIdAeypWHytAIHtJ5K-wuUHBfx4");
   const [open, setOpen] = useState(false);
   const [imageId,setImageId]=useState('');

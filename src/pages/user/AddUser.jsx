@@ -5,9 +5,10 @@ import { Button, Dialog, Toolbar, IconButton, Typography, TextField, DialogConte
 import Iconify from '../../components/Iconify';
 import AppBar from '@mui/material/AppBar';
 import { baseURL } from 'src/utils/api';
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+import { useAuth } from 'src/AuthContext';
+   
 function AddUser(props) {
-  
+    const { apikey } = useAuth();
     const [open, setOpen] = useState(false);
     const [count, setCount] = useState('');
     // const [ceoUser, setCeoUser] = useState(props.data)

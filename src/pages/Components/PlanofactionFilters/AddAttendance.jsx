@@ -3,12 +3,13 @@ import React from 'react';
 import { Button, Card, CardActions, CardContent, Stack,Checkbox ,Dialog,AppBar,Toolbar,IconButton,Typography,Slide} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export default function AddAttendance({ shown, setShown, batch }) {
-  const apikey = JSON.parse(sessionStorage?.getItem('userDetails'))?.token
+  const { apikey } = useAuth();
   const [openFilter, setOpenFilter] = useState(false);
   const [clcikData, setClickData] = useState();
   const [addValue, setAddValue] = useState([]);

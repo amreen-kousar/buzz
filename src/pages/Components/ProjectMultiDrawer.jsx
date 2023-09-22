@@ -44,6 +44,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import ShaktiDialogday2 from '../projects/Components/ShaktiDialogday2';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -65,7 +66,7 @@ export default function projectMultiDrawer({
   batchState,
   projectId,
 }) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [batch, setBatch] = useState('');
   const [schedule, setReschedule] = React.useState(false);
   const [day2Schedule, setday2Reschedule] = React.useState(false);

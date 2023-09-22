@@ -14,11 +14,12 @@ import dayjs from 'dayjs';
 import moment from 'moment/moment';
 import Iconify from 'src/components/Iconify';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function EditTrainingBatch({batch,editSession, setEditsession}) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(dayjs('2022-04-07'));
   const [village, setVillage] = useState([]);

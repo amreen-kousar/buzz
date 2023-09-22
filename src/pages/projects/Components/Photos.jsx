@@ -20,10 +20,11 @@ import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { baseURL } from 'src/utils/api';
 import axios from 'axios';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -54,6 +55,7 @@ function a11yProps(index) {
   };
 }
 export default function FullScreenDialog({ photos, setPhotos, batch }) {
+   const { apikey } = useAuth();
   const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
   var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
   const [images,setImages] = useState([])

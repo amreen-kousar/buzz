@@ -17,8 +17,10 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import {baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
+
 const FunderVyaparDashboard = () => {
-    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+      const { apikey } = useAuth();
   const navigate = useNavigate();
  
   const [openFilter, setOpenFilter] = useState(false);

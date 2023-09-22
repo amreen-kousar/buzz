@@ -7,8 +7,9 @@ import Iconify from 'src/components/Iconify';
 import Filtersmain from './projectfilters/filtersmain';
 import Searchbar from 'src/layouts/dashboard/Searchbar';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 export default function gelathiProgram(props) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
     const {state} = useLocation();
     const [clcikData, setClickData] = useState()
     const [programe,setPrograme] = useState('')

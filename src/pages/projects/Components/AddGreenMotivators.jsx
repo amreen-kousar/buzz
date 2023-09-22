@@ -20,12 +20,13 @@ import { baseURL } from 'src/utils/api';
 import Iconify from 'src/components/Iconify';
 import AddParticipants from './AddParticipants';
 import { InsertEmoticon } from '@mui/icons-material';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   export default function AddGreenMotivators ({session ,reloadmethod}){
-    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+      const { apikey } = useAuth();
     const [open, setOpen] = React.useState(false);
     const [addValue,setAddValue]= useState([])
     const [sessiondata,setSessiondata]=useState('');

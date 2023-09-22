@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 export default async function shakthiapirequest(props) {
-    const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+      const { apikey } = useAuth();
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var response = []

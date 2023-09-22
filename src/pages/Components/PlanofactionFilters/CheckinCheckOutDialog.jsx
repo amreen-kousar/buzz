@@ -10,11 +10,13 @@ import Geocode from 'react-geocode';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function CheckinCheckOutDialog({ photos, setCheck, batch ,getGFSessionData  ,getTrainingBatch}) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
     setOpen(photos)

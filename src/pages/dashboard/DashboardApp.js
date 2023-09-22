@@ -12,9 +12,10 @@ import { AppWidgetSummary } from 'src/sections/@dashboard/app';
 import { useNavigate } from 'react-router-dom';
 import FiltersHome from 'src/pages/Filters/FiltersHome';
 import {baseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 import moment from 'moment';
 const DashboardApp = () => {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const navigate = useNavigate();
   const data = sessionStorage?.getItem('userId')
   const theme = useTheme();
@@ -63,7 +64,7 @@ const [errorMsg,setErrormsg]=useState(false)
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        // 'Authorization': `${apikey}`
+        'Authorization': `${apikey}`
       },
       data,
     };

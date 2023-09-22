@@ -11,12 +11,13 @@ import dayjs from 'dayjs';
 import Alert from '@mui/material/Alert';
 import Iconify from 'src/components/Iconify';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function PoaCreate(props) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [addPoa, setAddPoa] = useState('');

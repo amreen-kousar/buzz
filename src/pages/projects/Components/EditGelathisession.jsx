@@ -21,11 +21,13 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import axios from 'axios';
 import moment from 'moment';
 import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+   
 export default function EditGelathiSession({session,editSession, setEditsession}) {
+  const { apikey } = useAuth();
   const [openFilter, setOpenFilter] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = useState(new Date())

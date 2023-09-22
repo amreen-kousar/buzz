@@ -10,13 +10,14 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { baseURL } from 'src/utils/api';
 import { date } from 'yup';
+import { useAuth } from 'src/AuthContext';
 const bull = (
   <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
     •
   </Box>
 );
 export default function Location(props) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [country, setCountry] = useState([])
   const [states, setStates] = useState([])
   const [district, setDistrict] = useState([])

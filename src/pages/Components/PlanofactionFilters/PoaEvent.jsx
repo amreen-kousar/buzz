@@ -32,8 +32,9 @@ PoaFilter.propTypes = {
   onOpenEvent: PropTypes.func,
   onCloseEvent: PropTypes.func,
 };
+import { useAuth } from 'src/AuthContext';
 export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridvalue , changeState ,clickedItemData}) {
-  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
+    const { apikey } = useAuth();
   const [locationS, setLocation] = useState();
   const [checkin, setCheckIn] = useState('');
   const [checkout, setCheckout] = useState('');
