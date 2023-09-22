@@ -4,6 +4,7 @@ import { Button, Card, CardActions, CardContent, Stack,Checkbox ,Dialog,AppBar,T
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import { useAuth } from 'src/AuthContext';
+import { baseURL } from 'src/utils/api';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -32,7 +33,7 @@ export default function AddAttendance({ shown, setShown, batch }) {
         });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appGo/allAttendence',
+      url: baseURL + 'allAttendence',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `${apikey}`

@@ -21,7 +21,7 @@ import  Room  from '@mui/icons-material/Room';
 import { baseURL } from 'src/utils/api';
 import { useAuth } from 'src/AuthContext';
 export default function TravelDialog({ viewMessage }) {
-    const { apikey } = useAuth();
+  const apikey = JSON.parse(sessionStorage.getItem('userDetails'))?.token
   Geocode.setApiKey("AIzaSyAQZSphbIdAeypWHytAIHtJ5K-wuUHBfx4");
   const [open, setOpen] = useState(false);
   const [imageId,setImageId]=useState('');

@@ -265,7 +265,7 @@ axios(config)
     formdata.append("publish", 1)
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appGo/createProject',
+      url: baseURL + 'createProject',
       headers: {
         'Authorization': `${apikey}`
       },
@@ -313,7 +313,7 @@ axios(config)
      formdata.append("", "")
      var config = {
        method: 'post',
-       url: 'https://bdms.buzzwomen.org/appGo/createProject',
+       url: baseURL + 'createProject',
        headers: {
         'Authorization': `${apikey}`
        },

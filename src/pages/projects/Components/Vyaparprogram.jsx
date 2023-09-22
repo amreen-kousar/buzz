@@ -605,7 +605,7 @@ else{
 }
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
+        url: baseURL + 'addBuzzVyapar',
         headers: {
           'Content-Type': 'application/json',
            'Authorization': `${apikey}`

@@ -153,7 +153,7 @@ function AddProject({ viewMessage }) {
             // data.append('user_id', userid);
             var config = {
                 method: 'post',
-                url: 'https://bdms.buzzwomen.org/appGo/createProject',
+                url: baseURL + 'createProject',
                 headers: {
                     'Authorization': `${apikey}`
                 },

@@ -324,7 +324,7 @@ reloadfunction()
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appGo/getPoa ',
+      url: baseURL + 'getPoa',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `${apikey}`
@@ -343,7 +343,7 @@ reloadfunction()
   
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appGo/allDist',
+      url: baseURL + 'allDist',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `${apikey}`
@@ -389,7 +389,7 @@ reloadfunction()
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appGo/listTaluk',
+      url: baseURL + 'listTaluk',
       headers: {
         'Content-Type': 'application/json',
          'Authorization': `${apikey}`
@@ -1118,7 +1118,7 @@ let data = JSON.stringify({
 let config = {
   method: 'post',
   maxBodyLength: Infinity,
-  url: 'https://bdms.buzzwomen.org/appGo/addQualityAssessmentForm ',
+  url: baseURL + 'addQualityAssessmentForm ',
   headers: { 
     'Content-Type': 'application/json',
     'Authorization': `${apikey}`

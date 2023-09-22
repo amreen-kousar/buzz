@@ -15,6 +15,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useAuth } from 'src/AuthContext';
+import { baseURL } from 'src/utils/api';
 export default function AdminQuality({selectDATA,getData}) {
   const { apikey } = useAuth();
   
@@ -33,7 +34,7 @@ export default function AdminQuality({selectDATA,getData}) {
           
           var config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appGo/getEmpData',
+            url: baseURL + 'getEmpData',
             headers: { 
               'Content-Type': 'application/json',
               'Authorization': `${apikey}`
