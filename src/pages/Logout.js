@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Cookies from 'js-cookie';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -11,6 +12,7 @@ function SimpleDialog(props) {
   const navigate = useNavigate();
   const logoutuser = (path) => {
     sessionStorage.clear()
+    Cookies.remove('token')   
     navigate('/')
   }
   const loginuser = (path) => {
