@@ -11,8 +11,9 @@ function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
   const navigate = useNavigate();
   const logoutuser = (path) => {
-    sessionStorage.clear()
     Cookies.remove('token')   
+    sessionStorage.clear()
+    
     navigate('/')
   }
   const loginuser = (path) => {
