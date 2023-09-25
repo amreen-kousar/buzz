@@ -13,7 +13,7 @@ function SimpleDialog(props) {
   const logoutuser = (path) => {
     Cookies.remove('token')   
     sessionStorage.clear()
-    
+    localStorage.clear()
     navigate('/')
   }
   const loginuser = (path) => {

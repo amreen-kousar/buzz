@@ -3,7 +3,6 @@ import { Input, InputAdornment } from '@mui/material';
 import Iconify from '../../../components/Iconify';
 
 function searchCommon(props) {
-console.log("propss")
     return (
         <div style={{ marginLeft: "1rem", display: 'flex' }}>
             <Input

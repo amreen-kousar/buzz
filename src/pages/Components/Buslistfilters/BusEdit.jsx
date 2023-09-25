@@ -13,7 +13,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHandler ,busDetails}) {
-  console.log("🚀 ~ file:    ~ BusEdit1323 ~ clcikData:", clcikData)
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = useState('paper');
   const [age, setAge] = React.useState('');
@@ -120,23 +119,16 @@ export default function BusEdit({ clcikData,busesd,updatedata ,admin, reloadHand
     edit();
     
   }
-  console.log("moment:", moment)
   let register_date = clcikData?.register_date;
-  // console.log("moment_date:", moment(register_date))
   let testdate = moment(register_date, "DD-MM-YYYY").format("DD/MM/YYYY");
-  console.log("🚀 ~ file: BusEdit.jsx:127 ~ BusEdit ~ testdate:", testdate)
-  console.log("moment_date2:", moment(register_date, "DD-MM-YYYY").format("DD/MM/YYYY"))
-  // console.log("🚀 ~ file: BusEdit.jsx:125 ~ BusEdit ~ testdate:", testdate)
   // const [sendDateData, setSendDateData] = useState({
   //   register_date
   // });
-  // console.log("🚀 ~ file: BusEdit.jsx:126 ~ BusEdit ~ sendDateData:", sendDateData)
-  // console.log("clcikData?.register_date", clcikData?.register_date);
+
   // let dateExpected = clcikData?.register_date + '00:00:00';
 
   // let regdate = moment(dateExpected).format('DD/MM/YYYY')
-  // console.log("🚀 ~ file: BusEdit.jsx:127 ~ BusEdit ~ clcikData?.register_date:",typeof (clcikData?.register_date))
-  // console.log('Formatted register date:', regdate);
+
   return (
     <div>
       <Button onClick={handleClickOpen} sx={{

@@ -136,7 +136,6 @@ function AddProject({ viewMessage }) {
     const createProject = () => {
         if (confirm("Are You Sure You Want To Create Project?")) {
             const fundList = fund?.filter(itm => parseInt(itm?.funderID) == mainState?.funderId)
-            {console.log(fundList[0],"fundd")}
             const talukList = taluk?.filter(itm => itm?.id === mainState?.locationID)
             const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
             var data = new FormData();

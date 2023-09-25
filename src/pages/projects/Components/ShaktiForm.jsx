@@ -782,11 +782,9 @@ export default function ShaktiForm({itm ,reloadFUnction}) {
       localFormPresent1.set(item?.participantId, 'true');
     });
       setlocalFormPresent(localFormPresent1);
-      console.log(localFormPresent1,"localFormPresent1")
     },[localStorage?.getItem("shaktiform")]);
   
   useEffect(()=>{
-console.log("localFormPresent1 called")
   },[localFormPresent])
     const handleSurveyform = ()=>{
       alert("This form was Filled!!")
@@ -794,8 +792,7 @@ console.log("localFormPresent1 called")
 const handlesurvey=()=>{
   alert('Form is already filled')
 }
-{console.log(itm,"itemmmmm")}
-{console.log(itm?.isSurveyDone==='0' , (localFormPresent?.has(itm?.participant_id)),"localdataaaaaaa")}
+
   return (
     <>
       {/* <Button variant="outlined" onClick={handleClickOpen}>

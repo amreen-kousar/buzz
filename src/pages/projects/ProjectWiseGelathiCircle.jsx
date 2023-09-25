@@ -111,7 +111,7 @@ export default function ProjectWiseGelathiCircle() {
         setReload(!reload);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
  

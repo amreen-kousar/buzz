@@ -86,8 +86,6 @@ setShowAddBuss(false)
     setNotify(true);
   }, [])
 
-
-  {console.log(sendData.operations_manager_id,"omm")}
   const assignValues = () => {
     let tempdata = {
       ...sendData,

@@ -47,7 +47,6 @@ const GelathiProgramDashboard = () => {
     var startdate = moment(new Date()).format('YYYY-04-01')
     var endDate = moment(startdate, 'YYYY').add(1, 'year').format('YYYY-03-31')
     const apiHit = async (id, i, g,date1,date2) => {
-      console.log(id,"idvalue",i,"ivalue")
       setLoader(true)
       var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role
       var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
@@ -168,7 +167,6 @@ const GelathiProgramDashboard = () => {
     }
   
     const getData = (itm, i,date1,date2,dateValue,endDateValue,g) => {
-      console.log(i,"sjas",itm)
       setSelected(itm)
       const data = i === 2 ? { "funder_id": itm?.id } : i === 1 ? { "partner_id": itm?.id } : 
       i===3?{ "project_id": itm?.id }:i==4?{"opsManager":itm?.id}:i===12?{"somId":itm?.id} :i===5?{"trainerId":itm?.id}:i===6?{"gfid":itm?.id}:{"gflId":itm?.id}
