@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { baseURL } from 'src/utils/api';
-import { useAuth } from 'src/AuthContext';
+
 export default async function Projectapi(props) {
-      const { apikey } = useAuth();
+    
+   const {selectDATA,apikey}= props
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var response = []
@@ -10,7 +11,7 @@ export default async function Projectapi(props) {
         "role_id": role,
         "pageNum": "1",
         "user_id": idvalue,
-        "filter_id": JSON.stringify(props.selectDATA),
+        "filter_id": JSON.stringify(selectDATA),
         "type": ""
     });
    
@@ -19,7 +20,7 @@ export default async function Projectapi(props) {
         url: baseURL+'getAllPeople',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${apikey}`
+            'Authorization': apikey
         },
         data
     };

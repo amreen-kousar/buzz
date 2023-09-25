@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { baseURL } from 'src/utils/api';
-import { useAuth } from 'src/AuthContext';
+
 export default async function ApiRequest(props) {
-      const { apikey } = useAuth();
+   
+   const {selectDATA,apikey}= props
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var response = []
     const data = JSON.stringify({
         "role_id": role,
-        "filter_type": JSON.stringify(parseInt(props.selectDATA)),
+        "filter_type": JSON.stringify(parseInt(selectDATA)),
         "pageNum": 1,
         "emp_id": JSON.stringify(parseInt(idvalue))
     });
@@ -17,7 +18,7 @@ export default async function ApiRequest(props) {
         url: baseURL + 'getPeopleFilters',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${apikey}`
+            'Authorization': apikey,
         },
         data
     };

@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import ListTabledata from './components/ListTabledata';
 import ApiRequest from './components/ApiRequest';
 import SearchCommon from './components/SearchCommon';
+import { useAuth } from 'src/AuthContext';
 export default function GelathisLead({ selectDATA, getData ,date,endDate,dateValue,endDateValue}) {
+  const {apikey} = useAuth();
   const [glead, setGlead] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
   useEffect(() => {
     lead()
   }, [])
   const lead = async () => {
-    ApiRequest({ selectDATA: 13 }).then(res => setGlead(res))
+    ApiRequest({ selectDATA: 13 , apikey}).then(res => setGlead(res))
   }
   const getSearchFilter = (e) => {
     setSearchInFilter(e)

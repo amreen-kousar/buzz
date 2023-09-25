@@ -3,7 +3,11 @@ import ApiRequest from './components/ApiRequest';
 import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
 import Projectapi from './components/Projectsapi';
+import { useAuth } from 'src/AuthContext';
 export default function Funders({ selectDATA, getData,type ,date,endDate,dateValue,endDateValue}) {
+  const {apikey} = useAuth();
+
+  {console.log(apikey,"keyyy")}
   const [fund, setFund] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
   useEffect(() => {
@@ -18,10 +22,11 @@ export default function Funders({ selectDATA, getData,type ,date,endDate,dateVal
   const funder = async () => {
     if(type=="Projects")
     {
-      Projectapi({ selectDATA:8 }).then(res =>setFund(res))
+      Projectapi({ selectDATA:8 , apikey}).then(res =>setFund(res))
     }
     else{
-      ApiRequest({ selectDATA: 2 }).then(res => setFund(res))
+      {console.log(apikey,"keyyy")}
+      ApiRequest({ selectDATA: 2, apikey}).then(res => setFund(res))
     }
     
   }
