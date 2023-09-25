@@ -105,7 +105,8 @@ const GelathiProgramDashboard = () => {
         method: 'post',
         url: baseURL + 'gelathifilter',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
         data : data
       };
