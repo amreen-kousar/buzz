@@ -5,12 +5,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { DialogContent } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
   const navigate = useNavigate();
   const logoutuser = (path) => {
     sessionStorage.clear()
+    Cookies.remove('token')
     navigate('/')
   }
   const loginuser = (path) => {
