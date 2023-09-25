@@ -103,7 +103,6 @@ const handleclose=()=>{
     const userData = JSON.parse(sessionStorage?.getItem('people'))?.id;
     const roleid = JSON.parse(sessionStorage?.getItem('people'))?.role_id;
  
-    {console.log(projectIds,"projectsss")}
     if(confirm('Are you sure want to  delete')){
       var data = JSON.stringify({
         "emp_id": userData,

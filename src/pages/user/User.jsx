@@ -98,7 +98,6 @@ export default function User() {
   var userAccess = ['2']
   var userIdCheck = sessionStorage?.getItem('userId')
   const user = async (d, filter_type) => {
-    console.log(filter_type,"filterrr");
     setLoader(true)
     if (filter_type) {
       setSelected(filter_type)

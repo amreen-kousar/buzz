@@ -270,7 +270,7 @@ axios(config)
         <Typography style={{fontWeight:700,fontSize:25}}>
             Self Shakti Training Batch 
         </Typography>
-        {console.log(batch,"hasgdasghd")}
+     
         <Typography mt={3} mb={2}>
         {batch?.data?.name}
         </Typography>

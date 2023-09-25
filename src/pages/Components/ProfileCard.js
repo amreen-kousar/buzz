@@ -149,7 +149,7 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
     })
   }, [profileData])
 
-  console.log(profileData?.role,"rolee")
+
   const handleExpandClick = () => {
     setExpanded(true);
   };
@@ -164,13 +164,9 @@ export default function RecipeReviewCard({ profileData, changeUser }) {
     setOpen(false);
   };
 
-  console.log(profileData?.project_list,"projectssss")
+  
   var Project_List = profileData?.project_list?.map((e)=>e.project_id)
-  console.log(Project_List,"projectsssss")
-  console.log(profileData,"roleeeeee")
   const editProfile = async => {
-
-
     handleCloseClick();
     const userDetails = sessionStorage?.getItem("userDetails")
     var data = JSON.stringify({

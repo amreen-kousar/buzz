@@ -53,9 +53,9 @@ export default function Login() {
           Cookies.set('token', response.data.token, { expires: 1 }); // 1 day expiration
           sessionStorage.setItem('userDetails', JSON.stringify(response.data));
           userDetails = JSON.parse(JSON.stringify(response.data));
-          console.log(userDetails,"userdetailsss")
+        
           if (userDetails.token) {
-            console.log('Token exists in userDetails');
+           
             setApiKey(userDetails.token);
             const updatedUserDetails = { ...userDetails };
             delete updatedUserDetails.token;
@@ -128,8 +128,7 @@ export default function Login() {
       .catch((error) => alert(error.message));
   
   }
-  console.log(apikey,"apikey",userDetails);
-
+ 
   return (
     <Page title="Login" style={{ backgroundColor: "#ed6c02" }}>
       <RootStyle>
