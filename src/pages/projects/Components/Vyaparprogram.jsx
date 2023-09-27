@@ -20,7 +20,7 @@ import {
   CardContent,
   CardActionArea,
   DialogContent,
-  DialogContentText,
+  DialogContentText,Box, CircularProgress
 } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
@@ -304,7 +304,7 @@ const [entreprenur , setentrepreneurError] = useState(false)
     parsedData.push(newData);
     const updatedData = JSON.stringify(parsedData);
     localStorage.setItem('vyapar', updatedData);
-  componentreloadmethod()
+  // componentreloadmethod()
 };
 // Get data from local 
 const [isFormPresentLocally ,setIsFormPresentLocally] =useState(false)
@@ -633,7 +633,7 @@ else{
           // });
          
           setvyaparform(saveDataLocally('vyapar',data));
-          // componentreloadmethod()
+          componentreloadmethod()
         });
         handleClose()
       } 
@@ -794,6 +794,15 @@ else{
       });
   };
 
+  const [loader, setLoader] = useState(true);
+  useEffect(() => {
+    // After 5 seconds, set showCard to true to render the Card component
+    const delay = 5000; // 5 seconds in milliseconds
+    const timeoutId = setTimeout(() => {
+      setLoader(false);
+    }, delay);
+  })
+
   return (
     <div>
       {successMessage && (
@@ -842,6 +851,10 @@ else{
          This form is already filled!
        </Typography> */}
        {/* :  */}
+       {(loader)? 
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+                <CircularProgress sx={{color:'#ff7424'}}/>
+           </Box>:
        <Grid>
       
             <Card>
@@ -2499,7 +2512,7 @@ else{
                 {/* -------------------------------- */}
               </CardContent>
             </Card>
-          </Grid>
+          </Grid>}
           {/* } */}
         </form>
       </Dialog>
