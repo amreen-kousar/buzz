@@ -30,15 +30,17 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import moment from 'moment';
 import GelathiCircleForm from './GelathiCircleForm';
-import {oldbaseURL} from 'src/utils/api';
+import {oldbaseURL,baseURL} from 'src/utils/api';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+import { useAuth } from 'src/AuthContext';
 Circledrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
 export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onCloseFilter, clcikData, data1, id }) {
+  const {apikey} = useAuth()
   const [scheduleData, setScheduleData] = useState('');
   var [searchData, setSearchData] = useState('');
   var [search, setSearch] = useState('');
@@ -119,7 +121,10 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
   };
   useEffect(() => {
     VillageVisit();
-    circle();
+    if( clcikData?.id && data1?.project_id)
+      {
+        circle()
+      }
     setSendData({
       circle_date: clcikData?.date,
     });
@@ -230,9 +235,10 @@ export default function Circledrawer({ isOpenFilter,head , onOpenFilter, onClose
     });
     var config = {
       method: 'post',
-      url: oldbaseURL+'getGelathiCircleDataNew.php',
+      url: baseURL+'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };

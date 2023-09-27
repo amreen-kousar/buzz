@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { oldbaseURL } from 'src/utils/api';
+import { oldbaseURL , baseURL} from 'src/utils/api';
 import { Icon } from '@iconify/react';
+import { useAuth } from 'src/AuthContext';
 import GreenSurvey from 'src/pages/projects/Components/GreenSurvey';
 import Vyaparprogram from 'src/pages/projects/Components/Vyaparprogram';
 import GelathiCircleForm from 'src/pages/projects/Components/GelathiCircleForm';
@@ -55,6 +56,7 @@ PoaGF.propTypes = {
   onCloseFilterGF: PropTypes.func,
 };
 export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF, clcikData, batchState, reloadPOAGF}) {
+  const {apikey} = useAuth()
   const [batch, setBatch] = useState('');
   const [photos, setPhotos] = React.useState(false);
   const [shown, setShown] = React.useState(false);
@@ -162,7 +164,9 @@ window.addEventListener('offline', () => {
         let localData = JSON.parse(localStorage.getItem('sessiondata'));
         setSession(localData);
       });
-    circle();
+   if(session?.circle_id && session?.project_id){
+     circle();
+   }
   };
   const noteSubmitHandler = () => {
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
@@ -222,7 +226,9 @@ window.addEventListener('offline', () => {
       });
   };
   useEffect(()=>{
-    circle()
+    if(session?.circle_id && session?.project_id){
+      circle()
+    }
   },[reloadPOAGF])
   const circle = (async) => {
     const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
@@ -233,9 +239,10 @@ window.addEventListener('offline', () => {
     });
     var config = {
       method: 'post',
-      url: oldbaseURL + 'getGelathiCircleDataNew.php',
+      url:baseURL + 'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization':`${apikey}`
       },
       data: data,
     };

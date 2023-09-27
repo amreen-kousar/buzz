@@ -16,7 +16,8 @@ import { Icon } from '@iconify/react';
 import GelathiCircleForm from './GelathiCircleForm';
 import GreenSurvey from './GreenSurvey';
 import Vyaparprogram from './Vyaparprogram';
-import { oldbaseURL } from 'src/utils/api';
+import { oldbaseURL,baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 GelathiCircleDrawer.propTypes = {
   isOpenFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
@@ -36,6 +37,7 @@ export default function GelathiCircleDrawer({
     index: '',
     id: '',
   });
+  const {apikey} = useAuth()
   const [session, setSession] = useState('');
   const [SessionClickData,setSessionClickData]=useState('');
   const [circleData, setcircleData] = useState('');
@@ -45,7 +47,9 @@ export default function GelathiCircleDrawer({
 const [showGreenFrom ,setShowGreenForm] = useState(false)
 const [formData , setFormData] = useState()
   useEffect(() => {
-    circle();
+  if(clcikData?.id && data1?.project_id){
+      circle();
+  }
   }, [clcikData]);
   const gelathiDrawerReloder = () => {
     setReloadFromForm(!reloadFromForm);
@@ -53,7 +57,10 @@ const [formData , setFormData] = useState()
   useEffect(() => {
     let isApiSubscribed = true;
     if (isApiSubscribed) {
+
+     if(clcikData?.id && data1?.project_id){
       circle();
+     }
     }
     return () => {
       isApiSubscribed = false;
@@ -68,9 +75,10 @@ const circle = (async) => {
     });
 var config = {
       method: 'post',
-      url: oldbaseURL+'getGelathiCircleDataNew.php',
+      url: baseURL+'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization':`${apikey}`
       },
       data: data,
     };
