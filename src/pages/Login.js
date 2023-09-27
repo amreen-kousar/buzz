@@ -14,6 +14,7 @@ import AuthSocial from '../sections/auth/AuthSocial';
 import Iconify from 'src/components/Iconify';
 import { baseURL } from 'src/utils/api';
 import { useAuth } from 'src/AuthContext';
+import Cookies from 'js-cookie';
 export default function Login() {
   const RootStyle = styled('div')(({ theme }) => ({
     [theme.breakpoints.up('md')]: {

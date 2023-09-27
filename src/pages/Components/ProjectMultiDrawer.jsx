@@ -670,7 +670,6 @@ export default function projectMultiDrawer({
               ) : null}
               <Programevaluationday1 batch={batch} onCloseFilter={onCloseFilter} />
               <Evaluationday2 batch={batch} onCloseFilter={onCloseFilter} />
-{console.log(batch?.data,"batchdata")}
               <Stack style={{ flexDirection: 'row' }} mb={2}>
                 <Button
                   variant="secondary"

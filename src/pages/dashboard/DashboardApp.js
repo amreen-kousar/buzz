@@ -98,7 +98,7 @@ const [errorMsg,setErrormsg]=useState(false)
       url: baseURL + 'ssfilter',
       headers: { 
         'Content-Type': 'application/json',
-        //  'Authorization': `${apikey}`
+         'Authorization': `${apikey}`
 
       },
       data : data

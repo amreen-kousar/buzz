@@ -173,7 +173,6 @@ window.addEventListener('offline', () => {
     if(session?.circle_id && session?.project_id){circle()}
   };
 
-  console.log(session,"sessindata")
   const noteSubmitHandler = () => {
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
@@ -487,7 +486,6 @@ useEffect(()=>{
 
 },[localStorage?.getItem("vyapar"),localStorage?.getItem("spoorthi"),localStorage?.getItem("green")])
 
-console.log(localFormPresent,"localformmm")
   return (
     <>
       <Drawer
@@ -904,7 +902,6 @@ console.log(localFormPresent,"localformmm")
               </Button>
 }
   
-  {console.log(localFormPresent,"inside")}
              
               {(showSurvey && (!isOnline)) ? (
                 <Stack>
@@ -913,7 +910,6 @@ console.log(localFormPresent,"localformmm")
                       {session?.type == 4 || session.type == 10 || session.type == 16 ? (
                         <>
                           {gelathisData?.gelathis?.map((itm, index) => {
-                          {console.log(localFormPresent,"heyyy")}
                             return (
                               <Card style={{borderRadius:0}}>
 

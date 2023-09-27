@@ -5,12 +5,29 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { DialogContent } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
   const navigate = useNavigate();
+
+  // const clearCache=()=>
+  // {
+  //   // Get the browser's cache object.
+  //   const cache = window.caches.open('my-cache');
+  // {console.log("cacheeee",cache)}
+  //   // Delete all of the entries in the cache.
+  //   cache.matchAll().then(function(entries) {
+  //     entries.forEach(function(entry) {
+  //       entry.delete();
+  //     });
+  //   });
+  // }
+
   const logoutuser = (path) => {
     sessionStorage.clear()
+    Cookies.remove('token')
+    localStorage.clear()
     navigate('/')
   }
   const loginuser = (path) => {

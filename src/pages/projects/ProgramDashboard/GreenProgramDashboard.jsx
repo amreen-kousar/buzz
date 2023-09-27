@@ -100,7 +100,8 @@ const GreenProgramDashboard = () => {
       method: 'post',
       url: baseURL + 'greenfilter',
       headers: { 
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data : data
     };

@@ -102,7 +102,6 @@ setSummaryData(response.data);
       </Box>
     )
   }
-  console.log("🚀 ~ file:  ~ FUnderSSDashboard ~ summaryData:", summaryData[0]?.actual)
   const summarySubDataView = [
     { ...itemStyles[0], title: "Villages", total: 'villages', color: "villages", icon: 'fontisto:holiday-village' },
     { ...itemStyles[0], title: "Women", total: 'women', color: "info", icon: 'twemoji:women-holding-hands' },

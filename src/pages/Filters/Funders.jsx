@@ -7,7 +7,6 @@ import { useAuth } from 'src/AuthContext';
 export default function Funders({ selectDATA, getData,type ,date,endDate,dateValue,endDateValue}) {
   const {apikey} = useAuth();
 
-  {console.log(apikey,"keyyy")}
   const [fund, setFund] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
   useEffect(() => {
@@ -25,7 +24,6 @@ export default function Funders({ selectDATA, getData,type ,date,endDate,dateVal
       Projectapi({ selectDATA:8 , apikey}).then(res =>setFund(res))
     }
     else{
-      {console.log(apikey,"keyyy")}
       ApiRequest({ selectDATA: 2, apikey}).then(res => setFund(res))
     }
     

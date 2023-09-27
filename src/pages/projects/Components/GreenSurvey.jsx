@@ -364,7 +364,6 @@ useEffect(()=>{
     setChecked(tempData);
   };
 
-  console.log(JSON.stringify(props?.itm?.id) , JSON.stringify(props?.itm?.gelathi_id))
   const greensurveyformdata = async () => {
   var  data = {}
 

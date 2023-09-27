@@ -163,10 +163,9 @@ setShowAddBuss(false)
         // console.log(error);
       });
   }
-  {console.log(sendData?.operations_manager_id,"opssss",JSON.parse(sessionStorage.getItem('operations_manager_id')))}
-var userdata = (sendData?.operations_manager_id)?sendData?.operations_manager_id: JSON.parse(sessionStorage.getItem('operations_manager_id'))
-  {console.log(userdata,"userrr")}
 
+var userdata = (sendData?.operations_manager_id)?sendData?.operations_manager_id: JSON.parse(sessionStorage.getItem('operations_manager_id'))
+ 
 useEffect(() => {
     Gfl();
   },[userdata])
