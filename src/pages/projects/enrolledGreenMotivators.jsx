@@ -29,7 +29,7 @@ export default function enrolledGreenMotivatorsList() {
     var [selected, setSelected] = useState(null)
     const [data1, setData1] = useState('')
     var [search, setSearch] = useState('')
-    const [count,setCount]= useState('');
+    const [count,setCount]= useState(0);
     const [reload, setReload] = useState(false);
     useEffect(() => {
         enrolledGreenMotivators();
@@ -223,11 +223,11 @@ const getData = (itm, i) => {
             {
               green==""?
               <div style={{marginTop:"20%" , marginLeft:"40%"}}>
-              <CircularProgress />
+              <CircularProgress sx={{color:'#ff7424'}}/>
               </div>
               :
             
-            green?.list?.length!==0?green?.list?.map((itm) => {
+            green?.list!=null?green?.list?.map((itm) => {
                 return (
                     <Card  style={styles.card1}>
                    <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removeGelathi(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}

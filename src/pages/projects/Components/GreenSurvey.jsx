@@ -20,7 +20,7 @@ import {
   CardActionArea,
   DialogContent,
   DialogContentText,
-  FormHelperText,
+  FormHelperText,Box,CircularProgress
 } from '@mui/material';
 import svgLogo from '../../../assets/form-line.svg'
 import Dialog from '@mui/material/Dialog';
@@ -148,6 +148,8 @@ export default function GreenSurvey(props) {
   };
   const handleClickOpen = () => {
     setOpen(true);
+    setLoader(true);
+
   };
   const handleClose = () => {
     setOpen(false);
@@ -819,6 +821,14 @@ useEffect(()=>{
      
     }
   };
+  const [loader, setLoader] = useState(true);
+  useEffect(() => {
+    // After 5 seconds, set showCard to true to render the Card component
+    const delay = 5000; // 5 seconds in milliseconds
+    const timeoutId = setTimeout(() => {
+      setLoader(false);
+    }, delay);
+  })
 
 
   return (
@@ -876,22 +886,16 @@ useEffect(()=>{
             </Toolbar>
           </AppBar>
 
-        {isFormPresentLocally?
+        {(isFormPresentLocally)?
        <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
        This Form is Filled!
      </Typography>
+       :
+       (loader)? 
+         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+               <CircularProgress sx={{color:'#ff7424'}}/>
+          </Box>
         :<Grid>
-            {/* <Card mt={1} style={{ borderRadius: 20}} >
-        <CardContent>
-       
-            <Typography variant="subtitle2" style={{color:'white',backgroundColor:"#ff7424",padding:10,borderRadius:5}}>
-           Green Baseline Survey
-          </Typography>  
-          <Typography variant="subtitle2" style={{color:'#ff7424',backgroundColor:"white",paddingTop:10}}>
-            * 
-          </Typography>  
-          </CardContent>    
-  </Card> */}
             <Card>
               <CardContent>
                 <Card mt={1} style={{ backgroundColor: '#F6F8FB', marginTop: 50 }}>

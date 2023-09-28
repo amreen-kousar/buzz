@@ -25,7 +25,7 @@ export default function enrolledVyaaparList() {
     const [openFilter, setOpenFilter] = useState(false);
     const [filter,setFilter]=useState(false);
     const [reload, setReload] = useState(false);
-      const [count,setCount]= useState('');
+      const [count,setCount]= useState(0);
 const [remove,setremove]=useState('');
  const searchFunction = (e) => {
        
@@ -223,12 +223,11 @@ const id = sessionStorage?.getItem("proId")
             {/* </Stack> */}
             {vyaapar == ""?
                           <div style={{marginTop:"20%" , marginLeft:"40%"}}>
-                          <CircularProgress />
+                          <CircularProgress sx={{color:'#ff7424'}}/>
                           </div>
                           :
             
-            
-            vyaapar?.list?.length!==0?vyaapar?.list?.map((itm) => {
+            vyaapar?.list!==null?vyaapar?.list?.map((itm) => {
                 return (
                     <Card style={styles.card1} >
                       <div>{(role==13 || role==6)?<IconButton style={{float:'right',right:30}} onClick={()=>removevyapar(itm)} ><Iconify icon="ic:sharp-remove-circle"/></IconButton>:null}

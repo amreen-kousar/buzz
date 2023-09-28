@@ -69,7 +69,7 @@ const FunderVyaparDashboard = () => {
   if (loader) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
-        <CircularProgress />
+        <CircularProgress sx={{color:'#ff7424'}}/>
       </Box>
     );
   }
@@ -77,7 +77,7 @@ const FunderVyaparDashboard = () => {
   if (summaryData?.length === 0) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
-        <CircularProgress />
+        <CircularProgress sx={{color:'#ff7424'}}/>
       </Box>
     );
   }

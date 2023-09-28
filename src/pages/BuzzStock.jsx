@@ -118,7 +118,7 @@ export default function BuzzStock() {
   if (loader) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
-        <CircularProgress />
+        <CircularProgress sx={{color:'#ff7424'}}/>
       </Box>
     );
   }

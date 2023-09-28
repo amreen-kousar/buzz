@@ -234,7 +234,7 @@ export default function ProjectWiseGelathiCircle() {
      <>
       {gelathiCircles == ""?
 <div style={{marginTop:"20%" , marginLeft:"40%"}}>
-<CircularProgress />
+<CircularProgress sx={{color:'#ff7424'}}/>
 </div>
 :
       

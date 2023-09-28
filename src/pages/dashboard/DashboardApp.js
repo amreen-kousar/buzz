@@ -121,7 +121,7 @@ const [errorMsg,setErrormsg]=useState(false)
   if (loader) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-        <CircularProgress />
+        <CircularProgress sx={{color:'#ff7424'}}/>
       </Box>
     )
   }
@@ -148,7 +148,7 @@ const [errorMsg,setErrormsg]=useState(false)
   if (summaryData?.length === 0 ) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", height: '70vh' }}>
-        <CircularProgress />
+        <CircularProgress sx={{color:'#ff7424'}}/>
       </Box>
     )
   }

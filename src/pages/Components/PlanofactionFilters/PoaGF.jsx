@@ -679,7 +679,7 @@ useEffect(()=>{
                 </CardContent> */}
 
                     {isLoading ? (
-                      <CircularProgress />
+                      <CircularProgress sx={{color:'#ff7424'}}/>
                     ) : (
                       batch?.photos && (
                         <div>

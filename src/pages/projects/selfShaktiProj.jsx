@@ -206,7 +206,7 @@ export default function selfShaktiProj() {
                     {selfShakti == " "?
                     <>
                     <div style={{display:"flex", marginTop:"50%", marginLeft:"40%" }}>
-                          <CircularProgress />
+                          <CircularProgress sx={{color:'#ff7424'}}/>
                           </div>
                     </>
                      :

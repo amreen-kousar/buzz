@@ -14,7 +14,7 @@ import {
   Card,
   CardContent,
   DialogContent,
-  DialogContentText,
+  DialogContentText,Box, CircularProgress
 } from '@mui/material';
 import { Icon } from '@iconify/react';
 import Dialog from '@mui/material/Dialog';
@@ -119,6 +119,7 @@ export default function GelathiCircleForm({
   };
   const handleClickOpen = () => {
     setOpen(true);
+    setLoader(true);
     setShowForm(true);
   };
   const handleClose = () => {
@@ -397,6 +398,16 @@ const saveDataLocally = (key, data) => {
   }
 
   };
+
+  const [loader, setLoader] = useState(true);
+  useEffect(() => {
+    // After 5 seconds, set showCard to true to render the Card component
+    const delay = 5000; // 5 seconds in milliseconds
+    const timeoutId = setTimeout(() => {
+      setLoader(false);
+    }, delay);
+  })
+
   return (
     <div>
       <Stack style={{ flexDirection: 'row', float: 'right' }} mb={2}>
@@ -430,7 +441,11 @@ const saveDataLocally = (key, data) => {
              {(isOnline())? <Iconify icon="material-symbols:save" width={30} height={30} />:"save"}
             </Button>
           </Toolbar>
-          <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
+          {(loader)? 
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+                <CircularProgress sx={{color:'#ff7424'}}/>
+           </Box>:
+           <DialogContent dividers={scroll === 'paper'} sx={{ background: '#f9fafb' }}>
             <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
               <Grid style={{ margin: 10 }}>
                 <Card mt={1} style={{ marginTop: 10, borderRadius: 20 }}>
@@ -912,7 +927,7 @@ const saveDataLocally = (key, data) => {
                 <br />
               </Grid>
             </DialogContentText>
-          </DialogContent>
+          </DialogContent>}
         </form>
       </Dialog>
     </div>

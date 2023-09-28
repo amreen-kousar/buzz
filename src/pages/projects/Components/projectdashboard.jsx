@@ -164,7 +164,7 @@ export default function Projectdashboard({profileData}) {
   if (loader) {
     return (
       <Grid sx={{ display: 'flex',float:'right' }}>
-        <CircularProgress />
+        <CircularProgress sx={{color:'#ff7424'}}/>
       </Grid>
     )
   }

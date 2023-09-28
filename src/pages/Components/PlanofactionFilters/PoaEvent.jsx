@@ -455,7 +455,7 @@ const handlecheckin = () => {
             <Card id="event-data-card" style={{ marginTop: 20 }}>
               <CardContent id="card-content-poa-event-data">
                
-             {isLoading? <CircularProgress /> : 
+             {isLoading? <CircularProgress sx={{color:'#ff7424'}}/> : 
                 <div>
                   <img id="img-event-data" src={eventData?.photo1 ? eventData?.photo1 : ''} />
                 </div>}

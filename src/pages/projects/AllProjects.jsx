@@ -206,7 +206,7 @@ var data ={}
     if (loader) {
         return (
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
-            <CircularProgress />
+            <CircularProgress sx={{color:'#ff7424'}}/>
           </Box>
         );
       }
@@ -356,7 +356,7 @@ var data ={}
                         <TabPanel value={value} index={0}>
                             {projects == []?
                             <div >
-<CircularProgress />
+<CircularProgress sx={{color:'#ff7424'}}/>
                             </div>
                             :   projects?.length > 0 ? 
                                 <>

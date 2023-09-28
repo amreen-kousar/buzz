@@ -406,7 +406,7 @@ const [iserror, setIsError] = useState(false)
 session.length <=0 ?
 <>
 <div style={{display:"flex", marginTop:"50%", marginLeft:"40%" }}>
-      <CircularProgress />
+      <CircularProgress sx={{color:'#ff7424'}}/>
       </div>
 </>
 :
@@ -589,7 +589,7 @@ session.length <=0 ?
                 <Card id="event-data-card" style={{ marginTop: 20 }}>
                   <CardContent id="card-content-poa-event-data">
                     {isLoading ? (
-                      <CircularProgress />
+                      <CircularProgress sx={{color:'#ff7424'}}/>
                     ) : (
                       session?.photos && (
                         <div>

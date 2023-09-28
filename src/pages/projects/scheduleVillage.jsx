@@ -134,7 +134,7 @@ export default function scheduleVillage() {
             
             villageData == ""?
             <div style={{marginTop:"20%" , marginLeft:"40%"}}>
-            <CircularProgress />
+            <CircularProgress sx={{color:'#ff7424'}}/>
             </div>
             :
             villageData?.list?.length!==0?villageData?.list?.map((itm) => {

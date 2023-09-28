@@ -199,7 +199,7 @@ export default function gelathiProgram(props) {
             </Stack>}
             { programe == "" ? 
 <div style={{marginTop:"20%" , marginLeft:"40%"}}>
-  <CircularProgress />
+  <CircularProgress sx={{color:'#ff7424'}}/>
   </div>
 :   programe?.list?.length!==0?programe?.list?.map((itm) => {
                         return (
