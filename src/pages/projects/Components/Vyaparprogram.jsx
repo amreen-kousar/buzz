@@ -613,12 +613,13 @@ else{
       };
       axios(config)
         .then(function (response) {
+          changeState();
           setvyaparform(response?.data);
           localStorage.removeItem('vyapar');
       
           setMessage(response?.data.message);
           setsuccessMessage(true);
-          changeState();
+         
           setIsCurrentLoan(false);
           setisAdditionalSkill(false)
           handleClose();
