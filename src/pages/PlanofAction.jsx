@@ -367,6 +367,7 @@ const apigelathicircle = async () => {
         };
 
         await axios(config);
+        changeState()
         // Handle the response if needed
       }
 
@@ -382,7 +383,9 @@ const apigelathicircle = async () => {
   } finally {
     // Release the mutex lock
     mutex.unlock();
+    changeState()
   }
+ changeState()
 };
 const apiCall = async () => {
   // Acquire the mutex lock

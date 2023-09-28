@@ -285,7 +285,9 @@ const [internet , setinternet] = useState("")
 const [loansError , setloansError] = useState(false)
 const [bisnessError , setbusinessError] = useState(false)
 const [entreprenur , setentrepreneurError] = useState(false)
-  const handleClickOpen = () => {
+  
+
+const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
@@ -305,10 +307,11 @@ const [entreprenur , setentrepreneurError] = useState(false)
     parsedData.push(newData);
     const updatedData = JSON.stringify(parsedData);
     localStorage.setItem('vyapar', updatedData);
-  componentreloadmethod()
+   componentreloadmethod()
 };
 // Get data from local 
 const [isFormPresentLocally ,setIsFormPresentLocally] =useState(false)
+const localStorageData = localStorage.getItem('vyapar');
 useEffect(()=>{
   const existingData = localStorage.getItem('vyapar');
       const parsedData = existingData ? JSON.parse(existingData) : [];
@@ -614,25 +617,18 @@ else{
       };
       axios(config)
         .then(function (response) {
+          changeState();
           setvyaparform(response?.data);
           localStorage.removeItem('vyapar');
       
           setMessage(response?.data.message);
           setsuccessMessage(true);
-          changeState();
+        
           setIsCurrentLoan(false);
           setisAdditionalSkill(false)
           handleClose();
         })
         .catch(function (error) {
-          // Swal.fire({
-          //   icon: 'error',
-          //   title: 'Error',
-          //   text: response.data.message,
-          //   confirmButtonText: 'Ok',
-          //   timer: 2000,
-          // });
-         
           setvyaparform(saveDataLocally('vyapar',data));
           componentreloadmethod()
         });
@@ -768,8 +764,9 @@ else{
     ) {
 
     setvyaparform(saveDataLocally('vyapar',JSON.parse(data)));
-    componentreloadmethod();
     handleClose();
+    componentreloadmethod();
+ 
     }
     else{
       alert('Please Select the Option');
