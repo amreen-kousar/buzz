@@ -292,10 +292,11 @@ const saveDataLocally = (key, data) => {
         data = setSpoorthiForm(saveDataLocally('spoorthi', JSON.parse(data)));
         setSpoorthiForm(data);
 
-      }else{
+      }
+      else{
 
      var  data = JSON.stringify({
-         partcipantId: id,
+         partcipantId: JSON.stringify(parseInt(id)),
          email_address: sendData?.email_address,
          GelathiId: sendData?.GelathiId,
          Spoorthi_Session_Number: selectedValue,
