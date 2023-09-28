@@ -26,62 +26,63 @@ export default function Login() {
   var userDetails;
   const { apikey, setApiKey } = useAuth();
   const apiHit = async (itm) => {
-    try {
-      const data = JSON.stringify({
-        email: itm?.user?.email,
-        profile_pic: itm?.user?.photoURL,
-      });
-  
-      const config = {
-        method: 'post',
-        url: baseURL + 'signIn',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: data,
-      };
-  
-      const response = await axios(config);
-  
-      sessionStorage?.setItem('user', JSON?.stringify(itm?.user));
-      sessionStorage?.setItem('userId', response?.data?.role);
-  
-      if (response?.data?.code === 404) {
-        alert('email id not found');
-      }
-      if (response?.data?.code === 400) {
-        alert('Not Authorized');
-      } else {
-        sessionStorage.setItem('userDetails', JSON.stringify(response.data));
-        userDetails = JSON.parse(JSON.stringify(response.data));
-        console.log(userDetails, 'userdetailsss');
-  
-        if (userDetails.token) {
-          console.log('Token exists in userDetails');
-          setApiKey(userDetails.token);
-          const updatedUserDetails = { ...userDetails };
-          delete updatedUserDetails.token;
-  
-          sessionStorage.setItem('userDetails', JSON.stringify(updatedUserDetails));
+    var data = JSON.stringify({
+      "email": itm?.user?.email,
+      "profile_pic":itm?.user?.photoURL
+    });
+    var config = {
+      method: 'post',
+      url: baseURL + 'signIn',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data
+    };
+    axios(config)
+      .then(function (response) {
+        sessionStorage?.setItem('user', JSON?.stringify(itm?.user))
+        sessionStorage?.setItem('userId', response?.data?.role)
+        if (response?.data?.code == 404) {
+          alert("email id not found")
         }
-  
-        if (sessionStorage?.userDetails) {
-          if (response.data.role === 2) {
-            navigate('/dashboard/projects');
-          } else if (response.data.role === 8) {
-            navigate('/dashboard/funderselshaktidashboard');
-          } else if (response.data.role === 6 || response.data.role === 13) {
-            navigate('/dashboard/gelathiprogramdashboard');
-          } else {
-            navigate('/dashboard/app');
+        if(response?.data?.code == 400)
+        {
+          alert("Not Authorized")
+        }
+        else {
+          Cookies.set('token', response.data.token, { expires: 1 }); // 1 day expiration
+          sessionStorage.setItem('userDetails', JSON.stringify(response.data));
+          userDetails = JSON.parse(JSON.stringify(response.data));
+          if (userDetails.token) {
+            setApiKey(userDetails.token);
+            const updatedUserDetails = { ...userDetails };
+            delete updatedUserDetails.token;
+          
+            sessionStorage.setItem('userDetails', JSON.stringify(updatedUserDetails));
+          }
+    
+          if (sessionStorage?.userDetails) {
+            if (
+              response.data.role == 2
+            ) {
+              navigate('/dashboard/projects')
+            }
+            else if (response.data.role == 8) {
+              navigate('/dashboard/funderselshaktidashboard')
+            }
+            else if (response.data.role == 6 || response.data.role==13) {
+              navigate('/dashboard/gelathiprogramdashboard')
+            }
+            else {
+              navigate('/dashboard/app')
+            }
           }
         }
-      }
-    } catch (error) {
-      // Handle error if needed
-      // console.log(error);
-    }
-  }; 
+      })
+      .catch(function (error) {
+        // console.log(error);
+      });
+  }
 
 
   const HeaderStyle = styled('header')(({ theme }) => ({
@@ -120,14 +121,11 @@ export default function Login() {
   const navigate = useNavigate();
   const mdUp = useResponsive('up', 'md');
   const googleLogin = async () => {
-    try {
-      const itm = await auth.signInWithPopup(provider);
-      await apiHit(itm);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-  console.log(apikey,"apikey",userDetails);
+    auth.signInWithPopup(provider)
+      .then(itm => { apiHit(itm) })
+      .catch((error) => alert(error.message));
+  
+  }
 
   return (
     <Page title="Login" style={{ backgroundColor: "#ed6c02" }}>
