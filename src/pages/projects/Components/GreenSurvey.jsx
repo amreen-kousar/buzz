@@ -47,6 +47,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function GreenSurvey(props) {
+
+  { console.log(JSON.stringify(props?.itm?.id) || JSON.stringify(props?.itm?.gelathi_id),"null",props?.itm?.gelathi_id)}
   const { apikey } = useAuth();
   const { state } = useLocation();
   const [open, setOpen] = React.useState(false);
@@ -566,7 +568,7 @@ useEffect(()=>{
           setGreenForm(data);
         } else {
           data = JSON.stringify({
-            partcipantId: JSON.stringify(parseInt(props?.itm?.id)) || JSON.stringify(parseInt(props?.itm.gelathi_id)),
+            partcipantId: JSON.stringify(props?.itm?.id) || JSON.stringify(props?.itm?.gelathi_id),
             Email: sendData?.Email,
             Name_of_the_surveyor: sendData?.Name_of_the_surveyor,
             Name_of_the_respondent: sendData?.Name_of_the_respondent,
@@ -646,13 +648,13 @@ useEffect(()=>{
             setGreenForm(saveDataLocally('green', data));
             props?.componentreloadmethod()
           });
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: response.data.message,
-          confirmButtonText: 'Ok',
-          timer: 2000,
-        });
+        // Swal.fire({
+        //   icon: 'error',
+        //   title: 'Error',
+        //   text: response.data.message,
+        //   confirmButtonText: 'Ok',
+        //   timer: 2000,
+        // });
         handleClose();
       } else {
         alert('Please Fill All The Fields');

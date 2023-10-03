@@ -538,7 +538,7 @@ if(localStorage.getItem('vyapar')){
 }
 else{
       var data = JSON.stringify({
-        partcipantId: JSON.stringify(parseInt(itm?.id)) || JSON.stringify(parseInt(itm?.gelathi_id)),
+        partcipantId: JSON.stringify(itm?.id) || JSON.stringify(itm?.gelathi_id),
         gfId: sendData?.gfId,
         when_was_survey_done: survey,
         name_of_the_vyapari: sendData?.name_of_the_vyapari,
