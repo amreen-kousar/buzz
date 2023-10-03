@@ -344,7 +344,7 @@ const networkAccess = async () => {
   const vyaparformdata = (async) => {
     var data ={}
     data = JSON.stringify({
-      partcipantId: itm?.id || itm?.gelathi_id,
+      partcipantId: JSON.stringify(itm?.id) || JSON.stringify(itm?.gelathi_id),
       gfId: sendData?.gfId,
       when_was_survey_done: survey,
       name_of_the_vyapari: sendData?.name_of_the_vyapari,

@@ -369,7 +369,7 @@ useEffect(()=>{
   var  data = {}
 
   data = JSON.stringify({
-      partcipantId: props?.itm?.id || props?.itm.gelathi_id,
+      partcipantId: JSON.stringify(props?.itm?.id) || JSON.stringify(props?.itm?.gelathi_id),
       Email: sendData?.Email,
       Name_of_the_surveyor: sendData?.Name_of_the_surveyor,
       Name_of_the_respondent: sendData?.Name_of_the_respondent,
