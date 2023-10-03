@@ -19,7 +19,7 @@ function AddUser(props) {
     let [emailExists, setEmailExists] = useState(false)
     var [AddUser, setAddUser] = useState({
         role:'', first_name: '', last_name: "", contactNum: '', workNum: '', officeMailId: '', address: '', address3: "", address2: "",
-        pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: "", license_number: "", project_list: "",
+        pincode: "", gender: "", present_status: true, doj: new Date(), reportingManager: {}, license_number: "", project_list: "",
         emp_id: ""
     })
     const [roles, setRoles] = useState([])
@@ -109,7 +109,12 @@ const emailchangeHandler=(e) => {
             });
     }
     const getEmpId = async (value) => {
-        setAddUser({ ...AddUser, role: value })
+         const roleid = {
+            id: parseInt(value.id),
+            roleName: value.roleName
+         };
+
+        setAddUser({ ...AddUser, role: roleid })
         let formData = new FormData();
         formData.append('role_id', value.id);
         formData.append('name', '');
@@ -180,9 +185,9 @@ const emailchangeHandler=(e) => {
     }
 let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
     const submitUser = () => {
-        AddUser.project_list = inputProject.map(i => parseInt(i.id))
+        AddUser.project_list = inputProject.map(i => i.id)
         AddUser.officeMailId = AddUser?.officeMailId
-        AddUser.empRole = AddUser?.role.id
+        AddUser.empRole = JSON.stringify(parseInt(AddUser?.role.id));
         AddUser.supervisorId = AddUser?.reportingManager.id
         AddUser.profile_pic = ''
         AddUser.status = AddUser.present_status ? '1' : '0';
@@ -206,35 +211,35 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                     let funderPartnerData = {}
                     if (apiCallName) {
                         (apiCallName == "Funder") ?
-                            funderPartnerData = {
-                                "countryID": 1,
-                                "partnername": AddUser.first_name,
-                                "workPhone": AddUser.workNum,
-                                "mobilePhone": AddUser.contactNum,
-                                "emailID": AddUser.officeMailId,
-                                "address": AddUser.address,
-                                "status": AddUser.present_status ? '1' : '0',
-                                "city": "banglore",
-                                "state": "Karnataka",
-                                "pincode": AddUser.pincode,
-                                "designation": "Funder",
-                                "createdBy": userid,
-                                "lastUpdatedBy": userid
-                            } : funderPartnerData = {
-                                "countryID": 1,
-                                "partnername": AddUser.first_name,
-                                "workPhone": AddUser.workNum,
-                                "mobilePhone": AddUser.contactNum,
-                                "emailID": AddUser.officeMailId,
-                                "address": AddUser.address,
-                                "status": AddUser.present_status ? '1' : '0',
-                                "city": "banglore",
-                                "state": "Karnataka",
-                                "pincode": AddUser.pincode,
-                                "designation": "Partner",
-                                "createdBy": userid,
-                                "lastUpdatedBy": userid
-                            }
+                        funderPartnerData = {
+                            "countryID": 1,
+                            "partnername": AddUser.first_name,
+                            "workPhone": AddUser.workNum,
+                            "mobilePhone": AddUser.contactNum,
+                            "emailID": AddUser.officeMailId,
+                            "address": AddUser.address,
+                            "status": AddUser.present_status ? '1' : '0',
+                            "city": "banglore",
+                            "state": "Karnataka",
+                            "pincode": AddUser.pincode,
+                            "designation": "Funder",
+                            "createdBy": userid,
+                            "lastUpdatedBy": userid
+                        } : funderPartnerData = {
+                            "countryID": 1,
+                            "partnername": AddUser.first_name,
+                            "workPhone": AddUser.workNum,
+                            "mobilePhone": AddUser.contactNum,
+                            "emailID": AddUser.officeMailId,
+                            "address": AddUser.address,
+                            "status": AddUser.present_status ? '1' : '0',
+                            "city": "banglore",
+                            "state": "Karnataka",
+                            "pincode": AddUser.pincode,
+                            "designation": "Partner",
+                            "createdBy": userid,
+                            "lastUpdatedBy": userid
+                        }
                         const partnerFunderConfig = {
                             method: 'post',
                             url: baseURL + `${apiCallName}`,
