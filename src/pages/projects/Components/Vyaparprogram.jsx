@@ -20,7 +20,7 @@ import {
   CardContent,
   CardActionArea,
   DialogContent,
-  DialogContentText,Box, CircularProgress
+  DialogContentText,Box,CircularProgress
 } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
@@ -42,11 +42,12 @@ import Iconify from '../../../components/Iconify';
 import { Icon } from '@iconify/react';
 import FormHelperText from '@mui/material/FormHelperText';
 import Swal from 'sweetalert2';
-import { baseURL } from 'src/utils/api';
+import { baseURL , oldbaseURL} from 'src/utils/api';
 import { useAuth } from 'src/AuthContext';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+   
 export default function Vyaparprogram({ itm, changeState,componentreloadmethod }) {
   const { apikey } = useAuth();
   const [open, setOpen] = React.useState(false);
@@ -284,9 +285,12 @@ const [internet , setinternet] = useState("")
 const [loansError , setloansError] = useState(false)
 const [bisnessError , setbusinessError] = useState(false)
 const [entreprenur , setentrepreneurError] = useState(false)
-  const handleClickOpen = () => {
+  
+
+const handleClickOpen = () => {
     setOpen(true);
-  };
+    setLoader(true);
+    };
   const handleClose = () => {
     setOpen(false);
     setIsFormPresentLocally(false)
@@ -304,10 +308,11 @@ const [entreprenur , setentrepreneurError] = useState(false)
     parsedData.push(newData);
     const updatedData = JSON.stringify(parsedData);
     localStorage.setItem('vyapar', updatedData);
-  // componentreloadmethod()
+   componentreloadmethod()
 };
 // Get data from local 
 const [isFormPresentLocally ,setIsFormPresentLocally] =useState(false)
+const localStorageData = localStorage.getItem('vyapar');
 useEffect(()=>{
   const existingData = localStorage.getItem('vyapar');
       const parsedData = existingData ? JSON.parse(existingData) : [];
@@ -340,11 +345,10 @@ const networkAccess = async () => {
 };
 
 
-
   const vyaparformdata = (async) => {
     var data ={}
     data = JSON.stringify({
-      partcipantId: JSON.stringify(itm?.id) || JSON.stringify(itm?.gelathi_id),
+      partcipantId: JSON.stringify(itm?.id)||JSON.stringify(itm?.gelathi_id),
       gfId: sendData?.gfId,
       when_was_survey_done: survey,
       name_of_the_vyapari: sendData?.name_of_the_vyapari,
@@ -536,9 +540,10 @@ if(localStorage.getItem('vyapar')){
   data = setvyaparform(saveDataLocally('vyapar',JSON.parse(data)));
   setvyaparform(data);
 }
+
 else{
       var data = JSON.stringify({
-        partcipantId: JSON.stringify(itm?.id) || JSON.stringify(itm?.gelathi_id),
+        partcipantId: JSON.stringify(itm?.id)|| JSON.stringify(itm?.gelathi_id),
         gfId: sendData?.gfId,
         when_was_survey_done: survey,
         name_of_the_vyapari: sendData?.name_of_the_vyapari,
@@ -607,7 +612,7 @@ else{
         url: baseURL + 'addBuzzVyapar',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization':`${apikey}`
+           'Authorization': `${apikey}`
         },
         data: data,
       };
@@ -619,20 +624,12 @@ else{
       
           setMessage(response?.data.message);
           setsuccessMessage(true);
-         
+        
           setIsCurrentLoan(false);
           setisAdditionalSkill(false)
           handleClose();
         })
         .catch(function (error) {
-          // Swal.fire({
-          //   icon: 'error',
-          //   title: 'Error',
-          //   text: response.data.message,
-          //   confirmButtonText: 'Ok',
-          //   timer: 2000,
-          // });
-         
           setvyaparform(saveDataLocally('vyapar',data));
           componentreloadmethod()
         });
@@ -768,8 +765,9 @@ else{
     ) {
 
     setvyaparform(saveDataLocally('vyapar',JSON.parse(data)));
-    componentreloadmethod();
     handleClose();
+    componentreloadmethod();
+ 
     }
     else{
       alert('Please Select the Option');
@@ -779,9 +777,10 @@ else{
   const gelathinamelist = (async) => {
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
+      url: oldbaseURL + 'getGelathiList.php',
       headers: {
         'Content-Type': 'application/json',
+       
       }
     };
     axios(config)
@@ -795,7 +794,7 @@ else{
       });
   };
 
-  const [loader, setLoader] = useState(true);
+    const [loader, setLoader] = useState(true);
   useEffect(() => {
     // After 5 seconds, set showCard to true to render the Card component
     const delay = 5000; // 5 seconds in milliseconds
@@ -803,6 +802,7 @@ else{
       setLoader(false);
     }, delay);
   })
+
 
   return (
     <div>

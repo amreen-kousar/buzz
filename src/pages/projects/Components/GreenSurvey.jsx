@@ -22,6 +22,7 @@ import {
   DialogContentText,
   FormHelperText,Box,CircularProgress
 } from '@mui/material';
+import svgLogo from '../../../assets/form-line.svg'
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
@@ -41,14 +42,13 @@ import products from 'src/_mock/products';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
-import { baseURL } from 'src/utils/api';
-import { useAuth } from 'src/AuthContext';
+import { baseURL, oldbaseURL} from 'src/utils/api';
+import { useAuth } from 'src/AuthContext'; 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+ 
 export default function GreenSurvey(props) {
-
-  { console.log(JSON.stringify(props?.itm?.id) || JSON.stringify(props?.itm?.gelathi_id),"null",props?.itm?.gelathi_id)}
   const { apikey } = useAuth();
   const { state } = useLocation();
   const [open, setOpen] = React.useState(false);
@@ -149,6 +149,7 @@ export default function GreenSurvey(props) {
   const handleClickOpen = () => {
     setOpen(true);
     setLoader(true);
+
   };
   const handleClose = () => {
     setOpen(false);
@@ -369,7 +370,7 @@ useEffect(()=>{
   var  data = {}
 
   data = JSON.stringify({
-      partcipantId: JSON.stringify(props?.itm?.id) || JSON.stringify(props?.itm?.gelathi_id),
+      partcipantId: JSON.stringify(props?.itm?.id) || JSON.stringify(props?.itm.gelathi_id),
       Email: sendData?.Email,
       Name_of_the_surveyor: sendData?.Name_of_the_surveyor,
       Name_of_the_respondent: sendData?.Name_of_the_respondent,
@@ -568,7 +569,7 @@ useEffect(()=>{
           setGreenForm(data);
         } else {
           data = JSON.stringify({
-            partcipantId: JSON.stringify(props?.itm?.id) || JSON.stringify(props?.itm?.gelathi_id),
+            partcipantId: JSON.stringify(props?.itm?.id)|| JSON.stringify(props?.itm.gelathi_id),
             Email: sendData?.Email,
             Name_of_the_surveyor: sendData?.Name_of_the_surveyor,
             Name_of_the_respondent: sendData?.Name_of_the_respondent,
@@ -619,7 +620,7 @@ useEffect(()=>{
           url: baseURL + 'addGreenBaselineSurvey',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization':`${apikey}`
+             'Authorization': `${apikey}`
           },
           data: data,
         };
@@ -648,13 +649,13 @@ useEffect(()=>{
             setGreenForm(saveDataLocally('green', data));
             props?.componentreloadmethod()
           });
-        // Swal.fire({
-        //   icon: 'error',
-        //   title: 'Error',
-        //   text: response.data.message,
-        //   confirmButtonText: 'Ok',
-        //   timer: 2000,
-        // });
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: response.data.message,
+          confirmButtonText: 'Ok',
+          timer: 2000,
+        });
         handleClose();
       } else {
         alert('Please Fill All The Fields');
@@ -820,8 +821,6 @@ useEffect(()=>{
      
     }
   };
-
-
   const [loader, setLoader] = useState(true);
   useEffect(() => {
     // After 5 seconds, set showCard to true to render the Card component
@@ -831,9 +830,10 @@ useEffect(()=>{
     }, delay);
   })
 
+
   return (
     <div>
-       {(isOnline())?
+     {(isOnline())?
       <Stack style={{ position: 'absolute', right: 0, float: 'right' }} mb={2}>
         {!props?.itm?.is_green_survey ? (
           <IconButton onClick={handleClickOpen}>
@@ -886,15 +886,16 @@ useEffect(()=>{
             </Toolbar>
           </AppBar>
 
-        {(isFormPresentLocally) ?
+        {(isFormPresentLocally)?
        <Typography sx={{ ml: 2, flex: 1, color: 'inherit' }} variant="h6" component="div">
        This Form is Filled!
-     </Typography>:
-        (loader)? 
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
-                <CircularProgress sx={{color:'#ff7424'}}/>
-           </Box>
-         : <Grid>
+     </Typography>
+       :
+       (loader)? 
+         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+               <CircularProgress sx={{color:'#ff7424'}}/>
+          </Box>
+        :<Grid>
             <Card>
               <CardContent>
                 <Card mt={1} style={{ backgroundColor: '#F6F8FB', marginTop: 50 }}>
@@ -2174,9 +2175,7 @@ useEffect(()=>{
                 {/* -------------------------------- */}
               </CardContent>
             </Card>
-          </Grid>
-          }
-        
+          </Grid>}
         </form>
       </Dialog>
     </div>

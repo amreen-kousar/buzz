@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { oldbaseURL , baseURL} from 'src/utils/api';
+import { baseURL, oldbaseURL } from 'src/utils/api';
 import { Icon } from '@iconify/react';
-import { useAuth } from 'src/AuthContext';
 import GreenSurvey from 'src/pages/projects/Components/GreenSurvey';
 import Vyaparprogram from 'src/pages/projects/Components/Vyaparprogram';
 import GelathiCircleForm from 'src/pages/projects/Components/GelathiCircleForm';
@@ -46,6 +45,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import { EightK } from '@mui/icons-material';
 import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined';
+import { useAuth } from 'src/AuthContext';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -56,7 +56,7 @@ PoaGF.propTypes = {
   onCloseFilterGF: PropTypes.func,
 };
 export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF, clcikData, batchState, reloadPOAGF}) {
-  const {apikey} = useAuth()
+    const { apikey } = useAuth();
   const [batch, setBatch] = useState('');
   const [photos, setPhotos] = React.useState(false);
   const [shown, setShown] = React.useState(false);
@@ -76,15 +76,38 @@ export default function PoaGF({ isOpenFilterGF, onOpenFilterGF, onCloseFilterGF,
   const [session, setSession] = useState('');
   const [expanded, setExpanded] = React.useState(false);
   const [reload, setReload] = useState(false);
-  const [isOnline, setOnline] = useState(true);
   const isSmallScreen = useMediaQuery('(max-width:600px)');
-
+  const [isOnline, setOnline] = useState(true);
   const changeState = () => {
     setReload(!reload);
   };
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
+  useEffect(() => {
+    getTrainingBatch();
+    changeState();
+  }, [batchState, clcikData]);
+  useEffect(() => {
+    getGFSessionData();
+    if(session.type && session?.tb_id && session?.primary_id){
+      getNoteHandler();
+    } 
+  }, [clcikData, editSession]);
+  useEffect(() => {
+    let isSubscribe = true;
+    if (isSubscribe) {
+      if(session.type && session?.tb_id && session?.primary_id){
+        getNoteHandler();
+      } 
+      getGFSessionData();
+    }
+    return () => {
+      isSubscribe = false;
+    };
+  }, [session.tb_id, session.check_in, batch.check_1]);
+
   useEffect(()=>{
     setOnline(navigator.onLine)
   })
@@ -96,26 +119,6 @@ window.addEventListener('offline', () => {
 });
 
 
-
-  const role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
-  useEffect(() => {
-    getTrainingBatch();
-    changeState();
-  }, [batchState, clcikData]);
-  useEffect(() => {
-    getGFSessionData();
-    getNoteHandler();
-  }, [clcikData, editSession]);
-  useEffect(() => {
-    let isSubscribe = true;
-    if (isSubscribe) {
-      getNoteHandler();
-      getGFSessionData();
-    }
-    return () => {
-      isSubscribe = false;
-    };
-  }, [session.tb_id, session.check_in, batch.check_1]);
   const getTrainingBatch = (async) => {
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role;
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
@@ -126,9 +129,10 @@ window.addEventListener('offline', () => {
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData.php',
+      url: baseURL+'getGFSessionData',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -145,13 +149,15 @@ window.addEventListener('offline', () => {
     var userid = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var data = JSON.stringify({
       gf_session_id: clcikData?.id,
-      user_id: userid,
+      user_id : userid
     });
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getGFSessionData1.php',
+      url: baseURL + 'getGFSessionData1',
+      
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -164,25 +170,26 @@ window.addEventListener('offline', () => {
         let localData = JSON.parse(localStorage.getItem('sessiondata'));
         setSession(localData);
       });
-   if(session?.circle_id && session?.project_id){
-     circle();
-   }
+    if(session?.circle_id && session?.project_id){circle()}
   };
+
   const noteSubmitHandler = () => {
     var userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
     var role = JSON.parse(sessionStorage.getItem('userDetails'))?.role;
     var data = JSON.stringify({
       notes: gelatiNote,
-      type: session.type,
+      type: JSON.stringify(parseInt(session.type)),
       tb_id: session.tb_id,
       emp_id: userid,
+      primary_id:session.primary_id
     });
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/createNotes.php',
+      url: baseURL+'createNotes',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -190,7 +197,9 @@ window.addEventListener('offline', () => {
       .then(function (response) {
         if (response.status == 200) {
           setShowNote(false);
+        if(session.type && session?.tb_id && session?.primary_id){
           getNoteHandler();
+        } 
           setSaveBtn(false);
           alert('Note Added Successfully...');
         }
@@ -205,13 +214,15 @@ window.addEventListener('offline', () => {
     var data = JSON.stringify({
       type: session.type,
       tb_id: session.tb_id,
+      primary_id:session.primary_id
     });
     const config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/getNotes.php',
+      url: baseURL + 'getNotes',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -226,12 +237,25 @@ window.addEventListener('offline', () => {
       });
   };
   useEffect(()=>{
-    if(session?.circle_id && session?.project_id){
-      circle()
-    }
+   if(session?.circle_id && session?.project_id){
+    circle()
+   }
   },[reloadPOAGF])
   const circle = (async) => {
     const userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id;
+    // var data = JSON.stringify({
+    //   circle_id: session?.circle_id,
+    //   project_id: session?.project_id,
+    //   emp_id: userid,
+    // });
+    // var config = {
+    //   method: 'post',
+    //   url: oldbaseURL + 'getGelathiCircleDataNew.php',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   data: data,
+    // };
     var data = JSON.stringify({
       circle_id: session?.circle_id,
       project_id: session?.project_id,
@@ -239,10 +263,10 @@ window.addEventListener('offline', () => {
     });
     var config = {
       method: 'post',
-      url:baseURL + 'getGelathiCircleDataNew',
+      url: baseURL+'getGelathiCircleDataNew',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization':`${apikey}`
+        'Authorization': `${apikey}`
       },
       data: data,
     };
@@ -287,9 +311,12 @@ window.addEventListener('offline', () => {
       method: 'POST',
       body: raw,
       redirect: 'follow',
+      headers: { 
+        'Authorization': `${apikey}`
+      },
     };
 
-    let res = fetch('https://bdms.buzzwomen.org/appTest/uploadGFSessionPhotos.php', requestOptions)
+    let res = fetch('https://bdms.buzzwomen.org/appGo/uploadGFSessionPhotos', requestOptions)
       .then((itn) => {
         setImages([]);
         alert('Image uploaded successfully..');
@@ -310,19 +337,19 @@ window.addEventListener('offline', () => {
   const removesession = (e) => {
     if (confirm('Do You want to Cancel?')) {
       var data = JSON.stringify({
-        poa_id: e?.id,
-        day: '',
+        "poa_id": e?.id,
+        "day": ""
       });
-
+      
       var config = {
         method: 'post',
-        url: 'https://bdms.buzzwomen.org/appTest/updatePoaCancel.php',
-        headers: {
+        url: baseURL + 'updatePoaCancel',
+        headers: { 
           'Content-Type': 'application/json',
+          'Authorization': `${apikey}`
         },
-        data: data,
+        data : data
       };
-
       axios(config)
         .then(function (response) {
           onCloseFilterGF();
@@ -337,19 +364,20 @@ window.addEventListener('offline', () => {
  
   const Reschedule = (e) => {
     var data = JSON.stringify({
-      poa_id: e,
-      date_time: moment(date?.$d)?.format('YYYY-MM-DD HH:mm:ss'),
+      "poa_id": e,
+      "date_time":moment(date?.$d)?.format('YYYY-MM-DD HH:mm')
     });
-
+    
     var config = {
       method: 'post',
-      url: 'https://bdms.buzzwomen.org/appTest/updateReschedule.php',
-      headers: {
+      url: baseURL+'updateReschedule',
+      headers: { 
         'Content-Type': 'application/json',
+        'Authorization': `${apikey}`
       },
-      data: data,
+      data : data
     };
-
+    
     axios(config)
       .then(function (response) {
         setReschedule(false);
@@ -411,7 +439,7 @@ if(session?.type == 4){
   existingData = localStorage.getItem('spoorthi');
   let parsedData = JSON.parse(existingData);
   parsedData?.map((item) => {
-    localFormPresent1.set(item?.partcipantId, 'true');
+    localFormPresent1.set(parseInt(item?.partcipantId), 'true');
   });
 }
 if(session?.type == 10){
@@ -419,7 +447,7 @@ if(session?.type == 10){
    let parsedData = JSON.parse(existingData);
 
     parsedData?.map((item) => {
-      localFormPresent1.set(item?.partcipantId, 'true');
+      localFormPresent1.set(parseInt(item?.partcipantId), 'true');
     });
 }
 if(session?.type == 16){
@@ -427,7 +455,7 @@ if(session?.type == 16){
  let parsedData = JSON.parse(existingData);
 
  parsedData?.map((item) => {
-   localFormPresent1.set(item?.partcipantId, 'true');
+   localFormPresent1.set(parseInt(item?.partcipantId), 'true');
  });
 }
     setlocalFormPresent(localFormPresent1);
@@ -438,9 +466,10 @@ if(session?.type == 16){
 const gelathinamelist = (async) => {
   var config = {
     method: 'post',
-    url: 'https://bdms.buzzwomen.org/appTest/getGelathiList.php',
+    url: baseURL + 'getGelathiList',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `${apikey}`
     }
   };
   axios(config)
@@ -456,7 +485,6 @@ const gelathinamelist = (async) => {
 useEffect(()=>{
 
 },[localStorage?.getItem("vyapar"),localStorage?.getItem("spoorthi"),localStorage?.getItem("green")])
-
 
   return (
     <>
@@ -495,17 +523,16 @@ useEffect(()=>{
       <CircularProgress />
       </div>
   </>: */}
-        <Scrollbar>
+               <Scrollbar>
           <Stack spacing={3} sx={{ p: 2 }}>
             <div>
               <Card>
                 <CardContent>
                   <Typography style={{ flexDirection: 'row' }} variant="body1" gutterBottom>
-                    Project  : &nbsp;{session?.projectName}
+                    Project : &nbsp;{session?.projectName}
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     Partner : &nbsp;{session?.partnerName}
-                    <br />
                     <br />
                     {session?.check_out=="0" && role != 12 ? (
                       <>
@@ -526,12 +553,12 @@ useEffect(()=>{
                           <Iconify icon="mdi:clock-time-four-outline"></Iconify>
                         </IconButton>
                       </Tooltip>
-                       <Tooltip title="Delete">
+                      <Tooltip title="Delete">
 
                         <IconButton onClick={() => removesession(session)} style={{ right: -20 }}>
                           <Iconify icon="mdi:cancel-circle"></Iconify>
                         </IconButton>
-                       </Tooltip>
+                      </Tooltip>
                       </>
                     ) : null}
                   </Typography>
@@ -652,7 +679,7 @@ useEffect(()=>{
                 </CardContent> */}
 
                     {isLoading ? (
-                      <CircularProgress />
+                      <CircularProgress sx={{color:'#ff7424'}}/>
                     ) : (
                       batch?.photos && (
                         <div>
@@ -851,8 +878,8 @@ useEffect(()=>{
                 </div>
               ) : null}
               <br />
-             {(session?.type==4 || session?.type==10 || session?.type==16) && (!(isOnline)) && 
-             <Button
+              {(session?.type==4 || session?.type==10 || session?.type==16) && (!(isOnline)) && 
+              <Button
                 variant="secondary"
                 style={styles.buttonStyle}
                 onClick={() => {
@@ -873,8 +900,7 @@ useEffect(()=>{
               >
                 <span style={{ width: '200px' }}>Survey Form</span>
               </Button>
-             }
-
+}
   
              
               {(showSurvey && (!isOnline)) ? (
@@ -884,7 +910,6 @@ useEffect(()=>{
                       {session?.type == 4 || session.type == 10 || session.type == 16 ? (
                         <>
                           {gelathisData?.gelathis?.map((itm, index) => {
-                          
                             return (
                               <Card style={{borderRadius:0}}>
 
@@ -895,19 +920,19 @@ useEffect(()=>{
                                   {session?.type == 4 ? (
                                     itm?.is_survey ? (
                                       <>
-                                 {(!localFormPresent.has(itm?.gelathi_id)) &&   
-                                //  <IconButton onClick={handleform}>
-                                //         <Icon
-                                //           icon="clarity:form-line"
-                                //           width={20}
-                                //           height={20}
-                                //           color="green"
-                                //         />
-                                //       </IconButton>
+                                 {(!localFormPresent.has(itm?.gelathi_id)) &&  
+                                  // <IconButton onClick={handleform}>
+                                  //       <Icon
+                                  //         icon="clarity:form-line"
+                                  //         width={20}
+                                  //         height={20}
+                                  //         color="green"
+                                  //       />
+                                  //     </IconButton>
                                 <button onClick={handleform} style={{ border: 'none', outline: 'none', background: 'transparent', cursor: 'pointer'}}>
-                                <svg xmlns="http://www.w3.org/2000/svg" color="green" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
-                           </button>
-                                      }
+                                     <svg xmlns="http://www.w3.org/2000/svg" color="green" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+                                </button>
+                                }
                                       {localFormPresent.has(itm?.gelathi_id) ? (
                                           //   <IconButton onClick={handleSurveyform}>
                                           //   <Icon
@@ -919,8 +944,8 @@ useEffect(()=>{
                                           //   />
                                           // </IconButton>
                                           <button onClick={handleSurveyform} style={{ border: 'none', outline: 'none', background: 'transparent', cursor: 'pointer'}}>
-                                          <svg xmlns="http://www.w3.org/2000/svg" color="black" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
-                                     </button>
+                                              <svg xmlns="http://www.w3.org/2000/svg" color="black" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+                                         </button>
                                         ) : (
                                           ''
                                         )}
@@ -928,8 +953,8 @@ useEffect(()=>{
                                     ) : session?.type == 4 && session?.check_in != '0' ? (
                                         <>
                                         
-                                       {!localFormPresent.has(itm?.gelathi_id) &&
-                                      //   <IconButton
+                                       {!localFormPresent.has(itm?.gelathi_id) && 
+                                      //  <IconButton
                                       //   onClick={() => {
                                       //     callGelathiFormComponent(index, itm?.gelathi_id);
                                       //   }}
@@ -943,9 +968,9 @@ useEffect(()=>{
                                       //   />
                                       // </IconButton>
                                       <button onClick={()=>{ callGelathiFormComponent(index, itm?.gelathi_id);
-                                      }} style={{border: 'none', outline: 'none', background: 'transparent', cursor: 'pointer'}}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" color="#ff7424" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
-                                        </button>
+                                        }} style={{border: 'none', outline: 'none', background: 'transparent', cursor: 'pointer'}}>
+                                          <svg xmlns="http://www.w3.org/2000/svg" color="#ff7424" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+                                          </button>
                                       }
                                       {localFormPresent.has(itm?.gelathi_id) ? (
                                           //   <IconButton onClick={handleSurveyform}>
@@ -958,8 +983,9 @@ useEffect(()=>{
                                           //   />
                                           // </IconButton>
                                           <button onClick={handleSurveyform} style={{border: 'none', outline: 'none', background: 'transparent', cursor: 'pointer'}}>
-                                          <svg xmlns="http://www.w3.org/2000/svg" color="black" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
-                                     </button>
+                                                 <svg xmlns="http://www.w3.org/2000/svg" color="black" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+                                            </button>
+                                        
                                         ) : (
                                           ''
                                         )}
@@ -976,8 +1002,8 @@ useEffect(()=>{
                                       //   />
                                       // </IconButton>
                                       <button onClick={handleform} style={{ border: 'none', outline: 'none', background: 'transparent', cursor: 'pointer'}}>
-                                      <svg xmlns="http://www.w3.org/2000/svg" color="green" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
-                                  </button>
+                                         <svg xmlns="http://www.w3.org/2000/svg" color="green" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+                                     </button>
                                     ) : session?.type == 10 && session?.check_in != '0' ? (
                                       <IconButton
                                         onClick={() => {
@@ -999,7 +1025,6 @@ useEffect(()=>{
                                           <button onClick={handleSurveyform} style={{border: 'none', outline: 'none', background: 'transparent', cursor: 'pointer'}}>
                                                  <svg xmlns="http://www.w3.org/2000/svg" color="black" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
                                             </button>
-                                        
                                         ) : (
                                           ''
                                         )}
@@ -1017,15 +1042,15 @@ useEffect(()=>{
                                       //   />
                                       // </IconButton>
                                       <button onClick={handleform} style={{ border: 'none', outline: 'none', background: 'transparent', cursor: 'pointer'}}>
-                                      <svg xmlns="http://www.w3.org/2000/svg" color="green" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
-                                 </button>
+                                          <svg xmlns="http://www.w3.org/2000/svg" color="green" width="1.5em" height="1.5em" viewBox="0 0 36 36"><path fill="currentColor" d="M21 12H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1ZM8 10h12V7.94H8Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M21 14.08H7a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h11.36L22 16.3v-1.22a1 1 0 0 0-1-1ZM20 18H8v-2h12Z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M11.06 31.51v-.06l.32-1.39H4V4h20v10.25l2-1.89V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h8a3.44 3.44 0 0 1 .06-.49Z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="m22 19.17l-.78.79a1 1 0 0 0 .78-.79Z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M6 26.94a1 1 0 0 0 1 1h4.84l.3-1.3l.13-.55v-.05H8V24h6.34l2-2H7a1 1 0 0 0-1 1Z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="m33.49 16.67l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.13 27.09L13 31.9a1.61 1.61 0 0 0 1.26 1.9a1.55 1.55 0 0 0 .31 0a1.15 1.15 0 0 0 .37 0l4.85-1.07L33.49 19a1.6 1.6 0 0 0 0-2.27ZM18.77 30.91l-3.66.81l.89-3.63L26.28 17.7l2.82 2.82Zm11.46-11.52l-2.82-2.82L29 15l2.84 2.84Z" class="clr-i-outline clr-i-outline-path-6"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+                                     </button>
                                     ) : 
                                     session?.type == 16 && session?.check_in != '0' ? (
                                       
                                       <IconButton
                                       >
                                         {!localFormPresent.has(itm?.gelathi_id) && 
-                                        <Vyaparprogram itm={itm}  componentreloadmethod={componentreloadmethod}/>}
+                                        <Vyaparprogram itm={itm}  componentreloadmethod={componentreloadmethod} />}
                                         {localFormPresent.has(itm?.gelathi_id) ? ( 
                                           // <Tooltip title="Its Field in Offline Mode">
                                           //   <ErrorOutlinedIcon />
