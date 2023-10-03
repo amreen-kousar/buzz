@@ -4,8 +4,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, Dialog, Toolbar, IconButton, Typography, TextField, DialogContent, DialogContentText, Box, DialogActions, FormControl, InputLabel, Select, MenuItem, RadioGroup, Radio, Autocomplete, FormControlLabel, FormGroup, Switch, CardContent } from '@mui/material'
 import Iconify from '../../components/Iconify';
 import AppBar from '@mui/material/AppBar';
+import { baseURL } from 'src/utils/api';
+import { useAuth } from 'src/AuthContext';
 function AddUser(props) {
-  
+    const { apikey } = useAuth();
     const [open, setOpen] = useState(false);
     const [count, setCount] = useState('');
     // const [ceoUser, setCeoUser] = useState(props.data)
@@ -190,9 +192,10 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
         const data = JSON.stringify(AddUser);
         const config = {
             method: 'post',
-            url: 'https://bdms.buzzwomen.org/appTest/createUser.php',
+            url: baseURL + 'createUser',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `${apikey}`
             },
             data
         };
@@ -234,9 +237,11 @@ let userid = JSON.parse(sessionStorage.getItem('userDetails'))?.id
                             }
                         const partnerFunderConfig = {
                             method: 'post',
-                            url: `https://bdms.buzzwomen.org/appTest/${apiCallName}.php`,
+                            url: baseURL + `${apiCallName}`,
                             headers: {
-                                'Content-Type': 'application/json'
+                                'Content-Type': 'application/json',
+                                'Authorization': `${apikey}`
+
                             },
                             funderPartnerData
                         }
