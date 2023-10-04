@@ -538,7 +538,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.start_date}
+      &nbsp;:&nbsp;{(itm?.start_date)?itm?.start_date:itm?.startDate}
     </span>
   </Grid>:null}
   {(itm?.select_type=='1')?<Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
@@ -548,7 +548,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.end_date}
+      &nbsp;:&nbsp;{(itm?.end_date)?itm?.end_date:it?.endDate}
     </span>
   </Grid>:null}
   
@@ -655,7 +655,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.startDate} 
+      &nbsp;:&nbsp;{(itm?.startDate)?itm?.startDate:itm?.start_date} 
     </span>
   </Grid>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
@@ -665,7 +665,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.endDate} 
+      &nbsp;:&nbsp;{(itm?.endDate)?itm?.endDate:itm?.end_date} 
     </span>
   </Grid>
                   <Divider mt={1} />
@@ -768,7 +768,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.startDate} 
+      &nbsp;:&nbsp;{(itm?.startDate)?itm?.startDate:itm?.start_date} 
     </span>
   </Grid>
   <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
@@ -778,7 +778,7 @@ const userId = JSON.parse(sessionStorage.getItem('userDetails'))?.role
     </span>
     <span style={{ fontWeight: 700, fontSize: 15, flex: '2' }}>
      
-      &nbsp;:&nbsp;{itm?.endDate} 
+      &nbsp;:&nbsp;{(itm?.endDate)?itm?.endDate:itm?.end_date} 
     </span>
   </Grid>
 </Container>
