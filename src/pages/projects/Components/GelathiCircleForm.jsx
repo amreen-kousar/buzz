@@ -399,8 +399,8 @@ const saveDataLocally = (key, data) => {
 
   const [loader, setLoader] = useState(true);
   useEffect(() => {
-    // After 5 seconds, set showCard to true to render the Card component
-    const delay = 5000; // 5 seconds in milliseconds
+    // After 3 seconds, set showCard to true to render the Card component
+    const delay = 3000; // 3 seconds in milliseconds
     const timeoutId = setTimeout(() => {
       setLoader(false);
     }, delay);
