@@ -3,7 +3,9 @@ import ApiRequest from './components/ApiRequest';
 import ListTabledata from './components/ListTabledata';
 import SearchCommon from './components/SearchCommon';
 import Projectapi from './components/Projectsapi';
+import { useAuth } from 'src/AuthContext';
 export default function Trainers({ selectDATA, getData,type,date,endDate,dateValue,endDateValue}) {
+  const {apikey} = useAuth()
   const [train, setTrain] = useState();
   const [searchInFilter, setSearchInFilter] = useState(null)
   useEffect(() => {
@@ -13,7 +15,7 @@ export default function Trainers({ selectDATA, getData,type,date,endDate,dateVal
   const trainer = async () => {
     if(type=="Projects")
     {
-      Projectapi({ selectDATA:5 }).then(res =>setTrain(res))
+      Projectapi({ selectDATA:5,apikey }).then(res =>setTrain(res))
     }
     else{
     ApiRequest({ selectDATA: 5 }).then(res => setTrain(res))

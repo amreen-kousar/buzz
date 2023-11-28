@@ -89,7 +89,7 @@ export default function CreateTrainerBatch(props) {
       "number_of_participants": trainerData?.number_of_participants,
       "day1": moment(trainerData?.day1.$d)?.format('YYYY/MM/DD  h:mm:ss '),
       "day2": moment(trainerData?.day2.$d)?.format('YYYY/MM/DD  h:mm:ss '),
-      "location_id": props?.data1?.location_id,
+      "location_id": trainerData?.talaq_id,
       "contact_number": trainerData?.contact_number,
       "trainer_id": idvalue
     });
@@ -156,7 +156,7 @@ const handlenumber = (e) =>{
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" style={{color:"white"}}>
-              Create  New Training Batch 
+              Create New Training Batch 
             </Typography>
             <Button variant="standard" onClick={createTrainerBatch}>
               
@@ -201,6 +201,7 @@ const handlenumber = (e) =>{
               }
             </Select>
           </FormControl></Stack>
+          {console.log(trainerData?.talaq_id,"viallageidd")}
         <Stack margin={2} style={{ marginTop: 10 }}>
           <TextField
             fullWidth

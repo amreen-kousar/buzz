@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { baseURL } from 'src/utils/api';
+import { baseURL, oldbaseURL } from 'src/utils/api';
 import { useAuth } from 'src/AuthContext';
-export default async function Projectapi(props) {
-    const { apikey } = useAuth();
+const Projectapi = (props) => {
     var role = JSON.parse(sessionStorage?.getItem('userDetails'))?.role
     var idvalue = JSON.parse(sessionStorage?.getItem('userDetails'))?.id;
     var response = []
@@ -18,12 +17,12 @@ export default async function Projectapi(props) {
         url: baseURL+'getAllPeople',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization':`${apikey}`
+            'Authorization':`${props?.apikey}`
         },
         data
     };
   
-    response = await axios(config)
+    response = axios(config)
 
         .then((response) => {
             return response?.data?.list
@@ -32,6 +31,8 @@ export default async function Projectapi(props) {
             return null
         });
         
-    return await response;
+    return response;
 }
+
+export default Projectapi;
 
