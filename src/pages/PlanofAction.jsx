@@ -312,7 +312,7 @@ export default function PlanofAction() {
 //     newData?.map((item,index)=>{
 //      config = {
 //       method: 'post',
-//       url: 'https://bdms.buzzwomen.org/appGo/addBuzzVyapar',
+//       url: 'https://bdms.buzzwomen.org/appGoGambia/addBuzzVyapar',
 //       headers: {
 //         'Content-Type': 'application/json',
 //       },

@@ -316,7 +316,7 @@ window.addEventListener('offline', () => {
       },
     };
 
-    let res = fetch('https://bdms.buzzwomen.org/appGo/uploadGFSessionPhotos', requestOptions)
+    let res = fetch('https://bdms.buzzwomen.org/appGoGambia/uploadGFSessionPhotos', requestOptions)
       .then((itn) => {
         setImages([]);
         alert('Image uploaded successfully..');

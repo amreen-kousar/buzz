@@ -117,7 +117,7 @@ var requestOptions = {
     'Authorization': `${apikey}`
   },
 };
-fetch("https://bdms.buzzwomen.org/appGo/taAttachments", requestOptions)
+fetch("https://bdms.buzzwomen.org/appGoGambia/taAttachments", requestOptions)
   .then(response => response.text())
   .then(result => setImageId(JSON.parse(result)))
   alert("Uploaded Successfully")

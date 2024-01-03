@@ -188,7 +188,7 @@ export default function Edittraveldialog({ isOpenFilter, onOpenFilter, onCloseFi
         'Authorization': `${apikey}`
       },
     };
-    let res = fetch("https://bdms.buzzwomen.org/appGo/taAttachments", requestOptions).then(itn => {
+    let res = fetch("https://bdms.buzzwomen.org/appGoGambia/taAttachments", requestOptions).then(itn => {
       // console.log(itn, "<--itemgh")
     })
       .catch(err => {

@@ -121,7 +121,7 @@ const UploadImages = async(e) =>{
     })
 var config = {
   method: 'post',
-  url: 'https://bdms.buzzwomen.org/appGo/uploadTrainingPhotos',
+  url: 'https://bdms.buzzwomen.org/appGoGambia/uploadTrainingPhotos',
   headers: { 
     'Content-Type': 'application/json',
     'Authorization': `${apikey}`

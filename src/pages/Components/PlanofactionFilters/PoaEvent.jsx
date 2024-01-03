@@ -91,7 +91,7 @@ export default function PoaFilter({ isOpenEvent, onCloseEvent, select, useridval
       },
     };
   
-    let res = fetch('https://bdms.buzzwomen.org/appGo/uploadEventPhotos', requestOptions)
+    let res = fetch('https://bdms.buzzwomen.org/appGoGambia/uploadEventPhotos', requestOptions)
       .then((itn) => {
         setImage([])
         alert("Image uploaded successfully..")
